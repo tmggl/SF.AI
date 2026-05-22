@@ -9,8 +9,8 @@
 - **اسم المشروع:** SF.AI
 - **الرحلة الحالية:** **Phase 22 / 30**
 - **المرحلة الحالية:** **Phase 22 — Gold Dialogue Corpus v2**
-- **حالة المرحلة الحالية:** **بوابة جاهزية corpus v2 + review intake تعمل؛ corpus غير جاهز بعد (55/500، msa=25، saudi=30)**
-- **المرحلة التالية المقترحة:** جمع ومراجعة محادثات فصحى/سعودية حقيقية حتى تمر `make phase22-readiness`.
+- **حالة المرحلة الحالية:** **بوابة جاهزية corpus v2 + review intake تعمل؛ corpus غير جاهز بعد (80/500، msa=50، saudi=30)**
+- **المرحلة التالية المقترحة:** إكمال دفعات فصحى/سعودية محكومة يؤلفها/يراجعها الوكيل بتفويض موثق حتى تمر `make phase22-readiness`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ تم تحديث `default_registry.yaml` و`safety_terms.yaml` لفجوات finance/religion/security.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -212,13 +212,13 @@
   - أضيف `sf_ai/datasets/phase22_review_intake.py`.
   - أضيف تقرير [PHASE22_GOLD_DIALOGUE_CORPUS_V2_REPORT.md](./PHASE22_GOLD_DIALOGUE_CORPUS_V2_REPORT.md).
   - القرار الحالي: `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2`.
-  - الموجود الحالي: 55 سجل تدريب جاهز: 25 `msa` و30 `saudi`.
-  - المتبقي: 445 سجل للوصول إلى 500.
-  - خطة الجمع الحالية: 175 فصحى + 170 سعودي + 100 مرنة، أي نحو 18 batch بحجم 25.
+  - الموجود الحالي: 80 سجل تدريب جاهز: 50 `msa` و30 `saudi`.
+  - المتبقي: 420 سجل للوصول إلى 500.
+  - خطة الجمع الحالية: 150 فصحى + 170 سعودي + 100 مرنة، أي نحو 17 batch بحجم 25.
   - أضيفت بوابة اكتمال صارمة: `phase22-completion-gate`، وقرارها الحالي `PHASE22_INCOMPLETE_DO_NOT_ADVANCE`.
-  - أضيفت قائمة batches مفصلة داخل `phase22-plan`: من `msa_002` إلى `msa_008`، ثم `saudi_001` إلى `saudi_007`، ثم `flex_001` إلى `flex_004`، مع target records وأسماء ملفات وأوامر تحويل مقترحة.
-  - أضيفت مهمة batch فورية داخل `phase22-next-batch`: المهمة الحالية `msa_002`، 25 سجل فصيح، مع checklist قبول وموضوعات تأليف لا تُعد بيانات تدريب.
-  - أضيف أول batch فصيح معتمد: `data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl`، وفيه 25 سجلًا `silver` مؤلفة بتفويض سامي، مع بطاقة provenance.
+  - أضيفت قائمة batches مفصلة داخل `phase22-plan`: من `msa_003` إلى `msa_008`، ثم `saudi_001` إلى `saudi_007`، ثم `flex_001` إلى `flex_004`، مع target records وأسماء ملفات وأوامر تحقق مباشرة.
+  - أضيفت مهمة batch فورية داخل `phase22-next-batch`: المهمة الحالية `msa_003`، 25 سجل فصيح، مع checklist قبول وموضوعات تأليف لا تُعد بيانات تدريب.
+  - أضيفت دفعتان فصيحتان معتمدتان: `data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl` و`dialogue_batch_v2_msa_002.jsonl`، بإجمالي 50 سجلًا `silver` مؤلفة/مراجعة بتفويض سامي، مع بطاقات provenance.
   - أضيفت حقول فصل المستخدمين في schema/audit/UI/export/corpus: `owner_user_id`, `created_by_user_id`, `target_user_id`, `user_scope`.
   - المسار الحالي `sami-local` و`single_user`، والهدف منع خلط محادثات أو ذاكرة مستخدم مع مستخدم آخر عند التوسع لاحقًا.
   - أضيف بنك تأليف فصيح غير تدريبي في `resources/phase22_authoring/msa_prompt_bank_v1.json`: أكثر من 80 موضوعًا فصيحًا لبناء batches الفصحى، مع `training_allowed=false` و`synthetic_llm_data=false`.
@@ -226,10 +226,11 @@
   - أضيفت بوابة جودة داخل review intake: `quality_score`, `quality_label`, و`quality_blockers`.
   - أضيف مؤشر جودة التصدير داخل `/ui/chat` حتى يعرف سامي قبل التصدير هل الجلسة قصيرة أو صالحة للمراجعة.
   - أضيفت لوحة بوابة Phase 22 داخل `/ui/chat`، تقرأ `/system/phase22-readiness` و`/system/phase22-collection-plan` وتعرض عدد corpus الحالي، المتبقي، ونقص `msa/saudi`، والمهمة التالية مباشرة.
-  - أضيفت لوحة مهمة الجمع الحالية داخل `/ui/chat`، تقرأ `/system/phase22-next-batch` وتعرض `msa_002` وهدف 25 سجلًا وموضوعات تأليف عامة، وتضيف `phase22_next_batch` إلى metadata التصدير.
+  - أضيفت لوحة مهمة الجمع الحالية داخل `/ui/chat`، تقرأ `/system/phase22-next-batch` وتعرض `msa_003` وهدف 25 سجلًا وموضوعات تأليف عامة؛ الواجهة مختبر اختياري وليست شرطًا على سامي لحفظ أو تصدير أي شيء.
   - أضيف زر `موضوعات أخرى` داخل لوحة مهمة الجمع الحالية للتنقل في بنك التأليف الفصيح، مع `authoring_topic_count` في metadata.
   - أضيف زر `حفظ للمراجعة` في `/ui/chat` وendpoint `POST /chat/review-export` لحفظ review JSONL محليًا في `data/corpus/chat/review/` فقط، مع رفض `training_allowed=true`.
   - القاعدة العملية الجديدة: ملف التصدير المفيد يجب أن يحتوي غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل، وبدون ردود `sf_10m_v0_1`.
+  - القاعدة العملية الأحدث: الوكيل يستطيع تأليف/مراجعة/اعتماد دفعات Phase 22 مباشرة كـ `owner-delegated agent-authored` بدون انتظار حفظ أو تصدير من سامي، بشرط اكتمال `source/license/quality/training_allowed/user_scope/notes` ونجاح الاختبارات.
   - صححت تشغيل الواجهة المستقرة: `generator=template` افتراضيًا، أي قوالب ثابتة لا مولد؛ و`SF-10M` الخام يبقى مختبرًا صريحًا فقط.
   - أضيفت حماية export/review intake لتمييز أي جلسة تحتوي ردود `sf_10m_v0_1` ومنع عدّها كـ candidate تدريب جودة.
   - أضيفت intents محددة لعبارات Phase 22 اليومية: اختبار الحوار الفصيح، الخطوة التالية، والفرق بين التدريب والتفعيل.
@@ -331,7 +332,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-434 passed in 4.70s
+434 passed in 4.99s
 ```
 
 | ملف | عدد |

@@ -72,10 +72,10 @@ Phase 22 لا يبدأ تدريب tokenizer أو نموذج.
 القيم الحالية المتوقعة:
 
 ```text
-training_records: 55
+training_records: 80
 target_records: 500
-remaining_records: 445
-dialect_counts: {"msa": 25, "saudi": 30}
+remaining_records: 420
+dialect_counts: {"msa": 50, "saudi": 30}
 missing_required_dialects: []
 status: NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2
 can_start_phase23: false
@@ -86,23 +86,23 @@ completion_gate: PHASE22_INCOMPLETE_DO_NOT_ADVANCE
 وخطة الجمع الحالية:
 
 ```text
-remaining_records: 445
+remaining_records: 420
 batch_size: 25
-estimated_batches: 18
-quota_by_dialect: {"msa": 175, "saudi": 170}
+estimated_batches: 17
+quota_by_dialect: {"msa": 150, "saudi": 170}
 flexible_records_after_minimums: 100
-planned_batches: 18
-next_batch: msa_002, dialect=msa, target_records=25
+planned_batches: 17
+next_batch: msa_003, dialect=msa, target_records=25
 ```
 
 `phase22-next-batch` يعرض المهمة الفورية للتأليف/المراجعة:
 
-- batch الحالي: `msa_002`.
+- batch الحالي: `msa_003`.
 - الهدف: 25 سجلًا فصيحًا.
 - يعرض checklist قبول قبل التحويل.
 - يعرض موضوعات عامة تساعد التأليف/المراجعة؛ هذه الموضوعات ليست corpus ولا synthetic dialogue.
 - يقرأ بنك موضوعات فصيح غير تدريبي من `resources/phase22_authoring/msa_prompt_bank_v1.json`.
-- بعد التصدير: `phase22-review-intake` ثم `prepare-dialogue-batch` ثم `corpus-audit` ثم `phase22-readiness`.
+- بعد التأليف المباشر: `validate_dataset.py` ثم `corpus-audit` ثم `phase22-readiness`. مسار `phase22-review-intake` و`prepare-dialogue-batch` يبقى اختياريًا للمواد القادمة من الواجهة فقط.
 - شاشة `/ui/chat` تعرض هذه المهمة مباشرة وتضيف `phase22_next_batch` إلى `review_metadata` عند التصدير.
 
 بنك التأليف الفصيح:
@@ -118,12 +118,12 @@ next_batch: msa_002, dialect=msa, target_records=25
 - يرجع حاليًا `PHASE22_INCOMPLETE_DO_NOT_ADVANCE`.
 - يجمع readiness + collection plan + next batch في قرار واحد.
 - لا يسمح بالانتقال إلى Phase 23 إلا بعد `PHASE22_COMPLETE_READY_FOR_PHASE23`.
-- يذكر النواقص الحالية مثل `corpus_below_phase22_target`, `dialect_balance_below_minimum`, و`complete_next_batch:msa_002`.
+- يذكر النواقص الحالية مثل `corpus_below_phase22_target`, `dialect_balance_below_minimum`, و`complete_next_batch:msa_003`.
 
 تفصيل batches الرسمي:
 
-- `msa_001` اكتمل: 25 سجلًا فصيحًا owner-delegated agent-authored.
-- `msa_002` إلى `msa_008`: تغطية الحد الأدنى للفصحى، 25 سجلًا لكل batch.
+- `msa_001` و`msa_002` اكتملتا: 50 سجلًا فصيحًا owner-delegated agent-authored.
+- `msa_003` إلى `msa_008`: تغطية الحد الأدنى للفصحى، 25 سجلًا لكل batch.
 - `saudi_001` إلى `saudi_006`: تغطية سعودية، 25 سجلًا لكل batch.
 - `saudi_007`: تغطية سعودية، 20 سجلًا.
 - `flex_001` إلى `flex_004`: 100 سجل مرن بعد اكتمال الحد الأدنى.
@@ -159,7 +159,7 @@ status: REVIEW_EXPORTS_READY_FOR_MANUAL_REVIEW
 
 وأضيفت لوحة مهمة الجمع الحالية داخل الشاشة نفسها:
 
-- تعرض `msa_002` وهدف 25 سجلًا.
+- تعرض `msa_003` وهدف 25 سجلًا.
 - تعرض موضوعات تأليف عامة لا تُعد بيانات تدريب.
 - تعرض زر `موضوعات أخرى` للتنقل في بنك الموضوعات الفصيح بدل حصر سامي في أول ثلاثة موضوعات.
 - تربط export بالـ batch عبر `review_metadata.phase22_next_batch`.
@@ -172,10 +172,11 @@ status: REVIEW_EXPORTS_READY_FOR_MANUAL_REVIEW
 - يحفظ JSONL داخل `data/corpus/chat/review/` فقط.
 - يرفض أي payload فيه `training_allowed=true`.
 - يحفظ دائمًا بحالة `saved_for_manual_review_only`.
+- هذا المسار اختياري للتشخيص أو التجارب؛ سامي لا يحتاج إلى حفظ أو تصدير يدوي كي تتقدم Phase 22، لأن الوكيل يؤلف ويراجع ويعتمد الدفعات مباشرة عند وضوح الجودة.
 
 القاعدة العملية للوصول إلى حوار مفيد للتدريب:
 
-- لا تصدّر أقل من 3 أدوار منك و3 ردود من المساعد.
+- لا تعتمد جلسة قصيرة جدًا كبيانات تدريب؛ فضّل 3 أدوار مستخدم و3 ردود مساعد على الأقل.
 - لا تستخدم جلسة فيها `مولّد: نموذج SF-10M` كبيانات جودة.
 - فضّل موضوعًا واحدًا واضحًا في كل جلسة.
 - اجعل الردود المؤلفة/المعتمدة بتفويض واضح فقط تدخل corpus.
@@ -195,9 +196,22 @@ status: REVIEW_EXPORTS_READY_FOR_MANUAL_REVIEW
 
 ---
 
-## ماذا يكتب سامي لاختبار وجمع corpus؟
+## كيف يجمع المشروع corpus الآن؟
 
-اكتب محادثات طبيعية في الواجهة، ثم صدّرها:
+المسار الأساسي منذ تفويض سامي الأخير:
+
+```text
+الوكيل يؤلف دفعة msa/saudi مباشرة
+→ يوسمها كـ owner-delegated agent-authored
+→ يثبت owner_user_id/created_by_user_id/target_user_id/user_scope
+→ يشغل validate_dataset.py
+→ يشغل corpus-audit + phase22-readiness + tests
+→ يحدّث التقارير ويرفع فقط إذا نجح كل شيء
+```
+
+الواجهة تبقى مختبرًا اختياريًا فقط. لا يُطلب من سامي حفظ أو تصدير أو اعتماد ملفات يدوية.
+
+أمثلة مفيدة للتجربة الاختيارية في الواجهة:
 
 ```text
 خلنا نسولف شوي
@@ -215,16 +229,16 @@ status: REVIEW_EXPORTS_READY_FOR_MANUAL_REVIEW
 ما الفرق بين تدريب النموذج وتفعيل النموذج؟
 ```
 
-لجمع ملف أعلى جودة، اجعل كل جلسة 3–6 أدوار. مثال بنية الجلسة:
+لو استخدم الوكيل الواجهة كاختبار اختياري، فالجلسة الأقوى تكون 3–6 أدوار:
 
 ```text
 1. افتح موضوعًا واحدًا.
 2. اطلب توضيحًا أو مثالًا.
 3. اسأل متابعة قصيرة.
-4. إن كان الرد مفهومًا، صدّر الجلسة للمراجعة.
+4. إن كان الرد مفهومًا، يحفظها الوكيل للمراجعة بنفسه عند الحاجة.
 ```
 
-بعد التصدير، لا يدخل الملف التدريب حتى يُراجع ويُحضّر:
+لو وُجد ملف review اختياري، لا يدخل التدريب حتى يُراجع ويُحضّر. أما الدفعات المباشرة فيكفي تحقق schema/audit/tests:
 
 ```bash
 make phase22-review-intake
@@ -235,7 +249,15 @@ make prepare-dialogue-batch ARGS="--input data/corpus/chat/review/<file>.jsonl -
 أو للفصحى:
 
 ```bash
-make prepare-dialogue-batch ARGS="--input data/corpus/chat/review/<file>.jsonl --out data/corpus/chat/jsonl/dialogue_batch_v2_msa_002.jsonl --quality silver --dialect msa --training-allowed"
+make prepare-dialogue-batch ARGS="--input data/corpus/chat/review/<file>.jsonl --out data/corpus/chat/jsonl/dialogue_batch_v2_msa_003.jsonl --quality silver --dialect msa --training-allowed"
+```
+
+وللمسار المباشر:
+
+```bash
+.venv/bin/python scripts/validate_dataset.py data/corpus/chat/jsonl/dialogue_batch_v2_msa_003.jsonl
+make corpus-audit
+make phase22-readiness
 ```
 
 ---

@@ -47,7 +47,7 @@ def main(argv: list[str]) -> int:
     for item in brief.ui_instructions:
         print(f"  - {item}")
     print()
-    print("after export:")
+    print("after direct batch write:")
     for command in brief.after_export_commands:
         print(f"  - {command}")
     print()

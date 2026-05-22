@@ -216,8 +216,8 @@ def build_phase22_readiness_decision(
         action=action,
         recommended_commands=(
             "write or collect owner-approved MSA/Saudi dialogue records with full provenance",
-            "review exported JSONL manually; keep only user-authored/user-approved/owner-delegated records",
-            "make prepare-dialogue-batch ARGS=\"--input data/corpus/chat/review/<file>.jsonl --out data/corpus/chat/jsonl/dialogue_batch_v2_<n>.jsonl --quality silver --dialect saudi --training-allowed\"",
+            "write the next dialogue_batch_v2_* JSONL directly with full provenance",
+            "do not wait for user-side save/export/approval when the agent can author and verify the batch",
             "make corpus-audit",
             "make phase22-readiness",
         ),
@@ -296,7 +296,7 @@ def build_phase22_collection_plan(
         flexible_records_after_minimums=flexible,
         recommended_batch_mix=tuple(mix),
         review_rules=(
-            "Only user-authored, user-approved, or owner-delegated agent-authored dialogue enters corpus.",
+            "Owner-delegated agent-authored dialogue may enter corpus directly when fully provenanced.",
             "No external or unprovenanced synthetic LLM data.",
             "Owner-delegated agent-authored records must disclose source/license/notes.",
             "Every record needs source, license, quality, dialect, and training_allowed=true.",
@@ -304,8 +304,7 @@ def build_phase22_collection_plan(
             "Keep current dialect scope to msa + saudi only.",
         ),
         next_commands=(
-            "write or export reviewed sessions, then convert only clean records",
-            f"make prepare-dialogue-batch ARGS=\"--input data/corpus/chat/review/<file>.jsonl --out {first_output} --quality silver --dialect {first_dialect} --training-allowed\"",
+            f"write {first_output} directly with {first_dialect} records and full provenance",
             "make corpus-audit",
             "make phase22-readiness",
         ),
@@ -346,10 +345,10 @@ def build_phase22_next_batch_brief(
         next_batch=next_batch,
         why_this_batch=_why_batch_is_next(next_batch),
         acceptance_checklist=(
-            f"Collect exactly {next_batch.target_records} reviewed dialogue records for this batch.",
+            f"Write exactly {next_batch.target_records} reviewed dialogue records for this batch.",
             "Each record must be user-authored, explicitly user-approved, or owner-delegated agent-authored.",
             "Each record must contain at least one user turn and one assistant turn.",
-            "Prefer sessions with at least 3 user turns and 3 assistant turns before export.",
+            "Prefer multi-turn records with at least 3 user turns and 3 assistant turns before batch approval.",
             "Keep dialect inside the current scope: msa or saudi only.",
             "Use quality=silver unless the record is manually reviewed as gold.",
             "Keep medical/legal/finance/security/religion content out of this general chat corpus.",
@@ -357,15 +356,14 @@ def build_phase22_next_batch_brief(
         ),
         suggested_topics=_suggested_topics(next_batch.dialect),
         ui_instructions=(
-            "Open http://127.0.0.1:8123/ui/chat.",
-            "Keep the stable UI on generator=template; this is corpus collection, not generator evaluation.",
-            "Write or review natural conversations in the requested dialect.",
-            "Watch the جودة التصدير panel; export only when the score is useful for review.",
-            "Save the exported JSONL under data/corpus/chat/review/ for manual review.",
+            "The UI is optional for smoke testing only; corpus authoring is agent-side.",
+            "Keep the stable UI on generator=template when testing; this is not generator evaluation.",
+            "Do not ask Sami to save/export/approve conversation files during Phase 22.",
+            "Write the batch directly under data/corpus/chat/jsonl with user-scoped provenance.",
         ),
         after_export_commands=(
-            "make phase22-review-intake",
-            next_batch.prepare_command,
+            ".venv/bin/python scripts/validate_dataset.py "
+            f"data/corpus/chat/jsonl/dialogue_batch_v2_{next_batch.batch_id}.jsonl",
             "make corpus-audit",
             "make phase22-readiness",
         ),
@@ -435,9 +433,9 @@ def build_phase22_completion_gate(
         completion_checks=completion_checks,
         missing_requirements=tuple(dict.fromkeys(missing)),
         required_before_advance=(
-            "complete all planned Phase 22 batches with user-authored/user-approved records",
-            "run make phase22-review-intake on review exports",
-            "convert only reviewed exports with make prepare-dialogue-batch",
+            "complete all planned Phase 22 batches with user-authored/user-approved/owner-delegated records",
+            "validate every direct corpus batch with scripts/validate_dataset.py",
+            "run make phase22-review-intake only for optional review exports",
             "run make corpus-audit",
             "run make phase22-readiness",
             "run make phase22-completion-gate",
@@ -509,15 +507,7 @@ def _planned_batch(
     suggested_output_path = (
         f"data/corpus/chat/jsonl/dialogue_batch_v2_{batch_id}.jsonl"
     )
-    command_dialect = "msa" if dialect == "msa_or_saudi" else dialect
-    command = (
-        "make prepare-dialogue-batch "
-        "ARGS=\"--input data/corpus/chat/review/<exported_file>.jsonl "
-        f"--out {suggested_output_path} "
-        "--quality silver "
-        f"--dialect {command_dialect} "
-        "--training-allowed\""
-    )
+    command = f".venv/bin/python scripts/validate_dataset.py {suggested_output_path}"
     task_dialect = {
         "msa": "اكتب/راجع حوارات عربية فصحى طبيعية.",
         "saudi": "اكتب/راجع حوارات سعودية طبيعية من استخدامك أنت.",

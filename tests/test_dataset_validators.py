@@ -283,6 +283,7 @@ def test_real_corpus_dir_contains_only_explicit_reviewed_seeds() -> None:
     raw_files = list((corpus / "raw").glob("*.jsonl"))
     assert [p.name for p in jsonl_files] == [
         "dialogue_batch_v2_msa_001.jsonl",
+        "dialogue_batch_v2_msa_002.jsonl",
         "first_dialogue_seed.jsonl",
         "protected_terms_seed_v1.jsonl",
     ]

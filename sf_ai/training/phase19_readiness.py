@@ -107,7 +107,7 @@ def build_phase19_readiness_decision(
     action = (
         "START_SF50M_TRAINING"
         if can_start
-        else "USE_PHASE18_LOOP_TO_GROW_REVIEWED_MSA_SAUDI_CORPUS"
+        else "USE_PHASE22_BATCHES_TO_GROW_REVIEWED_MSA_SAUDI_CORPUS"
     )
 
     return Phase19ReadinessDecision(

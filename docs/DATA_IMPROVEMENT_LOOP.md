@@ -2,7 +2,7 @@
 
 ## SF.AI — Phase 18 Data Expansion Loop v1
 
-**Journey:** Phase 18 / 20
+**Journey:** Phase 18 / 30
 **Status:** completed as governed data loop
 **Language track:** Arabic MSA + Saudi only
 **Runtime learning:** disabled
@@ -15,21 +15,31 @@
 
 القاعدة:
 
-> المحادثة لا تدخل التدريب إلا إذا صدّرها سامي، راجعها، ثم حضّرها بسكربت
+> المحادثة لا تدخل التدريب إلا إذا امتلكت provenance كاملًا ومرت بفحص
 > governance مع `training_allowed=true`.
+
+تحديث Phase 22: سامي فوّض الوكيل أن يؤلف ويراجع ويعتمد دفعات corpus
+مباشرة. لذلك لم يعد حفظ/تصدير سامي اليدوي شرطًا للتقدم؛ مسار review من
+الواجهة يبقى اختياريًا للتشخيص فقط.
 
 ---
 
 ## مسار البيانات
 
 ```text
-/ui/chat
-  → زر "تصدير"
+agent-authored governed batch
+  → data/corpus/chat/jsonl/dialogue_batch_v2_*.jsonl
+  → scripts/validate_dataset.py
+  → make corpus-audit
+  → training لاحقًا
+
+optional UI review path
+  → /ui/chat
+  → زر "حفظ للمراجعة" أو "تصدير"
   → data/corpus/chat/review/*.jsonl
   → scripts/prepare_dialogue_batch.py
   → data/corpus/chat/jsonl/*.jsonl
   → make corpus-audit
-  → training لاحقًا
 ```
 
 ---
@@ -105,14 +115,14 @@ make prepare-dialogue-batch ARGS="--input data/corpus/chat/review/sfai_chat_revi
 
 ---
 
-## ماذا يكتب سامي في الاختبار؟
+## الاختبار الاختياري من الواجهة
 
-جرّب في الشاشة:
+الوكيل يستطيع تشغيل هذه الجمل بنفسه عند الحاجة لفحص الواجهة، وليست شرطًا على سامي:
 
 - `وش رايك اليوم`
 - `قل لي جملة قصيرة`
 - `سولف معي`
 - `وش تقدر تسوي`
 
-بعد المحادثة، اضغط `تصدير`. الملف الناتج يبقى للمراجعة فقط حتى يتم تحضيره
-بالسكريبت.
+أي ملف ناتج يبقى للمراجعة فقط حتى يتم تحضيره بالسكريبت. في Phase 22،
+المسار الأساسي هو الدفعات المباشرة ذات `owner-delegated agent-authored`.
