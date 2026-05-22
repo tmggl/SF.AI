@@ -20,7 +20,8 @@
 - `make corpus-audit` يفحص بيانات `data/corpus/chat/jsonl/`.
 - Phase 12 tokenizer v1 اكتمل بإذن صريح من سامي، مع توثيق أنه Saudi-only ويحتاج `msa` قبل أي تشغيل جودة متوازن.
 - Phase 14 SF-10M v0.1 اكتمل كتشغيل محدود وأثبت أن checkpoint يُقيّم ويولد نصًا غير فارغ.
-- الهدف التالي هو توسيع MSA قبل تدريب جودة، أو بناء Phase 15 adapter skeleton بدون تفعيل.
+- Phase 15 اكتمل كبنية Adapter آمنة: API/UI يعرضان `generator=template`، وNativeGenerator موجود لكنه غير مفعّل.
+- الهدف التالي هو Phase 16 evaluation/safety/style harness قبل السماح للمولّد بالرد داخل الشات.
 
 الجرد الحالي يرى:
 
@@ -59,13 +60,13 @@ SF.AI حاليًا:
 - **Phase 12:** تدريب SF-BPE tokenizer v1.
 - **Phase 13:** أول تدريب smoke صغير وإثبات أن النموذج يتعلم.
 - **Phase 14:** تدريب `SF-10M v0.1`.
-- **Phase 15:** ربط checkpoint بـ `ChatModule` كمولّد اختياري.
+- **Phase 15:** ربط checkpoint ببنية `ChatModule` كمولّد اختياري دون تفعيل runtime.
 - **Phase 16:** تقييم الجودة والسلامة والأسلوب قبل الاستخدام اليومي.
 
 المعنى العملي:
 
 - أول توليد خام: Phase 13.
-- أول توليد داخل شاشة الشات: Phase 15.
+- أول مسار مولّد داخل الشات: Phase 15 كبنية metadata فقط، والتفعيل ينتظر Phase 16.
 - توليد نثق به أكثر للاختبار اليومي: بعد Phase 16.
 
 حتى يتم ذلك، يجب وصف النظام بأنه **مساعد rule-based ذكي في التوجيه** وليس LLM.

@@ -54,7 +54,7 @@
 | Phase 12 | SF-BPE Tokenizer v1 Training & Audit | ✅ completed_with_limits |
 | Phase 13 | Tiny LM Smoke Training | ✅ completed_with_limits |
 | Phase 14 | SF-10M v0.1 Training Run | ✅ completed_with_limits |
-| Phase 15 | Generator Adapter for ChatModule | معلّقة |
+| Phase 15 | Generator Adapter for ChatModule | ✅ completed_as_safe_adapter |
 | Phase 16 | Evaluation/Safety/Style Harness | معلّقة |
 | Phase 17 | Local Memory/RAG Bridge into Chat | معلّقة |
 | Phase 18 | Data Expansion Loop v1 | معلّقة |
@@ -66,7 +66,7 @@
 ### الاختبارات
 
 ```
-360 passed in 2.14s
+367 passed in 3.13s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -136,7 +136,7 @@ bash scripts/run_chat_server.sh
 - `sf_ai/datasets/corpus_governance.py`
 - `tests/test_corpus_governance.py`
 
-تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه غير صالح للشات.
+تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه غير صالح للشات. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata `generator=template` دون تفعيل runtime.
 
 ### Phase 12 — preflight جاهز فقط
 
@@ -227,7 +227,7 @@ missing language balance: msa
 
 ### تستطيع الآن الانتقال إلى:
 
-- توسعة MSA قبل تشغيل جودة، أو **Phase 15** كبنية adapter فقط بدون تفعيل runtime.
+- **Phase 16** كبنية evaluation/safety/style harness قبل أي تفعيل runtime للتوليد.
 
 ---
 
@@ -284,7 +284,7 @@ sf_ai/datasets/                 schemas + validators + loaders + saudi_seed
 resources/lexicons/             YAML lexicons (Phase 3) + imported/ (Phase 3.5/3.6)
 data/corpus/                    حوار المستخدم + قاموس سعودي
 docs/                           كل الوثائق الفنية
-tests/                          332 اختبار، 29 ملف
+tests/                          367 اختبار، 40 ملف
 scripts/                        CLI: run_chat_server, validate_dataset, train_bpe, import_mo3jam_saudi
 ```
 

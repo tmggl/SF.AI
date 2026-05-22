@@ -8,8 +8,8 @@ The Orchestrator dispatches active routing decisions here. The module:
 4. Updates state with the user turn and the assistant turn.
 5. Returns a ModuleResponse the orchestrator can hand back to the API.
 
-No LLM here. When SF Native LM ships (Phase 6) it will plug in by replacing
-ChatResponseBuilder's generation backend; the public ChatModule API stays.
+No external LLM here. Phase 15 adds a native-generator adapter, but runtime
+chat remains template-backed until evaluation proves the checkpoint is useful.
 """
 
 from __future__ import annotations
@@ -20,6 +20,8 @@ from functools import lru_cache
 from sf_ai.core.nlp.types import NLPAnalysis
 from sf_ai.modules.chat.chat_response_builder import ChatResponseBuilder
 from sf_ai.modules.chat.conversation_state import ConversationState, ConversationStore
+from sf_ai.modules.chat.generation_policy import GenerationPolicy
+from sf_ai.modules.chat.native_generator import NativeGenerator
 
 
 _KNOWN_INTENTS: frozenset[str] = frozenset(
@@ -61,10 +63,14 @@ class ChatModule:
         self,
         store: ConversationStore | None = None,
         builder: ChatResponseBuilder | None = None,
+        generation_policy: GenerationPolicy | None = None,
+        native_generator: NativeGenerator | None = None,
         max_turns: int = 12,
     ) -> None:
         self.store = store or ConversationStore(max_turns=max_turns)
         self.builder = builder or ChatResponseBuilder()
+        self.generation_policy = generation_policy or GenerationPolicy.from_env()
+        self.native_generator = native_generator
 
     def handle(
         self,
@@ -93,6 +99,9 @@ class ChatModule:
         prior_count = state.count_intent(intent) - 1
         reply = self._build_with_prior_count(analysis, intent, state, prior_count)
 
+        generator_notes = self._generator_notes(intent=intent, analysis=analysis)
+        notes = reply.notes + generator_notes
+
         state.add_assistant(reply.text, intent=intent, domain=self.domain)
 
         sid_visible = state.session_id if state.session_id != "_anonymous_" else ""
@@ -102,7 +111,7 @@ class ChatModule:
             template_index=reply.template_index,
             session_id=sid_visible,
             turn_count=len(state.turns),
-            notes=reply.notes,
+            notes=notes,
         )
 
     def _build_with_prior_count(
@@ -133,6 +142,31 @@ class ChatModule:
                 return self._state.recent(n)
 
         return self.builder.build(analysis, intent, _StateView(state, prior_count))  # type: ignore[arg-type]
+
+    def _generator_notes(self, *, intent: str, analysis: NLPAnalysis) -> tuple[str, ...]:
+        """Expose generator metadata without activating weak runtime generation.
+
+        Phase 14 proved the checkpoint can emit text, but not that it is good
+        enough to replace the deterministic Arabic templates. Phase 15 therefore
+        wires the adapter/policy and surfaces metadata while keeping output
+        source as `template` until Phase 16 evaluation approves activation.
+        """
+        if not self.generation_policy.enabled:
+            return ("generator:template", "native_generator:disabled")
+
+        decision = self.generation_policy.decide(
+            domain=self.domain,
+            intent=intent,
+            confidence=0.0,
+            domain_status="active",
+            requires_safety=bool(analysis.safety_flags),
+            fallback_used=True,
+        )
+        return (
+            "generator:template",
+            f"native_generator:{decision.reason}",
+            "native_generator:phase15_metadata_only",
+        )
 
 
 @lru_cache(maxsize=1)

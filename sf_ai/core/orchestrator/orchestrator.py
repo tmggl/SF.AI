@@ -103,6 +103,10 @@ class Orchestrator:
         debug["dispatch"] = dispatch_kind
         if extra_notes:
             debug["module_notes"] = ",".join(extra_notes)
+            generator = self._extract_note_value(extra_notes, prefix="generator:")
+            if generator:
+                debug["generator"] = generator
+        debug.setdefault("generator", "template")
 
         return OrchestratorResult(
             domain=domain.name,
@@ -181,6 +185,12 @@ class Orchestrator:
             "safety_flags": ",".join(analysis.safety_flags),
             "intent_hints": ",".join(h.intent for h in analysis.intent_hints),
         }
+
+    def _extract_note_value(self, notes: tuple[str, ...], *, prefix: str) -> str:
+        for note in notes:
+            if note.startswith(prefix):
+                return note[len(prefix):]
+        return ""
 
     def _fail_safe(self, reason: str) -> OrchestratorResult:
         return OrchestratorResult(

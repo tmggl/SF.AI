@@ -29,8 +29,8 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 14 منتهية؛ Phase 12 اكتملت كتدريب tokenizer v1 محدود، وPhase 13/14 اكتملتا كتدريب LM محدود. الخطة الرسمية تمتد إلى Phase 20 لبناء النموذج اللغوي السيادي المولّد.
-- 360 اختبار يمر (`.venv/bin/python -m pytest tests`).
+- المراحل من Phase 0 حتى Phase 15 منتهية؛ Phase 12 اكتملت كتدريب tokenizer v1 محدود، Phase 13/14 اكتملتا كتدريب LM محدود، وPhase 15 اكتملت كبنية Adapter آمنة دون تفعيل runtime.
+- 367 اختبار يمر (`.venv/bin/python -m pytest tests`).
 - السيرفر يعمل عادةً على `http://127.0.0.1:8123` (المنفذ 8000/8765 محجوز).
 - شاشة المحادثة على `/ui/chat` — هي هدف سامي الرئيسي للتجريب.
 - آخر تحسين مكتمل: التركيز على العربية الفصحى + السعودية فقط، توجيه الرسائل اليومية (`وشلونك`/`شكرا`/`تمام`/`لا`/`ساعدني`/`مش فاهم`/`من صنعك`/`سعودي`/`عندي؟`/`عندي سؤال`) + Phase 10 skeleton domains.
@@ -38,7 +38,7 @@
 - اقرأ ملفات الحوكمة والدستور قبل أي تدريب: `PROJECT_CONSTITUTION`, `LANGUAGE_SEGMENTATION`, `TOKENIZATION_POLICY`, `DATASET_GOVERNANCE`, `AGENT_ENGINEERING_RULES`, ثم `PROJECT_IDENTITY`, `ENGINEERING_RULES`, `AGENT_INSTRUCTIONS`, `PROJECT_MAP`, `PROJECT_LIFECYCLE`.
 - اقرأ `docs/PHASE12_TOKENIZER_V1_REPORT.md`, `docs/PHASE13_SMOKE_TRAINING_REPORT.md`, و`docs/PHASE14_SF10M_V0_1_REPORT.md`: artifacts موجودة، لكنها غير صالحة للشات أو الجودة اللغوية بعد.
 - إذا كان السيرفر الحي لم يُعد تشغيله بعد، استخدم `make phase12-readiness` لنفس القرار بدون لمس السيرفر.
-- الهدف العام: الوصول إلى نموذج لغوي سيادي مولّد. أول توليد خام في Phase 13، وأول توليد داخل الشات في Phase 15، والاستخدام اليومي بعد Phase 16.
+- الهدف العام: الوصول إلى نموذج لغوي سيادي مولّد. أول توليد خام في Phase 13، وباب التوليد داخل الشات جُهّز في Phase 15، والاستخدام اليومي ينتظر Phase 16 وما بعدها.
 
 **هدف سامي الرئيسي الآن:**
 

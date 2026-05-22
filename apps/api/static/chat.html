@@ -164,6 +164,7 @@
         <div>النية</div><div><code>—</code></div>
         <div>الثقة</div><div><code>—</code></div>
         <div>المسار</div><div><code>—</code></div>
+        <div>المولّد</div><div><code>—</code></div>
         <div>سبب التوجيه</div><div><code>—</code></div>
         <div>اللغة</div><div><code>—</code></div>
         <div>اللهجة</div><div><code>—</code></div>
@@ -271,6 +272,7 @@
       ["النية", body.intent || "—"],
       ["الثقة", body.confidence != null ? body.confidence.toFixed(2) : "—"],
       ["المسار", body.dispatch || "—"],
+      ["المولّد", body.generator || (body.debug && body.debug.generator) || "template"],
       ["سبب التوجيه", body.route_reason || "—"],
       ["اللغة", (body.debug && body.debug.language) || "—"],
       ["اللهجة", (body.debug && body.debug.dialect) || "—"],
@@ -325,7 +327,8 @@
         (body.domain || "?") +
         " / " + (body.intent || "?") +
         " · ثقة " + (body.confidence != null ? body.confidence.toFixed(2) : "—") +
-        " · " + (body.dispatch || "");
+        " · " + (body.dispatch || "") +
+        " · generator=" + (body.generator || "template");
       placeholder.appendChild(meta);
       setDiag(body);
     } catch (e) {

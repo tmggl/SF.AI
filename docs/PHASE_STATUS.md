@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **المرحلة الحالية:** **Phase 14 — SF-10M v0.1 Training Run**
-- **حالة المرحلة الحالية:** **اكتملت مع قيود: loss انخفض، checkpoint حُفظ، والتقييم/التوليد نجحا لكن corpus صغير وسعودي فقط**
-- **المرحلة التالية المقترحة:** توسعة MSA قبل تشغيل جودة، أو Phase 15 adapter skeleton بدون تفعيل runtime.
-- **جاهزية Phase 15 الآن:** ممكنة كبنية adapter فقط؛ غير مسموح استبدال ChatModule بهذا checkpoint بعد.
+- **المرحلة الحالية:** **Phase 15 — Generator Adapter for ChatModule**
+- **حالة المرحلة الحالية:** **اكتملت كبنية adapter آمنة: API/UI يعرضان `generator=template`، وNativeGenerator موجود لكنه غير مفعّل runtime**
+- **المرحلة التالية المقترحة:** Phase 16 — Evaluation, Safety, and Saudi/MSA Style Harness.
+- **جاهزية Phase 16 الآن:** ممكنة كبنية تقييم فقط؛ لا تفعيل لتوليد الشات قبل gate واضح.
 - **تاريخ آخر تحديث:** 2026-05-22
 
 ---
@@ -39,7 +39,7 @@
 | Phase 12 | SF-BPE Tokenizer v1 Training & Audit | ✅ completed_with_limits | ✅ |
 | Phase 13 | Tiny LM Smoke Training | ✅ completed_with_limits | ✅ |
 | Phase 14 | SF-10M v0.1 Training Run | ✅ completed_with_limits | ✅ |
-| Phase 15 | Generator Adapter for ChatModule | معلّقة | ⏳ |
+| Phase 15 | Generator Adapter for ChatModule | ✅ completed_as_safe_adapter | ✅ |
 | Phase 16 | Evaluation, Safety, and Saudi/MSA Style Harness | معلّقة | ⏳ |
 | Phase 17 | Local Memory/RAG Bridge into Chat | معلّقة | ⏳ |
 | Phase 18 | Data Expansion Loop v1 | معلّقة | ⏳ |
@@ -127,6 +127,13 @@
   - perplexity: 59.01
   - generation: non-empty, repetitive as expected
   - report: [PHASE14_SF10M_V0_1_REPORT.md](./PHASE14_SF10M_V0_1_REPORT.md)
+- بدأ وانتهى Phase 15 Generator Adapter:
+  - أضيف `GenerationPolicy` لتعطيل التوليد افتراضيًا ومنع safety/skeleton/low-confidence routes.
+  - أضيف `NativeGenerator` كـ lazy adapter يحمّل tokenizer/checkpoint السياديين فقط.
+  - بقي `ChatModule` على القوالب، ويصدر metadata `generator=template`.
+  - أضيف حقل `generator` إلى API وشاشة `/ui/chat`.
+  - tests: `367 passed`.
+  - report: [PHASE15_GENERATOR_ADAPTER_REPORT.md](./PHASE15_GENERATOR_ADAPTER_REPORT.md)
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 

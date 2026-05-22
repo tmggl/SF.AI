@@ -35,10 +35,11 @@
 
 ## الهدف الحالي
 
-- **الأولوية الحالية:** توسعة corpus الفصيح MSA قبل تشغيل جودة، أو Phase 15 adapter skeleton بدون تفعيل.
+- **الأولوية الحالية:** Phase 16 evaluation/safety/style harness قبل السماح لتوليد النموذج بالرد داخل الشات.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
 - **البيانات الحالية:** seed سعودي صغير `30/30` يمر `corpus-audit`؛ ما زال `msa` مطلوبًا قبل تشغيل جودة لغوية متوازنة.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 اكتملت من بيانات SF.AI فقط، مع قيود موثقة.
+- **المولّد:** Phase 15 أضاف NativeGenerator adapter وسياسة أمان، لكن runtime ما زال يرد عبر `template`.
 
 ---
 
@@ -66,6 +67,7 @@
 | Phase 12 | SF-BPE Tokenizer v1 Training & Audit — completed with limits |
 | Phase 13 | Tiny LM Smoke Training — completed with limits |
 | Phase 14 | SF-10M v0.1 Training Run — completed with limits |
+| Phase 15 | Generator Adapter for ChatModule — completed as safe adapter |
 
 **تفويض التنفيذ الحالي:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة في الرحلة، مع بقاء قواعد السيادة والسلامة وفحص الحساسية قبل الرفع.
 

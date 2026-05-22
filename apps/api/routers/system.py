@@ -36,9 +36,9 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 11 — Sovereign Corpus Governance & Saudi/MSA Dialogue Pack",
-        current_phase_status="completed",
-        next_phase="Phase 12 — SF-BPE Tokenizer v1 Training & Audit (preflight ready; waiting for JSONL data + explicit permission)",
+        current_phase="Phase 15 — Generator Adapter for ChatModule",
+        current_phase_status="completed_as_safe_adapter",
+        next_phase="Phase 16 — Evaluation, Safety, and Saudi/MSA Style Harness",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -112,6 +112,8 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
             ComponentStatus(name="corpus_governance", status="active", phase="Phase 11"),
             ComponentStatus(name="training_corpus", status="waiting_for_user_data", phase="Phase 11"),
             ComponentStatus(name="phase12_corpus_preflight", status="active", phase="Phase 12"),
+            ComponentStatus(name="native_generator", status="ready_offline", phase="Phase 15"),
+            ComponentStatus(name="generation_policy", status="active", phase="Phase 15"),
             ComponentStatus(name="rag", status="planned", phase="Phase 8"),
         ],
     )

@@ -38,7 +38,7 @@
 | Phase 12 | SF-BPE Tokenizer v1 Training & Audit | مكتملة مع قيود |
 | Phase 13 | Tiny LM Smoke Training (Overfit + Generation Sanity) | مكتملة مع قيود |
 | Phase 14 | SF-10M v0.1 Training Run | مكتملة مع قيود |
-| Phase 15 | Generator Adapter for ChatModule | معلّقة |
+| Phase 15 | Generator Adapter for ChatModule | مكتملة كبنية آمنة |
 | Phase 16 | Evaluation, Safety, and Saudi/MSA Style Harness | معلّقة |
 | Phase 17 | Local Memory/RAG Bridge into Chat | معلّقة |
 | Phase 18 | Data Expansion Loop v1 | معلّقة |
@@ -689,7 +689,7 @@ coding, data, files, legal, medical, finance, education, religion, social, writi
 ### متى يظهر أول توليد فعلي؟
 
 - **أول توليد خام للتجربة:** Phase 13، بعد تدريب smoke صغير جدًا للتأكد أن pipeline يتعلم.
-- **أول توليد داخل شاشة الشات:** Phase 15، بعد وجود checkpoint صالح من Phase 14 وربطه بـ `ChatModule`.
+- **أول باب توليد داخل شاشة الشات:** Phase 15 كبنية Adapter وmetadata، لكن التفعيل ينتظر Phase 16.
 - **توليد مقبول للاستخدام اليومي:** بعد Phase 16، عندما يمر على اختبارات جودة وسلامة ولهجة.
 
 ---
@@ -733,7 +733,7 @@ artifacts/reports/corpus_v1_report.json
 - تقرير يوضح عدد المحادثات، عدد tokens التقريبي، نسبة فصحى/سعودي، وأخطاء التنسيق.
 
 ### بعد المرحلة
-توقف، ملخص، اطلب الإذن.
+Phase 15 اكتملت كبنية آمنة دون تفعيل runtime. انتقل إلى Phase 16 لتقييم الجودة والسلامة والأسلوب قبل السماح للمولّد بالرد داخل الشات.
 
 ---
 
