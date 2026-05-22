@@ -129,3 +129,38 @@ class Phase19ReadinessResponse(BaseModel):
     recommended_commands: list[str]
     blockers: list[str]
     notes: list[str]
+
+
+class DomainGateResponse(BaseModel):
+    domain: str
+    current_status: str
+    requires_safety: bool
+    manifest_present: bool
+    registry_present: bool
+    data_ready: bool
+    safety_policy_ready: bool
+    tests_ready: bool
+    ui_indication_ready: bool
+    fallback_path_ready: bool
+    allowed_tools_declared: bool
+    can_activate_now: bool
+    recommended_status: str
+    action: str
+    blockers: list[str]
+    notes: list[str]
+
+
+class Phase20GatesResponse(BaseModel):
+    phase: str
+    status: str
+    language_track: list[str]
+    lexicon_track: str
+    total_domains: int
+    active_domains: list[str]
+    ready_offline_domains: list[str]
+    candidate_domains: list[str]
+    blocked_domains: list[str]
+    sensitive_domains: list[str]
+    can_activate_any_domain: bool
+    gates: list[DomainGateResponse]
+    notes: list[str]

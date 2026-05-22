@@ -5,6 +5,7 @@ Endpoints:
 - GET  /health           liveness probe
 - GET  /system/status    phase + sovereign flags + components
 - GET  /system/phase12-readiness  read-only training readiness + permission gate
+- GET  /system/phase20-gates      read-only domain activation gates
 - POST /chat/message     orchestrator dispatch (Phase 4 chat module)
 - GET  /ui/chat          minimal Arabic-RTL chat UI (Phase 9)
 
@@ -30,7 +31,7 @@ app = FastAPI(
     version="0.1.0",
     description=(
         "SF.AI — Sovereign AI platform. Phase 9 chat UI mounted at /ui/chat. "
-        "Phase 19 SF-50M readiness gate is active. "
+        "Phase 20 domain activation gates are active. "
         "No pretrained models, no external AI APIs."
     ),
 )
@@ -45,7 +46,7 @@ app.include_router(ui.router)
 def root() -> dict[str, str]:
     return {
         "project": "SF.AI",
-        "phase": "Phase 19 — SF-50M Readiness Gate",
+        "phase": "Phase 20 — Domain Activation Gates",
         "ui": "/ui/chat",
         "docs": "/docs",
     }

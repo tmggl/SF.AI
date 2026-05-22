@@ -29,8 +29,8 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 18 منتهية؛ Phase 19 تعمل الآن كبوابة جاهزية لـ SF-50M. القرار الحالي: `NOT_READY_EXPAND_CORPUS_FIRST` لأن corpus صغير ويفتقد `msa`.
-- 394 اختبار يمر (`.venv/bin/python -m pytest tests`) وآخر تشغيل: `394 passed in 3.12s`.
+- المراحل من Phase 0 حتى Phase 20 منتهية؛ Phase 19 تعمل كبوابة جاهزية لـ SF-50M وPhase 20 يعمل كبوابة تفعيل للمجالات. قرار SF-50M الحالي: `NOT_READY_EXPAND_CORPUS_FIRST` لأن corpus صغير ويفتقد `msa`.
+- 400 اختبار يمر (`.venv/bin/python -m pytest tests`) وآخر تشغيل: `400 passed in 3.93s`.
 - السيرفر يعمل عادةً على `http://127.0.0.1:8123` (المنفذ 8000/8765 محجوز).
 - شاشة المحادثة على `/ui/chat` — هي هدف سامي الرئيسي للتجريب.
 - آخر تحسين مكتمل: التركيز على العربية الفصحى + السعودية فقط، توجيه الرسائل اليومية (`وشلونك`/`شكرا`/`تمام`/`لا`/`ساعدني`/`مش فاهم`/`من صنعك`/`سعودي`/`عندي؟`/`عندي سؤال`) + Phase 10 skeleton domains.
@@ -38,7 +38,7 @@
 - اقرأ ملفات الحوكمة والدستور قبل أي تدريب: `PROJECT_CONSTITUTION`, `LANGUAGE_SEGMENTATION`, `TOKENIZATION_POLICY`, `DATASET_GOVERNANCE`, `AGENT_ENGINEERING_RULES`, ثم `PROJECT_IDENTITY`, `ENGINEERING_RULES`, `AGENT_INSTRUCTIONS`, `PROJECT_MAP`, `PROJECT_LIFECYCLE`.
 - اقرأ `docs/PHASE12_TOKENIZER_V1_REPORT.md`, `docs/PHASE13_SMOKE_TRAINING_REPORT.md`, و`docs/PHASE14_SF10M_V0_1_REPORT.md`: artifacts موجودة، لكنها غير صالحة للشات أو الجودة اللغوية بعد.
 - إذا كان السيرفر الحي لم يُعد تشغيله بعد، استخدم `make phase12-readiness` لنفس القرار بدون لمس السيرفر.
-- الهدف العام: الوصول إلى نموذج لغوي سيادي مولّد. أول توليد خام في Phase 13، وباب التوليد داخل الشات جُهّز في Phase 15. مختبر سامي المحلي يفعّل المولد الخام للتجربة. Phase 17 جهّز RAG/Memory المحلي، Phase 18 جهّز دورة تحسين بيانات، وPhase 19 يقيس جاهزية SF-50M.
+- الهدف العام: الوصول إلى نموذج لغوي سيادي مولّد. أول توليد خام في Phase 13، وباب التوليد داخل الشات جُهّز في Phase 15. مختبر سامي المحلي يفعّل المولد الخام للتجربة. Phase 17 جهّز RAG/Memory المحلي، Phase 18 جهّز دورة تحسين بيانات، Phase 19 يقيس جاهزية SF-50M، وPhase 20 يمنع تفعيل المجالات بلا بوابات.
 
 **هدف سامي الرئيسي الآن:**
 

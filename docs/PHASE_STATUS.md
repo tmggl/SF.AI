@@ -7,9 +7,9 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 19 / 20**
-- **المرحلة الحالية:** **Phase 19 — SF-50M Readiness Gate**
-- **حالة المرحلة الحالية:** **بوابة الجاهزية تعمل؛ تدريب SF-50M غير جاهز لأن corpus الحالي 30 سجلًا فقط ويفتقد msa**
+- **الرحلة الحالية:** **Phase 20 / 20**
+- **المرحلة الحالية:** **Phase 20 — Domain Activation Gates**
+- **حالة المرحلة الحالية:** **بوابات تفعيل المجالات تعمل؛ لا يوجد أي تفعيل تلقائي، وchat هو المجال النشط الوحيد**
 - **المرحلة التالية المقترحة:** توسيع corpus عبر Phase 18 loop ثم إعادة `make phase19-readiness`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ تم تحديث `default_registry.yaml` و`safety_terms.yaml` لفجوات finance/religion/security.
 - **تاريخ آخر تحديث:** 2026-05-22
@@ -45,7 +45,7 @@
 | Phase 17 | Local Memory/RAG Bridge into Chat | ✅ completed_local_bridge | ✅ |
 | Phase 18 | Data Expansion Loop v1 | ✅ completed_governed_loop | ✅ |
 | Phase 19 | SF-50M Candidate Training | readiness_gate_active_not_ready | ✅ |
-| Phase 20 | Domain Activation Gates | معلّقة | ⏳ |
+| Phase 20 | Domain Activation Gates | ✅ gates_active_no_auto_activation | ✅ |
 
 ---
 
@@ -167,6 +167,17 @@
   - السبب: corpus الحالي `30` سجلًا فقط والحد الأدنى العملي الحالي `5000`.
   - أضيف lab bridge للرسائل غير الحساسة حتى يختبر سامي المولد الخام عبر مجالات skeleton داخل المختبر المحلي.
   - docs: [PHASE19_READINESS_REPORT.md](./PHASE19_READINESS_REPORT.md)
+- بدأ وانتهى Phase 20 Domain Activation Gates:
+  - أضيف `make phase20-gates`.
+  - أضيف `GET /system/phase20-gates`.
+  - أضيف `sf_ai/core/activation/domain_activation_gates.py`.
+  - أضيفت اختبارات Phase 20.
+  - أُضيف `productivity` كسكيلتون كامل لأنه كان موجودًا في registry دون module/manifest.
+  - القرار الحالي: `PHASE20_GATES_ACTIVE_NO_DOMAIN_AUTO_ACTIVATED`.
+  - المجال النشط الوحيد: `chat`.
+  - المرشحان للمراجعة الصريحة فقط: `web`, `research`.
+  - بقية المجالات تبقى skeleton أو safety-first.
+  - docs: [PHASE20_DOMAIN_ACTIVATION_GATES_REPORT.md](./PHASE20_DOMAIN_ACTIVATION_GATES_REPORT.md)
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -263,7 +274,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-394 passed in 3.12s
+400 passed in 3.93s
 ```
 
 | ملف | عدد |
@@ -290,6 +301,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_phase10_skeleton_domains.py | 4 (Phase 10) |
 | test_phase16_eval_harness.py | 3 (Phase 16) |
 | test_phase19_readiness.py | 2 (Phase 19) |
+| test_phase20_domain_activation_gates.py | 6 (Phase 20) |
 | test_rag_sparse_retrieval.py | 14 (Phase 8) |
 | test_research_summarizer.py | 20 |
 | test_response_composer.py | 6 |
@@ -302,7 +314,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_training_device.py | 14 |
 | test_typo_corrector.py | 5 |
 | test_web_extractor.py | 18 |
-| **Total** | **394** |
+| **Total** | **400** |
 
 ---
 

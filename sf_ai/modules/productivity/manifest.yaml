@@ -1,0 +1,15 @@
+# SF.AI — Productivity skeleton manifest (Phase 10)
+domain: productivity
+status: skeleton_only
+phase: "Phase 10"
+version: "0.1"
+description: "Future productivity, tasks, and planning domain."
+handles_intents:
+  - productivity.general
+  - productivity.tasks
+allowed_tools: []
+requires_safety: false
+limitations:
+  - "Skeleton only: no calendar, reminder, or task execution engine."
+  - "No external productivity API or hidden automation."
+notes: "Future activation should keep plans local, explicit, and user-reviewable."

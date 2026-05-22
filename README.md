@@ -35,7 +35,7 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 19 / 20 — بوابة جاهزية SF-50M تعمل، والتدريب الكبير غير جاهز بسبب صغر corpus.
+- **الرحلة الحالية:** Phase 20 / 20 — بوابات تفعيل المجالات تعمل، ولا يوجد أي تفعيل تلقائي للمجالات اللاحقة.
 - **الأولوية الحالية:** اختبار مختبر سامي المحلي، تصدير محادثات مراجعة، وتكبير corpus المحكوم قبل تدريب SF-50M.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
 - **البيانات الحالية:** seed سعودي صغير `30/30` يمر `corpus-audit`؛ ما زال `msa` مطلوبًا قبل تشغيل جودة لغوية متوازنة.
@@ -45,6 +45,7 @@
 - **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.
 - **دورة البيانات:** Phase 18 أضاف تصدير مراجعة من الواجهة و`prepare_dialogue_batch.py`; لا تعلم تلقائي.
 - **جاهزية SF-50M:** Phase 19 أضاف `make phase19-readiness`; القرار الحالي `NOT_READY_EXPAND_CORPUS_FIRST`.
+- **بوابات المجالات:** Phase 20 أضاف `make phase20-gates` و`GET /system/phase20-gates`; المجال النشط الوحيد هو `chat`.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
 ---
@@ -78,6 +79,7 @@
 | Phase 17 | Local Memory/RAG Bridge into Chat — completed as local bridge |
 | Phase 18 | Data Expansion Loop v1 — completed as governed loop |
 | Phase 19 | SF-50M Readiness Gate — active, corpus too small for training |
+| Phase 20 | Domain Activation Gates — active, no domain auto-activated |
 
 **تفويض التنفيذ الحالي:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة في الرحلة، مع بقاء قواعد السيادة والسلامة وفحص الحساسية قبل الرفع.
 

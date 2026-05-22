@@ -15,12 +15,15 @@ from apps.api.schemas.system import (
     ComponentStatus,
     CorpusAuditResponse,
     CorpusIssueResponse,
+    DomainGateResponse,
     Phase12ReadinessResponse,
     Phase19ReadinessResponse,
+    Phase20GatesResponse,
     SourceInventoryItemResponse,
     SourceInventoryResponse,
     SystemStatusResponse,
 )
+from sf_ai.core.activation import build_phase20_activation_gates
 from sf_ai.datasets.corpus_governance import audit_jsonl_directory_for_training
 from sf_ai.datasets.source_inventory import build_source_inventory
 from sf_ai.training.phase12_readiness import build_phase12_readiness_decision
@@ -38,8 +41,8 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 19 — SF-50M Readiness Gate",
-        current_phase_status="not_ready_expand_corpus_first",
+        current_phase="Phase 20 — Domain Activation Gates",
+        current_phase_status="phase20_gates_active_no_domain_auto_activated",
         next_phase="Grow governed MSA+Saudi corpus through Phase 18 loop, then rerun Phase 19",
         sovereign=True,
         uses_external_llm=False,
@@ -104,6 +107,7 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
             ComponentStatus(name="education_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="religion_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="social_module", status="skeleton_only", phase="Phase 10"),
+            ComponentStatus(name="productivity_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="writing_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="translation_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="image_module", status="skeleton_only", phase="Phase 10"),
@@ -122,6 +126,7 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
             ComponentStatus(name="dialogue_batch_preparation", status="active", phase="Phase 18"),
             ComponentStatus(name="chat_review_export", status="active", phase="Phase 18"),
             ComponentStatus(name="phase19_readiness", status="active", phase="Phase 19"),
+            ComponentStatus(name="domain_activation_gates", status="active", phase="Phase 20"),
         ],
     )
 
@@ -256,5 +261,46 @@ def phase19_readiness() -> Phase19ReadinessResponse:
         action=decision.action,
         recommended_commands=list(decision.recommended_commands),
         blockers=list(decision.blockers),
+        notes=list(decision.notes),
+    )
+
+
+@router.get("/phase20-gates", response_model=Phase20GatesResponse)
+def phase20_gates() -> Phase20GatesResponse:
+    """Read-only Phase 20 decision for skeleton domain activation."""
+    decision = build_phase20_activation_gates()
+    return Phase20GatesResponse(
+        phase=decision.phase,
+        status=decision.status,
+        language_track=list(decision.language_track),
+        lexicon_track=decision.lexicon_track,
+        total_domains=decision.total_domains,
+        active_domains=list(decision.active_domains),
+        ready_offline_domains=list(decision.ready_offline_domains),
+        candidate_domains=list(decision.candidate_domains),
+        blocked_domains=list(decision.blocked_domains),
+        sensitive_domains=list(decision.sensitive_domains),
+        can_activate_any_domain=decision.can_activate_any_domain,
+        gates=[
+            DomainGateResponse(
+                domain=gate.domain,
+                current_status=gate.current_status,
+                requires_safety=gate.requires_safety,
+                manifest_present=gate.manifest_present,
+                registry_present=gate.registry_present,
+                data_ready=gate.data_ready,
+                safety_policy_ready=gate.safety_policy_ready,
+                tests_ready=gate.tests_ready,
+                ui_indication_ready=gate.ui_indication_ready,
+                fallback_path_ready=gate.fallback_path_ready,
+                allowed_tools_declared=gate.allowed_tools_declared,
+                can_activate_now=gate.can_activate_now,
+                recommended_status=gate.recommended_status,
+                action=gate.action,
+                blockers=list(gate.blockers),
+                notes=list(gate.notes),
+            )
+            for gate in decision.gates
+        ],
         notes=list(decision.notes),
     )
