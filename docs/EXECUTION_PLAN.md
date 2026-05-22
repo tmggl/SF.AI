@@ -764,8 +764,11 @@ artifacts/tokenizers/sf_bpe/v1/
 قبل التدريب:
 
 ```bash
+make source-inventory
 make corpus-audit
 ```
+
+`source-inventory` يشرح كل المصادر المحلية، بما فيها المراجع الخاصة مثل قاموس Saudi Seed وملف مهام اللهجة السعودية. أما `corpus-audit` فهو البوابة الصارمة لتدريب tokenizer من corpus حواري جاهز.
 
 لا يبدأ التدريب إلا إذا ظهر:
 

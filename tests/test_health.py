@@ -51,6 +51,19 @@ def test_system_corpus_audit_reports_not_ready_without_jsonl() -> None:
     assert any("no JSONL files found" in issue["message"] for issue in body["issues"])
 
 
+def test_system_source_inventory_reports_reference_layers() -> None:
+    r = client.get("/system/source-inventory")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["source_count"] >= 4
+    names = {source["name"] for source in body["sources"]}
+    assert "chat_training_jsonl" in names
+    assert "saudi_dialect_training_tasks_seed_v1" in names
+    assert "saudi_seed_v1_lexicon_reference" in names
+    assert "mo3jam_saudi_import_slot" in names
+    assert any(source["private_or_ignored"] for source in body["sources"])
+
+
 def test_chat_greeting_routes_through_module() -> None:
     r = client.post("/chat/message", json={"message": "مرحبا", "session_id": "api-test-1"})
     assert r.status_code == 200

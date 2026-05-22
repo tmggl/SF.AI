@@ -151,6 +151,23 @@ GET /system/corpus-audit
 
 هذه تستخدم `scripts/audit_training_corpus.py` وتجمع فحص كل ملفات `.jsonl` في `data/corpus/chat/jsonl/`.
 
+بعد ملاحظة سامي أن الفحص السابق غير شامل، أُضيف جرد مصادر شامل:
+
+```bash
+make source-inventory
+```
+
+```text
+GET /system/source-inventory
+```
+
+الجرد الحالي يميز بين:
+
+- `chat_training_jsonl`: المصدر الحواري الرسمي، فارغ حاليًا.
+- `saudi_dialect_training_tasks_seed_v1`: ملف محلي خاص فيه 1032 مهمة لهجة سعودية، مرشح tokenizer/تحويل لاحق، وليس chat corpus مباشرًا.
+- `saudi_seed_v1_lexicon_reference`: قاموس سعودي محلي خاص فيه 516 مدخلًا، مرجع لهجي لا يرفع ولا يدخل كحوار مباشر.
+- `mo3jam_saudi_import_slot`: موضع استيراد مؤجل permission-gated.
+
 الوضع الحالي:
 
 ```text

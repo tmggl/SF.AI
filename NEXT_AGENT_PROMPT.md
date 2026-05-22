@@ -52,6 +52,12 @@
 
 3. Phase 11 مكتملة كحوكمة وأداة فحص. شغّل:
    ```
+   make source-inventory
+   ```
+   هذا يريك كل المراجع المحلية: chat corpus، ملف مهام اللهجة السعودية، قاموس Saudi Seed، وMo3jam slot.
+
+4. ثم شغّل:
+   ```
    make corpus-audit
    ```
    إذا كانت النتيجة `NOT_READY_FOR_TRAINING` فلا تبدأ التدريب. Phase 12 يبدأ فقط بعد بيانات JSONL صالحة، تقرير `READY_FOR_PHASE_12_TOKENIZER_TRAINING`، وموافقة صريحة.

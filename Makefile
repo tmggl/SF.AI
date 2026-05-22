@@ -1,7 +1,7 @@
 # SF.AI — Makefile
 # Phase 1 set of operational commands.
 
-.PHONY: help check-env install test lint type api web docker-up docker-down phase-status import-mo3jam-saudi corpus-audit train-bpe train-lm eval-lm
+.PHONY: help check-env install test lint type api web docker-up docker-down phase-status import-mo3jam-saudi source-inventory corpus-audit train-bpe train-lm eval-lm
 
 PY ?= .venv/bin/python
 UVICORN ?= uvicorn
@@ -20,6 +20,7 @@ help:
 	@echo "  make phase-status  Print current phase status"
 	@echo "  make import-mo3jam-saudi  Run the Phase 3.5 Saudi-dialect importer"
 	@echo "                            (dry-run by default; ARGS to override)"
+	@echo "  make source-inventory     Show all local data/reference sources"
 	@echo "  make corpus-audit         Audit JSONL corpus before Phase 12"
 	@echo "  make train-bpe ARGS=...   Train SF-BPE tokenizer"
 	@echo "  make train-lm ARGS=...    Train SF native LM (Phase 6)"
@@ -67,6 +68,9 @@ import-mo3jam-saudi:
 	$(PY) scripts/import_mo3jam_saudi.py $(ARGS)
 
 # Phase 12 preflight — refuses readiness when no approved Saudi/MSA JSONL exists.
+source-inventory:
+	$(PY) scripts/source_inventory.py
+
 corpus-audit:
 	$(PY) scripts/audit_training_corpus.py $(ARGS)
 

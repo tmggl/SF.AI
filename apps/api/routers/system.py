@@ -15,9 +15,12 @@ from apps.api.schemas.system import (
     ComponentStatus,
     CorpusAuditResponse,
     CorpusIssueResponse,
+    SourceInventoryItemResponse,
+    SourceInventoryResponse,
     SystemStatusResponse,
 )
 from sf_ai.datasets.corpus_governance import audit_jsonl_directory_for_training
+from sf_ai.datasets.source_inventory import build_source_inventory
 
 router = APIRouter(prefix="/system", tags=["system"])
 
@@ -140,5 +143,39 @@ def corpus_audit() -> CorpusAuditResponse:
                 snippet=issue.snippet,
             )
             for issue in report.issues[:50]
+        ],
+    )
+
+
+@router.get("/source-inventory", response_model=SourceInventoryResponse)
+def source_inventory() -> SourceInventoryResponse:
+    """Comprehensive local data/reference source inventory."""
+    report = build_source_inventory()
+    return SourceInventoryResponse(
+        phase12_status=report.phase12_status,
+        source_count=report.source_count,
+        chat_training_records=report.chat_training_records,
+        local_reference_records=report.local_reference_records,
+        blockers=list(report.blockers),
+        sources=[
+            SourceInventoryItemResponse(
+                name=item.name,
+                path=item.path,
+                kind=item.kind,
+                exists=item.exists,
+                records=item.records,
+                valid_json_records=item.valid_json_records,
+                private_or_ignored=item.private_or_ignored,
+                tracked_payload_allowed=item.tracked_payload_allowed,
+                phase12_tokenizer_candidate=item.phase12_tokenizer_candidate,
+                phase13_lm_candidate=item.phase13_lm_candidate,
+                needs_conversion=item.needs_conversion,
+                needs_governance_audit=item.needs_governance_audit,
+                status=item.status,
+                action_required=item.action_required,
+                notes=list(item.notes),
+                stats=item.stats,
+            )
+            for item in report.sources
         ],
     )

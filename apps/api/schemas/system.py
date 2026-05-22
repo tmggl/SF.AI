@@ -48,3 +48,31 @@ class CorpusAuditResponse(BaseModel):
     quality_counts: dict[str, int]
     source_counts: dict[str, int]
     issues: list[CorpusIssueResponse]
+
+
+class SourceInventoryItemResponse(BaseModel):
+    name: str
+    path: str
+    kind: str
+    exists: bool
+    records: int
+    valid_json_records: int
+    private_or_ignored: bool
+    tracked_payload_allowed: bool
+    phase12_tokenizer_candidate: bool
+    phase13_lm_candidate: bool
+    needs_conversion: bool
+    needs_governance_audit: bool
+    status: str
+    action_required: str
+    notes: list[str]
+    stats: dict[str, object]
+
+
+class SourceInventoryResponse(BaseModel):
+    phase12_status: str
+    source_count: int
+    chat_training_records: int
+    local_reference_records: int
+    blockers: list[str]
+    sources: list[SourceInventoryItemResponse]

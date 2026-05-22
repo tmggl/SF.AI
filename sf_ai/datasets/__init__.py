@@ -29,6 +29,11 @@ from sf_ai.datasets.saudi_seed import (
     load_saudi_seed,
     saudi_seed_stats,
 )
+from sf_ai.datasets.source_inventory import (
+    SourceInventoryItem,
+    SourceInventoryReport,
+    build_source_inventory,
+)
 from sf_ai.datasets.loaders import iter_chat_samples, iter_jsonl
 from sf_ai.datasets.schemas import (
     ChatMessage,
@@ -59,6 +64,8 @@ __all__ = [
     "SaudiSeedEntry",
     "SaudiSeedSafety",
     "SaudiSeedStats",
+    "SourceInventoryItem",
+    "SourceInventoryReport",
     "ValidationReport",
     "iter_chat_samples",
     "iter_jsonl",
@@ -70,6 +77,7 @@ __all__ = [
     "audit_record_for_training",
     "saudi_seed_attribution",
     "saudi_seed_stats",
+    "build_source_inventory",
     "validate_jsonl_file",
     "validate_record",
 ]
