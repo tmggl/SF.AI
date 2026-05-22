@@ -121,7 +121,7 @@ def build_source_inventory(project_dir: str | Path | None = None) -> SourceInven
             needs_governance_audit=True,
             status="ready" if chat_ready else "not_ready",
             action_required=(
-                "ابدأ Phase 12 بعد إذن صريح."
+                "شغّل make phase12-readiness؛ لا تبدأ Phase 12 إلا بعد اكتمال التوازن اللغوي وإذن صريح."
                 if chat_ready
                 else "أضف ملفات JSONL حوارية فصحى/سعودية مع provenance كامل."
             ),

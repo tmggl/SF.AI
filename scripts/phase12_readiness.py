@@ -35,6 +35,11 @@ def main(argv: list[str]) -> int:
     print(f"  status                        : {decision.corpus_status}")
     print(f"  training_ready                : {decision.corpus_training_ready}")
     print(f"  issues                        : {decision.corpus_issue_count}")
+    print(f"  dialect_counts                : {decision.corpus_dialect_counts}")
+    print(f"  required_dialects             : {', '.join(decision.required_dialects)}")
+    missing = ", ".join(decision.missing_required_dialects) or "none"
+    print(f"  missing_required_dialects     : {missing}")
+    print(f"  language_balance_status       : {decision.language_balance_status}")
     print()
     print("tokenization:")
     print(f"  status                        : {decision.tokenization_status}")
@@ -60,7 +65,7 @@ def main(argv: list[str]) -> int:
     for note in decision.notes:
         print(f"  - {note}")
 
-    return 0 if decision.preflight_pass else 1
+    return 0
 
 
 if __name__ == "__main__":

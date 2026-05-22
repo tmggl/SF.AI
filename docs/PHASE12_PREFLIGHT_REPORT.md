@@ -137,9 +137,10 @@ GET /health → {"status":"ok","project":"SF.AI","phase":"Phase 11"}
 
 ```text
 GET /system/phase12-readiness
-preflight_pass=true
+preflight_pass=false
 can_train_now=false
 training_permission_granted=false
+missing_required_dialects=["msa"]
 required_confirmation_flag=--confirm-phase12-permission
 ```
 
@@ -220,7 +221,8 @@ make train-bpe ARGS="--confirm-phase12-permission --corpus data/corpus/chat/json
 ## 8. Decision
 
 ```text
-Phase 12 preflight: PASS
+Phase 12 corpus/tokenization preflight: PASS
+Phase 12 language-balance gate: MISSING msa
 Training permission: NOT GRANTED
 Action now: STOP before training
 ```

@@ -198,6 +198,6 @@ runtime يستخدم checkpoint فقط بعد:
 ## الحالة الحالية
 
 - corpus seed صغير موجود: `first_dialogue_seed.jsonl`.
-- `corpus-audit` جاهز: 30/30.
+- `corpus-audit` جاهز بنيويًا: 30/30، لكن `phase12-readiness` يطلب إضافة `msa`.
 - Phase 12 لم تبدأ.
 - tokenizer training ممنوع حتى إذن صريح.

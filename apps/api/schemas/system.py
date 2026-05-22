@@ -89,6 +89,10 @@ class Phase12ReadinessResponse(BaseModel):
     corpus_status: str
     corpus_training_ready: int
     corpus_issue_count: int
+    corpus_dialect_counts: dict[str, int]
+    required_dialects: list[str]
+    missing_required_dialects: list[str]
+    language_balance_status: str
     tokenization_status: str
     protected_terms_total: int
     protected_terms_covered: int

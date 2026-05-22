@@ -17,6 +17,7 @@ from sf_ai.models.tokenizer.policy_audit import audit_tokenization_policy
 
 REQUIRED_PHASE12_PERMISSION_PHRASE = "ابدأ Phase 12"
 REQUIRED_PHASE12_CONFIRMATION_FLAG = "--confirm-phase12-permission"
+REQUIRED_PHASE12_DIALECTS = ("msa", "saudi")
 PHASE12_TRAIN_BPE_COMMAND = (
     'make train-bpe ARGS="--confirm-phase12-permission '
     '--corpus data/corpus/chat/jsonl --out artifacts/tokenizers/sf_bpe/v1"'
@@ -35,6 +36,10 @@ class Phase12ReadinessDecision:
     corpus_status: str
     corpus_training_ready: int
     corpus_issue_count: int
+    corpus_dialect_counts: dict[str, int]
+    required_dialects: tuple[str, ...]
+    missing_required_dialects: tuple[str, ...]
+    language_balance_status: str
     tokenization_status: str
     protected_terms_total: int
     protected_terms_covered: int
@@ -69,12 +74,22 @@ def build_phase12_readiness_decision(
     tokenization = audit_tokenization_policy()
 
     corpus_ready = inventory.phase12_status == "READY_FOR_PHASE_12_TOKENIZER_TRAINING"
+    dialect_counts = dict(inventory.chat_audit.dialect_counts)
+    missing_required_dialects = tuple(
+        dialect for dialect in REQUIRED_PHASE12_DIALECTS if dialect_counts.get(dialect, 0) == 0
+    )
+    language_balance_ready = not missing_required_dialects
     tokenization_ready = tokenization.status == "READY_FOR_PHASE12_TOKENIZATION_PREFLIGHT"
     protected_ready = (
         tokenization.protected_terms_total > 0
         and tokenization.protected_terms_covered == tokenization.protected_terms_total
     )
-    preflight_pass = corpus_ready and tokenization_ready and protected_ready
+    preflight_pass = (
+        corpus_ready
+        and language_balance_ready
+        and tokenization_ready
+        and protected_ready
+    )
 
     # This flips only after explicit human permission. A preflight pass never
     # grants training permission by itself.
@@ -90,11 +105,23 @@ def build_phase12_readiness_decision(
         action=(
             "STOP_BEFORE_TRAINING"
             if preflight_pass
-            else "FIX_PREFLIGHT_BEFORE_REQUESTING_PERMISSION"
+            else (
+                "ADD_MSA_CORPUS_BEFORE_PERMISSION"
+                if missing_required_dialects == ("msa",)
+                else "FIX_PREFLIGHT_BEFORE_REQUESTING_PERMISSION"
+            )
         ),
         corpus_status=inventory.phase12_status,
         corpus_training_ready=inventory.chat_training_records,
         corpus_issue_count=inventory.chat_audit.error_count,
+        corpus_dialect_counts=dialect_counts,
+        required_dialects=REQUIRED_PHASE12_DIALECTS,
+        missing_required_dialects=missing_required_dialects,
+        language_balance_status=(
+            "READY_MSA_AND_SAUDI"
+            if language_balance_ready
+            else "MISSING_REQUIRED_DIALECTS"
+        ),
         tokenization_status=tokenization.status,
         protected_terms_total=tokenization.protected_terms_total,
         protected_terms_covered=tokenization.protected_terms_covered,
@@ -106,5 +133,6 @@ def build_phase12_readiness_decision(
             "Preflight readiness is not training permission.",
             "This decision is read-only and writes no tokenizer/checkpoint artifacts.",
             "Training commands refuse to start without --confirm-phase12-permission.",
+            "Phase 12 requires both msa and saudi corpus coverage before permission.",
         ),
     )

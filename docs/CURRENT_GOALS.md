@@ -18,8 +18,8 @@
 
 - `make source-inventory` يعرض كل مصادر البيانات والمراجع المحلية، ويفرق بين corpus حواري وملفات مرجعية.
 - `make corpus-audit` يفحص بيانات `data/corpus/chat/jsonl/`.
-- لا يبدأ Phase 12 فعليًا إلا إذا كان التقرير `READY_FOR_PHASE_12_TOKENIZER_TRAINING` ومعه إذن صريح و`--confirm-phase12-permission`.
-- الوضع الحالي: `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعد إضافة `first_dialogue_seed.jsonl`، لكن التدريب ممنوع حتى إذن صريح.
+- لا يبدأ Phase 12 فعليًا إلا إذا كان `phase12-readiness` يمر بلا نقص لهجي، ومعه إذن صريح و`--confirm-phase12-permission`.
+- الوضع الحالي: `corpus-audit` جاهز بنيويًا، لكن `phase12-readiness` يوقف التدريب لأن corpus الحالي يفتقد `msa`.
 
 الجرد الحالي يرى:
 

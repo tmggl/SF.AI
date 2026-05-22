@@ -10,7 +10,7 @@
 - **المرحلة الحالية:** **Phase 11 — Sovereign Corpus Governance & Saudi/MSA Dialogue Pack**
 - **حالة المرحلة الحالية:** **مكتملة كحوكمة وأدوات فحص؛ يوجد seed صغير مصرح، ولا يوجد تدريب فعلي بعد**
 - **المرحلة التالية المقترحة:** Phase 12 — SF-BPE Tokenizer v1 Training & Audit
-- **جاهزية Phase 12 الآن:** preflight audit جاهز `30/30`؛ endpoint القرار يثبت `can_train_now=false` حتى إذن صريح و`--confirm-phase12-permission`.
+- **جاهزية Phase 12 الآن:** corpus/tokenization جاهزان بنيويًا `30/30`، لكن قرار Phase 12 يوقف التدريب لأن corpus الحالي يفتقد `msa`، ثم يحتاج إذنًا صريحًا و`--confirm-phase12-permission`.
 - **تاريخ آخر تحديث:** 2026-05-22
 
 ---
@@ -69,7 +69,8 @@
 - نتيجة الجرد المحلي الحالي: 1548 سجلًا مرجعيًا خاصًا غير مرفوع (`1032` مهمة لهجة سعودية + `516` مدخل قاموس سعودي)، لكنها ليست chat corpus مباشرًا.
 - أضيف `data/corpus/chat/jsonl/first_dialogue_seed.jsonl`: seed صغير فيه 20 محادثة سعودية `gold`، مشتقة من مرجع Saudi Seed المحلي، مع `source/license/training_allowed/quality`.
 - أضيف `data/corpus/chat/jsonl/protected_terms_seed_v1.jsonl`: seed صغير فيه 10 محادثات سعودية `gold` لتغطية protected terms المتبقية.
-- نتيجة الوضع الحالي بعد `make corpus-audit`: `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد `30/30`، لكن تدريب tokenizer لم يبدأ وينتظر إذنًا صريحًا.
+- نتيجة الوضع الحالي بعد `make corpus-audit`: `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد `30/30`.
+- نتيجة `make phase12-readiness`: `preflight_pass=false` بسبب `missing_required_dialects=msa`، لذلك تدريب tokenizer لم يبدأ ولا يبدأ.
 - أضيف حقل `provenance.quality` إلى schema.
 - أضيف حقل `provenance.training_allowed` إلى schema، وصار شرطًا في corpus governance.
 - قيود Phase 11: `domain=chat`, `lang=ar`, `dialect ∈ {msa, saudi}`, ووجود user+assistant وsource/license/quality/training_allowed.
@@ -100,8 +101,9 @@
   - training permission: NOT GRANTED
   - action: STOP before training
 - أضيف `GET /system/phase12-readiness` كقرار API موحد:
-  - `preflight_pass=true`
+  - `preflight_pass=false` حتى إضافة `msa`
   - `can_train_now=false`
+  - `missing_required_dialects=["msa"]`
   - `required_confirmation_flag=--confirm-phase12-permission`
 - أضيف `make phase12-readiness` كقرار CLI مطابق للـ API بدون restart للسيرفر.
 - لم يبدأ tokenizer أو LM training.
@@ -201,7 +203,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-353 passed in 2.16s
+353 passed in 2.18s
 ```
 
 | ملف | عدد |

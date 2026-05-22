@@ -36,7 +36,7 @@
 - آخر تحسين مكتمل: التركيز على العربية الفصحى + السعودية فقط، توجيه الرسائل اليومية (`وشلونك`/`شكرا`/`تمام`/`لا`/`ساعدني`/`مش فاهم`/`من صنعك`/`سعودي`/`عندي؟`/`عندي سؤال`) + Phase 10 skeleton domains.
 - قاموس Saudi Seed v1 (516 مدخل من تأليف سامي) في `resources/lexicons/imported/saudi_seed_v1/`.
 - اقرأ ملفات الحوكمة والدستور قبل أي تدريب: `PROJECT_CONSTITUTION`, `LANGUAGE_SEGMENTATION`, `TOKENIZATION_POLICY`, `DATASET_GOVERNANCE`, `AGENT_ENGINEERING_RULES`, ثم `PROJECT_IDENTITY`, `ENGINEERING_RULES`, `AGENT_INSTRUCTIONS`, `PROJECT_MAP`, `PROJECT_LIFECYCLE`.
-- اقرأ `docs/PHASE12_PREFLIGHT_REPORT.md`: إذا كان `Training permission: NOT GRANTED` فلا تبدأ التدريب حتى لو كانت الفحوصات PASS. ويمكنك فحص القرار الحي من API عبر `GET /system/phase12-readiness`؛ إذا كان `can_train_now=false` فتوقف قبل التدريب.
+- اقرأ `docs/PHASE12_PREFLIGHT_REPORT.md`: إذا كان `Training permission: NOT GRANTED` فلا تبدأ التدريب. ويمكنك فحص القرار الحي من API عبر `GET /system/phase12-readiness`؛ إذا كان `can_train_now=false` أو `missing_required_dialects` غير فارغة فتوقف قبل التدريب.
 - إذا كان السيرفر الحي لم يُعد تشغيله بعد، استخدم `make phase12-readiness` لنفس القرار بدون لمس السيرفر.
 - الهدف العام: الوصول إلى نموذج لغوي سيادي مولّد. أول توليد خام في Phase 13، وأول توليد داخل الشات في Phase 15، والاستخدام اليومي بعد Phase 16.
 
@@ -63,7 +63,7 @@
    ```
    make corpus-audit
    ```
-   يوجد الآن `first_dialogue_seed.jsonl` صغير، وقد يعطي التقرير `READY_FOR_PHASE_12_TOKENIZER_TRAINING`. لا تبدأ التدريب رغم ذلك إلا إذا أعطى سامي إذنًا صريحًا جديدًا. آخر توجيه منه كان: لا تبدأ Phase 12 الآن، شغّل corpus-audit فقط.
+   يوجد الآن seed سعودي صغير قد يعطي `corpus-audit` نتيجة `READY_FOR_PHASE_12_TOKENIZER_TRAINING`. لا تبدأ التدريب: قرار `phase12-readiness` ما زال يطلب `msa` وإذنًا صريحًا جديدًا.
 
 5. بوابة التدريب التنفيذية:
    ```

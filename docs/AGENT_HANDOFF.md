@@ -66,7 +66,7 @@
 ### الاختبارات
 
 ```
-353 passed in 2.16s
+353 passed in 2.18s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -200,13 +200,13 @@ status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
 
 والسبب: أُضيف seed أول باسم `data/corpus/chat/jsonl/first_dialogue_seed.jsonl` فيه 20 محادثة سعودية gold، ثم `protected_terms_seed_v1.jsonl` فيه 10 محادثات لتغطية protected terms. يمر `make corpus-audit` بعدد `30/30`.
 
-مع ذلك، لا تشغّل `make train-bpe` حتى بعد ظهور:
+مع ذلك، لا تشغّل `make train-bpe` حتى بعد ظهور `corpus-audit`:
 
 ```text
 status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
 ```
 
-إلا بعد إذن صريح من سامي للتدريب. آخر توجيه منه: **لا تبدأ Phase 12 الآن، شغّل corpus-audit فقط**.
+لأن قرار `make phase12-readiness` الآن أشد: corpus الحالي سعودي فقط ويفتقد `msa`. أضف بيانات فصحى مصرح بها أولًا، ثم اطلب إذنًا صريحًا من سامي للتدريب. آخر توجيه حاكم: **لا تبدأ Phase 12 بدون إذن صريح**.
 
 أضيفت بوابة تنفيذية فوق ذلك: `make train-bpe` و`scripts/train_bpe.py` يرفضان البدء بدون:
 
@@ -219,7 +219,8 @@ status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
 تقرير preflight الحالي يقول:
 
 ```text
-Phase 12 preflight: PASS
+Phase 12 corpus/tokenization preflight: PASS
+Phase 12 language-balance gate: MISSING msa
 Training permission: NOT GRANTED
 Action now: STOP before training
 ```
