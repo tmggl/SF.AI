@@ -29,14 +29,14 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 12 منتهية؛ Phase 12 اكتملت كتدريب tokenizer v1 محدود من corpus سعودي صغير. الخطة الرسمية تمتد إلى Phase 20 لبناء النموذج اللغوي السيادي المولّد.
-- 356 اختبار يمر (`.venv/bin/python -m pytest tests`).
+- المراحل من Phase 0 حتى Phase 13 منتهية؛ Phase 12 اكتملت كتدريب tokenizer v1 محدود، وPhase 13 اكتملت كـ smoke LM training. الخطة الرسمية تمتد إلى Phase 20 لبناء النموذج اللغوي السيادي المولّد.
+- 358 اختبار يمر (`.venv/bin/python -m pytest tests`).
 - السيرفر يعمل عادةً على `http://127.0.0.1:8123` (المنفذ 8000/8765 محجوز).
 - شاشة المحادثة على `/ui/chat` — هي هدف سامي الرئيسي للتجريب.
 - آخر تحسين مكتمل: التركيز على العربية الفصحى + السعودية فقط، توجيه الرسائل اليومية (`وشلونك`/`شكرا`/`تمام`/`لا`/`ساعدني`/`مش فاهم`/`من صنعك`/`سعودي`/`عندي؟`/`عندي سؤال`) + Phase 10 skeleton domains.
 - قاموس Saudi Seed v1 (516 مدخل من تأليف سامي) في `resources/lexicons/imported/saudi_seed_v1/`.
 - اقرأ ملفات الحوكمة والدستور قبل أي تدريب: `PROJECT_CONSTITUTION`, `LANGUAGE_SEGMENTATION`, `TOKENIZATION_POLICY`, `DATASET_GOVERNANCE`, `AGENT_ENGINEERING_RULES`, ثم `PROJECT_IDENTITY`, `ENGINEERING_RULES`, `AGENT_INSTRUCTIONS`, `PROJECT_MAP`, `PROJECT_LIFECYCLE`.
-- اقرأ `docs/PHASE12_TOKENIZER_V1_REPORT.md`: tokenizer v1 موجود وجاهز لPhase 13 smoke، لكنه غير متوازن لغويًا لأن `msa` ناقص.
+- اقرأ `docs/PHASE12_TOKENIZER_V1_REPORT.md` و`docs/PHASE13_SMOKE_TRAINING_REPORT.md`: tokenizer v1 وsmoke checkpoint موجودان، لكنهما غير صالحين للشات أو الجودة اللغوية بعد.
 - إذا كان السيرفر الحي لم يُعد تشغيله بعد، استخدم `make phase12-readiness` لنفس القرار بدون لمس السيرفر.
 - الهدف العام: الوصول إلى نموذج لغوي سيادي مولّد. أول توليد خام في Phase 13، وأول توليد داخل الشات في Phase 15، والاستخدام اليومي بعد Phase 16.
 
@@ -63,7 +63,7 @@
    ```
    make corpus-audit
    ```
-   يوجد الآن seed سعودي صغير، وجرى تدريب tokenizer v1 منه بإذن سامي. لا تعامله كجودة لغوية متوازنة؛ استخدمه فقط لـ Phase 13 smoke.
+   يوجد الآن seed سعودي صغير، وجرى تدريب tokenizer v1 وsmoke LM منه بإذن سامي. لا تعامله كجودة لغوية متوازنة ولا تربطه بالشات.
 
 5. التفويض الحالي: سامي أعطى إذنًا صريحًا لمتابعة المراحل المسجلة والتدريب والاختبارات. لا تنتظر إذنًا جديدًا للمراحل المخططة، لكن لا تكسر قواعد السيادة أو فحص الحساسية.
 

@@ -52,7 +52,7 @@
 | Phase 10 | Later Domains Skeleton | ✅ |
 | Phase 11 | Sovereign Corpus Governance & Saudi/MSA Dialogue Pack | ✅ |
 | Phase 12 | SF-BPE Tokenizer v1 Training & Audit | ✅ completed_with_limits |
-| Phase 13 | Tiny LM Smoke Training | معلّقة |
+| Phase 13 | Tiny LM Smoke Training | ✅ completed_with_limits |
 | Phase 14 | SF-10M v0.1 Training Run | معلّقة |
 | Phase 15 | Generator Adapter for ChatModule | معلّقة |
 | Phase 16 | Evaluation/Safety/Style Harness | معلّقة |
@@ -66,7 +66,7 @@
 ### الاختبارات
 
 ```
-356 passed in 2.79s
+358 passed in 2.28s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -136,7 +136,7 @@ bash scripts/run_chat_server.sh
 - `sf_ai/datasets/corpus_governance.py`
 - `tests/test_corpus_governance.py`
 
-لم يبدأ تدريب LM بعد. تدريب tokenizer v1 اكتمل في Phase 12.
+تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، لكنه غير صالح للشات.
 
 ### Phase 12 — preflight جاهز فقط
 
@@ -227,8 +227,7 @@ missing language balance: msa
 
 ### تستطيع الآن الانتقال إلى:
 
-- **إضافة بيانات سامي بصيغة JSONL** ثم تشغيل `make corpus-audit`.
-- **Phase 13** — Tiny LM Smoke Training باستخدام tokenizer v1، مع تقرير واضح للقيود.
+- **Phase 14** — SF-10M v0.1 Training Run، أو توسيع MSA أولًا قبل تشغيل جودة.
 
 ---
 

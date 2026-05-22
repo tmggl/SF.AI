@@ -56,7 +56,7 @@ def _find_training_artifacts(root: Path) -> tuple[str, ...]:
     artifact_globs = (
         "artifacts/tokenizers/**/vocab.json",
         "artifacts/tokenizers/**/merges.txt",
-        "artifacts/checkpoints/**/*",
+        "artifacts/checkpoints/**/meta.json",
     )
     for pattern in artifact_globs:
         for path in root.glob(pattern):

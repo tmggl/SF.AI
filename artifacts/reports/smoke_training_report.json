@@ -1,0 +1,68 @@
+{
+  "phase": "Phase 13 — Tiny LM Smoke Training",
+  "status": "COMPLETED_WITH_LIMITS",
+  "purpose": "Verify that the sovereign LM training loop learns from local SF.AI data.",
+  "training_permission": {
+    "granted": true,
+    "granted_by": "Sami",
+    "permission_text_summary": "موافق لكل شي حتي الاختبارات استمر لاي شي لاتنتظر مني اي اذن ابدا التدريب وكل شي لاعاد تنتظر مني اذن"
+  },
+  "tokenizer": {
+    "path": "artifacts/tokenizers/sf_bpe/v1",
+    "vocab_size": 261,
+    "sf_origin": true
+  },
+  "corpus": {
+    "path": "data/corpus/chat/jsonl",
+    "records": 30,
+    "dialects": {
+      "saudi": 30
+    },
+    "known_limits": ["missing msa"]
+  },
+  "model": {
+    "name": "sf-10m",
+    "parameters": 6361600,
+    "random_init": true,
+    "pretrained_weights_used": false,
+    "device": "mps"
+  },
+  "training_args": {
+    "seq_len": 16,
+    "batch_size": 2,
+    "steps": 20,
+    "warmup": 2,
+    "seed": 20260522,
+    "save_every": 10,
+    "checkpoints": "artifacts/checkpoints/smoke_lm"
+  },
+  "loss": {
+    "first_logged": 5.6638,
+    "last_logged": 4.7539,
+    "decreased": true
+  },
+  "checkpoints": [
+    {
+      "name": "sf-10m-step10",
+      "tracked_in_git": false,
+      "reason_not_tracked": "checkpoint state files are generated artifacts and remain ignored"
+    },
+    {
+      "name": "sf-10m-step20",
+      "tracked_in_git": false,
+      "reason_not_tracked": "checkpoint state files are generated artifacts and remain ignored"
+    }
+  ],
+  "evaluation": {
+    "checkpoint": "sf-10m-step20",
+    "batches": 5,
+    "loss": 4.4346,
+    "perplexity": 84.32,
+    "generation_non_empty": true
+  },
+  "decision": {
+    "phase13_smoke_training_passed": true,
+    "suitable_for_chat_runtime": false,
+    "next_recommended_phase": "Phase 14 — SF-10M v0.1 Training Run or MSA corpus expansion"
+  }
+}

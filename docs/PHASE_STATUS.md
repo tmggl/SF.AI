@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **المرحلة الحالية:** **Phase 12 — SF-BPE Tokenizer v1 Training & Audit**
-- **حالة المرحلة الحالية:** **اكتملت كتدريب tokenizer v1 محدود من corpus سعودي صغير؛ MSA expansion مطلوب لاحقًا**
-- **المرحلة التالية المقترحة:** Phase 13 — Tiny LM Smoke Training
-- **جاهزية Phase 13 الآن:** tokenizer v1 موجود في `artifacts/tokenizers/sf_bpe/v1`; مناسب لـ smoke training وليس لجودة لغوية متوازنة.
+- **المرحلة الحالية:** **Phase 13 — Tiny LM Smoke Training**
+- **حالة المرحلة الحالية:** **اكتملت كاختبار حياة: loss انخفض، checkpoint حُفظ وحُمّل، والتوليد غير فارغ**
+- **المرحلة التالية المقترحة:** Phase 14 — SF-10M v0.1 Training Run أو توسعة MSA قبل تشغيل جودة.
+- **جاهزية Phase 14 الآن:** ممكنة تقنيًا، لكن corpus الحالي صغير وسعودي فقط؛ الجودة تتطلب توسعة بيانات.
 - **تاريخ آخر تحديث:** 2026-05-22
 
 ---
@@ -37,7 +37,7 @@
 | Governance Layer | Engineering Standards قبل Phase 12 | ✅ | ✅ |
 | Constitution Layer | Engineering & Linguistic Constitution قبل Phase 12 | ✅ | ✅ |
 | Phase 12 | SF-BPE Tokenizer v1 Training & Audit | ✅ completed_with_limits | ✅ |
-| Phase 13 | Tiny LM Smoke Training | معلّقة | ⏳ |
+| Phase 13 | Tiny LM Smoke Training | ✅ completed_with_limits | ✅ |
 | Phase 14 | SF-10M v0.1 Training Run | معلّقة | ⏳ |
 | Phase 15 | Generator Adapter for ChatModule | معلّقة | ⏳ |
 | Phase 16 | Evaluation, Safety, and Saudi/MSA Style Harness | معلّقة | ⏳ |
@@ -108,7 +108,16 @@
   - `missing_required_dialects=["msa"]`
   - `required_confirmation_flag=--confirm-phase12-permission`
 - أضيف `make phase12-readiness` كقرار CLI مطابق للـ API بدون restart للسيرفر.
-- بدأ وانتهى tokenizer training لPhase 12. لم يبدأ LM training بعد.
+- بدأ وانتهى tokenizer training لPhase 12.
+- بدأ وانتهى Phase 13 smoke LM training:
+  - model: `sf-10m`
+  - params: 6,361,600
+  - steps: 20
+  - first loss: 5.6638
+  - last loss: 4.7539
+  - eval loss: 4.4346
+  - generation: non-empty, repetitive as expected
+  - report: [PHASE13_SMOKE_TRAINING_REPORT.md](./PHASE13_SMOKE_TRAINING_REPORT.md)
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -205,7 +214,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-356 passed in 2.79s
+358 passed in 2.28s
 ```
 
 | ملف | عدد |

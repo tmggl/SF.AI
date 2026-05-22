@@ -35,10 +35,10 @@
 
 ## الهدف الحالي
 
-- **الأولوية الحالية:** Phase 13 Tiny LM smoke training فوق tokenizer v1 السيادي.
+- **الأولوية الحالية:** Phase 14 أو توسعة corpus الفصيح MSA قبل تشغيل جودة.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
 - **البيانات الحالية:** seed سعودي صغير `30/30` يمر `corpus-audit`؛ ما زال `msa` مطلوبًا قبل تشغيل جودة لغوية متوازنة.
-- **التدريب:** Phase 12 tokenizer v1 اكتمل من بيانات SF.AI فقط، مع قيود موثقة.
+- **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM اكتملتا من بيانات SF.AI فقط، مع قيود موثقة.
 
 ---
 
@@ -64,6 +64,7 @@
 | Phase 11 | Sovereign Corpus Governance & Saudi/MSA Dialogue Pack |
 | Governance Layer | Engineering Standards قبل Phase 12 |
 | Phase 12 | SF-BPE Tokenizer v1 Training & Audit — completed with limits |
+| Phase 13 | Tiny LM Smoke Training — completed with limits |
 
 **تفويض التنفيذ الحالي:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة في الرحلة، مع بقاء قواعد السيادة والسلامة وفحص الحساسية قبل الرفع.
 

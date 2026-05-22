@@ -10,10 +10,11 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **المرحلة الحالية:** **Phase 12 — SF-BPE Tokenizer v1 Training & Audit** (اكتملت كتدريب tokenizer v1 محدود؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **المرحلة الحالية:** **Phase 13 — Tiny LM Smoke Training** (اكتملت كاختبار حياة محدود؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** **Phase 13 — Tiny LM Smoke Training** باستخدام `artifacts/tokenizers/sf_bpe/v1`.
+- **المرحلة التالية المقترحة:** **Phase 14 — SF-10M v0.1 Training Run** أو توسعة MSA قبل تشغيل جودة.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
+- **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
 - **تفويض التنفيذ:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة؛ استخدم flags المطلوبة مع توثيق كل تشغيل.
 - **فحص Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/corpus-audit`
 - **قرار Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/phase12-readiness` يعرض أن tokenizer v1 اكتمل، مع بقاء `missing_required_dialects=["msa"]` قبل إعادة تدريب متوازن.
@@ -207,7 +208,7 @@ make server-start
 ## نتائج الاختبارات (Phase 11 + Governance Layer)
 
 ```
-356 passed in 2.79s
+358 passed in 2.28s
 ```
 
 التغطية الحالية:

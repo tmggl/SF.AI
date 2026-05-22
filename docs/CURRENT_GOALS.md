@@ -19,7 +19,8 @@
 - `make source-inventory` يعرض كل مصادر البيانات والمراجع المحلية، ويفرق بين corpus حواري وملفات مرجعية.
 - `make corpus-audit` يفحص بيانات `data/corpus/chat/jsonl/`.
 - Phase 12 tokenizer v1 اكتمل بإذن صريح من سامي، مع توثيق أنه Saudi-only ويحتاج `msa` قبل أي تشغيل جودة متوازن.
-- الهدف التالي هو Phase 13 smoke training لإثبات أن pipeline يتعلم فعليًا من بيانات صغيرة.
+- Phase 13 smoke training اكتمل وأثبت أن loss ينخفض وأن checkpoint يحمّل ويولد نصًا غير فارغ.
+- الهدف التالي هو Phase 14 أو توسيع MSA قبل تدريب جودة.
 
 الجرد الحالي يرى:
 
