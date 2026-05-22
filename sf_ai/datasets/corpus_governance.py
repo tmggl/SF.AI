@@ -185,3 +185,62 @@ def audit_jsonl_file_for_training(path: str | Path) -> CorpusGovernanceReport:
             )
 
     return report
+
+
+def audit_jsonl_directory_for_training(
+    path: str | Path,
+    *,
+    pattern: str = "*.jsonl",
+) -> CorpusGovernanceReport:
+    """Audit all JSONL files in a directory for Phase 12 readiness.
+
+    The aggregate report intentionally treats "no JSONL files" as a governance
+    issue, because Phase 12 must not start tokenizer training on an empty corpus.
+    """
+    path = Path(path)
+    report = CorpusGovernanceReport(path=path)
+
+    if not path.exists():
+        report.issues.append(
+            SampleIssue(
+                line_number=None,
+                kind="encoding",
+                message=f"directory not found: {path}",
+            )
+        )
+        return report
+
+    files = sorted(p for p in path.glob(pattern) if p.is_file())
+    if not files:
+        report.issues.append(
+            SampleIssue(
+                line_number=None,
+                kind="empty",
+                message=f"no JSONL files found in: {path}",
+            )
+        )
+        return report
+
+    for file_path in files:
+        file_report = audit_jsonl_file_for_training(file_path)
+        report.total_records += file_report.total_records
+        report.training_ready += file_report.training_ready
+
+        for dialect, count in file_report.dialect_counts.items():
+            report.dialect_counts[dialect] = report.dialect_counts.get(dialect, 0) + count
+        for quality, count in file_report.quality_counts.items():
+            report.quality_counts[quality] = report.quality_counts.get(quality, 0) + count
+        for source, count in file_report.source_counts.items():
+            report.source_counts[source] = report.source_counts.get(source, 0) + count
+
+        for issue in file_report.issues:
+            report.issues.append(
+                SampleIssue(
+                    line_number=issue.line_number,
+                    kind=issue.kind,
+                    message=f"{file_path.name}: {issue.message}",
+                    snippet=issue.snippet,
+                )
+            )
+
+    return report

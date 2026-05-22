@@ -18,14 +18,39 @@
 ## فحص الملف
 
 ```bash
-python scripts/validate_dataset.py data/corpus/chat/jsonl/your_file.jsonl
+.venv/bin/python scripts/validate_dataset.py data/corpus/chat/jsonl/your_file.jsonl
 ```
 
-ثم برمجيًا لفحص حوكمة التدريب:
+## فحص جاهزية التدريب قبل Phase 12
+
+بعد وضع ملف أو أكثر بصيغة `.jsonl` في هذا المجلد:
+
+```bash
+make corpus-audit
+```
+
+إذا ظهر:
+
+```text
+status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
+```
+
+يمكن الانتقال إلى تدريب tokenizer بعد إذن صريح. إذا ظهر:
+
+```text
+status: NOT_READY_FOR_TRAINING
+```
+
+لا يبدأ التدريب بعد؛ أصلح الأخطاء التي يعرضها التقرير.
+
+## فحص برمجي
 
 ```python
-from sf_ai.datasets import audit_jsonl_file_for_training
+from sf_ai.datasets import audit_jsonl_directory_for_training, audit_jsonl_file_for_training
 
 report = audit_jsonl_file_for_training("data/corpus/chat/jsonl/your_file.jsonl")
 print(report.summary())
+
+directory_report = audit_jsonl_directory_for_training("data/corpus/chat/jsonl")
+print(directory_report.summary())
 ```

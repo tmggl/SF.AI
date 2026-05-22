@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from sf_ai.datasets import (
+    audit_jsonl_directory_for_training,
     audit_jsonl_file_for_training,
     audit_record_for_training,
 )
@@ -85,3 +86,39 @@ def test_audit_jsonl_file_counts_ready_records(tmp_path: Path) -> None:
     assert report.training_ready == 1
     assert report.dialect_counts == {"msa": 1}
     assert report.error_count == 1
+
+
+def test_audit_jsonl_directory_rejects_empty_corpus(tmp_path: Path) -> None:
+    report = audit_jsonl_directory_for_training(tmp_path)
+    assert report.total_records == 0
+    assert report.training_ready == 0
+    assert report.error_count == 1
+    assert "no JSONL files found" in report.issues[0].message
+
+
+def test_audit_jsonl_directory_aggregates_ready_records(tmp_path: Path) -> None:
+    first = tmp_path / "msa.jsonl"
+    second = tmp_path / "saudi.jsonl"
+    first.write_text(
+        (
+            '{"domain":"chat","lang":"ar","messages":[{"role":"user","content":"مرحبا"},'
+            '{"role":"assistant","content":"أهلًا"}],"provenance":{"source":"sami",'
+            '"license":"user-provided","language":"ar","dialect":"msa","quality":"gold"}}\n'
+        ),
+        encoding="utf-8",
+    )
+    second.write_text(
+        (
+            '{"domain":"chat","lang":"ar","messages":[{"role":"user","content":"وشلونك"},'
+            '{"role":"assistant","content":"بخير"}],"provenance":{"source":"sami",'
+            '"license":"user-provided","language":"ar","dialect":"saudi","quality":"silver"}}\n'
+        ),
+        encoding="utf-8",
+    )
+
+    report = audit_jsonl_directory_for_training(tmp_path)
+    assert report.total_records == 2
+    assert report.training_ready == 2
+    assert report.error_count == 0
+    assert report.dialect_counts == {"msa": 1, "saudi": 1}
+    assert report.quality_counts == {"gold": 1, "silver": 1}

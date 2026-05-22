@@ -16,6 +16,7 @@ from sf_ai.datasets.chat_dataset import ChatDataset, DatasetStats
 from sf_ai.datasets.cleaners import SampleCleaner
 from sf_ai.datasets.corpus_governance import (
     CorpusGovernanceReport,
+    audit_jsonl_directory_for_training,
     audit_jsonl_file_for_training,
     audit_record_for_training,
 )
@@ -64,6 +65,7 @@ __all__ = [
     "iter_saudi_seed_entries",
     "load_saudi_seed",
     "parse_record",
+    "audit_jsonl_directory_for_training",
     "audit_jsonl_file_for_training",
     "audit_record_for_training",
     "saudi_seed_attribution",

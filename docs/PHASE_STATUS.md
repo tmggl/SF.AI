@@ -10,6 +10,7 @@
 - **المرحلة الحالية:** **Phase 11 — Sovereign Corpus Governance & Saudi/MSA Dialogue Pack**
 - **حالة المرحلة الحالية:** **مكتملة كحوكمة وأدوات فحص؛ لا توجد بيانات تدريب فعلية بعد**
 - **المرحلة التالية المقترحة:** Phase 12 — SF-BPE Tokenizer v1 Training & Audit
+- **جاهزية Phase 12 الآن:** preflight audit جاهز؛ التدريب ينتظر JSONL صالح + إذن صريح.
 - **تاريخ آخر تحديث:** 2026-05-22
 
 ---
@@ -55,7 +56,10 @@
 - أضيفت `sf_ai/datasets/corpus_governance.py`:
   - `audit_record_for_training`
   - `audit_jsonl_file_for_training`
+  - `audit_jsonl_directory_for_training`
   - `CorpusGovernanceReport`
+- أضيف `scripts/audit_training_corpus.py` وهدف `make corpus-audit` كبوابة preflight قبل Phase 12.
+- نتيجة الوضع الحالي: `NOT_READY_FOR_TRAINING` لأن `data/corpus/chat/jsonl/` لا يحتوي ملفات JSONL تدريبية بعد.
 - أضيف حقل `provenance.quality` إلى schema.
 - قيود Phase 11: `domain=chat`, `lang=ar`, `dialect ∈ {msa, saudi}`, ووجود user+assistant وsource/license/quality.
 - لم تُضف أي بيانات تدريب، ولم يبدأ tokenizer أو LM training.

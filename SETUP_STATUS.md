@@ -13,6 +13,7 @@
 - **المرحلة الحالية:** **Phase 11 — Sovereign Corpus Governance & Saudi/MSA Dialogue Pack** (مكتملة كحوكمة؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
 - **المرحلة التالية المقترحة:** **Phase 12 — SF-BPE Tokenizer v1 Training & Audit** بعد وضع بيانات JSONL وموافقة صريحة.
+- **بوابة Phase 12 الحالية:** `make corpus-audit` جاهز؛ نتيجته الآن `NOT_READY_FOR_TRAINING` لأن مجلد `data/corpus/chat/jsonl/` بلا ملفات تدريب.
 - **تحسين اللغة الأخير:** التركيز الافتراضي الآن على العربية الفصحى + اللهجة السعودية فقط، مع إيقاف اللهجات الأخرى افتراضيًا.
 - **تحسين المحادثة الأخير:** توجيه أدق للرسائل اليومية (`شكرا`، `تمام`، `لا`، `ساعدني`، `مش فاهم`، `من صنعك`) + `سعودي` + `عندي؟` + زر مسح المحادثة + timestamps.
 - **خلفية:** بعد Phase 7 أضاف المستخدم قاموس سعودي تأليفي (Phase 3.6)، ثم أُكملت Phase 8 (RAG)، Phase 9 (الشاشة)، Phase 10 (هياكل المجالات).
@@ -60,7 +61,7 @@ SF.AI/
 ├── PROJECT_PRINCIPLES.md                  Phase 0
 ├── SETUP_STATUS.md                        محدّث
 ├── .env.example / .gitignore              Phase 1 (+ runtime lexicon flags)
-├── docker-compose.yml / Makefile          Phase 1 (+ targets Phase 3.5/5.5/6)
+├── docker-compose.yml / Makefile          Phase 1 (+ targets Phase 3.5/5.5/6/12 preflight)
 ├── pyproject.toml                         Phase 1 (+ training extras: torch)
 │
 ├── apps/

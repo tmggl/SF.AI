@@ -760,6 +760,21 @@ artifacts/tokenizers/sf_bpe/v1/
 - مقارنة token counts بين الفصحى والسعودي.
 
 ### أوامر متوقعة
+
+قبل التدريب:
+
+```bash
+make corpus-audit
+```
+
+لا يبدأ التدريب إلا إذا ظهر:
+
+```text
+status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
+```
+
+ثم بعد إذن صريح:
+
 ```bash
 make train-bpe ARGS="--corpus data/corpus/chat/jsonl --out artifacts/tokenizers/sf_bpe/v1"
 ```

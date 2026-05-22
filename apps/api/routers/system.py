@@ -27,7 +27,7 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
         env=settings.env,
         current_phase="Phase 11 — Sovereign Corpus Governance & Saudi/MSA Dialogue Pack",
         current_phase_status="completed",
-        next_phase="Phase 12 — SF-BPE Tokenizer v1 Training & Audit (after JSONL data + explicit permission)",
+        next_phase="Phase 12 — SF-BPE Tokenizer v1 Training & Audit (preflight ready; waiting for JSONL data + explicit permission)",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -100,6 +100,7 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
             ComponentStatus(name="ecommerce_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="corpus_governance", status="active", phase="Phase 11"),
             ComponentStatus(name="training_corpus", status="waiting_for_user_data", phase="Phase 11"),
+            ComponentStatus(name="phase12_corpus_preflight", status="active", phase="Phase 12"),
             ComponentStatus(name="rag", status="planned", phase="Phase 8"),
         ],
     )

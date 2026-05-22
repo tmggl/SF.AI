@@ -66,7 +66,7 @@
 ### الاختبارات
 
 ```
-332 passed in ~2.4s
+334 passed in ~1.9s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -135,9 +135,34 @@ bash scripts/run_chat_server.sh
 
 لم تُضف بيانات فعلية ولم يبدأ تدريب tokenizer/LM.
 
+### Phase 12 — preflight جاهز فقط
+
+أُضيفت بوابة فحص قبل تدريب tokenizer:
+
+```bash
+make corpus-audit
+```
+
+هذه تستخدم `scripts/audit_training_corpus.py` وتجمع فحص كل ملفات `.jsonl` في `data/corpus/chat/jsonl/`.
+
+الوضع الحالي:
+
+```text
+status: NOT_READY_FOR_TRAINING
+```
+
+والسبب: لا توجد ملفات JSONL تدريبية بعد. لا تشغّل `make train-bpe` قبل أن يصبح التقرير:
+
+```text
+status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
+```
+
+ثم تأخذ إذنًا صريحًا من سامي للتدريب.
+
 ### تستطيع الآن الانتقال إلى:
 
-- **Phase 12** — تدريب SF-BPE tokenizer v1، لكن فقط بعد أن يضع سامي بيانات JSONL صالحة ويمر governance audit.
+- **إضافة بيانات سامي بصيغة JSONL** ثم تشغيل `make corpus-audit`.
+- **Phase 12** — تدريب SF-BPE tokenizer v1، لكن فقط بعد تقرير جاهز وإذن صريح.
 
 ---
 
