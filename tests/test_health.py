@@ -39,16 +39,17 @@ def test_system_status_sovereign_flags() -> None:
     assert any(c["name"] == "orchestrator" and c["status"] == "active" for c in body["components"])
 
 
-def test_system_corpus_audit_reports_not_ready_without_jsonl() -> None:
+def test_system_corpus_audit_reports_first_seed_ready() -> None:
     r = client.get("/system/corpus-audit")
     assert r.status_code == 200
     body = r.json()
     assert body["corpus"] == "data/corpus/chat/jsonl"
-    assert body["status"] == "NOT_READY_FOR_TRAINING"
-    assert body["total_records"] == 0
-    assert body["training_ready"] == 0
-    assert body["issue_count"] >= 1
-    assert any("no JSONL files found" in issue["message"] for issue in body["issues"])
+    assert body["status"] == "READY_FOR_PHASE_12_TOKENIZER_TRAINING"
+    assert body["total_records"] == 20
+    assert body["training_ready"] == 20
+    assert body["issue_count"] == 0
+    assert body["dialect_counts"] == {"saudi": 20}
+    assert body["quality_counts"] == {"gold": 20}
 
 
 def test_system_source_inventory_reports_reference_layers() -> None:

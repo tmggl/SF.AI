@@ -275,11 +275,11 @@ def test_chat_dataset_iter_messages_streams(tmp_path: Path) -> None:
     assert [m.content for m in msgs] == ["a", "b"]
 
 
-def test_real_corpus_dir_is_empty() -> None:
-    # Sanity: Phase 5 must NOT auto-fill the corpus.
+def test_real_corpus_dir_contains_only_the_explicit_first_seed() -> None:
+    # Sanity: corpus content must be explicit and reviewed, not auto-filled.
     corpus = Path(__file__).resolve().parent.parent / "data" / "corpus" / "chat"
     assert corpus.exists()
-    jsonl_files = list((corpus / "jsonl").glob("*.jsonl"))
+    jsonl_files = sorted((corpus / "jsonl").glob("*.jsonl"))
     raw_files = list((corpus / "raw").glob("*.jsonl"))
-    assert jsonl_files == []
+    assert [p.name for p in jsonl_files] == ["first_dialogue_seed.jsonl"]
     assert raw_files == []

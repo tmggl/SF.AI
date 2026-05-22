@@ -57,6 +57,7 @@ artifacts/logs/**/*
 !**/.gitkeep
 !**/README.md
 !data/corpus/chat/jsonl/first_dialogue_seed.jsonl
+!data/corpus/chat/jsonl/first_dialogue_seed.CARD.md
 
 # User-authored private lexicon payloads. Keep docs/summaries, do not publish
 # the full proprietary data files unless the owner explicitly approves.
