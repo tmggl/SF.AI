@@ -33,6 +33,7 @@ def test_source_inventory_separates_chat_tasks_and_lexicon(tmp_path: Path) -> No
                     "language": "ar",
                     "dialect": "saudi",
                     "quality": "gold",
+                    "training_allowed": True,
                 },
             }
         ],

@@ -12,7 +12,7 @@
 ## مثال سجل تدريبي صالح
 
 ```json
-{"domain":"chat","lang":"ar","messages":[{"role":"user","content":"وشلونك؟"},{"role":"assistant","content":"بخير، شكرًا لك."}],"provenance":{"source":"sami-authored","license":"user-provided","language":"ar","dialect":"saudi","quality":"gold"}}
+{"domain":"chat","lang":"ar","messages":[{"role":"user","content":"وشلونك؟"},{"role":"assistant","content":"بخير، شكرًا لك."}],"provenance":{"source":"sami-authored","license":"user-provided","language":"ar","dialect":"saudi","quality":"gold","training_allowed":true}}
 ```
 
 ## فحص الملف

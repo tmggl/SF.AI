@@ -64,6 +64,7 @@ class Provenance(BaseModel):
     language: str | None = None    # ar / en / mixed
     dialect: str | None = None     # msa / saudi / ...
     quality: str | None = None     # gold / silver / bronze (Phase 11 training gate)
+    training_allowed: bool | None = None  # explicit owner permission for training
     notes: str | None = None
 
 

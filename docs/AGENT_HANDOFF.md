@@ -171,16 +171,18 @@ GET /system/source-inventory
 الوضع الحالي:
 
 ```text
-status: NOT_READY_FOR_TRAINING
+status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
 ```
 
-والسبب: لا توجد ملفات JSONL تدريبية بعد. لا تشغّل `make train-bpe` قبل أن يصبح التقرير:
+والسبب: أُضيف seed صغير باسم `data/corpus/chat/jsonl/first_dialogue_seed.jsonl` فيه 20 محادثة سعودية gold مشتقة من مرجع Saudi Seed المحلي، ويمر `make corpus-audit` بعدد `20/20`.
+
+مع ذلك، لا تشغّل `make train-bpe` حتى بعد ظهور:
 
 ```text
 status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
 ```
 
-ثم تأخذ إذنًا صريحًا من سامي للتدريب.
+إلا بعد إذن صريح من سامي للتدريب. آخر توجيه منه: **لا تبدأ Phase 12 الآن، شغّل corpus-audit فقط**.
 
 ### تستطيع الآن الانتقال إلى:
 

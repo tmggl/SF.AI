@@ -60,7 +60,7 @@
    ```
    make corpus-audit
    ```
-   إذا كانت النتيجة `NOT_READY_FOR_TRAINING` فلا تبدأ التدريب. Phase 12 يبدأ فقط بعد بيانات JSONL صالحة، تقرير `READY_FOR_PHASE_12_TOKENIZER_TRAINING`، وموافقة صريحة.
+   يوجد الآن `first_dialogue_seed.jsonl` صغير، وقد يعطي التقرير `READY_FOR_PHASE_12_TOKENIZER_TRAINING`. لا تبدأ التدريب رغم ذلك إلا إذا أعطى سامي إذنًا صريحًا جديدًا. آخر توجيه منه كان: لا تبدأ Phase 12 الآن، شغّل corpus-audit فقط.
 
 **أسلوب التواصل المتفق عليه:**
 

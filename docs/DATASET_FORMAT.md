@@ -60,6 +60,7 @@
     "language": "ar",
     "dialect": "msa",
     "quality": "gold",
+    "training_allowed": true,
     "notes": "ملاحظات اختيارية"
   }
 }
@@ -86,11 +87,12 @@
   "language": "ar / en / ...",
   "dialect": "msa / saudi / ...",
   "quality": "gold / silver / bronze",
+  "training_allowed": true,
   "notes": "اختياري"
 }
 ```
 
-في Phase 11، بيانات التدريب الأولى تقبل `dialect ∈ {msa, saudi}` فقط.
+في Phase 11، بيانات التدريب الأولى تقبل `dialect ∈ {msa, saudi}` فقط، وتتطلب `training_allowed=true`.
 
 ---
 

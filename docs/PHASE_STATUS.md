@@ -65,7 +65,8 @@
   - `GET /system/source-inventory`
   - يفرّق بين chat corpus، وملف مهام اللهجة السعودية، وقاموس Saudi Seed الخاص، وموضع Mo3jam المؤجل.
 - نتيجة الجرد المحلي الحالي: 1548 سجلًا مرجعيًا خاصًا غير مرفوع (`1032` مهمة لهجة سعودية + `516` مدخل قاموس سعودي)، لكنها ليست chat corpus مباشرًا.
-- نتيجة الوضع الحالي: `NOT_READY_FOR_TRAINING` لأن `data/corpus/chat/jsonl/` لا يحتوي ملفات JSONL تدريبية بعد.
+- أضيف `data/corpus/chat/jsonl/first_dialogue_seed.jsonl`: seed صغير فيه 20 محادثة سعودية `gold`، مشتقة من مرجع Saudi Seed المحلي، مع `source/license/training_allowed/quality`.
+- نتيجة الوضع الحالي بعد `make corpus-audit`: `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد `20/20`، لكن تدريب tokenizer لم يبدأ وينتظر إذنًا صريحًا.
 - أضيف حقل `provenance.quality` إلى schema.
 - قيود Phase 11: `domain=chat`, `lang=ar`, `dialect ∈ {msa, saudi}`, ووجود user+assistant وsource/license/quality.
 - لم تُضف أي بيانات تدريب، ولم يبدأ tokenizer أو LM training.

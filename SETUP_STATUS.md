@@ -13,7 +13,7 @@
 - **المرحلة الحالية:** **Phase 11 — Sovereign Corpus Governance & Saudi/MSA Dialogue Pack** (مكتملة كحوكمة؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
 - **المرحلة التالية المقترحة:** **Phase 12 — SF-BPE Tokenizer v1 Training & Audit** بعد وضع بيانات JSONL وموافقة صريحة.
-- **بوابة Phase 12 الحالية:** `make corpus-audit` جاهز؛ نتيجته الآن `NOT_READY_FOR_TRAINING` لأن مجلد `data/corpus/chat/jsonl/` بلا ملفات تدريب.
+- **بوابة Phase 12 الحالية:** `make corpus-audit` جاهز؛ نتيجته الآن `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعد إضافة `first_dialogue_seed.jsonl` بعدد 20/20، لكن التدريب ممنوع حتى إذن صريح.
 - **فحص Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/corpus-audit`
 - **جرد المصادر الشامل:** `make source-inventory` أو `GET http://127.0.0.1:8123/system/source-inventory`
 - **المراجع المحلية الخاصة الموجودة:** 516 مدخل قاموس سعودي + 1032 مهمة لهجة سعودية، وهي مستثناة من الرفع وتحتاج تحويل/حوكمة قبل استخدامها كـ LM corpus.

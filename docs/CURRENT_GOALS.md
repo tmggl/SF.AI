@@ -19,13 +19,13 @@
 - `make source-inventory` يعرض كل مصادر البيانات والمراجع المحلية، ويفرق بين corpus حواري وملفات مرجعية.
 - `make corpus-audit` يفحص بيانات `data/corpus/chat/jsonl/`.
 - لا يبدأ Phase 12 فعليًا إلا إذا كان التقرير `READY_FOR_PHASE_12_TOKENIZER_TRAINING`.
-- الوضع الحالي: `NOT_READY_FOR_TRAINING` لأنه لا توجد ملفات JSONL تدريبية بعد.
+- الوضع الحالي: `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعد إضافة `first_dialogue_seed.jsonl`، لكن التدريب ممنوع حتى إذن صريح.
 
 الجرد الحالي يرى:
 
 - قاموس Saudi Seed v1 المحلي: 516 مدخل، مرجع لهجي خاص لا يُرفع.
 - مهام اللهجة السعودية المشتقة: 1032 سجل، تصلح كمرشح tokenizer/تحويل لاحق، وليست chat corpus مباشرًا.
-- `chat/jsonl`: لا يحتوي بيانات تدريب حوارية بعد.
+- `chat/jsonl`: يحتوي الآن seed صغيرًا باسم `first_dialogue_seed.jsonl` فيه 20 محادثة سعودية gold مشتقة من مرجع Saudi Seed المحلي.
 
 ## سياسة اللغة الآن
 

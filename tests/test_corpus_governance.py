@@ -25,6 +25,7 @@ def _ready_record(dialect: str = "saudi", quality: str = "gold") -> dict:
             "language": "ar",
             "dialect": dialect,
             "quality": quality,
+            "training_allowed": True,
         },
     }
 
@@ -59,6 +60,13 @@ def test_quality_is_required_for_training_pack() -> None:
     assert any("quality must be" in i.message for i in issues)
 
 
+def test_training_allowed_must_be_true_for_training_pack() -> None:
+    raw = _ready_record()
+    raw["provenance"]["training_allowed"] = False
+    issues = audit_record_for_training(raw, line_number=1)
+    assert any("training_allowed must be true" in i.message for i in issues)
+
+
 def test_dialogue_must_include_user_and_assistant() -> None:
     raw = _ready_record()
     raw["messages"] = [{"role": "user", "content": "مرحبا"}]
@@ -72,12 +80,14 @@ def test_audit_jsonl_file_counts_ready_records(tmp_path: Path) -> None:
         (
             '{"domain":"chat","lang":"ar","messages":[{"role":"user","content":"مرحبا"},'
             '{"role":"assistant","content":"أهلًا"}],"provenance":{"source":"sami",'
-            '"license":"user-provided","language":"ar","dialect":"msa","quality":"gold"}}\n'
+            '"license":"user-provided","language":"ar","dialect":"msa","quality":"gold",'
+            '"training_allowed":true}}\n'
         )
         + (
             '{"domain":"chat","lang":"ar","messages":[{"role":"user","content":"ازيك"},'
             '{"role":"assistant","content":"تمام"}],"provenance":{"source":"x",'
-            '"license":"user-provided","language":"ar","dialect":"egyptian","quality":"gold"}}\n'
+            '"license":"user-provided","language":"ar","dialect":"egyptian","quality":"gold",'
+            '"training_allowed":true}}\n'
         ),
         encoding="utf-8",
     )
@@ -103,7 +113,8 @@ def test_audit_jsonl_directory_aggregates_ready_records(tmp_path: Path) -> None:
         (
             '{"domain":"chat","lang":"ar","messages":[{"role":"user","content":"مرحبا"},'
             '{"role":"assistant","content":"أهلًا"}],"provenance":{"source":"sami",'
-            '"license":"user-provided","language":"ar","dialect":"msa","quality":"gold"}}\n'
+            '"license":"user-provided","language":"ar","dialect":"msa","quality":"gold",'
+            '"training_allowed":true}}\n'
         ),
         encoding="utf-8",
     )
@@ -111,7 +122,8 @@ def test_audit_jsonl_directory_aggregates_ready_records(tmp_path: Path) -> None:
         (
             '{"domain":"chat","lang":"ar","messages":[{"role":"user","content":"وشلونك"},'
             '{"role":"assistant","content":"بخير"}],"provenance":{"source":"sami",'
-            '"license":"user-provided","language":"ar","dialect":"saudi","quality":"silver"}}\n'
+            '"license":"user-provided","language":"ar","dialect":"saudi","quality":"silver",'
+            '"training_allowed":true}}\n'
         ),
         encoding="utf-8",
     )

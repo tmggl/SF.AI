@@ -80,6 +80,14 @@ def audit_record_for_training(
         issues.append(_issue(line_number, "missing provenance.source", snippet))
     if not provenance.license:
         issues.append(_issue(line_number, "missing provenance.license", snippet))
+    if provenance.training_allowed is not True:
+        issues.append(
+            _issue(
+                line_number,
+                "provenance.training_allowed must be true",
+                snippet,
+            )
+        )
 
     language = provenance.language or (
         sample.lang if isinstance(sample, StructuredSample) else None
