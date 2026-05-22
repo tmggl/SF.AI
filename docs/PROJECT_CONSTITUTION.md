@@ -87,6 +87,29 @@ runtime يخدم المستخدم. training ينتج artifacts.
 
 لا corpus مجهول، ولا بيانات بلا حق استخدام.
 
+### 9. Progressive Scaling Strategy
+
+لا يتم رفع حجم النموذج إلا بعد نجاح المرحلة الحالية.
+
+السلم الرسمي:
+
+```text
+SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
+```
+
+أي انتقال إلى حجم أكبر يحتاج passing scaling gate:
+
+- corpus readiness.
+- tokenization audit.
+- evaluation suite.
+- safety checks.
+- runtime quality.
+- hallucination checks.
+- repetition checks.
+- resource readiness.
+
+ممنوع على أي Agent القفز إلى حجم كبير لأن المستخدم متحمس أو لأن الجهاز يسمح. الحجم التالي يُفتح فقط إذا أثبت الحجم الحالي قيمة واضحة.
+
 ## صلاحية الدستور
 
 هذا الدستور يحكم:
@@ -106,3 +129,4 @@ runtime يخدم المستخدم. training ينتج artifacts.
 - tokenizer policy.
 - training gates.
 - safety gates.
+- scaling gates.

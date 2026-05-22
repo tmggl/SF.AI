@@ -27,6 +27,7 @@
 - **نتيجة Phase 20:** أضيفت بوابة `make phase20-gates` و`GET /system/phase20-gates`; لا مجال يتفعل تلقائيًا، و`chat` هو المجال النشط الوحيد.
 - **تصحيح Phase 20:** أضيف `sf_ai/modules/productivity/` كسكيلتون كامل بعد أن كشفت البوابة وجوده في registry دون module/manifest.
 - **نتيجة Phase 21:** أضيف `docs/GENERATIVE_ROADMAP.md` ومُدّدت الخطة إلى Phase 30؛ أول تدريب جودة مفيد قادم Phase 24، وأول هدف حوار مولّد مقنع Phase 26–28.
+- **مبدأ التكبير الرسمي:** `Progressive Scaling Strategy` — لا يتم رفع حجم النموذج إلا بعد نجاح المرحلة الحالية، والسلم الرسمي هو `SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+`.
 - **مختبر سامي المحلي:** يمكن تشغيل المولّد الخام عبر `SF_ENABLE_NATIVE_GENERATOR=true` و`SF_NATIVE_GENERATOR_EXPERIMENTAL=true`، وتمكين الرسائل غير الحساسة من مجالات skeleton عبر `SF_LAB_GENERATION_FOR_NON_SENSITIVE=true`.
 - **واجهة الاختبار:** الواجهة لا تلقّن رسائل جاهزة؛ الاختبار يتم بما تكتبه أنت، مع تشخيص واضح يبين `template` أو `sf_10m_v0_1`.
 - **تفويض التنفيذ:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة دون انتظار موافقات جديدة؛ استخدم flags المطلوبة مع توثيق كل تشغيل ولا تكسر قواعد السيادة/السلامة.
@@ -149,7 +150,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs,reports}/   Phase 5.5+ outputs/reports
 │
-├── tests/                                 pytest suite — 403 تست / 46 ملف
+├── tests/                                 pytest suite — 405 تست / 46 ملف
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -227,17 +228,17 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى Phase 20 gates)
+## نتائج الاختبارات (حتى Phase 21 scaling strategy + short-fragment guard)
 
 ```
-403 passed in 3.63s
+405 passed in 4.00s
 ```
 
 التغطية الحالية:
 - `test_arabic_normalizer.py` — 16 tests
 - `test_capability_registry.py` — 5 tests
 - `test_chat_module.py` — 12 tests (Phase 4 + language polish)
-- `test_chat_native_generator.py` — 14 tests (Phase 15 + lab routing)
+- `test_chat_native_generator.py` — 15 tests (Phase 15 + lab routing)
 - `test_chat_rag_bridge.py` — 6 tests (Phase 17)
 - `test_phase16_eval_harness.py` — 3 tests (Phase 16)
 - `test_conversation_state.py` — 8 tests (Phase 4)

@@ -51,9 +51,9 @@
 | Phase 23 | Tokenizer v2 Retrain & Audit | مخططة | ✅ |
 | Phase 24 | SF-10M v0.2 Quality Training | مخططة | ✅ |
 | Phase 25 | Generated Chat Canary v1 | مخططة | ✅ |
-| Phase 26 | SF-25M v0.1 Dialogue Model | مخططة | ✅ |
+| Phase 26 | SF-50M v0.1 Dialogue Model | مخططة | ✅ |
 | Phase 27 | Dialogue Evaluation v2 | مخططة | ✅ |
-| Phase 28 | SF-50M v0.1 Candidate | مخططة | ✅ |
+| Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
 
@@ -194,6 +194,9 @@
   - تم توثيق أن التدريب الفعلي بدأ في Phase 13/14، لكن أول تدريب جودة مفيد قادم هو Phase 24.
   - تم تحديد أن أول فرصة لحوار قصير مولّد مقنع هي Phase 26، والهدف الرسمي للحوار المقنع المستقر هو Phase 28.
   - بقي المسار اللغوي `msa + saudi` فقط، وقاموس Saudi Seed v1 هو المرجع اللهجي الحالي.
+  - أضيف مبدأ `Progressive Scaling Strategy`: لا يتم رفع حجم النموذج إلا بعد نجاح المرحلة الحالية.
+  - السلم الرسمي صار: `SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+`.
+  - أضيف تقرير [SCALING_STRATEGY.md](./SCALING_STRATEGY.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -290,7 +293,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-403 passed in 3.63s
+405 passed in 4.00s
 ```
 
 | ملف | عدد |
@@ -299,7 +302,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_bpe_tokenizer.py | 13 |
 | test_capability_registry.py | 5 |
 | test_chat_module.py | 12 |
-| test_chat_native_generator.py | 14 (Phase 15 + lab mode) |
+| test_chat_native_generator.py | 15 (Phase 15 + lab mode) |
 | test_chat_rag_bridge.py | 6 (Phase 17) |
 | test_chat_ui.py | 4 (Phase 9/19 status) |
 | test_checkpoints.py | 7 |
@@ -308,7 +311,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_dataset_validators.py | 28 |
 | test_dialogue_batch_preparation.py | 3 (Phase 18) |
 | test_dialect_mapper.py | 7 |
-| test_generative_roadmap.py | 3 (Phase 21) |
+| test_generative_roadmap.py | 4 (Phase 21 + scaling strategy) |
 | test_health.py | 11 |
 | test_intent_detector.py | 7 |
 | test_mo3jam_importer.py | 13 |
@@ -331,7 +334,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_training_device.py | 14 |
 | test_typo_corrector.py | 5 |
 | test_web_extractor.py | 18 |
-| **Total** | **403** |
+| **Total** | **405** |
 
 ---
 

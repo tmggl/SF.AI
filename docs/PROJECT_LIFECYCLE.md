@@ -10,6 +10,7 @@ corpus
 → training
 → checkpoint
 → eval
+→ scaling gate
 → runtime
 ```
 
@@ -175,6 +176,39 @@ runtime يستخدم checkpoint فقط بعد:
 - composer.
 - safety replies.
 
+## 7. Progressive Scaling Strategy / Scaling Gate
+
+Progressive Scaling Strategy هو المبدأ الحاكم للتكبير. وScaling Gate يقرر هل نكبر النموذج أم نبقى على الحجم الحالي.
+
+القاعدة:
+
+> لا يتم رفع حجم النموذج إلا بعد نجاح المرحلة الحالية.
+
+السلم الرسمي:
+
+```text
+SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
+```
+
+قبل الانتقال يجب أن تنجح:
+
+- corpus readiness.
+- tokenization audit.
+- evaluation suite.
+- safety checks.
+- runtime quality.
+- hallucination checks.
+- repetition checks.
+- resource readiness.
+
+إذا فشل gate، يعود المشروع إلى:
+
+- توسيع corpus.
+- تحسين tokenizer.
+- تعديل eval.
+- إعادة تدريب الحجم نفسه.
+- تحسين runtime canary/fallback.
+
 ## نقاط الفصل
 
 | المرحلة | تكتب أين؟ | تقرأ من أين؟ |
@@ -183,6 +217,7 @@ runtime يستخدم checkpoint فقط بعد:
 | tokenizer training | `artifacts/tokenizers/` | `data/corpus/` |
 | LM training | `artifacts/checkpoints/`, `artifacts/logs/` | corpus + tokenizer |
 | eval | `artifacts/logs/`, `docs/` | checkpoint |
+| scaling gate | `docs/`, `artifacts/reports/` | eval + corpus + resources |
 | runtime | لا يكتب artifacts تدريب | checkpoint مفعّل فقط |
 
 ## Gates
@@ -194,6 +229,7 @@ runtime يستخدم checkpoint فقط بعد:
 - لا توجد أسرار أو ملفات خاصة في git.
 - وُثقت المخرجات.
 - أعطى سامي الإذن إذا كانت خطوة عالية الأثر.
+- نجحت scaling gate قبل أي حجم أكبر.
 
 ## الحالة الحالية
 

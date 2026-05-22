@@ -31,6 +31,7 @@
 - [docs/PROJECT_MAP.md](./docs/PROJECT_MAP.md) — خريطة المجلدات ومسؤولية كل مسار.
 - [docs/PROJECT_LIFECYCLE.md](./docs/PROJECT_LIFECYCLE.md) — دورة الحياة من corpus إلى runtime.
 - [docs/GENERATIVE_ROADMAP.md](./docs/GENERATIVE_ROADMAP.md) — خارطة الوصول إلى حوار مولّد مقنع بعد Phase 20.
+- [docs/SCALING_STRATEGY.md](./docs/SCALING_STRATEGY.md) — استراتيجية التكبير التدريجي من SF-10M إلى SF-1B+.
 
 ---
 
@@ -87,9 +88,9 @@
 | Phase 23 | Tokenizer v2 Retrain & Audit — planned |
 | Phase 24 | SF-10M v0.2 Quality Training — planned |
 | Phase 25 | Generated Chat Canary v1 — planned |
-| Phase 26 | SF-25M v0.1 Dialogue Model — planned |
+| Phase 26 | SF-50M v0.1 Dialogue Model — planned |
 | Phase 27 | Dialogue Evaluation v2 — planned |
-| Phase 28 | SF-50M v0.1 Candidate — planned |
+| Phase 28 | SF-120M v0.1 Candidate — planned |
 | Phase 29 | Runtime Hybrid Assistant v1 — planned |
 | Phase 30 | Continuous Improvement Loop — planned |
 

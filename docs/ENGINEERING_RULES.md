@@ -171,6 +171,41 @@ docs/
 - لا تجعل tests أو scripts توقف السيرفر.
 - أي script status يجب أن يكون read-only.
 
+## 13. Progressive Scaling Strategy
+
+لا يتم رفع حجم النموذج إلا بعد نجاح المرحلة الحالية.
+
+السلم الرسمي الوحيد:
+
+```text
+SF-10M
+→ SF-50M
+→ SF-120M
+→ SF-350M
+→ SF-700M
+→ SF-1B+
+```
+
+ممنوع:
+
+- القفز من `SF-10M` إلى `3B`.
+- تدريب `SF-1B+` قبل نجاح الأحجام الأصغر.
+- تبرير التكبير بضعف الردود فقط؛ ضعف الردود غالبًا يعني نقص بيانات أو تقييم.
+- تشغيل تدريب أكبر دون تقرير scaling gate.
+
+قبل أي حجم أكبر يجب توثيق:
+
+- corpus readiness.
+- tokenization audit.
+- evaluation suite.
+- safety checks.
+- runtime quality.
+- hallucination checks.
+- repetition checks.
+- resource readiness.
+
+إذا فشل شرط واحد، الخطوة الصحيحة هي تحسين البيانات/التوكنزر/التقييم أو إعادة تدريب الحجم نفسه، لا تكبير النموذج.
+
 ## Naming Conventions
 
 ### الملفات والمجلدات
