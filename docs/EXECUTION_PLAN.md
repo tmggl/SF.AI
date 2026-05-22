@@ -779,7 +779,7 @@ status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
 ثم بعد إذن صريح:
 
 ```bash
-make train-bpe ARGS="--corpus data/corpus/chat/jsonl --out artifacts/tokenizers/sf_bpe/v1"
+make train-bpe ARGS="--confirm-phase12-permission --corpus data/corpus/chat/jsonl --out artifacts/tokenizers/sf_bpe/v1"
 ```
 
 ### شروط النجاح

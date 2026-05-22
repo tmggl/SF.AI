@@ -5,13 +5,17 @@ Usage:
     python scripts/train_bpe.py \\
         --corpus data/corpus/chat/jsonl \\
         --out artifacts/tokenizers/sf_bpe/v1 \\
-        --vocab-size 8000
+        --vocab-size 8000 \\
+        --confirm-phase12-permission
 
 REFUSES to start training if the corpus is empty. Place your dialogue data
 under data/corpus/chat/jsonl/ first (see docs/DATASET_FORMAT.md).
 
 NEVER load vocab/merges from any external tokenizer. The training produces
 SF-origin artifacts only.
+
+Also refuses to start Phase 12 tokenizer training unless Sami has explicitly
+approved it and the command includes --confirm-phase12-permission.
 """
 
 from __future__ import annotations
@@ -28,6 +32,7 @@ from sf_ai.models.tokenizer import (  # noqa: E402
     TokenizerConfig,
     train_bpe_from_corpus,
 )
+from sf_ai.training.train_tokenizer import PHASE12_PERMISSION_ERROR  # noqa: E402
 
 
 def main(argv: list[str]) -> int:
@@ -39,7 +44,16 @@ def main(argv: list[str]) -> int:
     p.add_argument("--byte-level", action="store_true", help="Use byte-level base alphabet")
     p.add_argument("--lowercase", action="store_true", help="Lowercase pre-tokenized words")
     p.add_argument("--name", default="sf_bpe", help="Logical name for meta.json")
+    p.add_argument(
+        "--confirm-phase12-permission",
+        action="store_true",
+        help="Required after explicit Sami approval to start Phase 12 tokenizer training",
+    )
     args = p.parse_args(argv)
+
+    if not args.confirm_phase12_permission:
+        print(f"error: {PHASE12_PERMISSION_ERROR}", file=sys.stderr)
+        return 2
 
     config = TokenizerConfig(
         vocab_size=args.vocab_size,

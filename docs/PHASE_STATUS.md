@@ -10,7 +10,7 @@
 - **المرحلة الحالية:** **Phase 11 — Sovereign Corpus Governance & Saudi/MSA Dialogue Pack**
 - **حالة المرحلة الحالية:** **مكتملة كحوكمة وأدوات فحص؛ يوجد seed صغير مصرح، ولا يوجد تدريب فعلي بعد**
 - **المرحلة التالية المقترحة:** Phase 12 — SF-BPE Tokenizer v1 Training & Audit
-- **جاهزية Phase 12 الآن:** preflight audit جاهز `30/30`؛ التدريب ينتظر إذنًا صريحًا.
+- **جاهزية Phase 12 الآن:** preflight audit جاهز `30/30`؛ التدريب ينتظر إذنًا صريحًا و`--confirm-phase12-permission`.
 - **تاريخ آخر تحديث:** 2026-05-22
 
 ---
@@ -196,7 +196,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-348 passed in ~2.4s
+350 passed in 2.50s
 ```
 
 | ملف | عدد |

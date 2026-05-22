@@ -13,6 +13,13 @@ from pathlib import Path
 from sf_ai.models.tokenizer import TokenizerConfig, train_bpe_from_corpus
 
 
+PHASE12_PERMISSION_ERROR = (
+    "Phase 12 tokenizer training requires explicit permission. "
+    "Re-run with --confirm-phase12-permission only after Sami says: "
+    '"ابدأ Phase 12".'
+)
+
+
 def parse_args(argv: list[str]) -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Train SF-BPE from SF.AI corpus")
     p.add_argument("--corpus", type=Path, required=True)
@@ -22,11 +29,23 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     p.add_argument("--byte-level", action="store_true")
     p.add_argument("--lowercase", action="store_true")
     p.add_argument("--name", default="sf_bpe")
+    p.add_argument(
+        "--confirm-phase12-permission",
+        action="store_true",
+        help=(
+            "Required gate: pass only after Sami explicitly approves "
+            "starting Phase 12 tokenizer training."
+        ),
+    )
     return p.parse_args(argv)
 
 
 def run(argv: list[str]) -> int:
     args = parse_args(argv)
+    if not args.confirm_phase12_permission:
+        print(f"error: {PHASE12_PERMISSION_ERROR}", file=sys.stderr)
+        return 2
+
     cfg = TokenizerConfig(
         vocab_size=args.vocab_size,
         min_frequency=args.min_frequency,

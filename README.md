@@ -165,6 +165,14 @@ make tokenization-audit
 
 هذه الفحوصات لا تبدأ تدريبًا ولا تكتب artifacts.
 
+حتى بعد نجاح الفحوصات، يرفض تدريب tokenizer البدء بدون إذن Phase 12 الصريح:
+
+```bash
+make train-bpe ARGS="--confirm-phase12-permission --corpus data/corpus/chat/jsonl --out artifacts/tokenizers/sf_bpe/v1"
+```
+
+لا تستخدم هذا العلم إلا بعد موافقة سامي الواضحة على بدء Phase 12.
+
 تقرير الجاهزية الرسمي:
 
 ```text

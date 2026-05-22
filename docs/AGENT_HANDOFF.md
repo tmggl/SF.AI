@@ -66,7 +66,7 @@
 ### الاختبارات
 
 ```
-348 passed in ~2.4s
+350 passed in 2.50s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -199,6 +199,14 @@ status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
 ```
 
 إلا بعد إذن صريح من سامي للتدريب. آخر توجيه منه: **لا تبدأ Phase 12 الآن، شغّل corpus-audit فقط**.
+
+أضيفت بوابة تنفيذية فوق ذلك: `make train-bpe` و`scripts/train_bpe.py` يرفضان البدء بدون:
+
+```text
+--confirm-phase12-permission
+```
+
+لا تمرر هذا العلم إلا بعد إذن صريح بعبارة واضحة مثل: **ابدأ Phase 12**.
 
 تقرير preflight الحالي يقول:
 

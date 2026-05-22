@@ -25,7 +25,7 @@ help:
 	@echo "  make source-inventory     Show all local data/reference sources"
 	@echo "  make corpus-audit         Audit JSONL corpus before Phase 12"
 	@echo "  make tokenization-audit   Audit tokenization policy before Phase 12"
-	@echo "  make train-bpe ARGS=...   Train SF-BPE tokenizer"
+	@echo "  make train-bpe ARGS=...   Train SF-BPE tokenizer (requires Phase 12 confirmation flag)"
 	@echo "  make train-lm ARGS=...    Train SF native LM (Phase 6)"
 	@echo "  make eval-lm ARGS=...     Evaluate a SF.AI checkpoint"
 
@@ -86,8 +86,10 @@ corpus-audit:
 tokenization-audit:
 	$(PY) scripts/audit_tokenization_policy.py $(ARGS)
 
-# Phase 5.5 — train SF-BPE tokenizer.
-# Example: make train-bpe ARGS="--corpus data/corpus/chat/jsonl --out artifacts/tokenizers/sf_bpe/v1"
+# Phase 12 — train SF-BPE tokenizer.
+# Requires explicit Sami approval and --confirm-phase12-permission.
+# Example after approval only:
+#   make train-bpe ARGS="--confirm-phase12-permission --corpus data/corpus/chat/jsonl --out artifacts/tokenizers/sf_bpe/v1"
 train-bpe:
 	$(PY) -m sf_ai.training.train_tokenizer $(ARGS)
 

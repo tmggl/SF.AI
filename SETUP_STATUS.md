@@ -14,6 +14,7 @@
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
 - **المرحلة التالية المقترحة:** **Phase 12 — SF-BPE Tokenizer v1 Training & Audit** بعد وضع بيانات JSONL وموافقة صريحة.
 - **بوابة Phase 12 الحالية:** `make corpus-audit` جاهز؛ نتيجته الآن `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30، لكن التدريب ممنوع حتى إذن صريح.
+- **بوابة التدريب التنفيذية:** `make train-bpe` يرفض التشغيل بدون `--confirm-phase12-permission`، ولا يُستخدم هذا العلم إلا بعد إذن صريح ببدء Phase 12.
 - **فحص Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/corpus-audit`
 - **جرد المصادر الشامل:** `make source-inventory` أو `GET http://127.0.0.1:8123/system/source-inventory`
 - **فحص السيرفر بدون تعطيل:** `make server-status`، وهو read-only ولا يعمل restart/stop.
@@ -203,7 +204,7 @@ make server-start
 ## نتائج الاختبارات (Phase 11 + Governance Layer)
 
 ```
-348 passed in ~2.4s
+350 passed in 2.50s
 ```
 
 التغطية الحالية:

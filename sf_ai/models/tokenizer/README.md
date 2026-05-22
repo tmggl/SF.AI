@@ -20,8 +20,11 @@ Sovereign tokenizers for SF.AI.
 python scripts/train_bpe.py \
     --corpus data/corpus/chat/jsonl \
     --out artifacts/tokenizers/sf_bpe/v1 \
-    --vocab-size 8000
+    --vocab-size 8000 \
+    --confirm-phase12-permission
 ```
+
+لا تمرر `--confirm-phase12-permission` إلا بعد إذن صريح من سامي ببدء Phase 12.
 
 ## شكل الناتج
 
@@ -36,6 +39,7 @@ artifacts/tokenizers/sf_bpe/v1/
 
 - `BPETokenizer.load(path)` يرفع `ValueError` إن لم يكن `meta.json.sf_origin == true`.
 - `train_bpe_from_corpus()` يرفض البدء إن كان الـ corpus فارغًا.
+- واجهات التدريب (`make train-bpe` و`scripts/train_bpe.py`) ترفض البدء بدون `--confirm-phase12-permission`.
 - `training_meta` يسجل blake2b hash لكل ملف مصدر — يمكن لاحقًا التحقق من أن نفس البيانات أنتجت نفس الـ tokenizer.
 
 ## ما لا نفعله

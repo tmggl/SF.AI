@@ -21,6 +21,7 @@
 - لا تنفذ مرحلة غير مصرح بها.
 - لا تبدأ Phase 12 إلا بإذن صريح.
 - لا تشغّل tokenizer training من كلمة “التالي”.
+- لا تمرر `--confirm-phase12-permission` إلا بعد إذن صريح من سامي ببدء Phase 12.
 - لا تغير tokenizer rules بدون توثيق.
 - لا تكسر protected terms.
 - لا تضف dependency بلا justification.

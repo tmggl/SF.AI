@@ -64,7 +64,11 @@ def main(argv: list[str]) -> int:
     print()
     if report.error_count == 0 and report.training_ready > 0:
         print("status: READY_FOR_PHASE_12_TOKENIZER_TRAINING")
-        print("next: run `make train-bpe ARGS=\"--corpus data/corpus/chat/jsonl --out artifacts/tokenizers/sf_bpe/v1\"`")
+        print(
+            "next after explicit Sami approval only: "
+            "`make train-bpe ARGS=\"--confirm-phase12-permission "
+            "--corpus data/corpus/chat/jsonl --out artifacts/tokenizers/sf_bpe/v1\"`"
+        )
         return 0
 
     print("status: NOT_READY_FOR_TRAINING")

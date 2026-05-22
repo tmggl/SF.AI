@@ -162,6 +162,14 @@ artifacts/logs/*
 
 جاهزية preflight لا تعني بدء التدريب.
 
+كما أن أمر التدريب نفسه مغلق ببوابة تنفيذية:
+
+```text
+--confirm-phase12-permission
+```
+
+بدون هذا العلم، يرفض `make train-bpe` و`scripts/train_bpe.py` البدء ولا يكتبان أي tokenizer artifacts.
+
 ---
 
 ## 6. Known Constraints
@@ -179,7 +187,7 @@ artifacts/logs/*
 لا تنفذ إلا بعد إذن صريح:
 
 ```bash
-make train-bpe ARGS="--corpus data/corpus/chat/jsonl --out artifacts/tokenizers/sf_bpe/v1"
+make train-bpe ARGS="--confirm-phase12-permission --corpus data/corpus/chat/jsonl --out artifacts/tokenizers/sf_bpe/v1"
 ```
 
 بعد التدريب يجب إنشاء report مستقل يوضح:

@@ -59,6 +59,7 @@ training هو ما ينتج artifacts لاحقًا:
 
 - `READY_FOR_PHASE_12_TOKENIZER_TRAINING` لا يعني بدء `make train-bpe`.
 - إذن “التالي” لا يعني تدريبًا إذا كانت المرحلة التالية عالية الأثر.
+- `make train-bpe` يجب أن يرفض التشغيل بدون `--confirm-phase12-permission`.
 - التدريب، crawling، ونقل البيانات كلها تحتاج إذنًا صريحًا.
 
 ## 5. datasets منفصلة عن lexicons
