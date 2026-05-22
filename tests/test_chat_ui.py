@@ -23,6 +23,9 @@ def test_ui_chat_serves_html() -> None:
     assert "اكتب رسالتك هنا" in body
     assert "المحادثة جاهزة" in body
     assert "قالب ثابت - ليس مولدًا" in body
+    assert "بوابة Phase 22" in body
+    assert "/system/phase22-readiness" in body
+    assert "غير جاهز للتوكنزر بعد" in body
     assert "جودة التصدير" in body
     assert "quality-score" in body
     assert "ui_quality_score" in body

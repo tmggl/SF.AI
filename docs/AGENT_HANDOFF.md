@@ -85,6 +85,7 @@
 - Phase 22 readiness: `GET /system/phase22-readiness`.
 - Phase 22 collection plan: `GET /system/phase22-collection-plan`.
 - Phase 22 review intake: `GET /system/phase22-review-intake`.
+- `/ui/chat` تعرض بوابة Phase 22 الحية وجودة التصدير؛ لا تعرض ذلك كدليل على وجود مولد جاهز.
 - Source inventory: `GET /system/source-inventory`.
 
 تشغيل يدوي:

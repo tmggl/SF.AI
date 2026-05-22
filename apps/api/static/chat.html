@@ -249,6 +249,16 @@
       <h2>الإشارات</h2>
       <div class="signals" id="signals"></div>
       <div class="divider"></div>
+      <h2>بوابة Phase 22</h2>
+      <div class="quality-box bad" id="phase22-box">
+        <div class="quality-score">
+          <span id="phase22-label">جاري فحص corpus…</span>
+          <code id="phase22-score">—</code>
+        </div>
+        <div class="quality-meter"><div class="quality-fill" id="phase22-fill"></div></div>
+        <div class="quality-details" id="phase22-details">أفحص عدد السجلات وتوازن الفصحى/السعودي.</div>
+      </div>
+      <div class="divider"></div>
       <h2>جودة التصدير</h2>
       <div class="quality-box bad" id="quality-box">
         <div class="quality-score">
@@ -307,6 +317,11 @@
   const qualityScoreEl = document.getElementById("quality-score");
   const qualityFillEl = document.getElementById("quality-fill");
   const qualityDetailsEl = document.getElementById("quality-details");
+  const phase22Box = document.getElementById("phase22-box");
+  const phase22LabelEl = document.getElementById("phase22-label");
+  const phase22ScoreEl = document.getElementById("phase22-score");
+  const phase22FillEl = document.getElementById("phase22-fill");
+  const phase22DetailsEl = document.getElementById("phase22-details");
 
   // Fetch phase info.
   fetch("/system/status").then(r => r.json()).then(data => {
@@ -314,6 +329,36 @@
   }).catch(() => {
     phaseEl.textContent = "تعذر جلب /system/status";
   });
+
+  function updatePhase22Gate() {
+    fetch("/system/phase22-readiness").then(r => r.json()).then(data => {
+      const target = Number(data.target_records || 0);
+      const records = Number(data.training_records || 0);
+      const pct = target ? Math.max(0, Math.min(100, Math.round((records / target) * 100))) : 0;
+      const missing = (data.missing_required_dialects || []).join("، ") || "لا يوجد";
+      const shortfalls = data.dialect_shortfalls || {};
+      const shortfallText = Object.keys(shortfalls).length
+        ? Object.entries(shortfalls).map(([k, v]) => k + ": " + v).join("، ")
+        : "مكتمل";
+      phase22Box.classList.remove("good", "mid", "bad");
+      phase22Box.classList.add(data.can_start_phase23 ? "good" : (pct >= 50 ? "mid" : "bad"));
+      phase22LabelEl.textContent = data.can_start_phase23 ? "جاهز للانتقال إلى Phase 23" : "غير جاهز للتوكنزر بعد";
+      phase22ScoreEl.textContent = records + "/" + target;
+      phase22FillEl.style.width = pct + "%";
+      phase22DetailsEl.textContent =
+        "المتبقي: " + data.remaining_records +
+        " · الناقص لهجيًا: " + shortfallText +
+        " · اللهجات المفقودة: " + missing +
+        " · تدريب synthetic LLM: ممنوع";
+    }).catch(() => {
+      phase22LabelEl.textContent = "تعذر فحص Phase 22";
+      phase22ScoreEl.textContent = "—";
+      phase22FillEl.style.width = "0%";
+      phase22DetailsEl.textContent = "تأكد من تشغيل السيرفر ثم حدّث الصفحة.";
+    });
+  }
+
+  updatePhase22Gate();
 
   function el(tag, opts = {}) {
     const e = document.createElement(tag);

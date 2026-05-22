@@ -49,7 +49,7 @@
 - **جاهزية SF-50M:** Phase 19 أضاف `make phase19-readiness`; القرار الحالي `NOT_READY_EXPAND_CORPUS_FIRST`.
 - **بوابات المجالات:** Phase 20 أضاف `make phase20-gates` و`GET /system/phase20-gates`; المجال النشط الوحيد هو `chat`.
 - **طريق التوليد المقنع:** لا تطلب من سامي اختبار مولّد الآن. Phase 24 هو أول تدريب جودة مفيد، Phase 26 أول فرصة لحوار قصير مقنع، وPhase 28 هدف الحوار المولّد المستقر.
-- **Corpus v2:** Phase 22 أضاف `make phase22-readiness` و`make phase22-plan` و`make phase22-review-intake`; الوضع الحالي 30/500 و`msa` ناقصة، وملفات review لا تدخل التدريب تلقائيًا. الواجهة تعرض الآن جودة التصدير، و`phase22-review-intake` يعطي score جودة للحوار قبل أي تحويل.
+- **Corpus v2:** Phase 22 أضاف `make phase22-readiness` و`make phase22-plan` و`make phase22-review-intake`; الوضع الحالي 30/500 و`msa` ناقصة، وملفات review لا تدخل التدريب تلقائيًا. الواجهة تعرض الآن بوابة Phase 22 الحية وجودة التصدير، و`phase22-review-intake` يعطي score جودة للحوار قبل أي تحويل.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
 ---

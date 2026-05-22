@@ -58,6 +58,7 @@ Phase 22 لا يبدأ تدريب tokenizer أو نموذج.
 - `GET /system/phase22-readiness`
 - `GET /system/phase22-collection-plan`
 - `GET /system/phase22-review-intake`
+- `/ui/chat` يعرض لوحة بوابة Phase 22 الحية من `/system/phase22-readiness`.
 - `sf_ai/datasets/phase22_readiness.py`
 - `sf_ai/datasets/phase22_review_intake.py`
 
@@ -106,6 +107,12 @@ status: REVIEW_EXPORTS_READY_FOR_MANUAL_REVIEW
 - يعرض score قبل التصدير.
 - يحذر إذا كانت الجلسة أقل من 3 أدوار منك و3 ردود من المساعد.
 - يضع `ui_quality_score`, `ui_quality_label`, `ui_quality_blockers` في ملف export.
+
+وأضيفت لوحة بوابة Phase 22 داخل الشاشة نفسها:
+
+- تعرض عدد سجلات corpus الحالي مقابل هدف 500.
+- تعرض المتبقي ونقص `msa/saudi`.
+- توضّح أن Phase 23 لا تبدأ حتى تمر بوابة corpus.
 
 القاعدة العملية للوصول إلى حوار مفيد للتدريب:
 
