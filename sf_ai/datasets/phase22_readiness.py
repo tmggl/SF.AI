@@ -73,6 +73,32 @@ class Phase22PlannedBatch:
 
 
 @dataclass(frozen=True)
+class Phase22CompletionGate:
+    phase: str
+    status: str
+    can_advance_phase23: bool
+    readiness_status: str
+    corpus_path: str
+    training_records: int
+    target_records: int
+    remaining_records: int
+    dialect_counts: dict[str, int]
+    dialect_shortfalls: dict[str, int]
+    current_next_batch: str | None
+    completion_checks: dict[str, bool]
+    missing_requirements: tuple[str, ...]
+    required_before_advance: tuple[str, ...]
+    notes: tuple[str, ...]
+
+    def to_json(self) -> dict[str, object]:
+        data = asdict(self)
+        data["missing_requirements"] = list(self.missing_requirements)
+        data["required_before_advance"] = list(self.required_before_advance)
+        data["notes"] = list(self.notes)
+        return data
+
+
+@dataclass(frozen=True)
 class Phase22NextBatchBrief:
     phase: str
     status: str
@@ -330,6 +356,80 @@ def build_phase22_next_batch_brief(
             "This brief is not training data.",
             "Suggested topics are prompts for Sami to author/review, not synthetic dialogue records.",
             "Do not run tokenizer or model training during this step.",
+        ),
+    )
+
+
+def build_phase22_completion_gate(
+    project_dir: str | Path | None = None,
+    *,
+    batch_size: int = 25,
+) -> Phase22CompletionGate:
+    """Strict Phase 22 completion gate; read-only and training-free."""
+    decision = build_phase22_readiness_decision(project_dir)
+    plan = build_phase22_collection_plan(project_dir, batch_size=batch_size)
+    brief = build_phase22_next_batch_brief(project_dir, batch_size=batch_size)
+    current_next_batch = brief.next_batch.batch_id if brief.next_batch else None
+
+    completion_checks = {
+        "corpus_target_met": decision.training_records >= decision.target_records,
+        "no_corpus_governance_issues": decision.corpus_issue_count == 0,
+        "required_dialects_present": not decision.missing_required_dialects,
+        "dialect_balance_met": all(
+            shortfall == 0 for shortfall in decision.dialect_shortfalls.values()
+        ),
+        "gold_or_silver_quality_present": any(
+            decision.quality_counts.get(q, 0) > 0 for q in REQUIRED_QUALITIES
+        ),
+        "synthetic_llm_data_forbidden": decision.synthetic_llm_data_allowed is False,
+        "collection_plan_available": plan.estimated_batches >= 0,
+        "next_batch_brief_available": bool(current_next_batch) or decision.can_start_phase23,
+        "phase23_blocked_until_ready": decision.can_start_phase23 is False
+        or decision.status == "READY_FOR_PHASE23_TOKENIZER_V2",
+    }
+
+    missing = list(decision.blockers)
+    if current_next_batch:
+        missing.append(f"complete_next_batch:{current_next_batch}")
+    if not completion_checks["collection_plan_available"]:
+        missing.append("phase22_collection_plan_unavailable")
+    if not completion_checks["next_batch_brief_available"]:
+        missing.append("phase22_next_batch_brief_unavailable")
+
+    can_advance = decision.can_start_phase23 and all(completion_checks.values())
+    status = (
+        "PHASE22_COMPLETE_READY_FOR_PHASE23"
+        if can_advance
+        else "PHASE22_INCOMPLETE_DO_NOT_ADVANCE"
+    )
+
+    return Phase22CompletionGate(
+        phase="Phase 22 — Completion Gate",
+        status=status,
+        can_advance_phase23=can_advance,
+        readiness_status=decision.status,
+        corpus_path=decision.corpus_path,
+        training_records=decision.training_records,
+        target_records=decision.target_records,
+        remaining_records=decision.remaining_records,
+        dialect_counts=decision.dialect_counts,
+        dialect_shortfalls=decision.dialect_shortfalls,
+        current_next_batch=current_next_batch,
+        completion_checks=completion_checks,
+        missing_requirements=tuple(dict.fromkeys(missing)),
+        required_before_advance=(
+            "complete all planned Phase 22 batches with user-authored/user-approved records",
+            "run make phase22-review-intake on review exports",
+            "convert only reviewed exports with make prepare-dialogue-batch",
+            "run make corpus-audit",
+            "run make phase22-readiness",
+            "run make phase22-completion-gate",
+        ),
+        notes=(
+            "This gate is read-only and starts no training.",
+            "Do not move to Phase 23 until status is PHASE22_COMPLETE_READY_FOR_PHASE23.",
+            "Current Phase 22 scope remains msa + saudi only.",
+            "Saudi Seed v1 remains a reference lexicon, not direct chat corpus.",
         ),
     )
 

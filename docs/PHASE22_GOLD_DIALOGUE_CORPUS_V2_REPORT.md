@@ -55,10 +55,12 @@ Phase 22 لا يبدأ تدريب tokenizer أو نموذج.
 - `make phase22-readiness`
 - `make phase22-plan`
 - `make phase22-next-batch`
+- `make phase22-completion-gate`
 - `make phase22-review-intake`
 - `GET /system/phase22-readiness`
 - `GET /system/phase22-collection-plan`
 - `GET /system/phase22-next-batch`
+- `GET /system/phase22-completion-gate`
 - `GET /system/phase22-review-intake`
 - `/ui/chat` يعرض لوحة بوابة Phase 22 الحية من `/system/phase22-readiness`.
 - `/system/phase22-collection-plan` يرجع الآن `planned_batches` مفصلة لكل batch.
@@ -76,6 +78,7 @@ missing_required_dialects: ["msa"]
 status: NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2
 can_start_phase23: false
 synthetic_llm_data_allowed: false
+completion_gate: PHASE22_INCOMPLETE_DO_NOT_ADVANCE
 ```
 
 وخطة الجمع الحالية:
@@ -98,6 +101,13 @@ next_batch: msa_001, dialect=msa, target_records=25
 - يعرض موضوعات عامة تساعد سامي يكتب بنفسه؛ هذه الموضوعات ليست corpus ولا synthetic dialogue.
 - بعد التصدير: `phase22-review-intake` ثم `prepare-dialogue-batch` ثم `corpus-audit` ثم `phase22-readiness`.
 - شاشة `/ui/chat` تعرض هذه المهمة مباشرة وتضيف `phase22_next_batch` إلى `review_metadata` عند التصدير.
+
+`phase22-completion-gate` هو مانع الانتقال النهائي:
+
+- يرجع حاليًا `PHASE22_INCOMPLETE_DO_NOT_ADVANCE`.
+- يجمع readiness + collection plan + next batch في قرار واحد.
+- لا يسمح بالانتقال إلى Phase 23 إلا بعد `PHASE22_COMPLETE_READY_FOR_PHASE23`.
+- يذكر النواقص الحالية مثل `corpus_below_phase22_target`, `missing_required_msa_or_saudi`, و`complete_next_batch:msa_001`.
 
 تفصيل batches الرسمي:
 

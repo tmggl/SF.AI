@@ -9,6 +9,7 @@ from fastapi.testclient import TestClient
 from apps.api.main import app
 from sf_ai.datasets.phase22_readiness import (
     build_phase22_collection_plan,
+    build_phase22_completion_gate,
     build_phase22_next_batch_brief,
     build_phase22_readiness_decision,
 )
@@ -119,6 +120,36 @@ def test_phase22_next_batch_endpoint() -> None:
     assert body["after_export_commands"][0] == "make phase22-review-intake"
 
 
+def test_phase22_completion_gate_blocks_advancement_until_complete() -> None:
+    gate = build_phase22_completion_gate()
+    assert gate.status == "PHASE22_INCOMPLETE_DO_NOT_ADVANCE"
+    assert gate.can_advance_phase23 is False
+    assert gate.readiness_status == "NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2"
+    assert gate.training_records == 30
+    assert gate.target_records == 500
+    assert gate.remaining_records == 470
+    assert gate.current_next_batch == "msa_001"
+    assert gate.completion_checks["corpus_target_met"] is False
+    assert gate.completion_checks["required_dialects_present"] is False
+    assert gate.completion_checks["dialect_balance_met"] is False
+    assert gate.completion_checks["no_corpus_governance_issues"] is True
+    assert "corpus_below_phase22_target" in gate.missing_requirements
+    assert "complete_next_batch:msa_001" in gate.missing_requirements
+    assert any("phase22-completion-gate" in item for item in gate.required_before_advance)
+
+
+def test_phase22_completion_gate_endpoint() -> None:
+    r = client.get("/system/phase22-completion-gate")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["phase"].startswith("Phase 22")
+    assert body["status"] == "PHASE22_INCOMPLETE_DO_NOT_ADVANCE"
+    assert body["can_advance_phase23"] is False
+    assert body["current_next_batch"] == "msa_001"
+    assert body["completion_checks"]["corpus_target_met"] is False
+    assert "complete_next_batch:msa_001" in body["missing_requirements"]
+
+
 def test_phase22_cli_is_read_only() -> None:
     proc = subprocess.run(
         [".venv/bin/python", "scripts/phase22_readiness.py"],
@@ -161,6 +192,20 @@ def test_phase22_next_batch_cli_is_read_only() -> None:
     assert "Do not run tokenizer or model training" in proc.stdout
 
 
+def test_phase22_completion_gate_cli_is_read_only() -> None:
+    proc = subprocess.run(
+        [".venv/bin/python", "scripts/phase22_completion_gate.py"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert proc.returncode == 0
+    assert "Phase 22 completion gate" in proc.stdout
+    assert "status                        : PHASE22_INCOMPLETE_DO_NOT_ADVANCE" in proc.stdout
+    assert "can_advance_phase23           : false" in proc.stdout
+    assert "current_next_batch            : msa_001" in proc.stdout
+
+
 def test_system_status_reports_phase22_component() -> None:
     r = client.get("/system/status")
     assert r.status_code == 200
@@ -176,5 +221,9 @@ def test_system_status_reports_phase22_component() -> None:
     )
     assert any(
         c["name"] == "phase22_next_batch" and c["status"] == "active"
+        for c in body["components"]
+    )
+    assert any(
+        c["name"] == "phase22_completion_gate" and c["status"] == "active"
         for c in body["components"]
     )

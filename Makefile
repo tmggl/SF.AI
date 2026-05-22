@@ -1,7 +1,7 @@
 # SF.AI — Makefile
 # Phase 1 set of operational commands.
 
-.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit phase12-readiness phase19-readiness phase20-gates phase22-readiness phase22-plan phase22-next-batch phase22-review-intake prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
+.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit phase12-readiness phase19-readiness phase20-gates phase22-readiness phase22-plan phase22-next-batch phase22-completion-gate phase22-review-intake prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
 
 PY ?= .venv/bin/python
 UVICORN ?= uvicorn
@@ -31,6 +31,7 @@ help:
 	@echo "  make phase22-readiness    Read-only Phase 22 Gold Dialogue Corpus v2 gate"
 	@echo "  make phase22-plan         Read-only Phase 22 corpus collection plan"
 	@echo "  make phase22-next-batch   Show the immediate Phase 22 authoring task"
+	@echo "  make phase22-completion-gate Strict Phase 22 completion gate before Phase 23"
 	@echo "  make phase22-review-intake Scan review exports before corpus conversion"
 	@echo "  make prepare-dialogue-batch ARGS=...  Prepare reviewed chat exports (Phase 18)"
 	@echo "  make train-bpe ARGS=...   Train SF-BPE tokenizer (requires Phase 12 confirmation flag)"
@@ -112,6 +113,9 @@ phase22-plan:
 
 phase22-next-batch:
 	$(PY) scripts/phase22_next_batch.py $(ARGS)
+
+phase22-completion-gate:
+	$(PY) scripts/phase22_completion_gate.py $(ARGS)
 
 phase22-review-intake:
 	$(PY) scripts/phase22_review_intake.py $(ARGS)

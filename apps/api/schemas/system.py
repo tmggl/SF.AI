@@ -221,6 +221,24 @@ class Phase22NextBatchBriefResponse(BaseModel):
     warnings: list[str]
 
 
+class Phase22CompletionGateResponse(BaseModel):
+    phase: str
+    status: str
+    can_advance_phase23: bool
+    readiness_status: str
+    corpus_path: str
+    training_records: int
+    target_records: int
+    remaining_records: int
+    dialect_counts: dict[str, int]
+    dialect_shortfalls: dict[str, int]
+    current_next_batch: str | None
+    completion_checks: dict[str, bool]
+    missing_requirements: list[str]
+    required_before_advance: list[str]
+    notes: list[str]
+
+
 class Phase22ReviewExportItemResponse(BaseModel):
     path: str
     records: int

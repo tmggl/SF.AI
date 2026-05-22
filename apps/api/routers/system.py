@@ -19,6 +19,7 @@ from apps.api.schemas.system import (
     Phase12ReadinessResponse,
     Phase19ReadinessResponse,
     Phase20GatesResponse,
+    Phase22CompletionGateResponse,
     Phase22CollectionPlanResponse,
     Phase22NextBatchBriefResponse,
     Phase22ReadinessResponse,
@@ -32,6 +33,7 @@ from sf_ai.core.activation import build_phase20_activation_gates
 from sf_ai.datasets.corpus_governance import audit_jsonl_directory_for_training
 from sf_ai.datasets.phase22_readiness import (
     build_phase22_collection_plan,
+    build_phase22_completion_gate,
     build_phase22_next_batch_brief,
     build_phase22_readiness_decision,
 )
@@ -142,6 +144,7 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
             ComponentStatus(name="phase22_readiness", status="active", phase="Phase 22"),
             ComponentStatus(name="phase22_collection_plan", status="active", phase="Phase 22"),
             ComponentStatus(name="phase22_next_batch", status="active", phase="Phase 22"),
+            ComponentStatus(name="phase22_completion_gate", status="active", phase="Phase 22"),
             ComponentStatus(name="phase22_review_intake", status="active", phase="Phase 22"),
             ComponentStatus(name="phase22_dialogue_quality_gate", status="active", phase="Phase 22"),
         ],
@@ -390,6 +393,29 @@ def phase22_next_batch(batch_size: int = 25) -> Phase22NextBatchBriefResponse:
         ui_instructions=list(brief.ui_instructions),
         after_export_commands=list(brief.after_export_commands),
         warnings=list(brief.warnings),
+    )
+
+
+@router.get("/phase22-completion-gate", response_model=Phase22CompletionGateResponse)
+def phase22_completion_gate(batch_size: int = 25) -> Phase22CompletionGateResponse:
+    """Strict read-only completion gate before Phase 23."""
+    gate = build_phase22_completion_gate(batch_size=batch_size)
+    return Phase22CompletionGateResponse(
+        phase=gate.phase,
+        status=gate.status,
+        can_advance_phase23=gate.can_advance_phase23,
+        readiness_status=gate.readiness_status,
+        corpus_path=gate.corpus_path,
+        training_records=gate.training_records,
+        target_records=gate.target_records,
+        remaining_records=gate.remaining_records,
+        dialect_counts=gate.dialect_counts,
+        dialect_shortfalls=gate.dialect_shortfalls,
+        current_next_batch=gate.current_next_batch,
+        completion_checks=gate.completion_checks,
+        missing_requirements=list(gate.missing_requirements),
+        required_before_advance=list(gate.required_before_advance),
+        notes=list(gate.notes),
     )
 
 

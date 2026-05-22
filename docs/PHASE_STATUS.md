@@ -201,10 +201,12 @@
   - أضيف `make phase22-readiness`.
   - أضيف `make phase22-plan`.
   - أضيف `make phase22-next-batch`.
+  - أضيف `make phase22-completion-gate`.
   - أضيف `make phase22-review-intake`.
   - أضيف `GET /system/phase22-readiness`.
   - أضيف `GET /system/phase22-collection-plan`.
   - أضيف `GET /system/phase22-next-batch`.
+  - أضيف `GET /system/phase22-completion-gate`.
   - أضيف `GET /system/phase22-review-intake`.
   - أضيف `sf_ai/datasets/phase22_readiness.py`.
   - أضيف `sf_ai/datasets/phase22_review_intake.py`.
@@ -213,6 +215,7 @@
   - الموجود الحالي: 30 سجل تدريب جاهز، كلها `saudi`.
   - المتبقي: 470 سجل للوصول إلى 500.
   - خطة الجمع الحالية: 200 فصحى + 170 سعودي + 100 مرنة، أي نحو 19 batch بحجم 25.
+  - أضيفت بوابة اكتمال صارمة: `phase22-completion-gate`، وقرارها الحالي `PHASE22_INCOMPLETE_DO_NOT_ADVANCE`.
   - أضيفت قائمة batches مفصلة داخل `phase22-plan`: من `msa_001` إلى `msa_008`، ثم `saudi_001` إلى `saudi_007`، ثم `flex_001` إلى `flex_004`، مع target records وأسماء ملفات وأوامر تحويل مقترحة.
   - أضيفت مهمة batch فورية داخل `phase22-next-batch`: المهمة الحالية `msa_001`، 25 سجل فصيح، مع checklist قبول وموضوعات تأليف لا تُعد بيانات تدريب.
   - review intake الحالي: ملف عينة واحد في `data/corpus/chat/review/` مرشح للمراجعة، ولا يدخل التدريب تلقائيًا.

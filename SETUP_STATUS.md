@@ -28,7 +28,8 @@
 - **تصحيح Phase 20:** أضيف `sf_ai/modules/productivity/` كسكيلتون كامل بعد أن كشفت البوابة وجوده في registry دون module/manifest.
 - **نتيجة Phase 21:** أضيف `docs/GENERATIVE_ROADMAP.md` ومُدّدت الخطة إلى Phase 30؛ أول تدريب جودة مفيد قادم Phase 24، وأول هدف حوار مولّد مقنع Phase 26–28.
 - **مبدأ التكبير الرسمي:** `Progressive Scaling Strategy` — لا يتم رفع حجم النموذج إلا بعد نجاح المرحلة الحالية، والسلم الرسمي هو `SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+`.
-- **نتيجة Phase 22:** أضيف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-review-intake` و`GET /system/phase22-readiness` و`GET /system/phase22-collection-plan` و`GET /system/phase22-next-batch` و`GET /system/phase22-review-intake`; القرار الحالي `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2` لأن corpus الحالي 30/500 ويفتقد `msa`.
+- **نتيجة Phase 22:** أضيف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-completion-gate` و`make phase22-review-intake` و`GET /system/phase22-readiness` و`GET /system/phase22-collection-plan` و`GET /system/phase22-next-batch` و`GET /system/phase22-completion-gate` و`GET /system/phase22-review-intake`; القرار الحالي `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2` لأن corpus الحالي 30/500 ويفتقد `msa`.
+- **بوابة اكتمال Phase 22:** `make phase22-completion-gate` يرجع الآن `PHASE22_INCOMPLETE_DO_NOT_ADVANCE`، ولا يُسمح بالانتقال إلى Phase 23 حتى يرجع `PHASE22_COMPLETE_READY_FOR_PHASE23`.
 - **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches`: `msa_001..msa_008`, `saudi_001..saudi_007`, `flex_001..flex_004` مع عدد السجلات وملف الإخراج وأمر التحويل المقترح.
 - **مهمة batch التالية:** `make phase22-next-batch` يعرض الآن `msa_001` كالمهمة الفورية: 25 سجلًا فصيحًا، مع checklist قبول وموضوعات تأليف عامة وليست بيانات تدريب.
 - **Review intake الحالي:** `data/corpus/chat/review/sample_review_export.jsonl` مرشح للمراجعة فقط؛ الأداة read-only ولا تنقل أي شيء إلى التدريب.
