@@ -185,7 +185,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-342 passed in ~2.5s
+343 passed in ~2.3s
 ```
 
 | ملف | عدد |

@@ -127,6 +127,12 @@ make api
 bash scripts/run_chat_server.sh
 ```
 
+لفحص السيرفر بدون إيقافه أو إعادة تشغيله:
+
+```bash
+make server-status
+```
+
 ثم افتح:
 
 ```text

@@ -1,7 +1,7 @@
 # SF.AI — Makefile
 # Phase 1 set of operational commands.
 
-.PHONY: help check-env install test lint type api web docker-up docker-down phase-status import-mo3jam-saudi source-inventory corpus-audit train-bpe train-lm eval-lm
+.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status import-mo3jam-saudi source-inventory corpus-audit train-bpe train-lm eval-lm
 
 PY ?= .venv/bin/python
 UVICORN ?= uvicorn
@@ -18,6 +18,7 @@ help:
 	@echo "  make docker-up     Start docker-compose services"
 	@echo "  make docker-down   Stop docker-compose services"
 	@echo "  make phase-status  Print current phase status"
+	@echo "  make server-status Check port 8123 without restart/stop"
 	@echo "  make import-mo3jam-saudi  Run the Phase 3.5 Saudi-dialect importer"
 	@echo "                            (dry-run by default; ARGS to override)"
 	@echo "  make source-inventory     Show all local data/reference sources"
@@ -59,6 +60,9 @@ docker-down:
 phase-status:
 	@echo "----- docs/PHASE_STATUS.md -----"
 	@head -n 30 docs/PHASE_STATUS.md
+
+server-status:
+	bash scripts/server_status.sh
 
 # Phase 3.5 — import Mo3jam Saudi-dialect lexicon.
 # Default: dry-run. To go live, override with:

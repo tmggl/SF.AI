@@ -80,3 +80,23 @@ git status --short
 - لا checkpoints.
 - لا full private lexicon payloads.
 - لا tokenizer vocab/merges بدون إذن.
+
+## تشغيل السيرفر
+
+لا تكسر السيرفر أثناء العمل.
+
+قبل أي محاولة تشغيل:
+
+```bash
+make server-status
+```
+
+إذا كان المنفذ `8123` يستمع و`/health` يرد، اتركه يعمل ولا تعمل restart.
+
+ممنوع استخدام:
+
+- `pkill`
+- kill PID
+- restart
+
+إلا إذا طلب سامي ذلك صراحة، أو إذا كان السيرفر متوقفًا أصلًا ولا يوجد listener على 8123.
