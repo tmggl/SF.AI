@@ -66,7 +66,7 @@
 ### الاختبارات
 
 ```
-347 passed in ~2.5s
+348 passed in ~2.4s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -146,6 +146,7 @@ bash scripts/run_chat_server.sh
 - [TOKENIZATION_POLICY.md](./TOKENIZATION_POLICY.md)
 - [DATASET_GOVERNANCE.md](./DATASET_GOVERNANCE.md)
 - [AGENT_ENGINEERING_RULES.md](./AGENT_ENGINEERING_RULES.md)
+- [PHASE12_PREFLIGHT_REPORT.md](./PHASE12_PREFLIGHT_REPORT.md)
 - [PROJECT_IDENTITY.md](./PROJECT_IDENTITY.md)
 - [ENGINEERING_RULES.md](./ENGINEERING_RULES.md)
 - [AGENT_INSTRUCTIONS.md](./AGENT_INSTRUCTIONS.md)
@@ -198,6 +199,14 @@ status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
 ```
 
 إلا بعد إذن صريح من سامي للتدريب. آخر توجيه منه: **لا تبدأ Phase 12 الآن، شغّل corpus-audit فقط**.
+
+تقرير preflight الحالي يقول:
+
+```text
+Phase 12 preflight: PASS
+Training permission: NOT GRANTED
+Action now: STOP before training
+```
 
 ### تستطيع الآن الانتقال إلى:
 

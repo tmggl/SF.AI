@@ -95,6 +95,10 @@
   - covered: 30
   - coverage: 100%
   - missing examples: none
+- أضيف [PHASE12_PREFLIGHT_REPORT.md](./PHASE12_PREFLIGHT_REPORT.md) كتقرير قرار نهائي قبل Phase 12:
+  - preflight: PASS
+  - training permission: NOT GRANTED
+  - action: STOP before training
 - لم يبدأ tokenizer أو LM training.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
@@ -192,7 +196,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-347 passed in ~2.5s
+348 passed in ~2.4s
 ```
 
 | ملف | عدد |
