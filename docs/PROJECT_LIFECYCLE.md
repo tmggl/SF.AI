@@ -39,6 +39,7 @@ data/corpus/
 ```bash
 make source-inventory
 make corpus-audit
+make tokenization-audit
 ```
 
 وقبل Phase 12 تحديدًا:

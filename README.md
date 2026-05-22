@@ -154,6 +154,16 @@ http://127.0.0.1:8123/ui/chat
 - `POST /chat/message` — رسالة إلى الـ Orchestrator.
 - `GET /ui/chat` — شاشة المحادثة.
 
+### فحوصات ما قبل Phase 12
+
+```bash
+make source-inventory
+make corpus-audit
+make tokenization-audit
+```
+
+هذه الفحوصات لا تبدأ تدريبًا ولا تكتب artifacts.
+
 ### الاختبارات
 
 ```bash

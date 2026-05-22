@@ -69,6 +69,7 @@
 ```bash
 .venv/bin/python -m pytest tests
 make corpus-audit
+make tokenization-audit
 make source-inventory
 git status --short
 ```

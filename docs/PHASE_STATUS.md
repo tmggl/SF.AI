@@ -88,6 +88,12 @@
   - [protected_terms_saudi.txt](../resources/tokenization/protected_terms_saudi.txt)
   - [preferred_merges.txt](../resources/tokenization/preferred_merges.txt)
   - [tokenization_rules.yaml](../resources/tokenization/tokenization_rules.yaml)
+- أضيف `make tokenization-audit` لفحص policy/coverage قبل Phase 12 دون تدريب أو كتابة artifacts.
+- نتيجة `make tokenization-audit ARGS="--show-missing"` الحالية:
+  - protected terms total: 30
+  - covered: 20
+  - coverage: 66.67%
+  - missing examples: `تكفين`, `لا هنت`, `الله لا يهينك`, `سم`, `أبشر`, `حيّاك`, `حياك`, `يعطيك العافية`, `ما قصرت`, `الله يعافيك`
 - لم يبدأ tokenizer أو LM training.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
@@ -185,7 +191,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-344 passed in ~2.6s
+347 passed in ~2.5s
 ```
 
 | ملف | عدد |

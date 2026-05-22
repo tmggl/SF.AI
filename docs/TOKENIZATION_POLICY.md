@@ -67,6 +67,22 @@ Phase 12 يجب أن ينتج audit يراجع:
 - Saudi examples round-trip.
 - MSA examples round-trip.
 
+قبل Phase 12، شغّل preflight read-only:
+
+```bash
+make tokenization-audit
+```
+
+هذا يفحص:
+
+- وجود قواعد YAML.
+- وجود protected terms.
+- وجود preferred merges.
+- تغطية protected terms داخل corpus الحالي.
+- عدم وجود pretrained policy.
+
+ولا يدرّب tokenizer ولا يكتب artifacts.
+
 ## سياسة corpus
 
 tokenizer يتعلم من:

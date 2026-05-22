@@ -1,7 +1,7 @@
 # SF.AI — Makefile
 # Phase 1 set of operational commands.
 
-.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit train-bpe train-lm eval-lm
+.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit train-bpe train-lm eval-lm
 
 PY ?= .venv/bin/python
 UVICORN ?= uvicorn
@@ -24,6 +24,7 @@ help:
 	@echo "                            (dry-run by default; ARGS to override)"
 	@echo "  make source-inventory     Show all local data/reference sources"
 	@echo "  make corpus-audit         Audit JSONL corpus before Phase 12"
+	@echo "  make tokenization-audit   Audit tokenization policy before Phase 12"
 	@echo "  make train-bpe ARGS=...   Train SF-BPE tokenizer"
 	@echo "  make train-lm ARGS=...    Train SF native LM (Phase 6)"
 	@echo "  make eval-lm ARGS=...     Evaluate a SF.AI checkpoint"
@@ -81,6 +82,9 @@ source-inventory:
 
 corpus-audit:
 	$(PY) scripts/audit_training_corpus.py $(ARGS)
+
+tokenization-audit:
+	$(PY) scripts/audit_tokenization_policy.py $(ARGS)
 
 # Phase 5.5 — train SF-BPE tokenizer.
 # Example: make train-bpe ARGS="--corpus data/corpus/chat/jsonl --out artifacts/tokenizers/sf_bpe/v1"
