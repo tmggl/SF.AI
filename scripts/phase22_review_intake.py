@@ -43,6 +43,7 @@ def main(argv: list[str]) -> int:
     print(f"  user_assistant_records        : {report.total_user_assistant_records}")
     print(f"  raw_generator_records         : {report.total_raw_generator_assistant_records}")
     print(f"  safety_flagged_estimate       : {report.total_safety_flagged_estimate}")
+    print(f"  average_quality_score         : {report.average_dialogue_quality_score}")
     print(f"  synthetic_llm_data_allowed    : {str(report.synthetic_llm_data_allowed).lower()}")
     print()
     print("review files:")
@@ -58,6 +59,14 @@ def main(argv: list[str]) -> int:
         print(f"      training_allowed_false    : {item.training_allowed_false}")
         print(f"      training_allowed_true     : {item.training_allowed_true}")
         print(f"      raw_generator_records     : {item.raw_generator_assistant_records}")
+        print(f"      user_turns                : {item.user_turns}")
+        print(f"      assistant_turns           : {item.assistant_turns}")
+        print(f"      quality_score             : {item.dialogue_quality_score}")
+        print(f"      quality_label             : {item.dialogue_quality_label}")
+        if item.dialogue_quality_blockers:
+            print("      quality_blockers:")
+            for blocker in item.dialogue_quality_blockers:
+                print(f"        - {blocker}")
         print(f"      suggested_msa_command     : {item.suggested_msa_command}")
         print(f"      suggested_saudi_command   : {item.suggested_saudi_command}")
     print()

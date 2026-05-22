@@ -140,6 +140,7 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
             ComponentStatus(name="phase22_readiness", status="active", phase="Phase 22"),
             ComponentStatus(name="phase22_collection_plan", status="active", phase="Phase 22"),
             ComponentStatus(name="phase22_review_intake", status="active", phase="Phase 22"),
+            ComponentStatus(name="phase22_dialogue_quality_gate", status="active", phase="Phase 22"),
         ],
     )
 
@@ -387,6 +388,7 @@ def phase22_review_intake(max_files: int | None = None) -> Phase22ReviewIntakeRe
         total_user_assistant_records=report.total_user_assistant_records,
         total_raw_generator_assistant_records=report.total_raw_generator_assistant_records,
         total_safety_flagged_estimate=report.total_safety_flagged_estimate,
+        average_dialogue_quality_score=report.average_dialogue_quality_score,
         synthetic_llm_data_allowed=report.synthetic_llm_data_allowed,
         files=[
             Phase22ReviewExportItemResponse(
@@ -400,6 +402,11 @@ def phase22_review_intake(max_files: int | None = None) -> Phase22ReviewIntakeRe
                 training_allowed_missing=item.training_allowed_missing,
                 raw_generator_assistant_records=item.raw_generator_assistant_records,
                 safety_flagged_estimate=item.safety_flagged_estimate,
+                user_turns=item.user_turns,
+                assistant_turns=item.assistant_turns,
+                dialogue_quality_score=item.dialogue_quality_score,
+                dialogue_quality_label=item.dialogue_quality_label,
+                dialogue_quality_blockers=list(item.dialogue_quality_blockers),
                 status=item.status,
                 recommended_actions=list(item.recommended_actions),
                 suggested_msa_command=item.suggested_msa_command,

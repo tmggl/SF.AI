@@ -212,6 +212,8 @@
   - المتبقي: 470 سجل للوصول إلى 500.
   - خطة الجمع الحالية: 200 فصحى + 170 سعودي + 100 مرنة، أي نحو 19 batch بحجم 25.
   - review intake الحالي: ملف عينة واحد في `data/corpus/chat/review/` مرشح للمراجعة، ولا يدخل التدريب تلقائيًا.
+  - أضيفت بوابة جودة داخل review intake: `quality_score`, `quality_label`, و`quality_blockers`.
+  - القاعدة العملية الجديدة: ملف التصدير المفيد يجب أن يحتوي غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل، وبدون ردود `sf_10m_v0_1`.
   - صححت تشغيل الواجهة المستقرة: `generator=template` افتراضيًا، و`SF-10M` الخام يبقى مختبرًا صريحًا فقط.
   - أضيفت حماية export/review intake لتمييز أي جلسة تحتوي ردود `sf_10m_v0_1` ومنع عدّها كـ candidate تدريب جودة.
   - أضيفت intents محددة لعبارات Phase 22 اليومية: اختبار الحوار الفصيح، الخطوة التالية، والفرق بين التدريب والتفعيل.
@@ -313,7 +315,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-422 passed in 4.41s
+423 passed in 4.67s
 ```
 
 | ملف | عدد |
@@ -343,7 +345,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_phase19_readiness.py | 2 (Phase 19) |
 | test_phase20_domain_activation_gates.py | 6 (Phase 20) |
 | test_phase22_readiness.py | 8 (Phase 22) |
-| test_phase22_review_intake.py | 6 (Phase 22) |
+| test_phase22_review_intake.py | 7 (Phase 22) |
 | test_rag_sparse_retrieval.py | 14 (Phase 8) |
 | test_research_summarizer.py | 20 |
 | test_response_composer.py | 6 |
@@ -356,7 +358,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_training_device.py | 14 |
 | test_typo_corrector.py | 5 |
 | test_web_extractor.py | 18 |
-| **Total** | **422** |
+| **Total** | **423** |
 
 ---
 

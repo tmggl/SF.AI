@@ -30,6 +30,7 @@
 - **مبدأ التكبير الرسمي:** `Progressive Scaling Strategy` — لا يتم رفع حجم النموذج إلا بعد نجاح المرحلة الحالية، والسلم الرسمي هو `SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+`.
 - **نتيجة Phase 22:** أضيف `make phase22-readiness` و`make phase22-plan` و`make phase22-review-intake` و`GET /system/phase22-readiness` و`GET /system/phase22-collection-plan` و`GET /system/phase22-review-intake`; القرار الحالي `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2` لأن corpus الحالي 30/500 ويفتقد `msa`.
 - **Review intake الحالي:** `data/corpus/chat/review/sample_review_export.jsonl` مرشح للمراجعة فقط؛ الأداة read-only ولا تنقل أي شيء إلى التدريب.
+- **بوابة جودة الحوار:** `phase22-review-intake` يعرض الآن `quality_score/quality_label/quality_blockers`; الجلسة المفيدة للتدريب تحتاج غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل وبدون `sf_10m_v0_1`.
 - **تصحيح تشغيل المولّد:** الواجهة المستقرة عادت إلى `generator=template` افتراضيًا؛ `SF-10M` الخام لا يدخل ردود الشات إلا بفلاغات مختبر صريحة.
 - **مختبر سامي المحلي:** يمكن تشغيل المولّد الخام عبر `SF_ENABLE_NATIVE_GENERATOR=true` و`SF_NATIVE_GENERATOR_EXPERIMENTAL=true`، وتمكين الرسائل غير الحساسة من مجالات skeleton عبر `SF_LAB_GENERATION_FOR_NON_SENSITIVE=true` عند الاختبار فقط.
 - **حماية التصدير:** إذا صدّرت جلسة تحتوي ردودًا من `sf_10m_v0_1`، تضع الواجهة metadata واضحًا، و`phase22-review-intake` لا يعدّها candidate تدريب جودة.
@@ -40,7 +41,7 @@
 - **قرار Phase 12 من الطرفية بدون restart:** `make phase12-readiness`، وهو read-only ويعرض نفس منطق القرار.
 - **بوابات Phase 20 من الطرفية/API:** `make phase20-gates` أو `GET http://127.0.0.1:8123/system/phase20-gates`.
 - **خطة جمع Phase 22:** `make phase22-plan` أو `GET http://127.0.0.1:8123/system/phase22-collection-plan`.
-- **فحص ملفات review في Phase 22:** `make phase22-review-intake` أو `GET http://127.0.0.1:8123/system/phase22-review-intake`.
+- **فحص ملفات review في Phase 22:** `make phase22-review-intake` أو `GET http://127.0.0.1:8123/system/phase22-review-intake`، ويشمل score جودة الحوار.
 - **جرد المصادر الشامل:** `make source-inventory` أو `GET http://127.0.0.1:8123/system/source-inventory`
 - **فحص السيرفر بدون تعطيل:** `make server-status`، وهو read-only ولا يعمل restart/stop.
 - **تشغيل السيرفر المستقر:** `make server-start` يبدأه داخل `screen` فقط إذا كان متوقفًا.
@@ -156,7 +157,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs,reports}/   Phase 5.5+ outputs/reports
 │
-├── tests/                                 pytest suite — 422 تست / 48 ملف
+├── tests/                                 pytest suite — 423 تست / 48 ملف
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -240,7 +241,7 @@ make server-start
 ## نتائج الاختبارات (حتى Phase 22 review intake)
 
 ```
-422 passed in 4.41s
+423 passed in 4.67s
 ```
 
 التغطية الحالية:
@@ -271,7 +272,7 @@ make server-start
 - `test_new_chat_intents.py` — 38 tests (daily social + Phase 22 guidance prompts)
 - `test_nlp_pipeline.py` — 9 tests
 - `test_phase10_skeleton_domains.py` — 4 tests (Phase 10)
-- `test_phase22_review_intake.py` — 6 tests (Phase 22 review exports)
+- `test_phase22_review_intake.py` — 7 tests (Phase 22 review exports + dialogue quality gate)
 - `test_orchestrator.py` — 7 tests
 - `test_response_composer.py` — 6 tests
 - `test_router.py` — 8 tests

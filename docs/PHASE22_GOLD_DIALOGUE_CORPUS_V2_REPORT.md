@@ -90,9 +90,23 @@ flexible_records_after_minimums: 100
 review_path: data/corpus/chat/review
 review_files: 1
 candidate_files: 1
+average_quality_score: 60.0
 synthetic_llm_data_allowed: false
 status: REVIEW_EXPORTS_READY_FOR_MANUAL_REVIEW
 ```
+
+أضيفت بوابة جودة للحوار داخل `phase22-review-intake`:
+
+- `quality_score` من 0 إلى 100.
+- `quality_label`: مثل `gold_candidate`, `silver_candidate`, `needs_more_turns_or_review`.
+- `quality_blockers`: مثل قصر المحادثة أو وجود ردود `sf_10m_v0_1`.
+
+القاعدة العملية للوصول إلى حوار مفيد للتدريب:
+
+- لا تصدّر أقل من 3 أدوار منك و3 ردود من المساعد.
+- لا تستخدم جلسة فيها `مولّد: نموذج SF-10M` كبيانات جودة.
+- فضّل موضوعًا واحدًا واضحًا في كل جلسة.
+- اجعل الردود التي توافق عليها أنت فقط تدخل corpus.
 
 ---
 
@@ -129,6 +143,15 @@ status: REVIEW_EXPORTS_READY_FOR_MANUAL_REVIEW
 ما الفرق بين تدريب النموذج وتفعيل النموذج؟
 ```
 
+لجمع ملف أعلى جودة، اجعل كل جلسة 3–6 أدوار. مثال بنية الجلسة:
+
+```text
+1. افتح موضوعًا واحدًا.
+2. اطلب توضيحًا أو مثالًا.
+3. اسأل متابعة قصيرة.
+4. إن كان الرد مفهومًا، صدّر الجلسة للمراجعة.
+```
+
 بعد التصدير، لا يدخل الملف التدريب حتى يُراجع ويُحضّر:
 
 ```bash
@@ -163,5 +186,6 @@ make phase22-review-intake
 - لا `missing_required_dialects`.
 - لا dialect shortfall.
 - `can_start_phase23=true`.
+- `quality_label` لمعظم ملفات review يكون `silver_candidate` أو `gold_candidate`.
 
 حتى ذلك الوقت تبقى الخطوة الصحيحة: جمع ومراجعة بيانات حوار حقيقية.

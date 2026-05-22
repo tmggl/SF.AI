@@ -219,6 +219,11 @@ class Phase22ReviewExportItemResponse(BaseModel):
     training_allowed_missing: int
     raw_generator_assistant_records: int
     safety_flagged_estimate: int
+    user_turns: int
+    assistant_turns: int
+    dialogue_quality_score: int
+    dialogue_quality_label: str
+    dialogue_quality_blockers: list[str]
     status: str
     recommended_actions: list[str]
     suggested_msa_command: str
@@ -238,6 +243,7 @@ class Phase22ReviewIntakeResponse(BaseModel):
     total_user_assistant_records: int
     total_raw_generator_assistant_records: int
     total_safety_flagged_estimate: int
+    average_dialogue_quality_score: float
     synthetic_llm_data_allowed: bool
     files: list[Phase22ReviewExportItemResponse]
     recommended_next_commands: list[str]

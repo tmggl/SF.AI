@@ -33,7 +33,12 @@ class ReviewExportItem:
     training_allowed_missing: int
     raw_generator_assistant_records: int
     safety_flagged_estimate: int
+    user_turns: int
+    assistant_turns: int
+    dialogue_quality_score: int
+    dialogue_quality_label: str
     status: str
+    dialogue_quality_blockers: tuple[str, ...] = field(default_factory=tuple)
     recommended_actions: tuple[str, ...] = field(default_factory=tuple)
     suggested_msa_command: str = ""
     suggested_saudi_command: str = ""
@@ -59,6 +64,7 @@ class Phase22ReviewIntakeReport:
     total_user_assistant_records: int
     total_raw_generator_assistant_records: int
     total_safety_flagged_estimate: int
+    average_dialogue_quality_score: float
     synthetic_llm_data_allowed: bool
     files: tuple[ReviewExportItem, ...]
     recommended_next_commands: tuple[str, ...] = field(default_factory=tuple)
@@ -96,6 +102,11 @@ def build_phase22_review_intake_report(
     user_assistant_records = sum(item.records_with_user_and_assistant for item in items)
     safety_flagged = sum(item.safety_flagged_estimate for item in items)
     raw_generator_records = sum(item.raw_generator_assistant_records for item in items)
+    avg_quality = (
+        round(sum(item.dialogue_quality_score for item in items) / len(items), 2)
+        if items
+        else 0.0
+    )
 
     if not items:
         status = "NO_REVIEW_EXPORTS_FOUND"
@@ -120,6 +131,7 @@ def build_phase22_review_intake_report(
         total_user_assistant_records=user_assistant_records,
         total_raw_generator_assistant_records=raw_generator_records,
         total_safety_flagged_estimate=safety_flagged,
+        average_dialogue_quality_score=avg_quality,
         synthetic_llm_data_allowed=False,
         files=items,
         recommended_next_commands=(
@@ -133,6 +145,7 @@ def build_phase22_review_intake_report(
             "This report is read-only and does not prepare training JSONL.",
             "Review exports must normally keep training_allowed=false until manual approval.",
             "Exports containing sf_10m_v0_1 raw output are review evidence, not quality training candidates.",
+            "Quality score estimates whether a review export is useful for the next dialogue-training corpus.",
             "Allowed dialect targets remain msa + saudi only.",
             "Saudi Seed v1 remains a reference lexicon, not direct chat corpus.",
         ),
@@ -149,6 +162,10 @@ def _scan_review_file(path: Path, *, root: Path) -> ReviewExportItem:
     training_missing = 0
     raw_generator_records = 0
     safety_flagged = 0
+    user_turns = 0
+    assistant_turns = 0
+    user_chars = 0
+    assistant_chars = 0
     notes: list[str] = []
 
     if not path.exists():
@@ -163,6 +180,11 @@ def _scan_review_file(path: Path, *, root: Path) -> ReviewExportItem:
             training_allowed_missing=0,
             raw_generator_assistant_records=0,
             safety_flagged_estimate=0,
+            user_turns=0,
+            assistant_turns=0,
+            dialogue_quality_score=0,
+            dialogue_quality_label="missing",
+            dialogue_quality_blockers=("missing_file",),
             status="missing",
             recommended_actions=("check the review export path",),
         )
@@ -199,6 +221,15 @@ def _scan_review_file(path: Path, *, root: Path) -> ReviewExportItem:
             if _has_safety_terms(joined):
                 safety_flagged += 1
 
+            for msg in messages:
+                content = str(getattr(msg, "content", "")).strip()
+                if getattr(msg, "role", "") == "user":
+                    user_turns += 1
+                    user_chars += len(content)
+                elif getattr(msg, "role", "") == "assistant":
+                    assistant_turns += 1
+                    assistant_chars += len(content)
+
             provenance = getattr(sample, "provenance", None)
             training_allowed = getattr(provenance, "training_allowed", None) if provenance is not None else None
             if training_allowed is True:
@@ -224,6 +255,18 @@ def _scan_review_file(path: Path, *, root: Path) -> ReviewExportItem:
         status = "candidate_review_export"
 
     rel = str(path.relative_to(root)) if _is_relative_to(path, root) else str(path)
+    quality_score, quality_label, quality_blockers = _dialogue_quality(
+        schema_valid=schema_valid,
+        with_user_and_assistant=with_user_and_assistant,
+        user_turns=user_turns,
+        assistant_turns=assistant_turns,
+        user_chars=user_chars,
+        assistant_chars=assistant_chars,
+        training_true=training_true,
+        training_missing=training_missing,
+        raw_generator_records=raw_generator_records,
+        safety_flagged=safety_flagged,
+    )
     return ReviewExportItem(
         path=rel,
         records=records,
@@ -235,6 +278,11 @@ def _scan_review_file(path: Path, *, root: Path) -> ReviewExportItem:
         training_allowed_missing=training_missing,
         raw_generator_assistant_records=raw_generator_records,
         safety_flagged_estimate=safety_flagged,
+        user_turns=user_turns,
+        assistant_turns=assistant_turns,
+        dialogue_quality_score=quality_score,
+        dialogue_quality_label=quality_label,
+        dialogue_quality_blockers=quality_blockers,
         status=status,
         recommended_actions=_recommended_actions(path=rel, status=status),
         suggested_msa_command=_prepare_command(rel, "msa"),
@@ -304,6 +352,67 @@ def _contains_raw_generator_output(raw: dict[str, Any]) -> bool:
         if message.get("role") == "assistant" and message.get("generator") == "sf_10m_v0_1":
             return True
     return False
+
+
+def _dialogue_quality(
+    *,
+    schema_valid: int,
+    with_user_and_assistant: int,
+    user_turns: int,
+    assistant_turns: int,
+    user_chars: int,
+    assistant_chars: int,
+    training_true: int,
+    training_missing: int,
+    raw_generator_records: int,
+    safety_flagged: int,
+) -> tuple[int, str, tuple[str, ...]]:
+    score = 100
+    blockers: list[str] = []
+    if schema_valid == 0:
+        score -= 60
+        blockers.append("schema_invalid")
+    if with_user_and_assistant == 0:
+        score -= 50
+        blockers.append("missing_user_or_assistant")
+    if raw_generator_records:
+        score -= 60
+        blockers.append("contains_raw_generator_output")
+    if safety_flagged:
+        score -= 35
+        blockers.append("safety_review_required")
+    if training_true:
+        score -= 25
+        blockers.append("review_export_has_training_allowed_true")
+    if training_missing:
+        score -= 10
+        blockers.append("training_allowed_missing")
+    if user_turns < 3:
+        score -= 20
+        blockers.append("needs_at_least_3_user_turns")
+    if assistant_turns < 3:
+        score -= 20
+        blockers.append("needs_at_least_3_assistant_turns")
+
+    avg_user = user_chars / user_turns if user_turns else 0
+    avg_assistant = assistant_chars / assistant_turns if assistant_turns else 0
+    if avg_user < 12:
+        score -= 8
+        blockers.append("user_turns_too_short")
+    if avg_assistant < 35:
+        score -= 12
+        blockers.append("assistant_turns_too_short")
+
+    score = max(0, min(100, score))
+    if score >= 85 and not blockers:
+        label = "gold_candidate"
+    elif score >= 70:
+        label = "silver_candidate"
+    elif score >= 45:
+        label = "needs_more_turns_or_review"
+    else:
+        label = "not_training_quality_candidate"
+    return score, label, tuple(blockers)
 
 
 def _has_safety_terms(text: str) -> bool:

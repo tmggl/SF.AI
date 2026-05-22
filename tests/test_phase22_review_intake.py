@@ -20,23 +20,27 @@ def _write_review_record(
     *,
     training_allowed: bool = False,
     assistant_generator: str = "template",
+    turns: int = 1,
 ) -> None:
+    messages: list[dict[str, str]] = []
+    for i in range(turns):
+        messages.append({"role": "user", "content": f"وش تقدر تسوي في الاختبار رقم {i + 1}؟"})
+        messages.append(
+            {
+                "role": "assistant",
+                "content": "أساعدك في الفصحى والسعودية ضمن حدود النظام، وأوضح لك الخطوة التالية بهدوء.",
+                "generator": assistant_generator,
+            }
+        )
     record = {
         "domain": "chat",
         "lang": "ar",
-        "messages": [
-            {"role": "user", "content": "وش تقدر تسوي؟"},
-            {
-                "role": "assistant",
-                "content": "أساعدك في الفصحى والسعودية ضمن حدود النظام.",
-                "generator": assistant_generator,
-            },
-        ],
+        "messages": messages,
         "review_metadata": {
             "contains_raw_generator_output": assistant_generator == "sf_10m_v0_1",
             "assistant_generator_counts": {
-                "template": 1 if assistant_generator == "template" else 0,
-                "sf_10m_v0_1": 1 if assistant_generator == "sf_10m_v0_1" else 0,
+                "template": turns if assistant_generator == "template" else 0,
+                "sf_10m_v0_1": turns if assistant_generator == "sf_10m_v0_1" else 0,
             },
         },
         "provenance": {
@@ -70,6 +74,7 @@ def test_phase22_review_intake_endpoint() -> None:
     assert body["review_path"] == "data/corpus/chat/review"
     assert body["candidate_files"] >= 1
     assert body["total_raw_generator_assistant_records"] == 0
+    assert "average_dialogue_quality_score" in body
     assert any(
         f["status"] == "candidate_review_export"
         for f in body["files"]
@@ -87,6 +92,7 @@ def test_phase22_review_intake_cli_is_read_only() -> None:
     assert "SF.AI — Phase 22 review intake" in proc.stdout
     assert "synthetic_llm_data_allowed    : false" in proc.stdout
     assert "raw_generator_records" in proc.stdout
+    assert "quality_score" in proc.stdout
     assert "suggested_msa_command" in proc.stdout
     assert "suggested_saudi_command" in proc.stdout
 
@@ -124,6 +130,27 @@ def test_phase22_review_intake_marks_raw_generator_exports_as_lab_only(tmp_path:
     assert report.candidate_files == 0
     assert report.total_raw_generator_assistant_records == 1
     assert report.files[0].status == "raw_generator_review_export_not_training_candidate"
+    assert report.files[0].dialogue_quality_label == "not_training_quality_candidate"
+    assert "contains_raw_generator_output" in report.files[0].dialogue_quality_blockers
+
+
+def test_phase22_review_intake_scores_multi_turn_template_export_higher(tmp_path: Path) -> None:
+    review_dir = tmp_path / "review"
+    review_dir.mkdir()
+    _write_review_record(review_dir / "multi_turn.jsonl", turns=3)
+
+    report = build_phase22_review_intake_report(
+        project_dir=tmp_path,
+        review_dir=review_dir,
+    )
+
+    item = report.files[0]
+    assert report.status == "REVIEW_EXPORTS_READY_FOR_MANUAL_REVIEW"
+    assert item.user_turns == 3
+    assert item.assistant_turns == 3
+    assert item.dialogue_quality_score >= 85
+    assert item.dialogue_quality_label == "gold_candidate"
+    assert item.dialogue_quality_blockers == ()
 
 
 def test_system_status_reports_phase22_review_intake_component() -> None:
@@ -132,5 +159,9 @@ def test_system_status_reports_phase22_review_intake_component() -> None:
     body = r.json()
     assert any(
         c["name"] == "phase22_review_intake" and c["status"] == "active"
+        for c in body["components"]
+    )
+    assert any(
+        c["name"] == "phase22_dialogue_quality_gate" and c["status"] == "active"
         for c in body["components"]
     )
