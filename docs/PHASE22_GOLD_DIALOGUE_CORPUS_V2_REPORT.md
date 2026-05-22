@@ -54,9 +54,12 @@ Phase 22 لا يبدأ تدريب tokenizer أو نموذج.
 
 - `make phase22-readiness`
 - `make phase22-plan`
+- `make phase22-review-intake`
 - `GET /system/phase22-readiness`
 - `GET /system/phase22-collection-plan`
+- `GET /system/phase22-review-intake`
 - `sf_ai/datasets/phase22_readiness.py`
+- `sf_ai/datasets/phase22_review_intake.py`
 
 القيم الحالية المتوقعة:
 
@@ -79,6 +82,16 @@ batch_size: 25
 estimated_batches: 19
 quota_by_dialect: {"msa": 200, "saudi": 170}
 flexible_records_after_minimums: 100
+```
+
+ومسار review intake الحالي:
+
+```text
+review_path: data/corpus/chat/review
+review_files: 1
+candidate_files: 1
+synthetic_llm_data_allowed: false
+status: REVIEW_EXPORTS_READY_FOR_MANUAL_REVIEW
 ```
 
 ---
@@ -119,6 +132,8 @@ flexible_records_after_minimums: 100
 بعد التصدير، لا يدخل الملف التدريب حتى يُراجع ويُحضّر:
 
 ```bash
+make phase22-review-intake
+
 make prepare-dialogue-batch ARGS="--input data/corpus/chat/review/<file>.jsonl --out data/corpus/chat/jsonl/dialogue_batch_v2_001.jsonl --quality silver --dialect saudi --training-allowed"
 ```
 
@@ -138,6 +153,7 @@ make prepare-dialogue-batch ARGS="--input data/corpus/chat/review/<file>.jsonl -
 make corpus-audit
 make phase22-readiness
 make phase22-plan
+make phase22-review-intake
 ```
 
 يعطيان:

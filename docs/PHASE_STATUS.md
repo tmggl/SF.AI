@@ -9,7 +9,7 @@
 - **اسم المشروع:** SF.AI
 - **الرحلة الحالية:** **Phase 22 / 30**
 - **المرحلة الحالية:** **Phase 22 — Gold Dialogue Corpus v2**
-- **حالة المرحلة الحالية:** **بوابة جاهزية corpus v2 تعمل؛ corpus غير جاهز بعد (30/500، وmsa ناقصة)**
+- **حالة المرحلة الحالية:** **بوابة جاهزية corpus v2 + review intake تعمل؛ corpus غير جاهز بعد (30/500، وmsa ناقصة)**
 - **المرحلة التالية المقترحة:** جمع ومراجعة محادثات فصحى/سعودية حقيقية حتى تمر `make phase22-readiness`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ تم تحديث `default_registry.yaml` و`safety_terms.yaml` لفجوات finance/religion/security.
 - **تاريخ آخر تحديث:** 2026-05-22
@@ -200,14 +200,18 @@
 - بدأ Phase 22 Gold Dialogue Corpus v2 كبوابة جاهزية:
   - أضيف `make phase22-readiness`.
   - أضيف `make phase22-plan`.
+  - أضيف `make phase22-review-intake`.
   - أضيف `GET /system/phase22-readiness`.
   - أضيف `GET /system/phase22-collection-plan`.
+  - أضيف `GET /system/phase22-review-intake`.
   - أضيف `sf_ai/datasets/phase22_readiness.py`.
+  - أضيف `sf_ai/datasets/phase22_review_intake.py`.
   - أضيف تقرير [PHASE22_GOLD_DIALOGUE_CORPUS_V2_REPORT.md](./PHASE22_GOLD_DIALOGUE_CORPUS_V2_REPORT.md).
   - القرار الحالي: `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2`.
   - الموجود الحالي: 30 سجل تدريب جاهز، كلها `saudi`.
   - المتبقي: 470 سجل للوصول إلى 500.
   - خطة الجمع الحالية: 200 فصحى + 170 سعودي + 100 مرنة، أي نحو 19 batch بحجم 25.
+  - review intake الحالي: ملف عينة واحد في `data/corpus/chat/review/` مرشح للمراجعة، ولا يدخل التدريب تلقائيًا.
   - الناقص الحاسم: `msa`.
   - لا تدريب جديد بدأ.
 
@@ -306,7 +310,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-412 passed in 4.29s
+417 passed in 4.39s
 ```
 
 | ملف | عدد |
@@ -336,6 +340,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_phase19_readiness.py | 2 (Phase 19) |
 | test_phase20_domain_activation_gates.py | 6 (Phase 20) |
 | test_phase22_readiness.py | 8 (Phase 22) |
+| test_phase22_review_intake.py | 5 (Phase 22) |
 | test_rag_sparse_retrieval.py | 14 (Phase 8) |
 | test_research_summarizer.py | 20 |
 | test_response_composer.py | 6 |
@@ -348,7 +353,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_training_device.py | 14 |
 | test_typo_corrector.py | 5 |
 | test_web_extractor.py | 18 |
-| **Total** | **412** |
+| **Total** | **417** |
 
 ---
 

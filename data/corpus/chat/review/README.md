@@ -11,5 +11,10 @@
 مثال:
 
 ```bash
+make phase22-review-intake
+
 make prepare-dialogue-batch ARGS="--input data/corpus/chat/review/sfai_chat_review.jsonl --out data/corpus/chat/jsonl/dialogue_batch_v1.jsonl --quality silver --dialect saudi --training-allowed"
 ```
+
+قبل أي تحويل، شغّل `make phase22-review-intake` أو افتح
+`GET /system/phase22-review-intake` لمعرفة الملفات المرشحة والملاحظات.

@@ -21,6 +21,8 @@ from apps.api.schemas.system import (
     Phase20GatesResponse,
     Phase22CollectionPlanResponse,
     Phase22ReadinessResponse,
+    Phase22ReviewExportItemResponse,
+    Phase22ReviewIntakeResponse,
     SourceInventoryItemResponse,
     SourceInventoryResponse,
     SystemStatusResponse,
@@ -31,6 +33,7 @@ from sf_ai.datasets.phase22_readiness import (
     build_phase22_collection_plan,
     build_phase22_readiness_decision,
 )
+from sf_ai.datasets.phase22_review_intake import build_phase22_review_intake_report
 from sf_ai.datasets.source_inventory import build_source_inventory
 from sf_ai.training.phase12_readiness import build_phase12_readiness_decision
 from sf_ai.training.phase19_readiness import build_phase19_readiness_decision
@@ -136,6 +139,7 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
             ComponentStatus(name="generative_roadmap", status="active", phase="Phase 21"),
             ComponentStatus(name="phase22_readiness", status="active", phase="Phase 22"),
             ComponentStatus(name="phase22_collection_plan", status="active", phase="Phase 22"),
+            ComponentStatus(name="phase22_review_intake", status="active", phase="Phase 22"),
         ],
     )
 
@@ -364,4 +368,44 @@ def phase22_collection_plan(batch_size: int = 25) -> Phase22CollectionPlanRespon
         next_commands=list(plan.next_commands),
         synthetic_llm_data_allowed=plan.synthetic_llm_data_allowed,
         notes=list(plan.notes),
+    )
+
+
+@router.get("/phase22-review-intake", response_model=Phase22ReviewIntakeResponse)
+def phase22_review_intake(max_files: int | None = None) -> Phase22ReviewIntakeResponse:
+    """Read-only scan of chat review exports before corpus conversion."""
+    report = build_phase22_review_intake_report(max_files=max_files)
+    return Phase22ReviewIntakeResponse(
+        phase=report.phase,
+        status=report.status,
+        review_path=report.review_path,
+        review_files=report.review_files,
+        candidate_files=report.candidate_files,
+        total_review_records=report.total_review_records,
+        total_valid_json_records=report.total_valid_json_records,
+        total_schema_valid_records=report.total_schema_valid_records,
+        total_user_assistant_records=report.total_user_assistant_records,
+        total_safety_flagged_estimate=report.total_safety_flagged_estimate,
+        synthetic_llm_data_allowed=report.synthetic_llm_data_allowed,
+        files=[
+            Phase22ReviewExportItemResponse(
+                path=item.path,
+                records=item.records,
+                valid_json_records=item.valid_json_records,
+                schema_valid_records=item.schema_valid_records,
+                records_with_user_and_assistant=item.records_with_user_and_assistant,
+                training_allowed_false=item.training_allowed_false,
+                training_allowed_true=item.training_allowed_true,
+                training_allowed_missing=item.training_allowed_missing,
+                safety_flagged_estimate=item.safety_flagged_estimate,
+                status=item.status,
+                recommended_actions=list(item.recommended_actions),
+                suggested_msa_command=item.suggested_msa_command,
+                suggested_saudi_command=item.suggested_saudi_command,
+                notes=list(item.notes),
+            )
+            for item in report.files
+        ],
+        recommended_next_commands=list(report.recommended_next_commands),
+        notes=list(report.notes),
     )

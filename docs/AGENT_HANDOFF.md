@@ -68,7 +68,7 @@
 ### الاختبارات
 
 ```
-412 passed in 4.29s
+417 passed in 4.39s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -84,6 +84,7 @@
 - Phase 12 decision: `GET /system/phase12-readiness`.
 - Phase 22 readiness: `GET /system/phase22-readiness`.
 - Phase 22 collection plan: `GET /system/phase22-collection-plan`.
+- Phase 22 review intake: `GET /system/phase22-review-intake`.
 - Source inventory: `GET /system/source-inventory`.
 
 تشغيل يدوي:
@@ -270,12 +271,15 @@ missing language balance: msa
 
 - `make phase22-readiness`
 - `make phase22-plan`
+- `make phase22-review-intake`
 - `GET /system/phase22-readiness`
 - `GET /system/phase22-collection-plan`
+- `GET /system/phase22-review-intake`
 - القرار الحالي: `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2`
 - الموجود: 30 سجل `saudi`
 - الهدف: 500 سجل، مع 200 على الأقل لكل من `msa` و`saudi`
 - خطة الجمع الحالية: 200 فصحى + 170 سعودي + 100 مرنة، نحو 19 batch بحجم 25
+- review intake الحالي: `data/corpus/chat/review/sample_review_export.jsonl` مرشح للمراجعة فقط؛ لا يدخل التدريب تلقائيًا.
 - الممنوع: synthetic LLM data
 
 ### تستطيع الآن العمل على:

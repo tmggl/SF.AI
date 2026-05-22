@@ -206,3 +206,37 @@ class Phase22CollectionPlanResponse(BaseModel):
     next_commands: list[str]
     synthetic_llm_data_allowed: bool
     notes: list[str]
+
+
+class Phase22ReviewExportItemResponse(BaseModel):
+    path: str
+    records: int
+    valid_json_records: int
+    schema_valid_records: int
+    records_with_user_and_assistant: int
+    training_allowed_false: int
+    training_allowed_true: int
+    training_allowed_missing: int
+    safety_flagged_estimate: int
+    status: str
+    recommended_actions: list[str]
+    suggested_msa_command: str
+    suggested_saudi_command: str
+    notes: list[str]
+
+
+class Phase22ReviewIntakeResponse(BaseModel):
+    phase: str
+    status: str
+    review_path: str
+    review_files: int
+    candidate_files: int
+    total_review_records: int
+    total_valid_json_records: int
+    total_schema_valid_records: int
+    total_user_assistant_records: int
+    total_safety_flagged_estimate: int
+    synthetic_llm_data_allowed: bool
+    files: list[Phase22ReviewExportItemResponse]
+    recommended_next_commands: list[str]
+    notes: list[str]
