@@ -10,10 +10,10 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 21 / 30**
-- **المرحلة الحالية:** **Phase 21 — Generative Roadmap & Quality Targets** (الخارطة بعد Phase 20 مثبتة؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **الرحلة الحالية:** **Phase 22 / 30**
+- **المرحلة الحالية:** **Phase 22 — Gold Dialogue Corpus v2** (بوابة corpus v2 تعمل؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** Phase 22 — بناء Gold Dialogue Corpus v2 حتى 500 سجل فصحى/سعودي.
+- **المرحلة التالية المقترحة:** جمع ومراجعة محادثات فصحى/سعودية حقيقية حتى تمر `make phase22-readiness`.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
@@ -28,6 +28,7 @@
 - **تصحيح Phase 20:** أضيف `sf_ai/modules/productivity/` كسكيلتون كامل بعد أن كشفت البوابة وجوده في registry دون module/manifest.
 - **نتيجة Phase 21:** أضيف `docs/GENERATIVE_ROADMAP.md` ومُدّدت الخطة إلى Phase 30؛ أول تدريب جودة مفيد قادم Phase 24، وأول هدف حوار مولّد مقنع Phase 26–28.
 - **مبدأ التكبير الرسمي:** `Progressive Scaling Strategy` — لا يتم رفع حجم النموذج إلا بعد نجاح المرحلة الحالية، والسلم الرسمي هو `SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+`.
+- **نتيجة Phase 22:** أضيف `make phase22-readiness` و`GET /system/phase22-readiness`; القرار الحالي `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2` لأن corpus الحالي 30/500 ويفتقد `msa`.
 - **مختبر سامي المحلي:** يمكن تشغيل المولّد الخام عبر `SF_ENABLE_NATIVE_GENERATOR=true` و`SF_NATIVE_GENERATOR_EXPERIMENTAL=true`، وتمكين الرسائل غير الحساسة من مجالات skeleton عبر `SF_LAB_GENERATION_FOR_NON_SENSITIVE=true`.
 - **واجهة الاختبار:** الواجهة لا تلقّن رسائل جاهزة؛ الاختبار يتم بما تكتبه أنت، مع تشخيص واضح يبين `template` أو `sf_10m_v0_1`.
 - **تفويض التنفيذ:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة دون انتظار موافقات جديدة؛ استخدم flags المطلوبة مع توثيق كل تشغيل ولا تكسر قواعد السيادة/السلامة.
@@ -150,7 +151,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs,reports}/   Phase 5.5+ outputs/reports
 │
-├── tests/                                 pytest suite — 404 تست / 46 ملف
+├── tests/                                 pytest suite — 409 تست / 47 ملف
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -220,7 +221,7 @@ make server-start
 
 آخر تحقق حي بدون restart:
 - السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`.
-- الكود الحالي بعد Phase 21 يعرض `Phase 21`، وزر `تصدير` في الواجهة، و`generator` حسب flags التشغيل.
+- الكود الحالي بعد Phase 22 يعرض `Phase 22`، وزر `تصدير` في الواجهة، و`generator` حسب flags التشغيل.
 - `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - `make server-status` read-only ولا يوقف السيرفر.
 
@@ -228,10 +229,10 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى Phase 21 scaling strategy + short-fragment guard)
+## نتائج الاختبارات (حتى Phase 22 readiness)
 
 ```
-404 passed in 4.08s
+409 passed in 4.03s
 ```
 
 التغطية الحالية:

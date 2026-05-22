@@ -1,7 +1,7 @@
 # SF.AI — Makefile
 # Phase 1 set of operational commands.
 
-.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit phase12-readiness phase19-readiness phase20-gates prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
+.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit phase12-readiness phase19-readiness phase20-gates phase22-readiness prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
 
 PY ?= .venv/bin/python
 UVICORN ?= uvicorn
@@ -28,6 +28,7 @@ help:
 	@echo "  make phase12-readiness    Read-only Phase 12 decision: ready vs allowed"
 	@echo "  make phase19-readiness    Read-only Phase 19 decision before SF-50M"
 	@echo "  make phase20-gates        Read-only Phase 20 domain activation gates"
+	@echo "  make phase22-readiness    Read-only Phase 22 Gold Dialogue Corpus v2 gate"
 	@echo "  make prepare-dialogue-batch ARGS=...  Prepare reviewed chat exports (Phase 18)"
 	@echo "  make train-bpe ARGS=...   Train SF-BPE tokenizer (requires Phase 12 confirmation flag)"
 	@echo "  make train-lm ARGS=...    Train SF native LM (Phase 6)"
@@ -99,6 +100,9 @@ phase19-readiness:
 
 phase20-gates:
 	$(PY) scripts/phase20_gates.py
+
+phase22-readiness:
+	$(PY) scripts/phase22_readiness.py
 
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)

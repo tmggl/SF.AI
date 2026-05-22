@@ -164,3 +164,27 @@ class Phase20GatesResponse(BaseModel):
     can_activate_any_domain: bool
     gates: list[DomainGateResponse]
     notes: list[str]
+
+
+class Phase22ReadinessResponse(BaseModel):
+    phase: str
+    status: str
+    can_start_phase23: bool
+    corpus_path: str
+    training_records: int
+    target_records: int
+    remaining_records: int
+    min_per_dialect: int
+    dialect_counts: dict[str, int]
+    quality_counts: dict[str, int]
+    source_counts: dict[str, int]
+    missing_required_dialects: list[str]
+    dialect_shortfalls: dict[str, int]
+    corpus_issue_count: int
+    allowed_dialects: list[str]
+    allowed_qualities: list[str]
+    synthetic_llm_data_allowed: bool
+    action: str
+    recommended_commands: list[str]
+    blockers: list[str]
+    notes: list[str]

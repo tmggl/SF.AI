@@ -19,12 +19,14 @@ from apps.api.schemas.system import (
     Phase12ReadinessResponse,
     Phase19ReadinessResponse,
     Phase20GatesResponse,
+    Phase22ReadinessResponse,
     SourceInventoryItemResponse,
     SourceInventoryResponse,
     SystemStatusResponse,
 )
 from sf_ai.core.activation import build_phase20_activation_gates
 from sf_ai.datasets.corpus_governance import audit_jsonl_directory_for_training
+from sf_ai.datasets.phase22_readiness import build_phase22_readiness_decision
 from sf_ai.datasets.source_inventory import build_source_inventory
 from sf_ai.training.phase12_readiness import build_phase12_readiness_decision
 from sf_ai.training.phase19_readiness import build_phase19_readiness_decision
@@ -41,9 +43,9 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 21 — Generative Roadmap & Quality Targets",
-        current_phase_status="generative_roadmap_completed_after_phase20",
-        next_phase="Phase 22 — build Gold Dialogue Corpus v2 for MSA+Saudi generation quality",
+        current_phase="Phase 22 — Gold Dialogue Corpus v2",
+        current_phase_status="not_ready_build_gold_dialogue_corpus_v2",
+        next_phase="Collect reviewed user-authored MSA+Saudi dialogue until Phase 22 readiness passes",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -128,6 +130,7 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
             ComponentStatus(name="phase19_readiness", status="active", phase="Phase 19"),
             ComponentStatus(name="domain_activation_gates", status="active", phase="Phase 20"),
             ComponentStatus(name="generative_roadmap", status="active", phase="Phase 21"),
+            ComponentStatus(name="phase22_readiness", status="active", phase="Phase 22"),
         ],
     )
 
@@ -303,5 +306,34 @@ def phase20_gates() -> Phase20GatesResponse:
             )
             for gate in decision.gates
         ],
+        notes=list(decision.notes),
+    )
+
+
+@router.get("/phase22-readiness", response_model=Phase22ReadinessResponse)
+def phase22_readiness() -> Phase22ReadinessResponse:
+    """Read-only Phase 22 decision before tokenizer v2 or quality training."""
+    decision = build_phase22_readiness_decision()
+    return Phase22ReadinessResponse(
+        phase=decision.phase,
+        status=decision.status,
+        can_start_phase23=decision.can_start_phase23,
+        corpus_path=decision.corpus_path,
+        training_records=decision.training_records,
+        target_records=decision.target_records,
+        remaining_records=decision.remaining_records,
+        min_per_dialect=decision.min_per_dialect,
+        dialect_counts=decision.dialect_counts,
+        quality_counts=decision.quality_counts,
+        source_counts=decision.source_counts,
+        missing_required_dialects=list(decision.missing_required_dialects),
+        dialect_shortfalls=decision.dialect_shortfalls,
+        corpus_issue_count=decision.corpus_issue_count,
+        allowed_dialects=list(decision.allowed_dialects),
+        allowed_qualities=list(decision.allowed_qualities),
+        synthetic_llm_data_allowed=decision.synthetic_llm_data_allowed,
+        action=decision.action,
+        recommended_commands=list(decision.recommended_commands),
+        blockers=list(decision.blockers),
         notes=list(decision.notes),
     )

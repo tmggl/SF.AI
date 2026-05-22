@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 21 / 30**
-- **المرحلة الحالية:** **Phase 21 — Generative Roadmap & Quality Targets**
-- **حالة المرحلة الحالية:** **خارطة ما بعد Phase 20 مثبتة للوصول إلى حوار مولّد مقنع**
-- **المرحلة التالية المقترحة:** Phase 22 — بناء Gold Dialogue Corpus v2 حتى 500 سجل فصحى/سعودي.
+- **الرحلة الحالية:** **Phase 22 / 30**
+- **المرحلة الحالية:** **Phase 22 — Gold Dialogue Corpus v2**
+- **حالة المرحلة الحالية:** **بوابة جاهزية corpus v2 تعمل؛ corpus غير جاهز بعد (30/500، وmsa ناقصة)**
+- **المرحلة التالية المقترحة:** جمع ومراجعة محادثات فصحى/سعودية حقيقية حتى تمر `make phase22-readiness`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ تم تحديث `default_registry.yaml` و`safety_terms.yaml` لفجوات finance/religion/security.
 - **تاريخ آخر تحديث:** 2026-05-22
 
@@ -47,7 +47,7 @@
 | Phase 19 | SF-50M Candidate Training | readiness_gate_active_not_ready | ✅ |
 | Phase 20 | Domain Activation Gates | ✅ gates_active_no_auto_activation | ✅ |
 | Phase 21 | Generative Roadmap & Quality Targets | ✅ completed | ✅ |
-| Phase 22 | Gold Dialogue Corpus v2 | مخططة | ✅ |
+| Phase 22 | Gold Dialogue Corpus v2 | readiness_gate_active_not_ready | ✅ |
 | Phase 23 | Tokenizer v2 Retrain & Audit | مخططة | ✅ |
 | Phase 24 | SF-10M v0.2 Quality Training | مخططة | ✅ |
 | Phase 25 | Generated Chat Canary v1 | مخططة | ✅ |
@@ -197,6 +197,16 @@
   - أضيف مبدأ `Progressive Scaling Strategy`: لا يتم رفع حجم النموذج إلا بعد نجاح المرحلة الحالية.
   - السلم الرسمي صار: `SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+`.
   - أضيف تقرير [SCALING_STRATEGY.md](./SCALING_STRATEGY.md).
+- بدأ Phase 22 Gold Dialogue Corpus v2 كبوابة جاهزية:
+  - أضيف `make phase22-readiness`.
+  - أضيف `GET /system/phase22-readiness`.
+  - أضيف `sf_ai/datasets/phase22_readiness.py`.
+  - أضيف تقرير [PHASE22_GOLD_DIALOGUE_CORPUS_V2_REPORT.md](./PHASE22_GOLD_DIALOGUE_CORPUS_V2_REPORT.md).
+  - القرار الحالي: `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2`.
+  - الموجود الحالي: 30 سجل تدريب جاهز، كلها `saudi`.
+  - المتبقي: 470 سجل للوصول إلى 500.
+  - الناقص الحاسم: `msa`.
+  - لا تدريب جديد بدأ.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -293,7 +303,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-404 passed in 4.08s
+409 passed in 4.03s
 ```
 
 | ملف | عدد |
@@ -322,6 +332,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_phase16_eval_harness.py | 3 (Phase 16) |
 | test_phase19_readiness.py | 2 (Phase 19) |
 | test_phase20_domain_activation_gates.py | 6 (Phase 20) |
+| test_phase22_readiness.py | 5 (Phase 22) |
 | test_rag_sparse_retrieval.py | 14 (Phase 8) |
 | test_research_summarizer.py | 20 |
 | test_response_composer.py | 6 |
@@ -334,7 +345,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_training_device.py | 14 |
 | test_typo_corrector.py | 5 |
 | test_web_extractor.py | 18 |
-| **Total** | **404** |
+| **Total** | **409** |
 
 ---
 
