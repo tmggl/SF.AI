@@ -68,7 +68,7 @@
 ### الاختبارات
 
 ```
-417 passed in 4.39s
+422 passed in 4.41s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -280,6 +280,8 @@ missing language balance: msa
 - الهدف: 500 سجل، مع 200 على الأقل لكل من `msa` و`saudi`
 - خطة الجمع الحالية: 200 فصحى + 170 سعودي + 100 مرنة، نحو 19 batch بحجم 25
 - review intake الحالي: `data/corpus/chat/review/sample_review_export.jsonl` مرشح للمراجعة فقط؛ لا يدخل التدريب تلقائيًا.
+- الواجهة المستقرة يجب أن تعمل بـ `generator=template` افتراضيًا. لا تشغّل `SF-10M` الخام في الشات إلا بفلاغات مختبر صريحة.
+- أي export يحتوي ردود `sf_10m_v0_1` يجب أن يبقى review evidence فقط، و`phase22-review-intake` يميّزه ولا يعدّه candidate تدريب جودة.
 - الممنوع: synthetic LLM data
 
 ### تستطيع الآن العمل على:

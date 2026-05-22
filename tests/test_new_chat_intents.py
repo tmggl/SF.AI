@@ -43,6 +43,9 @@ def orch() -> Orchestrator:
         ("عندي؟",     "chat.clarification"),
         ("عندي سؤال", "chat.clarification"),
         ("وش تقصد",   "chat.clarification"),
+        ("أريد أن أختبر الحوار العربي الفصيح.", "chat.dialogue_test"),
+        ("اشرح لي خطوتنا التالية باختصار.", "chat.next_step"),
+        ("ما الفرق بين تدريب النموذج وتفعيل النموذج؟", "chat.training_activation_difference"),
         ("من صنعك",   "chat.who_made_you"),
         ("من بناك",   "chat.who_made_you"),
         ("وداعا",       "chat.farewell"),
@@ -147,3 +150,19 @@ def test_open_question_stays_open_after_smalltalk_followup() -> None:
     assert r.domain == "chat"
     assert r.intent == "chat.clarification"
     assert "وش سؤالك" in r.response
+
+
+def test_phase22_guidance_prompts_are_specific_templates() -> None:
+    orch = Orchestrator(registry=load_default_registry())
+    dialogue = orch.process(UserMessage(text="أريد أن أختبر الحوار العربي الفصيح.", session_id="p22-dialogue"))
+    next_step = orch.process(UserMessage(text="اشرح لي خطوتنا التالية باختصار.", session_id="p22-next"))
+    diff = orch.process(UserMessage(text="ما الفرق بين تدريب النموذج وتفعيل النموذج؟", session_id="p22-diff"))
+
+    assert dialogue.intent == "chat.dialogue_test"
+    assert dialogue.debug["generator"] == "template"
+    assert "SF-10M الخام" in dialogue.response
+    assert next_step.intent == "chat.next_step"
+    assert "Phase 22" in next_step.response
+    assert diff.intent == "chat.training_activation_difference"
+    assert "التدريب" in diff.response
+    assert "التفعيل" in diff.response

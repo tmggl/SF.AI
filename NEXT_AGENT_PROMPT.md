@@ -31,7 +31,8 @@
 
 - المراحل من Phase 0 حتى Phase 21 منتهية؛ Phase 22 تعمل الآن كبوابة جاهزية وخطة جمع وreview intake لـ Gold Dialogue Corpus v2. قرار Phase 22 الحالي: `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2` لأن corpus الحالي 30/500 ويفتقد `msa`. خطة الجمع الحالية: 200 فصحى + 170 سعودي + 100 مرنة.
 - استخدم `make phase22-review-intake` أو `GET /system/phase22-review-intake` قبل أي تحويل من `data/corpus/chat/review/` إلى corpus تدريبي.
-- 417 اختبار يمر (`.venv/bin/python -m pytest tests`) وآخر تشغيل: `417 passed`.
+- الواجهة المستقرة تعمل بـ `generator=template` افتراضيًا. لا تفعل `sf_10m_v0_1` في الشات إلا كمختبر صريح، ولا تدخل مخرجاته في corpus جودة.
+- 422 اختبار يمر (`.venv/bin/python -m pytest tests`) وآخر تشغيل: `422 passed in 4.41s`.
 - السيرفر يعمل عادةً على `http://127.0.0.1:8123` (المنفذ 8000/8765 محجوز).
 - شاشة المحادثة على `/ui/chat` — هي هدف سامي الرئيسي للتجريب.
 - آخر تحسين مكتمل: التركيز على العربية الفصحى + السعودية فقط، توجيه الرسائل اليومية (`وشلونك`/`شكرا`/`تمام`/`لا`/`ساعدني`/`مش فاهم`/`من صنعك`/`سعودي`/`عندي؟`/`عندي سؤال`) + Phase 10 skeleton domains.

@@ -478,19 +478,47 @@
   });
 
   function exportForReview() {
+    const rawGeneratorTurns = transcript.filter(
+      (t) => t.role === "assistant" && t.generator === "sf_10m_v0_1"
+    );
     const clean = transcript
       .filter((t) => (t.role === "user" || t.role === "assistant") && (t.content || "").trim())
-      .map((t) => ({ role: t.role, content: t.content.trim() }));
+      .map((t) => {
+        const msg = { role: t.role, content: t.content.trim() };
+        if (t.role === "assistant") {
+          msg.generator = t.generator || "template";
+          msg.intent = t.intent || "";
+          msg.domain = t.domain || "";
+        }
+        return msg;
+      });
     const hasUser = clean.some((m) => m.role === "user");
     const hasAssistant = clean.some((m) => m.role === "assistant");
     if (!hasUser || !hasAssistant) {
       alert("احتاج رسالة منك ورد من المساعد قبل التصدير.");
       return;
     }
+    if (rawGeneratorTurns.length > 0) {
+      const ok = confirm(
+        "هذه الجلسة تحتوي ردودًا من نموذج SF-10M الخام (" +
+        rawGeneratorTurns.length +
+        "). صدّرها للمراجعة فقط، ولا تستخدمها كبيانات تدريب جودة. هل تريد المتابعة؟"
+      );
+      if (!ok) return;
+    }
     const record = {
       domain: "chat",
       lang: "ar",
       messages: clean,
+      review_metadata: {
+        exported_from: "ui",
+        session_id: SESSION_ID,
+        assistant_generator_counts: {
+          template: transcript.filter((t) => t.role === "assistant" && (t.generator || "template") === "template").length,
+          sf_10m_v0_1: rawGeneratorTurns.length
+        },
+        contains_raw_generator_output: rawGeneratorTurns.length > 0
+      },
       provenance: {
         source: "sf-ai-chat-ui-review-export",
         license: "user-review-required",
@@ -498,7 +526,9 @@
         dialect: "saudi",
         quality: "needs_review",
         training_allowed: false,
-        notes: "Exported locally from UI. Review with scripts/prepare_dialogue_batch.py before training."
+        notes: rawGeneratorTurns.length > 0
+          ? "Exported locally from UI; contains raw SF-10M generator output for review only, not quality training."
+          : "Exported locally from UI. Review with scripts/prepare_dialogue_batch.py before training."
       }
     };
     const blob = new Blob([JSON.stringify(record) + "\n"], { type: "application/jsonl;charset=utf-8" });

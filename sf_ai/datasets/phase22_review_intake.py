@@ -31,6 +31,7 @@ class ReviewExportItem:
     training_allowed_false: int
     training_allowed_true: int
     training_allowed_missing: int
+    raw_generator_assistant_records: int
     safety_flagged_estimate: int
     status: str
     recommended_actions: tuple[str, ...] = field(default_factory=tuple)
@@ -56,6 +57,7 @@ class Phase22ReviewIntakeReport:
     total_valid_json_records: int
     total_schema_valid_records: int
     total_user_assistant_records: int
+    total_raw_generator_assistant_records: int
     total_safety_flagged_estimate: int
     synthetic_llm_data_allowed: bool
     files: tuple[ReviewExportItem, ...]
@@ -93,11 +95,14 @@ def build_phase22_review_intake_report(
     schema_valid_records = sum(item.schema_valid_records for item in items)
     user_assistant_records = sum(item.records_with_user_and_assistant for item in items)
     safety_flagged = sum(item.safety_flagged_estimate for item in items)
+    raw_generator_records = sum(item.raw_generator_assistant_records for item in items)
 
     if not items:
         status = "NO_REVIEW_EXPORTS_FOUND"
     elif any(item.training_allowed_true for item in items):
         status = "REVIEW_EXPORT_HAS_TRAINING_ALLOWED_TRUE"
+    elif raw_generator_records:
+        status = "REVIEW_EXPORT_HAS_RAW_GENERATOR_OUTPUT"
     elif candidate_count:
         status = "REVIEW_EXPORTS_READY_FOR_MANUAL_REVIEW"
     else:
@@ -113,6 +118,7 @@ def build_phase22_review_intake_report(
         total_valid_json_records=valid_json_records,
         total_schema_valid_records=schema_valid_records,
         total_user_assistant_records=user_assistant_records,
+        total_raw_generator_assistant_records=raw_generator_records,
         total_safety_flagged_estimate=safety_flagged,
         synthetic_llm_data_allowed=False,
         files=items,
@@ -126,6 +132,7 @@ def build_phase22_review_intake_report(
         notes=(
             "This report is read-only and does not prepare training JSONL.",
             "Review exports must normally keep training_allowed=false until manual approval.",
+            "Exports containing sf_10m_v0_1 raw output are review evidence, not quality training candidates.",
             "Allowed dialect targets remain msa + saudi only.",
             "Saudi Seed v1 remains a reference lexicon, not direct chat corpus.",
         ),
@@ -140,6 +147,7 @@ def _scan_review_file(path: Path, *, root: Path) -> ReviewExportItem:
     training_false = 0
     training_true = 0
     training_missing = 0
+    raw_generator_records = 0
     safety_flagged = 0
     notes: list[str] = []
 
@@ -153,6 +161,7 @@ def _scan_review_file(path: Path, *, root: Path) -> ReviewExportItem:
             training_allowed_false=0,
             training_allowed_true=0,
             training_allowed_missing=0,
+            raw_generator_assistant_records=0,
             safety_flagged_estimate=0,
             status="missing",
             recommended_actions=("check the review export path",),
@@ -177,6 +186,9 @@ def _scan_review_file(path: Path, *, root: Path) -> ReviewExportItem:
                 continue
 
             schema_valid += 1
+            if _contains_raw_generator_output(raw):
+                raw_generator_records += 1
+                notes.append(f"line:{line_no}:contains_raw_sf10m_output")
             messages = sample.messages if isinstance(sample, StructuredSample) else sample.to_messages()
             if _has_user_and_assistant(messages):
                 with_user_and_assistant += 1
@@ -202,6 +214,8 @@ def _scan_review_file(path: Path, *, root: Path) -> ReviewExportItem:
         status = "empty_or_invalid"
     elif training_true:
         status = "review_payload_should_not_be_training_allowed"
+    elif raw_generator_records:
+        status = "raw_generator_review_export_not_training_candidate"
     elif schema_valid == 0 or with_user_and_assistant == 0:
         status = "not_candidate_needs_schema_or_roles"
     elif safety_flagged == schema_valid:
@@ -219,6 +233,7 @@ def _scan_review_file(path: Path, *, root: Path) -> ReviewExportItem:
         training_allowed_false=training_false,
         training_allowed_true=training_true,
         training_allowed_missing=training_missing,
+        raw_generator_assistant_records=raw_generator_records,
         safety_flagged_estimate=safety_flagged,
         status=status,
         recommended_actions=_recommended_actions(path=rel, status=status),
@@ -239,6 +254,12 @@ def _recommended_actions(*, path: str, status: str) -> tuple[str, ...]:
         return (
             "keep review exports as training_allowed=false until manual approval",
             "re-export or correct provenance before conversion",
+        )
+    if status == "raw_generator_review_export_not_training_candidate":
+        return (
+            "keep this file as lab evidence only",
+            "do not convert raw SF-10M output into quality dialogue training data",
+            "collect a new template or human-approved session for Phase 22 corpus",
         )
     if status == "needs_sensitive_review":
         return (
@@ -263,6 +284,26 @@ def _prepare_command(path: str, dialect: str) -> str:
 def _has_user_and_assistant(messages: list[Any]) -> bool:
     roles = {getattr(m, "role", "") for m in messages}
     return "user" in roles and "assistant" in roles
+
+
+def _contains_raw_generator_output(raw: dict[str, Any]) -> bool:
+    review_meta = raw.get("review_metadata") if isinstance(raw, dict) else None
+    if isinstance(review_meta, dict):
+        counts = review_meta.get("assistant_generator_counts") or {}
+        if int(counts.get("sf_10m_v0_1") or 0) > 0:
+            return True
+        if review_meta.get("contains_raw_generator_output") is True:
+            return True
+
+    messages = raw.get("messages") if isinstance(raw, dict) else None
+    if not isinstance(messages, list):
+        return False
+    for message in messages:
+        if not isinstance(message, dict):
+            continue
+        if message.get("role") == "assistant" and message.get("generator") == "sf_10m_v0_1":
+            return True
+    return False
 
 
 def _has_safety_terms(text: str) -> bool:

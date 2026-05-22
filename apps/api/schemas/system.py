@@ -217,6 +217,7 @@ class Phase22ReviewExportItemResponse(BaseModel):
     training_allowed_false: int
     training_allowed_true: int
     training_allowed_missing: int
+    raw_generator_assistant_records: int
     safety_flagged_estimate: int
     status: str
     recommended_actions: list[str]
@@ -235,6 +236,7 @@ class Phase22ReviewIntakeResponse(BaseModel):
     total_valid_json_records: int
     total_schema_valid_records: int
     total_user_assistant_records: int
+    total_raw_generator_assistant_records: int
     total_safety_flagged_estimate: int
     synthetic_llm_data_allowed: bool
     files: list[Phase22ReviewExportItemResponse]
