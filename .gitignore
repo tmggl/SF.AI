@@ -51,6 +51,12 @@ data/corpus/**/cleaned/*
 data/corpus/**/jsonl/*
 data/corpus/**/review/*.jsonl
 data/indexes/*
+!data/corpus/chat/jsonl/first_dialogue_seed.jsonl
+!data/corpus/chat/jsonl/first_dialogue_seed.CARD.md
+!data/corpus/chat/jsonl/protected_terms_seed_v1.jsonl
+!data/corpus/chat/jsonl/protected_terms_seed_v1.CARD.md
+!data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl
+!data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.CARD.md
 artifacts/tokenizers/*/vocab.json
 artifacts/tokenizers/*/merges.txt
 artifacts/checkpoints/**/*

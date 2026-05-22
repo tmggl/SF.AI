@@ -96,12 +96,13 @@ def build_phase12_readiness_decision(
     training_permission_granted = True
 
     artifacts_present = _find_training_artifacts(root)
+    phase12_already_completed = bool(artifacts_present)
     action = (
-        "STOP_BEFORE_TRAINING"
-        if preflight_pass
+        "PHASE12_V1_COMPLETED_CONTINUE_PHASE22_CORPUS_TARGET"
+        if phase12_already_completed
         else (
-            "PHASE12_V1_COMPLETED_ADD_MSA_BEFORE_BALANCED_RETRAINING"
-            if artifacts_present and missing_required_dialects == ("msa",)
+            "STOP_BEFORE_TRAINING"
+            if preflight_pass
             else (
                 "ADD_MSA_CORPUS_BEFORE_PERMISSION"
                 if missing_required_dialects == ("msa",)
@@ -113,7 +114,11 @@ def build_phase12_readiness_decision(
     return Phase12ReadinessDecision(
         phase="Phase 12 — SF-BPE Tokenizer v1 Training & Audit",
         preflight_pass=preflight_pass,
-        can_train_now=preflight_pass and training_permission_granted,
+        can_train_now=(
+            preflight_pass
+            and training_permission_granted
+            and not phase12_already_completed
+        ),
         training_permission_granted=training_permission_granted,
         required_permission_phrase=REQUIRED_PHASE12_PERMISSION_PHRASE,
         required_confirmation_flag=REQUIRED_PHASE12_CONFIRMATION_FLAG,
@@ -141,5 +146,6 @@ def build_phase12_readiness_decision(
             "This decision command is read-only and writes no tokenizer/checkpoint artifacts.",
             "Training commands refuse to start without --confirm-phase12-permission.",
             "Balanced retraining requires both msa and saudi corpus coverage.",
+            "Phase 12 v1 artifacts already exist; continue Phase 22 instead of rerunning Phase 12.",
         ),
     )

@@ -76,8 +76,8 @@ SF.AI يملك الآن:
 توسيع corpus إلى 500 سجل على الأقل:
 
 - فصحى + سعودي فقط.
-- user-authored أو user-reviewed فقط.
-- لا synthetic LLM data.
+- user-authored أو user-reviewed أو owner-delegated agent-authored فقط.
+- لا synthetic LLM data من مصدر خارجي أو مجهول.
 - كل سجل يحمل `source/license/quality/training_allowed/dialect`.
 
 **النجاح:** `make corpus-audit` يمر، والتوازن اللغوي لا يفتقد `msa`.

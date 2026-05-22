@@ -28,7 +28,13 @@ SF.AI يملك مسار ذكائه:
 - pretrained tokenizer vocab.
 - external LLM APIs.
 - LoRA فوق نموذج خارجي.
-- synthetic LLM data.
+- synthetic LLM data من مصادر خارجية أو غير موثقة.
+
+استثناء موثق: يجوز إدخال حوارات **owner-delegated agent-authored** في
+corpus إذا كان سامي قد فوّض الوكيل صراحة بتأليفها واعتمادها، وكانت كل
+سجلاتها تحمل `source/license/quality/training_allowed/notes` يشرح أنها
+مؤلفة بتفويض المالك لمشروع SF.AI فقط. هذا ليس استدعاء LLM خارجي ولا
+pretrained shortcut؛ هو تأليف تشغيلي شفاف داخل المشروع.
 
 ### 3. Arabic-first
 
@@ -86,6 +92,22 @@ runtime يخدم المستخدم. training ينتج artifacts.
 - `training_allowed`
 
 لا corpus مجهول، ولا بيانات بلا حق استخدام.
+
+### Owner-Delegated Agent-Authored Data
+
+عندما يصرّح سامي للوكيل بأن يعتمد أي حوار يؤلفه لخدمة الهدف، يصبح هذا
+الحوار مقبولًا للتدريب بشرط:
+
+- `source` يبدأ بـ `sf-ai-owner-delegated-agent-authored-`.
+- `license=owner-approved-for-sf-ai-training`.
+- `training_allowed=true`.
+- `quality` لا تتجاوز `silver` إلا بعد مراجعة بشرية لاحقة.
+- `dialect ∈ {msa, saudi}` في النطاق الحالي.
+- `notes` تذكر التفويض وتاريخ المحادثة، وتؤكد عدم وجود corpus خارجي أو
+  pretrained model data.
+
+يظل ممنوعًا إدخال بيانات مولدة من LLM خارجي أو مصادر مجهولة أو نصوص منسوخة
+بلا إذن.
 
 ### 9. Progressive Scaling Strategy
 

@@ -24,24 +24,24 @@ Phase 22 لا يبدأ تدريب tokenizer أو نموذج.
 
 ---
 
-## لماذا لا أضيف 500 محادثة بنفسي؟
+## كيف تُضاف محادثات الوكيل الآن؟
 
-لأن دستور SF.AI يمنع `synthetic LLM data`.
+دستور SF.AI يمنع `synthetic LLM data` من مصادر خارجية أو مجهولة.
 
-أي محادثة يكتبها Agent/LLM لتدريب النموذج ستصبح بيانات مولدة من عقل خارجي، وهذا يخالف:
+بعد تصريح سامي بتاريخ 2026-05-23، حوار الوكيل المؤلف خصيصًا لهذا المشروع
+يمكن دخوله corpus إذا كان **owner-delegated agent-authored** وموثقًا بالكامل:
 
-- Own the intelligence.
-- No hidden shortcuts.
-- Data provenance required.
-- Progressive Scaling Strategy.
+- source واضح يبدأ بـ `sf-ai-owner-delegated-agent-authored-`.
+- license واضح: `owner-approved-for-sf-ai-training`.
+- quality افتراضيًا `silver`.
+- training_allowed=true.
+- notes تذكر التفويض وتؤكد عدم وجود dataset خارجي أو pretrained model data.
 
 الطريق الصحيح:
 
 ```text
-اختبار سامي الحقيقي
-→ export من الواجهة
-→ مراجعة سامي
-→ prepare-dialogue-batch مع training_allowed
+تأليف/اختبار محادثة ضمن msa أو saudi
+→ توثيق source/license/quality/notes
 → corpus-audit
 → phase22-readiness
 ```
@@ -70,11 +70,11 @@ Phase 22 لا يبدأ تدريب tokenizer أو نموذج.
 القيم الحالية المتوقعة:
 
 ```text
-training_records: 30
+training_records: 55
 target_records: 500
-remaining_records: 470
-dialect_counts: {"saudi": 30}
-missing_required_dialects: ["msa"]
+remaining_records: 445
+dialect_counts: {"msa": 25, "saudi": 30}
+missing_required_dialects: []
 status: NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2
 can_start_phase23: false
 synthetic_llm_data_allowed: false
@@ -84,28 +84,28 @@ completion_gate: PHASE22_INCOMPLETE_DO_NOT_ADVANCE
 وخطة الجمع الحالية:
 
 ```text
-remaining_records: 470
+remaining_records: 445
 batch_size: 25
-estimated_batches: 19
-quota_by_dialect: {"msa": 200, "saudi": 170}
+estimated_batches: 18
+quota_by_dialect: {"msa": 175, "saudi": 170}
 flexible_records_after_minimums: 100
-planned_batches: 19
-next_batch: msa_001, dialect=msa, target_records=25
+planned_batches: 18
+next_batch: msa_002, dialect=msa, target_records=25
 ```
 
 `phase22-next-batch` يعرض المهمة الفورية للتأليف/المراجعة:
 
-- batch الحالي: `msa_001`.
+- batch الحالي: `msa_002`.
 - الهدف: 25 سجلًا فصيحًا.
 - يعرض checklist قبول قبل التحويل.
-- يعرض موضوعات عامة تساعد سامي يكتب بنفسه؛ هذه الموضوعات ليست corpus ولا synthetic dialogue.
+- يعرض موضوعات عامة تساعد التأليف/المراجعة؛ هذه الموضوعات ليست corpus ولا synthetic dialogue.
 - يقرأ بنك موضوعات فصيح غير تدريبي من `resources/phase22_authoring/msa_prompt_bank_v1.json`.
 - بعد التصدير: `phase22-review-intake` ثم `prepare-dialogue-batch` ثم `corpus-audit` ثم `phase22-readiness`.
 - شاشة `/ui/chat` تعرض هذه المهمة مباشرة وتضيف `phase22_next_batch` إلى `review_metadata` عند التصدير.
 
 بنك التأليف الفصيح:
 
-- يحتوي 80+ موضوعًا فصيحًا لتغطية `msa_001`.
+- يحتوي 80+ موضوعًا فصيحًا لتغطية batches الفصحى.
 - `training_allowed=false`.
 - `synthetic_llm_data=false`.
 - `corpus_record=false`.
@@ -116,11 +116,12 @@ next_batch: msa_001, dialect=msa, target_records=25
 - يرجع حاليًا `PHASE22_INCOMPLETE_DO_NOT_ADVANCE`.
 - يجمع readiness + collection plan + next batch في قرار واحد.
 - لا يسمح بالانتقال إلى Phase 23 إلا بعد `PHASE22_COMPLETE_READY_FOR_PHASE23`.
-- يذكر النواقص الحالية مثل `corpus_below_phase22_target`, `missing_required_msa_or_saudi`, و`complete_next_batch:msa_001`.
+- يذكر النواقص الحالية مثل `corpus_below_phase22_target`, `dialect_balance_below_minimum`, و`complete_next_batch:msa_002`.
 
 تفصيل batches الرسمي:
 
-- `msa_001` إلى `msa_008`: تغطية الحد الأدنى للفصحى، 25 سجلًا لكل batch.
+- `msa_001` اكتمل: 25 سجلًا فصيحًا owner-delegated agent-authored.
+- `msa_002` إلى `msa_008`: تغطية الحد الأدنى للفصحى، 25 سجلًا لكل batch.
 - `saudi_001` إلى `saudi_006`: تغطية سعودية، 25 سجلًا لكل batch.
 - `saudi_007`: تغطية سعودية، 20 سجلًا.
 - `flex_001` إلى `flex_004`: 100 سجل مرن بعد اكتمال الحد الأدنى.
@@ -156,7 +157,7 @@ status: REVIEW_EXPORTS_READY_FOR_MANUAL_REVIEW
 
 وأضيفت لوحة مهمة الجمع الحالية داخل الشاشة نفسها:
 
-- تعرض `msa_001` وهدف 25 سجلًا.
+- تعرض `msa_002` وهدف 25 سجلًا.
 - تعرض موضوعات تأليف عامة لا تُعد بيانات تدريب.
 - تعرض زر `موضوعات أخرى` للتنقل في بنك الموضوعات الفصيح بدل حصر سامي في أول ثلاثة موضوعات.
 - تربط export بالـ batch عبر `review_metadata.phase22_next_batch`.
@@ -175,7 +176,7 @@ status: REVIEW_EXPORTS_READY_FOR_MANUAL_REVIEW
 - لا تصدّر أقل من 3 أدوار منك و3 ردود من المساعد.
 - لا تستخدم جلسة فيها `مولّد: نموذج SF-10M` كبيانات جودة.
 - فضّل موضوعًا واحدًا واضحًا في كل جلسة.
-- اجعل الردود التي توافق عليها أنت فقط تدخل corpus.
+- اجعل الردود المؤلفة/المعتمدة بتفويض واضح فقط تدخل corpus.
 
 ---
 
@@ -232,7 +233,7 @@ make prepare-dialogue-batch ARGS="--input data/corpus/chat/review/<file>.jsonl -
 أو للفصحى:
 
 ```bash
-make prepare-dialogue-batch ARGS="--input data/corpus/chat/review/<file>.jsonl --out data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl --quality silver --dialect msa --training-allowed"
+make prepare-dialogue-batch ARGS="--input data/corpus/chat/review/<file>.jsonl --out data/corpus/chat/jsonl/dialogue_batch_v2_msa_002.jsonl --quality silver --dialect msa --training-allowed"
 ```
 
 ---

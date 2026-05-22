@@ -23,20 +23,21 @@
 - **نتيجة Phase 17:** أضيف `ChatRagBridge` و`ContextBuilder`; الشات يستطيع استخدام snippets محلية عند حقن `HybridRetriever`، ويعرض `rag=used/not_used`.
 - **نتيجة Phase 18:** أضيف زر تصدير مراجعة من واجهة الشات + `scripts/prepare_dialogue_batch.py` + تقرير `artifacts/reports/dialogue_batch_report.json`; لا تدخل محادثات المستخدم إلى التدريب تلقائيًا.
 - **حماية Phase 18:** ملفات `data/corpus/**/review/*.jsonl` مستثناة من git افتراضيًا؛ العينة الآمنة الوحيدة المسموحة هي `sample_review_export.jsonl`.
-- **نتيجة Phase 19:** أضيفت بوابة `make phase19-readiness` و`GET /system/phase19-readiness`; القرار الحالي `NOT_READY_EXPAND_CORPUS_FIRST` لأن corpus الحالي 30 سجلًا فقط والحد الأدنى العملي 5000.
+- **نتيجة Phase 19:** أضيفت بوابة `make phase19-readiness` و`GET /system/phase19-readiness`; القرار الحالي `NOT_READY_EXPAND_CORPUS_FIRST` لأن corpus الحالي 55 سجلًا فقط والحد الأدنى العملي 5000.
 - **نتيجة Phase 20:** أضيفت بوابة `make phase20-gates` و`GET /system/phase20-gates`; لا مجال يتفعل تلقائيًا، و`chat` هو المجال النشط الوحيد.
 - **تصحيح Phase 20:** أضيف `sf_ai/modules/productivity/` كسكيلتون كامل بعد أن كشفت البوابة وجوده في registry دون module/manifest.
 - **نتيجة Phase 21:** أضيف `docs/GENERATIVE_ROADMAP.md` ومُدّدت الخطة إلى Phase 30؛ أول تدريب جودة مفيد قادم Phase 24، وأول هدف حوار مولّد مقنع Phase 26–28.
 - **مبدأ التكبير الرسمي:** `Progressive Scaling Strategy` — لا يتم رفع حجم النموذج إلا بعد نجاح المرحلة الحالية، والسلم الرسمي هو `SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+`.
-- **نتيجة Phase 22:** أضيف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-completion-gate` و`make phase22-review-intake` و`GET /system/phase22-readiness` و`GET /system/phase22-collection-plan` و`GET /system/phase22-next-batch` و`GET /system/phase22-completion-gate` و`GET /system/phase22-review-intake`; القرار الحالي `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2` لأن corpus الحالي 30/500 ويفتقد `msa`.
+- **نتيجة Phase 22:** أضيف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-completion-gate` و`make phase22-review-intake` و`GET /system/phase22-readiness` و`GET /system/phase22-collection-plan` و`GET /system/phase22-next-batch` و`GET /system/phase22-completion-gate` و`GET /system/phase22-review-intake`; القرار الحالي `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2` لأن corpus الحالي 55/500، والتوازن ما زال ناقصًا: `msa=25`, `saudi=30`.
 - **بوابة اكتمال Phase 22:** `make phase22-completion-gate` يرجع الآن `PHASE22_INCOMPLETE_DO_NOT_ADVANCE`، ولا يُسمح بالانتقال إلى Phase 23 حتى يرجع `PHASE22_COMPLETE_READY_FOR_PHASE23`.
-- **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches`: `msa_001..msa_008`, `saudi_001..saudi_007`, `flex_001..flex_004` مع عدد السجلات وملف الإخراج وأمر التحويل المقترح.
-- **مهمة batch التالية:** `make phase22-next-batch` يعرض الآن `msa_001` كالمهمة الفورية: 25 سجلًا فصيحًا، مع checklist قبول وموضوعات تأليف عامة وليست بيانات تدريب.
-- **بنك تأليف فصيح غير تدريبي:** أضيف `resources/phase22_authoring/msa_prompt_bank_v1.json` وفيه 80+ موضوعًا فصيحًا لتسهيل كتابة `msa_001`; الملف `training_allowed=false` و`synthetic_llm_data=false` ولا يُنسخ إلى corpus.
+- **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches`: `msa_002..msa_008`, `saudi_001..saudi_007`, `flex_001..flex_004` مع عدد السجلات وملف الإخراج وأمر التحويل المقترح.
+- **مهمة batch التالية:** `make phase22-next-batch` يعرض الآن `msa_002` كالمهمة الفورية: 25 سجلًا فصيحًا، مع checklist قبول وموضوعات تأليف عامة وليست بيانات تدريب.
+- **أول batch فصيح معتمد:** أضيف `data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl` وفيه 25 سجلًا فصيحًا `silver` مؤلفة بتفويض سامي، مع بطاقة `dialogue_batch_v2_msa_001.CARD.md`.
+- **بنك تأليف فصيح غير تدريبي:** أضيف `resources/phase22_authoring/msa_prompt_bank_v1.json` وفيه 80+ موضوعًا فصيحًا لتسهيل كتابة batches الفصحى؛ الملف `training_allowed=false` و`synthetic_llm_data=false` ولا يُنسخ إلى corpus.
 - **Review intake الحالي:** `data/corpus/chat/review/sample_review_export.jsonl` مرشح للمراجعة فقط؛ الأداة read-only ولا تنقل أي شيء إلى التدريب.
 - **بوابة جودة الحوار:** `phase22-review-intake` يعرض الآن `quality_score/quality_label/quality_blockers`; الجلسة المفيدة للتدريب تحتاج غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل وبدون `sf_10m_v0_1`.
 - **بوابة Phase 22 في الواجهة:** شاشة `/ui/chat` تعرض قراءة حية من `/system/phase22-readiness`: عدد corpus الحالي، المتبقي، نقص `msa/saudi`، وهل Phase 23 ما زالت محجوبة.
-- **مهمة الجمع الحالية في الواجهة:** شاشة `/ui/chat` تعرض `msa_001` من `/system/phase22-next-batch` مع هدف 25 سجلًا وموضوعات تأليف عامة، وتضع `phase22_next_batch` داخل metadata عند التصدير.
+- **مهمة الجمع الحالية في الواجهة:** شاشة `/ui/chat` تعرض `msa_002` من `/system/phase22-next-batch` مع هدف 25 سجلًا وموضوعات تأليف عامة، وتضع `phase22_next_batch` داخل metadata عند التصدير.
 - **تدوير موضوعات التأليف:** الواجهة تعرض زر `موضوعات أخرى` للتنقل داخل بنك الـ 94 موضوعًا الفصيح، وتضيف `authoring_topic_count` إلى metadata التصدير.
 - **حفظ محلي للمراجعة:** أضيف `POST /chat/review-export` وزر `حفظ للمراجعة` في `/ui/chat` لحفظ الجلسة مباشرة في `data/corpus/chat/review/` مع `training_allowed=false` و`quality=needs_review`; لا يدخل التدريب تلقائيًا.
 - **مؤشر جودة التصدير في الواجهة:** شاشة `/ui/chat` تعرض score جودة محلي قبل التصدير وتضع `ui_quality_score/ui_quality_label/ui_quality_blockers` داخل metadata.
@@ -166,7 +167,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs,reports}/   Phase 5.5+ outputs/reports
 │
-├── tests/                                 pytest suite — 423 تست / 48 ملف
+├── tests/                                 pytest suite — 432 تست / 48 ملف
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -250,18 +251,18 @@ make server-start
 ## نتائج الاختبارات (حتى Phase 22 review intake)
 
 ```
-423 passed in 4.43s
+432 passed in 4.71s
 ```
 
 التغطية الحالية:
 - `test_arabic_normalizer.py` — 16 tests
 - `test_capability_registry.py` — 5 tests
 - `test_chat_module.py` — 12 tests (Phase 4 + language polish)
-- `test_chat_native_generator.py` — 15 tests (Phase 15 + lab routing)
-- `test_chat_rag_bridge.py` — 6 tests (Phase 17)
+- `test_chat_native_generator.py` — 14 tests (Phase 15 + lab routing)
+- `test_chat_rag_bridge.py` — 7 tests (Phase 17)
 - `test_phase16_eval_harness.py` — 3 tests (Phase 16)
 - `test_conversation_state.py` — 8 tests (Phase 4)
-- `test_corpus_governance.py` — Phase 11 corpus governance
+- `test_corpus_governance.py` — 9 tests (Phase 11 corpus governance)
 - `test_dataset_validators.py` — 28 tests (Phase 5)
 - `test_bpe_tokenizer.py` — 13 tests (Phase 5.5)
 - `test_training_device.py` — 14 tests (Phase 5.5)
@@ -273,7 +274,7 @@ make server-start
 - `test_research_summarizer.py` — 20 tests (Phase 7)
 - `test_saudi_seed.py` — 15 tests (Phase 3.6)
 - `test_rag_sparse_retrieval.py` — 14 tests (Phase 8)
-- `test_chat_ui.py` — 4 tests (Phase 9 + export quality indicator)
+- `test_chat_ui.py` — 6 tests (Phase 9 + export quality indicator)
 - `test_dialogue_batch_preparation.py` — Phase 18 data loop
 - `test_dialect_mapper.py` — 7 tests
 - `test_health.py` — 11 tests (API + module dispatch + safety + readiness)
@@ -281,6 +282,7 @@ make server-start
 - `test_new_chat_intents.py` — 38 tests (daily social + Phase 22 guidance prompts)
 - `test_nlp_pipeline.py` — 9 tests
 - `test_phase10_skeleton_domains.py` — 4 tests (Phase 10)
+- `test_phase22_readiness.py` — 15 tests (Phase 22)
 - `test_phase22_review_intake.py` — 7 tests (Phase 22 review exports + dialogue quality gate)
 - `test_orchestrator.py` — 7 tests
 - `test_response_composer.py` — 6 tests
@@ -320,7 +322,7 @@ make server-start
 - ❌ لا sentence-transformers.
 - ❌ لا HuggingFace pretrained.
 - ❌ لا LoRA فوق نموذج خارجي.
-- ❌ لا synthetic LLM data في corpus السيادي.
+- ❌ لا synthetic LLM data من مصدر خارجي أو مجهول في corpus السيادي؛ حوار الوكيل مسموح فقط كـ owner-delegated agent-authored مع provenance كامل.
 - ❌ لا API keys في الكود.
 - ❌ لا تدريب خارج الخطة أو بدون provenance؛ التفويض الحالي يغطي المراحل المسجلة فقط.
 - ❌ لا crawling تلقائي. CrawlerBase يرفع `CrawlerPermissionError` بدون `permission_granted=True`.

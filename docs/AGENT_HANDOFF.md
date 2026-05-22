@@ -68,7 +68,7 @@
 ### الاختبارات
 
 ```
-423 passed in 4.43s
+432 passed in 4.71s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -142,7 +142,7 @@ bash scripts/run_chat_server.sh
 - `sf_ai/datasets/corpus_governance.py`
 - `tests/test_corpus_governance.py`
 
-تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر وغير جاهز لاختبار سامي كمولد حواري. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`، لكنه لم يجعل المولد مقنعًا. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات. Phase 19 أضاف بوابة جاهزية SF-50M وقراره الحالي: وسّع corpus أولًا. Phase 20 أضاف بوابات تفعيل المجالات، ولا يفعّل أي skeleton تلقائيًا. Phase 21 ثبت خارطة Phase 22–30 للوصول إلى حوار مولّد مقنع. Phase 22 أضاف بوابة Gold Dialogue Corpus v2: الوضع الحالي 30/500 و`msa` ناقصة، ولا synthetic LLM data.
+تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر وغير جاهز لاختبار سامي كمولد حواري. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`، لكنه لم يجعل المولد مقنعًا. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات. Phase 19 أضاف بوابة جاهزية SF-50M وقراره الحالي: وسّع corpus أولًا. Phase 20 أضاف بوابات تفعيل المجالات، ولا يفعّل أي skeleton تلقائيًا. Phase 21 ثبت خارطة Phase 22–30 للوصول إلى حوار مولّد مقنع. Phase 22 أضاف بوابة Gold Dialogue Corpus v2: الوضع الحالي 55/500 (`msa=25`, `saudi=30`) ولا يزال غير جاهز.
 
 ### Phase 12 — preflight جاهز فقط
 
@@ -212,7 +212,7 @@ status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
 status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
 ```
 
-تم تشغيل Phase 12 tokenizer v1 بإذن صريح من سامي. القرار الحالي ما زال يوضح أن corpus سعودي فقط ويفتقد `msa`، لذلك لا تعامل v1 كتشغيل لغوي متوازن.
+تم تشغيل Phase 12 tokenizer v1 بإذن صريح من سامي على corpus صغير سابقًا. لا تعامل v1 كتشغيل لغوي متوازن؛ Phase 22 رفع corpus الحالي إلى 55 سجلًا فقط (`msa=25`, `saudi=30`) وما زال التوازن والعدد غير كافيين.
 
 أضيفت بوابة تنفيذية فوق ذلك: `make train-bpe` و`scripts/train_bpe.py` يرفضان البدء بدون:
 
@@ -247,7 +247,7 @@ missing language balance: msa
 - `make phase19-readiness`
 - `GET /system/phase19-readiness`
 - القرار الحالي: `NOT_READY_EXPAND_CORPUS_FIRST`
-- السبب: corpus الحالي 30 سجلًا فقط، والحد الأدنى العملي الحالي 5000 سجل محكوم مع توازن `msa + saudi`.
+- السبب: corpus الحالي 55 سجلًا فقط، والحد الأدنى العملي الحالي 5000 سجل محكوم مع توازن `msa + saudi`.
 - مختبر سامي المحلي يسمح بتجربة المولد الخام على الرسائل غير الحساسة من مجالات skeleton عبر `SF_LAB_GENERATION_FOR_NON_SENSITIVE=true`.
 
 ### Phase 20 — Domain Activation Gates — تعمل
@@ -279,10 +279,11 @@ missing language balance: msa
 - `GET /system/phase22-next-batch`
 - `GET /system/phase22-review-intake`
 - القرار الحالي: `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2`
-- الموجود: 30 سجل `saudi`
+- الموجود: 55 سجلًا: 25 `msa` و30 `saudi`
 - الهدف: 500 سجل، مع 200 على الأقل لكل من `msa` و`saudi`
-- خطة الجمع الحالية: 200 فصحى + 170 سعودي + 100 مرنة، نحو 19 batch بحجم 25
-- المهمة الفورية الحالية: `msa_001` عبر `make phase22-next-batch`
+- خطة الجمع الحالية: 175 فصحى + 170 سعودي + 100 مرنة، نحو 18 batch بحجم 25
+- المهمة الفورية الحالية: `msa_002` عبر `make phase22-next-batch`
+- أضيف batch فصيح معتمد: `data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl` مع بطاقة provenance.
 - بنك التأليف الفصيح: `resources/phase22_authoring/msa_prompt_bank_v1.json`، ملف مساعدة فقط وليس corpus، وحقوله `training_allowed=false` و`synthetic_llm_data=false`.
 - حفظ review المحلي: `POST /chat/review-export` وزر `حفظ للمراجعة` في `/ui/chat` يكتبان إلى `data/corpus/chat/review/` فقط مع `training_allowed=false`.
 - بروتوكول سامي الجديد: الوكيل هو من يختبر الواجهة/API ويحفظ review exports ويرتّب الملفات والتقارير. لا تطلب من سامي خطوات تصدير يدوية إذا كنت تستطيع تنفيذها. سامي يستلم النتيجة النهائية ويقرر الاقتناع فقط.
@@ -291,12 +292,12 @@ missing language balance: msa
 - `/ui/chat` يعرض مؤشر جودة تصدير محليًا، ويضيف `ui_quality_score/ui_quality_label/ui_quality_blockers` إلى export metadata.
 - الواجهة المستقرة يجب أن تعمل بـ `generator=template` افتراضيًا، وهذا يعني قوالب ثابتة لا مولدًا مقنعًا. لا تطلب من سامي اختبار المولد حتى Phase 24/25 على الأقل.
 - أي export يحتوي ردود `sf_10m_v0_1` يجب أن يبقى review evidence فقط، و`phase22-review-intake` يميّزه ولا يعدّه candidate تدريب جودة.
-- الممنوع: synthetic LLM data
-- أي حوار يؤلفه الوكيل أو أي LLM يبقى review-only ولا يتحول إلى training corpus إلا بعد مراجعة صريحة وقواعد dataset governance.
+- الممنوع: synthetic LLM data من مصدر خارجي أو مجهول.
+- حوار الوكيل المؤلف بتفويض سامي يمكن أن يدخل corpus مباشرة إذا وُسم كـ `owner-delegated agent-authored` مع source/license/quality/notes كاملة، وبقي ضمن `msa + saudi`، ودون أي pretrained أو dataset خارجي.
 
 ### تستطيع الآن العمل على:
 
-- اجمع وراجع محادثات حقيقية عبر Phase 18 loop حتى تمر Phase 22 readiness، ثم أعد corpus-audit وPhase 19/20/22 gates.
+- أكمل دفعات `msa_002..msa_008` ثم `saudi_001..saudi_007` ثم المرنة حتى تمر Phase 22 readiness، ثم أعد corpus-audit وPhase 19/20/22 gates.
 
 ---
 
@@ -308,7 +309,7 @@ missing language balance: msa
 2. **CrawlerBase يرفع `CrawlerPermissionError`** بدون `permission_granted=True` — لا تكسر هذا.
 3. **CheckpointMetadata.sf_origin = True** مقفل — لا تحاول تجاوزه.
 4. **TrainingConfig.sovereign = True** مقفل — لا تحاول تجاوزه.
-5. **أي مصدر بيانات خارجي جديد يحتاج توثيق provenance**. سامي أعطى تفويضًا عامًا للمراحل المسجلة، لكن لا تستخدم مصادر مجهولة أو LLM synthetic data.
+5. **أي مصدر بيانات خارجي جديد يحتاج توثيق provenance**. سامي أعطى تفويضًا عامًا للتأليف المحلي بالنيابة عنه، لكن لا تستخدم مصادر مجهولة أو LLM synthetic data خارجي.
 6. **شفافية User-Agent** على أي crawl: `SF.AI Research Crawler - permission-gated`.
 7. **rate-limit أدنى 2 ثوانٍ** بين الطلبات على نفس الـ domain.
 
@@ -353,7 +354,7 @@ sf_ai/datasets/                 schemas + validators + loaders + saudi_seed
 resources/lexicons/             YAML lexicons (Phase 3) + imported/ (Phase 3.5/3.6)
 data/corpus/                    حوار المستخدم + قاموس سعودي
 docs/                           كل الوثائق الفنية
-tests/                          380 اختبار، 42 ملف
+tests/                          432 اختبار، 48 ملف
 scripts/                        CLI: run_chat_server, validate_dataset, train_bpe, import_mo3jam_saudi
 ```
 

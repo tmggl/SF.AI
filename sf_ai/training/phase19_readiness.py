@@ -133,8 +133,8 @@ def build_phase19_readiness_decision(
         device=device.name,
         action=action,
         recommended_commands=(
-            "export conversations from /ui/chat using the تصدير button",
-            "make prepare-dialogue-batch ARGS=\"--input data/corpus/chat/review/<file>.jsonl --out data/corpus/chat/jsonl/dialogue_batch_v1.jsonl --quality silver --dialect saudi --training-allowed\"",
+            "make phase22-next-batch",
+            "add owner-approved MSA/Saudi dialogue batches with full provenance",
             "make corpus-audit",
             "make phase19-readiness",
         ),

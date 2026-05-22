@@ -192,7 +192,7 @@ def build_phase22_readiness_decision(
     action = (
         "START_PHASE23_TOKENIZER_V2"
         if can_start
-        else "COLLECT_AND_REVIEW_USER_AUTHORED_MSA_SAUDI_DIALOGUES"
+        else "COLLECT_OWNER_APPROVED_MSA_SAUDI_DIALOGUES"
     )
 
     return Phase22ReadinessDecision(
@@ -215,8 +215,8 @@ def build_phase22_readiness_decision(
         synthetic_llm_data_allowed=False,
         action=action,
         recommended_commands=(
-            "test real conversations in /ui/chat, then export with the تصدير button",
-            "review exported JSONL manually; keep only user-authored/user-approved records",
+            "write or collect owner-approved MSA/Saudi dialogue records with full provenance",
+            "review exported JSONL manually; keep only user-authored/user-approved/owner-delegated records",
             "make prepare-dialogue-batch ARGS=\"--input data/corpus/chat/review/<file>.jsonl --out data/corpus/chat/jsonl/dialogue_batch_v2_<n>.jsonl --quality silver --dialect saudi --training-allowed\"",
             "make corpus-audit",
             "make phase22-readiness",
@@ -224,7 +224,8 @@ def build_phase22_readiness_decision(
         blockers=tuple(blockers),
         notes=(
             "This gate is read-only and starts no training.",
-            "Do not fill the corpus with AI-generated synthetic dialogue.",
+            "Do not fill the corpus with external or unprovenanced synthetic dialogue.",
+            "Owner-delegated agent-authored records are allowed only with transparent provenance.",
             "Phase 22 must add MSA coverage before tokenizer v2.",
             "Saudi Seed v1 is a reference lexicon, not direct chat corpus.",
         ),
@@ -240,6 +241,7 @@ def build_phase22_collection_plan(
     if batch_size <= 0:
         raise ValueError("batch_size must be positive")
 
+    root = Path(project_dir) if project_dir is not None else PROJECT_DIR
     decision = build_phase22_readiness_decision(project_dir)
     quota_by_dialect = {
         dialect: shortfall
@@ -262,6 +264,19 @@ def build_phase22_collection_plan(
         quota_by_dialect=quota_by_dialect,
         flexible_records=flexible,
         batch_size=batch_size,
+        corpus_path=root / decision.corpus_path,
+    )
+    first_output = (
+        planned_batches[0].suggested_output_path
+        if planned_batches
+        else "data/corpus/chat/jsonl/<no_batches_remaining>.jsonl"
+    )
+    first_dialect = (
+        "msa"
+        if planned_batches and planned_batches[0].dialect == "msa_or_saudi"
+        else planned_batches[0].dialect
+        if planned_batches
+        else "msa"
     )
 
     return Phase22CollectionPlan(
@@ -281,16 +296,16 @@ def build_phase22_collection_plan(
         flexible_records_after_minimums=flexible,
         recommended_batch_mix=tuple(mix),
         review_rules=(
-            "Only user-authored or user-approved dialogue enters corpus.",
-            "No synthetic LLM data.",
+            "Only user-authored, user-approved, or owner-delegated agent-authored dialogue enters corpus.",
+            "No external or unprovenanced synthetic LLM data.",
+            "Owner-delegated agent-authored records must disclose source/license/notes.",
             "Every record needs source, license, quality, dialect, and training_allowed=true.",
             "Sensitive medical/legal/finance/security/religion records stay out of general chat corpus.",
             "Keep current dialect scope to msa + saudi only.",
         ),
         next_commands=(
-            "export reviewed sessions from /ui/chat using the تصدير button",
-            "make prepare-dialogue-batch ARGS=\"--input data/corpus/chat/review/<file>.jsonl --out data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl --quality silver --dialect msa --training-allowed\"",
-            "make prepare-dialogue-batch ARGS=\"--input data/corpus/chat/review/<file>.jsonl --out data/corpus/chat/jsonl/dialogue_batch_v2_saudi_001.jsonl --quality silver --dialect saudi --training-allowed\"",
+            "write or export reviewed sessions, then convert only clean records",
+            f"make prepare-dialogue-batch ARGS=\"--input data/corpus/chat/review/<file>.jsonl --out {first_output} --quality silver --dialect {first_dialect} --training-allowed\"",
             "make corpus-audit",
             "make phase22-readiness",
         ),
@@ -298,7 +313,7 @@ def build_phase22_collection_plan(
         synthetic_llm_data_allowed=False,
         notes=(
             "This plan is read-only and does not generate corpus records.",
-            "The fastest useful path is to add MSA first, because current corpus is Saudi-only.",
+            "The fastest useful path is to keep filling MSA until its minimum coverage is met.",
             "Phase 23 remains blocked until phase22-readiness passes.",
         ),
     )
@@ -332,7 +347,7 @@ def build_phase22_next_batch_brief(
         why_this_batch=_why_batch_is_next(next_batch),
         acceptance_checklist=(
             f"Collect exactly {next_batch.target_records} reviewed dialogue records for this batch.",
-            "Each record must be user-authored or explicitly user-approved.",
+            "Each record must be user-authored, explicitly user-approved, or owner-delegated agent-authored.",
             "Each record must contain at least one user turn and one assistant turn.",
             "Prefer sessions with at least 3 user turns and 3 assistant turns before export.",
             "Keep dialect inside the current scope: msa or saudi only.",
@@ -344,7 +359,7 @@ def build_phase22_next_batch_brief(
         ui_instructions=(
             "Open http://127.0.0.1:8123/ui/chat.",
             "Keep the stable UI on generator=template; this is corpus collection, not generator evaluation.",
-            "Write natural conversations yourself in the requested dialect.",
+            "Write or review natural conversations in the requested dialect.",
             "Watch the جودة التصدير panel; export only when the score is useful for review.",
             "Save the exported JSONL under data/corpus/chat/review/ for manual review.",
         ),
@@ -356,7 +371,7 @@ def build_phase22_next_batch_brief(
         ),
         warnings=(
             "This brief is not training data.",
-            "Suggested topics are prompts for Sami to author/review, not synthetic dialogue records.",
+            "Suggested topics are prompts for authoring/review; they are not corpus records by themselves.",
             "Do not run tokenizer or model training during this step.",
         ),
     )
@@ -441,10 +456,11 @@ def _build_phase22_planned_batches(
     quota_by_dialect: dict[str, int],
     flexible_records: int,
     batch_size: int,
+    corpus_path: Path,
 ) -> tuple[Phase22PlannedBatch, ...]:
     """Build a deterministic batch-by-batch checklist without writing data."""
     batches: list[Phase22PlannedBatch] = []
-    dialect_batch_counts: dict[str, int] = {}
+    dialect_batch_counts: dict[str, int] = _existing_batch_indexes(corpus_path)
 
     for dialect in REQUIRED_DIALECTS:
         count = quota_by_dialect.get(dialect, 0)
@@ -463,7 +479,7 @@ def _build_phase22_planned_batches(
             )
             count -= target
 
-    flexible_index = 0
+    flexible_index = dialect_batch_counts.get("flex", 0)
     remaining_flexible = flexible_records
     while remaining_flexible > 0:
         target = min(batch_size, remaining_flexible)
@@ -517,18 +533,35 @@ def _planned_batch(
         suggested_output_path=suggested_output_path,
         prepare_command=command,
         user_task=(
-            f"{task_dialect} الهدف {target_records} سجلًا، "
-            "كلها user-authored أو user-approved، بدون synthetic LLM data."
+        f"{task_dialect} الهدف {target_records} سجلًا، "
+            "كلها user-authored أو user-approved أو owner-delegated، "
+            "بدون synthetic LLM data خارجي أو مجهول."
         ),
     )
 
 
 def _why_batch_is_next(batch: Phase22PlannedBatch) -> str:
     if batch.dialect == "msa":
-        return "MSA is missing entirely from the current corpus, so the first priority is filling msa minimum coverage."
+        return "MSA coverage is below the Phase 22 minimum, so the first priority is filling msa minimum coverage."
     if batch.dialect == "saudi":
         return "Saudi coverage is below the Phase 22 minimum after MSA minimum batches."
     return "Minimum dialect coverage is planned first; flexible batches fill the remaining target toward 500 records."
+
+
+def _existing_batch_indexes(corpus_path: Path) -> dict[str, int]:
+    indexes = {"msa": 0, "saudi": 0, "flex": 0}
+    if not corpus_path.exists():
+        return indexes
+    for path in corpus_path.glob("dialogue_batch_v2_*.jsonl"):
+        stem = path.stem.removeprefix("dialogue_batch_v2_")
+        parts = stem.rsplit("_", 1)
+        if len(parts) != 2:
+            continue
+        dialect, raw_index = parts
+        if dialect not in indexes or not raw_index.isdigit():
+            continue
+        indexes[dialect] = max(indexes[dialect], int(raw_index))
+    return indexes
 
 
 def _suggested_topics(dialect: str) -> tuple[str, ...]:

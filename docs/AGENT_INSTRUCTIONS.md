@@ -30,8 +30,8 @@
 
 هذا التفويض لا يلغي الحوكمة:
 
-- لا synthetic LLM data في corpus.
-- لا تجعل حوار الوكيل `training_allowed=true`.
+- لا synthetic LLM data من مصدر خارجي أو مجهول في corpus.
+- حوار الوكيل يمكن أن يكون `training_allowed=true` فقط إذا كان `owner-delegated agent-authored` بتفويض سامي، ومع provenance كامل.
 - لا تنتقل إلى phase لاحقة حتى تمر بواباتها.
 
 ## قاعدة البدء

@@ -40,7 +40,7 @@
 - **الرحلة الحالية:** Phase 22 / 30 — بوابة Gold Dialogue Corpus v2 تعمل، والبيانات غير جاهزة بعد.
 - **الأولوية الحالية:** اختبار مختبر سامي المحلي، تصدير محادثات مراجعة، وتكبير corpus المحكوم قبل تدريب SF-50M.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
-- **البيانات الحالية:** seed سعودي صغير `30/30` يمر `corpus-audit`؛ ما زال `msa` مطلوبًا قبل تشغيل جودة لغوية متوازنة.
+- **البيانات الحالية:** corpus صغير `55/500` يمر `corpus-audit`: `30` سعودي + `25` فصحى؛ ما زال التوازن والعدد مطلوبين قبل تدريب جودة مفيد.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 اكتملت من بيانات SF.AI فقط، مع قيود موثقة.
 - **المولّد:** لا يوجد حاليًا مولّد حواري مقنع للاختبار. Phase 15 أضاف NativeGenerator adapter فقط، و`SF-10M v0.1` خام/مكرر. الواجهة المستقرة تعرض `generator=template` أي قوالب ثابتة وليست توليدًا ذكيًا.
 - **التقييم:** Phase 16 مرّر `15/15` prompt cases؛ الجودة اليومية لم تنضج بعد، لكن المختبر المحلي مفتوح للتجربة والتطوير.
@@ -49,7 +49,7 @@
 - **جاهزية SF-50M:** Phase 19 أضاف `make phase19-readiness`; القرار الحالي `NOT_READY_EXPAND_CORPUS_FIRST`.
 - **بوابات المجالات:** Phase 20 أضاف `make phase20-gates` و`GET /system/phase20-gates`; المجال النشط الوحيد هو `chat`.
 - **طريق التوليد المقنع:** لا تطلب من سامي اختبار مولّد الآن. Phase 24 هو أول تدريب جودة مفيد، Phase 26 أول فرصة لحوار قصير مقنع، وPhase 28 هدف الحوار المولّد المستقر.
-- **Corpus v2:** Phase 22 أضاف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-completion-gate` و`make phase22-review-intake`; الوضع الحالي 30/500 و`msa` ناقصة، وملفات review لا تدخل التدريب تلقائيًا. الواجهة تعرض الآن بوابة Phase 22 الحية وجودة التصدير ومهمة الجمع الحالية مع زر تدوير الموضوعات وزر حفظ محلي للمراجعة، و`phase22-plan` يعطي batches مفصلة تبدأ بـ `msa_001`، و`phase22-next-batch` يعطي مهمة التأليف/المراجعة الفورية ويقرأ بنك موضوعات فصيح غير تدريبي من `resources/phase22_authoring/`, و`phase22-completion-gate` يمنع Phase 23 حتى اكتمال الشروط، و`phase22-review-intake` يعطي score جودة للحوار قبل أي تحويل.
+- **Corpus v2:** Phase 22 أضاف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-completion-gate` و`make phase22-review-intake`; الوضع الحالي 55/500، وفيه أول batch فصيح `dialogue_batch_v2_msa_001.jsonl`. الواجهة تعرض بوابة Phase 22 الحية وجودة التصدير ومهمة الجمع الحالية مع زر تدوير الموضوعات وزر حفظ محلي للمراجعة، و`phase22-plan` يعطي batches مفصلة تبدأ الآن بـ `msa_002` لأن `msa_001` اكتمل، و`phase22-completion-gate` يمنع Phase 23 حتى اكتمال الشروط.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
 ---
@@ -227,7 +227,7 @@ pytest
 - لا أي نموذج جاهز / pretrained weights / pretrained embeddings / pretrained tokenizer.
 - لا Llama / Gemma / Phi / Mistral / sentence-transformers / HuggingFace pretrained.
 - لا LoRA فوق نموذج خارجي.
-- لا synthetic LLM data في corpus السيادي.
+- لا synthetic LLM data من مصدر خارجي أو مجهول في corpus السيادي؛ يسمح فقط بحوار owner-delegated agent-authored إذا حمل provenance كاملًا وتفويض سامي.
 - لا تشغيل crawling أو phase خارج الخطة بدون توثيق وإذن واضح؛ التفويض الحالي يسمح بمتابعة التدريب والمراحل المسجلة فقط مع فحص الحساسية.
 - لا خلط بين `data/corpus/` و `resources/lexicons/`.
 - لا تغيير في `resources/tokenization/` بدون توثيق واختبارات.

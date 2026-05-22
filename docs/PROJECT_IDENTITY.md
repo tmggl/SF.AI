@@ -36,7 +36,7 @@ runtime rules + routing
 - pretrained embeddings.
 - pretrained tokenizer vocabulary.
 - LoRA أو fine-tuning فوق نموذج خارجي.
-- synthetic LLM data داخل corpus السيادي.
+- synthetic LLM data من مصدر خارجي أو مجهول داخل corpus السيادي.
 
 ## ما هو المشروع الآن؟
 

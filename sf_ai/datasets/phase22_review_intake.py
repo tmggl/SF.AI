@@ -137,7 +137,7 @@ def build_phase22_review_intake_report(
         recommended_next_commands=(
             "make phase22-review-intake",
             "manually review candidate files; keep only Sami-authored or Sami-approved dialogue",
-            "make prepare-dialogue-batch ARGS=\"--input data/corpus/chat/review/<file>.jsonl --out data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl --quality silver --dialect msa --training-allowed\"",
+            "make prepare-dialogue-batch ARGS=\"--input data/corpus/chat/review/<file>.jsonl --out data/corpus/chat/jsonl/dialogue_batch_v2_msa_002.jsonl --quality silver --dialect msa --training-allowed\"",
             "make prepare-dialogue-batch ARGS=\"--input data/corpus/chat/review/<file>.jsonl --out data/corpus/chat/jsonl/dialogue_batch_v2_saudi_001.jsonl --quality silver --dialect saudi --training-allowed\"",
             "make corpus-audit && make phase22-readiness",
         ),

@@ -65,9 +65,17 @@
 
 لكن هذا التفويض لا يلغي قواعد البيانات:
 
-- أي حوار كتبه Agent/LLM يبقى `training_allowed=false`.
-- لا يتحول review export إلى corpus تدريبي إلا بعد مراجعة صريحة وبوابة governance.
-- لا synthetic LLM data في corpus السيادي.
+- بعد تصريح سامي بتاريخ 2026-05-23، أي حوار يؤلفه الوكيل لخدمة هدف corpus
+  يمكن اعتماده مباشرة إذا وُسم كـ `owner-delegated agent-authored` مع
+  provenance كامل.
+- استخدم `training_allowed=true` فقط عندما تكون السجلات مؤلفة محليًا لهذا
+  المشروع، بلا dataset خارجي، وبلا pretrained model data، وبلا copy من مصدر
+  محمي.
+- اجعل `quality=silver` افتراضيًا؛ لا ترفعها إلى `gold` إلا عند مراجعة بشرية
+  لاحقة.
+- لا يتحول review export إلى corpus تدريبي إلا بعد تنظيفه وتحويله إلى schema
+  training واضح.
+- لا synthetic LLM data من مصادر خارجية أو مجهولة في corpus السيادي.
 - لا Phase 23 حتى `make phase22-completion-gate` يرجع `PHASE22_COMPLETE_READY_FOR_PHASE23`.
 
 ## عند إضافة dependency

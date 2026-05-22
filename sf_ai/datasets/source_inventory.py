@@ -121,7 +121,7 @@ def build_source_inventory(project_dir: str | Path | None = None) -> SourceInven
             needs_governance_audit=True,
             status="ready" if chat_ready else "not_ready",
             action_required=(
-                "شغّل make phase12-readiness؛ tokenizer v1 اكتمل، وأضف msa قبل إعادة تدريب متوازن."
+                "شغّل make phase22-readiness؛ tokenizer v1 اكتمل، وأكمل corpus v2 قبل أي إعادة تدريب متوازنة."
                 if chat_ready
                 else "أضف ملفات JSONL حوارية فصحى/سعودية مع provenance كامل."
             ),
