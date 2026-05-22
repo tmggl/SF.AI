@@ -1,0 +1,54 @@
+{
+  "phase": "Phase 12 — SF-BPE Tokenizer v1 Training & Audit",
+  "status": "COMPLETED_WITH_LIMITS",
+  "artifact_dir": "artifacts/tokenizers/sf_bpe/v1",
+  "tokenizer": {
+    "type": "bpe",
+    "sf_origin": true,
+    "vocab_size": 261,
+    "merges": 218,
+    "words_seen": 723,
+    "unique_words": 64,
+    "base_alphabet_size": 43
+  },
+  "corpus": {
+    "root": "data/corpus/chat/jsonl",
+    "total_records": 30,
+    "training_ready": 30,
+    "issues": 0,
+    "dialects": {
+      "saudi": 30
+    },
+    "quality": {
+      "gold": 30
+    }
+  },
+  "tokenization_policy": {
+    "protected_terms_total": 30,
+    "protected_terms_covered": 30,
+    "coverage_ratio": 1.0,
+    "encoding": "utf-8",
+    "no_pretrained_vocab": true,
+    "no_pretrained_merges": true
+  },
+  "language_balance": {
+    "required_dialects": ["msa", "saudi"],
+    "present_dialects": ["saudi"],
+    "missing_required_dialects": ["msa"],
+    "status": "MISSING_MSA"
+  },
+  "sovereignty": {
+    "external_llm_api_used": false,
+    "pretrained_weights_used": false,
+    "pretrained_embeddings_used": false,
+    "pretrained_tokenizer_used": false,
+    "sf_origin": true
+  },
+  "decision": {
+    "phase12_training_started": true,
+    "permission_granted": true,
+    "suitable_for_phase13_smoke": true,
+    "suitable_for_balanced_arabic_saudi_quality": false,
+    "next_recommended_phase": "Phase 13 — Tiny LM Smoke Training"
+  }
+}

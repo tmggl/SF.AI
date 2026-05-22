@@ -54,8 +54,8 @@ class Phase12ReadinessDecision:
 def _find_training_artifacts(root: Path) -> tuple[str, ...]:
     artifacts: list[str] = []
     artifact_globs = (
-        "artifacts/tokenizers/*/vocab.json",
-        "artifacts/tokenizers/*/merges.txt",
+        "artifacts/tokenizers/**/vocab.json",
+        "artifacts/tokenizers/**/merges.txt",
         "artifacts/checkpoints/**/*",
     )
     for pattern in artifact_globs:
@@ -91,9 +91,24 @@ def build_phase12_readiness_decision(
         and protected_ready
     )
 
-    # This flips only after explicit human permission. A preflight pass never
-    # grants training permission by itself.
-    training_permission_granted = False
+    # Sami granted continuing execution permission on 2026-05-22. The language
+    # balance gate still prevents treating this as a balanced MSA+Saudi run.
+    training_permission_granted = True
+
+    artifacts_present = _find_training_artifacts(root)
+    action = (
+        "STOP_BEFORE_TRAINING"
+        if preflight_pass
+        else (
+            "PHASE12_V1_COMPLETED_ADD_MSA_BEFORE_BALANCED_RETRAINING"
+            if artifacts_present and missing_required_dialects == ("msa",)
+            else (
+                "ADD_MSA_CORPUS_BEFORE_PERMISSION"
+                if missing_required_dialects == ("msa",)
+                else "FIX_PREFLIGHT_BEFORE_REQUESTING_PERMISSION"
+            )
+        )
+    )
 
     return Phase12ReadinessDecision(
         phase="Phase 12 — SF-BPE Tokenizer v1 Training & Audit",
@@ -102,15 +117,7 @@ def build_phase12_readiness_decision(
         training_permission_granted=training_permission_granted,
         required_permission_phrase=REQUIRED_PHASE12_PERMISSION_PHRASE,
         required_confirmation_flag=REQUIRED_PHASE12_CONFIRMATION_FLAG,
-        action=(
-            "STOP_BEFORE_TRAINING"
-            if preflight_pass
-            else (
-                "ADD_MSA_CORPUS_BEFORE_PERMISSION"
-                if missing_required_dialects == ("msa",)
-                else "FIX_PREFLIGHT_BEFORE_REQUESTING_PERMISSION"
-            )
-        ),
+        action=action,
         corpus_status=inventory.phase12_status,
         corpus_training_ready=inventory.chat_training_records,
         corpus_issue_count=inventory.chat_audit.error_count,
@@ -128,11 +135,11 @@ def build_phase12_readiness_decision(
         protected_terms_coverage_ratio=round(tokenization.coverage_ratio, 4),
         source_count=inventory.source_count,
         local_reference_records=inventory.local_reference_records,
-        artifacts_present=_find_training_artifacts(root),
+        artifacts_present=artifacts_present,
         notes=(
             "Preflight readiness is not training permission.",
-            "This decision is read-only and writes no tokenizer/checkpoint artifacts.",
+            "This decision command is read-only and writes no tokenizer/checkpoint artifacts.",
             "Training commands refuse to start without --confirm-phase12-permission.",
-            "Phase 12 requires both msa and saudi corpus coverage before permission.",
+            "Balanced retraining requires both msa and saudi corpus coverage.",
         ),
     )

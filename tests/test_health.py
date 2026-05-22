@@ -71,9 +71,9 @@ def test_system_phase12_readiness_is_read_only_and_permission_gated() -> None:
     body = r.json()
     assert body["phase"].startswith("Phase 12")
     assert body["preflight_pass"] is False
-    assert body["training_permission_granted"] is False
+    assert body["training_permission_granted"] is True
     assert body["can_train_now"] is False
-    assert body["action"] == "ADD_MSA_CORPUS_BEFORE_PERMISSION"
+    assert body["action"] == "PHASE12_V1_COMPLETED_ADD_MSA_BEFORE_BALANCED_RETRAINING"
     assert body["required_permission_phrase"] == "ابدأ Phase 12"
     assert body["required_confirmation_flag"] == "--confirm-phase12-permission"
     assert body["corpus_status"] == "READY_FOR_PHASE_12_TOKENIZER_TRAINING"
@@ -86,7 +86,8 @@ def test_system_phase12_readiness_is_read_only_and_permission_gated() -> None:
     assert body["protected_terms_total"] == 30
     assert body["protected_terms_covered"] == 30
     assert body["protected_terms_coverage_ratio"] == 1.0
-    assert body["artifacts_present"] == []
+    assert "artifacts/tokenizers/sf_bpe/v1/vocab.json" in body["artifacts_present"]
+    assert "artifacts/tokenizers/sf_bpe/v1/merges.txt" in body["artifacts_present"]
     assert "--confirm-phase12-permission" in body["required_command_after_permission"]
 
 

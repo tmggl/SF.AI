@@ -51,7 +51,7 @@
 | Phase 9 | Frontend Chat Interface (HTML+JS RTL) | ✅ |
 | Phase 10 | Later Domains Skeleton | ✅ |
 | Phase 11 | Sovereign Corpus Governance & Saudi/MSA Dialogue Pack | ✅ |
-| Phase 12 | SF-BPE Tokenizer v1 Training & Audit | ⏳ التالية بعد بيانات وموافقة |
+| Phase 12 | SF-BPE Tokenizer v1 Training & Audit | ✅ completed_with_limits |
 | Phase 13 | Tiny LM Smoke Training | معلّقة |
 | Phase 14 | SF-10M v0.1 Training Run | معلّقة |
 | Phase 15 | Generator Adapter for ChatModule | معلّقة |
@@ -66,7 +66,7 @@
 ### الاختبارات
 
 ```
-353 passed in 2.18s
+356 passed in 2.79s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -136,7 +136,7 @@ bash scripts/run_chat_server.sh
 - `sf_ai/datasets/corpus_governance.py`
 - `tests/test_corpus_governance.py`
 
-لم تُضف بيانات فعلية ولم يبدأ تدريب tokenizer/LM.
+لم يبدأ تدريب LM بعد. تدريب tokenizer v1 اكتمل في Phase 12.
 
 ### Phase 12 — preflight جاهز فقط
 
@@ -206,7 +206,7 @@ status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
 status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
 ```
 
-لأن قرار `make phase12-readiness` الآن أشد: corpus الحالي سعودي فقط ويفتقد `msa`. أضف بيانات فصحى مصرح بها أولًا، ثم اطلب إذنًا صريحًا من سامي للتدريب. آخر توجيه حاكم: **لا تبدأ Phase 12 بدون إذن صريح**.
+تم تشغيل Phase 12 tokenizer v1 بإذن صريح من سامي. القرار الحالي ما زال يوضح أن corpus سعودي فقط ويفتقد `msa`، لذلك لا تعامل v1 كتشغيل لغوي متوازن.
 
 أضيفت بوابة تنفيذية فوق ذلك: `make train-bpe` و`scripts/train_bpe.py` يرفضان البدء بدون:
 
@@ -214,21 +214,21 @@ status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
 --confirm-phase12-permission
 ```
 
-لا تمرر هذا العلم إلا بعد إذن صريح بعبارة واضحة مثل: **ابدأ Phase 12**.
+سامي أعطى إذنًا صريحًا عامًا لمتابعة التدريب والاختبارات والمراحل المسجلة. استخدم هذا العلم عند الحاجة مع توثيق التشغيل.
 
 تقرير preflight الحالي يقول:
 
 ```text
-Phase 12 corpus/tokenization preflight: PASS
-Phase 12 language-balance gate: MISSING msa
-Training permission: NOT GRANTED
-Action now: STOP before training
+Phase 12 tokenizer v1: COMPLETED_WITH_LIMITS
+vocab: 261
+merges: 218
+missing language balance: msa
 ```
 
 ### تستطيع الآن الانتقال إلى:
 
 - **إضافة بيانات سامي بصيغة JSONL** ثم تشغيل `make corpus-audit`.
-- **Phase 12** — تدريب SF-BPE tokenizer v1، لكن فقط بعد تقرير جاهز وإذن صريح.
+- **Phase 13** — Tiny LM Smoke Training باستخدام tokenizer v1، مع تقرير واضح للقيود.
 
 ---
 

@@ -10,13 +10,13 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **المرحلة الحالية:** **Phase 11 — Sovereign Corpus Governance & Saudi/MSA Dialogue Pack** (مكتملة كحوكمة؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **المرحلة الحالية:** **Phase 12 — SF-BPE Tokenizer v1 Training & Audit** (اكتملت كتدريب tokenizer v1 محدود؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** **Phase 12 — SF-BPE Tokenizer v1 Training & Audit** بعد وضع بيانات JSONL وموافقة صريحة.
-- **بوابة Phase 12 الحالية:** `make corpus-audit` جاهز بنيويًا بعدد 30/30، لكن `make phase12-readiness` يمنع الانتقال لأن corpus الحالي سعودي فقط ويفتقد `msa`.
-- **بوابة التدريب التنفيذية:** `make train-bpe` يرفض التشغيل بدون `--confirm-phase12-permission`، ولا يُستخدم هذا العلم إلا بعد إذن صريح ببدء Phase 12.
+- **المرحلة التالية المقترحة:** **Phase 13 — Tiny LM Smoke Training** باستخدام `artifacts/tokenizers/sf_bpe/v1`.
+- **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
+- **تفويض التنفيذ:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة؛ استخدم flags المطلوبة مع توثيق كل تشغيل.
 - **فحص Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/corpus-audit`
-- **قرار Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/phase12-readiness` يعرض `can_train_now=false` و`missing_required_dialects=["msa"]` حتى إضافة فصحى مصرح بها ثم الإذن.
+- **قرار Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/phase12-readiness` يعرض أن tokenizer v1 اكتمل، مع بقاء `missing_required_dialects=["msa"]` قبل إعادة تدريب متوازن.
 - **قرار Phase 12 من الطرفية بدون restart:** `make phase12-readiness`، وهو read-only ويعرض نفس منطق القرار.
 - **جرد المصادر الشامل:** `make source-inventory` أو `GET http://127.0.0.1:8123/system/source-inventory`
 - **فحص السيرفر بدون تعطيل:** `make server-status`، وهو read-only ولا يعمل restart/stop.
@@ -27,7 +27,7 @@
 - **موارد tokenization:** `resources/tokenization/protected_terms_saudi.txt`, `resources/tokenization/preferred_merges.txt`, `resources/tokenization/tokenization_rules.yaml`.
 - **فحص tokenization قبل Phase 12:** `make tokenization-audit`، وهو read-only ولا يدرّب tokenizer.
 - **نتيجة tokenization-audit الحالية:** 30/30 protected terms مغطاة في corpus الحالي؛ التغطية 100%.
-- **تقرير Phase 12 preflight:** `docs/PHASE12_PREFLIGHT_REPORT.md`، وحالته: corpus/tokenization جاهزان، لكن قرار Phase 12 النهائي موقوف بسبب نقص `msa` وإذن التدريب غير ممنوح.
+- **تقرير Phase 12:** `docs/PHASE12_TOKENIZER_V1_REPORT.md`، وحالته: `COMPLETED_WITH_LIMITS`.
 - **تحسين اللغة الأخير:** التركيز الافتراضي الآن على العربية الفصحى + اللهجة السعودية فقط، مع إيقاف اللهجات الأخرى افتراضيًا.
 - **تحسين المحادثة الأخير:** توجيه أدق للرسائل اليومية (`شكرا`، `تمام`، `لا`، `ساعدني`، `مش فاهم`، `من صنعك`) + `سعودي` + `عندي؟` + زر مسح المحادثة + timestamps.
 - **خلفية:** بعد Phase 7 أضاف المستخدم قاموس سعودي تأليفي (Phase 3.6)، ثم أُكملت Phase 8 (RAG)، Phase 9 (الشاشة)، Phase 10 (هياكل المجالات).
@@ -207,7 +207,7 @@ make server-start
 ## نتائج الاختبارات (Phase 11 + Governance Layer)
 
 ```
-353 passed in 2.18s
+356 passed in 2.79s
 ```
 
 التغطية الحالية:

@@ -1,0 +1,42 @@
+{
+  "tokenizer_type": "bpe",
+  "sf_origin": true,
+  "vocab_size": 261,
+  "merges": 218,
+  "special_tokens": [
+    "<pad>",
+    "<bos>",
+    "<eos>",
+    "<unk>"
+  ],
+  "lowercase": false,
+  "byte_level": false,
+  "training_stats": {
+    "words_seen": 723,
+    "unique_words": 64,
+    "merges_learned": 218,
+    "base_alphabet_size": 43
+  },
+  "training_meta": {
+    "name": "sf_bpe_v1",
+    "created_at": "2026-05-22T18:38:40.395352+00:00",
+    "corpus_root": "data/corpus/chat/jsonl",
+    "source_files": [
+      {
+        "path": "data/corpus/chat/jsonl/first_dialogue_seed.jsonl",
+        "blake2b_16": "d607525cde19553b20dc4660a33588b9"
+      },
+      {
+        "path": "data/corpus/chat/jsonl/protected_terms_seed_v1.jsonl",
+        "blake2b_16": "04dc2ac220390d7071ad220d0eadbff0"
+      }
+    ],
+    "extra_texts_count": 0,
+    "stats": {
+      "words_seen": 723,
+      "unique_words": 64,
+      "merges_learned": 218,
+      "base_alphabet_size": 43
+    }
+  }
+}

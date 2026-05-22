@@ -35,7 +35,7 @@
 | Phase 9 | Frontend Chat Interface | مكتملة |
 | Phase 10 | Later Domains Skeleton | مكتملة |
 | Phase 11 | Sovereign Corpus Governance & Saudi/MSA Dialogue Pack | التالية بإذن |
-| Phase 12 | SF-BPE Tokenizer v1 Training & Audit | معلّقة |
+| Phase 12 | SF-BPE Tokenizer v1 Training & Audit | مكتملة مع قيود |
 | Phase 13 | Tiny LM Smoke Training (Overfit + Generation Sanity) | معلّقة |
 | Phase 14 | SF-10M v0.1 Training Run | معلّقة |
 | Phase 15 | Generator Adapter for ChatModule | معلّقة |

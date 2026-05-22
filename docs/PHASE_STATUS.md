@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **المرحلة الحالية:** **Phase 11 — Sovereign Corpus Governance & Saudi/MSA Dialogue Pack**
-- **حالة المرحلة الحالية:** **مكتملة كحوكمة وأدوات فحص؛ يوجد seed صغير مصرح، ولا يوجد تدريب فعلي بعد**
-- **المرحلة التالية المقترحة:** Phase 12 — SF-BPE Tokenizer v1 Training & Audit
-- **جاهزية Phase 12 الآن:** corpus/tokenization جاهزان بنيويًا `30/30`، لكن قرار Phase 12 يوقف التدريب لأن corpus الحالي يفتقد `msa`، ثم يحتاج إذنًا صريحًا و`--confirm-phase12-permission`.
+- **المرحلة الحالية:** **Phase 12 — SF-BPE Tokenizer v1 Training & Audit**
+- **حالة المرحلة الحالية:** **اكتملت كتدريب tokenizer v1 محدود من corpus سعودي صغير؛ MSA expansion مطلوب لاحقًا**
+- **المرحلة التالية المقترحة:** Phase 13 — Tiny LM Smoke Training
+- **جاهزية Phase 13 الآن:** tokenizer v1 موجود في `artifacts/tokenizers/sf_bpe/v1`; مناسب لـ smoke training وليس لجودة لغوية متوازنة.
 - **تاريخ آخر تحديث:** 2026-05-22
 
 ---
@@ -36,7 +36,7 @@
 | Phase 11 | Sovereign Corpus Governance & Saudi/MSA Dialogue Pack | ✅ | ✅ |
 | Governance Layer | Engineering Standards قبل Phase 12 | ✅ | ✅ |
 | Constitution Layer | Engineering & Linguistic Constitution قبل Phase 12 | ✅ | ✅ |
-| Phase 12 | SF-BPE Tokenizer v1 Training & Audit | ⏳ التالية بعد بيانات وموافقة | ⏳ |
+| Phase 12 | SF-BPE Tokenizer v1 Training & Audit | ✅ completed_with_limits | ✅ |
 | Phase 13 | Tiny LM Smoke Training | معلّقة | ⏳ |
 | Phase 14 | SF-10M v0.1 Training Run | معلّقة | ⏳ |
 | Phase 15 | Generator Adapter for ChatModule | معلّقة | ⏳ |
@@ -70,7 +70,8 @@
 - أضيف `data/corpus/chat/jsonl/first_dialogue_seed.jsonl`: seed صغير فيه 20 محادثة سعودية `gold`، مشتقة من مرجع Saudi Seed المحلي، مع `source/license/training_allowed/quality`.
 - أضيف `data/corpus/chat/jsonl/protected_terms_seed_v1.jsonl`: seed صغير فيه 10 محادثات سعودية `gold` لتغطية protected terms المتبقية.
 - نتيجة الوضع الحالي بعد `make corpus-audit`: `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد `30/30`.
-- نتيجة `make phase12-readiness`: `preflight_pass=false` بسبب `missing_required_dialects=msa`، لذلك تدريب tokenizer لم يبدأ ولا يبدأ.
+- نتيجة تدريب Phase 12: `artifacts/tokenizers/sf_bpe/v1`, `vocab=261`, `merges=218`, `sf_origin=true`.
+- نتيجة `make phase12-readiness`: يعرض أن v1 اكتمل، مع استمرار `missing_required_dialects=msa` قبل أي إعادة تدريب متوازنة.
 - أضيف حقل `provenance.quality` إلى schema.
 - أضيف حقل `provenance.training_allowed` إلى schema، وصار شرطًا في corpus governance.
 - قيود Phase 11: `domain=chat`, `lang=ar`, `dialect ∈ {msa, saudi}`, ووجود user+assistant وsource/license/quality/training_allowed.
@@ -96,17 +97,18 @@
   - covered: 30
   - coverage: 100%
   - missing examples: none
-- أضيف [PHASE12_PREFLIGHT_REPORT.md](./PHASE12_PREFLIGHT_REPORT.md) كتقرير قرار نهائي قبل Phase 12:
-  - preflight: PASS
-  - training permission: NOT GRANTED
-  - action: STOP before training
+- أضيف [PHASE12_TOKENIZER_V1_REPORT.md](./PHASE12_TOKENIZER_V1_REPORT.md) كتقرير تنفيذ Phase 12:
+  - status: COMPLETED_WITH_LIMITS
+  - vocab_size: 261
+  - merges: 218
+  - missing MSA remains documented
 - أضيف `GET /system/phase12-readiness` كقرار API موحد:
   - `preflight_pass=false` حتى إضافة `msa`
-  - `can_train_now=false`
+  - `can_train_now=false` للتدريب المتوازن اللاحق
   - `missing_required_dialects=["msa"]`
   - `required_confirmation_flag=--confirm-phase12-permission`
 - أضيف `make phase12-readiness` كقرار CLI مطابق للـ API بدون restart للسيرفر.
-- لم يبدأ tokenizer أو LM training.
+- بدأ وانتهى tokenizer training لPhase 12. لم يبدأ LM training بعد.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -203,7 +205,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-353 passed in 2.18s
+356 passed in 2.79s
 ```
 
 | ملف | عدد |

@@ -13,7 +13,7 @@ def test_phase12_preflight_report_exists_and_blocks_training() -> None:
     text = report.read_text(encoding="utf-8")
     assert "Phase 12 corpus/tokenization preflight: PASS" in text
     assert "Phase 12 language-balance gate: MISSING msa" in text
-    assert "Training permission: NOT GRANTED" in text
-    assert "Action now: STOP before training" in text
+    assert "Training permission: GRANTED" in text
+    assert "Action now: Phase 12 tokenizer v1 completed with limits" in text
     assert "make train-bpe" in text
     assert "لا تنفذ إلا بعد إذن صريح" in text

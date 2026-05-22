@@ -1,0 +1,44 @@
+{
+  "artifact": "artifacts/tokenizers/sf_bpe/v1",
+  "phase": "Phase 12 — SF-BPE Tokenizer v1 Training & Audit",
+  "created_at_utc": "2026-05-22T18:38:40.395352+00:00",
+  "training_permission": {
+    "granted": true,
+    "granted_by": "Sami",
+    "permission_text_summary": "موافق لكل شي حتي الاختبارات استمر لاي شي لاتنتظر مني اي اذن ابدا التدريب وكل شي لاعاد تنتظر مني اذن",
+    "required_flag_used": "--confirm-phase12-permission"
+  },
+  "corpus_root": "data/corpus/chat/jsonl",
+  "source_files": [
+    {
+      "path": "data/corpus/chat/jsonl/first_dialogue_seed.jsonl",
+      "records": 20,
+      "dialect": "saudi",
+      "quality": "gold",
+      "license": "user-provided",
+      "training_allowed": true,
+      "blake2b_16": "d607525cde19553b20dc4660a33588b9"
+    },
+    {
+      "path": "data/corpus/chat/jsonl/protected_terms_seed_v1.jsonl",
+      "records": 10,
+      "dialect": "saudi",
+      "quality": "gold",
+      "license": "user-provided",
+      "training_allowed": true,
+      "blake2b_16": "04dc2ac220390d7071ad220d0eadbff0"
+    }
+  ],
+  "data_boundaries": {
+    "external_llm_data_used": false,
+    "pretrained_weights_used": false,
+    "pretrained_tokenizer_used": false,
+    "synthetic_llm_corpus_used": false,
+    "extra_texts_count": 0
+  },
+  "known_limits": [
+    "The v1 tokenizer was trained on a small Saudi-only seed corpus.",
+    "MSA coverage is still required before treating this as a balanced Arabic+Saudi tokenizer.",
+    "This artifact is suitable for Phase 13 smoke training, not production language quality."
+  ]
+}

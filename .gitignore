@@ -56,6 +56,12 @@ artifacts/checkpoints/**/*
 artifacts/logs/**/*
 !**/.gitkeep
 !**/README.md
+!artifacts/tokenizers/sf_bpe/v1/vocab.json
+!artifacts/tokenizers/sf_bpe/v1/merges.txt
+!artifacts/tokenizers/sf_bpe/v1/meta.json
+!artifacts/tokenizers/sf_bpe/v1/tokenizer_config.json
+!artifacts/tokenizers/sf_bpe/v1/provenance.json
+!artifacts/tokenizers/sf_bpe/v1/audit_report.json
 !data/corpus/chat/jsonl/first_dialogue_seed.jsonl
 !data/corpus/chat/jsonl/first_dialogue_seed.CARD.md
 !data/corpus/chat/jsonl/protected_terms_seed_v1.jsonl
