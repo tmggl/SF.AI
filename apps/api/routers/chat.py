@@ -60,7 +60,11 @@ def save_review_export(payload: ReviewExportSaveRequest) -> ReviewExportSaveResp
     record = payload.record
     _validate_review_export_record(record)
 
-    session = _safe_slug(payload.session_id or _nested_str(record, "review_metadata", "session_id") or "session")
+    session = _safe_slug(
+        payload.session_id
+        or _nested_str(record, "review_metadata", "session_id")
+        or "session"
+    )
     stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
     filename = f"sfai_chat_review_{session}_{stamp}.jsonl"
 

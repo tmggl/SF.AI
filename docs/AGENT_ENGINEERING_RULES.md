@@ -53,6 +53,23 @@
 - لا تبدأ training.
 - لا ترفع corpus خاص إلا إذا كان مقصودًا ومصرحًا.
 
+## دور الوكيل في Phase 22
+
+سامي فوّض الوكيل أن يكون هو المشغّل العملي:
+
+- الوكيل يفتح الواجهة أو يستدعي الـ API ويختبر بنفسه.
+- الوكيل يحفظ review exports بنفسه عند الحاجة.
+- الوكيل يشغّل `phase22-review-intake` و`phase22-completion-gate` بنفسه.
+- الوكيل يرتّب الملفات والتقارير ويحدّث docs بنفسه.
+- الوكيل لا يطلب من سامي القيام بخطوات تصدير أو نقل ملفات إذا كان يستطيع تنفيذها محليًا.
+
+لكن هذا التفويض لا يلغي قواعد البيانات:
+
+- أي حوار كتبه Agent/LLM يبقى `training_allowed=false`.
+- لا يتحول review export إلى corpus تدريبي إلا بعد مراجعة صريحة وبوابة governance.
+- لا synthetic LLM data في corpus السيادي.
+- لا Phase 23 حتى `make phase22-completion-gate` يرجع `PHASE22_COMPLETE_READY_FOR_PHASE23`.
+
 ## عند إضافة dependency
 
 وثّق:
