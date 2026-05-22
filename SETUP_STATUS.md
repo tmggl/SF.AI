@@ -17,6 +17,7 @@
 - **فحص Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/corpus-audit`
 - **جرد المصادر الشامل:** `make source-inventory` أو `GET http://127.0.0.1:8123/system/source-inventory`
 - **المراجع المحلية الخاصة الموجودة:** 516 مدخل قاموس سعودي + 1032 مهمة لهجة سعودية، وهي مستثناة من الرفع وتحتاج تحويل/حوكمة قبل استخدامها كـ LM corpus.
+- **طبقة الحوكمة الهندسية قبل Phase 12:** مكتملة في `docs/PROJECT_IDENTITY.md`, `docs/ENGINEERING_RULES.md`, `docs/AGENT_INSTRUCTIONS.md`, `docs/PROJECT_MAP.md`, `docs/PROJECT_LIFECYCLE.md`.
 - **تحسين اللغة الأخير:** التركيز الافتراضي الآن على العربية الفصحى + اللهجة السعودية فقط، مع إيقاف اللهجات الأخرى افتراضيًا.
 - **تحسين المحادثة الأخير:** توجيه أدق للرسائل اليومية (`شكرا`، `تمام`، `لا`، `ساعدني`، `مش فاهم`، `من صنعك`) + `سعودي` + `عندي؟` + زر مسح المحادثة + timestamps.
 - **خلفية:** بعد Phase 7 أضاف المستخدم قاموس سعودي تأليفي (Phase 3.6)، ثم أُكملت Phase 8 (RAG)، Phase 9 (الشاشة)، Phase 10 (هياكل المجالات).
@@ -56,7 +57,7 @@
 
 ---
 
-## الملفات الموجودة الآن (Phases 0–9 + 3.5 + 3.6 + 5.5)
+## الملفات الموجودة الآن (Phases 0–11 + Governance Layer)
 
 ```
 SF.AI/
@@ -113,7 +114,7 @@ SF.AI/
 │       └── saudi_seed_v1/                 Phase 3.6 — قاموسك (516 مدخل)
 │
 ├── data/corpus/
-│   ├── chat/{raw,cleaned,jsonl}/          Phase 5 — بانتظار بياناتك
+│   ├── chat/{raw,cleaned,jsonl}/          Phase 5/11 — first_dialogue_seed.jsonl + CARD
 │   └── dialects/saudi/
 │       ├── raw/mo3jam/                    Phase 3.5
 │       ├── jsonl/saudi_dialect_training_tasks_seed_v1.jsonl   Phase 3.6
@@ -121,7 +122,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs}/   Phase 5.5+ outputs
 │
-├── tests/                                 29 ملف اختبار، 332 تست
+├── tests/                                 pytest suite — 339 تست
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -141,6 +142,8 @@ SF.AI/
 │
 └── docs/
     ├── EXECUTION_PLAN.md, PHASE_STATUS.md, ARCHITECTURE.md
+    ├── PROJECT_IDENTITY.md, ENGINEERING_RULES.md, AGENT_INSTRUCTIONS.md
+    ├── PROJECT_MAP.md, PROJECT_LIFECYCLE.md
     ├── CURRENT_GOALS.md                    الهدف العام وخارطة التوليد الحالية
     ├── ROUTER.md, SEMANTIC_EXPLORER.md, LANGUAGE_UNDERSTANDING.md
     ├── DATASET_FORMAT.md, SOVEREIGN_ACCELERATION.md, TRAINING_PLAN.md
@@ -158,6 +161,8 @@ SF.AI/
 - `GET /` — معلومات root + رابط الـ UI.
 - `GET /health` — فحص صحة (project + phase).
 - `GET /system/status` — حالة المراحل + flags السيادة + قائمة المكونات، بما فيها Phase 10 skeleton modules.
+- `GET /system/corpus-audit` — جاهزية corpus قبل Phase 12.
+- `GET /system/source-inventory` — جرد مصادر البيانات والمراجع.
 - `POST /chat/message` — Orchestrator: NLP → Router → Module/Composer. يرجع domain/intent/confidence/signals/route_reason/response/requires_safety/status/fallback_used/dispatch/debug.
 - `GET /chat` → redirect (307) إلى `/ui/chat`.
 - `GET /ui/chat` — **شاشة المحادثة العربية RTL** (Phase 9).
@@ -172,17 +177,17 @@ bash scripts/run_chat_server.sh
 - listener: `Python 75503` على `127.0.0.1:8123`
 - `GET /health` → 200، `{"status":"ok","project":"SF.AI","phase":"Phase 11"}`
 - `GET /system/status` يعرض `saudi_seed_v1_lexicon=active`
-- `GET /system/status` يعرض `corpus_governance=active` و `training_corpus=waiting_for_user_data`
+- `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 20/20
 - smoke: `وشلونك` → `chat.smalltalk` بدون fallback، و`عندي سؤال` → دعوة مباشرة لكتابة السؤال.
 
 > المنفذ 8000/8765 مشغول بمشروع آخر للمستخدم — استخدم 8123.
 
 ---
 
-## نتائج الاختبارات (Phase 10 + تحسين اللغة)
+## نتائج الاختبارات (Phase 11 + Governance Layer)
 
 ```
-332 passed in 2.40s
+339 passed in ~1.9s
 ```
 
 التغطية الحالية:
@@ -190,7 +195,7 @@ bash scripts/run_chat_server.sh
 - `test_capability_registry.py` — 5 tests
 - `test_chat_module.py` — 12 tests (Phase 4 + language polish)
 - `test_conversation_state.py` — 8 tests (Phase 4)
-- `test_corpus_governance.py` — 6 tests (Phase 11)
+- `test_corpus_governance.py` — Phase 11 corpus governance
 - `test_dataset_validators.py` — 28 tests (Phase 5)
 - `test_bpe_tokenizer.py` — 13 tests (Phase 5.5)
 - `test_training_device.py` — 14 tests (Phase 5.5)
@@ -204,7 +209,7 @@ bash scripts/run_chat_server.sh
 - `test_rag_sparse_retrieval.py` — 14 tests (Phase 8)
 - `test_chat_ui.py` — 4 tests (Phase 9)
 - `test_dialect_mapper.py` — 7 tests
-- `test_health.py` — 7 tests (API + module dispatch + safety)
+- `test_health.py` — API + module dispatch + safety + corpus/source inventory
 - `test_intent_detector.py` — 7 tests
 - `test_new_chat_intents.py` — 31 tests (thanks/help/affirmation/negation/confused/who_made_you/farewell/language_preference/clarification)
 - `test_nlp_pipeline.py` — 9 tests
@@ -220,9 +225,10 @@ bash scripts/run_chat_server.sh
 
 ---
 
-## خارطة النموذج اللغوي السيادي بعد Phase 10
+## خارطة النموذج اللغوي السيادي بعد Phase 11
 
-- **Phase 11:** حوكمة وتجهيز بيانات حوار فصحى/سعودي — مكتملة كحوكمة وأداة فحص، بانتظار بيانات فعلية.
+- **Phase 11:** حوكمة وتجهيز بيانات حوار فصحى/سعودي — مكتملة، وفيها seed صغير 20/20 جاهز preflight.
+- **Governance Layer:** قواعد الهندسة والهوية وخريطة المشروع ودورة الحياة — مكتملة قبل Phase 12.
 - **Phase 12:** تدريب SF-BPE tokenizer v1 من بيانات SF.AI فقط.
 - **Phase 13:** تدريب smoke صغير لإثبات أن النموذج يتعلم ويولد نصًا خامًا.
 - **Phase 14:** تدريب `SF-10M v0.1`.

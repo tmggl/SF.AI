@@ -66,7 +66,7 @@
 ### الاختبارات
 
 ```
-334 passed in ~1.9s
+339 passed in ~1.9s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -78,6 +78,8 @@
 - Endpoint رئيسي: `POST /chat/message`.
 - شاشة: `GET /ui/chat`.
 - تشخيص: `GET /system/status`.
+- Corpus preflight: `GET /system/corpus-audit`.
+- Source inventory: `GET /system/source-inventory`.
 
 تشغيل يدوي:
 ```bash
@@ -136,6 +138,14 @@ bash scripts/run_chat_server.sh
 لم تُضف بيانات فعلية ولم يبدأ تدريب tokenizer/LM.
 
 ### Phase 12 — preflight جاهز فقط
+
+قبل Phase 12 أضيفت طبقة Governance & Engineering Standards. اقرأ:
+
+- [PROJECT_IDENTITY.md](./PROJECT_IDENTITY.md)
+- [ENGINEERING_RULES.md](./ENGINEERING_RULES.md)
+- [AGENT_INSTRUCTIONS.md](./AGENT_INSTRUCTIONS.md)
+- [PROJECT_MAP.md](./PROJECT_MAP.md)
+- [PROJECT_LIFECYCLE.md](./PROJECT_LIFECYCLE.md)
 
 أُضيفت بوابة فحص قبل تدريب tokenizer:
 

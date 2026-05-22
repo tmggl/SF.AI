@@ -15,13 +15,24 @@
 
 اقرأ المبادئ الكاملة في [PROJECT_PRINCIPLES.md](./PROJECT_PRINCIPLES.md).
 
+### وثائق الحوكمة قبل التدريب
+
+قبل أي Phase جديدة، خصوصًا Phase 12 وما بعدها، اقرأ:
+
+- [docs/PROJECT_IDENTITY.md](./docs/PROJECT_IDENTITY.md) — هوية المشروع وحدوده.
+- [docs/ENGINEERING_RULES.md](./docs/ENGINEERING_RULES.md) — قواعد الهندسة غير القابلة للكسر.
+- [docs/AGENT_INSTRUCTIONS.md](./docs/AGENT_INSTRUCTIONS.md) — workflow أي Agent يعمل على المشروع.
+- [docs/PROJECT_MAP.md](./docs/PROJECT_MAP.md) — خريطة المجلدات ومسؤولية كل مسار.
+- [docs/PROJECT_LIFECYCLE.md](./docs/PROJECT_LIFECYCLE.md) — دورة الحياة من corpus إلى runtime.
+
 ---
 
 ## الهدف الحالي
 
-- **الأولوية الأولى:** الحوار العام (Phase 4).
-- **الأولوية الثانية:** البحث في الويب + الاستخراج + التلخيص + تنظيم الرد (Phase 7).
-- **بقية المجالات:** skeleton مؤجَّل.
+- **الأولوية الحالية:** تجهيز المسار السيادي الآمن قبل تدريب Phase 12.
+- **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
+- **البيانات الحالية:** seed صغير `20/20` يمر `corpus-audit`.
+- **التدريب:** لم يبدأ، ولا يبدأ إلا بإذن صريح.
 
 ---
 
@@ -44,6 +55,9 @@
 | Phase 8 | Local RAG Foundation |
 | Phase 9 | Frontend Chat Interface |
 | Phase 10 | Later Domains Skeleton |
+| Phase 11 | Sovereign Corpus Governance & Saudi/MSA Dialogue Pack |
+| Governance Layer | Engineering Standards قبل Phase 12 |
+| Phase 12 | SF-BPE Tokenizer v1 Training & Audit |
 
 **لا انتقال بين المراحل بدون إذن صريح من المستخدم.**
 
@@ -80,14 +94,14 @@ SF.AI/
 ├── artifacts/                     # tokenizers, checkpoints, logs
 ├── tests/                         # pytest tests
 ├── scripts/                       # operational scripts
-└── docs/                          # documentation
+└── docs/                          # documentation + governance
 ```
 
 ---
 
-## التشغيل المحلي (Phase 10)
+## التشغيل المحلي (Phase 11)
 
-> المراحل 0–10 مكتملة. شاشة المحادثة العربية تعمل محليًا، مع NLP rule-based وتوجيه سيادي بدون أي نموذج خارجي. التركيز اللغوي الحالي: العربية الفصحى + اللهجة السعودية فقط.
+> المراحل 0–11 مكتملة. شاشة المحادثة العربية تعمل محليًا، مع NLP rule-based وتوجيه سيادي بدون أي نموذج خارجي. التركيز اللغوي الحالي: العربية الفصحى + اللهجة السعودية فقط.
 
 ### المتطلبات
 - Python 3.11+
@@ -117,6 +131,8 @@ http://127.0.0.1:8123/ui/chat
 
 - `GET /health` — فحص صحة الخدمة.
 - `GET /system/status` — حالة المراحل والمكونات.
+- `GET /system/corpus-audit` — جاهزية corpus قبل Phase 12.
+- `GET /system/source-inventory` — جرد مصادر البيانات والمراجع.
 - `POST /chat/message` — رسالة إلى الـ Orchestrator.
 - `GET /ui/chat` — شاشة المحادثة.
 
@@ -137,6 +153,8 @@ pytest
 - لا Llama / Gemma / Phi / Mistral / sentence-transformers / HuggingFace pretrained.
 - لا LoRA فوق نموذج خارجي.
 - لا synthetic LLM data في corpus السيادي.
+- لا تشغيل training أو crawling أو phase جديدة بدون إذن صريح.
+- لا خلط بين `data/corpus/` و `resources/lexicons/`.
 
 التفاصيل في [PROJECT_PRINCIPLES.md](./PROJECT_PRINCIPLES.md).
 

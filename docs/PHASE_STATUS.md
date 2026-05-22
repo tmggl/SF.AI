@@ -8,9 +8,9 @@
 
 - **اسم المشروع:** SF.AI
 - **المرحلة الحالية:** **Phase 11 — Sovereign Corpus Governance & Saudi/MSA Dialogue Pack**
-- **حالة المرحلة الحالية:** **مكتملة كحوكمة وأدوات فحص؛ لا توجد بيانات تدريب فعلية بعد**
+- **حالة المرحلة الحالية:** **مكتملة كحوكمة وأدوات فحص؛ يوجد seed صغير مصرح، ولا يوجد تدريب فعلي بعد**
 - **المرحلة التالية المقترحة:** Phase 12 — SF-BPE Tokenizer v1 Training & Audit
-- **جاهزية Phase 12 الآن:** preflight audit جاهز؛ التدريب ينتظر JSONL صالح + إذن صريح.
+- **جاهزية Phase 12 الآن:** preflight audit جاهز `20/20`؛ التدريب ينتظر إذنًا صريحًا.
 - **تاريخ آخر تحديث:** 2026-05-22
 
 ---
@@ -34,6 +34,7 @@
 | Phase 9 | Frontend Chat Interface | ✅ | ✅ |
 | Phase 10 | Later Domains Skeleton | ✅ | ✅ |
 | Phase 11 | Sovereign Corpus Governance & Saudi/MSA Dialogue Pack | ✅ | ✅ |
+| Governance Layer | Engineering Standards قبل Phase 12 | ✅ | ✅ |
 | Phase 12 | SF-BPE Tokenizer v1 Training & Audit | ⏳ التالية بعد بيانات وموافقة | ⏳ |
 | Phase 13 | Tiny LM Smoke Training | معلّقة | ⏳ |
 | Phase 14 | SF-10M v0.1 Training Run | معلّقة | ⏳ |
@@ -68,8 +69,15 @@
 - أضيف `data/corpus/chat/jsonl/first_dialogue_seed.jsonl`: seed صغير فيه 20 محادثة سعودية `gold`، مشتقة من مرجع Saudi Seed المحلي، مع `source/license/training_allowed/quality`.
 - نتيجة الوضع الحالي بعد `make corpus-audit`: `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد `20/20`، لكن تدريب tokenizer لم يبدأ وينتظر إذنًا صريحًا.
 - أضيف حقل `provenance.quality` إلى schema.
-- قيود Phase 11: `domain=chat`, `lang=ar`, `dialect ∈ {msa, saudi}`, ووجود user+assistant وsource/license/quality.
-- لم تُضف أي بيانات تدريب، ولم يبدأ tokenizer أو LM training.
+- أضيف حقل `provenance.training_allowed` إلى schema، وصار شرطًا في corpus governance.
+- قيود Phase 11: `domain=chat`, `lang=ar`, `dialect ∈ {msa, saudi}`, ووجود user+assistant وsource/license/quality/training_allowed.
+- أضيفت طبقة Governance & Engineering Standards قبل Phase 12:
+  - [PROJECT_IDENTITY.md](./PROJECT_IDENTITY.md)
+  - [ENGINEERING_RULES.md](./ENGINEERING_RULES.md)
+  - [AGENT_INSTRUCTIONS.md](./AGENT_INSTRUCTIONS.md)
+  - [PROJECT_MAP.md](./PROJECT_MAP.md)
+  - [PROJECT_LIFECYCLE.md](./PROJECT_LIFECYCLE.md)
+- لم يبدأ tokenizer أو LM training.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -135,8 +143,9 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 10"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 11"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
+GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 20/20
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
                      dialect=saudi, response="بخير، شكرًا لسؤالك. عندك أنت؟"
 ```
@@ -165,7 +174,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-332 passed in 2.40s
+339 passed in ~1.9s
 ```
 
 | ملف | عدد |
