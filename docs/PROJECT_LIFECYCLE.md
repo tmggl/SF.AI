@@ -41,6 +41,17 @@ make source-inventory
 make corpus-audit
 ```
 
+وقبل Phase 12 تحديدًا:
+
+```text
+docs/PROJECT_CONSTITUTION.md
+docs/LANGUAGE_SEGMENTATION.md
+docs/TOKENIZATION_POLICY.md
+resources/tokenization/tokenization_rules.yaml
+resources/tokenization/protected_terms_saudi.txt
+resources/tokenization/preferred_merges.txt
+```
+
 مخرجات corpus stage:
 
 - training-ready samples.

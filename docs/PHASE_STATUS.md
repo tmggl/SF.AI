@@ -35,6 +35,7 @@
 | Phase 10 | Later Domains Skeleton | ✅ | ✅ |
 | Phase 11 | Sovereign Corpus Governance & Saudi/MSA Dialogue Pack | ✅ | ✅ |
 | Governance Layer | Engineering Standards قبل Phase 12 | ✅ | ✅ |
+| Constitution Layer | Engineering & Linguistic Constitution قبل Phase 12 | ✅ | ✅ |
 | Phase 12 | SF-BPE Tokenizer v1 Training & Audit | ⏳ التالية بعد بيانات وموافقة | ⏳ |
 | Phase 13 | Tiny LM Smoke Training | معلّقة | ⏳ |
 | Phase 14 | SF-10M v0.1 Training Run | معلّقة | ⏳ |
@@ -77,6 +78,16 @@
   - [AGENT_INSTRUCTIONS.md](./AGENT_INSTRUCTIONS.md)
   - [PROJECT_MAP.md](./PROJECT_MAP.md)
   - [PROJECT_LIFECYCLE.md](./PROJECT_LIFECYCLE.md)
+- أضيفت طبقة SF.AI Engineering & Linguistic Constitution قبل Phase 12:
+  - [PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md)
+  - [LANGUAGE_SEGMENTATION.md](./LANGUAGE_SEGMENTATION.md)
+  - [TOKENIZATION_POLICY.md](./TOKENIZATION_POLICY.md)
+  - [DATASET_GOVERNANCE.md](./DATASET_GOVERNANCE.md)
+  - [AGENT_ENGINEERING_RULES.md](./AGENT_ENGINEERING_RULES.md)
+- أضيفت موارد tokenization:
+  - [protected_terms_saudi.txt](../resources/tokenization/protected_terms_saudi.txt)
+  - [preferred_merges.txt](../resources/tokenization/preferred_merges.txt)
+  - [tokenization_rules.yaml](../resources/tokenization/tokenization_rules.yaml)
 - لم يبدأ tokenizer أو LM training.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
@@ -174,7 +185,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-339 passed in ~1.9s
+342 passed in ~2.5s
 ```
 
 | ملف | عدد |

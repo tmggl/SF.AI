@@ -18,6 +18,8 @@
 - **جرد المصادر الشامل:** `make source-inventory` أو `GET http://127.0.0.1:8123/system/source-inventory`
 - **المراجع المحلية الخاصة الموجودة:** 516 مدخل قاموس سعودي + 1032 مهمة لهجة سعودية، وهي مستثناة من الرفع وتحتاج تحويل/حوكمة قبل استخدامها كـ LM corpus.
 - **طبقة الحوكمة الهندسية قبل Phase 12:** مكتملة في `docs/PROJECT_IDENTITY.md`, `docs/ENGINEERING_RULES.md`, `docs/AGENT_INSTRUCTIONS.md`, `docs/PROJECT_MAP.md`, `docs/PROJECT_LIFECYCLE.md`.
+- **طبقة الدستور الهندسي واللغوي قبل Phase 12:** مكتملة في `docs/PROJECT_CONSTITUTION.md`, `docs/LANGUAGE_SEGMENTATION.md`, `docs/TOKENIZATION_POLICY.md`, `docs/DATASET_GOVERNANCE.md`, `docs/AGENT_ENGINEERING_RULES.md`.
+- **موارد tokenization:** `resources/tokenization/protected_terms_saudi.txt`, `resources/tokenization/preferred_merges.txt`, `resources/tokenization/tokenization_rules.yaml`.
 - **تحسين اللغة الأخير:** التركيز الافتراضي الآن على العربية الفصحى + اللهجة السعودية فقط، مع إيقاف اللهجات الأخرى افتراضيًا.
 - **تحسين المحادثة الأخير:** توجيه أدق للرسائل اليومية (`شكرا`، `تمام`، `لا`، `ساعدني`، `مش فاهم`، `من صنعك`) + `سعودي` + `عندي؟` + زر مسح المحادثة + timestamps.
 - **خلفية:** بعد Phase 7 أضاف المستخدم قاموس سعودي تأليفي (Phase 3.6)، ثم أُكملت Phase 8 (RAG)، Phase 9 (الشاشة)، Phase 10 (هياكل المجالات).
@@ -112,6 +114,7 @@ SF.AI/
 │   └── imported/
 │       ├── mo3jam/                        Phase 3.5 destination (فارغ حتى الاستيراد)
 │       └── saudi_seed_v1/                 Phase 3.6 — قاموسك (516 مدخل)
+├── resources/tokenization/                Constitution Layer — protected terms + rules
 │
 ├── data/corpus/
 │   ├── chat/{raw,cleaned,jsonl}/          Phase 5/11 — first_dialogue_seed.jsonl + CARD
@@ -122,7 +125,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs}/   Phase 5.5+ outputs
 │
-├── tests/                                 pytest suite — 339 تست
+├── tests/                                 pytest suite — 342 تست
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -187,7 +190,7 @@ bash scripts/run_chat_server.sh
 ## نتائج الاختبارات (Phase 11 + Governance Layer)
 
 ```
-339 passed in ~1.9s
+342 passed in ~2.5s
 ```
 
 التغطية الحالية:

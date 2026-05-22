@@ -66,7 +66,7 @@
 ### الاختبارات
 
 ```
-339 passed in ~1.9s
+342 passed in ~2.5s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -141,6 +141,11 @@ bash scripts/run_chat_server.sh
 
 قبل Phase 12 أضيفت طبقة Governance & Engineering Standards. اقرأ:
 
+- [PROJECT_CONSTITUTION.md](./PROJECT_CONSTITUTION.md)
+- [LANGUAGE_SEGMENTATION.md](./LANGUAGE_SEGMENTATION.md)
+- [TOKENIZATION_POLICY.md](./TOKENIZATION_POLICY.md)
+- [DATASET_GOVERNANCE.md](./DATASET_GOVERNANCE.md)
+- [AGENT_ENGINEERING_RULES.md](./AGENT_ENGINEERING_RULES.md)
 - [PROJECT_IDENTITY.md](./PROJECT_IDENTITY.md)
 - [ENGINEERING_RULES.md](./ENGINEERING_RULES.md)
 - [AGENT_INSTRUCTIONS.md](./AGENT_INSTRUCTIONS.md)

@@ -1,0 +1,19 @@
+# SF.AI preferred Saudi merges
+# Format: tokens separated by spaces. These guide future SF-BPE policy only.
+# They are not pretrained merges and must be learned/validated from sovereign corpus.
+و ش
+وش لون
+ش لون
+ل يه
+ل يش
+ت را
+ت رى
+ت كفى
+تك فين
+لا هنت
+الله لا
+لا يهينك
+الله يعافيك
+يعطيك العافية
+ما قصرت
+أ بشر

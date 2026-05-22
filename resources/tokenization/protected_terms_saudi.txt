@@ -1,0 +1,32 @@
+# SF.AI protected Saudi terms
+# UTF-8, one term per line. These are local policy terms, not pretrained vocab.
+وش
+وشو
+وشلون
+شلون
+وين
+ليه
+ليش
+مين
+إيش
+ترا
+ترى
+عاد
+أبد
+بس
+خلاص
+طيب
+تمام
+عادي
+بالله
+تكفى
+تكفين
+لا هنت
+الله لا يهينك
+سم
+أبشر
+حيّاك
+حياك
+يعطيك العافية
+ما قصرت
+الله يعافيك

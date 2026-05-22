@@ -198,6 +198,7 @@ tools/web/
 
 ```text
 resources/lexicons/
+resources/tokenization/
 ```
 
 الدور:
@@ -206,6 +207,9 @@ resources/lexicons/
 - normalization maps.
 - domain terms.
 - imported lexicon references.
+- protected terms.
+- preferred tokenizer merges.
+- tokenization policy rules.
 
 هذه ليست corpus مباشرًا. تحويلها إلى samples يتم عبر scripts موثقة وprovenance.
 

@@ -19,6 +19,11 @@
 
 قبل أي Phase جديدة، خصوصًا Phase 12 وما بعدها، اقرأ:
 
+- [docs/PROJECT_CONSTITUTION.md](./docs/PROJECT_CONSTITUTION.md) — الدستور الهندسي واللغوي الأعلى.
+- [docs/LANGUAGE_SEGMENTATION.md](./docs/LANGUAGE_SEGMENTATION.md) — سياسة الفصحى/السعودي وArabizi/code.
+- [docs/TOKENIZATION_POLICY.md](./docs/TOKENIZATION_POLICY.md) — سياسة tokenizer وprotected terms.
+- [docs/DATASET_GOVERNANCE.md](./docs/DATASET_GOVERNANCE.md) — قواعد dataset/provenance.
+- [docs/AGENT_ENGINEERING_RULES.md](./docs/AGENT_ENGINEERING_RULES.md) — قواعد الوكلاء الهندسية واللغوية.
 - [docs/PROJECT_IDENTITY.md](./docs/PROJECT_IDENTITY.md) — هوية المشروع وحدوده.
 - [docs/ENGINEERING_RULES.md](./docs/ENGINEERING_RULES.md) — قواعد الهندسة غير القابلة للكسر.
 - [docs/AGENT_INSTRUCTIONS.md](./docs/AGENT_INSTRUCTIONS.md) — workflow أي Agent يعمل على المشروع.
@@ -90,6 +95,7 @@ SF.AI/
 │   └── training/                  # training tools (لاحقًا)
 │
 ├── resources/lexicons/            # YAML lexicons
+├── resources/tokenization/         # protected terms + tokenizer policy resources
 ├── data/                          # corpus & indexes
 ├── artifacts/                     # tokenizers, checkpoints, logs
 ├── tests/                         # pytest tests
@@ -155,6 +161,7 @@ pytest
 - لا synthetic LLM data في corpus السيادي.
 - لا تشغيل training أو crawling أو phase جديدة بدون إذن صريح.
 - لا خلط بين `data/corpus/` و `resources/lexicons/`.
+- لا تغيير في `resources/tokenization/` بدون توثيق واختبارات.
 
 التفاصيل في [PROJECT_PRINCIPLES.md](./PROJECT_PRINCIPLES.md).
 

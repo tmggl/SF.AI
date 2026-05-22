@@ -1,0 +1,58 @@
+# SF.AI tokenization policy rules.
+# This is policy/configuration, not a pretrained tokenizer.
+
+version: 1
+encoding: utf-8
+scope:
+  current_languages:
+    - ar
+  current_dialects:
+    - msa
+    - saudi
+  excluded_until_explicit_approval:
+    - egyptian
+    - levantine
+    - iraqi
+    - maghrebi
+    - other
+
+sovereignty:
+  no_pretrained_vocab: true
+  no_pretrained_merges: true
+  learn_from_sovereign_corpus_only: true
+  external_tokenizer_artifacts_allowed: false
+
+normalization:
+  utf8_required: true
+  arabizi_has_separate_normalization: true
+  code_is_separate_from_dialogue: true
+  preserve_arabic_letters: true
+  preserve_digits: true
+  preserve_basic_punctuation: true
+
+protected_terms:
+  path: resources/tokenization/protected_terms_saudi.txt
+  policy: avoid_aggressive_splitting
+  max_expected_pieces_initial: 4
+  max_expected_pieces_after_training: 2
+  requires_audit: true
+
+preferred_merges:
+  path: resources/tokenization/preferred_merges.txt
+  policy: prefer_if_supported_by_corpus
+  requires_provenance_in_artifact: true
+
+training_audit:
+  required_checks:
+    - protected_terms_piece_counts
+    - protected_terms_round_trip
+    - msa_round_trip
+    - saudi_round_trip
+    - no_external_vocab
+    - no_external_merges
+
+artifact_requirements:
+  output_root: artifacts/tokenizers
+  require_sf_origin: true
+  require_rules_reference: true
+  require_corpus_reference: true
