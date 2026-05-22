@@ -41,9 +41,9 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 20 — Domain Activation Gates",
-        current_phase_status="phase20_gates_active_no_domain_auto_activated",
-        next_phase="Grow governed MSA+Saudi corpus through Phase 18 loop, then rerun Phase 19",
+        current_phase="Phase 21 — Generative Roadmap & Quality Targets",
+        current_phase_status="generative_roadmap_completed_after_phase20",
+        next_phase="Phase 22 — build Gold Dialogue Corpus v2 for MSA+Saudi generation quality",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -127,6 +127,7 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
             ComponentStatus(name="chat_review_export", status="active", phase="Phase 18"),
             ComponentStatus(name="phase19_readiness", status="active", phase="Phase 19"),
             ComponentStatus(name="domain_activation_gates", status="active", phase="Phase 20"),
+            ComponentStatus(name="generative_roadmap", status="active", phase="Phase 21"),
         ],
     )
 

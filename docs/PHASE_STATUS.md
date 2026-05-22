@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 20 / 20**
-- **المرحلة الحالية:** **Phase 20 — Domain Activation Gates**
-- **حالة المرحلة الحالية:** **بوابات تفعيل المجالات تعمل؛ لا يوجد أي تفعيل تلقائي، وchat هو المجال النشط الوحيد**
-- **المرحلة التالية المقترحة:** توسيع corpus عبر Phase 18 loop ثم إعادة `make phase19-readiness`.
+- **الرحلة الحالية:** **Phase 21 / 30**
+- **المرحلة الحالية:** **Phase 21 — Generative Roadmap & Quality Targets**
+- **حالة المرحلة الحالية:** **خارطة ما بعد Phase 20 مثبتة للوصول إلى حوار مولّد مقنع**
+- **المرحلة التالية المقترحة:** Phase 22 — بناء Gold Dialogue Corpus v2 حتى 500 سجل فصحى/سعودي.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ تم تحديث `default_registry.yaml` و`safety_terms.yaml` لفجوات finance/religion/security.
 - **تاريخ آخر تحديث:** 2026-05-22
 
@@ -46,6 +46,16 @@
 | Phase 18 | Data Expansion Loop v1 | ✅ completed_governed_loop | ✅ |
 | Phase 19 | SF-50M Candidate Training | readiness_gate_active_not_ready | ✅ |
 | Phase 20 | Domain Activation Gates | ✅ gates_active_no_auto_activation | ✅ |
+| Phase 21 | Generative Roadmap & Quality Targets | ✅ completed | ✅ |
+| Phase 22 | Gold Dialogue Corpus v2 | مخططة | ✅ |
+| Phase 23 | Tokenizer v2 Retrain & Audit | مخططة | ✅ |
+| Phase 24 | SF-10M v0.2 Quality Training | مخططة | ✅ |
+| Phase 25 | Generated Chat Canary v1 | مخططة | ✅ |
+| Phase 26 | SF-25M v0.1 Dialogue Model | مخططة | ✅ |
+| Phase 27 | Dialogue Evaluation v2 | مخططة | ✅ |
+| Phase 28 | SF-50M v0.1 Candidate | مخططة | ✅ |
+| Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
+| Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
 
 ---
 
@@ -178,6 +188,12 @@
   - المرشحان للمراجعة الصريحة فقط: `web`, `research`.
   - بقية المجالات تبقى skeleton أو safety-first.
   - docs: [PHASE20_DOMAIN_ACTIVATION_GATES_REPORT.md](./PHASE20_DOMAIN_ACTIVATION_GATES_REPORT.md)
+- بدأ وانتهى Phase 21 Generative Roadmap:
+  - أضيف [GENERATIVE_ROADMAP.md](./GENERATIVE_ROADMAP.md).
+  - مُدّدت الخطة الرسمية إلى Phase 30.
+  - تم توثيق أن التدريب الفعلي بدأ في Phase 13/14، لكن أول تدريب جودة مفيد قادم هو Phase 24.
+  - تم تحديد أن أول فرصة لحوار قصير مولّد مقنع هي Phase 26، والهدف الرسمي للحوار المقنع المستقر هو Phase 28.
+  - بقي المسار اللغوي `msa + saudi` فقط، وقاموس Saudi Seed v1 هو المرجع اللهجي الحالي.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -274,7 +290,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-400 passed in 3.93s
+403 passed in 3.63s
 ```
 
 | ملف | عدد |
@@ -292,6 +308,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_dataset_validators.py | 28 |
 | test_dialogue_batch_preparation.py | 3 (Phase 18) |
 | test_dialect_mapper.py | 7 |
+| test_generative_roadmap.py | 3 (Phase 21) |
 | test_health.py | 11 |
 | test_intent_detector.py | 7 |
 | test_mo3jam_importer.py | 13 |
@@ -314,7 +331,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_training_device.py | 14 |
 | test_typo_corrector.py | 5 |
 | test_web_extractor.py | 18 |
-| **Total** | **400** |
+| **Total** | **403** |
 
 ---
 

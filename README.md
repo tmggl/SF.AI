@@ -30,12 +30,13 @@
 - [docs/AGENT_INSTRUCTIONS.md](./docs/AGENT_INSTRUCTIONS.md) — workflow أي Agent يعمل على المشروع.
 - [docs/PROJECT_MAP.md](./docs/PROJECT_MAP.md) — خريطة المجلدات ومسؤولية كل مسار.
 - [docs/PROJECT_LIFECYCLE.md](./docs/PROJECT_LIFECYCLE.md) — دورة الحياة من corpus إلى runtime.
+- [docs/GENERATIVE_ROADMAP.md](./docs/GENERATIVE_ROADMAP.md) — خارطة الوصول إلى حوار مولّد مقنع بعد Phase 20.
 
 ---
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 20 / 20 — بوابات تفعيل المجالات تعمل، ولا يوجد أي تفعيل تلقائي للمجالات اللاحقة.
+- **الرحلة الحالية:** Phase 21 / 30 — خارطة الوصول إلى حوار مولّد مقنع مثبتة بعد Phase 20.
 - **الأولوية الحالية:** اختبار مختبر سامي المحلي، تصدير محادثات مراجعة، وتكبير corpus المحكوم قبل تدريب SF-50M.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
 - **البيانات الحالية:** seed سعودي صغير `30/30` يمر `corpus-audit`؛ ما زال `msa` مطلوبًا قبل تشغيل جودة لغوية متوازنة.
@@ -46,6 +47,7 @@
 - **دورة البيانات:** Phase 18 أضاف تصدير مراجعة من الواجهة و`prepare_dialogue_batch.py`; لا تعلم تلقائي.
 - **جاهزية SF-50M:** Phase 19 أضاف `make phase19-readiness`; القرار الحالي `NOT_READY_EXPAND_CORPUS_FIRST`.
 - **بوابات المجالات:** Phase 20 أضاف `make phase20-gates` و`GET /system/phase20-gates`; المجال النشط الوحيد هو `chat`.
+- **طريق التوليد المقنع:** Phase 24 هو أول تدريب جودة مفيد، Phase 26 أول فرصة لحوار قصير مقنع، وPhase 28 هدف الحوار المولّد المستقر.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
 ---
@@ -80,6 +82,16 @@
 | Phase 18 | Data Expansion Loop v1 — completed as governed loop |
 | Phase 19 | SF-50M Readiness Gate — active, corpus too small for training |
 | Phase 20 | Domain Activation Gates — active, no domain auto-activated |
+| Phase 21 | Generative Roadmap & Quality Targets — completed |
+| Phase 22 | Gold Dialogue Corpus v2 — planned |
+| Phase 23 | Tokenizer v2 Retrain & Audit — planned |
+| Phase 24 | SF-10M v0.2 Quality Training — planned |
+| Phase 25 | Generated Chat Canary v1 — planned |
+| Phase 26 | SF-25M v0.1 Dialogue Model — planned |
+| Phase 27 | Dialogue Evaluation v2 — planned |
+| Phase 28 | SF-50M v0.1 Candidate — planned |
+| Phase 29 | Runtime Hybrid Assistant v1 — planned |
+| Phase 30 | Continuous Improvement Loop — planned |
 
 **تفويض التنفيذ الحالي:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة في الرحلة، مع بقاء قواعد السيادة والسلامة وفحص الحساسية قبل الرفع.
 

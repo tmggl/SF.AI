@@ -60,13 +60,14 @@
 | Phase 18 | Data Expansion Loop v1 | ✅ completed_governed_loop |
 | Phase 19 | SF-50M Candidate Training | readiness_gate_active_not_ready |
 | Phase 20 | Domain Activation Gates | ✅ gates_active_no_auto_activation |
+| Phase 21 | Generative Roadmap & Quality Targets | ✅ completed |
 
 اقرأ التفاصيل في [PHASE_STATUS.md](./PHASE_STATUS.md) و [EXECUTION_PLAN.md](./EXECUTION_PLAN.md).
 
 ### الاختبارات
 
 ```
-400 passed in 3.93s
+403 passed in 3.63s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -136,7 +137,7 @@ bash scripts/run_chat_server.sh
 - `sf_ai/datasets/corpus_governance.py`
 - `tests/test_corpus_governance.py`
 
-تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات. Phase 19 أضاف بوابة جاهزية SF-50M وقراره الحالي: وسّع corpus أولًا. Phase 20 أضاف بوابات تفعيل المجالات، ولا يفعّل أي skeleton تلقائيًا.
+تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات. Phase 19 أضاف بوابة جاهزية SF-50M وقراره الحالي: وسّع corpus أولًا. Phase 20 أضاف بوابات تفعيل المجالات، ولا يفعّل أي skeleton تلقائيًا. Phase 21 ثبت خارطة Phase 22–30 للوصول إلى حوار مولّد مقنع.
 
 ### Phase 12 — preflight جاهز فقط
 
@@ -254,9 +255,17 @@ missing language balance: msa
 - المجالات الحساسة تبقى محجوبة بسبب `safety_policy_missing` واختبارات التفعيل.
 - أضيف `productivity` كسكيلتون كامل بعد أن كشفت البوابة أنه موجود في registry دون module/manifest.
 
+### Phase 21 — Generative Roadmap — مكتملة
+
+- `docs/GENERATIVE_ROADMAP.md`
+- امتدت الخطة الرسمية إلى Phase 30.
+- التدريب الفعلي بدأ في Phase 13/14، لكن أول تدريب جودة مفيد قادم هو Phase 24.
+- أول فرصة لحوار قصير مولّد مقنع: Phase 26.
+- الهدف الرسمي لحوار مولّد مستقر نسبيًا: Phase 28.
+
 ### تستطيع الآن العمل على:
 
-- توسيع corpus عبر Phase 18 loop، ثم إعادة Phase 19 readiness وPhase 20 gates.
+- Phase 22: بناء Gold Dialogue Corpus v2 حتى 500 سجل فصحى/سعودي، ثم إعادة corpus-audit وPhase 19/20 gates.
 
 ---
 

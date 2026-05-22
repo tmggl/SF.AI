@@ -25,6 +25,8 @@
 - Phase 17 اكتمل كبنية Local RAG bridge: الشات يستطيع استخدام snippets محلية عند حقن `HybridRetriever`.
 - Phase 18 اكتمل كدورة بيانات محكومة: الواجهة تصدر محادثة مراجعة محلية، و`prepare_dialogue_batch.py` يحول المعتمد فقط إلى JSONL تدريبي.
 - Phase 19 بدأ كبوابة جاهزية: `make phase19-readiness` يقرر هل نبدأ SF-50M. القرار الحالي: لا، corpus صغير جدًا.
+- Phase 20 اكتمل كبوابة تفعيل المجالات: `make phase20-gates` يمنع تفعيل skeleton domains بلا data/safety/tests/UI/fallback.
+- Phase 21 يبدأ الآن: تثبيت خارطة الوصول إلى حوار مولّد مقنع بعد Phase 20.
 
 الجرد الحالي يرى:
 
@@ -58,7 +60,7 @@ SF.AI حاليًا:
 - TinyTransformer scaffold جاهز.
 - training loop/checkpoints/device manager موجودة.
 
-الخارطة الرسمية أُضيفت إلى `docs/EXECUTION_PLAN.md`:
+الخارطة الرسمية أُضيفت إلى `docs/EXECUTION_PLAN.md` و[GENERATIVE_ROADMAP.md](./GENERATIVE_ROADMAP.md):
 
 - **Phase 11:** حوكمة وتجهيز corpus فصحى/سعودي.
 - **Phase 12:** تدريب SF-BPE tokenizer v1.
@@ -69,12 +71,25 @@ SF.AI حاليًا:
 - **Phase 17:** إدخال Memory/RAG المحلي في الشات — مكتمل كبنية اختيارية.
 - **Phase 18:** دورة توسيع بيانات مضبوطة — مكتملة كتصدير مراجعة + batch preparation.
 - **Phase 19:** بوابة جاهزية مرشح أكبر `SF-50M`; تحتاج 5000 سجل محكوم تقريبًا قبل التدريب.
+- **Phase 20:** بوابات تفعيل المجالات؛ المجال النشط الوحيد هو `chat`.
+- **Phase 21:** خارطة الجودة والتدريب بعد Phase 20.
+- **Phase 22:** توسيع corpus إلى 500 سجل حوار gold/silver.
+- **Phase 23:** تدريب tokenizer v2.
+- **Phase 24:** تدريب `SF-10M v0.2`؛ أول تدريب جودة مفيد بعد corpus أكبر.
+- **Phase 25:** Canary داخل الشات للمولد مع fallback عند التكرار.
+- **Phase 26:** تدريب `SF-25M v0.1`؛ أول فرصة لحوار قصير مولّد مقنع.
+- **Phase 27:** تقييم حوار متعدد الأدوار.
+- **Phase 28:** تدريب `SF-50M v0.1`؛ الهدف الأول لحوار مولّد مقنع ومستقر نسبيًا.
+- **Phase 29:** Runtime Hybrid Assistant v1.
+- **Phase 30:** Continuous Improvement Loop.
 
 المعنى العملي:
 
 - أول توليد خام: Phase 13.
-- أول مسار مولّد داخل الشات: Phase 15 كبنية metadata فقط، والتفعيل ينتظر Phase 16.
-- توليد نثق به أكثر للاختبار اليومي: بعد بيانات/تدريب أفضل ومرور gate جديد.
+- أول مسار مولّد داخل الشات: Phase 15 كبنية metadata، ثم مختبر محلي بعد Phase 16.
+- أول تدريب جودة مفيد قادم: Phase 24.
+- أول فرصة لحوار قصير مولّد يقنعك: Phase 26.
+- أول هدف رسمي لحوار مولّد مقنع ومستقر نسبيًا: Phase 28.
 
 حتى يتم ذلك، يجب وصف النظام بأنه **مساعد rule-based ذكي في التوجيه** مع مولّد سيادي خام للتجربة الفردية فقط عند تشغيل flags التجريبية.
 
