@@ -161,6 +161,23 @@
     line-height: 1.65;
   }
   .brief-list li { margin: 3px 0; }
+  .brief-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .brief-actions button {
+    min-height: 34px;
+    padding: 0 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    background: var(--panel-strong);
+    color: var(--text);
+    border: 1px solid var(--line);
+  }
+  .brief-actions button:hover { background: #dbe7f8; }
+  .brief-count { font-size: 12px; color: var(--muted); }
   footer {
     border-top: 1px solid var(--line);
     padding: 16px 18px;
@@ -275,6 +292,10 @@
         </div>
         <div class="quality-details" id="next-batch-details">تعرض المهمة التالية من Phase 22.</div>
         <ul class="brief-list" id="next-batch-topics"></ul>
+        <div class="brief-actions">
+          <button id="next-topic-btn" type="button">موضوعات أخرى</button>
+          <span class="brief-count" id="next-topic-count">—</span>
+        </div>
       </div>
       <div class="divider"></div>
       <h2>جودة التصدير</h2>
@@ -345,7 +366,11 @@
   const nextBatchTargetEl = document.getElementById("next-batch-target");
   const nextBatchDetailsEl = document.getElementById("next-batch-details");
   const nextBatchTopicsEl = document.getElementById("next-batch-topics");
+  const nextTopicBtn = document.getElementById("next-topic-btn");
+  const nextTopicCountEl = document.getElementById("next-topic-count");
   let currentNextBatch = null;
+  let currentSuggestedTopics = [];
+  let topicPage = 0;
 
   // Fetch phase info.
   fetch("/system/status").then(r => r.json()).then(data => {
@@ -402,7 +427,7 @@
         nextBatchLabelEl.textContent = "لا توجد batch حالية";
         nextBatchTargetEl.textContent = "—";
         nextBatchDetailsEl.textContent = brief.why_this_batch || "أعد فحص readiness.";
-        nextBatchTopicsEl.innerHTML = "";
+        setSuggestedTopics([]);
         return;
       }
       nextBatchBox.classList.add("mid");
@@ -410,24 +435,52 @@
       nextBatchTargetEl.textContent = batch.target_records + " سجل";
       nextBatchDetailsEl.textContent =
         "اكتب حواراتك أنت فقط. هذه موضوعات مساعدة وليست بيانات تدريب.";
-      nextBatchTopicsEl.innerHTML = "";
-      (brief.suggested_topics || []).slice(0, 3).forEach((topic) => {
-        const item = document.createElement("li");
-        item.textContent = topic;
-        nextBatchTopicsEl.appendChild(item);
-      });
+      setSuggestedTopics(brief.suggested_topics || []);
     }).catch(() => {
       currentNextBatch = null;
+      setSuggestedTopics([]);
       nextBatchBox.classList.remove("good", "mid", "bad");
       nextBatchBox.classList.add("bad");
       nextBatchLabelEl.textContent = "تعذر جلب المهمة";
       nextBatchTargetEl.textContent = "—";
       nextBatchDetailsEl.textContent = "تأكد من تشغيل السيرفر ثم حدّث الصفحة.";
-      nextBatchTopicsEl.innerHTML = "";
     });
   }
 
   updateNextBatchBrief();
+
+  function setSuggestedTopics(topics) {
+    currentSuggestedTopics = topics.filter((topic) => (topic || "").trim());
+    topicPage = 0;
+    renderSuggestedTopics();
+  }
+
+  function renderSuggestedTopics() {
+    nextBatchTopicsEl.innerHTML = "";
+    const pageSize = 3;
+    const total = currentSuggestedTopics.length;
+    if (!total) {
+      nextTopicCountEl.textContent = "—";
+      nextTopicBtn.disabled = true;
+      return;
+    }
+    const pages = Math.ceil(total / pageSize);
+    const start = (topicPage % pages) * pageSize;
+    currentSuggestedTopics.slice(start, start + pageSize).forEach((topic) => {
+      const item = document.createElement("li");
+      item.textContent = topic;
+      nextBatchTopicsEl.appendChild(item);
+    });
+    nextTopicBtn.disabled = total <= pageSize;
+    nextTopicCountEl.textContent =
+      "يعرض " + (start + 1) + "-" + Math.min(start + pageSize, total) + " من " + total;
+  }
+
+  nextTopicBtn.addEventListener("click", () => {
+    if (!currentSuggestedTopics.length) return;
+    topicPage += 1;
+    renderSuggestedTopics();
+  });
 
   function el(tag, opts = {}) {
     const e = document.createElement(tag);
@@ -743,7 +796,8 @@
           batch_id: currentNextBatch.batch_id,
           dialect: currentNextBatch.dialect,
           target_records: currentNextBatch.target_records,
-          suggested_output_path: currentNextBatch.suggested_output_path
+          suggested_output_path: currentNextBatch.suggested_output_path,
+          authoring_topic_count: currentSuggestedTopics.length
         } : null,
         ui_quality_score: quality.score,
         ui_quality_label: quality.label,

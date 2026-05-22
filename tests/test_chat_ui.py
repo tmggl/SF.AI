@@ -29,6 +29,9 @@ def test_ui_chat_serves_html() -> None:
     assert "مهمة الجمع الحالية" in body
     assert "/system/phase22-next-batch" in body
     assert "phase22_next_batch" in body
+    assert "موضوعات أخرى" in body
+    assert "authoring_topic_count" in body
+    assert "هذه موضوعات مساعدة وليست بيانات تدريب" in body
     assert "غير جاهز للتوكنزر بعد" in body
     assert "جودة التصدير" in body
     assert "quality-score" in body
