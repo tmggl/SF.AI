@@ -68,7 +68,7 @@
 ### الاختبارات
 
 ```
-423 passed in 4.67s
+423 passed in 4.43s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -281,6 +281,7 @@ missing language balance: msa
 - خطة الجمع الحالية: 200 فصحى + 170 سعودي + 100 مرنة، نحو 19 batch بحجم 25
 - review intake الحالي: `data/corpus/chat/review/sample_review_export.jsonl` مرشح للمراجعة فقط؛ لا يدخل التدريب تلقائيًا.
 - `phase22-review-intake` يعرض أيضًا `quality_score`, `quality_label`, و`quality_blockers`; لا تعتبر جلسة قوية للتدريب إلا إذا كانت متعددة الأدوار غالبًا 3 user + 3 assistant على الأقل.
+- `/ui/chat` يعرض مؤشر جودة تصدير محليًا، ويضيف `ui_quality_score/ui_quality_label/ui_quality_blockers` إلى export metadata.
 - الواجهة المستقرة يجب أن تعمل بـ `generator=template` افتراضيًا، وهذا يعني قوالب ثابتة لا مولدًا مقنعًا. لا تطلب من سامي اختبار المولد حتى Phase 24/25 على الأقل.
 - أي export يحتوي ردود `sf_10m_v0_1` يجب أن يبقى review evidence فقط، و`phase22-review-intake` يميّزه ولا يعدّه candidate تدريب جودة.
 - الممنوع: synthetic LLM data

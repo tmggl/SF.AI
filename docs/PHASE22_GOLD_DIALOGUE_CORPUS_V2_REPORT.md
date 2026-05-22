@@ -101,6 +101,12 @@ status: REVIEW_EXPORTS_READY_FOR_MANUAL_REVIEW
 - `quality_label`: مثل `gold_candidate`, `silver_candidate`, `needs_more_turns_or_review`.
 - `quality_blockers`: مثل قصر المحادثة أو وجود ردود `sf_10m_v0_1`.
 
+وأضيف مؤشر جودة مباشر داخل شاشة `/ui/chat`:
+
+- يعرض score قبل التصدير.
+- يحذر إذا كانت الجلسة أقل من 3 أدوار منك و3 ردود من المساعد.
+- يضع `ui_quality_score`, `ui_quality_label`, `ui_quality_blockers` في ملف export.
+
 القاعدة العملية للوصول إلى حوار مفيد للتدريب:
 
 - لا تصدّر أقل من 3 أدوار منك و3 ردود من المساعد.

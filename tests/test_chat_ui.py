@@ -23,6 +23,10 @@ def test_ui_chat_serves_html() -> None:
     assert "اكتب رسالتك هنا" in body
     assert "المحادثة جاهزة" in body
     assert "قالب ثابت - ليس مولدًا" in body
+    assert "جودة التصدير" in body
+    assert "quality-score" in body
+    assert "ui_quality_score" in body
+    assert "ui_quality_label" in body
     assert "ذاكرة:" in body
     assert "تصدير" in body
     assert "training_allowed: false" in body or "training_allowed\": false" in body

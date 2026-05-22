@@ -31,6 +31,7 @@
 - **نتيجة Phase 22:** أضيف `make phase22-readiness` و`make phase22-plan` و`make phase22-review-intake` و`GET /system/phase22-readiness` و`GET /system/phase22-collection-plan` و`GET /system/phase22-review-intake`; القرار الحالي `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2` لأن corpus الحالي 30/500 ويفتقد `msa`.
 - **Review intake الحالي:** `data/corpus/chat/review/sample_review_export.jsonl` مرشح للمراجعة فقط؛ الأداة read-only ولا تنقل أي شيء إلى التدريب.
 - **بوابة جودة الحوار:** `phase22-review-intake` يعرض الآن `quality_score/quality_label/quality_blockers`; الجلسة المفيدة للتدريب تحتاج غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل وبدون `sf_10m_v0_1`.
+- **مؤشر جودة التصدير في الواجهة:** شاشة `/ui/chat` تعرض score جودة محلي قبل التصدير وتضع `ui_quality_score/ui_quality_label/ui_quality_blockers` داخل metadata.
 - **تصحيح تشغيل المولّد:** الواجهة المستقرة عادت إلى `generator=template` افتراضيًا؛ هذا يعني قوالب ثابتة لا توليدًا ذكيًا. `SF-10M` الخام لا يدخل ردود الشات إلا بفلاغات مختبر صريحة.
 - **مختبر سامي المحلي:** يمكن تشغيل المولّد الخام عبر `SF_ENABLE_NATIVE_GENERATOR=true` و`SF_NATIVE_GENERATOR_EXPERIMENTAL=true`، وتمكين الرسائل غير الحساسة من مجالات skeleton عبر `SF_LAB_GENERATION_FOR_NON_SENSITIVE=true` عند الاختبار فقط.
 - **حماية التصدير:** إذا صدّرت جلسة تحتوي ردودًا من `sf_10m_v0_1`، تضع الواجهة metadata واضحًا، و`phase22-review-intake` لا يعدّها candidate تدريب جودة.
@@ -241,7 +242,7 @@ make server-start
 ## نتائج الاختبارات (حتى Phase 22 review intake)
 
 ```
-423 passed in 4.67s
+423 passed in 4.43s
 ```
 
 التغطية الحالية:
@@ -264,7 +265,7 @@ make server-start
 - `test_research_summarizer.py` — 20 tests (Phase 7)
 - `test_saudi_seed.py` — 15 tests (Phase 3.6)
 - `test_rag_sparse_retrieval.py` — 14 tests (Phase 8)
-- `test_chat_ui.py` — 4 tests (Phase 9)
+- `test_chat_ui.py` — 4 tests (Phase 9 + export quality indicator)
 - `test_dialogue_batch_preparation.py` — Phase 18 data loop
 - `test_dialect_mapper.py` — 7 tests
 - `test_health.py` — 11 tests (API + module dispatch + safety + readiness)

@@ -213,6 +213,7 @@
   - خطة الجمع الحالية: 200 فصحى + 170 سعودي + 100 مرنة، أي نحو 19 batch بحجم 25.
   - review intake الحالي: ملف عينة واحد في `data/corpus/chat/review/` مرشح للمراجعة، ولا يدخل التدريب تلقائيًا.
   - أضيفت بوابة جودة داخل review intake: `quality_score`, `quality_label`, و`quality_blockers`.
+  - أضيف مؤشر جودة التصدير داخل `/ui/chat` حتى يعرف سامي قبل التصدير هل الجلسة قصيرة أو صالحة للمراجعة.
   - القاعدة العملية الجديدة: ملف التصدير المفيد يجب أن يحتوي غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل، وبدون ردود `sf_10m_v0_1`.
   - صححت تشغيل الواجهة المستقرة: `generator=template` افتراضيًا، أي قوالب ثابتة لا مولد؛ و`SF-10M` الخام يبقى مختبرًا صريحًا فقط.
   - أضيفت حماية export/review intake لتمييز أي جلسة تحتوي ردود `sf_10m_v0_1` ومنع عدّها كـ candidate تدريب جودة.
@@ -252,7 +253,7 @@
   - **لا CDNs، لا Node، لا build step** — تعمل من المتصفح مباشرة.
 - `apps/api/routers/ui.py` — GET `/ui/chat` يخدم الـ HTML.
 - `apps/api/main.py` — أضيف `ui.router`، و GET `/chat` redirect → `/ui/chat`.
-- اختبارات: 4 في `test_chat_ui.py`.
+- اختبارات: 4 في `test_chat_ui.py` تشمل مؤشر جودة التصدير.
 
 ### Phase 9 Polish — Comfortable Chat + Accurate Routing
 
@@ -315,7 +316,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-423 passed in 4.67s
+423 passed in 4.43s
 ```
 
 | ملف | عدد |
@@ -326,7 +327,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_chat_module.py | 12 |
 | test_chat_native_generator.py | 15 (Phase 15 + lab mode) |
 | test_chat_rag_bridge.py | 6 (Phase 17) |
-| test_chat_ui.py | 4 (Phase 9/19 status) |
+| test_chat_ui.py | 4 (Phase 9/19 status + export quality indicator) |
 | test_checkpoints.py | 7 |
 | test_conversation_state.py | 8 |
 | test_corpus_governance.py | 6 (Phase 11) |
