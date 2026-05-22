@@ -57,7 +57,7 @@
 | Phase 15 | Generator Adapter for ChatModule | ✅ completed_as_safe_adapter |
 | Phase 16 | Evaluation/Safety/Style Harness | ✅ completed_with_runtime_blocked |
 | Phase 17 | Local Memory/RAG Bridge into Chat | ✅ completed_local_bridge |
-| Phase 18 | Data Expansion Loop v1 | معلّقة |
+| Phase 18 | Data Expansion Loop v1 | ✅ completed_governed_loop |
 | Phase 19 | SF-50M Candidate Training | معلّقة |
 | Phase 20 | Domain Activation Gates | معلّقة |
 
@@ -66,7 +66,7 @@
 ### الاختبارات
 
 ```
-380 passed in 2.32s
+383 passed in 2.29s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -125,7 +125,7 @@ bash scripts/run_chat_server.sh
 
 ### الهدف العام بعد تحديث الخطة
 
-سامي أكد أن الهدف ليس بوت قواعد فقط، بل **نموذج لغوي سيادي مولّد**. لذلك أُضيفت Phase 11–20 في [EXECUTION_PLAN.md](./EXECUTION_PLAN.md). لا تبدأ تدريبًا أو تجهيز corpus فعلي قبل إذن صريح.
+سامي أكد أن الهدف ليس بوت قواعد فقط، بل **نموذج لغوي سيادي مولّد**. لذلك أُضيفت Phase 11–20 في [EXECUTION_PLAN.md](./EXECUTION_PLAN.md). التفويض الحالي يسمح بمتابعة المراحل المسجلة دون انتظار موافقة جديدة، مع بقاء قواعد السيادة وفحص الحساسية.
 
 ### Phase 11 — اكتملت كحوكمة
 
@@ -136,7 +136,7 @@ bash scripts/run_chat_server.sh
 - `sf_ai/datasets/corpus_governance.py`
 - `tests/test_corpus_governance.py`
 
-تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه غير صالح للشات. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata `generator=template` دون تفعيل runtime. Phase 16 أضاف prompt suites وeval report وقرر `runtime_activation_allowed=false`. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`.
+تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه غير صالح للشات. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata `generator=template` دون تفعيل runtime. Phase 16 أضاف prompt suites وeval report وقرر `runtime_activation_allowed=false`. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات.
 
 ### Phase 12 — preflight جاهز فقط
 
@@ -225,9 +225,20 @@ merges: 218
 missing language balance: msa
 ```
 
+### Phase 18 — Data Expansion Loop v1 — اكتملت
+
+أضيفت طبقة تمنع التعلم الخفي من محادثات سامي، لكنها تجعل جمع البيانات أسهل:
+
+- زر `تصدير` في [apps/api/static/chat.html](../apps/api/static/chat.html) يخرج JSONL محليًا للمراجعة.
+- export يضع دائمًا `training_allowed=false`, `quality=needs_review`, `license=user-review-required`.
+- [scripts/prepare_dialogue_batch.py](../scripts/prepare_dialogue_batch.py) يحول المراجعات إلى corpus تدريبي فقط عند تمرير `--training-allowed`.
+- [sf_ai/datasets/dialogue_batch.py](../sf_ai/datasets/dialogue_batch.py) يفرض provenance/dialect/quality ويتخطى السجلات الحساسة افتراضيًا.
+- التقرير الافتراضي: [artifacts/reports/dialogue_batch_report.json](../artifacts/reports/dialogue_batch_report.json).
+- الوثيقة: [DATA_IMPROVEMENT_LOOP.md](./DATA_IMPROVEMENT_LOOP.md).
+
 ### تستطيع الآن الانتقال إلى:
 
-- **Phase 18** Data Expansion Loop v1.
+- **Phase 19** SF-50M Candidate Training، لكن فقط بعد التأكد أن corpus المحكوم كافٍ. إن لم يكف، وسّع corpus عبر Phase 18 loop أولًا.
 
 ---
 
@@ -239,7 +250,7 @@ missing language balance: msa
 2. **CrawlerBase يرفع `CrawlerPermissionError`** بدون `permission_granted=True` — لا تكسر هذا.
 3. **CheckpointMetadata.sf_origin = True** مقفل — لا تحاول تجاوزه.
 4. **TrainingConfig.sovereign = True** مقفل — لا تحاول تجاوزه.
-5. **أي مصدر بيانات جديد يحتاج إذنًا**. سامي يتواصل بنفسه ويعطيك تأكيدًا.
+5. **أي مصدر بيانات خارجي جديد يحتاج توثيق provenance**. سامي أعطى تفويضًا عامًا للمراحل المسجلة، لكن لا تستخدم مصادر مجهولة أو LLM synthetic data.
 6. **شفافية User-Agent** على أي crawl: `SF.AI Research Crawler - permission-gated`.
 7. **rate-limit أدنى 2 ثوانٍ** بين الطلبات على نفس الـ domain.
 
@@ -249,7 +260,7 @@ missing language balance: msa
 2. كن **حازمًا في التنفيذ، شفافًا في النتائج**. لا تتظاهر بأن شيئًا اكتمل قبل التحقق.
 3. **لا تختصر القرارات المعمارية** — اشرح لماذا اخترت X بدل Y لو سامي سأل.
 4. **استخدم Phase 0–9 كمرجع** — لا تخترع مراحل جديدة من فراغ.
-5. **عند الشك في إذن مصدر خارجي → توقّف واسأل**. لا تخمن.
+5. التفويض الحالي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، لكن عند الشك في مصدر خارجي أو مخاطرة حساسة → توقّف واسأل.
 
 ### مع الاختبارات
 
@@ -334,7 +345,8 @@ curl -s -X POST http://127.0.0.1:8123/chat/message \
 
 ## 9. عبارات للتواصل مع المستخدم
 
-- إنهاء أي مرحلة بـ: **"اكتملت المرحلة الحالية. هل تسمح لي بالانتقال إلى المرحلة التالية؟"** — هذا بروتوكول متفق عليه.
+- إنهاء أي مرحلة بملخص عربي واضح يتضمن رقم الرحلة، القاموس المتبع، الاختبارات، والرفع إن تم.
+- التفويض الحالي يلغي انتظار الموافقة بين المراحل المسجلة، لكن لا يلغي قواعد: لا pretrained، لا مصادر مجهولة، لا بيانات حساسة، لا hidden shortcuts.
 - عند البدء بمهمة كبيرة: اشرح في 3 أسطر **ما ستعمله** قبل التنفيذ.
 - عند الفشل: قل بصراحة **ما لم يعمل**، لا تختبئ خلف "تم".
 

@@ -199,6 +199,7 @@
     <div class="badges">
       <span class="badge" id="session-badge">جلسة: —</span>
       <span class="badge" id="sov-badge">سيادي ✓</span>
+      <button class="icon-btn" id="export-btn" title="تصدير المحادثة للمراجعة">تصدير</button>
       <button class="icon-btn" id="clear-btn" title="مسح المحادثة">مسح</button>
     </div>
   </header>
@@ -253,6 +254,13 @@
     return id;
   })();
   document.getElementById("session-badge").textContent = "جلسة: " + SESSION_ID;
+  const TRANSCRIPT_KEY = "sf_transcript_" + SESSION_ID;
+  let transcript = [];
+  try {
+    transcript = JSON.parse(localStorage.getItem(TRANSCRIPT_KEY) || "[]");
+  } catch (_) {
+    transcript = [];
+  }
 
   const messagesEl = document.getElementById("messages");
   const inputEl = document.getElementById("input");
@@ -312,6 +320,20 @@
 
   function showEmpty() {
     messagesEl.innerHTML = '<div class="empty">المحادثة جاهزة. اكتب رسالتك في الأسفل.</div>';
+  }
+
+  function saveTranscript() {
+    localStorage.setItem(TRANSCRIPT_KEY, JSON.stringify(transcript.slice(-80)));
+  }
+
+  function recordTurn(role, content, extra = {}) {
+    transcript.push({
+      role,
+      content,
+      time: new Date().toISOString(),
+      ...extra
+    });
+    saveTranscript();
   }
 
   function escapeText(t) { return (t || "").toString(); }
@@ -391,6 +413,7 @@
     if (!text) return;
     sendBtn.disabled = true;
     appendMessage("user", text);
+    recordTurn("user", text);
     inputEl.value = "";
     const placeholder = appendMessage("bot", "…");
     try {
@@ -405,6 +428,14 @@
       }
       const body = await r.json();
       setMessageText(placeholder, body.response || "(لا رد)");
+      recordTurn("assistant", body.response || "", {
+        domain: body.domain || "",
+        intent: body.intent || "",
+        generator: body.generator || "template",
+        rag: body.rag || "not_used",
+        requires_safety: !!body.requires_safety,
+        fallback_used: !!body.fallback_used
+      });
       const meta = el("div", { className: "meta" });
       meta.textContent =
         readableValue("domain", body.domain) +
@@ -435,6 +466,7 @@
     safetyEl.textContent = "—";
     // Rotate to a fresh session so the server's short-term memory starts over.
     const newId = "sf-" + Math.random().toString(36).slice(2, 10);
+    localStorage.removeItem(TRANSCRIPT_KEY);
     localStorage.setItem("sf_session_id", newId);
     document.getElementById("session-badge").textContent = "جلسة: " + newId;
     // Soft reload so SESSION_ID variable updates.
@@ -443,6 +475,41 @@
   document.getElementById("clear-btn").addEventListener("click", () => {
     if (confirm("هل تريد مسح المحادثة وبدء جلسة جديدة؟")) clearChat();
   });
+
+  function exportForReview() {
+    const clean = transcript
+      .filter((t) => (t.role === "user" || t.role === "assistant") && (t.content || "").trim())
+      .map((t) => ({ role: t.role, content: t.content.trim() }));
+    const hasUser = clean.some((m) => m.role === "user");
+    const hasAssistant = clean.some((m) => m.role === "assistant");
+    if (!hasUser || !hasAssistant) {
+      alert("احتاج رسالة منك ورد من المساعد قبل التصدير.");
+      return;
+    }
+    const record = {
+      domain: "chat",
+      lang: "ar",
+      messages: clean,
+      provenance: {
+        source: "sf-ai-chat-ui-review-export",
+        license: "user-review-required",
+        language: "ar",
+        dialect: "saudi",
+        quality: "needs_review",
+        training_allowed: false,
+        notes: "Exported locally from UI. Review with scripts/prepare_dialogue_batch.py before training."
+      }
+    };
+    const blob = new Blob([JSON.stringify(record) + "\n"], { type: "application/jsonl;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "sfai_chat_review_" + SESSION_ID + ".jsonl";
+    document.body.appendChild(a);
+    a.click();
+    URL.revokeObjectURL(a.href);
+    a.remove();
+  }
+  document.getElementById("export-btn").addEventListener("click", exportForReview);
 
   sendBtn.addEventListener("click", send);
   inputEl.addEventListener("keydown", (e) => {

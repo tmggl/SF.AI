@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 17 / 20**
-- **المرحلة الحالية:** **Phase 17 — Local Memory/RAG Bridge into Chat**
-- **حالة المرحلة الحالية:** **اكتملت كبنية bridge محلية: ChatModule يقبل snippets من HybridRetriever ويميز ردود الذاكرة المحلية**
-- **المرحلة التالية المقترحة:** Phase 18 — Data Expansion Loop v1.
+- **الرحلة الحالية:** **Phase 18 / 20**
+- **المرحلة الحالية:** **Phase 18 — Data Expansion Loop v1**
+- **حالة المرحلة الحالية:** **اكتملت كدورة بيانات محكومة: تصدير مراجعة من الواجهة + تحضير batch تدريبي بسكربت صريح**
+- **المرحلة التالية المقترحة:** Phase 19 — SF-50M Candidate Training (مشروط بكفاية corpus).
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ تم تحديث `default_registry.yaml` و`safety_terms.yaml` لفجوات finance/religion/security.
 - **تاريخ آخر تحديث:** 2026-05-22
 
@@ -43,7 +43,7 @@
 | Phase 15 | Generator Adapter for ChatModule | ✅ completed_as_safe_adapter | ✅ |
 | Phase 16 | Evaluation, Safety, and Saudi/MSA Style Harness | ✅ completed_with_runtime_blocked | ✅ |
 | Phase 17 | Local Memory/RAG Bridge into Chat | ✅ completed_local_bridge | ✅ |
-| Phase 18 | Data Expansion Loop v1 | معلّقة | ⏳ |
+| Phase 18 | Data Expansion Loop v1 | ✅ completed_governed_loop | ✅ |
 | Phase 19 | SF-50M Candidate Training | معلّقة | ⏳ |
 | Phase 20 | Domain Activation Gates | معلّقة | ⏳ |
 
@@ -152,6 +152,14 @@
   - تحسين واجهة `/ui/chat` إلى تصميم فاتح، خطوط أكبر، تشخيص أوضح، وتسميات عربية للـ generator/rag/dispatch.
   - لا web crawling تلقائي ولا embeddings جاهزة.
   - docs: [PHASE17_RAG_BRIDGE_REPORT.md](./PHASE17_RAG_BRIDGE_REPORT.md)
+- بدأ وانتهى Phase 18 Data Expansion Loop v1:
+  - أضيف زر `تصدير` في `/ui/chat` لإخراج JSONL محلي للمراجعة.
+  - export يضع `training_allowed=false` و`quality=needs_review`.
+  - أضيف `scripts/prepare_dialogue_batch.py`.
+  - أضيف `sf_ai/datasets/dialogue_batch.py`.
+  - أضيف `artifacts/reports/dialogue_batch_report.json`.
+  - لا تدخل المحادثات التدريب تلقائيًا.
+  - docs: [DATA_IMPROVEMENT_LOOP.md](./DATA_IMPROVEMENT_LOOP.md)
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -248,7 +256,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-380 passed in 2.32s
+383 passed in 2.29s
 ```
 
 | ملف | عدد |
@@ -264,6 +272,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_conversation_state.py | 8 |
 | test_corpus_governance.py | 6 (Phase 11) |
 | test_dataset_validators.py | 28 |
+| test_dialogue_batch_preparation.py | 3 (Phase 18) |
 | test_dialect_mapper.py | 7 |
 | test_health.py | 7 |
 | test_intent_detector.py | 7 |
@@ -285,7 +294,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_training_device.py | 14 |
 | test_typo_corrector.py | 5 |
 | test_web_extractor.py | 18 |
-| **Total** | **380** |
+| **Total** | **383** |
 
 ---
 
@@ -327,4 +336,4 @@ make api
 
 ## بروتوكول الانتقال
 
-> **"اكتملت المرحلة الحالية. هل تسمح لي بالانتقال إلى المرحلة التالية؟"**
+التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقات جديدة، مع توثيق رقم الرحلة، القاموس المتبع، نتائج الاختبارات، وفحص الحساسية قبل أي رفع.

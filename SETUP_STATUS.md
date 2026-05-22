@@ -10,10 +10,10 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 17 / 20**
-- **المرحلة الحالية:** **Phase 17 — Local Memory/RAG Bridge into Chat** (اكتملت كبنية bridge محلية؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **الرحلة الحالية:** **Phase 18 / 20**
+- **المرحلة الحالية:** **Phase 18 — Data Expansion Loop v1** (اكتملت كدورة بيانات محكومة؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** **Phase 18 — Data Expansion Loop v1**.
+- **المرحلة التالية المقترحة:** **Phase 19 — SF-50M Candidate Training**، مشروطة بكفاية corpus محكوم.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
@@ -21,8 +21,10 @@
 - **نتيجة Phase 15:** أضيف `NativeGenerator` + `GenerationPolicy` + metadata في API/UI، لكن الرد الحي يبقى `generator=template` حتى ينجح Phase 16.
 - **نتيجة Phase 16:** `make eval-phase16` نجح: `15/15`, `PASS_WITH_RUNTIME_BLOCKED`, و`runtime_activation_allowed=false`.
 - **نتيجة Phase 17:** أضيف `ChatRagBridge` و`ContextBuilder`; الشات يستطيع استخدام snippets محلية عند حقن `HybridRetriever`، ويعرض `rag=used/not_used`.
+- **نتيجة Phase 18:** أضيف زر تصدير مراجعة من واجهة الشات + `scripts/prepare_dialogue_batch.py` + تقرير `artifacts/reports/dialogue_batch_report.json`; لا تدخل محادثات المستخدم إلى التدريب تلقائيًا.
+- **حماية Phase 18:** ملفات `data/corpus/**/review/*.jsonl` مستثناة من git افتراضيًا؛ العينة الآمنة الوحيدة المسموحة هي `sample_review_export.jsonl`.
 - **وضع تجربة المستخدم الفردي:** يمكن تشغيل المولّد الخام لك وحدك عبر `SF_ENABLE_NATIVE_GENERATOR=true` و`SF_NATIVE_GENERATOR_EXPERIMENTAL=true`; هذا لا يعني أن النموذج صار صالحًا عامًا.
-- **تفويض التنفيذ:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة؛ استخدم flags المطلوبة مع توثيق كل تشغيل.
+- **تفويض التنفيذ:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة دون انتظار موافقات جديدة؛ استخدم flags المطلوبة مع توثيق كل تشغيل ولا تكسر قواعد السيادة/السلامة.
 - **فحص Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/corpus-audit`
 - **قرار Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/phase12-readiness` يعرض أن tokenizer v1 اكتمل، مع بقاء `missing_required_dialects=["msa"]` قبل إعادة تدريب متوازن.
 - **قرار Phase 12 من الطرفية بدون restart:** `make phase12-readiness`، وهو read-only ويعرض نفس منطق القرار.
@@ -37,7 +39,7 @@
 - **نتيجة tokenization-audit الحالية:** 30/30 protected terms مغطاة في corpus الحالي؛ التغطية 100%.
 - **تقرير Phase 12:** `docs/PHASE12_TOKENIZER_V1_REPORT.md`، وحالته: `COMPLETED_WITH_LIMITS`.
 - **تحسين اللغة الأخير:** التركيز الافتراضي الآن على العربية الفصحى + اللهجة السعودية فقط، مع إيقاف اللهجات الأخرى افتراضيًا.
-- **تحسين المحادثة الأخير:** واجهة فاتحة أوضح للشات، خطوط أكبر، أزرار أوضح، لوحة تشخيص مقروءة، وتسمية عربية لـ `generator/rag/dispatch`.
+- **تحسين المحادثة الأخير:** واجهة فاتحة أوضح للشات، خطوط أكبر، أزرار أوضح، لوحة تشخيص مقروءة، تسمية عربية لـ `generator/rag/dispatch`، وزر `تصدير` لمراجعة المحادثة.
 - **خلفية:** بعد Phase 7 أضاف المستخدم قاموس سعودي تأليفي (Phase 3.6)، ثم أُكملت Phase 8 (RAG)، Phase 9 (الشاشة)، Phase 10 (هياكل المجالات).
 - **آخر تحديث:** 2026-05-22
 
@@ -75,7 +77,7 @@
 
 ---
 
-## الملفات الموجودة الآن (Phases 0–11 + Governance Layer)
+## الملفات الموجودة الآن (Phases 0–18 + Governance Layer)
 
 ```
 SF.AI/
@@ -83,7 +85,7 @@ SF.AI/
 ├── PROJECT_PRINCIPLES.md                  Phase 0
 ├── SETUP_STATUS.md                        محدّث
 ├── .env.example / .gitignore              Phase 1 (+ runtime lexicon flags)
-├── docker-compose.yml / Makefile          Phase 1 (+ targets Phase 3.5/5.5/6/12 preflight)
+├── docker-compose.yml / Makefile          Phase 1 (+ targets Phase 3.5/5.5/6/12/18)
 ├── pyproject.toml                         Phase 1 (+ training extras: torch)
 │
 ├── apps/
@@ -96,7 +98,7 @@ SF.AI/
 │   │   │   ├── system.py                  GET /system/status
 │   │   │   └── ui.py                      GET /ui/chat  (Phase 9)
 │   │   ├── static/
-│   │   │   └── chat.html                  شاشة المحادثة RTL (Phase 9 + clear/timestamps)
+│   │   │   └── chat.html                  شاشة المحادثة RTL (Phase 9 + clear/timestamps/export)
 │   │   └── schemas/{chat,system}.py
 │   └── web/README.md                      placeholder for Next.js later
 │
@@ -121,7 +123,7 @@ SF.AI/
 │   ├── models/
 │   │   ├── tokenizer/                     Phase 5.5 — char + SF-BPE + trainer
 │   │   └── transformer/                   Phase 6 — TinyTransformer + RoPE + RMSNorm
-│   ├── datasets/                          Phase 5 + Phase 3.6 (saudi_seed loader)
+│   ├── datasets/                          Phase 5 + Phase 3.6 + Phase 18 dialogue batches
 │   └── training/                          Phase 5.5 + Phase 6 — device, schedules,
 │                                           checkpoints, optimizers, train_*.py
 │
@@ -133,15 +135,15 @@ SF.AI/
 ├── resources/tokenization/                Constitution Layer — protected terms + rules
 │
 ├── data/corpus/
-│   ├── chat/{raw,cleaned,jsonl}/          Phase 5/11 — first_dialogue_seed.jsonl + CARD
+│   ├── chat/{raw,cleaned,jsonl,review}/   Phase 5/11/18 — governed chat corpus + review exports
 │   └── dialects/saudi/
 │       ├── raw/mo3jam/                    Phase 3.5
 │       ├── jsonl/saudi_dialect_training_tasks_seed_v1.jsonl   Phase 3.6
 │       ├── cleaned/, reports/
 │
-├── artifacts/{tokenizers,checkpoints,logs}/   Phase 5.5+ outputs
+├── artifacts/{tokenizers,checkpoints,logs,reports}/   Phase 5.5+ outputs/reports
 │
-├── tests/                                 pytest suite — 380 تست / 42 ملف
+├── tests/                                 pytest suite — 383 تست / 43 ملف
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -157,6 +159,7 @@ SF.AI/
 │   ├── validate_dataset.py                Phase 5
 │   ├── train_bpe.py                       Phase 5.5
 │   ├── run_chat_server.sh                 يشغّل API على 8123 ويفعّل Saudi Seed افتراضيًا
+│   ├── prepare_dialogue_batch.py          Phase 18 — يحضر exports مراجعة إلى batch تدريبي محكوم
 │   └── import_mo3jam_saudi.py             Phase 3.5
 │
 └── docs/
@@ -164,6 +167,7 @@ SF.AI/
     ├── PROJECT_IDENTITY.md, ENGINEERING_RULES.md, AGENT_INSTRUCTIONS.md
     ├── PROJECT_MAP.md, PROJECT_LIFECYCLE.md
     ├── CURRENT_GOALS.md                    الهدف العام وخارطة التوليد الحالية
+    ├── DATA_IMPROVEMENT_LOOP.md           Phase 18 — دورة تحسين البيانات
     ├── ROUTER.md, SEMANTIC_EXPLORER.md, LANGUAGE_UNDERSTANDING.md
     ├── DATASET_FORMAT.md, SOVEREIGN_ACCELERATION.md, TRAINING_PLAN.md
     ├── WEB_RESEARCH_PLAN.md, WEB_CRAWLING_POLICY.md, RAG_PLAN.md
@@ -179,7 +183,7 @@ SF.AI/
 
 - `GET /` — معلومات root + رابط الـ UI.
 - `GET /health` — فحص صحة (project + phase).
-- `GET /system/status` — حالة المراحل + flags السيادة + قائمة المكونات، بما فيها Phase 10 skeleton modules.
+- `GET /system/status` — حالة المراحل + flags السيادة + قائمة المكونات، بما فيها Phase 18 data loop.
 - `GET /system/corpus-audit` — جاهزية corpus قبل Phase 12.
 - `GET /system/phase12-readiness` — قرار جاهزية Phase 12 مع بوابة الإذن.
 - `GET /system/source-inventory` — جرد مصادر البيانات والمراجع.
@@ -202,10 +206,8 @@ make server-start
 ثم زر `http://127.0.0.1:8123/ui/chat` أو `http://127.0.0.1:8123/docs`.
 
 آخر تحقق حي بدون restart:
-- listener: `Python 84853` على `127.0.0.1:8123`
-- `GET /health` → 200، `{"status":"ok","project":"SF.AI","phase":"Phase 11"}`
-- ملاحظة: السيرفر الحي لم يُعد تشغيله بعد احترامًا لطلب عدم كسره، لذلك قد يعرض phase قديمًا حتى restart لاحق.
-- الكود الحالي بعد Phase 17 يعرض `Phase 17` و`generator=template` و`rag=not_used` افتراضيًا.
+- السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`.
+- الكود الحالي بعد Phase 18 يعرض `Phase 18`، وزر `تصدير` في الواجهة، و`generator` حسب flags التشغيل.
 - `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - `make server-status` read-only ولا يوقف السيرفر.
 
@@ -213,10 +215,10 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى Phase 17)
+## نتائج الاختبارات (حتى Phase 18)
 
 ```
-380 passed in 2.32s
+383 passed in 2.29s
 ```
 
 التغطية الحالية:
@@ -240,6 +242,7 @@ make server-start
 - `test_saudi_seed.py` — 15 tests (Phase 3.6)
 - `test_rag_sparse_retrieval.py` — 14 tests (Phase 8)
 - `test_chat_ui.py` — 4 tests (Phase 9)
+- `test_dialogue_batch_preparation.py` — Phase 18 data loop
 - `test_dialect_mapper.py` — 7 tests
 - `test_health.py` — API + module dispatch + safety + corpus/source inventory
 - `test_intent_detector.py` — 7 tests
@@ -267,7 +270,7 @@ make server-start
 - **Phase 15:** ربط checkpoint ببنية `ChatModule` كمولّد اختياري، مع إبقاء runtime على القوالب.
 - **Phase 16:** تقييم الجودة والسلامة والأسلوب السعودي/الفصيح قبل تفعيل التوليد — مكتمل مع runtime blocked.
 - **Phase 17:** ربط Memory/RAG المحلي بالشات — مكتمل كبنية محلية اختيارية.
-- **Phase 18:** دورة توسيع بيانات من اختبار سامي المباشر.
+- **Phase 18:** دورة توسيع بيانات من اختبار سامي المباشر — مكتملة كتصدير مراجعة + batch preparation محكوم.
 - **Phase 19:** تدريب مرشح `SF-50M`.
 - **Phase 20:** تفعيل المجالات skeleton عبر gates مستقلة.
 
@@ -286,9 +289,9 @@ make server-start
 - ❌ لا LoRA فوق نموذج خارجي.
 - ❌ لا synthetic LLM data في corpus السيادي.
 - ❌ لا API keys في الكود.
-- ❌ لا تدريب فعلي قبل إذن صريح (Phase 6 جاهز scaffolding، لا أوزان مدرَّبة).
+- ❌ لا تدريب خارج الخطة أو بدون provenance؛ التفويض الحالي يغطي المراحل المسجلة فقط.
 - ❌ لا crawling تلقائي. CrawlerBase يرفع `CrawlerPermissionError` بدون `permission_granted=True`.
-- ❌ لا انتقال بين المراحل بدون إذن صريح.
+- ❌ لا انتقال خارج الخطة المسجلة بدون توثيق وإذن واضح.
 
 ---
 
@@ -311,6 +314,4 @@ make server-start
 
 ## بروتوكول الانتقال
 
-> **"اكتملت المرحلة الحالية. هل تسمح لي بالانتقال إلى المرحلة التالية؟"**
-
-لا انتقال بدون إذن صريح من المستخدم.
+التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، مع رفع الناجح فقط، وفحص الحساسية، وتوثيق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا.

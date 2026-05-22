@@ -35,14 +35,15 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 17 / 20 مكتملة، والمرحلة التالية Phase 18.
-- **الأولوية الحالية:** بناء Data Expansion Loop v1 من اختبار سامي المباشر، بدون تعلم تلقائي خفي.
+- **الرحلة الحالية:** Phase 18 / 20 مكتملة، والمرحلة التالية Phase 19 مشروطة بكفاية corpus.
+- **الأولوية الحالية:** تجميع بيانات مراجعة من اختبار سامي عبر زر التصدير، ثم تحضير batches محكومة قبل أي تدريب أكبر.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
 - **البيانات الحالية:** seed سعودي صغير `30/30` يمر `corpus-audit`؛ ما زال `msa` مطلوبًا قبل تشغيل جودة لغوية متوازنة.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 اكتملت من بيانات SF.AI فقط، مع قيود موثقة.
 - **المولّد:** Phase 15 أضاف NativeGenerator adapter وسياسة أمان، لكن runtime ما زال يرد عبر `template`.
 - **التقييم:** Phase 16 مرّر `15/15` prompt cases، لكنه أبقى `runtime_activation_allowed=false`.
 - **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.
+- **دورة البيانات:** Phase 18 أضاف تصدير مراجعة من الواجهة و`prepare_dialogue_batch.py`; لا تعلم تلقائي.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
 ---
@@ -74,6 +75,7 @@
 | Phase 15 | Generator Adapter for ChatModule — completed as safe adapter |
 | Phase 16 | Evaluation, Safety, and Saudi/MSA Style Harness — completed, runtime blocked |
 | Phase 17 | Local Memory/RAG Bridge into Chat — completed as local bridge |
+| Phase 18 | Data Expansion Loop v1 — completed as governed loop |
 
 **تفويض التنفيذ الحالي:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة في الرحلة، مع بقاء قواعد السيادة والسلامة وفحص الحساسية قبل الرفع.
 
@@ -208,7 +210,7 @@ pytest
 - لا Llama / Gemma / Phi / Mistral / sentence-transformers / HuggingFace pretrained.
 - لا LoRA فوق نموذج خارجي.
 - لا synthetic LLM data في corpus السيادي.
-- لا تشغيل training أو crawling أو phase جديدة بدون إذن صريح.
+- لا تشغيل crawling أو phase خارج الخطة بدون توثيق وإذن واضح؛ التفويض الحالي يسمح بمتابعة التدريب والمراحل المسجلة فقط مع فحص الحساسية.
 - لا خلط بين `data/corpus/` و `resources/lexicons/`.
 - لا تغيير في `resources/tokenization/` بدون توثيق واختبارات.
 

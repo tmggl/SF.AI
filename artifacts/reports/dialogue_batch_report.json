@@ -1,0 +1,13 @@
+{
+  "input_path": "data/corpus/chat/review/sample_review_export.jsonl",
+  "output_path": "data/corpus/chat/jsonl/dialogue_batch_preview.jsonl",
+  "total_records": 1,
+  "written_records": 0,
+  "skipped_records": 0,
+  "training_allowed": false,
+  "quality": "silver",
+  "dialect": "saudi",
+  "skipped_reasons": {
+    "training_allowed_flag_missing": 1
+  }
+}

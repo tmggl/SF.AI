@@ -41,7 +41,7 @@
 | Phase 15 | Generator Adapter for ChatModule | مكتملة كبنية آمنة |
 | Phase 16 | Evaluation, Safety, and Saudi/MSA Style Harness | مكتملة مع حجب runtime |
 | Phase 17 | Local Memory/RAG Bridge into Chat | مكتملة كبنية bridge محلية |
-| Phase 18 | Data Expansion Loop v1 | معلّقة |
+| Phase 18 | Data Expansion Loop v1 | مكتملة كدورة بيانات محكومة |
 | Phase 19 | SF-50M Candidate Training | معلّقة |
 | Phase 20 | Domain Activation Gates | معلّقة |
 
@@ -324,7 +324,7 @@ chat, coding, data, files, web, research, legal, medical, finance, education, re
 - `status: skeleton_only`
 
 ### بعد المرحلة
-توقف، ملخص، اطلب الإذن.
+Phase 18 اكتملت: الواجهة تصدر مراجعة محلية فقط، و`prepare_dialogue_batch.py` يحضر batch تدريبي فقط مع `--training-allowed` ووسوم الجودة/اللهجة. انتقل إلى Phase 19 فقط عند كفاية corpus.
 
 ---
 

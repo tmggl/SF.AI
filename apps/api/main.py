@@ -30,7 +30,8 @@ app = FastAPI(
     version="0.1.0",
     description=(
         "SF.AI — Sovereign AI platform. Phase 9 chat UI mounted at /ui/chat. "
-        "Phase 17 local RAG bridge is ready. No pretrained models, no external AI APIs."
+        "Phase 18 governed data expansion loop is ready. "
+        "No pretrained models, no external AI APIs."
     ),
 )
 
@@ -44,7 +45,7 @@ app.include_router(ui.router)
 def root() -> dict[str, str]:
     return {
         "project": "SF.AI",
-        "phase": "Phase 17 — Local Memory/RAG Bridge into Chat",
+        "phase": "Phase 18 — Data Expansion Loop v1",
         "ui": "/ui/chat",
         "docs": "/docs",
     }
