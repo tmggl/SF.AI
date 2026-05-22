@@ -7,19 +7,19 @@
 **Runtime language focus:** Arabic MSA + Saudi only  
 **Current generator:** `template`  
 **Candidate generator:** `sf_10m_v0_1`  
-**Runtime activation:** public gate closed; Sami local lab enabled separately
+**Runtime activation:** Sami local lab enabled; quality gate is diagnostic
 
 ---
 
 ## الهدف
 
-Phase 16 لا تجعل النموذج مسارًا عامًا موثوقًا. هدفها إنشاء بوابة تقييم واضحة
-قبل اعتبار أي توليد داخل الشات صالحًا للاستخدام اليومي.
+Phase 16 تجعل التقييم واضحًا: النموذج الخام يعمل في مختبر سامي، لكن جودة
+اللغة اليومية تحتاج corpus وتدريبًا أكبر.
 
 القاعدة:
 
-> إذا لم ينجح النموذج في السلامة، الأسلوب، وعدم الهلوسة، يبقى المسار العام
-> على القوالب والـ router/composer، بينما يظل مختبر سامي المحلي متاحًا للتجربة.
+> إذا ظهرت تكرارات أو ضعف أسلوب، فهذا لا يمنع الاختبار؛ يوجهنا إلى توسيع
+> corpus وتحسين التدريب.
 
 ---
 
@@ -107,9 +107,9 @@ runtime_activation_allowed: false
 
 ---
 
-## شروط اعتماد المولّد لاحقًا كمسار يومي
+## شروط رفع جودة المولّد
 
-لا يُعتمد `SF_ENABLE_NATIVE_GENERATOR=true` كمسار يومي إلا بعد:
+لتحسين `SF_ENABLE_NATIVE_GENERATOR=true` من تجربة خام إلى ردود أنضج نحتاج:
 
 - توسعة corpus الفصيح والسعودي.
 - تدريب أفضل من Phase 14.

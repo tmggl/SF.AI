@@ -137,6 +137,28 @@
     display: flex; gap: 8px;
     background: var(--surface);
   }
+  .quick-tests {
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+    padding: 12px 18px 0;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .quick-tests button {
+    min-height: 38px;
+    padding: 0 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--line);
+  }
+  .quick-tests button:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+  }
   textarea {
     flex: 1; resize: none; min-height: 54px; max-height: 220px;
     background: var(--surface); color: var(--text);
@@ -186,6 +208,7 @@
     .msg { max-width: 94%; }
     header h1 { font-size: 21px; }
     footer { padding: 12px; }
+    .quick-tests { padding: 10px 12px 0; }
   }
 </style>
 </head>
@@ -235,6 +258,12 @@
     </aside>
   </main>
 
+  <div class="quick-tests" aria-label="اختبارات سريعة">
+    <button type="button" data-prompt="وش رايك اليوم">توليد خام</button>
+    <button type="button" data-prompt="ابي اسوي كود">برمجة</button>
+    <button type="button" data-prompt="من أنت">قالب</button>
+    <button type="button" data-prompt="عندي ألم في الراس">حساس</button>
+  </div>
   <footer>
     <textarea id="input"
               placeholder="اكتب رسالتك هنا…"
@@ -513,6 +542,13 @@
   document.getElementById("export-btn").addEventListener("click", exportForReview);
 
   sendBtn.addEventListener("click", send);
+  document.querySelectorAll("[data-prompt]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      inputEl.value = btn.getAttribute("data-prompt") || "";
+      inputEl.focus();
+      send();
+    });
+  });
   inputEl.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();

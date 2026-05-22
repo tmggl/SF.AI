@@ -165,7 +165,7 @@
   - أضيف `GET /system/phase19-readiness`.
   - القرار الحالي: `NOT_READY_EXPAND_CORPUS_FIRST`.
   - السبب: corpus الحالي `30` سجلًا فقط والحد الأدنى العملي الحالي `5000`.
-  - أضيف lab bridge للرسائل غير الحساسة حتى يختبر سامي المولد الخام عبر مجالات skeleton دون نشر عام.
+  - أضيف lab bridge للرسائل غير الحساسة حتى يختبر سامي المولد الخام عبر مجالات skeleton داخل المختبر المحلي.
   - docs: [PHASE19_READINESS_REPORT.md](./PHASE19_READINESS_REPORT.md)
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
@@ -263,7 +263,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-388 passed in 3.09s
+388 passed in 2.92s
 ```
 
 | ملف | عدد |

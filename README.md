@@ -40,8 +40,8 @@
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
 - **البيانات الحالية:** seed سعودي صغير `30/30` يمر `corpus-audit`؛ ما زال `msa` مطلوبًا قبل تشغيل جودة لغوية متوازنة.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 اكتملت من بيانات SF.AI فقط، مع قيود موثقة.
-- **المولّد:** Phase 15 أضاف NativeGenerator adapter وسياسة أمان، لكن runtime ما زال يرد عبر `template`.
-- **التقييم:** Phase 16 مرّر `15/15` prompt cases؛ الاستخدام العام غير مفتوح، لكن مختبر سامي المحلي يفعّل المولد الخام للتجربة.
+- **المولّد:** Phase 15 أضاف NativeGenerator adapter، ومختبر سامي المحلي يفعّله للتجربة عبر flags التشغيل.
+- **التقييم:** Phase 16 مرّر `15/15` prompt cases؛ الجودة اليومية لم تنضج بعد، لكن المختبر المحلي مفتوح للتجربة والتطوير.
 - **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.
 - **دورة البيانات:** Phase 18 أضاف تصدير مراجعة من الواجهة و`prepare_dialogue_batch.py`; لا تعلم تلقائي.
 - **جاهزية SF-50M:** Phase 19 أضاف `make phase19-readiness`; القرار الحالي `NOT_READY_EXPAND_CORPUS_FIRST`.

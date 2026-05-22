@@ -20,8 +20,8 @@
 - `make corpus-audit` يفحص بيانات `data/corpus/chat/jsonl/`.
 - Phase 12 tokenizer v1 اكتمل بإذن صريح من سامي، مع توثيق أنه Saudi-only ويحتاج `msa` قبل أي تشغيل جودة متوازن.
 - Phase 14 SF-10M v0.1 اكتمل كتشغيل محدود وأثبت أن checkpoint يُقيّم ويولد نصًا غير فارغ.
-- Phase 15 اكتمل كبنية Adapter آمنة: API/UI يعرضان `generator=template`، وNativeGenerator موجود لكنه غير مفعّل.
-- Phase 16 اكتمل كبوابة evaluation/safety/style: `15/15`، مع `runtime_activation_allowed=false`.
+- Phase 15 اكتمل كبنية Adapter: API/UI يعرضان مصدر الرد، ومختبر سامي المحلي يستطيع استخدام `sf_10m_v0_1`.
+- Phase 16 اكتمل كبوابة evaluation/safety/style: `15/15`; النتيجة تؤكد أن النموذج الخام مكرر ويحتاج corpus أكبر.
 - Phase 17 اكتمل كبنية Local RAG bridge: الشات يستطيع استخدام snippets محلية عند حقن `HybridRetriever`.
 - Phase 18 اكتمل كدورة بيانات محكومة: الواجهة تصدر محادثة مراجعة محلية، و`prepare_dialogue_batch.py` يحول المعتمد فقط إلى JSONL تدريبي.
 - Phase 19 بدأ كبوابة جاهزية: `make phase19-readiness` يقرر هل نبدأ SF-50M. القرار الحالي: لا، corpus صغير جدًا.
@@ -102,4 +102,4 @@ SF.AI حاليًا:
 - `عندي؟` تذهب إلى `chat.clarification`.
 - `عندي سؤال` تفتح المجال للسؤال مباشرة، ولا تشرح سؤالًا سابقًا.
 - `سعودي` تذهب إلى `chat.language_preference`.
-- البرمجة/الطب وغيرها تبقى skeleton أو safety، ولا تُعامل كقدرة مفعّلة.
+- البرمجة غير الحساسة تمر في مختبر التوليد عند تفعيل lab mode؛ المجالات الحساسة تبقى safety-first.

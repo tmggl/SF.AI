@@ -1,9 +1,9 @@
-"""Generation policy for Phase 15.
+"""Generation policy for the local sovereign generator.
 
-The native generator is intentionally conservative. It is disabled unless an
-explicit runtime flag enables it, and even then it refuses sensitive/skeleton
-domains or low-confidence routes. This keeps the current template chat stable
-while giving Phase 15 a clean place to plug in sovereign generation later.
+The default runtime stays explicit: generation is enabled by flags and safety
+domains keep their gates. Sami's lab mode can route non-sensitive skeleton
+prompts through ChatModule so the raw generator can be stress-tested without
+pretending the model is mature.
 """
 
 from __future__ import annotations
