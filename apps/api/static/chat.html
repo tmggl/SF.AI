@@ -153,6 +153,14 @@
     margin-top: 8px; font-size: 13px; color: var(--muted);
     overflow-wrap: anywhere;
   }
+  .brief-list {
+    margin: 8px 0 0;
+    padding: 0 18px 0 0;
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.65;
+  }
+  .brief-list li { margin: 3px 0; }
   footer {
     border-top: 1px solid var(--line);
     padding: 16px 18px;
@@ -259,6 +267,16 @@
         <div class="quality-details" id="phase22-details">أفحص عدد السجلات وتوازن الفصحى/السعودي.</div>
       </div>
       <div class="divider"></div>
+      <h2>مهمة الجمع الحالية</h2>
+      <div class="quality-box mid" id="next-batch-box">
+        <div class="quality-score">
+          <span id="next-batch-label">جاري جلب المهمة…</span>
+          <code id="next-batch-target">—</code>
+        </div>
+        <div class="quality-details" id="next-batch-details">تعرض المهمة التالية من Phase 22.</div>
+        <ul class="brief-list" id="next-batch-topics"></ul>
+      </div>
+      <div class="divider"></div>
       <h2>جودة التصدير</h2>
       <div class="quality-box bad" id="quality-box">
         <div class="quality-score">
@@ -322,6 +340,12 @@
   const phase22ScoreEl = document.getElementById("phase22-score");
   const phase22FillEl = document.getElementById("phase22-fill");
   const phase22DetailsEl = document.getElementById("phase22-details");
+  const nextBatchBox = document.getElementById("next-batch-box");
+  const nextBatchLabelEl = document.getElementById("next-batch-label");
+  const nextBatchTargetEl = document.getElementById("next-batch-target");
+  const nextBatchDetailsEl = document.getElementById("next-batch-details");
+  const nextBatchTopicsEl = document.getElementById("next-batch-topics");
+  let currentNextBatch = null;
 
   // Fetch phase info.
   fetch("/system/status").then(r => r.json()).then(data => {
@@ -367,6 +391,43 @@
   }
 
   updatePhase22Gate();
+
+  function updateNextBatchBrief() {
+    fetch("/system/phase22-next-batch").then(r => r.json()).then(brief => {
+      const batch = brief.next_batch;
+      currentNextBatch = batch || null;
+      nextBatchBox.classList.remove("good", "mid", "bad");
+      if (!batch) {
+        nextBatchBox.classList.add("good");
+        nextBatchLabelEl.textContent = "لا توجد batch حالية";
+        nextBatchTargetEl.textContent = "—";
+        nextBatchDetailsEl.textContent = brief.why_this_batch || "أعد فحص readiness.";
+        nextBatchTopicsEl.innerHTML = "";
+        return;
+      }
+      nextBatchBox.classList.add("mid");
+      nextBatchLabelEl.textContent = batch.batch_id + " · " + batch.dialect;
+      nextBatchTargetEl.textContent = batch.target_records + " سجل";
+      nextBatchDetailsEl.textContent =
+        "اكتب حواراتك أنت فقط. هذه موضوعات مساعدة وليست بيانات تدريب.";
+      nextBatchTopicsEl.innerHTML = "";
+      (brief.suggested_topics || []).slice(0, 3).forEach((topic) => {
+        const item = document.createElement("li");
+        item.textContent = topic;
+        nextBatchTopicsEl.appendChild(item);
+      });
+    }).catch(() => {
+      currentNextBatch = null;
+      nextBatchBox.classList.remove("good", "mid", "bad");
+      nextBatchBox.classList.add("bad");
+      nextBatchLabelEl.textContent = "تعذر جلب المهمة";
+      nextBatchTargetEl.textContent = "—";
+      nextBatchDetailsEl.textContent = "تأكد من تشغيل السيرفر ثم حدّث الصفحة.";
+      nextBatchTopicsEl.innerHTML = "";
+    });
+  }
+
+  updateNextBatchBrief();
 
   function el(tag, opts = {}) {
     const e = document.createElement(tag);
@@ -678,6 +739,12 @@
       review_metadata: {
         exported_from: "ui",
         session_id: SESSION_ID,
+        phase22_next_batch: currentNextBatch ? {
+          batch_id: currentNextBatch.batch_id,
+          dialect: currentNextBatch.dialect,
+          target_records: currentNextBatch.target_records,
+          suggested_output_path: currentNextBatch.suggested_output_path
+        } : null,
         ui_quality_score: quality.score,
         ui_quality_label: quality.label,
         ui_quality_blockers: quality.blockers,

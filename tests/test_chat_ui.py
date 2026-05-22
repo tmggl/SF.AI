@@ -26,6 +26,9 @@ def test_ui_chat_serves_html() -> None:
     assert "بوابة Phase 22" in body
     assert "/system/phase22-readiness" in body
     assert "/system/phase22-collection-plan?batch_size=25" in body
+    assert "مهمة الجمع الحالية" in body
+    assert "/system/phase22-next-batch" in body
+    assert "phase22_next_batch" in body
     assert "غير جاهز للتوكنزر بعد" in body
     assert "جودة التصدير" in body
     assert "quality-score" in body

@@ -97,6 +97,7 @@ next_batch: msa_001, dialect=msa, target_records=25
 - يعرض checklist قبول قبل التحويل.
 - يعرض موضوعات عامة تساعد سامي يكتب بنفسه؛ هذه الموضوعات ليست corpus ولا synthetic dialogue.
 - بعد التصدير: `phase22-review-intake` ثم `prepare-dialogue-batch` ثم `corpus-audit` ثم `phase22-readiness`.
+- شاشة `/ui/chat` تعرض هذه المهمة مباشرة وتضيف `phase22_next_batch` إلى `review_metadata` عند التصدير.
 
 تفصيل batches الرسمي:
 
@@ -133,6 +134,12 @@ status: REVIEW_EXPORTS_READY_FOR_MANUAL_REVIEW
 - تعرض عدد سجلات corpus الحالي مقابل هدف 500.
 - تعرض المتبقي ونقص `msa/saudi`.
 - توضّح أن Phase 23 لا تبدأ حتى تمر بوابة corpus.
+
+وأضيفت لوحة مهمة الجمع الحالية داخل الشاشة نفسها:
+
+- تعرض `msa_001` وهدف 25 سجلًا.
+- تعرض موضوعات تأليف عامة لا تُعد بيانات تدريب.
+- تربط export بالـ batch عبر `review_metadata.phase22_next_batch`.
 
 القاعدة العملية للوصول إلى حوار مفيد للتدريب:
 
