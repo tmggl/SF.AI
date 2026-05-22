@@ -196,20 +196,6 @@ def test_chat_module_keeps_smalltalk_on_template_when_experimental() -> None:
     assert "native_generator:template_first_social_intent" in out.notes
 
 
-def test_chat_module_keeps_short_general_fragments_on_template() -> None:
-    pipe = get_default_pipeline()
-    mod = ChatModule(
-        generation_policy=GenerationPolicy(enabled=True, experimental_runtime=True),
-        native_generator=_FakeGenerator(),  # type: ignore[arg-type]
-    )
-    for text in ("انت", "نت", "من", "مولد", "ماهذا"):
-        analysis = pipe.analyze_user_text(text)
-        out = mod.handle(analysis, intent="chat.general", session_id=f"short-{text}")
-        assert "رد مولد تجريبي" not in out.text
-        assert "generator:template" in out.notes
-        assert "native_generator:short_fragment" in out.notes
-
-
 def test_chat_api_response_includes_generator_metadata() -> None:
     client = TestClient(app)
     r = client.post(

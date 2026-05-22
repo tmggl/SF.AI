@@ -67,7 +67,7 @@
 ### الاختبارات
 
 ```
-405 passed in 4.00s
+404 passed in 4.08s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.

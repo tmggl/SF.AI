@@ -150,7 +150,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs,reports}/   Phase 5.5+ outputs/reports
 │
-├── tests/                                 pytest suite — 405 تست / 46 ملف
+├── tests/                                 pytest suite — 404 تست / 46 ملف
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -231,7 +231,7 @@ make server-start
 ## نتائج الاختبارات (حتى Phase 21 scaling strategy + short-fragment guard)
 
 ```
-405 passed in 4.00s
+404 passed in 4.08s
 ```
 
 التغطية الحالية:

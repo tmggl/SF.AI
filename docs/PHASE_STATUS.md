@@ -293,7 +293,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-405 passed in 4.00s
+404 passed in 4.08s
 ```
 
 | ملف | عدد |
@@ -334,7 +334,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_training_device.py | 14 |
 | test_typo_corrector.py | 5 |
 | test_web_extractor.py | 18 |
-| **Total** | **405** |
+| **Total** | **404** |
 
 ---
 

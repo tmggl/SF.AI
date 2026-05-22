@@ -196,8 +196,6 @@ class ChatModule:
             )
         if rag_used:
             return fallback_text, ("generator:template", "native_generator:skipped_rag_used")
-        if intent == "chat.general" and _looks_like_short_fragment(analysis.original_text):
-            return fallback_text, ("generator:template", "native_generator:short_fragment")
 
         decision = self.generation_policy.decide(
             domain=self.domain,
@@ -235,12 +233,3 @@ class ChatModule:
 @lru_cache(maxsize=1)
 def get_default_chat_module() -> ChatModule:
     return ChatModule()
-
-
-def _looks_like_short_fragment(text: str) -> bool:
-    """Avoid sending incomplete one/two-word fragments to the raw generator."""
-    stripped = " ".join(text.strip().split())
-    if not stripped:
-        return True
-    words = stripped.split()
-    return len(words) < 3
