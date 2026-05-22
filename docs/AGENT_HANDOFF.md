@@ -55,7 +55,7 @@
 | Phase 13 | Tiny LM Smoke Training | ✅ completed_with_limits |
 | Phase 14 | SF-10M v0.1 Training Run | ✅ completed_with_limits |
 | Phase 15 | Generator Adapter for ChatModule | ✅ completed_as_safe_adapter |
-| Phase 16 | Evaluation/Safety/Style Harness | معلّقة |
+| Phase 16 | Evaluation/Safety/Style Harness | ✅ completed_with_runtime_blocked |
 | Phase 17 | Local Memory/RAG Bridge into Chat | معلّقة |
 | Phase 18 | Data Expansion Loop v1 | معلّقة |
 | Phase 19 | SF-50M Candidate Training | معلّقة |
@@ -66,7 +66,7 @@
 ### الاختبارات
 
 ```
-367 passed in 3.13s
+370 passed in 2.75s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -136,7 +136,7 @@ bash scripts/run_chat_server.sh
 - `sf_ai/datasets/corpus_governance.py`
 - `tests/test_corpus_governance.py`
 
-تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه غير صالح للشات. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata `generator=template` دون تفعيل runtime.
+تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه غير صالح للشات. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata `generator=template` دون تفعيل runtime. Phase 16 أضاف prompt suites وeval report وقرر `runtime_activation_allowed=false`.
 
 ### Phase 12 — preflight جاهز فقط
 
@@ -227,7 +227,7 @@ missing language balance: msa
 
 ### تستطيع الآن الانتقال إلى:
 
-- **Phase 16** كبنية evaluation/safety/style harness قبل أي تفعيل runtime للتوليد.
+- **Phase 17** Local Memory/RAG Bridge into Chat.
 
 ---
 
@@ -284,7 +284,7 @@ sf_ai/datasets/                 schemas + validators + loaders + saudi_seed
 resources/lexicons/             YAML lexicons (Phase 3) + imported/ (Phase 3.5/3.6)
 data/corpus/                    حوار المستخدم + قاموس سعودي
 docs/                           كل الوثائق الفنية
-tests/                          367 اختبار، 40 ملف
+tests/                          370 اختبار، 41 ملف
 scripts/                        CLI: run_chat_server, validate_dataset, train_bpe, import_mo3jam_saudi
 ```
 

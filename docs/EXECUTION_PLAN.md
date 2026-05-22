@@ -39,7 +39,7 @@
 | Phase 13 | Tiny LM Smoke Training (Overfit + Generation Sanity) | مكتملة مع قيود |
 | Phase 14 | SF-10M v0.1 Training Run | مكتملة مع قيود |
 | Phase 15 | Generator Adapter for ChatModule | مكتملة كبنية آمنة |
-| Phase 16 | Evaluation, Safety, and Saudi/MSA Style Harness | معلّقة |
+| Phase 16 | Evaluation, Safety, and Saudi/MSA Style Harness | مكتملة مع حجب runtime |
 | Phase 17 | Local Memory/RAG Bridge into Chat | معلّقة |
 | Phase 18 | Data Expansion Loop v1 | معلّقة |
 | Phase 19 | SF-50M Candidate Training | معلّقة |
@@ -155,7 +155,7 @@ SF.AI/
 - المشروع منظم وفق الهيكل.
 
 ### بعد المرحلة
-توقف، ملخص، اطلب الإذن.
+Phase 16 اكتملت: prompt suites نجحت `15/15`، لكن runtime activation بقي محجوبًا لأن عينة SF-10M v0.1 مكررة. انتقل إلى Phase 17 لربط Memory/RAG المحلي بالشات.
 
 ---
 

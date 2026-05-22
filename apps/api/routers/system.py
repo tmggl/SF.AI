@@ -36,9 +36,9 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 15 — Generator Adapter for ChatModule",
-        current_phase_status="completed_as_safe_adapter",
-        next_phase="Phase 16 — Evaluation, Safety, and Saudi/MSA Style Harness",
+        current_phase="Phase 16 — Evaluation, Safety, and Saudi/MSA Style Harness",
+        current_phase_status="completed_with_runtime_blocked",
+        next_phase="Phase 17 — Local Memory/RAG Bridge into Chat",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -114,6 +114,7 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
             ComponentStatus(name="phase12_corpus_preflight", status="active", phase="Phase 12"),
             ComponentStatus(name="native_generator", status="ready_offline", phase="Phase 15"),
             ComponentStatus(name="generation_policy", status="active", phase="Phase 15"),
+            ComponentStatus(name="evaluation_harness", status="active", phase="Phase 16"),
             ComponentStatus(name="rag", status="planned", phase="Phase 8"),
         ],
     )

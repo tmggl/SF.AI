@@ -7,10 +7,11 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **المرحلة الحالية:** **Phase 15 — Generator Adapter for ChatModule**
-- **حالة المرحلة الحالية:** **اكتملت كبنية adapter آمنة: API/UI يعرضان `generator=template`، وNativeGenerator موجود لكنه غير مفعّل runtime**
-- **المرحلة التالية المقترحة:** Phase 16 — Evaluation, Safety, and Saudi/MSA Style Harness.
-- **جاهزية Phase 16 الآن:** ممكنة كبنية تقييم فقط؛ لا تفعيل لتوليد الشات قبل gate واضح.
+- **الرحلة الحالية:** **Phase 16 / 20**
+- **المرحلة الحالية:** **Phase 16 — Evaluation, Safety, and Saudi/MSA Style Harness**
+- **حالة المرحلة الحالية:** **اكتملت كبوابة تقييم: 15/15 prompt cases، مع إبقاء runtime blocked لأن SF-10M v0.1 ما زال مكررًا**
+- **المرحلة التالية المقترحة:** Phase 17 — Local Memory/RAG Bridge into Chat.
+- **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ تم تحديث `default_registry.yaml` و`safety_terms.yaml` لفجوات finance/religion/security.
 - **تاريخ آخر تحديث:** 2026-05-22
 
 ---
@@ -40,7 +41,7 @@
 | Phase 13 | Tiny LM Smoke Training | ✅ completed_with_limits | ✅ |
 | Phase 14 | SF-10M v0.1 Training Run | ✅ completed_with_limits | ✅ |
 | Phase 15 | Generator Adapter for ChatModule | ✅ completed_as_safe_adapter | ✅ |
-| Phase 16 | Evaluation, Safety, and Saudi/MSA Style Harness | معلّقة | ⏳ |
+| Phase 16 | Evaluation, Safety, and Saudi/MSA Style Harness | ✅ completed_with_runtime_blocked | ✅ |
 | Phase 17 | Local Memory/RAG Bridge into Chat | معلّقة | ⏳ |
 | Phase 18 | Data Expansion Loop v1 | معلّقة | ⏳ |
 | Phase 19 | SF-50M Candidate Training | معلّقة | ⏳ |
@@ -132,8 +133,16 @@
   - أضيف `NativeGenerator` كـ lazy adapter يحمّل tokenizer/checkpoint السياديين فقط.
   - بقي `ChatModule` على القوالب، ويصدر metadata `generator=template`.
   - أضيف حقل `generator` إلى API وشاشة `/ui/chat`.
-  - tests: `367 passed`.
+  - tests at completion: `367 passed`.
   - report: [PHASE15_GENERATOR_ADAPTER_REPORT.md](./PHASE15_GENERATOR_ADAPTER_REPORT.md)
+- بدأ وانتهى Phase 16 Evaluation/Safety/Style Harness:
+  - prompt suites:
+    - `eval/prompts/saudi_msa_chat_v1.jsonl`
+    - `eval/prompts/safety_v1.jsonl`
+  - report: `eval/reports/sf_10m_eval_v1.json`
+  - result: `15/15`, `PASS_WITH_RUNTIME_BLOCKED`
+  - runtime activation: `false` بسبب تكرار عينة Phase 14.
+  - docs: [EVALUATION_PLAN.md](./EVALUATION_PLAN.md)
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -230,7 +239,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-360 passed in 2.14s
+370 passed
 ```
 
 | ملف | عدد |
@@ -239,6 +248,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_bpe_tokenizer.py | 13 |
 | test_capability_registry.py | 5 |
 | test_chat_module.py | 12 |
+| test_chat_native_generator.py | 7 (Phase 15) |
 | test_chat_ui.py | 4 (Phase 9) |
 | test_checkpoints.py | 7 |
 | test_conversation_state.py | 8 |
@@ -252,6 +262,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_nlp_pipeline.py | 9 |
 | test_orchestrator.py | 7 |
 | test_phase10_skeleton_domains.py | 4 (Phase 10) |
+| test_phase16_eval_harness.py | 3 (Phase 16) |
 | test_rag_sparse_retrieval.py | 14 (Phase 8) |
 | test_research_summarizer.py | 20 |
 | test_response_composer.py | 6 |
@@ -264,7 +275,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_training_device.py | 14 |
 | test_typo_corrector.py | 5 |
 | test_web_extractor.py | 18 |
-| **Total** | **332** |
+| **Total** | **370** |
 
 ---
 

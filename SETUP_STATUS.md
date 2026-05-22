@@ -10,13 +10,16 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **المرحلة الحالية:** **Phase 15 — Generator Adapter for ChatModule** (اكتملت كبنية آمنة؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **الرحلة الحالية:** **Phase 16 / 20**
+- **المرحلة الحالية:** **Phase 16 — Evaluation, Safety, and Saudi/MSA Style Harness** (اكتملت كبوابة تقييم؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** **Phase 16 — Evaluation, Safety, and Saudi/MSA Style Harness** قبل أي تفعيل runtime للتوليد.
+- **المرحلة التالية المقترحة:** **Phase 17 — Local Memory/RAG Bridge into Chat**.
+- **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
 - **نتيجة Phase 14:** SF-10M v0.1 محدود نجح: `33/80` خطوة بسبب صغر corpus، eval loss `4.0777`, perplexity `59.01`, وتقرير في `docs/PHASE14_SF10M_V0_1_REPORT.md`.
 - **نتيجة Phase 15:** أضيف `NativeGenerator` + `GenerationPolicy` + metadata في API/UI، لكن الرد الحي يبقى `generator=template` حتى ينجح Phase 16.
+- **نتيجة Phase 16:** `make eval-phase16` نجح: `15/15`, `PASS_WITH_RUNTIME_BLOCKED`, و`runtime_activation_allowed=false`.
 - **تفويض التنفيذ:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة؛ استخدم flags المطلوبة مع توثيق كل تشغيل.
 - **فحص Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/corpus-audit`
 - **قرار Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/phase12-readiness` يعرض أن tokenizer v1 اكتمل، مع بقاء `missing_required_dialects=["msa"]` قبل إعادة تدريب متوازن.
@@ -136,7 +139,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs}/   Phase 5.5+ outputs
 │
-├── tests/                                 pytest suite — 367 تست / 40 ملف
+├── tests/                                 pytest suite — 370 تست / 41 ملف
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -200,7 +203,7 @@ make server-start
 - listener: `Python 84853` على `127.0.0.1:8123`
 - `GET /health` → 200، `{"status":"ok","project":"SF.AI","phase":"Phase 11"}`
 - ملاحظة: السيرفر الحي لم يُعد تشغيله بعد احترامًا لطلب عدم كسره، لذلك قد يعرض phase قديمًا حتى restart لاحق.
-- الكود الحالي بعد Phase 15 يعرض `Phase 15` و`generator=template`.
+- الكود الحالي بعد Phase 16 يعرض `Phase 16` و`generator=template`.
 - `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - `make server-status` read-only ولا يوقف السيرفر.
 
@@ -208,10 +211,10 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى Phase 15)
+## نتائج الاختبارات (حتى Phase 16)
 
 ```
-367 passed in 3.13s
+370 passed in 2.75s
 ```
 
 التغطية الحالية:
@@ -219,6 +222,7 @@ make server-start
 - `test_capability_registry.py` — 5 tests
 - `test_chat_module.py` — 12 tests (Phase 4 + language polish)
 - `test_chat_native_generator.py` — 7 tests (Phase 15)
+- `test_phase16_eval_harness.py` — 3 tests (Phase 16)
 - `test_conversation_state.py` — 8 tests (Phase 4)
 - `test_corpus_governance.py` — Phase 11 corpus governance
 - `test_dataset_validators.py` — 28 tests (Phase 5)
@@ -258,13 +262,14 @@ make server-start
 - **Phase 13:** تدريب smoke صغير لإثبات أن النموذج يتعلم ويولد نصًا خامًا.
 - **Phase 14:** تدريب `SF-10M v0.1`.
 - **Phase 15:** ربط checkpoint ببنية `ChatModule` كمولّد اختياري، مع إبقاء runtime على القوالب.
-- **Phase 16:** تقييم الجودة والسلامة والأسلوب السعودي/الفصيح قبل تفعيل التوليد.
+- **Phase 16:** تقييم الجودة والسلامة والأسلوب السعودي/الفصيح قبل تفعيل التوليد — مكتمل مع runtime blocked.
+- **Phase 17:** ربط Memory/RAG المحلي بالشات.
 - **Phase 17:** ربط Memory/RAG المحلي بالشات.
 - **Phase 18:** دورة توسيع بيانات بإذن صريح.
 - **Phase 19:** تدريب مرشح `SF-50M`.
 - **Phase 20:** تفعيل المجالات skeleton عبر gates مستقلة.
 
-أول توليد خام حدث في Phase 13. Phase 15 جهّز الباب داخل الشات لكنه لم يفعّل المولّد للمستخدم. الاستخدام اليومي الموثوق أكثر بعد Phase 16.
+أول توليد خام حدث في Phase 13. Phase 15 جهّز الباب داخل الشات، وPhase 16 أبقاه مغلقًا لأن التوليد مكرر. الاستخدام اليومي الموثوق يحتاج بيانات/تدريب أفضل ثم gate جديد.
 
 ---
 

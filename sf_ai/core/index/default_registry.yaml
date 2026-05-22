@@ -398,8 +398,12 @@ domains:
     description: "المال والاستثمار"
     status: skeleton_only
     requires_safety: true
-    phrases: []
-    keywords: ["مال", "استثمار", "بنك", "اسهم"]
+    phrases:
+      - "هل اشتري سهم"
+      - "هل أشتري سهم"
+      - "ابي استثمر"
+      - "أبي أستثمر"
+    keywords: ["مال", "استثمار", "استثمر", "بنك", "اسهم", "أسهم", "سهم", "تداول", "محفظة", "قرض"]
     intents: {}
     notes: "حساس — لا يجوز إعطاء توصيات مالية"
 
@@ -415,8 +419,10 @@ domains:
     description: "الدين"
     status: skeleton_only
     requires_safety: true
-    phrases: []
-    keywords: []
+    phrases:
+      - "أفتني في"
+      - "افتني في"
+    keywords: ["دين", "ديني", "فتوى", "أفتني", "افتني", "حلال", "حرام", "شرعي", "شريعة", "زكاة", "صلاة"]
     intents: {}
     notes: "حساس — يحتاج تأنّيًا ومصادر موثوقة فقط"
 
@@ -474,7 +480,7 @@ domains:
     status: skeleton_only
     requires_safety: true
     phrases: []
-    keywords: ["امن", "أمن", "اختراق", "حماية"]
+    keywords: ["امن", "أمن", "اختراق", "اخترق", "أخترق", "هكر", "هاكر", "ثغرة", "حماية"]
     intents: {}
     notes: "حساس — حد استخدام دفاعي فقط"
 

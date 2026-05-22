@@ -30,7 +30,7 @@ app = FastAPI(
     version="0.1.0",
     description=(
         "SF.AI — Sovereign AI platform. Phase 9 chat UI mounted at /ui/chat. "
-        "Phase 15 generator adapter is safe/off by default. No pretrained models, no external AI APIs."
+        "Phase 16 evaluation gate is ready. No pretrained models, no external AI APIs."
     ),
 )
 
@@ -44,7 +44,7 @@ app.include_router(ui.router)
 def root() -> dict[str, str]:
     return {
         "project": "SF.AI",
-        "phase": "Phase 15 — Generator Adapter for ChatModule",
+        "phase": "Phase 16 — Evaluation, Safety, and Saudi/MSA Style Harness",
         "ui": "/ui/chat",
         "docs": "/docs",
     }

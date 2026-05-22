@@ -1,7 +1,7 @@
 # SF.AI — Makefile
 # Phase 1 set of operational commands.
 
-.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit phase12-readiness train-bpe train-lm eval-lm
+.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit phase12-readiness train-bpe train-lm eval-lm eval-phase16
 
 PY ?= .venv/bin/python
 UVICORN ?= uvicorn
@@ -29,6 +29,7 @@ help:
 	@echo "  make train-bpe ARGS=...   Train SF-BPE tokenizer (requires Phase 12 confirmation flag)"
 	@echo "  make train-lm ARGS=...    Train SF native LM (Phase 6)"
 	@echo "  make eval-lm ARGS=...     Evaluate a SF.AI checkpoint"
+	@echo "  make eval-phase16         Run Phase 16 chat/safety/style gate"
 
 check-env:
 	@echo "Python: $$($(PY) --version 2>&1)"
@@ -106,3 +107,7 @@ train-lm:
 # Phase 6 — evaluate a checkpoint.
 eval-lm:
 	$(PY) -m sf_ai.training.evaluate_tiny_lm $(ARGS)
+
+# Phase 16 — runtime gate before native generation can answer users.
+eval-phase16:
+	$(PY) scripts/run_phase16_eval.py $(ARGS)
