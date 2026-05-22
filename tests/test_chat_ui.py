@@ -19,6 +19,11 @@ def test_ui_chat_serves_html() -> None:
     # RTL Arabic surface is present.
     assert 'dir="rtl"' in body
     assert "محادثة" in body
+    assert "--bg: #f6f8fb" in body
+    assert "اكتب رسالتك هنا" in body
+    assert "المحادثة جاهزة" in body
+    assert "قالب آمن" in body
+    assert "ذاكرة:" in body
 
 
 def test_get_chat_redirects_to_ui() -> None:

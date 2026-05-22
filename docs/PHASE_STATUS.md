@@ -148,6 +148,7 @@
   - أضيف `sf_ai/modules/chat/rag_bridge.py`.
   - `ChatModule` صار يقبل `rag_bridge` اختياريًا.
   - API/UI يعرضان `rag=used/not_used`.
+  - تحسين واجهة `/ui/chat` إلى تصميم فاتح، خطوط أكبر، تشخيص أوضح، وتسميات عربية للـ generator/rag/dispatch.
   - لا web crawling تلقائي ولا embeddings جاهزة.
   - docs: [PHASE17_RAG_BRIDGE_REPORT.md](./PHASE17_RAG_BRIDGE_REPORT.md)
 
