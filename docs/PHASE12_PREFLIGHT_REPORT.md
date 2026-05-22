@@ -143,6 +143,12 @@ training_permission_granted=false
 required_confirmation_flag=--confirm-phase12-permission
 ```
 
+والقرار نفسه متاح من الطرفية بدون restart للسيرفر:
+
+```bash
+make phase12-readiness
+```
+
 قاعدة التشغيل:
 
 - لا توقف السيرفر إذا كان يعمل.

@@ -20,10 +20,9 @@ from apps.api.schemas.system import (
     SourceInventoryResponse,
     SystemStatusResponse,
 )
-from sf_ai.core.config import PROJECT_DIR
 from sf_ai.datasets.corpus_governance import audit_jsonl_directory_for_training
 from sf_ai.datasets.source_inventory import build_source_inventory
-from sf_ai.models.tokenizer.policy_audit import audit_tokenization_policy
+from sf_ai.training.phase12_readiness import build_phase12_readiness_decision
 
 router = APIRouter(prefix="/system", tags=["system"])
 
@@ -191,61 +190,26 @@ def phase12_readiness() -> Phase12ReadinessResponse:
     This is deliberately read-only. It reports readiness and the permission
     boundary, but it never starts tokenizer training and never writes artifacts.
     """
-    inventory = build_source_inventory()
-    tokenization = audit_tokenization_policy()
-
-    corpus_ready = inventory.phase12_status == "READY_FOR_PHASE_12_TOKENIZER_TRAINING"
-    tokenization_ready = tokenization.status == "READY_FOR_PHASE12_TOKENIZATION_PREFLIGHT"
-    protected_ready = (
-        tokenization.protected_terms_total > 0
-        and tokenization.protected_terms_covered == tokenization.protected_terms_total
-    )
-    preflight_pass = corpus_ready and tokenization_ready and protected_ready
-
-    artifacts_present: list[str] = []
-    artifact_globs = (
-        "artifacts/tokenizers/*/vocab.json",
-        "artifacts/tokenizers/*/merges.txt",
-        "artifacts/checkpoints/**/*",
-    )
-    for pattern in artifact_globs:
-        for path in PROJECT_DIR.glob(pattern):
-            if path.is_file() and path.name != ".gitkeep":
-                artifacts_present.append(str(path.relative_to(PROJECT_DIR)))
-
-    training_permission_granted = False
-    required_flag = "--confirm-phase12-permission"
-    command = (
-        'make train-bpe ARGS="--confirm-phase12-permission '
-        '--corpus data/corpus/chat/jsonl --out artifacts/tokenizers/sf_bpe/v1"'
-    )
+    decision = build_phase12_readiness_decision()
 
     return Phase12ReadinessResponse(
-        phase="Phase 12 — SF-BPE Tokenizer v1 Training & Audit",
-        preflight_pass=preflight_pass,
-        can_train_now=False,
-        training_permission_granted=training_permission_granted,
-        required_permission_phrase="ابدأ Phase 12",
-        required_confirmation_flag=required_flag,
-        action=(
-            "STOP_BEFORE_TRAINING"
-            if preflight_pass
-            else "FIX_PREFLIGHT_BEFORE_REQUESTING_PERMISSION"
-        ),
-        corpus_status=inventory.phase12_status,
-        corpus_training_ready=inventory.chat_training_records,
-        corpus_issue_count=inventory.chat_audit.error_count,
-        tokenization_status=tokenization.status,
-        protected_terms_total=tokenization.protected_terms_total,
-        protected_terms_covered=tokenization.protected_terms_covered,
-        protected_terms_coverage_ratio=round(tokenization.coverage_ratio, 4),
-        source_count=inventory.source_count,
-        local_reference_records=inventory.local_reference_records,
-        artifacts_present=sorted(artifacts_present),
-        required_command_after_permission=command,
-        notes=[
-            "Preflight readiness is not training permission.",
-            "The endpoint is read-only and writes no tokenizer/checkpoint artifacts.",
-            "Training commands refuse to start without --confirm-phase12-permission.",
-        ],
+        phase=decision.phase,
+        preflight_pass=decision.preflight_pass,
+        can_train_now=decision.can_train_now,
+        training_permission_granted=decision.training_permission_granted,
+        required_permission_phrase=decision.required_permission_phrase,
+        required_confirmation_flag=decision.required_confirmation_flag,
+        action=decision.action,
+        corpus_status=decision.corpus_status,
+        corpus_training_ready=decision.corpus_training_ready,
+        corpus_issue_count=decision.corpus_issue_count,
+        tokenization_status=decision.tokenization_status,
+        protected_terms_total=decision.protected_terms_total,
+        protected_terms_covered=decision.protected_terms_covered,
+        protected_terms_coverage_ratio=decision.protected_terms_coverage_ratio,
+        source_count=decision.source_count,
+        local_reference_records=decision.local_reference_records,
+        artifacts_present=list(decision.artifacts_present),
+        required_command_after_permission=decision.required_command_after_permission,
+        notes=list(decision.notes),
     )

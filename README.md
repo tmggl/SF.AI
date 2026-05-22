@@ -162,6 +162,7 @@ http://127.0.0.1:8123/ui/chat
 make source-inventory
 make corpus-audit
 make tokenization-audit
+make phase12-readiness
 ```
 
 هذه الفحوصات لا تبدأ تدريبًا ولا تكتب artifacts.

@@ -1,7 +1,7 @@
 # SF.AI — Makefile
 # Phase 1 set of operational commands.
 
-.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit train-bpe train-lm eval-lm
+.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit phase12-readiness train-bpe train-lm eval-lm
 
 PY ?= .venv/bin/python
 UVICORN ?= uvicorn
@@ -25,6 +25,7 @@ help:
 	@echo "  make source-inventory     Show all local data/reference sources"
 	@echo "  make corpus-audit         Audit JSONL corpus before Phase 12"
 	@echo "  make tokenization-audit   Audit tokenization policy before Phase 12"
+	@echo "  make phase12-readiness    Read-only Phase 12 decision: ready vs allowed"
 	@echo "  make train-bpe ARGS=...   Train SF-BPE tokenizer (requires Phase 12 confirmation flag)"
 	@echo "  make train-lm ARGS=...    Train SF native LM (Phase 6)"
 	@echo "  make eval-lm ARGS=...     Evaluate a SF.AI checkpoint"
@@ -85,6 +86,9 @@ corpus-audit:
 
 tokenization-audit:
 	$(PY) scripts/audit_tokenization_policy.py $(ARGS)
+
+phase12-readiness:
+	$(PY) scripts/phase12_readiness.py
 
 # Phase 12 — train SF-BPE tokenizer.
 # Requires explicit Sami approval and --confirm-phase12-permission.

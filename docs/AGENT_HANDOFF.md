@@ -66,7 +66,7 @@
 ### الاختبارات
 
 ```
-351 passed in 2.56s
+353 passed in 2.16s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -165,6 +165,12 @@ make corpus-audit
 ```text
 GET /system/corpus-audit
 GET /system/phase12-readiness
+```
+
+وللحصول على القرار نفسه بدون restart للسيرفر:
+
+```bash
+make phase12-readiness
 ```
 
 هذه تستخدم `scripts/audit_training_corpus.py` وتجمع فحص كل ملفات `.jsonl` في `data/corpus/chat/jsonl/`.

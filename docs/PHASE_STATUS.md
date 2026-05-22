@@ -103,6 +103,7 @@
   - `preflight_pass=true`
   - `can_train_now=false`
   - `required_confirmation_flag=--confirm-phase12-permission`
+- أضيف `make phase12-readiness` كقرار CLI مطابق للـ API بدون restart للسيرفر.
 - لم يبدأ tokenizer أو LM training.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
@@ -200,7 +201,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-351 passed in 2.56s
+353 passed in 2.16s
 ```
 
 | ملف | عدد |

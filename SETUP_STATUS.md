@@ -17,6 +17,7 @@
 - **بوابة التدريب التنفيذية:** `make train-bpe` يرفض التشغيل بدون `--confirm-phase12-permission`، ولا يُستخدم هذا العلم إلا بعد إذن صريح ببدء Phase 12.
 - **فحص Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/corpus-audit`
 - **قرار Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/phase12-readiness` يعرض `can_train_now=false` حتى الإذن.
+- **قرار Phase 12 من الطرفية بدون restart:** `make phase12-readiness`، وهو read-only ويعرض نفس منطق القرار.
 - **جرد المصادر الشامل:** `make source-inventory` أو `GET http://127.0.0.1:8123/system/source-inventory`
 - **فحص السيرفر بدون تعطيل:** `make server-status`، وهو read-only ولا يعمل restart/stop.
 - **تشغيل السيرفر المستقر:** `make server-start` يبدأه داخل `screen` فقط إذا كان متوقفًا.
@@ -206,7 +207,7 @@ make server-start
 ## نتائج الاختبارات (Phase 11 + Governance Layer)
 
 ```
-351 passed in 2.56s
+353 passed in 2.16s
 ```
 
 التغطية الحالية:

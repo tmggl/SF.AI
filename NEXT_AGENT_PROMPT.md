@@ -30,13 +30,14 @@
 **الحالة الراهنة باختصار:**
 
 - المراحل من Phase 0 حتى Phase 11 منتهية، ومعها طبقة Governance & Engineering Standards قبل Phase 12. الخطة الرسمية تمتد إلى Phase 20 لبناء النموذج اللغوي السيادي المولّد.
-- 351 اختبار يمر (`.venv/bin/python -m pytest tests`).
+- 353 اختبار يمر (`.venv/bin/python -m pytest tests`).
 - السيرفر يعمل عادةً على `http://127.0.0.1:8123` (المنفذ 8000/8765 محجوز).
 - شاشة المحادثة على `/ui/chat` — هي هدف سامي الرئيسي للتجريب.
 - آخر تحسين مكتمل: التركيز على العربية الفصحى + السعودية فقط، توجيه الرسائل اليومية (`وشلونك`/`شكرا`/`تمام`/`لا`/`ساعدني`/`مش فاهم`/`من صنعك`/`سعودي`/`عندي؟`/`عندي سؤال`) + Phase 10 skeleton domains.
 - قاموس Saudi Seed v1 (516 مدخل من تأليف سامي) في `resources/lexicons/imported/saudi_seed_v1/`.
 - اقرأ ملفات الحوكمة والدستور قبل أي تدريب: `PROJECT_CONSTITUTION`, `LANGUAGE_SEGMENTATION`, `TOKENIZATION_POLICY`, `DATASET_GOVERNANCE`, `AGENT_ENGINEERING_RULES`, ثم `PROJECT_IDENTITY`, `ENGINEERING_RULES`, `AGENT_INSTRUCTIONS`, `PROJECT_MAP`, `PROJECT_LIFECYCLE`.
 - اقرأ `docs/PHASE12_PREFLIGHT_REPORT.md`: إذا كان `Training permission: NOT GRANTED` فلا تبدأ التدريب حتى لو كانت الفحوصات PASS. ويمكنك فحص القرار الحي من API عبر `GET /system/phase12-readiness`؛ إذا كان `can_train_now=false` فتوقف قبل التدريب.
+- إذا كان السيرفر الحي لم يُعد تشغيله بعد، استخدم `make phase12-readiness` لنفس القرار بدون لمس السيرفر.
 - الهدف العام: الوصول إلى نموذج لغوي سيادي مولّد. أول توليد خام في Phase 13، وأول توليد داخل الشات في Phase 15، والاستخدام اليومي بعد Phase 16.
 
 **هدف سامي الرئيسي الآن:**
