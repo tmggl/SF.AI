@@ -165,6 +165,7 @@ docs/
 
 - افحصه عبر `make server-status`.
 - إذا كان يعمل، لا تعمل restart.
+- إذا كان متوقفًا، شغّله عبر `make server-start`.
 - لا تستخدم `pkill` أو kill PID إلا بطلب صريح.
 - لا تجعل tests أو scripts توقف السيرفر.
 - أي script status يجب أن يكون read-only.

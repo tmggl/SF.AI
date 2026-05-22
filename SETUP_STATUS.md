@@ -17,6 +17,7 @@
 - **فحص Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/corpus-audit`
 - **جرد المصادر الشامل:** `make source-inventory` أو `GET http://127.0.0.1:8123/system/source-inventory`
 - **فحص السيرفر بدون تعطيل:** `make server-status`، وهو read-only ولا يعمل restart/stop.
+- **تشغيل السيرفر المستقر:** `make server-start` يبدأه داخل `screen` فقط إذا كان متوقفًا.
 - **المراجع المحلية الخاصة الموجودة:** 516 مدخل قاموس سعودي + 1032 مهمة لهجة سعودية، وهي مستثناة من الرفع وتحتاج تحويل/حوكمة قبل استخدامها كـ LM corpus.
 - **طبقة الحوكمة الهندسية قبل Phase 12:** مكتملة في `docs/PROJECT_IDENTITY.md`, `docs/ENGINEERING_RULES.md`, `docs/AGENT_INSTRUCTIONS.md`, `docs/PROJECT_MAP.md`, `docs/PROJECT_LIFECYCLE.md`.
 - **طبقة الدستور الهندسي واللغوي قبل Phase 12:** مكتملة في `docs/PROJECT_CONSTITUTION.md`, `docs/LANGUAGE_SEGMENTATION.md`, `docs/TOKENIZATION_POLICY.md`, `docs/DATASET_GOVERNANCE.md`, `docs/AGENT_ENGINEERING_RULES.md`.
@@ -126,7 +127,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs}/   Phase 5.5+ outputs
 │
-├── tests/                                 pytest suite — 343 تست
+├── tests/                                 pytest suite — 344 تست
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -179,6 +180,10 @@ bash scripts/run_chat_server.sh
 ```bash
 make server-status
 ```
+تشغيل detached إذا كان متوقفًا:
+```bash
+make server-start
+```
 ثم زر `http://127.0.0.1:8123/ui/chat` أو `http://127.0.0.1:8123/docs`.
 
 آخر تحقق حي:
@@ -195,7 +200,7 @@ make server-status
 ## نتائج الاختبارات (Phase 11 + Governance Layer)
 
 ```
-343 passed in ~2.3s
+344 passed in ~2.6s
 ```
 
 التغطية الحالية:

@@ -133,6 +133,12 @@ bash scripts/run_chat_server.sh
 make server-status
 ```
 
+لتشغيله بشكل detached إذا كان متوقفًا فقط:
+
+```bash
+make server-start
+```
+
 ثم افتح:
 
 ```text
