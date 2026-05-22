@@ -40,7 +40,7 @@
 | Phase 14 | SF-10M v0.1 Training Run | مكتملة مع قيود |
 | Phase 15 | Generator Adapter for ChatModule | مكتملة كبنية آمنة |
 | Phase 16 | Evaluation, Safety, and Saudi/MSA Style Harness | مكتملة مع حجب runtime |
-| Phase 17 | Local Memory/RAG Bridge into Chat | معلّقة |
+| Phase 17 | Local Memory/RAG Bridge into Chat | مكتملة كبنية bridge محلية |
 | Phase 18 | Data Expansion Loop v1 | معلّقة |
 | Phase 19 | SF-50M Candidate Training | معلّقة |
 | Phase 20 | Domain Activation Gates | معلّقة |
@@ -228,7 +228,7 @@ sf_ai/core/
 ```
 
 ### بعد المرحلة
-توقف، ملخص، اطلب الإذن.
+Phase 17 اكتملت كبنية bridge محلية: ChatModule يستطيع استخدام snippets من HybridRetriever عند حقنها، ويرد بوسم "من الذاكرة المحلية" مع المصدر. انتقل إلى Phase 18 لبناء دورة توسيع بيانات مضبوطة.
 
 ---
 

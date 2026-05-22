@@ -165,6 +165,7 @@
         <div>الثقة</div><div><code>—</code></div>
         <div>المسار</div><div><code>—</code></div>
         <div>المولّد</div><div><code>—</code></div>
+        <div>الذاكرة</div><div><code>—</code></div>
         <div>سبب التوجيه</div><div><code>—</code></div>
         <div>اللغة</div><div><code>—</code></div>
         <div>اللهجة</div><div><code>—</code></div>
@@ -273,6 +274,7 @@
       ["الثقة", body.confidence != null ? body.confidence.toFixed(2) : "—"],
       ["المسار", body.dispatch || "—"],
       ["المولّد", body.generator || (body.debug && body.debug.generator) || "template"],
+      ["الذاكرة", body.rag || (body.debug && body.debug.rag) || "not_used"],
       ["سبب التوجيه", body.route_reason || "—"],
       ["اللغة", (body.debug && body.debug.language) || "—"],
       ["اللهجة", (body.debug && body.debug.dialect) || "—"],
@@ -328,7 +330,8 @@
         " / " + (body.intent || "?") +
         " · ثقة " + (body.confidence != null ? body.confidence.toFixed(2) : "—") +
         " · " + (body.dispatch || "") +
-        " · generator=" + (body.generator || "template");
+        " · generator=" + (body.generator || "template") +
+        " · rag=" + (body.rag || "not_used");
       placeholder.appendChild(meta);
       setDiag(body);
     } catch (e) {

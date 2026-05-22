@@ -22,5 +22,6 @@ class ChatResponse(BaseModel):
     fallback_used: bool = False
     dispatch: str = Field(default="composer", description="composer | module:<name> | composer_no_module")
     generator: str = Field(default="template", description="template | sf_10m_v0_1")
+    rag: str = Field(default="not_used", description="used | not_used")
     debug: dict[str, str] = Field(default_factory=dict)
     echo: str | None = Field(default=None, description="نص المستخدم الأصلي للتشخيص")

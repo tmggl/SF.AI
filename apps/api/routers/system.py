@@ -36,9 +36,9 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 16 — Evaluation, Safety, and Saudi/MSA Style Harness",
-        current_phase_status="completed_with_runtime_blocked",
-        next_phase="Phase 17 — Local Memory/RAG Bridge into Chat",
+        current_phase="Phase 17 — Local Memory/RAG Bridge into Chat",
+        current_phase_status="completed_local_bridge",
+        next_phase="Phase 18 — Data Expansion Loop v1",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -115,7 +115,8 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
             ComponentStatus(name="native_generator", status="ready_offline", phase="Phase 15"),
             ComponentStatus(name="generation_policy", status="active", phase="Phase 15"),
             ComponentStatus(name="evaluation_harness", status="active", phase="Phase 16"),
-            ComponentStatus(name="rag", status="planned", phase="Phase 8"),
+            ComponentStatus(name="rag", status="active", phase="Phase 8"),
+            ComponentStatus(name="chat_rag_bridge", status="ready_offline", phase="Phase 17"),
         ],
     )
 

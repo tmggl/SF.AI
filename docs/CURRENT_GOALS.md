@@ -22,7 +22,8 @@
 - Phase 14 SF-10M v0.1 اكتمل كتشغيل محدود وأثبت أن checkpoint يُقيّم ويولد نصًا غير فارغ.
 - Phase 15 اكتمل كبنية Adapter آمنة: API/UI يعرضان `generator=template`، وNativeGenerator موجود لكنه غير مفعّل.
 - Phase 16 اكتمل كبوابة evaluation/safety/style: `15/15`، مع `runtime_activation_allowed=false`.
-- الهدف التالي هو Phase 17: ربط Memory/RAG المحلي بالشات بدون crawling تلقائي.
+- Phase 17 اكتمل كبنية Local RAG bridge: الشات يستطيع استخدام snippets محلية عند حقن `HybridRetriever`.
+- الهدف التالي هو Phase 18: Data Expansion Loop v1 من اختبار سامي المباشر بدون تعلم تلقائي خفي.
 
 الجرد الحالي يرى:
 
@@ -63,7 +64,8 @@ SF.AI حاليًا:
 - **Phase 14:** تدريب `SF-10M v0.1`.
 - **Phase 15:** ربط checkpoint ببنية `ChatModule` كمولّد اختياري دون تفعيل runtime.
 - **Phase 16:** تقييم الجودة والسلامة والأسلوب قبل الاستخدام اليومي — مكتمل، والتوليد ما زال محجوبًا.
-- **Phase 17:** إدخال Memory/RAG المحلي في الشات.
+- **Phase 17:** إدخال Memory/RAG المحلي في الشات — مكتمل كبنية اختيارية.
+- **Phase 18:** دورة توسيع بيانات مضبوطة.
 
 المعنى العملي:
 

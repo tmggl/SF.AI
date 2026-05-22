@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 16 / 20**
-- **المرحلة الحالية:** **Phase 16 — Evaluation, Safety, and Saudi/MSA Style Harness**
-- **حالة المرحلة الحالية:** **اكتملت كبوابة تقييم: 15/15 prompt cases، مع إبقاء runtime blocked لأن SF-10M v0.1 ما زال مكررًا**
-- **المرحلة التالية المقترحة:** Phase 17 — Local Memory/RAG Bridge into Chat.
+- **الرحلة الحالية:** **Phase 17 / 20**
+- **المرحلة الحالية:** **Phase 17 — Local Memory/RAG Bridge into Chat**
+- **حالة المرحلة الحالية:** **اكتملت كبنية bridge محلية: ChatModule يقبل snippets من HybridRetriever ويميز ردود الذاكرة المحلية**
+- **المرحلة التالية المقترحة:** Phase 18 — Data Expansion Loop v1.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ تم تحديث `default_registry.yaml` و`safety_terms.yaml` لفجوات finance/religion/security.
 - **تاريخ آخر تحديث:** 2026-05-22
 
@@ -42,7 +42,7 @@
 | Phase 14 | SF-10M v0.1 Training Run | ✅ completed_with_limits | ✅ |
 | Phase 15 | Generator Adapter for ChatModule | ✅ completed_as_safe_adapter | ✅ |
 | Phase 16 | Evaluation, Safety, and Saudi/MSA Style Harness | ✅ completed_with_runtime_blocked | ✅ |
-| Phase 17 | Local Memory/RAG Bridge into Chat | معلّقة | ⏳ |
+| Phase 17 | Local Memory/RAG Bridge into Chat | ✅ completed_local_bridge | ✅ |
 | Phase 18 | Data Expansion Loop v1 | معلّقة | ⏳ |
 | Phase 19 | SF-50M Candidate Training | معلّقة | ⏳ |
 | Phase 20 | Domain Activation Gates | معلّقة | ⏳ |
@@ -143,6 +143,13 @@
   - result: `15/15`, `PASS_WITH_RUNTIME_BLOCKED`
   - runtime activation: `false` بسبب تكرار عينة Phase 14.
   - docs: [EVALUATION_PLAN.md](./EVALUATION_PLAN.md)
+- بدأ وانتهى Phase 17 Local Memory/RAG Bridge:
+  - أضيف `sf_ai/modules/chat/context_builder.py`.
+  - أضيف `sf_ai/modules/chat/rag_bridge.py`.
+  - `ChatModule` صار يقبل `rag_bridge` اختياريًا.
+  - API/UI يعرضان `rag=used/not_used`.
+  - لا web crawling تلقائي ولا embeddings جاهزة.
+  - docs: [PHASE17_RAG_BRIDGE_REPORT.md](./PHASE17_RAG_BRIDGE_REPORT.md)
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -239,7 +246,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-370 passed
+376 passed in 2.58s
 ```
 
 | ملف | عدد |
@@ -249,6 +256,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_capability_registry.py | 5 |
 | test_chat_module.py | 12 |
 | test_chat_native_generator.py | 7 (Phase 15) |
+| test_chat_rag_bridge.py | 6 (Phase 17) |
 | test_chat_ui.py | 4 (Phase 9) |
 | test_checkpoints.py | 7 |
 | test_conversation_state.py | 8 |
@@ -275,7 +283,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_training_device.py | 14 |
 | test_typo_corrector.py | 5 |
 | test_web_extractor.py | 18 |
-| **Total** | **370** |
+| **Total** | **376** |
 
 ---
 

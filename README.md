@@ -35,13 +35,14 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 16 / 20 مكتملة، والمرحلة التالية Phase 17.
-- **الأولوية الحالية:** ربط Memory/RAG المحلي بالشات في Phase 17 بدون web crawling تلقائي.
+- **الرحلة الحالية:** Phase 17 / 20 مكتملة، والمرحلة التالية Phase 18.
+- **الأولوية الحالية:** بناء Data Expansion Loop v1 من اختبار سامي المباشر، بدون تعلم تلقائي خفي.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
 - **البيانات الحالية:** seed سعودي صغير `30/30` يمر `corpus-audit`؛ ما زال `msa` مطلوبًا قبل تشغيل جودة لغوية متوازنة.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 اكتملت من بيانات SF.AI فقط، مع قيود موثقة.
 - **المولّد:** Phase 15 أضاف NativeGenerator adapter وسياسة أمان، لكن runtime ما زال يرد عبر `template`.
 - **التقييم:** Phase 16 مرّر `15/15` prompt cases، لكنه أبقى `runtime_activation_allowed=false`.
+- **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
 ---
@@ -72,6 +73,7 @@
 | Phase 14 | SF-10M v0.1 Training Run — completed with limits |
 | Phase 15 | Generator Adapter for ChatModule — completed as safe adapter |
 | Phase 16 | Evaluation, Safety, and Saudi/MSA Style Harness — completed, runtime blocked |
+| Phase 17 | Local Memory/RAG Bridge into Chat — completed as local bridge |
 
 **تفويض التنفيذ الحالي:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة في الرحلة، مع بقاء قواعد السيادة والسلامة وفحص الحساسية قبل الرفع.
 

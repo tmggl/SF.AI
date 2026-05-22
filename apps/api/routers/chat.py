@@ -32,6 +32,7 @@ def chat_message(payload: ChatRequest) -> ChatResponse:
         fallback_used=result.fallback_used,
         dispatch=result.debug.get("dispatch", "composer"),
         generator=result.debug.get("generator", "template"),
+        rag=result.debug.get("rag", "not_used"),
         debug=result.debug,
         echo=payload.message,
     )

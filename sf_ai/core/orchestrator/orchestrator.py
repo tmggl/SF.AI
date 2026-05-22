@@ -106,7 +106,12 @@ class Orchestrator:
             generator = self._extract_note_value(extra_notes, prefix="generator:")
             if generator:
                 debug["generator"] = generator
+            rag_sources = self._extract_note_value(extra_notes, prefix="rag_sources:")
+            debug["rag"] = "used" if "rag:used" in extra_notes else "not_used"
+            if rag_sources:
+                debug["rag_sources"] = rag_sources
         debug.setdefault("generator", "template")
+        debug.setdefault("rag", "not_used")
 
         return OrchestratorResult(
             domain=domain.name,

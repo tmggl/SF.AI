@@ -22,6 +22,7 @@ from sf_ai.modules.chat.chat_response_builder import ChatResponseBuilder
 from sf_ai.modules.chat.conversation_state import ConversationState, ConversationStore
 from sf_ai.modules.chat.generation_policy import GenerationPolicy
 from sf_ai.modules.chat.native_generator import NativeGenerator
+from sf_ai.modules.chat.rag_bridge import ChatRagBridge
 
 
 _KNOWN_INTENTS: frozenset[str] = frozenset(
@@ -65,12 +66,14 @@ class ChatModule:
         builder: ChatResponseBuilder | None = None,
         generation_policy: GenerationPolicy | None = None,
         native_generator: NativeGenerator | None = None,
+        rag_bridge: ChatRagBridge | None = None,
         max_turns: int = 12,
     ) -> None:
         self.store = store or ConversationStore(max_turns=max_turns)
         self.builder = builder or ChatResponseBuilder()
         self.generation_policy = generation_policy or GenerationPolicy.from_env()
         self.native_generator = native_generator
+        self.rag_bridge = rag_bridge
 
     def handle(
         self,
@@ -99,20 +102,34 @@ class ChatModule:
         prior_count = state.count_intent(intent) - 1
         reply = self._build_with_prior_count(analysis, intent, state, prior_count)
 
-        generator_notes = self._generator_notes(intent=intent, analysis=analysis)
-        notes = reply.notes + generator_notes
+        text = reply.text
+        rag_notes = self._rag_notes_no_bridge()
+        if self.rag_bridge is not None:
+            rag_context = self.rag_bridge.maybe_build_context(
+                analysis.original_text,
+                intent=intent,
+            )
+            rag_notes = rag_context.notes
+            if rag_context.used:
+                text = rag_context.text
 
-        state.add_assistant(reply.text, intent=intent, domain=self.domain)
+        generator_notes = self._generator_notes(intent=intent, analysis=analysis)
+        notes = reply.notes + rag_notes + generator_notes
+
+        state.add_assistant(text, intent=intent, domain=self.domain)
 
         sid_visible = state.session_id if state.session_id != "_anonymous_" else ""
         return ModuleResponse(
-            text=reply.text,
+            text=text,
             intent_used=reply.intent_used,
             template_index=reply.template_index,
             session_id=sid_visible,
             turn_count=len(state.turns),
             notes=notes,
         )
+
+    def _rag_notes_no_bridge(self) -> tuple[str, ...]:
+        return ("rag:not_configured",)
 
     def _build_with_prior_count(
         self,
