@@ -23,20 +23,30 @@ from sf_ai.modules.chat.chat_patterns import (
     IDENTITY,
     LANGUAGE_PREFERENCE,
     NEGATION,
+    PRESENCE,
     REPEATED_NOTICE,
     SMALLTALK,
     THANKS,
+    UNDERSTANDING,
     WHO_MADE_YOU,
 )
 from sf_ai.modules.chat.conversation_state import ConversationState
 
 
-_SMALLTALK_PROMPTS = ("عندك أنت", "أنت كيف حالك", "انت كيف حالك")
+_SMALLTALK_PROMPTS = (
+    "عندك أنت",
+    "أنت كيف حالك",
+    "انت كيف حالك",
+    "كيف حالك أنت",
+    "وش ودك نسولف عنه",
+)
 
 
 _INTENT_TO_PATTERN: dict[str, tuple[str, ...]] = {
     "chat.greeting": GREETING,
     "chat.smalltalk": SMALLTALK,
+    "chat.presence": PRESENCE,
+    "chat.understanding": UNDERSTANDING,
     "chat.identity": IDENTITY,
     "chat.who_made_you": WHO_MADE_YOU,
     "chat.capability": CAPABILITY,

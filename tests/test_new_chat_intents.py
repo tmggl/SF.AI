@@ -35,6 +35,9 @@ def orch() -> Orchestrator:
         ("مش فاهم",   "chat.confused"),
         ("ما فهمت",   "chat.confused"),
         ("وشلونك",    "chat.smalltalk"),
+        ("كيفك",      "chat.smalltalk"),
+        ("وين كنت",   "chat.presence"),
+        ("هل تفهم",   "chat.understanding"),
         ("سعودي",     "chat.language_preference"),
         ("فصحى",      "chat.language_preference"),
         ("عندي؟",     "chat.clarification"),
@@ -107,6 +110,24 @@ def test_wshlonk_routes_without_domain_fallback() -> None:
     assert r.domain == "chat"
     assert r.intent == "chat.smalltalk"
     assert r.fallback_used is False
+
+
+def test_social_templates_are_good_enough_for_direct_ui_prompts() -> None:
+    orch = Orchestrator(registry=load_default_registry())
+
+    r1 = orch.process(UserMessage(text="كيفك", session_id="social-ui"))
+    r2 = orch.process(UserMessage(text="اهلا", session_id="social-ui"))
+    r3 = orch.process(UserMessage(text="وين كنت", session_id="social-ui"))
+    r4 = orch.process(UserMessage(text="هل تفهم", session_id="social-ui"))
+
+    assert r1.intent == "chat.smalltalk"
+    assert "كيف حالك" in r1.response or "وش ودك" in r1.response
+    assert r2.intent == "chat.greeting"
+    assert "أهلًا" in r2.response
+    assert r3.intent == "chat.presence"
+    assert "هنا" in r3.response
+    assert r4.intent == "chat.understanding"
+    assert "أفهم" in r4.response
 
 
 def test_open_question_gets_invitation_not_previous_prompt_explanation() -> None:

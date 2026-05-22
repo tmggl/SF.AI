@@ -263,7 +263,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-388 passed in 2.92s
+394 passed in 3.12s
 ```
 
 | ملف | عدد |
@@ -272,7 +272,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_bpe_tokenizer.py | 13 |
 | test_capability_registry.py | 5 |
 | test_chat_module.py | 12 |
-| test_chat_native_generator.py | 9 (Phase 15 + lab mode) |
+| test_chat_native_generator.py | 14 (Phase 15 + lab mode) |
 | test_chat_rag_bridge.py | 6 (Phase 17) |
 | test_chat_ui.py | 4 (Phase 9/19 status) |
 | test_checkpoints.py | 7 |
@@ -281,10 +281,10 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_dataset_validators.py | 28 |
 | test_dialogue_batch_preparation.py | 3 (Phase 18) |
 | test_dialect_mapper.py | 7 |
-| test_health.py | 8 |
+| test_health.py | 11 |
 | test_intent_detector.py | 7 |
 | test_mo3jam_importer.py | 13 |
-| test_new_chat_intents.py | 31 (Phase 9 polish) |
+| test_new_chat_intents.py | 34 (Phase 9/19 social polish) |
 | test_nlp_pipeline.py | 9 |
 | test_orchestrator.py | 7 |
 | test_phase10_skeleton_domains.py | 4 (Phase 10) |
@@ -302,7 +302,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_training_device.py | 14 |
 | test_typo_corrector.py | 5 |
 | test_web_extractor.py | 18 |
-| **Total** | **388** |
+| **Total** | **394** |
 
 ---
 

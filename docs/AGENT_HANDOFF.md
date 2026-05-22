@@ -66,7 +66,7 @@
 ### الاختبارات
 
 ```
-388 passed in 2.92s
+394 passed in 3.12s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -136,7 +136,7 @@ bash scripts/run_chat_server.sh
 - `sf_ai/datasets/corpus_governance.py`
 - `tests/test_corpus_governance.py`
 
-تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه غير صالح للشات. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata `generator=template` دون تفعيل runtime العام. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي لاحقًا للقياس لا للنشر. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات. Phase 19 أضاف بوابة جاهزية SF-50M وقراره الحالي: وسّع corpus أولًا.
+تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات. Phase 19 أضاف بوابة جاهزية SF-50M وقراره الحالي: وسّع corpus أولًا.
 
 ### Phase 12 — preflight جاهز فقط
 

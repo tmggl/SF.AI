@@ -16,6 +16,27 @@ def _env_true(name: str) -> bool:
     return os.getenv(name, "").strip().lower() in {"1", "true", "yes", "on"}
 
 
+_TEMPLATE_FIRST_INTENTS: frozenset[str] = frozenset(
+    {
+        "chat.greeting",
+        "chat.smalltalk",
+        "chat.presence",
+        "chat.understanding",
+        "chat.identity",
+        "chat.who_made_you",
+        "chat.capability",
+        "chat.language_preference",
+        "chat.clarification",
+        "chat.help",
+        "chat.confused",
+        "chat.thanks",
+        "chat.affirmation",
+        "chat.negation",
+        "chat.farewell",
+    }
+)
+
+
 @dataclass(frozen=True)
 class GenerationDecision:
     allowed: bool
@@ -61,6 +82,6 @@ class GenerationPolicy:
             return GenerationDecision(False, "fallback_route")
         if confidence < self.min_confidence:
             return GenerationDecision(False, "low_confidence")
-        if intent in {"chat.identity", "chat.who_made_you", "chat.capability"}:
-            return GenerationDecision(False, "pinned_identity_capability_intent")
+        if intent in _TEMPLATE_FIRST_INTENTS:
+            return GenerationDecision(False, "template_first_social_intent")
         return GenerationDecision(True, "allowed", generator="sf_10m_v0_1")

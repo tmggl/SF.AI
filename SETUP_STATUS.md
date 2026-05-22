@@ -25,7 +25,7 @@
 - **حماية Phase 18:** ملفات `data/corpus/**/review/*.jsonl` مستثناة من git افتراضيًا؛ العينة الآمنة الوحيدة المسموحة هي `sample_review_export.jsonl`.
 - **نتيجة Phase 19:** أضيفت بوابة `make phase19-readiness` و`GET /system/phase19-readiness`; القرار الحالي `NOT_READY_EXPAND_CORPUS_FIRST` لأن corpus الحالي 30 سجلًا فقط والحد الأدنى العملي 5000.
 - **مختبر سامي المحلي:** يمكن تشغيل المولّد الخام عبر `SF_ENABLE_NATIVE_GENERATOR=true` و`SF_NATIVE_GENERATOR_EXPERIMENTAL=true`، وتمكين الرسائل غير الحساسة من مجالات skeleton عبر `SF_LAB_GENERATION_FOR_NON_SENSITIVE=true`.
-- **واجهة الاختبار:** أضيفت أزرار سريعة في `/ui/chat`: `توليد خام`, `برمجة`, `قالب`, `حساس`.
+- **واجهة الاختبار:** الواجهة لا تلقّن رسائل جاهزة؛ الاختبار يتم بما تكتبه أنت، مع تشخيص واضح يبين `template` أو `sf_10m_v0_1`.
 - **تفويض التنفيذ:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة دون انتظار موافقات جديدة؛ استخدم flags المطلوبة مع توثيق كل تشغيل ولا تكسر قواعد السيادة/السلامة.
 - **فحص Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/corpus-audit`
 - **قرار Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/phase12-readiness` يعرض أن tokenizer v1 اكتمل، مع بقاء `missing_required_dialects=["msa"]` قبل إعادة تدريب متوازن.
@@ -145,7 +145,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs,reports}/   Phase 5.5+ outputs/reports
 │
-├── tests/                                 pytest suite — 388 تست / 44 ملف
+├── tests/                                 pytest suite — 394 تست / 44 ملف
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -223,14 +223,14 @@ make server-start
 ## نتائج الاختبارات (حتى Phase 19 readiness)
 
 ```
-388 passed in 2.92s
+394 passed in 3.12s
 ```
 
 التغطية الحالية:
 - `test_arabic_normalizer.py` — 16 tests
 - `test_capability_registry.py` — 5 tests
 - `test_chat_module.py` — 12 tests (Phase 4 + language polish)
-- `test_chat_native_generator.py` — 7 tests (Phase 15)
+- `test_chat_native_generator.py` — 14 tests (Phase 15 + lab routing)
 - `test_chat_rag_bridge.py` — 6 tests (Phase 17)
 - `test_phase16_eval_harness.py` — 3 tests (Phase 16)
 - `test_conversation_state.py` — 8 tests (Phase 4)
@@ -249,9 +249,9 @@ make server-start
 - `test_chat_ui.py` — 4 tests (Phase 9)
 - `test_dialogue_batch_preparation.py` — Phase 18 data loop
 - `test_dialect_mapper.py` — 7 tests
-- `test_health.py` — API + module dispatch + safety + corpus/source inventory
+- `test_health.py` — 11 tests (API + module dispatch + safety + readiness)
 - `test_intent_detector.py` — 7 tests
-- `test_new_chat_intents.py` — 31 tests (thanks/help/affirmation/negation/confused/who_made_you/farewell/language_preference/clarification)
+- `test_new_chat_intents.py` — 34 tests (daily social + thanks/help/affirmation/negation/confused/who_made_you/farewell/language_preference/clarification)
 - `test_nlp_pipeline.py` — 9 tests
 - `test_phase10_skeleton_domains.py` — 4 tests (Phase 10)
 - `test_orchestrator.py` — 7 tests
@@ -279,7 +279,7 @@ make server-start
 - **Phase 19:** بوابة جاهزية تدريب مرشح `SF-50M` — تعمل، وقرارها الحالي: وسّع corpus أولًا.
 - **Phase 20:** تفعيل المجالات skeleton عبر gates مستقلة.
 
-أول توليد خام حدث في Phase 13. Phase 15 جهّز الباب داخل الشات، وPhase 16 أبقاه مغلقًا لأن التوليد مكرر. الاستخدام اليومي الموثوق يحتاج بيانات/تدريب أفضل ثم gate جديد.
+أول توليد خام حدث في Phase 13. Phase 15 جهّز الباب داخل الشات، وPhase 16 أثبت أن التوليد مكرر. مختبر سامي المحلي يعمل الآن، والجودة الاجتماعية الموثوقة تحتاج بيانات/تدريب أفضل.
 
 ---
 

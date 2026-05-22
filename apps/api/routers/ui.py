@@ -23,4 +23,8 @@ CHAT_HTML = STATIC_DIR / "chat.html"
 
 @router.get("/chat", response_class=HTMLResponse)
 def chat_page() -> FileResponse:
-    return FileResponse(CHAT_HTML, media_type="text/html; charset=utf-8")
+    return FileResponse(
+        CHAT_HTML,
+        media_type="text/html; charset=utf-8",
+        headers={"Cache-Control": "no-store"},
+    )

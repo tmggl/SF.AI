@@ -90,10 +90,10 @@ def test_generation_policy_blocks_sensitive_and_unready_paths() -> None:
     assert all(decision.allowed is False for decision in blocked)
 
 
-def test_generation_policy_allows_high_confidence_safe_chat() -> None:
+def test_generation_policy_allows_high_confidence_freeform_chat() -> None:
     decision = GenerationPolicy(enabled=True).decide(
         domain="chat",
-        intent="chat.smalltalk",
+        intent="chat.general",
         confidence=0.95,
         domain_status="active",
         requires_safety=False,
@@ -101,6 +101,28 @@ def test_generation_policy_allows_high_confidence_safe_chat() -> None:
     )
     assert decision.allowed is True
     assert decision.generator == "sf_10m_v0_1"
+
+
+def test_generation_policy_keeps_social_intents_on_templates() -> None:
+    policy = GenerationPolicy(enabled=True, experimental_runtime=True)
+
+    for intent in (
+        "chat.greeting",
+        "chat.smalltalk",
+        "chat.presence",
+        "chat.understanding",
+        "chat.language_preference",
+    ):
+        decision = policy.decide(
+            domain="chat",
+            intent=intent,
+            confidence=0.95,
+            domain_status="active",
+            requires_safety=False,
+            fallback_used=False,
+        )
+        assert decision.allowed is False
+        assert decision.reason == "template_first_social_intent"
 
 
 def test_native_generator_status_checks_sovereign_artifact_locations() -> None:
@@ -158,7 +180,20 @@ def test_chat_module_keeps_pinned_identity_on_template_when_experimental() -> No
     out = mod.handle(analysis, intent="chat.identity", session_id="phase15-pinned")
     assert "SF.AI" in out.text
     assert "generator:template" in out.notes
-    assert "native_generator:pinned_identity_capability_intent" in out.notes
+    assert "native_generator:template_first_social_intent" in out.notes
+
+
+def test_chat_module_keeps_smalltalk_on_template_when_experimental() -> None:
+    pipe = get_default_pipeline()
+    mod = ChatModule(
+        generation_policy=GenerationPolicy(enabled=True, experimental_runtime=True),
+        native_generator=_FakeGenerator(),  # type: ignore[arg-type]
+    )
+    analysis = pipe.analyze_user_text("كيفك")
+    out = mod.handle(analysis, intent="chat.smalltalk", session_id="phase15-social")
+    assert "كيف حالك" in out.text
+    assert "generator:template" in out.notes
+    assert "native_generator:template_first_social_intent" in out.notes
 
 
 def test_chat_api_response_includes_generator_metadata() -> None:

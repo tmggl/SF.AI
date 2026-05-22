@@ -29,6 +29,8 @@ _KNOWN_INTENTS: frozenset[str] = frozenset(
     {
         "chat.greeting",
         "chat.smalltalk",
+        "chat.presence",
+        "chat.understanding",
         "chat.identity",
         "chat.who_made_you",
         "chat.capability",

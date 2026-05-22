@@ -25,8 +25,6 @@ def test_ui_chat_serves_html() -> None:
     assert "قالب آمن" in body
     assert "ذاكرة:" in body
     assert "تصدير" in body
-    assert "توليد خام" in body
-    assert "data-prompt=\"ابي اسوي كود\"" in body
     assert "training_allowed: false" in body or "training_allowed\": false" in body
     assert "sfai_chat_review_" in body
 

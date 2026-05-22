@@ -65,7 +65,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "بخير، شكرًا لسؤالك. عندك أنت؟"
+      "response_preview": "بخير، شكرًا لسؤالك. كيف حالك أنت؟"
     },
     {
       "id": "chat_msa_identity_001",
@@ -167,7 +167,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلتك. أنا مساعد محدود حاليًا — جرب صياغة محددة أكثر، أو اسأل «وش تقدر تسوي» لتشوف القدرات المتاحة."
+      "response_preview": "وصلتك. أنا محدود الآن، لكن قل لي وش تبي بالضبط وأنا أمشي معك خطوة خطوة."
     },
     {
       "id": "chat_saudi_skeleton_coding_001",
