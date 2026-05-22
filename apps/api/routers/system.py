@@ -11,7 +11,13 @@ import os
 from fastapi import APIRouter, Depends
 
 from apps.api.dependencies import Settings, get_settings
-from apps.api.schemas.system import ComponentStatus, SystemStatusResponse
+from apps.api.schemas.system import (
+    ComponentStatus,
+    CorpusAuditResponse,
+    CorpusIssueResponse,
+    SystemStatusResponse,
+)
+from sf_ai.datasets.corpus_governance import audit_jsonl_directory_for_training
 
 router = APIRouter(prefix="/system", tags=["system"])
 
@@ -102,5 +108,37 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
             ComponentStatus(name="training_corpus", status="waiting_for_user_data", phase="Phase 11"),
             ComponentStatus(name="phase12_corpus_preflight", status="active", phase="Phase 12"),
             ComponentStatus(name="rag", status="planned", phase="Phase 8"),
+        ],
+    )
+
+
+@router.get("/corpus-audit", response_model=CorpusAuditResponse)
+def corpus_audit() -> CorpusAuditResponse:
+    """Live Phase 12 preflight status for the local chat JSONL corpus."""
+    corpus = "data/corpus/chat/jsonl"
+    report = audit_jsonl_directory_for_training(corpus)
+    ready = report.error_count == 0 and report.training_ready > 0
+
+    return CorpusAuditResponse(
+        corpus=corpus,
+        status=(
+            "READY_FOR_PHASE_12_TOKENIZER_TRAINING"
+            if ready
+            else "NOT_READY_FOR_TRAINING"
+        ),
+        total_records=report.total_records,
+        training_ready=report.training_ready,
+        issue_count=report.error_count,
+        dialect_counts=report.dialect_counts,
+        quality_counts=report.quality_counts,
+        source_counts=report.source_counts,
+        issues=[
+            CorpusIssueResponse(
+                line_number=issue.line_number,
+                kind=issue.kind,
+                message=issue.message,
+                snippet=issue.snippet,
+            )
+            for issue in report.issues[:50]
         ],
     )

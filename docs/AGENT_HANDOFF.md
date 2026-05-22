@@ -143,6 +143,12 @@ bash scripts/run_chat_server.sh
 make corpus-audit
 ```
 
+وأضيف endpoint حي:
+
+```text
+GET /system/corpus-audit
+```
+
 هذه تستخدم `scripts/audit_training_corpus.py` وتجمع فحص كل ملفات `.jsonl` في `data/corpus/chat/jsonl/`.
 
 الوضع الحالي:

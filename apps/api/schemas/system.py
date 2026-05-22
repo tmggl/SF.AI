@@ -29,3 +29,22 @@ class SystemStatusResponse(BaseModel):
     uses_pretrained_embeddings: bool
     uses_pretrained_tokenizer: bool
     components: list[ComponentStatus]
+
+
+class CorpusIssueResponse(BaseModel):
+    line_number: int | None
+    kind: str
+    message: str
+    snippet: str = ""
+
+
+class CorpusAuditResponse(BaseModel):
+    corpus: str
+    status: str = Field(..., description="READY_FOR_PHASE_12_TOKENIZER_TRAINING | NOT_READY_FOR_TRAINING")
+    total_records: int
+    training_ready: int
+    issue_count: int
+    dialect_counts: dict[str, int]
+    quality_counts: dict[str, int]
+    source_counts: dict[str, int]
+    issues: list[CorpusIssueResponse]

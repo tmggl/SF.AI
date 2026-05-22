@@ -59,6 +59,7 @@
   - `audit_jsonl_directory_for_training`
   - `CorpusGovernanceReport`
 - أضيف `scripts/audit_training_corpus.py` وهدف `make corpus-audit` كبوابة preflight قبل Phase 12.
+- أضيف endpoint حي: `GET /system/corpus-audit` لعرض جاهزية corpus من المتصفح/API.
 - نتيجة الوضع الحالي: `NOT_READY_FOR_TRAINING` لأن `data/corpus/chat/jsonl/` لا يحتوي ملفات JSONL تدريبية بعد.
 - أضيف حقل `provenance.quality` إلى schema.
 - قيود Phase 11: `domain=chat`, `lang=ar`, `dialect ∈ {msa, saudi}`, ووجود user+assistant وsource/license/quality.
