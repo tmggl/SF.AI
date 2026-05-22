@@ -13,7 +13,7 @@
 - **المرحلة الحالية:** **Phase 11 — Sovereign Corpus Governance & Saudi/MSA Dialogue Pack** (مكتملة كحوكمة؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
 - **المرحلة التالية المقترحة:** **Phase 12 — SF-BPE Tokenizer v1 Training & Audit** بعد وضع بيانات JSONL وموافقة صريحة.
-- **بوابة Phase 12 الحالية:** `make corpus-audit` جاهز؛ نتيجته الآن `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعد إضافة `first_dialogue_seed.jsonl` بعدد 20/20، لكن التدريب ممنوع حتى إذن صريح.
+- **بوابة Phase 12 الحالية:** `make corpus-audit` جاهز؛ نتيجته الآن `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30، لكن التدريب ممنوع حتى إذن صريح.
 - **فحص Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/corpus-audit`
 - **جرد المصادر الشامل:** `make source-inventory` أو `GET http://127.0.0.1:8123/system/source-inventory`
 - **فحص السيرفر بدون تعطيل:** `make server-status`، وهو read-only ولا يعمل restart/stop.
@@ -23,7 +23,7 @@
 - **طبقة الدستور الهندسي واللغوي قبل Phase 12:** مكتملة في `docs/PROJECT_CONSTITUTION.md`, `docs/LANGUAGE_SEGMENTATION.md`, `docs/TOKENIZATION_POLICY.md`, `docs/DATASET_GOVERNANCE.md`, `docs/AGENT_ENGINEERING_RULES.md`.
 - **موارد tokenization:** `resources/tokenization/protected_terms_saudi.txt`, `resources/tokenization/preferred_merges.txt`, `resources/tokenization/tokenization_rules.yaml`.
 - **فحص tokenization قبل Phase 12:** `make tokenization-audit`، وهو read-only ولا يدرّب tokenizer.
-- **نتيجة tokenization-audit الحالية:** 20/30 protected terms مغطاة في seed الحالي؛ الـ 10 المتبقية تحتاج أمثلة لاحقة قبل تحسين تغطية tokenizer.
+- **نتيجة tokenization-audit الحالية:** 30/30 protected terms مغطاة في corpus الحالي؛ التغطية 100%.
 - **تحسين اللغة الأخير:** التركيز الافتراضي الآن على العربية الفصحى + اللهجة السعودية فقط، مع إيقاف اللهجات الأخرى افتراضيًا.
 - **تحسين المحادثة الأخير:** توجيه أدق للرسائل اليومية (`شكرا`، `تمام`، `لا`، `ساعدني`، `مش فاهم`، `من صنعك`) + `سعودي` + `عندي؟` + زر مسح المحادثة + timestamps.
 - **خلفية:** بعد Phase 7 أضاف المستخدم قاموس سعودي تأليفي (Phase 3.6)، ثم أُكملت Phase 8 (RAG)، Phase 9 (الشاشة)، Phase 10 (هياكل المجالات).
@@ -192,7 +192,7 @@ make server-start
 - listener: `Python 75503` على `127.0.0.1:8123`
 - `GET /health` → 200، `{"status":"ok","project":"SF.AI","phase":"Phase 11"}`
 - `GET /system/status` يعرض `saudi_seed_v1_lexicon=active`
-- `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 20/20
+- `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - smoke: `وشلونك` → `chat.smalltalk` بدون fallback، و`عندي سؤال` → دعوة مباشرة لكتابة السؤال.
 
 > المنفذ 8000/8765 مشغول بمشروع آخر للمستخدم — استخدم 8123.
@@ -242,7 +242,7 @@ make server-start
 
 ## خارطة النموذج اللغوي السيادي بعد Phase 11
 
-- **Phase 11:** حوكمة وتجهيز بيانات حوار فصحى/سعودي — مكتملة، وفيها seed صغير 20/20 جاهز preflight.
+- **Phase 11:** حوكمة وتجهيز بيانات حوار فصحى/سعودي — مكتملة، وفيها corpus seed صغير 30/30 جاهز preflight.
 - **Governance Layer:** قواعد الهندسة والهوية وخريطة المشروع ودورة الحياة — مكتملة قبل Phase 12.
 - **Phase 12:** تدريب SF-BPE tokenizer v1 من بيانات SF.AI فقط.
 - **Phase 13:** تدريب smoke صغير لإثبات أن النموذج يتعلم ويولد نصًا خامًا.

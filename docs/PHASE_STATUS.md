@@ -10,7 +10,7 @@
 - **المرحلة الحالية:** **Phase 11 — Sovereign Corpus Governance & Saudi/MSA Dialogue Pack**
 - **حالة المرحلة الحالية:** **مكتملة كحوكمة وأدوات فحص؛ يوجد seed صغير مصرح، ولا يوجد تدريب فعلي بعد**
 - **المرحلة التالية المقترحة:** Phase 12 — SF-BPE Tokenizer v1 Training & Audit
-- **جاهزية Phase 12 الآن:** preflight audit جاهز `20/20`؛ التدريب ينتظر إذنًا صريحًا.
+- **جاهزية Phase 12 الآن:** preflight audit جاهز `30/30`؛ التدريب ينتظر إذنًا صريحًا.
 - **تاريخ آخر تحديث:** 2026-05-22
 
 ---
@@ -68,7 +68,8 @@
   - يفرّق بين chat corpus، وملف مهام اللهجة السعودية، وقاموس Saudi Seed الخاص، وموضع Mo3jam المؤجل.
 - نتيجة الجرد المحلي الحالي: 1548 سجلًا مرجعيًا خاصًا غير مرفوع (`1032` مهمة لهجة سعودية + `516` مدخل قاموس سعودي)، لكنها ليست chat corpus مباشرًا.
 - أضيف `data/corpus/chat/jsonl/first_dialogue_seed.jsonl`: seed صغير فيه 20 محادثة سعودية `gold`، مشتقة من مرجع Saudi Seed المحلي، مع `source/license/training_allowed/quality`.
-- نتيجة الوضع الحالي بعد `make corpus-audit`: `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد `20/20`، لكن تدريب tokenizer لم يبدأ وينتظر إذنًا صريحًا.
+- أضيف `data/corpus/chat/jsonl/protected_terms_seed_v1.jsonl`: seed صغير فيه 10 محادثات سعودية `gold` لتغطية protected terms المتبقية.
+- نتيجة الوضع الحالي بعد `make corpus-audit`: `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد `30/30`، لكن تدريب tokenizer لم يبدأ وينتظر إذنًا صريحًا.
 - أضيف حقل `provenance.quality` إلى schema.
 - أضيف حقل `provenance.training_allowed` إلى schema، وصار شرطًا في corpus governance.
 - قيود Phase 11: `domain=chat`, `lang=ar`, `dialect ∈ {msa, saudi}`, ووجود user+assistant وsource/license/quality/training_allowed.
@@ -91,9 +92,9 @@
 - أضيف `make tokenization-audit` لفحص policy/coverage قبل Phase 12 دون تدريب أو كتابة artifacts.
 - نتيجة `make tokenization-audit ARGS="--show-missing"` الحالية:
   - protected terms total: 30
-  - covered: 20
-  - coverage: 66.67%
-  - missing examples: `تكفين`, `لا هنت`, `الله لا يهينك`, `سم`, `أبشر`, `حيّاك`, `حياك`, `يعطيك العافية`, `ما قصرت`, `الله يعافيك`
+  - covered: 30
+  - coverage: 100%
+  - missing examples: none
 - لم يبدأ tokenizer أو LM training.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
@@ -162,7 +163,7 @@
 ```
 GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 11"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
-GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 20/20
+GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
                      dialect=saudi, response="بخير، شكرًا لسؤالك. عندك أنت؟"
 ```

@@ -198,6 +198,6 @@ runtime يستخدم checkpoint فقط بعد:
 ## الحالة الحالية
 
 - corpus seed صغير موجود: `first_dialogue_seed.jsonl`.
-- `corpus-audit` جاهز: 20/20.
+- `corpus-audit` جاهز: 30/30.
 - Phase 12 لم تبدأ.
 - tokenizer training ممنوع حتى إذن صريح.

@@ -189,7 +189,7 @@ GET /system/source-inventory
 status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
 ```
 
-والسبب: أُضيف seed صغير باسم `data/corpus/chat/jsonl/first_dialogue_seed.jsonl` فيه 20 محادثة سعودية gold مشتقة من مرجع Saudi Seed المحلي، ويمر `make corpus-audit` بعدد `20/20`.
+والسبب: أُضيف seed أول باسم `data/corpus/chat/jsonl/first_dialogue_seed.jsonl` فيه 20 محادثة سعودية gold، ثم `protected_terms_seed_v1.jsonl` فيه 10 محادثات لتغطية protected terms. يمر `make corpus-audit` بعدد `30/30`.
 
 مع ذلك، لا تشغّل `make train-bpe` حتى بعد ظهور:
 

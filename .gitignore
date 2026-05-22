@@ -58,6 +58,8 @@ artifacts/logs/**/*
 !**/README.md
 !data/corpus/chat/jsonl/first_dialogue_seed.jsonl
 !data/corpus/chat/jsonl/first_dialogue_seed.CARD.md
+!data/corpus/chat/jsonl/protected_terms_seed_v1.jsonl
+!data/corpus/chat/jsonl/protected_terms_seed_v1.CARD.md
 
 # User-authored private lexicon payloads. Keep docs/summaries, do not publish
 # the full proprietary data files unless the owner explicitly approves.
