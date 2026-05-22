@@ -19,7 +19,9 @@
 ```text
 resources/tokenization/
 ├── protected_terms_saudi.txt
+├── protected_terms_msa_candidate.txt
 ├── preferred_merges.txt
+├── preferred_merges_msa_candidate.txt
 └── tokenization_rules.yaml
 ```
 
@@ -37,11 +39,24 @@ protected terms هي كلمات أو عبارات يجب أن يحاول tokeniz
 
 هذه ليست vocab جاهزًا خارجيًا. هي policy محلية مشتقة من مرجع سعودي يملكه المشروع.
 
+أضيفت أيضًا قائمة مرشحة للفصحى:
+
+- `protected_terms_msa_candidate.txt`
+- حجمها الحالي: 138 مصطلحًا/عبارة فصيحة.
+- ليست active protected terms بعد.
+- ليست corpus ولا vocab pretrained.
+- تُفعّل تدريجيًا فقط عندما تغطيها دفعات corpus السيادية وتنجح audit.
+
 ## Preferred Merges
 
 preferred merges هي أزواج أو سلاسل يُفضّل تعلمها مبكرًا إذا ظهرت في corpus.
 
 هي توجيه سيادي، وليست merges pretrained.
+
+أضيفت قائمة مرشحة للفصحى:
+
+- `preferred_merges_msa_candidate.txt`
+- لا تُرقّى إلى merges نشطة إلا إذا دعمها corpus السيادي.
 
 لا تُستخدم إذا لم تكن مدعومة في implementation. عند إضافتها للتنفيذ يجب:
 
@@ -113,6 +128,7 @@ artifacts/tokenizers/
 - corpus path.
 - tokenization rules hash أو path.
 - protected terms path.
+- candidate protected/preferred paths إن استُخدمت في audit.
 - no pretrained vocab.
 
 ## تغيير السياسة

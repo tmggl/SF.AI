@@ -31,16 +31,24 @@ normalization:
   preserve_basic_punctuation: true
 
 protected_terms:
-  path: resources/tokenization/protected_terms_saudi.txt
+  active_paths:
+    - resources/tokenization/protected_terms_saudi.txt
+  candidate_paths:
+    - resources/tokenization/protected_terms_msa_candidate.txt
   policy: avoid_aggressive_splitting
   max_expected_pieces_initial: 4
   max_expected_pieces_after_training: 2
   requires_audit: true
+  candidate_activation_policy: activate_after_corpus_coverage
 
 preferred_merges:
-  path: resources/tokenization/preferred_merges.txt
+  active_paths:
+    - resources/tokenization/preferred_merges.txt
+  candidate_paths:
+    - resources/tokenization/preferred_merges_msa_candidate.txt
   policy: prefer_if_supported_by_corpus
   requires_provenance_in_artifact: true
+  candidate_activation_policy: promote_only_when_supported_by_sovereign_corpus
 
 training_audit:
   required_checks:

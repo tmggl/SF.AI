@@ -9,7 +9,7 @@
 - **اسم المشروع:** SF.AI
 - **الرحلة الحالية:** **Phase 22 / 30**
 - **المرحلة الحالية:** **Phase 22 — Gold Dialogue Corpus v2**
-- **حالة المرحلة الحالية:** **بوابة جاهزية corpus v2 + review intake تعمل؛ corpus غير جاهز بعد (105/500، msa=75، saudi=30)**
+- **حالة المرحلة الحالية:** **بوابة جاهزية corpus v2 + review intake تعمل؛ corpus غير جاهز بعد (127/500، msa=97، saudi=30)**
 - **المرحلة التالية المقترحة:** إكمال دفعات فصحى/سعودية محكومة يؤلفها/يراجعها الوكيل بتفويض موثق حتى تمر `make phase22-readiness`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ تم تحديث `default_registry.yaml` و`safety_terms.yaml` لفجوات finance/religion/security.
 - **تاريخ آخر تحديث:** 2026-05-23
@@ -100,8 +100,11 @@
   - [AGENT_ENGINEERING_RULES.md](./AGENT_ENGINEERING_RULES.md)
 - أضيفت موارد tokenization:
   - [protected_terms_saudi.txt](../resources/tokenization/protected_terms_saudi.txt)
+  - [protected_terms_msa_candidate.txt](../resources/tokenization/protected_terms_msa_candidate.txt)
   - [preferred_merges.txt](../resources/tokenization/preferred_merges.txt)
+  - [preferred_merges_msa_candidate.txt](../resources/tokenization/preferred_merges_msa_candidate.txt)
   - [tokenization_rules.yaml](../resources/tokenization/tokenization_rules.yaml)
+- أضيفت مصطلحات فصحى مرشحة غير نشطة: 138 protected terms candidate و101 preferred merges candidate. لا تُعد corpus ولا pretrained vocab، وتُفعّل فقط بعد تغطية corpus/audit.
 - أضيف `make tokenization-audit` لفحص policy/coverage قبل Phase 12 دون تدريب أو كتابة artifacts.
 - نتيجة `make tokenization-audit ARGS="--show-missing"` الحالية:
   - protected terms total: 30
@@ -212,13 +215,14 @@
   - أضيف `sf_ai/datasets/phase22_review_intake.py`.
   - أضيف تقرير [PHASE22_GOLD_DIALOGUE_CORPUS_V2_REPORT.md](./PHASE22_GOLD_DIALOGUE_CORPUS_V2_REPORT.md).
   - القرار الحالي: `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2`.
-  - الموجود الحالي: 105 سجل تدريب جاهز: 75 `msa` و30 `saudi`.
-  - المتبقي: 395 سجل للوصول إلى 500.
-  - خطة الجمع الحالية: 125 فصحى + 170 سعودي + 100 مرنة، أي نحو 16 batch بحجم 25.
+  - الموجود الحالي: 127 سجل تدريب جاهز: 97 `msa` و30 `saudi`.
+  - المتبقي: 373 سجل للوصول إلى 500.
+  - خطة الجمع الحالية: 103 فصحى + 170 سعودي + 100 مرنة، أي نحو 15 batch بحجم 25.
   - أضيفت بوابة اكتمال صارمة: `phase22-completion-gate`، وقرارها الحالي `PHASE22_INCOMPLETE_DO_NOT_ADVANCE`.
   - أضيفت قائمة batches مفصلة داخل `phase22-plan`: من `msa_004` إلى `msa_008`، ثم `saudi_001` إلى `saudi_007`، ثم `flex_001` إلى `flex_004`، مع target records وأسماء ملفات وأوامر تحقق مباشرة.
   - أضيفت مهمة batch فورية داخل `phase22-next-batch`: المهمة الحالية `msa_004`، 25 سجل فصيح، مع checklist قبول وموضوعات تأليف لا تُعد بيانات تدريب.
   - أضيفت ثلاث دفعات فصيحة معتمدة: `data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl` و`dialogue_batch_v2_msa_002.jsonl` و`dialogue_batch_v2_msa_003.jsonl`، بإجمالي 75 سجلًا `silver` مؤلفة/مراجعة بتفويض سامي، مع بطاقات provenance.
+  - أضيف seed مصطلحات فصحى تدريبي: `data/corpus/chat/jsonl/protected_terms_msa_seed_v1.jsonl` وفيه 22 سجلًا `gold` لتغطية مصطلحات تشغيل/حوكمة/تدريب أساسية.
   - أضيفت حقول فصل المستخدمين في schema/audit/UI/export/corpus: `owner_user_id`, `created_by_user_id`, `target_user_id`, `user_scope`.
   - المسار الحالي `sami-local` و`single_user`، والهدف منع خلط محادثات أو ذاكرة مستخدم مع مستخدم آخر عند التوسع لاحقًا.
   - أضيف بنك تأليف فصيح غير تدريبي في `resources/phase22_authoring/msa_prompt_bank_v1.json`: أكثر من 80 موضوعًا فصيحًا لبناء batches الفصحى، مع `training_allowed=false` و`synthetic_llm_data=false`.
@@ -332,7 +336,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-434 passed in 4.87s
+435 passed in 4.78s
 ```
 
 | ملف | عدد |

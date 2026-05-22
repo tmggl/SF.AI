@@ -25,7 +25,9 @@ class ProtectedTermHit:
 class TokenizationPolicyAuditReport:
     corpus: Path
     protected_terms_path: Path
+    protected_terms_paths: tuple[Path, ...]
     preferred_merges_path: Path
+    preferred_merges_paths: tuple[Path, ...]
     rules_path: Path
     corpus_files: int
     messages_seen: int
@@ -68,6 +70,39 @@ def load_tokenization_rules(path: str | Path) -> dict[str, Any]:
     return raw
 
 
+def _policy_paths(
+    *,
+    explicit_path: str | Path | None,
+    rules: dict[str, Any],
+    section: str,
+    default_path: str,
+) -> tuple[Path, ...]:
+    if explicit_path is not None:
+        return (Path(explicit_path),)
+
+    raw = rules.get(section) or {}
+    paths = raw.get("active_paths") or raw.get("paths")
+    if isinstance(paths, list) and paths:
+        return tuple(Path(str(path)) for path in paths)
+
+    path = raw.get("path")
+    if path:
+        return (Path(str(path)),)
+
+    return (Path(default_path),)
+
+
+def _load_terms_from_paths(paths: tuple[Path, ...]) -> list[str]:
+    terms: list[str] = []
+    seen: set[str] = set()
+    for path in paths:
+        for term in load_plain_terms(path):
+            if term not in seen:
+                seen.add(term)
+                terms.append(term)
+    return terms
+
+
 def _validate_rules(rules: dict[str, Any]) -> list[str]:
     warnings: list[str] = []
     if rules.get("encoding") != "utf-8":
@@ -97,18 +132,28 @@ def _validate_rules(rules: dict[str, Any]) -> list[str]:
 def audit_tokenization_policy(
     *,
     corpus: str | Path = "data/corpus/chat/jsonl",
-    protected_terms_path: str | Path = "resources/tokenization/protected_terms_saudi.txt",
-    preferred_merges_path: str | Path = "resources/tokenization/preferred_merges.txt",
+    protected_terms_path: str | Path | None = None,
+    preferred_merges_path: str | Path | None = None,
     rules_path: str | Path = "resources/tokenization/tokenization_rules.yaml",
 ) -> TokenizationPolicyAuditReport:
     corpus_path = Path(corpus)
-    protected_path = Path(protected_terms_path)
-    preferred_path = Path(preferred_merges_path)
     rules_file = Path(rules_path)
 
-    protected_terms = load_plain_terms(protected_path)
-    preferred_merges = load_plain_terms(preferred_path)
     rules = load_tokenization_rules(rules_file)
+    protected_paths = _policy_paths(
+        explicit_path=protected_terms_path,
+        rules=rules,
+        section="protected_terms",
+        default_path="resources/tokenization/protected_terms_saudi.txt",
+    )
+    preferred_paths = _policy_paths(
+        explicit_path=preferred_merges_path,
+        rules=rules,
+        section="preferred_merges",
+        default_path="resources/tokenization/preferred_merges.txt",
+    )
+    protected_terms = _load_terms_from_paths(protected_paths)
+    preferred_merges = _load_terms_from_paths(preferred_paths)
     warnings = _validate_rules(rules)
 
     if not protected_terms:
@@ -143,8 +188,10 @@ def audit_tokenization_policy(
 
     return TokenizationPolicyAuditReport(
         corpus=corpus_path,
-        protected_terms_path=protected_path,
-        preferred_merges_path=preferred_path,
+        protected_terms_path=protected_paths[0],
+        protected_terms_paths=protected_paths,
+        preferred_merges_path=preferred_paths[0],
+        preferred_merges_paths=preferred_paths,
         rules_path=rules_file,
         corpus_files=len(files),
         messages_seen=messages_seen,

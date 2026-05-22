@@ -55,7 +55,9 @@ docs/LANGUAGE_SEGMENTATION.md
 docs/TOKENIZATION_POLICY.md
 resources/tokenization/tokenization_rules.yaml
 resources/tokenization/protected_terms_saudi.txt
+resources/tokenization/protected_terms_msa_candidate.txt
 resources/tokenization/preferred_merges.txt
+resources/tokenization/preferred_merges_msa_candidate.txt
 ```
 
 مخرجات corpus stage:

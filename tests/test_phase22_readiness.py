@@ -26,10 +26,10 @@ def test_phase22_readiness_reports_current_gap() -> None:
     assert decision.phase.startswith("Phase 22")
     assert decision.status == "NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2"
     assert decision.can_start_phase23 is False
-    assert decision.training_records == 105
+    assert decision.training_records == 127
     assert decision.target_records == 500
-    assert decision.remaining_records == 395
-    assert decision.dialect_counts == {"msa": 75, "saudi": 30}
+    assert decision.remaining_records == 373
+    assert decision.dialect_counts == {"msa": 97, "saudi": 30}
     assert decision.missing_required_dialects == ()
     assert decision.synthetic_llm_data_allowed is False
     assert "corpus_below_phase22_target" in decision.blockers
@@ -39,7 +39,7 @@ def test_phase22_readiness_reports_current_gap() -> None:
 def test_phase22_readiness_requires_balance_before_phase23() -> None:
     decision = build_phase22_readiness_decision()
     assert decision.min_per_dialect == 200
-    assert decision.dialect_shortfalls["msa"] == 125
+    assert decision.dialect_shortfalls["msa"] == 103
     assert decision.dialect_shortfalls["saudi"] == 170
     assert "dialect_balance_below_minimum" in decision.blockers
 
@@ -51,7 +51,7 @@ def test_phase22_endpoint() -> None:
     assert body["phase"].startswith("Phase 22")
     assert body["status"] == "NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2"
     assert body["can_start_phase23"] is False
-    assert body["training_records"] == 105
+    assert body["training_records"] == 127
     assert body["target_records"] == 500
     assert body["allowed_dialects"] == ["msa", "saudi"]
     assert body["synthetic_llm_data_allowed"] is False
@@ -60,11 +60,11 @@ def test_phase22_endpoint() -> None:
 def test_phase22_collection_plan_calculates_real_quotas() -> None:
     plan = build_phase22_collection_plan()
     assert plan.status == "COLLECT_REVIEWED_MSA_SAUDI_DIALOGUE_BATCHES"
-    assert plan.current_records == 105
-    assert plan.remaining_records == 395
+    assert plan.current_records == 127
+    assert plan.remaining_records == 373
     assert plan.batch_size == 25
-    assert plan.estimated_batches == 16
-    assert plan.quota_by_dialect == {"msa": 125, "saudi": 170}
+    assert plan.estimated_batches == 15
+    assert plan.quota_by_dialect == {"msa": 103, "saudi": 170}
     assert plan.flexible_records_after_minimums == 100
     assert plan.synthetic_llm_data_allowed is False
     assert any("No external or unprovenanced synthetic LLM data" in rule for rule in plan.review_rules)
@@ -73,6 +73,7 @@ def test_phase22_collection_plan_calculates_real_quotas() -> None:
     assert plan.planned_batches[0].dialect == "msa"
     assert plan.planned_batches[0].target_records == 25
     assert plan.planned_batches[4].batch_id == "msa_008"
+    assert plan.planned_batches[4].target_records == 3
     assert plan.planned_batches[5].batch_id == "saudi_001"
     assert plan.planned_batches[11].batch_id == "saudi_007"
     assert plan.planned_batches[11].target_records == 20
@@ -87,7 +88,7 @@ def test_phase22_collection_plan_endpoint() -> None:
     assert body["phase"].startswith("Phase 22")
     assert body["batch_size"] == 50
     assert body["estimated_batches"] == 8
-    assert body["quota_by_dialect"] == {"msa": 125, "saudi": 170}
+    assert body["quota_by_dialect"] == {"msa": 103, "saudi": 170}
     assert body["synthetic_llm_data_allowed"] is False
     assert len(body["planned_batches"]) == 9
     assert body["planned_batches"][0]["batch_id"] == "msa_004"
@@ -141,9 +142,9 @@ def test_phase22_completion_gate_blocks_advancement_until_complete() -> None:
     assert gate.status == "PHASE22_INCOMPLETE_DO_NOT_ADVANCE"
     assert gate.can_advance_phase23 is False
     assert gate.readiness_status == "NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2"
-    assert gate.training_records == 105
+    assert gate.training_records == 127
     assert gate.target_records == 500
-    assert gate.remaining_records == 395
+    assert gate.remaining_records == 373
     assert gate.current_next_batch == "msa_004"
     assert gate.completion_checks["corpus_target_met"] is False
     assert gate.completion_checks["required_dialects_present"] is True

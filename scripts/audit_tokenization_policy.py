@@ -23,11 +23,11 @@ def main(argv: list[str]) -> int:
     parser.add_argument("--corpus", default="data/corpus/chat/jsonl")
     parser.add_argument(
         "--protected-terms",
-        default="resources/tokenization/protected_terms_saudi.txt",
+        default=None,
     )
     parser.add_argument(
         "--preferred-merges",
-        default="resources/tokenization/preferred_merges.txt",
+        default=None,
     )
     parser.add_argument(
         "--rules",
@@ -52,7 +52,15 @@ def main(argv: list[str]) -> int:
     print(f"  protected_terms_covered : {report.protected_terms_covered}")
     print(f"  coverage_ratio          : {report.coverage_ratio:.2%}")
     print(f"  protected_terms_path    : {report.protected_terms_path}")
+    print(
+        "  protected_terms_paths   : "
+        + ", ".join(str(path) for path in report.protected_terms_paths)
+    )
     print(f"  preferred_merges_path   : {report.preferred_merges_path}")
+    print(
+        "  preferred_merges_paths  : "
+        + ", ".join(str(path) for path in report.preferred_merges_paths)
+    )
     print(f"  rules_path              : {report.rules_path}")
     print()
 

@@ -37,7 +37,9 @@
 - اقرأ `docs/TOKENIZATION_POLICY.md`.
 - اقرأ `resources/tokenization/tokenization_rules.yaml`.
 - راجع `protected_terms_saudi.txt`.
+- راجع `protected_terms_msa_candidate.txt` كمرشح فصيح غير نشط.
 - راجع `preferred_merges.txt`.
+- راجع `preferred_merges_msa_candidate.txt` كمرشح فصيح غير نشط.
 
 بعد أي تعديل:
 

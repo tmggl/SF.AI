@@ -17,7 +17,7 @@ Phase 19 لا يبدأ تدريب `SF-50M` الآن.
 
 - corpus الحالي صغير جدًا: `80` سجلًا تدريبيًا فقط.
 - الحد الأدنى العملي لهذه القفزة: `5000` سجل محكوم على الأقل.
-- corpus الحالي لم يعد يفتقد `msa`، لكنه ما زال بعيدًا عن العدد والتوازن المطلوبين: `msa=75`, `saudi=30`.
+- corpus الحالي لم يعد يفتقد `msa`، لكنه ما زال بعيدًا عن العدد والتوازن المطلوبين: `msa=97`, `saudi=30`.
 - Phase 16 يسمح بالتجربة المحلية، لكنه يوضح أن النموذج الخام يحتاج بيانات أكثر.
 
 ---
@@ -55,7 +55,7 @@ Phase 19 لا يبدأ تدريب `SF-50M` الآن.
 ```text
 status: NOT_READY_EXPAND_CORPUS_FIRST
 can_start_training: false
-training_records: 105
+training_records: 127
 min_training_records: 5000
 blockers:
   - corpus_too_small_for_sf50m

@@ -42,6 +42,41 @@ def test_tokenization_resources_exist_and_include_core_saudi_terms() -> None:
         assert term in terms
 
 
+def test_msa_candidate_terms_are_large_and_not_active_training_data() -> None:
+    protected = ROOT / "resources/tokenization/protected_terms_msa_candidate.txt"
+    preferred = ROOT / "resources/tokenization/preferred_merges_msa_candidate.txt"
+
+    assert protected.exists()
+    assert preferred.exists()
+
+    protected_terms = {
+        line.strip()
+        for line in protected.read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.startswith("#")
+    }
+    preferred_terms = {
+        line.strip()
+        for line in preferred.read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.startswith("#")
+    }
+
+    assert len(protected_terms) >= 120
+    assert len(preferred_terms) >= 80
+    for term in [
+        "الذكاء الاصطناعي",
+        "النموذج اللغوي",
+        "السيادة المعرفية",
+        "بوابة الجاهزية",
+        "العربية الفصحى",
+    ]:
+        assert term in protected_terms
+        assert term in preferred_terms
+
+    header = protected.read_text(encoding="utf-8").splitlines()[:6]
+    assert any("NOT pretrained vocabulary" in line for line in header)
+    assert any("NOT active protected terms yet" in line for line in header)
+
+
 def test_tokenization_rules_preserve_sovereign_constraints() -> None:
     rules_path = ROOT / "resources/tokenization/tokenization_rules.yaml"
     rules = yaml.safe_load(rules_path.read_text(encoding="utf-8"))
@@ -54,4 +89,13 @@ def test_tokenization_rules_preserve_sovereign_constraints() -> None:
     assert rules["normalization"]["arabizi_has_separate_normalization"] is True
     assert rules["normalization"]["code_is_separate_from_dialogue"] is True
     assert rules["protected_terms"]["policy"] == "avoid_aggressive_splitting"
+    assert rules["protected_terms"]["active_paths"] == [
+        "resources/tokenization/protected_terms_saudi.txt"
+    ]
+    assert rules["protected_terms"]["candidate_paths"] == [
+        "resources/tokenization/protected_terms_msa_candidate.txt"
+    ]
+    assert rules["preferred_merges"]["candidate_paths"] == [
+        "resources/tokenization/preferred_merges_msa_candidate.txt"
+    ]
     assert rules["artifact_requirements"]["require_sf_origin"] is True
