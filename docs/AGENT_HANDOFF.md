@@ -68,7 +68,7 @@
 ### الاختبارات
 
 ```
-435 passed in 4.78s
+435 passed in 4.83s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -142,7 +142,7 @@ bash scripts/run_chat_server.sh
 - `sf_ai/datasets/corpus_governance.py`
 - `tests/test_corpus_governance.py`
 
-تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر وغير جاهز لاختبار سامي كمولد حواري. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`، لكنه لم يجعل المولد مقنعًا. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات. Phase 19 أضاف بوابة جاهزية SF-50M وقراره الحالي: وسّع corpus أولًا. Phase 20 أضاف بوابات تفعيل المجالات، ولا يفعّل أي skeleton تلقائيًا. Phase 21 ثبت خارطة Phase 22–30 للوصول إلى حوار مولّد مقنع. Phase 22 أضاف بوابة Gold Dialogue Corpus v2: الوضع الحالي 152/500 (`msa=122`, `saudi=30`) ولا يزال غير جاهز.
+تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر وغير جاهز لاختبار سامي كمولد حواري. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`، لكنه لم يجعل المولد مقنعًا. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات. Phase 19 أضاف بوابة جاهزية SF-50M وقراره الحالي: وسّع corpus أولًا. Phase 20 أضاف بوابات تفعيل المجالات، ولا يفعّل أي skeleton تلقائيًا. Phase 21 ثبت خارطة Phase 22–30 للوصول إلى حوار مولّد مقنع. Phase 22 أضاف بوابة Gold Dialogue Corpus v2: الوضع الحالي 177/500 (`msa=147`, `saudi=30`) ولا يزال غير جاهز.
 
 ### Phase 12 — preflight جاهز فقط
 
@@ -212,7 +212,7 @@ status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
 status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
 ```
 
-تم تشغيل Phase 12 tokenizer v1 بإذن صريح من سامي على corpus صغير سابقًا. لا تعامل v1 كتشغيل لغوي متوازن؛ Phase 22 رفع corpus الحالي إلى 152 سجلًا فقط (`msa=122`, `saudi=30`) وما زال التوازن والعدد غير كافيين.
+تم تشغيل Phase 12 tokenizer v1 بإذن صريح من سامي على corpus صغير سابقًا. لا تعامل v1 كتشغيل لغوي متوازن؛ Phase 22 رفع corpus الحالي إلى 177 سجلًا فقط (`msa=147`, `saudi=30`) وما زال التوازن والعدد غير كافيين.
 
 أضيفت بوابة تنفيذية فوق ذلك: `make train-bpe` و`scripts/train_bpe.py` يرفضان البدء بدون:
 
@@ -247,7 +247,7 @@ missing language balance: msa
 - `make phase19-readiness`
 - `GET /system/phase19-readiness`
 - القرار الحالي: `NOT_READY_EXPAND_CORPUS_FIRST`
-- السبب: corpus الحالي 152 سجلًا فقط، والحد الأدنى العملي الحالي 5000 سجل محكوم مع توازن `msa + saudi`.
+- السبب: corpus الحالي 177 سجلًا فقط، والحد الأدنى العملي الحالي 5000 سجل محكوم مع توازن `msa + saudi`.
 - مختبر سامي المحلي يسمح بتجربة المولد الخام على الرسائل غير الحساسة من مجالات skeleton عبر `SF_LAB_GENERATION_FOR_NON_SENSITIVE=true`.
 
 ### Phase 20 — Domain Activation Gates — تعمل
@@ -279,11 +279,11 @@ missing language balance: msa
 - `GET /system/phase22-next-batch`
 - `GET /system/phase22-review-intake`
 - القرار الحالي: `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2`
-- الموجود: 152 سجلًا: 122 `msa` و30 `saudi`
+- الموجود: 177 سجلًا: 147 `msa` و30 `saudi`
 - الهدف: 500 سجل، مع 200 على الأقل لكل من `msa` و`saudi`
-- خطة الجمع الحالية: 78 فصحى + 170 سعودي + 100 مرنة، نحو 15 batch بحجم 25
-- المهمة الفورية الحالية: `msa_005` عبر `make phase22-next-batch`
-- أضيفت أربع دفعات فصيحة معتمدة: `data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl` إلى `dialogue_batch_v2_msa_004.jsonl` مع بطاقات provenance.
+- خطة الجمع الحالية: 53 فصحى + 170 سعودي + 100 مرنة، نحو 14 batch بحجم 25
+- المهمة الفورية الحالية: `msa_006` عبر `make phase22-next-batch`
+- أضيفت خمس دفعات فصيحة معتمدة: `data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl` إلى `dialogue_batch_v2_msa_005.jsonl` مع بطاقات provenance.
 - أضيف seed مصطلحات فصحى تدريبي: `data/corpus/chat/jsonl/protected_terms_msa_seed_v1.jsonl` وفيه 22 سجلًا `gold`; هذا corpus فعلي، وليس موردًا مرشحًا.
 - بنك التأليف الفصيح: `resources/phase22_authoring/msa_prompt_bank_v1.json`، ملف مساعدة فقط وليس corpus، وحقوله `training_allowed=false` و`synthetic_llm_data=false`.
 - مصطلحات الفصحى المرشحة: `resources/tokenization/protected_terms_msa_candidate.txt` و`resources/tokenization/preferred_merges_msa_candidate.txt`. هذه موارد سياسة غير نشطة، ليست corpus ولا vocab pretrained، وتُستخدم لتوجيه دفعات الفصحى القادمة قبل تفعيلها في tokenizer.
@@ -302,7 +302,7 @@ missing language balance: msa
 
 ### تستطيع الآن العمل على:
 
-- أكمل دفعات `msa_005..msa_008` ثم `saudi_001..saudi_007` ثم المرنة حتى تمر Phase 22 readiness، ثم أعد corpus-audit وPhase 19/20/22 gates.
+- أكمل دفعات `msa_006..msa_008` ثم `saudi_001..saudi_007` ثم المرنة حتى تمر Phase 22 readiness، ثم أعد corpus-audit وPhase 19/20/22 gates.
 
 ---
 
