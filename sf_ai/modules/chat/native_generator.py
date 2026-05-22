@@ -103,6 +103,10 @@ class NativeGenerator:
         else:
             out = greedy_generate(model, input_ids, cfg)
         text = tok.decode(out[0].detach().cpu().tolist()).strip()
+        if text.startswith(prompt):
+            continuation = text[len(prompt):].strip()
+            if continuation:
+                text = continuation
         if not text:
             return NativeGenerationResult(False, "", status.generator, "empty_generation")
         return NativeGenerationResult(True, text, status.generator, "generated")

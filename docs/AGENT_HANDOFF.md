@@ -66,7 +66,7 @@
 ### الاختبارات
 
 ```
-376 passed in 3.90s
+380 passed in 2.32s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -284,7 +284,7 @@ sf_ai/datasets/                 schemas + validators + loaders + saudi_seed
 resources/lexicons/             YAML lexicons (Phase 3) + imported/ (Phase 3.5/3.6)
 data/corpus/                    حوار المستخدم + قاموس سعودي
 docs/                           كل الوثائق الفنية
-tests/                          376 اختبار، 42 ملف
+tests/                          380 اختبار، 42 ملف
 scripts/                        CLI: run_chat_server, validate_dataset, train_bpe, import_mo3jam_saudi
 ```
 

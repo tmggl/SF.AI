@@ -21,6 +21,7 @@
 - **نتيجة Phase 15:** أضيف `NativeGenerator` + `GenerationPolicy` + metadata في API/UI، لكن الرد الحي يبقى `generator=template` حتى ينجح Phase 16.
 - **نتيجة Phase 16:** `make eval-phase16` نجح: `15/15`, `PASS_WITH_RUNTIME_BLOCKED`, و`runtime_activation_allowed=false`.
 - **نتيجة Phase 17:** أضيف `ChatRagBridge` و`ContextBuilder`; الشات يستطيع استخدام snippets محلية عند حقن `HybridRetriever`، ويعرض `rag=used/not_used`.
+- **وضع تجربة المستخدم الفردي:** يمكن تشغيل المولّد الخام لك وحدك عبر `SF_ENABLE_NATIVE_GENERATOR=true` و`SF_NATIVE_GENERATOR_EXPERIMENTAL=true`; هذا لا يعني أن النموذج صار صالحًا عامًا.
 - **تفويض التنفيذ:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة؛ استخدم flags المطلوبة مع توثيق كل تشغيل.
 - **فحص Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/corpus-audit`
 - **قرار Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/phase12-readiness` يعرض أن tokenizer v1 اكتمل، مع بقاء `missing_required_dialects=["msa"]` قبل إعادة تدريب متوازن.
@@ -140,7 +141,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs}/   Phase 5.5+ outputs
 │
-├── tests/                                 pytest suite — 376 تست / 42 ملف
+├── tests/                                 pytest suite — 380 تست / 42 ملف
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -215,7 +216,7 @@ make server-start
 ## نتائج الاختبارات (حتى Phase 17)
 
 ```
-376 passed in 3.90s
+380 passed in 2.32s
 ```
 
 التغطية الحالية:

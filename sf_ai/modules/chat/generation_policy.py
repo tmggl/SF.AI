@@ -26,6 +26,7 @@ class GenerationDecision:
 @dataclass(frozen=True)
 class GenerationPolicy:
     enabled: bool = False
+    experimental_runtime: bool = False
     min_confidence: float = 0.80
     max_new_tokens: int = 48
     temperature: float = 0.20
@@ -33,7 +34,10 @@ class GenerationPolicy:
 
     @classmethod
     def from_env(cls) -> "GenerationPolicy":
-        return cls(enabled=_env_true("SF_ENABLE_NATIVE_GENERATOR"))
+        return cls(
+            enabled=_env_true("SF_ENABLE_NATIVE_GENERATOR"),
+            experimental_runtime=_env_true("SF_NATIVE_GENERATOR_EXPERIMENTAL"),
+        )
 
     def decide(
         self,

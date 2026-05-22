@@ -118,6 +118,14 @@ runtime_activation_allowed: false
 - عدم تراجع safety.
 - تقرير جديد يغيّر `runtime_activation_allowed` إلى `true`.
 
+استثناء تجربة المستخدم الفردي:
+
+- يمكن لسامي تشغيل `SF_ENABLE_NATIVE_GENERATOR=true` مع
+  `SF_NATIVE_GENERATOR_EXPERIMENTAL=true` لاختبار النموذج الخام بنفسه.
+- هذا الوضع يبقى تجريبيًا ولا يغيّر قرار التقرير.
+- مجالات safety/skeleton والنوايا الثابتة مثل الهوية والقدرات تبقى على
+  القوالب/Composer.
+
 ---
 
 ## ماذا يختبر سامي الآن؟

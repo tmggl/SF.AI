@@ -8,8 +8,8 @@ The Orchestrator dispatches active routing decisions here. The module:
 4. Updates state with the user turn and the assistant turn.
 5. Returns a ModuleResponse the orchestrator can hand back to the API.
 
-No external LLM here. Phase 15 adds a native-generator adapter, but runtime
-chat remains template-backed until evaluation proves the checkpoint is useful.
+No external LLM here. Native generation is opt-in and experimental; templates
+remain the default runtime path.
 """
 
 from __future__ import annotations
@@ -73,6 +73,12 @@ class ChatModule:
         self.builder = builder or ChatResponseBuilder()
         self.generation_policy = generation_policy or GenerationPolicy.from_env()
         self.native_generator = native_generator
+        if (
+            self.native_generator is None
+            and self.generation_policy.enabled
+            and self.generation_policy.experimental_runtime
+        ):
+            self.native_generator = NativeGenerator()
         self.rag_bridge = rag_bridge
 
     def handle(
@@ -113,7 +119,12 @@ class ChatModule:
             if rag_context.used:
                 text = rag_context.text
 
-        generator_notes = self._generator_notes(intent=intent, analysis=analysis)
+        text, generator_notes = self._maybe_generate_native(
+            fallback_text=text,
+            intent=intent,
+            analysis=analysis,
+            rag_used=("rag:used" in rag_notes),
+        )
         notes = reply.notes + rag_notes + generator_notes
 
         state.add_assistant(text, intent=intent, domain=self.domain)
@@ -160,29 +171,60 @@ class ChatModule:
 
         return self.builder.build(analysis, intent, _StateView(state, prior_count))  # type: ignore[arg-type]
 
-    def _generator_notes(self, *, intent: str, analysis: NLPAnalysis) -> tuple[str, ...]:
-        """Expose generator metadata without activating weak runtime generation.
+    def _maybe_generate_native(
+        self,
+        *,
+        fallback_text: str,
+        intent: str,
+        analysis: NLPAnalysis,
+        rag_used: bool,
+    ) -> tuple[str, tuple[str, ...]]:
+        """Optionally use the sovereign native generator for single-user testing.
 
-        Phase 14 proved the checkpoint can emit text, but not that it is good
-        enough to replace the deterministic Arabic templates. Phase 15 therefore
-        wires the adapter/policy and surfaces metadata while keeping output
-        source as `template` until Phase 16 evaluation approves activation.
+        This path is deliberately behind two flags:
+        `SF_ENABLE_NATIVE_GENERATOR=true` and
+        `SF_NATIVE_GENERATOR_EXPERIMENTAL=true`.
         """
         if not self.generation_policy.enabled:
-            return ("generator:template", "native_generator:disabled")
+            return fallback_text, ("generator:template", "native_generator:disabled")
+        if not self.generation_policy.experimental_runtime:
+            return fallback_text, (
+                "generator:template",
+                "native_generator:experimental_runtime_disabled",
+            )
+        if rag_used:
+            return fallback_text, ("generator:template", "native_generator:skipped_rag_used")
 
         decision = self.generation_policy.decide(
             domain=self.domain,
             intent=intent,
-            confidence=0.0,
+            confidence=1.0,
             domain_status="active",
             requires_safety=bool(analysis.safety_flags),
-            fallback_used=True,
+            fallback_used=False,
         )
+        if not decision.allowed:
+            return fallback_text, ("generator:template", f"native_generator:{decision.reason}")
+
+        generator = self.native_generator or NativeGenerator()
+        result = generator.generate(
+            analysis.original_text,
+            max_new_tokens=self.generation_policy.max_new_tokens,
+            temperature=self.generation_policy.temperature,
+            top_k=self.generation_policy.top_k,
+        )
+        if not result.used:
+            return fallback_text, (
+                "generator:template",
+                f"native_generator:{result.reason}",
+            )
         return (
-            "generator:template",
-            f"native_generator:{decision.reason}",
-            "native_generator:phase15_metadata_only",
+            result.text,
+            (
+                "generator:sf_10m_v0_1",
+                "native_generator:generated",
+                "native_generator:experimental_runtime",
+            ),
         )
 
 

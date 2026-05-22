@@ -25,6 +25,8 @@ echo "  host                              : $HOST"
 echo "  port                              : $PORT"
 echo "  ENABLE_SAUDI_SEED_V1_LEXICON      : $ENABLE_SAUDI_SEED_V1_LEXICON"
 echo "  ENABLE_MO3JAM_SAUDI_LEXICON       : $ENABLE_MO3JAM_SAUDI_LEXICON"
+echo "  SF_ENABLE_NATIVE_GENERATOR        : ${SF_ENABLE_NATIVE_GENERATOR:-false}"
+echo "  SF_NATIVE_GENERATOR_EXPERIMENTAL  : ${SF_NATIVE_GENERATOR_EXPERIMENTAL:-false}"
 echo "  UI                                : http://$HOST:$PORT/ui/chat"
 echo
 

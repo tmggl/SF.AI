@@ -9,7 +9,24 @@ from sf_ai.core.index import load_default_registry
 from sf_ai.core.nlp import get_default_pipeline
 from sf_ai.core.orchestrator import Orchestrator, UserMessage
 from sf_ai.memory import Document, HybridRetriever, RetrievalConfig
-from sf_ai.modules.chat import ChatModule, ChatRagBridge, ContextBuilder, RagBridgeConfig
+from sf_ai.modules.chat import (
+    ChatModule,
+    ChatRagBridge,
+    ContextBuilder,
+    GenerationPolicy,
+    NativeGenerationResult,
+    RagBridgeConfig,
+)
+
+
+class _FakeGenerator:
+    def generate(self, prompt: str, **_: object) -> NativeGenerationResult:
+        return NativeGenerationResult(
+            used=True,
+            text=f"generated: {prompt}",
+            generator="sf_10m_v0_1",
+            reason="generated",
+        )
 
 
 def _retriever_with_local_memory() -> HybridRetriever:
@@ -78,6 +95,25 @@ def test_chat_module_distinguishes_local_memory_response() -> None:
     assert "المصدر:" in out.text
     assert "rag:used" in out.notes
     assert "generator:template" in out.notes
+
+
+def test_chat_module_prefers_local_memory_over_experimental_generation() -> None:
+    pipe = get_default_pipeline()
+    bridge = ChatRagBridge(
+        _retriever_with_local_memory(),
+        config=RagBridgeConfig(top_k=2, min_score=0.0),
+    )
+    mod = ChatModule(
+        rag_bridge=bridge,
+        generation_policy=GenerationPolicy(enabled=True, experimental_runtime=True),
+        native_generator=_FakeGenerator(),  # type: ignore[arg-type]
+    )
+    analysis = pipe.analyze_user_text("ما اللغة الحالية في SF.AI؟")
+    out = mod.handle(analysis, intent="chat.general", session_id="rag-gen-1")
+    assert "من الذاكرة المحلية" in out.text
+    assert "generated:" not in out.text
+    assert "rag:used" in out.notes
+    assert "native_generator:skipped_rag_used" in out.notes
 
 
 def test_orchestrator_surfaces_rag_debug_metadata() -> None:

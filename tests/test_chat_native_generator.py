@@ -11,9 +11,20 @@ from sf_ai.core.nlp import get_default_pipeline
 from sf_ai.modules.chat import (
     ChatModule,
     GenerationPolicy,
+    NativeGenerationResult,
     NativeGenerator,
     NativeGeneratorConfig,
 )
+
+
+class _FakeGenerator:
+    def generate(self, prompt: str, **_: object) -> NativeGenerationResult:
+        return NativeGenerationResult(
+            used=True,
+            text=f"رد مولد تجريبي على: {prompt}",
+            generator="sf_10m_v0_1",
+            reason="generated",
+        )
 
 
 def test_generation_policy_disabled_by_default() -> None:
@@ -28,6 +39,14 @@ def test_generation_policy_disabled_by_default() -> None:
     assert decision.allowed is False
     assert decision.generator == "template"
     assert decision.reason == "native_generator_disabled"
+
+
+def test_generation_policy_reads_experimental_runtime_flags(monkeypatch) -> None:
+    monkeypatch.setenv("SF_ENABLE_NATIVE_GENERATOR", "true")
+    monkeypatch.setenv("SF_NATIVE_GENERATOR_EXPERIMENTAL", "true")
+    policy = GenerationPolicy.from_env()
+    assert policy.enabled is True
+    assert policy.experimental_runtime is True
 
 
 def test_generation_policy_blocks_sensitive_and_unready_paths() -> None:
@@ -112,6 +131,32 @@ def test_chat_module_exposes_template_generator_metadata() -> None:
     out = mod.handle(analysis, intent="chat.greeting", session_id="phase15")
     assert "generator:template" in out.notes
     assert "native_generator:disabled" in out.notes
+
+
+def test_chat_module_uses_native_generator_in_explicit_experimental_mode() -> None:
+    pipe = get_default_pipeline()
+    mod = ChatModule(
+        generation_policy=GenerationPolicy(enabled=True, experimental_runtime=True),
+        native_generator=_FakeGenerator(),  # type: ignore[arg-type]
+    )
+    analysis = pipe.analyze_user_text("اكتب رد قصير")
+    out = mod.handle(analysis, intent="chat.general", session_id="phase15-exp")
+    assert out.text == "رد مولد تجريبي على: اكتب رد قصير"
+    assert "generator:sf_10m_v0_1" in out.notes
+    assert "native_generator:experimental_runtime" in out.notes
+
+
+def test_chat_module_keeps_pinned_identity_on_template_when_experimental() -> None:
+    pipe = get_default_pipeline()
+    mod = ChatModule(
+        generation_policy=GenerationPolicy(enabled=True, experimental_runtime=True),
+        native_generator=_FakeGenerator(),  # type: ignore[arg-type]
+    )
+    analysis = pipe.analyze_user_text("من أنت")
+    out = mod.handle(analysis, intent="chat.identity", session_id="phase15-pinned")
+    assert "SF.AI" in out.text
+    assert "generator:template" in out.notes
+    assert "native_generator:pinned_identity_capability_intent" in out.notes
 
 
 def test_chat_api_response_includes_generator_metadata() -> None:

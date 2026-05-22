@@ -142,6 +142,7 @@
   - report: `eval/reports/sf_10m_eval_v1.json`
   - result: `15/15`, `PASS_WITH_RUNTIME_BLOCKED`
   - runtime activation: `false` بسبب تكرار عينة Phase 14.
+  - سُمح لاحقًا بوضع تجربة فردي لسامي فقط عبر `SF_NATIVE_GENERATOR_EXPERIMENTAL=true` دون تغيير gate العام.
   - docs: [EVALUATION_PLAN.md](./EVALUATION_PLAN.md)
 - بدأ وانتهى Phase 17 Local Memory/RAG Bridge:
   - أضيف `sf_ai/modules/chat/context_builder.py`.
@@ -247,7 +248,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-376 passed in 2.58s
+380 passed in 2.32s
 ```
 
 | ملف | عدد |
@@ -284,7 +285,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_training_device.py | 14 |
 | test_typo_corrector.py | 5 |
 | test_web_extractor.py | 18 |
-| **Total** | **376** |
+| **Total** | **380** |
 
 ---
 
