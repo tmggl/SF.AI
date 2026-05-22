@@ -7,6 +7,7 @@ It never generates data and never writes training artifacts.
 
 from __future__ import annotations
 
+import json
 from dataclasses import asdict, dataclass, field
 from math import ceil
 from pathlib import Path
@@ -19,6 +20,7 @@ TARGET_RECORDS = 500
 MIN_PER_DIALECT = 200
 REQUIRED_DIALECTS = ("msa", "saudi")
 REQUIRED_QUALITIES = ("gold", "silver")
+AUTHORING_BANK_PATH = Path("resources/phase22_authoring/msa_prompt_bank_v1.json")
 
 
 @dataclass(frozen=True)
@@ -531,6 +533,9 @@ def _why_batch_is_next(batch: Phase22PlannedBatch) -> str:
 
 def _suggested_topics(dialect: str) -> tuple[str, ...]:
     if dialect == "msa":
+        bank = _load_authoring_prompt_bank("msa")
+        if bank:
+            return bank
         return (
             "شرح الفرق بين runtime وtraining وtokenizer بلغة فصحى بسيطة.",
             "حوار عن تنظيم خطوة يومية في مشروع تقني.",
@@ -553,3 +558,29 @@ def _suggested_topics(dialect: str) -> tuple[str, ...]:
         "غط موضوعات المشروع اليومية: خطة، تدريب، توكنزر، واجهة، مراجعة.",
         "اكتب حوارًا طبيعيًا من استخدام سامي، لا نصًا مصطنعًا للملء.",
     )
+
+
+def _load_authoring_prompt_bank(dialect: str) -> tuple[str, ...]:
+    """Load non-training authoring prompts for Phase 22, if present."""
+    path = PROJECT_DIR / AUTHORING_BANK_PATH
+    if not path.exists():
+        return ()
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return ()
+    if raw.get("training_allowed") is not False:
+        return ()
+    if raw.get("synthetic_llm_data") is not False:
+        return ()
+    dialects = raw.get("dialects")
+    if not isinstance(dialects, dict):
+        return ()
+    items = dialects.get(dialect)
+    if not isinstance(items, list):
+        return ()
+    prompts: list[str] = []
+    for item in items:
+        if isinstance(item, str) and item.strip():
+            prompts.append(item.strip())
+    return tuple(prompts)

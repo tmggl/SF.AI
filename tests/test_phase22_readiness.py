@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import json
 import subprocess
+from pathlib import Path
 
 from fastapi.testclient import TestClient
 
@@ -16,6 +18,7 @@ from sf_ai.datasets.phase22_readiness import (
 
 
 client = TestClient(app)
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_phase22_readiness_reports_current_gap() -> None:
@@ -103,8 +106,20 @@ def test_phase22_next_batch_brief_points_to_msa_001() -> None:
     assert any("No raw sf_10m_v0_1" in item for item in brief.acceptance_checklist)
     assert any("not training data" in warning for warning in brief.warnings)
     assert any("runtime" in topic and "training" in topic for topic in brief.suggested_topics)
+    assert len(brief.suggested_topics) >= 80
     assert brief.after_export_commands[0] == "make phase22-review-intake"
     assert "dialogue_batch_v2_msa_001.jsonl" in brief.after_export_commands[1]
+
+
+def test_phase22_msa_authoring_bank_is_not_training_data() -> None:
+    path = ROOT / "resources/phase22_authoring/msa_prompt_bank_v1.json"
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    assert raw["training_allowed"] is False
+    assert raw["synthetic_llm_data"] is False
+    assert raw["corpus_record"] is False
+    assert raw["dialect_scope"] == ["msa"]
+    assert len(raw["dialects"]["msa"]) >= 80
+    assert "Do not copy this file into data/corpus/chat/jsonl." in raw["notes"]
 
 
 def test_phase22_next_batch_endpoint() -> None:
@@ -116,6 +131,7 @@ def test_phase22_next_batch_endpoint() -> None:
     assert body["next_batch"]["batch_id"] == "msa_001"
     assert body["next_batch"]["dialect"] == "msa"
     assert body["next_batch"]["target_records"] == 25
+    assert len(body["suggested_topics"]) >= 80
     assert body["warnings"]
     assert body["after_export_commands"][0] == "make phase22-review-intake"
 

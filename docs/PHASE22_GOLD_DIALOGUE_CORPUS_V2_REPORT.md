@@ -99,8 +99,17 @@ next_batch: msa_001, dialect=msa, target_records=25
 - الهدف: 25 سجلًا فصيحًا.
 - يعرض checklist قبول قبل التحويل.
 - يعرض موضوعات عامة تساعد سامي يكتب بنفسه؛ هذه الموضوعات ليست corpus ولا synthetic dialogue.
+- يقرأ بنك موضوعات فصيح غير تدريبي من `resources/phase22_authoring/msa_prompt_bank_v1.json`.
 - بعد التصدير: `phase22-review-intake` ثم `prepare-dialogue-batch` ثم `corpus-audit` ثم `phase22-readiness`.
 - شاشة `/ui/chat` تعرض هذه المهمة مباشرة وتضيف `phase22_next_batch` إلى `review_metadata` عند التصدير.
+
+بنك التأليف الفصيح:
+
+- يحتوي 80+ موضوعًا فصيحًا لتغطية `msa_001`.
+- `training_allowed=false`.
+- `synthetic_llm_data=false`.
+- `corpus_record=false`.
+- لا يُنسخ إلى `data/corpus/chat/jsonl`; هو دليل كتابة فقط.
 
 `phase22-completion-gate` هو مانع الانتقال النهائي:
 
