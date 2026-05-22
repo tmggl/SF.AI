@@ -199,12 +199,15 @@
   - أضيف تقرير [SCALING_STRATEGY.md](./SCALING_STRATEGY.md).
 - بدأ Phase 22 Gold Dialogue Corpus v2 كبوابة جاهزية:
   - أضيف `make phase22-readiness`.
+  - أضيف `make phase22-plan`.
   - أضيف `GET /system/phase22-readiness`.
+  - أضيف `GET /system/phase22-collection-plan`.
   - أضيف `sf_ai/datasets/phase22_readiness.py`.
   - أضيف تقرير [PHASE22_GOLD_DIALOGUE_CORPUS_V2_REPORT.md](./PHASE22_GOLD_DIALOGUE_CORPUS_V2_REPORT.md).
   - القرار الحالي: `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2`.
   - الموجود الحالي: 30 سجل تدريب جاهز، كلها `saudi`.
   - المتبقي: 470 سجل للوصول إلى 500.
+  - خطة الجمع الحالية: 200 فصحى + 170 سعودي + 100 مرنة، أي نحو 19 batch بحجم 25.
   - الناقص الحاسم: `msa`.
   - لا تدريب جديد بدأ.
 
@@ -303,7 +306,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-409 passed in 4.03s
+412 passed in 4.29s
 ```
 
 | ملف | عدد |
@@ -332,7 +335,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_phase16_eval_harness.py | 3 (Phase 16) |
 | test_phase19_readiness.py | 2 (Phase 19) |
 | test_phase20_domain_activation_gates.py | 6 (Phase 20) |
-| test_phase22_readiness.py | 5 (Phase 22) |
+| test_phase22_readiness.py | 8 (Phase 22) |
 | test_rag_sparse_retrieval.py | 14 (Phase 8) |
 | test_research_summarizer.py | 20 |
 | test_response_composer.py | 6 |
@@ -345,7 +348,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_training_device.py | 14 |
 | test_typo_corrector.py | 5 |
 | test_web_extractor.py | 18 |
-| **Total** | **409** |
+| **Total** | **412** |
 
 ---
 

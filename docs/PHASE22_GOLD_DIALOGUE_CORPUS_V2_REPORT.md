@@ -53,7 +53,9 @@ Phase 22 لا يبدأ تدريب tokenizer أو نموذج.
 أضيف:
 
 - `make phase22-readiness`
+- `make phase22-plan`
 - `GET /system/phase22-readiness`
+- `GET /system/phase22-collection-plan`
 - `sf_ai/datasets/phase22_readiness.py`
 
 القيم الحالية المتوقعة:
@@ -67,6 +69,16 @@ missing_required_dialects: ["msa"]
 status: NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2
 can_start_phase23: false
 synthetic_llm_data_allowed: false
+```
+
+وخطة الجمع الحالية:
+
+```text
+remaining_records: 470
+batch_size: 25
+estimated_batches: 19
+quota_by_dialect: {"msa": 200, "saudi": 170}
+flexible_records_after_minimums: 100
 ```
 
 ---
@@ -125,6 +137,7 @@ make prepare-dialogue-batch ARGS="--input data/corpus/chat/review/<file>.jsonl -
 ```bash
 make corpus-audit
 make phase22-readiness
+make phase22-plan
 ```
 
 يعطيان:

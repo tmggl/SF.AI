@@ -28,7 +28,7 @@
 - **تصحيح Phase 20:** أضيف `sf_ai/modules/productivity/` كسكيلتون كامل بعد أن كشفت البوابة وجوده في registry دون module/manifest.
 - **نتيجة Phase 21:** أضيف `docs/GENERATIVE_ROADMAP.md` ومُدّدت الخطة إلى Phase 30؛ أول تدريب جودة مفيد قادم Phase 24، وأول هدف حوار مولّد مقنع Phase 26–28.
 - **مبدأ التكبير الرسمي:** `Progressive Scaling Strategy` — لا يتم رفع حجم النموذج إلا بعد نجاح المرحلة الحالية، والسلم الرسمي هو `SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+`.
-- **نتيجة Phase 22:** أضيف `make phase22-readiness` و`GET /system/phase22-readiness`; القرار الحالي `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2` لأن corpus الحالي 30/500 ويفتقد `msa`.
+- **نتيجة Phase 22:** أضيف `make phase22-readiness` و`make phase22-plan` و`GET /system/phase22-readiness` و`GET /system/phase22-collection-plan`; القرار الحالي `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2` لأن corpus الحالي 30/500 ويفتقد `msa`.
 - **مختبر سامي المحلي:** يمكن تشغيل المولّد الخام عبر `SF_ENABLE_NATIVE_GENERATOR=true` و`SF_NATIVE_GENERATOR_EXPERIMENTAL=true`، وتمكين الرسائل غير الحساسة من مجالات skeleton عبر `SF_LAB_GENERATION_FOR_NON_SENSITIVE=true`.
 - **واجهة الاختبار:** الواجهة لا تلقّن رسائل جاهزة؛ الاختبار يتم بما تكتبه أنت، مع تشخيص واضح يبين `template` أو `sf_10m_v0_1`.
 - **تفويض التنفيذ:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة دون انتظار موافقات جديدة؛ استخدم flags المطلوبة مع توثيق كل تشغيل ولا تكسر قواعد السيادة/السلامة.
@@ -36,6 +36,7 @@
 - **قرار Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/phase12-readiness` يعرض أن tokenizer v1 اكتمل، مع بقاء `missing_required_dialects=["msa"]` قبل إعادة تدريب متوازن.
 - **قرار Phase 12 من الطرفية بدون restart:** `make phase12-readiness`، وهو read-only ويعرض نفس منطق القرار.
 - **بوابات Phase 20 من الطرفية/API:** `make phase20-gates` أو `GET http://127.0.0.1:8123/system/phase20-gates`.
+- **خطة جمع Phase 22:** `make phase22-plan` أو `GET http://127.0.0.1:8123/system/phase22-collection-plan`.
 - **جرد المصادر الشامل:** `make source-inventory` أو `GET http://127.0.0.1:8123/system/source-inventory`
 - **فحص السيرفر بدون تعطيل:** `make server-status`، وهو read-only ولا يعمل restart/stop.
 - **تشغيل السيرفر المستقر:** `make server-start` يبدأه داخل `screen` فقط إذا كان متوقفًا.
@@ -151,7 +152,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs,reports}/   Phase 5.5+ outputs/reports
 │
-├── tests/                                 pytest suite — 409 تست / 47 ملف
+├── tests/                                 pytest suite — 412 تست / 47 ملف
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -232,7 +233,7 @@ make server-start
 ## نتائج الاختبارات (حتى Phase 22 readiness)
 
 ```
-409 passed in 4.03s
+412 passed in 4.29s
 ```
 
 التغطية الحالية:

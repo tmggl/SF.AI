@@ -19,6 +19,7 @@ from apps.api.schemas.system import (
     Phase12ReadinessResponse,
     Phase19ReadinessResponse,
     Phase20GatesResponse,
+    Phase22CollectionPlanResponse,
     Phase22ReadinessResponse,
     SourceInventoryItemResponse,
     SourceInventoryResponse,
@@ -26,7 +27,10 @@ from apps.api.schemas.system import (
 )
 from sf_ai.core.activation import build_phase20_activation_gates
 from sf_ai.datasets.corpus_governance import audit_jsonl_directory_for_training
-from sf_ai.datasets.phase22_readiness import build_phase22_readiness_decision
+from sf_ai.datasets.phase22_readiness import (
+    build_phase22_collection_plan,
+    build_phase22_readiness_decision,
+)
 from sf_ai.datasets.source_inventory import build_source_inventory
 from sf_ai.training.phase12_readiness import build_phase12_readiness_decision
 from sf_ai.training.phase19_readiness import build_phase19_readiness_decision
@@ -131,6 +135,7 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
             ComponentStatus(name="domain_activation_gates", status="active", phase="Phase 20"),
             ComponentStatus(name="generative_roadmap", status="active", phase="Phase 21"),
             ComponentStatus(name="phase22_readiness", status="active", phase="Phase 22"),
+            ComponentStatus(name="phase22_collection_plan", status="active", phase="Phase 22"),
         ],
     )
 
@@ -336,4 +341,27 @@ def phase22_readiness() -> Phase22ReadinessResponse:
         recommended_commands=list(decision.recommended_commands),
         blockers=list(decision.blockers),
         notes=list(decision.notes),
+    )
+
+
+@router.get("/phase22-collection-plan", response_model=Phase22CollectionPlanResponse)
+def phase22_collection_plan(batch_size: int = 25) -> Phase22CollectionPlanResponse:
+    """Read-only plan for collecting reviewed MSA/Saudi corpus batches."""
+    plan = build_phase22_collection_plan(batch_size=batch_size)
+    return Phase22CollectionPlanResponse(
+        phase=plan.phase,
+        status=plan.status,
+        corpus_path=plan.corpus_path,
+        current_records=plan.current_records,
+        target_records=plan.target_records,
+        remaining_records=plan.remaining_records,
+        batch_size=plan.batch_size,
+        estimated_batches=plan.estimated_batches,
+        quota_by_dialect=plan.quota_by_dialect,
+        flexible_records_after_minimums=plan.flexible_records_after_minimums,
+        recommended_batch_mix=list(plan.recommended_batch_mix),
+        review_rules=list(plan.review_rules),
+        next_commands=list(plan.next_commands),
+        synthetic_llm_data_allowed=plan.synthetic_llm_data_allowed,
+        notes=list(plan.notes),
     )

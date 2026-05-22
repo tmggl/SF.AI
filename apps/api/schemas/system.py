@@ -188,3 +188,21 @@ class Phase22ReadinessResponse(BaseModel):
     recommended_commands: list[str]
     blockers: list[str]
     notes: list[str]
+
+
+class Phase22CollectionPlanResponse(BaseModel):
+    phase: str
+    status: str
+    corpus_path: str
+    current_records: int
+    target_records: int
+    remaining_records: int
+    batch_size: int
+    estimated_batches: int
+    quota_by_dialect: dict[str, int]
+    flexible_records_after_minimums: int
+    recommended_batch_mix: list[str]
+    review_rules: list[str]
+    next_commands: list[str]
+    synthetic_llm_data_allowed: bool
+    notes: list[str]
