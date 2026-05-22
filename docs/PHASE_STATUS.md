@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **المرحلة الحالية:** **Phase 13 — Tiny LM Smoke Training**
-- **حالة المرحلة الحالية:** **اكتملت كاختبار حياة: loss انخفض، checkpoint حُفظ وحُمّل، والتوليد غير فارغ**
-- **المرحلة التالية المقترحة:** Phase 14 — SF-10M v0.1 Training Run أو توسعة MSA قبل تشغيل جودة.
-- **جاهزية Phase 14 الآن:** ممكنة تقنيًا، لكن corpus الحالي صغير وسعودي فقط؛ الجودة تتطلب توسعة بيانات.
+- **المرحلة الحالية:** **Phase 14 — SF-10M v0.1 Training Run**
+- **حالة المرحلة الحالية:** **اكتملت مع قيود: loss انخفض، checkpoint حُفظ، والتقييم/التوليد نجحا لكن corpus صغير وسعودي فقط**
+- **المرحلة التالية المقترحة:** توسعة MSA قبل تشغيل جودة، أو Phase 15 adapter skeleton بدون تفعيل runtime.
+- **جاهزية Phase 15 الآن:** ممكنة كبنية adapter فقط؛ غير مسموح استبدال ChatModule بهذا checkpoint بعد.
 - **تاريخ آخر تحديث:** 2026-05-22
 
 ---
@@ -38,7 +38,7 @@
 | Constitution Layer | Engineering & Linguistic Constitution قبل Phase 12 | ✅ | ✅ |
 | Phase 12 | SF-BPE Tokenizer v1 Training & Audit | ✅ completed_with_limits | ✅ |
 | Phase 13 | Tiny LM Smoke Training | ✅ completed_with_limits | ✅ |
-| Phase 14 | SF-10M v0.1 Training Run | معلّقة | ⏳ |
+| Phase 14 | SF-10M v0.1 Training Run | ✅ completed_with_limits | ✅ |
 | Phase 15 | Generator Adapter for ChatModule | معلّقة | ⏳ |
 | Phase 16 | Evaluation, Safety, and Saudi/MSA Style Harness | معلّقة | ⏳ |
 | Phase 17 | Local Memory/RAG Bridge into Chat | معلّقة | ⏳ |
@@ -118,6 +118,15 @@
   - eval loss: 4.4346
   - generation: non-empty, repetitive as expected
   - report: [PHASE13_SMOKE_TRAINING_REPORT.md](./PHASE13_SMOKE_TRAINING_REPORT.md)
+- بدأ وانتهى Phase 14 SF-10M v0.1:
+  - requested steps: 80
+  - completed steps: 33
+  - first loss: 5.6638
+  - last loss: 4.7535
+  - eval loss: 4.0777
+  - perplexity: 59.01
+  - generation: non-empty, repetitive as expected
+  - report: [PHASE14_SF10M_V0_1_REPORT.md](./PHASE14_SF10M_V0_1_REPORT.md)
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -214,7 +223,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-358 passed in 2.28s
+360 passed in 2.14s
 ```
 
 | ملف | عدد |

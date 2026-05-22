@@ -10,11 +10,12 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **المرحلة الحالية:** **Phase 13 — Tiny LM Smoke Training** (اكتملت كاختبار حياة محدود؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **المرحلة الحالية:** **Phase 14 — SF-10M v0.1 Training Run** (اكتملت كتدريب محدود؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** **Phase 14 — SF-10M v0.1 Training Run** أو توسعة MSA قبل تشغيل جودة.
+- **المرحلة التالية المقترحة:** توسعة MSA قبل تشغيل جودة، أو **Phase 15 — Generator Adapter Skeleton** بدون تفعيل runtime.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
+- **نتيجة Phase 14:** SF-10M v0.1 محدود نجح: `33/80` خطوة بسبب صغر corpus، eval loss `4.0777`, perplexity `59.01`, وتقرير في `docs/PHASE14_SF10M_V0_1_REPORT.md`.
 - **تفويض التنفيذ:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة؛ استخدم flags المطلوبة مع توثيق كل تشغيل.
 - **فحص Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/corpus-audit`
 - **قرار Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/phase12-readiness` يعرض أن tokenizer v1 اكتمل، مع بقاء `missing_required_dialects=["msa"]` قبل إعادة تدريب متوازن.
@@ -208,7 +209,7 @@ make server-start
 ## نتائج الاختبارات (Phase 11 + Governance Layer)
 
 ```
-358 passed in 2.28s
+360 passed in 2.14s
 ```
 
 التغطية الحالية:

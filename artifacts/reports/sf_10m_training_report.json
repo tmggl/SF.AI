@@ -1,0 +1,72 @@
+{
+  "phase": "Phase 14 — SF-10M v0.1 Training Run",
+  "status": "COMPLETED_WITH_LIMITS",
+  "purpose": "Run the first named SF-10M v0.1 training pass from random initialization on SF.AI local data.",
+  "training_permission": {
+    "granted": true,
+    "granted_by": "Sami",
+    "permission_text_summary": "موافق لكل شي حتي الاختبارات استمر لاي شي لاتنتظر مني اي اذن ابدا التدريب وكل شي لاعاد تنتظر مني اذن"
+  },
+  "tokenizer": {
+    "path": "artifacts/tokenizers/sf_bpe/v1",
+    "vocab_size": 261,
+    "sf_origin": true
+  },
+  "corpus": {
+    "path": "data/corpus/chat/jsonl",
+    "records": 30,
+    "dialects": {
+      "saudi": 30
+    },
+    "training_data_hash": "b0333df699b59a6980f9835e1b9fab8490f48995c1c612ee9a314a7cf9bbc259",
+    "known_limits": ["small corpus", "missing msa", "saudi-only seed"]
+  },
+  "model": {
+    "name": "sf-10m",
+    "parameters": 6361600,
+    "random_init": true,
+    "pretrained_weights_used": false,
+    "device": "mps",
+    "config_hash": "062371d4e269f2b2f2c3f9350765873d069bb58d7603b4ac8a4d597292250b74"
+  },
+  "training_args": {
+    "seq_len": 16,
+    "batch_size": 2,
+    "steps_requested": 80,
+    "steps_completed": 33,
+    "warmup": 4,
+    "seed": 20260522,
+    "save_every": 20,
+    "checkpoints": "artifacts/checkpoints/sf_10m_v0_1"
+  },
+  "loss": {
+    "first_logged": 5.6638,
+    "last_logged": 4.7535,
+    "decreased": true
+  },
+  "checkpoints": [
+    {
+      "name": "sf-10m-step20",
+      "tracked_in_git": false,
+      "metadata_updated_locally": true
+    },
+    {
+      "name": "sf-10m-step33",
+      "tracked_in_git": false,
+      "metadata_updated_locally": true
+    }
+  ],
+  "evaluation": {
+    "checkpoint": "sf-10m-step33",
+    "batches": 5,
+    "loss": 4.0777,
+    "perplexity": 59.01,
+    "generation_non_empty": true
+  },
+  "decision": {
+    "phase14_training_passed": true,
+    "suitable_for_chat_runtime": false,
+    "reason_not_runtime": "tiny corpus and repetitive generation; Phase 15 must not wire this into chat yet",
+    "next_recommended_phase": "MSA corpus expansion before quality run, or Phase 15 adapter skeleton without activation"
+  }
+}

@@ -37,7 +37,7 @@
 | Phase 11 | Sovereign Corpus Governance & Saudi/MSA Dialogue Pack | التالية بإذن |
 | Phase 12 | SF-BPE Tokenizer v1 Training & Audit | مكتملة مع قيود |
 | Phase 13 | Tiny LM Smoke Training (Overfit + Generation Sanity) | مكتملة مع قيود |
-| Phase 14 | SF-10M v0.1 Training Run | معلّقة |
+| Phase 14 | SF-10M v0.1 Training Run | مكتملة مع قيود |
 | Phase 15 | Generator Adapter for ChatModule | معلّقة |
 | Phase 16 | Evaluation, Safety, and Saudi/MSA Style Harness | معلّقة |
 | Phase 17 | Local Memory/RAG Bridge into Chat | معلّقة |

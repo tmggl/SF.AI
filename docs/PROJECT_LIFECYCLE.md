@@ -201,3 +201,4 @@ runtime يستخدم checkpoint فقط بعد:
 - `corpus-audit` جاهز بنيويًا: 30/30، لكن `phase12-readiness` يطلب إضافة `msa`.
 - Phase 12 tokenizer v1 اكتملت مع قيود موثقة.
 - Phase 13 smoke training اكتملت مع قيود موثقة.
+- Phase 14 SF-10M v0.1 اكتملت مع قيود موثقة.
