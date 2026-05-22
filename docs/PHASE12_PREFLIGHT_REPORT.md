@@ -133,6 +133,16 @@ make server-status
 GET /health → {"status":"ok","project":"SF.AI","phase":"Phase 11"}
 ```
 
+قرار Phase 12 الموحّد:
+
+```text
+GET /system/phase12-readiness
+preflight_pass=true
+can_train_now=false
+training_permission_granted=false
+required_confirmation_flag=--confirm-phase12-permission
+```
+
 قاعدة التشغيل:
 
 - لا توقف السيرفر إذا كان يعمل.

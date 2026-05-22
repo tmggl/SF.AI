@@ -37,7 +37,7 @@
 
 - **الأولوية الحالية:** تجهيز المسار السيادي الآمن قبل تدريب Phase 12.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
-- **البيانات الحالية:** seed صغير `20/20` يمر `corpus-audit`.
+- **البيانات الحالية:** seed صغير `30/30` يمر `corpus-audit`.
 - **التدريب:** لم يبدأ، ولا يبدأ إلا بإذن صريح.
 
 ---
@@ -151,6 +151,7 @@ http://127.0.0.1:8123/ui/chat
 - `GET /health` — فحص صحة الخدمة.
 - `GET /system/status` — حالة المراحل والمكونات.
 - `GET /system/corpus-audit` — جاهزية corpus قبل Phase 12.
+- `GET /system/phase12-readiness` — قرار Phase 12 كامل: preflight + بوابة الإذن.
 - `GET /system/source-inventory` — جرد مصادر البيانات والمراجع.
 - `POST /chat/message` — رسالة إلى الـ Orchestrator.
 - `GET /ui/chat` — شاشة المحادثة.

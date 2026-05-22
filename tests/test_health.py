@@ -65,6 +65,27 @@ def test_system_source_inventory_reports_reference_layers() -> None:
     assert any(source["private_or_ignored"] for source in body["sources"])
 
 
+def test_system_phase12_readiness_is_read_only_and_permission_gated() -> None:
+    r = client.get("/system/phase12-readiness")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["phase"].startswith("Phase 12")
+    assert body["preflight_pass"] is True
+    assert body["training_permission_granted"] is False
+    assert body["can_train_now"] is False
+    assert body["action"] == "STOP_BEFORE_TRAINING"
+    assert body["required_permission_phrase"] == "ابدأ Phase 12"
+    assert body["required_confirmation_flag"] == "--confirm-phase12-permission"
+    assert body["corpus_status"] == "READY_FOR_PHASE_12_TOKENIZER_TRAINING"
+    assert body["corpus_training_ready"] == 30
+    assert body["corpus_issue_count"] == 0
+    assert body["protected_terms_total"] == 30
+    assert body["protected_terms_covered"] == 30
+    assert body["protected_terms_coverage_ratio"] == 1.0
+    assert body["artifacts_present"] == []
+    assert "--confirm-phase12-permission" in body["required_command_after_permission"]
+
+
 def test_chat_greeting_routes_through_module() -> None:
     r = client.post("/chat/message", json={"message": "مرحبا", "session_id": "api-test-1"})
     assert r.status_code == 200

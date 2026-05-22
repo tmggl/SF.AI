@@ -15,12 +15,15 @@ from apps.api.schemas.system import (
     ComponentStatus,
     CorpusAuditResponse,
     CorpusIssueResponse,
+    Phase12ReadinessResponse,
     SourceInventoryItemResponse,
     SourceInventoryResponse,
     SystemStatusResponse,
 )
+from sf_ai.core.config import PROJECT_DIR
 from sf_ai.datasets.corpus_governance import audit_jsonl_directory_for_training
 from sf_ai.datasets.source_inventory import build_source_inventory
+from sf_ai.models.tokenizer.policy_audit import audit_tokenization_policy
 
 router = APIRouter(prefix="/system", tags=["system"])
 
@@ -177,5 +180,72 @@ def source_inventory() -> SourceInventoryResponse:
                 stats=item.stats,
             )
             for item in report.sources
+        ],
+    )
+
+
+@router.get("/phase12-readiness", response_model=Phase12ReadinessResponse)
+def phase12_readiness() -> Phase12ReadinessResponse:
+    """One-stop Phase 12 decision endpoint.
+
+    This is deliberately read-only. It reports readiness and the permission
+    boundary, but it never starts tokenizer training and never writes artifacts.
+    """
+    inventory = build_source_inventory()
+    tokenization = audit_tokenization_policy()
+
+    corpus_ready = inventory.phase12_status == "READY_FOR_PHASE_12_TOKENIZER_TRAINING"
+    tokenization_ready = tokenization.status == "READY_FOR_PHASE12_TOKENIZATION_PREFLIGHT"
+    protected_ready = (
+        tokenization.protected_terms_total > 0
+        and tokenization.protected_terms_covered == tokenization.protected_terms_total
+    )
+    preflight_pass = corpus_ready and tokenization_ready and protected_ready
+
+    artifacts_present: list[str] = []
+    artifact_globs = (
+        "artifacts/tokenizers/*/vocab.json",
+        "artifacts/tokenizers/*/merges.txt",
+        "artifacts/checkpoints/**/*",
+    )
+    for pattern in artifact_globs:
+        for path in PROJECT_DIR.glob(pattern):
+            if path.is_file() and path.name != ".gitkeep":
+                artifacts_present.append(str(path.relative_to(PROJECT_DIR)))
+
+    training_permission_granted = False
+    required_flag = "--confirm-phase12-permission"
+    command = (
+        'make train-bpe ARGS="--confirm-phase12-permission '
+        '--corpus data/corpus/chat/jsonl --out artifacts/tokenizers/sf_bpe/v1"'
+    )
+
+    return Phase12ReadinessResponse(
+        phase="Phase 12 — SF-BPE Tokenizer v1 Training & Audit",
+        preflight_pass=preflight_pass,
+        can_train_now=False,
+        training_permission_granted=training_permission_granted,
+        required_permission_phrase="ابدأ Phase 12",
+        required_confirmation_flag=required_flag,
+        action=(
+            "STOP_BEFORE_TRAINING"
+            if preflight_pass
+            else "FIX_PREFLIGHT_BEFORE_REQUESTING_PERMISSION"
+        ),
+        corpus_status=inventory.phase12_status,
+        corpus_training_ready=inventory.chat_training_records,
+        corpus_issue_count=inventory.chat_audit.error_count,
+        tokenization_status=tokenization.status,
+        protected_terms_total=tokenization.protected_terms_total,
+        protected_terms_covered=tokenization.protected_terms_covered,
+        protected_terms_coverage_ratio=round(tokenization.coverage_ratio, 4),
+        source_count=inventory.source_count,
+        local_reference_records=inventory.local_reference_records,
+        artifacts_present=sorted(artifacts_present),
+        required_command_after_permission=command,
+        notes=[
+            "Preflight readiness is not training permission.",
+            "The endpoint is read-only and writes no tokenizer/checkpoint artifacts.",
+            "Training commands refuse to start without --confirm-phase12-permission.",
         ],
     )

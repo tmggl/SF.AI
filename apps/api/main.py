@@ -4,6 +4,7 @@ Endpoints:
 - GET  /                 root info
 - GET  /health           liveness probe
 - GET  /system/status    phase + sovereign flags + components
+- GET  /system/phase12-readiness  read-only training readiness + permission gate
 - POST /chat/message     orchestrator dispatch (Phase 4 chat module)
 - GET  /ui/chat          minimal Arabic-RTL chat UI (Phase 9)
 

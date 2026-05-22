@@ -76,3 +76,25 @@ class SourceInventoryResponse(BaseModel):
     local_reference_records: int
     blockers: list[str]
     sources: list[SourceInventoryItemResponse]
+
+
+class Phase12ReadinessResponse(BaseModel):
+    phase: str
+    preflight_pass: bool
+    can_train_now: bool
+    training_permission_granted: bool
+    required_permission_phrase: str
+    required_confirmation_flag: str
+    action: str
+    corpus_status: str
+    corpus_training_ready: int
+    corpus_issue_count: int
+    tokenization_status: str
+    protected_terms_total: int
+    protected_terms_covered: int
+    protected_terms_coverage_ratio: float
+    source_count: int
+    local_reference_records: int
+    artifacts_present: list[str]
+    required_command_after_permission: str
+    notes: list[str]

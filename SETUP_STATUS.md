@@ -16,6 +16,7 @@
 - **بوابة Phase 12 الحالية:** `make corpus-audit` جاهز؛ نتيجته الآن `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30، لكن التدريب ممنوع حتى إذن صريح.
 - **بوابة التدريب التنفيذية:** `make train-bpe` يرفض التشغيل بدون `--confirm-phase12-permission`، ولا يُستخدم هذا العلم إلا بعد إذن صريح ببدء Phase 12.
 - **فحص Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/corpus-audit`
+- **قرار Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/phase12-readiness` يعرض `can_train_now=false` حتى الإذن.
 - **جرد المصادر الشامل:** `make source-inventory` أو `GET http://127.0.0.1:8123/system/source-inventory`
 - **فحص السيرفر بدون تعطيل:** `make server-status`، وهو read-only ولا يعمل restart/stop.
 - **تشغيل السيرفر المستقر:** `make server-start` يبدأه داخل `screen` فقط إذا كان متوقفًا.
@@ -171,6 +172,7 @@ SF.AI/
 - `GET /health` — فحص صحة (project + phase).
 - `GET /system/status` — حالة المراحل + flags السيادة + قائمة المكونات، بما فيها Phase 10 skeleton modules.
 - `GET /system/corpus-audit` — جاهزية corpus قبل Phase 12.
+- `GET /system/phase12-readiness` — قرار جاهزية Phase 12 مع بوابة الإذن.
 - `GET /system/source-inventory` — جرد مصادر البيانات والمراجع.
 - `POST /chat/message` — Orchestrator: NLP → Router → Module/Composer. يرجع domain/intent/confidence/signals/route_reason/response/requires_safety/status/fallback_used/dispatch/debug.
 - `GET /chat` → redirect (307) إلى `/ui/chat`.
@@ -204,7 +206,7 @@ make server-start
 ## نتائج الاختبارات (Phase 11 + Governance Layer)
 
 ```
-350 passed in 2.50s
+351 passed in 2.56s
 ```
 
 التغطية الحالية:
