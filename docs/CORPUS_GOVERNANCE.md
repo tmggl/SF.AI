@@ -47,6 +47,11 @@
     "language": "ar",
     "dialect": "saudi",
     "quality": "gold",
+    "training_allowed": true,
+    "owner_user_id": "sami-local",
+    "created_by_user_id": "sami-local",
+    "target_user_id": "sami-local",
+    "user_scope": "single_user",
     "notes": "حوار قصير من تأليف سامي"
   }
 }
@@ -68,6 +73,11 @@
 | `provenance.language` | نعم | `ar` |
 | `provenance.dialect` | نعم | `msa` أو `saudi` |
 | `provenance.quality` | نعم | `gold`, `silver`, `bronze` |
+| `provenance.training_allowed` | نعم | `true` للتدريب |
+| `provenance.owner_user_id` | نعم | مثل `sami-local` |
+| `provenance.created_by_user_id` | نعم | من أنشأ/صدّر/راجع السجل |
+| `provenance.target_user_id` | نعم | المستخدم الذي تعود له البيانات لاحقًا |
+| `provenance.user_scope` | نعم | `single_user` حاليًا |
 
 ---
 

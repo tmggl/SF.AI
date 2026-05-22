@@ -35,6 +35,8 @@ Phase 22 لا يبدأ تدريب tokenizer أو نموذج.
 - license واضح: `owner-approved-for-sf-ai-training`.
 - quality افتراضيًا `silver`.
 - training_allowed=true.
+- owner_user_id/created_by_user_id/target_user_id واضحة.
+- user_scope=single_user في المسار الحالي.
 - notes تذكر التفويض وتؤكد عدم وجود dataset خارجي أو pretrained model data.
 
 الطريق الصحيح:

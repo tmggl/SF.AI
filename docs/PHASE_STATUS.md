@@ -219,6 +219,8 @@
   - أضيفت قائمة batches مفصلة داخل `phase22-plan`: من `msa_002` إلى `msa_008`، ثم `saudi_001` إلى `saudi_007`، ثم `flex_001` إلى `flex_004`، مع target records وأسماء ملفات وأوامر تحويل مقترحة.
   - أضيفت مهمة batch فورية داخل `phase22-next-batch`: المهمة الحالية `msa_002`، 25 سجل فصيح، مع checklist قبول وموضوعات تأليف لا تُعد بيانات تدريب.
   - أضيف أول batch فصيح معتمد: `data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl`، وفيه 25 سجلًا `silver` مؤلفة بتفويض سامي، مع بطاقة provenance.
+  - أضيفت حقول فصل المستخدمين في schema/audit/UI/export/corpus: `owner_user_id`, `created_by_user_id`, `target_user_id`, `user_scope`.
+  - المسار الحالي `sami-local` و`single_user`، والهدف منع خلط محادثات أو ذاكرة مستخدم مع مستخدم آخر عند التوسع لاحقًا.
   - أضيف بنك تأليف فصيح غير تدريبي في `resources/phase22_authoring/msa_prompt_bank_v1.json`: أكثر من 80 موضوعًا فصيحًا لبناء batches الفصحى، مع `training_allowed=false` و`synthetic_llm_data=false`.
   - review intake الحالي: ملف عينة واحد في `data/corpus/chat/review/` مرشح للمراجعة، ولا يدخل التدريب تلقائيًا.
   - أضيفت بوابة جودة داخل review intake: `quality_score`, `quality_label`, و`quality_blockers`.
@@ -266,7 +268,7 @@
   - **لا CDNs، لا Node، لا build step** — تعمل من المتصفح مباشرة.
 - `apps/api/routers/ui.py` — GET `/ui/chat` يخدم الـ HTML.
 - `apps/api/main.py` — أضيف `ui.router`، و GET `/chat` redirect → `/ui/chat`.
-- اختبارات: 6 في `test_chat_ui.py` تشمل مؤشر جودة التصدير ولوحة بوابة Phase 22 ومهمة الجمع الحالية وحفظ review المحلي.
+- اختبارات: 7 في `test_chat_ui.py` تشمل مؤشر جودة التصدير ولوحة بوابة Phase 22 ومهمة الجمع الحالية وحفظ review المحلي وفصل المستخدمين.
 
 ### Phase 9 Polish — Comfortable Chat + Accurate Routing
 
@@ -329,7 +331,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-432 passed in 4.71s
+434 passed in 4.70s
 ```
 
 | ملف | عدد |
@@ -340,10 +342,10 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_chat_module.py | 12 |
 | test_chat_native_generator.py | 14 (Phase 15 + lab mode) |
 | test_chat_rag_bridge.py | 7 (Phase 17) |
-| test_chat_ui.py | 6 (Phase 9/19 status + export quality indicator) |
+| test_chat_ui.py | 7 (Phase 9/19 status + export quality indicator) |
 | test_checkpoints.py | 7 |
 | test_conversation_state.py | 8 |
-| test_corpus_governance.py | 9 (Phase 11) |
+| test_corpus_governance.py | 10 (Phase 11) |
 | test_dataset_validators.py | 28 |
 | test_dialogue_batch_preparation.py | 3 (Phase 18) |
 | test_dialect_mapper.py | 7 |

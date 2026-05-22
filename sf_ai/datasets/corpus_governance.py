@@ -88,6 +88,20 @@ def audit_record_for_training(
                 snippet,
             )
         )
+    if not provenance.owner_user_id:
+        issues.append(_issue(line_number, "missing provenance.owner_user_id", snippet))
+    if not provenance.created_by_user_id:
+        issues.append(_issue(line_number, "missing provenance.created_by_user_id", snippet))
+    if not provenance.target_user_id:
+        issues.append(_issue(line_number, "missing provenance.target_user_id", snippet))
+    if provenance.user_scope not in {"single_user", "multi_user", "public"}:
+        issues.append(
+            _issue(
+                line_number,
+                "provenance.user_scope must be one of ['single_user', 'multi_user', 'public']",
+                snippet,
+            )
+        )
 
     language = provenance.language or (
         sample.lang if isinstance(sample, StructuredSample) else None

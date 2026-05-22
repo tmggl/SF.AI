@@ -242,6 +242,10 @@ SF-10M
   - `dialect`
   - `quality`
   - `training_allowed`
+  - `owner_user_id`
+  - `created_by_user_id`
+  - `target_user_id`
+  - `user_scope`
   - `notes`
 
 ممنوع استخدام أسماء غامضة مثل `data1`, `misc`, `tmp_final`, `new_file`.

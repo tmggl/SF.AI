@@ -15,6 +15,9 @@ Seed صغير لتغطية المصطلحات السعودية المحمية ا
 - اللهجة: `saudi`
 - الجودة: `gold`
 - `training_allowed`: `true`
+- `user_scope`: `single_user`
+- `owner_user_id`: `sami-local`
+- `target_user_id`: `sami-local`
 
 ## المصطلحات المغطاة
 

@@ -26,6 +26,10 @@ def _ready_record(dialect: str = "saudi", quality: str = "gold") -> dict:
             "dialect": dialect,
             "quality": quality,
             "training_allowed": True,
+            "owner_user_id": "sami-local",
+            "created_by_user_id": "sami-local",
+            "target_user_id": "sami-local",
+            "user_scope": "single_user",
         },
     }
 
@@ -67,6 +71,13 @@ def test_training_allowed_must_be_true_for_training_pack() -> None:
     assert any("training_allowed must be true" in i.message for i in issues)
 
 
+def test_user_ownership_fields_are_required_for_training_pack() -> None:
+    raw = _ready_record()
+    raw["provenance"].pop("target_user_id")
+    issues = audit_record_for_training(raw, line_number=1)
+    assert any("target_user_id" in i.message for i in issues)
+
+
 def test_dialogue_must_include_user_and_assistant() -> None:
     raw = _ready_record()
     raw["messages"] = [{"role": "user", "content": "مرحبا"}]
@@ -81,13 +92,13 @@ def test_audit_jsonl_file_counts_ready_records(tmp_path: Path) -> None:
             '{"domain":"chat","lang":"ar","messages":[{"role":"user","content":"مرحبا"},'
             '{"role":"assistant","content":"أهلًا"}],"provenance":{"source":"sami",'
             '"license":"user-provided","language":"ar","dialect":"msa","quality":"gold",'
-            '"training_allowed":true}}\n'
+            '"training_allowed":true,"owner_user_id":"sami-local","created_by_user_id":"sami-local","target_user_id":"sami-local","user_scope":"single_user"}}\n'
         )
         + (
             '{"domain":"chat","lang":"ar","messages":[{"role":"user","content":"ازيك"},'
             '{"role":"assistant","content":"تمام"}],"provenance":{"source":"x",'
             '"license":"user-provided","language":"ar","dialect":"egyptian","quality":"gold",'
-            '"training_allowed":true}}\n'
+            '"training_allowed":true,"owner_user_id":"sami-local","created_by_user_id":"sami-local","target_user_id":"sami-local","user_scope":"single_user"}}\n'
         ),
         encoding="utf-8",
     )
@@ -114,7 +125,7 @@ def test_audit_jsonl_directory_aggregates_ready_records(tmp_path: Path) -> None:
             '{"domain":"chat","lang":"ar","messages":[{"role":"user","content":"مرحبا"},'
             '{"role":"assistant","content":"أهلًا"}],"provenance":{"source":"sami",'
             '"license":"user-provided","language":"ar","dialect":"msa","quality":"gold",'
-            '"training_allowed":true}}\n'
+            '"training_allowed":true,"owner_user_id":"sami-local","created_by_user_id":"sami-local","target_user_id":"sami-local","user_scope":"single_user"}}\n'
         ),
         encoding="utf-8",
     )
@@ -123,7 +134,7 @@ def test_audit_jsonl_directory_aggregates_ready_records(tmp_path: Path) -> None:
             '{"domain":"chat","lang":"ar","messages":[{"role":"user","content":"وشلونك"},'
             '{"role":"assistant","content":"بخير"}],"provenance":{"source":"sami",'
             '"license":"user-provided","language":"ar","dialect":"saudi","quality":"silver",'
-            '"training_allowed":true}}\n'
+            '"training_allowed":true,"owner_user_id":"sami-local","created_by_user_id":"sami-local","target_user_id":"sami-local","user_scope":"single_user"}}\n'
         ),
         encoding="utf-8",
     )

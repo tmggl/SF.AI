@@ -10,17 +10,19 @@
 - أو مؤلفة بتفويض سامي الواضح كـ `owner-delegated agent-authored` مع
   provenance كامل.
 - تحتوي `provenance` كامل.
+- تحمل هوية مستخدم واضحة:
+  `owner_user_id`, `created_by_user_id`, `target_user_id`, `user_scope`.
 
 ## مثال سجل تدريبي صالح
 
 ```json
-{"domain":"chat","lang":"ar","messages":[{"role":"user","content":"وشلونك؟"},{"role":"assistant","content":"بخير، شكرًا لك."}],"provenance":{"source":"sami-authored","license":"user-provided","language":"ar","dialect":"saudi","quality":"gold","training_allowed":true}}
+{"domain":"chat","lang":"ar","messages":[{"role":"user","content":"وشلونك؟"},{"role":"assistant","content":"بخير، شكرًا لك."}],"provenance":{"source":"sami-authored","license":"user-provided","language":"ar","dialect":"saudi","quality":"gold","training_allowed":true,"owner_user_id":"sami-local","created_by_user_id":"sami-local","target_user_id":"sami-local","user_scope":"single_user"}}
 ```
 
 مثال owner-delegated agent-authored:
 
 ```json
-{"domain":"chat","lang":"ar","messages":[{"role":"user","content":"اشرح لي الفرق بين runtime والتدريب."},{"role":"assistant","content":"runtime هو تشغيل النظام للرد على المستخدم، أما التدريب فهو بناء artifact جديد من corpus موثق."}],"provenance":{"source":"sf-ai-owner-delegated-agent-authored-msa-v1","license":"owner-approved-for-sf-ai-training","language":"ar","dialect":"msa","quality":"silver","training_allowed":true,"notes":"Owner explicitly delegated agent authoring and approval in chat on 2026-05-23; transparent agent-authored corpus for SF.AI; no external dataset or pretrained model data."}}
+{"domain":"chat","lang":"ar","messages":[{"role":"user","content":"اشرح لي الفرق بين runtime والتدريب."},{"role":"assistant","content":"runtime هو تشغيل النظام للرد على المستخدم، أما التدريب فهو بناء artifact جديد من corpus موثق."}],"provenance":{"source":"sf-ai-owner-delegated-agent-authored-msa-v1","license":"owner-approved-for-sf-ai-training","language":"ar","dialect":"msa","quality":"silver","training_allowed":true,"owner_user_id":"sami-local","created_by_user_id":"sami-local","target_user_id":"sami-local","user_scope":"single_user","notes":"Owner explicitly delegated agent authoring and approval in chat on 2026-05-23; transparent agent-authored corpus for SF.AI; no external dataset or pretrained model data."}}
 ```
 
 ## فحص الملف

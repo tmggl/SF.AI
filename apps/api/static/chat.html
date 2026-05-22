@@ -245,6 +245,7 @@
     </div>
     <div class="badges">
       <span class="badge" id="session-badge">جلسة: —</span>
+      <span class="badge" id="user-badge">مستخدم: —</span>
       <span class="badge" id="sov-badge">سيادي ✓</span>
       <button class="icon-btn" id="export-btn" title="تصدير المحادثة للمراجعة">تصدير</button>
       <button class="icon-btn" id="save-review-btn" title="حفظ المحادثة داخل data/corpus/chat/review">حفظ للمراجعة</button>
@@ -335,7 +336,16 @@
     }
     return id;
   })();
+  const USER_ID = (() => {
+    let id = localStorage.getItem("sf_user_id");
+    if (!id) {
+      id = "sami-local";
+      localStorage.setItem("sf_user_id", id);
+    }
+    return id;
+  })();
   document.getElementById("session-badge").textContent = "جلسة: " + SESSION_ID;
+  document.getElementById("user-badge").textContent = "مستخدم: " + USER_ID;
   const TRANSCRIPT_KEY = "sf_transcript_" + SESSION_ID;
   let transcript = [];
   try {
@@ -692,7 +702,7 @@
       const r = await fetch("/chat/message", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text, session_id: SESSION_ID }),
+        body: JSON.stringify({ message: text, session_id: SESSION_ID, user_id: USER_ID }),
       });
       if (!r.ok) {
         setMessageText(placeholder, "خطأ: HTTP " + r.status);
@@ -793,6 +803,10 @@
       review_metadata: {
         exported_from: "ui",
         session_id: SESSION_ID,
+        owner_user_id: USER_ID,
+        exported_by_user_id: USER_ID,
+        target_user_id: USER_ID,
+        user_scope: "single_user",
         phase22_next_batch: currentNextBatch ? {
           batch_id: currentNextBatch.batch_id,
           dialect: currentNextBatch.dialect,
@@ -816,6 +830,10 @@
         dialect: "saudi",
         quality: "needs_review",
         training_allowed: false,
+        owner_user_id: USER_ID,
+        created_by_user_id: USER_ID,
+        target_user_id: USER_ID,
+        user_scope: "single_user",
         notes: rawGeneratorTurns.length > 0
           ? "Exported locally from UI; contains raw SF-10M generator output for review only, not quality training."
           : "Exported locally from UI. Review with scripts/prepare_dialogue_batch.py before training."
@@ -845,7 +863,7 @@
       const r = await fetch("/chat/review-export", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ session_id: SESSION_ID, record })
+        body: JSON.stringify({ session_id: SESSION_ID, user_id: USER_ID, record })
       });
       const body = await r.json();
       if (!r.ok) {

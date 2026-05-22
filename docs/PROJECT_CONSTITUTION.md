@@ -90,8 +90,27 @@ runtime يخدم المستخدم. training ينتج artifacts.
 - `dialect`
 - `quality`
 - `training_allowed`
+- `owner_user_id`
+- `created_by_user_id`
+- `target_user_id`
+- `user_scope`
 
 لا corpus مجهول، ولا بيانات بلا حق استخدام.
+
+### 9. User-Scoped Data
+
+كل حوار يصدر من مستخدم محدد ويعود لمستخدم محدد. في الوضع الحالي:
+
+```text
+owner_user_id = sami-local
+created_by_user_id = sami-local
+target_user_id = sami-local
+user_scope = single_user
+```
+
+لا يجوز تدريب أو تخصيص أو RAG لاحقًا على بيانات بلا مالك واضح. هذه القاعدة
+موجودة الآن حتى يكون التوسع متعدد المستخدمين لاحقًا آمنًا، وحتى لا تختلط
+ذاكرة أو corpus مستخدم بمستخدم آخر.
 
 ### Owner-Delegated Agent-Authored Data
 
@@ -103,13 +122,15 @@ runtime يخدم المستخدم. training ينتج artifacts.
 - `training_allowed=true`.
 - `quality` لا تتجاوز `silver` إلا بعد مراجعة بشرية لاحقة.
 - `dialect ∈ {msa, saudi}` في النطاق الحالي.
+- `owner_user_id`, `created_by_user_id`, و`target_user_id` تشير إلى سامي في المسار الحالي.
+- `user_scope=single_user`.
 - `notes` تذكر التفويض وتاريخ المحادثة، وتؤكد عدم وجود corpus خارجي أو
   pretrained model data.
 
 يظل ممنوعًا إدخال بيانات مولدة من LLM خارجي أو مصادر مجهولة أو نصوص منسوخة
 بلا إذن.
 
-### 9. Progressive Scaling Strategy
+### 10. Progressive Scaling Strategy
 
 لا يتم رفع حجم النموذج إلا بعد نجاح المرحلة الحالية.
 

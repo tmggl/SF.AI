@@ -58,7 +58,7 @@ def chat_message(payload: ChatRequest) -> ChatResponse:
 def save_review_export(payload: ReviewExportSaveRequest) -> ReviewExportSaveResponse:
     """Save a UI review export locally without admitting it to training."""
     record = payload.record
-    _validate_review_export_record(record)
+    _validate_review_export_record(record, user_id=payload.user_id)
 
     session = _safe_slug(
         payload.session_id
@@ -82,7 +82,11 @@ def save_review_export(payload: ReviewExportSaveRequest) -> ReviewExportSaveResp
     )
 
 
-def _validate_review_export_record(record: dict[str, object]) -> None:
+def _validate_review_export_record(
+    record: dict[str, object],
+    *,
+    user_id: str | None = None,
+) -> None:
     if record.get("domain") != "chat":
         raise HTTPException(status_code=400, detail="review export must be domain=chat")
     messages = record.get("messages")
@@ -104,6 +108,32 @@ def _validate_review_export_record(record: dict[str, object]) -> None:
     review_metadata = record.get("review_metadata")
     if not isinstance(review_metadata, dict):
         raise HTTPException(status_code=400, detail="review export must include review_metadata")
+    meta_owner = _str_from_mapping(review_metadata, "owner_user_id")
+    meta_exporter = _str_from_mapping(review_metadata, "exported_by_user_id")
+    meta_target = _str_from_mapping(review_metadata, "target_user_id")
+    meta_scope = _str_from_mapping(review_metadata, "user_scope")
+
+    prov_owner = _str_from_mapping(provenance, "owner_user_id")
+    prov_creator = _str_from_mapping(provenance, "created_by_user_id")
+    prov_target = _str_from_mapping(provenance, "target_user_id")
+    prov_scope = _str_from_mapping(provenance, "user_scope")
+
+    if not all((meta_owner, meta_exporter, meta_target, meta_scope)):
+        raise HTTPException(
+            status_code=400,
+            detail="review export must include user ownership metadata",
+        )
+    if not all((prov_owner, prov_creator, prov_target, prov_scope)):
+        raise HTTPException(
+            status_code=400,
+            detail="review export provenance must include user ownership fields",
+        )
+    if meta_scope != "single_user" or prov_scope != "single_user":
+        raise HTTPException(status_code=400, detail="review export must use user_scope=single_user")
+    if len({meta_owner, meta_exporter, meta_target, prov_owner, prov_creator, prov_target}) != 1:
+        raise HTTPException(status_code=400, detail="review export user ownership fields must match")
+    if user_id is not None and user_id != meta_owner:
+        raise HTTPException(status_code=400, detail="request user_id must match export owner_user_id")
 
 
 def _safe_slug(value: str) -> str:
@@ -117,4 +147,11 @@ def _nested_str(record: dict[str, object], parent: str, child: str) -> str | Non
         value = obj.get(child)
         if isinstance(value, str):
             return value
+    return None
+
+
+def _str_from_mapping(obj: dict[str, object], key: str) -> str | None:
+    value = obj.get(key)
+    if isinstance(value, str) and value.strip():
+        return value.strip()
     return None

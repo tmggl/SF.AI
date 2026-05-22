@@ -68,7 +68,7 @@
 ### الاختبارات
 
 ```
-432 passed in 4.71s
+434 passed in 4.70s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -286,6 +286,9 @@ missing language balance: msa
 - أضيف batch فصيح معتمد: `data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl` مع بطاقة provenance.
 - بنك التأليف الفصيح: `resources/phase22_authoring/msa_prompt_bank_v1.json`، ملف مساعدة فقط وليس corpus، وحقوله `training_allowed=false` و`synthetic_llm_data=false`.
 - حفظ review المحلي: `POST /chat/review-export` وزر `حفظ للمراجعة` في `/ui/chat` يكتبان إلى `data/corpus/chat/review/` فقط مع `training_allowed=false`.
+- كل export/training record يحمل الآن user ownership:
+  `owner_user_id`, `created_by_user_id`, `target_user_id`, `user_scope`.
+- المسار الحالي `single_user` بمعرف `sami-local` حتى لا تختلط محادثات المستخدمين عند التوسع لاحقًا.
 - بروتوكول سامي الجديد: الوكيل هو من يختبر الواجهة/API ويحفظ review exports ويرتّب الملفات والتقارير. لا تطلب من سامي خطوات تصدير يدوية إذا كنت تستطيع تنفيذها. سامي يستلم النتيجة النهائية ويقرر الاقتناع فقط.
 - review intake الحالي: `data/corpus/chat/review/sample_review_export.jsonl` مرشح للمراجعة فقط؛ لا يدخل التدريب تلقائيًا.
 - `phase22-review-intake` يعرض أيضًا `quality_score`, `quality_label`, و`quality_blockers`; لا تعتبر جلسة قوية للتدريب إلا إذا كانت متعددة الأدوار غالبًا 3 user + 3 assistant على الأقل.
@@ -354,7 +357,7 @@ sf_ai/datasets/                 schemas + validators + loaders + saudi_seed
 resources/lexicons/             YAML lexicons (Phase 3) + imported/ (Phase 3.5/3.6)
 data/corpus/                    حوار المستخدم + قاموس سعودي
 docs/                           كل الوثائق الفنية
-tests/                          432 اختبار، 48 ملف
+tests/                          434 اختبار، 48 ملف
 scripts/                        CLI: run_chat_server, validate_dataset, train_bpe, import_mo3jam_saudi
 ```
 

@@ -45,6 +45,10 @@ def test_ui_chat_serves_html() -> None:
     assert "تصدير" in body
     assert "حفظ للمراجعة" in body
     assert "/chat/review-export" in body
+    assert "user-badge" in body
+    assert "owner_user_id" in body
+    assert "target_user_id" in body
+    assert "user_scope" in body
     assert "training_allowed: false" in body or "training_allowed\": false" in body
     assert "sfai_chat_review_" in body
 
@@ -83,6 +87,10 @@ def test_save_review_export_writes_review_only_jsonl(
         "review_metadata": {
             "exported_from": "ui",
             "session_id": "sf-test",
+            "owner_user_id": "sami-local",
+            "exported_by_user_id": "sami-local",
+            "target_user_id": "sami-local",
+            "user_scope": "single_user",
             "phase22_next_batch": {"batch_id": "msa_001"},
             "ui_quality_score": 70,
             "ui_quality_label": "مرشح متوسط بعد مراجعة",
@@ -96,13 +104,17 @@ def test_save_review_export_writes_review_only_jsonl(
             "dialect": "msa",
             "quality": "needs_review",
             "training_allowed": False,
+            "owner_user_id": "sami-local",
+            "created_by_user_id": "sami-local",
+            "target_user_id": "sami-local",
+            "user_scope": "single_user",
             "notes": "Review only.",
         },
     }
 
     r = client.post(
         "/chat/review-export",
-        json={"session_id": "sf-test", "record": record},
+        json={"session_id": "sf-test", "user_id": "sami-local", "record": record},
     )
 
     assert r.status_code == 201
@@ -115,6 +127,8 @@ def test_save_review_export_writes_review_only_jsonl(
     saved = json.loads(saved_path.read_text(encoding="utf-8"))
     assert saved["provenance"]["training_allowed"] is False
     assert saved["provenance"]["quality"] == "needs_review"
+    assert saved["provenance"]["owner_user_id"] == "sami-local"
+    assert saved["review_metadata"]["target_user_id"] == "sami-local"
 
 
 def test_save_review_export_rejects_training_allowed_true(
@@ -127,10 +141,20 @@ def test_save_review_export_rejects_training_allowed_true(
             {"role": "user", "content": "اختبار"},
             {"role": "assistant", "content": "رد"},
         ],
-        "review_metadata": {"exported_from": "ui"},
+        "review_metadata": {
+            "exported_from": "ui",
+            "owner_user_id": "sami-local",
+            "exported_by_user_id": "sami-local",
+            "target_user_id": "sami-local",
+            "user_scope": "single_user",
+        },
         "provenance": {
             "quality": "needs_review",
             "training_allowed": True,
+            "owner_user_id": "sami-local",
+            "created_by_user_id": "sami-local",
+            "target_user_id": "sami-local",
+            "user_scope": "single_user",
         },
     }
 
@@ -141,6 +165,33 @@ def test_save_review_export_rejects_training_allowed_true(
 
     assert r.status_code == 400
     assert "training_allowed=false" in r.json()["detail"]
+    assert not list(tmp_path.glob("*.jsonl"))
+
+
+def test_save_review_export_rejects_missing_user_ownership(
+    tmp_path: Path, monkeypatch
+) -> None:
+    monkeypatch.setattr(chat_router, "REVIEW_EXPORT_DIR", tmp_path)
+    record = {
+        "domain": "chat",
+        "messages": [
+            {"role": "user", "content": "اختبار"},
+            {"role": "assistant", "content": "رد"},
+        ],
+        "review_metadata": {"exported_from": "ui"},
+        "provenance": {
+            "quality": "needs_review",
+            "training_allowed": False,
+        },
+    }
+
+    r = client.post(
+        "/chat/review-export",
+        json={"session_id": "sf-test", "user_id": "sami-local", "record": record},
+    )
+
+    assert r.status_code == 400
+    assert "ownership" in r.json()["detail"]
     assert not list(tmp_path.glob("*.jsonl"))
 
 

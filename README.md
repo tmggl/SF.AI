@@ -50,6 +50,7 @@
 - **بوابات المجالات:** Phase 20 أضاف `make phase20-gates` و`GET /system/phase20-gates`; المجال النشط الوحيد هو `chat`.
 - **طريق التوليد المقنع:** لا تطلب من سامي اختبار مولّد الآن. Phase 24 هو أول تدريب جودة مفيد، Phase 26 أول فرصة لحوار قصير مقنع، وPhase 28 هدف الحوار المولّد المستقر.
 - **Corpus v2:** Phase 22 أضاف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-completion-gate` و`make phase22-review-intake`; الوضع الحالي 55/500، وفيه أول batch فصيح `dialogue_batch_v2_msa_001.jsonl`. الواجهة تعرض بوابة Phase 22 الحية وجودة التصدير ومهمة الجمع الحالية مع زر تدوير الموضوعات وزر حفظ محلي للمراجعة، و`phase22-plan` يعطي batches مفصلة تبدأ الآن بـ `msa_002` لأن `msa_001` اكتمل، و`phase22-completion-gate` يمنع Phase 23 حتى اكتمال الشروط.
+- **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
 ---

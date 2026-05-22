@@ -34,6 +34,10 @@ data/corpus/
 - `provenance.dialect`.
 - `provenance.quality`.
 - `provenance.training_allowed=true`.
+- `provenance.owner_user_id`.
+- `provenance.created_by_user_id`.
+- `provenance.target_user_id`.
+- `provenance.user_scope`.
 
 قبل التدريب:
 

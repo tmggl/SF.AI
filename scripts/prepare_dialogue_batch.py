@@ -42,6 +42,16 @@ def main(argv: list[str]) -> int:
     parser.add_argument("--dialect", choices=["msa", "saudi"], default="saudi")
     parser.add_argument("--quality", choices=["gold", "silver", "bronze"], default="silver")
     parser.add_argument(
+        "--owner-user-id",
+        default="sami-local",
+        help="Canonical owner of the prepared dialogue data.",
+    )
+    parser.add_argument(
+        "--target-user-id",
+        default=None,
+        help="User/account this data may personalize. Defaults to owner-user-id.",
+    )
+    parser.add_argument(
         "--training-allowed",
         action="store_true",
         help="Required to write training JSONL. Without it, only a report is written.",
@@ -62,6 +72,8 @@ def main(argv: list[str]) -> int:
         dialect=args.dialect,
         quality=args.quality,
         training_allowed=args.training_allowed,
+        owner_user_id=args.owner_user_id,
+        target_user_id=args.target_user_id,
         include_sensitive=args.include_sensitive,
     )
 

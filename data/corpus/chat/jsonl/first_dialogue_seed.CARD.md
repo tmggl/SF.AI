@@ -16,6 +16,9 @@ Seed صغير جدًا لاختبار بوابة حوكمة corpus قبل Phase 
 - اللهجة: `saudi`
 - الجودة: `gold`
 - `training_allowed`: `true`
+- `user_scope`: `single_user`
+- `owner_user_id`: `sami-local`
+- `target_user_id`: `sami-local`
 
 ## المصدر
 

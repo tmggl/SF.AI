@@ -24,6 +24,10 @@ def _review_export(path: Path, *, user: str = "وش تقدر تسوي؟") -> Non
             "dialect": "saudi",
             "quality": "needs_review",
             "training_allowed": False,
+            "owner_user_id": "sami-local",
+            "created_by_user_id": "sami-local",
+            "target_user_id": "sami-local",
+            "user_scope": "single_user",
         },
     }
     path.write_text(json.dumps(record, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -77,6 +81,9 @@ def test_prepare_dialogue_batch_writes_governed_training_jsonl(tmp_path: Path) -
     row = json.loads(out.read_text(encoding="utf-8"))
     assert row["provenance"]["training_allowed"] is True
     assert row["provenance"]["quality"] == "gold"
+    assert row["provenance"]["owner_user_id"] == "sami-local"
+    assert row["provenance"]["target_user_id"] == "sami-local"
+    assert row["provenance"]["user_scope"] == "single_user"
 
 
 def test_prepare_dialogue_batch_skips_safety_flagged_by_default(tmp_path: Path) -> None:

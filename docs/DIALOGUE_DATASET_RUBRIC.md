@@ -33,7 +33,12 @@
     "license": "user-provided",
     "language": "ar",
     "dialect": "saudi",
-    "quality": "gold"
+    "quality": "gold",
+    "training_allowed": true,
+    "owner_user_id": "sami-local",
+    "created_by_user_id": "sami-local",
+    "target_user_id": "sami-local",
+    "user_scope": "single_user"
   }
 }
 ```

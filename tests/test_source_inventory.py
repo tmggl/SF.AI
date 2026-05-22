@@ -34,6 +34,10 @@ def test_source_inventory_separates_chat_tasks_and_lexicon(tmp_path: Path) -> No
                     "dialect": "saudi",
                     "quality": "gold",
                     "training_allowed": True,
+                    "owner_user_id": "sami-local",
+                    "created_by_user_id": "sami-local",
+                    "target_user_id": "sami-local",
+                    "user_scope": "single_user",
                 },
             }
         ],

@@ -12,6 +12,10 @@ First Phase 22 MSA dialogue batch for SF.AI Gold Dialogue Corpus v2.
 - Dialect: `msa`
 - Quality: `silver`
 - Training allowed: true
+- User scope: `single_user`
+- Owner user: `sami-local`
+- Created by user: `sami-local`
+- Target user: `sami-local`
 
 ## Provenance
 

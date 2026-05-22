@@ -61,6 +61,10 @@
     "dialect": "msa",
     "quality": "gold",
     "training_allowed": true,
+    "owner_user_id": "sami-local",
+    "created_by_user_id": "sami-local",
+    "target_user_id": "sami-local",
+    "user_scope": "single_user",
     "notes": "ملاحظات اختيارية"
   }
 }
@@ -88,11 +92,15 @@
   "dialect": "msa / saudi / ...",
   "quality": "gold / silver / bronze",
   "training_allowed": true,
+  "owner_user_id": "sami-local",
+  "created_by_user_id": "sami-local",
+  "target_user_id": "sami-local",
+  "user_scope": "single_user",
   "notes": "اختياري"
 }
 ```
 
-في Phase 11، بيانات التدريب الأولى تقبل `dialect ∈ {msa, saudi}` فقط، وتتطلب `training_allowed=true`.
+في Phase 11+، بيانات التدريب الأولى تقبل `dialect ∈ {msa, saudi}` فقط، وتتطلب `training_allowed=true` وحقول فصل المستخدمين حتى لا تختلط بيانات مستخدم بآخر عند التوسع.
 
 ---
 

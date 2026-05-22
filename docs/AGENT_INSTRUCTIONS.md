@@ -32,6 +32,8 @@
 
 - لا synthetic LLM data من مصدر خارجي أو مجهول في corpus.
 - حوار الوكيل يمكن أن يكون `training_allowed=true` فقط إذا كان `owner-delegated agent-authored` بتفويض سامي، ومع provenance كامل.
+- كل export أو corpus record يجب أن يحمل user ownership: `owner_user_id`, `created_by_user_id`, `target_user_id`, و`user_scope`.
+- المسار الحالي single-user: `sami-local`; لا تخلط corpus أو review بين مستخدمين.
 - لا تنتقل إلى phase لاحقة حتى تمر بواباتها.
 
 ## قاعدة البدء

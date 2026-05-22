@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 class ChatRequest(BaseModel):
     message: str = Field(..., min_length=1, description="رسالة المستخدم النصية")
     session_id: str | None = Field(default=None, description="معرف جلسة اختياري")
+    user_id: str | None = Field(default=None, description="معرف المستخدم/المالك اختياري")
 
 
 class ChatResponse(BaseModel):
@@ -31,6 +32,7 @@ class ChatResponse(BaseModel):
 
 class ReviewExportSaveRequest(BaseModel):
     session_id: str | None = Field(default=None, description="UI session id")
+    user_id: str | None = Field(default=None, description="UI owner/exporting user id")
     record: dict[str, Any] = Field(..., description="Single JSONL review-export record")
 
 

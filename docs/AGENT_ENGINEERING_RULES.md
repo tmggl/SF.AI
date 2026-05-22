@@ -49,6 +49,8 @@
 ## عند تعديل datasets
 
 - تحقق من `source/license/quality/training_allowed`.
+- تحقق من `owner_user_id/created_by_user_id/target_user_id/user_scope`.
+- لا تخلط review أو corpus بين مستخدمين مختلفين.
 - شغّل `make corpus-audit`.
 - لا تبدأ training.
 - لا ترفع corpus خاص إلا إذا كان مقصودًا ومصرحًا.

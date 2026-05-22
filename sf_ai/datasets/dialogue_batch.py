@@ -56,6 +56,8 @@ def prepare_dialogue_batch(
     dialect: str,
     quality: str,
     training_allowed: bool,
+    owner_user_id: str = "sami-local",
+    target_user_id: str | None = None,
     include_sensitive: bool = False,
 ) -> DialogueBatchReport:
     """Prepare reviewed dialogue JSONL for training.
@@ -100,6 +102,17 @@ def prepare_dialogue_batch(
         if not include_sensitive and _has_safety_terms(joined):
             report.add_skip("safety_flagged")
             continue
+        input_provenance = getattr(sample, "provenance", None)
+        created_by_user_id = (
+            getattr(input_provenance, "created_by_user_id", None)
+            or getattr(input_provenance, "owner_user_id", None)
+            or owner_user_id
+        )
+        effective_target_user_id = (
+            target_user_id
+            or getattr(input_provenance, "target_user_id", None)
+            or owner_user_id
+        )
 
         prepared.append(
             PreparedDialogue(
@@ -119,6 +132,10 @@ def prepare_dialogue_batch(
                         "dialect": dialect,
                         "quality": quality,
                         "training_allowed": True,
+                        "owner_user_id": owner_user_id,
+                        "created_by_user_id": created_by_user_id,
+                        "target_user_id": effective_target_user_id,
+                        "user_scope": "single_user",
                         "notes": f"prepared_from_review_export_line:{line_no}",
                     },
                 },

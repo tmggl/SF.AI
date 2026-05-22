@@ -33,6 +33,7 @@
 - **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches`: `msa_002..msa_008`, `saudi_001..saudi_007`, `flex_001..flex_004` مع عدد السجلات وملف الإخراج وأمر التحويل المقترح.
 - **مهمة batch التالية:** `make phase22-next-batch` يعرض الآن `msa_002` كالمهمة الفورية: 25 سجلًا فصيحًا، مع checklist قبول وموضوعات تأليف عامة وليست بيانات تدريب.
 - **أول batch فصيح معتمد:** أضيف `data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl` وفيه 25 سجلًا فصيحًا `silver` مؤلفة بتفويض سامي، مع بطاقة `dialogue_batch_v2_msa_001.CARD.md`.
+- **فصل المستخدمين من الأساس:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` حتى لا تختلط محادثات المستخدمين عند التوسع لاحقًا.
 - **بنك تأليف فصيح غير تدريبي:** أضيف `resources/phase22_authoring/msa_prompt_bank_v1.json` وفيه 80+ موضوعًا فصيحًا لتسهيل كتابة batches الفصحى؛ الملف `training_allowed=false` و`synthetic_llm_data=false` ولا يُنسخ إلى corpus.
 - **Review intake الحالي:** `data/corpus/chat/review/sample_review_export.jsonl` مرشح للمراجعة فقط؛ الأداة read-only ولا تنقل أي شيء إلى التدريب.
 - **بوابة جودة الحوار:** `phase22-review-intake` يعرض الآن `quality_score/quality_label/quality_blockers`; الجلسة المفيدة للتدريب تحتاج غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل وبدون `sf_10m_v0_1`.
@@ -167,7 +168,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs,reports}/   Phase 5.5+ outputs/reports
 │
-├── tests/                                 pytest suite — 432 تست / 48 ملف
+├── tests/                                 pytest suite — 434 تست / 48 ملف
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -251,7 +252,7 @@ make server-start
 ## نتائج الاختبارات (حتى Phase 22 review intake)
 
 ```
-432 passed in 4.71s
+434 passed in 4.70s
 ```
 
 التغطية الحالية:
@@ -262,7 +263,7 @@ make server-start
 - `test_chat_rag_bridge.py` — 7 tests (Phase 17)
 - `test_phase16_eval_harness.py` — 3 tests (Phase 16)
 - `test_conversation_state.py` — 8 tests (Phase 4)
-- `test_corpus_governance.py` — 9 tests (Phase 11 corpus governance)
+- `test_corpus_governance.py` — 10 tests (Phase 11 corpus governance)
 - `test_dataset_validators.py` — 28 tests (Phase 5)
 - `test_bpe_tokenizer.py` — 13 tests (Phase 5.5)
 - `test_training_device.py` — 14 tests (Phase 5.5)
@@ -274,7 +275,7 @@ make server-start
 - `test_research_summarizer.py` — 20 tests (Phase 7)
 - `test_saudi_seed.py` — 15 tests (Phase 3.6)
 - `test_rag_sparse_retrieval.py` — 14 tests (Phase 8)
-- `test_chat_ui.py` — 6 tests (Phase 9 + export quality indicator)
+- `test_chat_ui.py` — 7 tests (Phase 9 + export quality indicator)
 - `test_dialogue_batch_preparation.py` — Phase 18 data loop
 - `test_dialect_mapper.py` — 7 tests
 - `test_health.py` — 11 tests (API + module dispatch + safety + readiness)
