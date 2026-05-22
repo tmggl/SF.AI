@@ -57,6 +57,22 @@ class Phase22ReadinessDecision:
 
 
 @dataclass(frozen=True)
+class Phase22PlannedBatch:
+    sequence: int
+    batch_id: str
+    dialect: str
+    target_records: int
+    priority: str
+    suggested_review_path: str
+    suggested_output_path: str
+    prepare_command: str
+    user_task: str
+
+    def to_json(self) -> dict[str, object]:
+        return asdict(self)
+
+
+@dataclass(frozen=True)
 class Phase22CollectionPlan:
     phase: str
     status: str
@@ -71,6 +87,7 @@ class Phase22CollectionPlan:
     recommended_batch_mix: tuple[str, ...]
     review_rules: tuple[str, ...]
     next_commands: tuple[str, ...]
+    planned_batches: tuple[Phase22PlannedBatch, ...]
     synthetic_llm_data_allowed: bool
     notes: tuple[str, ...] = field(default_factory=tuple)
 
@@ -79,6 +96,7 @@ class Phase22CollectionPlan:
         data["recommended_batch_mix"] = list(self.recommended_batch_mix)
         data["review_rules"] = list(self.review_rules)
         data["next_commands"] = list(self.next_commands)
+        data["planned_batches"] = [batch.to_json() for batch in self.planned_batches]
         data["notes"] = list(self.notes)
         return data
 
@@ -189,6 +207,11 @@ def build_phase22_collection_plan(
         mix.append(f"{ceil(flexible / batch_size)} flexible batch(es) after minimums ({flexible} records)")
     if not mix:
         mix.append("minimum quotas already satisfied")
+    planned_batches = _build_phase22_planned_batches(
+        quota_by_dialect=quota_by_dialect,
+        flexible_records=flexible,
+        batch_size=batch_size,
+    )
 
     return Phase22CollectionPlan(
         phase="Phase 22 — Gold Dialogue Corpus v2 Collection Plan",
@@ -220,10 +243,98 @@ def build_phase22_collection_plan(
             "make corpus-audit",
             "make phase22-readiness",
         ),
+        planned_batches=planned_batches,
         synthetic_llm_data_allowed=False,
         notes=(
             "This plan is read-only and does not generate corpus records.",
             "The fastest useful path is to add MSA first, because current corpus is Saudi-only.",
             "Phase 23 remains blocked until phase22-readiness passes.",
+        ),
+    )
+
+
+def _build_phase22_planned_batches(
+    *,
+    quota_by_dialect: dict[str, int],
+    flexible_records: int,
+    batch_size: int,
+) -> tuple[Phase22PlannedBatch, ...]:
+    """Build a deterministic batch-by-batch checklist without writing data."""
+    batches: list[Phase22PlannedBatch] = []
+    dialect_batch_counts: dict[str, int] = {}
+
+    for dialect in REQUIRED_DIALECTS:
+        count = quota_by_dialect.get(dialect, 0)
+        while count > 0:
+            target = min(batch_size, count)
+            dialect_batch_counts[dialect] = dialect_batch_counts.get(dialect, 0) + 1
+            index = dialect_batch_counts[dialect]
+            batches.append(
+                _planned_batch(
+                    sequence=len(batches) + 1,
+                    batch_id=f"{dialect}_{index:03d}",
+                    dialect=dialect,
+                    target_records=target,
+                    priority=f"minimum_{dialect}",
+                )
+            )
+            count -= target
+
+    flexible_index = 0
+    remaining_flexible = flexible_records
+    while remaining_flexible > 0:
+        target = min(batch_size, remaining_flexible)
+        flexible_index += 1
+        batches.append(
+            _planned_batch(
+                sequence=len(batches) + 1,
+                batch_id=f"flex_{flexible_index:03d}",
+                dialect="msa_or_saudi",
+                target_records=target,
+                priority="flexible_after_minimums",
+            )
+        )
+        remaining_flexible -= target
+
+    return tuple(batches)
+
+
+def _planned_batch(
+    *,
+    sequence: int,
+    batch_id: str,
+    dialect: str,
+    target_records: int,
+    priority: str,
+) -> Phase22PlannedBatch:
+    suggested_output_path = (
+        f"data/corpus/chat/jsonl/dialogue_batch_v2_{batch_id}.jsonl"
+    )
+    command_dialect = "msa" if dialect == "msa_or_saudi" else dialect
+    command = (
+        "make prepare-dialogue-batch "
+        "ARGS=\"--input data/corpus/chat/review/<exported_file>.jsonl "
+        f"--out {suggested_output_path} "
+        "--quality silver "
+        f"--dialect {command_dialect} "
+        "--training-allowed\""
+    )
+    task_dialect = {
+        "msa": "اكتب/راجع حوارات عربية فصحى طبيعية.",
+        "saudi": "اكتب/راجع حوارات سعودية طبيعية من استخدامك أنت.",
+        "msa_or_saudi": "اكتب/راجع حوارات فصحى أو سعودية حسب النقص بعد الحد الأدنى.",
+    }.get(dialect, "اكتب/راجع حوارات عربية ضمن نطاق المشروع.")
+    return Phase22PlannedBatch(
+        sequence=sequence,
+        batch_id=batch_id,
+        dialect=dialect,
+        target_records=target_records,
+        priority=priority,
+        suggested_review_path="data/corpus/chat/review/<exported_file>.jsonl",
+        suggested_output_path=suggested_output_path,
+        prepare_command=command,
+        user_task=(
+            f"{task_dialect} الهدف {target_records} سجلًا، "
+            "كلها user-authored أو user-approved، بدون synthetic LLM data."
         ),
     )

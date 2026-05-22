@@ -350,6 +350,14 @@
         " · الناقص لهجيًا: " + shortfallText +
         " · اللهجات المفقودة: " + missing +
         " · تدريب synthetic LLM: ممنوع";
+      fetch("/system/phase22-collection-plan?batch_size=25").then(r => r.json()).then(plan => {
+        const next = (plan.planned_batches || [])[0];
+        if (next) {
+          phase22DetailsEl.textContent +=
+            " · المهمة التالية: " + next.batch_id +
+            " (" + next.dialect + "، " + next.target_records + " سجل)";
+        }
+      }).catch(() => {});
     }).catch(() => {
       phase22LabelEl.textContent = "تعذر فحص Phase 22";
       phase22ScoreEl.textContent = "—";

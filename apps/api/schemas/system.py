@@ -204,6 +204,7 @@ class Phase22CollectionPlanResponse(BaseModel):
     recommended_batch_mix: list[str]
     review_rules: list[str]
     next_commands: list[str]
+    planned_batches: list[dict[str, object]]
     synthetic_llm_data_allowed: bool
     notes: list[str]
 

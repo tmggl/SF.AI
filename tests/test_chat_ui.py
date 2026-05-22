@@ -25,6 +25,7 @@ def test_ui_chat_serves_html() -> None:
     assert "قالب ثابت - ليس مولدًا" in body
     assert "بوابة Phase 22" in body
     assert "/system/phase22-readiness" in body
+    assert "/system/phase22-collection-plan?batch_size=25" in body
     assert "غير جاهز للتوكنزر بعد" in body
     assert "جودة التصدير" in body
     assert "quality-score" in body

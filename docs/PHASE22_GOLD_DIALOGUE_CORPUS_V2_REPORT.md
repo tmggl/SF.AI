@@ -59,6 +59,7 @@ Phase 22 لا يبدأ تدريب tokenizer أو نموذج.
 - `GET /system/phase22-collection-plan`
 - `GET /system/phase22-review-intake`
 - `/ui/chat` يعرض لوحة بوابة Phase 22 الحية من `/system/phase22-readiness`.
+- `/system/phase22-collection-plan` يرجع الآن `planned_batches` مفصلة لكل batch.
 - `sf_ai/datasets/phase22_readiness.py`
 - `sf_ai/datasets/phase22_review_intake.py`
 
@@ -83,7 +84,16 @@ batch_size: 25
 estimated_batches: 19
 quota_by_dialect: {"msa": 200, "saudi": 170}
 flexible_records_after_minimums: 100
+planned_batches: 19
+next_batch: msa_001, dialect=msa, target_records=25
 ```
+
+تفصيل batches الرسمي:
+
+- `msa_001` إلى `msa_008`: تغطية الحد الأدنى للفصحى، 25 سجلًا لكل batch.
+- `saudi_001` إلى `saudi_006`: تغطية سعودية، 25 سجلًا لكل batch.
+- `saudi_007`: تغطية سعودية، 20 سجلًا.
+- `flex_001` إلى `flex_004`: 100 سجل مرن بعد اكتمال الحد الأدنى.
 
 ومسار review intake الحالي:
 

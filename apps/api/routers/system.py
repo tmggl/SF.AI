@@ -367,6 +367,7 @@ def phase22_collection_plan(batch_size: int = 25) -> Phase22CollectionPlanRespon
         recommended_batch_mix=list(plan.recommended_batch_mix),
         review_rules=list(plan.review_rules),
         next_commands=list(plan.next_commands),
+        planned_batches=[batch.to_json() for batch in plan.planned_batches],
         synthetic_llm_data_allowed=plan.synthetic_llm_data_allowed,
         notes=list(plan.notes),
     )

@@ -44,6 +44,16 @@ def main(argv: list[str]) -> int:
     print("next commands:")
     for command in plan.next_commands:
         print(f"  - {command}")
+    print()
+    print("planned batches:")
+    for batch in plan.planned_batches:
+        print(
+            "  - "
+            f"#{batch.sequence:02d} {batch.batch_id} "
+            f"({batch.dialect}, {batch.target_records} records, {batch.priority})"
+        )
+        print(f"    out: {batch.suggested_output_path}")
+        print(f"    task: {batch.user_task}")
 
     return 0
 

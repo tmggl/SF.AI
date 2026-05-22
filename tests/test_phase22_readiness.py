@@ -63,6 +63,16 @@ def test_phase22_collection_plan_calculates_real_quotas() -> None:
     assert plan.flexible_records_after_minimums == 100
     assert plan.synthetic_llm_data_allowed is False
     assert any("No synthetic LLM data" in rule for rule in plan.review_rules)
+    assert len(plan.planned_batches) == 19
+    assert plan.planned_batches[0].batch_id == "msa_001"
+    assert plan.planned_batches[0].dialect == "msa"
+    assert plan.planned_batches[0].target_records == 25
+    assert plan.planned_batches[7].batch_id == "msa_008"
+    assert plan.planned_batches[8].batch_id == "saudi_001"
+    assert plan.planned_batches[14].batch_id == "saudi_007"
+    assert plan.planned_batches[14].target_records == 20
+    assert plan.planned_batches[-1].batch_id == "flex_004"
+    assert "synthetic LLM data" in plan.planned_batches[0].user_task
 
 
 def test_phase22_collection_plan_endpoint() -> None:
@@ -74,6 +84,10 @@ def test_phase22_collection_plan_endpoint() -> None:
     assert body["estimated_batches"] == 10
     assert body["quota_by_dialect"] == {"msa": 200, "saudi": 170}
     assert body["synthetic_llm_data_allowed"] is False
+    assert len(body["planned_batches"]) == 10
+    assert body["planned_batches"][0]["batch_id"] == "msa_001"
+    assert body["planned_batches"][0]["suggested_output_path"].endswith("dialogue_batch_v2_msa_001.jsonl")
+    assert body["planned_batches"][-1]["batch_id"] == "flex_002"
 
 
 def test_phase22_cli_is_read_only() -> None:
@@ -99,6 +113,8 @@ def test_phase22_collection_plan_cli_is_read_only() -> None:
     assert proc.returncode == 0
     assert "Phase 22 collection plan" in proc.stdout
     assert "estimated_batches             : 10" in proc.stdout
+    assert "planned batches:" in proc.stdout
+    assert "#01 msa_001 (msa, 50 records, minimum_msa)" in proc.stdout
     assert "synthetic_llm_data_allowed    : false" in proc.stdout
 
 
