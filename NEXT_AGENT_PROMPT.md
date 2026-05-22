@@ -32,7 +32,7 @@
 - المراحل من Phase 0 حتى Phase 21 منتهية؛ Phase 22 تعمل الآن كبوابة جاهزية وخطة جمع وreview intake لـ Gold Dialogue Corpus v2. قرار Phase 22 الحالي: `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2` لأن corpus الحالي 30/500 ويفتقد `msa`. خطة الجمع الحالية: 200 فصحى + 170 سعودي + 100 مرنة.
 - استخدم `make phase22-review-intake` أو `GET /system/phase22-review-intake` قبل أي تحويل من `data/corpus/chat/review/` إلى corpus تدريبي.
 - `phase22-review-intake` يحتوي بوابة جودة: راقب `quality_score/quality_label/quality_blockers`، ولا تحوّل جلسات قصيرة جدًا أو فيها ردود خام من `sf_10m_v0_1` إلى corpus جودة.
-- الواجهة المستقرة تعمل بـ `generator=template` افتراضيًا. لا تفعل `sf_10m_v0_1` في الشات إلا كمختبر صريح، ولا تدخل مخرجاته في corpus جودة.
+- الواجهة المستقرة تعمل بـ `generator=template` افتراضيًا، أي قوالب ثابتة وليست مولدًا ذكيًا. لا تطلب من سامي اختبار المولد كحوار مقنع الآن؛ `sf_10m_v0_1` خام ومكرر ولا يُفعل إلا كمختبر صريح.
 - 423 اختبار يمر (`.venv/bin/python -m pytest tests`) وآخر تشغيل: `423 passed in 4.67s`.
 - السيرفر يعمل عادةً على `http://127.0.0.1:8123` (المنفذ 8000/8765 محجوز).
 - شاشة المحادثة على `/ui/chat` — هي هدف سامي الرئيسي للتجريب.

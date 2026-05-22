@@ -141,7 +141,7 @@
 - بدأ وانتهى Phase 15 Generator Adapter:
   - أضيف `GenerationPolicy` لتعطيل التوليد افتراضيًا ومنع safety/skeleton/low-confidence routes.
   - أضيف `NativeGenerator` كـ lazy adapter يحمّل tokenizer/checkpoint السياديين فقط.
-  - بقي `ChatModule` على القوالب، ويصدر metadata `generator=template`.
+  - بقي `ChatModule` على القوالب، ويصدر metadata `generator=template`; هذا ليس توليدًا ذكيًا.
   - أضيف حقل `generator` إلى API وشاشة `/ui/chat`.
   - tests at completion: `367 passed`.
   - report: [PHASE15_GENERATOR_ADAPTER_REPORT.md](./PHASE15_GENERATOR_ADAPTER_REPORT.md)
@@ -214,7 +214,7 @@
   - review intake الحالي: ملف عينة واحد في `data/corpus/chat/review/` مرشح للمراجعة، ولا يدخل التدريب تلقائيًا.
   - أضيفت بوابة جودة داخل review intake: `quality_score`, `quality_label`, و`quality_blockers`.
   - القاعدة العملية الجديدة: ملف التصدير المفيد يجب أن يحتوي غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل، وبدون ردود `sf_10m_v0_1`.
-  - صححت تشغيل الواجهة المستقرة: `generator=template` افتراضيًا، و`SF-10M` الخام يبقى مختبرًا صريحًا فقط.
+  - صححت تشغيل الواجهة المستقرة: `generator=template` افتراضيًا، أي قوالب ثابتة لا مولد؛ و`SF-10M` الخام يبقى مختبرًا صريحًا فقط.
   - أضيفت حماية export/review intake لتمييز أي جلسة تحتوي ردود `sf_10m_v0_1` ومنع عدّها كـ candidate تدريب جودة.
   - أضيفت intents محددة لعبارات Phase 22 اليومية: اختبار الحوار الفصيح، الخطوة التالية، والفرق بين التدريب والتفعيل.
   - الناقص الحاسم: `msa`.

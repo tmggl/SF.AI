@@ -22,7 +22,7 @@ def test_ui_chat_serves_html() -> None:
     assert "--bg: #f6f8fb" in body
     assert "اكتب رسالتك هنا" in body
     assert "المحادثة جاهزة" in body
-    assert "قالب آمن" in body
+    assert "قالب ثابت - ليس مولدًا" in body
     assert "ذاكرة:" in body
     assert "تصدير" in body
     assert "training_allowed: false" in body or "training_allowed\": false" in body

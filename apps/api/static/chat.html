@@ -341,8 +341,8 @@
   function readableValue(key, value) {
     const v = (value || "").toString();
     if (key === "generator") {
-      if (v === "template") return "قالب آمن";
-      if (v === "sf_10m_v0_1") return "نموذج SF-10M";
+      if (v === "template") return "قالب ثابت - ليس مولدًا";
+      if (v === "sf_10m_v0_1") return "نموذج SF-10M خام غير جاهز";
     }
     if (key === "rag") {
       if (v === "used") return "مستخدمة";
