@@ -137,12 +137,14 @@ GET /health → {"status":"ok","project":"SF.AI","phase":"Phase 11"}
 
 ```text
 GET /system/phase12-readiness
-preflight_pass=false
+preflight_pass=true
 can_train_now=false
 training_permission_granted=true
-missing_required_dialects=["msa"]
+missing_required_dialects=[]
 required_confirmation_flag=--confirm-phase12-permission
 ```
+
+تحديث Phase 22: أصبحت `msa + saudi` موجودتين في corpus، لكن Phase 22 لا تزال تجمع العدد والتوازن اللازمين قبل أي تدريب جودة جديد.
 
 والقرار نفسه متاح من الطرفية بدون restart للسيرفر:
 

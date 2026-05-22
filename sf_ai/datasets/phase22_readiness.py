@@ -195,6 +195,12 @@ def build_phase22_readiness_decision(
         else "COLLECT_OWNER_APPROVED_MSA_SAUDI_DIALOGUES"
     )
 
+    dialect_note = (
+        "Phase 22 minimum MSA coverage is met; continue Saudi coverage before tokenizer v2."
+        if dialect_shortfalls.get("msa", 0) == 0 and dialect_shortfalls.get("saudi", 0) > 0
+        else "Phase 22 must fill required MSA/Saudi coverage before tokenizer v2."
+    )
+
     return Phase22ReadinessDecision(
         phase="Phase 22 — Gold Dialogue Corpus v2",
         status=status,
@@ -226,7 +232,7 @@ def build_phase22_readiness_decision(
             "This gate is read-only and starts no training.",
             "Do not fill the corpus with external or unprovenanced synthetic dialogue.",
             "Owner-delegated agent-authored records are allowed only with transparent provenance.",
-            "Phase 22 must add MSA coverage before tokenizer v2.",
+            dialect_note,
             "Saudi Seed v1 is a reference lexicon, not direct chat corpus.",
         ),
     )
