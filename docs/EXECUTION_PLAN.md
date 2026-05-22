@@ -34,7 +34,7 @@
 | Phase 8 | Local RAG Foundation | مكتملة |
 | Phase 9 | Frontend Chat Interface | مكتملة |
 | Phase 10 | Later Domains Skeleton | مكتملة |
-| Phase 11 | Sovereign Corpus Governance & Saudi/MSA Dialogue Pack | التالية بإذن |
+| Phase 11 | Sovereign Corpus Governance & Saudi/MSA Dialogue Pack | مكتملة |
 | Phase 12 | SF-BPE Tokenizer v1 Training & Audit | مكتملة مع قيود |
 | Phase 13 | Tiny LM Smoke Training (Overfit + Generation Sanity) | مكتملة مع قيود |
 | Phase 14 | SF-10M v0.1 Training Run | مكتملة مع قيود |
@@ -42,7 +42,7 @@
 | Phase 16 | Evaluation, Safety, and Saudi/MSA Style Harness | مكتملة مع حجب runtime |
 | Phase 17 | Local Memory/RAG Bridge into Chat | مكتملة كبنية bridge محلية |
 | Phase 18 | Data Expansion Loop v1 | مكتملة كدورة بيانات محكومة |
-| Phase 19 | SF-50M Candidate Training | معلّقة |
+| Phase 19 | SF-50M Candidate Training | بوابة جاهزية مفعلة؛ التدريب غير جاهز لصغر corpus |
 | Phase 20 | Domain Activation Gates | معلّقة |
 
 ---
@@ -155,7 +155,7 @@ SF.AI/
 - المشروع منظم وفق الهيكل.
 
 ### بعد المرحلة
-Phase 16 اكتملت: prompt suites نجحت `15/15`، لكن runtime activation بقي محجوبًا لأن عينة SF-10M v0.1 مكررة. انتقل إلى Phase 17 لربط Memory/RAG المحلي بالشات.
+Phase 16 اكتملت: prompt suites نجحت `15/15`. المسار اليومي العام بقي على القوالب لأن عينة SF-10M v0.1 مكررة، لكن مختبر سامي المحلي يستطيع تشغيل المولد الخام للتجربة. انتقل إلى Phase 17 لربط Memory/RAG المحلي بالشات.
 
 ---
 
@@ -324,7 +324,7 @@ chat, coding, data, files, web, research, legal, medical, finance, education, re
 - `status: skeleton_only`
 
 ### بعد المرحلة
-Phase 18 اكتملت: الواجهة تصدر مراجعة محلية فقط، و`prepare_dialogue_batch.py` يحضر batch تدريبي فقط مع `--training-allowed` ووسوم الجودة/اللهجة. انتقل إلى Phase 19 فقط عند كفاية corpus.
+انتقل إلى Phase 4 لتفعيل أول مجال حوار عام فوق طبقة الفهم اللغوي.
 
 ---
 
@@ -371,7 +371,7 @@ sf_ai/modules/chat/
 **لا hardcoded سيئ.** الردود تمر عبر `ChatResponseBuilder` ثم `ResponseComposer`.
 
 ### بعد المرحلة
-توقف، ملخص، اطلب الإذن.
+Phase 18 اكتملت. تفويض سامي الحالي يسمح بالمتابعة، لكن لا تدريب كبير بدون corpus كافٍ.
 
 ---
 
@@ -425,7 +425,7 @@ docs/DATASET_FORMAT.md
 - **لا تدريب الآن.** لا ملء dataset من الوكيل. الانتظار حتى يضع المستخدم البيانات.
 
 ### بعد المرحلة
-توقف، ملخص، اطلب الإذن.
+انتقل إلى Phase 5.5 لبناء tokenizer/training infrastructure بدون تشغيل تدريب فعلي من هذه المرحلة.
 
 ---
 
@@ -498,7 +498,7 @@ tests/
 - لا يبدأ التدريب إلا بعد بيانات وإذن.
 
 ### بعد المرحلة
-توقف، ملخص، اطلب الإذن.
+انتقل إلى Phase 6 لبناء نموذج صغير من الصفر وبنية تدريب سيادية.
 
 ---
 
@@ -549,7 +549,7 @@ sf_ai/training/
 - كيف نستخدم RAG لاحقًا بدل حشر المعرفة في الأوزان.
 
 ### بعد المرحلة
-توقف، ملخص، اطلب الإذن.
+انتقل إلى Phase 7 لبناء البحث/الاستخراج/التلخيص offline-ready بدون زحف تلقائي.
 
 ---
 
@@ -987,7 +987,7 @@ artifacts/reports/dialogue_batch_report.json
 - dataset grows with quality tags.
 
 ### بعد المرحلة
-توقف، ملخص، اطلب الإذن.
+Phase 18 اكتملت. تفويض سامي الحالي يسمح بالمتابعة، لكن لا تدريب كبير بدون corpus كافٍ.
 
 ---
 
@@ -997,10 +997,10 @@ artifacts/reports/dialogue_batch_report.json
 توسيع النموذج من `SF-10M` إلى `SF-50M` فقط إذا أثبتت المراحل السابقة فائدة واضحة.
 
 ### شروط البدء
-- corpus كافٍ.
+- corpus كافٍ؛ بوابة الجاهزية الحالية تطلب 5000 سجل محكوم على الأقل.
 - tokenizer v1 مقبول.
 - SF-10M اجتاز eval.
-- الجهاز والوقت مسموح بهما من سامي.
+- الجهاز والوقت موثقان ضمن تفويض سامي الحالي، مع بقاء القرار الهندسي حسب الجاهزية.
 
 ### شروط النجاح
 - تحسن ملموس في eval suite.
@@ -1008,7 +1008,7 @@ artifacts/reports/dialogue_batch_report.json
 - لا استهلاك مفرط للجهاز بدون إذن.
 
 ### بعد المرحلة
-توقف، ملخص، اطلب الإذن.
+بوابة Phase 19 أُضيفت عبر `make phase19-readiness`. القرار الحالي: لا تدريب `SF-50M` حتى يكبر corpus المحكوم ويتوازن `msa + saudi`.
 
 ---
 

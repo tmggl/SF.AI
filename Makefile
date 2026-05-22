@@ -1,7 +1,7 @@
 # SF.AI — Makefile
 # Phase 1 set of operational commands.
 
-.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit phase12-readiness prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
+.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit phase12-readiness phase19-readiness prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
 
 PY ?= .venv/bin/python
 UVICORN ?= uvicorn
@@ -26,6 +26,7 @@ help:
 	@echo "  make corpus-audit         Audit JSONL corpus before Phase 12"
 	@echo "  make tokenization-audit   Audit tokenization policy before Phase 12"
 	@echo "  make phase12-readiness    Read-only Phase 12 decision: ready vs allowed"
+	@echo "  make phase19-readiness    Read-only Phase 19 decision before SF-50M"
 	@echo "  make prepare-dialogue-batch ARGS=...  Prepare reviewed chat exports (Phase 18)"
 	@echo "  make train-bpe ARGS=...   Train SF-BPE tokenizer (requires Phase 12 confirmation flag)"
 	@echo "  make train-lm ARGS=...    Train SF native LM (Phase 6)"
@@ -91,6 +92,9 @@ tokenization-audit:
 
 phase12-readiness:
 	$(PY) scripts/phase12_readiness.py
+
+phase19-readiness:
+	$(PY) scripts/phase19_readiness.py
 
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)

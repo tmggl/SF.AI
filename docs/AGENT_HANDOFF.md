@@ -55,10 +55,10 @@
 | Phase 13 | Tiny LM Smoke Training | ✅ completed_with_limits |
 | Phase 14 | SF-10M v0.1 Training Run | ✅ completed_with_limits |
 | Phase 15 | Generator Adapter for ChatModule | ✅ completed_as_safe_adapter |
-| Phase 16 | Evaluation/Safety/Style Harness | ✅ completed_with_runtime_blocked |
+| Phase 16 | Evaluation/Safety/Style Harness | ✅ completed_lab_runtime_separate |
 | Phase 17 | Local Memory/RAG Bridge into Chat | ✅ completed_local_bridge |
 | Phase 18 | Data Expansion Loop v1 | ✅ completed_governed_loop |
-| Phase 19 | SF-50M Candidate Training | معلّقة |
+| Phase 19 | SF-50M Candidate Training | readiness_gate_active_not_ready |
 | Phase 20 | Domain Activation Gates | معلّقة |
 
 اقرأ التفاصيل في [PHASE_STATUS.md](./PHASE_STATUS.md) و [EXECUTION_PLAN.md](./EXECUTION_PLAN.md).
@@ -66,7 +66,7 @@
 ### الاختبارات
 
 ```
-383 passed in 2.29s
+388 passed in 3.09s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -136,7 +136,7 @@ bash scripts/run_chat_server.sh
 - `sf_ai/datasets/corpus_governance.py`
 - `tests/test_corpus_governance.py`
 
-تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه غير صالح للشات. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata `generator=template` دون تفعيل runtime. Phase 16 أضاف prompt suites وeval report وقرر `runtime_activation_allowed=false`. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات.
+تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه غير صالح للشات. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata `generator=template` دون تفعيل runtime العام. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي لاحقًا للقياس لا للنشر. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات. Phase 19 أضاف بوابة جاهزية SF-50M وقراره الحالي: وسّع corpus أولًا.
 
 ### Phase 12 — preflight جاهز فقط
 
@@ -236,9 +236,17 @@ missing language balance: msa
 - التقرير الافتراضي: [artifacts/reports/dialogue_batch_report.json](../artifacts/reports/dialogue_batch_report.json).
 - الوثيقة: [DATA_IMPROVEMENT_LOOP.md](./DATA_IMPROVEMENT_LOOP.md).
 
-### تستطيع الآن الانتقال إلى:
+### Phase 19 — SF-50M Readiness Gate — تعمل
 
-- **Phase 19** SF-50M Candidate Training، لكن فقط بعد التأكد أن corpus المحكوم كافٍ. إن لم يكف، وسّع corpus عبر Phase 18 loop أولًا.
+- `make phase19-readiness`
+- `GET /system/phase19-readiness`
+- القرار الحالي: `NOT_READY_EXPAND_CORPUS_FIRST`
+- السبب: corpus الحالي 30 سجلًا فقط، والحد الأدنى العملي الحالي 5000 سجل محكوم مع توازن `msa + saudi`.
+- مختبر سامي المحلي يسمح بتجربة المولد الخام على الرسائل غير الحساسة من مجالات skeleton عبر `SF_LAB_GENERATION_FOR_NON_SENSITIVE=true`.
+
+### تستطيع الآن العمل على:
+
+- توسيع corpus عبر Phase 18 loop، ثم إعادة Phase 19 readiness.
 
 ---
 

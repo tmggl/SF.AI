@@ -29,8 +29,8 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 18 منتهية؛ Phase 12 اكتملت كتدريب tokenizer v1 محدود، Phase 13/14 اكتملتا كتدريب LM محدود، Phase 15 اكتملت كبنية Adapter آمنة، Phase 16 اكتملت كبوابة evaluation مع runtime blocked، Phase 17 اكتملت كبنية Local RAG bridge، وPhase 18 اكتملت كدورة بيانات محكومة.
-- 383 اختبار يمر (`.venv/bin/python -m pytest tests`) وآخر تشغيل: `383 passed in 2.29s`.
+- المراحل من Phase 0 حتى Phase 18 منتهية؛ Phase 19 تعمل الآن كبوابة جاهزية لـ SF-50M. القرار الحالي: `NOT_READY_EXPAND_CORPUS_FIRST` لأن corpus صغير ويفتقد `msa`.
+- 388 اختبار يمر (`.venv/bin/python -m pytest tests`) وآخر تشغيل: `388 passed in 3.09s`.
 - السيرفر يعمل عادةً على `http://127.0.0.1:8123` (المنفذ 8000/8765 محجوز).
 - شاشة المحادثة على `/ui/chat` — هي هدف سامي الرئيسي للتجريب.
 - آخر تحسين مكتمل: التركيز على العربية الفصحى + السعودية فقط، توجيه الرسائل اليومية (`وشلونك`/`شكرا`/`تمام`/`لا`/`ساعدني`/`مش فاهم`/`من صنعك`/`سعودي`/`عندي؟`/`عندي سؤال`) + Phase 10 skeleton domains.
@@ -38,7 +38,7 @@
 - اقرأ ملفات الحوكمة والدستور قبل أي تدريب: `PROJECT_CONSTITUTION`, `LANGUAGE_SEGMENTATION`, `TOKENIZATION_POLICY`, `DATASET_GOVERNANCE`, `AGENT_ENGINEERING_RULES`, ثم `PROJECT_IDENTITY`, `ENGINEERING_RULES`, `AGENT_INSTRUCTIONS`, `PROJECT_MAP`, `PROJECT_LIFECYCLE`.
 - اقرأ `docs/PHASE12_TOKENIZER_V1_REPORT.md`, `docs/PHASE13_SMOKE_TRAINING_REPORT.md`, و`docs/PHASE14_SF10M_V0_1_REPORT.md`: artifacts موجودة، لكنها غير صالحة للشات أو الجودة اللغوية بعد.
 - إذا كان السيرفر الحي لم يُعد تشغيله بعد، استخدم `make phase12-readiness` لنفس القرار بدون لمس السيرفر.
-- الهدف العام: الوصول إلى نموذج لغوي سيادي مولّد. أول توليد خام في Phase 13، وباب التوليد داخل الشات جُهّز في Phase 15، وPhase 16 منع تفعيله لأن العينة مكررة. Phase 17 جهّز RAG/Memory المحلي. Phase 18 جهّز دورة تحسين بيانات من اختبار سامي. التالي Phase 19 مشروط بكفاية corpus.
+- الهدف العام: الوصول إلى نموذج لغوي سيادي مولّد. أول توليد خام في Phase 13، وباب التوليد داخل الشات جُهّز في Phase 15. مختبر سامي المحلي يفعّل المولد الخام للتجربة. Phase 17 جهّز RAG/Memory المحلي، Phase 18 جهّز دورة تحسين بيانات، وPhase 19 يقيس جاهزية SF-50M.
 
 **هدف سامي الرئيسي الآن:**
 

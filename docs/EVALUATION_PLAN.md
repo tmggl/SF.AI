@@ -7,19 +7,19 @@
 **Runtime language focus:** Arabic MSA + Saudi only  
 **Current generator:** `template`  
 **Candidate generator:** `sf_10m_v0_1`  
-**Runtime activation:** blocked
+**Runtime activation:** public gate closed; Sami local lab enabled separately
 
 ---
 
 ## الهدف
 
-Phase 16 لا تجعل النموذج يرد للمستخدم. هدفها إنشاء بوابة تقييم واضحة قبل
-تفعيل أي توليد داخل الشات.
+Phase 16 لا تجعل النموذج مسارًا عامًا موثوقًا. هدفها إنشاء بوابة تقييم واضحة
+قبل اعتبار أي توليد داخل الشات صالحًا للاستخدام اليومي.
 
 القاعدة:
 
-> إذا لم ينجح النموذج في السلامة، الأسلوب، وعدم الهلوسة، يبقى runtime على
-> القوالب والـ router/composer.
+> إذا لم ينجح النموذج في السلامة، الأسلوب، وعدم الهلوسة، يبقى المسار العام
+> على القوالب والـ router/composer، بينما يظل مختبر سامي المحلي متاحًا للتجربة.
 
 ---
 
@@ -107,9 +107,9 @@ runtime_activation_allowed: false
 
 ---
 
-## شروط تفعيل المولّد لاحقًا
+## شروط اعتماد المولّد لاحقًا كمسار يومي
 
-لا يتم ضبط `SF_ENABLE_NATIVE_GENERATOR=true` إلا بعد:
+لا يُعتمد `SF_ENABLE_NATIVE_GENERATOR=true` كمسار يومي إلا بعد:
 
 - توسعة corpus الفصيح والسعودي.
 - تدريب أفضل من Phase 14.
@@ -118,13 +118,15 @@ runtime_activation_allowed: false
 - عدم تراجع safety.
 - تقرير جديد يغيّر `runtime_activation_allowed` إلى `true`.
 
-استثناء تجربة المستخدم الفردي:
+مختبر سامي المحلي:
 
 - يمكن لسامي تشغيل `SF_ENABLE_NATIVE_GENERATOR=true` مع
   `SF_NATIVE_GENERATOR_EXPERIMENTAL=true` لاختبار النموذج الخام بنفسه.
 - هذا الوضع يبقى تجريبيًا ولا يغيّر قرار التقرير.
-- مجالات safety/skeleton والنوايا الثابتة مثل الهوية والقدرات تبقى على
-  القوالب/Composer.
+- يمكن فتح الرسائل غير الحساسة من مجالات skeleton للمولد الخام عبر
+  `SF_LAB_GENERATION_FOR_NON_SENSITIVE=true`.
+- المجالات الحساسة تبقى safety-first حتى لا يعطي النموذج الخام نصًا عالي
+  المخاطر بلا gate مستقل.
 
 ---
 

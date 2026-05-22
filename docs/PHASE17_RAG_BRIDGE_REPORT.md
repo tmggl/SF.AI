@@ -98,8 +98,8 @@ tests/test_chat_rag_bridge.py — 6 passed
 
 Phase 17 مكتملة كبنية bridge محلية.
 
-لا يزال التوليد السيادي محجوبًا بواسطة Phase 16، ولا يزال الاستخدام اليومي
-يعتمد على templates + router + composer + optional local RAG.
+لا يزال الاستخدام اليومي يعتمد على templates + router + composer + optional
+local RAG، بينما يستطيع مختبر سامي المحلي تشغيل المولد السيادي الخام للتجربة.
 
 المرحلة التالية:
 

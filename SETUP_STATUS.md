@@ -10,10 +10,10 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 18 / 20**
-- **المرحلة الحالية:** **Phase 18 — Data Expansion Loop v1** (اكتملت كدورة بيانات محكومة؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **الرحلة الحالية:** **Phase 19 / 20**
+- **المرحلة الحالية:** **Phase 19 — SF-50M Readiness Gate** (البوابة تعمل؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** **Phase 19 — SF-50M Candidate Training**، مشروطة بكفاية corpus محكوم.
+- **المرحلة التالية المقترحة:** توسيع corpus عبر Phase 18 loop ثم إعادة `make phase19-readiness`.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
@@ -23,7 +23,8 @@
 - **نتيجة Phase 17:** أضيف `ChatRagBridge` و`ContextBuilder`; الشات يستطيع استخدام snippets محلية عند حقن `HybridRetriever`، ويعرض `rag=used/not_used`.
 - **نتيجة Phase 18:** أضيف زر تصدير مراجعة من واجهة الشات + `scripts/prepare_dialogue_batch.py` + تقرير `artifacts/reports/dialogue_batch_report.json`; لا تدخل محادثات المستخدم إلى التدريب تلقائيًا.
 - **حماية Phase 18:** ملفات `data/corpus/**/review/*.jsonl` مستثناة من git افتراضيًا؛ العينة الآمنة الوحيدة المسموحة هي `sample_review_export.jsonl`.
-- **وضع تجربة المستخدم الفردي:** يمكن تشغيل المولّد الخام لك وحدك عبر `SF_ENABLE_NATIVE_GENERATOR=true` و`SF_NATIVE_GENERATOR_EXPERIMENTAL=true`; هذا لا يعني أن النموذج صار صالحًا عامًا.
+- **نتيجة Phase 19:** أضيفت بوابة `make phase19-readiness` و`GET /system/phase19-readiness`; القرار الحالي `NOT_READY_EXPAND_CORPUS_FIRST` لأن corpus الحالي 30 سجلًا فقط والحد الأدنى العملي 5000.
+- **مختبر سامي المحلي:** يمكن تشغيل المولّد الخام عبر `SF_ENABLE_NATIVE_GENERATOR=true` و`SF_NATIVE_GENERATOR_EXPERIMENTAL=true`، وتمكين الرسائل غير الحساسة من مجالات skeleton عبر `SF_LAB_GENERATION_FOR_NON_SENSITIVE=true`.
 - **تفويض التنفيذ:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة دون انتظار موافقات جديدة؛ استخدم flags المطلوبة مع توثيق كل تشغيل ولا تكسر قواعد السيادة/السلامة.
 - **فحص Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/corpus-audit`
 - **قرار Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/phase12-readiness` يعرض أن tokenizer v1 اكتمل، مع بقاء `missing_required_dialects=["msa"]` قبل إعادة تدريب متوازن.
@@ -143,7 +144,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs,reports}/   Phase 5.5+ outputs/reports
 │
-├── tests/                                 pytest suite — 383 تست / 43 ملف
+├── tests/                                 pytest suite — 388 تست / 44 ملف
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -160,6 +161,7 @@ SF.AI/
 │   ├── train_bpe.py                       Phase 5.5
 │   ├── run_chat_server.sh                 يشغّل API على 8123 ويفعّل Saudi Seed افتراضيًا
 │   ├── prepare_dialogue_batch.py          Phase 18 — يحضر exports مراجعة إلى batch تدريبي محكوم
+│   ├── phase19_readiness.py               Phase 19 — بوابة جاهزية SF-50M read-only
 │   └── import_mo3jam_saudi.py             Phase 3.5
 │
 └── docs/
@@ -168,6 +170,7 @@ SF.AI/
     ├── PROJECT_MAP.md, PROJECT_LIFECYCLE.md
     ├── CURRENT_GOALS.md                    الهدف العام وخارطة التوليد الحالية
     ├── DATA_IMPROVEMENT_LOOP.md           Phase 18 — دورة تحسين البيانات
+    ├── PHASE19_READINESS_REPORT.md         Phase 19 — قرار جاهزية SF-50M
     ├── ROUTER.md, SEMANTIC_EXPLORER.md, LANGUAGE_UNDERSTANDING.md
     ├── DATASET_FORMAT.md, SOVEREIGN_ACCELERATION.md, TRAINING_PLAN.md
     ├── WEB_RESEARCH_PLAN.md, WEB_CRAWLING_POLICY.md, RAG_PLAN.md
@@ -183,9 +186,10 @@ SF.AI/
 
 - `GET /` — معلومات root + رابط الـ UI.
 - `GET /health` — فحص صحة (project + phase).
-- `GET /system/status` — حالة المراحل + flags السيادة + قائمة المكونات، بما فيها Phase 18 data loop.
+- `GET /system/status` — حالة المراحل + flags السيادة + قائمة المكونات، بما فيها Phase 19 readiness.
 - `GET /system/corpus-audit` — جاهزية corpus قبل Phase 12.
 - `GET /system/phase12-readiness` — قرار جاهزية Phase 12 مع بوابة الإذن.
+- `GET /system/phase19-readiness` — قرار جاهزية Phase 19 قبل أي تدريب `SF-50M`.
 - `GET /system/source-inventory` — جرد مصادر البيانات والمراجع.
 - `POST /chat/message` — Orchestrator: NLP → Router → Module/Composer. يرجع domain/intent/confidence/signals/route_reason/response/requires_safety/status/fallback_used/dispatch/generator/debug.
 - `GET /chat` → redirect (307) إلى `/ui/chat`.
@@ -207,7 +211,7 @@ make server-start
 
 آخر تحقق حي بدون restart:
 - السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`.
-- الكود الحالي بعد Phase 18 يعرض `Phase 18`، وزر `تصدير` في الواجهة، و`generator` حسب flags التشغيل.
+- الكود الحالي بعد Phase 19 يعرض `Phase 19`، وزر `تصدير` في الواجهة، و`generator` حسب flags التشغيل.
 - `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - `make server-status` read-only ولا يوقف السيرفر.
 
@@ -215,10 +219,10 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى Phase 18)
+## نتائج الاختبارات (حتى Phase 19 readiness)
 
 ```
-383 passed in 2.29s
+388 passed in 3.09s
 ```
 
 التغطية الحالية:
@@ -268,10 +272,10 @@ make server-start
 - **Phase 13:** تدريب smoke صغير لإثبات أن النموذج يتعلم ويولد نصًا خامًا.
 - **Phase 14:** تدريب `SF-10M v0.1`.
 - **Phase 15:** ربط checkpoint ببنية `ChatModule` كمولّد اختياري، مع إبقاء runtime على القوالب.
-- **Phase 16:** تقييم الجودة والسلامة والأسلوب السعودي/الفصيح قبل تفعيل التوليد — مكتمل مع runtime blocked.
+- **Phase 16:** تقييم الجودة والسلامة والأسلوب السعودي/الفصيح — مكتمل، ومختبر سامي المحلي يستطيع تشغيل المولد الخام للتجربة.
 - **Phase 17:** ربط Memory/RAG المحلي بالشات — مكتمل كبنية محلية اختيارية.
 - **Phase 18:** دورة توسيع بيانات من اختبار سامي المباشر — مكتملة كتصدير مراجعة + batch preparation محكوم.
-- **Phase 19:** تدريب مرشح `SF-50M`.
+- **Phase 19:** بوابة جاهزية تدريب مرشح `SF-50M` — تعمل، وقرارها الحالي: وسّع corpus أولًا.
 - **Phase 20:** تفعيل المجالات skeleton عبر gates مستقلة.
 
 أول توليد خام حدث في Phase 13. Phase 15 جهّز الباب داخل الشات، وPhase 16 أبقاه مغلقًا لأن التوليد مكرر. الاستخدام اليومي الموثوق يحتاج بيانات/تدريب أفضل ثم gate جديد.

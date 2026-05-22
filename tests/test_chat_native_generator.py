@@ -8,6 +8,8 @@ from fastapi.testclient import TestClient
 
 from apps.api.main import app
 from sf_ai.core.nlp import get_default_pipeline
+from sf_ai.core.index import load_default_registry
+from sf_ai.core.orchestrator import Orchestrator, UserMessage
 from sf_ai.modules.chat import (
     ChatModule,
     GenerationPolicy,
@@ -169,3 +171,40 @@ def test_chat_api_response_includes_generator_metadata() -> None:
     body = r.json()
     assert body["generator"] == "template"
     assert body["debug"]["generator"] == "template"
+
+
+def test_lab_generation_can_cover_non_sensitive_skeleton_domains(monkeypatch) -> None:
+    monkeypatch.setenv("SF_LAB_GENERATION_FOR_NON_SENSITIVE", "true")
+    pipe = get_default_pipeline()
+    fake_chat = ChatModule(
+        generation_policy=GenerationPolicy(enabled=True, experimental_runtime=True),
+        native_generator=_FakeGenerator(),  # type: ignore[arg-type]
+    )
+    orch = Orchestrator(
+        registry=load_default_registry(),
+        nlp=pipe,
+        modules={"chat": fake_chat},
+    )
+
+    result = orch.process(UserMessage(text="ابي اسوي كود", session_id="lab-skeleton"))
+
+    assert result.domain == "coding"
+    assert result.debug["dispatch"] == "module:chat_lab"
+    assert result.debug["generator"] == "sf_10m_v0_1"
+    assert "رد مولد تجريبي" in result.response
+    assert "lab_domain:coding" in result.debug["module_notes"]
+
+
+def test_lab_generation_keeps_sensitive_domains_on_composer(monkeypatch) -> None:
+    monkeypatch.setenv("SF_LAB_GENERATION_FOR_NON_SENSITIVE", "true")
+    fake_chat = ChatModule(
+        generation_policy=GenerationPolicy(enabled=True, experimental_runtime=True),
+        native_generator=_FakeGenerator(),  # type: ignore[arg-type]
+    )
+    orch = Orchestrator(registry=load_default_registry(), modules={"chat": fake_chat})
+
+    result = orch.process(UserMessage(text="عندي ألم في الراس", session_id="lab-sensitive"))
+
+    assert result.domain == "medical"
+    assert result.debug["dispatch"] == "composer"
+    assert result.debug["generator"] == "template"

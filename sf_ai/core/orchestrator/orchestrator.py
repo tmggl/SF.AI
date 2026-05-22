@@ -17,6 +17,7 @@ ChatModule. Later phases register `web`, `research`, etc.
 
 from __future__ import annotations
 
+import os
 from functools import lru_cache
 from typing import Callable, Protocol
 
@@ -31,6 +32,10 @@ from sf_ai.core.router import DomainRouter, IntentRouter
 from sf_ai.modules.chat import ChatModule, get_default_chat_module
 
 logger = get_logger("sf_ai.orchestrator")
+
+
+def _env_true(name: str) -> bool:
+    return os.getenv(name, "").strip().lower() in {"1", "true", "yes", "on"}
 
 
 class _ModuleProtocol(Protocol):
@@ -139,10 +144,28 @@ class Orchestrator:
         session_id: str | None,
     ) -> tuple[str, str, tuple[str, ...]]:
         """Return (response_text, dispatch_kind, extra_notes)."""
-        # Safety-flagged domains and skeleton-only domains still go through
-        # the Composer's stock replies — we want one consistent voice for
-        # "this isn't ready" and "this is sensitive".
+        # Safety-flagged domains still go through the Composer. Skeleton-only
+        # domains normally do too, unless Sami's local lab mode is enabled to
+        # stress-test the sovereign generator across broader prompts.
         if domain_requires_safety or domain_status != "active":
+            if (
+                domain_status != "active"
+                and not domain_requires_safety
+                and _env_true("SF_LAB_GENERATION_FOR_NON_SENSITIVE")
+            ):
+                chat_module = self.modules.get("chat")
+                if chat_module is not None:
+                    module_result = chat_module.handle(
+                        analysis,
+                        intent="chat.general",
+                        session_id=session_id,
+                    )
+                    return (
+                        module_result.text,
+                        "module:chat_lab",
+                        module_result.notes + (f"lab_domain:{domain_name}",),
+                    )
+
             domain = self.registry.get_domain(domain_name)
             # `domain` will not be None here — registry already vetted it.
             reply = self.composer.compose(

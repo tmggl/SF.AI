@@ -91,6 +91,20 @@ def test_system_phase12_readiness_is_read_only_and_permission_gated() -> None:
     assert "--confirm-phase12-permission" in body["required_command_after_permission"]
 
 
+def test_system_phase19_readiness_reports_training_gate() -> None:
+    r = client.get("/system/phase19-readiness")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["phase"].startswith("Phase 19")
+    assert body["status"] == "NOT_READY_EXPAND_CORPUS_FIRST"
+    assert body["can_start_training"] is False
+    assert body["lab_experiment_allowed"] is True
+    assert body["training_records"] == 30
+    assert body["min_training_records"] == 5000
+    assert body["target_model"] == "sf-50m"
+    assert "corpus_too_small_for_sf50m" in body["blockers"]
+
+
 def test_chat_greeting_routes_through_module() -> None:
     r = client.post("/chat/message", json={"message": "مرحبا", "session_id": "api-test-1"})
     assert r.status_code == 200

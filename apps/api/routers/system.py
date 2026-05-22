@@ -16,6 +16,7 @@ from apps.api.schemas.system import (
     CorpusAuditResponse,
     CorpusIssueResponse,
     Phase12ReadinessResponse,
+    Phase19ReadinessResponse,
     SourceInventoryItemResponse,
     SourceInventoryResponse,
     SystemStatusResponse,
@@ -23,6 +24,7 @@ from apps.api.schemas.system import (
 from sf_ai.datasets.corpus_governance import audit_jsonl_directory_for_training
 from sf_ai.datasets.source_inventory import build_source_inventory
 from sf_ai.training.phase12_readiness import build_phase12_readiness_decision
+from sf_ai.training.phase19_readiness import build_phase19_readiness_decision
 
 router = APIRouter(prefix="/system", tags=["system"])
 
@@ -36,9 +38,9 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 18 — Data Expansion Loop v1",
-        current_phase_status="completed_governed_loop",
-        next_phase="Phase 19 — SF-50M Candidate Training (requires sufficient governed corpus)",
+        current_phase="Phase 19 — SF-50M Readiness Gate",
+        current_phase_status="not_ready_expand_corpus_first",
+        next_phase="Grow governed MSA+Saudi corpus through Phase 18 loop, then rerun Phase 19",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -119,6 +121,7 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
             ComponentStatus(name="chat_rag_bridge", status="ready_offline", phase="Phase 17"),
             ComponentStatus(name="dialogue_batch_preparation", status="active", phase="Phase 18"),
             ComponentStatus(name="chat_review_export", status="active", phase="Phase 18"),
+            ComponentStatus(name="phase19_readiness", status="active", phase="Phase 19"),
         ],
     )
 
@@ -221,5 +224,37 @@ def phase12_readiness() -> Phase12ReadinessResponse:
         local_reference_records=decision.local_reference_records,
         artifacts_present=list(decision.artifacts_present),
         required_command_after_permission=decision.required_command_after_permission,
+        notes=list(decision.notes),
+    )
+
+
+@router.get("/phase19-readiness", response_model=Phase19ReadinessResponse)
+def phase19_readiness() -> Phase19ReadinessResponse:
+    """Read-only Phase 19 decision before any SF-50M candidate training."""
+    decision = build_phase19_readiness_decision()
+    return Phase19ReadinessResponse(
+        phase=decision.phase,
+        status=decision.status,
+        can_start_training=decision.can_start_training,
+        lab_experiment_allowed=decision.lab_experiment_allowed,
+        corpus_path=decision.corpus_path,
+        training_records=decision.training_records,
+        min_training_records=decision.min_training_records,
+        corpus_issue_count=decision.corpus_issue_count,
+        dialect_counts=decision.dialect_counts,
+        missing_required_dialects=list(decision.missing_required_dialects),
+        tokenizer_ready=decision.tokenizer_ready,
+        sf10m_checkpoint_ready=decision.sf10m_checkpoint_ready,
+        phase16_eval_passed=decision.phase16_eval_passed,
+        phase16_runtime_activation_allowed=decision.phase16_runtime_activation_allowed,
+        target_model=decision.target_model,
+        target_context=decision.target_context,
+        target_d_model=decision.target_d_model,
+        target_layers=decision.target_layers,
+        target_heads=decision.target_heads,
+        device=decision.device,
+        action=decision.action,
+        recommended_commands=list(decision.recommended_commands),
+        blockers=list(decision.blockers),
         notes=list(decision.notes),
     )

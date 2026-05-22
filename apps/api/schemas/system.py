@@ -102,3 +102,30 @@ class Phase12ReadinessResponse(BaseModel):
     artifacts_present: list[str]
     required_command_after_permission: str
     notes: list[str]
+
+
+class Phase19ReadinessResponse(BaseModel):
+    phase: str
+    status: str
+    can_start_training: bool
+    lab_experiment_allowed: bool
+    corpus_path: str
+    training_records: int
+    min_training_records: int
+    corpus_issue_count: int
+    dialect_counts: dict[str, int]
+    missing_required_dialects: list[str]
+    tokenizer_ready: bool
+    sf10m_checkpoint_ready: bool
+    phase16_eval_passed: bool
+    phase16_runtime_activation_allowed: bool
+    target_model: str
+    target_context: int
+    target_d_model: int
+    target_layers: int
+    target_heads: int
+    device: str
+    action: str
+    recommended_commands: list[str]
+    blockers: list[str]
+    notes: list[str]

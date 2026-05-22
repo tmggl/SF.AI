@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 18 / 20**
-- **المرحلة الحالية:** **Phase 18 — Data Expansion Loop v1**
-- **حالة المرحلة الحالية:** **اكتملت كدورة بيانات محكومة: تصدير مراجعة من الواجهة + تحضير batch تدريبي بسكربت صريح**
-- **المرحلة التالية المقترحة:** Phase 19 — SF-50M Candidate Training (مشروط بكفاية corpus).
+- **الرحلة الحالية:** **Phase 19 / 20**
+- **المرحلة الحالية:** **Phase 19 — SF-50M Readiness Gate**
+- **حالة المرحلة الحالية:** **بوابة الجاهزية تعمل؛ تدريب SF-50M غير جاهز لأن corpus الحالي 30 سجلًا فقط ويفتقد msa**
+- **المرحلة التالية المقترحة:** توسيع corpus عبر Phase 18 loop ثم إعادة `make phase19-readiness`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ تم تحديث `default_registry.yaml` و`safety_terms.yaml` لفجوات finance/religion/security.
 - **تاريخ آخر تحديث:** 2026-05-22
 
@@ -41,10 +41,10 @@
 | Phase 13 | Tiny LM Smoke Training | ✅ completed_with_limits | ✅ |
 | Phase 14 | SF-10M v0.1 Training Run | ✅ completed_with_limits | ✅ |
 | Phase 15 | Generator Adapter for ChatModule | ✅ completed_as_safe_adapter | ✅ |
-| Phase 16 | Evaluation, Safety, and Saudi/MSA Style Harness | ✅ completed_with_runtime_blocked | ✅ |
+| Phase 16 | Evaluation, Safety, and Saudi/MSA Style Harness | ✅ completed_lab_runtime_separate | ✅ |
 | Phase 17 | Local Memory/RAG Bridge into Chat | ✅ completed_local_bridge | ✅ |
 | Phase 18 | Data Expansion Loop v1 | ✅ completed_governed_loop | ✅ |
-| Phase 19 | SF-50M Candidate Training | معلّقة | ⏳ |
+| Phase 19 | SF-50M Candidate Training | readiness_gate_active_not_ready | ✅ |
 | Phase 20 | Domain Activation Gates | معلّقة | ⏳ |
 
 ---
@@ -160,6 +160,13 @@
   - أضيف `artifacts/reports/dialogue_batch_report.json`.
   - لا تدخل المحادثات التدريب تلقائيًا.
   - docs: [DATA_IMPROVEMENT_LOOP.md](./DATA_IMPROVEMENT_LOOP.md)
+- بدأ Phase 19 كبوابة جاهزية قبل تدريب SF-50M:
+  - أضيف `make phase19-readiness`.
+  - أضيف `GET /system/phase19-readiness`.
+  - القرار الحالي: `NOT_READY_EXPAND_CORPUS_FIRST`.
+  - السبب: corpus الحالي `30` سجلًا فقط والحد الأدنى العملي الحالي `5000`.
+  - أضيف lab bridge للرسائل غير الحساسة حتى يختبر سامي المولد الخام عبر مجالات skeleton دون نشر عام.
+  - docs: [PHASE19_READINESS_REPORT.md](./PHASE19_READINESS_REPORT.md)
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -256,7 +263,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-383 passed in 2.29s
+388 passed in 3.09s
 ```
 
 | ملف | عدد |
@@ -265,16 +272,16 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_bpe_tokenizer.py | 13 |
 | test_capability_registry.py | 5 |
 | test_chat_module.py | 12 |
-| test_chat_native_generator.py | 7 (Phase 15) |
+| test_chat_native_generator.py | 9 (Phase 15 + lab mode) |
 | test_chat_rag_bridge.py | 6 (Phase 17) |
-| test_chat_ui.py | 4 (Phase 9) |
+| test_chat_ui.py | 4 (Phase 9/19 status) |
 | test_checkpoints.py | 7 |
 | test_conversation_state.py | 8 |
 | test_corpus_governance.py | 6 (Phase 11) |
 | test_dataset_validators.py | 28 |
 | test_dialogue_batch_preparation.py | 3 (Phase 18) |
 | test_dialect_mapper.py | 7 |
-| test_health.py | 7 |
+| test_health.py | 8 |
 | test_intent_detector.py | 7 |
 | test_mo3jam_importer.py | 13 |
 | test_new_chat_intents.py | 31 (Phase 9 polish) |
@@ -282,6 +289,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_orchestrator.py | 7 |
 | test_phase10_skeleton_domains.py | 4 (Phase 10) |
 | test_phase16_eval_harness.py | 3 (Phase 16) |
+| test_phase19_readiness.py | 2 (Phase 19) |
 | test_rag_sparse_retrieval.py | 14 (Phase 8) |
 | test_research_summarizer.py | 20 |
 | test_response_composer.py | 6 |
@@ -294,7 +302,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_training_device.py | 14 |
 | test_typo_corrector.py | 5 |
 | test_web_extractor.py | 18 |
-| **Total** | **383** |
+| **Total** | **388** |
 
 ---
 
