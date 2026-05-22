@@ -225,6 +225,7 @@
   - أضيفت لوحة بوابة Phase 22 داخل `/ui/chat`، تقرأ `/system/phase22-readiness` و`/system/phase22-collection-plan` وتعرض عدد corpus الحالي، المتبقي، ونقص `msa/saudi`، والمهمة التالية مباشرة.
   - أضيفت لوحة مهمة الجمع الحالية داخل `/ui/chat`، تقرأ `/system/phase22-next-batch` وتعرض `msa_001` وهدف 25 سجلًا وموضوعات تأليف عامة، وتضيف `phase22_next_batch` إلى metadata التصدير.
   - أضيف زر `موضوعات أخرى` داخل لوحة مهمة الجمع الحالية للتنقل في بنك التأليف الفصيح، مع `authoring_topic_count` في metadata.
+  - أضيف زر `حفظ للمراجعة` في `/ui/chat` وendpoint `POST /chat/review-export` لحفظ review JSONL محليًا في `data/corpus/chat/review/` فقط، مع رفض `training_allowed=true`.
   - القاعدة العملية الجديدة: ملف التصدير المفيد يجب أن يحتوي غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل، وبدون ردود `sf_10m_v0_1`.
   - صححت تشغيل الواجهة المستقرة: `generator=template` افتراضيًا، أي قوالب ثابتة لا مولد؛ و`SF-10M` الخام يبقى مختبرًا صريحًا فقط.
   - أضيفت حماية export/review intake لتمييز أي جلسة تحتوي ردود `sf_10m_v0_1` ومنع عدّها كـ candidate تدريب جودة.
@@ -264,7 +265,7 @@
   - **لا CDNs، لا Node، لا build step** — تعمل من المتصفح مباشرة.
 - `apps/api/routers/ui.py` — GET `/ui/chat` يخدم الـ HTML.
 - `apps/api/main.py` — أضيف `ui.router`، و GET `/chat` redirect → `/ui/chat`.
-- اختبارات: 4 في `test_chat_ui.py` تشمل مؤشر جودة التصدير ولوحة بوابة Phase 22 ومهمة الجمع الحالية.
+- اختبارات: 6 في `test_chat_ui.py` تشمل مؤشر جودة التصدير ولوحة بوابة Phase 22 ومهمة الجمع الحالية وحفظ review المحلي.
 
 ### Phase 9 Polish — Comfortable Chat + Accurate Routing
 

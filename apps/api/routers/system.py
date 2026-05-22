@@ -138,6 +138,7 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
             ComponentStatus(name="chat_rag_bridge", status="ready_offline", phase="Phase 17"),
             ComponentStatus(name="dialogue_batch_preparation", status="active", phase="Phase 18"),
             ComponentStatus(name="chat_review_export", status="active", phase="Phase 18"),
+            ComponentStatus(name="chat_review_local_save", status="active", phase="Phase 22"),
             ComponentStatus(name="phase19_readiness", status="active", phase="Phase 19"),
             ComponentStatus(name="domain_activation_gates", status="active", phase="Phase 20"),
             ComponentStatus(name="generative_roadmap", status="active", phase="Phase 21"),

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 from pydantic import BaseModel, Field
 
 
@@ -25,3 +27,16 @@ class ChatResponse(BaseModel):
     rag: str = Field(default="not_used", description="used | not_used")
     debug: dict[str, str] = Field(default_factory=dict)
     echo: str | None = Field(default=None, description="نص المستخدم الأصلي للتشخيص")
+
+
+class ReviewExportSaveRequest(BaseModel):
+    session_id: str | None = Field(default=None, description="UI session id")
+    record: dict[str, Any] = Field(..., description="Single JSONL review-export record")
+
+
+class ReviewExportSaveResponse(BaseModel):
+    saved: bool
+    path: str
+    filename: str
+    training_allowed: bool
+    status: str

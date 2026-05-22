@@ -38,6 +38,7 @@
 - **بوابة Phase 22 في الواجهة:** شاشة `/ui/chat` تعرض قراءة حية من `/system/phase22-readiness`: عدد corpus الحالي، المتبقي، نقص `msa/saudi`، وهل Phase 23 ما زالت محجوبة.
 - **مهمة الجمع الحالية في الواجهة:** شاشة `/ui/chat` تعرض `msa_001` من `/system/phase22-next-batch` مع هدف 25 سجلًا وموضوعات تأليف عامة، وتضع `phase22_next_batch` داخل metadata عند التصدير.
 - **تدوير موضوعات التأليف:** الواجهة تعرض زر `موضوعات أخرى` للتنقل داخل بنك الـ 94 موضوعًا الفصيح، وتضيف `authoring_topic_count` إلى metadata التصدير.
+- **حفظ محلي للمراجعة:** أضيف `POST /chat/review-export` وزر `حفظ للمراجعة` في `/ui/chat` لحفظ الجلسة مباشرة في `data/corpus/chat/review/` مع `training_allowed=false` و`quality=needs_review`; لا يدخل التدريب تلقائيًا.
 - **مؤشر جودة التصدير في الواجهة:** شاشة `/ui/chat` تعرض score جودة محلي قبل التصدير وتضع `ui_quality_score/ui_quality_label/ui_quality_blockers` داخل metadata.
 - **تصحيح تشغيل المولّد:** الواجهة المستقرة عادت إلى `generator=template` افتراضيًا؛ هذا يعني قوالب ثابتة لا توليدًا ذكيًا. `SF-10M` الخام لا يدخل ردود الشات إلا بفلاغات مختبر صريحة.
 - **مختبر سامي المحلي:** يمكن تشغيل المولّد الخام عبر `SF_ENABLE_NATIVE_GENERATOR=true` و`SF_NATIVE_GENERATOR_EXPERIMENTAL=true`، وتمكين الرسائل غير الحساسة من مجالات skeleton عبر `SF_LAB_GENERATION_FOR_NON_SENSITIVE=true` عند الاختبار فقط.

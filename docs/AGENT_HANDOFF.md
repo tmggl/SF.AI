@@ -284,6 +284,7 @@ missing language balance: msa
 - خطة الجمع الحالية: 200 فصحى + 170 سعودي + 100 مرنة، نحو 19 batch بحجم 25
 - المهمة الفورية الحالية: `msa_001` عبر `make phase22-next-batch`
 - بنك التأليف الفصيح: `resources/phase22_authoring/msa_prompt_bank_v1.json`، ملف مساعدة فقط وليس corpus، وحقوله `training_allowed=false` و`synthetic_llm_data=false`.
+- حفظ review المحلي: `POST /chat/review-export` وزر `حفظ للمراجعة` في `/ui/chat` يكتبان إلى `data/corpus/chat/review/` فقط مع `training_allowed=false`.
 - review intake الحالي: `data/corpus/chat/review/sample_review_export.jsonl` مرشح للمراجعة فقط؛ لا يدخل التدريب تلقائيًا.
 - `phase22-review-intake` يعرض أيضًا `quality_score`, `quality_label`, و`quality_blockers`; لا تعتبر جلسة قوية للتدريب إلا إذا كانت متعددة الأدوار غالبًا 3 user + 3 assistant على الأقل.
 - `/ui/chat` يعرض مؤشر جودة تصدير محليًا، ويضيف `ui_quality_score/ui_quality_label/ui_quality_blockers` إلى export metadata.

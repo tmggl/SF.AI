@@ -247,6 +247,7 @@
       <span class="badge" id="session-badge">جلسة: —</span>
       <span class="badge" id="sov-badge">سيادي ✓</span>
       <button class="icon-btn" id="export-btn" title="تصدير المحادثة للمراجعة">تصدير</button>
+      <button class="icon-btn" id="save-review-btn" title="حفظ المحادثة داخل data/corpus/chat/review">حفظ للمراجعة</button>
       <button class="icon-btn" id="clear-btn" title="مسح المحادثة">مسح</button>
     </div>
   </header>
@@ -748,7 +749,7 @@
     if (confirm("هل تريد مسح المحادثة وبدء جلسة جديدة؟")) clearChat();
   });
 
-  function exportForReview() {
+  function buildReviewRecord() {
     const rawGeneratorTurns = transcript.filter(
       (t) => t.role === "assistant" && t.generator === "sf_10m_v0_1"
     );
@@ -767,7 +768,7 @@
     const hasAssistant = clean.some((m) => m.role === "assistant");
     if (!hasUser || !hasAssistant) {
       alert("احتاج رسالة منك ورد من المساعد قبل التصدير.");
-      return;
+      return null;
     }
     const quality = exportQuality();
     if (quality.score < 70) {
@@ -775,7 +776,7 @@
         "جودة التصدير الحالية " + quality.score + "/100 (" + quality.label + "). " +
         "الأفضل تكمل 3 أدوار منك و3 ردود من المساعد قبل التصدير. هل تريد التصدير الآن للمراجعة فقط؟"
       );
-      if (!ok) return;
+      if (!ok) return null;
     }
     if (rawGeneratorTurns.length > 0) {
       const ok = confirm(
@@ -783,9 +784,9 @@
         rawGeneratorTurns.length +
         "). صدّرها للمراجعة فقط، ولا تستخدمها كبيانات تدريب جودة. هل تريد المتابعة؟"
       );
-      if (!ok) return;
+      if (!ok) return null;
     }
-    const record = {
+    return {
       domain: "chat",
       lang: "ar",
       messages: clean,
@@ -820,6 +821,11 @@
           : "Exported locally from UI. Review with scripts/prepare_dialogue_batch.py before training."
       }
     };
+  }
+
+  function exportForReview() {
+    const record = buildReviewRecord();
+    if (!record) return;
     const blob = new Blob([JSON.stringify(record) + "\n"], { type: "application/jsonl;charset=utf-8" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
@@ -829,7 +835,32 @@
     URL.revokeObjectURL(a.href);
     a.remove();
   }
+
+  async function saveReviewToServer() {
+    const record = buildReviewRecord();
+    if (!record) return;
+    const btn = document.getElementById("save-review-btn");
+    btn.disabled = true;
+    try {
+      const r = await fetch("/chat/review-export", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ session_id: SESSION_ID, record })
+      });
+      const body = await r.json();
+      if (!r.ok) {
+        alert("تعذر الحفظ للمراجعة: " + (body.detail || ("HTTP " + r.status)));
+        return;
+      }
+      alert("حُفظت الجلسة للمراجعة فقط:\n" + body.path);
+    } catch (e) {
+      alert("تعذر الاتصال بالخادم أثناء الحفظ: " + e.message);
+    } finally {
+      btn.disabled = false;
+    }
+  }
   document.getElementById("export-btn").addEventListener("click", exportForReview);
+  document.getElementById("save-review-btn").addEventListener("click", saveReviewToServer);
 
   sendBtn.addEventListener("click", send);
   inputEl.addEventListener("keydown", (e) => {

@@ -162,6 +162,14 @@ status: REVIEW_EXPORTS_READY_FOR_MANUAL_REVIEW
 - تربط export بالـ batch عبر `review_metadata.phase22_next_batch`.
 - تضع `authoring_topic_count` داخل metadata حتى نعرف حجم بنك التأليف المعروض وقت التصدير.
 
+وأضيف حفظ محلي للمراجعة:
+
+- زر `حفظ للمراجعة` في `/ui/chat`.
+- endpoint: `POST /chat/review-export`.
+- يحفظ JSONL داخل `data/corpus/chat/review/` فقط.
+- يرفض أي payload فيه `training_allowed=true`.
+- يحفظ دائمًا بحالة `saved_for_manual_review_only`.
+
 القاعدة العملية للوصول إلى حوار مفيد للتدريب:
 
 - لا تصدّر أقل من 3 أدوار منك و3 ردود من المساعد.

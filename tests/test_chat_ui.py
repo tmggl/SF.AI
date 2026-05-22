@@ -2,9 +2,13 @@
 
 from __future__ import annotations
 
+import json
+from pathlib import Path
+
 from fastapi.testclient import TestClient
 
 from apps.api.main import app
+from apps.api.routers import chat as chat_router
 
 client = TestClient(app)
 
@@ -39,6 +43,8 @@ def test_ui_chat_serves_html() -> None:
     assert "ui_quality_label" in body
     assert "ذاكرة:" in body
     assert "تصدير" in body
+    assert "حفظ للمراجعة" in body
+    assert "/chat/review-export" in body
     assert "training_allowed: false" in body or "training_allowed\": false" in body
     assert "sfai_chat_review_" in body
 
@@ -57,6 +63,87 @@ def test_post_chat_message_still_works_after_ui_mount() -> None:
     assert body["intent"] == "chat.greeting"
 
 
+def test_save_review_export_writes_review_only_jsonl(
+    tmp_path: Path, monkeypatch
+) -> None:
+    monkeypatch.setattr(chat_router, "REVIEW_EXPORT_DIR", tmp_path)
+    record = {
+        "domain": "chat",
+        "lang": "ar",
+        "messages": [
+            {"role": "user", "content": "أريد حوارًا فصيحًا للمراجعة."},
+            {
+                "role": "assistant",
+                "content": "هذا رد مراجعة فقط.",
+                "generator": "template",
+                "intent": "chat.general",
+                "domain": "chat",
+            },
+        ],
+        "review_metadata": {
+            "exported_from": "ui",
+            "session_id": "sf-test",
+            "phase22_next_batch": {"batch_id": "msa_001"},
+            "ui_quality_score": 70,
+            "ui_quality_label": "مرشح متوسط بعد مراجعة",
+            "ui_quality_blockers": [],
+            "contains_raw_generator_output": False,
+        },
+        "provenance": {
+            "source": "sf-ai-chat-ui-review-export",
+            "license": "user-review-required",
+            "language": "ar",
+            "dialect": "msa",
+            "quality": "needs_review",
+            "training_allowed": False,
+            "notes": "Review only.",
+        },
+    }
+
+    r = client.post(
+        "/chat/review-export",
+        json={"session_id": "sf-test", "record": record},
+    )
+
+    assert r.status_code == 201
+    body = r.json()
+    assert body["saved"] is True
+    assert body["training_allowed"] is False
+    assert body["status"] == "saved_for_manual_review_only"
+    saved_path = tmp_path / body["filename"]
+    assert saved_path.exists()
+    saved = json.loads(saved_path.read_text(encoding="utf-8"))
+    assert saved["provenance"]["training_allowed"] is False
+    assert saved["provenance"]["quality"] == "needs_review"
+
+
+def test_save_review_export_rejects_training_allowed_true(
+    tmp_path: Path, monkeypatch
+) -> None:
+    monkeypatch.setattr(chat_router, "REVIEW_EXPORT_DIR", tmp_path)
+    record = {
+        "domain": "chat",
+        "messages": [
+            {"role": "user", "content": "اختبار"},
+            {"role": "assistant", "content": "رد"},
+        ],
+        "review_metadata": {"exported_from": "ui"},
+        "provenance": {
+            "quality": "needs_review",
+            "training_allowed": True,
+        },
+    }
+
+    r = client.post(
+        "/chat/review-export",
+        json={"session_id": "sf-test", "record": record},
+    )
+
+    assert r.status_code == 400
+    assert "training_allowed=false" in r.json()["detail"]
+    assert not list(tmp_path.glob("*.jsonl"))
+
+
 def test_system_status_reports_phase_22_with_chat_ui() -> None:
     r = client.get("/system/status")
     assert r.status_code == 200
@@ -73,6 +160,8 @@ def test_system_status_reports_phase_22_with_chat_ui() -> None:
     assert any(c["name"] == "dialogue_batch_preparation" and c["status"] == "active"
                for c in body["components"])
     assert any(c["name"] == "chat_review_export" and c["status"] == "active"
+               for c in body["components"])
+    assert any(c["name"] == "chat_review_local_save" and c["status"] == "active"
                for c in body["components"])
     assert any(c["name"] == "phase19_readiness" and c["status"] == "active"
                for c in body["components"])
