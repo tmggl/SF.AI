@@ -54,9 +54,11 @@ Phase 22 لا يبدأ تدريب tokenizer أو نموذج.
 
 - `make phase22-readiness`
 - `make phase22-plan`
+- `make phase22-next-batch`
 - `make phase22-review-intake`
 - `GET /system/phase22-readiness`
 - `GET /system/phase22-collection-plan`
+- `GET /system/phase22-next-batch`
 - `GET /system/phase22-review-intake`
 - `/ui/chat` يعرض لوحة بوابة Phase 22 الحية من `/system/phase22-readiness`.
 - `/system/phase22-collection-plan` يرجع الآن `planned_batches` مفصلة لكل batch.
@@ -87,6 +89,14 @@ flexible_records_after_minimums: 100
 planned_batches: 19
 next_batch: msa_001, dialect=msa, target_records=25
 ```
+
+`phase22-next-batch` يعرض المهمة الفورية للتأليف/المراجعة:
+
+- batch الحالي: `msa_001`.
+- الهدف: 25 سجلًا فصيحًا.
+- يعرض checklist قبول قبل التحويل.
+- يعرض موضوعات عامة تساعد سامي يكتب بنفسه؛ هذه الموضوعات ليست corpus ولا synthetic dialogue.
+- بعد التصدير: `phase22-review-intake` ثم `prepare-dialogue-batch` ثم `corpus-audit` ثم `phase22-readiness`.
 
 تفصيل batches الرسمي:
 

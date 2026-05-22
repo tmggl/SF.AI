@@ -209,6 +209,18 @@ class Phase22CollectionPlanResponse(BaseModel):
     notes: list[str]
 
 
+class Phase22NextBatchBriefResponse(BaseModel):
+    phase: str
+    status: str
+    next_batch: dict[str, object] | None
+    why_this_batch: str
+    acceptance_checklist: list[str]
+    suggested_topics: list[str]
+    ui_instructions: list[str]
+    after_export_commands: list[str]
+    warnings: list[str]
+
+
 class Phase22ReviewExportItemResponse(BaseModel):
     path: str
     records: int

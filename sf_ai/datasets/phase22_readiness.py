@@ -73,6 +73,29 @@ class Phase22PlannedBatch:
 
 
 @dataclass(frozen=True)
+class Phase22NextBatchBrief:
+    phase: str
+    status: str
+    next_batch: Phase22PlannedBatch | None
+    why_this_batch: str
+    acceptance_checklist: tuple[str, ...]
+    suggested_topics: tuple[str, ...]
+    ui_instructions: tuple[str, ...]
+    after_export_commands: tuple[str, ...]
+    warnings: tuple[str, ...]
+
+    def to_json(self) -> dict[str, object]:
+        data = asdict(self)
+        data["next_batch"] = self.next_batch.to_json() if self.next_batch else None
+        data["acceptance_checklist"] = list(self.acceptance_checklist)
+        data["suggested_topics"] = list(self.suggested_topics)
+        data["ui_instructions"] = list(self.ui_instructions)
+        data["after_export_commands"] = list(self.after_export_commands)
+        data["warnings"] = list(self.warnings)
+        return data
+
+
+@dataclass(frozen=True)
 class Phase22CollectionPlan:
     phase: str
     status: str
@@ -253,6 +276,64 @@ def build_phase22_collection_plan(
     )
 
 
+def build_phase22_next_batch_brief(
+    project_dir: str | Path | None = None,
+    *,
+    batch_size: int = 25,
+) -> Phase22NextBatchBrief:
+    """Return the immediate authoring task for Phase 22 without creating data."""
+    plan = build_phase22_collection_plan(project_dir, batch_size=batch_size)
+    next_batch = plan.planned_batches[0] if plan.planned_batches else None
+    if next_batch is None:
+        return Phase22NextBatchBrief(
+            phase="Phase 22 — Next Batch Brief",
+            status="NO_BATCHES_REMAINING_RECHECK_READINESS",
+            next_batch=None,
+            why_this_batch="All planned batches are complete according to the current readiness gate.",
+            acceptance_checklist=(),
+            suggested_topics=(),
+            ui_instructions=(),
+            after_export_commands=("make phase22-readiness",),
+            warnings=("Do not start Phase 23 until phase22-readiness passes.",),
+        )
+
+    return Phase22NextBatchBrief(
+        phase="Phase 22 — Next Batch Brief",
+        status="AUTHOR_NEXT_REVIEW_BATCH",
+        next_batch=next_batch,
+        why_this_batch=_why_batch_is_next(next_batch),
+        acceptance_checklist=(
+            f"Collect exactly {next_batch.target_records} reviewed dialogue records for this batch.",
+            "Each record must be user-authored or explicitly user-approved.",
+            "Each record must contain at least one user turn and one assistant turn.",
+            "Prefer sessions with at least 3 user turns and 3 assistant turns before export.",
+            "Keep dialect inside the current scope: msa or saudi only.",
+            "Use quality=silver unless the record is manually reviewed as gold.",
+            "Keep medical/legal/finance/security/religion content out of this general chat corpus.",
+            "No raw sf_10m_v0_1 output enters quality training data.",
+        ),
+        suggested_topics=_suggested_topics(next_batch.dialect),
+        ui_instructions=(
+            "Open http://127.0.0.1:8123/ui/chat.",
+            "Keep the stable UI on generator=template; this is corpus collection, not generator evaluation.",
+            "Write natural conversations yourself in the requested dialect.",
+            "Watch the جودة التصدير panel; export only when the score is useful for review.",
+            "Save the exported JSONL under data/corpus/chat/review/ for manual review.",
+        ),
+        after_export_commands=(
+            "make phase22-review-intake",
+            next_batch.prepare_command,
+            "make corpus-audit",
+            "make phase22-readiness",
+        ),
+        warnings=(
+            "This brief is not training data.",
+            "Suggested topics are prompts for Sami to author/review, not synthetic dialogue records.",
+            "Do not run tokenizer or model training during this step.",
+        ),
+    )
+
+
 def _build_phase22_planned_batches(
     *,
     quota_by_dialect: dict[str, int],
@@ -337,4 +418,38 @@ def _planned_batch(
             f"{task_dialect} الهدف {target_records} سجلًا، "
             "كلها user-authored أو user-approved، بدون synthetic LLM data."
         ),
+    )
+
+
+def _why_batch_is_next(batch: Phase22PlannedBatch) -> str:
+    if batch.dialect == "msa":
+        return "MSA is missing entirely from the current corpus, so the first priority is filling msa minimum coverage."
+    if batch.dialect == "saudi":
+        return "Saudi coverage is below the Phase 22 minimum after MSA minimum batches."
+    return "Minimum dialect coverage is planned first; flexible batches fill the remaining target toward 500 records."
+
+
+def _suggested_topics(dialect: str) -> tuple[str, ...]:
+    if dialect == "msa":
+        return (
+            "شرح الفرق بين runtime وtraining وtokenizer بلغة فصحى بسيطة.",
+            "حوار عن تنظيم خطوة يومية في مشروع تقني.",
+            "سؤال وجواب عن سبب جمع corpus قبل تدريب النموذج.",
+            "حوار دعم قصير: المستخدم مرتبك والمساعد يطلب توضيحًا بأدب.",
+            "طلب تلخيص قرار هندسي دون استخدام مصطلحات أجنبية كثيرة.",
+            "حوار عن تفضيل العربية الفصحى والسعودية فقط في هذه المرحلة.",
+        )
+    if dialect == "saudi":
+        return (
+            "سؤال سعودي طبيعي عن وش الخطوة الجاية في المشروع.",
+            "حوار قصير عن تجربة الواجهة ولماذا الردود الحالية قوالب.",
+            "طلب توضيح سعودي للفرق بين القاموس وبيانات التدريب.",
+            "حوار سعودي عن جمع محادثات من استخدام سامي اليومي.",
+            "سؤال متابعة قصير مثل: يعني وش أسوي الحين؟",
+            "حوار سعودي فيه تصحيح فهم بدون مبالغة أو وعود.",
+        )
+    return (
+        "اختر فصحى أو سعودي حسب النقص الذي يظهر في phase22-readiness.",
+        "غط موضوعات المشروع اليومية: خطة، تدريب، توكنزر، واجهة، مراجعة.",
+        "اكتب حوارًا طبيعيًا من استخدام سامي، لا نصًا مصطنعًا للملء.",
     )

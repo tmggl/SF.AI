@@ -9,6 +9,7 @@ from fastapi.testclient import TestClient
 from apps.api.main import app
 from sf_ai.datasets.phase22_readiness import (
     build_phase22_collection_plan,
+    build_phase22_next_batch_brief,
     build_phase22_readiness_decision,
 )
 
@@ -90,6 +91,34 @@ def test_phase22_collection_plan_endpoint() -> None:
     assert body["planned_batches"][-1]["batch_id"] == "flex_002"
 
 
+def test_phase22_next_batch_brief_points_to_msa_001() -> None:
+    brief = build_phase22_next_batch_brief()
+    assert brief.status == "AUTHOR_NEXT_REVIEW_BATCH"
+    assert brief.next_batch is not None
+    assert brief.next_batch.batch_id == "msa_001"
+    assert brief.next_batch.dialect == "msa"
+    assert brief.next_batch.target_records == 25
+    assert "MSA is missing entirely" in brief.why_this_batch
+    assert any("No raw sf_10m_v0_1" in item for item in brief.acceptance_checklist)
+    assert any("not training data" in warning for warning in brief.warnings)
+    assert any("runtime" in topic and "training" in topic for topic in brief.suggested_topics)
+    assert brief.after_export_commands[0] == "make phase22-review-intake"
+    assert "dialogue_batch_v2_msa_001.jsonl" in brief.after_export_commands[1]
+
+
+def test_phase22_next_batch_endpoint() -> None:
+    r = client.get("/system/phase22-next-batch")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["phase"].startswith("Phase 22")
+    assert body["status"] == "AUTHOR_NEXT_REVIEW_BATCH"
+    assert body["next_batch"]["batch_id"] == "msa_001"
+    assert body["next_batch"]["dialect"] == "msa"
+    assert body["next_batch"]["target_records"] == 25
+    assert body["warnings"]
+    assert body["after_export_commands"][0] == "make phase22-review-intake"
+
+
 def test_phase22_cli_is_read_only() -> None:
     proc = subprocess.run(
         [".venv/bin/python", "scripts/phase22_readiness.py"],
@@ -118,6 +147,20 @@ def test_phase22_collection_plan_cli_is_read_only() -> None:
     assert "synthetic_llm_data_allowed    : false" in proc.stdout
 
 
+def test_phase22_next_batch_cli_is_read_only() -> None:
+    proc = subprocess.run(
+        [".venv/bin/python", "scripts/phase22_next_batch.py"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert proc.returncode == 0
+    assert "Phase 22 next batch" in proc.stdout
+    assert "next_batch                    : msa_001" in proc.stdout
+    assert "suggested topics (not training data):" in proc.stdout
+    assert "Do not run tokenizer or model training" in proc.stdout
+
+
 def test_system_status_reports_phase22_component() -> None:
     r = client.get("/system/status")
     assert r.status_code == 200
@@ -129,5 +172,9 @@ def test_system_status_reports_phase22_component() -> None:
     )
     assert any(
         c["name"] == "phase22_collection_plan" and c["status"] == "active"
+        for c in body["components"]
+    )
+    assert any(
+        c["name"] == "phase22_next_batch" and c["status"] == "active"
         for c in body["components"]
     )

@@ -29,7 +29,7 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 21 منتهية؛ Phase 22 تعمل الآن كبوابة جاهزية وخطة جمع وreview intake لـ Gold Dialogue Corpus v2. قرار Phase 22 الحالي: `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2` لأن corpus الحالي 30/500 ويفتقد `msa`. خطة الجمع الحالية: 200 فصحى + 170 سعودي + 100 مرنة.
+- المراحل من Phase 0 حتى Phase 21 منتهية؛ Phase 22 تعمل الآن كبوابة جاهزية وخطة جمع وreview intake لـ Gold Dialogue Corpus v2. قرار Phase 22 الحالي: `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2` لأن corpus الحالي 30/500 ويفتقد `msa`. خطة الجمع الحالية: 200 فصحى + 170 سعودي + 100 مرنة. استخدم `make phase22-next-batch` لمعرفة المهمة الفورية؛ الحالية `msa_001`.
 - استخدم `make phase22-review-intake` أو `GET /system/phase22-review-intake` قبل أي تحويل من `data/corpus/chat/review/` إلى corpus تدريبي.
 - `phase22-review-intake` يحتوي بوابة جودة: راقب `quality_score/quality_label/quality_blockers`، ولا تحوّل جلسات قصيرة جدًا أو فيها ردود خام من `sf_10m_v0_1` إلى corpus جودة.
 - `/ui/chat` يحتوي مؤشر جودة تصدير محلي ويضيف `ui_quality_*` إلى metadata.
