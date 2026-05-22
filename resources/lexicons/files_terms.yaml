@@ -1,0 +1,28 @@
+meta:
+  version: "0.1"
+  domain: files
+  status: skeleton_only
+keywords:
+  - "ملف"
+  - "ملفات"
+  - "file"
+  - "files"
+  - "pdf"
+  - "doc"
+  - "docx"
+  - "ورد"
+  - "word"
+  - "txt"
+  - "md"
+  - "markdown"
+  - "أرشيف"
+  - "ارشيف"
+  - "zip"
+  - "tar"
+  - "حجم"
+  - "size"
+phrases:
+  - "افتح الملف"
+  - "لخص الملف"
+  - "استخرج من PDF"
+  - "احفظ كـ"

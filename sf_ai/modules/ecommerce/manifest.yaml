@@ -1,0 +1,14 @@
+# SF.AI — Ecommerce skeleton manifest (Phase 10)
+domain: ecommerce
+status: skeleton_only
+phase: "Phase 10"
+version: "0.1"
+description: "Future ecommerce and store-operations domain."
+handles_intents:
+  - ecommerce.general
+allowed_tools: []
+requires_safety: false
+limitations:
+  - "Skeleton only: no product, order, payment, fulfillment, or marketplace actions."
+  - "No external store or payment integration."
+notes: "Future activation requires explicit permissions for any commerce-side effects."

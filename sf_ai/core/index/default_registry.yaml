@@ -1,0 +1,495 @@
+# SF.AI — Global Capability Registry (Phase 2 seed)
+#
+# This file is the source of truth for which domains exist, which intents
+# they expose, and what status they hold. Phase 3 will move richer lexicons
+# to `resources/lexicons/*.yaml`; this registry stays a thin global index.
+#
+# Status values:
+#   active        — fully wired and reachable end-to-end
+#   skeleton_only — registered but not implemented (must not be dispatched)
+#   planned       — listed for transparency only
+#   disabled      — explicitly turned off
+#
+# requires_safety: domain handles sensitive content. A safety flag must be
+# raised on the routing result before responding.
+
+meta:
+  version: "0.2"
+  schema_version: "phase2"
+  generated_at: "2026-05-22"
+  fallback:
+    domain: chat
+    intent: chat.general
+    response_style: arabic_formal
+
+domains:
+
+  chat:
+    description: "الحوار العام"
+    status: active
+    requires_safety: false
+    phrases:
+      - "السلام عليكم"
+      - "وعليكم السلام"
+      - "صباح الخير"
+      - "مساء الخير"
+      - "كيف حالك"
+      - "كيفك"
+      - "وشلونك"
+      - "من انت"
+      - "من أنت"
+      - "وش تقدر تسوي"
+      - "ايش تقدر تسوي"
+      - "أيش تقدر تسوي"
+      - "من صنعك"
+      - "انت بوت"
+      - "أنت بوت"
+      - "انت نموذج"
+      - "أنت نموذج"
+      - "ابي اتكلم معك"
+      - "أبي أتكلم معك"
+    keywords:
+      - "مرحبا"
+      - "مرحباً"
+      - "اهلا"
+      - "أهلا"
+      - "هلا"
+      - "سلام"
+      - "حالك"
+      - "حالكم"
+      - "اخبارك"
+      - "أخبارك"
+      - "كيف"
+      - "شلون"
+      - "شلونك"
+      - "وشلونك"
+      - "اسولف"
+      - "أسولف"
+      - "اتكلم"
+      - "أتكلم"
+      # ---- expanded coverage: thanks / yes / no / help / confused / made-by ----
+      - "شكرا"
+      - "شكراً"
+      - "مشكور"
+      - "تسلم"
+      - "تسلمين"
+      - "تمام"
+      - "نعم"
+      - "ايوه"
+      - "أيوه"
+      - "ايه"
+      - "اي"
+      - "صح"
+      - "زين"
+      - "ماشي"
+      - "اوكي"
+      - "اوك"
+      - "لا"
+      - "كلا"
+      - "ليس"
+      - "مو"
+      - "مش"
+      - "ساعدني"
+      - "ساعديني"
+      - "مساعدة"
+      - "مساعدتك"
+      - "حائر"
+      - "صنعك"
+      - "بناك"
+      - "مطورك"
+      - "مؤلفك"
+      - "وداع"
+      - "وداعا"
+      - "باي"
+      - "سعودي"
+      - "السعودية"
+      - "فصحى"
+      - "الفصحى"
+      - "اللهجة"
+    intents:
+
+      chat.greeting:
+        description: "تحية وبداية حديث"
+        phrases:
+          - "السلام عليكم"
+          - "وعليكم السلام"
+          - "صباح الخير"
+          - "مساء الخير"
+        keywords:
+          - "مرحبا"
+          - "مرحباً"
+          - "اهلا"
+          - "أهلا"
+          - "هلا"
+          - "سلام"
+
+      chat.smalltalk:
+        description: "حديث اجتماعي قصير"
+        phrases:
+          - "كيف حالك"
+          - "كيفك"
+          - "شلونك"
+          - "وشلونك"
+          - "وش اخبارك"
+          - "وش أخبارك"
+        keywords:
+          - "حالك"
+          - "اخبارك"
+          - "أخبارك"
+          - "وشلونك"
+          - "اسولف"
+          - "أسولف"
+
+      chat.identity:
+        description: "سؤال عن هوية النظام"
+        phrases:
+          - "من انت"
+          - "من أنت"
+          - "ما انت"
+          - "ما أنت"
+          - "انت بوت"
+          - "أنت بوت"
+          - "انت نموذج"
+          - "أنت نموذج"
+        keywords:
+          - "بوت"
+          - "نموذج"
+          - "هويتك"
+
+      chat.capability:
+        description: "سؤال عن قدرات النظام"
+        phrases:
+          - "وش تقدر تسوي"
+          - "ايش تقدر تسوي"
+          - "أيش تقدر تسوي"
+          - "وش هدفك"
+          - "ايش تسوي"
+        keywords:
+          - "تقدر"
+          - "تستطيع"
+          - "تسوي"
+          - "هدفك"
+          - "قدرات"
+          - "مميزات"
+
+      chat.language_preference:
+        description: "تفضيل الفصحى أو اللهجة السعودية"
+        phrases:
+          - "سعودي"
+          - "اللهجة السعودية"
+          - "تكلم سعودي"
+          - "خلك سعودي"
+          - "فصحى"
+          - "العربية الفصحى"
+        keywords:
+          - "سعودي"
+          - "السعودية"
+          - "فصحى"
+          - "الفصحى"
+          - "اللهجة"
+
+      chat.clarification:
+        description: "استيضاح متابعة قصيرة"
+        phrases:
+          - "عندي؟"
+          - "عندي سؤال"
+          - "وش تقصد"
+          - "ايش تقصد"
+          - "تقصد ايش"
+        keywords:
+          - "تقصد"
+          - "قصدك"
+
+      chat.farewell:
+        description: "وداع"
+        phrases:
+          - "مع السلامة"
+          - "في امان الله"
+          - "في أمان الله"
+          - "الى اللقاء"
+          - "إلى اللقاء"
+          - "وداعا"
+          - "وداعاً"
+        keywords:
+          - "وداع"
+          - "وداعا"
+          - "باي"
+          - "bye"
+
+      chat.thanks:
+        description: "شكر وامتنان"
+        phrases:
+          - "شكرا لك"
+          - "شكراً لك"
+          - "مشكور والله"
+          - "الله يعطيك العافية"
+          - "تسلم يا اخوي"
+          - "ما قصرت"
+        keywords:
+          - "شكرا"
+          - "شكراً"
+          - "مشكور"
+          - "تسلم"
+          - "تسلمين"
+          - "thanks"
+          - "thank"
+
+      chat.affirmation:
+        description: "موافقة أو تأكيد"
+        phrases:
+          - "تمام كذا"
+          - "زين كذا"
+          - "ايه نعم"
+          - "أيوه"
+        keywords:
+          - "تمام"
+          - "نعم"
+          - "ايوه"
+          - "أيوه"
+          - "ايه"
+          - "أيه"
+          - "اي"
+          - "صح"
+          - "زين"
+          - "ماشي"
+          - "موافق"
+          - "اوكي"
+          - "اوك"
+          - "ok"
+          - "okay"
+          - "yes"
+
+      chat.negation:
+        description: "نفي أو رفض"
+        phrases:
+          - "لا والله"
+          - "مو الحين"
+          - "ليس الآن"
+          - "مو هذا"
+          - "مش هذا"
+        keywords:
+          - "لا"
+          - "كلا"
+          - "ليس"
+          - "ليست"
+          - "مو"
+          - "مش"
+          - "no"
+
+      chat.help:
+        description: "طلب مساعدة عامة"
+        phrases:
+          - "ساعدني"
+          - "ساعديني"
+          - "محتاج مساعدة"
+          - "أحتاج مساعدة"
+          - "ابي مساعدة"
+          - "كيف استخدمك"
+          - "كيف أستخدمك"
+        keywords:
+          - "ساعدني"
+          - "مساعدة"
+          - "مساعدتك"
+          - "help"
+
+      chat.confused:
+        description: "حيرة أو عدم فهم"
+        phrases:
+          - "مش فاهم"
+          - "ما فهمت"
+          - "مو فاهم"
+          - "مو واضح"
+          - "ايش قصدك"
+          - "وش قصدك"
+        keywords:
+          - "ما فهمت"
+          - "مافهمت"
+          - "حائر"
+
+      chat.who_made_you:
+        description: "من صنعك / من المؤلف"
+        phrases:
+          - "من صنعك"
+          - "من بناك"
+          - "من المطور"
+          - "من المؤلف"
+          - "ايش الفريق ورا"
+        keywords:
+          - "صنعك"
+          - "بناك"
+          - "مطورك"
+          - "مؤلفك"
+
+      chat.general:
+        description: "حوار عام افتراضي (fallback)"
+        fallback: true
+        phrases: []
+        keywords: []
+
+  web:
+    description: "البحث في الويب وجلب الصفحات"
+    status: skeleton_only
+    requires_safety: false
+    phrases:
+      - "ابحث في الويب"
+      - "ابحث لي على الانترنت"
+    keywords: ["ابحث", "بحث", "ويب", "انترنت", "صفحة"]
+    intents: {}
+
+  research:
+    description: "بحث متعمق وتلخيص"
+    status: skeleton_only
+    requires_safety: false
+    phrases:
+      - "لخص لي"
+      - "ابيك تلخص"
+    keywords: ["لخص", "تلخيص", "ملخص", "ابحث"]
+    intents: {}
+
+  coding:
+    description: "البرمجة والتطوير"
+    status: skeleton_only
+    requires_safety: false
+    phrases:
+      - "ابي اسوي كود"
+      - "اصلح bug"
+    keywords: ["كود", "برمجة", "python", "django", "bug", "api", "json", "docker"]
+    intents: {}
+
+  data:
+    description: "تحليل البيانات"
+    status: skeleton_only
+    requires_safety: false
+    phrases:
+      - "حلل ملف csv"
+      - "نظف البيانات"
+    keywords: ["csv", "اكسل", "excel", "بيانات", "تحليل", "تكرار"]
+    intents: {}
+
+  files:
+    description: "إدارة الملفات"
+    status: skeleton_only
+    requires_safety: false
+    phrases: []
+    keywords: ["ملف", "ملفات", "pdf", "ورد", "word"]
+    intents: {}
+
+  legal:
+    description: "القانون والعقود"
+    status: skeleton_only
+    requires_safety: true
+    phrases:
+      - "ابي افهم عقد الايجار"
+    keywords: ["قانون", "قانوني", "عقد", "ايجار", "محامي"]
+    intents: {}
+    notes: "حساس — يتطلب موافقة المستخدم وإخلاء مسؤولية قبل التفعيل"
+
+  medical:
+    description: "الصحة والطب"
+    status: skeleton_only
+    requires_safety: true
+    phrases:
+      - "عندي الم في الراس"
+    keywords: ["مرض", "دواء", "علاج", "ألم", "الم", "طبيب"]
+    intents: {}
+    notes: "حساس — لا يجوز إعطاء تشخيص طبي"
+
+  finance:
+    description: "المال والاستثمار"
+    status: skeleton_only
+    requires_safety: true
+    phrases: []
+    keywords: ["مال", "استثمار", "بنك", "اسهم"]
+    intents: {}
+    notes: "حساس — لا يجوز إعطاء توصيات مالية"
+
+  education:
+    description: "التعليم"
+    status: skeleton_only
+    requires_safety: false
+    phrases: []
+    keywords: ["تعلم", "اتعلم", "أتعلم", "دراسة", "مادة", "درس"]
+    intents: {}
+
+  religion:
+    description: "الدين"
+    status: skeleton_only
+    requires_safety: true
+    phrases: []
+    keywords: []
+    intents: {}
+    notes: "حساس — يحتاج تأنّيًا ومصادر موثوقة فقط"
+
+  social:
+    description: "المحادثات الاجتماعية"
+    status: skeleton_only
+    requires_safety: false
+    phrases: []
+    keywords: []
+    intents: {}
+
+  productivity:
+    description: "الإنتاجية والمهام"
+    status: skeleton_only
+    requires_safety: false
+    phrases: []
+    keywords: []
+    intents: {}
+
+  writing:
+    description: "الكتابة والصياغة"
+    status: skeleton_only
+    requires_safety: false
+    phrases:
+      - "اكتب لي رد"
+    keywords: ["اكتب", "صياغة", "صيغة", "رد"]
+    intents: {}
+
+  translation:
+    description: "الترجمة"
+    status: skeleton_only
+    requires_safety: false
+    phrases: []
+    keywords: ["ترجم", "ترجمة"]
+    intents: {}
+
+  image:
+    description: "الصور"
+    status: skeleton_only
+    requires_safety: false
+    phrases: []
+    keywords: ["صورة", "صور"]
+    intents: {}
+
+  audio:
+    description: "الصوت"
+    status: skeleton_only
+    requires_safety: false
+    phrases: []
+    keywords: ["صوت", "تسجيل"]
+    intents: {}
+
+  security:
+    description: "الأمن السيبراني"
+    status: skeleton_only
+    requires_safety: true
+    phrases: []
+    keywords: ["امن", "أمن", "اختراق", "حماية"]
+    intents: {}
+    notes: "حساس — حد استخدام دفاعي فقط"
+
+  business:
+    description: "الأعمال"
+    status: skeleton_only
+    requires_safety: false
+    phrases: []
+    keywords: []
+    intents: {}
+
+  ecommerce:
+    description: "التجارة الإلكترونية"
+    status: skeleton_only
+    requires_safety: false
+    phrases: []
+    keywords: []
+    intents: {}

@@ -1,0 +1,35 @@
+# SF.AI — WebModule manifest (Phase 7)
+domain: web
+status: ready_offline   # active when the orchestrator opts in
+phase: "Phase 7"
+version: "0.1"
+
+description: |
+  جلب وتنظيم صفحات الويب التي يعطيها المستخدم صراحة. لا محرك بحث خارجي
+  في Phase 7. الـ ranker rule-based + الـ response_builder يقدّم مقتطفات
+  مع مصادر.
+
+handles_intents:
+  - web.search          # يفسَّر كـ "افتح URLs أعطاها المستخدم"
+  - web.fetch
+  - web.preview
+
+allowed_tools:
+  - WebSearchPlanner    # extracts URLs only — no external search API
+  - ArticleExtractor
+  - WebResultRanker
+  - WebResponseBuilder
+  - CrawlerBase         # only when constructed with permission_granted=True
+
+requires_safety: false
+
+limitations:
+  - "لا محرك بحث خارجي. Phase 7 يعتمد على روابط يقدمها المستخدم فقط."
+  - "لا توليد محتوى من النموذج — مقتطفات حرفية من المصادر."
+  - "لا playwright/scrapy في Phase 7 — stubs فقط."
+  - "robots.txt يجب أن يسمح أو يتم تجاوز URL."
+
+notes: |
+  WebModule يكشف URLs من نص المستخدم. لا يخمن. عند غياب الـ URL يرد بأن
+  المرحلة الحالية لا تدعم البحث المفتوح، ويُحال المستخدم إلى Phase 8 RAG
+  لاحقًا.

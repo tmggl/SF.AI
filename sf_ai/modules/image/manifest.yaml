@@ -1,0 +1,14 @@
+# SF.AI — Image skeleton manifest (Phase 10)
+domain: image
+status: skeleton_only
+phase: "Phase 10"
+version: "0.1"
+description: "Future image understanding/generation domain."
+handles_intents:
+  - image.general
+allowed_tools: []
+requires_safety: false
+limitations:
+  - "Skeleton only: no image generation, editing, classification, or OCR."
+  - "No pretrained vision/diffusion model or external AI API."
+notes: "Future activation requires separate safety and sovereign model/data plan."

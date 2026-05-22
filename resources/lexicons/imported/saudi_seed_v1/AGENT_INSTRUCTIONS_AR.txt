@@ -1,0 +1,18 @@
+افتح الحزمة واستخدم الملف الأساسي:
+saudi_dialect_lexicon_full_seed_v1.json
+
+الغرض:
+- بناء قاموس لهجات سعودي.
+- تحويل المصطلحات إلى صيغة تدريب أو RAG.
+- تدريب مهام: dialect_identification / lexicon_lookup / normalization.
+
+لا تنسخ من Mo3jam.
+لو أضاف المستخدم بيانات Mo3jam بإذن، أضف الإسناد:
+المصدر: معجم — اللهجة السعودية: https://ar.mo3jam.com/dialect/Saudi
+
+الأولوية في التدريب:
+1. entries حيث confidence=high و sensitive_or_profane=false
+2. ثم medium بعد مراجعة بشرية
+3. low للمراجعة فقط
+
+عدد المداخل: 516

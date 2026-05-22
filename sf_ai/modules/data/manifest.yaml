@@ -1,0 +1,16 @@
+# SF.AI — Data skeleton manifest (Phase 10)
+domain: data
+status: skeleton_only
+phase: "Phase 10"
+version: "0.1"
+description: "Future data cleaning and analysis domain."
+handles_intents:
+  - data.general
+  - data.clean
+  - data.analyze
+allowed_tools: []
+requires_safety: false
+limitations:
+  - "Skeleton only: no dataframe loading, cleaning, plotting, or analysis."
+  - "No runtime file access through chat."
+notes: "Future activation may use local pandas-style tools only."

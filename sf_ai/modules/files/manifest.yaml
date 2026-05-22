@@ -1,0 +1,15 @@
+# SF.AI — Files skeleton manifest (Phase 10)
+domain: files
+status: skeleton_only
+phase: "Phase 10"
+version: "0.1"
+description: "Future file and document handling domain."
+handles_intents:
+  - files.general
+  - files.summarize
+allowed_tools: []
+requires_safety: false
+limitations:
+  - "Skeleton only: no file opening, parsing, summarizing, or conversion."
+  - "No persistent file writes through chat."
+notes: "Future activation must keep file permissions explicit."

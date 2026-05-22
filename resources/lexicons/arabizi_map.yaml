@@ -1,0 +1,133 @@
+# SF.AI — Arabizi → Arabic mapping (Phase 3 seed)
+#
+# Format: latin-form: { ar: <arabic>, dialect: <gulf|egyptian|levantine|iraqi|msa>, conf: <0..1> }
+# Conservative entries only — common chat forms. Quality over quantity.
+#
+# CRITICAL: programming and tech terms (python, django, api, json, docker,
+# react, vue, sql, http, https, url, css, html, js, ts) MUST NOT appear here.
+# They live in `protected_tokens` below and are skipped during mapping.
+
+meta:
+  version: "0.1"
+  notes: "Phase 3 seed. Expand with care; verify each entry on real chat data."
+
+mappings:
+
+  # Greetings / smalltalk
+  hala:        { ar: "هلا",     dialect: gulf,      conf: 0.9 }
+  halla:       { ar: "هلا",     dialect: gulf,      conf: 0.9 }
+  marhaba:     { ar: "مرحبا",   dialect: msa,       conf: 0.95 }
+  ahlan:       { ar: "اهلا",    dialect: msa,       conf: 0.95 }
+  salam:       { ar: "سلام",    dialect: msa,       conf: 0.9 }
+
+  # How are you (Gulf)
+  shlon:       { ar: "شلون",    dialect: gulf,      conf: 0.95 }
+  shlonak:     { ar: "شلونك",   dialect: gulf,      conf: 0.95 }
+  shlonk:      { ar: "شلونك",   dialect: gulf,      conf: 0.85 }
+  shloonak:    { ar: "شلونك",   dialect: gulf,      conf: 0.9 }
+  keef:        { ar: "كيف",     dialect: levantine, conf: 0.9 }
+  keefak:      { ar: "كيفك",    dialect: levantine, conf: 0.9 }
+  keifak:      { ar: "كيفك",    dialect: levantine, conf: 0.85 }
+  kayfak:      { ar: "كيفك",    dialect: msa,       conf: 0.85 }
+  ezayak:      { ar: "ازيك",    dialect: egyptian,  conf: 0.9 }
+  izzayak:     { ar: "ازيك",    dialect: egyptian,  conf: 0.85 }
+
+  # Want / ask
+  abi:         { ar: "ابي",     dialect: gulf,      conf: 0.9 }
+  abee:        { ar: "ابي",     dialect: gulf,      conf: 0.85 }
+  abgha:       { ar: "ابغى",    dialect: gulf,      conf: 0.9 }
+  abeek:       { ar: "ابيك",    dialect: gulf,      conf: 0.85 }
+  ana:         { ar: "انا",     dialect: msa,       conf: 0.95 }
+  enta:        { ar: "انت",     dialect: egyptian,  conf: 0.85 }
+  inta:        { ar: "انت",     dialect: levantine, conf: 0.85 }
+
+  # Where / when / what
+  wen:         { ar: "وين",     dialect: gulf,      conf: 0.9 }
+  ween:        { ar: "وين",     dialect: gulf,      conf: 0.9 }
+  fen:         { ar: "فين",     dialect: egyptian,  conf: 0.85 }
+  meta:        { ar: "متى",     dialect: msa,       conf: 0.6 }   # ambiguous: meta also english
+  emta:        { ar: "امتى",    dialect: egyptian,  conf: 0.9 }
+  esh:         { ar: "ايش",     dialect: gulf,      conf: 0.9 }
+  ish:         { ar: "ايش",     dialect: gulf,      conf: 0.85 }
+  wesh:        { ar: "وش",      dialect: gulf,      conf: 0.95 }
+
+  # Common discourse
+  wallah:      { ar: "والله",   dialect: msa,       conf: 0.9 }
+  yalla:       { ar: "يلا",     dialect: levantine, conf: 0.9 }
+  el7een:      { ar: "الحين",   dialect: gulf,      conf: 0.9 }
+  el7in:       { ar: "الحين",   dialect: gulf,      conf: 0.85 }
+  ba3den:      { ar: "بعدين",   dialect: levantine, conf: 0.85 }
+  shokran:     { ar: "شكرا",    dialect: msa,       conf: 0.9 }
+  shukran:     { ar: "شكرا",    dialect: msa,       conf: 0.9 }
+  3afwan:      { ar: "عفوا",    dialect: msa,       conf: 0.85 }
+
+# Tokens that must NEVER be rewritten by ArabiziMapper. Lowercase compared.
+protected_tokens:
+  - "python"
+  - "django"
+  - "fastapi"
+  - "flask"
+  - "node"
+  - "react"
+  - "vue"
+  - "angular"
+  - "next"
+  - "nextjs"
+  - "typescript"
+  - "javascript"
+  - "java"
+  - "kotlin"
+  - "swift"
+  - "rust"
+  - "golang"
+  - "go"
+  - "api"
+  - "rest"
+  - "json"
+  - "xml"
+  - "yaml"
+  - "html"
+  - "css"
+  - "js"
+  - "ts"
+  - "sql"
+  - "nosql"
+  - "http"
+  - "https"
+  - "url"
+  - "uri"
+  - "docker"
+  - "kubernetes"
+  - "k8s"
+  - "linux"
+  - "macos"
+  - "windows"
+  - "git"
+  - "github"
+  - "gitlab"
+  - "ci"
+  - "cd"
+  - "ssh"
+  - "tcp"
+  - "udp"
+  - "dns"
+  - "ip"
+  - "ml"
+  - "ai"
+  - "llm"
+  - "rag"
+  - "vector"
+  - "embedding"
+  - "tokenizer"
+  - "transformer"
+  - "gpu"
+  - "cpu"
+  - "mps"
+  - "cuda"
+  - "torch"
+  - "pytorch"
+  - "mlx"
+  - "numpy"
+  - "pandas"
+  - "scrapy"
+  - "playwright"

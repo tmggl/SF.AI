@@ -1,0 +1,50 @@
+# SF.AI — Gulf Dialects (Phase 3 seed)
+#
+# Maps Gulf-dialect surface forms → canonical MSA-ish equivalents. Helps the
+# Router score domain phrases that were phrased in dialect.
+#
+# Format: surface: { ar: <canonical>, conf: <0..1> }
+# Quality > quantity. Common words first.
+
+meta:
+  version: "0.1"
+  dialect: gulf
+
+mappings:
+
+  # How are you / smalltalk
+  "شلون":     { ar: "كيف",       conf: 0.95 }
+  "شلونك":    { ar: "كيف حالك",  conf: 0.95 }
+  "شلونكم":   { ar: "كيف حالكم", conf: 0.95 }
+  "كيفك":     { ar: "كيف حالك",  conf: 0.9 }
+  "اخبارك":   { ar: "كيف حالك",  conf: 0.85 }
+  "وش":       { ar: "ماذا",      conf: 0.85 }
+  "ايش":      { ar: "ماذا",      conf: 0.85 }
+  "وشلون":    { ar: "كيف",       conf: 0.9 }
+  "وشاخبارك": { ar: "كيف حالك",  conf: 0.85 }
+
+  # Want
+  "ابي":      { ar: "اريد",      conf: 0.9 }
+  "أبي":      { ar: "اريد",      conf: 0.9 }
+  "ابغى":     { ar: "اريد",      conf: 0.9 }
+  "أبغى":     { ar: "اريد",      conf: 0.9 }
+  "ابيك":     { ar: "اريدك",     conf: 0.85 }
+  "ابغيك":    { ar: "اريدك",     conf: 0.85 }
+  "ابي اسوي": { ar: "اريد ان اعمل", conf: 0.85 }
+  "ابي اسولف": { ar: "اريد ان اتحدث", conf: 0.85 }
+  "اسولف":    { ar: "اتحدث",     conf: 0.85 }
+
+  # Where / when
+  "وين":      { ar: "اين",       conf: 0.95 }
+  "وينك":     { ar: "اين انت",   conf: 0.9 }
+  "متى":      { ar: "متى",       conf: 1.0 }
+  "الحين":    { ar: "الان",      conf: 0.95 }
+
+  # Discourse
+  "زين":      { ar: "جيد",       conf: 0.85 }
+  "تمام":     { ar: "حسن",       conf: 0.8 }
+  "ماشي":     { ar: "موافق",     conf: 0.75 }
+  "ايوه":     { ar: "نعم",       conf: 0.95 }
+  "أيوه":     { ar: "نعم",       conf: 0.95 }
+  "لا":       { ar: "لا",        conf: 1.0 }
+  "ترا":      { ar: "اعلم",      conf: 0.7 }

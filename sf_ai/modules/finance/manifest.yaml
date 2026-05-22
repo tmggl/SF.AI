@@ -1,0 +1,15 @@
+# SF.AI — Finance skeleton manifest (Phase 10)
+domain: finance
+status: skeleton_only
+phase: "Phase 10"
+version: "0.1"
+description: "Future finance domain, currently safety-gated."
+handles_intents:
+  - finance.general
+  - finance.advice
+allowed_tools: []
+requires_safety: true
+limitations:
+  - "Skeleton only: no financial, investment, tax, or trading advice."
+  - "Must recommend a qualified financial professional for case-specific questions."
+notes: "Sensitive domain. Future activation requires strict financial safety policy."

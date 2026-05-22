@@ -1,0 +1,15 @@
+# SF.AI — Translation skeleton manifest (Phase 10)
+domain: translation
+status: skeleton_only
+phase: "Phase 10"
+version: "0.1"
+description: "Future translation domain."
+handles_intents:
+  - translation.general
+  - translation.translate
+allowed_tools: []
+requires_safety: false
+limitations:
+  - "Skeleton only: no sentence, document, or dialect translation engine."
+  - "Dialect aliases are lexical hints, not translation."
+notes: "Future activation requires sovereign bilingual data and model training."

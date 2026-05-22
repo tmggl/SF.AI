@@ -1,0 +1,55 @@
+# SF.AI — ChatModule manifest (Phase 4)
+#
+# Declarative metadata about the chat domain's first active module. The
+# orchestrator reads this (via the CapabilityRegistry overlay later) to know
+# what the module can and cannot do.
+
+domain: chat
+status: active
+phase: "Phase 4"
+version: "0.1"
+
+description: |
+  أول طبقة حوار عام في SF.AI. تستقبل NLPAnalysis، تختار قالب رد مناسبًا
+  حسب الـ intent، وتحفظ سياق الجلسة (آخر N رسائل). لا تستخدم أي نموذج لغوي
+  جاهز ولا أي LLM خارجي.
+
+handles_intents:
+  - chat.greeting
+  - chat.smalltalk
+  - chat.identity
+  - chat.who_made_you
+  - chat.capability
+  - chat.language_preference
+  - chat.clarification
+  - chat.help
+  - chat.confused
+  - chat.thanks
+  - chat.affirmation
+  - chat.negation
+  - chat.farewell
+  - chat.general
+
+allowed_tools: []     # Phase 4 chat lives in-process, no external tools yet
+requires_safety: false
+
+session_state:
+  type: short_term
+  max_turns: 12
+  scope: in_memory_singleton
+  persistence: none  # Phase 8/9 may add Redis-backed sessions
+
+limitations:
+  - "لا توليد حر — الردود من قوالب محدودة شفافة"
+  - "لا حفظ طويل المدى للسياق بين الجلسات"
+  - "لا يدّعي قدرات لم تكتمل بعد (ويب، تلخيص، نموذج لغوي)"
+  - "لا اعتماد على أي ذكاء جاهز"
+
+style:
+  default_response_style: arabic_formal
+  acknowledges_dialect: true   # يذكر اللهجة في metadata، لا يقلّدها في الرد
+
+notes: |
+  هذا ليس نموذجًا لغويًا. هذا منسّق ردود قائم على قواعد، يستفيد من نتائج
+  طبقة NLP (Phase 3) ويمرر السياق إلى ResponseComposer. عند توفر SF Native
+  LM في Phase 6، ChatModule سيوكّل التوليد إليه مع إبقاء بنية الردود.

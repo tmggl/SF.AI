@@ -1,0 +1,14 @@
+# SF.AI — Religion skeleton manifest (Phase 10)
+domain: religion
+status: skeleton_only
+phase: "Phase 10"
+version: "0.1"
+description: "Future religion domain, currently safety-gated."
+handles_intents:
+  - religion.general
+allowed_tools: []
+requires_safety: true
+limitations:
+  - "Skeleton only: no fatwa, religious ruling, or case-specific religious judgment."
+  - "Must point users to trusted qualified sources for sensitive questions."
+notes: "Sensitive domain. Future activation requires explicit source and safety policy."

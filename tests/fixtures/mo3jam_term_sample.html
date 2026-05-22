@@ -1,0 +1,34 @@
+<!doctype html>
+<!--
+Synthetic fixture representing one term page in the structure expected by
+the parser. The live HTML may differ — when the user runs the live importer
+on a small sample (--limit 10), they should inspect the resulting JSONL and
+adjust the heuristics if needed. The parser surfaces uncertain rows via
+`parser_warnings`.
+-->
+<html lang="ar" dir="rtl">
+<head><title>اشلونك</title></head>
+<body>
+<h1>اشلونك</h1>
+
+<!-- Egyptian block: should be ignored by the Saudi-block heuristic. -->
+<section class="dialect-block">
+  <a href="/dialect/Egyptian">المصرية</a>
+  <p class="definition">معناها بالمصري: عامل ايه</p>
+  <p class="example">مثال: اشلونك يا صاحبي؟</p>
+</section>
+
+<!-- Saudi block: the one we want. -->
+<section class="dialect-block saudi">
+  <a href="/dialect/Saudi">السعودية</a>
+  <p class="definition">كيف حالك — تستخدم بكثرة في نجد والشمال.</p>
+  <p class="example">مثال: اشلونك يا اخوي اليوم؟</p>
+  <ul class="spelling">
+    <li>اشلونك</li>
+    <li>شلونك</li>
+  </ul>
+  <span class="dialect-tag">نجدي</span>
+</section>
+
+</body>
+</html>

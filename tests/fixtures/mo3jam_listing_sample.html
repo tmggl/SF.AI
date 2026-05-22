@@ -1,0 +1,26 @@
+<!doctype html>
+<!--
+Synthetic fixture representing a snippet of a Mo3jam letter-listing page
+(/dialect/Saudi/all/<LETTER>). Built from the observed structure: each
+term is a <li> with a single <a href="/term/<TERM>#Saudi"> child.
+
+DO NOT replace this with a copy of the live page without confirming the
+source's redistribution policy. This snippet is small enough to be a
+fair-use structural fixture for tests.
+-->
+<html lang="ar" dir="rtl">
+<head><title>اللهجة السعودية</title></head>
+<body>
+<h1>السعودية 3139 مصطلح</h1>
+<ul class="terms-list">
+  <li><a href="/term/اشلونك#Saudi">اشلونك</a></li>
+  <li><a href="/term/ابتل#Saudi">ابتل</a></li>
+  <li><a href="/term/ابخص#Saudi">ابخص</a></li>
+  <li><a href="/term/احلت#Saudi">احلت</a></li>
+  <!-- Distractor: non-Saudi anchor — should be ignored by the parser. -->
+  <li><a href="/term/azoz#Egyptian">azoz</a></li>
+  <!-- Distractor: not a term link at all. -->
+  <li><a href="/about">عن المعجم</a></li>
+</ul>
+</body>
+</html>

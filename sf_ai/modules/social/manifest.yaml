@@ -1,0 +1,14 @@
+# SF.AI — Social skeleton manifest (Phase 10)
+domain: social
+status: skeleton_only
+phase: "Phase 10"
+version: "0.1"
+description: "Future social conversation support beyond general chat."
+handles_intents:
+  - social.general
+allowed_tools: []
+requires_safety: false
+limitations:
+  - "Skeleton only: no specialized social coaching or mental-health guidance."
+  - "General conversation remains handled by active ChatModule."
+notes: "Future activation must distinguish friendly chat from sensitive wellbeing topics."

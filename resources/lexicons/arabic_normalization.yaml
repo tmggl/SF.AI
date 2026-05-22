@@ -1,0 +1,75 @@
+# SF.AI — Arabic Normalization Rules (Phase 3 seed)
+#
+# Source of truth for the ArabicNormalizer. Loaded as a YAML so the rules
+# are inspectable without reading Python. Phase 5.5 BPE tokenizer training
+# will reuse this file to keep canonical input consistent.
+
+meta:
+  version: "0.1"
+  notes: |
+    Mappings here are applied to the NORMALIZED form only. The original
+    text is always preserved on NLPAnalysis.original_text.
+
+# Tashkeel (diacritics) to strip entirely. Each entry is a single codepoint.
+strip_chars:
+  - "ً"  # fathatan
+  - "ٌ"  # dammatan
+  - "ٍ"  # kasratan
+  - "َ"  # fatha
+  - "ُ"  # damma
+  - "ِ"  # kasra
+  - "ّ"  # shadda
+  - "ْ"  # sukun
+  - "ٓ"  # maddah above
+  - "ٔ"  # hamza above
+  - "ٕ"  # hamza below
+  - "ـ"  # tatweel
+  - "‏"  # RLM
+  - "‎"  # LRM
+  - "​"  # ZWSP
+  - "‌"  # ZWNJ
+  - "‍"  # ZWJ
+  - "﻿"  # BOM
+
+# Character substitutions applied after stripping tashkeel/tatweel.
+char_map:
+  "أ": "ا"
+  "إ": "ا"
+  "آ": "ا"
+  "ٱ": "ا"
+  "ى": "ي"
+  "ئ": "ي"
+  "ؤ": "و"
+  # ة/ه intentionally NOT mapped by default. Some matchers can opt-in.
+  "ك": "ك"
+  "گ": "ك"   # Persian/Urdu kaf
+  "چ": "ج"   # Persian che (gulf usage)
+  "پ": "ب"   # Persian pe
+
+# Digit unification: Arabic-Indic and Eastern Arabic digits → ASCII.
+digit_map:
+  "٠": "0"
+  "١": "1"
+  "٢": "2"
+  "٣": "3"
+  "٤": "4"
+  "٥": "5"
+  "٦": "6"
+  "٧": "7"
+  "٨": "8"
+  "٩": "9"
+  "۰": "0"
+  "۱": "1"
+  "۲": "2"
+  "۳": "3"
+  "۴": "4"
+  "۵": "5"
+  "۶": "6"
+  "۷": "7"
+  "۸": "8"
+  "۹": "9"
+
+# Optional aggressive transforms (off by default).
+options:
+  fold_ta_marbuta: false   # ة → ه — only set to true for fuzzy matchers
+  fold_alef_maqsura: true  # already covered via char_map (ى → ي)

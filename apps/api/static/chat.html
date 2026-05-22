@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SF.AI — Chat</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #161a22;
+    --line: #232838;
+    --text: #e8ebf2;
+    --muted: #8b93a7;
+    --user: #2a3554;
+    --bot:  #1d2532;
+    --accent: #6aa9ff;
+    --warn: #f5a05c;
+    --ok: #79d18a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Text",
+                 "Segoe UI", "Cairo", "Tajawal", "Noto Naskh Arabic", sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .app {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-inline: 1px solid var(--line);
+    background: var(--bg);
+  }
+  header {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  header h1 {
+    margin: 0; font-size: 17px; font-weight: 700; letter-spacing: 0.2px;
+  }
+  header .sub { color: var(--muted); font-size: 12px; }
+  .badges { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .badge {
+    background: var(--panel); border: 1px solid var(--line);
+    padding: 4px 8px; border-radius: 999px; font-size: 12px; color: var(--muted);
+  }
+  .icon-btn {
+    background: var(--panel); color: var(--muted);
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 4px 10px; font-size: 12px; cursor: pointer; font-family: inherit;
+  }
+  .icon-btn:hover { color: var(--text); border-color: var(--accent); }
+  main {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    overflow: hidden;
+  }
+  .messages {
+    overflow-y: auto;
+    padding: 18px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .msg {
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    border: 1px solid var(--line);
+  }
+  .msg.user { align-self: flex-end; background: var(--user); }
+  .msg.bot  { align-self: flex-start; background: var(--bot); }
+  .msg .meta {
+    color: var(--muted); font-size: 11px; margin-top: 6px;
+  }
+  .msg .time { color: var(--muted); font-size: 10px; margin-bottom: 4px; opacity: 0.7; }
+  .sidebar {
+    background: var(--panel);
+    border-inline-start: 1px solid var(--line);
+    padding: 14px;
+    overflow-y: auto;
+    font-size: 13px;
+  }
+  .sidebar h2 {
+    margin: 0 0 8px; font-size: 13px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .kv { display: grid; grid-template-columns: 110px 1fr; gap: 4px 12px; }
+  .kv div:nth-child(odd) { color: var(--muted); }
+  .kv code { background: var(--bg); padding: 2px 6px; border-radius: 6px; font-size: 12px; }
+  .signals { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .sig {
+    background: var(--bg); border: 1px solid var(--line);
+    padding: 2px 8px; border-radius: 999px; font-size: 11px; color: var(--muted);
+  }
+  .sig.phrase { color: var(--ok); border-color: #2a4a35; }
+  .sig.keyword { color: var(--accent); border-color: #2a3e6a; }
+  .sig.dialect_alias { color: var(--warn); border-color: #594a31; }
+  .divider { height: 1px; background: var(--line); margin: 14px 0; }
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 12px 14px;
+    display: flex; gap: 8px;
+  }
+  textarea {
+    flex: 1; resize: none; min-height: 44px; max-height: 200px;
+    background: var(--panel); color: var(--text);
+    border: 1px solid var(--line); border-radius: 12px;
+    padding: 10px 12px; font-family: inherit; font-size: 15px;
+    line-height: 1.5;
+  }
+  textarea:focus { outline: 2px solid var(--accent); }
+  button {
+    background: var(--accent); color: #0b1426; border: 0; border-radius: 12px;
+    padding: 0 16px; font-weight: 700; font-size: 14px; cursor: pointer;
+  }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .pill {
+    display: inline-block; padding: 2px 8px; border-radius: 999px;
+    font-size: 11px; border: 1px solid var(--line); margin-inline-end: 4px;
+  }
+  .pill.ok { color: var(--ok); }
+  .pill.warn { color: var(--warn); }
+  .empty {
+    color: var(--muted); font-style: italic; padding: 18px;
+    text-align: center;
+  }
+  @media (max-width: 800px) {
+    main { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div>
+      <h1>SF.AI — محادثة</h1>
+      <div class="sub" id="phase-line">جاري التحميل…</div>
+    </div>
+    <div class="badges">
+      <span class="badge" id="session-badge">جلسة: —</span>
+      <span class="badge" id="sov-badge">سيادي ✓</span>
+      <button class="icon-btn" id="clear-btn" title="مسح المحادثة">مسح المحادثة</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="messages" id="messages">
+      <div class="empty">ابدأ بكتابة رسالة. كل قرار توجيه يظهر في اللوحة الجانبية.</div>
+    </section>
+    <aside class="sidebar">
+      <h2>تشخيص آخر رسالة</h2>
+      <div class="kv" id="diag">
+        <div>المجال</div><div><code>—</code></div>
+        <div>النية</div><div><code>—</code></div>
+        <div>الثقة</div><div><code>—</code></div>
+        <div>المسار</div><div><code>—</code></div>
+        <div>سبب التوجيه</div><div><code>—</code></div>
+        <div>اللغة</div><div><code>—</code></div>
+        <div>اللهجة</div><div><code>—</code></div>
+        <div>safety</div><div><code>—</code></div>
+        <div>fallback</div><div><code>—</code></div>
+      </div>
+      <div class="divider"></div>
+      <h2>الإشارات</h2>
+      <div class="signals" id="signals"></div>
+      <div class="divider"></div>
+      <h2>تصحيحات إملائية / لهجية</h2>
+      <div id="corrections" style="font-size:12px; color: var(--muted);">—</div>
+      <div class="divider"></div>
+      <h2>flags السلامة</h2>
+      <div id="safety-flags" style="font-size:12px; color: var(--muted);">—</div>
+    </aside>
+  </main>
+
+  <footer>
+    <textarea id="input"
+              placeholder="اكتب رسالتك ثم اضغط Enter (Shift+Enter لسطر جديد)…"
+              rows="1"></textarea>
+    <button id="send">إرسال</button>
+  </footer>
+</div>
+
+<script>
+(function () {
+  const SESSION_ID = (() => {
+    let id = localStorage.getItem("sf_session_id");
+    if (!id) {
+      id = "sf-" + Math.random().toString(36).slice(2, 10);
+      localStorage.setItem("sf_session_id", id);
+    }
+    return id;
+  })();
+  document.getElementById("session-badge").textContent = "جلسة: " + SESSION_ID;
+
+  const messagesEl = document.getElementById("messages");
+  const inputEl = document.getElementById("input");
+  const sendBtn = document.getElementById("send");
+  const diagEl = document.getElementById("diag");
+  const signalsEl = document.getElementById("signals");
+  const correctionsEl = document.getElementById("corrections");
+  const safetyEl = document.getElementById("safety-flags");
+  const phaseEl = document.getElementById("phase-line");
+
+  // Fetch phase info.
+  fetch("/system/status").then(r => r.json()).then(data => {
+    phaseEl.textContent = data.current_phase + " — " + data.env;
+  }).catch(() => {
+    phaseEl.textContent = "تعذر جلب /system/status";
+  });
+
+  function el(tag, opts = {}) {
+    const e = document.createElement(tag);
+    if (opts.className) e.className = opts.className;
+    if (opts.text) e.textContent = opts.text;
+    if (opts.html) e.innerHTML = opts.html;
+    return e;
+  }
+
+  function clearEmpty() {
+    const empty = messagesEl.querySelector(".empty");
+    if (empty) empty.remove();
+  }
+
+  function nowHHMM() {
+    const d = new Date();
+    return d.toLocaleTimeString("ar-SA", { hour: "2-digit", minute: "2-digit" });
+  }
+
+  function appendMessage(role, text) {
+    clearEmpty();
+    const m = el("div", { className: "msg " + role });
+    const time = el("div", { className: "time", text: nowHHMM() });
+    m.appendChild(time);
+    const body = el("div");
+    body.textContent = text;
+    m.appendChild(body);
+    m._body = body;
+    messagesEl.appendChild(m);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return m;
+  }
+
+  function setMessageText(msgEl, text) {
+    if (msgEl._body) {
+      msgEl._body.textContent = text;
+    } else {
+      msgEl.textContent = text;
+    }
+  }
+
+  function showEmpty() {
+    messagesEl.innerHTML = '<div class="empty">ابدأ بكتابة رسالة. كل قرار توجيه يظهر في اللوحة الجانبية.</div>';
+  }
+
+  function escapeText(t) { return (t || "").toString(); }
+
+  function setDiag(body) {
+    const rows = diagEl.querySelectorAll("div");
+    const pairs = [
+      ["المجال", body.domain || "—"],
+      ["النية", body.intent || "—"],
+      ["الثقة", body.confidence != null ? body.confidence.toFixed(2) : "—"],
+      ["المسار", body.dispatch || "—"],
+      ["سبب التوجيه", body.route_reason || "—"],
+      ["اللغة", (body.debug && body.debug.language) || "—"],
+      ["اللهجة", (body.debug && body.debug.dialect) || "—"],
+      ["safety", body.requires_safety ? "نعم" : "لا"],
+      ["fallback", body.fallback_used ? "نعم" : "لا"],
+    ];
+    let idx = 1;
+    pairs.forEach((p) => {
+      rows[idx].innerHTML = "<code>" + escapeText(p[1]) + "</code>";
+      idx += 2;
+    });
+
+    // Signals.
+    signalsEl.innerHTML = "";
+    (body.matched_signals || []).forEach((s) => {
+      const kind = (s.split(":")[0] || "").trim();
+      const chip = el("span", { className: "sig " + kind, text: s });
+      signalsEl.appendChild(chip);
+    });
+    if (!body.matched_signals || body.matched_signals.length === 0) {
+      signalsEl.appendChild(el("span", { className: "sig", text: "(لا إشارات)" }));
+    }
+
+    // Corrections + safety flags from debug.
+    const corr = (body.debug && body.debug.corrections) || "";
+    correctionsEl.textContent = corr ? corr : "—";
+    const safe = (body.debug && body.debug.safety_flags) || "";
+    safetyEl.textContent = safe ? safe : "—";
+  }
+
+  async function send() {
+    const text = inputEl.value.trim();
+    if (!text) return;
+    sendBtn.disabled = true;
+    appendMessage("user", text);
+    inputEl.value = "";
+    const placeholder = appendMessage("bot", "…");
+    try {
+      const r = await fetch("/chat/message", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text, session_id: SESSION_ID }),
+      });
+      if (!r.ok) {
+        setMessageText(placeholder, "خطأ: HTTP " + r.status);
+        return;
+      }
+      const body = await r.json();
+      setMessageText(placeholder, body.response || "(لا رد)");
+      const meta = el("div", { className: "meta" });
+      meta.textContent =
+        (body.domain || "?") +
+        " / " + (body.intent || "?") +
+        " · ثقة " + (body.confidence != null ? body.confidence.toFixed(2) : "—") +
+        " · " + (body.dispatch || "");
+      placeholder.appendChild(meta);
+      setDiag(body);
+    } catch (e) {
+      setMessageText(placeholder, "تعذر الاتصال بالخادم: " + e.message);
+    } finally {
+      sendBtn.disabled = false;
+      inputEl.focus();
+    }
+  }
+
+  function clearChat() {
+    showEmpty();
+    // Reset diag panel.
+    const blanks = diagEl.querySelectorAll("div");
+    for (let i = 1; i < blanks.length; i += 2) {
+      blanks[i].innerHTML = "<code>—</code>";
+    }
+    signalsEl.innerHTML = "";
+    correctionsEl.textContent = "—";
+    safetyEl.textContent = "—";
+    // Rotate to a fresh session so the server's short-term memory starts over.
+    const newId = "sf-" + Math.random().toString(36).slice(2, 10);
+    localStorage.setItem("sf_session_id", newId);
+    document.getElementById("session-badge").textContent = "جلسة: " + newId;
+    // Soft reload so SESSION_ID variable updates.
+    location.reload();
+  }
+  document.getElementById("clear-btn").addEventListener("click", () => {
+    if (confirm("هل تريد مسح المحادثة وبدء جلسة جديدة؟")) clearChat();
+  });
+
+  sendBtn.addEventListener("click", send);
+  inputEl.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      send();
+    }
+  });
+  // Auto-grow textarea.
+  inputEl.addEventListener("input", () => {
+    inputEl.style.height = "auto";
+    inputEl.style.height = Math.min(200, inputEl.scrollHeight) + "px";
+  });
+
+  inputEl.focus();
+})();
+</script>
+</body>
+</html>

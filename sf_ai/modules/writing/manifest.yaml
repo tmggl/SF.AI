@@ -1,0 +1,15 @@
+# SF.AI — Writing skeleton manifest (Phase 10)
+domain: writing
+status: skeleton_only
+phase: "Phase 10"
+version: "0.1"
+description: "Future writing, editing, and drafting domain."
+handles_intents:
+  - writing.general
+  - writing.compose
+allowed_tools: []
+requires_safety: false
+limitations:
+  - "Skeleton only: no long-form drafting, rewriting, or style transfer."
+  - "No pretrained writing model or external AI API."
+notes: "Future activation depends on the sovereign language model path."

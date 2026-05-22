@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sf-ai"
+version = "0.1.0"
+description = "SF.AI — Sovereign AI platform built from scratch. No pretrained LLMs, no external AI APIs."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "SF.AI" }]
+license = { text = "Proprietary — see PROJECT_PRINCIPLES.md" }
+
+# Phase 1 dependencies are minimal: API + config + tests.
+# Heavier libs (torch, scrapy, playwright, qdrant-client) are introduced in their phases.
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.6",
+    "python-dotenv>=1.0",
+    "PyYAML>=6.0",
+    "httpx>=0.27",
+    "beautifulsoup4>=4.12",
+    "lxml>=5.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "ruff>=0.7",
+    "mypy>=1.13",
+]
+# Phase 5.5+ — training acceleration. Torch is a compute tool, not knowledge.
+# See docs/SOVEREIGN_ACCELERATION.md for the sovereignty rationale.
+training = [
+    "torch>=2.4",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["sf_ai*", "apps*"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+addopts = "-ra -q"
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["artifacts", "data", "node_modules"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_ignores = true
+warn_redundant_casts = true
+ignore_missing_imports = true
+exclude = ["artifacts", "data", "build", "dist"]

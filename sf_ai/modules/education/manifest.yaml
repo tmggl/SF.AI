@@ -1,0 +1,15 @@
+# SF.AI — Education skeleton manifest (Phase 10)
+domain: education
+status: skeleton_only
+phase: "Phase 10"
+version: "0.1"
+description: "Future education and tutoring domain."
+handles_intents:
+  - education.general
+  - education.learn
+allowed_tools: []
+requires_safety: false
+limitations:
+  - "Skeleton only: no full tutoring engine, quiz generation, or curriculum planning."
+  - "No pretrained education model or external AI API."
+notes: "Future activation should use local knowledge and transparent lesson structure."

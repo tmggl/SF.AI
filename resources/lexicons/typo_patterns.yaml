@@ -1,0 +1,47 @@
+# SF.AI — Common typo / variant patterns (Phase 3 seed)
+#
+# Format: bad: { correct: <fix>, conf: <0..1>, reason: <short> }
+# Conservative entries only. Anything below conf 0.7 is reported as a hint
+# but NOT auto-applied by the corrector. Quality over quantity.
+
+meta:
+  version: "0.1"
+  notes: "Phase 3 seed. Add only patterns observed on real input."
+
+patterns:
+
+  # Programming term spellings (Arabic users frequently transliterate variants).
+  "بايثن":      { correct: "بايثون",   conf: 0.95, reason: "missing_waw" }
+  "بايثوون":    { correct: "بايثون",   conf: 0.95, reason: "extra_waw" }
+  "جانغو":      { correct: "دجانغو",   conf: 0.85, reason: "django_variant" }
+  "دجنغو":      { correct: "دجانغو",   conf: 0.85, reason: "django_variant" }
+  "فاست api":   { correct: "fastapi",  conf: 0.9,  reason: "fastapi_variant" }
+  "جسون":       { correct: "json",     conf: 0.85, reason: "json_transliteration" }
+  "دوكر":       { correct: "docker",   conf: 0.9,  reason: "docker_transliteration" }
+
+  # Common Arabic mistypes / hamza drops
+  "ادري":       { correct: "أدري",     conf: 0.9,  reason: "hamza_drop" }
+  "اظن":        { correct: "أظن",      conf: 0.85, reason: "hamza_drop" }
+  "احس":        { correct: "أحس",      conf: 0.85, reason: "hamza_drop" }
+  "غرايب":      { correct: "غرائب",    conf: 0.85, reason: "hamza_yaa_form" }
+  "مساله":      { correct: "مسألة",    conf: 0.8,  reason: "hamza_taa_marbuta" }
+  "شلوون":      { correct: "شلون",     conf: 0.9,  reason: "extra_waw" }
+  "كييف":       { correct: "كيف",      conf: 0.9,  reason: "extra_yaa" }
+  "كيييف":      { correct: "كيف",      conf: 0.9,  reason: "extra_yaa" }
+  "مرحبااا":    { correct: "مرحبا",    conf: 0.9,  reason: "elongation" }
+  "اهلااا":     { correct: "اهلا",     conf: 0.9,  reason: "elongation" }
+  "هلااا":      { correct: "هلا",      conf: 0.9,  reason: "elongation" }
+  "وييش":       { correct: "وش",       conf: 0.85, reason: "extra_yaa" }
+
+  # English typos common in code-mixed messages
+  "pythn":      { correct: "python",   conf: 0.9,  reason: "missing_o" }
+  "pyhton":     { correct: "python",   conf: 0.9,  reason: "letter_swap" }
+  "dokcer":     { correct: "docker",   conf: 0.85, reason: "letter_swap" }
+  "djnago":     { correct: "django",   conf: 0.85, reason: "letter_swap" }
+  "jvascript":  { correct: "javascript", conf: 0.85, reason: "missing_a" }
+  "javascrpt":  { correct: "javascript", conf: 0.85, reason: "missing_i" }
+
+# Patterns flagged but never auto-applied (left for the chat module to ask).
+soft_hints:
+  "احسن":       { correct: "أحسن",     conf: 0.6,  reason: "hamza_drop_soft" }
+  "ابتدي":      { correct: "ابتدئ",    conf: 0.5,  reason: "hamza_form_soft" }

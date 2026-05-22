@@ -1,0 +1,16 @@
+# SF.AI — Coding skeleton manifest (Phase 10)
+domain: coding
+status: skeleton_only
+phase: "Phase 10"
+version: "0.1"
+description: "Future programming and software-development domain."
+handles_intents:
+  - coding.general
+  - coding.write_code
+  - coding.debug
+allowed_tools: []
+requires_safety: false
+limitations:
+  - "Skeleton only: no code generation, execution, debugging, or file edits through chat."
+  - "No pretrained coding model or external AI API."
+notes: "Registered for future activation after sovereign model/tool policies are explicit."

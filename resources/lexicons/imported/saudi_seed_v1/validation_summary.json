@@ -1,0 +1,61 @@
+{
+  "entry_count": 516,
+  "unique_normalized_terms": 514,
+  "duplicates_by_normalized_term": {
+    "ايش": 2,
+    "سنع": 2
+  },
+  "counts_by_dialect": {
+    "saudi_general": 389,
+    "najdi": 130,
+    "northern_shamali": 21,
+    "eastern_shargawi": 46,
+    "hijazi_urban": 78,
+    "southern_asiri_bahawi": 35,
+    "jizani_tihami": 27,
+    "bedouin_tribal": 76,
+    "najrani": 3
+  },
+  "counts_by_category": {
+    "question": 32,
+    "particle": 32,
+    "courtesy": 37,
+    "greeting": 21,
+    "time": 24,
+    "place": 29,
+    "verb": 70,
+    "adjective": 19,
+    "state": 19,
+    "intensifier": 8,
+    "vehicle": 18,
+    "home": 7,
+    "social": 24,
+    "culture": 8,
+    "drink": 6,
+    "food": 37,
+    "clothing": 8,
+    "negation": 12,
+    "cognition": 9,
+    "ability": 2,
+    "manner": 4,
+    "pronoun": 9,
+    "object": 15,
+    "identity": 7,
+    "feature": 3,
+    "commerce": 8,
+    "work": 4,
+    "education": 4,
+    "slang": 2,
+    "phrase": 23,
+    "religious_expression": 12,
+    "safety": 3
+  },
+  "confidence_counts": {
+    "high": 441,
+    "medium": 69,
+    "low": 6
+  },
+  "sensitive_count": 3,
+  "requires_native_review_count": 144,
+  "created_at_utc": "2026-05-22T15:16:03.647515+00:00"
+}

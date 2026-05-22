@@ -1,0 +1,14 @@
+# SF.AI — Business skeleton manifest (Phase 10)
+domain: business
+status: skeleton_only
+phase: "Phase 10"
+version: "0.1"
+description: "Future business planning and operations domain."
+handles_intents:
+  - business.general
+allowed_tools: []
+requires_safety: false
+limitations:
+  - "Skeleton only: no strategy, forecasting, market research, or operational planning."
+  - "No external market data or external AI API."
+notes: "Future activation should separate general business help from regulated finance/legal advice."

@@ -1,0 +1,15 @@
+# SF.AI — Legal skeleton manifest (Phase 10)
+domain: legal
+status: skeleton_only
+phase: "Phase 10"
+version: "0.1"
+description: "Future legal-domain support, currently safety-gated."
+handles_intents:
+  - legal.general
+  - legal.contract
+allowed_tools: []
+requires_safety: true
+limitations:
+  - "Skeleton only: no legal advice, legal opinion, or contract interpretation."
+  - "Must recommend a licensed legal professional for case-specific questions."
+notes: "Sensitive domain. Future activation requires explicit legal safety policy."

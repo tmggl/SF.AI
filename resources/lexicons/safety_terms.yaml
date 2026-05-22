@@ -1,0 +1,73 @@
+# SF.AI — Safety-flag terms (Phase 3 seed)
+#
+# These terms NEVER pick a domain alone. They only raise a safety flag on
+# NLPAnalysis.safety_flags which the orchestrator and composer respect.
+# Quality over quantity.
+
+meta:
+  version: "0.1"
+  notes: "Phase 3 seed. Flags are coarse — refined as real cases appear."
+
+flags:
+
+  medical:
+    - "ألم"
+    - "الم"
+    - "مرض"
+    - "مريض"
+    - "علاج"
+    - "دواء"
+    - "حقنة"
+    - "جرعة"
+    - "تشخيص"
+    - "وصفة"
+    - "اعراض"
+    - "أعراض"
+
+  legal:
+    - "قانون"
+    - "قانوني"
+    - "محامي"
+    - "محاماة"
+    - "عقد"
+    - "ايجار"
+    - "إيجار"
+    - "وكالة"
+    - "ميراث"
+    - "نزاع"
+    - "محكمة"
+    - "قضية"
+
+  finance:
+    - "استثمار"
+    - "استثمر"
+    - "سهم"
+    - "اسهم"
+    - "أسهم"
+    - "محفظة"
+    - "قرض"
+    - "فائدة"
+    - "ربا"
+    - "بنك"
+    - "تداول"
+
+  security:
+    - "اختراق"
+    - "ثغرة"
+    - "هكر"
+    - "هاكر"
+    - "تشفير"
+    - "هندسة اجتماعية"
+    - "كلمة مرور"
+    - "كلمة سر"
+    - "phishing"
+    - "exploit"
+
+  religion:
+    - "حلال"
+    - "حرام"
+    - "فتوى"
+    - "شرعي"
+    - "شريعة"
+    - "زكاة"
+    - "صلاة"

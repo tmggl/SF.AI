@@ -1,0 +1,34 @@
+meta:
+  version: "0.1"
+  domain: medical
+  status: skeleton_only
+  requires_safety: true
+keywords:
+  - "ألم"
+  - "الم"
+  - "وجع"
+  - "صداع"
+  - "حرارة"
+  - "حمى"
+  - "سعال"
+  - "كحة"
+  - "زكام"
+  - "مرض"
+  - "مريض"
+  - "علاج"
+  - "دواء"
+  - "وصفة"
+  - "اعراض"
+  - "أعراض"
+  - "تشخيص"
+  - "طبيب"
+  - "مستشفى"
+  - "عيادة"
+phrases:
+  - "عندي الم في الراس"
+  - "عندي حرارة"
+  - "ايش اعراض"
+  - "كيف اعالج"
+notes: |
+  Sensitive domain. SF.AI must NEVER diagnose or prescribe; always advise
+  users to seek a qualified medical professional.

@@ -1,0 +1,142 @@
+# SF.AI — Intent hints overlay (Phase 3 seed)
+#
+# Extends `default_registry.yaml`. Format:
+#   <intent_id>: { domain: <name>, phrases: [...], keywords: [...] }
+#
+# IntentDetector reads this to emit IntentHint records on NLPAnalysis.
+# The router still has final say.
+
+meta:
+  version: "0.1"
+
+intents:
+
+  chat.greeting:
+    domain: chat
+    phrases: ["السلام عليكم", "وعليكم السلام", "صباح الخير", "مساء الخير", "صباح النور", "مساء النور"]
+    keywords: ["مرحبا", "اهلا", "هلا", "سلام", "صباح", "مساء"]
+
+  chat.smalltalk:
+    domain: chat
+    phrases: ["كيف حالك", "كيفك", "شلونك", "وشلونك", "وش اخبارك", "اخبارك"]
+    keywords: ["حالك", "اخبارك", "وشلونك", "اسولف", "اتكلم", "احكي"]
+
+  chat.identity:
+    domain: chat
+    phrases: ["من انت", "من أنت", "انت بوت", "أنت بوت", "انت نموذج", "أنت نموذج", "ما هويتك"]
+    keywords: ["بوت", "نموذج", "هويتك"]
+
+  chat.capability:
+    domain: chat
+    phrases: ["وش تقدر تسوي", "ايش تقدر تسوي", "ايش تقدر", "وش هدفك", "ما هي قدراتك"]
+    keywords: ["تقدر", "تستطيع", "تسوي", "قدرات", "مميزات"]
+
+  chat.language_preference:
+    domain: chat
+    phrases: ["سعودي", "اللهجة السعودية", "تكلم سعودي", "خلك سعودي", "فصحى", "العربية الفصحى"]
+    keywords: ["سعودي", "السعودية", "فصحى", "الفصحى", "اللهجة"]
+
+  chat.clarification:
+    domain: chat
+    phrases: ["عندي؟", "عندي سؤال", "وش تقصد", "ايش تقصد", "تقصد ايش"]
+    keywords: ["تقصد", "قصدك"]
+
+  chat.farewell:
+    domain: chat
+    phrases: ["مع السلامة", "وداعا", "وداعاً", "في امان الله", "في أمان الله", "الى اللقاء", "إلى اللقاء"]
+    keywords: ["وداع", "وداعا", "باي", "bye"]
+
+  chat.thanks:
+    domain: chat
+    phrases: ["شكرا لك", "شكراً لك", "مشكور والله", "الله يعطيك العافية", "تسلم يا اخوي", "ما قصرت"]
+    keywords: ["شكرا", "شكراً", "مشكور", "تسلم", "تسلمين", "thanks", "thank"]
+
+  chat.affirmation:
+    domain: chat
+    phrases: ["تمام كذا", "زين كذا", "ايه نعم", "أيوه"]
+    keywords: ["تمام", "نعم", "ايوه", "أيوه", "ايه", "أيه", "اي", "صح", "زين", "ماشي", "موافق", "اوكي", "اوك", "ok", "okay", "yes"]
+
+  chat.negation:
+    domain: chat
+    phrases: ["لا والله", "مو الحين", "ليس الآن", "مو هذا", "مش هذا"]
+    keywords: ["لا", "كلا", "ليس", "ليست", "مو", "مش", "no"]
+
+  chat.help:
+    domain: chat
+    phrases: ["ساعدني", "ساعديني", "محتاج مساعدة", "أحتاج مساعدة", "ابي مساعدة", "كيف استخدمك", "كيف أستخدمك"]
+    keywords: ["ساعدني", "مساعدة", "مساعدتك", "help"]
+
+  chat.confused:
+    domain: chat
+    phrases: ["مش فاهم", "ما فهمت", "مو فاهم", "مو واضح", "ايش قصدك", "وش قصدك"]
+    keywords: ["ما فهمت", "مافهمت", "حائر"]
+
+  chat.who_made_you:
+    domain: chat
+    phrases: ["من صنعك", "من بناك", "من المطور", "من المؤلف", "ايش الفريق ورا"]
+    keywords: ["صنعك", "بناك", "مطورك", "مؤلفك"]
+
+  web.search:
+    domain: web
+    phrases: ["ابحث لي في الويب", "ابحث في الانترنت", "دور لي على"]
+    keywords: ["ابحث", "بحث", "دور", "انترنت", "ويب"]
+
+  research.summarize:
+    domain: research
+    phrases: ["لخص لي", "ابيك تلخص"]
+    keywords: ["لخص", "تلخيص", "ملخص"]
+
+  coding.write_code:
+    domain: coding
+    phrases: ["اكتب لي كود", "ابي اسوي كود"]
+    keywords: ["كود", "code", "اكتب"]
+
+  coding.debug:
+    domain: coding
+    phrases: ["اصلح bug", "صلح الكود", "ليش الكود ما يشتغل"]
+    keywords: ["bug", "error", "debug", "اصلح", "صلح"]
+
+  data.clean:
+    domain: data
+    phrases: ["نظف البيانات", "ابي انظف الداتا"]
+    keywords: ["نظف", "تنظيف", "تكرار", "مفقود"]
+
+  data.analyze:
+    domain: data
+    phrases: ["حلل لي البيانات", "حلل ملف csv"]
+    keywords: ["حلل", "تحليل"]
+
+  files.summarize:
+    domain: files
+    phrases: ["لخص الملف", "افتح الملف"]
+    keywords: ["ملف", "pdf", "ورد", "word"]
+
+  writing.compose:
+    domain: writing
+    phrases: ["اكتب لي رد", "صيغ لي"]
+    keywords: ["اكتب", "صيغ", "صياغة"]
+
+  translation.translate:
+    domain: translation
+    phrases: ["ترجم لي", "ترجمها"]
+    keywords: ["ترجم", "ترجمة"]
+
+  medical.symptom:
+    domain: medical
+    phrases: ["عندي الم", "اعراض"]
+    keywords: ["الم", "ألم", "اعراض", "أعراض"]
+
+  legal.contract:
+    domain: legal
+    phrases: ["افهم العقد", "ابي افهم عقد الايجار"]
+    keywords: ["عقد", "ايجار", "قانوني"]
+
+  finance.advice:
+    domain: finance
+    phrases: ["ابي استثمر", "نصيحة مالية"]
+    keywords: ["استثمار", "محفظة", "ادخار"]
+
+  education.learn:
+    domain: education
+    phrases: ["ابي اتعلم", "كيف اتعلم"]
+    keywords: ["اتعلم", "تعلم", "دراسة", "ادرس"]

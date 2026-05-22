@@ -1,0 +1,15 @@
+# SF.AI — Medical skeleton manifest (Phase 10)
+domain: medical
+status: skeleton_only
+phase: "Phase 10"
+version: "0.1"
+description: "Future health/medical domain, currently safety-gated."
+handles_intents:
+  - medical.general
+  - medical.symptom
+allowed_tools: []
+requires_safety: true
+limitations:
+  - "Skeleton only: no diagnosis, prescription, or medical triage."
+  - "Must recommend qualified medical care for case-specific questions."
+notes: "Sensitive domain. Future activation requires strict medical safety policy."

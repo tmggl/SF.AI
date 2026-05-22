@@ -1,0 +1,33 @@
+# SF.AI — ResearchModule manifest (Phase 7)
+domain: research
+status: ready_offline   # active when the orchestrator opts in
+phase: "Phase 7"
+version: "0.1"
+
+description: |
+  استخراج وتلخيص واستشهاد قائم على القواعد (rule-based). يستقبل HTML
+  مسبقة الجلب من المتصل أو يستخدم crawler مفوَّض من المستخدم.
+
+handles_intents:
+  - research.summarize
+  - research.compare
+
+allowed_tools:
+  - ArticleExtractor
+  - RuleBasedSummarizer
+  - CitationBuilder
+  - ResponseOrganizer
+  - CrawlerBase   # only when caller passes one with permission_granted=True
+
+requires_safety: false
+
+limitations:
+  - "لا توليد حر — تلخيص استخراجي فقط."
+  - "لا تحويل بين اللغات."
+  - "لا fact-checking خارج النص المعطى."
+  - "لا اعتماد runtime على أي LLM."
+  - "روابط بدون إذن مستخدم → تُتجاهَل وتُسجَّل سبب التجاهل."
+
+notes: |
+  المعرفة المتخصصة (قانون/طب/مال) لا تُسحب من هذا المجال إلى الأوزان. هي
+  تُسترجع من مصادر موثَّقة في الـ JSONL، تُلخَّص بقواعد، وتُحال إلى متخصص.

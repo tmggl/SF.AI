@@ -1,0 +1,14 @@
+# SF.AI — Audio skeleton manifest (Phase 10)
+domain: audio
+status: skeleton_only
+phase: "Phase 10"
+version: "0.1"
+description: "Future audio and speech domain."
+handles_intents:
+  - audio.general
+allowed_tools: []
+requires_safety: false
+limitations:
+  - "Skeleton only: no transcription, speech synthesis, classification, or editing."
+  - "No pretrained speech/audio model or external AI API."
+notes: "Future activation requires sovereign audio data and explicit consent policy."

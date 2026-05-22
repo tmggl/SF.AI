@@ -1,0 +1,81 @@
+# SF.AI — Makefile
+# Phase 1 set of operational commands.
+
+.PHONY: help check-env install test lint type api web docker-up docker-down phase-status import-mo3jam-saudi train-bpe train-lm eval-lm
+
+PY ?= python3
+UVICORN ?= uvicorn
+
+help:
+	@echo "SF.AI — available commands:"
+	@echo "  make check-env     Check Python and tooling versions"
+	@echo "  make install       Install package + dev dependencies"
+	@echo "  make test          Run pytest"
+	@echo "  make lint          Run ruff"
+	@echo "  make type          Run mypy"
+	@echo "  make api           Run FastAPI dev server (uvicorn --reload)"
+	@echo "  make web           Run frontend (placeholder — Phase 9)"
+	@echo "  make docker-up     Start docker-compose services"
+	@echo "  make docker-down   Stop docker-compose services"
+	@echo "  make phase-status  Print current phase status"
+	@echo "  make import-mo3jam-saudi  Run the Phase 3.5 Saudi-dialect importer"
+	@echo "                            (dry-run by default; ARGS to override)"
+	@echo "  make train-bpe ARGS=...   Train SF-BPE tokenizer"
+	@echo "  make train-lm ARGS=...    Train SF native LM (Phase 6)"
+	@echo "  make eval-lm ARGS=...     Evaluate a SF.AI checkpoint"
+
+check-env:
+	@echo "Python: $$($(PY) --version 2>&1)"
+	@command -v $(UVICORN) >/dev/null 2>&1 && echo "uvicorn: $$($(UVICORN) --version)" || echo "uvicorn: not installed"
+	@command -v pytest >/dev/null 2>&1 && echo "pytest: $$(pytest --version 2>&1 | head -n1)" || echo "pytest: not installed"
+	@command -v docker >/dev/null 2>&1 && echo "docker: $$(docker --version)" || echo "docker: not installed"
+
+install:
+	$(PY) -m pip install -e ".[dev]"
+
+test:
+	pytest
+
+lint:
+	ruff check .
+
+type:
+	mypy sf_ai apps
+
+api:
+	bash scripts/run_chat_server.sh --reload
+
+web:
+	@echo "Phase 9 — frontend not implemented yet."
+
+docker-up:
+	docker compose up -d
+
+docker-down:
+	docker compose down
+
+phase-status:
+	@echo "----- docs/PHASE_STATUS.md -----"
+	@head -n 30 docs/PHASE_STATUS.md
+
+# Phase 3.5 — import Mo3jam Saudi-dialect lexicon.
+# Default: dry-run. To go live, override with:
+#   make import-mo3jam-saudi ARGS="--no-dry-run --confirm-user-permission"
+# Source: معجم — اللهجة السعودية / https://ar.mo3jam.com/dialect/Saudi
+import-mo3jam-saudi:
+	$(PY) scripts/import_mo3jam_saudi.py $(ARGS)
+
+# Phase 5.5 — train SF-BPE tokenizer.
+# Example: make train-bpe ARGS="--corpus data/corpus/chat/jsonl --out artifacts/tokenizers/sf_bpe/v1"
+train-bpe:
+	$(PY) -m sf_ai.training.train_tokenizer $(ARGS)
+
+# Phase 6 — train SF native LM.
+# Example: make train-lm ARGS="--tokenizer artifacts/tokenizers/sf_bpe/v1 \
+#                              --corpus data/corpus/chat/jsonl --size sf-10m --steps 50"
+train-lm:
+	$(PY) -m sf_ai.training.train_tiny_lm $(ARGS)
+
+# Phase 6 — evaluate a checkpoint.
+eval-lm:
+	$(PY) -m sf_ai.training.evaluate_tiny_lm $(ARGS)

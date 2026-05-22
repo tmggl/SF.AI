@@ -1,0 +1,29 @@
+meta:
+  version: "0.1"
+  domain: finance
+  status: skeleton_only
+  requires_safety: true
+keywords:
+  - "مال"
+  - "تمويل"
+  - "استثمار"
+  - "استثمر"
+  - "محفظة"
+  - "اسهم"
+  - "أسهم"
+  - "سهم"
+  - "تداول"
+  - "قرض"
+  - "فائدة"
+  - "ربا"
+  - "بنك"
+  - "ميزانية"
+  - "ادخار"
+  - "توفير"
+phrases:
+  - "ابي استثمر"
+  - "ايش انصحك"
+  - "كيف ابني محفظة"
+notes: |
+  Sensitive domain. SF.AI must NEVER give financial advice; refer users
+  to a licensed financial advisor.

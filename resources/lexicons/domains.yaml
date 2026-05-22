@@ -1,0 +1,46 @@
+# SF.AI — Domain hints overlay (Phase 3 seed)
+#
+# Lightweight domain-level signals used by IntentDetector. The structural
+# truth (status, requires_safety, allowed_tools) stays in
+# `sf_ai/core/index/default_registry.yaml` — this file is an additive overlay.
+
+meta:
+  version: "0.1"
+
+domains:
+
+  chat:
+    extra_keywords: ["كلام", "حديث", "محادثة", "نتكلم", "نسولف"]
+
+  web:
+    extra_keywords: ["جوجل", "محرك بحث", "صفحة ويب", "موقع"]
+
+  research:
+    extra_keywords: ["مقال", "ورقة", "بحث علمي", "موضوع"]
+
+  coding:
+    extra_keywords: ["برمجة", "مبرمج", "developer", "framework", "library"]
+
+  data:
+    extra_keywords: ["داتا", "data", "dataset", "تكرار", "احصاء", "إحصاء"]
+
+  files:
+    extra_keywords: ["مرفق", "attachment", "file", "csv", "xlsx"]
+
+  legal:
+    extra_keywords: ["مادة", "بند", "حقوق", "واجبات"]
+
+  medical:
+    extra_keywords: ["طب", "صحة", "وجع", "وجعني", "صداع"]
+
+  finance:
+    extra_keywords: ["تمويل", "ميزانية", "اقتصاد"]
+
+  education:
+    extra_keywords: ["جامعة", "مدرسة", "كورس", "course"]
+
+  writing:
+    extra_keywords: ["مقال", "خطاب", "ايميل", "بريد"]
+
+  translation:
+    extra_keywords: ["english", "arabic", "عربي", "انجليزي"]

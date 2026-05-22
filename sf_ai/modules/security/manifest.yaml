@@ -1,0 +1,14 @@
+# SF.AI — Security skeleton manifest (Phase 10)
+domain: security
+status: skeleton_only
+phase: "Phase 10"
+version: "0.1"
+description: "Future cybersecurity domain, safety-gated and defensive-only."
+handles_intents:
+  - security.general
+allowed_tools: []
+requires_safety: true
+limitations:
+  - "Skeleton only: no exploit, intrusion, malware, evasion, or offensive guidance."
+  - "Future activation must stay defensive and policy-bounded."
+notes: "Sensitive domain. Keep Composer safety response until explicit activation."

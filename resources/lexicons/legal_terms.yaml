@@ -1,0 +1,30 @@
+meta:
+  version: "0.1"
+  domain: legal
+  status: skeleton_only
+  requires_safety: true
+keywords:
+  - "قانون"
+  - "قانوني"
+  - "محامي"
+  - "محاماة"
+  - "عقد"
+  - "ايجار"
+  - "إيجار"
+  - "وكالة"
+  - "وكيل"
+  - "ميراث"
+  - "محكمة"
+  - "قضية"
+  - "نزاع"
+  - "بند"
+  - "مادة"
+  - "حقوق"
+  - "واجبات"
+phrases:
+  - "ابي افهم عقد الايجار"
+  - "ما هي حقوقي"
+  - "هل هذا قانوني"
+notes: |
+  Sensitive domain. SF.AI must NEVER offer legal advice; only summarize
+  public information and direct users to a licensed lawyer.
