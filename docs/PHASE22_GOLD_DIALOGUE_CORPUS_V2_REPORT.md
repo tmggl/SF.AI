@@ -72,10 +72,10 @@ Phase 22 لا يبدأ تدريب tokenizer أو نموذج.
 القيم الحالية المتوقعة:
 
 ```text
-training_records: 305
+training_records: 330
 target_records: 500
-remaining_records: 195
-dialect_counts: {"msa": 200, "saudi": 105}
+remaining_records: 170
+dialect_counts: {"msa": 200, "saudi": 130}
 missing_required_dialects: []
 status: NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2
 can_start_phase23: false
@@ -86,18 +86,18 @@ completion_gate: PHASE22_INCOMPLETE_DO_NOT_ADVANCE
 وخطة الجمع الحالية:
 
 ```text
-remaining_records: 195
+remaining_records: 170
 batch_size: 25
-estimated_batches: 8
-quota_by_dialect: {"saudi": 95}
+estimated_batches: 7
+quota_by_dialect: {"saudi": 70}
 flexible_records_after_minimums: 100
-planned_batches: 8
-next_batch: saudi_004, dialect=saudi, target_records=25
+planned_batches: 7
+next_batch: saudi_005, dialect=saudi, target_records=25
 ```
 
 `phase22-next-batch` يعرض المهمة الفورية للتأليف/المراجعة:
 
-- batch الحالي: `saudi_004`.
+- batch الحالي: `saudi_005`.
 - الهدف: 25 سجلًا سعوديًا.
 - يعرض checklist قبول قبل التحويل.
 - يعرض موضوعات عامة تساعد التأليف/المراجعة؛ هذه الموضوعات ليست corpus ولا synthetic dialogue.
@@ -118,15 +118,15 @@ next_batch: saudi_004, dialect=saudi, target_records=25
 - يرجع حاليًا `PHASE22_INCOMPLETE_DO_NOT_ADVANCE`.
 - يجمع readiness + collection plan + next batch في قرار واحد.
 - لا يسمح بالانتقال إلى Phase 23 إلا بعد `PHASE22_COMPLETE_READY_FOR_PHASE23`.
-- يذكر النواقص الحالية مثل `corpus_below_phase22_target`, `dialect_balance_below_minimum`, و`complete_next_batch:saudi_004`.
+- يذكر النواقص الحالية مثل `corpus_below_phase22_target`, `dialect_balance_below_minimum`, و`complete_next_batch:saudi_005`.
 
 تفصيل batches الرسمي:
 
 - `msa_001` إلى `msa_008` اكتملت: 178 سجل فصيح owner-delegated agent-authored.
 - `protected_terms_msa_seed_v1` اكتمل: 22 سجلًا فصيحًا `gold` لتغطية مصطلحات التوكننة/الحوكمة.
 - `msa_008` اكتملت: 3 سجلات فصيحة، وأصبح الحد الأدنى للفصحى مكتملًا.
-- `saudi_001` إلى `saudi_003` اكتملت: 75 سجلًا سعوديًا owner-delegated agent-authored.
-- `saudi_004` إلى `saudi_006`: تغطية سعودية، 25 سجلًا لكل batch.
+- `saudi_001` إلى `saudi_004` اكتملت: 100 سجل سعودي owner-delegated agent-authored.
+- `saudi_005` و`saudi_006`: تغطية سعودية، 25 سجلًا لكل batch.
 - `saudi_007`: تغطية سعودية، 20 سجلًا.
 - `flex_001` إلى `flex_004`: 100 سجل مرن بعد اكتمال الحد الأدنى.
 
@@ -161,7 +161,7 @@ status: REVIEW_EXPORTS_READY_FOR_MANUAL_REVIEW
 
 وأضيفت لوحة مهمة الجمع الحالية داخل الشاشة نفسها:
 
-- تعرض `saudi_004` وهدف 25 سجلًا.
+- تعرض `saudi_005` وهدف 25 سجلًا.
 - تعرض موضوعات تأليف عامة لا تُعد بيانات تدريب.
 - تعرض زر `موضوعات أخرى` للتنقل في بنك الموضوعات الفصيح بدل حصر سامي في أول ثلاثة موضوعات.
 - تربط export بالـ batch عبر `review_metadata.phase22_next_batch`.
@@ -251,13 +251,13 @@ make prepare-dialogue-batch ARGS="--input data/corpus/chat/review/<file>.jsonl -
 أو للدفعة السعودية التالية:
 
 ```bash
-make prepare-dialogue-batch ARGS="--input data/corpus/chat/review/<file>.jsonl --out data/corpus/chat/jsonl/dialogue_batch_v2_saudi_004.jsonl --quality silver --dialect saudi --training-allowed"
+make prepare-dialogue-batch ARGS="--input data/corpus/chat/review/<file>.jsonl --out data/corpus/chat/jsonl/dialogue_batch_v2_saudi_005.jsonl --quality silver --dialect saudi --training-allowed"
 ```
 
 وللمسار المباشر:
 
 ```bash
-.venv/bin/python scripts/validate_dataset.py data/corpus/chat/jsonl/dialogue_batch_v2_saudi_004.jsonl
+.venv/bin/python scripts/validate_dataset.py data/corpus/chat/jsonl/dialogue_batch_v2_saudi_005.jsonl
 make corpus-audit
 make phase22-readiness
 ```
