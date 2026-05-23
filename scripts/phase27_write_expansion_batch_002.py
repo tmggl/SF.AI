@@ -584,4 +584,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(
+        "legacy Phase 27 generator disabled: operational/internal dialogue is "
+        "training_forbidden. Use natural-only batch generation instead."
+    )

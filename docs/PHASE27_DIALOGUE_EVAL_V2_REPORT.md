@@ -36,29 +36,33 @@ can_start_phase28    : false
 ## خطة توسيع corpus
 
 ```text
-current_records   : 1550
+current_records   : 643
 target_records    : 5000
-remaining_records : 3450
-needed_msa        : 1725
-needed_saudi      : 1725
+remaining_records : 4357
+needed_msa        : 2201
+needed_saudi      : 2156
 batch_size        : 500
-batches_total     : 7
+batches_total     : 9
 gold_target       : 1000
-needed_gold       : 948
-needed_silver     : 2502
+needed_gold       : 969
+needed_silver     : 3388
 ```
 
 فئات البيانات المطلوبة:
 
 - social_smalltalk
-- question_answer
-- msa_explanation
+- everyday_question_answer
+- msa_daily_explanation
 - saudi_daily_dialogue
 - context_followup
 - clarification_repair
-- safety_refusal
-- project_training_meta
-- tool_boundary_and_limits
+- everyday_decisions
+- polite_disagreement_and_apology
+- feelings_and_reassurance
+
+ممنوع في توسعة corpus: أي حوار عن إدارة المشروع، مراحل البناء، تشغيل
+الوكيل، التدريب، tokenizer، أو أي نقاش هندسي داخلي. هذه الأنماط أصبحت
+`training_forbidden_operational_internal_dialogue`.
 
 ## ما أُضيف
 
@@ -74,7 +78,7 @@ needed_silver     : 2502
 
 لا نبدأ `SF-50M` الآن، ولا نبدأ Phase 28. المسار الصحيح:
 
-1. توسيع corpus إلى `5000` سجل داخل `msa + saudi`؛ الحالة الحالية بعد Batch 003 هي `1550`.
+1. توسيع corpus إلى `5000` سجل داخل `msa + saudi`؛ الحالة الحالية بعد تنظيف الحوارات التشغيلية هي `643`.
 2. إعادة `corpus-audit`.
 3. إعادة تدريب `SF-10M` بعد التوسيع.
 4. إعادة canary.

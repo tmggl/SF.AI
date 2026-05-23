@@ -1,6 +1,6 @@
 # dialogue_batch_v3_saudi_003.jsonl
 
-- records: 250
+- records: 162
 - dialect: saudi
 - language: ar
 - quality: silver

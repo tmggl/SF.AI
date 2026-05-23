@@ -105,3 +105,24 @@ def test_prepare_dialogue_batch_skips_safety_flagged_by_default(tmp_path: Path) 
 
     assert report.written_records == 0
     assert report.skipped_reasons["safety_flagged"] == 1
+
+
+def test_prepare_dialogue_batch_skips_operational_internal_dialogue(tmp_path: Path) -> None:
+    src = tmp_path / "review.jsonl"
+    out = tmp_path / "batch.jsonl"
+    report_path = tmp_path / "report.json"
+    _review_export(src, user="التالي شغل pytest ثم ارفع commit")
+
+    report = prepare_dialogue_batch(
+        input_path=src,
+        output_path=out,
+        report_path=report_path,
+        source="sf-ai-user-reviewed-dialogue",
+        license_name="user-provided",
+        dialect="saudi",
+        quality="silver",
+        training_allowed=True,
+    )
+
+    assert report.written_records == 0
+    assert report.skipped_reasons["training_forbidden_operational_internal_dialogue"] == 1

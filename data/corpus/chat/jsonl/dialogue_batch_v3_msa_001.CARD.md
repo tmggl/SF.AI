@@ -20,7 +20,7 @@
 - created_by_user_id: `sami-local`
 - target_user_id: `sami-local`
 - user_scope: `single_user`
-- records: `25`
+- records: 0
 
 ## Safety
 

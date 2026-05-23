@@ -19,6 +19,74 @@ from sf_ai.datasets.validators import SampleIssue, validate_record
 TRAINING_LANGS: frozenset[str] = frozenset({"ar"})
 TRAINING_DIALECTS: frozenset[str] = frozenset({"msa", "saudi"})
 TRAINING_QUALITIES: frozenset[str] = frozenset({"gold", "silver", "bronze"})
+TRAINING_FORBIDDEN_OPERATIONAL_TERMS: tuple[str, ...] = (
+    # User/agent operational commands.
+    "التالي",
+    "اكمل",
+    "أكمل",
+    "كمل",
+    "كمّل",
+    "ارفع",
+    "إرفع",
+    "commit",
+    "pytest",
+    "git",
+    "push",
+    "pull",
+    # Internal project/lifecycle terms.
+    "phase",
+    "Phase",
+    "gates",
+    "gate",
+    "readiness",
+    "corpus",
+    "tokenizer",
+    "توكن",
+    "توكنة",
+    "بوابة",
+    "بوابات",
+    "مرحلة",
+    "دفعة",
+    "دفعات",
+    "اختبارات",
+    "الاختبارات",
+    "اختبار",
+    "سيرفر",
+    "endpoint",
+    "runtime",
+    "review export",
+    "msa_",
+    "saudi_",
+    "سجل",
+    "سجلات",
+    "الحد الأدنى",
+    "بيانات",
+    "التدريب",
+    "تدريب",
+    "الواجهة",
+    # Project/persona/agent workflow leakage.
+    "SF.AI",
+    "سامي",
+    "الوكيل",
+    "وكيل",
+    "agent",
+    "workflow",
+    "ChatModule",
+    "Orchestrator",
+    "Router",
+    "Saudi Seed",
+    # AI-engineering internals that must not teach the general chat model.
+    "النموذج",
+    "نموذج",
+    "المولد",
+    "القوالب",
+    "قالب",
+    "الأوزان",
+    "checkpoint",
+    "pretrained",
+    "LLM",
+    "RAG",
+)
 
 
 @dataclass
@@ -54,6 +122,30 @@ def _issue(line_number: int | None, message: str, snippet: str = "") -> SampleIs
         message=message,
         snippet=snippet,
     )
+
+
+def detect_training_forbidden_operational_terms(raw: Any) -> tuple[str, ...]:
+    """Return forbidden project/agent-operation terms found in a record.
+
+    The public dialogue corpus is for natural human Arabic/Saudi conversation
+    only. Internal project management, agent workflow, model-building jargon,
+    and Sami-specific operating patterns are training-forbidden.
+    """
+    try:
+        sample = parse_record(raw)
+    except Exception:
+        return ()
+
+    text_parts: list[str] = []
+    messages = (
+        sample.messages if isinstance(sample, StructuredSample) else sample.to_messages()
+    )
+    text_parts.extend(message.content for message in messages)
+    haystack = "\n".join(text_parts)
+    found = tuple(
+        term for term in TRAINING_FORBIDDEN_OPERATIONAL_TERMS if term in haystack
+    )
+    return found
 
 
 def audit_record_for_training(
@@ -147,6 +239,17 @@ def audit_record_for_training(
             _issue(
                 line_number,
                 "training dialogue must include at least one user and one assistant message",
+                snippet,
+            )
+        )
+
+    forbidden_terms = detect_training_forbidden_operational_terms(raw)
+    if forbidden_terms:
+        preview = ", ".join(forbidden_terms[:8])
+        issues.append(
+            _issue(
+                line_number,
+                f"training_forbidden operational/internal dialogue terms: {preview}",
                 snippet,
             )
         )

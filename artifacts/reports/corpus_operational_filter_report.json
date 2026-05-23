@@ -1,0 +1,157 @@
+{
+  "policy": "training_forbidden_operational_internal_dialogue",
+  "corpus_dir": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl",
+  "files_scanned": 28,
+  "records_before": 752,
+  "records_after": 643,
+  "records_removed": 109,
+  "cumulative_records_before_policy": 1550,
+  "cumulative_records_after_policy": 643,
+  "cumulative_records_removed_by_policy": 907,
+  "cumulative_note": "The numeric records_before/after/removed fields describe the latest strict pass. Cumulative fields describe the full policy effect across both cleanup passes.",
+  "terms": {
+    "تدريب": 72,
+    "بيانات": 32,
+    "نموذج": 22,
+    "التدريب": 19,
+    "سجل": 11,
+    "اختبار": 2,
+    "saudi_": 1,
+    "الواجهة": 1
+  },
+  "files": [
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v2_flex_001.jsonl",
+      "before": 2,
+      "after": 1,
+      "removed": 1
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v2_flex_002.jsonl",
+      "before": 2,
+      "after": 1,
+      "removed": 1
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v2_flex_004.jsonl",
+      "before": 0,
+      "after": 0,
+      "removed": 0
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl",
+      "before": 2,
+      "after": 1,
+      "removed": 1
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v2_msa_002.jsonl",
+      "before": 0,
+      "after": 0,
+      "removed": 0
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v2_msa_003.jsonl",
+      "before": 1,
+      "after": 0,
+      "removed": 1
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v2_msa_004.jsonl",
+      "before": 3,
+      "after": 2,
+      "removed": 1
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v2_msa_005.jsonl",
+      "before": 2,
+      "after": 0,
+      "removed": 2
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v2_msa_006.jsonl",
+      "before": 3,
+      "after": 1,
+      "removed": 2
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v2_msa_008.jsonl",
+      "before": 0,
+      "after": 0,
+      "removed": 0
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v2_saudi_001.jsonl",
+      "before": 3,
+      "after": 1,
+      "removed": 2
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v2_saudi_002.jsonl",
+      "before": 2,
+      "after": 1,
+      "removed": 1
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v2_saudi_003.jsonl",
+      "before": 3,
+      "after": 2,
+      "removed": 1
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v2_saudi_005.jsonl",
+      "before": 0,
+      "after": 0,
+      "removed": 0
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v2_saudi_006.jsonl",
+      "before": 1,
+      "after": 0,
+      "removed": 1
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v2_saudi_007.jsonl",
+      "before": 0,
+      "after": 0,
+      "removed": 0
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v3_msa_001.jsonl",
+      "before": 4,
+      "after": 0,
+      "removed": 4
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v3_msa_003.jsonl",
+      "before": 180,
+      "after": 162,
+      "removed": 18
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v3_saudi_001.jsonl",
+      "before": 5,
+      "after": 4,
+      "removed": 1
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v3_saudi_002.jsonl",
+      "before": 160,
+      "after": 140,
+      "removed": 20
+    },
+    {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v3_saudi_003.jsonl",
+      "before": 210,
+      "after": 162,
+      "removed": 48
+    },
+    {
+      "path": "data/corpus/chat/jsonl/protected_terms_msa_seed_v1.jsonl",
+      "before": 5,
+      "after": 1,
+      "removed": 4
+    }
+  ],
+  "note": "Removed records are intentionally not archived as review-only; they are forbidden for training corpus use."
+}

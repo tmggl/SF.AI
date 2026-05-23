@@ -71,6 +71,28 @@ def test_training_allowed_must_be_true_for_training_pack() -> None:
     assert any("training_allowed must be true" in i.message for i in issues)
 
 
+def test_operational_project_dialogue_is_training_forbidden() -> None:
+    raw = _ready_record(dialect="msa", quality="silver")
+    raw["messages"] = [
+        {"role": "user", "content": "التالي: شغل pytest ثم ارفع commit"},
+        {"role": "assistant", "content": "سأراجع readiness وأحدث corpus."},
+    ]
+    issues = audit_record_for_training(raw, line_number=1)
+    assert any("training_forbidden operational/internal" in i.message for i in issues)
+
+
+def test_natural_daily_dialogue_is_not_operationally_blocked() -> None:
+    raw = _ready_record(dialect="saudi", quality="silver")
+    raw["messages"] = [
+        {"role": "user", "content": "هلا، وش رايك نطلع بدري؟"},
+        {"role": "assistant", "content": "فكرة طيبة، إذا خلصنا شغلنا نطلع قبل الزحمة."},
+        {"role": "user", "content": "تمام، خلها بعد العصر."},
+        {"role": "assistant", "content": "تم، بعد العصر مناسب."},
+    ]
+    issues = audit_record_for_training(raw, line_number=1)
+    assert issues == []
+
+
 def test_user_ownership_fields_are_required_for_training_pack() -> None:
     raw = _ready_record()
     raw["provenance"].pop("target_user_id")

@@ -5,7 +5,7 @@
 **Journey:** Phase 27 / 30
 **Language track:** `msa + saudi` only
 **Lexicon track:** `Saudi Seed v1`
-**Status:** `COMPLETED_LARGE_BATCH_003_READY_FOR_NEXT_EXPANSION`
+**Status:** `SUPERSEDED_BY_OPERATIONAL_FILTER`
 
 ## الهدف
 
@@ -37,7 +37,7 @@
 - مفردات سعودية عامة مثل: `وش`, `ليه`, `بس`, `عادي`, `الزبدة`,
   `هلا`, `خلنا`, `أبي`, `جاوب عربي`.
 
-## الأرقام بعد الدفعة
+## الأرقام بعد الدفعة قبل التنظيف
 
 ```text
 training_ready      : 1550
@@ -51,6 +51,23 @@ needed_msa          : 1725
 needed_saudi        : 1725
 ```
 
+## الحالة الحالية بعد سياسة منع الحوارات التشغيلية
+
+بعد هذه الدفعة صدر قرار حاكم يمنع أي حوار تشغيلي/هندسي/خاص بإدارة
+المشروع من الدخول في corpus التدريب. لذلك حُذف هذا النمط نهائيًا من
+الدُفعات السابقة بدل اعتباره review-only.
+
+```text
+training_ready_after_cleaning : 643
+msa_after_cleaning            : 299
+saudi_after_cleaning          : 344
+removed_operational_records   : 907
+remaining_to_5000             : 4357
+batches_remaining_at_500      : 9
+```
+
+التقرير الحاكم: [CORPUS_OPERATIONAL_FILTER_REPORT.md](./CORPUS_OPERATIONAL_FILTER_REPORT.md).
+
 ## التحقق
 
 ```text
@@ -62,8 +79,9 @@ phase26-readiness            : still NOT_READY, corpus below 5000
 phase27-dialogue-eval        : 19/19, remaining=3450, batches=7
 ```
 
-## القرار
+## القرار المحدّث
 
-Batch 003 ناجحة. حجم `500` سجل لكل دفعة أصبح مقبولًا كمسار Phase 27
-الحالي. لا نبدأ `SF-50M` بعد؛ الخطوة التالية هي Batch 004 بحجم `500`
-أو الاستمرار حتى الاقتراب من `5000` ثم إعادة readiness.
+Batch 003 كانت ناجحة تقنيًا قبل السياسة الجديدة، لكنها لم تعد مرجعًا
+أسلوبيًا للدُفعات القادمة. لا نبدأ `SF-50M` بعد؛ الخطوة التالية هي
+Batch 004 بحوار بشري طبيعي فقط: سوالف يومية، فصحى طبيعية، وسعودي طبيعي
+بلا أوامر تشغيلية ولا مصطلحات هندسية.

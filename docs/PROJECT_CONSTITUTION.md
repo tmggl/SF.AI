@@ -97,6 +97,25 @@ runtime يخدم المستخدم. training ينتج artifacts.
 
 لا corpus مجهول، ولا بيانات بلا حق استخدام.
 
+### 8.1 Natural Dialogue Only
+
+corpus الحوار العام يجب أن يعلّم SF.AI كلام البشر الطبيعي، لا طريقة إدارة
+المشروع. لذلك يمنع نهائيًا إدخال:
+
+- أوامر تشغيل مثل: `التالي`, `اكمل`, `ارفع`.
+- مفردات هندسية/داخلية مثل: `phase`, `gates`, `corpus`, `tokenizer`,
+  `pytest`, `commit`, `readiness`.
+- أي حوار عن إدارة المشروع أو تشغيل الوكيل أو workflow داخلي.
+- أي persona خاصة بسامي أو أسلوب إدارته للمشروع.
+
+أي سجل من هذا النوع يصنّف:
+
+```text
+training_forbidden_operational_internal_dialogue
+```
+
+ويحذف من corpus التدريبية ولا يعامل كـ review-only.
+
 ### 9. User-Scoped Data
 
 كل حوار يصدر من مستخدم محدد ويعود لمستخدم محدد. في الوضع الحالي:

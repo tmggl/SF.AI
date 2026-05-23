@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from sf_ai.core.nlp._lexicons import load_lexicon
+from sf_ai.datasets.corpus_governance import detect_training_forbidden_operational_terms
 from sf_ai.datasets.schemas import ChatMessage, StructuredSample, parse_record
 
 
@@ -101,6 +102,9 @@ def prepare_dialogue_batch(
         joined = "\n".join(m.content for m in messages)
         if not include_sensitive and _has_safety_terms(joined):
             report.add_skip("safety_flagged")
+            continue
+        if detect_training_forbidden_operational_terms(raw):
+            report.add_skip("training_forbidden_operational_internal_dialogue")
             continue
         input_provenance = getattr(sample, "provenance", None)
         created_by_user_id = (

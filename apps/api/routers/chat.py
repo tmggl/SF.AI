@@ -17,6 +17,7 @@ from apps.api.schemas.chat import (
 )
 from sf_ai.core.config import PROJECT_DIR
 from sf_ai.core.orchestrator import UserMessage, get_default_orchestrator
+from sf_ai.datasets.corpus_governance import detect_training_forbidden_operational_terms
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 REVIEW_EXPORT_DIR = PROJECT_DIR / "data/corpus/chat/review"
@@ -134,6 +135,11 @@ def _validate_review_export_record(
         raise HTTPException(status_code=400, detail="review export user ownership fields must match")
     if user_id is not None and user_id != meta_owner:
         raise HTTPException(status_code=400, detail="request user_id must match export owner_user_id")
+    if detect_training_forbidden_operational_terms(record):
+        raise HTTPException(
+            status_code=400,
+            detail="review export is training_forbidden_operational_internal_dialogue",
+        )
 
 
 def _safe_slug(value: str) -> str:

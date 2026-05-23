@@ -53,6 +53,11 @@
 - تحقق من `source/license/quality/training_allowed`.
 - تحقق من `owner_user_id/created_by_user_id/target_user_id/user_scope`.
 - لا تخلط review أو corpus بين مستخدمين مختلفين.
+- لا تدخل أي حوار تشغيلي/هندسي/خاص بإدارة المشروع في corpus.
+- إذا ظهر نمط مثل `التالي`, `اكمل`, `phase`, `corpus`, `tokenizer`,
+  `pytest`, `commit`, `readiness` فصنّفه `training_forbidden` واحذفه.
+- review exports التي تحتوي هذا النمط ليست مرشحة تدريب ولا review-only؛
+  ارفضها أو احذفها.
 - شغّل `make corpus-audit`.
 - لا تبدأ training.
 - لا ترفع corpus خاص إلا إذا كان مقصودًا ومصرحًا.

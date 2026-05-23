@@ -19,6 +19,7 @@ from sf_ai.datasets.corpus_governance import (
     audit_jsonl_directory_for_training,
     audit_jsonl_file_for_training,
     audit_record_for_training,
+    detect_training_forbidden_operational_terms,
 )
 from sf_ai.datasets.saudi_seed import (
     SaudiSeedEntry,
@@ -75,6 +76,7 @@ __all__ = [
     "audit_jsonl_directory_for_training",
     "audit_jsonl_file_for_training",
     "audit_record_for_training",
+    "detect_training_forbidden_operational_terms",
     "saudi_seed_attribution",
     "saudi_seed_stats",
     "build_source_inventory",

@@ -385,4 +385,7 @@ def _card(title: str, description: str, filename: str, source: str, dialect: str
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(
+        "legacy Phase 27 generator disabled: operational/internal dialogue is "
+        "training_forbidden. Use natural-only batch generation instead."
+    )

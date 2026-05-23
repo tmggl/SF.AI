@@ -169,6 +169,43 @@ def test_save_review_export_rejects_training_allowed_true(
     assert not list(tmp_path.glob("*.jsonl"))
 
 
+def test_save_review_export_rejects_operational_internal_dialogue(
+    tmp_path: Path, monkeypatch
+) -> None:
+    monkeypatch.setattr(chat_router, "REVIEW_EXPORT_DIR", tmp_path)
+    record = {
+        "domain": "chat",
+        "messages": [
+            {"role": "user", "content": "التالي شغل pytest ثم ارفع commit"},
+            {"role": "assistant", "content": "سأفحص readiness وأحدث corpus."},
+        ],
+        "review_metadata": {
+            "exported_from": "ui",
+            "owner_user_id": "sami-local",
+            "exported_by_user_id": "sami-local",
+            "target_user_id": "sami-local",
+            "user_scope": "single_user",
+        },
+        "provenance": {
+            "quality": "needs_review",
+            "training_allowed": False,
+            "owner_user_id": "sami-local",
+            "created_by_user_id": "sami-local",
+            "target_user_id": "sami-local",
+            "user_scope": "single_user",
+        },
+    }
+
+    r = client.post(
+        "/chat/review-export",
+        json={"session_id": "sf-test", "record": record},
+    )
+
+    assert r.status_code == 400
+    assert "training_forbidden_operational_internal_dialogue" in r.json()["detail"]
+    assert not list(tmp_path.glob("*.jsonl"))
+
+
 def test_save_review_export_rejects_missing_user_ownership(
     tmp_path: Path, monkeypatch
 ) -> None:

@@ -1,6 +1,6 @@
 # dialogue_batch_v3_msa_003.jsonl
 
-- records: 250
+- records: 162
 - dialect: msa
 - language: ar
 - quality: silver
