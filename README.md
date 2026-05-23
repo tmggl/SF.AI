@@ -33,6 +33,7 @@
 - [docs/GENERATIVE_ROADMAP.md](./docs/GENERATIVE_ROADMAP.md) — خارطة الوصول إلى حوار مولّد مقنع بعد Phase 20.
 - [docs/SCALING_STRATEGY.md](./docs/SCALING_STRATEGY.md) — استراتيجية التكبير التدريجي من SF-10M إلى SF-1B+.
 - [docs/SOVEREIGN_TRAINING_QUALITY_TOOLING.md](./docs/SOVEREIGN_TRAINING_QUALITY_TOOLING.md) — قرار أدوات جودة التدريب المحلية.
+- [docs/SF_AI_ENGINEER_STATUS_REPORT.md](./docs/SF_AI_ENGINEER_STATUS_REPORT.md) — تقرير شامل يمكن تقديمه لمهندس خارجي لفهم الهدف والحالة والخطة.
 
 ---
 
