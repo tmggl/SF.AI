@@ -87,6 +87,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.15 | Social/Lexical Curriculum + No-Repeat Decoding | مكتملة؛ eval تحسن وcanary صارم يحجب |
 | Phase 27.16 | Prompt-to-Answer Objective Repair | مكتملة؛ sample isolation أضيف وruntime محظور |
 | Phase 27.17 | Prompt-to-Answer Micro-Probe | مكتملة؛ 27/32 breakthrough وruntime محظور |
+| Phase 27.18 | Tokenization/Decoding Hygiene Repair | مكتملة؛ blockers محددة وruntime محظور |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2041,6 +2042,62 @@ guard_passed = 29/32
 
 ### بعد المرحلة
 نفّذ Phase 27.18 لإصلاح الكسور اللفظية قبل أي تدريب واسع.
+
+---
+
+## Phase 27.18 — Tokenization/Decoding Hygiene Repair
+
+### الهدف
+تحويل فشل Phase 27.17 من ملاحظات يدوية إلى بوابة قياس واضحة: ما الكلمات
+التي تتجزأ بقوة؟ وهل الحارس يمنع الكسور المرصودة؟
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.18 بقرار:
+
+```text
+COMPLETED_HYGIENE_AUDIT_WITH_BLOCKERS
+```
+
+ما تحقق:
+
+- أضيف ملف مصطلحات hygiene:
+  - `resources/tokenization/hygiene_terms_phase27_18.txt`
+- أضيف audit:
+  - `scripts/phase27_18_hygiene_audit.py`
+  - `make phase27-hygiene-audit`
+- أضيفت كسور Phase 27.17 إلى `GenerationGuard`.
+
+نتيجة audit:
+
+```text
+terms_total             = 26
+average_pieces          = 3.5385
+aggressive_split_terms  = 5
+roundtrip_failures      = 0
+uncovered_bad_fragments = 0
+```
+
+المصطلحات الخمسة التي تتجزأ بقوة:
+
+```text
+وعليكم السلام
+نفسًا هادئًا
+نشتغل سوا
+القراءة تفيد
+تقدّر الناس
+```
+
+### القرار
+
+- لا runtime.
+- لا `SF-50M`.
+- التالي Phase 27.19: hygiene repair corpus/probe موجه لهذه المصطلحات.
+
+### artifacts
+
+- [PHASE27_18_TOKENIZATION_DECODING_HYGIENE_REPORT.md](./PHASE27_18_TOKENIZATION_DECODING_HYGIENE_REPORT.md)
+- `artifacts/reports/phase27_18_tokenization_hygiene_report.json`
 
 ---
 

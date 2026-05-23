@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.17 — Prompt-to-Answer Micro-Probe",
-        current_phase_status="completed_micro_probe_breakthrough_runtime_blocked",
+        current_phase="Phase 27.18 — Tokenization/Decoding Hygiene Repair",
+        current_phase_status="completed_hygiene_audit_with_blockers",
         next_phase=(
-            "Phase 27.18 SF-10M tokenization/decoding hygiene repair before any SF-50M scaling"
+            "Phase 27.19 SF-10M hygiene repair corpus/probe before any SF-50M scaling"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -199,6 +199,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_17_prompt_answer_micro_probe",
                 status="completed_breakthrough_runtime_blocked",
                 phase="Phase 27.17",
+            ),
+            ComponentStatus(
+                name="phase27_18_tokenization_decoding_hygiene",
+                status="completed_hygiene_audit_runtime_blocked",
+                phase="Phase 27.18",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

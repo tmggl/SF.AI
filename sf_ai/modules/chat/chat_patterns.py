@@ -84,10 +84,10 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.17: شغّلنا micro-probe من 32 زوج سؤال/جواب فصحى وسعودي، "
-    "ووصل SF-10M إلى 27/32 ردًا صحيحًا. هذا تقدم حقيقي، لكنه لا يكفي للواجهة "
-    "لأن الفشل المتبقي كسور لفظية مثل حروف ملتصقة. التالي Phase 27.18 لإصلاح "
-    "tokenization/decoding hygiene قبل أي تكبير.",
+    "اكتملت Phase 27.18: فحصنا tokenization/decoding hygiene بعد نجاح 27/32 "
+    "في micro-probe على SF-10M. وجدنا 5 عبارات تتجزأ بقوة مثل «وعليكم السلام» و«نشتغل سوا»، "
+    "وحجبنا الكسور المرصودة في GenerationGuard. التالي Phase 27.19 لبناء repair "
+    "probe مركز قبل أي تكبير.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

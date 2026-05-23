@@ -1,0 +1,30 @@
+# SF.AI Phase 27.18 hygiene terms
+# UTF-8, one term per line.
+# These are sovereign, project-authored diagnostic terms from Phase 27.17 failures.
+# They are not pretrained vocabulary and do not activate a tokenizer retrain by themselves.
+وعليكم السلام
+أهلًا بك
+التعاون
+القراءة
+تحتاج
+هلا بك
+وش تحتاج
+حياك
+بخير
+شكرًا
+ابدأ بخطوة
+خطوة صغيرة
+الصبر
+الصعوبة
+نفسًا هادئًا
+ثلاث مهام
+أفهم كلامك
+نشتغل سوا
+الزحمة
+اطلع بدري
+القراءة تفيد
+الجوال
+الاحترام
+تقدّر الناس
+العفو
+حاضر

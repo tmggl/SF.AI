@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.17 / 30**
-- **المرحلة الحالية:** **Phase 27.17 — Prompt-to-Answer Micro-Probe**
-- **حالة المرحلة الحالية:** **مكتملة؛ 27/32 في micro-probe لكن runtime بقي محجوبًا**
-- **المرحلة التالية المقترحة:** Phase 27.18 لإصلاح tokenization/decoding hygiene قبل أي تكبير إلى `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.18 / 30**
+- **المرحلة الحالية:** **Phase 27.18 — Tokenization/Decoding Hygiene Repair**
+- **حالة المرحلة الحالية:** **مكتملة؛ hygiene blockers محددة وruntime بقي محجوبًا**
+- **المرحلة التالية المقترحة:** Phase 27.19 hygiene repair corpus/probe قبل أي تكبير إلى `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -66,6 +66,7 @@
 | Phase 27.15 | Social/Lexical Curriculum + No-Repeat Decoding | ✅ completed_eval_improved_strict_generation_blocked | ✅ |
 | Phase 27.16 | Prompt-to-Answer Objective Repair | ✅ completed_objective_repair_runtime_blocked | ✅ |
 | Phase 27.17 | Prompt-to-Answer Micro-Probe | ✅ completed_micro_probe_breakthrough_runtime_blocked | ✅ |
+| Phase 27.18 | Tokenization/Decoding Hygiene Repair | ✅ completed_hygiene_audit_with_blockers | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -486,6 +487,18 @@
   - لا تفعيل runtime ولا تدريب `SF-50M`.
   - أضيف [PHASE27_17_PROMPT_ANSWER_MICRO_PROBE_REPORT.md](./PHASE27_17_PROMPT_ANSWER_MICRO_PROBE_REPORT.md).
   - أضيف `artifacts/reports/phase27_17_prompt_answer_micro_probe_report.json`.
+- بدأ وانتهى Phase 27.18 Tokenization/Decoding Hygiene Repair:
+  - أضيف `resources/tokenization/hygiene_terms_phase27_18.txt`.
+  - أضيف `scripts/phase27_18_hygiene_audit.py`.
+  - أضيف `make phase27-hygiene-audit`.
+  - أضيفت كسور Phase 27.17 إلى `GenerationGuard`.
+  - نتيجة audit: `terms_total=26`, `average_pieces=3.5385`, `roundtrip_failures=0`.
+  - `aggressive_split_terms=5`: `وعليكم السلام`, `نفسًا هادئًا`, `نشتغل سوا`, `القراءة تفيد`, `تقدّر الناس`.
+  - `uncovered_bad_fragments=0`: كل الكسور المرصودة أصبحت محجوبة.
+  - القرار: `COMPLETED_HYGIENE_AUDIT_WITH_BLOCKERS`.
+  - لا تفعيل runtime ولا تدريب `SF-50M`.
+  - أضيف [PHASE27_18_TOKENIZATION_DECODING_HYGIENE_REPORT.md](./PHASE27_18_TOKENIZATION_DECODING_HYGIENE_REPORT.md).
+  - أضيف `artifacts/reports/phase27_18_tokenization_hygiene_report.json`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -551,7 +564,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.17"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.18"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -582,7 +595,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-501 passed in 16.74s
+504 passed in 16.95s
 ```
 
 | ملف | عدد |

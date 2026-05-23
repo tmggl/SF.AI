@@ -81,6 +81,13 @@ _MODEL_ARTIFACT_FRAGMENTS = (
     "تخيارين",
     "خياروح",
     "يارين",
+    # Observed in Phase 27.17 prompt-answer micro-probe.
+    "وعليكأهلًا",
+    "التعاعاون",
+    "القراد. ءة",
+    "تحتاججج",
+    "ججبعيادة",
+    "هوش تحتاجججبعيادة",
 )
 _BROKEN_PREFIX_RE = re.compile(r"^\s*[\u0600-\u06FF]\s*[؟?]")
 _REPEATED_ARABIC_BIGRAM_RE = re.compile(r"([\u0600-\u06FF]{2})\1")

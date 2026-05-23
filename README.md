@@ -38,8 +38,8 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.17 / 30 — Prompt-to-Answer Micro-Probe اكتملت باختراق جزئي `27/32` مع حجب runtime.
-- **الأولوية الحالية:** Phase 27.18 لإصلاح tokenization/decoding hygiene؛ لا تدريب `SF-50M` ولا Phase 28 حتى تمر بوابات الجودة.
+- **الرحلة الحالية:** Phase 27.18 / 30 — Tokenization/Decoding Hygiene Repair اكتملت بتشخيص blockers وحجب runtime.
+- **الأولوية الحالية:** Phase 27.19 hygiene repair corpus/probe؛ لا تدريب `SF-50M` ولا Phase 28 حتى تمر بوابات الجودة.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -71,6 +71,7 @@
 - **نتيجة Phase 27.15:** أضيفت 400 عينة gold اجتماعية/لغوية، وأضيف no-repeat decoding. دُرّب `SF-10M v0.10`; أفضل eval: loss `3.0452`, perplexity `21.01`. بعد تشديد canary الدلالي بقي `0/10`، لذلك runtime و`SF-50M` محظوران. التقرير: [docs/PHASE27_15_SOCIAL_LEXICAL_CURRICULUM_REPORT.md](./docs/PHASE27_15_SOCIAL_LEXICAL_CURRICULUM_REPORT.md).
 - **نتيجة Phase 27.16:** أضيف `sample_isolated` packing لمنع اختلاط العينات داخل causal context، ودُرّب `SF-10M v0.11`. أفضل eval: loss `4.0573`, perplexity `57.82`، وcanary بقي محجوبًا (`step2000=2/10`, `step6000=0/10`). القرار: runtime و`SF-50M` محظوران. التقرير: [docs/PHASE27_16_PROMPT_TO_ANSWER_OBJECTIVE_REPORT.md](./docs/PHASE27_16_PROMPT_TO_ANSWER_OBJECTIVE_REPORT.md).
 - **نتيجة Phase 27.17:** شُغّل micro-probe من 32 زوج سؤال/جواب فصحى وسعودي. النتيجة: `passed=27/32`, `exact_clean=28/32`, `semantic=29/32`. الفشل المتبقي كسور لفظية/حروفية، لذلك runtime و`SF-50M` محظوران. التقرير: [docs/PHASE27_17_PROMPT_ANSWER_MICRO_PROBE_REPORT.md](./docs/PHASE27_17_PROMPT_ANSWER_MICRO_PROBE_REPORT.md).
+- **نتيجة Phase 27.18:** أضيف hygiene audit بعد micro-probe. النتيجة: `terms_total=26`, `average_pieces=3.5385`, `aggressive_split_terms=5`, `roundtrip_failures=0`, و`uncovered_bad_fragments=0`. القرار: runtime و`SF-50M` محظوران. التقرير: [docs/PHASE27_18_TOKENIZATION_DECODING_HYGIENE_REPORT.md](./docs/PHASE27_18_TOKENIZATION_DECODING_HYGIENE_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
@@ -126,6 +127,7 @@
 | Phase 27.15 | Social/Lexical Curriculum + No-Repeat Decoding — eval improved; strict generation blocked |
 | Phase 27.16 | Prompt-to-Answer Objective Repair — sample isolation added; runtime blocked |
 | Phase 27.17 | Prompt-to-Answer Micro-Probe — 27/32 breakthrough; runtime blocked |
+| Phase 27.18 | Tokenization/Decoding Hygiene Repair — blockers identified; runtime blocked |
 | Phase 28 | SF-120M v0.1 Candidate — planned |
 | Phase 29 | Runtime Hybrid Assistant v1 — planned |
 | Phase 30 | Continuous Improvement Loop — planned |

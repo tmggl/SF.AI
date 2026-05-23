@@ -1,0 +1,391 @@
+{
+  "phase": "Phase 27.18",
+  "status": "COMPLETED_HYGIENE_AUDIT_WITH_BLOCKERS",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "tokenizer": {
+    "path": "artifacts/tokenizers/sf_bpe/v2",
+    "sf_origin": true,
+    "vocab_size": 4493,
+    "tokenizer_type": "bpe"
+  },
+  "terms_path": "resources/tokenization/hygiene_terms_phase27_18.txt",
+  "terms_total": 26,
+  "max_good_pieces": 4,
+  "average_pieces": 3.5385,
+  "roundtrip_failures": [],
+  "aggressive_split_terms": [
+    "وعليكم السلام",
+    "نفسًا هادئًا",
+    "نشتغل سوا",
+    "القراءة تفيد",
+    "تقدّر الناس"
+  ],
+  "observed_bad_fragments": [
+    {
+      "fragment": "وعليكأهلًا",
+      "guard_allowed": false,
+      "guard_reason": "model_artifact_fragment"
+    },
+    {
+      "fragment": "التعاعاون",
+      "guard_allowed": false,
+      "guard_reason": "malformed_token"
+    },
+    {
+      "fragment": "القراد. ءة",
+      "guard_allowed": false,
+      "guard_reason": "model_artifact_fragment"
+    },
+    {
+      "fragment": "تحتاججج",
+      "guard_allowed": false,
+      "guard_reason": "model_artifact_fragment"
+    },
+    {
+      "fragment": "ججبعيادة",
+      "guard_allowed": false,
+      "guard_reason": "model_artifact_fragment"
+    },
+    {
+      "fragment": "هوش تحتاجججبعيادة",
+      "guard_allowed": false,
+      "guard_reason": "model_artifact_fragment"
+    }
+  ],
+  "uncovered_bad_fragments": [],
+  "runtime_allowed": false,
+  "sf50m_allowed": false,
+  "decision": "Do not enable runtime or scaling. Add hygiene-focused corpus/protected terms and rerun micro-probes.",
+  "terms": [
+    {
+      "term": "وعليكم السلام",
+      "piece_count": 8,
+      "token_ids": [
+        102,
+        168,
+        205,
+        117,
+        107,
+        86,
+        144,
+        117
+      ],
+      "decoded": "وعليكم السلام",
+      "roundtrip_ok": true,
+      "aggressive_split": true
+    },
+    {
+      "term": "أهلًا بك",
+      "piece_count": 2,
+      "token_ids": [
+        4284,
+        4061
+      ],
+      "decoded": "أهلًا بك",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "التعاون",
+      "piece_count": 3,
+      "token_ids": [
+        128,
+        299,
+        176
+      ],
+      "decoded": "التعاون",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "القراءة",
+      "piece_count": 4,
+      "token_ids": [
+        231,
+        182,
+        68,
+        111
+      ],
+      "decoded": "القراءة",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "تحتاج",
+      "piece_count": 1,
+      "token_ids": [
+        1507
+      ],
+      "decoded": "تحتاج",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "هلا بك",
+      "piece_count": 3,
+      "token_ids": [
+        101,
+        130,
+        4061
+      ],
+      "decoded": "هلا بك",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "وش تحتاج",
+      "piece_count": 2,
+      "token_ids": [
+        160,
+        1507
+      ],
+      "decoded": "وش تحتاج",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "حياك",
+      "piece_count": 4,
+      "token_ids": [
+        80,
+        104,
+        74,
+        354
+      ],
+      "decoded": "حياك",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "بخير",
+      "piece_count": 3,
+      "token_ids": [
+        75,
+        81,
+        1113
+      ],
+      "decoded": "بخير",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "شكرًا",
+      "piece_count": 3,
+      "token_ids": [
+        87,
+        97,
+        641
+      ],
+      "decoded": "شكرًا",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "ابدأ بخطوة",
+      "piece_count": 3,
+      "token_ids": [
+        1883,
+        75,
+        573
+      ],
+      "decoded": "ابدأ بخطوة",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "خطوة صغيرة",
+      "piece_count": 2,
+      "token_ids": [
+        573,
+        2784
+      ],
+      "decoded": "خطوة صغيرة",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "الصبر",
+      "piece_count": 2,
+      "token_ids": [
+        1874,
+        393
+      ],
+      "decoded": "الصبر",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "الصعوبة",
+      "piece_count": 3,
+      "token_ids": [
+        1874,
+        92,
+        3335
+      ],
+      "decoded": "الصعوبة",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "نفسًا هادئًا",
+      "piece_count": 6,
+      "token_ids": [
+        900,
+        137,
+        101,
+        264,
+        73,
+        137
+      ],
+      "decoded": "نفسًا هادئًا",
+      "roundtrip_ok": true,
+      "aggressive_split": true
+    },
+    {
+      "term": "ثلاث مهام",
+      "piece_count": 3,
+      "token_ids": [
+        1148,
+        428,
+        252
+      ],
+      "decoded": "ثلاث مهام",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "أفهم كلامك",
+      "piece_count": 2,
+      "token_ids": [
+        998,
+        3695
+      ],
+      "decoded": "أفهم كلامك",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "نشتغل سوا",
+      "piece_count": 8,
+      "token_ids": [
+        100,
+        87,
+        77,
+        93,
+        110,
+        86,
+        102,
+        108
+      ],
+      "decoded": "نشتغل سوا",
+      "roundtrip_ok": true,
+      "aggressive_split": true
+    },
+    {
+      "term": "الزحمة",
+      "piece_count": 4,
+      "token_ids": [
+        107,
+        85,
+        80,
+        381
+      ],
+      "decoded": "الزحمة",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "اطلع بدري",
+      "piece_count": 4,
+      "token_ids": [
+        74,
+        1788,
+        198,
+        1040
+      ],
+      "decoded": "اطلع بدري",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "القراءة تفيد",
+      "piece_count": 5,
+      "token_ids": [
+        231,
+        182,
+        68,
+        111,
+        4004
+      ],
+      "decoded": "القراءة تفيد",
+      "roundtrip_ok": true,
+      "aggressive_split": true
+    },
+    {
+      "term": "الجوال",
+      "piece_count": 3,
+      "token_ids": [
+        1101,
+        175,
+        18
+      ],
+      "decoded": "الجوال",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "الاحترام",
+      "piece_count": 2,
+      "token_ids": [
+        4249,
+        3898
+      ],
+      "decoded": "الاحترام",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "تقدّر الناس",
+      "piece_count": 5,
+      "token_ids": [
+        1283,
+        1431,
+        146,
+        74,
+        199
+      ],
+      "decoded": "تقدّر الناس",
+      "roundtrip_ok": true,
+      "aggressive_split": true
+    },
+    {
+      "term": "العفو",
+      "piece_count": 3,
+      "token_ids": [
+        551,
+        95,
+        127
+      ],
+      "decoded": "العفو",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    },
+    {
+      "term": "حاضر",
+      "piece_count": 4,
+      "token_ids": [
+        80,
+        74,
+        89,
+        118
+      ],
+      "decoded": "حاضر",
+      "roundtrip_ok": true,
+      "aggressive_split": false
+    }
+  ]
+}
