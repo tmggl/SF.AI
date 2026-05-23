@@ -40,7 +40,7 @@
 - **الرحلة الحالية:** Phase 22 / 30 — بوابة Gold Dialogue Corpus v2 تعمل، والبيانات غير جاهزة بعد.
 - **الأولوية الحالية:** تكبير corpus المحكوم مباشرة عبر دفعات يؤلفها/يراجعها الوكيل بتفويض سامي، قبل تدريب SF-50M.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
-- **البيانات الحالية:** corpus موثق `400/500` يمر `corpus-audit`: `200` سعودي + `200` فصحى؛ التوازن الأساسي اكتمل، وما زال العدد الكلي يحتاج 100 سجل قبل تدريب جودة مفيد.
+- **البيانات الحالية:** corpus موثق `425/500` يمر `corpus-audit`: `213` سعودي + `212` فصحى؛ التوازن الأساسي اكتمل، وما زال العدد الكلي يحتاج 75 سجل قبل تدريب جودة مفيد.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 اكتملت من بيانات SF.AI فقط، مع قيود موثقة.
 - **المولّد:** لا يوجد حاليًا مولّد حواري مقنع للاختبار. Phase 15 أضاف NativeGenerator adapter فقط، و`SF-10M v0.1` خام/مكرر. الواجهة المستقرة تعرض `generator=template` أي قوالب ثابتة وليست توليدًا ذكيًا.
 - **التقييم:** Phase 16 مرّر `15/15` prompt cases؛ الجودة اليومية لم تنضج بعد، لكن المختبر المحلي مفتوح للتجربة والتطوير.
@@ -49,7 +49,7 @@
 - **جاهزية SF-50M:** Phase 19 أضاف `make phase19-readiness`; القرار الحالي `NOT_READY_EXPAND_CORPUS_FIRST`.
 - **بوابات المجالات:** Phase 20 أضاف `make phase20-gates` و`GET /system/phase20-gates`; المجال النشط الوحيد هو `chat`.
 - **طريق التوليد المقنع:** لا تطلب من سامي اختبار مولّد الآن. Phase 24 هو أول تدريب جودة مفيد، Phase 26 أول فرصة لحوار قصير مقنع، وPhase 28 هدف الحوار المولّد المستقر.
-- **Corpus v2:** Phase 22 أضاف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-completion-gate` و`make phase22-review-intake`; الوضع الحالي 400/500، وفيه ثمان دفعات فصيحة `dialogue_batch_v2_msa_001.jsonl` إلى `dialogue_batch_v2_msa_008.jsonl` وسبع دفعات سعودية `dialogue_batch_v2_saudi_001.jsonl` إلى `dialogue_batch_v2_saudi_007.jsonl` إضافة إلى seed فصيح للمصطلحات `protected_terms_msa_seed_v1.jsonl`. التوازن الأساسي اكتمل (`msa=200`, `saudi=200`) والمتبقي 100 سجل مرن. الواجهة تعرض بوابة Phase 22 الحية وجودة التصدير كمختبر اختياري فقط، أما بناء corpus الحالي فيتم مباشرة عبر الوكيل. `phase22-plan` يعطي batches مفصلة تبدأ الآن بـ `flex_001`، و`phase22-completion-gate` يمنع Phase 23 حتى اكتمال الشروط.
+- **Corpus v2:** Phase 22 أضاف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-completion-gate` و`make phase22-review-intake`; الوضع الحالي 425/500، وفيه ثمان دفعات فصيحة `dialogue_batch_v2_msa_001.jsonl` إلى `dialogue_batch_v2_msa_008.jsonl` وسبع دفعات سعودية `dialogue_batch_v2_saudi_001.jsonl` إلى `dialogue_batch_v2_saudi_007.jsonl` ودفعة مرنة `dialogue_batch_v2_flex_001.jsonl` إضافة إلى seed فصيح للمصطلحات `protected_terms_msa_seed_v1.jsonl`. التوازن الأساسي اكتمل (`msa=212`, `saudi=213`) والمتبقي 75 سجل مرن. الواجهة تعرض بوابة Phase 22 الحية وجودة التصدير كمختبر اختياري فقط، أما بناء corpus الحالي فيتم مباشرة عبر الوكيل. `phase22-plan` يعطي batches مفصلة تبدأ الآن بـ `flex_002`، و`phase22-completion-gate` يمنع Phase 23 حتى اكتمال الشروط.
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
