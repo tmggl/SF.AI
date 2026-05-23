@@ -200,7 +200,7 @@ def test_system_status_reports_current_phase_with_chat_ui() -> None:
     r = client.get("/system/status")
     assert r.status_code == 200
     body = r.json()
-    assert "Phase 26" in body["current_phase"]
+    assert "Phase 27" in body["current_phase"]
     assert any(c["name"] == "chat_ui" and c["status"] == "active"
                for c in body["components"])
     assert any(c["name"] == "native_generator" and c["status"] == "ready_offline"

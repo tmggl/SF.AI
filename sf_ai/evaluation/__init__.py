@@ -12,6 +12,16 @@ from sf_ai.evaluation.phase16 import (
     run_phase16_eval,
     write_phase16_report,
 )
+from sf_ai.evaluation.phase27 import (
+    DialogueScenario,
+    DialogueTurn,
+    DialogueTurnResult,
+    Phase27DialogueEvalReport,
+    build_corpus_expansion_plan,
+    load_dialogue_scenarios,
+    run_phase27_dialogue_eval,
+    write_phase27_dialogue_eval_report,
+)
 
 __all__ = [
     "EvalCase",
@@ -20,4 +30,12 @@ __all__ = [
     "load_eval_cases",
     "run_phase16_eval",
     "write_phase16_report",
+    "DialogueScenario",
+    "DialogueTurn",
+    "DialogueTurnResult",
+    "Phase27DialogueEvalReport",
+    "build_corpus_expansion_plan",
+    "load_dialogue_scenarios",
+    "run_phase27_dialogue_eval",
+    "write_phase27_dialogue_eval_report",
 ]

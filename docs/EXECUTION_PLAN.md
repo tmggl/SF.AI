@@ -73,7 +73,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 24 | SF-10M v0.2 Quality Training | مكتملة بحدود؛ runtime محظور |
 | Phase 25 | Generated Chat Canary v1 | مكتملة كحماية؛ real model blocked |
 | Phase 26 | SF-50M v0.1 Readiness | مكتملة؛ التدريب غير جاهز حسب scaling gates |
-| Phase 27 | Dialogue Evaluation v2 + corpus expansion plan | مخططة |
+| Phase 27 | Dialogue Evaluation v2 + corpus expansion plan | مكتملة؛ baseline pass والتوسعة مطلوبة |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -1301,8 +1301,47 @@ can_start_sf50m_training=false
 - رفض حساس.
 - كشف تكرار.
 
+### نتيجة التنفيذ
+
+اكتملت Phase 27 بقرار:
+
+```text
+COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_EXPANSION_REQUIRED
+```
+
+النتائج:
+
+- suite متعدد الأدوار: `7` سيناريوهات، `19` turn.
+- التوجيه الحالي نجح: `19/19`.
+- كل الردود الحالية `template`، لذلك لا نعرضها كحوار مولّد ذكي.
+- `open_generator_ready=false`.
+- `can_reopen_sf50m_gate=false`.
+- `can_start_phase28=false`.
+
+خطة corpus:
+
+```text
+current_records      = 500
+target_records       = 5000
+remaining_records    = 4500
+batches_needed_total = 180
+needed_by_dialect    = msa=2250, saudi=2250
+```
+
+### artifacts
+
+- `eval/prompts/dialogue_v2.json`
+- `sf_ai/evaluation/phase27.py`
+- `scripts/phase27_dialogue_eval.py`
+- `make phase27-dialogue-eval`
+- `GET /system/phase27-dialogue-eval`
+- [PHASE27_DIALOGUE_EVAL_V2_REPORT.md](./PHASE27_DIALOGUE_EVAL_V2_REPORT.md)
+- `eval/reports/dialogue_eval_v2.json`
+- `artifacts/reports/phase27_dialogue_eval_v2_report.json`
+
 ### بعد المرحلة
-انتقل إلى Phase 28 إذا نجح التقييم.
+لا تنتقل إلى Phase 28 الآن. نفّذ توسعة corpus، ثم أعد Phase 26 readiness،
+ثم افتح `SF-50M` فقط إذا مرت gates.
 
 ---
 

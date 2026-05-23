@@ -84,8 +84,8 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "خطوتنا التالية Phase 27: نبني تقييم حوار v2 وخطة توسيع corpus، "
-    "لأن Phase 26 قررت أن SF-50M غير جاهز الآن.",
+    "اكتملت Phase 27 كتقييم حوار v2 وخطة توسعة corpus. النتيجة: التوجيه نجح، "
+    "لكن المولد ما زال قالبًا، ونحتاج رفع corpus من 500 إلى 5000 قبل SF-50M.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

@@ -37,23 +37,24 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 26 / 30 — SF-50M v0.1 Readiness اكتملت كقرار scaling.
-- **الأولوية الحالية:** Phase 27 تبدأ بتقييم حوار v2 وخطة توسيع corpus؛ لا تدريب `SF-50M` الآن لأن بوابات Phase 26 لم تمر.
+- **الرحلة الحالية:** Phase 27 / 30 — Dialogue Evaluation v2 + Corpus Expansion Plan اكتملت كاختبار baseline وخطة بيانات.
+- **الأولوية الحالية:** تنفيذ توسعة corpus من `500` إلى `5000` داخل `msa + saudi`; لا تدريب `SF-50M` ولا Phase 28 الآن.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
 - **البيانات الحالية:** corpus موثق `500/500` يمر `corpus-audit`: `250` سعودي + `250` فصحى؛ استُخدم في Phase 23 لتدريب tokenizer v2.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
 - **المولّد:** `SF-10M v0.2` تحسّن رقميًا لكنه غير جاهز كحوار مقنع؛ Phase 25 أضاف canary guard يمنع الرد الضعيف ويرجع للقالب.
-- **التقييم:** Phase 16 مرّر `15/15` prompt cases؛ الجودة اليومية لم تنضج بعد، لكن المختبر المحلي مفتوح للتجربة والتطوير.
+- **التقييم:** Phase 27 مرّر `19/19` turn في حوار متعدد الأدوار، لكنه أكد أن الردود ما زالت `template` وأن المولد غير جاهز.
 - **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.
 - **دورة البيانات:** Phase 18 أضاف تصدير مراجعة من الواجهة و`prepare_dialogue_batch.py`; وPhase 22 يعتمد الآن أيضًا دفعات مباشرة يؤلفها/يراجعها الوكيل بتفويض موثق، بدون انتظار حفظ أو تصدير من سامي.
 - **جاهزية SF-50M:** Phase 26 أضاف `make phase26-readiness` و`GET /system/phase26-readiness`; القرار الحالي `NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M`.
 - **بوابات المجالات:** Phase 20 أضاف `make phase20-gates` و`GET /system/phase20-gates`; المجال النشط الوحيد هو `chat`.
-- **طريق التوليد المقنع:** لا تعرض `SF-10M v0.2` كنجاح حواري. Phase 25 أثبت canary الحماية لكنه حجب النموذج الحقيقي. Phase 26 رفض تدريب SF-50M الآن؛ Phase 27 يجب أن يبني eval v2 وخطة corpus قبل أي تكبير.
+- **طريق التوليد المقنع:** لا تعرض `SF-10M v0.2` كنجاح حواري. Phase 27 نجح كاختبار توجيه وقوالب فقط، وقرر أن Phase 28 و`SF-50M` لا يبدآن قبل توسعة corpus وإصلاح canary.
 - **Corpus v2:** Phase 22 أضاف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-completion-gate` و`make phase22-review-intake`; الوضع الحالي 500/500، وفيه ثمان دفعات فصيحة `dialogue_batch_v2_msa_001.jsonl` إلى `dialogue_batch_v2_msa_008.jsonl` وسبع دفعات سعودية `dialogue_batch_v2_saudi_001.jsonl` إلى `dialogue_batch_v2_saudi_007.jsonl` وأربع دفعات مرنة `dialogue_batch_v2_flex_001.jsonl` إلى `dialogue_batch_v2_flex_004.jsonl` إضافة إلى seed فصيح للمصطلحات `protected_terms_msa_seed_v1.jsonl`. التوازن النهائي مكتمل (`msa=250`, `saudi=250`) ولا توجد دفعة تالية في Phase 22. الواجهة تعرض بوابة Phase 22 الحية وجودة التصدير كمختبر اختياري فقط، أما بناء corpus الحالي فتم مباشرة عبر الوكيل. `phase22-completion-gate` يرجع الآن `PHASE22_COMPLETE_READY_FOR_PHASE23`.
 - **Tokenizer v2:** Phase 23 أضاف `artifacts/tokenizers/sf_bpe/v2/` و`make phase23-tokenizer-audit`; الحالة `COMPLETED_READY_FOR_PHASE24`, `vocab=4493`, `merges=4386`, وprotected Saudi terms تحسنت من متوسط 4.0 tokens في v1 إلى 2.3 في v2.
 - **SF-10M v0.2:** Phase 24 درّب النموذج 2000 خطوة على tokenizer v2 وcorpus المتوازن: loss `8.4751 → 2.8256`, eval loss `2.5779`, perplexity `13.17`. القرار: `COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED` لأن التوليد لا يزال غير متماسك.
 - **Canary v1:** Phase 25 أضاف `GenerationGuard` و`SF_GENERATOR_CANARY`; التجربة الحقيقية على v0.2 حُجبت بـ `generation_guard:malformed_token` وبقي الرد من القالب.
 - **قرار Phase 26:** `SF-50M` غير جاهز: corpus الحالي `500` فقط والحد العملي `5000`، وruntime quality/hallucination/repetition gates لم تنجح بعد. التقرير: [docs/PHASE26_SF50M_READINESS_REPORT.md](./docs/PHASE26_SF50M_READINESS_REPORT.md).
+- **نتيجة Phase 27:** `make phase27-dialogue-eval` مرّر `19/19` turn في suite متعدد الأدوار، لكن كل الردود `template`، و`open_generator_ready=false`. خطة التوسعة: `4500` سجل إضافي، `180` batch، بالتساوي `msa=2250` و`saudi=2250`. التقرير: [docs/PHASE27_DIALOGUE_EVAL_V2_REPORT.md](./docs/PHASE27_DIALOGUE_EVAL_V2_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
@@ -95,7 +96,7 @@
 | Phase 24 | SF-10M v0.2 Quality Training — completed with limits; runtime blocked |
 | Phase 25 | Generated Chat Canary v1 — completed as guarded canary; real model blocked |
 | Phase 26 | SF-50M v0.1 Readiness — completed; training blocked by scaling gates |
-| Phase 27 | Dialogue Evaluation v2 and corpus expansion plan — planned |
+| Phase 27 | Dialogue Evaluation v2 and corpus expansion plan — completed with corpus expansion required |
 | Phase 28 | SF-120M v0.1 Candidate — planned |
 | Phase 29 | Runtime Hybrid Assistant v1 — planned |
 | Phase 30 | Continuous Improvement Loop — planned |

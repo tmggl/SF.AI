@@ -1,7 +1,7 @@
 # SF.AI — Makefile
 # Phase 1 set of operational commands.
 
-.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit phase12-readiness phase19-readiness phase20-gates phase22-readiness phase22-plan phase22-next-batch phase22-completion-gate phase22-review-intake phase23-tokenizer-audit phase26-readiness prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
+.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit phase12-readiness phase19-readiness phase20-gates phase22-readiness phase22-plan phase22-next-batch phase22-completion-gate phase22-review-intake phase23-tokenizer-audit phase26-readiness phase27-dialogue-eval prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
 
 PY ?= .venv/bin/python
 UVICORN ?= uvicorn
@@ -35,6 +35,7 @@ help:
 	@echo "  make phase22-review-intake Scan review exports before corpus conversion"
 	@echo "  make phase23-tokenizer-audit Finalize/audit Phase 23 tokenizer v2"
 	@echo "  make phase26-readiness    Read-only Phase 26 scaling gate before SF-50M"
+	@echo "  make phase27-dialogue-eval Run Phase 27 dialogue eval v2 + corpus plan"
 	@echo "  make prepare-dialogue-batch ARGS=...  Prepare reviewed chat exports (Phase 18)"
 	@echo "  make train-bpe ARGS=...   Train SF-BPE tokenizer (requires phase confirmation flag)"
 	@echo "  make train-lm ARGS=...    Train SF native LM (Phase 6)"
@@ -127,6 +128,9 @@ phase23-tokenizer-audit:
 
 phase26-readiness:
 	$(PY) scripts/phase26_readiness.py $(ARGS)
+
+phase27-dialogue-eval:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_dialogue_eval.py $(ARGS)
 
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)

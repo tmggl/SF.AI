@@ -27,6 +27,7 @@ from apps.api.schemas.system import (
     Phase22ReviewExportItemResponse,
     Phase22ReviewIntakeResponse,
     Phase26ReadinessResponse,
+    Phase27DialogueEvalResponse,
     SourceInventoryItemResponse,
     SourceInventoryResponse,
     SystemStatusResponse,
@@ -41,6 +42,7 @@ from sf_ai.datasets.phase22_readiness import (
 )
 from sf_ai.datasets.phase22_review_intake import build_phase22_review_intake_report
 from sf_ai.datasets.source_inventory import build_source_inventory
+from sf_ai.evaluation import run_phase27_dialogue_eval
 from sf_ai.training.phase12_readiness import build_phase12_readiness_decision
 from sf_ai.training.phase19_readiness import build_phase19_readiness_decision
 from sf_ai.training.phase23_tokenizer import build_phase23_tokenizer_audit
@@ -59,9 +61,9 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 26 — SF-50M v0.1 Readiness",
-        current_phase_status="completed_not_ready_expand_corpus_and_improve_sf10m",
-        next_phase="Phase 27 — Dialogue Evaluation v2 and corpus expansion plan",
+        current_phase="Phase 27 — Dialogue Evaluation v2 + Corpus Expansion Plan",
+        current_phase_status="completed_baseline_pass_expansion_required",
+        next_phase="Phase 28 — blocked until corpus expansion, SF-50M training, and eval pass",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -130,6 +132,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase26_readiness",
                 status="completed_training_blocked",
                 phase="Phase 26",
+            ),
+            ComponentStatus(
+                name="phase27_dialogue_eval_v2",
+                status="completed_with_blockers",
+                phase="Phase 27",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),
@@ -313,6 +320,13 @@ def phase26_readiness() -> Phase26ReadinessResponse:
     """Read-only Phase 26 scaling gate before any SF-50M training."""
     decision = build_phase26_scaling_decision()
     return Phase26ReadinessResponse(**decision.to_json())
+
+
+@router.get("/phase27-dialogue-eval", response_model=Phase27DialogueEvalResponse)
+def phase27_dialogue_eval() -> Phase27DialogueEvalResponse:
+    """Read-only Phase 27 multi-turn dialogue eval and corpus expansion plan."""
+    report = run_phase27_dialogue_eval()
+    return Phase27DialogueEvalResponse(**report.to_json())
 
 
 @router.get("/phase20-gates", response_model=Phase20GatesResponse)

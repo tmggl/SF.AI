@@ -157,6 +157,33 @@ class Phase26ReadinessResponse(BaseModel):
     notes: list[str]
 
 
+class Phase27DialogueEvalResponse(BaseModel):
+    phase: str
+    status: str
+    language_track: list[str]
+    suite_path: str
+    total_scenarios: int
+    total_turns: int
+    passed_turns: int
+    failed_turns: int
+    pass_rate: float
+    fallback_turns: int
+    fallback_rate: float
+    safety_turns: int
+    generator_modes: dict[str, int]
+    category_counts: dict[str, int]
+    dialogue_baseline_passed: bool
+    open_generator_ready: bool
+    can_reopen_sf50m_gate: bool
+    can_start_phase28: bool
+    phase26_status: str
+    corpus_expansion_plan: dict[str, object]
+    blockers: list[str]
+    recommended_commands: list[str]
+    notes: list[str]
+    results: list[dict[str, object]]
+
+
 class DomainGateResponse(BaseModel):
     domain: str
     current_status: str

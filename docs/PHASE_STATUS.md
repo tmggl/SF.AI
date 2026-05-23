@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 26 / 30**
-- **المرحلة الحالية:** **Phase 26 — SF-50M v0.1 Readiness**
-- **حالة المرحلة الحالية:** **مكتملة كقرار scaling؛ تدريب SF-50M محظور الآن**
-- **المرحلة التالية المقترحة:** Phase 27 — Dialogue Evaluation v2 and corpus expansion plan.
+- **الرحلة الحالية:** **Phase 27 / 30**
+- **المرحلة الحالية:** **Phase 27 — Dialogue Evaluation v2 + Corpus Expansion Plan**
+- **حالة المرحلة الحالية:** **مكتملة كـ baseline eval؛ توسعة corpus مطلوبة قبل SF-50M**
+- **المرحلة التالية المقترحة:** توسعة corpus إلى `5000` ثم إعادة Phase 26 readiness؛ Phase 28 محظورة حتى ينجح `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ تم تحديث `default_registry.yaml` و`safety_terms.yaml` لفجوات finance/religion/security.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -52,7 +52,7 @@
 | Phase 24 | SF-10M v0.2 Quality Training | ✅ completed_with_limits_runtime_blocked | ✅ |
 | Phase 25 | Generated Chat Canary v1 | ✅ completed_guarded_canary_real_model_blocked | ✅ |
 | Phase 26 | SF-50M v0.1 Readiness | ✅ completed_not_ready_expand_corpus_and_improve_sf10m | ✅ |
-| Phase 27 | Dialogue Evaluation v2 and corpus expansion plan | مخططة | ✅ |
+| Phase 27 | Dialogue Evaluation v2 and corpus expansion plan | ✅ completed_baseline_pass_expansion_required | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -195,7 +195,7 @@
   - أضيف [GENERATIVE_ROADMAP.md](./GENERATIVE_ROADMAP.md).
   - مُدّدت الخطة الرسمية إلى Phase 30.
   - تم توثيق أن التدريب الفعلي بدأ في Phase 13/14، وأن أول تدريب جودة مفيد سيأتي في Phase 24.
-  - تم تحديد أن أول فرصة لحوار قصير مولّد مقنع هي Phase 26، والهدف الرسمي للحوار المقنع المستقر هو Phase 28.
+  - تم تحديد أن الحوار المولّد المقنع يحتاج تدرجًا: Phase 24 أعطت تحسنًا معمليًا، Phase 26 منعت SF-50M، وPhase 27 وضعت خطة corpus قبل أي قفزة.
   - بقي المسار اللغوي `msa + saudi` فقط، وقاموس Saudi Seed v1 هو المرجع اللهجي الحالي.
   - أضيف مبدأ `Progressive Scaling Strategy`: لا يتم رفع حجم النموذج إلا بعد نجاح المرحلة الحالية.
   - السلم الرسمي صار: `SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+`.
@@ -288,6 +288,20 @@
   - blockers: `corpus_below_sf50m_minimum`, `phase24_runtime_quality_blocked`, `phase25_real_model_blocked`, `hallucination_checks_missing`, `repetition_checks_failed`.
   - أضيف [PHASE26_SF50M_READINESS_REPORT.md](./PHASE26_SF50M_READINESS_REPORT.md).
   - أضيف `artifacts/reports/phase26_sf50m_readiness_report.json`.
+- بدأ وانتهى Phase 27 Dialogue Evaluation v2 + Corpus Expansion Plan:
+  - أضيف `eval/prompts/dialogue_v2.json`.
+  - أضيف `sf_ai/evaluation/phase27.py`.
+  - أضيف `scripts/phase27_dialogue_eval.py` وهدف `make phase27-dialogue-eval`.
+  - أضيف endpoint حي: `GET /system/phase27-dialogue-eval`.
+  - suite متعدد الأدوار: `7` سيناريوهات و`19` turn.
+  - النتيجة: `19/19`, pass rate `100%`.
+  - `generator_modes={'template': 19}`، أي لا يوجد حوار مولّد مفتوح بعد.
+  - خطة corpus: `500 → 5000`, المتبقي `4500`, عدد batches `180`, بالتوازن `msa=2250`, `saudi=2250`.
+  - القرار: `COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_EXPANSION_REQUIRED`.
+  - Phase 28 محظورة حتى ينجح `SF-50M` في eval v2.
+  - أضيف [PHASE27_DIALOGUE_EVAL_V2_REPORT.md](./PHASE27_DIALOGUE_EVAL_V2_REPORT.md).
+  - أضيف `eval/reports/dialogue_eval_v2.json`.
+  - أضيف `artifacts/reports/phase27_dialogue_eval_v2_report.json`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -353,7 +367,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 26"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -384,7 +398,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-456 passed in 5.65s
+460 passed in 7.51s
 ```
 
 | ملف | عدد |

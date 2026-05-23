@@ -66,13 +66,14 @@
 | Phase 24 | SF-10M v0.2 Quality Training | ✅ completed_with_limits_runtime_blocked |
 | Phase 25 | Generated Chat Canary v1 | ✅ completed_guarded_canary_real_model_blocked |
 | Phase 26 | SF-50M v0.1 Readiness | ✅ completed_not_ready_expand_corpus_and_improve_sf10m |
+| Phase 27 | Dialogue Evaluation v2 + Corpus Expansion Plan | ✅ completed_baseline_pass_expansion_required |
 
 اقرأ التفاصيل في [PHASE_STATUS.md](./PHASE_STATUS.md) و [EXECUTION_PLAN.md](./EXECUTION_PLAN.md).
 
 ### الاختبارات
 
 ```
-راجع `docs/PHASE_STATUS.md` لآخر رقم اختبارات موثق بعد Phase 26.
+راجع `docs/PHASE_STATUS.md` لآخر رقم اختبارات موثق بعد Phase 27.
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -146,7 +147,7 @@ bash scripts/run_chat_server.sh
 - `sf_ai/datasets/corpus_governance.py`
 - `tests/test_corpus_governance.py`
 
-تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر وغير جاهز لاختبار سامي كمولد حواري. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`، لكنه لم يجعل المولد مقنعًا. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات. Phase 19 أضاف بوابة جاهزية SF-50M وقراره الحالي: وسّع corpus أولًا. Phase 20 أضاف بوابات تفعيل المجالات، ولا يفعّل أي skeleton تلقائيًا. Phase 21 ثبت خارطة Phase 22–30 للوصول إلى حوار مولّد مقنع. Phase 22 أضاف وأكمل بوابة Gold Dialogue Corpus v2: الوضع الحالي 500/500 (`msa=250`, `saudi=250`). Phase 23 درّب tokenizer v2: `vocab=4493`, `merges=4386`. Phase 24 درّب `SF-10M v0.2` 2000 خطوة، وحقق eval loss `2.5779` وperplexity `13.17`، لكنه ما زال غير متماسك ولذلك runtime محظور. Phase 25 أضاف canary guard وحجب تجربة v0.2 الحقيقية بـ `generation_guard:malformed_token`. Phase 26 أضاف بوابة readiness ورفض تدريب `SF-50M` الآن لأن corpus دون `5000` ولأن runtime quality لم تنجح.
+تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر وغير جاهز لاختبار سامي كمولد حواري. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`، لكنه لم يجعل المولد مقنعًا. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات. Phase 19 أضاف بوابة جاهزية SF-50M وقراره الحالي: وسّع corpus أولًا. Phase 20 أضاف بوابات تفعيل المجالات، ولا يفعّل أي skeleton تلقائيًا. Phase 21 ثبت خارطة Phase 22–30 للوصول إلى حوار مولّد مقنع. Phase 22 أضاف وأكمل بوابة Gold Dialogue Corpus v2: الوضع الحالي 500/500 (`msa=250`, `saudi=250`). Phase 23 درّب tokenizer v2: `vocab=4493`, `merges=4386`. Phase 24 درّب `SF-10M v0.2` 2000 خطوة، وحقق eval loss `2.5779` وperplexity `13.17`، لكنه ما زال غير متماسك ولذلك runtime محظور. Phase 25 أضاف canary guard وحجب تجربة v0.2 الحقيقية بـ `generation_guard:malformed_token`. Phase 26 أضاف بوابة readiness ورفض تدريب `SF-50M` الآن لأن corpus دون `5000` ولأن runtime quality لم تنجح. Phase 27 أضاف eval v2 متعدد الأدوار وخطة corpus: `19/19` baseline، لكن كل الردود `template`; المتبقي `4500` سجل عبر `180` batch قبل إعادة SF-50M gate.
 
 ### Phase 12 — preflight جاهز فقط
 
@@ -269,7 +270,7 @@ missing language balance: msa
 - `docs/GENERATIVE_ROADMAP.md`
 - امتدت الخطة الرسمية إلى Phase 30.
 - التدريب الفعلي بدأ في Phase 13/14، وأول تدريب جودة مفيد اكتمل في Phase 24 مع منع runtime الواسع.
-- أول فرصة لحوار قصير مولّد مقنع: بعد توسعة corpus ونجاح Phase 27 ثم إعادة بوابة SF-50M، وليس في الحالة الحالية.
+- أول فرصة لحوار قصير مولّد مقنع: بعد تنفيذ خطة Phase 27، ثم إعادة بوابة SF-50M، ثم تدريب `SF-50M` ونجاحه في eval v2.
 - الهدف الرسمي لحوار مولّد مستقر نسبيًا: Phase 28.
 
 ### Phase 22 — Gold Dialogue Corpus v2 — بوابة تعمل
@@ -286,7 +287,7 @@ missing language balance: msa
 - الموجود: 500 سجلًا: 250 `msa` و250 `saudi`
 - الهدف: 500 سجل، مع 200 على الأقل لكل من `msa` و`saudi`
 - خطة الجمع الحالية: مكتملة، ولا توجد batches متبقية.
-- المهمة الفورية الحالية: Phase 27 Dialogue Evaluation v2 + corpus expansion plan، مع بقاء `make phase26-readiness` قرارًا مانعًا لأي تدريب `SF-50M` حتى تتغير المعطيات.
+- المهمة الفورية الحالية: تنفيذ توسعة corpus المحكومة حسب Phase 27، مع بقاء `make phase26-readiness` قرارًا مانعًا لأي تدريب `SF-50M` حتى تتغير المعطيات.
 - الدفعات المرنة المكتملة: `data/corpus/chat/jsonl/dialogue_batch_v2_flex_001.jsonl` إلى `dialogue_batch_v2_flex_004.jsonl` بإجمالي 100 سجل.
 - أضيفت ثمان دفعات فصيحة معتمدة: `data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl` إلى `dialogue_batch_v2_msa_008.jsonl` مع بطاقات provenance.
 - أضيف seed مصطلحات فصحى تدريبي: `data/corpus/chat/jsonl/protected_terms_msa_seed_v1.jsonl` وفيه 22 سجلًا `gold`; هذا corpus فعلي، وليس موردًا مرشحًا.
@@ -307,7 +308,7 @@ missing language balance: msa
 
 ### تستطيع الآن العمل على:
 
-- افتح Phase 27 فقط. لا تبدأ تدريب `SF-50M` لأن Phase 26 قررت رسميًا `can_start_sf50m_training=false`.
+- لا تفتح Phase 28 الآن. ابدأ بتوسعة corpus حسب Phase 27، ثم أعد `make phase26-readiness`.
 
 ---
 
