@@ -84,9 +84,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.36: triage الواجهة الحية مرّ 27/27، "
-    "ومنها 18/18 ردود مولدة و5/5 quality-floor. التالي Phase 27.37 "
-    "لتوسيع النوايا والموضوعات التي يسمح لها بالمولّد.",
+    "اكتملت Phase 27.37: فتحنا موضوع الصبر خلف semantic guard، "
+    "ومرّت التوسعة الحية 21/21. التالي Phase 27.38 لبناء curriculum/probe "
+    "للموضوعات المحجوبة مثل الصداقة والصدق.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

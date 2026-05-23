@@ -260,6 +260,18 @@ class ChatModule:
                 f"generation_repetition:{verdict.repetition_ratio:.2f}",
                 f"generation_arabic:{verdict.arabic_ratio:.2f}",
             )
+        topic_mismatch = _definition_topic_mismatch(
+            generated_text=result.text,
+            generation_intent=generation_intent,
+            generation_topic=generation_topic,
+        )
+        if topic_mismatch is not None:
+            return fallback_text, (
+                "generator:template",
+                "native_generator:canary_blocked",
+                f"generation_guard:{topic_mismatch}",
+                f"native_generator:intent:{generation_intent}",
+            )
         return (
             result.text,
             (
@@ -303,6 +315,8 @@ def _generation_intent_for_prompt(
 
 def _generation_topic_for_prompt(prompt: str) -> str:
     text = _surface(prompt)
+    if "صبر" in text:
+        return "الصبر"
     if "تعاون" in text:
         return "التعاون"
     if "احترام" in text:
@@ -326,6 +340,31 @@ def _guarded_trial_quality_floor(
     if generation_intent == "definition" and not generation_topic:
         return "trial_unsupported_definition_topic"
     return None
+
+
+_DEFINITION_TOPIC_TERMS: dict[str, tuple[str, ...]] = {
+    "الصبر": ("صبر", "الثبات", "تثبت", "صعوبة", "الصعوبة"),
+    "التعاون": ("تعاون", "ننجز", "سوا", "معا", "نخفف"),
+    "الاحترام": ("احترام", "تقدير", "تقدر", "الناس", "تصرف"),
+    "القراءة": ("قراء", "قراي", "فهم", "كلمات", "مفردات"),
+}
+
+
+def _definition_topic_mismatch(
+    *,
+    generated_text: str,
+    generation_intent: str,
+    generation_topic: str,
+) -> str | None:
+    if generation_intent != "definition" or not generation_topic:
+        return None
+    expected_terms = _DEFINITION_TOPIC_TERMS.get(generation_topic)
+    if not expected_terms:
+        return "definition_topic_not_registered"
+    surface = _surface(generated_text)
+    if any(term in surface for term in expected_terms):
+        return None
+    return "definition_topic_mismatch"
 
 
 def _generation_dialect_for_prompt(

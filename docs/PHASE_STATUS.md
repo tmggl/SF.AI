@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.36 / 30**
-- **المرحلة الحالية:** **Phase 27.36 — Live UI Triage**
-- **حالة المرحلة الحالية:** **مكتملة؛ triage الحي مرّ `27/27` مع quality-floor**
-- **المرحلة التالية المقترحة:** Phase 27.37 expand supported generator intents/topics؛ لا Phase 28 ولا `SF-50M` قبل توسيع جودة الواجهة.
+- **الرحلة الحالية:** **Phase 27.37 / 30**
+- **المرحلة الحالية:** **Phase 27.37 — Supported Topic Expansion**
+- **حالة المرحلة الحالية:** **مكتملة؛ فتح موضوع `الصبر` خلف semantic guard ومرّ `21/21`**
+- **المرحلة التالية المقترحة:** Phase 27.38 targeted topic curriculum/probe؛ لا Phase 28 ولا `SF-50M` قبل توسيع جودة الواجهة.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -85,6 +85,7 @@
 | Phase 27.34 | Guarded Runtime Trial | ✅ completed_ready_for_ui_test | ✅ |
 | Phase 27.35 | Live UI Trial Observations | ✅ completed_ready_for_user_observation | ✅ |
 | Phase 27.36 | Live UI Triage | ✅ completed_quality_floor_active | ✅ |
+| Phase 27.37 | Supported Topic Expansion | ✅ completed_quality_gated | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -637,6 +638,17 @@
   - القرار: `PASSED_LIVE_UI_TRIAGE_QUALITY_FLOOR_ACTIVE`.
   - التالي Phase 27.37 expand supported generator intents/topics.
   - أضيف [PHASE27_36_LIVE_UI_TRIAGE_REPORT.md](./PHASE27_36_LIVE_UI_TRIAGE_REPORT.md).
+- بدأ وانتهى Phase 27.37 Supported Topic Expansion:
+  - أضيف semantic topic guard بعد التوليد.
+  - فُتح موضوع `الصبر` بصيغ مثبتة فقط.
+  - فُحص `/chat/message` حيًا: `21/21` passed.
+  - regression generated: `10/10`.
+  - new topic: `3/3`.
+  - quality-floor blocks: `5/5`.
+  - تحكم template/safety: `3/3`.
+  - القرار: `PASSED_SUPPORTED_TOPIC_EXPANSION_QUALITY_GATED`.
+  - التالي Phase 27.38 targeted topic curriculum/probe للموضوعات المحجوبة.
+  - أضيف [PHASE27_37_SUPPORTED_TOPIC_EXPANSION_REPORT.md](./PHASE27_37_SUPPORTED_TOPIC_EXPANSION_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -702,7 +714,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.36"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.37"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -733,7 +745,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-543 passed in 16.91s
+545 passed in 16.98s
 ```
 
 | ملف | عدد |
@@ -742,7 +754,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_bpe_tokenizer.py | 13 |
 | test_capability_registry.py | 5 |
 | test_chat_module.py | 12 |
-| test_chat_native_generator.py | 25 (Phase 15 + Phase 25 canary + Phase 27.36 quality floor) |
+| test_chat_native_generator.py | 26 (Phase 15 + Phase 25 canary + Phase 27.37 semantic topic guard) |
 | test_chat_rag_bridge.py | 7 (Phase 17) |
 | test_chat_ui.py | 7 (Phase 9/19 status + export quality indicator) |
 | test_checkpoints.py | 7 |

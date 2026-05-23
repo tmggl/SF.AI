@@ -106,6 +106,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.34 | Guarded Runtime Trial | مكتملة؛ request-scoped UI generator trial مرّ `9/9` |
 | Phase 27.35 | Live UI Trial Observations | مكتملة؛ live server UI/API trial مرّ `10/10` |
 | Phase 27.36 | Live UI Triage | مكتملة؛ quality-floor active وtriage مرّ `27/27` |
+| Phase 27.37 | Supported Topic Expansion | مكتملة؛ `الصبر` فُتح خلف semantic guard ومرّ `21/21` |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2636,6 +2637,42 @@ controls = 4/4
 - [PHASE27_36_LIVE_UI_TRIAGE_REPORT.md](./PHASE27_36_LIVE_UI_TRIAGE_REPORT.md)
 - `artifacts/reports/phase27_36_live_ui_triage_report.json`
 - `artifacts/samples/phase27_36_live_ui_triage.md`
+
+---
+
+## Phase 27.37 — Supported Topic Expansion
+
+### الهدف
+
+توسيع نطاقات المولّد بموضوع جديد فقط إذا نجح دلاليًا خلف guard، دون تدريب
+جديد ودون فتح `chat.general`.
+
+### نتيجة التنفيذ
+
+```text
+cases = 21/21
+generated = 10/10
+new_topic = 3/3
+quality_floor = 5/5
+controls = 3/3
+```
+
+### القرار
+
+- فُتح موضوع `الصبر` بصيغ مثبتة:
+  - `ما معنى الصبر`
+  - `الصبر وش يعني`
+  - `وش المقصود بالصبر`
+- أضيف semantic topic guard لحجب الردود التي لا تحمل معنى الموضوع.
+- بقيت `الصداقة` و`الصدق` و`التنظيم` و`الهدوء` محجوبة.
+- لا `SF-50M` ولا Phase 28.
+- التالي Phase 27.38: targeted topic curriculum/probe للموضوعات المحجوبة.
+
+### artifacts
+
+- [PHASE27_37_SUPPORTED_TOPIC_EXPANSION_REPORT.md](./PHASE27_37_SUPPORTED_TOPIC_EXPANSION_REPORT.md)
+- `artifacts/reports/phase27_37_supported_topic_expansion_report.json`
+- `artifacts/samples/phase27_37_supported_topic_expansion.md`
 
 ---
 

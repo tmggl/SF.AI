@@ -68,6 +68,7 @@ SF.AI يملك الآن:
 | Phase 27.34 | `Guarded runtime trial` | زر مولّد تجريبي request-scoped مرّ `9/9` |
 | Phase 27.35 | `Live UI trial observations` | السيرفر الحي والواجهة مرّا `10/10` |
 | Phase 27.36 | `Live UI triage` | quality-floor active، وtriage مرّ `27/27` |
+| Phase 27.37 | `Supported topic expansion` | موضوع `الصبر` فُتح خلف semantic guard ومرّ `21/21` |
 | بعد نجاح SF-10M | `SF-50M v0.1` | نجاح جودة SF-10M/canary + إعادة Phase 26 readiness |
 | Phase 28 | `SF-120M v0.1` | نجاح SF-50M + scaling gate |
 
@@ -107,6 +108,7 @@ SF.AI يملك الآن:
 - **Phase 27.34:** أضافت trial محروسًا في الواجهة/API عبر `generator_trial=true` ومرّت `9/9`. التالي جمع ملاحظات حية من الواجهة قبل أي تكبير.
 - **Phase 27.35:** اختبرت السيرفر الحي والواجهة عبر HTTP: `10/10`، منها `7/7` ردود مولدة و`3/3` ضوابط template/safety.
 - **Phase 27.36:** أضافت quality-floor يمنع raw `chat.general` وموضوعات التعريف غير المثبتة من المولّد، ومرّ triage الحي `27/27`.
+- **Phase 27.37:** أضافت semantic topic guard وفتحت `الصبر` بصيغ مثبتة؛ التوسعة الحية مرّت `21/21`.
 - **Phase 28:** أول قفزة بعد SF-50M إذا أثبت 50M قيمة واضحة.
 - **Phase 29:** إدخاله في الواجهة كتجربة يومية مع router/safety/memory.
 

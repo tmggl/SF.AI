@@ -109,3 +109,20 @@ def test_phase27_36_live_ui_triage_quality_floor_passes() -> None:
     assert report["triage_decision"]["quality_floor"] == (
         "block raw chat.general and unsupported definition topics"
     )
+
+
+def test_phase27_37_supported_topic_expansion_passes() -> None:
+    report = _report("phase27_37_supported_topic_expansion_report.json")
+    assert report["phase"] == "Phase 27.37"
+    assert report["status"] == "PASSED_SUPPORTED_TOPIC_EXPANSION_QUALITY_GATED"
+    assert report["user_test_allowed"] is True
+    assert report["sf50m_allowed"] is False
+    assert report["phase28_allowed"] is False
+    assert report["expanded_topics"] == ["الصبر"]
+    assert report["semantic_topic_guard"] is True
+    assert report["summary"]["cases_passed"] == 21
+    assert report["summary"]["cases_total"] == 21
+    assert report["summary"]["new_topic_passed"] == 3
+    assert report["summary"]["new_topic_total"] == 3
+    assert report["summary"]["quality_floor_passed"] == 5
+    assert report["summary"]["quality_floor_total"] == 5

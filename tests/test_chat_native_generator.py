@@ -74,6 +74,16 @@ class _AlignedSmalltalkGenerator:
         )
 
 
+class _DefinitionMismatchGenerator:
+    def generate(self, prompt: str, **_: object) -> NativeGenerationResult:
+        return NativeGenerationResult(
+            used=True,
+            text="العفو، حاضر بأي وقت.",
+            generator="sf_10m_phase27_33",
+            reason="generated",
+        )
+
+
 def test_generation_policy_disabled_by_default() -> None:
     decision = GenerationPolicy(enabled=False).decide(
         domain="chat",
@@ -388,11 +398,29 @@ def test_guarded_runtime_trial_blocks_unstable_definition_topic_before_generator
         ),
         native_generator=gen,  # type: ignore[arg-type]
     )
-    analysis = pipe.analyze_user_text("اشرح لي الصبر ببساطة")
+    analysis = pipe.analyze_user_text("اشرح لي الصداقة ببساطة")
     out = mod.handle(analysis, intent="chat.general", session_id="phase2736-topic")
     assert gen.calls == []
     assert "generator:template" in out.notes
     assert "native_generator:trial_unsupported_definition_topic" in out.notes
+
+
+def test_guarded_runtime_trial_blocks_definition_topic_mismatch_after_generation() -> None:
+    pipe = get_default_pipeline()
+    mod = ChatModule(
+        generation_policy=GenerationPolicy(
+            enabled=True,
+            experimental_runtime=True,
+            canary=True,
+            guarded_runtime_trial=True,
+        ),
+        native_generator=_DefinitionMismatchGenerator(),  # type: ignore[arg-type]
+    )
+    analysis = pipe.analyze_user_text("ما معنى الصبر")
+    out = mod.handle(analysis, intent="chat.general", session_id="phase2737-topic")
+    assert out.text != "العفو، حاضر بأي وقت."
+    assert "generator:template" in out.notes
+    assert "generation_guard:definition_topic_mismatch" in out.notes
 
 
 def test_chat_api_response_includes_generator_metadata() -> None:

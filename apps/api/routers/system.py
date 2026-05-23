@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.36 — Live UI Triage",
-        current_phase_status="completed_live_ui_triage_quality_floor_active",
+        current_phase="Phase 27.37 — Supported Topic Expansion",
+        current_phase_status="completed_supported_topic_expansion_quality_gated",
         next_phase=(
-            "Phase 27.37 expand supported generator intents/topics; SF-50M remains blocked"
+            "Phase 27.38 targeted topic curriculum/probe; SF-50M remains blocked"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -294,6 +294,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_36_live_ui_triage",
                 status="completed_quality_floor_active",
                 phase="Phase 27.36",
+            ),
+            ComponentStatus(
+                name="phase27_37_supported_topic_expansion",
+                status="completed_quality_gated",
+                phase="Phase 27.37",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),
