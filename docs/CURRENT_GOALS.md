@@ -52,7 +52,7 @@ Phase 27.25 اختبرت checkpoint نفسه على أسئلة held-out جديد
 `16/18` مع intent/topic conditioning. Phase 27.31–27.33 أكملت natural
 intent/topic + balanced calibration + advice/micro stabilization، ووصلت إلى
 كل البوابات المحلية كاملة: fresh mixed `18/18` وmicro `32/32` بلا تسريب.
-الخطوة الحالية ليست تكبير النموذج. Phase 27.50 جعل الواجهة و`/chat/message` مختبرًا مولّدًا فقط: لا قوالب ظاهرة، إما رد من `sf_10m_phase27_47` أو `generator_blocked` فارغ. Phase 27.51 أثبت أن checkpoint الحالي لا يعمم على حوار طبيعي مفتوح (`raw natural=1/20`). Phase 27.52 ضاعف تدريب `SF-10M` إلى `9200` خطوة ورفع المؤشر إلى `5/20` فقط. Phase 27.53 وسّع البيانات إلى `10,540` زوجًا فريدًا و`18,000` خطوة، لكن raw natural صار `2/36` مع خلط/fragments؛ التالي Phase 27.54 لتحديد هل العائق سعة النموذج أم الهدف/التوكنة.
+الخطوة الحالية ليست تكبير النموذج كاملًا. Phase 27.50 جعل الواجهة و`/chat/message` مختبرًا مولّدًا فقط: لا قوالب ظاهرة، إما رد من `sf_10m_phase27_47` أو `generator_blocked` فارغ. Phase 27.51 أثبت أن checkpoint الحالي لا يعمم على حوار طبيعي مفتوح (`raw natural=1/20`). Phase 27.52 ضاعف تدريب `SF-10M` إلى `9200` خطوة ورفع المؤشر إلى `5/20` فقط. Phase 27.53 وسّع البيانات إلى `10,540` زوجًا فريدًا و`18,000` خطوة، لكن raw natural صار `2/36` مع خلط/fragments. Phase 27.54 حسم القرار: لا `SF-50M` كامل ولا Phase 28 الآن؛ المسموح فقط Phase 27.55 كmicro-probe تشخيصي مضبوط.
 
 الخطوة العملية الحالية:
 
@@ -213,7 +213,7 @@ SF.AI حاليًا:
 - **Phase 27.51:** Open-Dialogue Generalization Audit — مكتمل؛ فشل مفيد، live `3/22`, raw natural `1/20`.
 - **Phase 27.52:** Natural Dialogue Objective Repair — مكتمل جزئيًا؛ `9200` خطوة، raw natural `5/20`, لا runtime switch.
 - **Phase 27.53:** Natural Dialogue Diversity Expansion — مكتمل جزئيًا؛ `10,540` زوجًا، raw natural `2/36`, لا runtime switch.
-- **Phase 27.54:** Capacity/Objectivity Gate — التالي.
+- **Phase 27.54:** Capacity/Objectivity Gate — مكتمل؛ التكبير الكامل ممنوع، والمسموح فقط micro-probe تشخيصي في Phase 27.55.
 - **Phase 28:** تدريب `SF-120M v0.1`؛ أول قفزة بعد نجاح `SF-50M`.
 - **Phase 29:** Runtime Hybrid Assistant v1.
 - **Phase 30:** Continuous Improvement Loop.

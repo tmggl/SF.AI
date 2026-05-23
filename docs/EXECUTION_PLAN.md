@@ -123,7 +123,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.51 | Open-Dialogue Generalization Audit | مكتملة؛ فشل مفيد، live `3/22`, raw natural `1/20`, التدريب مطلوب |
 | Phase 27.52 | Natural Dialogue Objective Repair | مكتملة جزئيًا؛ دبل تدريب `9200` خطوة، raw natural `5/20`, لا runtime switch |
 | Phase 27.53 | Natural Dialogue Diversity Expansion | مكتملة جزئيًا؛ `10,540` زوجًا و`18,000` خطوة، raw natural `2/36`, لا runtime switch |
-| Phase 27.54 | Capacity/Objectivity Gate | التالية؛ تحديد هل العائق سعة النموذج أم الهدف/التوكنة قبل أي تكبير |
+| Phase 27.54 | Capacity/Objectivity Gate | مكتملة؛ التكبير الكامل ممنوع، micro-probe تشخيصي فقط في Phase 27.55 |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3106,6 +3106,37 @@ cases = 7/7
 - `artifacts/reports/phase27_53_natural_dialogue_diversity_expansion_report.json`
 - `artifacts/samples/phase27_53_natural_dialogue_diversity_expansion.md`
 - checkpoint محلي غير مرفوع: `artifacts/eval/phase27_53_natural_dialogue_diversity_expansion/checkpoints/sf-10m-step18000/state.pt`
+
+---
+
+## Phase 27.54 — Capacity/Objectivity Gate
+
+### الهدف
+منع القفز العشوائي إلى حجم أكبر بعد فشل Phase 27.53، وتحديد القرار الرسمي قبل أي `SF-50M`.
+
+### ما تم
+- أضيف `scripts/phase27_54_capacity_objectivity_gate.py`.
+- أضيف `make phase27-capacity-objectivity-gate`.
+- لم يبدأ أي تدريب جديد ولم تُنشأ checkpoints.
+- قورنت نتائج Phase 27.51–27.53:
+  - Phase 27.51: raw natural `1/20`.
+  - Phase 27.52: raw natural `5/20`.
+  - Phase 27.53: raw natural `2/36`.
+
+### النتيجة
+- الحالة: `COMPLETED_CAPACITY_OBJECTIVITY_GATE_FULL_SCALING_BLOCKED_DIAGNOSTIC_MICRO_PROBE_ALLOWED`.
+- زيادة البيانات وحدها لم تساعد داخل `SF-10M`.
+- العائق قد يكون سعة أو objective/format/tokenization، لذلك لا يجوز تدريب `SF-50M` كامل كقفزة مباشرة.
+
+### القرار
+- لا runtime switch.
+- لا `SF-50M` full training.
+- لا Phase 28.
+- المسموح فقط: Phase 27.55 controlled diagnostic micro-probe يقارن `SF-50M` ضد `SF-10M` بنفس corpus/eval، ولا يفتح runtime إلا بعد gate جديد.
+
+### artifacts
+- [PHASE27_54_CAPACITY_OBJECTIVITY_GATE_REPORT.md](./PHASE27_54_CAPACITY_OBJECTIVITY_GATE_REPORT.md)
+- `artifacts/reports/phase27_54_capacity_objectivity_gate_report.json`
 
 ---
 

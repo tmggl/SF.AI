@@ -392,3 +392,23 @@ def test_phase27_53_natural_dialogue_diversity_expansion_stays_guarded() -> None
     assert report["runtime_switch_allowed"] is False
     assert report["sf50m_allowed"] is False
     assert report["phase28_allowed"] is False
+
+
+def test_phase27_54_capacity_objectivity_gate_blocks_full_scaling() -> None:
+    report = _report("phase27_54_capacity_objectivity_gate_report.json")
+    assert report["phase"] == "Phase 27.54"
+    assert report["training_started"] is False
+    assert report["progressive_scaling_strategy_respected"] is True
+    assert report["observations"]["phase27_51"]["raw_natural_passed"] == 1
+    assert report["observations"]["phase27_52"]["passed"] == 5
+    assert report["observations"]["phase27_53"]["passed"] == 2
+    assert report["diagnosis"]["data_volume_alone_helped"] is False
+    assert report["diagnosis"]["broad_diversity_regressed_vs_phase27_52"] is True
+    assert report["diagnosis"]["direct_full_scaling_would_be_blind"] is True
+    assert report["scaling_gates"]["evaluation_suite"]["passed"] is False
+    assert report["scaling_gates"]["runtime_quality"]["passed"] is False
+    assert report["decisions"]["runtime_switch_allowed"] is False
+    assert report["decisions"]["sf50m_full_training_allowed"] is False
+    assert report["decisions"]["phase28_allowed"] is False
+    assert report["decisions"]["sf50m_diagnostic_micro_probe_allowed"] is True
+    assert report["decisions"]["diagnostic_micro_probe_is_not_runtime_scaling"] is True

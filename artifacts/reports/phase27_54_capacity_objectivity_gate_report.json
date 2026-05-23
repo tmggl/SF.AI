@@ -1,0 +1,126 @@
+{
+  "phase": "Phase 27.54",
+  "status": "COMPLETED_CAPACITY_OBJECTIVITY_GATE_FULL_SCALING_BLOCKED_DIAGNOSTIC_MICRO_PROBE_ALLOWED",
+  "training_started": false,
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "template_answers_allowed": false,
+  "progressive_scaling_strategy_respected": true,
+  "observations": {
+    "phase27_51": {
+      "candidate_generator": "sf_10m_phase27_47",
+      "training_started": false,
+      "raw_natural_passed": 1,
+      "raw_natural_total": 20,
+      "raw_natural_ratio": 0.05
+    },
+    "phase27_52": {
+      "candidate_generator": "sf_10m_phase27_52",
+      "training_started": true,
+      "model_size": "sf-10m",
+      "train_records": 6400,
+      "unique_train_pairs": 40,
+      "steps": 9200,
+      "passed": 5,
+      "total": 20,
+      "ratio": 0.25
+    },
+    "phase27_53": {
+      "candidate_generator": "sf_10m_phase27_53",
+      "training_started": true,
+      "model_size": "sf-10m",
+      "unique_train_records": 10540,
+      "steps": 18000,
+      "passed": 2,
+      "total": 36,
+      "ratio": 0.0556,
+      "dialect_counts": {
+        "msa": 5270,
+        "saudi": 5270
+      },
+      "category_counts": {
+        "explain": 600,
+        "topic": 600,
+        "question": 600,
+        "example": 600,
+        "open_social": 60,
+        "support": 400,
+        "planning": 320,
+        "writing": 400,
+        "communication": 200,
+        "decision": 240,
+        "learning": 120,
+        "open_general": 6400
+      }
+    }
+  },
+  "diagnosis": {
+    "more_steps_alone_helped_some": true,
+    "data_volume_alone_helped": false,
+    "broad_diversity_regressed_vs_phase27_52": true,
+    "sf10m_collapses_under_broad_open_dialogue": true,
+    "objective_or_format_issue_still_possible": true,
+    "capacity_limit_suspected_but_not_proven": true,
+    "direct_full_scaling_would_be_blind": true
+  },
+  "scaling_gates": {
+    "corpus_readiness": {
+      "passed": true,
+      "notes": "Phase 27.53 produced governed MSA/Saudi dialogue with operational dialogue excluded."
+    },
+    "tokenization_audit": {
+      "passed": true,
+      "notes": "Tokenizer v6 is sovereign and protected weak-lane terms are present."
+    },
+    "evaluation_suite": {
+      "passed": false,
+      "notes": "Open natural dialogue remains far below the runtime bar: 2/36 in Phase 27.53."
+    },
+    "safety_checks": {
+      "passed": true,
+      "notes": "No unsafe domain expansion was opened; generator-only runtime stays guarded."
+    },
+    "runtime_quality": {
+      "passed": false,
+      "notes": "Newer checkpoints are not opened; live UI stays on Phase 27.47 only."
+    },
+    "hallucination_checks": {
+      "passed": false,
+      "notes": "Open dialogue failures include prompt drift and unrelated fragments."
+    },
+    "repetition_checks": {
+      "passed": false,
+      "notes": "Phase 27.53 still shows fragments/mixing; quality gate blocks runtime."
+    },
+    "resource_readiness": {
+      "passed": true,
+      "notes": "Local MPS training pipeline and checkpoint policy are available."
+    }
+  },
+  "decisions": {
+    "runtime_switch_allowed": false,
+    "phase27_52_runtime_allowed": false,
+    "phase27_53_runtime_allowed": false,
+    "sf50m_full_training_allowed": false,
+    "phase28_allowed": false,
+    "sf50m_diagnostic_micro_probe_allowed": true,
+    "diagnostic_micro_probe_is_not_runtime_scaling": true,
+    "must_compare_against_sf10m_same_data_and_eval": true
+  },
+  "next_phase": "Phase 27.55 — Controlled SF-50M diagnostic micro-probe vs SF-10M baseline; bounded training only, no runtime switch unless gate passes",
+  "required_next_gate": {
+    "purpose": "prove whether capacity helps before any full SF-50M plan",
+    "conditions": [
+      "same governed MSA/Saudi micro corpus for SF-10M and SF-50M comparison",
+      "same tokenizer policy unless explicitly audited",
+      "same held-out natural dialogue suite",
+      "no templates and no keyword-lane claims",
+      "no runtime switch on partial result",
+      "report must show clear improvement over Phase 27.52 and Phase 27.53"
+    ],
+    "minimum_to_open_runtime": "natural dialogue quality must pass the gate, not merely improve numerically"
+  }
+}

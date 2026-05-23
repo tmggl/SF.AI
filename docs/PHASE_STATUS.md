@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.53 / 30**
-- **المرحلة الحالية:** **Phase 27.53 — Natural Dialogue Diversity Expansion**
-- **حالة المرحلة الحالية:** **مكتملة جزئيًا؛ 10,540 زوجًا فريدًا و18,000 خطوة لم تكفِ، raw natural = 2/36، لذلك runtime يبقى على Phase 27.47**
-- **المرحلة التالية المقترحة:** Phase 27.54 Capacity/Objectivity Gate؛ لا Phase 28 ولا `SF-50M` قبل إثبات أن التوسيع مبرر.
+- **الرحلة الحالية:** **Phase 27.54 / 30**
+- **المرحلة الحالية:** **Phase 27.54 — Capacity/Objectivity Gate**
+- **حالة المرحلة الحالية:** **مكتملة؛ التكبير الكامل إلى SF-50M ممنوع، والمسموح فقط micro-probe تشخيصي مضبوط في Phase 27.55**
+- **المرحلة التالية المقترحة:** Phase 27.55 Controlled SF-50M Diagnostic Micro-Probe؛ تشخيص فقط، لا runtime switch ولا Phase 28 إلا بعد gate جديد.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -102,6 +102,7 @@
 | Phase 27.51 | Open-Dialogue Generalization Audit | ✅ completed_failed_training_required | ✅ |
 | Phase 27.52 | Natural Dialogue Objective Repair | ✅ completed_partial_keep_phase27_47_runtime | ✅ |
 | Phase 27.53 | Natural Dialogue Diversity Expansion | ✅ completed_partial_keep_phase27_47_runtime | ✅ |
+| Phase 27.54 | Capacity/Objectivity Gate | ✅ completed_full_scaling_blocked_diagnostic_micro_probe_allowed | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -797,6 +798,14 @@
   - السبب الجذري الظاهر: خلط أجزاء من ردود مختلفة وفقدان ارتباط prompt بالرد، مع fragments مثل `نقدر نًا`.
   - القرار: لا runtime switch؛ لا `SF-50M` ولا Phase 28 تلقائيًا؛ التالي Phase 27.54 Capacity/Objectivity Gate.
   - أضيف [PHASE27_53_NATURAL_DIALOGUE_DIVERSITY_EXPANSION_REPORT.md](./PHASE27_53_NATURAL_DIALOGUE_DIVERSITY_EXPANSION_REPORT.md).
+- بدأ وانتهى Phase 27.54 Capacity/Objectivity Gate:
+  - أضيف `make phase27-capacity-objectivity-gate`.
+  - لم يبدأ أي تدريب جديد، ولم تُنشأ corpus أو checkpoints.
+  - قرأ التقارير `27.51/27.52/27.53` وقارن المسار: `1/20` ثم `5/20` ثم `2/36`.
+  - الاستنتاج: زيادة البيانات وحدها لم تساعد، والتكبير الكامل الآن سيكون قفزة عمياء.
+  - القرار: لا runtime switch؛ لا تدريب `SF-50M` كامل؛ لا Phase 28.
+  - المسموح التالي: Phase 27.55 micro-probe تشخيصي مضبوط فقط، يقارن `SF-50M` ضد `SF-10M` بنفس البيانات والتقييم، ولا يفتح runtime.
+  - أضيف [PHASE27_54_CAPACITY_OBJECTIVITY_GATE_REPORT.md](./PHASE27_54_CAPACITY_OBJECTIVITY_GATE_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 

@@ -40,13 +40,14 @@
 - [docs/PHASE27_51_OPEN_DIALOGUE_GENERALIZATION_AUDIT_REPORT.md](./docs/PHASE27_51_OPEN_DIALOGUE_GENERALIZATION_AUDIT_REPORT.md) — تقرير يثبت أن الحوار الطبيعي المفتوح يحتاج تدريبًا جديدًا، لا توسيع كلمات مفتاحية.
 - [docs/PHASE27_52_NATURAL_DIALOGUE_OBJECTIVE_REPAIR_REPORT.md](./docs/PHASE27_52_NATURAL_DIALOGUE_OBJECTIVE_REPAIR_REPORT.md) — تقرير دبل تدريب `SF-10M` الآمن وسبب عدم فتح checkpoint الجديد.
 - [docs/PHASE27_53_NATURAL_DIALOGUE_DIVERSITY_EXPANSION_REPORT.md](./docs/PHASE27_53_NATURAL_DIALOGUE_DIVERSITY_EXPANSION_REPORT.md) — تقرير توسعة `10,540` زوجًا حواريًا ولماذا لم يكفِ ذلك داخل `SF-10M`.
+- [docs/PHASE27_54_CAPACITY_OBJECTIVITY_GATE_REPORT.md](./docs/PHASE27_54_CAPACITY_OBJECTIVITY_GATE_REPORT.md) — بوابة قرار تمنع التكبير الكامل وتسمح فقط بmicro-probe تشخيصي مضبوط.
 
 ---
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.53 / 30 — Natural Dialogue Diversity Expansion اكتملت جزئيًا.
-- **الأولوية الحالية:** Phase 27.54 Capacity/Objectivity Gate؛ لا تدريب `SF-50M` ولا Phase 28 قبل إثبات أن التوسيع مبرر.
+- **الرحلة الحالية:** Phase 27.54 / 30 — Capacity/Objectivity Gate اكتملت.
+- **الأولوية الحالية:** Phase 27.55 Controlled SF-50M diagnostic micro-probe؛ تشخيص فقط، لا تدريب كامل ولا runtime switch.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -54,7 +55,7 @@
 - **التقييم:** Phase 27 مرّر `19/19` turn في حوار متعدد الأدوار، لكنه أكد أن الردود ما زالت `template` وأن المولد غير جاهز.
 - **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.
 - **دورة البيانات:** Phase 18 أضاف تصدير مراجعة من الواجهة و`prepare_dialogue_batch.py`; وPhase 22 يعتمد الآن أيضًا دفعات مباشرة يؤلفها/يراجعها الوكيل بتفويض موثق، بدون انتظار حفظ أو تصدير من سامي.
-- **جاهزية SF-50M:** Phase 26 أضاف `make phase26-readiness` و`GET /system/phase26-readiness`; القرار الحالي `NOT_READY_IMPROVE_SF10M_AND_CANARY`.
+- **جاهزية SF-50M:** Phase 26 أضاف `make phase26-readiness` و`GET /system/phase26-readiness`; Phase 27.54 منع التدريب الكامل وسمح فقط بmicro-probe تشخيصي مضبوط.
 - **بوابات المجالات:** Phase 20 أضاف `make phase20-gates` و`GET /system/phase20-gates`; المجال النشط الوحيد هو `chat`.
 - **طريق التوليد المقنع:** لا تعرض `SF-10M v0.2` أو `SF-10M v0.4` أو `SF-10M v0.5` أو `SF-10M v0.6` كنجاح حواري. v0.6 تحسن رقميًا لكن canary حجبه.
 - **Corpus v2:** Phase 22 أضاف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-completion-gate` و`make phase22-review-intake`; الوضع الحالي 500/500، وفيه ثمان دفعات فصيحة `dialogue_batch_v2_msa_001.jsonl` إلى `dialogue_batch_v2_msa_008.jsonl` وسبع دفعات سعودية `dialogue_batch_v2_saudi_001.jsonl` إلى `dialogue_batch_v2_saudi_007.jsonl` وأربع دفعات مرنة `dialogue_batch_v2_flex_001.jsonl` إلى `dialogue_batch_v2_flex_004.jsonl` إضافة إلى seed فصيح للمصطلحات `protected_terms_msa_seed_v1.jsonl`. التوازن النهائي مكتمل (`msa=250`, `saudi=250`) ولا توجد دفعة تالية في Phase 22. الواجهة الآن للاختبار فقط ولا تعرض حفظ/تصدير يدوي؛ بناء corpus يتم عبر الوكيل والتقارير الداخلية. `phase22-completion-gate` يرجع الآن `PHASE22_COMPLETE_READY_FOR_PHASE23`.
@@ -104,6 +105,7 @@
 - **نتيجة Phase 27.51:** اختبار open-dialogue كشف أن live API نجح `3/22` وأن raw checkpoint بلا conditioning نجح `1/20` فقط على prompts طبيعية؛ التالي تدريب/إصلاح هدف حواري لا keyword expansion. التقرير: [docs/PHASE27_51_OPEN_DIALOGUE_GENERALIZATION_AUDIT_REPORT.md](./docs/PHASE27_51_OPEN_DIALOGUE_GENERALIZATION_AUDIT_REPORT.md).
 - **نتيجة Phase 27.52:** دبل تدريب آمن داخل `SF-10M`: `9200` خطوة و`6400` سجل داخلي، لكن held-out raw natural وصل `5/20` فقط؛ لا runtime switch. التقرير: [docs/PHASE27_52_NATURAL_DIALOGUE_OBJECTIVE_REPAIR_REPORT.md](./docs/PHASE27_52_NATURAL_DIALOGUE_OBJECTIVE_REPAIR_REPORT.md).
 - **نتيجة Phase 27.53:** توسعة كبيرة: `10,540` زوجًا فريدًا و`18,000` خطوة، لكن raw natural وصل `2/36` فقط مع خلط/fragments؛ لا runtime switch. التقرير: [docs/PHASE27_53_NATURAL_DIALOGUE_DIVERSITY_EXPANSION_REPORT.md](./docs/PHASE27_53_NATURAL_DIALOGUE_DIVERSITY_EXPANSION_REPORT.md).
+- **نتيجة Phase 27.54:** بوابة السعة/الهدف: زيادة البيانات وحدها لم تساعد، والتكبير الكامل إلى `SF-50M` ممنوع. المسموح فقط Phase 27.55 كmicro-probe تشخيصي مقارنة بـ`SF-10M`، بلا runtime. التقرير: [docs/PHASE27_54_CAPACITY_OBJECTIVITY_GATE_REPORT.md](./docs/PHASE27_54_CAPACITY_OBJECTIVITY_GATE_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 

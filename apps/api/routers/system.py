@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.53 — Natural Dialogue Diversity Expansion",
-        current_phase_status="completed_partial_keep_phase27_47_runtime",
+        current_phase="Phase 27.54 — Capacity/Objectivity Gate",
+        current_phase_status="completed_full_scaling_blocked_diagnostic_micro_probe_allowed",
         next_phase=(
-            "Phase 27.54 capacity/objectivity gate; no SF-50M/Phase 28 until gate proves scaling is justified"
+            "Phase 27.55 controlled SF-50M diagnostic micro-probe vs SF-10M baseline; no runtime switch unless gate passes"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -379,6 +379,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_53_natural_dialogue_diversity_expansion",
                 status="completed_partial_keep_phase27_47_runtime",
                 phase="Phase 27.53",
+            ),
+            ComponentStatus(
+                name="phase27_54_capacity_objectivity_gate",
+                status="completed_full_scaling_blocked_diagnostic_micro_probe_allowed",
+                phase="Phase 27.54",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

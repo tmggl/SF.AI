@@ -309,6 +309,9 @@ phase27-natural-dialogue-objective-repair:
 phase27-natural-dialogue-diversity-expansion:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_53_natural_dialogue_diversity_expansion.py $(ARGS)
 
+phase27-capacity-objectivity-gate:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_54_capacity_objectivity_gate.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 
