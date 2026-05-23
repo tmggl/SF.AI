@@ -472,3 +472,23 @@ def test_phase27_57_repair_pack_covers_tokenizer_eval_and_format() -> None:
     assert report["decisions"]["next_training_allowed"] is True
     assert report["decisions"]["runtime_switch_allowed"] is False
     assert report["decisions"]["sf50m_full_training_allowed"] is False
+
+
+def test_phase27_58_tokenizer_v7_probe_blocks_runtime_on_alignment_failure() -> None:
+    report = _report("phase27_58_tokenizer_bounded_alignment_probe_report.json")
+    assert report["phase"] == "Phase 27.58"
+    assert report["status"] == "FAILED_TOKENIZER_V7_BOUNDED_ALIGNMENT_PROBE_RUNTIME_BLOCKED"
+    assert report["training_started"] is True
+    assert report["tokenizer"]["path"] == "artifacts/tokenizers/sf_bpe/v7_phase27_58"
+    assert report["tokenizer"]["sf_origin"] is True
+    assert report["tokenizer"]["protected_terms_count"] == 53
+    assert report["protected_phrase_behavior"]["phase27_57_max_pieces"] == 1
+    assert report["protected_phrase_behavior"]["phase27_57_all_single_piece"] is True
+    assert report["summary"]["passed"] == 4
+    assert report["summary"]["total"] == 15
+    assert report["summary"]["family_summary"]["open_social"]["passed"] == 0
+    assert report["summary"]["family_summary"]["followup"]["passed"] == 0
+    assert report["decisions"]["runtime_switch_allowed"] is False
+    assert report["decisions"]["ui_open_allowed"] is False
+    assert report["decisions"]["sf50m_allowed"] is False
+    assert report["decisions"]["broader_canary_allowed"] is False

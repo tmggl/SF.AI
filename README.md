@@ -44,13 +44,14 @@
 - [docs/PHASE27_55_SF50M_DIAGNOSTIC_MICRO_PROBE_REPORT.md](./docs/PHASE27_55_SF50M_DIAGNOSTIC_MICRO_PROBE_REPORT.md) — micro-probe قارن `SF-10M` و`SF-50M` وأبقى التكبير الكامل محجوبًا.
 - [docs/PHASE27_56_OBJECTIVE_FORMAT_TOKENIZER_DIAGNOSIS_REPORT.md](./docs/PHASE27_56_OBJECTIVE_FORMAT_TOKENIZER_DIAGNOSIS_REPORT.md) — تشخيص objective/format/tokenizer قبل أي تدريب جديد.
 - [docs/PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md](./docs/PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md) — حزمة إصلاح tokenizer/eval/format قبل إعادة التدريب.
+- [docs/PHASE27_58_TOKENIZER_BOUNDED_ALIGNMENT_PROBE_REPORT.md](./docs/PHASE27_58_TOKENIZER_BOUNDED_ALIGNMENT_PROBE_REPORT.md) — tokenizer v7 نجح في الحماية، لكن bounded alignment probe فشل `4/15`.
 
 ---
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.57 / 30 — Tokenizer/Eval/Format Repair Pack اكتملت.
-- **الأولوية الحالية:** Phase 27.58 retrain tokenizer + bounded format/alignment probe؛ تدريب محدود فقط، لا فتح واجهة.
+- **الرحلة الحالية:** Phase 27.58 / 30 — Tokenizer v7 Bounded Alignment Probe اكتملت كتجربة فاشلة حواريًا.
+- **الأولوية الحالية:** Phase 27.59 إصلاح فشل `open_social/followup/topic` قبل أي فتح واجهة.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -112,6 +113,7 @@
 - **نتيجة Phase 27.55:** micro-probe مضبوط: `SF-10M=3/20`, `SF-50M=4/20`, delta=1. السعة وحدها لم تحل الحوار المفتوح، لذلك لا runtime ولا تدريب `SF-50M` كامل. التقرير: [docs/PHASE27_55_SF50M_DIAGNOSTIC_MICRO_PROBE_REPORT.md](./docs/PHASE27_55_SF50M_DIAGNOSTIC_MICRO_PROBE_REPORT.md).
 - **نتيجة Phase 27.56:** التشخيص وجد أن `SF-50M` يرتفع إلى `9/20` إذا أزلنا شرط overlap، لكن بقي `9` expected-missing و`9` splits حرجة في tokenizer؛ التالي إصلاح tokenizer/eval/format قبل التدريب. التقرير: [docs/PHASE27_56_OBJECTIVE_FORMAT_TOKENIZER_DIAGNOSIS_REPORT.md](./docs/PHASE27_56_OBJECTIVE_FORMAT_TOKENIZER_DIAGNOSIS_REPORT.md).
 - **نتيجة Phase 27.57:** أضيفت حزمة إصلاح قبل التدريب: `18` عبارة محمية، تغطية `9/9` للعبارات الحرجة، semantic alignment بلا overlap، و5 قواعد لمنع خلط عائلات الردود. التقرير: [docs/PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md](./docs/PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md).
+- **نتيجة Phase 27.58:** دُرّب tokenizer v7 مع `53` مصطلحًا/عبارة محمية ونجحت عبارات 27.57 كقطعة واحدة، لكن probe المولّد فشل `4/15`; لا runtime ولا UI. التقرير: [docs/PHASE27_58_TOKENIZER_BOUNDED_ALIGNMENT_PROBE_REPORT.md](./docs/PHASE27_58_TOKENIZER_BOUNDED_ALIGNMENT_PROBE_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 

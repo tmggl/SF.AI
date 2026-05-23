@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.57 — Tokenizer/Eval/Format Repair Pack",
-        current_phase_status="completed_repair_pack_ready_for_bounded_retraining_gate",
+        current_phase="Phase 27.58 — Tokenizer v7 Bounded Alignment Probe",
+        current_phase_status="failed_bounded_alignment_probe_runtime_blocked",
         next_phase=(
-            "Phase 27.58 retrain tokenizer with Phase 27.57 protected phrases and run bounded format/alignment probe"
+            "Phase 27.59 inspect Phase 27.58 failures and repair bounded alignment before any runtime switch"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -399,6 +399,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_57_tokenizer_eval_format_repair_pack",
                 status="completed_repair_pack_ready_for_bounded_retraining_gate",
                 phase="Phase 27.57",
+            ),
+            ComponentStatus(
+                name="phase27_58_tokenizer_bounded_alignment_probe",
+                status="failed_bounded_alignment_probe_runtime_blocked",
+                phase="Phase 27.58",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

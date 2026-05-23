@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.57 / 30**
-- **المرحلة الحالية:** **Phase 27.57 — Tokenizer/Eval/Format Repair Pack**
-- **حالة المرحلة الحالية:** **مكتملة؛ حزمة الإصلاح جاهزة وتسمح بتدريب محدود في Phase 27.58**
-- **المرحلة التالية المقترحة:** Phase 27.58 retrain tokenizer with Phase 27.57 protected phrases and run bounded format/alignment probe.
+- **الرحلة الحالية:** **Phase 27.58 / 30**
+- **المرحلة الحالية:** **Phase 27.58 — Tokenizer v7 Bounded Alignment Probe**
+- **حالة المرحلة الحالية:** **اكتملت كتجربة تدريب محدودة؛ فشلت بوابة alignment (`4/15`) والـ runtime محجوب**
+- **المرحلة التالية المقترحة:** Phase 27.59 inspect Phase 27.58 failures and repair bounded alignment before any runtime switch.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -106,6 +106,7 @@
 | Phase 27.55 | Controlled SF-50M Diagnostic Micro-Probe | ✅ completed_diagnostic_capacity_signal_failed_full_sf50m_blocked | ✅ |
 | Phase 27.56 | Objective/Format/Tokenizer Diagnosis | ✅ completed_objective_format_tokenizer_diagnosis_runtime_blocked | ✅ |
 | Phase 27.57 | Tokenizer/Eval/Format Repair Pack | ✅ completed_repair_pack_ready_for_bounded_retraining_gate | ✅ |
+| Phase 27.58 | Tokenizer v7 Bounded Alignment Probe | ✅ failed_bounded_alignment_probe_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -835,6 +836,15 @@
   - أضيفت `resources/dialogue_format/response_families_phase27_57.json` وفيها `5` قواعد تمنع خلط عائلات الردود.
   - القرار: يسمح فقط بتدريب محدود في Phase 27.58، ولا runtime switch ولا `SF-50M` كامل.
   - أضيف [PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md](./PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md).
+- بدأ وانتهى Phase 27.58 Tokenizer v7 Bounded Alignment Probe:
+  - أضيف `make phase27-tokenizer-bounded-alignment-probe`.
+  - دُرّب tokenizer v7 في `artifacts/tokenizers/sf_bpe/v7_phase27_58`.
+  - استخدم `53` مصطلحًا/عبارة محمية، وحافظ على عبارات Phase 27.57 كقطعة واحدة (`max_pieces=1`).
+  - دُرّب probe محدود `SF-10M` لمدة `7600` خطوة داخل `artifacts/eval/phase27_58_tokenizer_bounded_alignment_probe`.
+  - النتيجة: `4/15` فقط؛ فشلت `open_social=0/3` و`followup=0/3` وبقي خلط في `topic`.
+  - القرار: لا runtime switch، لا فتح UI، لا `SF-50M`، ولا Phase 28.
+  - التالي: Phase 27.59 إصلاح عائلات `open_social/followup/topic` قبل أي توسيع.
+  - أضيف [PHASE27_58_TOKENIZER_BOUNDED_ALIGNMENT_PROBE_REPORT.md](./PHASE27_58_TOKENIZER_BOUNDED_ALIGNMENT_PROBE_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 

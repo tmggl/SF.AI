@@ -1,0 +1,771 @@
+{
+  "phase": "Phase 27.58",
+  "status": "FAILED_TOKENIZER_V7_BOUNDED_ALIGNMENT_PROBE_RUNTIME_BLOCKED",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": true,
+  "training_scope": "bounded SF-10M tokenizer/probe only; no runtime switch; no SF-50M",
+  "tokenizer": {
+    "path": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+    "sf_origin": true,
+    "vocab_size": 4968,
+    "merges": 4872,
+    "protected_terms_count": 53,
+    "protected_joiner": "▁"
+  },
+  "protected_phrase_behavior": {
+    "average_pieces": 1,
+    "max_pieces": 1,
+    "all_roundtrip_ok": true,
+    "phase27_57_count": 18,
+    "phase27_57_max_pieces": 1,
+    "phase27_57_all_single_piece": true,
+    "rows": [
+      {
+        "term": "وش",
+        "piece_count": 1,
+        "decoded": "وش",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "وشو",
+        "piece_count": 1,
+        "decoded": "وشو",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "وشلون",
+        "piece_count": 1,
+        "decoded": "وشلون",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "شلون",
+        "piece_count": 1,
+        "decoded": "شلون",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "وين",
+        "piece_count": 1,
+        "decoded": "وين",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "ليه",
+        "piece_count": 1,
+        "decoded": "ليه",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "ليش",
+        "piece_count": 1,
+        "decoded": "ليش",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "مين",
+        "piece_count": 1,
+        "decoded": "مين",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "إيش",
+        "piece_count": 1,
+        "decoded": "إيش",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "ترا",
+        "piece_count": 1,
+        "decoded": "ترا",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "ترى",
+        "piece_count": 1,
+        "decoded": "ترى",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "عاد",
+        "piece_count": 1,
+        "decoded": "عاد",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "أبد",
+        "piece_count": 1,
+        "decoded": "أبد",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "بس",
+        "piece_count": 1,
+        "decoded": "بس",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "خلاص",
+        "piece_count": 1,
+        "decoded": "خلاص",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "طيب",
+        "piece_count": 1,
+        "decoded": "طيب",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "تمام",
+        "piece_count": 1,
+        "decoded": "تمام",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "عادي",
+        "piece_count": 1,
+        "decoded": "عادي",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "بالله",
+        "piece_count": 1,
+        "decoded": "بالله",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "تكفى",
+        "piece_count": 1,
+        "decoded": "تكفى",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "تكفين",
+        "piece_count": 1,
+        "decoded": "تكفين",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "لا هنت",
+        "piece_count": 1,
+        "decoded": "لا هنت",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "الله لا يهينك",
+        "piece_count": 1,
+        "decoded": "الله لا يهينك",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "سم",
+        "piece_count": 1,
+        "decoded": "سم",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "أبشر",
+        "piece_count": 1,
+        "decoded": "أبشر",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "حيّاك",
+        "piece_count": 1,
+        "decoded": "حيّاك",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "حياك",
+        "piece_count": 1,
+        "decoded": "حياك",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "يعطيك العافية",
+        "piece_count": 1,
+        "decoded": "يعطيك العافية",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "ما قصرت",
+        "piece_count": 1,
+        "decoded": "ما قصرت",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "الله يعافيك",
+        "piece_count": 1,
+        "decoded": "الله يعافيك",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "وعليكم السلام",
+        "piece_count": 1,
+        "decoded": "وعليكم السلام",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "نفسًا هادئًا",
+        "piece_count": 1,
+        "decoded": "نفسًا هادئًا",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "نشتغل سوا",
+        "piece_count": 1,
+        "decoded": "نشتغل سوا",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "القراءة تفيد",
+        "piece_count": 1,
+        "decoded": "القراءة تفيد",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "تقدّر الناس",
+        "piece_count": 1,
+        "decoded": "تقدّر الناس",
+        "roundtrip_ok": true,
+        "phase27_57_critical": false
+      },
+      {
+        "term": "نسولف",
+        "piece_count": 1,
+        "decoded": "نسولف",
+        "roundtrip_ok": true,
+        "phase27_57_critical": true
+      },
+      {
+        "term": "سولف",
+        "piece_count": 1,
+        "decoded": "سولف",
+        "roundtrip_ok": true,
+        "phase27_57_critical": true
+      },
+      {
+        "term": "سولف معي",
+        "piece_count": 1,
+        "decoded": "سولف معي",
+        "roundtrip_ok": true,
+        "phase27_57_critical": true
+      },
+      {
+        "term": "وش ودك نسولف عنه",
+        "piece_count": 1,
+        "decoded": "وش ودك نسولف عنه",
+        "roundtrip_ok": true,
+        "phase27_57_critical": true
+      },
+      {
+        "term": "الي تحب",
+        "piece_count": 1,
+        "decoded": "الي تحب",
+        "roundtrip_ok": true,
+        "phase27_57_critical": true
+      },
+      {
+        "term": "كمل كلامك",
+        "piece_count": 1,
+        "decoded": "كمل كلامك",
+        "roundtrip_ok": true,
+        "phase27_57_critical": true
+      },
+      {
+        "term": "طيب ليه",
+        "piece_count": 1,
+        "decoded": "طيب ليه",
+        "roundtrip_ok": true,
+        "phase27_57_critical": true
+      },
+      {
+        "term": "يعني كيف",
+        "piece_count": 1,
+        "decoded": "يعني كيف",
+        "roundtrip_ok": true,
+        "phase27_57_critical": true
+      },
+      {
+        "term": "طمني",
+        "piece_count": 1,
+        "decoded": "طمني",
+        "roundtrip_ok": true,
+        "phase27_57_critical": true
+      },
+      {
+        "term": "توترت",
+        "piece_count": 1,
+        "decoded": "توترت",
+        "roundtrip_ok": true,
+        "phase27_57_critical": true
+      },
+      {
+        "term": "كيف أهدأ إذا توترت",
+        "piece_count": 1,
+        "decoded": "كيف أهدأ إذا توترت",
+        "roundtrip_ok": true,
+        "phase27_57_critical": true
+      },
+      {
+        "term": "حاس بضغط",
+        "piece_count": 1,
+        "decoded": "حاس بضغط",
+        "roundtrip_ok": true,
+        "phase27_57_critical": true
+      },
+      {
+        "term": "هات موضوع خفيف",
+        "piece_count": 1,
+        "decoded": "هات موضوع خفيف",
+        "roundtrip_ok": true,
+        "phase27_57_critical": true
+      },
+      {
+        "term": "هات موضوع",
+        "piece_count": 1,
+        "decoded": "هات موضوع",
+        "roundtrip_ok": true,
+        "phase27_57_critical": true
+      },
+      {
+        "term": "يومي كان طويل",
+        "piece_count": 1,
+        "decoded": "يومي كان طويل",
+        "roundtrip_ok": true,
+        "phase27_57_critical": true
+      },
+      {
+        "term": "تعبان شوي واحتاج كلام يهديني",
+        "piece_count": 1,
+        "decoded": "تعبان شوي واحتاج كلام يهديني",
+        "roundtrip_ok": true,
+        "phase27_57_critical": true
+      },
+      {
+        "term": "رتب لي بداية بسيطة بدون تعقيد",
+        "piece_count": 1,
+        "decoded": "رتب لي بداية بسيطة بدون تعقيد",
+        "roundtrip_ok": true,
+        "phase27_57_critical": true
+      },
+      {
+        "term": "اعطني مثال بسيط عن الصدق",
+        "piece_count": 1,
+        "decoded": "اعطني مثال بسيط عن الصدق",
+        "roundtrip_ok": true,
+        "phase27_57_critical": true
+      }
+    ]
+  },
+  "alignment_policy": {
+    "prompt_overlap_required": false,
+    "cross_family_blocking_enabled": true,
+    "forbidden_collapses": [
+      {
+        "prompt_family": "followup",
+        "wrong_response_family": "planning"
+      },
+      {
+        "prompt_family": "followup",
+        "wrong_response_family": "support"
+      },
+      {
+        "prompt_family": "open_social",
+        "wrong_response_family": "planning"
+      },
+      {
+        "prompt_family": "topic",
+        "wrong_response_family": "planning"
+      },
+      {
+        "prompt_family": "support",
+        "wrong_response_family": "topic"
+      }
+    ]
+  },
+  "train_records": 3283,
+  "checkpoint_root": "artifacts/eval/phase27_58_tokenizer_bounded_alignment_probe/checkpoints",
+  "checkpoint_name": "sf-10m-step7600",
+  "candidate_generator": "sf_10m_phase27_58_probe",
+  "summary": {
+    "passed": 4,
+    "total": 15,
+    "pass_rate": 0.2667,
+    "family_summary": {
+      "followup": {
+        "passed": 0,
+        "total": 3
+      },
+      "open_social": {
+        "passed": 0,
+        "total": 3
+      },
+      "planning": {
+        "passed": 2,
+        "total": 3
+      },
+      "support": {
+        "passed": 1,
+        "total": 3
+      },
+      "topic": {
+        "passed": 1,
+        "total": 3
+      }
+    },
+    "reason_counts": {
+      "expected_terms_missing": 10,
+      "response_family_mismatch": 1,
+      "passed": 4
+    }
+  },
+  "rows": [
+    {
+      "id": "open_social_01",
+      "dialect": "saudi",
+      "prompt": "وش ودك نسولف عنه",
+      "intent": "open_social",
+      "topic": "",
+      "family": "open_social",
+      "expected_terms": [
+        "نسولف",
+        "موضوع"
+      ],
+      "response": "خلنا نبدأ بسؤال بسيط: وش تحتاج؟",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "open_social_02",
+      "dialect": "saudi",
+      "prompt": "هات سالفة خفيفة",
+      "intent": "open_social",
+      "topic": "",
+      "family": "open_social",
+      "expected_terms": [
+        "موضوع",
+        "يومك"
+      ],
+      "response": "العفو، حاضر بأي وقت.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "open_social_03",
+      "dialect": "msa",
+      "prompt": "أريد كلامًا خفيفًا",
+      "intent": "open_social",
+      "topic": "",
+      "family": "open_social",
+      "expected_terms": [
+        "نبدأ",
+        "موضوع"
+      ],
+      "response": "ابدأ بخطوة صغيرة ثم أكمل.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "followup_01",
+      "dialect": "saudi",
+      "prompt": "يعني كيف",
+      "intent": "followup",
+      "topic": "",
+      "family": "followup",
+      "expected_terms": [
+        "ابدأ",
+        "خطوة"
+      ],
+      "response": "نكمل: اختر خطوة واحدة، نفذها، ثم قيّم النتيجة.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "family_ok": false,
+      "passed": false,
+      "reason": "response_family_mismatch"
+    },
+    {
+      "id": "followup_02",
+      "dialect": "msa",
+      "prompt": "اشرحها أكثر",
+      "intent": "followup",
+      "topic": "",
+      "family": "followup",
+      "expected_terms": [
+        "أقصد",
+        "خطوة"
+      ],
+      "response": "العفو، يسعدني أن أساعدك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "followup_03",
+      "dialect": "saudi",
+      "prompt": "طيب بعدين",
+      "intent": "followup",
+      "topic": "",
+      "family": "followup",
+      "expected_terms": [
+        "بعدها",
+        "خطوة"
+      ],
+      "response": "العفو، حاضر بأي وقت.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "planning_01",
+      "dialect": "msa",
+      "prompt": "كيف أنظم يومي",
+      "intent": "planning",
+      "topic": "",
+      "family": "planning",
+      "expected_terms": [
+        "مهام",
+        "ابدأ"
+      ],
+      "response": "اكتب ثلاث مهام وابدأ بالأهم.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "family_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "planning_02",
+      "dialect": "saudi",
+      "prompt": "ابي ارتب يومي",
+      "intent": "planning",
+      "topic": "",
+      "family": "planning",
+      "expected_terms": [
+        "ابدأ",
+        "خطوة"
+      ],
+      "response": "اكتب أهم ثلاث أشياء وابدأ بالأول.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "family_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "planning_03",
+      "dialect": "msa",
+      "prompt": "دلني على بداية عملية",
+      "intent": "planning",
+      "topic": "",
+      "family": "planning",
+      "expected_terms": [
+        "مهمة",
+        "ابدأ"
+      ],
+      "response": "اختر واحدة صغيرة وواضحة.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "support_01",
+      "dialect": "saudi",
+      "prompt": "توترت شوي",
+      "intent": "support",
+      "topic": "",
+      "family": "support",
+      "expected_terms": [
+        "نفس",
+        "خطوة"
+      ],
+      "response": "الله يهونها، خذ نفس واهدأ شوي.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "family_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "support_02",
+      "dialect": "msa",
+      "prompt": "أحتاج أهدأ",
+      "intent": "support",
+      "topic": "",
+      "family": "support",
+      "expected_terms": [
+        "تنفس",
+        "بهدوء"
+      ],
+      "response": "خذ نفسًا هادئًا واهدأ الآن.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": true,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "support_03",
+      "dialect": "saudi",
+      "prompt": "طمني",
+      "intent": "support",
+      "topic": "",
+      "family": "support",
+      "expected_terms": [
+        "تهدأ",
+        "خطوة"
+      ],
+      "response": "ابدأ بشي بسيط وواضح.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "topic_01",
+      "dialect": "msa",
+      "prompt": "ما معنى الصداقة",
+      "intent": "topic",
+      "topic": "الصداقة",
+      "family": "topic",
+      "expected_terms": [
+        "الصداقة"
+      ],
+      "response": "الصدق أن تقول الحقيقة بوضوح ل.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": true,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "topic_02",
+      "dialect": "saudi",
+      "prompt": "الشجاعة وش تعني",
+      "intent": "topic",
+      "topic": "الشجاعة",
+      "family": "topic",
+      "expected_terms": [
+        "الشجاعة"
+      ],
+      "response": "الشجاعة إنك تسوي الصح حتى لو كنت خايف.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "family_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "topic_03",
+      "dialect": "msa",
+      "prompt": "اشرح الصدق",
+      "intent": "topic",
+      "topic": "الصدق",
+      "family": "topic",
+      "expected_terms": [
+        "الصدق"
+      ],
+      "response": "الشجاعة أن تقول طيبة تقوم الآن.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": true,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    }
+  ],
+  "decisions": {
+    "runtime_switch_allowed": false,
+    "ui_open_allowed": false,
+    "sf50m_allowed": false,
+    "phase28_allowed": false,
+    "broader_canary_allowed": false
+  },
+  "decision": "Bounded alignment probe failed. Keep runtime blocked and inspect tokenizer/probe samples before more scaling.",
+  "next_phase": "Phase 27.59 — inspect Phase 27.58 failures and repair bounded alignment",
+  "torch_version": "2.12.0"
+}

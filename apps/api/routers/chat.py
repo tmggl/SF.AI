@@ -49,8 +49,13 @@ def chat_message(payload: ChatRequest) -> ChatResponse:
         generator = "generator_blocked"
         dispatch = "module:chat_lab"
         debug["generator"] = generator
+        if "module_notes" in debug:
+            debug["module_notes"] = debug["module_notes"].replace(
+                "generator:template",
+                "generator:generator_blocked",
+            )
         debug["generator_only_blocked"] = "true"
-        debug["template_suppressed"] = "true"
+        debug["fixed_reply_suppressed"] = "true"
     return ChatResponse(
         domain=result.domain,
         intent=result.intent,

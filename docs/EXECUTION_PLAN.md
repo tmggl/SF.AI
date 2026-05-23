@@ -127,6 +127,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.55 | Controlled SF-50M Diagnostic Micro-Probe | مكتملة؛ `SF-10M=3/20`, `SF-50M=4/20`, السعة وحدها غير كافية |
 | Phase 27.56 | Objective/Format/Tokenizer Diagnosis | مكتملة؛ strict `4/20` وrelaxed `9/20`; إصلاح tokenizer/eval/format قبل التدريب |
 | Phase 27.57 | Tokenizer/Eval/Format Repair Pack | مكتملة؛ `18` عبارة محمية، تغطية `9/9`, semantic alignment جاهز |
+| Phase 27.58 | Tokenizer v7 Bounded Alignment Probe | مكتملة كتجربة؛ tokenizer نجح، probe فشل `4/15`, runtime محجوب |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3247,6 +3248,51 @@ cases = 7/7
 ### artifacts
 - [PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md](./PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md)
 - `artifacts/reports/phase27_57_tokenizer_eval_format_repair_pack_report.json`
+
+---
+
+## Phase 27.58 — Tokenizer v7 Bounded Alignment Probe
+
+### الهدف
+تنفيذ التدريب المحدود الذي سمحت به Phase 27.57: tokenizer جديد يحمي العبارات الحوارية، ثم probe صغير يقيس عائلات الردود بلا فتح واجهة.
+
+### ما تم
+- أضيف `scripts/phase27_58_tokenizer_bounded_alignment_probe.py`.
+- أضيف `make phase27-tokenizer-bounded-alignment-probe`.
+- دُرّب tokenizer v7:
+  - `artifacts/tokenizers/sf_bpe/v7_phase27_58`
+  - protected terms/phrases: `53`
+  - Phase 27.57 phrases بقيت `max_pieces=1`.
+- دُرّب probe محدود `SF-10M`:
+  - `7600` خطوة.
+  - corpus مؤقت داخل `artifacts/eval/phase27_58_tokenizer_bounded_alignment_probe/corpus`.
+  - checkpoint داخل `artifacts/eval/phase27_58_tokenizer_bounded_alignment_probe/checkpoints`.
+- شُغّل alignment probe على `15` حالة موزعة على:
+  - `open_social`
+  - `followup`
+  - `planning`
+  - `support`
+  - `topic`
+
+### النتيجة
+- pass: `4/15`.
+- `open_social`: `0/3`.
+- `followup`: `0/3`.
+- `planning`: `2/3`.
+- `support`: `1/3`.
+- `topic`: `1/3`.
+
+### القرار
+التوكنة تحسنت، لكن objective/alignment ما زال ضعيفًا. لا runtime switch، لا UI، لا SF-50M، ولا Phase 28.
+
+التالي:
+
+**Phase 27.59 — inspect Phase 27.58 failures and repair bounded alignment**
+
+### artifacts
+- [PHASE27_58_TOKENIZER_BOUNDED_ALIGNMENT_PROBE_REPORT.md](./PHASE27_58_TOKENIZER_BOUNDED_ALIGNMENT_PROBE_REPORT.md)
+- `artifacts/reports/phase27_58_tokenizer_bounded_alignment_probe_report.json`
+- `artifacts/samples/phase27_58_tokenizer_bounded_alignment_probe.md`
 
 ---
 

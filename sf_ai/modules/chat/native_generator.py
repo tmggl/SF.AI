@@ -1,8 +1,8 @@
 """NativeGenerator adapter skeleton for Phase 15.
 
 This module loads only SF.AI-origin tokenizer/checkpoint artifacts and exposes a
-small generation interface. It is not enabled by default and ChatModule keeps
-using templates unless the runtime explicitly opts in and the policy allows it.
+small generation interface. The public chat API uses guarded generation only;
+unsupported prompts are blocked instead of receiving a fixed fallback reply.
 """
 
 from __future__ import annotations
@@ -230,6 +230,12 @@ def _intent_label(intent: str | None) -> str:
         "chat.support": "دعم",
         "thanks": "شكر",
         "chat.thanks": "شكر",
+        "followup": "متابعة",
+        "chat.followup": "متابعة",
+        "open_social": "سوالف",
+        "chat.open_social": "سوالف",
+        "topic": "تعريف",
+        "chat.topic": "تعريف",
     }
     return mapping.get(i, "")
 

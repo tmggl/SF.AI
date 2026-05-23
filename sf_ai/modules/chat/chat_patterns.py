@@ -83,10 +83,10 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.57: ثبتنا حزمة إصلاح قبل التدريب. أضفنا 18 عبارة "
-    "محمية للـ tokenizer وغطينا 9/9 من العبارات الحرجة، واستبدلنا overlap "
-    "بsemantic alignment، وثبتنا response families لمنع خلط الردود. التالي "
-    "Phase 27.58 تدريب محدود للـ tokenizer/probe، بلا فتح واجهة.",
+    "وصلنا إلى Phase 27.58: دربنا tokenizer v7 مع 53 مصطلحًا/عبارة محمية، "
+    "وحافظ على عبارات 27.57 كقطعة واحدة، لكن probe الحواري فشل 4/15. "
+    "الواجهة لا تُفتح لهذا المرشح. التالي Phase 27.59 لإصلاح open_social "
+    "وfollowup وtopic قبل أي runtime switch.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

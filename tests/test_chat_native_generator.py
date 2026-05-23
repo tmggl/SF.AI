@@ -487,7 +487,7 @@ def test_chat_api_response_includes_generator_metadata() -> None:
     body = r.json()
     assert body["generator"] == "generator_blocked"
     assert body["response"] == ""
-    assert body["debug"]["template_suppressed"] == "true"
+    assert body["debug"]["fixed_reply_suppressed"] == "true"
 
 
 def test_lab_generation_can_cover_non_sensitive_skeleton_domains(monkeypatch) -> None:
