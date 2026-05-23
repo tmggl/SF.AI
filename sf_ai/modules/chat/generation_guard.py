@@ -26,6 +26,17 @@ _CORPUS_ARTIFACTS = (
     "المعنى:",
     "وأين",
 )
+_MODEL_ARTIFACT_FRAGMENTS = (
+    # Observed in SF-10M v0.6 canary samples: Arabic-looking fragments that
+    # are not stable words and should never surface in runtime chat.
+    "الطرو",
+    "حارين",
+    "استعجه",
+    "مستمستم",
+    "بالمو",
+    "رتنا",
+    "تًا",
+)
 _BROKEN_PREFIX_RE = re.compile(r"^\s*[\u0600-\u06FF]\s*[؟?]")
 _REPEATED_ARABIC_BIGRAM_RE = re.compile(r"([\u0600-\u06FF]{2})\1")
 _REPEATED_SHORT_PHRASE_RE = re.compile(
@@ -89,6 +100,8 @@ class GenerationGuard:
             return self._verdict(False, "too_fragmented", cleaned)
         if any(marker in cleaned for marker in _CORPUS_ARTIFACTS):
             return self._verdict(False, "corpus_artifact", cleaned)
+        if any(marker in cleaned for marker in _MODEL_ARTIFACT_FRAGMENTS):
+            return self._verdict(False, "model_artifact_fragment", cleaned)
         if _REPEATED_SHORT_PHRASE_RE.search(cleaned):
             return self._verdict(False, "repeated_phrase", cleaned)
 

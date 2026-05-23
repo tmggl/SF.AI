@@ -63,6 +63,7 @@ artifacts/tokenizers/*/vocab.json
 artifacts/tokenizers/*/merges.txt
 artifacts/checkpoints/**/*
 artifacts/logs/**/*
+artifacts/eval/**/*
 !**/.gitkeep
 !**/README.md
 !artifacts/tokenizers/sf_bpe/v1/vocab.json

@@ -31,6 +31,14 @@ def test_phase25_generation_guard_blocks_real_v02_style_fragment() -> None:
     assert verdict.reason in {"broken_prefix", "corpus_artifact", "malformed_token"}
 
 
+def test_phase27_8_generation_guard_blocks_v06_fragment() -> None:
+    verdict = GenerationGuard().inspect(
+        "ابدأ بهالفكرة: اطلب الطروسبب حارين وسبب حاستعجه على بنير."
+    )
+    assert verdict.allowed is False
+    assert verdict.reason == "model_artifact_fragment"
+
+
 def test_phase25_generation_guard_blocks_repetition() -> None:
     verdict = GenerationGuard().inspect(
         "تمام تمام تمام تمام تمام تمام تمام تمام تمام"

@@ -77,6 +77,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.5 | SF-10M Dialogue-Format Repair | مكتملة بحدود؛ runtime محظور |
 | Phase 27.6 | SF-10M Assistant-Target Training | مكتملة بحدود؛ runtime محظور |
 | Phase 27.7 | Fixed Split + Gold Social Canary | مكتملة؛ split ثابت + canary أقوى، runtime محظور |
+| Phase 27.8 | SF-10M v0.6 Split Training | مكتملة بتحسن رقمي؛ runtime محظور |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -1501,6 +1502,50 @@ issues  = 0
 ### بعد المرحلة
 درّب `SF-10M v0.6` على `train split` فقط بخسارة assistant-target، ثم قيّمه على
 `eval split`، ثم شغّل canary prompt-aware قبل أي تشغيل واجهة أو قرار تكبير.
+
+---
+
+## Phase 27.8 — SF-10M v0.6 Split Training
+
+### الهدف
+تدريب `SF-10M v0.6` على `train split` فقط وقياسه على `eval split` المعزول
+للحكم الحقيقي على جودة التوليد قبل أي تكبير.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.8 بقرار:
+
+```text
+COMPLETED_WITH_NUMERIC_IMPROVEMENT_RUNTIME_BLOCKED
+```
+
+نتيجة التدريب والتقييم:
+
+```text
+train_records = 4703
+eval_records  = 540
+steps         = 4000
+loss          = 8.4743 → 3.7460
+best eval     = step4000 loss 5.0227, perplexity 151.82
+canary        = 0/10 allowed
+```
+
+قرار الجودة:
+
+- `SF-10M v0.6` أفضل رقميًا من v0.5 على eval split.
+- التوليد ما زال يحتوي fragments مشوهة.
+- canary يحجب النموذج عن الواجهة.
+- لا يبدأ `SF-50M` حتى تُصلح جودة التوليد القصير.
+
+### artifacts
+
+- [PHASE27_8_SF10M_V0_6_SPLIT_TRAINING_REPORT.md](./PHASE27_8_SF10M_V0_6_SPLIT_TRAINING_REPORT.md)
+- `artifacts/reports/sf_10m_v0_6_split_training_report.json`
+- `artifacts/samples/sf_10m_v0_6_generations.md`
+
+### بعد المرحلة
+ابدأ إصلاح جودة التوليد القصير: eval suite آلي لعينات التوليد، gold social
+أعلى، وفحص tokenizer/decoding قبل إعادة تدريب صغيرة.
 
 ---
 

@@ -45,8 +45,9 @@ SF.AI يملك الآن:
 | Phase 27.5 | `SF-10M v0.4` | إصلاح صيغة الحوار بعد corpus gate |
 | Phase 27.6 | `SF-10M v0.5` | assistant-target training على رد المساعد فقط |
 | Phase 27.7 | لا تدريب | fixed train/eval split + gold social + canary prompt-aware |
-| بعد Phase 27.7 | `SF-10M v0.6` | تدريب على train split وتقييم held-out eval split |
-| بعد نجاح v0.6 | `SF-50M v0.1` | نجاح جودة SF-10M/canary + إعادة Phase 26 readiness |
+| Phase 27.8 | `SF-10M v0.6` | تحسن رقمي على eval؛ runtime blocked |
+| بعد Phase 27.8 | إصلاح SF-10M | جودة توليد قصير + canary آلي |
+| بعد نجاح SF-10M | `SF-50M v0.1` | نجاح جودة SF-10M/canary + إعادة Phase 26 readiness |
 | Phase 28 | `SF-120M v0.1` | نجاح SF-50M + scaling gate |
 
 ---
@@ -62,12 +63,13 @@ SF.AI يملك الآن:
 - **Phase 27.5:** `SF-10M v0.4` تعلّم صيغة الحوار أفضل، لكنه بقي غير جاهز للواجهة.
 - **Phase 27.6:** `SF-10M v0.5` جرّب assistant-target، لكنه بقي مكررًا وغير جاهز للواجهة.
 - **Phase 27.7:** ثبت split/canary قبل التدريب التالي، وأصبح القياس على eval held-out إلزاميًا.
+- **Phase 27.8:** `SF-10M v0.6` تحسن رقميًا، لكن canary حجب 10/10 عينات بسبب fragments.
 - **Phase 28:** أول قفزة بعد SF-50M إذا أثبت 50M قيمة واضحة.
 - **Phase 29:** إدخاله في الواجهة كتجربة يومية مع router/safety/memory.
 
 الخلاصة:
 
-> أول “مولّد حقيقي” بدأ في Phase 13، لكن أول “حوار مولّد يقنع سامي” صار مشروطًا بنجاح `SF-10M v0.6` على split ثابت وcanary أقوى، أو نجاح `SF-50M` لاحقًا.
+> أول “مولّد حقيقي” بدأ في Phase 13، لكن أول “حوار مولّد يقنع سامي” صار مشروطًا بإصلاح جودة التوليد القصير على `SF-10M` ومروره من canary، أو نجاح `SF-50M` لاحقًا.
 
 ---
 

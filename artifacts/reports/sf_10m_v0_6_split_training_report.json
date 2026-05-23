@@ -1,0 +1,51 @@
+{
+  "phase": "Phase 27.8",
+  "name": "SF-10M v0.6 Split Training",
+  "status": "completed_with_numeric_improvement_runtime_blocked",
+  "language_track": ["msa", "saudi"],
+  "lexicon_track": "Saudi Seed v1",
+  "runtime_generator_enabled": false,
+  "training": {
+    "model": "sf-10m",
+    "params": 7444992,
+    "tokenizer": "artifacts/tokenizers/sf_bpe/v2",
+    "corpus": "data/corpus/chat/jsonl",
+    "split_manifest": "data/corpus/chat/splits/dialogue_split_v1.json",
+    "split_name": "train",
+    "train_records": 4703,
+    "loss_scope": "assistant",
+    "steps": 4000,
+    "batch_size": 4,
+    "seq_len": 64,
+    "device": "mps",
+    "seed": 20260523,
+    "first_logged_loss": 8.4743,
+    "last_loss": 3.7460,
+    "best_logged_train_loss": 2.7407
+  },
+  "eval": {
+    "split_name": "eval",
+    "eval_records": 540,
+    "max_batches": 50,
+    "checkpoints": [
+      {"name": "sf-10m-step1000", "loss": 6.0635, "perplexity": 429.90},
+      {"name": "sf-10m-step2000", "loss": 5.5189, "perplexity": 249.37},
+      {"name": "sf-10m-step3000", "loss": 5.4055, "perplexity": 222.63},
+      {"name": "sf-10m-step4000", "loss": 5.0227, "perplexity": 151.82}
+    ],
+    "best_checkpoint": "sf-10m-step4000"
+  },
+  "canary": {
+    "prompt_aware": true,
+    "sample_count": 10,
+    "allowed_count": 0,
+    "blocked_count": 10,
+    "primary_block_reason": "model_artifact_fragment",
+    "blocked_fragments": ["الطرو", "حارين", "استعجه", "مستمستم", "بالمو", "رتنا", "تًا"]
+  },
+  "decision": {
+    "activate_in_chat_ui": false,
+    "start_sf50m": false,
+    "reason": "Numeric eval improved, but generation samples remain malformed and are blocked by canary."
+  }
+}

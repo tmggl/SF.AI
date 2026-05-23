@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.7 / 30**
-- **المرحلة الحالية:** **Phase 27.7 — Fixed Split + Gold Social Canary**
-- **حالة المرحلة الحالية:** **مكتملة كبوابة جودة؛ split ثابت + gold social + canary prompt-aware، ولا يزال runtime المولّد محظورًا**
-- **المرحلة التالية المقترحة:** تدريب `SF-10M v0.6` على `train split` فقط، ثم تقييم `held-out eval split` قبل أي تفكير في `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.8 / 30**
+- **المرحلة الحالية:** **Phase 27.8 — SF-10M v0.6 Split Training**
+- **حالة المرحلة الحالية:** **مكتملة بتحسن رقمي؛ `SF-10M v0.6` تحسن على eval لكنه محظور runtime بسبب canary**
+- **المرحلة التالية المقترحة:** إصلاح جودة التوليد القصير على `SF-10M` قبل أي تكبير إلى `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -56,6 +56,7 @@
 | Phase 27.5 | SF-10M Dialogue-Format Repair | ✅ completed_with_limits_runtime_blocked | ✅ |
 | Phase 27.6 | SF-10M Assistant-Target Training | ✅ completed_with_limits_runtime_blocked | ✅ |
 | Phase 27.7 | Fixed Split + Gold Social Canary | ✅ completed_quality_gate_runtime_blocked | ✅ |
+| Phase 27.8 | SF-10M v0.6 Split Training | ✅ completed_with_numeric_improvement_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -366,6 +367,17 @@
   - لا يتم تفعيل أي checkpoint مولّد في الواجهة حتى ينجح v0.6 على split الثابت وcanary prompt-aware.
   - أضيف [PHASE27_7_FIXED_SPLIT_GOLD_SOCIAL_CANARY_REPORT.md](./PHASE27_7_FIXED_SPLIT_GOLD_SOCIAL_CANARY_REPORT.md).
   - أضيف `artifacts/reports/phase27_7_fixed_split_gold_social_canary_report.json`.
+- بدأ وانتهى Phase 27.8 SF-10M v0.6 Split Training:
+  - دُرّب `SF-10M v0.6` على `train split` فقط: `4703` سجلًا.
+  - استُخدم `loss_scope=assistant`, `steps=4000`, `batch_size=4`, `seq_len=64`, `device=mps`.
+  - loss التدريب: `8.4743 → 3.7460`، وأفضل logged train loss كان `2.7407`.
+  - تقييم eval split المعزول (`540` سجلًا) أظهر أفضل checkpoint عند `step4000`: loss `5.0227`, perplexity `151.82`.
+  - canary على 10 prompts اجتماعية/يومية حجب `10/10` بسبب fragments مولّدة مشوهة مثل `الطرو`, `حارين`, `استعجه`.
+  - القرار: `COMPLETED_WITH_NUMERIC_IMPROVEMENT_RUNTIME_BLOCKED`.
+  - لا يتم تفعيل `SF-10M v0.6` في الواجهة، ولا يبدأ `SF-50M`.
+  - أضيف [PHASE27_8_SF10M_V0_6_SPLIT_TRAINING_REPORT.md](./PHASE27_8_SF10M_V0_6_SPLIT_TRAINING_REPORT.md).
+  - أضيف `artifacts/reports/sf_10m_v0_6_split_training_report.json`.
+  - أضيف `artifacts/samples/sf_10m_v0_6_generations.md`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -431,7 +443,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.7"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.8"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -462,7 +474,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-476 passed in 16.43s
+477 passed in 16.79s
 ```
 
 | ملف | عدد |
