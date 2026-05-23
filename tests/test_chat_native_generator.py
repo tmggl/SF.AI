@@ -481,12 +481,13 @@ def test_chat_api_response_includes_generator_metadata() -> None:
     client = TestClient(app)
     r = client.post(
         "/chat/message",
-        json={"message": "مرحبا", "session_id": "phase15-api"},
+        json={"message": "من أنت", "session_id": "phase15-api"},
     )
     assert r.status_code == 200
     body = r.json()
-    assert body["generator"] == "template"
-    assert body["debug"]["generator"] == "template"
+    assert body["generator"] == "generator_blocked"
+    assert body["response"] == ""
+    assert body["debug"]["template_suppressed"] == "true"
 
 
 def test_lab_generation_can_cover_non_sensitive_skeleton_domains(monkeypatch) -> None:

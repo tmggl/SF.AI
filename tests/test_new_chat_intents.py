@@ -154,19 +154,19 @@ def test_open_question_stays_open_after_smalltalk_followup() -> None:
     assert "وش سؤالك" in r.response
 
 
-def test_phase_guidance_prompts_are_specific_templates() -> None:
+def test_phase_guidance_prompts_are_current_generator_lab_guidance() -> None:
     orch = Orchestrator(registry=load_default_registry())
     dialogue = orch.process(UserMessage(text="أريد أن أختبر الحوار العربي الفصيح.", session_id="p22-dialogue"))
     next_step = orch.process(UserMessage(text="اشرح لي خطوتنا التالية باختصار.", session_id="p22-next"))
     diff = orch.process(UserMessage(text="ما الفرق بين تدريب النموذج وتفعيل النموذج؟", session_id="p22-diff"))
 
     assert dialogue.intent == "chat.dialogue_test"
-    assert dialogue.debug["generator"] == "template"
-    assert "مولّد تجريبي" in dialogue.response
-    assert "نطاقات محددة" in dialogue.response
+    assert "sf_10m_phase27_47" in dialogue.response
+    assert "القوالب" in dialogue.response
+    assert "لا يظهر له رد" in dialogue.response
     assert next_step.intent == "chat.next_step"
-    assert "Phase 27.49" in next_step.response
-    assert "33 حالة" in next_step.response
+    assert "Phase 27.50" in next_step.response
+    assert "فلن يظهر قالب" in next_step.response
     assert diff.intent == "chat.training_activation_difference"
     assert "التدريب" in diff.response
     assert "التفعيل" in diff.response

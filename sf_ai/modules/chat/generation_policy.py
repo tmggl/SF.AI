@@ -103,7 +103,6 @@ class GenerationPolicy:
 
 _GUARDED_TRIAL_SOCIAL_INTENTS: frozenset[str] = frozenset(
     {
-        "chat.greeting",
         "chat.smalltalk",
         "chat.thanks",
     }

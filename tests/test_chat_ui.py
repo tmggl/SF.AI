@@ -26,7 +26,10 @@ def test_ui_chat_serves_html() -> None:
     assert "--bg: #f6f8fb" in body
     assert "اكتب رسالتك هنا" in body
     assert "المحادثة جاهزة" in body
-    assert "قالب ثابت - ليس مولدًا" in body
+    assert "قالب ثابت - ليس مولدًا" not in body
+    assert "مولّد تجريبي" not in body
+    assert "المولّد مباشر" in body
+    assert "generator_trial" not in body
     assert "Canary SF-10M v0.2" in body
     assert "مولّد SF-10M Phase 27.47" in body
     assert "ذاكرة:" in body
@@ -45,11 +48,12 @@ def test_get_chat_redirects_to_ui() -> None:
 
 
 def test_post_chat_message_still_works_after_ui_mount() -> None:
-    r = client.post("/chat/message", json={"message": "مرحبا", "session_id": "ui-test"})
+    r = client.post("/chat/message", json={"message": "علومك", "session_id": "ui-test"})
     assert r.status_code == 200
     body = r.json()
     assert body["domain"] == "chat"
-    assert body["intent"] == "chat.greeting"
+    assert body["intent"] == "chat.smalltalk"
+    assert body["generator"] == "sf_10m_phase27_47"
 
 
 def test_save_review_export_writes_review_only_jsonl(
@@ -64,7 +68,7 @@ def test_save_review_export_writes_review_only_jsonl(
             {
                 "role": "assistant",
                 "content": "هذا رد مراجعة فقط.",
-                "generator": "template",
+                "generator": "generator_blocked",
                 "intent": "chat.general",
                 "domain": "chat",
             },
@@ -221,7 +225,7 @@ def test_system_status_reports_current_phase_with_chat_ui() -> None:
     r = client.get("/system/status")
     assert r.status_code == 200
     body = r.json()
-    assert "Phase 27.49" in body["current_phase"]
+    assert "Phase 27.50" in body["current_phase"]
     assert any(c["name"] == "chat_ui" and c["status"] == "active"
                for c in body["components"])
     assert any(c["name"] == "native_generator" and c["status"] == "ready_offline"

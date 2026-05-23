@@ -1,0 +1,238 @@
+{
+  "phase": "Phase 27.50",
+  "status": "PASSED_GENERATOR_ONLY_UI_GATE",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_default": "generator_only_lab",
+  "candidate_generator": "sf_10m_phase27_47",
+  "template_answers_allowed": false,
+  "sf50m_allowed": false,
+  "phase28_allowed": false,
+  "summary": {
+    "passed": 7,
+    "total": 7
+  },
+  "rows": [
+    {
+      "id": "smalltalk_news",
+      "prompt": "وش الاخبار",
+      "expected_generator": "sf_10m_phase27_47",
+      "actual_generator": "sf_10m_phase27_47",
+      "required_terms": [
+        "بخير"
+      ],
+      "expect_empty": false,
+      "response": "بخير ولله الحمد، أنت كيفك؟",
+      "domain": "chat",
+      "intent": "chat.smalltalk",
+      "dispatch": "module:chat",
+      "debug": {
+        "domain_score": "5.00",
+        "intent_score": "8.00",
+        "session_id": "phase27-50-smalltalk_news",
+        "language": "ar",
+        "dialect": "saudi",
+        "corrections": "",
+        "aliases": "وش→ماذا(saudi,0.85)",
+        "safety_flags": "",
+        "intent_hints": "",
+        "dispatch": "module:chat",
+        "module_notes": "dialect:السعودية,language:ar,rag:not_configured,generator:sf_10m_phase27_47,native_generator:generated,native_generator:canary_passed,native_generator:intent:chat.smalltalk",
+        "generator": "sf_10m_phase27_47",
+        "rag": "not_used"
+      },
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "smalltalk_oloomk",
+      "prompt": "علومك",
+      "expected_generator": "sf_10m_phase27_47",
+      "actual_generator": "sf_10m_phase27_47",
+      "required_terms": [
+        "بخير"
+      ],
+      "expect_empty": false,
+      "response": "بخير ولله الحمد. وش ودك نسولف عنه؟",
+      "domain": "chat",
+      "intent": "chat.smalltalk",
+      "dispatch": "module:chat",
+      "debug": {
+        "domain_score": "7.00",
+        "intent_score": "10.00",
+        "session_id": "phase27-50-smalltalk_oloomk",
+        "language": "ar",
+        "dialect": "saudi",
+        "corrections": "",
+        "aliases": "علومك→ما أخبارك؟(saudi,0.90)",
+        "safety_flags": "",
+        "intent_hints": "",
+        "dispatch": "module:chat",
+        "module_notes": "dialect:السعودية,language:ar,rag:not_configured,generator:sf_10m_phase27_47,native_generator:generated,native_generator:canary_passed,native_generator:intent:chat.smalltalk",
+        "generator": "sf_10m_phase27_47",
+        "rag": "not_used"
+      },
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "planning_time",
+      "prompt": "نظم وقتي",
+      "expected_generator": "sf_10m_phase27_47",
+      "actual_generator": "sf_10m_phase27_47",
+      "required_terms": [
+        "مهام"
+      ],
+      "expect_empty": false,
+      "response": "اكتب ثلاث مهام وابدأ بالأهم.",
+      "domain": "chat",
+      "intent": "chat.general",
+      "dispatch": "module:chat",
+      "debug": {
+        "domain_score": "0.00",
+        "intent_score": "0.00",
+        "session_id": "phase27-50-planning_time",
+        "language": "ar",
+        "dialect": "msa",
+        "corrections": "",
+        "aliases": "",
+        "safety_flags": "",
+        "intent_hints": "",
+        "dispatch": "module:chat",
+        "module_notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:sf_10m_phase27_47,native_generator:generated,native_generator:canary_passed,native_generator:intent:planning",
+        "generator": "sf_10m_phase27_47",
+        "rag": "not_used"
+      },
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "advice_saudi",
+      "prompt": "وش تنصحني اسوي",
+      "expected_generator": "sf_10m_phase27_47",
+      "actual_generator": "sf_10m_phase27_47",
+      "required_terms": [
+        "ابدأ"
+      ],
+      "expect_empty": false,
+      "response": "ابدأ بشي بسيط وواضح.",
+      "domain": "chat",
+      "intent": "chat.general",
+      "dispatch": "module:chat",
+      "debug": {
+        "domain_score": "0.00",
+        "intent_score": "0.00",
+        "session_id": "phase27-50-advice_saudi",
+        "language": "ar",
+        "dialect": "saudi",
+        "corrections": "",
+        "aliases": "وش→ماذا(saudi,0.85)",
+        "safety_flags": "",
+        "intent_hints": "",
+        "dispatch": "module:chat",
+        "module_notes": "dialect:السعودية,language:ar,rag:not_configured,generator:sf_10m_phase27_47,native_generator:generated,native_generator:canary_passed,native_generator:intent:advice",
+        "generator": "sf_10m_phase27_47",
+        "rag": "not_used"
+      },
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "definition_wafa",
+      "prompt": "الوفاء وش يعني",
+      "expected_generator": "sf_10m_phase27_47",
+      "actual_generator": "sf_10m_phase27_47",
+      "required_terms": [
+        "الوفاء"
+      ],
+      "expect_empty": false,
+      "response": "الوفاء إنك تحفظ المعروف وتوقف مع اللي تثق فيه.",
+      "domain": "chat",
+      "intent": "chat.general",
+      "dispatch": "module:chat",
+      "debug": {
+        "domain_score": "0.00",
+        "intent_score": "0.00",
+        "session_id": "phase27-50-definition_wafa",
+        "language": "ar",
+        "dialect": "saudi",
+        "corrections": "",
+        "aliases": "وش→ماذا(saudi,0.85)",
+        "safety_flags": "",
+        "intent_hints": "",
+        "dispatch": "module:chat",
+        "module_notes": "dialect:السعودية,language:ar,rag:not_configured,generator:sf_10m_phase27_47,native_generator:generated,native_generator:canary_passed,native_generator:intent:definition",
+        "generator": "sf_10m_phase27_47",
+        "rag": "not_used"
+      },
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "unsupported_karam_no_template",
+      "prompt": "ما معنى الكرم",
+      "expected_generator": "generator_blocked",
+      "actual_generator": "generator_blocked",
+      "required_terms": [],
+      "expect_empty": true,
+      "response": "",
+      "domain": "chat",
+      "intent": "chat.general",
+      "dispatch": "module:chat_lab",
+      "debug": {
+        "domain_score": "0.00",
+        "intent_score": "0.00",
+        "session_id": "phase27-50-unsupported_karam_no_template",
+        "language": "ar",
+        "dialect": "msa",
+        "corrections": "",
+        "aliases": "",
+        "safety_flags": "",
+        "intent_hints": "",
+        "dispatch": "module:chat",
+        "module_notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:template,native_generator:trial_unsupported_definition_topic",
+        "generator": "generator_blocked",
+        "rag": "not_used",
+        "generator_only_blocked": "true",
+        "template_suppressed": "true"
+      },
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "identity_no_template",
+      "prompt": "من أنت",
+      "expected_generator": "generator_blocked",
+      "actual_generator": "generator_blocked",
+      "required_terms": [],
+      "expect_empty": true,
+      "response": "",
+      "domain": "chat",
+      "intent": "chat.identity",
+      "dispatch": "module:chat_lab",
+      "debug": {
+        "domain_score": "7.50",
+        "intent_score": "7.50",
+        "session_id": "phase27-50-identity_no_template",
+        "language": "ar",
+        "dialect": "saudi",
+        "corrections": "",
+        "aliases": "من→من(saudi,0.90)",
+        "safety_flags": "",
+        "intent_hints": "chat.identity",
+        "dispatch": "module:chat",
+        "module_notes": "dialect:السعودية,language:ar,rag:not_configured,generator:template,native_generator:template_first_social_intent",
+        "generator": "generator_blocked",
+        "rag": "not_used",
+        "generator_only_blocked": "true",
+        "template_suppressed": "true"
+      },
+      "passed": true,
+      "reason": "passed"
+    }
+  ]
+}

@@ -32,39 +32,50 @@ REVIEW_EXPORT_DIR = PROJECT_DIR / "data/corpus/chat/review"
     status_code=status.HTTP_200_OK,
 )
 def chat_message(payload: ChatRequest) -> ChatResponse:
-    orchestrator = (
-        _get_guarded_trial_orchestrator()
-        if payload.generator_trial
-        else get_default_orchestrator()
-    )
+    # Phase 27.50: the single-user lab chat surface is generator-first. We no
+    # longer expose a template/default toggle from /chat/message; if the
+    # guarded native generator cannot answer, the API returns an empty response
+    # with explicit metadata instead of silently showing a template.
+    orchestrator = _get_guarded_trial_orchestrator()
     result = orchestrator.process(
         UserMessage(text=payload.message, session_id=payload.session_id)
     )
+    debug = dict(result.debug)
+    response_text = result.response
+    generator = debug.get("generator", "template")
+    dispatch = debug.get("dispatch", "composer")
+    if generator == "template":
+        response_text = ""
+        generator = "generator_blocked"
+        dispatch = "module:chat_lab"
+        debug["generator"] = generator
+        debug["generator_only_blocked"] = "true"
+        debug["template_suppressed"] = "true"
     return ChatResponse(
         domain=result.domain,
         intent=result.intent,
         confidence=round(result.confidence, 4),
         matched_signals=list(result.matched_signals),
         route_reason=result.route_reason,
-        response=result.response,
+        response=response_text,
         requires_safety=result.requires_safety,
         status=result.status,
         fallback_used=result.fallback_used,
-        dispatch=result.debug.get("dispatch", "composer"),
-        generator=result.debug.get("generator", "template"),
-        rag=result.debug.get("rag", "not_used"),
-        debug=result.debug,
+        dispatch=dispatch,
+        generator=generator,
+        rag=debug.get("rag", "not_used"),
+        debug=debug,
         echo=payload.message,
     )
 
 
 @lru_cache(maxsize=1)
 def _get_guarded_trial_orchestrator() -> Orchestrator:
-    """Build the explicit Phase 27.47 local generator trial path.
+    """Build the Phase 27.47 local generator path for the lab chat API.
 
-    This is not the default runtime brain. The UI/API must opt in per request
-    via `generator_trial=true`; sensitive/non-chat domains still route through
-    the normal composer because only the chat module can call the generator.
+    Phase 27.50 makes this the only visible /chat/message path. If the guarded
+    generator cannot answer, the endpoint suppresses legacy template text and
+    returns `generator_blocked` with an empty response.
     """
     policy = GenerationPolicy(
         enabled=True,

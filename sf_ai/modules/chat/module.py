@@ -300,7 +300,7 @@ def _generation_intent_for_prompt(
     text = _surface(prompt)
     if any(term in text for term in ("شكرا", "مشكور", "يعطيك العافيه", "تسلم", "ممتن")):
         return "thanks"
-    if any(term in text for term in ("كيفك", "كيف حالك", "وش اخبارك", "علومك", "طمني عنك")):
+    if any(term in text for term in ("كيفك", "كيف حالك", "وش اخبارك", "وش الاخبار", "علومك", "طمني عنك")):
         return "smalltalk"
     if any(
         term in text

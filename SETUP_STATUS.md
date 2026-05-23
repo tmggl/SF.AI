@@ -10,10 +10,10 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.49 / 30**
-- **المرحلة الحالية:** **Phase 27.49 — Broader Live UI/API Probes** (اكتملت: `sf_10m_phase27_47` مرّ live API أوسع `33/33`; الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **الرحلة الحالية:** **Phase 27.50 / 30**
+- **المرحلة الحالية:** **Phase 27.50 — Generator-Only UI Lab Mode** (اكتملت: `/chat/message` والواجهة لا يعرضان قوالب؛ المولد `sf_10m_phase27_47` فقط أو رد فارغ)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** Phase 27.50 targeted natural-prompt expansion plan؛ Phase 28 و`SF-50M` محظوران حتى تنجح بوابات جودة أوسع.
+- **المرحلة التالية المقترحة:** Phase 27.51 targeted natural-prompt expansion plan؛ Phase 28 و`SF-50M` محظوران حتى تنجح بوابات جودة أوسع.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
@@ -111,6 +111,8 @@
 - **تقرير Phase 27.44–27.48:** `docs/PHASE27_44_TO_48_RUNTIME_SWITCH_REPORT.md`, `artifacts/reports/phase27_48_guarded_runtime_switch_report.json`.
 - **نتيجة Phase 27.49:** وُسّعت probes الحية إلى `33/33`، وأُصلح كشف النصيحة لعبارة `وش تنصحني اسوي`.
 - **تقرير Phase 27.49:** `docs/PHASE27_49_BROADER_LIVE_UI_PROBES_REPORT.md`, `artifacts/reports/phase27_49_broader_live_ui_probes_report.json`.
+- **نتيجة Phase 27.50:** تحولت الواجهة و`/chat/message` إلى generator-only lab: `7/7`، لا قوالب ظاهرة. غير المدعوم يرجع `generator_blocked` مع `response=""`.
+- **تقرير Phase 27.50:** `docs/PHASE27_50_GENERATOR_ONLY_UI_GATE_REPORT.md`, `artifacts/reports/phase27_50_generator_only_ui_gate_report.json`.
 - **مقارنة tokenizer v1/v2:** v1 كان `vocab=261`, `merges=218`, `words_seen=723`, سعودي فقط. v2 تدرب على `500` سجل متوازن: `msa=250`, `saudi=250`.
 - **تحسن protected Saudi terms:** `average_tokens` انخفض من `4.0` في v1 إلى `2.3` في v2، ولا توجد `roundtrip_failures` أو `aggressive_split_terms`.
 - **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches=[]` لأن الجمع اكتمل.
@@ -127,10 +129,10 @@
 - **مهمة الجمع الحالية:** endpoints Phase 22 بقيت داخلية للوكيل، لكن شاشة `/ui/chat` لم تعد تعرض جمع/تصدير/حفظ يدوي. الواجهة الآن لاختبار الحوار فقط.
 - **حفظ المراجعة الداخلي:** `POST /chat/review-export` باقٍ كمسار داخلي محكوم عند الحاجة، وليس زرًا ظاهرًا للمستخدم في `/ui/chat`.
 - **اعتماد البيانات:** الوكيل يؤلف/يراجع/يعتمد دفعات corpus مباشرة عند وضوح الجودة؛ لا يُطلب من سامي حفظ أو تصدير يدوي.
-- **تصحيح تشغيل المولّد:** الواجهة المستقرة عادت إلى `generator=template` افتراضيًا؛ هذا يعني قوالب ثابتة لا توليدًا ذكيًا. `SF-10M` الخام لا يدخل ردود الشات إلا بفلاغات مختبر صريحة.
+- **تصحيح تشغيل المولّد:** بعد Phase 27.50 لم تعد الواجهة تعرض القوالب. أي رد ظاهر من `/chat/message` يأتي من `sf_10m_phase27_47`، وغير المدعوم يرجع ردًا فارغًا بدل template.
 - **مختبر سامي المحلي:** يمكن تشغيل المولّد الخام عبر `SF_ENABLE_NATIVE_GENERATOR=true` و`SF_NATIVE_GENERATOR_EXPERIMENTAL=true`، وتمكين الرسائل غير الحساسة من مجالات skeleton عبر `SF_LAB_GENERATION_FOR_NON_SENSITIVE=true` عند الاختبار فقط.
 - **حماية التصدير:** إذا صدّرت جلسة تحتوي ردودًا من `sf_10m_v0_1/sf_10m_v0_2`، تضع الواجهة metadata واضحًا، و`phase22-review-intake` لا يعدّها candidate تدريب جودة.
-- **واجهة الاختبار:** لا تستخدم الواجهة حاليًا لاختبار مولد مقنع؛ استخدمها فقط لجمع محادثات review أو لفحص التوجيه. التشخيص يبين `template` أو `sf_10m_v0_2` عند canary فقط.
+- **واجهة الاختبار:** الواجهة الآن لاختبار المولد مباشرة. التشخيص يجب أن يبين `sf_10m_phase27_47` أو `generator_blocked`، وليس `template`.
 - **تفويض التنفيذ:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة دون انتظار موافقات جديدة؛ استخدم flags المطلوبة مع توثيق كل تشغيل ولا تكسر قواعد السيادة/السلامة.
 - **فحص Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/corpus-audit`
 - **قرار Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/phase12-readiness` يعرض أن tokenizer v1 اكتمل، وأن `msa + saudi` موجودتان حاليًا؛ tokenizer v2 أصبح جاهزًا في Phase 23.
@@ -331,7 +333,7 @@ make server-start
 
 آخر تحقق حي بعد restart:
 - السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`.
-- الكود الحالي بعد Phase 27.49 يعرض `Phase 27.49` في `/system/status` و`/health`; زر `مولّد تجريبي` يستخدم `sf_10m_phase27_47` خلف guard/fallback.
+- الكود الحالي بعد Phase 27.50 يعرض `Phase 27.50` في `/system/status` و`/health`; لا يوجد زر مولّد، و`/chat/message` مولّد فقط.
 - `GET /system/phase26-readiness` يرجع `can_start_sf50m_training=false`.
 - `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - `make server-status` read-only ولا يوقف السيرفر.
@@ -340,7 +342,7 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى إكمال Phase 27.49)
+## نتائج الاختبارات (حتى إكمال Phase 27.50)
 
 ```
 559 passed in 16.81s

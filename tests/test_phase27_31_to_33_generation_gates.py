@@ -325,3 +325,17 @@ def test_phase27_49_broader_live_ui_probes_pass() -> None:
     assert report["summary"]["bucket_summary"]["generated_task"]["passed"] == 8
     assert report["summary"]["bucket_summary"]["generated_definition"]["passed"] == 11
     assert all(row["passed"] for row in report["rows"])
+
+
+def test_phase27_50_generator_only_ui_gate_passes() -> None:
+    report = _report("phase27_50_generator_only_ui_gate_report.json")
+    assert report["phase"] == "Phase 27.50"
+    assert report["status"] == "PASSED_GENERATOR_ONLY_UI_GATE"
+    assert report["training_started"] is False
+    assert report["runtime_default"] == "generator_only_lab"
+    assert report["candidate_generator"] == "sf_10m_phase27_47"
+    assert report["template_answers_allowed"] is False
+    assert report["summary"]["passed"] == 7
+    assert report["summary"]["total"] == 7
+    assert all(row["actual_generator"] != "template" for row in report["rows"])
+    assert all(row["passed"] for row in report["rows"])

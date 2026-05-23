@@ -17,9 +17,9 @@ export ENABLE_SAUDI_SEED_V1_LEXICON="${ENABLE_SAUDI_SEED_V1_LEXICON:-true}"
 # via the importer CLI rather than the chat server.
 export ENABLE_MO3JAM_SAUDI_LEXICON="${ENABLE_MO3JAM_SAUDI_LEXICON:-false}"
 
-# Keep normal UI/export traffic on the stable template path. The raw SF-10M
-# generator is a lab probe only; enable broad non-sensitive generation by
-# explicitly exporting SF_LAB_GENERATION_FOR_NON_SENSITIVE=true.
+# /chat/message is now generator-only for the single-user lab UI. Legacy
+# template fallbacks are suppressed by the API; unsupported prompts return
+# generator_blocked with an empty response.
 export SF_LAB_GENERATION_FOR_NON_SENSITIVE="${SF_LAB_GENERATION_FOR_NON_SENSITIVE:-false}"
 
 HOST="${SF_HOST:-127.0.0.1}"
@@ -32,7 +32,7 @@ echo "  ENABLE_SAUDI_SEED_V1_LEXICON      : $ENABLE_SAUDI_SEED_V1_LEXICON"
 echo "  ENABLE_MO3JAM_SAUDI_LEXICON       : $ENABLE_MO3JAM_SAUDI_LEXICON"
 echo "  SF_ENABLE_NATIVE_GENERATOR        : ${SF_ENABLE_NATIVE_GENERATOR:-false}"
 echo "  SF_NATIVE_GENERATOR_EXPERIMENTAL  : ${SF_NATIVE_GENERATOR_EXPERIMENTAL:-false}"
-echo "  SF_GUARDED_RUNTIME_TRIAL          : request-scoped via generator_trial=true"
+echo "  CHAT_RUNTIME                      : generator-only lab (no template fallback)"
 echo "  SF_LAB_GENERATION_FOR_NON_SENSITIVE: $SF_LAB_GENERATION_FOR_NON_SENSITIVE"
 echo "  UI                                : http://$HOST:$PORT/ui/chat"
 echo

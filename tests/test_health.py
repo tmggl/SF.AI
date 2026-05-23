@@ -23,7 +23,7 @@ def test_health_ok() -> None:
     body = r.json()
     assert body["status"] == "ok"
     assert body["project"] == "SF.AI"
-    assert body["phase"] == "Phase 27.49"
+    assert body["phase"] == "Phase 27.50"
 
 
 def test_system_status_sovereign_flags() -> None:
@@ -31,9 +31,9 @@ def test_system_status_sovereign_flags() -> None:
     assert r.status_code == 200
     body = r.json()
     assert body["project"] == "SF.AI"
-    assert body["current_phase"].startswith("Phase 27.49")
-    assert body["current_phase_status"] == "completed_broader_live_ui_probes_phase27_47"
-    assert "Phase 27.50" in body["next_phase"]
+    assert body["current_phase"].startswith("Phase 27.50")
+    assert body["current_phase_status"] == "completed_generator_only_ui_gate"
+    assert "Phase 27.51" in body["next_phase"]
     assert body["sovereign"] is True
     assert body["uses_external_llm"] is False
     assert body["uses_pretrained_weights"] is False
@@ -253,9 +253,10 @@ def test_chat_greeting_routes_through_module() -> None:
     assert body["status"] == "active"
     assert body["requires_safety"] is False
     assert body["fallback_used"] is False
-    assert body["dispatch"] == "module:chat"
+    assert body["dispatch"] == "module:chat_lab"
     assert body["echo"] == "مرحبا"
-    assert "SF.AI" in body["response"]
+    assert body["generator"] == "generator_blocked"
+    assert body["response"] == ""
 
 
 def test_chat_unknown_falls_back_to_general() -> None:
@@ -265,7 +266,9 @@ def test_chat_unknown_falls_back_to_general() -> None:
     assert body["domain"] == "chat"
     assert body["intent"] == "chat.general"
     assert body["fallback_used"] is True
-    assert body["dispatch"] == "module:chat"
+    assert body["dispatch"] == "module:chat_lab"
+    assert body["generator"] == "generator_blocked"
+    assert body["response"] == ""
 
 
 def test_chat_medical_triggers_safety_flag_and_uses_composer() -> None:
@@ -274,8 +277,9 @@ def test_chat_medical_triggers_safety_flag_and_uses_composer() -> None:
     body = r.json()
     assert body["domain"] == "medical"
     assert body["requires_safety"] is True
-    # Sensitive domains go through the composer's safety reply, not the module.
-    assert body["dispatch"] == "composer"
+    assert body["dispatch"] == "module:chat_lab"
+    assert body["generator"] == "generator_blocked"
+    assert body["response"] == ""
 
 
 def test_chat_rejects_empty_message() -> None:

@@ -61,6 +61,11 @@
     padding: 7px 11px; border-radius: 999px; font-size: 13px; color: #21466f;
     font-weight: 700;
   }
+  .badge.on {
+    background: #eefaf4;
+    border-color: #9fd0b9;
+    color: var(--ok);
+  }
   .icon-btn {
     background: var(--surface); color: var(--accent-strong);
     border: 1px solid var(--line); border-radius: 999px;
@@ -68,25 +73,6 @@
     font-weight: 800;
   }
   .icon-btn:hover { color: #ffffff; background: var(--accent); border-color: var(--accent); }
-  .trial-toggle {
-    display: inline-flex; align-items: center; gap: 7px;
-    min-height: 32px;
-    padding: 5px 10px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: var(--surface);
-    color: var(--text);
-    font-size: 13px;
-    font-weight: 800;
-    cursor: pointer;
-    user-select: none;
-  }
-  .trial-toggle input { accent-color: var(--accent); inline-size: 16px; block-size: 16px; }
-  .trial-toggle.on {
-    background: #eefaf4;
-    border-color: #9fd0b9;
-    color: var(--ok);
-  }
   main {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 360px;
@@ -266,10 +252,7 @@
       <span class="badge" id="session-badge">جلسة: —</span>
       <span class="badge" id="user-badge">مستخدم: —</span>
       <span class="badge" id="sov-badge">سيادي ✓</span>
-      <label class="trial-toggle" id="trial-toggle">
-        <input type="checkbox" id="generator-trial" />
-        <span>مولّد تجريبي</span>
-      </label>
+      <span class="badge on" id="generator-badge">المولّد مباشر</span>
       <button class="icon-btn" id="clear-btn" title="مسح المحادثة">مسح</button>
     </div>
   </header>
@@ -349,14 +332,6 @@
   const correctionsEl = document.getElementById("corrections");
   const safetyEl = document.getElementById("safety-flags");
   const phaseEl = document.getElementById("phase-line");
-  const generatorTrialEl = document.getElementById("generator-trial");
-  const trialToggleEl = document.getElementById("trial-toggle");
-  generatorTrialEl.checked = localStorage.getItem("sf_generator_trial") === "true";
-  trialToggleEl.classList.toggle("on", generatorTrialEl.checked);
-  generatorTrialEl.addEventListener("change", () => {
-    localStorage.setItem("sf_generator_trial", generatorTrialEl.checked ? "true" : "false");
-    trialToggleEl.classList.toggle("on", generatorTrialEl.checked);
-  });
 
   // Fetch phase info.
   fetch("/system/status").then(r => r.json()).then(data => {
@@ -428,7 +403,7 @@
   function readableValue(key, value) {
     const v = (value || "").toString();
     if (key === "generator") {
-      if (v === "template") return "قالب ثابت - ليس مولدًا";
+      if (v === "generator_blocked") return "لم يصدر رد من المولد";
       if (v === "sf_10m_v0_1") return "نموذج SF-10M خام غير جاهز";
       if (v === "sf_10m_v0_2") return "Canary SF-10M v0.2";
       if (v === "sf_10m_phase27_33") return "مولّد SF-10M Phase 27.33";
@@ -468,7 +443,7 @@
       ["النية", body.intent || "—"],
       ["الثقة", body.confidence != null ? body.confidence.toFixed(2) : "—"],
       ["المسار", readableValue("dispatch", body.dispatch)],
-      ["المولّد", readableValue("generator", body.generator || (body.debug && body.debug.generator) || "template")],
+      ["المولّد", readableValue("generator", body.generator || (body.debug && body.debug.generator) || "generator_blocked")],
       ["الذاكرة", readableValue("rag", body.rag || (body.debug && body.debug.rag) || "not_used")],
       ["سبب التوجيه", body.route_reason || "—"],
       ["اللغة", (body.debug && body.debug.language) || "—"],
@@ -515,8 +490,7 @@
         body: JSON.stringify({
           message: text,
           session_id: SESSION_ID,
-          user_id: USER_ID,
-          generator_trial: !!generatorTrialEl.checked
+          user_id: USER_ID
         }),
       });
       if (!r.ok) {
@@ -524,11 +498,15 @@
         return;
       }
       const body = await r.json();
-      setMessageText(placeholder, body.response || "(لا رد)");
+      if (body.response) {
+        setMessageText(placeholder, body.response);
+      } else {
+        placeholder.remove();
+      }
       recordTurn("assistant", body.response || "", {
         domain: body.domain || "",
         intent: body.intent || "",
-        generator: body.generator || "template",
+        generator: body.generator || "generator_blocked",
         rag: body.rag || "not_used",
         requires_safety: !!body.requires_safety,
         fallback_used: !!body.fallback_used
@@ -539,7 +517,7 @@
         " / " + (body.intent || "?") +
         " · ثقة " + (body.confidence != null ? body.confidence.toFixed(2) : "—") +
         " · " + readableValue("dispatch", body.dispatch) +
-        " · مولّد: " + readableValue("generator", body.generator || "template") +
+        " · مولّد: " + readableValue("generator", body.generator || "generator_blocked") +
         " · ذاكرة: " + readableValue("rag", body.rag || "not_used");
       placeholder.appendChild(meta);
       setDiag(body);

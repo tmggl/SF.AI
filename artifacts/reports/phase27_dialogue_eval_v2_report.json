@@ -215,7 +215,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "تقدر تختبر المولّد الآن من زر «مولّد تجريبي»، لكن داخل نطاقات محددة: سؤال الحال، الشكر، نصيحة قصيرة، ترتيب بسيط، دعم خفيف، وتعريفات مثبتة مثل الصداقة والصدق والتنظيم والهدوء والوفا"
+      "response_preview": "الواجهة الآن لا تختبر القوالب. أي رد ظاهر يجب أن يأتي من المولّد `sf_10m_phase27_47` داخل نطاقاته المثبتة، وما لا يعرفه لا يظهر له رد."
     },
     {
       "scenario_id": "project_meta_flow",
@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.49: وسّعنا اختبار الواجهة/API إلى 33 حالة ومرّت كلها. المولّد التجريبي ما زال `sf_10m_phase27_47` خلف زر «مولّد تجريبي»، والافتراضي قالب آمن. التالي Phase 27.50 "
+      "response_preview": "وصلنا إلى Phase 27.50: ألغينا زر التجربة من الواجهة وجعلنا /chat/message مختبرًا مولّدًا فقط. إذا لم يستطع `sf_10m_phase27_47` الرد فلن يظهر قالب بديل. التالي Phase 27.51 لتوسيع pr"
     },
     {
       "scenario_id": "clarification_repair_flow",

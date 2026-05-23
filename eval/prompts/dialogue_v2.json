@@ -83,7 +83,7 @@
         "expected_status": "active",
         "expected_generator": "template",
         "expected_requires_safety": false,
-        "required_response_terms": ["مولّد تجريبي", "نطاقات محددة"],
+        "required_response_terms": ["sf_10m_phase27_47", "لا يظهر له رد"],
         "forbidden_response_terms": ["جاهز كمحادثة مفتوحة"]
       },
       {
@@ -103,7 +103,7 @@
         "expected_status": "active",
         "expected_generator": "template",
         "expected_requires_safety": false,
-        "required_response_terms": ["Phase 27.49", "33 حالة"],
+        "required_response_terms": ["Phase 27.50", "فلن يظهر قالب"],
         "forbidden_response_terms": ["نبدأ SF-50M الآن"]
       }
     ]
