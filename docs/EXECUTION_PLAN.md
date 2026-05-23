@@ -75,6 +75,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 26 | SF-50M v0.1 Readiness | مكتملة؛ التدريب غير جاهز حسب scaling gates |
 | Phase 27 | Dialogue Evaluation v2 + corpus expansion plan | مكتملة؛ baseline pass وcorpus gate ناجح |
 | Phase 27.5 | SF-10M Dialogue-Format Repair | مكتملة بحدود؛ runtime محظور |
+| Phase 27.6 | SF-10M Assistant-Target Training | مكتملة بحدود؛ runtime محظور |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -1394,8 +1395,58 @@ perplexity = 339.24
 - `artifacts/samples/sf_10m_v0_4_generations.md`
 
 ### بعد المرحلة
-نفّذ إصلاحًا نوعيًا قبل التكبير: assistant-target training أو loss masking،
-ثم canary حقيقي على `SF-10M`. افتح `SF-50M` فقط إذا مرّت بوابات الجودة.
+نفّذ assistant-target training/loss masking قبل التكبير، ثم canary حقيقي على
+`SF-10M`. افتح `SF-50M` فقط إذا مرّت بوابات الجودة.
+
+---
+
+## Phase 27.6 — SF-10M Assistant-Target Training
+
+### الهدف
+جعل سياق المستخدم وعلامات الأدوار خارج الخسارة، وتدريب النموذج على رد
+المساعد فقط.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.6 بقرار:
+
+```text
+COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED
+```
+
+ما تحقق:
+
+- أضيف `--loss-scope assistant` إلى `train_tiny_lm` و`evaluate_tiny_lm`.
+- أضيف masking بقيمة `-100` لكل user/context/role-marker token.
+- دُرّب `SF-10M v0.5` على corpus الحالي.
+
+نتيجة التدريب:
+
+```text
+model      = sf-10m
+params     = 7,444,992
+records    = 5143
+steps      = 4000
+loss       = 8.4643 → 2.3513
+best eval  = step2000 loss 6.5718, perplexity 714.65
+```
+
+قرار الجودة:
+
+- الهدف الهندسي صار أصح من v0.4.
+- الردود ما زالت مكررة وضعيفة.
+- لا يتم تفعيل `SF-10M v0.5` في الواجهة.
+- لا يبدأ `SF-50M` ولا Phase 28.
+
+### artifacts
+
+- [PHASE27_6_SF10M_ASSISTANT_TARGET_REPORT.md](./PHASE27_6_SF10M_ASSISTANT_TARGET_REPORT.md)
+- `artifacts/reports/sf_10m_v0_5_assistant_target_report.json`
+- `artifacts/samples/sf_10m_v0_5_generations.md`
+
+### بعد المرحلة
+ابنِ fixed train/eval split، وأضف gold social dialogue صغير عالي الجودة، وشدد
+canary الصلة بالسؤال والتكرار قبل أي تكبير.
 
 ---
 

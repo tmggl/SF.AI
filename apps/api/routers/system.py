@@ -61,9 +61,9 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.5 — SF-10M Dialogue-Format Repair",
+        current_phase="Phase 27.6 — SF-10M Assistant-Target Training",
         current_phase_status="completed_with_limits_runtime_blocked",
-        next_phase="SF-10M assistant-target repair before SF-50M; Phase 28 blocked until SF-50M eval pass",
+        next_phase="SF-10M fixed split + gold social dialogue + stronger canary before SF-50M",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,

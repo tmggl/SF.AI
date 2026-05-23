@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.5 / 30**
-- **المرحلة الحالية:** **Phase 27.5 — SF-10M Dialogue-Format Repair**
-- **حالة المرحلة الحالية:** **مكتملة بحدود؛ `SF-10M v0.4` تعلّم صيغة الحوار لكنه محظور runtime**
-- **المرحلة التالية المقترحة:** assistant-target training / loss masking ثم canary حقيقي على `SF-10M`; Phase 28 محظورة حتى ينجح `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.6 / 30**
+- **المرحلة الحالية:** **Phase 27.6 — SF-10M Assistant-Target Training**
+- **حالة المرحلة الحالية:** **مكتملة بحدود؛ `SF-10M v0.5` جرّب loss على رد المساعد فقط لكنه محظور runtime**
+- **المرحلة التالية المقترحة:** fixed train/eval split + gold social dialogue + canary أقوى؛ Phase 28 محظورة حتى ينجح `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -54,6 +54,7 @@
 | Phase 26 | SF-50M v0.1 Readiness | ✅ completed_not_ready_improve_sf10m_and_canary | ✅ |
 | Phase 27 | Dialogue Evaluation v2 and corpus expansion plan | ✅ completed_baseline_pass_corpus_gate_passed | ✅ |
 | Phase 27.5 | SF-10M Dialogue-Format Repair | ✅ completed_with_limits_runtime_blocked | ✅ |
+| Phase 27.6 | SF-10M Assistant-Target Training | ✅ completed_with_limits_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -333,6 +334,18 @@
   - أضيف [PHASE27_5_SF10M_DIALOGUE_FORMAT_REPORT.md](./PHASE27_5_SF10M_DIALOGUE_FORMAT_REPORT.md).
   - أضيف `artifacts/reports/sf_10m_v0_4_dialogue_format_report.json`.
   - أضيف `artifacts/samples/sf_10m_v0_4_generations.md`.
+- بدأ وانتهى Phase 27.6 SF-10M Assistant-Target Training:
+  - أضيف `--loss-scope assistant` إلى `train_tiny_lm` و`evaluate_tiny_lm`.
+  - أضيف `_encode_assistant_target_dialogue()` لتعليم رد المساعد فقط، مع masking لسياق المستخدم وعلامات الأدوار بقيمة `-100`.
+  - دُرّب `SF-10M v0.5` على corpus الحالي `5143` سجلًا، `steps=4000`, `seq_len=64`, `batch_size=4`, `device=mps`.
+  - loss التدريب انخفض من `8.4643` إلى `2.3513`.
+  - أفضل checkpoint مقاس كان `sf-10m-step2000`: `eval loss=6.5718`, `perplexity=714.65`.
+  - العينات بدأت بشكل عربي أوضح لكنها مكررة وغير مرتبطة كفاية بالسؤال.
+  - القرار: `COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED`.
+  - لا يتم تفعيل `SF-10M v0.5` في الواجهة، ولا يبدأ `SF-50M`.
+  - أضيف [PHASE27_6_SF10M_ASSISTANT_TARGET_REPORT.md](./PHASE27_6_SF10M_ASSISTANT_TARGET_REPORT.md).
+  - أضيف `artifacts/reports/sf_10m_v0_5_assistant_target_report.json`.
+  - أضيف `artifacts/samples/sf_10m_v0_5_generations.md`.
   - أضيف [PHASE27_CORPUS_EXPANSION_BATCH_002_REPORT.md](./PHASE27_CORPUS_EXPANSION_BATCH_002_REPORT.md).
   - أضيف [PHASE27_CORPUS_EXPANSION_BATCH_003_REPORT.md](./PHASE27_CORPUS_EXPANSION_BATCH_003_REPORT.md).
   - أضيف [PHASE27_CORPUS_EXPANSION_BATCH_004_REPORT.md](./PHASE27_CORPUS_EXPANSION_BATCH_004_REPORT.md).
@@ -403,7 +416,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.5"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.6"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -434,7 +447,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-467 passed in 16.39s
+469 passed in 16.14s
 ```
 
 | ملف | عدد |

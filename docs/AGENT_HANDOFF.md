@@ -68,13 +68,14 @@
 | Phase 26 | SF-50M v0.1 Readiness | ✅ completed_not_ready_expand_corpus_and_improve_sf10m |
 | Phase 27 | Dialogue Evaluation v2 + Corpus Expansion Plan | ✅ completed_baseline_pass_corpus_gate_passed |
 | Phase 27.5 | SF-10M Dialogue-Format Repair | ✅ completed_with_limits_runtime_blocked |
+| Phase 27.6 | SF-10M Assistant-Target Training | ✅ completed_with_limits_runtime_blocked |
 
 اقرأ التفاصيل في [PHASE_STATUS.md](./PHASE_STATUS.md) و [EXECUTION_PLAN.md](./EXECUTION_PLAN.md).
 
 ### الاختبارات
 
 ```
-راجع `docs/PHASE_STATUS.md` لآخر رقم اختبارات موثق بعد Phase 27.
+راجع `docs/PHASE_STATUS.md` لآخر رقم اختبارات موثق بعد Phase 27.6.
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -271,7 +272,7 @@ missing language balance: msa
 - `docs/GENERATIVE_ROADMAP.md`
 - امتدت الخطة الرسمية إلى Phase 30.
 - التدريب الفعلي بدأ في Phase 13/14، وأول تدريب جودة مفيد اكتمل في Phase 24 مع منع runtime الواسع.
-- أول فرصة لحوار قصير مولّد مقنع: بعد تنفيذ خطة Phase 27، ثم إعادة بوابة SF-50M، ثم تدريب `SF-50M` ونجاحه في eval v2.
+- أول فرصة لحوار قصير مولّد مقنع: بعد fixed split + gold social dialogue + canary أقوى على SF-10M، أو نجاح SF-50M لاحقًا.
 - الهدف الرسمي لحوار مولّد مستقر نسبيًا: Phase 28.
 
 ### Phase 22 — Gold Dialogue Corpus v2 — بوابة تعمل
@@ -309,7 +310,7 @@ missing language balance: msa
 
 ### تستطيع الآن العمل على:
 
-- لا تفتح Phase 28 الآن. ابدأ بتوسعة corpus حسب Phase 27، ثم أعد `make phase26-readiness`.
+- لا تفتح Phase 28 الآن. ابدأ بإصلاح fixed split وgold social dialogue وcanary، ثم أعد `make phase26-readiness`.
 
 ---
 
@@ -366,7 +367,7 @@ sf_ai/datasets/                 schemas + validators + loaders + saudi_seed
 resources/lexicons/             YAML lexicons (Phase 3) + imported/ (Phase 3.5/3.6)
 data/corpus/                    حوار المستخدم + قاموس سعودي
 docs/                           كل الوثائق الفنية
-tests/                          467 اختبار، 53 ملف
+tests/                          469 اختبار، 54 ملف
 scripts/                        CLI: run_chat_server, validate_dataset, train_bpe, import_mo3jam_saudi
 ```
 

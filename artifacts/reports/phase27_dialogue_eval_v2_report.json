@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27.5: درّبنا SF-10M v0.4 بصيغة حوارية كاملة. تحسن التدريب رقميًا، لكن الردود لا تزال غير مناسبة للواجهة. الخطوة التالية إصلاح assistant-target/loss masking قبل أي تكبي"
+      "response_preview": "اكتملت Phase 27.6: جرّبنا تدريب SF-10M v0.5 على رد المساعد فقط. الهدف الهندسي تحسن، لكن الردود ما زالت مكررة وغير جاهزة للواجهة. الخطوة التالية split ثابت وبيانات gold اجتماعية وca"
     },
     {
       "scenario_id": "clarification_repair_flow",

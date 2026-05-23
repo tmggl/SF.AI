@@ -10,10 +10,10 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.5 / 30**
-- **المرحلة الحالية:** **Phase 27.5 — SF-10M Dialogue-Format Repair** (اكتملت بحدود؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **الرحلة الحالية:** **Phase 27.6 / 30**
+- **المرحلة الحالية:** **Phase 27.6 — SF-10M Assistant-Target Training** (اكتملت بحدود؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** assistant-target training / loss masking على `SF-10M` ثم canary حقيقي؛ Phase 28 محظورة حتى ينجح `SF-50M`.
+- **المرحلة التالية المقترحة:** fixed train/eval split + gold social dialogue + canary أقوى؛ Phase 28 محظورة حتى ينجح `SF-50M`.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
@@ -43,6 +43,8 @@
 - **دفعات توسعة Phase 27:** أضيف Batch 001 بإجمالي 50 سجلًا، ثم Batch 002 وBatch 003 الكبيرتان بإجمالي 1000 سجل، كل واحدة `250` فصيح + `250` سعودي. corpus الحالي صار `5143`: `msa=2549`, `saudi=2594`, والمتبقي إلى `5000` صار `0` سجلًا.
 - **نتيجة Phase 27.5:** أضيف بث حواري كامل في `ChatDataset.iter_dialogue_texts()`، وأصبح `train_tiny_lm` يستخدم `--stream-format dialogue` افتراضيًا. دُرّب `SF-10M v0.4` على `5143` سجلًا، training loss `8.4662 → 1.4070`, eval loss `5.8267`, perplexity `339.24`. القرار `COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED`: النموذج تعلم الأدوار أفضل لكنه لا يرد بعد بجودة واجهة.
 - **تقرير Phase 27.5:** `docs/PHASE27_5_SF10M_DIALOGUE_FORMAT_REPORT.md`, `artifacts/reports/sf_10m_v0_4_dialogue_format_report.json`, `artifacts/samples/sf_10m_v0_4_generations.md`.
+- **نتيجة Phase 27.6:** أضيف `--loss-scope assistant` إلى التدريب والتقييم، ودُرّب `SF-10M v0.5` على رد المساعد فقط. training loss `8.4643 → 2.3513`, أفضل eval مقاس step2000: loss `6.5718`, perplexity `714.65`. القرار `COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED`: الردود لا تزال مكررة وغير جاهزة للواجهة.
+- **تقرير Phase 27.6:** `docs/PHASE27_6_SF10M_ASSISTANT_TARGET_REPORT.md`, `artifacts/reports/sf_10m_v0_5_assistant_target_report.json`, `artifacts/samples/sf_10m_v0_5_generations.md`.
 - **مقارنة tokenizer v1/v2:** v1 كان `vocab=261`, `merges=218`, `words_seen=723`, سعودي فقط. v2 تدرب على `500` سجل متوازن: `msa=250`, `saudi=250`.
 - **تحسن protected Saudi terms:** `average_tokens` انخفض من `4.0` في v1 إلى `2.3` في v2، ولا توجد `roundtrip_failures` أو `aggressive_split_terms`.
 - **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches=[]` لأن الجمع اكتمل.
@@ -188,7 +190,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs,reports}/   Phase 5.5+ outputs/reports
 │
-├── tests/                                 pytest suite — 467 تست / 53 ملف
+├── tests/                                 pytest suite — 469 تست / 54 ملف
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -264,7 +266,7 @@ make server-start
 
 آخر تحقق حي بعد restart:
 - السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`، PID `7733`.
-- الكود الحالي بعد Phase 27.5 يعرض `Phase 27.5` في `/system/status` و`/health`، ويعرض `GET /system/phase27-dialogue-eval` تقييم الحوار وخطة corpus.
+- الكود الحالي بعد Phase 27.6 يعرض `Phase 27.6` في `/system/status` و`/health`، ويعرض `GET /system/phase27-dialogue-eval` تقييم الحوار وخطة corpus.
 - `GET /system/phase26-readiness` يرجع `can_start_sf50m_training=false`.
 - `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - `make server-status` read-only ولا يوقف السيرفر.
@@ -273,10 +275,10 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى إكمال Phase 27.5)
+## نتائج الاختبارات (حتى إكمال Phase 27.6)
 
 ```
-467 passed in 16.39s
+469 passed in 16.14s
 ```
 
 التغطية الحالية:

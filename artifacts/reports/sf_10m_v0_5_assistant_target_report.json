@@ -1,0 +1,98 @@
+{
+  "phase": "Phase 27.6 — SF-10M Assistant-Target Training",
+  "status": "COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED",
+  "journey": "Phase 27.6 / 30",
+  "language_track": ["msa", "saudi"],
+  "lexicon_track": "Saudi Seed v1",
+  "purpose": "Train SF-10M with user/context tokens masked and assistant reply tokens as the only loss target.",
+  "sovereignty": {
+    "pretrained_weights_used": false,
+    "pretrained_tokenizer_used": false,
+    "external_llm_used": false,
+    "synthetic_llm_data_used": false
+  },
+  "corpus": {
+    "path": "data/corpus/chat/jsonl",
+    "records": 5143,
+    "dialects": {
+      "msa": 2549,
+      "saudi": 2594
+    },
+    "operational_internal_dialogue_allowed": false,
+    "training_allowed_required": true
+  },
+  "tokenizer": {
+    "path": "artifacts/tokenizers/sf_bpe/v2",
+    "sf_origin": true
+  },
+  "code_changes": {
+    "training_loss_scope": "train_tiny_lm supports --loss-scope assistant.",
+    "evaluation_loss_scope": "evaluate_tiny_lm supports --loss-scope assistant.",
+    "masking_rule": "User/context/role-marker tokens are labelled -100; assistant content tokens keep their token ids."
+  },
+  "model": {
+    "name": "sf-10m",
+    "parameters": 7444992,
+    "random_init": true,
+    "device": "mps"
+  },
+  "training": {
+    "run_name": "sf_10m_v0_5",
+    "stream_format": "dialogue",
+    "loss_scope": "assistant",
+    "steps": 4000,
+    "epochs": 8,
+    "seq_len": 64,
+    "batch_size": 4,
+    "learning_rate": 0.0003,
+    "warmup": 100,
+    "min_lr": 0.00001,
+    "seed": 20260526,
+    "first_logged_loss": 8.4643,
+    "last_logged_loss": 2.3513,
+    "checkpoint": "artifacts/checkpoints/sf_10m_v0_5/sf-10m-step4000",
+    "checkpoint_tracked_in_git": false
+  },
+  "evaluation": {
+    "best_checkpoint_measured": "sf-10m-step2000",
+    "best_loss": 6.5718,
+    "best_perplexity": 714.65,
+    "step4000_loss": 7.936,
+    "step4000_perplexity": 2796.09,
+    "samples": [
+      {
+        "checkpoint": "sf-10m-step2000",
+        "prompt": "كيفك",
+        "output": "الزبدة: اطلب رر بخياها بخيا. ، وبخيا. ، بالموقت مطر: اكتب الز: قل الزبدة: اطلب رر ب",
+        "verdict": "repetitive_not_suitable"
+      },
+      {
+        "checkpoint": "sf-10m-step3000",
+        "prompt": "كيفك",
+        "output": "الزبدة: ابدأ بهالفكرة: ابدأ بخيارير وت أخياري، وء. . ل تسأخير. الصورة. . . ت الصورة. . ك، وشأ",
+        "verdict": "fragmented_not_suitable"
+      },
+      {
+        "checkpoint": "sf-10m-step4000",
+        "prompt": "السلام عليكم",
+        "output": "الأفضل أن تبدأ بهدوء: اذكر الطف. ت الطت الطت الطرف أن تبدأ بهدوء: اذكر الطروء: اذكر الطروء: ا",
+        "verdict": "repetitive_not_suitable"
+      }
+    ]
+  },
+  "generation_quality": {
+    "assistant_target_objective_works": true,
+    "still_repetitive": true,
+    "question_relevance_failed": true,
+    "short_social_chat_failed": true,
+    "suitable_for_chat_runtime": false,
+    "runtime_blocked": true
+  },
+  "decision": {
+    "phase27_6_completed": true,
+    "can_enable_v0_5_in_ui": false,
+    "can_start_sf50m": false,
+    "can_start_phase28": false,
+    "next_recommended_work": "Build fixed train/eval split, add more gold social dialogue, and strengthen repetition/relevance canary before scaling."
+  }
+}

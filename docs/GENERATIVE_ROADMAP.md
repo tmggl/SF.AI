@@ -43,7 +43,8 @@ SF.AI يملك الآن:
 |---------|---------|-----------|
 | Phase 24 | `SF-10M v0.2` | 500 سجل حوار محكوم على الأقل |
 | Phase 27.5 | `SF-10M v0.4` | إصلاح صيغة الحوار بعد corpus gate |
-| بعد Phase 27.5 | `SF-50M v0.1` | نجاح جودة SF-10M/canary + إعادة Phase 26 readiness |
+| Phase 27.6 | `SF-10M v0.5` | assistant-target training على رد المساعد فقط |
+| بعد Phase 27.6 | `SF-50M v0.1` | نجاح جودة SF-10M/canary + إعادة Phase 26 readiness |
 | Phase 28 | `SF-120M v0.1` | نجاح SF-50M + scaling gate |
 
 ---
@@ -57,12 +58,13 @@ SF.AI يملك الآن:
 - **Phase 26:** بوابة readiness رفضت SF-50M الآن.
 - **Phase 27:** eval v2 مرّر التوجيه، ثم اكتمل corpus gate بعد التوسعة الطبيعية.
 - **Phase 27.5:** `SF-10M v0.4` تعلّم صيغة الحوار أفضل، لكنه بقي غير جاهز للواجهة.
+- **Phase 27.6:** `SF-10M v0.5` جرّب assistant-target، لكنه بقي مكررًا وغير جاهز للواجهة.
 - **Phase 28:** أول قفزة بعد SF-50M إذا أثبت 50M قيمة واضحة.
 - **Phase 29:** إدخاله في الواجهة كتجربة يومية مع router/safety/memory.
 
 الخلاصة:
 
-> أول “مولّد حقيقي” بدأ في Phase 13، لكن أول “حوار مولّد يقنع سامي” صار مشروطًا بإصلاح assistant-target على `SF-10M` أو نجاح `SF-50M` لاحقًا.
+> أول “مولّد حقيقي” بدأ في Phase 13، لكن أول “حوار مولّد يقنع سامي” صار مشروطًا بـ fixed split + gold social dialogue + canary أقوى على `SF-10M`، أو نجاح `SF-50M` لاحقًا.
 
 ---
 

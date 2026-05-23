@@ -49,6 +49,8 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     p.add_argument("--temperature", type=float, default=1.0)
     p.add_argument("--top-k", type=int, default=20)
     p.add_argument("--stream-format", choices=["dialogue", "messages"], default="dialogue")
+    p.add_argument("--loss-scope", choices=["full", "assistant"], default="full",
+                   help="Match the training objective when computing eval loss")
     p.add_argument("--chat-prompt", action="store_true",
                    help="Wrap prompt as المستخدم/المساعد dialogue before generation")
     return p.parse_args(argv)
@@ -82,6 +84,7 @@ def run(argv: list[str]) -> int:
         for inputs, targets in iter_token_batches(
             tok, dataset, batch_size=args.batch_size, seq_len=args.seq_len,
             device=torch_device, stream_format=args.stream_format,
+            loss_scope=args.loss_scope,
         ):
             logits = model(inputs)
             loss = cross_entropy_lm(logits, targets)

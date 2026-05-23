@@ -37,8 +37,8 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.5 / 30 — SF-10M Dialogue-Format Repair اكتملت بحدود.
-- **الأولوية الحالية:** إصلاح جودة `SF-10M` بأسلوب assistant-target/loss masking؛ لا تدريب `SF-50M` ولا Phase 28 حتى تمر بوابات الجودة.
+- **الرحلة الحالية:** Phase 27.6 / 30 — SF-10M Assistant-Target Training اكتملت بحدود.
+- **الأولوية الحالية:** fixed train/eval split + gold social dialogue + canary أقوى؛ لا تدريب `SF-50M` ولا Phase 28 حتى تمر بوابات الجودة.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
 - **البيانات الحالية:** corpus موثق `5143` سجلًا يمر `corpus-audit`: `2594` سعودي + `2549` فصحى. آخر tokenizer v2 وSF-10M v0.2 استُخدما corpus Phase 22 عند `500` سجل، والتوسعة الجديدة بدأت بعد Phase 27.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -48,7 +48,7 @@
 - **دورة البيانات:** Phase 18 أضاف تصدير مراجعة من الواجهة و`prepare_dialogue_batch.py`; وPhase 22 يعتمد الآن أيضًا دفعات مباشرة يؤلفها/يراجعها الوكيل بتفويض موثق، بدون انتظار حفظ أو تصدير من سامي.
 - **جاهزية SF-50M:** Phase 26 أضاف `make phase26-readiness` و`GET /system/phase26-readiness`; القرار الحالي `NOT_READY_IMPROVE_SF10M_AND_CANARY`.
 - **بوابات المجالات:** Phase 20 أضاف `make phase20-gates` و`GET /system/phase20-gates`; المجال النشط الوحيد هو `chat`.
-- **طريق التوليد المقنع:** لا تعرض `SF-10M v0.2` أو `SF-10M v0.4` كنجاح حواري. Phase 27 نجح كاختبار توجيه وقوالب، وPhase 27.5 أثبت أن صيغة الحوار تحسن التدريب لكنها لا تكفي للواجهة.
+- **طريق التوليد المقنع:** لا تعرض `SF-10M v0.2` أو `SF-10M v0.4` أو `SF-10M v0.5` كنجاح حواري. Phase 27.6 أثبت أن assistant-target يحسن التصميم لكنه لا يكفي للواجهة.
 - **Corpus v2:** Phase 22 أضاف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-completion-gate` و`make phase22-review-intake`; الوضع الحالي 500/500، وفيه ثمان دفعات فصيحة `dialogue_batch_v2_msa_001.jsonl` إلى `dialogue_batch_v2_msa_008.jsonl` وسبع دفعات سعودية `dialogue_batch_v2_saudi_001.jsonl` إلى `dialogue_batch_v2_saudi_007.jsonl` وأربع دفعات مرنة `dialogue_batch_v2_flex_001.jsonl` إلى `dialogue_batch_v2_flex_004.jsonl` إضافة إلى seed فصيح للمصطلحات `protected_terms_msa_seed_v1.jsonl`. التوازن النهائي مكتمل (`msa=250`, `saudi=250`) ولا توجد دفعة تالية في Phase 22. الواجهة تعرض بوابة Phase 22 الحية وجودة التصدير كمختبر اختياري فقط، أما بناء corpus الحالي فتم مباشرة عبر الوكيل. `phase22-completion-gate` يرجع الآن `PHASE22_COMPLETE_READY_FOR_PHASE23`.
 - **Tokenizer v2:** Phase 23 أضاف `artifacts/tokenizers/sf_bpe/v2/` و`make phase23-tokenizer-audit`; الحالة `COMPLETED_READY_FOR_PHASE24`, `vocab=4493`, `merges=4386`, وprotected Saudi terms تحسنت من متوسط 4.0 tokens في v1 إلى 2.3 في v2.
 - **SF-10M v0.2:** Phase 24 درّب النموذج 2000 خطوة على tokenizer v2 وcorpus المتوازن: loss `8.4751 → 2.8256`, eval loss `2.5779`, perplexity `13.17`. القرار: `COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED` لأن التوليد لا يزال غير متماسك.
@@ -58,6 +58,7 @@
 - **دفعات توسعة:** أضيفت Batch 001 بإجمالي 50 سجلًا، ثم Batch 002 وBatch 003 الكبيرتان بإجمالي 1000 سجل، كل واحدة `250` فصيح + `250` سعودي. التقارير: [docs/PHASE27_CORPUS_EXPANSION_BATCH_001_REPORT.md](./docs/PHASE27_CORPUS_EXPANSION_BATCH_001_REPORT.md), [docs/PHASE27_CORPUS_EXPANSION_BATCH_002_REPORT.md](./docs/PHASE27_CORPUS_EXPANSION_BATCH_002_REPORT.md), [docs/PHASE27_CORPUS_EXPANSION_BATCH_003_REPORT.md](./docs/PHASE27_CORPUS_EXPANSION_BATCH_003_REPORT.md).
 - **تنظيف corpus:** أضيف فلتر يمنع الحوارات التشغيلية/الهندسية/الخاصة بسامي من التدريب؛ حُذف `907` سجلًا قديمًا، ثم وصلت التوسعة الطبيعية إلى `5143` سجلًا. التقرير: [docs/CORPUS_OPERATIONAL_FILTER_REPORT.md](./docs/CORPUS_OPERATIONAL_FILTER_REPORT.md).
 - **نتيجة Phase 27.5:** دُرّب `SF-10M v0.4` بصيغة حوارية كاملة على `5143` سجلًا: training loss `8.4662 → 1.4070`، لكن eval loss `5.8267` وperplexity `339.24` والردود غير مرتبطة كفاية بالسؤال. القرار: runtime blocked. التقرير: [docs/PHASE27_5_SF10M_DIALOGUE_FORMAT_REPORT.md](./docs/PHASE27_5_SF10M_DIALOGUE_FORMAT_REPORT.md).
+- **نتيجة Phase 27.6:** دُرّب `SF-10M v0.5` بخسارة على رد المساعد فقط: training loss `8.4643 → 2.3513`; أفضل eval مقاس step2000: loss `6.5718`, perplexity `714.65`. الردود ما زالت مكررة، لذلك runtime blocked. التقرير: [docs/PHASE27_6_SF10M_ASSISTANT_TARGET_REPORT.md](./docs/PHASE27_6_SF10M_ASSISTANT_TARGET_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
@@ -101,6 +102,7 @@
 | Phase 26 | SF-50M v0.1 Readiness — completed; training blocked by scaling gates |
 | Phase 27 | Dialogue Evaluation v2 and corpus expansion plan — completed; corpus gate passed |
 | Phase 27.5 | SF-10M Dialogue-Format Repair — completed with limits; runtime blocked |
+| Phase 27.6 | SF-10M Assistant-Target Training — completed with limits; runtime blocked |
 | Phase 28 | SF-120M v0.1 Candidate — planned |
 | Phase 29 | Runtime Hybrid Assistant v1 — planned |
 | Phase 30 | Continuous Improvement Loop — planned |

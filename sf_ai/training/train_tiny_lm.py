@@ -62,25 +62,85 @@ def iter_token_batches(
     seq_len: int,
     device: torch.device,
     stream_format: str = "dialogue",
+    loss_scope: str = "full",
 ) -> Iterator[tuple[torch.Tensor, torch.Tensor]]:
     """Stream (input_ids, targets) batches from a chat corpus."""
-    pool: list[int] = []
+    pool_ids: list[int] = []
+    pool_labels: list[int] = []
     texts = (
         dataset.iter_dialogue_texts()
         if stream_format == "dialogue"
         else (msg.content for msg in dataset.iter_messages())
     )
     for text in texts:
-        ids = tokenizer.encode(text)
-        if not ids:
+        ids, labels = _encode_training_text(
+            tokenizer,
+            text,
+            stream_format=stream_format,
+            loss_scope=loss_scope,
+        )
+        if not ids or not labels:
             continue
-        pool.extend(ids)
-        while len(pool) >= batch_size * (seq_len + 1):
-            chunk = pool[: batch_size * (seq_len + 1)]
-            del pool[: batch_size * (seq_len + 1)]
-            t = torch.tensor(chunk, dtype=torch.long, device=device)
-            t = t.view(batch_size, seq_len + 1)
-            yield t[:, :-1], t[:, 1:]
+        pool_ids.extend(ids)
+        pool_labels.extend(labels)
+        while len(pool_ids) >= batch_size * (seq_len + 1):
+            need = batch_size * (seq_len + 1)
+            id_chunk = pool_ids[:need]
+            label_chunk = pool_labels[:need]
+            del pool_ids[:need]
+            del pool_labels[:need]
+            ids_tensor = torch.tensor(id_chunk, dtype=torch.long, device=device)
+            labels_tensor = torch.tensor(label_chunk, dtype=torch.long, device=device)
+            ids_tensor = ids_tensor.view(batch_size, seq_len + 1)
+            labels_tensor = labels_tensor.view(batch_size, seq_len + 1)
+            targets = labels_tensor[:, 1:]
+            if loss_scope == "assistant" and bool((targets != -100).sum().item() == 0):
+                continue
+            yield ids_tensor[:, :-1], targets
+
+
+def _encode_training_text(
+    tokenizer,
+    text: str,
+    *,
+    stream_format: str,
+    loss_scope: str,
+) -> tuple[list[int], list[int]]:
+    ids = tokenizer.encode(text)
+    if loss_scope == "full" or stream_format != "dialogue":
+        return ids, list(ids)
+    if loss_scope != "assistant":
+        raise ValueError(f"unsupported loss_scope: {loss_scope}")
+    return _encode_assistant_target_dialogue(tokenizer, text)
+
+
+def _encode_assistant_target_dialogue(tokenizer, text: str) -> tuple[list[int], list[int]]:
+    """Encode dialogue while masking non-assistant target tokens.
+
+    Labels align token-for-token with ids. Later batching shifts labels by one
+    position, so the loss only trains predictions whose *target* token belongs
+    to assistant content, not the user's prompt or role markers.
+    """
+    ids: list[int] = []
+    labels: list[int] = []
+    for raw_line in text.splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+        if line.startswith("المساعد:"):
+            prefix = "المساعد:"
+            content = line[len(prefix):].strip()
+            prefix_ids = tokenizer.encode(prefix)
+            content_ids = tokenizer.encode(content)
+            ids.extend(prefix_ids)
+            labels.extend([-100] * len(prefix_ids))
+            ids.extend(content_ids)
+            labels.extend(content_ids)
+        else:
+            line_ids = tokenizer.encode(line)
+            ids.extend(line_ids)
+            labels.extend([-100] * len(line_ids))
+    return ids, labels
 
 
 def train_one_step(
@@ -129,6 +189,8 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     p.add_argument("--seed", type=int, default=1337)
     p.add_argument("--stream-format", choices=["dialogue", "messages"], default="dialogue",
                    help="dialogue keeps role-marked samples together; messages preserves legacy flat streaming")
+    p.add_argument("--loss-scope", choices=["full", "assistant"], default="full",
+                   help="assistant masks user/context tokens and trains only assistant reply tokens")
     p.add_argument("--dry-run", action="store_true",
                    help="Build everything but skip the training loop")
     return p.parse_args(argv)
@@ -188,6 +250,7 @@ def run(argv: list[str]) -> int:
             seq_len=args.seq_len,
             device=torch_device,
             stream_format=args.stream_format,
+            loss_scope=args.loss_scope,
         ):
             produced_in_epoch += 1
             # Set LR per step.
@@ -236,7 +299,8 @@ def _save(ckpt_mgr: CheckpointManager, model: TinyTransformer, args, step: int, 
         config_hash="",
         notes=(
             f"seed={args.seed} batch={args.batch_size} seq={args.seq_len} "
-            f"epochs={args.epochs} stream_format={args.stream_format}"
+            f"epochs={args.epochs} stream_format={args.stream_format} "
+            f"loss_scope={args.loss_scope}"
         ),
     )
     ckpt_mgr.save_metadata(name, meta)
