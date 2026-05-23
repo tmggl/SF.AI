@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.19 / 30**
-- **المرحلة الحالية:** **Phase 27.19 — Hygiene Repair Corpus/Probe**
-- **حالة المرحلة الحالية:** **مكتملة؛ repair examples وحدها لم ترفع النتيجة وruntime بقي محجوبًا**
-- **المرحلة التالية المقترحة:** Phase 27.20 tokenizer/protected-phrase strategy قبل أي تكبير إلى `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.20 / 30**
+- **المرحلة الحالية:** **Phase 27.20 — Tokenizer/Protected-Phrase Strategy**
+- **حالة المرحلة الحالية:** **مكتملة؛ دعم protected phrases جاهز لـ tokenizer v3 وruntime بقي محجوبًا**
+- **المرحلة التالية المقترحة:** Phase 27.21 tokenizer v3 protected-phrase retrain + micro-probe قبل أي runtime أو `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -68,6 +68,7 @@
 | Phase 27.17 | Prompt-to-Answer Micro-Probe | ✅ completed_micro_probe_breakthrough_runtime_blocked | ✅ |
 | Phase 27.18 | Tokenization/Decoding Hygiene Repair | ✅ completed_hygiene_audit_with_blockers | ✅ |
 | Phase 27.19 | Hygiene Repair Corpus/Probe | ✅ completed_repair_probe_still_runtime_blocked | ✅ |
+| Phase 27.20 | Tokenizer/Protected-Phrase Strategy | ✅ completed_ready_for_tokenizer_v3_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -511,6 +512,19 @@
   - لا تفعيل runtime ولا تدريب `SF-50M`.
   - أضيف [PHASE27_19_HYGIENE_REPAIR_PROBE_REPORT.md](./PHASE27_19_HYGIENE_REPAIR_PROBE_REPORT.md).
   - أضيف `artifacts/reports/phase27_19_hygiene_repair_probe_report.json`.
+- بدأ وانتهى Phase 27.20 Tokenizer/Protected-Phrase Strategy:
+  - أضيف دعم `protected_terms` داخل `TokenizerConfig` و`BPETokenizer`.
+  - أضيف حفظ `protected_terms/protected_joiner` داخل `meta.json`.
+  - أضيف `resources/tokenization/protected_phrases_phase27_20.txt`.
+  - أضيف `scripts/phase27_20_tokenizer_strategy.py`.
+  - أضيف `make phase27-tokenizer-strategy`.
+  - العبارات الخمس: `وعليكم السلام`, `نفسًا هادئًا`, `نشتغل سوا`, `القراءة تفيد`, `تقدّر الناس`.
+  - tokenizer v2 الحالي: `max_pieces=8`.
+  - استراتيجية protected phrase الجديدة: `max_pieces=1`, `all_single_piece=true`, `all_roundtrip_ok=true`.
+  - القرار: `COMPLETED_PROTECTED_PHRASE_STRATEGY_READY_FOR_TOKENIZER_V3`.
+  - لا تفعيل runtime ولا تدريب `SF-50M`.
+  - أضيف [PHASE27_20_TOKENIZER_PROTECTED_PHRASE_STRATEGY_REPORT.md](./PHASE27_20_TOKENIZER_PROTECTED_PHRASE_STRATEGY_REPORT.md).
+  - أضيف `artifacts/reports/phase27_20_tokenizer_strategy_report.json`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -576,7 +590,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.19"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.20"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,

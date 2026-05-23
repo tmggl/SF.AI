@@ -36,6 +36,9 @@ Phase 27.18 حولت هذه الكسور إلى hygiene audit: `5` عبارات 
 وكل الكسور المرصودة أصبحت محجوبة في الحارس.
 Phase 27.19 اختبرت repair examples حول العبارات الخمس، لكن النتيجة بقيت
 `27/32`، ما يعني أن الأمثلة وحدها لا تكفي.
+Phase 27.20 أضافت دعم protected phrases داخل tokenizer نفسه؛ العبارات الخمس
+صارت قابلة للحفظ كقطعة واحدة في tokenizer v3 القادم، لكن runtime ما زال
+محجوبًا حتى micro-probe جديد.
 
 الخطوة العملية الحالية:
 
@@ -162,7 +165,8 @@ SF.AI حاليًا:
 - **Phase 27.17:** Targeted micro-probe لأزواج سؤال/جواب — مكتمل جزئيًا، runtime محظور.
 - **Phase 27.18:** Tokenization/Decoding Hygiene Repair — مكتمل، runtime محظور.
 - **Phase 27.19:** Hygiene Repair Corpus/Probe — مكتمل، runtime محظور.
-- **Phase 27.20:** Tokenizer/Protected-Phrase Strategy — التالي.
+- **Phase 27.20:** Tokenizer/Protected-Phrase Strategy — مكتمل، runtime محظور.
+- **Phase 27.21:** Tokenizer v3 protected-phrase retrain + micro-probe — التالي.
 - **Phase 28:** تدريب `SF-120M v0.1`؛ أول قفزة بعد نجاح `SF-50M`.
 - **Phase 29:** Runtime Hybrid Assistant v1.
 - **Phase 30:** Continuous Improvement Loop.

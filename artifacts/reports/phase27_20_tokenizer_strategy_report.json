@@ -1,0 +1,177 @@
+{
+  "phase": "Phase 27.20",
+  "status": "COMPLETED_PROTECTED_PHRASE_STRATEGY_READY_FOR_TOKENIZER_V3",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "tokenizer_current": "artifacts/tokenizers/sf_bpe/v2",
+  "protected_phrases_path": "resources/tokenization/protected_phrases_phase27_20.txt",
+  "hygiene_report_path": "artifacts/reports/phase27_18_tokenization_hygiene_report.json",
+  "protected_phrases_total": 5,
+  "protected_phrases": [
+    "وعليكم السلام",
+    "نفسًا هادئًا",
+    "نشتغل سوا",
+    "القراءة تفيد",
+    "تقدّر الناس"
+  ],
+  "hygiene_focus_terms": [
+    "وعليكم السلام",
+    "نفسًا هادئًا",
+    "نشتغل سوا",
+    "القراءة تفيد",
+    "تقدّر الناس"
+  ],
+  "missing_from_policy": [],
+  "unexpected_policy_terms": [],
+  "corpus_coverage": {
+    "وعليكم السلام": 34,
+    "نفسًا هادئًا": 2,
+    "نشتغل سوا": 0,
+    "القراءة تفيد": 0,
+    "تقدّر الناس": 0
+  },
+  "current_v2_behavior": {
+    "max_pieces": 8,
+    "rows": [
+      {
+        "phrase": "وعليكم السلام",
+        "piece_count": 8,
+        "token_ids": [
+          102,
+          168,
+          205,
+          117,
+          107,
+          86,
+          144,
+          117
+        ],
+        "decoded": "وعليكم السلام",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "نفسًا هادئًا",
+        "piece_count": 6,
+        "token_ids": [
+          900,
+          137,
+          101,
+          264,
+          73,
+          137
+        ],
+        "decoded": "نفسًا هادئًا",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "نشتغل سوا",
+        "piece_count": 8,
+        "token_ids": [
+          100,
+          87,
+          77,
+          93,
+          110,
+          86,
+          102,
+          108
+        ],
+        "decoded": "نشتغل سوا",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "القراءة تفيد",
+        "piece_count": 5,
+        "token_ids": [
+          231,
+          182,
+          68,
+          111,
+          4004
+        ],
+        "decoded": "القراءة تفيد",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "تقدّر الناس",
+        "piece_count": 5,
+        "token_ids": [
+          1283,
+          1431,
+          146,
+          74,
+          199
+        ],
+        "decoded": "تقدّر الناس",
+        "roundtrip_ok": true
+      }
+    ]
+  },
+  "protected_phrase_strategy_behavior": {
+    "max_pieces": 1,
+    "all_single_piece": true,
+    "all_roundtrip_ok": true,
+    "rows": [
+      {
+        "phrase": "وعليكم السلام",
+        "piece_count": 1,
+        "token_ids": [
+          32
+        ],
+        "decoded": "وعليكم السلام",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "نفسًا هادئًا",
+        "piece_count": 1,
+        "token_ids": [
+          31
+        ],
+        "decoded": "نفسًا هادئًا",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "نشتغل سوا",
+        "piece_count": 1,
+        "token_ids": [
+          30
+        ],
+        "decoded": "نشتغل سوا",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "القراءة تفيد",
+        "piece_count": 1,
+        "token_ids": [
+          28
+        ],
+        "decoded": "القراءة تفيد",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "تقدّر الناس",
+        "piece_count": 1,
+        "token_ids": [
+          29
+        ],
+        "decoded": "تقدّر الناس",
+        "roundtrip_ok": true
+      }
+    ]
+  },
+  "sovereignty": {
+    "external_llm_api_used": false,
+    "pretrained_weights_used": false,
+    "pretrained_embeddings_used": false,
+    "pretrained_tokenizer_used": false,
+    "pretrained_vocab_used": false,
+    "policy_terms_from_sf_ai_diagnostics": true
+  },
+  "runtime_allowed": false,
+  "sf50m_allowed": false,
+  "decision": "Protected-phrase tokenizer support is now implemented. Next: train a tokenizer v3 artifact with these policy phrases, then rerun the Phase 27.17/27.19 micro-probe before any runtime or SF-50M scaling.",
+  "next_phase": "Phase 27.21 — Tokenizer v3 protected-phrase retrain + micro-probe"
+}

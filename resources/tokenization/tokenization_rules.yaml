@@ -41,6 +41,14 @@ protected_terms:
   requires_audit: true
   candidate_activation_policy: activate_after_corpus_coverage
 
+protected_phrases:
+  active_paths:
+    - resources/tokenization/protected_phrases_phase27_20.txt
+  policy: preserve_as_single_policy_unit_when_training_tokenizer_v3
+  provenance: phase27_17_to_phase27_19_diagnostics
+  requires_audit: true
+  runtime_activation_policy: tokenizer_v3_retrain_then_micro_probe
+
 preferred_merges:
   active_paths:
     - resources/tokenization/preferred_merges.txt

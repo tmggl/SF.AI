@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.19 — Hygiene Repair Corpus/Probe",
-        current_phase_status="completed_repair_probe_still_runtime_blocked",
+        current_phase="Phase 27.20 — Tokenizer/Protected-Phrase Strategy",
+        current_phase_status="completed_protected_phrase_strategy_runtime_blocked",
         next_phase=(
-            "Phase 27.20 SF-10M tokenizer/protected-phrase strategy before any SF-50M scaling"
+            "Phase 27.21 tokenizer v3 protected-phrase retrain + micro-probe before runtime"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -209,6 +209,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_19_hygiene_repair_probe",
                 status="completed_repair_probe_runtime_blocked",
                 phase="Phase 27.19",
+            ),
+            ComponentStatus(
+                name="phase27_20_tokenizer_protected_phrase_strategy",
+                status="completed_ready_for_tokenizer_v3_runtime_blocked",
+                phase="Phase 27.20",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

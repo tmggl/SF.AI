@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27.19: بنينا repair probe مركزًا لـ SF-10M حول العبارات الخمس ودربناه على 52 مثالًا داخليًا، لكن النتيجة بقيت 27/32. هذا يعني أن زيادة أمثلة repair وحدها لا تكفي. التا"
+      "response_preview": "اكتملت Phase 27.20: أضفنا دعم protected phrases داخل tokenizer نفسه. العبارات الخمس التي كانت تتكسر في v2 صارت قابلة للحفظ كقطعة واحدة في v3. التالي Phase 27.21: تدريب tokenizer v3"
     },
     {
       "scenario_id": "clarification_repair_flow",

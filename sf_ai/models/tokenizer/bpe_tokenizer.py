@@ -56,6 +56,7 @@ class BPETokenizer:
         self._merges: list[tuple[str, str]] = []
         self._merge_ranks: dict[tuple[str, str], int] = {}
         self._stats: TrainingStats | None = None
+        self._protected_surface_to_term: dict[str, str] = self._build_protected_surface_map()
 
     # ----- properties -----
 
@@ -79,12 +80,41 @@ class BPETokenizer:
 
     # ----- pre-tokenization -----
 
+    def _build_protected_surface_map(self) -> dict[str, str]:
+        out: dict[str, str] = {}
+        for raw in self.config.protected_terms:
+            term = " ".join(str(raw).split())
+            if not term:
+                continue
+            surface = self._term_to_surface(term)
+            out[surface] = term
+        return out
+
+    def _term_to_surface(self, term: str) -> str:
+        return self.config.protected_joiner.join(term.split())
+
+    def _protect_phrases(self, text: str) -> str:
+        if not self._protected_surface_to_term:
+            return text
+        protected_terms = sorted(
+            self._protected_surface_to_term.values(),
+            key=len,
+            reverse=True,
+        )
+        out = text
+        for term in protected_terms:
+            surface = self._term_to_surface(term)
+            pattern = re.compile(rf"(?<!\S){re.escape(term)}(?!\S)")
+            out = pattern.sub(surface, out)
+        return out
+
     def _pretokenize(self, text: str) -> list[str]:
         text = text.strip()
         if not text:
             return []
         if self.config.lowercase:
             text = text.lower()
+        text = self._protect_phrases(text)
         return [w for w in _WHITESPACE_RE.split(text) if w]
 
     def _word_to_symbols(self, word: str) -> list[str]:
@@ -123,6 +153,14 @@ class BPETokenizer:
         for sym in sorted(base_alphabet):
             self._add_token(sym)
         base_alphabet_size = len(self._vocab)
+
+        # Policy-owned protected phrases are first-class vocabulary entries.
+        # They are project-authored terms, not external pretrained vocab, and
+        # their presence is recorded in meta.json for auditability.
+        for surface in sorted(self._protected_surface_to_term):
+            if len(self._vocab) >= self.config.vocab_size:
+                break
+            self._add_token(surface)
 
         # BPE loop.
         merges_learned = 0
@@ -186,6 +224,8 @@ class BPETokenizer:
     # ----- encoding -----
 
     def _encode_word(self, word: str) -> list[str]:
+        if word in self._protected_surface_to_term and word in self._vocab:
+            return [word]
         symbols = self._word_to_symbols(word)
         if not symbols:
             return []
@@ -227,6 +267,8 @@ class BPETokenizer:
         # Join: every '</w>' marks the end of a word → insert space afterwards.
         joined = "".join(symbols)
         joined = joined.replace(END_OF_WORD, " ")
+        if self._protected_surface_to_term:
+            joined = joined.replace(self.config.protected_joiner, " ")
         return joined.strip()
 
     # ----- save / load -----
@@ -250,6 +292,8 @@ class BPETokenizer:
             "special_tokens": list(self.config.special_tokens),
             "lowercase": self.config.lowercase,
             "byte_level": self.config.byte_level,
+            "protected_terms": list(self.config.protected_terms),
+            "protected_joiner": self.config.protected_joiner,
         }
         if self._stats is not None:
             meta["training_stats"] = {
@@ -282,6 +326,8 @@ class BPETokenizer:
             special_tokens=tuple(meta.get("special_tokens", DEFAULT_SPECIAL_TOKENS)),
             lowercase=bool(meta.get("lowercase", False)),
             byte_level=bool(meta.get("byte_level", False)),
+            protected_terms=tuple(meta.get("protected_terms") or ()),
+            protected_joiner=str(meta.get("protected_joiner") or "▁"),
         )
         tok = cls(config=cfg)
         tok._vocab = json.loads((d / "vocab.json").read_text(encoding="utf-8"))

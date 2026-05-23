@@ -97,6 +97,28 @@ def test_bpe_encode_decode_roundtrip_arabic() -> None:
     assert decoded.replace(" ", "") == text.replace(" ", "")
 
 
+def test_bpe_protected_phrase_roundtrip_single_piece() -> None:
+    cfg = TokenizerConfig(
+        vocab_size=300,
+        min_frequency=1,
+        protected_terms=("وعليكم السلام", "نشتغل سوا"),
+    )
+    tok = BPETokenizer(config=cfg)
+    tok.train(
+        [
+            "وعليكم السلام أهلًا بك",
+            "نشتغل سوا ونخفف الحمل",
+        ]
+    )
+
+    ids = tok.encode("وعليكم السلام")
+    assert len(ids) == 1
+    assert tok.decode(ids) == "وعليكم السلام"
+
+    text = "نشتغل سوا"
+    assert tok.decode(tok.encode(text)) == text
+
+
 def test_bpe_save_load_roundtrip(tmp_path: Path) -> None:
     cfg = TokenizerConfig(vocab_size=200, min_frequency=1)
     tok = BPETokenizer(config=cfg)
@@ -114,6 +136,28 @@ def test_bpe_save_load_roundtrip(tmp_path: Path) -> None:
     a = tok.encode("the fox")
     b = loaded.encode("the fox")
     assert a == b
+
+
+def test_bpe_save_load_preserves_protected_phrases(tmp_path: Path) -> None:
+    tok = BPETokenizer(
+        config=TokenizerConfig(
+            vocab_size=300,
+            min_frequency=1,
+            protected_terms=("القراءة تفيد",),
+        )
+    )
+    tok.train(["القراءة تفيد وتزيد المفردات"])
+    out = tmp_path / "bpe_protected"
+    tok.save(out)
+
+    meta = json.loads((out / "meta.json").read_text(encoding="utf-8"))
+    assert meta["protected_terms"] == ["القراءة تفيد"]
+
+    loaded = BPETokenizer.load(out)
+    ids = loaded.encode("القراءة تفيد")
+    assert len(ids) == 1
+    assert loaded.decode(ids) == "القراءة تفيد"
+
 
 
 def test_bpe_refuses_non_sovereign_load(tmp_path: Path) -> None:

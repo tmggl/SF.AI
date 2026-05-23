@@ -23,7 +23,7 @@ def test_health_ok() -> None:
     body = r.json()
     assert body["status"] == "ok"
     assert body["project"] == "SF.AI"
-    assert body["phase"] == "Phase 27.19"
+    assert body["phase"] == "Phase 27.20"
 
 
 def test_system_status_sovereign_flags() -> None:
@@ -31,9 +31,9 @@ def test_system_status_sovereign_flags() -> None:
     assert r.status_code == 200
     body = r.json()
     assert body["project"] == "SF.AI"
-    assert body["current_phase"].startswith("Phase 27.19")
-    assert body["current_phase_status"] == "completed_repair_probe_still_runtime_blocked"
-    assert "SF-10M" in body["next_phase"]
+    assert body["current_phase"].startswith("Phase 27.20")
+    assert body["current_phase_status"] == "completed_protected_phrase_strategy_runtime_blocked"
+    assert "tokenizer v3" in body["next_phase"]
     assert body["sovereign"] is True
     assert body["uses_external_llm"] is False
     assert body["uses_pretrained_weights"] is False
@@ -125,6 +125,11 @@ def test_system_status_sovereign_flags() -> None:
     assert any(
         c["name"] == "phase27_19_hygiene_repair_probe"
         and c["status"] == "completed_repair_probe_runtime_blocked"
+        for c in body["components"]
+    )
+    assert any(
+        c["name"] == "phase27_20_tokenizer_protected_phrase_strategy"
+        and c["status"] == "completed_ready_for_tokenizer_v3_runtime_blocked"
         for c in body["components"]
     )
 

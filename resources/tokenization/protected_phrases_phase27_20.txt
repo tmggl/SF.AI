@@ -1,0 +1,9 @@
+# SF.AI Phase 27.20 active protected phrases
+# UTF-8, one phrase per line.
+# These phrases are project-authored from Phase 27.17/27.18/27.19 diagnostics.
+# They are policy-owned protected phrases, not pretrained vocabulary.
+وعليكم السلام
+نفسًا هادئًا
+نشتغل سوا
+القراءة تفيد
+تقدّر الناس

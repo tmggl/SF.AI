@@ -84,9 +84,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.19: بنينا repair probe مركزًا لـ SF-10M حول العبارات الخمس ودربناه على "
-    "52 مثالًا داخليًا، لكن النتيجة بقيت 27/32. هذا يعني أن زيادة أمثلة repair وحدها "
-    "لا تكفي. التالي Phase 27.20 لوضع استراتيجية tokenizer/protected-phrase قبل أي تكبير.",
+    "اكتملت Phase 27.20: أضفنا دعم protected phrases داخل tokenizer نفسه. "
+    "العبارات الخمس التي كانت تتكسر في v2 صارت قابلة للحفظ كقطعة واحدة في v3. "
+    "التالي Phase 27.21: تدريب tokenizer v3 ثم micro-probe قبل أي تفعيل للواجهة.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

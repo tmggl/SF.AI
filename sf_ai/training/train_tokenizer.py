@@ -10,6 +10,7 @@ import argparse
 import sys
 from pathlib import Path
 
+from sf_ai.models.tokenizer.policy_audit import load_plain_terms
 from sf_ai.models.tokenizer import TokenizerConfig, train_bpe_from_corpus
 
 
@@ -34,6 +35,15 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     p.add_argument("--byte-level", action="store_true")
     p.add_argument("--lowercase", action="store_true")
     p.add_argument("--name", default="sf_bpe")
+    p.add_argument(
+        "--protected-terms",
+        type=Path,
+        default=None,
+        help=(
+            "Optional SF.AI-owned protected terms/phrases file. This is policy "
+            "input, not pretrained vocab; the path is recorded in tokenizer meta."
+        ),
+    )
     p.add_argument(
         "--confirm-phase12-permission",
         action="store_true",
@@ -64,6 +74,9 @@ def run(argv: list[str]) -> int:
         min_frequency=args.min_frequency,
         byte_level=args.byte_level,
         lowercase=args.lowercase,
+        protected_terms=tuple(load_plain_terms(args.protected_terms))
+        if args.protected_terms
+        else (),
     )
     try:
         tok = train_bpe_from_corpus(

@@ -89,6 +89,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.17 | Prompt-to-Answer Micro-Probe | مكتملة؛ 27/32 breakthrough وruntime محظور |
 | Phase 27.18 | Tokenization/Decoding Hygiene Repair | مكتملة؛ blockers محددة وruntime محظور |
 | Phase 27.19 | Hygiene Repair Corpus/Probe | مكتملة؛ أمثلة repair وحدها لم تكف |
+| Phase 27.20 | Tokenizer/Protected-Phrase Strategy | مكتملة؛ دعم protected phrases جاهز لـ tokenizer v3 |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2150,6 +2151,65 @@ guard_passed = 29/32
 - [PHASE27_19_HYGIENE_REPAIR_PROBE_REPORT.md](./PHASE27_19_HYGIENE_REPAIR_PROBE_REPORT.md)
 - `artifacts/reports/phase27_19_hygiene_repair_probe_report.json`
 - `artifacts/samples/phase27_19_hygiene_repair_probe_generations.md`
+
+---
+
+## Phase 27.20 — Tokenizer/Protected-Phrase Strategy
+
+### الهدف
+
+تحويل تشخيص Phase 27.18/27.19 إلى دعم حقيقي داخل tokenizer:
+
+- حماية العبارات الخمس عالية التجزئة.
+- منع كسرها بشكل عدواني في tokenizer v3 القادم.
+- عدم تفعيل runtime أو تكبير النموذج قبل micro-probe جديد.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.20 بقرار:
+
+```text
+COMPLETED_PROTECTED_PHRASE_STRATEGY_READY_FOR_TOKENIZER_V3
+```
+
+ما تحقق:
+
+- أضيف `protected_terms` إلى `TokenizerConfig`.
+- صار `BPETokenizer` يحفظ protected phrases في `meta.json`.
+- أضيف ملف:
+  - `resources/tokenization/protected_phrases_phase27_20.txt`
+- أضيف:
+  - `scripts/phase27_20_tokenizer_strategy.py`
+  - `make phase27-tokenizer-strategy`
+
+### العبارات المحمية
+
+```text
+وعليكم السلام
+نفسًا هادئًا
+نشتغل سوا
+القراءة تفيد
+تقدّر الناس
+```
+
+### القياس
+
+```text
+tokenizer v2 max_pieces = 8
+protected strategy max_pieces = 1
+all_roundtrip_ok = true
+```
+
+### القرار
+
+- لا runtime.
+- لا `SF-50M`.
+- التالي Phase 27.21: tokenizer v3 protected-phrase retrain + micro-probe.
+
+### artifacts
+
+- [PHASE27_20_TOKENIZER_PROTECTED_PHRASE_STRATEGY_REPORT.md](./PHASE27_20_TOKENIZER_PROTECTED_PHRASE_STRATEGY_REPORT.md)
+- `artifacts/reports/phase27_20_tokenizer_strategy_report.json`
 
 ---
 
