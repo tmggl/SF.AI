@@ -223,3 +223,19 @@ def test_phase27_42_live_ui_broader_probes_pass_guarded_gate() -> None:
     assert report["summary"]["bucket_summary"]["quality_floor"]["passed"] == 3
     assert report["summary"]["bucket_summary"]["generated_definition"]["passed"] == 9
     assert all(row["passed"] for row in report["rows"])
+
+
+def test_phase27_43_guarded_data_backed_expansion_blocks_runtime_switch() -> None:
+    report = _report("phase27_43_guarded_data_backed_expansion_report.json")
+    assert report["phase"] == "Phase 27.43"
+    assert report["status"] == "PARTIAL_GUARDED_DATA_BACKED_EXPANSION_KEEP_PHASE27_40_RUNTIME"
+    assert report["training_started"] is True
+    assert report["candidate_generator"] == "sf_10m_phase27_43"
+    assert report["runtime_switch_allowed"] is False
+    assert report["sf50m_allowed"] is False
+    assert report["phase28_allowed"] is False
+    assert report["summary"]["passed"] == 10
+    assert report["summary"]["total"] == 16
+    assert report["summary"]["bucket_summary"]["weak_lane"]["passed"] == 4
+    assert report["summary"]["bucket_summary"]["regression"]["passed"] == 6
+    assert report["summary"]["bucket_summary"]["new_topic"]["passed"] == 0

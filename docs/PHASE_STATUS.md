@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.42 / 30**
-- **المرحلة الحالية:** **Phase 27.42 — Live UI Broader Probes**
-- **حالة المرحلة الحالية:** **مكتملة حيًا؛ broader UI/API probes مرّت `29/29` مع حجب misaligned generator outputs**
-- **المرحلة التالية المقترحة:** Phase 27.43 guarded data-backed expansion؛ لا Phase 28 ولا `SF-50M` قبل بوابات جودة أوسع.
+- **الرحلة الحالية:** **Phase 27.43 / 30**
+- **المرحلة الحالية:** **Phase 27.43 — Guarded Data-Backed Expansion**
+- **حالة المرحلة الحالية:** **مكتملة جزئيًا؛ تدريب weak-lane مرّ `10/16` فقط، وruntime يبقى على Phase 27.40**
+- **المرحلة التالية المقترحة:** Phase 27.44 tokenizer/curriculum repair for weak-lane stability؛ لا Phase 28 ولا `SF-50M` قبل بوابات جودة أوسع.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -91,6 +91,7 @@
 | Phase 27.40 | Tokenizer/Context Repair | ✅ completed_candidate_opened_in_guarded_trial | ✅ |
 | Phase 27.41 | Guarded Runtime Switch | ✅ completed_candidate_opened_in_guarded_trial | ✅ |
 | Phase 27.42 | Live UI Broader Probes | ✅ completed_live_ui_broader_probes_guarded | ✅ |
+| Phase 27.43 | Guarded Data-Backed Expansion | ✅ completed_partial_keep_phase27_40_runtime | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -706,6 +707,17 @@
   - القرار: تجربة الواجهة أوسع وأكثر أمانًا، لكن الافتراضي لا يزال `template` ولا `SF-50M`.
   - التالي Phase 27.43 guarded data-backed expansion.
   - أضيف [PHASE27_42_LIVE_UI_BROADER_PROBES_REPORT.md](./PHASE27_42_LIVE_UI_BROADER_PROBES_REPORT.md).
+- بدأ وانتهى Phase 27.43 Guarded Data-Backed Expansion:
+  - دُرّب مرشح `sf_10m_phase27_43` على tokenizer v5 لمعالجة weak lanes.
+  - checkpoint محلي: `artifacts/eval/phase27_43_guarded_data_backed_expansion/checkpoints/sf-10m-step4800`.
+  - الاختبار: `10/16`.
+  - weak_lane: `4/6`.
+  - regression: `6/8`.
+  - new_topic: `0/2`.
+  - التشخيص: البيانات وحدها سببت انجرافًا؛ بعض social/advice prompts صارت تعريفات، و`الوفاء/الشجاعة` انهارت إلى موضوعات قديمة.
+  - القرار: لا runtime switch؛ الواجهة تبقى على `sf_10m_phase27_40` داخل `generator_trial=true`.
+  - التالي Phase 27.44 tokenizer/curriculum repair for weak-lane stability.
+  - أضيف [PHASE27_43_GUARDED_DATA_BACKED_EXPANSION_REPORT.md](./PHASE27_43_GUARDED_DATA_BACKED_EXPANSION_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -771,7 +783,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.42"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.43"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -802,7 +814,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-558 passed in 16.99s
+559 passed in 16.81s
 ```
 
 | ملف | عدد |

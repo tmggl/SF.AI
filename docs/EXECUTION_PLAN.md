@@ -112,6 +112,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.40 | Tokenizer/Context Repair | مكتملة؛ `24/24` والمرشح فُتح لاحقًا في trial محروس |
 | Phase 27.41 | Guarded Runtime Switch | مكتملة؛ HTTP gate مرّ `22/22` و`generator_trial` يستخدم `sf_10m_phase27_40` |
 | Phase 27.42 | Live UI Broader Probes | مكتملة؛ broader gate مرّ `29/29` وحجب الردود غير المطابقة |
+| Phase 27.43 | Guarded Data-Backed Expansion | مكتملة جزئيًا؛ weak-lane candidate مرّ `10/16` ولا runtime switch |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2852,6 +2853,39 @@ sf50m_allowed = false
 - [PHASE27_42_LIVE_UI_BROADER_PROBES_REPORT.md](./PHASE27_42_LIVE_UI_BROADER_PROBES_REPORT.md)
 - `artifacts/reports/phase27_42_live_ui_broader_probes_report.json`
 - `artifacts/samples/phase27_42_live_ui_broader_probes.md`
+
+## Phase 27.43 — Guarded Data-Backed Expansion
+
+### الهدف
+
+تدريب مرشح SF-10M صغير على أمثلة موجهة للمسارات الضعيفة التي كشفها 27.42،
+مع عدم تبديل الواجهة إلا إذا اجتاز البوابة كاملة.
+
+### نتيجة التنفيذ
+
+```text
+candidate_generator = sf_10m_phase27_43
+checkpoint = sf-10m-step4800
+cases = 10/16
+weak_lane = 4/6
+regression = 6/8
+new_topic = 0/2
+runtime_switch_allowed = false
+sf50m_allowed = false
+```
+
+### القرار
+
+- لا runtime switch.
+- الواجهة تبقى على `sf_10m_phase27_40`.
+- `الوفاء/الشجاعة` تحتاج tokenizer/curriculum repair بدل إضافة أمثلة فقط.
+- التالي Phase 27.44: tokenizer/curriculum repair for weak-lane stability.
+
+### artifacts
+
+- [PHASE27_43_GUARDED_DATA_BACKED_EXPANSION_REPORT.md](./PHASE27_43_GUARDED_DATA_BACKED_EXPANSION_REPORT.md)
+- `artifacts/reports/phase27_43_guarded_data_backed_expansion_report.json`
+- `artifacts/samples/phase27_43_guarded_data_backed_expansion.md`
 
 ---
 

@@ -39,8 +39,8 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.42 / 30 — Live UI Broader Probes اكتملت بنجاح حي عبر HTTP.
-- **الأولوية الحالية:** Phase 27.43 guarded data-backed expansion؛ لا تدريب `SF-50M` ولا Phase 28 قبل بوابات جودة أوسع.
+- **الرحلة الحالية:** Phase 27.43 / 30 — Guarded Data-Backed Expansion اكتملت جزئيًا بدون تبديل runtime.
+- **الأولوية الحالية:** Phase 27.44 tokenizer/curriculum repair for weak-lane stability؛ لا تدريب `SF-50M` ولا Phase 28 قبل بوابات جودة أوسع.
 - **الشات الحالي:** runtime الافتراضي قالب/router، ومع زر `مولّد تجريبي` يستخدم `SF-10M Phase 27.40` خلف guard/fallback.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -91,6 +91,7 @@
 - **نتيجة Phase 27.40:** أُنشئ tokenizer v5 محمي للموضوعات الجديدة، ومرّ probe السياق `24/24` (`regression/new_topic/heldout/isolation` كلها كاملة). التقرير: [docs/PHASE27_40_TOKENIZER_CONTEXT_REPAIR_REPORT.md](./docs/PHASE27_40_TOKENIZER_CONTEXT_REPAIR_REPORT.md).
 - **نتيجة Phase 27.41:** فُتح مرشح `sf_10m_phase27_40` في مسار `generator_trial=true` فقط، ومرّت بوابة HTTP الحية `22/22`: `17/17` رد مولّد و`5/5` ضوابط قالب/سلامة. التقرير: [docs/PHASE27_41_GUARDED_RUNTIME_SWITCH_REPORT.md](./docs/PHASE27_41_GUARDED_RUNTIME_SWITCH_REPORT.md).
 - **نتيجة Phase 27.42:** وُسّعت probes الحية إلى `29/29`: الردود المثبتة بقيت مولّدة، والردود غير المطابقة حُجبت وعادت للقالب. التقرير: [docs/PHASE27_42_LIVE_UI_BROADER_PROBES_REPORT.md](./docs/PHASE27_42_LIVE_UI_BROADER_PROBES_REPORT.md).
+- **نتيجة Phase 27.43:** دُرّب مرشح weak-lane جديد لكنه فشل جزئيًا `10/16`; لا runtime switch، والواجهة تبقى على `sf_10m_phase27_40`. التقرير: [docs/PHASE27_43_GUARDED_DATA_BACKED_EXPANSION_REPORT.md](./docs/PHASE27_43_GUARDED_DATA_BACKED_EXPANSION_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
@@ -171,6 +172,7 @@
 | Phase 27.40 | Tokenizer/Context Repair — passed 24/24; candidate opened in guarded trial |
 | Phase 27.41 | Guarded Runtime Switch — live HTTP gate passed 22/22; generator_trial uses sf_10m_phase27_40 |
 | Phase 27.42 | Live UI Broader Probes — broader HTTP gate passed 29/29; misaligned generations blocked |
+| Phase 27.43 | Guarded Data-Backed Expansion — weak-lane candidate partial 10/16; runtime stays on phase27_40 |
 | Phase 28 | SF-120M v0.1 Candidate — planned |
 | Phase 29 | Runtime Hybrid Assistant v1 — planned |
 | Phase 30 | Continuous Improvement Loop — planned |

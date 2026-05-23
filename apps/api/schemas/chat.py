@@ -13,7 +13,7 @@ class ChatRequest(BaseModel):
     user_id: str | None = Field(default=None, description="معرف المستخدم/المالك اختياري")
     generator_trial: bool = Field(
         default=False,
-        description="Phase 27.42 guarded local generator trial for the single-user UI",
+        description="Phase 27.43 guarded local generator trial for the single-user UI; runtime remains phase27_40",
     )
 
 

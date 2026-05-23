@@ -165,8 +165,8 @@ def test_phase_guidance_prompts_are_specific_templates() -> None:
     assert "مولّد تجريبي" in dialogue.response
     assert "نطاقات محددة" in dialogue.response
     assert next_step.intent == "chat.next_step"
-    assert "Phase 27.42" in next_step.response
-    assert "29/29" in next_step.response
+    assert "Phase 27.43" in next_step.response
+    assert "10/16" in next_step.response
     assert diff.intent == "chat.training_activation_difference"
     assert "التدريب" in diff.response
     assert "التفعيل" in diff.response

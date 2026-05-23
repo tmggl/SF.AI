@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.42 — Live UI Broader Probes",
-        current_phase_status="completed_live_ui_broader_probes_guarded",
+        current_phase="Phase 27.43 — Guarded Data-Backed Expansion",
+        current_phase_status="completed_partial_keep_phase27_40_runtime",
         next_phase=(
-            "Phase 27.43 guarded data-backed expansion; SF-50M remains blocked"
+            "Phase 27.44 tokenizer/curriculum repair for weak-lane stability; SF-50M remains blocked"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -324,6 +324,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_42_live_ui_broader_probes",
                 status="completed_live_ui_broader_probes_guarded",
                 phase="Phase 27.42",
+            ),
+            ComponentStatus(
+                name="phase27_43_guarded_data_backed_expansion",
+                status="completed_partial_keep_phase27_40_runtime",
+                phase="Phase 27.43",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

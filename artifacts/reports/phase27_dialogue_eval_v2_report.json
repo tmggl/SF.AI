@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27.42: اختبرنا الواجهة/API على نطاق أوسع ومرّت 29/29. المولد يرد في المسارات المثبتة، والحارس يرجع للقالب عند الرد غير المطابق. التالي Phase 27.43 لتوسعة محروسة مبنية "
+      "response_preview": "اكتملت Phase 27.43 جزئيًا: درّبنا مرشح weak-lane لكنه مرّ 10/16 فقط، لذلك لم نبدّل الواجهة وبقي runtime على Phase 27.40. التالي Phase 27.44 لإصلاح tokenizer/curriculum قبل أي فتح ج"
     },
     {
       "scenario_id": "clarification_repair_flow",
