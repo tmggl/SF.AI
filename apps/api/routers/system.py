@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.35 — Live UI Trial Observations",
-        current_phase_status="completed_live_ui_trial_ready_for_user_observation",
+        current_phase="Phase 27.36 — Live UI Triage",
+        current_phase_status="completed_live_ui_triage_quality_floor_active",
         next_phase=(
-            "Phase 27.36 collect/triage live UI observations; SF-50M remains blocked"
+            "Phase 27.37 expand supported generator intents/topics; SF-50M remains blocked"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -289,6 +289,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_35_live_ui_trial_observations",
                 status="completed_ready_for_user_observation",
                 phase="Phase 27.35",
+            ),
+            ComponentStatus(
+                name="phase27_36_live_ui_triage",
+                status="completed_quality_floor_active",
+                phase="Phase 27.36",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

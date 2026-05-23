@@ -105,6 +105,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.33 | Advice + Micro Stabilization | مكتملة؛ كل بوابات التوليد المحلية مرّت، جاهزة لتصميم guarded trial |
 | Phase 27.34 | Guarded Runtime Trial | مكتملة؛ request-scoped UI generator trial مرّ `9/9` |
 | Phase 27.35 | Live UI Trial Observations | مكتملة؛ live server UI/API trial مرّ `10/10` |
+| Phase 27.36 | Live UI Triage | مكتملة؛ quality-floor active وtriage مرّ `27/27` |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2603,6 +2604,38 @@ controls = 3/3
 - [PHASE27_35_LIVE_UI_TRIAL_OBSERVATIONS_REPORT.md](./PHASE27_35_LIVE_UI_TRIAL_OBSERVATIONS_REPORT.md)
 - `artifacts/reports/phase27_35_live_ui_trial_observations_report.json`
 - `artifacts/samples/phase27_35_live_ui_trial_observations.md`
+
+---
+
+## Phase 27.36 — Live UI Triage
+
+### الهدف
+
+توسيع اختبار الواجهة الحية بعد فتح زر `مولّد تجريبي`، وتصنيف المسارات
+المسموحة للمولّد مقابل المسارات التي يجب حجبها بجدار جودة.
+
+### نتيجة التنفيذ
+
+```text
+cases = 27/27
+generated = 18/18
+quality_floor = 5/5
+controls = 4/4
+```
+
+### القرار
+
+- يستمر زر `مولّد تجريبي`، لكن داخل proven lanes فقط.
+- raw `chat.general` وموضوعات التعريف غير المثبتة تُحجب عن المولّد.
+- الافتراضي يبقى template.
+- لا `SF-50M` ولا Phase 28.
+- التالي Phase 27.37: expand supported generator intents/topics.
+
+### artifacts
+
+- [PHASE27_36_LIVE_UI_TRIAGE_REPORT.md](./PHASE27_36_LIVE_UI_TRIAGE_REPORT.md)
+- `artifacts/reports/phase27_36_live_ui_triage_report.json`
+- `artifacts/samples/phase27_36_live_ui_triage.md`
 
 ---
 

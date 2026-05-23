@@ -215,7 +215,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "تنبيه صريح: هذا ليس اختبار مولد الآن. الرد الحالي قالب ثابت للتوجيه فقط. مولد SF-10M v0.2 تدرّب في Phase 24 وتحسّن رقميًا، لكنه لا يزال غير مقنع للواجهة. Phase 25 أضاف canary يمنع "
+      "response_preview": "تقدر تختبر المولّد الآن من زر «مولّد تجريبي»، لكن داخل نطاقات محددة: سؤال الحال، الشكر، نصيحة قصيرة، ترتيب بسيط، دعم خفيف، وتعريفات مثبتة مثل الاحترام والتعاون والقراءة."
     },
     {
       "scenario_id": "project_meta_flow",
@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27.35: اختبار الواجهة الحية مرّ 10/10، ومنها 7/7 ردود من المولّد المحروس. جرّب زر «مولّد تجريبي» الآن، والتالي Phase 27.36 لتجميع ملاحظات التجربة وتصنيفها."
+      "response_preview": "اكتملت Phase 27.36: triage الواجهة الحية مرّ 27/27، ومنها 18/18 ردود مولدة و5/5 quality-floor. التالي Phase 27.37 لتوسيع النوايا والموضوعات التي يسمح لها بالمولّد."
     },
     {
       "scenario_id": "clarification_repair_flow",

@@ -215,12 +215,21 @@ class ChatModule:
         if not decision.allowed:
             return fallback_text, ("generator:template", f"native_generator:{decision.reason}")
 
-        generator = self.native_generator or NativeGenerator()
         generation_intent = _generation_intent_for_prompt(
             analysis.original_text,
             routed_intent=intent,
             guarded_trial=self.generation_policy.guarded_runtime_trial,
         )
+        generation_topic = _generation_topic_for_prompt(analysis.original_text)
+        trial_floor = _guarded_trial_quality_floor(
+            generation_intent=generation_intent,
+            generation_topic=generation_topic,
+            guarded_trial=self.generation_policy.guarded_runtime_trial,
+        )
+        if trial_floor is not None:
+            return fallback_text, ("generator:template", f"native_generator:{trial_floor}")
+
+        generator = self.native_generator or NativeGenerator()
         result = generator.generate(
             analysis.original_text,
             dialect=_generation_dialect_for_prompt(
@@ -229,7 +238,7 @@ class ChatModule:
                 guarded_trial=self.generation_policy.guarded_runtime_trial,
             ),
             intent=generation_intent,
-            topic=_generation_topic_for_prompt(analysis.original_text),
+            topic=generation_topic,
             max_new_tokens=self.generation_policy.max_new_tokens,
             temperature=self.generation_policy.temperature,
             top_k=self.generation_policy.top_k,
@@ -301,6 +310,22 @@ def _generation_topic_for_prompt(prompt: str) -> str:
     if "قراء" in text or "قراي" in text:
         return "القراءة"
     return ""
+
+
+def _guarded_trial_quality_floor(
+    *,
+    generation_intent: str,
+    generation_topic: str,
+    guarded_trial: bool,
+) -> str | None:
+    """Keep the single-user generator trial inside proven Phase 27.33 lanes."""
+    if not guarded_trial:
+        return None
+    if generation_intent == "chat.general":
+        return "trial_unsupported_general"
+    if generation_intent == "definition" and not generation_topic:
+        return "trial_unsupported_definition_topic"
+    return None
 
 
 def _generation_dialect_for_prompt(

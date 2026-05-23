@@ -89,3 +89,23 @@ def test_phase27_35_live_ui_trial_observations_pass() -> None:
     assert report["summary"]["generator_cases"] == 7
     assert report["summary"]["template_controls_passed"] == 3
     assert report["summary"]["template_controls"] == 3
+
+
+def test_phase27_36_live_ui_triage_quality_floor_passes() -> None:
+    report = _report("phase27_36_live_ui_triage_report.json")
+    assert report["phase"] == "Phase 27.36"
+    assert report["status"] == "PASSED_LIVE_UI_TRIAGE_QUALITY_FLOOR_ACTIVE"
+    assert report["user_test_allowed"] is True
+    assert report["sf50m_allowed"] is False
+    assert report["phase28_allowed"] is False
+    assert report["summary"]["cases_passed"] == 27
+    assert report["summary"]["cases_total"] == 27
+    assert report["summary"]["generated_passed"] == 18
+    assert report["summary"]["generated_total"] == 18
+    assert report["summary"]["quality_floor_passed"] == 5
+    assert report["summary"]["quality_floor_total"] == 5
+    assert report["summary"]["controls_passed"] == 4
+    assert report["summary"]["controls_total"] == 4
+    assert report["triage_decision"]["quality_floor"] == (
+        "block raw chat.general and unsupported definition topics"
+    )

@@ -357,6 +357,44 @@ def test_guarded_runtime_trial_infers_generation_intent_for_general_prompt() -> 
     assert "native_generator:intent:advice" in out.notes
 
 
+def test_guarded_runtime_trial_blocks_raw_general_before_generator() -> None:
+    pipe = get_default_pipeline()
+    gen = _CapturingGenerator()
+    mod = ChatModule(
+        generation_policy=GenerationPolicy(
+            enabled=True,
+            experimental_runtime=True,
+            canary=True,
+            guarded_runtime_trial=True,
+        ),
+        native_generator=gen,  # type: ignore[arg-type]
+    )
+    analysis = pipe.analyze_user_text("كلام عادي")
+    out = mod.handle(analysis, intent="chat.general", session_id="phase2736-general")
+    assert gen.calls == []
+    assert "generator:template" in out.notes
+    assert "native_generator:trial_unsupported_general" in out.notes
+
+
+def test_guarded_runtime_trial_blocks_unstable_definition_topic_before_generator() -> None:
+    pipe = get_default_pipeline()
+    gen = _CapturingGenerator()
+    mod = ChatModule(
+        generation_policy=GenerationPolicy(
+            enabled=True,
+            experimental_runtime=True,
+            canary=True,
+            guarded_runtime_trial=True,
+        ),
+        native_generator=gen,  # type: ignore[arg-type]
+    )
+    analysis = pipe.analyze_user_text("اشرح لي الصبر ببساطة")
+    out = mod.handle(analysis, intent="chat.general", session_id="phase2736-topic")
+    assert gen.calls == []
+    assert "generator:template" in out.notes
+    assert "native_generator:trial_unsupported_definition_topic" in out.notes
+
+
 def test_chat_api_response_includes_generator_metadata() -> None:
     client = TestClient(app)
     r = client.post(

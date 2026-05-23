@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.35 / 30**
-- **المرحلة الحالية:** **Phase 27.35 — Live UI Trial Observations**
-- **حالة المرحلة الحالية:** **مكتملة؛ اختبار الواجهة/API الحي مرّ `10/10`**
-- **المرحلة التالية المقترحة:** Phase 27.36 collect/triage live UI observations؛ لا Phase 28 ولا `SF-50M` قبل تصنيف ملاحظات الواجهة.
+- **الرحلة الحالية:** **Phase 27.36 / 30**
+- **المرحلة الحالية:** **Phase 27.36 — Live UI Triage**
+- **حالة المرحلة الحالية:** **مكتملة؛ triage الحي مرّ `27/27` مع quality-floor**
+- **المرحلة التالية المقترحة:** Phase 27.37 expand supported generator intents/topics؛ لا Phase 28 ولا `SF-50M` قبل توسيع جودة الواجهة.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -84,6 +84,7 @@
 | Phase 27.33 | Advice + Micro Stabilization | ✅ completed_all_generation_gates_passed_trial_design_ready | ✅ |
 | Phase 27.34 | Guarded Runtime Trial | ✅ completed_ready_for_ui_test | ✅ |
 | Phase 27.35 | Live UI Trial Observations | ✅ completed_ready_for_user_observation | ✅ |
+| Phase 27.36 | Live UI Triage | ✅ completed_quality_floor_active | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -627,6 +628,15 @@
   - القرار: `PASSED_LIVE_UI_TRIAL_READY_FOR_USER_OBSERVATION`.
   - التالي Phase 27.36 collect/triage live UI observations.
   - أضيف [PHASE27_35_LIVE_UI_TRIAL_OBSERVATIONS_REPORT.md](./PHASE27_35_LIVE_UI_TRIAL_OBSERVATIONS_REPORT.md).
+- بدأ وانتهى Phase 27.36 Live UI Triage:
+  - أضيف quality-floor للتجربة الحية: raw `chat.general` وموضوعات التعريف غير المثبتة لا تذهب للمولّد.
+  - فُحص `/chat/message` حيًا: `27/27` passed.
+  - ردود المولّد المثبتة: `18/18`.
+  - quality-floor blocks: `5/5`.
+  - تحكم template/safety: `4/4`.
+  - القرار: `PASSED_LIVE_UI_TRIAGE_QUALITY_FLOOR_ACTIVE`.
+  - التالي Phase 27.37 expand supported generator intents/topics.
+  - أضيف [PHASE27_36_LIVE_UI_TRIAGE_REPORT.md](./PHASE27_36_LIVE_UI_TRIAGE_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -692,7 +702,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.35"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.36"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -723,7 +733,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-538 passed in 16.81s
+543 passed in 16.91s
 ```
 
 | ملف | عدد |
@@ -732,7 +742,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_bpe_tokenizer.py | 13 |
 | test_capability_registry.py | 5 |
 | test_chat_module.py | 12 |
-| test_chat_native_generator.py | 16 (Phase 15 + Phase 25 canary mode) |
+| test_chat_native_generator.py | 25 (Phase 15 + Phase 25 canary + Phase 27.36 quality floor) |
 | test_chat_rag_bridge.py | 7 (Phase 17) |
 | test_chat_ui.py | 7 (Phase 9/19 status + export quality indicator) |
 | test_checkpoints.py | 7 |
@@ -742,10 +752,10 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_dialogue_batch_preparation.py | 3 (Phase 18) |
 | test_dialect_mapper.py | 7 |
 | test_generative_roadmap.py | 4 (Phase 21 + scaling strategy) |
-| test_health.py | 11 |
+| test_health.py | 12 |
 | test_intent_detector.py | 7 |
 | test_mo3jam_importer.py | 13 |
-| test_new_chat_intents.py | 38 (Phase 9/19 social polish + phase guidance) |
+| test_new_chat_intents.py | 40 (Phase 9/19 social polish + phase guidance) |
 | test_nlp_pipeline.py | 9 |
 | test_orchestrator.py | 7 |
 | test_phase10_skeleton_domains.py | 4 (Phase 10) |

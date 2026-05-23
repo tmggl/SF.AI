@@ -26,6 +26,8 @@ def orch() -> Orchestrator:
         ("شكراً لك",   "chat.thanks"),
         ("تسلم",        "chat.thanks"),
         ("تمام",        "chat.affirmation"),
+        ("الحمدلله",    "chat.affirmation"),
+        ("أنا بخير",    "chat.affirmation"),
         ("أيوه",        "chat.affirmation"),
         ("اوكي",        "chat.affirmation"),
         ("لا",          "chat.negation"),
@@ -160,10 +162,11 @@ def test_phase_guidance_prompts_are_specific_templates() -> None:
 
     assert dialogue.intent == "chat.dialogue_test"
     assert dialogue.debug["generator"] == "template"
-    assert "SF-10M v0.2" in dialogue.response
+    assert "مولّد تجريبي" in dialogue.response
+    assert "نطاقات محددة" in dialogue.response
     assert next_step.intent == "chat.next_step"
-    assert "Phase 27.35" in next_step.response
-    assert "10/10" in next_step.response
+    assert "Phase 27.36" in next_step.response
+    assert "27/27" in next_step.response
     assert diff.intent == "chat.training_activation_difference"
     assert "التدريب" in diff.response
     assert "التفعيل" in diff.response

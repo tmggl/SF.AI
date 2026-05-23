@@ -39,12 +39,12 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.35 / 30 — Live UI Trial Observations مرّت `10/10`.
-- **الأولوية الحالية:** Phase 27.36 collect/triage live UI observations؛ لا تدريب `SF-50M` ولا Phase 28 حتى تُجمع ملاحظات الواجهة وتُصنّف.
+- **الرحلة الحالية:** Phase 27.36 / 30 — Live UI Triage مرّت `27/27`.
+- **الأولوية الحالية:** Phase 27.37 توسيع نوايا/موضوعات المولّد المثبتة؛ لا تدريب `SF-50M` ولا Phase 28 حتى تتوسع جودة الواجهة الحية.
 - **الشات الحالي:** runtime الافتراضي قالب/router، ومع زر `مولّد تجريبي` يستخدم `SF-10M Phase 27.33` خلف guard/fallback.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
-- **المولّد:** آخر checkpoint هو Phase 27.33 `sf-10m-step9800`; Phase 27.35 أثبت من السيرفر الحي أن زر `مولّد تجريبي` يعمل: `10/10` إجمالًا، و`7/7` ردود مولدة.
+- **المولّد:** آخر checkpoint هو Phase 27.33 `sf-10m-step9800`; Phase 27.36 أثبت أن زر `مولّد تجريبي` يعمل داخل نطاق محروس: `18/18` ردود مولدة، `5/5` quality-floor، و`4/4` ضوابط.
 - **التقييم:** Phase 27 مرّر `19/19` turn في حوار متعدد الأدوار، لكنه أكد أن الردود ما زالت `template` وأن المولد غير جاهز.
 - **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.
 - **دورة البيانات:** Phase 18 أضاف تصدير مراجعة من الواجهة و`prepare_dialogue_batch.py`; وPhase 22 يعتمد الآن أيضًا دفعات مباشرة يؤلفها/يراجعها الوكيل بتفويض موثق، بدون انتظار حفظ أو تصدير من سامي.
@@ -84,6 +84,7 @@
 - **نتيجة Phase 27.31–27.33:** أضيفت natural intent/topic data ثم balanced calibration ثم advice/micro stabilization. النتيجة النهائية في Phase 27.33: كل بوابات التوليد المحلية مرّت بلا تسريب، والحالة صارت `ready for guarded runtime trial design`. التقرير: [docs/PHASE27_31_TO_33_GENERATION_GATE_REPORT.md](./docs/PHASE27_31_TO_33_GENERATION_GATE_REPORT.md).
 - **نتيجة Phase 27.34:** أضيف زر `مولّد تجريبي` وحقل `generator_trial=true` في `/chat/message`. بوابة runtime المحروس مرّت `9/9`، والهوية/الطب بقيت على القوالب الآمنة. التقرير: [docs/PHASE27_34_GUARDED_RUNTIME_TRIAL_REPORT.md](./docs/PHASE27_34_GUARDED_RUNTIME_TRIAL_REPORT.md).
 - **نتيجة Phase 27.35:** اختبار حي عبر HTTP على `/ui/chat` و`/chat/message` مرّ `10/10`: الواجهة تعرض الزر، وطلبات trial تستخدم `sf_10m_phase27_33`, والتحكم الآمن بقي template/composer. التقرير: [docs/PHASE27_35_LIVE_UI_TRIAL_OBSERVATIONS_REPORT.md](./docs/PHASE27_35_LIVE_UI_TRIAL_OBSERVATIONS_REPORT.md).
+- **نتيجة Phase 27.36:** أضيف quality-floor للتجربة الحية: raw `chat.general` وموضوعات التعريف غير المثبتة لا تذهب للمولّد. triage الحي مرّ `27/27`: `18/18` مولّد، `5/5` quality-floor، `4/4` ضوابط. التقرير: [docs/PHASE27_36_LIVE_UI_TRIAGE_REPORT.md](./docs/PHASE27_36_LIVE_UI_TRIAGE_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
@@ -157,6 +158,7 @@
 | Phase 27.33 | Advice + Micro Stabilization — all local generation gates passed; guarded trial design ready |
 | Phase 27.34 | Guarded Runtime Trial — request-scoped UI generator trial passed 9/9 |
 | Phase 27.35 | Live UI Trial Observations — live server UI/API trial passed 10/10 |
+| Phase 27.36 | Live UI Triage — quality floor active; live triage passed 27/27 |
 | Phase 28 | SF-120M v0.1 Candidate — planned |
 | Phase 29 | Runtime Hybrid Assistant v1 — planned |
 | Phase 30 | Continuous Improvement Loop — planned |
