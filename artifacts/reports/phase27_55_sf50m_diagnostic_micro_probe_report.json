@@ -1,0 +1,983 @@
+{
+  "phase": "Phase 27.55",
+  "status": "FAILED_DIAGNOSTIC_CAPACITY_SIGNAL_KEEP_SF50M_FULL_BLOCKED",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": true,
+  "training_scope": "bounded diagnostic micro-probe only; not full SF-50M scaling",
+  "progressive_scaling_respected": true,
+  "template_answers_allowed": false,
+  "tokenizer": "artifacts/tokenizers/sf_bpe/v6_weak_lane_terms",
+  "checkpoint_root": "artifacts/eval/phase27_55_sf50m_diagnostic_micro_probe",
+  "train_records": 6400,
+  "unique_train_pairs": 40,
+  "eval_cases": 20,
+  "training_budget": {
+    "steps_each": 700,
+    "epochs": 700,
+    "batch_size": 1,
+    "seq_len": 64,
+    "lr_10m": 0.00045,
+    "lr_50m": 0.00028,
+    "warmup": 80
+  },
+  "models": {
+    "sf-10m": {
+      "checkpoint_name": "sf-10m-step700",
+      "params": 7520256,
+      "summary": {
+        "passed": 3,
+        "total": 20,
+        "bucket_summary": {
+          "followup": {
+            "passed": 0,
+            "total": 4
+          },
+          "open_social": {
+            "passed": 0,
+            "total": 4
+          },
+          "planning": {
+            "passed": 2,
+            "total": 4
+          },
+          "support": {
+            "passed": 0,
+            "total": 4
+          },
+          "topic": {
+            "passed": 1,
+            "total": 4
+          }
+        },
+        "reason_counts": {
+          "expected_terms_missing": 11,
+          "low_prompt_overlap:0.00": 4,
+          "guard:corpus_artifact": 2,
+          "passed": 3
+        }
+      }
+    },
+    "sf-50m": {
+      "checkpoint_name": "sf-50m-step700",
+      "params": 36014080,
+      "summary": {
+        "passed": 4,
+        "total": 20,
+        "bucket_summary": {
+          "followup": {
+            "passed": 0,
+            "total": 4
+          },
+          "open_social": {
+            "passed": 0,
+            "total": 4
+          },
+          "planning": {
+            "passed": 2,
+            "total": 4
+          },
+          "support": {
+            "passed": 0,
+            "total": 4
+          },
+          "topic": {
+            "passed": 2,
+            "total": 4
+          }
+        },
+        "reason_counts": {
+          "expected_terms_missing": 9,
+          "low_prompt_overlap:0.00": 5,
+          "passed": 4,
+          "guard:corpus_artifact": 2
+        }
+      }
+    }
+  },
+  "comparison": {
+    "sf-10m": {
+      "passed": 3,
+      "total": 20
+    },
+    "sf-50m": {
+      "passed": 4,
+      "total": 20
+    },
+    "delta_passed": 1,
+    "diagnostic_capacity_signal": false,
+    "strong_enough_for_full_sf50m": false
+  },
+  "runtime_switch_allowed": false,
+  "sf50m_full_training_allowed": false,
+  "sf50m_diagnostic_continuation_allowed": false,
+  "phase28_allowed": false,
+  "decision_notes": "التشخيص لم يثبت أن السعة وحدها تحل الحوار المفتوح. يجب إصلاح objective/format/tokenization أو إعادة تصميم التشخيص قبل أي تدريب SF-50M كامل.",
+  "next_phase": "Phase 27.56 — objective/format/tokenizer diagnosis before another capacity attempt",
+  "torch_version": "2.12.0",
+  "rows": {
+    "sf-10m": [
+      {
+        "id": "followup_free_choice",
+        "bucket": "followup",
+        "dialect": "saudi",
+        "prompt": "الي تحب",
+        "expected_terms": [
+          "نسولف"
+        ],
+        "forbidden_terms": [
+          "مهام",
+          "الأهم"
+        ],
+        "response": "ابدأ بشي واحد واضح، وبعده قيّم وش صار.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "followup_continue",
+        "bucket": "followup",
+        "dialect": "msa",
+        "prompt": "كمل كلامك",
+        "expected_terms": [
+          "نكمل",
+          "خطوة",
+          "موضوع"
+        ],
+        "forbidden_terms": [
+          "الأهم"
+        ],
+        "response": "ابدأ بكل سرور. أخبرني عن يومك أو عن فكرة تشغل بالك.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "followup_why",
+        "bucket": "followup",
+        "dialect": "saudi",
+        "prompt": "طيب ليه؟",
+        "expected_terms": [
+          "لأن",
+          "عشان",
+          "خطوة"
+        ],
+        "forbidden_terms": [],
+        "response": "ابدأ بشي واحد واضح، وبعده قيّم وش صار.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "followup_meaning",
+        "bucket": "followup",
+        "dialect": "saudi",
+        "prompt": "يعني كيف؟",
+        "expected_terms": [
+          "يعني",
+          "خطوة"
+        ],
+        "forbidden_terms": [],
+        "response": "ابدأ بشي واحد واضح، وبعده قيّم وش صار.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "social_chat",
+        "bucket": "open_social",
+        "dialect": "saudi",
+        "prompt": "سولف معي شوي",
+        "expected_terms": [
+          "نسولف",
+          "يومك",
+          "موضوع"
+        ],
+        "forbidden_terms": [],
+        "response": "حياك. نقدر نسولف عن يومك أو عن شيء خفيف تحبه.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": true,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "low_prompt_overlap:0.00"
+      },
+      {
+        "id": "social_topic_choice",
+        "bucket": "open_social",
+        "dialect": "saudi",
+        "prompt": "وش ودك نسولف عنه؟",
+        "expected_terms": [
+          "نسولف",
+          "موضوع"
+        ],
+        "forbidden_terms": [],
+        "response": "ابدأ بشي واحد واضح، وبعده قيّم وش صار.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.25,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "social_new_topic",
+        "bucket": "open_social",
+        "dialect": "msa",
+        "prompt": "هات موضوع خفيف",
+        "expected_terms": [
+          "موضوع"
+        ],
+        "forbidden_terms": [],
+        "response": "ابدأ بكل شيء دفعة واحدة.",
+        "generator_used": true,
+        "guard_allowed": false,
+        "guard_reason": "corpus_artifact",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "guard:corpus_artifact"
+      },
+      {
+        "id": "social_today",
+        "bucket": "open_social",
+        "dialect": "saudi",
+        "prompt": "يومي كان طويل",
+        "expected_terms": [
+          "يومك",
+          "راحة",
+          "طويل"
+        ],
+        "forbidden_terms": [],
+        "response": "ابدأ بشي واحد واضح، وبعده قيّم وش صار.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "topic_courage_simple",
+        "bucket": "topic",
+        "dialect": "msa",
+        "prompt": "اخبرني عن الشجاعة بأسلوب بسيط",
+        "expected_terms": [
+          "الشجاعة"
+        ],
+        "forbidden_terms": [],
+        "response": "الشجاعة إنك تواجه الموقف الصحيح رغم وجود الخوف.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": true,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.2,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "topic_friendship_talk",
+        "bucket": "topic",
+        "dialect": "saudi",
+        "prompt": "وش رأيك نتكلم عن الصداقة",
+        "expected_terms": [
+          "الصداقة"
+        ],
+        "forbidden_terms": [],
+        "response": "ابدأ بشي واحد واضح، وبعده قيّم وش صار.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.2,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "topic_honesty_example",
+        "bucket": "topic",
+        "dialect": "msa",
+        "prompt": "اعطني مثال بسيط عن الصدق",
+        "expected_terms": [
+          "الصدق"
+        ],
+        "forbidden_terms": [],
+        "response": "ابدأ من نقطة واحدة ولا تختار خطوة تفتح كل شيء مرة وحدة.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "topic_calm_life",
+        "bucket": "topic",
+        "dialect": "saudi",
+        "prompt": "الهدوء في اليوم وش يفيدني؟",
+        "expected_terms": [
+          "الهدوء"
+        ],
+        "forbidden_terms": [],
+        "response": "أنت مو مطالب تحل كل شيء الآن. اهدأ وخذ دقيقة لنفسك.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "planning_day_start",
+        "bucket": "planning",
+        "dialect": "msa",
+        "prompt": "اشرح لي كيف ابدأ يومي",
+        "expected_terms": [
+          "ابدأ",
+          "يومي"
+        ],
+        "forbidden_terms": [],
+        "response": "ابدأ بمهمة واحدة واضحة، ولا تفتح كل الأعمال في وقت واحد.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": true,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.2,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "planning_confused",
+        "bucket": "planning",
+        "dialect": "saudi",
+        "prompt": "أنا محتار من وين أبدأ",
+        "expected_terms": [
+          "ابدأ",
+          "خطوة"
+        ],
+        "forbidden_terms": [],
+        "response": "ابدأ بمهمة واحدة واضحة، ولا تفتح كل الأعمال في وقت واحد.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": true,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.2,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "planning_many_tasks",
+        "bucket": "planning",
+        "dialect": "msa",
+        "prompt": "عندي أشياء كثيرة ومتشتت",
+        "expected_terms": [
+          "اكتب",
+          "رتب",
+          "واحد"
+        ],
+        "forbidden_terms": [],
+        "response": "ابدأ بكل سرور. أخبرني عن يومك أو عن يومك شغل بالك.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "planning_light",
+        "bucket": "planning",
+        "dialect": "saudi",
+        "prompt": "رتب لي بداية بسيطة بدون تعقيد",
+        "expected_terms": [
+          "بداية",
+          "ابدأ"
+        ],
+        "forbidden_terms": [],
+        "response": "ابدأ بعمل واحد مهم، ثم خذ راحة قصيرة، ثم كمل التالي.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": true,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "low_prompt_overlap:0.00"
+      },
+      {
+        "id": "support_tired",
+        "bucket": "support",
+        "dialect": "saudi",
+        "prompt": "تعبان شوي واحتاج كلام يهديني",
+        "expected_terms": [
+          "اهدأ",
+          "راحة",
+          "نفس"
+        ],
+        "forbidden_terms": [],
+        "response": "أنت مو مطالب تحل كل شيء الآن. اهدأ وخذ دقيقة لنفسك.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": true,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "low_prompt_overlap:0.00"
+      },
+      {
+        "id": "support_anxious",
+        "bucket": "support",
+        "dialect": "msa",
+        "prompt": "كيف أهدأ إذا توترت؟",
+        "expected_terms": [
+          "نفس",
+          "تنفس",
+          "اهدأ"
+        ],
+        "forbidden_terms": [],
+        "response": "ابدأ ببطء، خفف الحركة، وابدأ بخطوة واحدة فقط.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "support_pressure",
+        "bucket": "support",
+        "dialect": "saudi",
+        "prompt": "حاس بضغط اليوم",
+        "expected_terms": [
+          "ضغط",
+          "نفس",
+          "خطوة"
+        ],
+        "forbidden_terms": [],
+        "response": "هونها عليك. خذ نفس هادي وخلنا نبدأ بشي واحد.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": true,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "low_prompt_overlap:0.00"
+      },
+      {
+        "id": "support_short",
+        "bucket": "support",
+        "dialect": "msa",
+        "prompt": "طمني بكلام بسيط",
+        "expected_terms": [
+          "بسيط",
+          "بهدوء",
+          "تستطيع"
+        ],
+        "forbidden_terms": [],
+        "response": "ابدأ بكل شيء دفعة واحدة.",
+        "generator_used": true,
+        "guard_allowed": false,
+        "guard_reason": "corpus_artifact",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "guard:corpus_artifact"
+      }
+    ],
+    "sf-50m": [
+      {
+        "id": "followup_free_choice",
+        "bucket": "followup",
+        "dialect": "saudi",
+        "prompt": "الي تحب",
+        "expected_terms": [
+          "نسولف"
+        ],
+        "forbidden_terms": [
+          "مهام",
+          "الأهم"
+        ],
+        "response": "أنت مو مطالب تحل كل شيء الآن. اهدأ وخذ دقيقة لنفسك.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "followup_continue",
+        "bucket": "followup",
+        "dialect": "msa",
+        "prompt": "كمل كلامك",
+        "expected_terms": [
+          "نكمل",
+          "خطوة",
+          "موضوع"
+        ],
+        "forbidden_terms": [
+          "الأهم"
+        ],
+        "response": "رتبها حسب الأهمية، ثم اختر أول عمل وتقدّم فيه قليلًا.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": false,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "followup_why",
+        "bucket": "followup",
+        "dialect": "saudi",
+        "prompt": "طيب ليه؟",
+        "expected_terms": [
+          "لأن",
+          "عشان",
+          "خطوة"
+        ],
+        "forbidden_terms": [],
+        "response": "رتبها حسب الأهمية، ثم اختر أول عمل وتقدّم فيه قليلًا.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "followup_meaning",
+        "bucket": "followup",
+        "dialect": "saudi",
+        "prompt": "يعني كيف؟",
+        "expected_terms": [
+          "يعني",
+          "خطوة"
+        ],
+        "forbidden_terms": [],
+        "response": "رتبها حسب الأهمية، ثم اختر أول عمل وتقدّم فيه قليلًا.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "social_chat",
+        "bucket": "open_social",
+        "dialect": "saudi",
+        "prompt": "سولف معي شوي",
+        "expected_terms": [
+          "نسولف",
+          "يومك",
+          "موضوع"
+        ],
+        "forbidden_terms": [],
+        "response": "حياك. نقدر نسولف عن يومك أو عن شيء خفيف تحبه.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": true,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "low_prompt_overlap:0.00"
+      },
+      {
+        "id": "social_topic_choice",
+        "bucket": "open_social",
+        "dialect": "saudi",
+        "prompt": "وش ودك نسولف عنه؟",
+        "expected_terms": [
+          "نسولف",
+          "موضوع"
+        ],
+        "forbidden_terms": [],
+        "response": "حياك. نقدر نسولتحبه.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "social_new_topic",
+        "bucket": "open_social",
+        "dialect": "msa",
+        "prompt": "هات موضوع خفيف",
+        "expected_terms": [
+          "موضوع"
+        ],
+        "forbidden_terms": [],
+        "response": "أقصد أن تحفظ المعروف ولا تنسى من وقف معك.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "social_today",
+        "bucket": "open_social",
+        "dialect": "saudi",
+        "prompt": "يومي كان طويل",
+        "expected_terms": [
+          "يومك",
+          "راحة",
+          "طويل"
+        ],
+        "forbidden_terms": [],
+        "response": "اكتب أهم شيين عندك اليوم وابدأ بالأقرب والأسهل.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "topic_courage_simple",
+        "bucket": "topic",
+        "dialect": "msa",
+        "prompt": "اخبرني عن الشجاعة بأسلوب بسيط",
+        "expected_terms": [
+          "الشجاعة"
+        ],
+        "forbidden_terms": [],
+        "response": "الشجاعة أن تواجه الموقف الصحيح رغم الخوف.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": true,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.2,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "topic_friendship_talk",
+        "bucket": "topic",
+        "dialect": "saudi",
+        "prompt": "وش رأيك نتكلم عن الصداقة",
+        "expected_terms": [
+          "الصداقة"
+        ],
+        "forbidden_terms": [],
+        "response": "الهدوء يخليك تفكر أوضح وترد بدون استعجال.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "topic_honesty_example",
+        "bucket": "topic",
+        "dialect": "msa",
+        "prompt": "اعطني مثال بسيط عن الصدق",
+        "expected_terms": [
+          "الصدق"
+        ],
+        "forbidden_terms": [],
+        "response": "أنت تستطيع أن تبدأ بهدوء. لا يلزم حل كل شيء دفعة واحدة.",
+        "generator_used": true,
+        "guard_allowed": false,
+        "guard_reason": "corpus_artifact",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "guard:corpus_artifact"
+      },
+      {
+        "id": "topic_calm_life",
+        "bucket": "topic",
+        "dialect": "saudi",
+        "prompt": "الهدوء في اليوم وش يفيدني؟",
+        "expected_terms": [
+          "الهدوء"
+        ],
+        "forbidden_terms": [],
+        "response": "الهدوء يخليك تفكر أوضح وترد بدون استعجال.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": true,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.2,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "planning_day_start",
+        "bucket": "planning",
+        "dialect": "msa",
+        "prompt": "اشرح لي كيف ابدأ يومي",
+        "expected_terms": [
+          "ابدأ",
+          "يومي"
+        ],
+        "forbidden_terms": [],
+        "response": "ابدأ بمهمة واحدة واضحة، ولا تفتح كل الأعمال في وقت واحد.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": true,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.2,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "planning_confused",
+        "bucket": "planning",
+        "dialect": "saudi",
+        "prompt": "أنا محتار من وين أبدأ",
+        "expected_terms": [
+          "ابدأ",
+          "خطوة"
+        ],
+        "forbidden_terms": [],
+        "response": "ابدأ بأصغر خطوة تفتح لك الطريق، حتى لو كانت خمس دقائق.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": true,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.2,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "planning_many_tasks",
+        "bucket": "planning",
+        "dialect": "msa",
+        "prompt": "عندي أشياء كثيرة ومتشتت",
+        "expected_terms": [
+          "اكتب",
+          "رتب",
+          "واحد"
+        ],
+        "forbidden_terms": [],
+        "response": "رتبها حسب الأهمية، ثم اختر أول عمل وتقدّم فيه قليلًا.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": true,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "low_prompt_overlap:0.00"
+      },
+      {
+        "id": "planning_light",
+        "bucket": "planning",
+        "dialect": "saudi",
+        "prompt": "رتب لي بداية بسيطة بدون تعقيد",
+        "expected_terms": [
+          "بداية",
+          "ابدأ"
+        ],
+        "forbidden_terms": [],
+        "response": "خذ نفسًا هادئًا، ثم اسأل نفسك: ما الخطوة الصغيرة الممكنة الآن؟",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": false,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "expected_terms_missing"
+      },
+      {
+        "id": "support_tired",
+        "bucket": "support",
+        "dialect": "saudi",
+        "prompt": "تعبان شوي واحتاج كلام يهديني",
+        "expected_terms": [
+          "اهدأ",
+          "راحة",
+          "نفس"
+        ],
+        "forbidden_terms": [],
+        "response": "أنت مو مطالب تحل كل شيء الآن. اهدأ وخذ دقيقة لنفسك.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": true,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "low_prompt_overlap:0.00"
+      },
+      {
+        "id": "support_anxious",
+        "bucket": "support",
+        "dialect": "msa",
+        "prompt": "كيف أهدأ إذا توترت؟",
+        "expected_terms": [
+          "نفس",
+          "تنفس",
+          "اهدأ"
+        ],
+        "forbidden_terms": [],
+        "response": "تنفس ببطء، خفف الحركة، وابدأ بخطوة واحدة فقط.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": true,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "low_prompt_overlap:0.00"
+      },
+      {
+        "id": "support_pressure",
+        "bucket": "support",
+        "dialect": "saudi",
+        "prompt": "حاس بضغط اليوم",
+        "expected_terms": [
+          "ضغط",
+          "نفس",
+          "خطوة"
+        ],
+        "forbidden_terms": [],
+        "response": "هونها عليك. خذ نفس هادي وخلنا نبدأ بشي واحد.",
+        "generator_used": true,
+        "guard_allowed": true,
+        "guard_reason": "passed",
+        "expected_ok": true,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "low_prompt_overlap:0.00"
+      },
+      {
+        "id": "support_short",
+        "bucket": "support",
+        "dialect": "msa",
+        "prompt": "طمني بكلام بسيط",
+        "expected_terms": [
+          "بسيط",
+          "بهدوء",
+          "تستطيع"
+        ],
+        "forbidden_terms": [],
+        "response": "أنت تستطيع أن تبدأ بهدوء. لا يلزم حل كل شيء دفعة واحدة.",
+        "generator_used": true,
+        "guard_allowed": false,
+        "guard_reason": "corpus_artifact",
+        "expected_ok": true,
+        "forbidden_ok": true,
+        "canned_phrase": false,
+        "prompt_overlap": 0.0,
+        "passed": false,
+        "reason": "guard:corpus_artifact"
+      }
+    ]
+  }
+}

@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.54 — Capacity/Objectivity Gate",
-        current_phase_status="completed_full_scaling_blocked_diagnostic_micro_probe_allowed",
+        current_phase="Phase 27.55 — Controlled SF-50M Diagnostic Micro-Probe",
+        current_phase_status="completed_diagnostic_capacity_signal_failed_full_sf50m_blocked",
         next_phase=(
-            "Phase 27.55 controlled SF-50M diagnostic micro-probe vs SF-10M baseline; no runtime switch unless gate passes"
+            "Phase 27.56 objective/format/tokenizer diagnosis before another capacity attempt"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -384,6 +384,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_54_capacity_objectivity_gate",
                 status="completed_full_scaling_blocked_diagnostic_micro_probe_allowed",
                 phase="Phase 27.54",
+            ),
+            ComponentStatus(
+                name="phase27_55_sf50m_diagnostic_micro_probe",
+                status="completed_diagnostic_capacity_signal_failed_full_sf50m_blocked",
+                phase="Phase 27.55",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

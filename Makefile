@@ -312,6 +312,9 @@ phase27-natural-dialogue-diversity-expansion:
 phase27-capacity-objectivity-gate:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_54_capacity_objectivity_gate.py $(ARGS)
 
+phase27-sf50m-diagnostic-micro-probe:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_55_sf50m_diagnostic_micro_probe.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 

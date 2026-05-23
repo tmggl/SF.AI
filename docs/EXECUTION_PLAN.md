@@ -124,6 +124,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.52 | Natural Dialogue Objective Repair | مكتملة جزئيًا؛ دبل تدريب `9200` خطوة، raw natural `5/20`, لا runtime switch |
 | Phase 27.53 | Natural Dialogue Diversity Expansion | مكتملة جزئيًا؛ `10,540` زوجًا و`18,000` خطوة، raw natural `2/36`, لا runtime switch |
 | Phase 27.54 | Capacity/Objectivity Gate | مكتملة؛ التكبير الكامل ممنوع، micro-probe تشخيصي فقط في Phase 27.55 |
+| Phase 27.55 | Controlled SF-50M Diagnostic Micro-Probe | مكتملة؛ `SF-10M=3/20`, `SF-50M=4/20`, السعة وحدها غير كافية |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3137,6 +3138,41 @@ cases = 7/7
 ### artifacts
 - [PHASE27_54_CAPACITY_OBJECTIVITY_GATE_REPORT.md](./PHASE27_54_CAPACITY_OBJECTIVITY_GATE_REPORT.md)
 - `artifacts/reports/phase27_54_capacity_objectivity_gate_report.json`
+
+---
+
+## Phase 27.55 — Controlled SF-50M Diagnostic Micro-Probe
+
+### الهدف
+اختبار أثر السعة وحدها قبل أي تدريب `SF-50M` كامل، بمقارنة `SF-10M` و`SF-50M` على نفس corpus/eval.
+
+### ما تم
+- أضيف `scripts/phase27_55_sf50m_diagnostic_micro_probe.py`.
+- أضيف `make phase27-sf50m-diagnostic-micro-probe`.
+- دُرّب نموذجان عشوائيان سياديان من الصفر:
+  - `SF-10M` baseline.
+  - `SF-50M` diagnostic candidate.
+- نفس البيانات: `6400` سجل من `40` زوجًا فريدًا.
+- نفس التقييم: `20` prompt held-out طبيعي.
+- runtime لم يتغير.
+
+### النتيجة
+- `SF-10M`: `3/20`.
+- `SF-50M`: `4/20`.
+- delta: `1`.
+
+### القرار
+السعة وحدها لم تثبت أنها تحل الحوار المفتوح. لا runtime switch، لا تدريب `SF-50M` كامل، ولا Phase 28.
+
+التالي:
+
+**Phase 27.56 — objective/format/tokenizer diagnosis before another capacity attempt**
+
+### artifacts
+- [PHASE27_55_SF50M_DIAGNOSTIC_MICRO_PROBE_REPORT.md](./PHASE27_55_SF50M_DIAGNOSTIC_MICRO_PROBE_REPORT.md)
+- `artifacts/reports/phase27_55_sf50m_diagnostic_micro_probe_report.json`
+- `artifacts/samples/phase27_55_sf50m_diagnostic_micro_probe.md`
+- checkpoints محلية غير مرفوعة: `artifacts/eval/phase27_55_sf50m_diagnostic_micro_probe/`
 
 ---
 

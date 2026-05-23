@@ -412,3 +412,23 @@ def test_phase27_54_capacity_objectivity_gate_blocks_full_scaling() -> None:
     assert report["decisions"]["phase28_allowed"] is False
     assert report["decisions"]["sf50m_diagnostic_micro_probe_allowed"] is True
     assert report["decisions"]["diagnostic_micro_probe_is_not_runtime_scaling"] is True
+
+
+def test_phase27_55_sf50m_diagnostic_micro_probe_keeps_full_scaling_blocked() -> None:
+    report = _report("phase27_55_sf50m_diagnostic_micro_probe_report.json")
+    assert report["phase"] == "Phase 27.55"
+    assert report["status"] == "FAILED_DIAGNOSTIC_CAPACITY_SIGNAL_KEEP_SF50M_FULL_BLOCKED"
+    assert report["training_started"] is True
+    assert report["training_scope"] == "bounded diagnostic micro-probe only; not full SF-50M scaling"
+    assert report["progressive_scaling_respected"] is True
+    assert report["models"]["sf-10m"]["summary"]["passed"] == 3
+    assert report["models"]["sf-10m"]["summary"]["total"] == 20
+    assert report["models"]["sf-50m"]["summary"]["passed"] == 4
+    assert report["models"]["sf-50m"]["summary"]["total"] == 20
+    assert report["comparison"]["delta_passed"] == 1
+    assert report["comparison"]["diagnostic_capacity_signal"] is False
+    assert report["comparison"]["strong_enough_for_full_sf50m"] is False
+    assert report["runtime_switch_allowed"] is False
+    assert report["sf50m_full_training_allowed"] is False
+    assert report["sf50m_diagnostic_continuation_allowed"] is False
+    assert report["phase28_allowed"] is False

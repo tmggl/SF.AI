@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.54 / 30**
-- **المرحلة الحالية:** **Phase 27.54 — Capacity/Objectivity Gate**
-- **حالة المرحلة الحالية:** **مكتملة؛ التكبير الكامل إلى SF-50M ممنوع، والمسموح فقط micro-probe تشخيصي مضبوط في Phase 27.55**
-- **المرحلة التالية المقترحة:** Phase 27.55 Controlled SF-50M Diagnostic Micro-Probe؛ تشخيص فقط، لا runtime switch ولا Phase 28 إلا بعد gate جديد.
+- **الرحلة الحالية:** **Phase 27.55 / 30**
+- **المرحلة الحالية:** **Phase 27.55 — Controlled SF-50M Diagnostic Micro-Probe**
+- **حالة المرحلة الحالية:** **مكتملة؛ SF-50M أعطى 4/20 فقط مقابل SF-10M 3/20، لذلك السعة وحدها لم تثبت حلًا**
+- **المرحلة التالية المقترحة:** Phase 27.56 objective/format/tokenizer diagnosis؛ لا محاولة سعة جديدة ولا runtime switch قبل فهم السبب.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -103,6 +103,7 @@
 | Phase 27.52 | Natural Dialogue Objective Repair | ✅ completed_partial_keep_phase27_47_runtime | ✅ |
 | Phase 27.53 | Natural Dialogue Diversity Expansion | ✅ completed_partial_keep_phase27_47_runtime | ✅ |
 | Phase 27.54 | Capacity/Objectivity Gate | ✅ completed_full_scaling_blocked_diagnostic_micro_probe_allowed | ✅ |
+| Phase 27.55 | Controlled SF-50M Diagnostic Micro-Probe | ✅ completed_diagnostic_capacity_signal_failed_full_sf50m_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -806,6 +807,14 @@
   - القرار: لا runtime switch؛ لا تدريب `SF-50M` كامل؛ لا Phase 28.
   - المسموح التالي: Phase 27.55 micro-probe تشخيصي مضبوط فقط، يقارن `SF-50M` ضد `SF-10M` بنفس البيانات والتقييم، ولا يفتح runtime.
   - أضيف [PHASE27_54_CAPACITY_OBJECTIVITY_GATE_REPORT.md](./PHASE27_54_CAPACITY_OBJECTIVITY_GATE_REPORT.md).
+- بدأ وانتهى Phase 27.55 Controlled SF-50M Diagnostic Micro-Probe:
+  - أضيف `make phase27-sf50m-diagnostic-micro-probe`.
+  - دُرّب `SF-10M` و`SF-50M` من الصفر على نفس corpus التشخيصي: `6400` سجل من `40` زوجًا فريدًا.
+  - ميزانية التدريب: `700` خطوة لكل نموذج، tokenizer v6، sample-isolated، assistant loss.
+  - النتيجة: `SF-10M=3/20`, `SF-50M=4/20`, delta=`1`.
+  - القرار: السعة وحدها لم تثبت حل الحوار المفتوح؛ لا runtime switch، لا تدريب `SF-50M` كامل، ولا Phase 28.
+  - التالي: Phase 27.56 objective/format/tokenizer diagnosis قبل أي محاولة سعة جديدة.
+  - أضيف [PHASE27_55_SF50M_DIAGNOSTIC_MICRO_PROBE_REPORT.md](./PHASE27_55_SF50M_DIAGNOSTIC_MICRO_PROBE_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
