@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.56: شخّصنا فشل 27.55. النتيجة: SF-50M strict = 4/20 لكن relaxed بدون overlap = 9/20، ومعه 9 مصطلحات حوارية تتكسر في tokenizer وخلط واضح بين عائلات الردود. التالي"
+      "response_preview": "وصلنا إلى Phase 27.57: ثبتنا حزمة إصلاح قبل التدريب. أضفنا 18 عبارة محمية للـ tokenizer وغطينا 9/9 من العبارات الحرجة، واستبدلنا overlap بsemantic alignment، وثبتنا response famili"
     },
     {
       "scenario_id": "clarification_repair_flow",

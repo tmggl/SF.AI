@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.56 / 30**
-- **المرحلة الحالية:** **Phase 27.56 — Objective/Format/Tokenizer Diagnosis**
-- **حالة المرحلة الحالية:** **مكتملة؛ حدّدنا أن العائق في objective/eval/tokenizer وليس السعة وحدها**
-- **المرحلة التالية المقترحة:** Phase 27.57 tokenizer/eval/format repair pack؛ لا تدريب جديد قبل إصلاح أدوات القياس والتمثيل.
+- **الرحلة الحالية:** **Phase 27.57 / 30**
+- **المرحلة الحالية:** **Phase 27.57 — Tokenizer/Eval/Format Repair Pack**
+- **حالة المرحلة الحالية:** **مكتملة؛ حزمة الإصلاح جاهزة وتسمح بتدريب محدود في Phase 27.58**
+- **المرحلة التالية المقترحة:** Phase 27.58 retrain tokenizer with Phase 27.57 protected phrases and run bounded format/alignment probe.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -105,6 +105,7 @@
 | Phase 27.54 | Capacity/Objectivity Gate | ✅ completed_full_scaling_blocked_diagnostic_micro_probe_allowed | ✅ |
 | Phase 27.55 | Controlled SF-50M Diagnostic Micro-Probe | ✅ completed_diagnostic_capacity_signal_failed_full_sf50m_blocked | ✅ |
 | Phase 27.56 | Objective/Format/Tokenizer Diagnosis | ✅ completed_objective_format_tokenizer_diagnosis_runtime_blocked | ✅ |
+| Phase 27.57 | Tokenizer/Eval/Format Repair Pack | ✅ completed_repair_pack_ready_for_bounded_retraining_gate | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -826,6 +827,14 @@
   - القرار: لا runtime، لا `SF-50M` كامل، ولا تدريب جديد قبل إصلاح tokenizer/eval/format.
   - التالي: Phase 27.57 tokenizer/eval/format repair pack.
   - أضيف [PHASE27_56_OBJECTIVE_FORMAT_TOKENIZER_DIAGNOSIS_REPORT.md](./PHASE27_56_OBJECTIVE_FORMAT_TOKENIZER_DIAGNOSIS_REPORT.md).
+- بدأ وانتهى Phase 27.57 Tokenizer/Eval/Format Repair Pack:
+  - أضيف `make phase27-tokenizer-eval-format-repair-pack`.
+  - أضيف `resources/tokenization/protected_phrases_phase27_57.txt` وفيه `18` عبارة محمية.
+  - غطت الحزمة `9/9` من العبارات الحرجة التي كشفها Phase 27.56.
+  - أضيفت `resources/evaluation/semantic_alignment_phase27_57.json` لتعطيل prompt-overlap واستبداله بـ semantic alignment.
+  - أضيفت `resources/dialogue_format/response_families_phase27_57.json` وفيها `5` قواعد تمنع خلط عائلات الردود.
+  - القرار: يسمح فقط بتدريب محدود في Phase 27.58، ولا runtime switch ولا `SF-50M` كامل.
+  - أضيف [PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md](./PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 

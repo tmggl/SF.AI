@@ -1,0 +1,77 @@
+{
+  "phase": "Phase 27.57",
+  "status": "COMPLETED_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_READY_FOR_RETRAINING_GATE",
+  "training_started": false,
+  "runtime_switch_allowed": false,
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "source_phase": "Phase 27.56",
+  "inputs": {
+    "phase27_56_report": "artifacts/reports/phase27_56_objective_format_tokenizer_diagnosis_report.json",
+    "protected_phrases": "resources/tokenization/protected_phrases_phase27_57.txt",
+    "semantic_rules": "resources/evaluation/semantic_alignment_phase27_57.json",
+    "response_families": "resources/dialogue_format/response_families_phase27_57.json"
+  },
+  "protected_phrase_pack": {
+    "total": 18,
+    "critical_terms_from_27_56": [
+      "الي تحب",
+      "توترت",
+      "حاس بضغط",
+      "سولف",
+      "طمني",
+      "كمل كلامك",
+      "نسولف",
+      "هات موضوع",
+      "يومي كان طويل"
+    ],
+    "covered_critical_terms": [
+      "الي تحب",
+      "توترت",
+      "حاس بضغط",
+      "سولف",
+      "طمني",
+      "كمل كلامك",
+      "نسولف",
+      "هات موضوع",
+      "يومي كان طويل"
+    ],
+    "missing_critical_terms": [],
+    "ready_for_next_tokenizer": true
+  },
+  "semantic_alignment_pack": {
+    "categories": [
+      "followup",
+      "open_social",
+      "planning",
+      "support",
+      "topic"
+    ],
+    "prompt_overlap_required": false,
+    "cross_family_blocking_enabled": true,
+    "covered_required_categories": true,
+    "ready_for_eval_replacement": true
+  },
+  "response_family_pack": {
+    "families": [
+      "followup",
+      "open_social",
+      "planning",
+      "support",
+      "topic"
+    ],
+    "forbidden_collapse_count": 5,
+    "ready_for_format_probe": true
+  },
+  "decisions": {
+    "runtime_switch_allowed": false,
+    "sf50m_full_training_allowed": false,
+    "phase28_allowed": false,
+    "next_training_allowed": true,
+    "training_scope_if_next": "bounded tokenizer/eval/format repair probe only"
+  },
+  "next_phase": "Phase 27.58 — retrain tokenizer with Phase 27.57 protected phrases and run bounded format/alignment probe"
+}

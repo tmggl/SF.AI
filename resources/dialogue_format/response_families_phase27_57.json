@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "phase": "Phase 27.57",
+  "purpose": "Define response families so future training/eval can detect family collapse before runtime.",
+  "families": {
+    "followup": {
+      "description": "Clarify, continue, explain the previous idea, or answer why/how.",
+      "markers": ["أقصد", "يعني", "بعدها", "نكمل", "وضح", "خطوة", "سبب", "لأن", "عشان"]
+    },
+    "open_social": {
+      "description": "Light conversation and social opening, not task planning.",
+      "markers": ["نسولف", "سولف", "حديث", "موضوع", "يومك", "حياك", "خفيف"]
+    },
+    "planning": {
+      "description": "Organize time, tasks, priorities, or a practical start.",
+      "markers": ["ابدأ", "مهمة", "مهام", "رتب", "أولويات", "الأهمية", "خطوة"]
+    },
+    "support": {
+      "description": "Calming, reassurance, pressure relief, and emotional support.",
+      "markers": ["اهدأ", "نفس", "تنفس", "راحة", "هون", "طمّن", "تستطيع", "خفف"]
+    },
+    "topic": {
+      "description": "Discuss a concept or give a simple example.",
+      "markers": ["الشجاعة", "الصداقة", "الصدق", "الهدوء", "الوفاء", "يعني", "مثال"]
+    }
+  },
+  "forbidden_collapses": [
+    {"prompt_family": "followup", "wrong_response_family": "planning"},
+    {"prompt_family": "followup", "wrong_response_family": "support"},
+    {"prompt_family": "open_social", "wrong_response_family": "planning"},
+    {"prompt_family": "topic", "wrong_response_family": "planning"},
+    {"prompt_family": "support", "wrong_response_family": "topic"}
+  ]
+}

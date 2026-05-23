@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.56 — Objective/Format/Tokenizer Diagnosis",
-        current_phase_status="completed_objective_format_tokenizer_diagnosis_runtime_blocked",
+        current_phase="Phase 27.57 — Tokenizer/Eval/Format Repair Pack",
+        current_phase_status="completed_repair_pack_ready_for_bounded_retraining_gate",
         next_phase=(
-            "Phase 27.57 tokenizer/eval/format repair pack before retraining"
+            "Phase 27.58 retrain tokenizer with Phase 27.57 protected phrases and run bounded format/alignment probe"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -394,6 +394,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_56_objective_format_tokenizer_diagnosis",
                 status="completed_objective_format_tokenizer_diagnosis_runtime_blocked",
                 phase="Phase 27.56",
+            ),
+            ComponentStatus(
+                name="phase27_57_tokenizer_eval_format_repair_pack",
+                status="completed_repair_pack_ready_for_bounded_retraining_gate",
+                phase="Phase 27.57",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

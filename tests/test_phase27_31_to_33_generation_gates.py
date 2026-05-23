@@ -453,3 +453,22 @@ def test_phase27_56_objective_format_tokenizer_diagnosis_identifies_blockers() -
     assert report["decisions"]["runtime_switch_allowed"] is False
     assert report["decisions"]["sf50m_full_training_allowed"] is False
     assert report["decisions"]["next_training_allowed"] is False
+
+
+def test_phase27_57_repair_pack_covers_tokenizer_eval_and_format() -> None:
+    report = _report("phase27_57_tokenizer_eval_format_repair_pack_report.json")
+    assert report["phase"] == "Phase 27.57"
+    assert report["status"] == "COMPLETED_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_READY_FOR_RETRAINING_GATE"
+    assert report["training_started"] is False
+    assert report["runtime_switch_allowed"] is False
+    assert report["protected_phrase_pack"]["total"] == 18
+    assert len(report["protected_phrase_pack"]["covered_critical_terms"]) == 9
+    assert report["protected_phrase_pack"]["missing_critical_terms"] == []
+    assert report["semantic_alignment_pack"]["prompt_overlap_required"] is False
+    assert report["semantic_alignment_pack"]["cross_family_blocking_enabled"] is True
+    assert report["semantic_alignment_pack"]["ready_for_eval_replacement"] is True
+    assert report["response_family_pack"]["forbidden_collapse_count"] == 5
+    assert report["response_family_pack"]["ready_for_format_probe"] is True
+    assert report["decisions"]["next_training_allowed"] is True
+    assert report["decisions"]["runtime_switch_allowed"] is False
+    assert report["decisions"]["sf50m_full_training_allowed"] is False

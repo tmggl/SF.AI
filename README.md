@@ -43,13 +43,14 @@
 - [docs/PHASE27_54_CAPACITY_OBJECTIVITY_GATE_REPORT.md](./docs/PHASE27_54_CAPACITY_OBJECTIVITY_GATE_REPORT.md) — بوابة قرار تمنع التكبير الكامل وتسمح فقط بmicro-probe تشخيصي مضبوط.
 - [docs/PHASE27_55_SF50M_DIAGNOSTIC_MICRO_PROBE_REPORT.md](./docs/PHASE27_55_SF50M_DIAGNOSTIC_MICRO_PROBE_REPORT.md) — micro-probe قارن `SF-10M` و`SF-50M` وأبقى التكبير الكامل محجوبًا.
 - [docs/PHASE27_56_OBJECTIVE_FORMAT_TOKENIZER_DIAGNOSIS_REPORT.md](./docs/PHASE27_56_OBJECTIVE_FORMAT_TOKENIZER_DIAGNOSIS_REPORT.md) — تشخيص objective/format/tokenizer قبل أي تدريب جديد.
+- [docs/PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md](./docs/PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md) — حزمة إصلاح tokenizer/eval/format قبل إعادة التدريب.
 
 ---
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.56 / 30 — Objective/Format/Tokenizer Diagnosis اكتملت.
-- **الأولوية الحالية:** Phase 27.57 tokenizer/eval/format repair pack؛ لا تدريب جديد قبل إصلاح أدوات القياس والتمثيل.
+- **الرحلة الحالية:** Phase 27.57 / 30 — Tokenizer/Eval/Format Repair Pack اكتملت.
+- **الأولوية الحالية:** Phase 27.58 retrain tokenizer + bounded format/alignment probe؛ تدريب محدود فقط، لا فتح واجهة.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -110,6 +111,7 @@
 - **نتيجة Phase 27.54:** بوابة السعة/الهدف: زيادة البيانات وحدها لم تساعد، والتكبير الكامل إلى `SF-50M` ممنوع. المسموح فقط Phase 27.55 كmicro-probe تشخيصي مقارنة بـ`SF-10M`، بلا runtime. التقرير: [docs/PHASE27_54_CAPACITY_OBJECTIVITY_GATE_REPORT.md](./docs/PHASE27_54_CAPACITY_OBJECTIVITY_GATE_REPORT.md).
 - **نتيجة Phase 27.55:** micro-probe مضبوط: `SF-10M=3/20`, `SF-50M=4/20`, delta=1. السعة وحدها لم تحل الحوار المفتوح، لذلك لا runtime ولا تدريب `SF-50M` كامل. التقرير: [docs/PHASE27_55_SF50M_DIAGNOSTIC_MICRO_PROBE_REPORT.md](./docs/PHASE27_55_SF50M_DIAGNOSTIC_MICRO_PROBE_REPORT.md).
 - **نتيجة Phase 27.56:** التشخيص وجد أن `SF-50M` يرتفع إلى `9/20` إذا أزلنا شرط overlap، لكن بقي `9` expected-missing و`9` splits حرجة في tokenizer؛ التالي إصلاح tokenizer/eval/format قبل التدريب. التقرير: [docs/PHASE27_56_OBJECTIVE_FORMAT_TOKENIZER_DIAGNOSIS_REPORT.md](./docs/PHASE27_56_OBJECTIVE_FORMAT_TOKENIZER_DIAGNOSIS_REPORT.md).
+- **نتيجة Phase 27.57:** أضيفت حزمة إصلاح قبل التدريب: `18` عبارة محمية، تغطية `9/9` للعبارات الحرجة، semantic alignment بلا overlap، و5 قواعد لمنع خلط عائلات الردود. التقرير: [docs/PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md](./docs/PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 

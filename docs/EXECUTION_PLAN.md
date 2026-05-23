@@ -126,6 +126,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.54 | Capacity/Objectivity Gate | مكتملة؛ التكبير الكامل ممنوع، micro-probe تشخيصي فقط في Phase 27.55 |
 | Phase 27.55 | Controlled SF-50M Diagnostic Micro-Probe | مكتملة؛ `SF-10M=3/20`, `SF-50M=4/20`, السعة وحدها غير كافية |
 | Phase 27.56 | Objective/Format/Tokenizer Diagnosis | مكتملة؛ strict `4/20` وrelaxed `9/20`; إصلاح tokenizer/eval/format قبل التدريب |
+| Phase 27.57 | Tokenizer/Eval/Format Repair Pack | مكتملة؛ `18` عبارة محمية، تغطية `9/9`, semantic alignment جاهز |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3211,6 +3212,41 @@ cases = 7/7
 ### artifacts
 - [PHASE27_56_OBJECTIVE_FORMAT_TOKENIZER_DIAGNOSIS_REPORT.md](./PHASE27_56_OBJECTIVE_FORMAT_TOKENIZER_DIAGNOSIS_REPORT.md)
 - `artifacts/reports/phase27_56_objective_format_tokenizer_diagnosis_report.json`
+
+---
+
+## Phase 27.57 — Tokenizer/Eval/Format Repair Pack
+
+### الهدف
+إصلاح أدوات التمثيل والقياس قبل أي تدريب جديد، بناءً على تشخيص Phase 27.56.
+
+### ما تم
+- أضيف `scripts/phase27_57_tokenizer_eval_format_repair_pack.py`.
+- أضيف `make phase27-tokenizer-eval-format-repair-pack`.
+- أضيفت عبارات tokenizer محمية:
+  - `resources/tokenization/protected_phrases_phase27_57.txt`
+- أضيفت قواعد semantic alignment:
+  - `resources/evaluation/semantic_alignment_phase27_57.json`
+- أضيفت خريطة response families:
+  - `resources/dialogue_format/response_families_phase27_57.json`
+- حُدث `tokenization_rules.yaml` ليضم protected phrases الجديدة.
+
+### النتيجة
+- protected phrases: `18`.
+- critical coverage: `9/9`.
+- prompt overlap required: `false`.
+- forbidden family collapses: `5`.
+
+### القرار
+الحزمة جاهزة لتدريب محدود في Phase 27.58، لكنها لا تفتح runtime ولا تسمح بتدريب `SF-50M` كامل.
+
+التالي:
+
+**Phase 27.58 — retrain tokenizer with Phase 27.57 protected phrases and run bounded format/alignment probe**
+
+### artifacts
+- [PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md](./PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md)
+- `artifacts/reports/phase27_57_tokenizer_eval_format_repair_pack_report.json`
 
 ---
 

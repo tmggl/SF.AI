@@ -318,6 +318,9 @@ phase27-sf50m-diagnostic-micro-probe:
 phase27-objective-format-tokenizer-diagnosis:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_56_objective_format_tokenizer_diagnosis.py $(ARGS)
 
+phase27-tokenizer-eval-format-repair-pack:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_57_tokenizer_eval_format_repair_pack.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 

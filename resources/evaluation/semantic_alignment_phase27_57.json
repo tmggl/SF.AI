@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "phase": "Phase 27.57",
+  "purpose": "Replace brittle prompt-overlap checks with category-aware semantic alignment for MSA/Saudi open-dialogue probes.",
+  "sovereign": true,
+  "external_data_used": false,
+  "categories": {
+    "followup": {
+      "required_any": ["أقصد", "اقصد", "يعني", "بعدها", "نكمل", "وضح", "خطوة", "سبب", "عشان", "لأن"],
+      "forbidden_family": ["planning", "support"]
+    },
+    "open_social": {
+      "required_any": ["نسولف", "سولف", "حديث", "موضوع", "يومك", "حياك", "خفيف"],
+      "forbidden_family": ["planning"]
+    },
+    "planning": {
+      "required_any": ["ابدأ", "مهمة", "مهام", "رتب", "أولويات", "اولويات", "الأهمية", "خطوة"],
+      "forbidden_family": []
+    },
+    "support": {
+      "required_any": ["اهدأ", "اهدا", "نفس", "تنفس", "راحة", "هون", "طمّن", "تستطيع", "خفف"],
+      "forbidden_family": ["topic"]
+    },
+    "topic": {
+      "required_any": ["الشجاعة", "الصداقة", "الصدق", "الهدوء", "الوفاء", "يعني", "مثال"],
+      "forbidden_family": ["planning"]
+    }
+  },
+  "decision_rules": {
+    "pass_requires_guard_allowed": true,
+    "pass_requires_expected_category": true,
+    "prompt_overlap_required": false,
+    "cross_family_blocking_enabled": true
+  }
+}

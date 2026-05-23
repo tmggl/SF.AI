@@ -83,10 +83,10 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.56: شخّصنا فشل 27.55. النتيجة: SF-50M strict = 4/20 "
-    "لكن relaxed بدون overlap = 9/20، ومعه 9 مصطلحات حوارية تتكسر في tokenizer "
-    "وخلط واضح بين عائلات الردود. التالي Phase 27.57 لإصلاح tokenizer/eval/format "
-    "قبل أي تدريب جديد.",
+    "وصلنا إلى Phase 27.57: ثبتنا حزمة إصلاح قبل التدريب. أضفنا 18 عبارة "
+    "محمية للـ tokenizer وغطينا 9/9 من العبارات الحرجة، واستبدلنا overlap "
+    "بsemantic alignment، وثبتنا response families لمنع خلط الردود. التالي "
+    "Phase 27.58 تدريب محدود للـ tokenizer/probe، بلا فتح واجهة.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

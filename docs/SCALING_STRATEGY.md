@@ -208,3 +208,24 @@ Phase 27.56 شخّصت سبب فشل Phase 27.55 بدون تدريب جديد:
 - لا محاولة سعة جديدة قبل إصلاح tokenizer/eval/format.
 
 سبب القرار: هناك فشل في أدوات القياس والتمثيل نفسها. معيار overlap يرفض ردودًا طبيعية، tokenizer يكسر عبارات سعودية/حواريّة، والنموذج يخلط عائلات الردود. أي تدريب قبل إصلاح هذه الطبقات سيقيس الخطأ أو يكرره.
+
+---
+
+## قرار Phase 27.57
+
+Phase 27.57 أصلحت طبقات القياس والتمثيل قبل التدريب:
+
+- protected phrases: `18`.
+- critical coverage: `9/9`.
+- prompt-overlap gate: disabled.
+- semantic alignment: enabled.
+- response-family collapse checks: `5`.
+
+القرار الرسمي:
+
+- يسمح فقط بـ Phase 27.58 كتدريب محدود للـ tokenizer/probe.
+- لا runtime switch.
+- لا `SF-50M` كامل.
+- لا Phase 28.
+
+سبب القرار: أصبح لدينا repair pack يغطي عيوب Phase 27.56، لكن لم يُختبر بعد على tokenizer/model جديد. الخطوة التالية يجب أن تختبر الحزمة ضمن probe محدود قبل أي توسع.

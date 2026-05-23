@@ -88,6 +88,7 @@ SF.AI يملك الآن:
 | Phase 27.54 | `Capacity/objectivity gate` | منع التكبير الكامل؛ سمح فقط بmicro-probe تشخيصي مضبوط |
 | Phase 27.55 | `SF-50M diagnostic micro-probe` | مقارنة مضبوطة: `SF-10M=3/20`, `SF-50M=4/20`; السعة وحدها غير كافية |
 | Phase 27.56 | `Objective/format/tokenizer diagnosis` | strict `4/20`, relaxed `9/20`, وtokenizer يحتاج إصلاح مصطلحات سعودية |
+| Phase 27.57 | `Tokenizer/eval/format repair pack` | 18 عبارة محمية، semantic alignment، response families؛ جاهز لـ probe محدود |
 | بعد نجاح SF-10M | `SF-50M v0.1` | نجاح جودة SF-10M/canary + إعادة Phase 26 readiness |
 | Phase 28 | `SF-120M v0.1` | نجاح SF-50M + scaling gate |
 
@@ -143,6 +144,7 @@ SF.AI يملك الآن:
 - **Phase 27.54:** ثبّتت بوابة السعة/الهدف: لا `SF-50M` كامل ولا Phase 28 الآن؛ Phase 27.55 مسموحة فقط كmicro-probe تشخيصي مقارنة بـ`SF-10M`.
 - **Phase 27.55:** نفذت micro-probe: `SF-50M` تحسن نقطة واحدة فقط (`4/20` مقابل `3/20`)، فبقي full scaling محجوبًا.
 - **Phase 27.56:** شخّصت السبب: eval overlap صارم، response-family confusion، وtokenizer يكسر عبارات سعودية؛ لا تدريب جديد قبل إصلاح هذه الطبقات.
+- **Phase 27.57:** ثبتت حزمة الإصلاح: protected phrases، semantic alignment، وresponse families قبل أي retrain.
 - **Phase 28:** أول قفزة بعد SF-50M إذا أثبت 50M قيمة واضحة.
 - **Phase 29:** إدخاله في الواجهة كتجربة يومية مع router/safety/memory.
 
