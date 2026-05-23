@@ -83,10 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.58: دربنا tokenizer v7 مع 53 مصطلحًا/عبارة محمية، "
-    "وحافظ على عبارات 27.57 كقطعة واحدة، لكن probe الحواري فشل 4/15. "
-    "الواجهة لا تُفتح لهذا المرشح. التالي Phase 27.59 لإصلاح open_social "
-    "وfollowup وtopic قبل أي runtime switch.",
+    "وصلنا إلى Phase 27.59: أصلحنا عائلات الردود داخل اختبار محدود ومرّ "
+    "probe المحاذاة 15/15 على tokenizer v7. الواجهة لا تُفتح بعد؛ التالي "
+    "Phase 27.60 canary أوسع للحوار الطبيعي قبل أي runtime switch.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

@@ -492,3 +492,22 @@ def test_phase27_58_tokenizer_v7_probe_blocks_runtime_on_alignment_failure() -> 
     assert report["decisions"]["ui_open_allowed"] is False
     assert report["decisions"]["sf50m_allowed"] is False
     assert report["decisions"]["broader_canary_allowed"] is False
+
+
+def test_phase27_59_bounded_alignment_repair_passes_but_keeps_runtime_blocked() -> None:
+    report = _report("phase27_59_bounded_alignment_repair_report.json")
+    assert report["phase"] == "Phase 27.59"
+    assert report["status"] == "PASSED_BOUNDED_ALIGNMENT_REPAIR_READY_FOR_BROADER_CANARY_RUNTIME_BLOCKED"
+    assert report["training_started"] is True
+    assert report["tokenizer"] == "artifacts/tokenizers/sf_bpe/v7_phase27_58"
+    assert report["train_records"] == 2880
+    assert report["repair_pair_count"] == 24
+    assert report["summary"]["passed"] == 15
+    assert report["summary"]["total"] == 15
+    assert report["summary"]["family_summary"]["open_social"]["passed"] == 3
+    assert report["summary"]["family_summary"]["followup"]["passed"] == 3
+    assert report["summary"]["family_summary"]["topic"]["passed"] == 3
+    assert report["decisions"]["runtime_switch_allowed"] is False
+    assert report["decisions"]["ui_open_allowed"] is False
+    assert report["decisions"]["sf50m_allowed"] is False
+    assert report["decisions"]["broader_canary_allowed"] is True

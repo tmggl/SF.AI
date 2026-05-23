@@ -245,3 +245,17 @@ Phase 27.58 نفذت التدريب المحدود المسموح:
 - لا فتح واجهة للمرشح.
 - لا `SF-50M` ولا Phase 28.
 - التالي Phase 27.59 إصلاح alignment قبل أي محاولة تكبير.
+
+## قرار Phase 27.59
+
+Phase 27.59 أصلحت alignment المحدود:
+
+- bounded alignment repair: نجح `15/15`.
+- عائلات `open_social/followup/topic` عادت للردود الصحيحة داخل الاختبار المحدود.
+
+قرار scaling:
+
+- لا رفع حجم.
+- لا runtime switch بعد.
+- لا فتح واجهة للمرشح حتى يمر canary طبيعي أوسع.
+- التالي Phase 27.60 broader natural-dialogue canary.

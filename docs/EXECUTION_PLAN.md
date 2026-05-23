@@ -128,6 +128,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.56 | Objective/Format/Tokenizer Diagnosis | مكتملة؛ strict `4/20` وrelaxed `9/20`; إصلاح tokenizer/eval/format قبل التدريب |
 | Phase 27.57 | Tokenizer/Eval/Format Repair Pack | مكتملة؛ `18` عبارة محمية، تغطية `9/9`, semantic alignment جاهز |
 | Phase 27.58 | Tokenizer v7 Bounded Alignment Probe | مكتملة كتجربة؛ tokenizer نجح، probe فشل `4/15`, runtime محجوب |
+| Phase 27.59 | Bounded Alignment Repair | مكتملة؛ repair محدود نجح `15/15`, runtime محجوب بانتظار canary أوسع |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3293,6 +3294,44 @@ cases = 7/7
 - [PHASE27_58_TOKENIZER_BOUNDED_ALIGNMENT_PROBE_REPORT.md](./PHASE27_58_TOKENIZER_BOUNDED_ALIGNMENT_PROBE_REPORT.md)
 - `artifacts/reports/phase27_58_tokenizer_bounded_alignment_probe_report.json`
 - `artifacts/samples/phase27_58_tokenizer_bounded_alignment_probe.md`
+
+---
+
+## Phase 27.59 — Bounded Alignment Repair
+
+### الهدف
+إصلاح فشل Phase 27.58 في عائلات `open_social/followup/topic` بدون فتح runtime وبدون تكبير النموذج.
+
+### ما تم
+- أضيف `scripts/phase27_59_bounded_alignment_repair.py`.
+- أضيف `make phase27-bounded-alignment-repair`.
+- استُخدم tokenizer v7:
+  - `artifacts/tokenizers/sf_bpe/v7_phase27_58`
+- دُرّب probe محدود `SF-10M`:
+  - `6400` خطوة.
+  - `24` زوج إصلاح.
+  - `2880` سجل تدريب داخل corpus مؤقت.
+- أُعيدت بوابة alignment نفسها على `15` حالة.
+
+### النتيجة
+- pass: `15/15`.
+- `open_social`: `3/3`.
+- `followup`: `3/3`.
+- `planning`: `3/3`.
+- `support`: `3/3`.
+- `topic`: `3/3`.
+
+### القرار
+هذا نجاح معملي محدود، وليس فتح واجهة. لا runtime switch، لا UI، لا `SF-50M`، ولا Phase 28.
+
+التالي:
+
+**Phase 27.60 — broader natural-dialogue canary using tokenizer v7 + Phase 27.59 repair**
+
+### artifacts
+- [PHASE27_59_BOUNDED_ALIGNMENT_REPAIR_REPORT.md](./PHASE27_59_BOUNDED_ALIGNMENT_REPAIR_REPORT.md)
+- `artifacts/reports/phase27_59_bounded_alignment_repair_report.json`
+- `artifacts/samples/phase27_59_bounded_alignment_repair.md`
 
 ---
 

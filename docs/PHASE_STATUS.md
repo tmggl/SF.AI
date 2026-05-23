@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.58 / 30**
-- **المرحلة الحالية:** **Phase 27.58 — Tokenizer v7 Bounded Alignment Probe**
-- **حالة المرحلة الحالية:** **اكتملت كتجربة تدريب محدودة؛ فشلت بوابة alignment (`4/15`) والـ runtime محجوب**
-- **المرحلة التالية المقترحة:** Phase 27.59 inspect Phase 27.58 failures and repair bounded alignment before any runtime switch.
+- **الرحلة الحالية:** **Phase 27.59 / 30**
+- **المرحلة الحالية:** **Phase 27.59 — Bounded Alignment Repair**
+- **حالة المرحلة الحالية:** **اكتملت؛ بوابة alignment المحدودة نجحت (`15/15`) والـ runtime ما زال محجوبًا**
+- **المرحلة التالية المقترحة:** Phase 27.60 broader natural-dialogue canary using tokenizer v7 and Phase 27.59 repair.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -107,6 +107,7 @@
 | Phase 27.56 | Objective/Format/Tokenizer Diagnosis | ✅ completed_objective_format_tokenizer_diagnosis_runtime_blocked | ✅ |
 | Phase 27.57 | Tokenizer/Eval/Format Repair Pack | ✅ completed_repair_pack_ready_for_bounded_retraining_gate | ✅ |
 | Phase 27.58 | Tokenizer v7 Bounded Alignment Probe | ✅ failed_bounded_alignment_probe_runtime_blocked | ✅ |
+| Phase 27.59 | Bounded Alignment Repair | ✅ passed_bounded_alignment_repair_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -845,6 +846,14 @@
   - القرار: لا runtime switch، لا فتح UI، لا `SF-50M`، ولا Phase 28.
   - التالي: Phase 27.59 إصلاح عائلات `open_social/followup/topic` قبل أي توسيع.
   - أضيف [PHASE27_58_TOKENIZER_BOUNDED_ALIGNMENT_PROBE_REPORT.md](./PHASE27_58_TOKENIZER_BOUNDED_ALIGNMENT_PROBE_REPORT.md).
+- بدأ وانتهى Phase 27.59 Bounded Alignment Repair:
+  - أضيف `make phase27-bounded-alignment-repair`.
+  - استخدم tokenizer v7 من Phase 27.58 بدون إعادة بنائه.
+  - دُرّب repair probe محدود `SF-10M` لمدة `6400` خطوة على `24` زوج إصلاح و`2880` سجل تدريب.
+  - النتيجة: `15/15` في بوابة alignment المحدودة.
+  - نجحت العائلات: `open_social=3/3`, `followup=3/3`, `planning=3/3`, `support=3/3`, `topic=3/3`.
+  - القرار: لا runtime switch ولا UI بعد؛ النجاح يسمح فقط بـ Phase 27.60 canary أوسع.
+  - أضيف [PHASE27_59_BOUNDED_ALIGNMENT_REPAIR_REPORT.md](./PHASE27_59_BOUNDED_ALIGNMENT_REPAIR_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 

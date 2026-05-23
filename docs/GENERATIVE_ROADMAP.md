@@ -90,6 +90,7 @@ SF.AI يملك الآن:
 | Phase 27.56 | `Objective/format/tokenizer diagnosis` | strict `4/20`, relaxed `9/20`, وtokenizer يحتاج إصلاح مصطلحات سعودية |
 | Phase 27.57 | `Tokenizer/eval/format repair pack` | 18 عبارة محمية، semantic alignment، response families؛ جاهز لـ probe محدود |
 | Phase 27.58 | `Tokenizer v7 bounded alignment probe` | tokenizer نجح، alignment probe فشل `4/15`; runtime محجوب |
+| Phase 27.59 | `Bounded alignment repair` | repair محدود نجح `15/15`; runtime محجوب حتى canary أوسع |
 | بعد نجاح SF-10M | `SF-50M v0.1` | نجاح جودة SF-10M/canary + إعادة Phase 26 readiness |
 | Phase 28 | `SF-120M v0.1` | نجاح SF-50M + scaling gate |
 
@@ -147,6 +148,7 @@ SF.AI يملك الآن:
 - **Phase 27.56:** شخّصت السبب: eval overlap صارم، response-family confusion، وtokenizer يكسر عبارات سعودية؛ لا تدريب جديد قبل إصلاح هذه الطبقات.
 - **Phase 27.57:** ثبتت حزمة الإصلاح: protected phrases، semantic alignment، وresponse families قبل أي retrain.
 - **Phase 27.58:** نفذ retrain محدود: tokenizer v7 نجح في حماية العبارات، لكن المولد أخفق في `open_social/followup/topic` وبقي runtime محجوبًا.
+- **Phase 27.59:** أصلح عائلات الردود داخل probe محدود ومرّ `15/15`; ما زال يحتاج canary طبيعي أوسع.
 - **Phase 28:** أول قفزة بعد SF-50M إذا أثبت 50M قيمة واضحة.
 - **Phase 29:** إدخاله في الواجهة كتجربة يومية مع router/safety/memory.
 

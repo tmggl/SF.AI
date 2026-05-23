@@ -52,7 +52,7 @@ Phase 27.25 اختبرت checkpoint نفسه على أسئلة held-out جديد
 `16/18` مع intent/topic conditioning. Phase 27.31–27.33 أكملت natural
 intent/topic + balanced calibration + advice/micro stabilization، ووصلت إلى
 كل البوابات المحلية كاملة: fresh mixed `18/18` وmicro `32/32` بلا تسريب.
-الخطوة الحالية ليست تكبير النموذج كاملًا. Phase 27.50 جعل الواجهة و`/chat/message` مختبرًا مولّدًا فقط: لا قوالب ظاهرة، إما رد من `sf_10m_phase27_47` أو `generator_blocked` فارغ. Phase 27.51 أثبت أن checkpoint الحالي لا يعمم على حوار طبيعي مفتوح (`raw natural=1/20`). Phase 27.52 ضاعف تدريب `SF-10M` إلى `9200` خطوة ورفع المؤشر إلى `5/20` فقط. Phase 27.53 وسّع البيانات إلى `10,540` زوجًا فريدًا و`18,000` خطوة، لكن raw natural صار `2/36` مع خلط/fragments. Phase 27.54 منع التكبير الكامل. Phase 27.55 أثبت أن السعة وحدها غير كافية (`3/20` مقابل `4/20`). Phase 27.56 شخّص أن الإصلاح التالي يجب أن يكون tokenizer/eval/format. Phase 27.57 ثبت هذه الحزمة. Phase 27.58 درّب tokenizer v7 وprobe محدودًا؛ التوكنة نجحت لكن alignment فشل `4/15`.
+الخطوة الحالية ليست تكبير النموذج كاملًا. Phase 27.50 جعل الواجهة و`/chat/message` مختبرًا مولّدًا فقط: لا قوالب ظاهرة، إما رد من `sf_10m_phase27_47` أو `generator_blocked` فارغ. Phase 27.51 أثبت أن checkpoint الحالي لا يعمم على حوار طبيعي مفتوح (`raw natural=1/20`). Phase 27.52 ضاعف تدريب `SF-10M` إلى `9200` خطوة ورفع المؤشر إلى `5/20` فقط. Phase 27.53 وسّع البيانات إلى `10,540` زوجًا فريدًا و`18,000` خطوة، لكن raw natural صار `2/36` مع خلط/fragments. Phase 27.54 منع التكبير الكامل. Phase 27.55 أثبت أن السعة وحدها غير كافية (`3/20` مقابل `4/20`). Phase 27.56 شخّص أن الإصلاح التالي يجب أن يكون tokenizer/eval/format. Phase 27.57 ثبت هذه الحزمة. Phase 27.58 درّب tokenizer v7 وprobe محدودًا؛ التوكنة نجحت لكن alignment فشل `4/15`. Phase 27.59 أصلح alignment المحدود ومرّ `15/15`، لكن runtime ما زال محجوبًا لحين canary أوسع.
 
 الخطوة العملية الحالية:
 
@@ -218,6 +218,7 @@ SF.AI حاليًا:
 - **Phase 27.56:** Objective/Format/Tokenizer Diagnosis — مكتمل؛ `SF-50M relaxed=9/20`, و9 splits حرجة في tokenizer.
 - **Phase 27.57:** Tokenizer/Eval/Format Repair Pack — مكتمل؛ `18` عبارة محمية وتغطية `9/9`، ولا runtime.
 - **Phase 27.58:** Tokenizer v7 Bounded Alignment Probe — مكتمل كتجربة؛ tokenizer نجح، probe فشل `4/15`، ولا runtime.
+- **Phase 27.59:** Bounded Alignment Repair — مكتمل؛ repair محدود نجح `15/15`، ولا runtime.
 - **Phase 28:** تدريب `SF-120M v0.1`؛ أول قفزة بعد نجاح `SF-50M`.
 - **Phase 29:** Runtime Hybrid Assistant v1.
 - **Phase 30:** Continuous Improvement Loop.
