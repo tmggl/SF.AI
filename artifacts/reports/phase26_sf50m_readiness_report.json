@@ -1,0 +1,93 @@
+{
+  "phase": "Phase 26 — SF-50M v0.1 Dialogue Model Readiness",
+  "status": "NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "target_model": "sf-50m",
+  "can_start_sf50m_training": false,
+  "recommended_action": "DO_NOT_TRAIN_SF50M_YET_EXPAND_CORPUS_AND_REPEAT_SF10M_CANARY",
+  "corpus": {
+    "path": "data/corpus/chat/jsonl",
+    "training_records": 500,
+    "min_training_records": 5000,
+    "issue_count": 0,
+    "dialects": {
+      "msa": 250,
+      "saudi": 250
+    },
+    "quality": {
+      "silver": 448,
+      "gold": 52
+    },
+    "missing_required_dialects": []
+  },
+  "tokenizer": {
+    "path": "artifacts/tokenizers/sf_bpe/v2",
+    "ready": true,
+    "status": "COMPLETED_READY_FOR_PHASE24",
+    "vocab_size": 4493,
+    "merges": 4386,
+    "sf_origin": true
+  },
+  "phase24": {
+    "status": "COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED",
+    "training_passed": true,
+    "runtime_allowed": false,
+    "eval_loss": 2.5779,
+    "perplexity": 13.17
+  },
+  "phase25": {
+    "status": "COMPLETED_GUARDED_CANARY_REAL_MODEL_BLOCKED",
+    "canary_guard_passed": true,
+    "open_chat_allowed": false,
+    "real_model_guard_reason": "malformed_token"
+  },
+  "scaling_gates": {
+    "corpus_readiness": false,
+    "tokenization_audit": true,
+    "evaluation_suite": true,
+    "safety_checks": true,
+    "runtime_quality": false,
+    "hallucination_checks": false,
+    "repetition_checks": false,
+    "resource_readiness": true
+  },
+  "target_config": {
+    "name": "sf-50m",
+    "max_seq_len": 512,
+    "d_model": 512,
+    "n_heads": 8,
+    "n_layers": 8,
+    "ff_mult": 4,
+    "vocab_size": 4493,
+    "sovereign": true
+  },
+  "resource_estimate": {
+    "device": "mps",
+    "device_note": "Apple Silicon GPU",
+    "training_allowed_by_resources": true,
+    "checkpoint_root": "artifacts/checkpoints/sf_50m_v0_1"
+  },
+  "blockers": [
+    "corpus_below_sf50m_minimum",
+    "phase24_runtime_quality_blocked",
+    "phase25_real_model_blocked",
+    "hallucination_checks_missing",
+    "repetition_checks_failed"
+  ],
+  "recommended_commands": [
+    "make corpus-audit",
+    "make phase23-tokenizer-audit",
+    "make phase26-readiness",
+    "expand governed msa+saudi corpus toward 5000 records",
+    "repeat SF-10M quality training/canary after corpus expansion"
+  ],
+  "notes": [
+    "This decision is read-only and starts no training.",
+    "Phase 25 protected the UI by blocking real SF-10M v0.2 output.",
+    "Progressive Scaling Strategy blocks SF-50M until current-tier quality gates pass.",
+    "Language track remains msa + saudi only."
+  ]
+}

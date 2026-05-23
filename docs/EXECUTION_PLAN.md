@@ -72,8 +72,8 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 23 | Tokenizer v2 Retrain & Audit | مكتملة؛ v2 جاهز لـ Phase 24 |
 | Phase 24 | SF-10M v0.2 Quality Training | مكتملة بحدود؛ runtime محظور |
 | Phase 25 | Generated Chat Canary v1 | مكتملة كحماية؛ real model blocked |
-| Phase 26 | SF-50M v0.1 Dialogue Model | مخططة؛ أول فرصة لحوار مولّد قصير مقنع |
-| Phase 27 | Dialogue Evaluation v2 | مخططة |
+| Phase 26 | SF-50M v0.1 Readiness | مكتملة؛ التدريب غير جاهز حسب scaling gates |
+| Phase 27 | Dialogue Evaluation v2 + corpus expansion plan | مخططة |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -1245,10 +1245,11 @@ fallback: template
 
 ---
 
-## Phase 26 — SF-50M v0.1 Dialogue Model
+## Phase 26 — SF-50M v0.1 Readiness
 
 ### الهدف
-تدريب أول نموذج متوسط رسمي بعد نجاح `SF-10M v0.2` ومرور scaling gate.
+تطبيق بوابة readiness/scaling قبل أي تدريب `SF-50M`. هذه المرحلة لا تبدأ تدريبًا؛
+هي قرار هندسي يجيب: هل نكبر النموذج الآن أم نصلح البيانات والجودة أولًا؟
 
 ### شروط البدء
 - `SF-10M v0.2` تحسن بوضوح على v0.1.
@@ -1257,20 +1258,39 @@ fallback: template
 - evaluation/safety/repetition/hallucination checks تمر.
 - الموارد جاهزة للتدريب والاستئناف.
 
-### شروط النجاح
-- حوار قصير 2–4 أدوار يبدو طبيعيًا في الفصحى/السعودي.
-- لا تدهور في safety.
-- لا اعتماد على قوالب لإخفاء ضعف المولد في اختبار canary.
+### نتيجة التنفيذ
+اكتملت Phase 26 بقرار:
+
+```text
+NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M
+can_start_sf50m_training=false
+```
+
+الأسباب:
+
+- corpus الحالي `500` سجل فقط، والحد العملي لـ `SF-50M` هو `5000` سجل.
+- `SF-10M v0.2` تحسن رقميًا لكنه بقي runtime-blocked.
+- Phase 25 حجب تجربة النموذج الحقيقي بـ `generation_guard:malformed_token`.
+- hallucination/repetition/runtime quality gates لم تنجح بعد.
+
+### artifacts
+- `sf_ai/training/phase26_readiness.py`
+- `scripts/phase26_readiness.py`
+- `make phase26-readiness`
+- `GET /system/phase26-readiness`
+- [PHASE26_SF50M_READINESS_REPORT.md](./PHASE26_SF50M_READINESS_REPORT.md)
+- `artifacts/reports/phase26_sf50m_readiness_report.json`
 
 ### بعد المرحلة
-انتقل إلى Phase 27.
+انتقل إلى Phase 27: تقييم حوار v2 وخطة توسيع corpus قبل إعادة محاولة `SF-50M`.
 
 ---
 
-## Phase 27 — Dialogue Evaluation v2
+## Phase 27 — Dialogue Evaluation v2 + Corpus Expansion Plan
 
 ### الهدف
-تقييم حوار متعدد الأدوار بدل prompt واحد.
+تقييم حوار متعدد الأدوار بدل prompt واحد، وتحويل نتيجة Phase 26 إلى خطة بيانات
+واضحة ترفع corpus من `500` باتجاه `5000` سجل داخل `msa + saudi`.
 
 ### محاور التقييم
 - اجتماعي.

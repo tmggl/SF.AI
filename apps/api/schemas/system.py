@@ -17,7 +17,8 @@ class ComponentStatus(BaseModel):
         ...,
         description=(
             "active | planned | skeleton_only | disabled | "
-            "completed_runtime_blocked | active_runtime_guard"
+            "completed_runtime_blocked | active_runtime_guard | "
+            "completed_training_blocked"
         ),
     )
     phase: str | None = Field(default=None, description="المرحلة المسؤولة عن المكون")
@@ -134,6 +135,25 @@ class Phase19ReadinessResponse(BaseModel):
     action: str
     recommended_commands: list[str]
     blockers: list[str]
+    notes: list[str]
+
+
+class Phase26ReadinessResponse(BaseModel):
+    phase: str
+    status: str
+    language_track: list[str]
+    target_model: str
+    can_start_sf50m_training: bool
+    recommended_action: str
+    corpus: dict[str, object]
+    tokenizer: dict[str, object]
+    phase24: dict[str, object]
+    phase25: dict[str, object]
+    scaling_gates: dict[str, bool]
+    target_config: dict[str, object]
+    resource_estimate: dict[str, object]
+    blockers: list[str]
+    recommended_commands: list[str]
     notes: list[str]
 
 

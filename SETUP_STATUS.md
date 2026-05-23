@@ -10,10 +10,10 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 25 / 30**
-- **المرحلة الحالية:** **Phase 25 — Generated Chat Canary v1** (اكتملت كحماية runtime؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **الرحلة الحالية:** **Phase 26 / 30**
+- **المرحلة الحالية:** **Phase 26 — SF-50M v0.1 Readiness** (اكتملت كقرار scaling؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** Phase 26 — تبدأ كقرار readiness/scaling قبل أي تدريب `SF-50M`.
+- **المرحلة التالية المقترحة:** Phase 27 — Dialogue Evaluation v2 and corpus expansion plan قبل أي تدريب `SF-50M`.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
@@ -36,6 +36,8 @@
 - **Checkpoint Phase 24 المحلي:** `artifacts/checkpoints/sf_10m_v0_2/sf-10m-step2000`; ملفات checkpoints مستثناة من git حسب السياسة.
 - **نتيجة Phase 25:** أضيف `GenerationGuard` وفلاغ `SF_GENERATOR_CANARY` ومسار `sf_10m_v0_2` guarded. التجربة الحقيقية حُجبت بـ `generation_guard:malformed_token` ورجع الرد إلى `template`. القرار `COMPLETED_GUARDED_CANARY_REAL_MODEL_BLOCKED`.
 - **تقرير Phase 25:** `docs/PHASE25_GENERATED_CHAT_CANARY_REPORT.md`, `artifacts/reports/phase25_generation_canary_report.json`.
+- **نتيجة Phase 26:** أضيفت بوابة `make phase26-readiness` و`GET /system/phase26-readiness`. القرار `NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M`: لا تدريب `SF-50M` الآن؛ corpus الحالي `500` والحد العملي `5000`، وPhase 25 حجب النموذج الحقيقي، وruntime quality/hallucination/repetition gates غير ناجحة.
+- **تقرير Phase 26:** `docs/PHASE26_SF50M_READINESS_REPORT.md`, `artifacts/reports/phase26_sf50m_readiness_report.json`.
 - **مقارنة tokenizer v1/v2:** v1 كان `vocab=261`, `merges=218`, `words_seen=723`, سعودي فقط. v2 تدرب على `500` سجل متوازن: `msa=250`, `saudi=250`.
 - **تحسن protected Saudi terms:** `average_tokens` انخفض من `4.0` في v1 إلى `2.3` في v2، ولا توجد `roundtrip_failures` أو `aggressive_split_terms`.
 - **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches=[]` لأن الجمع اكتمل.
@@ -232,6 +234,7 @@ SF.AI/
 - `GET /system/phase20-gates` — بوابات تفعيل المجالات؛ read-only ولا يفعّل مجالًا تلقائيًا.
 - `GET /system/phase22-readiness` — بوابة جاهزية corpus v2 قبل Phase 23.
 - `GET /system/phase23-tokenizer-audit` — تقرير tokenizer v2 قبل Phase 24.
+- `GET /system/phase26-readiness` — قرار Phase 26 قبل أي تدريب `SF-50M`.
 - `GET /system/phase22-collection-plan` — خطة جمع corpus v2 حسب العجز الحالي.
 - `GET /system/phase22-review-intake` — فحص ملفات review exports قبل أي تحويل تدريبي.
 - `GET /system/source-inventory` — جرد مصادر البيانات والمراجع.
@@ -253,9 +256,10 @@ make server-start
 ```
 ثم زر `http://127.0.0.1:8123/ui/chat` أو `http://127.0.0.1:8123/docs`.
 
-آخر تحقق حي بدون restart:
-- السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`.
-- الكود الحالي بعد Phase 25 يعرض `Phase 25` في `/system/status` و`/health`، وزر `تصدير` في الواجهة، و`generator` حسب flags التشغيل.
+آخر تحقق حي بعد restart:
+- السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`، PID `95424`.
+- الكود الحالي بعد Phase 26 يعرض `Phase 26` في `/system/status` و`/health`، ويعرض `GET /system/phase26-readiness` قرار بوابة SF-50M.
+- `GET /system/phase26-readiness` يرجع `can_start_sf50m_training=false`.
 - `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - `make server-status` read-only ولا يوقف السيرفر.
 
@@ -263,10 +267,10 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى إكمال Phase 25)
+## نتائج الاختبارات (حتى إكمال Phase 26)
 
 ```
-453 passed in 5.01s
+456 passed in 5.65s
 ```
 
 التغطية الحالية:

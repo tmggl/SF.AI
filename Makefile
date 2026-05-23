@@ -1,7 +1,7 @@
 # SF.AI — Makefile
 # Phase 1 set of operational commands.
 
-.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit phase12-readiness phase19-readiness phase20-gates phase22-readiness phase22-plan phase22-next-batch phase22-completion-gate phase22-review-intake phase23-tokenizer-audit prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
+.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit phase12-readiness phase19-readiness phase20-gates phase22-readiness phase22-plan phase22-next-batch phase22-completion-gate phase22-review-intake phase23-tokenizer-audit phase26-readiness prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
 
 PY ?= .venv/bin/python
 UVICORN ?= uvicorn
@@ -34,6 +34,7 @@ help:
 	@echo "  make phase22-completion-gate Strict Phase 22 completion gate before Phase 23"
 	@echo "  make phase22-review-intake Scan review exports before corpus conversion"
 	@echo "  make phase23-tokenizer-audit Finalize/audit Phase 23 tokenizer v2"
+	@echo "  make phase26-readiness    Read-only Phase 26 scaling gate before SF-50M"
 	@echo "  make prepare-dialogue-batch ARGS=...  Prepare reviewed chat exports (Phase 18)"
 	@echo "  make train-bpe ARGS=...   Train SF-BPE tokenizer (requires phase confirmation flag)"
 	@echo "  make train-lm ARGS=...    Train SF native LM (Phase 6)"
@@ -123,6 +124,9 @@ phase22-review-intake:
 
 phase23-tokenizer-audit:
 	$(PY) scripts/phase23_tokenizer_audit.py $(ARGS)
+
+phase26-readiness:
+	$(PY) scripts/phase26_readiness.py $(ARGS)
 
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)

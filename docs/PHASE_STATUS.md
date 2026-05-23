@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 25 / 30**
-- **المرحلة الحالية:** **Phase 25 — Generated Chat Canary v1**
-- **حالة المرحلة الحالية:** **مكتملة كحماية canary؛ النموذج الحقيقي حُجب ورجع الرد للقالب**
-- **المرحلة التالية المقترحة:** Phase 26 — تبدأ كقرار readiness/scaling قبل أي تدريب `SF-50M`.
+- **الرحلة الحالية:** **Phase 26 / 30**
+- **المرحلة الحالية:** **Phase 26 — SF-50M v0.1 Readiness**
+- **حالة المرحلة الحالية:** **مكتملة كقرار scaling؛ تدريب SF-50M محظور الآن**
+- **المرحلة التالية المقترحة:** Phase 27 — Dialogue Evaluation v2 and corpus expansion plan.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ تم تحديث `default_registry.yaml` و`safety_terms.yaml` لفجوات finance/religion/security.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -51,8 +51,8 @@
 | Phase 23 | Tokenizer v2 Retrain & Audit | ✅ completed_ready_for_phase24 | ✅ |
 | Phase 24 | SF-10M v0.2 Quality Training | ✅ completed_with_limits_runtime_blocked | ✅ |
 | Phase 25 | Generated Chat Canary v1 | ✅ completed_guarded_canary_real_model_blocked | ✅ |
-| Phase 26 | SF-50M v0.1 Dialogue Model | مخططة | ✅ |
-| Phase 27 | Dialogue Evaluation v2 | مخططة | ✅ |
+| Phase 26 | SF-50M v0.1 Readiness | ✅ completed_not_ready_expand_corpus_and_improve_sf10m | ✅ |
+| Phase 27 | Dialogue Evaluation v2 and corpus expansion plan | مخططة | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -277,6 +277,17 @@
   - القرار: `COMPLETED_GUARDED_CANARY_REAL_MODEL_BLOCKED`.
   - أضيف [PHASE25_GENERATED_CHAT_CANARY_REPORT.md](./PHASE25_GENERATED_CHAT_CANARY_REPORT.md).
   - أضيف `artifacts/reports/phase25_generation_canary_report.json`.
+- بدأ وانتهى Phase 26 SF-50M v0.1 Readiness:
+  - أضيف `sf_ai/training/phase26_readiness.py`.
+  - أضيف `scripts/phase26_readiness.py` وهدف `make phase26-readiness`.
+  - أضيف endpoint حي: `GET /system/phase26-readiness`.
+  - القرار: `NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M`.
+  - `can_start_sf50m_training=false`.
+  - corpus الحالي `500` سجل فقط، والحد العملي لـ `SF-50M` هو `5000` سجل.
+  - tokenizer v2 جاهز، لكن runtime quality غير جاهزة لأن Phase 25 حجب `SF-10M v0.2`.
+  - blockers: `corpus_below_sf50m_minimum`, `phase24_runtime_quality_blocked`, `phase25_real_model_blocked`, `hallucination_checks_missing`, `repetition_checks_failed`.
+  - أضيف [PHASE26_SF50M_READINESS_REPORT.md](./PHASE26_SF50M_READINESS_REPORT.md).
+  - أضيف `artifacts/reports/phase26_sf50m_readiness_report.json`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -342,7 +353,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 25"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 26"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -373,7 +384,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-453 passed in 5.01s
+456 passed in 5.65s
 ```
 
 | ملف | عدد |

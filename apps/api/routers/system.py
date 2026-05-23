@@ -26,6 +26,7 @@ from apps.api.schemas.system import (
     Phase22ReadinessResponse,
     Phase22ReviewExportItemResponse,
     Phase22ReviewIntakeResponse,
+    Phase26ReadinessResponse,
     SourceInventoryItemResponse,
     SourceInventoryResponse,
     SystemStatusResponse,
@@ -43,6 +44,7 @@ from sf_ai.datasets.source_inventory import build_source_inventory
 from sf_ai.training.phase12_readiness import build_phase12_readiness_decision
 from sf_ai.training.phase19_readiness import build_phase19_readiness_decision
 from sf_ai.training.phase23_tokenizer import build_phase23_tokenizer_audit
+from sf_ai.training.phase26_readiness import build_phase26_scaling_decision
 
 router = APIRouter(prefix="/system", tags=["system"])
 SettingsDep = Annotated[Settings, Depends(get_settings)]
@@ -57,9 +59,9 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 25 — Generated Chat Canary v1",
-        current_phase_status="completed_guarded_canary_real_model_blocked",
-        next_phase="Phase 26 — SF-50M v0.1 readiness/scaling decision",
+        current_phase="Phase 26 — SF-50M v0.1 Readiness",
+        current_phase_status="completed_not_ready_expand_corpus_and_improve_sf10m",
+        next_phase="Phase 27 — Dialogue Evaluation v2 and corpus expansion plan",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -123,6 +125,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase25_generation_canary",
                 status="active_runtime_guard",
                 phase="Phase 25",
+            ),
+            ComponentStatus(
+                name="phase26_readiness",
+                status="completed_training_blocked",
+                phase="Phase 26",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),
@@ -299,6 +306,13 @@ def phase19_readiness() -> Phase19ReadinessResponse:
         blockers=list(decision.blockers),
         notes=list(decision.notes),
     )
+
+
+@router.get("/phase26-readiness", response_model=Phase26ReadinessResponse)
+def phase26_readiness() -> Phase26ReadinessResponse:
+    """Read-only Phase 26 scaling gate before any SF-50M training."""
+    decision = build_phase26_scaling_decision()
+    return Phase26ReadinessResponse(**decision.to_json())
 
 
 @router.get("/phase20-gates", response_model=Phase20GatesResponse)

@@ -23,7 +23,7 @@ def test_health_ok() -> None:
     body = r.json()
     assert body["status"] == "ok"
     assert body["project"] == "SF.AI"
-    assert body["phase"] == "Phase 25"
+    assert body["phase"] == "Phase 26"
 
 
 def test_system_status_sovereign_flags() -> None:
@@ -31,9 +31,9 @@ def test_system_status_sovereign_flags() -> None:
     assert r.status_code == 200
     body = r.json()
     assert body["project"] == "SF.AI"
-    assert body["current_phase"].startswith("Phase 25")
-    assert body["current_phase_status"] == "completed_guarded_canary_real_model_blocked"
-    assert body["next_phase"].startswith("Phase 26")
+    assert body["current_phase"].startswith("Phase 26")
+    assert body["current_phase_status"] == "completed_not_ready_expand_corpus_and_improve_sf10m"
+    assert body["next_phase"].startswith("Phase 27")
     assert body["sovereign"] is True
     assert body["uses_external_llm"] is False
     assert body["uses_pretrained_weights"] is False
@@ -50,6 +50,11 @@ def test_system_status_sovereign_flags() -> None:
     assert any(
         c["name"] == "phase25_generation_canary"
         and c["status"] == "active_runtime_guard"
+        for c in body["components"]
+    )
+    assert any(
+        c["name"] == "phase26_readiness"
+        and c["status"] == "completed_training_blocked"
         for c in body["components"]
     )
 
