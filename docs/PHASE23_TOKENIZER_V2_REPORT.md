@@ -70,7 +70,7 @@ extra_texts      : 0
 ```
 
 ملاحظة بعد Phase 27: ملف `audit_report.json` داخل artifact قد يُعاد توليده
-ليقرأ corpus الحالي بعد التوسعة (`550` سجلًا)، لكن tokenizer v2 نفسه تدرب
+ليقرأ corpus الحالي بعد التوسعة (`1050` سجلًا)، لكن tokenizer v2 نفسه تدرب
 فعليًا على corpus Phase 22 عند `500` سجل. لا تعامل تحديث audit الحالي كتدريب
 tokenizer جديد.
 

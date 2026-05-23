@@ -32,31 +32,31 @@
   "can_start_phase28": false,
   "phase26_status": "NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M",
   "corpus_expansion_plan": {
-    "current_records": 550,
+    "current_records": 1050,
     "target_records": 5000,
-    "remaining_records": 4450,
-    "batch_size": 25,
-    "batches_needed_total": 178,
+    "remaining_records": 3950,
+    "batch_size": 500,
+    "batches_needed_total": 8,
     "target_per_dialect": 2500,
     "dialect_counts": {
-      "msa": 275,
-      "saudi": 275
+      "msa": 525,
+      "saudi": 525
     },
     "needed_by_dialect": {
-      "msa": 2225,
-      "saudi": 2225
+      "msa": 1975,
+      "saudi": 1975
     },
     "batches_by_dialect": {
-      "msa": 89,
-      "saudi": 89
+      "msa": 4,
+      "saudi": 4
     },
     "quality_targets": {
       "gold_total_target": 1000,
       "silver_total_target": 4000,
       "current_gold": 52,
-      "current_silver": 498,
+      "current_silver": 998,
       "needed_gold": 948,
-      "needed_silver": 3502
+      "needed_silver": 3002
     },
     "category_targets_remaining": {
       "social_smalltalk": 550,
@@ -250,7 +250,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27 كتقييم حوار v2 وخطة توسعة corpus. النتيجة: التوجيه نجح، لكن المولد ما زال قالبًا، ونحتاج رفع corpus من 550 إلى 5000 قبل SF-50M."
+      "response_preview": "اكتملت Phase 27 كتقييم حوار v2 وخطة توسعة corpus. النتيجة: التوجيه نجح، لكن المولد ما زال قالبًا، ونحتاج رفع corpus من 1050 إلى 5000 قبل SF-50M."
     },
     {
       "scenario_id": "clarification_repair_flow",

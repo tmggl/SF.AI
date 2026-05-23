@@ -177,7 +177,7 @@
   - أضيف `make phase19-readiness`.
   - أضيف `GET /system/phase19-readiness`.
   - القرار الحالي: `NOT_READY_EXPAND_CORPUS_FIRST`.
-  - السبب: corpus الحالي بعد أول توسعة `550` سجل فقط والحد الأدنى العملي الحالي `5000`.
+  - السبب: corpus الحالي بعد Batch 002 صار `1050` سجل فقط والحد الأدنى العملي الحالي `5000`.
   - أضيف lab bridge للرسائل غير الحساسة حتى يختبر سامي المولد الخام عبر مجالات skeleton داخل المختبر المحلي.
   - docs: [PHASE19_READINESS_REPORT.md](./PHASE19_READINESS_REPORT.md)
 - بدأ وانتهى Phase 20 Domain Activation Gates:
@@ -283,7 +283,7 @@
   - أضيف endpoint حي: `GET /system/phase26-readiness`.
   - القرار: `NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M`.
   - `can_start_sf50m_training=false`.
-  - corpus كان `500` سجل عند قرار Phase 26، ثم صار `550` بعد أول دفعة توسعة؛ ما زال بعيدًا عن الحد العملي `5000`.
+  - corpus كان `500` سجل عند قرار Phase 26، ثم صار `1050` بعد Batch 002؛ ما زال بعيدًا عن الحد العملي `5000`.
   - tokenizer v2 جاهز، لكن runtime quality غير جاهزة لأن Phase 25 حجب `SF-10M v0.2`.
   - blockers: `corpus_below_sf50m_minimum`, `phase24_runtime_quality_blocked`, `phase25_real_model_blocked`, `hallucination_checks_missing`, `repetition_checks_failed`.
   - أضيف [PHASE26_SF50M_READINESS_REPORT.md](./PHASE26_SF50M_READINESS_REPORT.md).
@@ -296,7 +296,7 @@
   - suite متعدد الأدوار: `7` سيناريوهات و`19` turn.
   - النتيجة: `19/19`, pass rate `100%`.
   - `generator_modes={'template': 19}`، أي لا يوجد حوار مولّد مفتوح بعد.
-  - خطة corpus الأصلية: `500 → 5000`. بعد Batch 001 صار المتبقي `4450`, عدد batches `178`, بالتوازن `msa=2225`, `saudi=2225`.
+  - خطة corpus الأصلية: `500 → 5000`. بعد Batch 002 صار المتبقي `3950`, عدد batches الكبيرة `8`, بالتوازن `msa=1975`, `saudi=1975`.
   - القرار: `COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_EXPANSION_REQUIRED`.
   - Phase 28 محظورة حتى ينجح `SF-50M` في eval v2.
   - أضيف [PHASE27_DIALOGUE_EVAL_V2_REPORT.md](./PHASE27_DIALOGUE_EVAL_V2_REPORT.md).
@@ -305,9 +305,12 @@
 - بدأت توسعة corpus بعد Phase 27:
   - أضيف `dialogue_batch_v3_msa_001.jsonl` وفيه 25 سجل فصيح.
   - أضيف `dialogue_batch_v3_saudi_001.jsonl` وفيه 25 سجل سعودي.
-  - corpus الحالي صار `550`: `msa=275`, `saudi=275`.
-  - المتبقي إلى هدف `5000` صار `4450` سجلًا، أي `178` batch بحجم 25 تقريبًا.
+  - أضيف `dialogue_batch_v3_msa_002.jsonl` وفيه 250 سجل فصيح.
+  - أضيف `dialogue_batch_v3_saudi_002.jsonl` وفيه 250 سجل سعودي.
+  - corpus الحالي صار `1050`: `msa=525`, `saudi=525`.
+  - المتبقي إلى هدف `5000` صار `3950` سجلًا، أي `8` دفعات كبيرة بحجم 500 تقريبًا.
   - أضيف [PHASE27_CORPUS_EXPANSION_BATCH_001_REPORT.md](./PHASE27_CORPUS_EXPANSION_BATCH_001_REPORT.md).
+  - أضيف [PHASE27_CORPUS_EXPANSION_BATCH_002_REPORT.md](./PHASE27_CORPUS_EXPANSION_BATCH_002_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -404,7 +407,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-460 passed in 7.65s
+460 passed in 8.10s
 ```
 
 | ملف | عدد |

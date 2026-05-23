@@ -28,7 +28,7 @@ DEFAULT_DIALOGUE_SUITE = PROJECT_DIR / "eval/prompts/dialogue_v2.json"
 DEFAULT_REPORT = PROJECT_DIR / "eval/reports/dialogue_eval_v2.json"
 DEFAULT_ARTIFACT_REPORT = PROJECT_DIR / "artifacts/reports/phase27_dialogue_eval_v2_report.json"
 DEFAULT_CORPUS_DIR = PROJECT_DIR / "data/corpus/chat/jsonl"
-BATCH_SIZE = 25
+BATCH_SIZE = 500
 TARGET_GOLD_RECORDS = 1_000
 
 
