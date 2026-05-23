@@ -22,6 +22,7 @@ from sf_ai.models.transformer import (
 )
 from sf_ai.training.checkpoints import CheckpointManager
 from sf_ai.training.device import DeviceManager
+from sf_ai.training.train_tiny_lm import ASSISTANT_EOS_TOKEN
 
 
 @dataclass(frozen=True)
@@ -95,6 +96,7 @@ class NativeGenerator:
         self,
         prompt: str,
         *,
+        dialect: str | None = None,
         max_new_tokens: int | None = None,
         temperature: float | None = None,
         top_k: int | None = None,
@@ -109,11 +111,7 @@ class NativeGenerator:
             return NativeGenerationResult(False, "", status.generator, "missing_checkpoint")
 
         tok, model, device = self._load()
-        model_prompt = (
-            f"المستخدم: {prompt.strip()}\nالمساعد:"
-            if self.config.dialogue_prompt
-            else prompt
-        )
+        model_prompt = self._format_prompt(prompt, dialect=dialect)
         prompt_ids = tok.encode(model_prompt)
         if not prompt_ids:
             return NativeGenerationResult(False, "", status.generator, "prompt_not_tokenized")
@@ -123,6 +121,7 @@ class NativeGenerator:
             max_new_tokens=max_new_tokens or self.config.max_new_tokens,
             temperature=temperature or self.config.temperature,
             top_k=self.config.top_k if top_k is None else top_k,
+            eos_token_id=tok.vocab.get(ASSISTANT_EOS_TOKEN),
         )
         if cfg.top_k > 0 or cfg.temperature != 1.0:
             out = sample_generate(model, input_ids, cfg)
@@ -136,6 +135,14 @@ class NativeGenerator:
         if not text:
             return NativeGenerationResult(False, "", status.generator, "empty_generation")
         return NativeGenerationResult(True, text, status.generator, "generated")
+
+    def _format_prompt(self, prompt: str, *, dialect: str | None = None) -> str:
+        if not self.config.dialogue_prompt:
+            return prompt
+        scope = _dialect_condition_line(dialect)
+        if scope:
+            return f"{scope}\nالمستخدم: {prompt.strip()}\nالمساعد:"
+        return f"المستخدم: {prompt.strip()}\nالمساعد:"
 
     def _load(self) -> tuple[BPETokenizer, TinyTransformer, torch.device]:
         if self._tokenizer is not None and self._model is not None and self._torch_device is not None:
@@ -161,3 +168,12 @@ class NativeGenerator:
         self._model = model
         self._torch_device = torch_device
         return tokenizer, model, torch_device
+
+
+def _dialect_condition_line(dialect: str | None) -> str:
+    d = (dialect or "").strip().lower()
+    if d == "msa":
+        return "النطاق: فصحى"
+    if d in {"saudi", "gulf"}:
+        return "النطاق: سعودي"
+    return ""

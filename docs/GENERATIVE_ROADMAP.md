@@ -49,7 +49,8 @@ SF.AI يملك الآن:
 | Phase 27.9 | لا تدريب | Generation Quality Harness يحجب v0.6 |
 | Phase 27.10 | `SF-10M v0.7` | short-response repair؛ تحسن رقمي وتوليد محظور |
 | Phase 27.11 | `SF-10M probe` | gold overfit أثبت نقص stop boundary/EOS |
-| بعد Phase 27.11 | إصلاح أعمق | assistant reply boundary + EOS قبل أي تكبير |
+| Phase 27.12 | `SF-10M probe` | EOS + dialect conditioning؛ تحسن جزئي |
+| بعد Phase 27.12 | `SF-10M v0.8` | تدريب أوسع بصيغة boundary/EOS + dialect قبل أي تكبير |
 | بعد نجاح SF-10M | `SF-50M v0.1` | نجاح جودة SF-10M/canary + إعادة Phase 26 readiness |
 | Phase 28 | `SF-120M v0.1` | نجاح SF-50M + scaling gate |
 
@@ -70,6 +71,7 @@ SF.AI يملك الآن:
 - **Phase 27.9:** صار لدينا harness آلي يقيس هذه المشكلة كشرط قبل runtime.
 - **Phase 27.10:** short-response repair حسن eval إلى `4.7512` لكنه لم يصلح التوليد.
 - **Phase 27.11:** gold overfit probe فشل `0/16 clean-stop`; المشكلة في توقف الرد لا في prefix فقط.
+- **Phase 27.12:** EOS + dialect conditioning حسّن probe إلى `5/16` تطابق كامل و`9/16` بلا فشل guard، لكنه لا يكفي للواجهة.
 - **Phase 28:** أول قفزة بعد SF-50M إذا أثبت 50M قيمة واضحة.
 - **Phase 29:** إدخاله في الواجهة كتجربة يومية مع router/safety/memory.
 

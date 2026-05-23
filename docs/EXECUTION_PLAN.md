@@ -81,6 +81,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.9 | Generation Quality Harness | مكتملة؛ harness يحجب v0.6 آليًا |
 | Phase 27.10 | Short Response Repair | مكتملة بتحسن رقمي؛ التوليد ما زال محظورًا |
 | Phase 27.11 | Objective/Decoding Diagnosis | مكتملة؛ stop boundary/EOS مفقود |
+| Phase 27.12 | Assistant Boundary/EOS Repair | مكتملة جزئيًا؛ runtime محظور |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -1685,6 +1686,58 @@ overgenerates_after_expected = 10
 
 ### بعد المرحلة
 لا يبدأ `SF-50M`. نفّذ Phase 27.12 لإصلاح boundary/EOS ثم أعد probe وgeneration-quality.
+
+---
+
+## Phase 27.12 — Assistant Boundary/EOS Repair
+
+### الهدف
+إضافة حد نهاية صريح لرد المساعد، واستخدام نطاق لغوي واضح للفصحى والسعودي
+قبل أي تكبير للنموذج.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.12 بقرار:
+
+```text
+COMPLETED_BOUNDARY_EOS_PARTIAL_SEMANTIC_BLOCKED
+```
+
+ما تحقق:
+
+- `assistant-target` صار يضيف `<eos>` بعد كل رد مساعد.
+- `NativeGenerator` و`evaluate_tiny_lm` يوقفان decoding عند `<eos>`.
+- التدريب الحواري صار يضيف conditioning من provenance:
+
+```text
+النطاق: فصحى
+النطاق: سعودي
+```
+
+نتيجة probe:
+
+```text
+records = 16
+semantic_clean_pass = 5/16
+guard_pass = 9/16
+runtime_allowed = false
+```
+
+### التشخيص
+
+EOS حسّن التوقف ومنع جزءًا من الحشو، لكنه لم يحل جودة الرد بالكامل.
+ما زال النموذج يحتاج تدريب `SF-10M v0.8` على corpus أوسع بنفس الصيغة قبل أي
+محاولة `SF-50M`.
+
+### artifacts
+
+- [PHASE27_12_ASSISTANT_EOS_REPAIR_REPORT.md](./PHASE27_12_ASSISTANT_EOS_REPAIR_REPORT.md)
+- `artifacts/reports/phase27_12_eos_probe_report.json`
+- `artifacts/samples/phase27_12_eos_probe_generations.md`
+
+### بعد المرحلة
+درّب `SF-10M v0.8` بصيغة boundary/EOS + dialect conditioning على train split،
+ثم أعد eval وgeneration-quality. لا يبدأ `SF-50M`.
 
 ---
 

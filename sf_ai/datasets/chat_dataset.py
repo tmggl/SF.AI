@@ -106,7 +106,7 @@ class ChatDataset:
                 if isinstance(sample, StructuredSample)
                 else sample.to_messages()
             )
-            lines: list[str] = []
+            lines: list[str] = _dialect_condition_lines(sample)
             for msg in messages:
                 content = msg.content.strip()
                 if not content:
@@ -141,3 +141,14 @@ class ChatDataset:
                     for msg in sample.to_messages():
                         stats.record_message(msg)
         return stats
+
+
+def _dialect_condition_lines(sample: SimpleSample | StructuredSample) -> list[str]:
+    """Return a plain Arabic conditioning line for current MSA/Saudi training."""
+    provenance = getattr(sample, "provenance", None)
+    dialect = (getattr(provenance, "dialect", "") or "").strip().lower()
+    if dialect == "msa":
+        return ["النطاق: فصحى"]
+    if dialect == "saudi":
+        return ["النطاق: سعودي"]
+    return []

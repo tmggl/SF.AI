@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.11 — Objective/Decoding Diagnosis",
-        current_phase_status="completed_stop_boundary_missing_generation_blocked",
+        current_phase="Phase 27.12 — Assistant Boundary/EOS Repair",
+        current_phase_status="completed_boundary_eos_partial_semantic_blocked",
         next_phase=(
-            "Add explicit SF-10M assistant reply boundary/EOS objective before any SF-50M scaling"
+            "Train SF-10M v0.8 with boundary/EOS plus dialect conditioning before any SF-50M scaling"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -169,6 +169,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_11_objective_probe",
                 status="completed_stop_boundary_blocked",
                 phase="Phase 27.11",
+            ),
+            ComponentStatus(
+                name="phase27_12_assistant_eos_repair",
+                status="completed_partial_runtime_blocked",
+                phase="Phase 27.12",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

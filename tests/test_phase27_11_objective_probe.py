@@ -34,3 +34,18 @@ def test_phase27_11_report_blocks_scaling_until_clean_stop() -> None:
     assert report["pass_rate"] == 0.0
     assert report["reason_counts"]["overgenerates_after_expected"] >= 1
     assert "boundary/EOS" in report["decision"]
+
+
+def test_phase27_12_report_records_eos_improvement_but_blocks_runtime() -> None:
+    report_path = ROOT / "artifacts/reports/phase27_12_eos_probe_report.json"
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+
+    assert report["phase"].startswith("Phase 27.12")
+    assert report["status"] == "FAILED_GOLD_OVERFIT_PROBE_BLOCK_SCALING"
+    assert report["language_track"] == ["msa", "saudi"]
+    assert report["lexicon_track"] == "Saudi Seed v1"
+    assert report["records"] == 16
+    assert report["passed"] == 5
+    assert report["guard_passed"] == 9
+    assert report["guard_pass_rate"] > report["pass_rate"]
+    assert "SF-50M" in report["decision"]

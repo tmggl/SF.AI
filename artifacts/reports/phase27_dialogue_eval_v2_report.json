@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27.11: شغّلنا probe على SF-10M في 16 ردًا gold قصيرًا. النموذج حفظ بدايات بعض الردود لكنه لم يتوقف نظيفًا: 0/16 clean-stop. الخطوة التالية إضافة boundary/EOS واضح لرد "
+      "response_preview": "اكتملت Phase 27.12: أضفنا EOS واضحًا لرد المساعد وconditioning للفصحى/السعودي. تحسن probe إلى 5/16 تطابق كامل و9/16 بلا فشل guard، لكنه لا يكفي للتفعيل. الخطوة التالية تدريب SF-10M"
     },
     {
       "scenario_id": "clarification_repair_flow",

@@ -162,7 +162,7 @@ def test_phase_guidance_prompts_are_specific_templates() -> None:
     assert dialogue.debug["generator"] == "template"
     assert "SF-10M v0.2" in dialogue.response
     assert next_step.intent == "chat.next_step"
-    assert "Phase 27.11" in next_step.response
+    assert "Phase 27.12" in next_step.response
     assert "SF-10M" in next_step.response
     assert diff.intent == "chat.training_activation_difference"
     assert "التدريب" in diff.response

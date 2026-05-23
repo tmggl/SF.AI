@@ -1,7 +1,7 @@
 # SF.AI — Makefile
 # Phase 1 set of operational commands.
 
-.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit build-dialogue-split phase12-readiness phase19-readiness phase20-gates phase22-readiness phase22-plan phase22-next-batch phase22-completion-gate phase22-review-intake phase23-tokenizer-audit phase26-readiness phase27-dialogue-eval phase27-generation-quality phase27-objective-probe prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
+.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit build-dialogue-split phase12-readiness phase19-readiness phase20-gates phase22-readiness phase22-plan phase22-next-batch phase22-completion-gate phase22-review-intake phase23-tokenizer-audit phase26-readiness phase27-dialogue-eval phase27-generation-quality phase27-objective-probe phase27-eos-probe prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
 
 PY ?= .venv/bin/python
 UVICORN ?= uvicorn
@@ -39,6 +39,7 @@ help:
 	@echo "  make phase27-dialogue-eval Run Phase 27 dialogue eval v2 + corpus plan"
 	@echo "  make phase27-generation-quality Run native generation quality canary"
 	@echo "  make phase27-objective-probe Run Phase 27.11 gold overfit/stop-boundary probe"
+	@echo "  make phase27-eos-probe Run Phase 27.12 boundary/EOS probe"
 	@echo "  make prepare-dialogue-batch ARGS=...  Prepare reviewed chat exports (Phase 18)"
 	@echo "  make train-bpe ARGS=...   Train SF-BPE tokenizer (requires phase confirmation flag)"
 	@echo "  make train-lm ARGS=...    Train SF native LM (Phase 6)"
@@ -143,6 +144,14 @@ phase27-generation-quality:
 
 phase27-objective-probe:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_11_objective_probe.py $(ARGS)
+
+phase27-eos-probe:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_11_objective_probe.py \
+		--phase "Phase 27.12 — Assistant Boundary/EOS Repair" \
+		--work-dir artifacts/eval/phase27_12_eos_probe \
+		--report artifacts/reports/phase27_12_eos_probe_report.json \
+		--samples artifacts/samples/phase27_12_eos_probe_generations.md \
+		$(ARGS)
 
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)

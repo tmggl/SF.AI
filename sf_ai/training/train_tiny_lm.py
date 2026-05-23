@@ -27,6 +27,7 @@ import torch
 import torch.nn as nn
 
 from sf_ai.datasets import ChatDataset
+from sf_ai.datasets.chat_dataset import _dialect_condition_lines
 from sf_ai.datasets.splits import iter_split_samples
 from sf_ai.models.tokenizer import BPETokenizer, CharTokenizer
 from sf_ai.models.transformer import (
@@ -38,6 +39,8 @@ from sf_ai.training.checkpoints import CheckpointManager, CheckpointMetadata
 from sf_ai.training.device import DeviceManager
 from sf_ai.training.optimizers import OptimizerSpec, build_optimizer
 from sf_ai.training.schedules import linear_warmup_cosine
+
+ASSISTANT_EOS_TOKEN = "<eos>"
 
 
 def load_sovereign_tokenizer(path: str | Path):  # type: ignore[no-untyped-def]
@@ -136,6 +139,7 @@ def _iter_training_texts(
         messages = sample.messages if hasattr(sample, "messages") else sample.to_messages()
         if stream_format == "dialogue":
             lines: list[str] = []
+            lines.extend(_dialect_condition_lines(sample))
             for msg in messages:
                 content = msg.content.strip()
                 if not content:
@@ -176,11 +180,26 @@ def _encode_assistant_target_dialogue(tokenizer, text: str) -> tuple[list[int], 
             labels.extend([-100] * len(prefix_ids))
             ids.extend(content_ids)
             labels.extend(content_ids)
+            eos_id = _token_id(tokenizer, ASSISTANT_EOS_TOKEN)
+            if eos_id is not None:
+                ids.append(eos_id)
+                labels.append(eos_id)
         else:
             line_ids = tokenizer.encode(line)
             ids.extend(line_ids)
             labels.extend([-100] * len(line_ids))
     return ids, labels
+
+
+def _token_id(tokenizer, token: str) -> int | None:  # type: ignore[no-untyped-def]
+    """Return a tokenizer special-token ID when available."""
+    vocab = getattr(tokenizer, "vocab", None)
+    if callable(vocab):
+        vocab = vocab()
+    if isinstance(vocab, dict):
+        value = vocab.get(token)
+        return int(value) if value is not None else None
+    return None
 
 
 def train_one_step(

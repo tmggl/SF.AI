@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Phase 27.11 — objective/decoding overfit probe.
+"""Objective/decoding overfit probe.
 
 This is not a production training phase. It builds a tiny gold-only corpus from
 the owner-authored Phase 27.10 repair batch, trains SF-10M briefly, then checks
@@ -33,7 +33,7 @@ V8_SAUDI = ROOT / "data/corpus/chat/jsonl/dialogue_batch_v8_short_repair_saudi_0
 
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser(description="Run Phase 27.11 objective/decoding probe")
+    p = argparse.ArgumentParser(description="Run objective/decoding overfit probe")
     p.add_argument("--records-per-dialect", type=int, default=8)
     p.add_argument("--steps", type=int, default=1000)
     p.add_argument("--epochs", type=int, default=200)
@@ -45,12 +45,15 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--work-dir", type=Path, default=DEFAULT_WORK)
     p.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     p.add_argument("--samples", type=Path, default=DEFAULT_SAMPLES)
+    p.add_argument("--phase", default="Phase 27.11 — Objective/Decoding Diagnosis")
+    p.add_argument("--lexicon-track", default="Saudi Seed v1")
     p.add_argument("--keep-work", action="store_true")
     return p.parse_args()
 
 
 def _load_records(path: Path, limit: int) -> list[dict[str, Any]]:
     records: list[dict[str, Any]] = []
+    seen_prompts: set[str] = set()
     for line in path.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
@@ -60,6 +63,13 @@ def _load_records(path: Path, limit: int) -> list[dict[str, Any]]:
             continue
         if prov.get("quality") != "gold":
             continue
+        prompt, answer = _messages(raw)
+        if not prompt or not answer:
+            continue
+        prompt_key = _surface(prompt)
+        if prompt_key in seen_prompts:
+            continue
+        seen_prompts.add(prompt_key)
         records.append(raw)
         if len(records) >= limit:
             break
@@ -141,7 +151,14 @@ def _evaluate(
     reasons: Counter[str] = Counter()
     for idx, record in enumerate(records):
         prompt, expected = _messages(record)
-        out = generator.generate(prompt, max_new_tokens=24, temperature=1.0, top_k=0)
+        dialect = str(record.get("provenance", {}).get("dialect", ""))
+        out = generator.generate(
+            prompt,
+            dialect=dialect,
+            max_new_tokens=24,
+            temperature=1.0,
+            top_k=0,
+        )
         verdict = guard.inspect_for_prompt(prompt, out.text)
         terms = _expected_terms(expected)
         term_hit = any(term in out.text for term in terms) if terms else False
@@ -189,8 +206,8 @@ def _latest_checkpoint_name(checkpoints_root: Path) -> str:
     return sorted(steps)[-1][1]
 
 
-def _write_samples(path: Path, results: list[dict[str, Any]]) -> None:
-    lines = ["# Phase 27.11 Objective Probe Generations", ""]
+def _write_samples(path: Path, results: list[dict[str, Any]], *, title: str) -> None:
+    lines = [f"# {title}", ""]
     for item in results:
         lines.extend(
             [
@@ -251,6 +268,7 @@ def main() -> int:
         device=args.device,
     )
     passed = sum(1 for item in results if item["passed"])
+    guard_passed = sum(1 for item in results if item["guard_reason"] == "passed")
     total = len(results)
     status = (
         "PASSED_GOLD_OVERFIT_PROBE"
@@ -258,10 +276,10 @@ def main() -> int:
         else "FAILED_GOLD_OVERFIT_PROBE_BLOCK_SCALING"
     )
     report = {
-        "phase": "Phase 27.11 — Objective/Decoding Diagnosis",
+        "phase": args.phase,
         "status": status,
         "language_track": ["msa", "saudi"],
-        "lexicon_track": "Saudi Seed v1",
+        "lexicon_track": args.lexicon_track,
         "records": total,
         "records_per_dialect": args.records_per_dialect,
         "steps": args.steps,
@@ -269,19 +287,21 @@ def main() -> int:
         "passed": passed,
         "failed": total - passed,
         "pass_rate": round(passed / total, 4) if total else 0.0,
+        "guard_passed": guard_passed,
+        "guard_pass_rate": round(guard_passed / total, 4) if total else 0.0,
         "reason_counts": dict(reasons),
         "decision": (
-            "Do not scale to SF-50M; fix objective/packing/decoding first."
+            "Do not scale to SF-50M until clean-stop and generation-quality gates pass."
             if passed != total
-            else "Overfit path can work; compare broader corpus packing next."
+            else "Boundary/EOS probe passed; compare broader corpus packing next."
         ),
         "results": results,
     }
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    _write_samples(args.samples, results)
+    _write_samples(args.samples, results, title=f"{args.phase} Probe Generations")
 
-    print("SF.AI — Phase 27.11 objective/decoding probe")
+    print("SF.AI — objective/decoding probe")
     print(f"  status       : {status}")
     print(f"  checkpoint   : {checkpoint_name}")
     print(f"  records      : {total}")

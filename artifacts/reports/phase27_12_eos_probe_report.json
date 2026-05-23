@@ -1,0 +1,313 @@
+{
+  "phase": "Phase 27.12 — Assistant Boundary/EOS Repair",
+  "status": "FAILED_GOLD_OVERFIT_PROBE_BLOCK_SCALING",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "records": 16,
+  "records_per_dialect": 8,
+  "steps": 1000,
+  "checkpoint_name": "sf-10m-step1000",
+  "passed": 5,
+  "failed": 11,
+  "pass_rate": 0.3125,
+  "reason_counts": {
+    "passed": 5,
+    "guard:repetition": 6,
+    "missing_expected_terms": 3,
+    "guard:malformed_token": 1,
+    "overgenerates_after_expected": 1
+  },
+  "decision": "Boundary/EOS improved stopping but does not yet pass semantic/dialect clean-stop; train v0.8 with boundary + dialect conditioning on broader corpus before SF-50M.",
+  "results": [
+    {
+      "id": 0,
+      "dialect": "msa",
+      "prompt": "السلام عليكم",
+      "expected": "وعليكم السلام، أهلًا بك.",
+      "generated": "وعليكم السلام، أهلًا بك.",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "passed",
+      "expected_terms": [
+        "وعليكم",
+        "السلام",
+        "أهلًا"
+      ],
+      "clean_stop": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": 1,
+      "dialect": "msa",
+      "prompt": "مرحبًا",
+      "expected": "مرحبًا بك، تفضل.",
+      "generated": "صباح النور، عسى يومك طة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة:",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "repetition",
+      "expected_terms": [
+        "مرحبًا",
+        "تفضل"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "guard:repetition"
+    },
+    {
+      "id": 2,
+      "dialect": "msa",
+      "prompt": "صباح الخير",
+      "expected": "صباح النور، يومك سعيد.",
+      "generated": "صباح النور، عسى يومك طة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة:",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "repetition",
+      "expected_terms": [
+        "صباح",
+        "النور",
+        "يومك"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "guard:repetition"
+    },
+    {
+      "id": 3,
+      "dialect": "msa",
+      "prompt": "مساء الخير",
+      "expected": "مساء النور، كيف أساعدك؟",
+      "generated": "صباح النور، عسى يومك طة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة:",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "repetition",
+      "expected_terms": [
+        "مساء",
+        "النور",
+        "كيف"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "guard:repetition"
+    },
+    {
+      "id": 4,
+      "dialect": "msa",
+      "prompt": "كيف حالك؟",
+      "expected": "أنا بخير، شكرًا لسؤالك.",
+      "generated": "أنا بخير، شكرًا لسؤالك.",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "passed",
+      "expected_terms": [
+        "أنا",
+        "بخير",
+        "شكرًا"
+      ],
+      "clean_stop": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": 5,
+      "dialect": "msa",
+      "prompt": "هل تفهمني؟",
+      "expected": "نعم، أفهمك. وضّح لي ما تريد.",
+      "generated": "نعم، أفهمك. وضّح لي ما تريد.",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "passed",
+      "expected_terms": [
+        "نعم",
+        "أفهمك",
+        "وضّح"
+      ],
+      "clean_stop": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": 6,
+      "dialect": "msa",
+      "prompt": "أريد جوابًا قصيرًا.",
+      "expected": "حسنًا، سأجيب باختصار.",
+      "generated": "عليكم السلام، أهلًا بك.",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "passed",
+      "expected_terms": [
+        "حسنًا",
+        "سأجيب",
+        "باختصار"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "missing_expected_terms"
+    },
+    {
+      "id": 7,
+      "dialect": "msa",
+      "prompt": "اشرح لي ببساطة.",
+      "expected": "ببساطة: ابدأ بخطوة صغيرة.",
+      "generated": "ببببخير، وش تحتاج؟",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "malformed_token",
+      "expected_terms": [
+        "ببساطة",
+        "ابدأ",
+        "بخطوة"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "guard:malformed_token"
+    },
+    {
+      "id": 8,
+      "dialect": "saudi",
+      "prompt": "السلام عليكم",
+      "expected": "وعليكم السلام، حياك الله.",
+      "generated": "وعليكم السلام، أهلًا بك.",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "passed",
+      "expected_terms": [
+        "وعليكم",
+        "السلام",
+        "حياك"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "overgenerates_after_expected"
+    },
+    {
+      "id": 9,
+      "dialect": "saudi",
+      "prompt": "هلا",
+      "expected": "هلا بك، تفضل.",
+      "generated": "طة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة:",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "repetition",
+      "expected_terms": [
+        "هلا",
+        "تفضل"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "guard:repetition"
+    },
+    {
+      "id": 10,
+      "dialect": "saudi",
+      "prompt": "صباح الخير",
+      "expected": "صباح النور، عسى يومك طيب.",
+      "generated": "صباح النور، عسى يومك طيب.",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "passed",
+      "expected_terms": [
+        "صباح",
+        "النور",
+        "عسى"
+      ],
+      "clean_stop": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": 11,
+      "dialect": "saudi",
+      "prompt": "مساء الخير",
+      "expected": "مساء النور، وش تحتاج؟",
+      "generated": "صباح النور، عسى يومك طة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة:",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "repetition",
+      "expected_terms": [
+        "مساء",
+        "النور",
+        "تحتاج"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "guard:repetition"
+    },
+    {
+      "id": 12,
+      "dialect": "saudi",
+      "prompt": "كيفك؟",
+      "expected": "بخير الحمد لله، أنت كيفك؟",
+      "generated": "بخير الحمد لله، أنت كيفك؟",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "passed",
+      "expected_terms": [
+        "بخير",
+        "الحمد",
+        "لله"
+      ],
+      "clean_stop": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": 13,
+      "dialect": "saudi",
+      "prompt": "وشلونك؟",
+      "expected": "تمام، الله يسلمك.",
+      "generated": "بخير، شكرًا لسؤالك.",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "passed",
+      "expected_terms": [
+        "تمام",
+        "الله",
+        "يسلمك"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "missing_expected_terms"
+    },
+    {
+      "id": 14,
+      "dialect": "saudi",
+      "prompt": "تفهم علي؟",
+      "expected": "إيه، أفهم عليك.",
+      "generated": "طة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة: ة:",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "repetition",
+      "expected_terms": [
+        "إيه",
+        "أفهم",
+        "عليك"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "guard:repetition"
+    },
+    {
+      "id": 15,
+      "dialect": "saudi",
+      "prompt": "أبي جواب قصير.",
+      "expected": "تم، بعطيك المختصر.",
+      "generated": "بخير الحمد للعليكم السلام، حيب.",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "passed",
+      "expected_terms": [
+        "بعطيك",
+        "المختصر"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "missing_expected_terms"
+    }
+  ],
+  "guard_passed": 9,
+  "guard_pass_rate": 0.5625
+}

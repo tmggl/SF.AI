@@ -7,8 +7,8 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.11 / 30**
-- **المرحلة الحالية:** **Phase 27.11 — Objective/Decoding Diagnosis**
+- **الرحلة الحالية:** **Phase 27.12 / 30**
+- **المرحلة الحالية:** **Phase 27.12 — Assistant Boundary/EOS Repair**
 - **حالة المرحلة الحالية:** **مكتملة؛ gold overfit probe أثبت أن حدّ نهاية رد المساعد/EOS غير مضبوط**
 - **المرحلة التالية المقترحة:** إضافة assistant reply boundary/EOS قبل أي تكبير إلى `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
@@ -60,6 +60,7 @@
 | Phase 27.9 | Generation Quality Harness | ✅ completed_harness_blocks_v0_6_runtime | ✅ |
 | Phase 27.10 | Short Response Repair | ✅ completed_numeric_improvement_generation_still_blocked | ✅ |
 | Phase 27.11 | Objective/Decoding Diagnosis | ✅ completed_stop_boundary_missing_generation_blocked | ✅ |
+| Phase 27.12 | Assistant Boundary/EOS Repair | ✅ completed_boundary_eos_partial_semantic_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -413,6 +414,16 @@
   - أضيف [PHASE27_11_OBJECTIVE_PROBE_REPORT.md](./PHASE27_11_OBJECTIVE_PROBE_REPORT.md).
   - أضيف `artifacts/reports/phase27_11_objective_probe_report.json`.
   - أضيف `artifacts/samples/phase27_11_objective_probe_generations.md`.
+- بدأ وانتهى Phase 27.12 Assistant Boundary/EOS Repair:
+  - أضيف `<eos>` كهدف صريح بعد كل رد مساعد في `assistant-target` training.
+  - `NativeGenerator` و`evaluate_tiny_lm` صارا يوقفان decoding عند `<eos>`.
+  - أضيف dialect conditioning من provenance: `النطاق: فصحى` أو `النطاق: سعودي`.
+  - probe الحالي أعطى `semantic_clean_pass=5/16`, `guard_pass=9/16`.
+  - القرار: `COMPLETED_BOUNDARY_EOS_PARTIAL_SEMANTIC_BLOCKED`.
+  - لا تفعيل runtime ولا تدريب `SF-50M`.
+  - أضيف [PHASE27_12_ASSISTANT_EOS_REPAIR_REPORT.md](./PHASE27_12_ASSISTANT_EOS_REPAIR_REPORT.md).
+  - أضيف `artifacts/reports/phase27_12_eos_probe_report.json`.
+  - أضيف `artifacts/samples/phase27_12_eos_probe_generations.md`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -478,7 +489,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.11"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.12"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -509,7 +520,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-484 passed in 17.77s
+487 passed in 16.53s
 ```
 
 | ملف | عدد |

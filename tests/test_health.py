@@ -23,7 +23,7 @@ def test_health_ok() -> None:
     body = r.json()
     assert body["status"] == "ok"
     assert body["project"] == "SF.AI"
-    assert body["phase"] == "Phase 27.11"
+    assert body["phase"] == "Phase 27.12"
 
 
 def test_system_status_sovereign_flags() -> None:
@@ -31,8 +31,8 @@ def test_system_status_sovereign_flags() -> None:
     assert r.status_code == 200
     body = r.json()
     assert body["project"] == "SF.AI"
-    assert body["current_phase"].startswith("Phase 27.11")
-    assert body["current_phase_status"] == "completed_stop_boundary_missing_generation_blocked"
+    assert body["current_phase"].startswith("Phase 27.12")
+    assert body["current_phase_status"] == "completed_boundary_eos_partial_semantic_blocked"
     assert "SF-10M" in body["next_phase"]
     assert body["sovereign"] is True
     assert body["uses_external_llm"] is False
@@ -85,6 +85,11 @@ def test_system_status_sovereign_flags() -> None:
     assert any(
         c["name"] == "phase27_11_objective_probe"
         and c["status"] == "completed_stop_boundary_blocked"
+        for c in body["components"]
+    )
+    assert any(
+        c["name"] == "phase27_12_assistant_eos_repair"
+        and c["status"] == "completed_partial_runtime_blocked"
         for c in body["components"]
     )
 

@@ -216,6 +216,7 @@ class ChatModule:
         generator = self.native_generator or NativeGenerator()
         result = generator.generate(
             analysis.original_text,
+            dialect=analysis.detected_dialect,
             max_new_tokens=self.generation_policy.max_new_tokens,
             temperature=self.generation_policy.temperature,
             top_k=self.generation_policy.top_k,

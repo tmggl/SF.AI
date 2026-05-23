@@ -28,7 +28,11 @@ from sf_ai.models.transformer import (
 from sf_ai.modules.chat.native_generator import extract_dialogue_reply
 from sf_ai.training.checkpoints import CheckpointManager
 from sf_ai.training.device import DeviceManager
-from sf_ai.training.train_tiny_lm import iter_token_batches, load_sovereign_tokenizer
+from sf_ai.training.train_tiny_lm import (
+    ASSISTANT_EOS_TOKEN,
+    iter_token_batches,
+    load_sovereign_tokenizer,
+)
 
 
 def parse_args(argv: list[str]) -> argparse.Namespace:
@@ -113,7 +117,8 @@ def run(argv: list[str]) -> int:
         print("(prompt produced no tokens — skipping generation)")
         return 0
     gen_cfg = GenerationConfig(max_new_tokens=args.max_new_tokens,
-                                temperature=args.temperature, top_k=args.top_k)
+                                temperature=args.temperature, top_k=args.top_k,
+                                eos_token_id=tok.vocab.get(ASSISTANT_EOS_TOKEN))
     if args.sample:
         out = sample_generate(model, prompt_ids, gen_cfg)
     else:

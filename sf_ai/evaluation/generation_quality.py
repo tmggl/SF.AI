@@ -27,6 +27,7 @@ class GeneratorLike(Protocol):
         self,
         prompt: str,
         *,
+        dialect: str | None = None,
         max_new_tokens: int | None = None,
         temperature: float | None = None,
         top_k: int | None = None,
