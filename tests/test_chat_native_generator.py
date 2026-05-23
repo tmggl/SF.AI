@@ -195,6 +195,18 @@ def test_native_generator_formats_dialect_conditioned_prompt() -> None:
     assert gen._format_prompt("مرحبا", dialect="msa") == "النطاق: فصحى\nالمستخدم: مرحبا\nالمساعد:"
     assert gen._format_prompt("هلا", dialect="saudi") == "النطاق: سعودي\nالمستخدم: هلا\nالمساعد:"
     assert gen._format_prompt("شلونك", dialect="gulf") == "النطاق: سعودي\nالمستخدم: شلونك\nالمساعد:"
+    assert gen._format_prompt(
+        "وش معنى التعاون",
+        dialect="saudi",
+        intent="definition",
+        topic="التعاون",
+    ) == (
+        "النطاق: سعودي\n"
+        "النظام: النية: تعريف\n"
+        "النظام: المصطلح: التعاون\n"
+        "المستخدم: وش معنى التعاون\n"
+        "المساعد:"
+    )
 
 
 def test_extract_dialogue_reply_prefers_assistant_segment() -> None:

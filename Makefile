@@ -1,7 +1,7 @@
 # SF.AI — Makefile
 # Phase 1 set of operational commands.
 
-.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit build-dialogue-split phase12-readiness phase19-readiness phase20-gates phase22-readiness phase22-plan phase22-next-batch phase22-completion-gate phase22-review-intake phase23-tokenizer-audit phase26-readiness phase27-dialogue-eval phase27-generation-quality phase27-objective-probe phase27-eos-probe phase27-quality-tooling phase27-social-lexical-curriculum phase27-prompt-answer-probe phase27-hygiene-audit phase27-hygiene-repair-probe phase27-tokenizer-strategy phase27-tokenizer-v3-probe phase27-spacing-boundary-repair phase27-semantic-lexical-repair phase27-minimal-lexical-stabilization phase27-heldout-generation-canary prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
+.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit build-dialogue-split phase12-readiness phase19-readiness phase20-gates phase22-readiness phase22-plan phase22-next-batch phase22-completion-gate phase22-review-intake phase23-tokenizer-audit phase26-readiness phase27-dialogue-eval phase27-generation-quality phase27-objective-probe phase27-eos-probe phase27-quality-tooling phase27-social-lexical-curriculum phase27-prompt-answer-probe phase27-hygiene-audit phase27-hygiene-repair-probe phase27-tokenizer-strategy phase27-tokenizer-v3-probe phase27-spacing-boundary-repair phase27-semantic-lexical-repair phase27-minimal-lexical-stabilization phase27-heldout-generation-canary phase27-heldout-objective-repair phase27-broader-heldout-repair phase27-intent-conditioned-repair phase27-topic-definition-repair phase27-fresh-mixed-shadow prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
 
 PY ?= .venv/bin/python
 UVICORN ?= uvicorn
@@ -51,6 +51,11 @@ help:
 	@echo "  make phase27-semantic-lexical-repair Run Phase 27.23 semantic/lexical repair"
 	@echo "  make phase27-minimal-lexical-stabilization Run Phase 27.24 minimal lexical stabilization"
 	@echo "  make phase27-heldout-generation-canary Run Phase 27.25 held-out generation canary"
+	@echo "  make phase27-heldout-objective-repair Run Phase 27.26 held-out objective repair"
+	@echo "  make phase27-broader-heldout-repair Run Phase 27.27 broader held-out repair"
+	@echo "  make phase27-intent-conditioned-repair Run Phase 27.28 intent-conditioned repair"
+	@echo "  make phase27-topic-definition-repair Run Phase 27.29 topic-conditioned definition repair"
+	@echo "  make phase27-fresh-mixed-shadow Run Phase 27.30 fresh mixed shadow canary"
 	@echo "  make prepare-dialogue-batch ARGS=...  Prepare reviewed chat exports (Phase 18)"
 	@echo "  make train-bpe ARGS=...   Train SF-BPE tokenizer (requires phase confirmation flag)"
 	@echo "  make train-lm ARGS=...    Train SF native LM (Phase 6)"
@@ -196,6 +201,21 @@ phase27-minimal-lexical-stabilization:
 
 phase27-heldout-generation-canary:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_25_heldout_generation_canary.py $(ARGS)
+
+phase27-heldout-objective-repair:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_26_heldout_objective_repair.py $(ARGS)
+
+phase27-broader-heldout-repair:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_27_broader_heldout_repair.py $(ARGS)
+
+phase27-intent-conditioned-repair:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_28_intent_conditioned_repair.py $(ARGS)
+
+phase27-topic-definition-repair:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_29_topic_conditioned_definition_repair.py $(ARGS)
+
+phase27-fresh-mixed-shadow:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_30_fresh_mixed_shadow_canary.py $(ARGS)
 
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)

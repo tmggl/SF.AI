@@ -95,6 +95,11 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.23 | Semantic/Lexical Confusion Repair | مكتملة جزئيًا؛ micro-probe تحسن إلى 30/32 |
 | Phase 27.24 | Minimal Lexical Stabilization | مكتملة؛ micro-probe وصل إلى 32/32 |
 | Phase 27.25 | Held-out Generation Quality Canary | مكتملة؛ فشل held-out `8/16` وruntime محظور |
+| Phase 27.26 | Held-out Objective Repair | مكتملة؛ `9/16` وruntime محظور |
+| Phase 27.27 | Broader Held-out Repair | مكتملة؛ old held-out `16/16`, shadow `9/16` |
+| Phase 27.28 | Intent-Conditioned Repair | مكتملة؛ shadow `12/16` |
+| Phase 27.29 | Topic-Conditioned Definition Repair | مكتملة؛ حُجبت بسبب shadow leakage |
+| Phase 27.30 | Fresh Mixed Shadow Canary | مكتملة؛ فشل `16/18` وruntime محظور |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2458,6 +2463,41 @@ guard_passed = 15/16
 - [PHASE27_25_HELDOUT_GENERATION_CANARY_REPORT.md](./PHASE27_25_HELDOUT_GENERATION_CANARY_REPORT.md)
 - `artifacts/reports/phase27_25_heldout_generation_canary_report.json`
 - `artifacts/samples/phase27_25_heldout_generation_canary_generations.md`
+
+---
+
+## Phase 27.26–27.30 — Repair Series Toward Runtime
+
+### الهدف
+
+علاج فشل Phase 27.25 تدريجيًا دون تكبير النموذج ودون فتح الواجهة قبل
+fresh canary نظيف.
+
+### نتيجة التنفيذ
+
+```text
+Phase 27.26 = held-out 9/16, micro 32/32
+Phase 27.27 = old held-out 16/16, shadow 9/16
+Phase 27.28 = intent-conditioned shadow 12/16
+Phase 27.29 = topic-conditioned definitions passed, but blocked by shadow leakage
+Phase 27.30 = fresh mixed shadow 16/18
+```
+
+### القرار
+
+- لا runtime.
+- لا تجربة محدودة في الواجهة.
+- لا `SF-50M`.
+- التالي Phase 27.31: broader natural intent/topic dataset.
+
+### artifacts
+
+- [PHASE27_26_TO_30_REPAIR_SERIES_REPORT.md](./PHASE27_26_TO_30_REPAIR_SERIES_REPORT.md)
+- `artifacts/reports/phase27_26_heldout_objective_repair_report.json`
+- `artifacts/reports/phase27_27_broader_heldout_repair_report.json`
+- `artifacts/reports/phase27_28_intent_conditioned_repair_report.json`
+- `artifacts/reports/phase27_29_topic_conditioned_definition_repair_report.json`
+- `artifacts/reports/phase27_30_fresh_mixed_shadow_canary_report.json`
 
 ---
 

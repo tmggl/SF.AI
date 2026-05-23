@@ -84,9 +84,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.25: اختبار held-out كشف أن المولد ينجح 8/16 فقط "
-    "خارج أسئلة micro-probe. لذلك لم أفتح المولد للواجهة؛ التالي Phase 27.26 "
-    "لإصلاح generalization/objective coverage.",
+    "اكتملت Phase 27.30: fresh mixed shadow وصل إلى 16/18 فقط. "
+    "المولد تحسن كثيرًا لكنه لم يفتح للواجهة؛ التالي Phase 27.31 "
+    "لتوسيع بيانات intent/topic الطبيعية قبل أي runtime.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

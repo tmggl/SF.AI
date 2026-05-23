@@ -39,8 +39,8 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.25 / 30 — Held-out Generation Quality Canary فشل `8/16`؛ runtime محظور.
-- **الأولوية الحالية:** Phase 27.26 held-out objective repair and generalization training؛ لا تدريب `SF-50M` ولا Phase 28 حتى تمر بوابات الجودة.
+- **الرحلة الحالية:** Phase 27.30 / 30 — Fresh Mixed Shadow Canary فشل `16/18`؛ runtime محظور.
+- **الأولوية الحالية:** Phase 27.31 broader natural intent/topic dataset؛ لا تدريب `SF-50M` ولا Phase 28 حتى تمر بوابات الجودة.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -80,6 +80,7 @@
 - **نتيجة Phase 27.23:** أضيف semantic/lexical repair متوازن على tokenizer v3. تحسن micro-probe إلى `30/32`; بقي خللان lexical في `التعاون` و`الاحترام`. runtime و`SF-50M` محظوران. التقرير: [docs/PHASE27_23_SEMANTIC_LEXICAL_REPAIR_REPORT.md](./docs/PHASE27_23_SEMANTIC_LEXICAL_REPAIR_REPORT.md).
 - **نتيجة Phase 27.24:** أضيف tokenizer minimal `v4_min_lexical` بحماية `التعاون` و`الاحترام` فقط فوق عبارات v3 الأصلية. وصل micro-probe إلى `32/32`; runtime ما زال محظورًا حتى Phase 27.25 held-out canary. التقرير: [docs/PHASE27_24_MINIMAL_LEXICAL_STABILIZATION_REPORT.md](./docs/PHASE27_24_MINIMAL_LEXICAL_STABILIZATION_REPORT.md).
 - **نتيجة Phase 27.25:** شُغّل held-out generation canary على `16` سؤالًا جديدًا فصيحًا/سعوديًا دون تدريب جديد. النتيجة `8/16`: التعريفات القريبة نجحت، لكن التحية الفصيحة والنصيحة والتخطيط والدعم فشلت دلاليًا. القرار: `FAILED_HELDOUT_GENERATION_CANARY_BLOCK_RUNTIME`; الواجهة تبقى على القوالب حتى Phase 27.26. التقرير: [docs/PHASE27_25_HELDOUT_GENERATION_CANARY_REPORT.md](./docs/PHASE27_25_HELDOUT_GENERATION_CANARY_REPORT.md).
+- **نتيجة Phase 27.26–27.30:** تحسن المولد من `8/16` إلى `16/18` على fresh mixed shadow بعد intent/topic conditioning، لكنه بقي محجوبًا بسبب فشلين في الشكر وسؤال الحال السعودي. التقرير: [docs/PHASE27_26_TO_30_REPAIR_SERIES_REPORT.md](./docs/PHASE27_26_TO_30_REPAIR_SERIES_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
@@ -143,6 +144,11 @@
 | Phase 27.23 | Semantic/Lexical Confusion Repair — improved to 30/32; runtime blocked |
 | Phase 27.24 | Minimal Lexical Stabilization — micro-probe passed 32/32; runtime blocked |
 | Phase 27.25 | Held-out Generation Quality Canary — failed 8/16; runtime blocked |
+| Phase 27.26 | Held-out Objective Repair — improved to 9/16; runtime blocked |
+| Phase 27.27 | Broader Held-out Repair — old held-out 16/16, shadow 9/16; runtime blocked |
+| Phase 27.28 | Intent-Conditioned Repair — shadow improved to 12/16; runtime blocked |
+| Phase 27.29 | Topic-Conditioned Definition Repair — blocked by shadow leakage |
+| Phase 27.30 | Fresh Mixed Shadow Canary — failed 16/18; runtime blocked |
 | Phase 28 | SF-120M v0.1 Candidate — planned |
 | Phase 29 | Runtime Hybrid Assistant v1 — planned |
 | Phase 30 | Continuous Improvement Loop — planned |

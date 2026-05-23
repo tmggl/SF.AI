@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.25 / 30**
-- **المرحلة الحالية:** **Phase 27.25 — Held-out Generation Quality Canary**
-- **حالة المرحلة الحالية:** **مكتملة كاختبار؛ فشل held-out canary (`8/16`) ولذلك runtime محجوب**
-- **المرحلة التالية المقترحة:** Phase 27.26 held-out objective repair and generalization training قبل أي runtime أو `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.30 / 30**
+- **المرحلة الحالية:** **Phase 27.30 — Fresh Mixed Shadow Canary**
+- **حالة المرحلة الحالية:** **مكتملة كاختبار؛ fresh mixed shadow فشل (`16/18`) ولذلك runtime محجوب**
+- **المرحلة التالية المقترحة:** Phase 27.31 broader natural intent/topic dataset قبل أي runtime أو `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -74,6 +74,11 @@
 | Phase 27.23 | Semantic/Lexical Confusion Repair | ✅ completed_partial_repair_runtime_blocked | ✅ |
 | Phase 27.24 | Minimal Lexical Stabilization | ✅ completed_micro_probe_passed_runtime_blocked | ✅ |
 | Phase 27.25 | Held-out Generation Quality Canary | ✅ completed_heldout_canary_failed_runtime_blocked | ✅ |
+| Phase 27.26 | Held-out Objective Repair | ✅ completed_partial_runtime_blocked | ✅ |
+| Phase 27.27 | Broader Held-out Repair | ✅ completed_old_heldout_passed_shadow_blocked | ✅ |
+| Phase 27.28 | Intent-Conditioned Repair | ✅ completed_intent_conditioning_partial_runtime_blocked | ✅ |
+| Phase 27.29 | Topic-Conditioned Definition Repair | ✅ completed_topic_conditioning_leakage_blocked | ✅ |
+| Phase 27.30 | Fresh Mixed Shadow Canary | ✅ completed_16_of_18_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -582,6 +587,17 @@
   - التالي Phase 27.26 held-out objective repair and generalization training.
   - أضيف [PHASE27_25_HELDOUT_GENERATION_CANARY_REPORT.md](./PHASE27_25_HELDOUT_GENERATION_CANARY_REPORT.md).
   - أضيف `artifacts/reports/phase27_25_heldout_generation_canary_report.json`.
+- بدأ وانتهى Phase 27.26–27.30 Repair Series:
+  - Phase 27.26: held-out تحسن إلى `9/16`, micro-probe بقي `32/32`.
+  - Phase 27.27: held-out القديم صار `16/16`, لكن shadow بقي `9/16`.
+  - Phase 27.28: intent conditioning رفع shadow إلى `12/16`.
+  - Phase 27.29: topic conditioning أصلح التعريفات لكنه حُجب بسبب `shadow_prompt_leakage`.
+  - Phase 27.30: fresh mixed shadow بلا تدريب أعطى `16/18`.
+  - الفشل المتبقي: الشكر الفصيح `شكرًا لمساعدتك` وسؤال الحال السعودي `كيفك اليوم`.
+  - القرار: `FAILED_FRESH_MIXED_SHADOW_BLOCK_RUNTIME`.
+  - لا تفعيل runtime ولا تدريب `SF-50M`.
+  - التالي Phase 27.31 broader natural intent/topic dataset.
+  - أضيف [PHASE27_26_TO_30_REPAIR_SERIES_REPORT.md](./PHASE27_26_TO_30_REPAIR_SERIES_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -647,7 +663,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.25"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.30"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -678,7 +694,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-526 passed in 16.87s
+531 passed in 17.10s
 ```
 
 | ملف | عدد |

@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.25 — Held-out Generation Quality Canary",
-        current_phase_status="completed_heldout_canary_failed_runtime_blocked",
+        current_phase="Phase 27.30 — Fresh Mixed Shadow Canary",
+        current_phase_status="completed_fresh_mixed_shadow_failed_runtime_blocked",
         next_phase=(
-            "Phase 27.26 held-out objective repair and generalization training"
+            "Phase 27.31 broader natural intent/topic dataset before runtime"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -239,6 +239,31 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_25_heldout_generation_canary",
                 status="completed_failed_runtime_blocked",
                 phase="Phase 27.25",
+            ),
+            ComponentStatus(
+                name="phase27_26_heldout_objective_repair",
+                status="completed_partial_runtime_blocked",
+                phase="Phase 27.26",
+            ),
+            ComponentStatus(
+                name="phase27_27_broader_heldout_repair",
+                status="completed_old_heldout_passed_shadow_blocked",
+                phase="Phase 27.27",
+            ),
+            ComponentStatus(
+                name="phase27_28_intent_conditioned_repair",
+                status="completed_intent_conditioning_partial_runtime_blocked",
+                phase="Phase 27.28",
+            ),
+            ComponentStatus(
+                name="phase27_29_topic_conditioned_definition_repair",
+                status="completed_topic_conditioning_leakage_blocked",
+                phase="Phase 27.29",
+            ),
+            ComponentStatus(
+                name="phase27_30_fresh_mixed_shadow_canary",
+                status="completed_16_of_18_runtime_blocked",
+                phase="Phase 27.30",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

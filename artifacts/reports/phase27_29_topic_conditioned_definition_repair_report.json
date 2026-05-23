@@ -1,0 +1,1511 @@
+{
+  "phase": "Phase 27.29",
+  "status": "PARTIAL_TOPIC_CONDITIONED_DEFINITION_REPAIR_BLOCK_RUNTIME_LEAKED_SHADOW",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "tokenizer": "artifacts/tokenizers/sf_bpe/v4_min_lexical",
+  "checkpoint_root": "artifacts/eval/phase27_29_topic_conditioned_definition_repair/checkpoints",
+  "checkpoint_name": "sf-10m-step8800",
+  "previous_phase27_28": {
+    "shadow_passed": 12,
+    "shadow_eval_records": 16
+  },
+  "conditioning": {
+    "dialect_line": true,
+    "intent_line": true,
+    "topic_line_for_definitions": true,
+    "topics": [
+      "التعاون",
+      "الاحترام",
+      "القراءة"
+    ]
+  },
+  "training": {
+    "steps": 8800,
+    "epochs": 880,
+    "batch_size": 1,
+    "seq_len": 64,
+    "lr": 0.0007,
+    "packing_mode": "sample_isolated",
+    "train_records": 487,
+    "repair_records": 61,
+    "shadow_prompt_leakage": [
+      "اذكر فائدة القراءة سريعًا",
+      "الاحترام وش يعني",
+      "التعاون وش يقصدون فيه",
+      "عرّف التعاون في عبارة",
+      "ما المقصود بالاحترام باختصار",
+      "وش أستفيد من القراءة"
+    ]
+  },
+  "heldout_27_25": {
+    "passed": 16,
+    "failed": 0,
+    "eval_records": 16,
+    "pass_rate": 1.0,
+    "semantic_match": 16,
+    "guard_passed": 16,
+    "reason_counts": {
+      "passed": 16
+    },
+    "category_breakdown": {
+      "greeting": {
+        "passed": 2,
+        "total": 2
+      },
+      "smalltalk": {
+        "passed": 1,
+        "total": 1
+      },
+      "definition": {
+        "passed": 6,
+        "total": 6
+      },
+      "advice": {
+        "passed": 2,
+        "total": 2
+      },
+      "planning": {
+        "passed": 2,
+        "total": 2
+      },
+      "support": {
+        "passed": 2,
+        "total": 2
+      },
+      "thanks": {
+        "passed": 1,
+        "total": 1
+      }
+    }
+  },
+  "shadow_27_27": {
+    "passed": 16,
+    "failed": 0,
+    "eval_records": 16,
+    "pass_rate": 1.0,
+    "semantic_match": 16,
+    "guard_passed": 16,
+    "reason_counts": {
+      "passed": 16
+    },
+    "category_breakdown": {
+      "greeting": {
+        "passed": 2,
+        "total": 2
+      },
+      "smalltalk": {
+        "passed": 1,
+        "total": 1
+      },
+      "definition": {
+        "passed": 6,
+        "total": 6
+      },
+      "advice": {
+        "passed": 2,
+        "total": 2
+      },
+      "planning": {
+        "passed": 2,
+        "total": 2
+      },
+      "support": {
+        "passed": 2,
+        "total": 2
+      },
+      "thanks": {
+        "passed": 1,
+        "total": 1
+      }
+    }
+  },
+  "definition_shadow_27_29": {
+    "passed": 6,
+    "failed": 0,
+    "eval_records": 6,
+    "pass_rate": 1.0,
+    "semantic_match": 6,
+    "guard_passed": 6,
+    "reason_counts": {
+      "passed": 6
+    },
+    "category_breakdown": {
+      "definition": {
+        "passed": 6,
+        "total": 6
+      }
+    }
+  },
+  "micro_probe_regression": {
+    "passed": 32,
+    "failed": 0,
+    "eval_records": 32,
+    "pass_rate": 1.0,
+    "exact_clean": 32,
+    "semantic_match": 32,
+    "guard_passed": 32,
+    "reason_counts": {
+      "passed": 32
+    }
+  },
+  "delta": {
+    "shadow_passed": 4
+  },
+  "runtime_allowed": false,
+  "limited_runtime_trial_allowed": false,
+  "sf50m_allowed": false,
+  "decision": "Topic-conditioned definitions improved results, but shadow prompt leakage blocks runtime.",
+  "next_phase": "Phase 27.30 — fresh mixed shadow canary without training",
+  "failures": {
+    "heldout_27_25": [],
+    "shadow_27_27": [],
+    "definition_shadow_27_29": [],
+    "micro_probe": []
+  },
+  "results": {
+    "heldout_27_25": [
+      {
+        "id": "phase27_25_msa_001",
+        "dialect": "msa",
+        "category": "greeting",
+        "intent_label": "تحية",
+        "topic": "",
+        "prompt": "حيّني بتحية قصيرة",
+        "expected_terms": [
+          "أهلًا"
+        ],
+        "generated": "أهلًا بك.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_25_msa_002",
+        "dialect": "msa",
+        "category": "smalltalk",
+        "intent_label": "سؤال حال",
+        "topic": "",
+        "prompt": "كيف حالك الآن",
+        "expected_terms": [
+          "بخير"
+        ],
+        "generated": "بخير، شكرًا لسؤالك.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_25_msa_003",
+        "dialect": "msa",
+        "category": "definition",
+        "intent_label": "تعريف",
+        "topic": "التعاون",
+        "prompt": "اشرح التعاون بجملة",
+        "expected_terms": [
+          "التعاون",
+          "معًا"
+        ],
+        "generated": "التعاون يعني أن ننجز معًا بدل الانفراد.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_25_msa_004",
+        "dialect": "msa",
+        "category": "definition",
+        "intent_label": "تعريف",
+        "topic": "الاحترام",
+        "prompt": "عرّف الاحترام باختصار",
+        "expected_terms": [
+          "الاحترام",
+          "تقدير"
+        ],
+        "generated": "الاحترام تقدير الناس بالكلام والفعل.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_25_msa_005",
+        "dialect": "msa",
+        "category": "definition",
+        "intent_label": "تعريف",
+        "topic": "القراءة",
+        "prompt": "ما فائدة القراءة باختصار",
+        "expected_terms": [
+          "الفهم",
+          "المفردات"
+        ],
+        "generated": "القراءة توسع الفهم وتزيد المفردات.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_25_msa_006",
+        "dialect": "msa",
+        "category": "advice",
+        "intent_label": "نصيحة",
+        "topic": "",
+        "prompt": "أحتاج نصيحة بسيطة",
+        "expected_terms": [
+          "ابدأ",
+          "خطوة"
+        ],
+        "generated": "ابدأ بخطوة صغيرة وواضحة.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_25_msa_007",
+        "dialect": "msa",
+        "category": "planning",
+        "intent_label": "تخطيط",
+        "topic": "",
+        "prompt": "كيف أرتب يومي",
+        "expected_terms": [
+          "ثلاث",
+          "مهام"
+        ],
+        "generated": "اكتب ثلاث مهام وابدأ بالأهم.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_25_msa_008",
+        "dialect": "msa",
+        "category": "support",
+        "intent_label": "دعم",
+        "topic": "",
+        "prompt": "أشعر بالقلق",
+        "expected_terms": [
+          "نفس",
+          "اهدأ"
+        ],
+        "generated": "خذ نفسًا هادئًا واهدأ خطوة خطوة.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_25_saudi_001",
+        "dialect": "saudi",
+        "category": "greeting",
+        "intent_label": "تحية",
+        "topic": "",
+        "prompt": "هلا كيف الحال",
+        "expected_terms": [
+          "هلا",
+          "تحتاج"
+        ],
+        "generated": "هلا بك، تفضل وش تحتاج؟",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_25_saudi_002",
+        "dialect": "saudi",
+        "category": "definition",
+        "intent_label": "تعريف",
+        "topic": "التعاون",
+        "prompt": "وش معنى التعاون",
+        "expected_terms": [
+          "سوا",
+          "الحمل"
+        ],
+        "generated": "يعني نشتغل سوا ونخفف الحمل.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_25_saudi_003",
+        "dialect": "saudi",
+        "category": "definition",
+        "intent_label": "تعريف",
+        "topic": "الاحترام",
+        "prompt": "اشرح الاحترام",
+        "expected_terms": [
+          "تقدّر",
+          "تصرفك"
+        ],
+        "generated": "يعني تقدّر الناس بكلامك وتصرفك.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_25_saudi_004",
+        "dialect": "saudi",
+        "category": "definition",
+        "intent_label": "تعريف",
+        "topic": "القراءة",
+        "prompt": "وش فايدة القراءة",
+        "expected_terms": [
+          "فهمك",
+          "كلماتك"
+        ],
+        "generated": "توسع فهمك وتزيد كلماتك.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_25_saudi_005",
+        "dialect": "saudi",
+        "category": "advice",
+        "intent_label": "نصيحة",
+        "topic": "",
+        "prompt": "ابي نصيحة سريعة",
+        "expected_terms": [
+          "ابدأ",
+          "بسيط"
+        ],
+        "generated": "ابدأ بشي بسيط ولا تكثرها.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_25_saudi_006",
+        "dialect": "saudi",
+        "category": "planning",
+        "intent_label": "تخطيط",
+        "topic": "",
+        "prompt": "ودي ارتب يومي",
+        "expected_terms": [
+          "ثلاث",
+          "الأول"
+        ],
+        "generated": "اكتب أهم ثلاث أشياء وابدأ بالأول.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_25_saudi_007",
+        "dialect": "saudi",
+        "category": "support",
+        "intent_label": "دعم",
+        "topic": "",
+        "prompt": "متوتر شوي",
+        "expected_terms": [
+          "يهونها",
+          "اهدأ"
+        ],
+        "generated": "الله يهونها، خذ نفس واهدأ شوي.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_25_saudi_008",
+        "dialect": "saudi",
+        "category": "thanks",
+        "intent_label": "شكر",
+        "topic": "",
+        "prompt": "مشكور يا بعدي",
+        "expected_terms": [
+          "العفو",
+          "حاضر"
+        ],
+        "generated": "العفو، حاضر بأي وقت.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      }
+    ],
+    "shadow_27_27": [
+      {
+        "id": "phase27_27_shadow_msa_001",
+        "dialect": "msa",
+        "category": "greeting",
+        "intent_label": "تحية",
+        "topic": "",
+        "prompt": "ابدأ معي بتحية لطيفة",
+        "expected_terms": [
+          "أهلًا"
+        ],
+        "generated": "أهلًا بك، تفضل.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_27_shadow_msa_002",
+        "dialect": "msa",
+        "category": "smalltalk",
+        "intent_label": "سؤال حال",
+        "topic": "",
+        "prompt": "كيف وضعك الآن",
+        "expected_terms": [
+          "بخير"
+        ],
+        "generated": "بخير، شكرًا لسؤالك.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_27_shadow_msa_003",
+        "dialect": "msa",
+        "category": "definition",
+        "intent_label": "تعريف",
+        "topic": "التعاون",
+        "prompt": "عرّف التعاون في عبارة",
+        "expected_terms": [
+          "التعاون",
+          "معًا"
+        ],
+        "generated": "التعاون يعني أن ننجز معًا بدل الانفراد.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_27_shadow_msa_004",
+        "dialect": "msa",
+        "category": "definition",
+        "intent_label": "تعريف",
+        "topic": "الاحترام",
+        "prompt": "ما المقصود بالاحترام باختصار",
+        "expected_terms": [
+          "الاحترام",
+          "تقدير"
+        ],
+        "generated": "الاحترام تقدير الناس بالكلام والفعل.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_27_shadow_msa_005",
+        "dialect": "msa",
+        "category": "definition",
+        "intent_label": "تعريف",
+        "topic": "القراءة",
+        "prompt": "اذكر فائدة القراءة سريعًا",
+        "expected_terms": [
+          "الفهم",
+          "المفردات"
+        ],
+        "generated": "القراءة توسع الفهم وتزيد المفردات.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_27_shadow_msa_006",
+        "dialect": "msa",
+        "category": "advice",
+        "intent_label": "نصيحة",
+        "topic": "",
+        "prompt": "أعطني نصيحة خفيفة",
+        "expected_terms": [
+          "ابدأ",
+          "خطوة"
+        ],
+        "generated": "ابدأ بخطوة صغيرة ثم واضحة.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_27_shadow_msa_007",
+        "dialect": "msa",
+        "category": "planning",
+        "intent_label": "تخطيط",
+        "topic": "",
+        "prompt": "كيف أرتب مهامي اليوم",
+        "expected_terms": [
+          "ثلاث",
+          "مهام"
+        ],
+        "generated": "اكتب ثلاث مهام وابدأ بالأقرب.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_27_shadow_msa_008",
+        "dialect": "msa",
+        "category": "support",
+        "intent_label": "دعم",
+        "topic": "",
+        "prompt": "أنا متوتر قليلًا",
+        "expected_terms": [
+          "نفس",
+          "اهدأ"
+        ],
+        "generated": "خذ نفسًا هادئًا واهدأ خطوة خطوة.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_27_shadow_saudi_001",
+        "dialect": "saudi",
+        "category": "greeting",
+        "intent_label": "تحية",
+        "topic": "",
+        "prompt": "هلا وش أقدر أقول",
+        "expected_terms": [
+          "هلا",
+          "تحتاج"
+        ],
+        "generated": "هلا بك، تفضل وش تحتاج؟",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_27_shadow_saudi_002",
+        "dialect": "saudi",
+        "category": "definition",
+        "intent_label": "تعريف",
+        "topic": "التعاون",
+        "prompt": "التعاون وش يقصدون فيه",
+        "expected_terms": [
+          "سوا",
+          "الحمل"
+        ],
+        "generated": "يعني نشتغل سوا ونخفف الحمل.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_27_shadow_saudi_003",
+        "dialect": "saudi",
+        "category": "definition",
+        "intent_label": "تعريف",
+        "topic": "الاحترام",
+        "prompt": "الاحترام وش يعني",
+        "expected_terms": [
+          "تقدّر",
+          "تصرفك"
+        ],
+        "generated": "يعني تقدّر الناس بكلامك وتصرفك.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_27_shadow_saudi_004",
+        "dialect": "saudi",
+        "category": "definition",
+        "intent_label": "تعريف",
+        "topic": "القراءة",
+        "prompt": "وش أستفيد من القراءة",
+        "expected_terms": [
+          "فهمك",
+          "كلماتك"
+        ],
+        "generated": "توسع فهمك وتزيد كلماتك.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_27_shadow_saudi_005",
+        "dialect": "saudi",
+        "category": "advice",
+        "intent_label": "نصيحة",
+        "topic": "",
+        "prompt": "عطني نصيحة بسيطة",
+        "expected_terms": [
+          "ابدأ",
+          "بسيط"
+        ],
+        "generated": "ابدأ بشي بسيط ولا تكثرها.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_27_shadow_saudi_006",
+        "dialect": "saudi",
+        "category": "planning",
+        "intent_label": "تخطيط",
+        "topic": "",
+        "prompt": "ابي أرتب مهامي",
+        "expected_terms": [
+          "ثلاث",
+          "الأول"
+        ],
+        "generated": "اكتب أهم ثلاث أشياء وابدأ بالأول.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_27_shadow_saudi_007",
+        "dialect": "saudi",
+        "category": "support",
+        "intent_label": "دعم",
+        "topic": "",
+        "prompt": "حاس بتوتر شوي",
+        "expected_terms": [
+          "يهونها",
+          "اهدأ"
+        ],
+        "generated": "الله يهونها، خذ نفس واهدأ شوي.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_27_shadow_saudi_008",
+        "dialect": "saudi",
+        "category": "thanks",
+        "intent_label": "شكر",
+        "topic": "",
+        "prompt": "يعطيك العافية",
+        "expected_terms": [
+          "العفو",
+          "حاضر"
+        ],
+        "generated": "العفو، حاضر بأي وقت.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      }
+    ],
+    "definition_shadow_27_29": [
+      {
+        "id": "phase27_29_def_msa_001",
+        "dialect": "msa",
+        "category": "definition",
+        "intent_label": "تعريف",
+        "topic": "التعاون",
+        "prompt": "عرّف التعاون بجملة قصيرة",
+        "expected_terms": [
+          "التعاون",
+          "معًا"
+        ],
+        "generated": "التعاون يعني أن ننجز معًا بدل الانفراد.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_29_def_msa_002",
+        "dialect": "msa",
+        "category": "definition",
+        "intent_label": "تعريف",
+        "topic": "الاحترام",
+        "prompt": "اختصر معنى الاحترام",
+        "expected_terms": [
+          "الاحترام",
+          "تقدير"
+        ],
+        "generated": "الاحترام تقدير الناس بالكلام والفعل.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_29_def_msa_003",
+        "dialect": "msa",
+        "category": "definition",
+        "intent_label": "تعريف",
+        "topic": "القراءة",
+        "prompt": "ما نفع القراءة",
+        "expected_terms": [
+          "الفهم",
+          "المفردات"
+        ],
+        "generated": "القراءة توسع الفهم وتزيد المفردات.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_29_def_saudi_001",
+        "dialect": "saudi",
+        "category": "definition",
+        "intent_label": "تعريف",
+        "topic": "التعاون",
+        "prompt": "وش معنى التعاون عند الناس",
+        "expected_terms": [
+          "سوا",
+          "الحمل"
+        ],
+        "generated": "يعني نشتغل سوا ونخفف الحمل.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_29_def_saudi_002",
+        "dialect": "saudi",
+        "category": "definition",
+        "intent_label": "تعريف",
+        "topic": "الاحترام",
+        "prompt": "فسّر لي الاحترام",
+        "expected_terms": [
+          "تقدّر",
+          "تصرفك"
+        ],
+        "generated": "يعني تقدّر الناس بكلامك وتصرفك.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_29_def_saudi_003",
+        "dialect": "saudi",
+        "category": "definition",
+        "intent_label": "تعريف",
+        "topic": "القراءة",
+        "prompt": "القراية تفيدني بشي",
+        "expected_terms": [
+          "فهمك",
+          "كلماتك"
+        ],
+        "generated": "توسع فهمك وتزيد كلماتك.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "semantic_match": true,
+        "prompt_echo": false,
+        "passed": true,
+        "reason": "passed"
+      }
+    ],
+    "micro_probe": [
+      {
+        "id": "phase27_17_msa_001",
+        "dialect": "msa",
+        "prompt": "السلام عليكم",
+        "expected": "وعليكم السلام، أهلًا بك.",
+        "expected_terms": [
+          "وعليكم",
+          "أهلًا"
+        ],
+        "generated": "وعليكم السلام، أهلًا بك.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_msa_002",
+        "dialect": "msa",
+        "prompt": "كيف حالك اليوم",
+        "expected": "بخير، شكرًا لسؤالك.",
+        "expected_terms": [
+          "بخير",
+          "شكرًا"
+        ],
+        "generated": "بخير، شكرًا لسؤالك.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_msa_003",
+        "dialect": "msa",
+        "prompt": "أريد نصيحة قصيرة",
+        "expected": "ابدأ بخطوة صغيرة وواضحة.",
+        "expected_terms": [
+          "خطوة",
+          "واضحة"
+        ],
+        "generated": "ابدأ بخطوة صغيرة وواضحة.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_msa_004",
+        "dialect": "msa",
+        "prompt": "ما معنى الصبر",
+        "expected": "الصبر هو الثبات عند الصعوبة.",
+        "expected_terms": [
+          "الثبات",
+          "الصعوبة"
+        ],
+        "generated": "الصبر هو الثبات عند الصعوبة.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_msa_005",
+        "dialect": "msa",
+        "prompt": "أشعر بتوتر بسيط",
+        "expected": "خذ نفسًا هادئًا وابدأ بالأهم.",
+        "expected_terms": [
+          "نفسًا",
+          "الأهم"
+        ],
+        "generated": "خذ نفسًا هادئًا وابدأ بالأهم.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_msa_006",
+        "dialect": "msa",
+        "prompt": "أريد ترتيب يومي",
+        "expected": "اكتب ثلاث مهام وابدأ بالأقرب.",
+        "expected_terms": [
+          "ثلاث",
+          "الأقرب"
+        ],
+        "generated": "اكتب ثلاث مهام وابدأ بالأقرب.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_msa_007",
+        "dialect": "msa",
+        "prompt": "هل تفهم كلامي",
+        "expected": "نعم، أفهم كلامك وأرد بوضوح.",
+        "expected_terms": [
+          "أفهم",
+          "بوضوح"
+        ],
+        "generated": "نعم، أفهم كلامك وأرد بوضوح.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_msa_008",
+        "dialect": "msa",
+        "prompt": "اشرح لي التعاون",
+        "expected": "التعاون يعني أن ننجز معًا بدل الانفراد.",
+        "expected_terms": [
+          "التعاون",
+          "معًا"
+        ],
+        "generated": "التعاون يعني أن ننجز معًا بدل الانفراد.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_msa_009",
+        "dialect": "msa",
+        "prompt": "ماذا أفعل عند الزحمة",
+        "expected": "اخرج مبكرًا واترك وقتًا إضافيًا.",
+        "expected_terms": [
+          "مبكرًا",
+          "إضافيًا"
+        ],
+        "generated": "اخرج مبكرًا واترك وقتًا إضافيًا.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_msa_010",
+        "dialect": "msa",
+        "prompt": "كيف أتعلم عادة جديدة",
+        "expected": "كررها يوميًا ولو لمدة قصيرة.",
+        "expected_terms": [
+          "يوميًا",
+          "قصيرة"
+        ],
+        "generated": "كررها يوميًا ولو لمدة قصيرة.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_msa_011",
+        "dialect": "msa",
+        "prompt": "ما فائدة القراءة",
+        "expected": "القراءة توسع الفهم وتزيد المفردات.",
+        "expected_terms": [
+          "الفهم",
+          "المفردات"
+        ],
+        "generated": "القراءة توسع الفهم وتزيد المفردات.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_msa_012",
+        "dialect": "msa",
+        "prompt": "أريد جوابا مختصرا",
+        "expected": "نعم، سأجيبك باختصار.",
+        "expected_terms": [
+          "نعم",
+          "باختصار"
+        ],
+        "generated": "نعم، سأجيبك باختصار.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_msa_013",
+        "dialect": "msa",
+        "prompt": "كيف أهدأ قبل النوم",
+        "expected": "خفف الإضاءة واترك الهاتف قليلًا.",
+        "expected_terms": [
+          "الإضاءة",
+          "الهاتف"
+        ],
+        "generated": "خفف الإضاءة واترك الهاتف قليلًا.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_msa_014",
+        "dialect": "msa",
+        "prompt": "ما معنى الاحترام",
+        "expected": "الاحترام تقدير الناس بالكلام والفعل.",
+        "expected_terms": [
+          "تقدير",
+          "الفعل"
+        ],
+        "generated": "الاحترام تقدير الناس بالكلام والفعل.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_msa_015",
+        "dialect": "msa",
+        "prompt": "أريد تشجيعا بسيطا",
+        "expected": "أنت قادر، ابدأ ولا تنتظر الكمال.",
+        "expected_terms": [
+          "قادر",
+          "الكمال"
+        ],
+        "generated": "أنت قادر، ابدأ ولا تنتظر الكمال.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_msa_016",
+        "dialect": "msa",
+        "prompt": "شكرا لك",
+        "expected": "العفو، يسعدني أن أساعدك.",
+        "expected_terms": [
+          "العفو",
+          "أساعدك"
+        ],
+        "generated": "العفو، يسعدني أن أساعدك.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_saudi_001",
+        "dialect": "saudi",
+        "prompt": "هلا والله",
+        "expected": "هلا بك، تفضل وش تحتاج؟",
+        "expected_terms": [
+          "هلا",
+          "تحتاج"
+        ],
+        "generated": "هلا بك، تفضل وش تحتاج؟",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_saudi_002",
+        "dialect": "saudi",
+        "prompt": "كيفك",
+        "expected": "بخير ولله الحمد، أنت كيفك؟",
+        "expected_terms": [
+          "بخير",
+          "كيفك"
+        ],
+        "generated": "بخير ولله الحمد، أنت كيفك؟",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_saudi_003",
+        "dialect": "saudi",
+        "prompt": "وش تنصحني اليوم",
+        "expected": "ابدأ بشي واحد بسيط ولا تكثرها.",
+        "expected_terms": [
+          "ابدأ",
+          "بسيط"
+        ],
+        "generated": "ابدأ بشي واحد بسيط ولا تكثرها.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_saudi_004",
+        "dialect": "saudi",
+        "prompt": "وش معنى الصبر",
+        "expected": "الصبر إنك تثبت وقت الصعوبة.",
+        "expected_terms": [
+          "تثبت",
+          "الصعوبة"
+        ],
+        "generated": "الصبر إنك تثبت وقت الصعوبة.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_saudi_005",
+        "dialect": "saudi",
+        "prompt": "متضايق شوي",
+        "expected": "الله يهونها، خذ نفس واهدأ شوي.",
+        "expected_terms": [
+          "يهونها",
+          "اهدأ"
+        ],
+        "generated": "الله يهونها، خذ نفس واهدأ شوي.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_saudi_006",
+        "dialect": "saudi",
+        "prompt": "ابي ارتب يومي",
+        "expected": "اكتب أهم ثلاث أشياء وابدأ بالأول.",
+        "expected_terms": [
+          "ثلاث",
+          "الأول"
+        ],
+        "generated": "اكتب أهم ثلاث أشياء وابدأ بالأول.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_saudi_007",
+        "dialect": "saudi",
+        "prompt": "تفهم كلامي",
+        "expected": "إيه أفهمك، وبرد عليك بوضوح.",
+        "expected_terms": [
+          "أفهمك",
+          "بوضوح"
+        ],
+        "generated": "إيه أفهمك، وبرد عليك بوضوح.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_saudi_008",
+        "dialect": "saudi",
+        "prompt": "وش يعني تعاون",
+        "expected": "يعني نشتغل سوا ونخفف الحمل.",
+        "expected_terms": [
+          "سوا",
+          "الحمل"
+        ],
+        "generated": "يعني نشتغل سوا ونخفف الحمل.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_saudi_009",
+        "dialect": "saudi",
+        "prompt": "الزحمة تعبتني",
+        "expected": "اطلع بدري وخل عندك وقت زيادة.",
+        "expected_terms": [
+          "بدري",
+          "زيادة"
+        ],
+        "generated": "اطلع بدري وخل عندك وقت زيادة.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_saudi_010",
+        "dialect": "saudi",
+        "prompt": "ابي اتعلم عادة",
+        "expected": "كررها كل يوم حتى لو شوي.",
+        "expected_terms": [
+          "كررها",
+          "شوي"
+        ],
+        "generated": "كررها كل يوم حتى لو شوي.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_saudi_011",
+        "dialect": "saudi",
+        "prompt": "القراءة وش تفيد",
+        "expected": "توسع فهمك وتزيد كلماتك.",
+        "expected_terms": [
+          "فهمك",
+          "كلماتك"
+        ],
+        "generated": "توسع فهمك وتزيد كلماتك.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_saudi_012",
+        "dialect": "saudi",
+        "prompt": "ابي جواب قصير",
+        "expected": "تم، بعطيك جواب مختصر.",
+        "expected_terms": [
+          "تم",
+          "مختصر"
+        ],
+        "generated": "تم، بعطيك جواب مختصر.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_saudi_013",
+        "dialect": "saudi",
+        "prompt": "ما انام بسرعة",
+        "expected": "خفف الجوال وخلي الجو أهدأ.",
+        "expected_terms": [
+          "الجوال",
+          "أهدأ"
+        ],
+        "generated": "خفف الجوال وخلي الجو أهدأ.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_saudi_014",
+        "dialect": "saudi",
+        "prompt": "وش معنى الاحترام",
+        "expected": "يعني تقدّر الناس بكلامك وتصرفك.",
+        "expected_terms": [
+          "تقدّر",
+          "تصرفك"
+        ],
+        "generated": "يعني تقدّر الناس بكلامك وتصرفك.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_saudi_015",
+        "dialect": "saudi",
+        "prompt": "حمسني بكلمة",
+        "expected": "تقدر، ابدأ بخطوة ولا توقف.",
+        "expected_terms": [
+          "تقدر",
+          "خطوة"
+        ],
+        "generated": "تقدر، ابدأ بخطوة ولا توقف.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      },
+      {
+        "id": "phase27_17_saudi_016",
+        "dialect": "saudi",
+        "prompt": "مشكور",
+        "expected": "العفو، حاضر بأي وقت.",
+        "expected_terms": [
+          "العفو",
+          "حاضر"
+        ],
+        "generated": "العفو، حاضر بأي وقت.",
+        "used": true,
+        "generator_reason": "generated",
+        "guard_reason": "passed",
+        "exact_clean": true,
+        "semantic_match": true,
+        "passed": true,
+        "reason": "passed"
+      }
+    ]
+  }
+}

@@ -10,10 +10,10 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.25 / 30**
-- **المرحلة الحالية:** **Phase 27.25 — Held-out Generation Quality Canary** (اكتملت كاختبار: held-out canary فشل `8/16`؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **الرحلة الحالية:** **Phase 27.30 / 30**
+- **المرحلة الحالية:** **Phase 27.30 — Fresh Mixed Shadow Canary** (اكتملت كاختبار: fresh mixed shadow فشل `16/18`؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** Phase 27.26 held-out objective repair and generalization training؛ Phase 28 و`SF-50M` محظوران حتى تنجح البوابات.
+- **المرحلة التالية المقترحة:** Phase 27.31 broader natural intent/topic dataset؛ Phase 28 و`SF-50M` محظوران حتى تنجح البوابات.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
@@ -83,6 +83,8 @@
 - **تقرير Phase 27.24:** `docs/PHASE27_24_MINIMAL_LEXICAL_STABILIZATION_REPORT.md`, `artifacts/reports/phase27_24_minimal_lexical_stabilization_report.json`, `artifacts/samples/phase27_24_minimal_lexical_stabilization_generations.md`.
 - **نتيجة Phase 27.25:** شُغّل held-out generation canary على `16` prompt جديدًا دون تدريب. النتيجة `passed=8/16`, `semantic=8/16`, `guard_passed=15/16`. القرار: `FAILED_HELDOUT_GENERATION_CANARY_BLOCK_RUNTIME`؛ runtime و`SF-50M` محظوران.
 - **تقرير Phase 27.25:** `docs/PHASE27_25_HELDOUT_GENERATION_CANARY_REPORT.md`, `artifacts/reports/phase27_25_heldout_generation_canary_report.json`, `artifacts/samples/phase27_25_heldout_generation_canary_generations.md`.
+- **نتيجة Phase 27.26–27.30:** أضيفت repair سلسلة للتعميم: 27.26 وصل `9/16`, 27.27 جعل held-out القديم `16/16` لكن shadow `9/16`, 27.28 رفع shadow إلى `12/16`, 27.29 أضاف topic conditioning لكنه حُجب بسبب leakage, و27.30 fresh mixed shadow أعطى `16/18`. القرار: runtime محظور.
+- **تقرير Phase 27.26–27.30:** `docs/PHASE27_26_TO_30_REPAIR_SERIES_REPORT.md`, وتقارير JSON لكل مرحلة داخل `artifacts/reports/`.
 - **مقارنة tokenizer v1/v2:** v1 كان `vocab=261`, `merges=218`, `words_seen=723`, سعودي فقط. v2 تدرب على `500` سجل متوازن: `msa=250`, `saudi=250`.
 - **تحسن protected Saudi terms:** `average_tokens` انخفض من `4.0` في v1 إلى `2.3` في v2، ولا توجد `roundtrip_failures` أو `aggressive_split_terms`.
 - **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches=[]` لأن الجمع اكتمل.
@@ -302,8 +304,8 @@ make server-start
 ثم زر `http://127.0.0.1:8123/ui/chat` أو `http://127.0.0.1:8123/docs`.
 
 آخر تحقق حي بعد restart:
-- السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`، PID `89596`.
-- الكود الحالي بعد Phase 27.25 يعرض `Phase 27.25` في `/system/status` و`/health`، ويعرض `GET /system/phase27-dialogue-eval` تقييم الحوار وخطة corpus.
+- السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`، PID `95996`.
+- الكود الحالي بعد Phase 27.30 يعرض `Phase 27.30` في `/system/status` و`/health`، ويعرض `GET /system/phase27-dialogue-eval` تقييم الحوار وخطة corpus.
 - `GET /system/phase26-readiness` يرجع `can_start_sf50m_training=false`.
 - `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - `make server-status` read-only ولا يوقف السيرفر.
@@ -312,10 +314,10 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى إكمال Phase 27.25)
+## نتائج الاختبارات (حتى إكمال Phase 27.30)
 
 ```
-526 passed in 16.87s
+531 passed in 17.10s
 ```
 
 التغطية الحالية:

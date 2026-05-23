@@ -217,6 +217,7 @@ class ChatModule:
         result = generator.generate(
             analysis.original_text,
             dialect=analysis.detected_dialect,
+            intent=intent,
             max_new_tokens=self.generation_policy.max_new_tokens,
             temperature=self.generation_policy.temperature,
             top_k=self.generation_policy.top_k,

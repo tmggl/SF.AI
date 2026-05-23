@@ -99,6 +99,8 @@ class NativeGenerator:
         prompt: str,
         *,
         dialect: str | None = None,
+        intent: str | None = None,
+        topic: str | None = None,
         max_new_tokens: int | None = None,
         temperature: float | None = None,
         top_k: int | None = None,
@@ -113,7 +115,12 @@ class NativeGenerator:
             return NativeGenerationResult(False, "", status.generator, "missing_checkpoint")
 
         tok, model, device = self._load()
-        model_prompt = self._format_prompt(prompt, dialect=dialect)
+        model_prompt = self._format_prompt(
+            prompt,
+            dialect=dialect,
+            intent=intent,
+            topic=topic,
+        )
         prompt_ids = tok.encode(model_prompt)
         if not prompt_ids:
             return NativeGenerationResult(False, "", status.generator, "prompt_not_tokenized")
@@ -140,12 +147,28 @@ class NativeGenerator:
             return NativeGenerationResult(False, "", status.generator, "empty_generation")
         return NativeGenerationResult(True, text, status.generator, "generated")
 
-    def _format_prompt(self, prompt: str, *, dialect: str | None = None) -> str:
+    def _format_prompt(
+        self,
+        prompt: str,
+        *,
+        dialect: str | None = None,
+        intent: str | None = None,
+        topic: str | None = None,
+    ) -> str:
         if not self.config.dialogue_prompt:
             return prompt
-        scope = _dialect_condition_line(dialect)
-        if scope:
-            return f"{scope}\nالمستخدم: {prompt.strip()}\nالمساعد:"
+        condition_lines = [
+            line
+            for line in (
+                _dialect_condition_line(dialect),
+                _intent_condition_line(intent),
+                _topic_condition_line(topic),
+            )
+            if line
+        ]
+        if condition_lines:
+            conditions = "\n".join(condition_lines)
+            return f"{conditions}\nالمستخدم: {prompt.strip()}\nالمساعد:"
         return f"المستخدم: {prompt.strip()}\nالمساعد:"
 
     def _load(self) -> tuple[BPETokenizer, TinyTransformer, torch.device]:
@@ -180,4 +203,39 @@ def _dialect_condition_line(dialect: str | None) -> str:
         return "النطاق: فصحى"
     if d in {"saudi", "gulf"}:
         return "النطاق: سعودي"
+    return ""
+
+
+def _intent_condition_line(intent: str | None) -> str:
+    intent_label = _intent_label(intent)
+    if intent_label:
+        return f"النظام: النية: {intent_label}"
+    return ""
+
+
+def _intent_label(intent: str | None) -> str:
+    i = (intent or "").strip().lower()
+    mapping = {
+        "greeting": "تحية",
+        "chat.greeting": "تحية",
+        "smalltalk": "سؤال حال",
+        "chat.smalltalk": "سؤال حال",
+        "definition": "تعريف",
+        "chat.definition": "تعريف",
+        "advice": "نصيحة",
+        "chat.advice": "نصيحة",
+        "planning": "تخطيط",
+        "chat.planning": "تخطيط",
+        "support": "دعم",
+        "chat.support": "دعم",
+        "thanks": "شكر",
+        "chat.thanks": "شكر",
+    }
+    return mapping.get(i, "")
+
+
+def _topic_condition_line(topic: str | None) -> str:
+    t = (topic or "").strip()
+    if t:
+        return f"النظام: المصطلح: {t}"
     return ""
