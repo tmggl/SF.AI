@@ -52,7 +52,7 @@ Phase 27.25 اختبرت checkpoint نفسه على أسئلة held-out جديد
 `16/18` مع intent/topic conditioning. Phase 27.31–27.33 أكملت natural
 intent/topic + balanced calibration + advice/micro stabilization، ووصلت إلى
 كل البوابات المحلية كاملة: fresh mixed `18/18` وmicro `32/32` بلا تسريب.
-الخطوة الحالية ليست تكبير النموذج كاملًا. Phase 27.50 جعل الواجهة و`/chat/message` مختبرًا مولّدًا فقط: لا قوالب ظاهرة، إما رد من `sf_10m_phase27_47` أو `generator_blocked` فارغ. Phase 27.51 أثبت أن checkpoint الحالي لا يعمم على حوار طبيعي مفتوح (`raw natural=1/20`). Phase 27.52 ضاعف تدريب `SF-10M` إلى `9200` خطوة ورفع المؤشر إلى `5/20` فقط. Phase 27.53 وسّع البيانات إلى `10,540` زوجًا فريدًا و`18,000` خطوة، لكن raw natural صار `2/36` مع خلط/fragments. Phase 27.54 منع التكبير الكامل وسمح بتشخيص فقط. Phase 27.55 نفّذ التشخيص: `SF-10M=3/20` و`SF-50M=4/20` فقط، لذلك السعة وحدها غير كافية.
+الخطوة الحالية ليست تكبير النموذج كاملًا. Phase 27.50 جعل الواجهة و`/chat/message` مختبرًا مولّدًا فقط: لا قوالب ظاهرة، إما رد من `sf_10m_phase27_47` أو `generator_blocked` فارغ. Phase 27.51 أثبت أن checkpoint الحالي لا يعمم على حوار طبيعي مفتوح (`raw natural=1/20`). Phase 27.52 ضاعف تدريب `SF-10M` إلى `9200` خطوة ورفع المؤشر إلى `5/20` فقط. Phase 27.53 وسّع البيانات إلى `10,540` زوجًا فريدًا و`18,000` خطوة، لكن raw natural صار `2/36` مع خلط/fragments. Phase 27.54 منع التكبير الكامل. Phase 27.55 أثبت أن السعة وحدها غير كافية (`3/20` مقابل `4/20`). Phase 27.56 شخّص أن الإصلاح التالي يجب أن يكون tokenizer/eval/format قبل أي تدريب جديد.
 
 الخطوة العملية الحالية:
 
@@ -215,6 +215,7 @@ SF.AI حاليًا:
 - **Phase 27.53:** Natural Dialogue Diversity Expansion — مكتمل جزئيًا؛ `10,540` زوجًا، raw natural `2/36`, لا runtime switch.
 - **Phase 27.54:** Capacity/Objectivity Gate — مكتمل؛ التكبير الكامل ممنوع، والمسموح فقط micro-probe تشخيصي في Phase 27.55.
 - **Phase 27.55:** Controlled SF-50M Diagnostic Micro-Probe — مكتمل؛ `SF-10M=3/20`, `SF-50M=4/20`, لا runtime ولا تدريب كامل.
+- **Phase 27.56:** Objective/Format/Tokenizer Diagnosis — مكتمل؛ `SF-50M relaxed=9/20`, و9 splits حرجة في tokenizer.
 - **Phase 28:** تدريب `SF-120M v0.1`؛ أول قفزة بعد نجاح `SF-50M`.
 - **Phase 29:** Runtime Hybrid Assistant v1.
 - **Phase 30:** Continuous Improvement Loop.

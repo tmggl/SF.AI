@@ -83,10 +83,10 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.55: جرّبنا micro-probe مضبوطًا يقارن SF-10M وSF-50M "
-    "على نفس البيانات. النتيجة: SF-10M = 3/20 وSF-50M = 4/20 فقط؛ لذلك "
-    "التكبير الكامل والواجهة ما زالا محجوبين. التالي Phase 27.56 لإصلاح "
-    "objective/format/tokenization قبل أي محاولة سعة جديدة.",
+    "وصلنا إلى Phase 27.56: شخّصنا فشل 27.55. النتيجة: SF-50M strict = 4/20 "
+    "لكن relaxed بدون overlap = 9/20، ومعه 9 مصطلحات حوارية تتكسر في tokenizer "
+    "وخلط واضح بين عائلات الردود. التالي Phase 27.57 لإصلاح tokenizer/eval/format "
+    "قبل أي تدريب جديد.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

@@ -432,3 +432,24 @@ def test_phase27_55_sf50m_diagnostic_micro_probe_keeps_full_scaling_blocked() ->
     assert report["sf50m_full_training_allowed"] is False
     assert report["sf50m_diagnostic_continuation_allowed"] is False
     assert report["phase28_allowed"] is False
+
+
+def test_phase27_56_objective_format_tokenizer_diagnosis_identifies_blockers() -> None:
+    report = _report("phase27_56_objective_format_tokenizer_diagnosis_report.json")
+    assert report["phase"] == "Phase 27.56"
+    assert report["status"] == "COMPLETED_OBJECTIVE_FORMAT_TOKENIZER_DIAGNOSIS_RUNTIME_BLOCKED"
+    assert report["training_started"] is False
+    assert report["capacity_result"]["delta_passed"] == 1
+    assert report["capacity_result"]["capacity_alone_failed"] is True
+    assert report["model_diagnosis"]["sf-50m"]["strict_passed"] == 4
+    assert report["model_diagnosis"]["sf-50m"]["relaxed_semantic_passed"] == 9
+    assert report["model_diagnosis"]["sf-50m"]["expected_terms_missing_count"] == 9
+    assert report["model_diagnosis"]["sf-50m"]["response_family_confusion_count"] == 11
+    assert report["tokenization_diagnosis"]["critical_aggressive_split_count"] == 9
+    assert report["root_cause_assessment"]["capacity_is_primary_fix"] is False
+    assert report["root_cause_assessment"]["objective_alignment_blocker"] is True
+    assert report["root_cause_assessment"]["eval_overlap_rule_too_strict"] is True
+    assert report["root_cause_assessment"]["tokenizer_saudi_social_terms_need_repair"] is True
+    assert report["decisions"]["runtime_switch_allowed"] is False
+    assert report["decisions"]["sf50m_full_training_allowed"] is False
+    assert report["decisions"]["next_training_allowed"] is False

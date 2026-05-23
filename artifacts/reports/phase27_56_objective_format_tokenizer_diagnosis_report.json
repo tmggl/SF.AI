@@ -1,0 +1,533 @@
+{
+  "phase": "Phase 27.56",
+  "status": "COMPLETED_OBJECTIVE_FORMAT_TOKENIZER_DIAGNOSIS_RUNTIME_BLOCKED",
+  "training_started": false,
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "source_phase": "Phase 27.55",
+  "capacity_result": {
+    "sf10m_passed": 3,
+    "sf50m_passed": 4,
+    "delta_passed": 1,
+    "capacity_alone_failed": true
+  },
+  "model_diagnosis": {
+    "sf-10m": {
+      "strict_passed": 3,
+      "total": 20,
+      "relaxed_semantic_passed": 7,
+      "relaxed_gain": 4,
+      "overlap_false_negative_ids": [
+        "social_chat",
+        "planning_light",
+        "support_tired",
+        "support_pressure"
+      ],
+      "expected_terms_missing_count": 11,
+      "expected_terms_missing_ids": [
+        "followup_free_choice",
+        "followup_continue",
+        "followup_why",
+        "followup_meaning",
+        "social_topic_choice",
+        "social_today",
+        "topic_friendship_talk",
+        "topic_honesty_example",
+        "topic_calm_life",
+        "planning_many_tasks",
+        "support_anxious"
+      ],
+      "guard_block_count": 2,
+      "guard_block_ids": [
+        "social_new_topic",
+        "support_short"
+      ],
+      "unique_responses": 12,
+      "top_repeated_responses": [
+        {
+          "count": 6,
+          "response": "ابدأ بشي واحد واضح، وبعده قيّم وش صار."
+        },
+        {
+          "count": 2,
+          "response": "ابدأ بكل شيء دفعة واحدة."
+        },
+        {
+          "count": 2,
+          "response": "أنت مو مطالب تحل كل شيء الآن. اهدأ وخذ دقيقة لنفسك."
+        },
+        {
+          "count": 2,
+          "response": "ابدأ بمهمة واحدة واضحة، ولا تفتح كل الأعمال في وقت واحد."
+        },
+        {
+          "count": 1,
+          "response": "ابدأ بكل سرور. أخبرني عن يومك أو عن فكرة تشغل بالك."
+        }
+      ],
+      "response_family_confusion_count": 13,
+      "response_family_confusion_examples": [
+        {
+          "id": "followup_free_choice",
+          "bucket": "followup",
+          "response_category_guess": "planning",
+          "response": "ابدأ بشي واحد واضح، وبعده قيّم وش صار."
+        },
+        {
+          "id": "followup_continue",
+          "bucket": "followup",
+          "response_category_guess": "open_social",
+          "response": "ابدأ بكل سرور. أخبرني عن يومك أو عن فكرة تشغل بالك."
+        },
+        {
+          "id": "followup_why",
+          "bucket": "followup",
+          "response_category_guess": "planning",
+          "response": "ابدأ بشي واحد واضح، وبعده قيّم وش صار."
+        },
+        {
+          "id": "followup_meaning",
+          "bucket": "followup",
+          "response_category_guess": "planning",
+          "response": "ابدأ بشي واحد واضح، وبعده قيّم وش صار."
+        },
+        {
+          "id": "social_topic_choice",
+          "bucket": "open_social",
+          "response_category_guess": "planning",
+          "response": "ابدأ بشي واحد واضح، وبعده قيّم وش صار."
+        },
+        {
+          "id": "social_new_topic",
+          "bucket": "open_social",
+          "response_category_guess": "planning",
+          "response": "ابدأ بكل شيء دفعة واحدة."
+        },
+        {
+          "id": "social_today",
+          "bucket": "open_social",
+          "response_category_guess": "planning",
+          "response": "ابدأ بشي واحد واضح، وبعده قيّم وش صار."
+        },
+        {
+          "id": "topic_friendship_talk",
+          "bucket": "topic",
+          "response_category_guess": "planning",
+          "response": "ابدأ بشي واحد واضح، وبعده قيّم وش صار."
+        },
+        {
+          "id": "topic_honesty_example",
+          "bucket": "topic",
+          "response_category_guess": "followup",
+          "response": "ابدأ من نقطة واحدة ولا تختار خطوة تفتح كل شيء مرة وحدة."
+        },
+        {
+          "id": "topic_calm_life",
+          "bucket": "topic",
+          "response_category_guess": "support",
+          "response": "أنت مو مطالب تحل كل شيء الآن. اهدأ وخذ دقيقة لنفسك."
+        }
+      ]
+    },
+    "sf-50m": {
+      "strict_passed": 4,
+      "total": 20,
+      "relaxed_semantic_passed": 9,
+      "relaxed_gain": 5,
+      "overlap_false_negative_ids": [
+        "social_chat",
+        "planning_many_tasks",
+        "support_tired",
+        "support_anxious",
+        "support_pressure"
+      ],
+      "expected_terms_missing_count": 9,
+      "expected_terms_missing_ids": [
+        "followup_free_choice",
+        "followup_continue",
+        "followup_why",
+        "followup_meaning",
+        "social_topic_choice",
+        "social_new_topic",
+        "social_today",
+        "topic_friendship_talk",
+        "planning_light"
+      ],
+      "guard_block_count": 2,
+      "guard_block_ids": [
+        "topic_honesty_example",
+        "support_short"
+      ],
+      "unique_responses": 14,
+      "top_repeated_responses": [
+        {
+          "count": 4,
+          "response": "رتبها حسب الأهمية، ثم اختر أول عمل وتقدّم فيه قليلًا."
+        },
+        {
+          "count": 2,
+          "response": "أنت مو مطالب تحل كل شيء الآن. اهدأ وخذ دقيقة لنفسك."
+        },
+        {
+          "count": 2,
+          "response": "الهدوء يخليك تفكر أوضح وترد بدون استعجال."
+        },
+        {
+          "count": 2,
+          "response": "أنت تستطيع أن تبدأ بهدوء. لا يلزم حل كل شيء دفعة واحدة."
+        },
+        {
+          "count": 1,
+          "response": "حياك. نقدر نسولف عن يومك أو عن شيء خفيف تحبه."
+        }
+      ],
+      "response_family_confusion_count": 11,
+      "response_family_confusion_examples": [
+        {
+          "id": "followup_free_choice",
+          "bucket": "followup",
+          "response_category_guess": "support",
+          "response": "أنت مو مطالب تحل كل شيء الآن. اهدأ وخذ دقيقة لنفسك."
+        },
+        {
+          "id": "followup_continue",
+          "bucket": "followup",
+          "response_category_guess": "planning",
+          "response": "رتبها حسب الأهمية، ثم اختر أول عمل وتقدّم فيه قليلًا."
+        },
+        {
+          "id": "followup_why",
+          "bucket": "followup",
+          "response_category_guess": "planning",
+          "response": "رتبها حسب الأهمية، ثم اختر أول عمل وتقدّم فيه قليلًا."
+        },
+        {
+          "id": "followup_meaning",
+          "bucket": "followup",
+          "response_category_guess": "planning",
+          "response": "رتبها حسب الأهمية، ثم اختر أول عمل وتقدّم فيه قليلًا."
+        },
+        {
+          "id": "social_new_topic",
+          "bucket": "open_social",
+          "response_category_guess": "followup",
+          "response": "أقصد أن تحفظ المعروف ولا تنسى من وقف معك."
+        },
+        {
+          "id": "social_today",
+          "bucket": "open_social",
+          "response_category_guess": "planning",
+          "response": "اكتب أهم شيين عندك اليوم وابدأ بالأقرب والأسهل."
+        },
+        {
+          "id": "topic_friendship_talk",
+          "bucket": "topic",
+          "response_category_guess": "followup",
+          "response": "الهدوء يخليك تفكر أوضح وترد بدون استعجال."
+        },
+        {
+          "id": "topic_honesty_example",
+          "bucket": "topic",
+          "response_category_guess": "support",
+          "response": "أنت تستطيع أن تبدأ بهدوء. لا يلزم حل كل شيء دفعة واحدة."
+        },
+        {
+          "id": "topic_calm_life",
+          "bucket": "topic",
+          "response_category_guess": "followup",
+          "response": "الهدوء يخليك تفكر أوضح وترد بدون استعجال."
+        },
+        {
+          "id": "planning_confused",
+          "bucket": "planning",
+          "response_category_guess": "followup",
+          "response": "ابدأ بأصغر خطوة تفتح لك الطريق، حتى لو كانت خمس دقائق."
+        }
+      ]
+    }
+  },
+  "tokenization_diagnosis": {
+    "tokenizer": "artifacts/tokenizers/sf_bpe/v6_weak_lane_terms",
+    "terms_total": 55,
+    "aggressive_split_count": 26,
+    "critical_aggressive_split_count": 9,
+    "critical_aggressive_terms": [
+      {
+        "term": "الي تحب",
+        "pieces": 4,
+        "tokens": [
+          "ال",
+          "ي",
+          "تح",
+          "ب"
+        ],
+        "aggressive": true
+      },
+      {
+        "term": "توترت",
+        "pieces": 3,
+        "tokens": [
+          "ت",
+          "وت",
+          "رت"
+        ],
+        "aggressive": true
+      },
+      {
+        "term": "حاس بضغط",
+        "pieces": 3,
+        "tokens": [
+          "حاس",
+          "ب",
+          "ضغط"
+        ],
+        "aggressive": true
+      },
+      {
+        "term": "سولف",
+        "pieces": 3,
+        "tokens": [
+          "س",
+          "ول",
+          "ف"
+        ],
+        "aggressive": true
+      },
+      {
+        "term": "طمني",
+        "pieces": 3,
+        "tokens": [
+          "ط",
+          "م",
+          "ني"
+        ],
+        "aggressive": true
+      },
+      {
+        "term": "كمل كلامك",
+        "pieces": 3,
+        "tokens": [
+          "ك",
+          "مل",
+          "كلامك"
+        ],
+        "aggressive": true
+      },
+      {
+        "term": "نسولف",
+        "pieces": 3,
+        "tokens": [
+          "نس",
+          "ول",
+          "ف"
+        ],
+        "aggressive": true
+      },
+      {
+        "term": "هات موضوع",
+        "pieces": 4,
+        "tokens": [
+          "ها",
+          "ت",
+          "م",
+          "وضوع"
+        ],
+        "aggressive": true
+      },
+      {
+        "term": "يومي كان طويل",
+        "pieces": 3,
+        "tokens": [
+          "يومي",
+          "كان",
+          "طويل"
+        ],
+        "aggressive": true
+      }
+    ],
+    "worst_terms": [
+      {
+        "term": "تعبان شوي واحتاج كلام يهديني",
+        "pieces": 10,
+        "tokens": [
+          "ت",
+          "عبا",
+          "ن",
+          "شوي",
+          "وا",
+          "حتاج",
+          "كلام",
+          "ي",
+          "هدي",
+          "ني"
+        ],
+        "aggressive": true
+      },
+      {
+        "term": "اخبرني عن الشجاعة بأسلوب بسيط",
+        "pieces": 8,
+        "tokens": [
+          "ا",
+          "خ",
+          "بر",
+          "ني",
+          "عن",
+          "الشجاعة",
+          "بأسلوب",
+          "بسيط"
+        ],
+        "aggressive": true
+      },
+      {
+        "term": "رتب لي بداية بسيطة بدون تعقيد",
+        "pieces": 8,
+        "tokens": [
+          "رتب",
+          "لي",
+          "بداية",
+          "بسيطة",
+          "بدون",
+          "تع",
+          "ق",
+          "يد"
+        ],
+        "aggressive": true
+      },
+      {
+        "term": "اعطني مثال بسيط عن الصدق",
+        "pieces": 7,
+        "tokens": [
+          "اع",
+          "ط",
+          "ني",
+          "مثال",
+          "بسيط",
+          "عن",
+          "الصدق"
+        ],
+        "aggressive": true
+      },
+      {
+        "term": "عندي أشياء كثيرة ومتشتت",
+        "pieces": 7,
+        "tokens": [
+          "عندي",
+          "أش",
+          "ياء",
+          "كثيرة",
+          "ومت",
+          "شت",
+          "ت"
+        ],
+        "aggressive": true
+      },
+      {
+        "term": "كيف أهدأ إذا توترت؟",
+        "pieces": 7,
+        "tokens": [
+          "كيف",
+          "أهدأ",
+          "إذا",
+          "ت",
+          "وت",
+          "رت",
+          "؟"
+        ],
+        "aggressive": true
+      },
+      {
+        "term": "الهدوء في اليوم وش يفيدني؟",
+        "pieces": 6,
+        "tokens": [
+          "الهدوء",
+          "في",
+          "اليوم",
+          "وش",
+          "يفيد",
+          "ني؟"
+        ],
+        "aggressive": true
+      },
+      {
+        "term": "وش ودك نسولف عنه؟",
+        "pieces": 6,
+        "tokens": [
+          "وش",
+          "ودك",
+          "نس",
+          "ول",
+          "ف",
+          "عنه؟"
+        ],
+        "aggressive": true
+      },
+      {
+        "term": "أنا محتار من وين أبدأ",
+        "pieces": 5,
+        "tokens": [
+          "أنا",
+          "محتار",
+          "من",
+          "وين",
+          "أبدأ"
+        ],
+        "aggressive": true
+      },
+      {
+        "term": "اشرح لي كيف ابدأ يومي",
+        "pieces": 5,
+        "tokens": [
+          "اشرح",
+          "لي",
+          "كيف",
+          "ابدأ",
+          "يومي"
+        ],
+        "aggressive": true
+      },
+      {
+        "term": "سولف معي شوي",
+        "pieces": 5,
+        "tokens": [
+          "س",
+          "ول",
+          "ف",
+          "معي",
+          "شوي"
+        ],
+        "aggressive": true
+      },
+      {
+        "term": "طمني بكلام بسيط",
+        "pieces": 5,
+        "tokens": [
+          "ط",
+          "م",
+          "ني",
+          "بكلام",
+          "بسيط"
+        ],
+        "aggressive": true
+      }
+    ]
+  },
+  "root_cause_assessment": {
+    "capacity_is_primary_fix": false,
+    "objective_alignment_blocker": true,
+    "response_family_collapse": true,
+    "eval_overlap_rule_too_strict": true,
+    "tokenizer_saudi_social_terms_need_repair": true,
+    "format_conditioning_gap": true
+  },
+  "decisions": {
+    "runtime_switch_allowed": false,
+    "sf50m_full_training_allowed": false,
+    "phase28_allowed": false,
+    "next_training_allowed": false,
+    "next_phase_should_repair_tooling_first": true
+  },
+  "next_phase": "Phase 27.57 — tokenizer/eval/format repair pack: protect Saudi social/follow-up terms, replace prompt-overlap gate with semantic-alignment checks, and define a non-keyword format probe before retraining"
+}

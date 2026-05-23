@@ -315,6 +315,9 @@ phase27-capacity-objectivity-gate:
 phase27-sf50m-diagnostic-micro-probe:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_55_sf50m_diagnostic_micro_probe.py $(ARGS)
 
+phase27-objective-format-tokenizer-diagnosis:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_56_objective_format_tokenizer_diagnosis.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 

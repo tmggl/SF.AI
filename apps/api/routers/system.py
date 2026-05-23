@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.55 — Controlled SF-50M Diagnostic Micro-Probe",
-        current_phase_status="completed_diagnostic_capacity_signal_failed_full_sf50m_blocked",
+        current_phase="Phase 27.56 — Objective/Format/Tokenizer Diagnosis",
+        current_phase_status="completed_objective_format_tokenizer_diagnosis_runtime_blocked",
         next_phase=(
-            "Phase 27.56 objective/format/tokenizer diagnosis before another capacity attempt"
+            "Phase 27.57 tokenizer/eval/format repair pack before retraining"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -389,6 +389,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_55_sf50m_diagnostic_micro_probe",
                 status="completed_diagnostic_capacity_signal_failed_full_sf50m_blocked",
                 phase="Phase 27.55",
+            ),
+            ComponentStatus(
+                name="phase27_56_objective_format_tokenizer_diagnosis",
+                status="completed_objective_format_tokenizer_diagnosis_runtime_blocked",
+                phase="Phase 27.56",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

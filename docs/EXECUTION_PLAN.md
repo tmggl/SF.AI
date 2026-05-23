@@ -125,6 +125,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.53 | Natural Dialogue Diversity Expansion | مكتملة جزئيًا؛ `10,540` زوجًا و`18,000` خطوة، raw natural `2/36`, لا runtime switch |
 | Phase 27.54 | Capacity/Objectivity Gate | مكتملة؛ التكبير الكامل ممنوع، micro-probe تشخيصي فقط في Phase 27.55 |
 | Phase 27.55 | Controlled SF-50M Diagnostic Micro-Probe | مكتملة؛ `SF-10M=3/20`, `SF-50M=4/20`, السعة وحدها غير كافية |
+| Phase 27.56 | Objective/Format/Tokenizer Diagnosis | مكتملة؛ strict `4/20` وrelaxed `9/20`; إصلاح tokenizer/eval/format قبل التدريب |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3173,6 +3174,43 @@ cases = 7/7
 - `artifacts/reports/phase27_55_sf50m_diagnostic_micro_probe_report.json`
 - `artifacts/samples/phase27_55_sf50m_diagnostic_micro_probe.md`
 - checkpoints محلية غير مرفوعة: `artifacts/eval/phase27_55_sf50m_diagnostic_micro_probe/`
+
+---
+
+## Phase 27.56 — Objective/Format/Tokenizer Diagnosis
+
+### الهدف
+تشخيص سبب فشل Phase 27.55 قبل أي تدريب جديد: هل المشكلة في السعة، أو objective/format، أو tokenizer، أو eval.
+
+### ما تم
+- أضيف `scripts/phase27_56_objective_format_tokenizer_diagnosis.py`.
+- أضيف `make phase27-objective-format-tokenizer-diagnosis`.
+- لم يبدأ تدريب جديد.
+- قرأ التقرير والعينات من Phase 27.55، ودقق:
+  - strict pass.
+  - relaxed semantic pass بدون شرط overlap.
+  - expected-term failures.
+  - response-family confusion.
+  - tokenization splits للمصطلحات السعودية/الحوارية.
+
+### النتيجة
+- capacity delta من 27.55 بقي `1`.
+- `SF-50M strict`: `4/20`.
+- `SF-50M relaxed`: `9/20`.
+- `expected_terms_missing`: `9`.
+- `response_family_confusion`: `11`.
+- critical tokenizer splits: `9`.
+
+### القرار
+لا runtime switch، لا `SF-50M` كامل، ولا تدريب جديد قبل إصلاح tokenizer/eval/format.
+
+التالي:
+
+**Phase 27.57 — tokenizer/eval/format repair pack**
+
+### artifacts
+- [PHASE27_56_OBJECTIVE_FORMAT_TOKENIZER_DIAGNOSIS_REPORT.md](./PHASE27_56_OBJECTIVE_FORMAT_TOKENIZER_DIAGNOSIS_REPORT.md)
+- `artifacts/reports/phase27_56_objective_format_tokenizer_diagnosis_report.json`
 
 ---
 

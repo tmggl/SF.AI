@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.55 / 30**
-- **المرحلة الحالية:** **Phase 27.55 — Controlled SF-50M Diagnostic Micro-Probe**
-- **حالة المرحلة الحالية:** **مكتملة؛ SF-50M أعطى 4/20 فقط مقابل SF-10M 3/20، لذلك السعة وحدها لم تثبت حلًا**
-- **المرحلة التالية المقترحة:** Phase 27.56 objective/format/tokenizer diagnosis؛ لا محاولة سعة جديدة ولا runtime switch قبل فهم السبب.
+- **الرحلة الحالية:** **Phase 27.56 / 30**
+- **المرحلة الحالية:** **Phase 27.56 — Objective/Format/Tokenizer Diagnosis**
+- **حالة المرحلة الحالية:** **مكتملة؛ حدّدنا أن العائق في objective/eval/tokenizer وليس السعة وحدها**
+- **المرحلة التالية المقترحة:** Phase 27.57 tokenizer/eval/format repair pack؛ لا تدريب جديد قبل إصلاح أدوات القياس والتمثيل.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -104,6 +104,7 @@
 | Phase 27.53 | Natural Dialogue Diversity Expansion | ✅ completed_partial_keep_phase27_47_runtime | ✅ |
 | Phase 27.54 | Capacity/Objectivity Gate | ✅ completed_full_scaling_blocked_diagnostic_micro_probe_allowed | ✅ |
 | Phase 27.55 | Controlled SF-50M Diagnostic Micro-Probe | ✅ completed_diagnostic_capacity_signal_failed_full_sf50m_blocked | ✅ |
+| Phase 27.56 | Objective/Format/Tokenizer Diagnosis | ✅ completed_objective_format_tokenizer_diagnosis_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -815,6 +816,16 @@
   - القرار: السعة وحدها لم تثبت حل الحوار المفتوح؛ لا runtime switch، لا تدريب `SF-50M` كامل، ولا Phase 28.
   - التالي: Phase 27.56 objective/format/tokenizer diagnosis قبل أي محاولة سعة جديدة.
   - أضيف [PHASE27_55_SF50M_DIAGNOSTIC_MICRO_PROBE_REPORT.md](./PHASE27_55_SF50M_DIAGNOSTIC_MICRO_PROBE_REPORT.md).
+- بدأ وانتهى Phase 27.56 Objective/Format/Tokenizer Diagnosis:
+  - أضيف `make phase27-objective-format-tokenizer-diagnosis`.
+  - لم يبدأ تدريب جديد ولم يتغير runtime.
+  - شخّص تقرير Phase 27.55 من أربع زوايا: capacity، objective/format، eval، tokenizer.
+  - النتيجة: `SF-50M strict=4/20` لكنه يصبح `9/20` عند تجاهل شرط overlap؛ هذا يكشف عيبًا في gate الحالي.
+  - بقي `9` expected-missing و`11` response-family confusion في `SF-50M`.
+  - tokenizer v6 يكسر `9` مصطلحات/عبارات حوارية حرجة، منها `نسولف` و`طمني` و`الي تحب`.
+  - القرار: لا runtime، لا `SF-50M` كامل، ولا تدريب جديد قبل إصلاح tokenizer/eval/format.
+  - التالي: Phase 27.57 tokenizer/eval/format repair pack.
+  - أضيف [PHASE27_56_OBJECTIVE_FORMAT_TOKENIZER_DIAGNOSIS_REPORT.md](./PHASE27_56_OBJECTIVE_FORMAT_TOKENIZER_DIAGNOSIS_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
