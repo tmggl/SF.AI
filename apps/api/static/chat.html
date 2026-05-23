@@ -555,7 +555,9 @@
   function exportQuality() {
     const users = transcript.filter((t) => t.role === "user" && (t.content || "").trim());
     const assistants = transcript.filter((t) => t.role === "assistant" && (t.content || "").trim());
-    const raw = assistants.filter((t) => t.generator === "sf_10m_v0_1");
+    const raw = assistants.filter((t) =>
+      t.generator === "sf_10m_v0_1" || t.generator === "sf_10m_v0_2"
+    );
     const sensitive = assistants.filter((t) => t.requires_safety);
     if (users.length === 0 && assistants.length === 0) {
       return {
@@ -624,6 +626,7 @@
     if (key === "generator") {
       if (v === "template") return "قالب ثابت - ليس مولدًا";
       if (v === "sf_10m_v0_1") return "نموذج SF-10M خام غير جاهز";
+      if (v === "sf_10m_v0_2") return "Canary SF-10M v0.2";
     }
     if (key === "rag") {
       if (v === "used") return "مستخدمة";
@@ -761,7 +764,8 @@
 
   function buildReviewRecord() {
     const rawGeneratorTurns = transcript.filter(
-      (t) => t.role === "assistant" && t.generator === "sf_10m_v0_1"
+      (t) => t.role === "assistant" &&
+        (t.generator === "sf_10m_v0_1" || t.generator === "sf_10m_v0_2")
     );
     const clean = transcript
       .filter((t) => (t.role === "user" || t.role === "assistant") && (t.content || "").trim())
@@ -819,7 +823,8 @@
         ui_quality_blockers: quality.blockers,
         assistant_generator_counts: {
           template: transcript.filter((t) => t.role === "assistant" && (t.generator || "template") === "template").length,
-          sf_10m_v0_1: rawGeneratorTurns.length
+          sf_10m_v0_1: transcript.filter((t) => t.role === "assistant" && t.generator === "sf_10m_v0_1").length,
+          sf_10m_v0_2: transcript.filter((t) => t.role === "assistant" && t.generator === "sf_10m_v0_2").length
         },
         contains_raw_generator_output: rawGeneratorTurns.length > 0
       },

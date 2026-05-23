@@ -71,7 +71,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 22 | Gold Dialogue Corpus v2 | مكتملة؛ corpus 500/500 جاهز لـ Phase 23 |
 | Phase 23 | Tokenizer v2 Retrain & Audit | مكتملة؛ v2 جاهز لـ Phase 24 |
 | Phase 24 | SF-10M v0.2 Quality Training | مكتملة بحدود؛ runtime محظور |
-| Phase 25 | Generated Chat Canary v1 | مخططة |
+| Phase 25 | Generated Chat Canary v1 | مكتملة كحماية؛ real model blocked |
 | Phase 26 | SF-50M v0.1 Dialogue Model | مخططة؛ أول فرصة لحوار مولّد قصير مقنع |
 | Phase 27 | Dialogue Evaluation v2 | مخططة |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
@@ -1207,6 +1207,38 @@ COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED
 - الواجهة تعرض بوضوح `generator=sf_10m_v0_2`.
 - detector للتكرار يمنع الرد الرديء من الظهور كأنه نجاح.
 - يمكن لسامي اختبار نفس prompts قبل/بعد التدريب.
+
+### نتيجة التنفيذ
+
+Phase 25 اكتملت بقرار:
+
+```text
+COMPLETED_GUARDED_CANARY_REAL_MODEL_BLOCKED
+```
+
+ما تحقق:
+
+- أضيف `GenerationGuard`.
+- أضيف شرط `SF_GENERATOR_CANARY=true` فوق فلاغات المختبر السابقة.
+- حُدّث `NativeGenerator` إلى `sf_10m_v0_2`.
+- إذا فشل canary، يعود `ChatModule` إلى القالب ويضيف:
+  - `native_generator:canary_blocked`
+  - `generation_guard:<reason>`
+
+التجربة الحقيقية:
+
+```text
+prompt: اكتب رد قصير عن هدف SF.AI
+decision: blocked
+reason: malformed_token
+fallback: template
+```
+
+القرار العملي:
+
+- canary نجح كحماية.
+- `SF-10M v0.2` لم ينجح كمحادثة مفتوحة.
+- Phase 26 لا يبدأ كتدريب أكبر أعمى؛ يبدأ ببوابة readiness/scaling.
 
 ### بعد المرحلة
 انتقل إلى Phase 26.

@@ -26,11 +26,12 @@ from sf_ai.training.device import DeviceManager
 
 @dataclass(frozen=True)
 class NativeGeneratorConfig:
-    tokenizer_path: Path = Path("artifacts/tokenizers/sf_bpe/v1")
-    checkpoints_root: Path = Path("artifacts/checkpoints/sf_10m_v0_1")
-    checkpoint_name: str = "sf-10m-step33"
+    tokenizer_path: Path = Path("artifacts/tokenizers/sf_bpe/v2")
+    checkpoints_root: Path = Path("artifacts/checkpoints/sf_10m_v0_2")
+    checkpoint_name: str = "sf-10m-step2000"
+    generator_name: str = "sf_10m_v0_2"
     model_size: str = "sf-10m"
-    seq_len: int = 16
+    seq_len: int = 64
     max_new_tokens: int = 48
     temperature: float = 0.20
     top_k: int = 0
@@ -50,7 +51,7 @@ class NativeGeneratorStatus:
     tokenizer_exists: bool
     checkpoint_meta_exists: bool
     checkpoint_state_exists: bool
-    generator: str = "sf_10m_v0_1"
+    generator: str = "sf_10m_v0_2"
 
 
 class NativeGenerator:
@@ -68,6 +69,7 @@ class NativeGenerator:
             tokenizer_exists=(self.config.tokenizer_path / "meta.json").exists(),
             checkpoint_meta_exists=(ckpt_dir / "meta.json").exists(),
             checkpoint_state_exists=(ckpt_dir / "state.pt").exists(),
+            generator=self.config.generator_name,
         )
 
     def generate(
@@ -79,7 +81,7 @@ class NativeGenerator:
         top_k: int | None = None,
     ) -> NativeGenerationResult:
         if not prompt.strip():
-            return NativeGenerationResult(False, "", "sf_10m_v0_1", "empty_prompt")
+            return NativeGenerationResult(False, "", self.config.generator_name, "empty_prompt")
 
         status = self.status()
         if not status.tokenizer_exists:

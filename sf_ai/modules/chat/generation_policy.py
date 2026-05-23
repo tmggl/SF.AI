@@ -51,16 +51,18 @@ class GenerationDecision:
 class GenerationPolicy:
     enabled: bool = False
     experimental_runtime: bool = False
+    canary: bool = False
     min_confidence: float = 0.80
     max_new_tokens: int = 48
     temperature: float = 0.20
     top_k: int = 0
 
     @classmethod
-    def from_env(cls) -> "GenerationPolicy":
+    def from_env(cls) -> GenerationPolicy:
         return cls(
             enabled=_env_true("SF_ENABLE_NATIVE_GENERATOR"),
             experimental_runtime=_env_true("SF_NATIVE_GENERATOR_EXPERIMENTAL"),
+            canary=_env_true("SF_GENERATOR_CANARY"),
         )
 
     def decide(
@@ -87,4 +89,6 @@ class GenerationPolicy:
             return GenerationDecision(False, "low_confidence")
         if intent in _TEMPLATE_FIRST_INTENTS:
             return GenerationDecision(False, "template_first_social_intent")
-        return GenerationDecision(True, "allowed", generator="sf_10m_v0_1")
+        if not self.canary:
+            return GenerationDecision(False, "canary_disabled")
+        return GenerationDecision(True, "allowed", generator="sf_10m_v0_2")

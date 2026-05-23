@@ -10,10 +10,10 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 24 / 30**
-- **المرحلة الحالية:** **Phase 24 — SF-10M v0.2 Quality Training** (اكتملت بحدود؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **الرحلة الحالية:** **Phase 25 / 30**
+- **المرحلة الحالية:** **Phase 25 — Generated Chat Canary v1** (اكتملت كحماية runtime؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** Phase 25 — Generated Chat Canary v1، لتجربة `SF-10M v0.2` خلف fallback صارم فقط.
+- **المرحلة التالية المقترحة:** Phase 26 — تبدأ كقرار readiness/scaling قبل أي تدريب `SF-50M`.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
@@ -34,6 +34,8 @@
 - **نتيجة Phase 24:** دُرّب `SF-10M v0.2` على tokenizer v2 وcorpus المتوازن 2000 خطوة: loss `8.4751 → 2.8256`, eval loss `2.5779`, perplexity `13.17`. القرار `COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED`: تحسن رقميًا لكنه لا يزال غير صالح للرد الواسع في الواجهة.
 - **تقرير Phase 24:** `docs/PHASE24_SF10M_V0_2_REPORT.md`, `artifacts/reports/sf_10m_v0_2_training_report.json`, `artifacts/samples/sf_10m_v0_2_generations.md`.
 - **Checkpoint Phase 24 المحلي:** `artifacts/checkpoints/sf_10m_v0_2/sf-10m-step2000`; ملفات checkpoints مستثناة من git حسب السياسة.
+- **نتيجة Phase 25:** أضيف `GenerationGuard` وفلاغ `SF_GENERATOR_CANARY` ومسار `sf_10m_v0_2` guarded. التجربة الحقيقية حُجبت بـ `generation_guard:malformed_token` ورجع الرد إلى `template`. القرار `COMPLETED_GUARDED_CANARY_REAL_MODEL_BLOCKED`.
+- **تقرير Phase 25:** `docs/PHASE25_GENERATED_CHAT_CANARY_REPORT.md`, `artifacts/reports/phase25_generation_canary_report.json`.
 - **مقارنة tokenizer v1/v2:** v1 كان `vocab=261`, `merges=218`, `words_seen=723`, سعودي فقط. v2 تدرب على `500` سجل متوازن: `msa=250`, `saudi=250`.
 - **تحسن protected Saudi terms:** `average_tokens` انخفض من `4.0` في v1 إلى `2.3` في v2، ولا توجد `roundtrip_failures` أو `aggressive_split_terms`.
 - **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches=[]` لأن الجمع اكتمل.
@@ -45,7 +47,7 @@
 - **فصل المستخدمين من الأساس:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` حتى لا تختلط محادثات المستخدمين عند التوسع لاحقًا.
 - **بنك تأليف فصيح غير تدريبي:** أضيف `resources/phase22_authoring/msa_prompt_bank_v1.json` وفيه 80+ موضوعًا فصيحًا لتسهيل كتابة batches الفصحى؛ الملف `training_allowed=false` و`synthetic_llm_data=false` ولا يُنسخ إلى corpus.
 - **Review intake الحالي:** `data/corpus/chat/review/sample_review_export.jsonl` مرشح للمراجعة فقط؛ الأداة read-only ولا تنقل أي شيء إلى التدريب.
-- **بوابة جودة الحوار:** `phase22-review-intake` يعرض الآن `quality_score/quality_label/quality_blockers`; الجلسة المفيدة للتدريب تحتاج غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل وبدون `sf_10m_v0_1`.
+- **بوابة جودة الحوار:** `phase22-review-intake` يعرض الآن `quality_score/quality_label/quality_blockers`; الجلسة المفيدة للتدريب تحتاج غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل وبدون ردود raw من `sf_10m_v0_1/sf_10m_v0_2`.
 - **بوابة Phase 22 في الواجهة:** شاشة `/ui/chat` تعرض قراءة حية من `/system/phase22-readiness`: عدد corpus الحالي، المتبقي، حالة `msa/saudi`، وأن corpus v2 مكتمل من جهة البيانات.
 - **مهمة الجمع الحالية في الواجهة:** شاشة `/ui/chat` تقرأ `/system/phase22-next-batch`؛ بعد اكتمال `flex_004` لا توجد دفعات Phase 22 متبقية. الواجهة مختبر اختياري؛ لا يعتمد بناء Phase 22 على حفظ/تصدير يدوي من سامي.
 - **تدوير موضوعات التأليف:** الواجهة تعرض زر `موضوعات أخرى` للتنقل داخل بنك الـ 94 موضوعًا الفصيح، وتضيف `authoring_topic_count` إلى metadata التصدير.
@@ -53,8 +55,8 @@
 - **مؤشر جودة التصدير في الواجهة:** شاشة `/ui/chat` تعرض score جودة محلي قبل التصدير وتضع `ui_quality_score/ui_quality_label/ui_quality_blockers` داخل metadata.
 - **تصحيح تشغيل المولّد:** الواجهة المستقرة عادت إلى `generator=template` افتراضيًا؛ هذا يعني قوالب ثابتة لا توليدًا ذكيًا. `SF-10M` الخام لا يدخل ردود الشات إلا بفلاغات مختبر صريحة.
 - **مختبر سامي المحلي:** يمكن تشغيل المولّد الخام عبر `SF_ENABLE_NATIVE_GENERATOR=true` و`SF_NATIVE_GENERATOR_EXPERIMENTAL=true`، وتمكين الرسائل غير الحساسة من مجالات skeleton عبر `SF_LAB_GENERATION_FOR_NON_SENSITIVE=true` عند الاختبار فقط.
-- **حماية التصدير:** إذا صدّرت جلسة تحتوي ردودًا من `sf_10m_v0_1`، تضع الواجهة metadata واضحًا، و`phase22-review-intake` لا يعدّها candidate تدريب جودة.
-- **واجهة الاختبار:** لا تستخدم الواجهة حاليًا لاختبار مولد مقنع؛ استخدمها فقط لجمع محادثات review أو لفحص التوجيه. التشخيص يبين `template` أو `sf_10m_v0_1`.
+- **حماية التصدير:** إذا صدّرت جلسة تحتوي ردودًا من `sf_10m_v0_1/sf_10m_v0_2`، تضع الواجهة metadata واضحًا، و`phase22-review-intake` لا يعدّها candidate تدريب جودة.
+- **واجهة الاختبار:** لا تستخدم الواجهة حاليًا لاختبار مولد مقنع؛ استخدمها فقط لجمع محادثات review أو لفحص التوجيه. التشخيص يبين `template` أو `sf_10m_v0_2` عند canary فقط.
 - **تفويض التنفيذ:** سامي أعطى إذنًا صريحًا بمتابعة التدريب والاختبارات والمراحل المسجلة دون انتظار موافقات جديدة؛ استخدم flags المطلوبة مع توثيق كل تشغيل ولا تكسر قواعد السيادة/السلامة.
 - **فحص Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/corpus-audit`
 - **قرار Phase 12 من المتصفح/API:** `GET http://127.0.0.1:8123/system/phase12-readiness` يعرض أن tokenizer v1 اكتمل، وأن `msa + saudi` موجودتان حاليًا؛ tokenizer v2 أصبح جاهزًا في Phase 23.
@@ -253,7 +255,7 @@ make server-start
 
 آخر تحقق حي بدون restart:
 - السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`.
-- الكود الحالي بعد Phase 24 يعرض `Phase 24` في `/system/status` و`/health`، وزر `تصدير` في الواجهة، و`generator` حسب flags التشغيل.
+- الكود الحالي بعد Phase 25 يعرض `Phase 25` في `/system/status` و`/health`، وزر `تصدير` في الواجهة، و`generator` حسب flags التشغيل.
 - `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - `make server-status` read-only ولا يوقف السيرفر.
 
@@ -261,17 +263,17 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى إكمال Phase 24)
+## نتائج الاختبارات (حتى إكمال Phase 25)
 
 ```
-445 passed in 5.43s
+453 passed in 5.01s
 ```
 
 التغطية الحالية:
 - `test_arabic_normalizer.py` — 16 tests
 - `test_capability_registry.py` — 5 tests
 - `test_chat_module.py` — 12 tests (Phase 4 + language polish)
-- `test_chat_native_generator.py` — 14 tests (Phase 15 + lab routing)
+- `test_chat_native_generator.py` — 16 tests (Phase 15 + Phase 25 canary routing)
 - `test_chat_rag_bridge.py` — 7 tests (Phase 17)
 - `test_phase16_eval_harness.py` — 3 tests (Phase 16)
 - `test_conversation_state.py` — 8 tests (Phase 4)
@@ -296,9 +298,10 @@ make server-start
 - `test_nlp_pipeline.py` — 9 tests
 - `test_phase10_skeleton_domains.py` — 4 tests (Phase 10)
 - `test_phase22_readiness.py` — 15 tests (Phase 22)
-- `test_phase22_review_intake.py` — 7 tests (Phase 22 review exports + dialogue quality gate)
+- `test_phase22_review_intake.py` — 8 tests (Phase 22 review exports + raw generator gate)
 - `test_phase23_tokenizer_artifacts.py` — 6 tests (Phase 23 tokenizer v2)
 - `test_phase24_sf10m_v0_2_report.py` — 3 tests (Phase 24 training report + runtime block)
+- `test_phase25_generation_canary.py` — 5 tests (Phase 25 canary guard)
 - `test_orchestrator.py` — 7 tests
 - `test_response_composer.py` — 6 tests
 - `test_router.py` — 8 tests

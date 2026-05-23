@@ -11,7 +11,6 @@ from fastapi.testclient import TestClient
 from apps.api.main import app
 from sf_ai.datasets.phase22_review_intake import build_phase22_review_intake_report
 
-
 client = TestClient(app)
 
 
@@ -37,10 +36,14 @@ def _write_review_record(
         "lang": "ar",
         "messages": messages,
         "review_metadata": {
-            "contains_raw_generator_output": assistant_generator == "sf_10m_v0_1",
+            "contains_raw_generator_output": assistant_generator in {
+                "sf_10m_v0_1",
+                "sf_10m_v0_2",
+            },
             "assistant_generator_counts": {
                 "template": turns if assistant_generator == "template" else 0,
                 "sf_10m_v0_1": turns if assistant_generator == "sf_10m_v0_1" else 0,
+                "sf_10m_v0_2": turns if assistant_generator == "sf_10m_v0_2" else 0,
             },
         },
         "provenance": {
@@ -132,6 +135,25 @@ def test_phase22_review_intake_marks_raw_generator_exports_as_lab_only(tmp_path:
     assert report.files[0].status == "raw_generator_review_export_not_training_candidate"
     assert report.files[0].dialogue_quality_label == "not_training_quality_candidate"
     assert "contains_raw_generator_output" in report.files[0].dialogue_quality_blockers
+
+
+def test_phase22_review_intake_marks_v02_canary_exports_as_lab_only(tmp_path: Path) -> None:
+    review_dir = tmp_path / "review"
+    review_dir.mkdir()
+    _write_review_record(
+        review_dir / "raw_generator_v02.jsonl",
+        assistant_generator="sf_10m_v0_2",
+    )
+
+    report = build_phase22_review_intake_report(
+        project_dir=tmp_path,
+        review_dir=review_dir,
+    )
+
+    assert report.status == "REVIEW_EXPORT_HAS_RAW_GENERATOR_OUTPUT"
+    assert report.candidate_files == 0
+    assert report.total_raw_generator_assistant_records == 1
+    assert report.files[0].status == "raw_generator_review_export_not_training_candidate"
 
 
 def test_phase22_review_intake_scores_multi_turn_template_export_higher(tmp_path: Path) -> None:

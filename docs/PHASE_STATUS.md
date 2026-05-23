@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 24 / 30**
-- **المرحلة الحالية:** **Phase 24 — SF-10M v0.2 Quality Training**
-- **حالة المرحلة الحالية:** **مكتملة بحدود؛ تحسّن التدريب رقميًا لكن runtime الواسع محظور**
-- **المرحلة التالية المقترحة:** Phase 25 — Generated Chat Canary v1، مع fallback صارم عند التكرار/عدم التماسك.
+- **الرحلة الحالية:** **Phase 25 / 30**
+- **المرحلة الحالية:** **Phase 25 — Generated Chat Canary v1**
+- **حالة المرحلة الحالية:** **مكتملة كحماية canary؛ النموذج الحقيقي حُجب ورجع الرد للقالب**
+- **المرحلة التالية المقترحة:** Phase 26 — تبدأ كقرار readiness/scaling قبل أي تدريب `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ تم تحديث `default_registry.yaml` و`safety_terms.yaml` لفجوات finance/religion/security.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -50,7 +50,7 @@
 | Phase 22 | Gold Dialogue Corpus v2 | ✅ completed_ready_for_phase23 | ✅ |
 | Phase 23 | Tokenizer v2 Retrain & Audit | ✅ completed_ready_for_phase24 | ✅ |
 | Phase 24 | SF-10M v0.2 Quality Training | ✅ completed_with_limits_runtime_blocked | ✅ |
-| Phase 25 | Generated Chat Canary v1 | مخططة | ✅ |
+| Phase 25 | Generated Chat Canary v1 | ✅ completed_guarded_canary_real_model_blocked | ✅ |
 | Phase 26 | SF-50M v0.1 Dialogue Model | مخططة | ✅ |
 | Phase 27 | Dialogue Evaluation v2 | مخططة | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
@@ -235,10 +235,10 @@
   - أضيفت لوحة مهمة الجمع الحالية داخل `/ui/chat`، تقرأ `/system/phase22-next-batch`; بعد اكتمال `flex_004` تعرض عدم وجود دفعات متبقية. الواجهة مختبر اختياري وليست شرطًا على سامي لحفظ أو تصدير أي شيء.
   - أضيف زر `موضوعات أخرى` داخل لوحة مهمة الجمع الحالية للتنقل في بنك التأليف الفصيح، مع `authoring_topic_count` في metadata.
   - أضيف زر `حفظ للمراجعة` في `/ui/chat` وendpoint `POST /chat/review-export` لحفظ review JSONL محليًا في `data/corpus/chat/review/` فقط، مع رفض `training_allowed=true`.
-  - القاعدة العملية الجديدة: ملف التصدير المفيد يجب أن يحتوي غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل، وبدون ردود `sf_10m_v0_1`.
+  - القاعدة العملية الجديدة: ملف التصدير المفيد يجب أن يحتوي غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل، وبدون ردود raw من `sf_10m_v0_1/sf_10m_v0_2`.
   - القاعدة العملية الأحدث: الوكيل يستطيع تأليف/مراجعة/اعتماد دفعات Phase 22 مباشرة كـ `owner-delegated agent-authored` بدون انتظار حفظ أو تصدير من سامي، بشرط اكتمال `source/license/quality/training_allowed/user_scope/notes` ونجاح الاختبارات.
   - صححت تشغيل الواجهة المستقرة: `generator=template` افتراضيًا، أي قوالب ثابتة لا مولد؛ و`SF-10M` الخام يبقى مختبرًا صريحًا فقط.
-  - أضيفت حماية export/review intake لتمييز أي جلسة تحتوي ردود `sf_10m_v0_1` ومنع عدّها كـ candidate تدريب جودة.
+  - أضيفت حماية export/review intake لتمييز أي جلسة تحتوي ردود `sf_10m_v0_1/sf_10m_v0_2` ومنع عدّها كـ candidate تدريب جودة.
   - أضيفت intents محددة لعبارات Phase 22 اليومية: اختبار الحوار الفصيح، الخطوة التالية، والفرق بين التدريب والتفعيل.
   - لا يوجد ناقص في Phase 22 حاليًا؛ الفصحى وصلت إلى 250، والسعودي وصل إلى 250، والمجموع 500.
   - لا تدريب جديد بدأ.
@@ -267,6 +267,16 @@
   - أضيف [PHASE24_SF10M_V0_2_REPORT.md](./PHASE24_SF10M_V0_2_REPORT.md).
   - أضيف `artifacts/reports/sf_10m_v0_2_training_report.json`.
   - أضيف `artifacts/samples/sf_10m_v0_2_generations.md`.
+- بدأ وانتهى Phase 25 Generated Chat Canary v1:
+  - أضيف `sf_ai/modules/chat/generation_guard.py`.
+  - أضيف شرط `SF_GENERATOR_CANARY=true` فوق فلاغات المختبر السابقة.
+  - حُدّث `NativeGenerator` إلى tokenizer v2 وcheckpoint `sf-10m-step2000`.
+  - يضع canary metadata `generator=sf_10m_v0_2` عند النجاح فقط.
+  - عند فشل guard يعود `ChatModule` إلى القالب ويضيف `native_generator:canary_blocked`.
+  - التجربة الحقيقية على prompt: `اكتب رد قصير عن هدف SF.AI` حُجبت بسبب `generation_guard:malformed_token`.
+  - القرار: `COMPLETED_GUARDED_CANARY_REAL_MODEL_BLOCKED`.
+  - أضيف [PHASE25_GENERATED_CHAT_CANARY_REPORT.md](./PHASE25_GENERATED_CHAT_CANARY_REPORT.md).
+  - أضيف `artifacts/reports/phase25_generation_canary_report.json`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -332,7 +342,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 24"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 25"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -363,7 +373,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-445 passed in 5.43s
+453 passed in 5.01s
 ```
 
 | ملف | عدد |
@@ -372,7 +382,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_bpe_tokenizer.py | 13 |
 | test_capability_registry.py | 5 |
 | test_chat_module.py | 12 |
-| test_chat_native_generator.py | 14 (Phase 15 + lab mode) |
+| test_chat_native_generator.py | 16 (Phase 15 + Phase 25 canary mode) |
 | test_chat_rag_bridge.py | 7 (Phase 17) |
 | test_chat_ui.py | 7 (Phase 9/19 status + export quality indicator) |
 | test_checkpoints.py | 7 |
@@ -393,9 +403,10 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_phase19_readiness.py | 2 (Phase 19) |
 | test_phase20_domain_activation_gates.py | 6 (Phase 20) |
 | test_phase22_readiness.py | 15 (Phase 22) |
-| test_phase22_review_intake.py | 7 (Phase 22) |
+| test_phase22_review_intake.py | 8 (Phase 22 + raw generator gate) |
 | test_phase23_tokenizer_artifacts.py | 6 (Phase 23) |
 | test_phase24_sf10m_v0_2_report.py | 3 (Phase 24) |
+| test_phase25_generation_canary.py | 5 (Phase 25) |
 | test_rag_sparse_retrieval.py | 14 (Phase 8) |
 | test_research_summarizer.py | 20 |
 | test_response_composer.py | 6 |

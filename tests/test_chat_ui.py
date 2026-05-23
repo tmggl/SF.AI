@@ -27,6 +27,7 @@ def test_ui_chat_serves_html() -> None:
     assert "اكتب رسالتك هنا" in body
     assert "المحادثة جاهزة" in body
     assert "قالب ثابت - ليس مولدًا" in body
+    assert "Canary SF-10M v0.2" in body
     assert "بوابة Phase 22" in body
     assert "/system/phase22-readiness" in body
     assert "/system/phase22-collection-plan?batch_size=25" in body
@@ -199,7 +200,7 @@ def test_system_status_reports_current_phase_with_chat_ui() -> None:
     r = client.get("/system/status")
     assert r.status_code == 200
     body = r.json()
-    assert "Phase 24" in body["current_phase"]
+    assert "Phase 25" in body["current_phase"]
     assert any(c["name"] == "chat_ui" and c["status"] == "active"
                for c in body["components"])
     assert any(c["name"] == "native_generator" and c["status"] == "ready_offline"

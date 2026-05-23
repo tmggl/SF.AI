@@ -13,7 +13,13 @@ class HealthResponse(BaseModel):
 
 class ComponentStatus(BaseModel):
     name: str
-    status: str = Field(..., description="active | planned | skeleton_only | disabled | completed_runtime_blocked")
+    status: str = Field(
+        ...,
+        description=(
+            "active | planned | skeleton_only | disabled | "
+            "completed_runtime_blocked | active_runtime_guard"
+        ),
+    )
     phase: str | None = Field(default=None, description="المرحلة المسؤولة عن المكون")
 
 

@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -29,7 +28,7 @@ def test_current_goals_explain_template_vs_generator_path() -> None:
     text = (ROOT / "docs/CURRENT_GOALS.md").read_text(encoding="utf-8")
     assert "أول توليد خام: Phase 13" in text
     assert "أول تدريب جودة مفيد اكتمل في Phase 24" in text
-    assert "أول فرصة لحوار قصير مولّد يقنعك: Phase 26 بعد `SF-50M`" in text
+    assert "أول فرصة لحوار قصير مولّد يقنعك: بعد بوابة Phase 26" in text
     assert "أول قفزة أكبر بعد نجاح الحوار: Phase 28 مع `SF-120M`" in text
 
 

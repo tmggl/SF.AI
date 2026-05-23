@@ -20,10 +20,10 @@ from functools import lru_cache
 from sf_ai.core.nlp.types import NLPAnalysis
 from sf_ai.modules.chat.chat_response_builder import ChatResponseBuilder
 from sf_ai.modules.chat.conversation_state import ConversationState, ConversationStore
+from sf_ai.modules.chat.generation_guard import GenerationGuard
 from sf_ai.modules.chat.generation_policy import GenerationPolicy
 from sf_ai.modules.chat.native_generator import NativeGenerator
 from sf_ai.modules.chat.rag_bridge import ChatRagBridge
-
 
 _KNOWN_INTENTS: frozenset[str] = frozenset(
     {
@@ -70,6 +70,7 @@ class ChatModule:
         store: ConversationStore | None = None,
         builder: ChatResponseBuilder | None = None,
         generation_policy: GenerationPolicy | None = None,
+        generation_guard: GenerationGuard | None = None,
         native_generator: NativeGenerator | None = None,
         rag_bridge: ChatRagBridge | None = None,
         max_turns: int = 12,
@@ -77,6 +78,7 @@ class ChatModule:
         self.store = store or ConversationStore(max_turns=max_turns)
         self.builder = builder or ChatResponseBuilder()
         self.generation_policy = generation_policy or GenerationPolicy.from_env()
+        self.generation_guard = generation_guard or GenerationGuard()
         self.native_generator = native_generator
         if (
             self.native_generator is None
@@ -223,12 +225,21 @@ class ChatModule:
                 "generator:template",
                 f"native_generator:{result.reason}",
             )
+        verdict = self.generation_guard.inspect(result.text)
+        if not verdict.allowed:
+            return fallback_text, (
+                "generator:template",
+                "native_generator:canary_blocked",
+                f"generation_guard:{verdict.reason}",
+                f"generation_repetition:{verdict.repetition_ratio:.2f}",
+                f"generation_arabic:{verdict.arabic_ratio:.2f}",
+            )
         return (
             result.text,
             (
-                "generator:sf_10m_v0_1",
+                f"generator:{result.generator}",
                 "native_generator:generated",
-                "native_generator:experimental_runtime",
+                "native_generator:canary_passed",
             ),
         )
 

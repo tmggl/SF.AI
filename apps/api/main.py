@@ -31,7 +31,7 @@ app = FastAPI(
     version="0.1.0",
     description=(
         "SF.AI — Sovereign AI platform. Phase 9 chat UI mounted at /ui/chat. "
-        "Phase 24 SF-10M v0.2 is trained with limits; broad runtime remains blocked. "
+        "Phase 25 canary guard is in place; broad runtime remains blocked. "
         "No pretrained models, no external AI APIs."
     ),
 )
@@ -46,7 +46,7 @@ app.include_router(ui.router)
 def root() -> dict[str, str]:
     return {
         "project": "SF.AI",
-        "phase": "Phase 24 — SF-10M v0.2 Quality Training",
+        "phase": "Phase 25 — Generated Chat Canary v1",
         "ui": "/ui/chat",
         "docs": "/docs",
     }

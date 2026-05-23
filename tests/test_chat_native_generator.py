@@ -7,8 +7,8 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 from apps.api.main import app
-from sf_ai.core.nlp import get_default_pipeline
 from sf_ai.core.index import load_default_registry
+from sf_ai.core.nlp import get_default_pipeline
 from sf_ai.core.orchestrator import Orchestrator, UserMessage
 from sf_ai.modules.chat import (
     ChatModule,
@@ -24,7 +24,17 @@ class _FakeGenerator:
         return NativeGenerationResult(
             used=True,
             text=f"رد مولد تجريبي على: {prompt}",
-            generator="sf_10m_v0_1",
+            generator="sf_10m_v0_2",
+            reason="generated",
+        )
+
+
+class _BadGenerator:
+    def generate(self, prompt: str, **_: object) -> NativeGenerationResult:
+        return NativeGenerationResult(
+            used=True,
+            text="المعنى: المعنى: corpus Phase tokenizer / / /",
+            generator="sf_10m_v0_2",
             reason="generated",
         )
 
@@ -46,9 +56,11 @@ def test_generation_policy_disabled_by_default() -> None:
 def test_generation_policy_reads_experimental_runtime_flags(monkeypatch) -> None:
     monkeypatch.setenv("SF_ENABLE_NATIVE_GENERATOR", "true")
     monkeypatch.setenv("SF_NATIVE_GENERATOR_EXPERIMENTAL", "true")
+    monkeypatch.setenv("SF_GENERATOR_CANARY", "true")
     policy = GenerationPolicy.from_env()
     assert policy.enabled is True
     assert policy.experimental_runtime is True
+    assert policy.canary is True
 
 
 def test_generation_policy_blocks_sensitive_and_unready_paths() -> None:
@@ -90,8 +102,21 @@ def test_generation_policy_blocks_sensitive_and_unready_paths() -> None:
     assert all(decision.allowed is False for decision in blocked)
 
 
-def test_generation_policy_allows_high_confidence_freeform_chat() -> None:
-    decision = GenerationPolicy(enabled=True).decide(
+def test_generation_policy_requires_canary_before_freeform_chat() -> None:
+    decision = GenerationPolicy(enabled=True, experimental_runtime=True).decide(
+        domain="chat",
+        intent="chat.general",
+        confidence=0.95,
+        domain_status="active",
+        requires_safety=False,
+        fallback_used=False,
+    )
+    assert decision.allowed is False
+    assert decision.reason == "canary_disabled"
+
+
+def test_generation_policy_allows_canary_high_confidence_freeform_chat() -> None:
+    decision = GenerationPolicy(enabled=True, experimental_runtime=True, canary=True).decide(
         domain="chat",
         intent="chat.general",
         confidence=0.95,
@@ -100,7 +125,7 @@ def test_generation_policy_allows_high_confidence_freeform_chat() -> None:
         fallback_used=False,
     )
     assert decision.allowed is True
-    assert decision.generator == "sf_10m_v0_1"
+    assert decision.generator == "sf_10m_v0_2"
 
 
 def test_generation_policy_keeps_social_intents_on_templates() -> None:
@@ -127,7 +152,7 @@ def test_generation_policy_keeps_social_intents_on_templates() -> None:
 
 def test_native_generator_status_checks_sovereign_artifact_locations() -> None:
     status = NativeGenerator().status()
-    assert status.generator == "sf_10m_v0_1"
+    assert status.generator == "sf_10m_v0_2"
     assert status.tokenizer_exists is True
     # Checkpoint state is intentionally ignored by git, so CI or a fresh clone
     # may only have metadata. The status surface must report both facts.
@@ -144,7 +169,7 @@ def test_native_generator_returns_missing_checkpoint_without_throwing(tmp_path: 
     )
     out = gen.generate("مرحبا")
     assert out.used is False
-    assert out.generator == "sf_10m_v0_1"
+    assert out.generator == "sf_10m_v0_2"
     assert out.reason == "missing_checkpoint"
 
 
@@ -160,20 +185,34 @@ def test_chat_module_exposes_template_generator_metadata() -> None:
 def test_chat_module_uses_native_generator_in_explicit_experimental_mode() -> None:
     pipe = get_default_pipeline()
     mod = ChatModule(
-        generation_policy=GenerationPolicy(enabled=True, experimental_runtime=True),
+        generation_policy=GenerationPolicy(enabled=True, experimental_runtime=True, canary=True),
         native_generator=_FakeGenerator(),  # type: ignore[arg-type]
     )
     analysis = pipe.analyze_user_text("اكتب رد قصير")
     out = mod.handle(analysis, intent="chat.general", session_id="phase15-exp")
     assert out.text == "رد مولد تجريبي على: اكتب رد قصير"
-    assert "generator:sf_10m_v0_1" in out.notes
-    assert "native_generator:experimental_runtime" in out.notes
+    assert "generator:sf_10m_v0_2" in out.notes
+    assert "native_generator:canary_passed" in out.notes
+
+
+def test_chat_module_blocks_bad_canary_output_and_keeps_template() -> None:
+    pipe = get_default_pipeline()
+    mod = ChatModule(
+        generation_policy=GenerationPolicy(enabled=True, experimental_runtime=True, canary=True),
+        native_generator=_BadGenerator(),  # type: ignore[arg-type]
+    )
+    analysis = pipe.analyze_user_text("اكتب رد قصير")
+    out = mod.handle(analysis, intent="chat.general", session_id="phase25-bad")
+    assert "رد مولد تجريبي" not in out.text
+    assert "generator:template" in out.notes
+    assert "native_generator:canary_blocked" in out.notes
+    assert any(note.startswith("generation_guard:") for note in out.notes)
 
 
 def test_chat_module_keeps_pinned_identity_on_template_when_experimental() -> None:
     pipe = get_default_pipeline()
     mod = ChatModule(
-        generation_policy=GenerationPolicy(enabled=True, experimental_runtime=True),
+        generation_policy=GenerationPolicy(enabled=True, experimental_runtime=True, canary=True),
         native_generator=_FakeGenerator(),  # type: ignore[arg-type]
     )
     analysis = pipe.analyze_user_text("من أنت")
@@ -186,7 +225,7 @@ def test_chat_module_keeps_pinned_identity_on_template_when_experimental() -> No
 def test_chat_module_keeps_smalltalk_on_template_when_experimental() -> None:
     pipe = get_default_pipeline()
     mod = ChatModule(
-        generation_policy=GenerationPolicy(enabled=True, experimental_runtime=True),
+        generation_policy=GenerationPolicy(enabled=True, experimental_runtime=True, canary=True),
         native_generator=_FakeGenerator(),  # type: ignore[arg-type]
     )
     analysis = pipe.analyze_user_text("كيفك")
@@ -212,7 +251,7 @@ def test_lab_generation_can_cover_non_sensitive_skeleton_domains(monkeypatch) ->
     monkeypatch.setenv("SF_LAB_GENERATION_FOR_NON_SENSITIVE", "true")
     pipe = get_default_pipeline()
     fake_chat = ChatModule(
-        generation_policy=GenerationPolicy(enabled=True, experimental_runtime=True),
+        generation_policy=GenerationPolicy(enabled=True, experimental_runtime=True, canary=True),
         native_generator=_FakeGenerator(),  # type: ignore[arg-type]
     )
     orch = Orchestrator(
@@ -225,7 +264,7 @@ def test_lab_generation_can_cover_non_sensitive_skeleton_domains(monkeypatch) ->
 
     assert result.domain == "coding"
     assert result.debug["dispatch"] == "module:chat_lab"
-    assert result.debug["generator"] == "sf_10m_v0_1"
+    assert result.debug["generator"] == "sf_10m_v0_2"
     assert "رد مولد تجريبي" in result.response
     assert "lab_domain:coding" in result.debug["module_notes"]
 
@@ -233,7 +272,7 @@ def test_lab_generation_can_cover_non_sensitive_skeleton_domains(monkeypatch) ->
 def test_lab_generation_keeps_sensitive_domains_on_composer(monkeypatch) -> None:
     monkeypatch.setenv("SF_LAB_GENERATION_FOR_NON_SENSITIVE", "true")
     fake_chat = ChatModule(
-        generation_policy=GenerationPolicy(enabled=True, experimental_runtime=True),
+        generation_policy=GenerationPolicy(enabled=True, experimental_runtime=True, canary=True),
         native_generator=_FakeGenerator(),  # type: ignore[arg-type]
     )
     orch = Orchestrator(registry=load_default_registry(), modules={"chat": fake_chat})

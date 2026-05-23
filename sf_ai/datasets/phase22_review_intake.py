@@ -16,7 +16,6 @@ from sf_ai.core.config import PROJECT_DIR
 from sf_ai.core.nlp._lexicons import load_lexicon
 from sf_ai.datasets.schemas import StructuredSample, parse_record
 
-
 REVIEW_DIR = Path("data/corpus/chat/review")
 ALLOWED_DIALECTS = ("msa", "saudi")
 
@@ -144,7 +143,7 @@ def build_phase22_review_intake_report(
         notes=(
             "This report is read-only and does not prepare training JSONL.",
             "Review exports must normally keep training_allowed=false until manual approval.",
-            "Exports containing sf_10m_v0_1 raw output are review evidence, not quality training candidates.",
+            "Exports containing sf_10m_v0_1/sf_10m_v0_2 raw output are review evidence, not quality training candidates.",
             "Quality score estimates whether a review export is useful for the next dialogue-training corpus.",
             "Allowed dialect targets remain msa + saudi only.",
             "Saudi Seed v1 remains a reference lexicon, not direct chat corpus.",
@@ -340,6 +339,8 @@ def _contains_raw_generator_output(raw: dict[str, Any]) -> bool:
         counts = review_meta.get("assistant_generator_counts") or {}
         if int(counts.get("sf_10m_v0_1") or 0) > 0:
             return True
+        if int(counts.get("sf_10m_v0_2") or 0) > 0:
+            return True
         if review_meta.get("contains_raw_generator_output") is True:
             return True
 
@@ -349,7 +350,10 @@ def _contains_raw_generator_output(raw: dict[str, Any]) -> bool:
     for message in messages:
         if not isinstance(message, dict):
             continue
-        if message.get("role") == "assistant" and message.get("generator") == "sf_10m_v0_1":
+        if message.get("role") == "assistant" and message.get("generator") in {
+            "sf_10m_v0_1",
+            "sf_10m_v0_2",
+        }:
             return True
     return False
 

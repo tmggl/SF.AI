@@ -1,0 +1,60 @@
+{
+  "phase": "Phase 25 — Generated Chat Canary v1",
+  "status": "COMPLETED_GUARDED_CANARY_REAL_MODEL_BLOCKED",
+  "language_track": ["msa", "saudi"],
+  "generator_candidate": "sf_10m_v0_2",
+  "tokenizer": "artifacts/tokenizers/sf_bpe/v2",
+  "checkpoint": "artifacts/checkpoints/sf_10m_v0_2/sf-10m-step2000",
+  "runtime_default": {
+    "generator": "template",
+    "canary_enabled_by_default": false,
+    "required_flags": [
+      "SF_ENABLE_NATIVE_GENERATOR=true",
+      "SF_NATIVE_GENERATOR_EXPERIMENTAL=true",
+      "SF_GENERATOR_CANARY=true"
+    ]
+  },
+  "guard": {
+    "module": "sf_ai.modules.chat.generation_guard.GenerationGuard",
+    "blocks": [
+      "too_short",
+      "broken_prefix",
+      "broken_characters",
+      "too_fragmented",
+      "corpus_artifact",
+      "malformed_token",
+      "repetition",
+      "low_arabic_ratio"
+    ],
+    "corpus_artifacts": [
+      "corpus",
+      "tokenizer",
+      "phase",
+      "Phase",
+      "training",
+      "النموذج",
+      "تدريب",
+      "دفعة",
+      "المعنى:",
+      "وأين"
+    ]
+  },
+  "real_model_smoke": {
+    "prompt": "اكتب رد قصير عن هدف SF.AI",
+    "accepted": false,
+    "fallback_used": true,
+    "generator_metadata": "template",
+    "native_generator_note": "native_generator:canary_blocked",
+    "guard_reason": "malformed_token",
+    "repetition_ratio": 0.27,
+    "arabic_ratio": 1.0,
+    "decision": "The canary correctly blocked weak v0.2 output and kept the template response."
+  },
+  "decision": {
+    "phase25_canary_infrastructure_passed": true,
+    "sf_10m_v0_2_suitable_for_open_chat": false,
+    "broad_runtime_activation_allowed": false,
+    "raw_generator_exports_allowed_as_training": false,
+    "next_recommended_phase": "Phase 26 should start as a readiness/scaling decision, not blind SF-50M training, because v0.2 still fails quality."
+  }
+}
