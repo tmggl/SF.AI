@@ -21,7 +21,6 @@ import json
 import sys
 import time
 from collections.abc import Iterator
-from dataclasses import asdict
 from pathlib import Path
 
 import torch
@@ -31,7 +30,6 @@ from sf_ai.datasets import ChatDataset
 from sf_ai.models.tokenizer import BPETokenizer, CharTokenizer
 from sf_ai.models.transformer import (
     TinyTransformer,
-    TransformerConfig,
     config_for_size,
     cross_entropy_lm,
 )
@@ -110,6 +108,8 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     p.add_argument("--batch-size", type=int, default=4)
     p.add_argument("--steps", type=int, default=100,
                    help="How many gradient steps to run (Phase 6 starts very small)")
+    p.add_argument("--epochs", type=int, default=1,
+                   help="Maximum passes over the corpus; use >1 for quality runs")
     p.add_argument("--lr", type=float, default=3e-4)
     p.add_argument("--warmup", type=int, default=20)
     p.add_argument("--min-lr", type=float, default=1e-5)
@@ -163,50 +163,72 @@ def run(argv: list[str]) -> int:
 
     ckpt_mgr = CheckpointManager(args.checkpoints)
 
+    if args.epochs < 1:
+        print("error: --epochs must be >= 1", file=sys.stderr)
+        return 2
+
     step = 0
     started = time.time()
     losses: list[float] = []
-    for inputs, targets in iter_token_batches(
-        tok, dataset, batch_size=args.batch_size, seq_len=args.seq_len, device=torch_device,
-    ):
-        # Set LR per step.
-        lr_now = linear_warmup_cosine(
-            step,
-            warmup_steps=args.warmup,
-            total_steps=args.steps,
-            peak_lr=args.lr,
-            min_lr=args.min_lr,
-        )
-        for g in optimizer.param_groups:
-            g["lr"] = lr_now
+    epoch = 0
+    for epoch in range(args.epochs):
+        produced_in_epoch = 0
+        for inputs, targets in iter_token_batches(
+            tok,
+            dataset,
+            batch_size=args.batch_size,
+            seq_len=args.seq_len,
+            device=torch_device,
+        ):
+            produced_in_epoch += 1
+            # Set LR per step.
+            lr_now = linear_warmup_cosine(
+                step,
+                warmup_steps=args.warmup,
+                total_steps=args.steps,
+                peak_lr=args.lr,
+                min_lr=args.min_lr,
+            )
+            for g in optimizer.param_groups:
+                g["lr"] = lr_now
 
-        loss = train_one_step(model, inputs, targets, optimizer, grad_clip=args.grad_clip)
-        losses.append(loss)
-        step += 1
-        if step % max(1, args.steps // 10) == 0 or step == 1:
-            print(f"step {step:>5d} | lr {lr_now:.2e} | loss {loss:.4f}")
+            loss = train_one_step(model, inputs, targets, optimizer, grad_clip=args.grad_clip)
+            losses.append(loss)
+            step += 1
+            if step % max(1, args.steps // 10) == 0 or step == 1:
+                print(
+                    f"epoch {epoch + 1:>3d} | step {step:>5d} | "
+                    f"lr {lr_now:.2e} | loss {loss:.4f}"
+                )
 
-        if args.save_every > 0 and step % args.save_every == 0:
-            _save(ckpt_mgr, model, args, step)
+            if args.save_every > 0 and step % args.save_every == 0:
+                _save(ckpt_mgr, model, args, step, epoch=epoch)
 
+            if step >= args.steps:
+                break
+        if produced_in_epoch == 0:
+            break
         if step >= args.steps:
             break
 
     elapsed = time.time() - started
     print(f"\nfinished {step} steps in {elapsed:.1f}s | last loss {losses[-1] if losses else 'n/a'}")
     if step > 0:
-        _save(ckpt_mgr, model, args, step)
+        _save(ckpt_mgr, model, args, step, epoch=epoch)
     return 0
 
 
-def _save(ckpt_mgr: CheckpointManager, model: TinyTransformer, args, step: int) -> None:  # type: ignore[no-untyped-def]
+def _save(ckpt_mgr: CheckpointManager, model: TinyTransformer, args, step: int, *, epoch: int) -> None:  # type: ignore[no-untyped-def]
     name = f"{args.size}-step{step}"
     meta = CheckpointMetadata(
         step=step,
-        epoch=0,
+        epoch=epoch + 1,
         model_name=args.size,
         config_hash="",
-        notes=f"seed={args.seed} batch={args.batch_size} seq={args.seq_len}",
+        notes=(
+            f"seed={args.seed} batch={args.batch_size} seq={args.seq_len} "
+            f"epochs={args.epochs}"
+        ),
     )
     ckpt_mgr.save_metadata(name, meta)
     ckpt_mgr.save_state(name, model.state_dict(), allow_overwrite=True)

@@ -23,7 +23,7 @@ def test_health_ok() -> None:
     body = r.json()
     assert body["status"] == "ok"
     assert body["project"] == "SF.AI"
-    assert body["phase"] == "Phase 23"
+    assert body["phase"] == "Phase 24"
 
 
 def test_system_status_sovereign_flags() -> None:
@@ -31,9 +31,9 @@ def test_system_status_sovereign_flags() -> None:
     assert r.status_code == 200
     body = r.json()
     assert body["project"] == "SF.AI"
-    assert body["current_phase"].startswith("Phase 23")
-    assert body["current_phase_status"] == "completed_ready_for_phase24"
-    assert body["next_phase"].startswith("Phase 24")
+    assert body["current_phase"].startswith("Phase 24")
+    assert body["current_phase_status"] == "completed_with_limits_runtime_blocked"
+    assert body["next_phase"].startswith("Phase 25")
     assert body["sovereign"] is True
     assert body["uses_external_llm"] is False
     assert body["uses_pretrained_weights"] is False
@@ -42,6 +42,11 @@ def test_system_status_sovereign_flags() -> None:
     assert any(c["name"] == "api" and c["status"] == "active" for c in body["components"])
     assert any(c["name"] == "orchestrator" and c["status"] == "active" for c in body["components"])
     assert any(c["name"] == "phase23_tokenizer_v2" and c["status"] == "active" for c in body["components"])
+    assert any(
+        c["name"] == "phase24_sf10m_v0_2"
+        and c["status"] == "completed_runtime_blocked"
+        for c in body["components"]
+    )
 
 
 def test_system_corpus_audit_reports_reviewed_seeds_ready() -> None:

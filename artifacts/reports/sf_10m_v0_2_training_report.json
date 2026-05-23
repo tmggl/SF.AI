@@ -1,0 +1,131 @@
+{
+  "phase": "Phase 24 — SF-10M v0.2 Quality Training",
+  "status": "COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED",
+  "purpose": "Run the first useful SF-10M quality training pass after the 500-record MSA/Saudi corpus and tokenizer v2.",
+  "training_permission": {
+    "granted": true,
+    "granted_by": "Sami",
+    "permission_text_summary": "سامي فوّض الوكيل بمتابعة التدريب والاختبارات والمراحل المسجلة دون انتظار موافقات جديدة، مع فحص الحساسية قبل الرفع."
+  },
+  "preflight": {
+    "corpus_audit": {
+      "status": "READY_FOR_PHASE_12_TOKENIZER_TRAINING",
+      "training_ready": 500,
+      "dialects": {
+        "msa": 250,
+        "saudi": 250
+      },
+      "issue_count": 0
+    },
+    "phase23_tokenizer_audit": {
+      "status": "COMPLETED_READY_FOR_PHASE24",
+      "vocab_size": 4493,
+      "merges": 4386
+    },
+    "tokenization_audit": {
+      "protected_terms_covered": 30,
+      "protected_terms_total": 30,
+      "coverage_ratio": 1.0
+    }
+  },
+  "tokenizer": {
+    "path": "artifacts/tokenizers/sf_bpe/v2",
+    "vocab_size": 4493,
+    "merges": 4386,
+    "sf_origin": true,
+    "pretrained_tokenizer_used": false,
+    "pretrained_vocab_used": false
+  },
+  "corpus": {
+    "path": "data/corpus/chat/jsonl",
+    "records": 500,
+    "dialects": {
+      "msa": 250,
+      "saudi": 250
+    },
+    "quality": {
+      "gold": 52,
+      "silver": 448
+    },
+    "synthetic_llm_data_used": false,
+    "training_allowed_required": true
+  },
+  "model": {
+    "name": "sf-10m",
+    "parameters": 7444992,
+    "random_init": true,
+    "pretrained_weights_used": false,
+    "external_llm_used": false,
+    "device": "mps"
+  },
+  "training_args": {
+    "seq_len": 64,
+    "batch_size": 4,
+    "steps_requested": 2000,
+    "steps_completed": 2000,
+    "epochs": 25,
+    "warmup": 50,
+    "seed": 20260523,
+    "save_every": 500,
+    "checkpoints": "artifacts/checkpoints/sf_10m_v0_2"
+  },
+  "loss": {
+    "first_logged": 8.4751,
+    "last_logged": 2.8256,
+    "decreased": true
+  },
+  "checkpoints": [
+    {
+      "name": "sf-10m-step500",
+      "tracked_in_git": false,
+      "metadata_updated_locally": true
+    },
+    {
+      "name": "sf-10m-step1000",
+      "tracked_in_git": false,
+      "metadata_updated_locally": true
+    },
+    {
+      "name": "sf-10m-step1500",
+      "tracked_in_git": false,
+      "metadata_updated_locally": true
+    },
+    {
+      "name": "sf-10m-step2000",
+      "tracked_in_git": false,
+      "metadata_updated_locally": true
+    }
+  ],
+  "evaluation": {
+    "checkpoint": "sf-10m-step2000",
+    "batches": 20,
+    "loss": 2.5779,
+    "perplexity": 13.17,
+    "generation_non_empty": true,
+    "utf8_valid": true
+  },
+  "comparison_with_v0_1": {
+    "note": "Not perfectly apples-to-apples because tokenizer/corpus changed, but the direction is useful for project tracking.",
+    "v0_1_eval_loss": 4.0777,
+    "v0_2_eval_loss": 2.5779,
+    "v0_1_perplexity": 59.01,
+    "v0_2_perplexity": 13.17,
+    "perplexity_improved": true
+  },
+  "generation_quality": {
+    "less_meaning_where_repetition_than_v0_1": true,
+    "still_incoherent": true,
+    "contains_fragmentation": true,
+    "contains_repetition": true,
+    "suitable_for_chat_runtime": false,
+    "runtime_blocked": true,
+    "reason": "The model produces Arabic fragments and repeats local patterns; it is a training improvement, not a convincing assistant yet."
+  },
+  "decision": {
+    "phase24_training_passed": true,
+    "suitable_for_chat_runtime": false,
+    "broad_runtime_activation_allowed": false,
+    "canary_allowed_next": true,
+    "next_recommended_phase": "Phase 25 — Generated Chat Canary v1 with strict repetition/incoherence fallback, no broad activation"
+  }
+}

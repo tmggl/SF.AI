@@ -37,20 +37,21 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 23 / 30 — Tokenizer v2 Retrain & Audit اكتملت.
-- **الأولوية الحالية:** الانتقال المنضبط إلى Phase 24 لتدريب `SF-10M v0.2` من الصفر باستخدام tokenizer v2، دون تفعيل runtime واسع قبل canary.
+- **الرحلة الحالية:** Phase 24 / 30 — SF-10M v0.2 Quality Training اكتملت بحدود.
+- **الأولوية الحالية:** الانتقال المنضبط إلى Phase 25 لبناء canary صغير للمولد، مع fallback صارم عند التكرار أو عدم التماسك.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
 - **البيانات الحالية:** corpus موثق `500/500` يمر `corpus-audit`: `250` سعودي + `250` فصحى؛ استُخدم في Phase 23 لتدريب tokenizer v2.
-- **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 اكتملت من بيانات SF.AI فقط، ثم Phase 23 درّب tokenizer v2 من corpus المتوازن.
-- **المولّد:** لا يوجد حاليًا مولّد حواري مقنع للاختبار. Phase 15 أضاف NativeGenerator adapter فقط، و`SF-10M v0.1` خام/مكرر. الواجهة المستقرة تعرض `generator=template` أي قوالب ثابتة وليست توليدًا ذكيًا.
+- **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
+- **المولّد:** `SF-10M v0.2` تحسّن رقميًا لكنه غير جاهز كحوار مقنع؛ الواجهة المستقرة تبقى `generator=template` حتى يمر canary في Phase 25.
 - **التقييم:** Phase 16 مرّر `15/15` prompt cases؛ الجودة اليومية لم تنضج بعد، لكن المختبر المحلي مفتوح للتجربة والتطوير.
 - **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.
 - **دورة البيانات:** Phase 18 أضاف تصدير مراجعة من الواجهة و`prepare_dialogue_batch.py`; وPhase 22 يعتمد الآن أيضًا دفعات مباشرة يؤلفها/يراجعها الوكيل بتفويض موثق، بدون انتظار حفظ أو تصدير من سامي.
 - **جاهزية SF-50M:** Phase 19 أضاف `make phase19-readiness`; القرار الحالي `NOT_READY_EXPAND_CORPUS_FIRST`.
 - **بوابات المجالات:** Phase 20 أضاف `make phase20-gates` و`GET /system/phase20-gates`; المجال النشط الوحيد هو `chat`.
-- **طريق التوليد المقنع:** لا تطلب من سامي اختبار مولّد الآن. Phase 24 هو أول تدريب جودة مفيد، Phase 26 أول فرصة لحوار قصير مقنع، وPhase 28 هدف الحوار المولّد المستقر.
+- **طريق التوليد المقنع:** لا تعرض `SF-10M v0.2` كنجاح حواري. Phase 25 سيختبره كـ canary محمي فقط، Phase 26 أول فرصة أوسع لحوار قصير مقنع، وPhase 28 هدف الحوار المولّد المستقر.
 - **Corpus v2:** Phase 22 أضاف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-completion-gate` و`make phase22-review-intake`; الوضع الحالي 500/500، وفيه ثمان دفعات فصيحة `dialogue_batch_v2_msa_001.jsonl` إلى `dialogue_batch_v2_msa_008.jsonl` وسبع دفعات سعودية `dialogue_batch_v2_saudi_001.jsonl` إلى `dialogue_batch_v2_saudi_007.jsonl` وأربع دفعات مرنة `dialogue_batch_v2_flex_001.jsonl` إلى `dialogue_batch_v2_flex_004.jsonl` إضافة إلى seed فصيح للمصطلحات `protected_terms_msa_seed_v1.jsonl`. التوازن النهائي مكتمل (`msa=250`, `saudi=250`) ولا توجد دفعة تالية في Phase 22. الواجهة تعرض بوابة Phase 22 الحية وجودة التصدير كمختبر اختياري فقط، أما بناء corpus الحالي فتم مباشرة عبر الوكيل. `phase22-completion-gate` يرجع الآن `PHASE22_COMPLETE_READY_FOR_PHASE23`.
 - **Tokenizer v2:** Phase 23 أضاف `artifacts/tokenizers/sf_bpe/v2/` و`make phase23-tokenizer-audit`; الحالة `COMPLETED_READY_FOR_PHASE24`, `vocab=4493`, `merges=4386`, وprotected Saudi terms تحسنت من متوسط 4.0 tokens في v1 إلى 2.3 في v2.
+- **SF-10M v0.2:** Phase 24 درّب النموذج 2000 خطوة على tokenizer v2 وcorpus المتوازن: loss `8.4751 → 2.8256`, eval loss `2.5779`, perplexity `13.17`. القرار: `COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED` لأن التوليد لا يزال غير متماسك.
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
@@ -89,7 +90,7 @@
 | Phase 21 | Generative Roadmap & Quality Targets — completed |
 | Phase 22 | Gold Dialogue Corpus v2 — completed, 500/500, ready for Phase 23 tokenizer v2 |
 | Phase 23 | Tokenizer v2 Retrain & Audit — completed, ready for Phase 24 |
-| Phase 24 | SF-10M v0.2 Quality Training — planned |
+| Phase 24 | SF-10M v0.2 Quality Training — completed with limits; runtime blocked |
 | Phase 25 | Generated Chat Canary v1 — planned |
 | Phase 26 | SF-50M v0.1 Dialogue Model — planned |
 | Phase 27 | Dialogue Evaluation v2 — planned |

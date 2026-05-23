@@ -7,6 +7,7 @@ from the Capability Registry and live components.
 from __future__ import annotations
 
 import os
+from typing import Annotated
 
 from fastapi import APIRouter, Depends
 
@@ -19,8 +20,8 @@ from apps.api.schemas.system import (
     Phase12ReadinessResponse,
     Phase19ReadinessResponse,
     Phase20GatesResponse,
-    Phase22CompletionGateResponse,
     Phase22CollectionPlanResponse,
+    Phase22CompletionGateResponse,
     Phase22NextBatchBriefResponse,
     Phase22ReadinessResponse,
     Phase22ReviewExportItemResponse,
@@ -44,10 +45,11 @@ from sf_ai.training.phase19_readiness import build_phase19_readiness_decision
 from sf_ai.training.phase23_tokenizer import build_phase23_tokenizer_audit
 
 router = APIRouter(prefix="/system", tags=["system"])
+SettingsDep = Annotated[Settings, Depends(get_settings)]
 
 
 @router.get("/status", response_model=SystemStatusResponse)
-def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusResponse:
+def system_status(settings: SettingsDep) -> SystemStatusResponse:
     saudi_seed_enabled = (
         os.getenv("ENABLE_SAUDI_SEED_V1_LEXICON", "").strip().lower()
         in {"1", "true", "yes", "on"}
@@ -55,9 +57,9 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 23 — Tokenizer v2 Retrain & Audit",
-        current_phase_status="completed_ready_for_phase24",
-        next_phase="Phase 24 — SF-10M v0.2 Quality Training",
+        current_phase="Phase 24 — SF-10M v0.2 Quality Training",
+        current_phase_status="completed_with_limits_runtime_blocked",
+        next_phase="Phase 25 — Generated Chat Canary v1",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -112,6 +114,11 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
                 phase="Phase 3.6",
             ),
             ComponentStatus(name="chat_ui", status="active", phase="Phase 9"),
+            ComponentStatus(
+                name="phase24_sf10m_v0_2",
+                status="completed_runtime_blocked",
+                phase="Phase 24",
+            ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="files_module", status="skeleton_only", phase="Phase 10"),

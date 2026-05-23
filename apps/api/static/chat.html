@@ -402,7 +402,7 @@
         : "مكتمل";
       phase22Box.classList.remove("good", "mid", "bad");
       phase22Box.classList.add(data.can_start_phase23 ? "good" : (pct >= 50 ? "mid" : "bad"));
-      phase22LabelEl.textContent = data.can_start_phase23 ? "جاهز للانتقال إلى Phase 23" : "غير جاهز للتوكنزر بعد";
+      phase22LabelEl.textContent = data.can_start_phase23 ? "Corpus v2 مكتمل" : "غير جاهز للتوكنزر بعد";
       phase22ScoreEl.textContent = records + "/" + target;
       phase22FillEl.style.width = pct + "%";
       phase22DetailsEl.textContent =

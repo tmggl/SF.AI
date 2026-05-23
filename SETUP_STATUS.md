@@ -10,10 +10,10 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 23 / 30**
-- **المرحلة الحالية:** **Phase 23 — Tokenizer v2 Retrain & Audit** (tokenizer v2 اكتمل؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **الرحلة الحالية:** **Phase 24 / 30**
+- **المرحلة الحالية:** **Phase 24 — SF-10M v0.2 Quality Training** (اكتملت بحدود؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** Phase 24 — SF-10M v0.2 Quality Training، باستخدام tokenizer v2 وبعد إعادة فحص البوابات.
+- **المرحلة التالية المقترحة:** Phase 25 — Generated Chat Canary v1، لتجربة `SF-10M v0.2` خلف fallback صارم فقط.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
@@ -26,11 +26,14 @@
 - **نتيجة Phase 19:** أضيفت بوابة `make phase19-readiness` و`GET /system/phase19-readiness`; القرار الحالي `NOT_READY_EXPAND_CORPUS_FIRST` لأن corpus الحالي 500 سجل فقط والحد الأدنى العملي 5000.
 - **نتيجة Phase 20:** أضيفت بوابة `make phase20-gates` و`GET /system/phase20-gates`; لا مجال يتفعل تلقائيًا، و`chat` هو المجال النشط الوحيد.
 - **تصحيح Phase 20:** أضيف `sf_ai/modules/productivity/` كسكيلتون كامل بعد أن كشفت البوابة وجوده في registry دون module/manifest.
-- **نتيجة Phase 21:** أضيف `docs/GENERATIVE_ROADMAP.md` ومُدّدت الخطة إلى Phase 30؛ أول تدريب جودة مفيد قادم Phase 24، وأول هدف حوار مولّد مقنع Phase 26–28.
+- **نتيجة Phase 21:** أضيف `docs/GENERATIVE_ROADMAP.md` ومُدّدت الخطة إلى Phase 30؛ أول تدريب جودة مفيد اكتمل في Phase 24 بحدود، وأول هدف حوار مولّد مقنع ما زال Phase 26–28.
 - **مبدأ التكبير الرسمي:** `Progressive Scaling Strategy` — لا يتم رفع حجم النموذج إلا بعد نجاح المرحلة الحالية، والسلم الرسمي هو `SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+`.
 - **نتيجة Phase 22:** أضيف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-completion-gate` و`make phase22-review-intake` و`GET /system/phase22-readiness` و`GET /system/phase22-collection-plan` و`GET /system/phase22-next-batch` و`GET /system/phase22-completion-gate` و`GET /system/phase22-review-intake`; القرار الحالي `READY_FOR_PHASE23_TOKENIZER_V2` لأن corpus الحالي اكتمل 500/500. التوازن النهائي مكتمل: `msa=250`, `saudi=250`.
 - **بوابة اكتمال Phase 22:** `make phase22-completion-gate` يرجع الآن `PHASE22_COMPLETE_READY_FOR_PHASE23`، ولا توجد نواقص تمنع الانتقال إلى Phase 23.
 - **نتيجة Phase 23:** أضيف `artifacts/tokenizers/sf_bpe/v2/` و`make phase23-tokenizer-audit` و`GET /system/phase23-tokenizer-audit`; القرار الحالي `COMPLETED_READY_FOR_PHASE24`. v2: `vocab=4493`, `merges=4386`, `words_seen=23190`, `unique_words=2492`.
+- **نتيجة Phase 24:** دُرّب `SF-10M v0.2` على tokenizer v2 وcorpus المتوازن 2000 خطوة: loss `8.4751 → 2.8256`, eval loss `2.5779`, perplexity `13.17`. القرار `COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED`: تحسن رقميًا لكنه لا يزال غير صالح للرد الواسع في الواجهة.
+- **تقرير Phase 24:** `docs/PHASE24_SF10M_V0_2_REPORT.md`, `artifacts/reports/sf_10m_v0_2_training_report.json`, `artifacts/samples/sf_10m_v0_2_generations.md`.
+- **Checkpoint Phase 24 المحلي:** `artifacts/checkpoints/sf_10m_v0_2/sf-10m-step2000`; ملفات checkpoints مستثناة من git حسب السياسة.
 - **مقارنة tokenizer v1/v2:** v1 كان `vocab=261`, `merges=218`, `words_seen=723`, سعودي فقط. v2 تدرب على `500` سجل متوازن: `msa=250`, `saudi=250`.
 - **تحسن protected Saudi terms:** `average_tokens` انخفض من `4.0` في v1 إلى `2.3` في v2، ولا توجد `roundtrip_failures` أو `aggressive_split_terms`.
 - **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches=[]` لأن الجمع اكتمل.
@@ -43,7 +46,7 @@
 - **بنك تأليف فصيح غير تدريبي:** أضيف `resources/phase22_authoring/msa_prompt_bank_v1.json` وفيه 80+ موضوعًا فصيحًا لتسهيل كتابة batches الفصحى؛ الملف `training_allowed=false` و`synthetic_llm_data=false` ولا يُنسخ إلى corpus.
 - **Review intake الحالي:** `data/corpus/chat/review/sample_review_export.jsonl` مرشح للمراجعة فقط؛ الأداة read-only ولا تنقل أي شيء إلى التدريب.
 - **بوابة جودة الحوار:** `phase22-review-intake` يعرض الآن `quality_score/quality_label/quality_blockers`; الجلسة المفيدة للتدريب تحتاج غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل وبدون `sf_10m_v0_1`.
-- **بوابة Phase 22 في الواجهة:** شاشة `/ui/chat` تعرض قراءة حية من `/system/phase22-readiness`: عدد corpus الحالي، المتبقي، حالة `msa/saudi`، وأن Phase 23 أصبحت جاهزة من جهة corpus.
+- **بوابة Phase 22 في الواجهة:** شاشة `/ui/chat` تعرض قراءة حية من `/system/phase22-readiness`: عدد corpus الحالي، المتبقي، حالة `msa/saudi`، وأن corpus v2 مكتمل من جهة البيانات.
 - **مهمة الجمع الحالية في الواجهة:** شاشة `/ui/chat` تقرأ `/system/phase22-next-batch`؛ بعد اكتمال `flex_004` لا توجد دفعات Phase 22 متبقية. الواجهة مختبر اختياري؛ لا يعتمد بناء Phase 22 على حفظ/تصدير يدوي من سامي.
 - **تدوير موضوعات التأليف:** الواجهة تعرض زر `موضوعات أخرى` للتنقل داخل بنك الـ 94 موضوعًا الفصيح، وتضيف `authoring_topic_count` إلى metadata التصدير.
 - **حفظ محلي للمراجعة:** أضيف `POST /chat/review-export` وزر `حفظ للمراجعة` في `/ui/chat` لحفظ الجلسة مباشرة في `data/corpus/chat/review/` مع `training_allowed=false` و`quality=needs_review`; هذا اختياري للتشخيص فقط، والوكيل مسؤول عن بناء الدفعات المعتمدة مباشرة عند الحاجة.
@@ -250,7 +253,7 @@ make server-start
 
 آخر تحقق حي بدون restart:
 - السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`.
-- الكود الحالي بعد Phase 23 يعرض `Phase 23` في `/system/status` و`/health`، وزر `تصدير` في الواجهة، و`generator` حسب flags التشغيل.
+- الكود الحالي بعد Phase 24 يعرض `Phase 24` في `/system/status` و`/health`، وزر `تصدير` في الواجهة، و`generator` حسب flags التشغيل.
 - `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - `make server-status` read-only ولا يوقف السيرفر.
 
@@ -258,10 +261,10 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى إكمال Phase 23)
+## نتائج الاختبارات (حتى إكمال Phase 24)
 
 ```
-442 passed in 5.19s
+445 passed in 5.43s
 ```
 
 التغطية الحالية:
@@ -295,6 +298,7 @@ make server-start
 - `test_phase22_readiness.py` — 15 tests (Phase 22)
 - `test_phase22_review_intake.py` — 7 tests (Phase 22 review exports + dialogue quality gate)
 - `test_phase23_tokenizer_artifacts.py` — 6 tests (Phase 23 tokenizer v2)
+- `test_phase24_sf10m_v0_2_report.py` — 3 tests (Phase 24 training report + runtime block)
 - `test_orchestrator.py` — 7 tests
 - `test_response_composer.py` — 6 tests
 - `test_router.py` — 8 tests

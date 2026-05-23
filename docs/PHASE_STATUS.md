@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 23 / 30**
-- **المرحلة الحالية:** **Phase 23 — Tokenizer v2 Retrain & Audit**
-- **حالة المرحلة الحالية:** **مكتملة؛ tokenizer v2 جاهز للانتقال إلى Phase 24 (`vocab=4493`, `merges=4386`)**
-- **المرحلة التالية المقترحة:** Phase 24 — SF-10M v0.2 Quality Training، مع tokenizer v2 وبدون تفعيل runtime واسع قبل canary.
+- **الرحلة الحالية:** **Phase 24 / 30**
+- **المرحلة الحالية:** **Phase 24 — SF-10M v0.2 Quality Training**
+- **حالة المرحلة الحالية:** **مكتملة بحدود؛ تحسّن التدريب رقميًا لكن runtime الواسع محظور**
+- **المرحلة التالية المقترحة:** Phase 25 — Generated Chat Canary v1، مع fallback صارم عند التكرار/عدم التماسك.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ تم تحديث `default_registry.yaml` و`safety_terms.yaml` لفجوات finance/religion/security.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -49,7 +49,7 @@
 | Phase 21 | Generative Roadmap & Quality Targets | ✅ completed | ✅ |
 | Phase 22 | Gold Dialogue Corpus v2 | ✅ completed_ready_for_phase23 | ✅ |
 | Phase 23 | Tokenizer v2 Retrain & Audit | ✅ completed_ready_for_phase24 | ✅ |
-| Phase 24 | SF-10M v0.2 Quality Training | مخططة | ✅ |
+| Phase 24 | SF-10M v0.2 Quality Training | ✅ completed_with_limits_runtime_blocked | ✅ |
 | Phase 25 | Generated Chat Canary v1 | مخططة | ✅ |
 | Phase 26 | SF-50M v0.1 Dialogue Model | مخططة | ✅ |
 | Phase 27 | Dialogue Evaluation v2 | مخططة | ✅ |
@@ -194,7 +194,7 @@
 - بدأ وانتهى Phase 21 Generative Roadmap:
   - أضيف [GENERATIVE_ROADMAP.md](./GENERATIVE_ROADMAP.md).
   - مُدّدت الخطة الرسمية إلى Phase 30.
-  - تم توثيق أن التدريب الفعلي بدأ في Phase 13/14، لكن أول تدريب جودة مفيد قادم هو Phase 24.
+  - تم توثيق أن التدريب الفعلي بدأ في Phase 13/14، وأن أول تدريب جودة مفيد سيأتي في Phase 24.
   - تم تحديد أن أول فرصة لحوار قصير مولّد مقنع هي Phase 26، والهدف الرسمي للحوار المقنع المستقر هو Phase 28.
   - بقي المسار اللغوي `msa + saudi` فقط، وقاموس Saudi Seed v1 هو المرجع اللهجي الحالي.
   - أضيف مبدأ `Progressive Scaling Strategy`: لا يتم رفع حجم النموذج إلا بعد نجاح المرحلة الحالية.
@@ -254,6 +254,19 @@
   - مقارنة v1/v2: v1 كان `vocab=261`, `merges=218`, سعودي فقط؛ v2 صار متوازنًا وأوسع.
   - protected Saudi terms: متوسط tokens تحسن من `4.0` إلى `2.3`، ولا توجد roundtrip failures أو aggressive splits.
   - لا تدريب نموذج لغوي بدأ في Phase 23.
+- بدأ وانتهى Phase 24 SF-10M v0.2 Quality Training:
+  - tokenizer: `artifacts/tokenizers/sf_bpe/v2`.
+  - corpus: `500` سجل، `msa=250`, `saudi=250`.
+  - النموذج: `sf-10m`, random init, `7,444,992` parameters.
+  - التدريب: `2000` خطوة، `epochs=25`, `seq_len=64`, `batch_size=4`.
+  - loss: `8.4751 → 2.8256`.
+  - eval: loss `2.5779`, perplexity `13.17`.
+  - checkpoint المحلي: `artifacts/checkpoints/sf_10m_v0_2/sf-10m-step2000`، غير مرفوع إلى git.
+  - القرار: `COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED`.
+  - التوليد أقل تكرارًا من v0.1، لكنه ما زال غير متماسك ولا يصلح للواجهة كمساعد ذكي.
+  - أضيف [PHASE24_SF10M_V0_2_REPORT.md](./PHASE24_SF10M_V0_2_REPORT.md).
+  - أضيف `artifacts/reports/sf_10m_v0_2_training_report.json`.
+  - أضيف `artifacts/samples/sf_10m_v0_2_generations.md`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -319,7 +332,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 23"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 24"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -350,7 +363,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-442 passed in 5.19s
+445 passed in 5.43s
 ```
 
 | ملف | عدد |
@@ -382,6 +395,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_phase22_readiness.py | 15 (Phase 22) |
 | test_phase22_review_intake.py | 7 (Phase 22) |
 | test_phase23_tokenizer_artifacts.py | 6 (Phase 23) |
+| test_phase24_sf10m_v0_2_report.py | 3 (Phase 24) |
 | test_rag_sparse_retrieval.py | 14 (Phase 8) |
 | test_research_summarizer.py | 20 |
 | test_response_composer.py | 6 |
