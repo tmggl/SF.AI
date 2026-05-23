@@ -1,0 +1,544 @@
+{
+  "phase": "Phase 27.39",
+  "status": "PARTIAL_TOPIC_ISOLATION_KEEP_CURRENT_RUNTIME",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": true,
+  "skip_train": true,
+  "training_scope": "targeted SF-10M topic-isolation probe only; no scaling",
+  "tokenizer": "artifacts/tokenizers/sf_bpe/v4_min_lexical",
+  "checkpoint_root": "artifacts/eval/phase27_39_topic_isolation_repair/checkpoints",
+  "checkpoint_name": "sf-10m-step6400",
+  "candidate_generator": "sf_10m_phase27_39",
+  "train_records": 3307,
+  "balanced_topics": [
+    "الاحترام",
+    "التعاون",
+    "التنظيم",
+    "الصبر",
+    "الصداقة",
+    "الصدق",
+    "القراءة",
+    "الهدوء"
+  ],
+  "summary": {
+    "passed": 10,
+    "total": 24,
+    "bucket_summary": {
+      "heldout": {
+        "passed": 1,
+        "total": 4
+      },
+      "isolation": {
+        "passed": 3,
+        "total": 4
+      },
+      "new_topic": {
+        "passed": 2,
+        "total": 8
+      },
+      "regression": {
+        "passed": 4,
+        "total": 8
+      }
+    },
+    "reason_counts": {
+      "guard:social_smalltalk_mismatch": 1,
+      "guard:thanks_mismatch": 1,
+      "passed": 10,
+      "semantic_mismatch": 11,
+      "topic_leakage": 1
+    }
+  },
+  "runtime_switch_allowed": false,
+  "sf50m_allowed": false,
+  "phase28_allowed": false,
+  "next_phase": "Phase 27.40 — tokenizer/context repair for topic isolation",
+  "rows": [
+    {
+      "id": "reg_001",
+      "bucket": "regression",
+      "dialect": "saudi",
+      "prompt": "كيفك اليوم",
+      "intent": "smalltalk",
+      "topic": "",
+      "expected_terms": [
+        "بخير"
+      ],
+      "response": "ابدأ بشي بسيط وواضح.",
+      "generator_used": true,
+      "guard_allowed": false,
+      "guard_reason": "social_smalltalk_mismatch",
+      "semantic_match": false,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": false,
+      "reason": "guard:social_smalltalk_mismatch"
+    },
+    {
+      "id": "reg_002",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "شكرًا لمساعدتك",
+      "intent": "thanks",
+      "topic": "",
+      "expected_terms": [
+        "العفو"
+      ],
+      "response": "ابدأ بخطوة صغيرة ثم ة تساعدك على الاحتمال.",
+      "generator_used": true,
+      "guard_allowed": false,
+      "guard_reason": "thanks_mismatch",
+      "semantic_match": false,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": false,
+      "reason": "guard:thanks_mismatch"
+    },
+    {
+      "id": "reg_003",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "وجهني بخطوة بسيطة",
+      "intent": "advice",
+      "topic": "",
+      "expected_terms": [
+        "ابدأ"
+      ],
+      "response": "ابدأ بخطوة صغيرة وواضحة.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_004",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "رتب لي يومي بسرعة",
+      "intent": "planning",
+      "topic": "",
+      "expected_terms": [
+        "ثلاث"
+      ],
+      "response": "القراءة طريق التول.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "reg_005",
+      "bucket": "regression",
+      "dialect": "saudi",
+      "prompt": "توترت شوي وش اسوي",
+      "intent": "support",
+      "topic": "",
+      "expected_terms": [
+        "اهدأ"
+      ],
+      "response": "خذ الأموقت الحاجة.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "reg_006",
+      "bucket": "regression",
+      "dialect": "saudi",
+      "prompt": "وش المقصود بالاحترام",
+      "intent": "definition",
+      "topic": "الاحترام",
+      "expected_terms": [
+        "تقدّر"
+      ],
+      "response": "الاحترام إنك تقدّر الناس بكلامك وتصرفك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_007",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "ما معنى التعاون",
+      "intent": "definition",
+      "topic": "التعاون",
+      "expected_terms": [
+        "التعاون"
+      ],
+      "response": "التعاون يعني أن يعمل الناس معًا لتخفيف الحمل.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_008",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "ما معنى الصبر",
+      "intent": "definition",
+      "topic": "الصبر",
+      "expected_terms": [
+        "الصبر"
+      ],
+      "response": "الصبر يعني الثبات وقت الصعوبة.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "new_001",
+      "bucket": "new_topic",
+      "dialect": "msa",
+      "prompt": "ما معنى الصداقة",
+      "intent": "definition",
+      "topic": "الصداقة",
+      "expected_terms": [
+        "الصداقة"
+      ],
+      "response": "الصداعلاقة طيبة تقوم على الوفاء.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "new_002",
+      "bucket": "new_topic",
+      "dialect": "saudi",
+      "prompt": "وش معنى الصداقة",
+      "intent": "definition",
+      "topic": "الصداقة",
+      "expected_terms": [
+        "الصداقة"
+      ],
+      "response": "الصداطيقة إنك تلقى رفيق يوقف معك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "new_003",
+      "bucket": "new_topic",
+      "dialect": "msa",
+      "prompt": "اشرح الصدق بجملة",
+      "intent": "definition",
+      "topic": "الصدق",
+      "expected_terms": [
+        "الصدق"
+      ],
+      "response": "الصد راالقول والعمل.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "new_004",
+      "bucket": "new_topic",
+      "dialect": "saudi",
+      "prompt": "وش معنى الصدق",
+      "intent": "definition",
+      "topic": "الصدق",
+      "expected_terms": [
+        "الصدق"
+      ],
+      "response": "الصدك وتلتزم والعموما فيه خداع.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "new_005",
+      "bucket": "new_topic",
+      "dialect": "msa",
+      "prompt": "ما معنى التنظيم",
+      "intent": "definition",
+      "topic": "التنظيم",
+      "expected_terms": [
+        "التنظيم"
+      ],
+      "response": "التنيعترتيب الوقت والمهام بطريقة واضحة.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "new_006",
+      "bucket": "new_topic",
+      "dialect": "saudi",
+      "prompt": "وش معنى التنظيم",
+      "intent": "definition",
+      "topic": "التنظيم",
+      "expected_terms": [
+        "ترتب"
+      ],
+      "response": "التنق إنك ترتب وقتك ومهامك بوضوح.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "new_007",
+      "bucket": "new_topic",
+      "dialect": "msa",
+      "prompt": "ما معنى الهدوء",
+      "intent": "definition",
+      "topic": "الهدوء",
+      "expected_terms": [
+        "الهدوء"
+      ],
+      "response": "الهدوء: القراءة طريوتات.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": false,
+      "forbidden_topics": [
+        "القراءة"
+      ],
+      "passed": false,
+      "reason": "topic_leakage"
+    },
+    {
+      "id": "new_008",
+      "bucket": "new_topic",
+      "dialect": "saudi",
+      "prompt": "وش معنى الهدوء",
+      "intent": "definition",
+      "topic": "الهدوء",
+      "expected_terms": [
+        "الهدوء"
+      ],
+      "response": "الهدوءالنتخفف تفيدك وتتكلم بروية.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "held_001",
+      "bucket": "heldout",
+      "dialect": "msa",
+      "prompt": "الصداقة ماذا تعني",
+      "intent": "definition",
+      "topic": "الصداقة",
+      "expected_terms": [
+        "الصداقة"
+      ],
+      "response": "الصداوقمودة ووفاء بين الناس.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "held_002",
+      "bucket": "heldout",
+      "dialect": "saudi",
+      "prompt": "الصدق وش يعني",
+      "intent": "definition",
+      "topic": "الصدق",
+      "expected_terms": [
+        "الحقيقة"
+      ],
+      "response": "الصدترتب يعني تقول الحقيقة بوضوح.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "held_003",
+      "bucket": "heldout",
+      "dialect": "msa",
+      "prompt": "اشرح التنظيم ببساطة",
+      "intent": "definition",
+      "topic": "التنظيم",
+      "expected_terms": [
+        "التنظيم"
+      ],
+      "response": "التنق وضوح ما تفعل ومتى تبدأ.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "held_004",
+      "bucket": "heldout",
+      "dialect": "saudi",
+      "prompt": "الهدوء وش يعني",
+      "intent": "definition",
+      "topic": "الهدوء",
+      "expected_terms": [
+        "توترك"
+      ],
+      "response": "الهدوءتوسع فهمك وتزيد كلماتك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "iso_001",
+      "bucket": "isolation",
+      "dialect": "msa",
+      "prompt": "اشرح القراءة بجملة",
+      "intent": "definition",
+      "topic": "القراءة",
+      "expected_terms": [
+        "القراءة"
+      ],
+      "response": "القراءة طريق لاكتساب معرفة جديدة.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "iso_002",
+      "bucket": "isolation",
+      "dialect": "saudi",
+      "prompt": "القراية وش تعني",
+      "intent": "definition",
+      "topic": "القراءة",
+      "expected_terms": [
+        "القراية"
+      ],
+      "response": "القرافا يعني تخفف توترك وتتكلم بروية.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "iso_003",
+      "bucket": "isolation",
+      "dialect": "msa",
+      "prompt": "اشرح الاحترام بجملة",
+      "intent": "definition",
+      "topic": "الاحترام",
+      "expected_terms": [
+        "الاحترام"
+      ],
+      "response": "الاحترام معاملة الناس بقدر وذوق.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "iso_004",
+      "bucket": "isolation",
+      "dialect": "saudi",
+      "prompt": "فسر التعاون بالسعودي",
+      "intent": "definition",
+      "topic": "التعاون",
+      "expected_terms": [
+        "التعاون"
+      ],
+      "response": "التعاون إنك تساعد غيرك وتنجزون سوا.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    }
+  ]
+}

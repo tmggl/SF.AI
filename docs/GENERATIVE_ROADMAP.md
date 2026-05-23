@@ -70,6 +70,7 @@ SF.AI يملك الآن:
 | Phase 27.36 | `Live UI triage` | quality-floor active، وtriage مرّ `27/27` |
 | Phase 27.37 | `Supported topic expansion` | موضوع `الصبر` فُتح خلف semantic guard ومرّ `21/21` |
 | Phase 27.38 | `Targeted topic curriculum/probe` | probe جزئي `6/20`; لا runtime switch |
+| Phase 27.39 | `Topic-isolation repair` | probe جزئي `10/24`; لا runtime switch |
 | بعد نجاح SF-10M | `SF-50M v0.1` | نجاح جودة SF-10M/canary + إعادة Phase 26 readiness |
 | Phase 28 | `SF-120M v0.1` | نجاح SF-50M + scaling gate |
 
@@ -111,6 +112,7 @@ SF.AI يملك الآن:
 - **Phase 27.36:** أضافت quality-floor يمنع raw `chat.general` وموضوعات التعريف غير المثبتة من المولّد، ومرّ triage الحي `27/27`.
 - **Phase 27.37:** أضافت semantic topic guard وفتحت `الصبر` بصيغ مثبتة؛ التوسعة الحية مرّت `21/21`.
 - **Phase 27.38:** دربت probe مستهدفًا للموضوعات المحجوبة، لكنه فشل `6/20` بسبب topic collapse نحو `الاحترام`; runtime لم يتغير.
+- **Phase 27.39:** دربت topic-isolation probe متوازنًا. تحسن جزئيًا إلى `10/24`، لكنه كشف كسورًا لفظية في المصطلحات الجديدة؛ runtime لم يتغير.
 - **Phase 28:** أول قفزة بعد SF-50M إذا أثبت 50M قيمة واضحة.
 - **Phase 29:** إدخاله في الواجهة كتجربة يومية مع router/safety/memory.
 

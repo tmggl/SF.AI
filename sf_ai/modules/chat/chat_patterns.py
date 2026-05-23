@@ -84,9 +84,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.38 جزئيًا: درّبنا probe للموضوعات المحجوبة، لكنه مرّ "
-    "6/20 فقط وظهر topic collapse نحو الاحترام. لذلك أبقينا runtime الحالي، "
-    "والتالي Phase 27.39 لإصلاح خلط الموضوعات.",
+    "اكتملت Phase 27.39 جزئيًا: درّبنا topic-isolation probe، وتحسن إلى "
+    "10/24 لكنه كشف كسورًا لفظية في المصطلحات الجديدة. لذلك أبقينا runtime "
+    "الحالي، والتالي Phase 27.40 لإصلاح tokenizer/context.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

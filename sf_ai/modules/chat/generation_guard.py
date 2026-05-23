@@ -113,7 +113,7 @@ _SOCIAL_PROMPT_RULES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] =
         "thanks_mismatch",
     ),
     (
-        ("سعودي", "بالسعودي", "لهجة سعودية"),
+        ("سعودي", "لهجة سعودية"),
         ("سعودي", "السعودية", "اللهجة", "أبشر", "حياك"),
         "saudi_preference_mismatch",
     ),
@@ -179,6 +179,8 @@ class GenerationGuard:
         p = _normalize_surface(prompt)
         t = _normalize_surface(text)
         for triggers, expected_terms, reason in _SOCIAL_PROMPT_RULES:
+            if reason == "saudi_preference_mismatch" and "بالسعودي" in p:
+                continue
             if any(trigger in p for trigger in triggers) and not any(
                 term in t for term in expected_terms
             ):

@@ -10,10 +10,10 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.38 / 30**
-- **المرحلة الحالية:** **Phase 27.38 — Targeted Topic Curriculum/Probe** (اكتملت جزئيًا: probe الموضوعات المحجوبة مرّ `6/20` فقط، والشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **الرحلة الحالية:** **Phase 27.39 / 30**
+- **المرحلة الحالية:** **Phase 27.39 — Topic-Isolation Repair** (اكتملت جزئيًا: probe الفصل الموضوعي مرّ `10/24` فقط، والشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** Phase 27.39 repair failed targeted topics؛ Phase 28 و`SF-50M` محظوران حتى تنجح موضوعات التعريف المحجوبة.
+- **المرحلة التالية المقترحة:** Phase 27.40 tokenizer/context repair for topic isolation؛ Phase 28 و`SF-50M` محظوران حتى تنجح موضوعات التعريف المحجوبة.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
@@ -97,6 +97,8 @@
 - **تقرير Phase 27.37:** `docs/PHASE27_37_SUPPORTED_TOPIC_EXPANSION_REPORT.md`, `artifacts/reports/phase27_37_supported_topic_expansion_report.json`.
 - **نتيجة Phase 27.38:** دُرّب probe مستهدف للموضوعات المحجوبة (`الصداقة/الصدق/التنظيم/الهدوء`) لكنه مرّ `6/20` فقط وظهر topic collapse نحو `الاحترام`. القرار: لا runtime switch.
 - **تقرير Phase 27.38:** `docs/PHASE27_38_TARGETED_TOPIC_CURRICULUM_PROBE_REPORT.md`, `artifacts/reports/phase27_38_targeted_topic_curriculum_probe_report.json`.
+- **نتيجة Phase 27.39:** دُرّب topic-isolation probe متوازن للموضوعات الثمانية. النتيجة `10/24`: تحسن جزئي، لكن بقيت كسور لفظية وتداخل محدود. القرار: لا runtime switch.
+- **تقرير Phase 27.39:** `docs/PHASE27_39_TOPIC_ISOLATION_REPAIR_REPORT.md`, `artifacts/reports/phase27_39_topic_isolation_repair_report.json`.
 - **مقارنة tokenizer v1/v2:** v1 كان `vocab=261`, `merges=218`, `words_seen=723`, سعودي فقط. v2 تدرب على `500` سجل متوازن: `msa=250`, `saudi=250`.
 - **تحسن protected Saudi terms:** `average_tokens` انخفض من `4.0` في v1 إلى `2.3` في v2، ولا توجد `roundtrip_failures` أو `aggressive_split_terms`.
 - **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches=[]` لأن الجمع اكتمل.
@@ -241,7 +243,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs,reports}/   Phase 5.5+ outputs/reports
 │
-├── tests/                                 pytest suite — 469 تست / 54 ملف
+├── tests/                                 pytest suite — 548 تست / 65 ملف
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -317,7 +319,7 @@ make server-start
 
 آخر تحقق حي بعد restart:
 - السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`.
-- الكود الحالي بعد Phase 27.38 يعرض `Phase 27.38` في `/system/status` و`/health`، ويعرض `GET /system/phase27-dialogue-eval` تقييم الحوار وخطة corpus.
+- الكود الحالي بعد Phase 27.39 يعرض `Phase 27.39` في `/system/status` و`/health`، ويعرض `GET /system/phase27-dialogue-eval` تقييم الحوار وخطة corpus.
 - `GET /system/phase26-readiness` يرجع `can_start_sf50m_training=false`.
 - `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - `make server-status` read-only ولا يوقف السيرفر.
@@ -326,10 +328,10 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى إكمال Phase 27.38)
+## نتائج الاختبارات (حتى إكمال Phase 27.39)
 
 ```
-546 passed in 16.97s
+548 passed in 16.99s
 ```
 
 التغطية الحالية:
@@ -364,7 +366,7 @@ make server-start
 - `test_phase22_review_intake.py` — 8 tests (Phase 22 review exports + raw generator gate)
 - `test_phase23_tokenizer_artifacts.py` — 6 tests (Phase 23 tokenizer v2)
 - `test_phase24_sf10m_v0_2_report.py` — 3 tests (Phase 24 training report + runtime block)
-- `test_phase25_generation_canary.py` — 5 tests (Phase 25 canary guard)
+- `test_phase25_generation_canary.py` — 6 tests (Phase 25 canary guard)
 - `test_orchestrator.py` — 7 tests
 - `test_response_composer.py` — 6 tests
 - `test_router.py` — 8 tests

@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.38 — Targeted Topic Curriculum/Probe",
+        current_phase="Phase 27.39 — Topic-Isolation Repair",
         current_phase_status="completed_partial_keep_current_runtime",
         next_phase=(
-            "Phase 27.39 repair failed targeted topics; SF-50M remains blocked"
+            "Phase 27.40 tokenizer/context repair for topic isolation; SF-50M remains blocked"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -304,6 +304,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_38_targeted_topic_curriculum_probe",
                 status="completed_partial_keep_current_runtime",
                 phase="Phase 27.38",
+            ),
+            ComponentStatus(
+                name="phase27_39_topic_isolation_repair",
+                status="completed_partial_keep_current_runtime",
+                phase="Phase 27.39",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

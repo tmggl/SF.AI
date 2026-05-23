@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.38 / 30**
-- **المرحلة الحالية:** **Phase 27.38 — Targeted Topic Curriculum/Probe**
-- **حالة المرحلة الحالية:** **مكتملة جزئيًا؛ probe الموضوعات المحجوبة مرّ `6/20` ولا runtime switch**
-- **المرحلة التالية المقترحة:** Phase 27.39 repair failed targeted topics؛ لا Phase 28 ولا `SF-50M` قبل نجاح موضوعات التعريف المحجوبة.
+- **الرحلة الحالية:** **Phase 27.39 / 30**
+- **المرحلة الحالية:** **Phase 27.39 — Topic-Isolation Repair**
+- **حالة المرحلة الحالية:** **مكتملة جزئيًا؛ topic-isolation probe مرّ `10/24` ولا runtime switch**
+- **المرحلة التالية المقترحة:** Phase 27.40 tokenizer/context repair for topic isolation؛ لا Phase 28 ولا `SF-50M` قبل نجاح موضوعات التعريف المحجوبة.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -87,6 +87,7 @@
 | Phase 27.36 | Live UI Triage | ✅ completed_quality_floor_active | ✅ |
 | Phase 27.37 | Supported Topic Expansion | ✅ completed_quality_gated | ✅ |
 | Phase 27.38 | Targeted Topic Curriculum/Probe | ✅ completed_partial_keep_current_runtime | ✅ |
+| Phase 27.39 | Topic-Isolation Repair | ✅ completed_partial_keep_current_runtime | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -660,6 +661,17 @@
   - القرار: `runtime_switch_allowed=false`; يبقى runtime التجريبي على مرشح Phase 27.33 + فتح `الصبر` المحروس من 27.37.
   - التالي Phase 27.39 repair failed targeted topics.
   - أضيف [PHASE27_38_TARGETED_TOPIC_CURRICULUM_PROBE_REPORT.md](./PHASE27_38_TARGETED_TOPIC_CURRICULUM_PROBE_REPORT.md).
+- بدأ وانتهى Phase 27.39 Topic-Isolation Repair:
+  - دُرّب checkpoint مستهدف: `sf-10m-step6400`.
+  - الاختبار: `10/24` بعد تصحيح القياس.
+  - regression: `4/8`.
+  - new_topic: `2/8`.
+  - heldout: `1/4`.
+  - isolation: `3/4`.
+  - التشخيص: topic collapse تحسن جزئيًا، لكن بقيت كسور لفظية في `الصداقة/الصدق/التنظيم` وتسرب محدود بين الموضوعات.
+  - القرار: `runtime_switch_allowed=false`; يبقى runtime التجريبي على مرشح Phase 27.33 + فتح `الصبر` المحروس من 27.37.
+  - التالي Phase 27.40 tokenizer/context repair for topic isolation.
+  - أضيف [PHASE27_39_TOPIC_ISOLATION_REPAIR_REPORT.md](./PHASE27_39_TOPIC_ISOLATION_REPAIR_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -725,7 +737,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.38"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.39"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -756,7 +768,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-546 passed in 16.97s
+548 passed in 16.99s
 ```
 
 | ملف | عدد |
@@ -789,7 +801,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_phase22_review_intake.py | 8 (Phase 22 + raw generator gate) |
 | test_phase23_tokenizer_artifacts.py | 6 (Phase 23) |
 | test_phase24_sf10m_v0_2_report.py | 3 (Phase 24) |
-| test_phase25_generation_canary.py | 5 (Phase 25) |
+| test_phase25_generation_canary.py | 6 (Phase 25 + Phase 27.39 guard refinement) |
 | test_rag_sparse_retrieval.py | 14 (Phase 8) |
 | test_research_summarizer.py | 20 |
 | test_response_composer.py | 6 |

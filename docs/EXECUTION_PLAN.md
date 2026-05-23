@@ -108,6 +108,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.36 | Live UI Triage | مكتملة؛ quality-floor active وtriage مرّ `27/27` |
 | Phase 27.37 | Supported Topic Expansion | مكتملة؛ `الصبر` فُتح خلف semantic guard ومرّ `21/21` |
 | Phase 27.38 | Targeted Topic Curriculum/Probe | مكتملة جزئيًا؛ `6/20` ولا runtime switch |
+| Phase 27.39 | Topic-Isolation Repair | مكتملة جزئيًا؛ `10/24` ولا runtime switch |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2708,6 +2709,41 @@ runtime_switch_allowed = false
 - [PHASE27_38_TARGETED_TOPIC_CURRICULUM_PROBE_REPORT.md](./PHASE27_38_TARGETED_TOPIC_CURRICULUM_PROBE_REPORT.md)
 - `artifacts/reports/phase27_38_targeted_topic_curriculum_probe_report.json`
 - `artifacts/samples/phase27_38_targeted_topic_curriculum_probe.md`
+
+---
+
+## Phase 27.39 — Topic-Isolation Repair
+
+### الهدف
+
+إصلاح خلط موضوعات التعريف عبر curriculum متوازن يحاسب النموذج على فصل
+`التعاون/الصبر/الاحترام/القراءة/الصداقة/الصدق/التنظيم/الهدوء`.
+
+### نتيجة التنفيذ
+
+```text
+checkpoint = sf-10m-step6400
+cases = 10/24
+regression = 4/8
+new_topic = 2/8
+heldout = 1/4
+isolation = 3/4
+runtime_switch_allowed = false
+```
+
+### القرار
+
+- لا نبدّل runtime.
+- يبقى زر `مولّد تجريبي` على مرشح Phase 27.33 مع فتح `الصبر` المحروس.
+- سبب الحجب: كسور لفظية في المصطلحات الجديدة وتسرب موضوعي محدود.
+- لا `SF-50M` ولا Phase 28.
+- التالي Phase 27.40: tokenizer/context repair for topic isolation.
+
+### artifacts
+
+- [PHASE27_39_TOPIC_ISOLATION_REPAIR_REPORT.md](./PHASE27_39_TOPIC_ISOLATION_REPAIR_REPORT.md)
+- `artifacts/reports/phase27_39_topic_isolation_repair_report.json`
+- `artifacts/samples/phase27_39_topic_isolation_repair.md`
 
 ---
 

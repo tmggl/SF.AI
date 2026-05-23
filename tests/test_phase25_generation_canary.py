@@ -97,6 +97,15 @@ def test_phase25_generation_guard_allows_aligned_social_reply() -> None:
     assert verdict.reason == "passed"
 
 
+def test_generation_guard_does_not_treat_bilsaudi_definition_as_language_preference() -> None:
+    verdict = GenerationGuard(min_chars=4).inspect_for_prompt(
+        "فسر التعاون بالسعودي",
+        "التعاون إنك تساعد غيرك وتنجزون سوا.",
+    )
+    assert verdict.allowed is True
+    assert verdict.reason == "passed"
+
+
 def test_phase25_policy_requires_all_three_flags() -> None:
     base = dict(
         domain="chat",

@@ -52,7 +52,7 @@ Phase 27.25 اختبرت checkpoint نفسه على أسئلة held-out جديد
 `16/18` مع intent/topic conditioning. Phase 27.31–27.33 أكملت natural
 intent/topic + balanced calibration + advice/micro stabilization، ووصلت إلى
 كل البوابات المحلية كاملة: fresh mixed `18/18` وmicro `32/32` بلا تسريب.
-الخطوة الحالية ليست تكبير النموذج، بل Phase 27.39 لإصلاح topic collapse الذي ظهر في probe Phase 27.38.
+الخطوة الحالية ليست تكبير النموذج، بل Phase 27.40 لإصلاح tokenizer/context بعد أن كشف Phase 27.39 كسورًا لفظية في موضوعات التعريف.
 
 الخطوة العملية الحالية:
 
@@ -198,7 +198,8 @@ SF.AI حاليًا:
 - **Phase 27.36:** Live UI Triage — مكتمل؛ quality-floor active وtriage مرّ `27/27`.
 - **Phase 27.37:** Supported Topic Expansion — مكتمل؛ موضوع `الصبر` مرّ `3/3` خلف semantic guard.
 - **Phase 27.38:** Targeted Topic Curriculum/Probe — مكتمل جزئيًا؛ `6/20` ولا runtime switch.
-- **Phase 27.39:** Repair Failed Targeted Topics — التالي.
+- **Phase 27.39:** Topic-Isolation Repair — مكتمل جزئيًا؛ `10/24` ولا runtime switch.
+- **Phase 27.40:** Tokenizer/Context Repair for Topic Isolation — التالي.
 - **Phase 28:** تدريب `SF-120M v0.1`؛ أول قفزة بعد نجاح `SF-50M`.
 - **Phase 29:** Runtime Hybrid Assistant v1.
 - **Phase 30:** Continuous Improvement Loop.
