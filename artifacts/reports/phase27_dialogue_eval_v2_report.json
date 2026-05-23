@@ -32,31 +32,31 @@
   "can_start_phase28": false,
   "phase26_status": "NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M",
   "corpus_expansion_plan": {
-    "current_records": 3643,
+    "current_records": 5143,
     "target_records": 5000,
-    "remaining_records": 1357,
+    "remaining_records": 0,
     "batch_size": 1500,
-    "batches_needed_total": 1,
+    "batches_needed_total": 0,
     "target_per_dialect": 2500,
     "dialect_counts": {
-      "saudi": 1844,
-      "msa": 1799
+      "saudi": 2594,
+      "msa": 2549
     },
     "needed_by_dialect": {
-      "msa": 701,
-      "saudi": 656
+      "msa": 0,
+      "saudi": 0
     },
     "batches_by_dialect": {
-      "msa": 1,
-      "saudi": 1
+      "msa": 0,
+      "saudi": 0
     },
     "quality_targets": {
       "gold_total_target": 1000,
       "silver_total_target": 4000,
       "current_gold": 31,
-      "current_silver": 3612,
+      "current_silver": 5112,
       "needed_gold": 969,
-      "needed_silver": 388
+      "needed_silver": 0
     },
     "category_targets_remaining": {
       "social_smalltalk": 600,
@@ -81,7 +81,6 @@
     ]
   },
   "blockers": [
-    "corpus_expansion_required",
     "open_generator_not_ready",
     "phase26_sf50m_gate_not_ready",
     "sf50m_not_trained_or_validated"
@@ -250,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27 كتقييم حوار v2 وخطة توسعة corpus. النتيجة: التوجيه نجح، لكن المولد ما زال قالبًا، ونحتاج رفع corpus من 3643 إلى 5000 قبل SF-50M."
+      "response_preview": "اكتملت Phase 27 كتقييم حوار v2 وخطة توسعة corpus. النتيجة: التوجيه نجح، لكن المولد ما زال قالبًا. corpus gate تجاوز 5000، والمانع الآن جودة SF-10M وcanary."
     },
     {
       "scenario_id": "clarification_repair_flow",

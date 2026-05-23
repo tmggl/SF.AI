@@ -10,7 +10,7 @@
 - **الرحلة الحالية:** **Phase 27 / 30**
 - **المرحلة الحالية:** **Phase 27 — Dialogue Evaluation v2 + Corpus Expansion Plan**
 - **حالة المرحلة الحالية:** **مكتملة كـ baseline eval؛ توسعة corpus مطلوبة قبل SF-50M**
-- **المرحلة التالية المقترحة:** توسعة corpus إلى `5000` ثم إعادة Phase 26 readiness؛ Phase 28 محظورة حتى ينجح `SF-50M`.
+- **المرحلة التالية المقترحة:** إعادة تدريب/تحسين `SF-10M` وإصلاح canary؛ Phase 28 محظورة حتى ينجح `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ تم تحديث `default_registry.yaml` و`safety_terms.yaml` لفجوات finance/religion/security.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -177,7 +177,7 @@
   - أضيف `make phase19-readiness`.
   - أضيف `GET /system/phase19-readiness`.
   - القرار الحالي: `NOT_READY_EXPAND_CORPUS_FIRST`.
-  - السبب: corpus الحالي بعد تنظيف الحوارات التشغيلية صار `3643` سجل فقط والحد الأدنى العملي الحالي `5000`.
+  - السبب: corpus الحالي بعد تنظيف الحوارات التشغيلية والتوسعة الطبيعية صار `5143` سجلًا وتجاوز الحد الأدنى العملي `5000`، لكن بوابات الجودة لم تمر.
   - أضيف lab bridge للرسائل غير الحساسة حتى يختبر سامي المولد الخام عبر مجالات skeleton داخل المختبر المحلي.
   - docs: [PHASE19_READINESS_REPORT.md](./PHASE19_READINESS_REPORT.md)
 - بدأ وانتهى Phase 20 Domain Activation Gates:
@@ -283,9 +283,9 @@
   - أضيف endpoint حي: `GET /system/phase26-readiness`.
   - القرار: `NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M`.
   - `can_start_sf50m_training=false`.
-  - corpus كان `500` سجل عند قرار Phase 26، ثم صار `3643` بعد تنظيف الحوارات التشغيلية؛ ما زال بعيدًا عن الحد العملي `5000`.
+  - corpus كان `500` سجل عند قرار Phase 26، ثم صار `5143` بعد تنظيف الحوارات التشغيلية والتوسعة الطبيعية؛ corpus gate صار ناجحًا.
   - tokenizer v2 جاهز، لكن runtime quality غير جاهزة لأن Phase 25 حجب `SF-10M v0.2`.
-  - blockers: `corpus_below_sf50m_minimum`, `phase24_runtime_quality_blocked`, `phase25_real_model_blocked`, `hallucination_checks_missing`, `repetition_checks_failed`.
+  - blockers: `phase24_runtime_quality_blocked`, `phase25_real_model_blocked`, `hallucination_checks_missing`, `repetition_checks_failed`.
   - أضيف [PHASE26_SF50M_READINESS_REPORT.md](./PHASE26_SF50M_READINESS_REPORT.md).
   - أضيف `artifacts/reports/phase26_sf50m_readiness_report.json`.
 - بدأ وانتهى Phase 27 Dialogue Evaluation v2 + Corpus Expansion Plan:
@@ -296,8 +296,8 @@
   - suite متعدد الأدوار: `7` سيناريوهات و`19` turn.
   - النتيجة: `19/19`, pass rate `100%`.
   - `generator_modes={'template': 19}`، أي لا يوجد حوار مولّد مفتوح بعد.
-  - خطة corpus الأصلية: `500 → 5000`. بعد تنظيف الحوارات التشغيلية صار المتبقي `1357`, عدد batches الكبيرة `9`, بالتوازن `msa=701`, `saudi=656`.
-  - القرار: `COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_EXPANSION_REQUIRED`.
+  - خطة corpus الأصلية: `500 → 5000`. بعد الدفعات الطبيعية صار corpus `5143` والمتبقي `0`.
+  - القرار: baseline نجح، وcorpus gate نجح، لكن open generator غير جاهز.
   - Phase 28 محظورة حتى ينجح `SF-50M` في eval v2.
   - أضيف [PHASE27_DIALOGUE_EVAL_V2_REPORT.md](./PHASE27_DIALOGUE_EVAL_V2_REPORT.md).
   - أضيف `eval/reports/dialogue_eval_v2.json`.
@@ -313,13 +313,16 @@
   - أضيف `dialogue_batch_v4_saudi_004.jsonl` وفيه 750 سجل سعودي طبيعي.
   - أضيف `dialogue_batch_v5_msa_005.jsonl` وفيه 750 سجل فصيح طبيعي.
   - أضيف `dialogue_batch_v5_saudi_005.jsonl` وفيه 750 سجل سعودي طبيعي.
-  - corpus الحالي صار `3643`: `msa=1799`, `saudi=1844`.
-  - المتبقي إلى هدف `5000` صار `1357` سجلًا، أي `1` دفعة كبيرة بحجم 1500 تقريبًا.
+  - أضيف `dialogue_batch_v6_msa_006.jsonl` وفيه 750 سجل فصيح طبيعي.
+  - أضيف `dialogue_batch_v6_saudi_006.jsonl` وفيه 750 سجل سعودي طبيعي.
+  - corpus الحالي صار `5143`: `msa=2549`, `saudi=2594`.
+  - المتبقي إلى هدف `5000` صار `0` سجلًا.
   - أضيف [PHASE27_CORPUS_EXPANSION_BATCH_001_REPORT.md](./PHASE27_CORPUS_EXPANSION_BATCH_001_REPORT.md).
   - أضيف [PHASE27_CORPUS_EXPANSION_BATCH_002_REPORT.md](./PHASE27_CORPUS_EXPANSION_BATCH_002_REPORT.md).
   - أضيف [PHASE27_CORPUS_EXPANSION_BATCH_003_REPORT.md](./PHASE27_CORPUS_EXPANSION_BATCH_003_REPORT.md).
   - أضيف [PHASE27_CORPUS_EXPANSION_BATCH_004_REPORT.md](./PHASE27_CORPUS_EXPANSION_BATCH_004_REPORT.md).
   - أضيف [PHASE27_CORPUS_EXPANSION_BATCH_005_REPORT.md](./PHASE27_CORPUS_EXPANSION_BATCH_005_REPORT.md).
+  - أضيف [PHASE27_CORPUS_EXPANSION_BATCH_006_REPORT.md](./PHASE27_CORPUS_EXPANSION_BATCH_006_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 

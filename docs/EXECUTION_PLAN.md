@@ -1268,7 +1268,7 @@ can_start_sf50m_training=false
 
 الأسباب:
 
-- corpus كان `500` سجل عند قرار Phase 26، ثم صار `3643` بعد تنظيف الحوارات التشغيلية؛ الحد العملي لـ `SF-50M` هو `5000` سجل.
+- corpus كان `500` سجل عند قرار Phase 26، ثم صار `5143` بعد تنظيف الحوارات التشغيلية؛ الحد العملي لـ `SF-50M` هو `5000` سجل.
 - `SF-10M v0.2` تحسن رقميًا لكنه بقي runtime-blocked.
 - Phase 25 حجب تجربة النموذج الحقيقي بـ `generation_guard:malformed_token`.
 - hallucination/repetition/runtime quality gates لم تنجح بعد.
@@ -1321,11 +1321,11 @@ COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_EXPANSION_REQUIRED
 خطة corpus:
 
 ```text
-current_records      = 3643
+current_records      = 5143
 target_records       = 5000
-remaining_records    = 1357
+remaining_records    = 0
 batches_needed_total = 9
-needed_by_dialect    = msa=701, saudi=656
+needed_by_dialect    = msa=0, saudi=0
 ```
 
 ### artifacts

@@ -39,14 +39,14 @@ def test_phase20_sensitive_domains_stay_blocked_without_policy() -> None:
         assert gate.recommended_status == "keep_skeleton_only"
 
 
-def test_phase20_text_domains_wait_for_corpus_and_activation_tests() -> None:
+def test_phase20_text_domains_wait_for_activation_tests_after_corpus_gate() -> None:
     decision = build_phase20_activation_gates()
     gates = {gate.domain: gate for gate in decision.gates}
     for domain in ("coding", "data", "writing", "translation", "education"):
         gate = gates[domain]
         assert gate.current_status == "skeleton_only"
         assert gate.can_activate_now is False
-        assert "data_or_model_not_ready" in gate.blockers
+        assert "data_or_model_not_ready" not in gate.blockers
         assert "domain_activation_tests_missing" in gate.blockers
 
 

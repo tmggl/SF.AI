@@ -85,7 +85,7 @@ DIALOGUE_TEST = (
 
 NEXT_STEP = (
     "اكتملت Phase 27 كتقييم حوار v2 وخطة توسعة corpus. النتيجة: التوجيه نجح، "
-    "لكن المولد ما زال قالبًا، ونحتاج رفع corpus من 3643 إلى 5000 قبل SF-50M.",
+    "لكن المولد ما زال قالبًا. corpus gate تجاوز 5000، والمانع الآن جودة SF-10M وcanary.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

@@ -10,15 +10,15 @@
   "recommended_action": "DO_NOT_TRAIN_SF50M_YET_EXPAND_CORPUS_AND_REPEAT_SF10M_CANARY",
   "corpus": {
     "path": "data/corpus/chat/jsonl",
-    "training_records": 3643,
+    "training_records": 5143,
     "min_training_records": 5000,
     "issue_count": 0,
     "dialects": {
-      "saudi": 1844,
-      "msa": 1799
+      "saudi": 2594,
+      "msa": 2549
     },
     "quality": {
-      "silver": 3612,
+      "silver": 5112,
       "gold": 31
     },
     "missing_required_dialects": []
@@ -45,7 +45,7 @@
     "real_model_guard_reason": "malformed_token"
   },
   "scaling_gates": {
-    "corpus_readiness": false,
+    "corpus_readiness": true,
     "tokenization_audit": true,
     "evaluation_suite": true,
     "safety_checks": true,
@@ -71,7 +71,6 @@
     "checkpoint_root": "artifacts/checkpoints/sf_50m_v0_1"
   },
   "blockers": [
-    "corpus_below_sf50m_minimum",
     "phase24_runtime_quality_blocked",
     "phase25_real_model_blocked",
     "hallucination_checks_missing",

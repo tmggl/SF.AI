@@ -29,7 +29,7 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 27 منتهية. Phase 22 Gold Dialogue Corpus v2 وصلت إلى `500/500` (`msa=250`, `saudi=250`)، وPhase 23 درّب tokenizer v2، وPhase 24 درّب `SF-10M v0.2`، وPhase 25 أضاف canary guard حجب النموذج الحقيقي ورجع للقالب، وPhase 26 رفض تدريب `SF-50M` الآن عبر بوابة readiness، وPhase 27 مرّر eval v2 baseline `19/19` ووضع خطة corpus إلى `5000`. بدأ تنفيذ التوسعة بإضافة Batch 001 ثم Batch 002 ثم Batch 003، ثم نُظّفت الحوارات التشغيلية، ثم أضيف Batch 004 وBatch 005 الطبيعيان بحجم `1500` لكل دفعة. corpus الحالي `3643` (`msa=1799`, `saudi=1844`).
+- المراحل من Phase 0 حتى Phase 27 منتهية. Phase 22 Gold Dialogue Corpus v2 وصلت إلى `500/500` (`msa=250`, `saudi=250`)، وPhase 23 درّب tokenizer v2، وPhase 24 درّب `SF-10M v0.2`، وPhase 25 أضاف canary guard حجب النموذج الحقيقي ورجع للقالب، وPhase 26 رفض تدريب `SF-50M` الآن عبر بوابة readiness، وPhase 27 مرّر eval v2 baseline `19/19` ووضع خطة corpus إلى `5000`. بدأ تنفيذ التوسعة بإضافة Batch 001 ثم Batch 002 ثم Batch 003، ثم نُظّفت الحوارات التشغيلية، ثم أضيف Batch 004 وBatch 005 الطبيعيان بحجم `1500` لكل دفعة. corpus الحالي `5143` (`msa=2549`, `saudi=2594`).
 - استخدم `make phase22-review-intake` أو `GET /system/phase22-review-intake` قبل أي تحويل من `data/corpus/chat/review/` إلى corpus تدريبي.
 - `phase22-review-intake` يحتوي بوابة جودة: راقب `quality_score/quality_label/quality_blockers`، ولا تحوّل جلسات قصيرة جدًا أو فيها ردود خام من `sf_10m_v0_1/sf_10m_v0_2` إلى corpus جودة.
 - `/ui/chat` يحتوي مؤشر جودة تصدير محلي ويضيف `ui_quality_*` إلى metadata.
@@ -44,7 +44,7 @@
 - اقرأ ملفات الحوكمة والدستور قبل أي تدريب: `PROJECT_CONSTITUTION`, `LANGUAGE_SEGMENTATION`, `TOKENIZATION_POLICY`, `DATASET_GOVERNANCE`, `AGENT_ENGINEERING_RULES`, ثم `PROJECT_IDENTITY`, `ENGINEERING_RULES`, `AGENT_INSTRUCTIONS`, `PROJECT_MAP`, `PROJECT_LIFECYCLE`.
 - اقرأ `docs/PHASE12_TOKENIZER_V1_REPORT.md`, `docs/PHASE13_SMOKE_TRAINING_REPORT.md`, و`docs/PHASE14_SF10M_V0_1_REPORT.md`: artifacts موجودة، لكنها غير صالحة للشات أو الجودة اللغوية بعد.
 - إذا كان السيرفر الحي لم يُعد تشغيله بعد، استخدم `make phase12-readiness` لنفس القرار بدون لمس السيرفر.
-- الهدف العام: الوصول إلى نموذج لغوي سيادي مولّد. أول توليد خام في Phase 13، وباب التوليد داخل الشات جُهّز في Phase 15. Phase 27 أنهى eval v2 وخطة corpus؛ الخطوة التالية مواصلة توسعة corpus من `3643` إلى `5000` قبل أي `SF-50M`.
+- الهدف العام: الوصول إلى نموذج لغوي سيادي مولّد. أول توليد خام في Phase 13، وباب التوليد داخل الشات جُهّز في Phase 15. Phase 27 أنهى eval v2 وخطة corpus، ثم تجاوز corpus حد `5000`. الخطوة التالية ليست تكبيرًا جديدًا، بل إصلاح جودة `SF-10M` وإعادة canary قبل أي `SF-50M`.
 - تفويض سامي الأخير يعني أن حوار الوكيل المؤلف لخدمة corpus يمكن اعتماده كـ `owner-delegated agent-authored` مع `training_allowed=true` إذا حمل source/license/quality/notes كاملة، وبقي ضمن `msa + saudi` ودون أي مصدر خارجي أو pretrained data.
 - كل export أو corpus record يجب أن يحمل user ownership. المسار الحالي: `owner_user_id=created_by_user_id=target_user_id=sami-local` و`user_scope=single_user`.
 

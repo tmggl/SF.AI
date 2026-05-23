@@ -89,6 +89,19 @@ saudi               : 1844
 phase27 eval        : 19/19, remaining=1357, batches=1 عند batch_size=1500
 ```
 
+## الحالة بعد Batch 006 الطبيعي
+
+أضيفت دفعة طبيعية ثالثة بحجم `1500` سجل (`750` فصحى + `750` سعودي)،
+فصار corpus فوق حد `5000` لأول مرة:
+
+```text
+corpus-audit        : 5143/5143 training-ready, issues=0
+msa                 : 2549
+saudi               : 2594
+phase26 corpus gate : passed
+phase27 eval        : 19/19, remaining=0, batches=0
+```
+
 ## القرار التالي
 
 Phase 27 تستمر، لكن الدفعات القادمة يجب أن تكون **طبيعية فقط**. لا تُستخدم

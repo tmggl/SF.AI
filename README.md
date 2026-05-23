@@ -38,9 +38,9 @@
 ## الهدف الحالي
 
 - **الرحلة الحالية:** Phase 27 / 30 — Dialogue Evaluation v2 + Corpus Expansion Plan اكتملت كاختبار baseline وخطة بيانات.
-- **الأولوية الحالية:** تنفيذ توسعة corpus من `3643` إلى `5000` داخل `msa + saudi`; لا تدريب `SF-50M` ولا Phase 28 الآن.
+- **الأولوية الحالية:** إعادة تدريب/تحسين `SF-10M` بعد اكتمال corpus gate؛ لا تدريب `SF-50M` ولا Phase 28 حتى تمر بوابات الجودة.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
-- **البيانات الحالية:** corpus موثق `3643` سجلًا يمر `corpus-audit`: `1844` سعودي + `1799` فصحى. آخر tokenizer v2 وSF-10M v0.2 استُخدما corpus Phase 22 عند `500` سجل، والتوسعة الجديدة بدأت بعد Phase 27.
+- **البيانات الحالية:** corpus موثق `5143` سجلًا يمر `corpus-audit`: `2594` سعودي + `2549` فصحى. آخر tokenizer v2 وSF-10M v0.2 استُخدما corpus Phase 22 عند `500` سجل، والتوسعة الجديدة بدأت بعد Phase 27.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
 - **المولّد:** `SF-10M v0.2` تحسّن رقميًا لكنه غير جاهز كحوار مقنع؛ Phase 25 أضاف canary guard يمنع الرد الضعيف ويرجع للقالب.
 - **التقييم:** Phase 27 مرّر `19/19` turn في حوار متعدد الأدوار، لكنه أكد أن الردود ما زالت `template` وأن المولد غير جاهز.
@@ -53,10 +53,10 @@
 - **Tokenizer v2:** Phase 23 أضاف `artifacts/tokenizers/sf_bpe/v2/` و`make phase23-tokenizer-audit`; الحالة `COMPLETED_READY_FOR_PHASE24`, `vocab=4493`, `merges=4386`, وprotected Saudi terms تحسنت من متوسط 4.0 tokens في v1 إلى 2.3 في v2.
 - **SF-10M v0.2:** Phase 24 درّب النموذج 2000 خطوة على tokenizer v2 وcorpus المتوازن: loss `8.4751 → 2.8256`, eval loss `2.5779`, perplexity `13.17`. القرار: `COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED` لأن التوليد لا يزال غير متماسك.
 - **Canary v1:** Phase 25 أضاف `GenerationGuard` و`SF_GENERATOR_CANARY`; التجربة الحقيقية على v0.2 حُجبت بـ `generation_guard:malformed_token` وبقي الرد من القالب.
-- **قرار Phase 26:** `SF-50M` غير جاهز: corpus الحالي `3643` فقط والحد العملي `5000`، وruntime quality/hallucination/repetition gates لم تنجح بعد. التقرير: [docs/PHASE26_SF50M_READINESS_REPORT.md](./docs/PHASE26_SF50M_READINESS_REPORT.md).
-- **نتيجة Phase 27:** `make phase27-dialogue-eval` مرّر `19/19` turn في suite متعدد الأدوار، لكن كل الردود `template`، و`open_generator_ready=false`. بعد تنظيف الحوارات التشغيلية صارت خطة التوسعة: `1357` سجلًا إضافيًا، `1` دفعة كبيرة تقريبًا، بالتساوي `msa=701` و`saudi=656`. التقرير: [docs/PHASE27_DIALOGUE_EVAL_V2_REPORT.md](./docs/PHASE27_DIALOGUE_EVAL_V2_REPORT.md).
+- **قرار Phase 26:** `SF-50M` غير جاهز رغم أن corpus الحالي `5143` تجاوز الحد العملي `5000`; المانع الآن runtime quality/hallucination/repetition gates. التقرير: [docs/PHASE26_SF50M_READINESS_REPORT.md](./docs/PHASE26_SF50M_READINESS_REPORT.md).
+- **نتيجة Phase 27:** `make phase27-dialogue-eval` مرّر `19/19` turn في suite متعدد الأدوار، لكن كل الردود `template`، و`open_generator_ready=false`. بعد تنظيف الحوارات التشغيلية صارت خطة التوسعة: `0` سجلًا إضافيًا، `1` دفعة كبيرة تقريبًا، بالتساوي `msa=0` و`saudi=0`. التقرير: [docs/PHASE27_DIALOGUE_EVAL_V2_REPORT.md](./docs/PHASE27_DIALOGUE_EVAL_V2_REPORT.md).
 - **دفعات توسعة:** أضيفت Batch 001 بإجمالي 50 سجلًا، ثم Batch 002 وBatch 003 الكبيرتان بإجمالي 1000 سجل، كل واحدة `250` فصيح + `250` سعودي. التقارير: [docs/PHASE27_CORPUS_EXPANSION_BATCH_001_REPORT.md](./docs/PHASE27_CORPUS_EXPANSION_BATCH_001_REPORT.md), [docs/PHASE27_CORPUS_EXPANSION_BATCH_002_REPORT.md](./docs/PHASE27_CORPUS_EXPANSION_BATCH_002_REPORT.md), [docs/PHASE27_CORPUS_EXPANSION_BATCH_003_REPORT.md](./docs/PHASE27_CORPUS_EXPANSION_BATCH_003_REPORT.md).
-- **تنظيف corpus:** أضيف فلتر يمنع الحوارات التشغيلية/الهندسية/الخاصة بسامي من التدريب؛ حُذف `907` سجلًا وبقي `3643` سجلًا طبيعيًا. التقرير: [docs/CORPUS_OPERATIONAL_FILTER_REPORT.md](./docs/CORPUS_OPERATIONAL_FILTER_REPORT.md).
+- **تنظيف corpus:** أضيف فلتر يمنع الحوارات التشغيلية/الهندسية/الخاصة بسامي من التدريب؛ حُذف `907` سجلًا قديمًا، ثم وصلت التوسعة الطبيعية إلى `5143` سجلًا. التقرير: [docs/CORPUS_OPERATIONAL_FILTER_REPORT.md](./docs/CORPUS_OPERATIONAL_FILTER_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
