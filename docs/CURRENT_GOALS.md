@@ -52,7 +52,7 @@ Phase 27.25 اختبرت checkpoint نفسه على أسئلة held-out جديد
 `16/18` مع intent/topic conditioning. Phase 27.31–27.33 أكملت natural
 intent/topic + balanced calibration + advice/micro stabilization، ووصلت إلى
 كل البوابات المحلية كاملة: fresh mixed `18/18` وmicro `32/32` بلا تسريب.
-الخطوة الحالية ليست تكبير النموذج، بل جمع ملاحظات واجهة حية في Phase 27.35 بعد نجاح trial المحروس في Phase 27.34.
+الخطوة الحالية ليست تكبير النموذج، بل Phase 27.36 لجمع وتصنيف ملاحظات الواجهة الحية بعد نجاح Phase 27.35.
 
 الخطوة العملية الحالية:
 
@@ -194,7 +194,8 @@ SF.AI حاليًا:
 - **Phase 27.32:** Balanced Natural Calibration — مكتمل جزئيًا؛ calibration `12/12`.
 - **Phase 27.33:** Advice + Micro Stabilization — مكتمل؛ كل بوابات التوليد المحلية مرّت.
 - **Phase 27.34:** Guarded Runtime Trial — مكتمل؛ تجربة الواجهة المحروسة مرّت `9/9`.
-- **Phase 27.35:** Live UI Trial Observations — التالي.
+- **Phase 27.35:** Live UI Trial Observations — مكتمل؛ live UI/API trial مرّ `10/10`.
+- **Phase 27.36:** Collect/Triage Live UI Observations — التالي.
 - **Phase 28:** تدريب `SF-120M v0.1`؛ أول قفزة بعد نجاح `SF-50M`.
 - **Phase 29:** Runtime Hybrid Assistant v1.
 - **Phase 30:** Continuous Improvement Loop.

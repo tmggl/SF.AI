@@ -1,0 +1,232 @@
+{
+  "phase": "Phase 27.35",
+  "status": "PASSED_LIVE_UI_TRIAL_READY_FOR_USER_OBSERVATION",
+  "base_url": "http://127.0.0.1:8123",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "default_runtime": "template",
+  "trial_generator": "sf_10m_phase27_33",
+  "summary": {
+    "health_status": 200,
+    "health_phase": "Phase 27.35",
+    "ui_checks": {
+      "status_200": true,
+      "has_generator_toggle_label": true,
+      "sends_generator_trial_field": true,
+      "persists_generator_trial_toggle": true,
+      "mentions_phase27_33_generator": true
+    },
+    "ui_passed": true,
+    "cases_passed": 10,
+    "cases_total": 10,
+    "generator_cases": 7,
+    "generator_cases_passed": 7,
+    "template_controls": 3,
+    "template_controls_passed": 3
+  },
+  "ui_user_test_allowed": true,
+  "sf50m_allowed": false,
+  "next_phase": "Phase 27.36 — collect/triage live UI observations",
+  "failures": [],
+  "results": [
+    {
+      "id": "live_001",
+      "message": "كيفك اليوم",
+      "generator_trial": true,
+      "http_status": 200,
+      "domain": "chat",
+      "intent": "chat.smalltalk",
+      "dispatch": "module:chat",
+      "expected_generator": "sf_10m_phase27_33",
+      "generator": "sf_10m_phase27_33",
+      "expected_terms": [
+        "بخير",
+        "كيفك"
+      ],
+      "semantic_match": true,
+      "response": "بخير ولله الحمد، أنت كيفك؟",
+      "module_notes": "dialect:السعودية,language:ar,rag:not_configured,generator:sf_10m_phase27_33,native_generator:generated,native_generator:canary_passed,native_generator:intent:chat.smalltalk",
+      "note": "smalltalk generator",
+      "passed": true
+    },
+    {
+      "id": "live_002",
+      "message": "شكرًا لمساعدتك",
+      "generator_trial": true,
+      "http_status": 200,
+      "domain": "chat",
+      "intent": "chat.thanks",
+      "dispatch": "module:chat",
+      "expected_generator": "sf_10m_phase27_33",
+      "generator": "sf_10m_phase27_33",
+      "expected_terms": [
+        "العفو",
+        "أساعدك"
+      ],
+      "semantic_match": true,
+      "response": "العفو، يسعدني أن أساعدك.",
+      "module_notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:sf_10m_phase27_33,native_generator:generated,native_generator:canary_passed,native_generator:intent:chat.thanks",
+      "note": "thanks generator",
+      "passed": true
+    },
+    {
+      "id": "live_003",
+      "message": "وجهني بخطوة بسيطة",
+      "generator_trial": true,
+      "http_status": 200,
+      "domain": "chat",
+      "intent": "chat.general",
+      "dispatch": "module:chat",
+      "expected_generator": "sf_10m_phase27_33",
+      "generator": "sf_10m_phase27_33",
+      "expected_terms": [
+        "ابدأ",
+        "خطوة"
+      ],
+      "semantic_match": true,
+      "response": "ابدأ بخطوة صغيرة وواضحة.",
+      "module_notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:sf_10m_phase27_33,native_generator:generated,native_generator:canary_passed,native_generator:intent:advice",
+      "note": "advice generator",
+      "passed": true
+    },
+    {
+      "id": "live_004",
+      "message": "رتب لي يومي بسرعة",
+      "generator_trial": true,
+      "http_status": 200,
+      "domain": "chat",
+      "intent": "chat.general",
+      "dispatch": "module:chat",
+      "expected_generator": "sf_10m_phase27_33",
+      "generator": "sf_10m_phase27_33",
+      "expected_terms": [
+        "ثلاث"
+      ],
+      "semantic_match": true,
+      "response": "اكتب ثلاث مهام وابدأ بالأهم.",
+      "module_notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:sf_10m_phase27_33,native_generator:generated,native_generator:canary_passed,native_generator:intent:planning",
+      "note": "planning generator",
+      "passed": true
+    },
+    {
+      "id": "live_005",
+      "message": "توترت شوي وش اسوي",
+      "generator_trial": true,
+      "http_status": 200,
+      "domain": "chat",
+      "intent": "chat.general",
+      "dispatch": "module:chat",
+      "expected_generator": "sf_10m_phase27_33",
+      "generator": "sf_10m_phase27_33",
+      "expected_terms": [
+        "يهونها",
+        "اهدأ"
+      ],
+      "semantic_match": true,
+      "response": "الله يهونها، خذ نفس واهدأ شوي.",
+      "module_notes": "dialect:السعودية,language:ar,rag:not_configured,generator:sf_10m_phase27_33,native_generator:generated,native_generator:canary_passed,native_generator:intent:support",
+      "note": "support generator",
+      "passed": true
+    },
+    {
+      "id": "live_006",
+      "message": "وش المقصود بالاحترام",
+      "generator_trial": true,
+      "http_status": 200,
+      "domain": "chat",
+      "intent": "chat.general",
+      "dispatch": "module:chat",
+      "expected_generator": "sf_10m_phase27_33",
+      "generator": "sf_10m_phase27_33",
+      "expected_terms": [
+        "تقدّر",
+        "تصرفك"
+      ],
+      "semantic_match": true,
+      "response": "يعني تقدّر الناس بكلامك وتصرفك.",
+      "module_notes": "dialect:السعودية,language:ar,rag:not_configured,generator:sf_10m_phase27_33,native_generator:generated,native_generator:canary_passed,native_generator:intent:definition",
+      "note": "definition generator",
+      "passed": true
+    },
+    {
+      "id": "live_007",
+      "message": "القراية تفيدني بشي",
+      "generator_trial": true,
+      "http_status": 200,
+      "domain": "chat",
+      "intent": "chat.general",
+      "dispatch": "module:chat",
+      "expected_generator": "sf_10m_phase27_33",
+      "generator": "sf_10m_phase27_33",
+      "expected_terms": [
+        "فهمك",
+        "كلماتك"
+      ],
+      "semantic_match": true,
+      "response": "توسع فهمك وتزيد كلماتك.",
+      "module_notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:sf_10m_phase27_33,native_generator:generated,native_generator:canary_passed,native_generator:intent:definition",
+      "note": "definition generator",
+      "passed": true
+    },
+    {
+      "id": "control_001",
+      "message": "كيفك اليوم",
+      "generator_trial": false,
+      "http_status": 200,
+      "domain": "chat",
+      "intent": "chat.smalltalk",
+      "dispatch": "module:chat",
+      "expected_generator": "template",
+      "generator": "template",
+      "expected_terms": [
+        "بخير"
+      ],
+      "semantic_match": true,
+      "response": "بخير، شكرًا لسؤالك. كيف حالك أنت؟",
+      "module_notes": "dialect:السعودية,language:ar,rag:not_configured,generator:template,native_generator:disabled",
+      "note": "default template path",
+      "passed": true
+    },
+    {
+      "id": "control_002",
+      "message": "من أنت",
+      "generator_trial": true,
+      "http_status": 200,
+      "domain": "chat",
+      "intent": "chat.identity",
+      "dispatch": "module:chat",
+      "expected_generator": "template",
+      "generator": "template",
+      "expected_terms": [
+        "SF.AI"
+      ],
+      "semantic_match": true,
+      "response": "أنا SF.AI — مساعد ذكاء اصطناعي يُبنى من الصفر بسيادة معرفية. ما أعتمد على نماذج خارجية، وأتعلّم من بيانات أنت تختارها.",
+      "module_notes": "dialect:السعودية,language:ar,rag:not_configured,generator:template,native_generator:template_first_social_intent",
+      "note": "identity remains pinned template",
+      "passed": true
+    },
+    {
+      "id": "control_003",
+      "message": "عندي ألم في الراس",
+      "generator_trial": true,
+      "http_status": 200,
+      "domain": "medical",
+      "intent": "medical.general",
+      "dispatch": "composer",
+      "expected_generator": "template",
+      "generator": "template",
+      "expected_terms": [
+        "طبيب"
+      ],
+      "semantic_match": true,
+      "response": "أرى أن سؤالك صحي/طبي. لن أعطي تشخيصًا أو وصفة. أنصحك تتواصل مع طبيب مختص. أقدر أكون معك لو حبيت تكتب وتفضفض.",
+      "module_notes": "",
+      "note": "medical remains safe composer",
+      "passed": true
+    }
+  ]
+}

@@ -104,6 +104,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.32 | Balanced Natural Calibration | مكتملة جزئيًا؛ calibration `12/12` وruntime محظور |
 | Phase 27.33 | Advice + Micro Stabilization | مكتملة؛ كل بوابات التوليد المحلية مرّت، جاهزة لتصميم guarded trial |
 | Phase 27.34 | Guarded Runtime Trial | مكتملة؛ request-scoped UI generator trial مرّ `9/9` |
+| Phase 27.35 | Live UI Trial Observations | مكتملة؛ live server UI/API trial مرّ `10/10` |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2568,6 +2569,40 @@ guarded_runtime_trial = 9/9
 - [PHASE27_34_GUARDED_RUNTIME_TRIAL_REPORT.md](./PHASE27_34_GUARDED_RUNTIME_TRIAL_REPORT.md)
 - `artifacts/reports/phase27_34_guarded_runtime_trial_report.json`
 - `artifacts/samples/phase27_34_guarded_runtime_trial_generations.md`
+
+---
+
+## Phase 27.35 — Live UI Trial Observations
+
+### الهدف
+
+اختبار السيرفر الحي على `127.0.0.1:8123` بدل الاكتفاء بمسار داخلي:
+
+- `/ui/chat` يعرض زر `مولّد تجريبي`.
+- `/chat/message` يستقبل `generator_trial=true`.
+- `sf_10m_phase27_33` يرد في الحالات المناسبة.
+- default وsafety controls تبقى template/composer.
+
+### نتيجة التنفيذ
+
+```text
+ui_passed = true
+cases = 10/10
+generator = 7/7
+controls = 3/3
+```
+
+### القرار
+
+- مسموح لسامي بتجربة المولّد من الواجهة الآن.
+- لا `SF-50M` ولا Phase 28.
+- التالي Phase 27.36: collect/triage live UI observations.
+
+### artifacts
+
+- [PHASE27_35_LIVE_UI_TRIAL_OBSERVATIONS_REPORT.md](./PHASE27_35_LIVE_UI_TRIAL_OBSERVATIONS_REPORT.md)
+- `artifacts/reports/phase27_35_live_ui_trial_observations_report.json`
+- `artifacts/samples/phase27_35_live_ui_trial_observations.md`
 
 ---
 

@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.34 — Guarded Runtime Trial",
-        current_phase_status="completed_guarded_runtime_trial_ready_for_ui_test",
+        current_phase="Phase 27.35 — Live UI Trial Observations",
+        current_phase_status="completed_live_ui_trial_ready_for_user_observation",
         next_phase=(
-            "Phase 27.35 live UI trial observations; SF-50M remains blocked"
+            "Phase 27.36 collect/triage live UI observations; SF-50M remains blocked"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -284,6 +284,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_34_guarded_runtime_trial",
                 status="completed_ready_for_ui_test",
                 phase="Phase 27.34",
+            ),
+            ComponentStatus(
+                name="phase27_35_live_ui_trial_observations",
+                status="completed_ready_for_user_observation",
+                phase="Phase 27.35",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

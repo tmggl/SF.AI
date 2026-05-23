@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.34 / 30**
-- **المرحلة الحالية:** **Phase 27.34 — Guarded Runtime Trial**
-- **حالة المرحلة الحالية:** **مكتملة؛ مسار المولّد المحروس عبر الواجهة/API مرّ `9/9`**
-- **المرحلة التالية المقترحة:** Phase 27.35 live UI trial observations؛ لا Phase 28 ولا `SF-50M` قبل ملاحظات واجهة ناجحة.
+- **الرحلة الحالية:** **Phase 27.35 / 30**
+- **المرحلة الحالية:** **Phase 27.35 — Live UI Trial Observations**
+- **حالة المرحلة الحالية:** **مكتملة؛ اختبار الواجهة/API الحي مرّ `10/10`**
+- **المرحلة التالية المقترحة:** Phase 27.36 collect/triage live UI observations؛ لا Phase 28 ولا `SF-50M` قبل تصنيف ملاحظات الواجهة.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -83,6 +83,7 @@
 | Phase 27.32 | Balanced Natural Calibration | ✅ completed_partial_runtime_blocked | ✅ |
 | Phase 27.33 | Advice + Micro Stabilization | ✅ completed_all_generation_gates_passed_trial_design_ready | ✅ |
 | Phase 27.34 | Guarded Runtime Trial | ✅ completed_ready_for_ui_test | ✅ |
+| Phase 27.35 | Live UI Trial Observations | ✅ completed_ready_for_user_observation | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -618,6 +619,14 @@
   - القرار: `PASSED_GUARDED_RUNTIME_TRIAL_READY_FOR_UI_TEST`.
   - التالي Phase 27.35 live UI trial observations.
   - أضيف [PHASE27_34_GUARDED_RUNTIME_TRIAL_REPORT.md](./PHASE27_34_GUARDED_RUNTIME_TRIAL_REPORT.md).
+- بدأ وانتهى Phase 27.35 Live UI Trial Observations:
+  - فُحص `/ui/chat` حيًا وتأكد وجود زر `مولّد تجريبي` وإرسال `generator_trial`.
+  - فُحص `/chat/message` حيًا: `10/10` passed.
+  - ردود المولّد: `7/7` عبر `sf_10m_phase27_33`.
+  - تحكم template/safety: `3/3`.
+  - القرار: `PASSED_LIVE_UI_TRIAL_READY_FOR_USER_OBSERVATION`.
+  - التالي Phase 27.36 collect/triage live UI observations.
+  - أضيف [PHASE27_35_LIVE_UI_TRIAL_OBSERVATIONS_REPORT.md](./PHASE27_35_LIVE_UI_TRIAL_OBSERVATIONS_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -683,7 +692,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.34"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.35"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -714,7 +723,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-537 passed in 17.07s
+538 passed in 16.81s
 ```
 
 | ملف | عدد |

@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27.34: مسار المولّد المحروس مرّ 9/9. تقدر الآن تفعّل زر «مولّد تجريبي» في الواجهة لاختبار SF-10M Phase 27.33، والنظام يرجع للقالب إذا فشل الحارس."
+      "response_preview": "اكتملت Phase 27.35: اختبار الواجهة الحية مرّ 10/10، ومنها 7/7 ردود من المولّد المحروس. جرّب زر «مولّد تجريبي» الآن، والتالي Phase 27.36 لتجميع ملاحظات التجربة وتصنيفها."
     },
     {
       "scenario_id": "clarification_repair_flow",
