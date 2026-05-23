@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.51 — Open-Dialogue Generalization Audit",
-        current_phase_status="completed_failed_open_dialogue_training_required",
+        current_phase="Phase 27.52 — Natural Dialogue Objective Repair",
+        current_phase_status="completed_partial_keep_phase27_47_runtime",
         next_phase=(
-            "Phase 27.52 natural dialogue objective repair; no SF-50M/Phase 28 until open-dialogue gates pass"
+            "Phase 27.53 natural dialogue diversity expansion; no SF-50M/Phase 28 until open-dialogue gates pass"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -369,6 +369,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_51_open_dialogue_generalization_audit",
                 status="completed_failed_training_required",
                 phase="Phase 27.51",
+            ),
+            ComponentStatus(
+                name="phase27_52_natural_dialogue_objective_repair",
+                status="completed_partial_keep_phase27_47_runtime",
+                phase="Phase 27.52",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

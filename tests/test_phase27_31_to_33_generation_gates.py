@@ -353,3 +353,22 @@ def test_phase27_51_open_dialogue_generalization_audit_blocks_scaling() -> None:
     assert report["summary"]["live_api"]["total"] == 22
     assert report["summary"]["raw_unconditioned"]["natural_passed"] == 1
     assert report["summary"]["raw_unconditioned"]["natural_total"] == 20
+
+
+def test_phase27_52_natural_dialogue_objective_repair_stays_guarded() -> None:
+    report = _report("phase27_52_natural_dialogue_objective_repair_report.json")
+    assert report["phase"] == "Phase 27.52"
+    assert report["status"] == "PARTIAL_NATURAL_DIALOGUE_OBJECTIVE_REPAIR_KEEP_PHASE27_47_RUNTIME"
+    assert report["training_started"] is True
+    assert report["model_size"] == "sf-10m"
+    assert report["progressive_scaling_respected"] is True
+    assert report["candidate_generator"] == "sf_10m_phase27_52"
+    assert report["training_budget"]["steps"] == 9200
+    assert report["training_budget"]["step_multiplier_vs_phase27_47"] == 2.0
+    assert report["no_keyword_lane_claim"]["intent_conditioning_used_in_training"] is False
+    assert report["no_keyword_lane_claim"]["topic_conditioning_used_in_training"] is False
+    assert report["summary"]["passed"] == 5
+    assert report["summary"]["total"] == 20
+    assert report["runtime_switch_allowed"] is False
+    assert report["sf50m_allowed"] is False
+    assert report["phase28_allowed"] is False

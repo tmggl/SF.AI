@@ -83,6 +83,7 @@ SF.AI يملك الآن:
 | Phase 27.49 | `Broader live UI/API probes` | live API `33/33`; أصلح `وش تنصحني اسوي` |
 | Phase 27.50 | `Generator-only UI lab` | لا قوالب في `/chat/message`; gate `7/7` |
 | Phase 27.51 | `Open-dialogue generalization audit` | فشل مفيد: live `3/22`, raw natural `1/20`; التدريب مطلوب |
+| Phase 27.52 | `Natural dialogue objective repair` | دبل تدريب SF-10M: `9200` خطوة؛ raw natural `5/20`; لا runtime switch |
 | بعد نجاح SF-10M | `SF-50M v0.1` | نجاح جودة SF-10M/canary + إعادة Phase 26 readiness |
 | Phase 28 | `SF-120M v0.1` | نجاح SF-50M + scaling gate |
 
@@ -133,7 +134,8 @@ SF.AI يملك الآن:
 - **Phase 27.49:** وسّعت probes الحية إلى `33/33` وأصلحت كشف النصيحة السعودية.
 - **Phase 27.50:** ألغت القوالب من `/chat/message`: المولد أو لا رد.
 - **Phase 27.51:** اختبرت الحوار الطبيعي بلا intent/topic conditioning؛ النتيجة فشلت بوضوح، لذلك لا يكفي توسيع keywords، والتالي تدريب هدف حواري طبيعي.
-- **Phase 27.52:** Natural Dialogue Objective Repair قبل أي تكبير.
+- **Phase 27.52:** ضاعفت التدريب داخل `SF-10M` إلى `9200` خطوة. تحسن المؤشر من `1/20` إلى `5/20` فقط، لذلك لا runtime switch ولا تكبير.
+- **Phase 27.53:** Natural Dialogue Diversity Expansion قبل أي تكبير.
 - **Phase 28:** أول قفزة بعد SF-50M إذا أثبت 50M قيمة واضحة.
 - **Phase 29:** إدخاله في الواجهة كتجربة يومية مع router/safety/memory.
 

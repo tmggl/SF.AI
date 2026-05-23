@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.51 / 30**
-- **المرحلة الحالية:** **Phase 27.51 — Open-Dialogue Generalization Audit**
-- **حالة المرحلة الحالية:** **مكتملة بنتيجة فشل مقصود؛ المولد الحالي لا يعمم على حوار طبيعي مفتوح ويحتاج Phase 27.52 تدريب/إصلاح هدف حواري**
-- **المرحلة التالية المقترحة:** Phase 27.52 Natural Dialogue Objective Repair؛ لا Phase 28 ولا `SF-50M` قبل بوابات حوار مفتوح.
+- **الرحلة الحالية:** **Phase 27.52 / 30**
+- **المرحلة الحالية:** **Phase 27.52 — Natural Dialogue Objective Repair**
+- **حالة المرحلة الحالية:** **مكتملة جزئيًا؛ دبل تدريب آمن داخل SF-10M رفع raw natural من 1/20 إلى 5/20 فقط، لذلك runtime يبقى على Phase 27.47**
+- **المرحلة التالية المقترحة:** Phase 27.53 Natural Dialogue Diversity Expansion؛ لا Phase 28 ولا `SF-50M` قبل بوابات حوار مفتوح.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -100,6 +100,7 @@
 | Phase 27.49 | Broader Live UI/API Probes | ✅ completed_broader_live_ui_probes_phase27_47 | ✅ |
 | Phase 27.50 | Generator-Only UI Lab Mode | ✅ completed_generator_only_ui_gate | ✅ |
 | Phase 27.51 | Open-Dialogue Generalization Audit | ✅ completed_failed_training_required | ✅ |
+| Phase 27.52 | Natural Dialogue Objective Repair | ✅ completed_partial_keep_phase27_47_runtime | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -774,6 +775,17 @@
   - السبب الجذري: `sf_10m_phase27_47` ما زال يخلط جملًا محفوظة ولا يعمم على الحوار المفتوح.
   - القرار: لا `SF-50M` ولا Phase 28؛ التالي Phase 27.52 Natural Dialogue Objective Repair.
   - أضيف [PHASE27_51_OPEN_DIALOGUE_GENERALIZATION_AUDIT_REPORT.md](./PHASE27_51_OPEN_DIALOGUE_GENERALIZATION_AUDIT_REPORT.md).
+- بدأ وانتهى Phase 27.52 Natural Dialogue Objective Repair:
+  - أضيف `make phase27-natural-dialogue-objective-repair`.
+  - دُرّب `SF-10M` فقط، بدون تكبير حجم، وبدون intent/topic keyword lanes.
+  - ميزانية التدريب: `9200` خطوة، أي `2.00x` مقارنة بـ Phase 27.47.
+  - checkpoint محلي: `artifacts/eval/phase27_52_natural_dialogue_objective_repair/checkpoints/sf-10m-step9200`.
+  - train records: `6400` من `40` زوجًا فريدًا مؤلفًا داخل المشروع.
+  - نتيجة held-out raw natural: `5/20` بدل `1/20`.
+  - التحسن: topic `3/4`, planning `2/4`.
+  - الفشل: followup `0/4`, open_social `0/4`, support `0/4`.
+  - القرار: لا runtime switch؛ لا `SF-50M` ولا Phase 28؛ التالي Phase 27.53 لتوسيع تنوع الحوار بدل زيادة الخطوات فقط.
+  - أضيف [PHASE27_52_NATURAL_DIALOGUE_OBJECTIVE_REPAIR_REPORT.md](./PHASE27_52_NATURAL_DIALOGUE_OBJECTIVE_REPAIR_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 

@@ -121,7 +121,8 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.49 | Broader Live UI/API Probes | مكتملة؛ live API gate مرّ `33/33` وأصلح كشف النصيحة السعودية |
 | Phase 27.50 | Generator-Only UI Lab Mode | مكتملة؛ `/chat/message` بلا قوالب، gate `7/7` |
 | Phase 27.51 | Open-Dialogue Generalization Audit | مكتملة؛ فشل مفيد، live `3/22`, raw natural `1/20`, التدريب مطلوب |
-| Phase 27.52 | Natural Dialogue Objective Repair | التالية؛ تدريب/إصلاح هدف الحوار الطبيعي لا keyword expansion |
+| Phase 27.52 | Natural Dialogue Objective Repair | مكتملة جزئيًا؛ دبل تدريب `9200` خطوة، raw natural `5/20`, لا runtime switch |
+| Phase 27.53 | Natural Dialogue Diversity Expansion | التالية؛ تنويع الأزواج الفريدة بدل زيادة الخطوات فقط |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3032,6 +3033,42 @@ cases = 7/7
 - [PHASE27_51_OPEN_DIALOGUE_GENERALIZATION_AUDIT_REPORT.md](./PHASE27_51_OPEN_DIALOGUE_GENERALIZATION_AUDIT_REPORT.md)
 - `artifacts/reports/phase27_51_open_dialogue_generalization_audit.json`
 - `artifacts/samples/phase27_51_open_dialogue_generalization_audit.md`
+
+---
+
+## Phase 27.52 — Natural Dialogue Objective Repair
+
+### الهدف
+تنفيذ قفزة تدريب آمنة داخل `SF-10M` فقط: دبل خطوات مقارنة بـ Phase 27.47، مع منع تكبير النموذج أو فتح runtime قبل بوابة حوار مفتوح.
+
+### ما تم
+- أضيف `scripts/phase27_52_natural_dialogue_objective_repair.py`.
+- أضيف `make phase27-natural-dialogue-objective-repair`.
+- دُرّب `SF-10M` على `6400` سجل داخلي مبني من `40` زوجًا فريدًا.
+- لا intent/topic system lines في التدريب؛ فقط نطاق `فصحى/سعودي` من provenance.
+- التدريب: `9200` خطوة، `2.00x` مقارنة بـ Phase 27.47.
+
+### النتيجة
+- الحالة: `PARTIAL_NATURAL_DIALOGUE_OBJECTIVE_REPAIR_KEEP_PHASE27_47_RUNTIME`.
+- held-out raw natural: `5/20`.
+- topic: `3/4`.
+- planning: `2/4`.
+- followup/open_social/support: `0/4` لكل مسار.
+
+### القرار
+لا يتم فتح `sf_10m_phase27_52` في الواجهة. لا `SF-50M` ولا Phase 28.
+
+التالي:
+
+**Phase 27.53 — Natural Dialogue Diversity Expansion**
+
+الهدف القادم زيادة عدد الأزواج الفريدة والتنوع الحواري بدل زيادة الخطوات وحدها.
+
+### artifacts
+- [PHASE27_52_NATURAL_DIALOGUE_OBJECTIVE_REPAIR_REPORT.md](./PHASE27_52_NATURAL_DIALOGUE_OBJECTIVE_REPAIR_REPORT.md)
+- `artifacts/reports/phase27_52_natural_dialogue_objective_repair_report.json`
+- `artifacts/samples/phase27_52_natural_dialogue_objective_repair.md`
+- checkpoint محلي غير مرفوع: `artifacts/eval/phase27_52_natural_dialogue_objective_repair/checkpoints/sf-10m-step9200/state.pt`
 
 ---
 

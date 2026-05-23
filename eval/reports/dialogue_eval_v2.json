@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.51: أثبتنا أن `sf_10m_phase27_47` مولّد ضيق لا يعمم على الحوار الطبيعي المفتوح. لا قوالب في الواجهة، لكن الرد المقنع يحتاج Phase 27.52 لإصلاح هدف الحوار بالتدريب"
+      "response_preview": "وصلنا إلى Phase 27.52: ضاعفنا تدريب `SF-10M` بأمان إلى 9200 خطوة، وتحسن raw natural من 1/20 إلى 5/20 فقط. لا نفتح checkpoint الجديد؛ التالي Phase 27.53 لزيادة تنوع الحوار بدل زيادة"
     },
     {
       "scenario_id": "clarification_repair_flow",
