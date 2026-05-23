@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.37 / 30**
-- **المرحلة الحالية:** **Phase 27.37 — Supported Topic Expansion**
-- **حالة المرحلة الحالية:** **مكتملة؛ فتح موضوع `الصبر` خلف semantic guard ومرّ `21/21`**
-- **المرحلة التالية المقترحة:** Phase 27.38 targeted topic curriculum/probe؛ لا Phase 28 ولا `SF-50M` قبل توسيع جودة الواجهة.
+- **الرحلة الحالية:** **Phase 27.38 / 30**
+- **المرحلة الحالية:** **Phase 27.38 — Targeted Topic Curriculum/Probe**
+- **حالة المرحلة الحالية:** **مكتملة جزئيًا؛ probe الموضوعات المحجوبة مرّ `6/20` ولا runtime switch**
+- **المرحلة التالية المقترحة:** Phase 27.39 repair failed targeted topics؛ لا Phase 28 ولا `SF-50M` قبل نجاح موضوعات التعريف المحجوبة.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -86,6 +86,7 @@
 | Phase 27.35 | Live UI Trial Observations | ✅ completed_ready_for_user_observation | ✅ |
 | Phase 27.36 | Live UI Triage | ✅ completed_quality_floor_active | ✅ |
 | Phase 27.37 | Supported Topic Expansion | ✅ completed_quality_gated | ✅ |
+| Phase 27.38 | Targeted Topic Curriculum/Probe | ✅ completed_partial_keep_current_runtime | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -649,6 +650,16 @@
   - القرار: `PASSED_SUPPORTED_TOPIC_EXPANSION_QUALITY_GATED`.
   - التالي Phase 27.38 targeted topic curriculum/probe للموضوعات المحجوبة.
   - أضيف [PHASE27_37_SUPPORTED_TOPIC_EXPANSION_REPORT.md](./PHASE27_37_SUPPORTED_TOPIC_EXPANSION_REPORT.md).
+- بدأ وانتهى Phase 27.38 Targeted Topic Curriculum/Probe:
+  - دُرّب checkpoint مستهدف: `sf-10m-step2400`.
+  - الاختبار: `6/20` فقط.
+  - regression: `6/8`.
+  - new_topic: `0/8`.
+  - heldout: `0/4`.
+  - التشخيص: topic collapse نحو `الاحترام`، وخسارة `التعاون` و`الصبر` في المرشح.
+  - القرار: `runtime_switch_allowed=false`; يبقى runtime التجريبي على مرشح Phase 27.33 + فتح `الصبر` المحروس من 27.37.
+  - التالي Phase 27.39 repair failed targeted topics.
+  - أضيف [PHASE27_38_TARGETED_TOPIC_CURRICULUM_PROBE_REPORT.md](./PHASE27_38_TARGETED_TOPIC_CURRICULUM_PROBE_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -714,7 +725,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.37"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.38"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -745,7 +756,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-545 passed in 16.98s
+546 passed in 16.97s
 ```
 
 | ملف | عدد |

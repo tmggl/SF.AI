@@ -1,0 +1,408 @@
+{
+  "phase": "Phase 27.38",
+  "status": "PARTIAL_TARGETED_TOPIC_CURRICULUM_KEEP_CURRENT_RUNTIME",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": true,
+  "training_scope": "targeted SF-10M probe only; no scaling",
+  "tokenizer": "artifacts/tokenizers/sf_bpe/v4_min_lexical",
+  "checkpoint_root": "artifacts/eval/phase27_38_targeted_topic_curriculum_probe/checkpoints",
+  "checkpoint_name": "sf-10m-step2400",
+  "candidate_generator": "sf_10m_phase27_38",
+  "train_records": 1635,
+  "targeted_topics": [
+    "الصداقة",
+    "الصدق",
+    "التنظيم",
+    "الهدوء"
+  ],
+  "summary": {
+    "passed": 6,
+    "total": 20,
+    "bucket_summary": {
+      "heldout": {
+        "passed": 0,
+        "total": 4
+      },
+      "new_topic": {
+        "passed": 0,
+        "total": 8
+      },
+      "regression": {
+        "passed": 6,
+        "total": 8
+      }
+    }
+  },
+  "new_topics_passed": 0,
+  "new_topics_total": 8,
+  "runtime_switch_allowed": false,
+  "sf50m_allowed": false,
+  "phase28_allowed": false,
+  "next_phase": "Phase 27.39 — repair failed targeted topics",
+  "rows": [
+    {
+      "id": "reg_001",
+      "bucket": "regression",
+      "dialect": "saudi",
+      "prompt": "كيفك اليوم",
+      "intent": "smalltalk",
+      "topic": "",
+      "expected_terms": [
+        "بخير"
+      ],
+      "response": "بخير، شكرًا لسؤالك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_002",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "شكرًا لمساعدتك",
+      "intent": "thanks",
+      "topic": "",
+      "expected_terms": [
+        "العفو"
+      ],
+      "response": "العفو، يسعدني أن أساعدك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_003",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "وجهني بخطوة بسيطة",
+      "intent": "advice",
+      "topic": "",
+      "expected_terms": [
+        "ابدأ"
+      ],
+      "response": "ابدأ بخطوة صغيرة وواضحة.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_004",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "رتب لي يومي بسرعة",
+      "intent": "planning",
+      "topic": "",
+      "expected_terms": [
+        "ثلاث"
+      ],
+      "response": "اكتب ثلاث مهام وابدأ بالأهم.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_005",
+      "bucket": "regression",
+      "dialect": "saudi",
+      "prompt": "توترت شوي وش اسوي",
+      "intent": "support",
+      "topic": "",
+      "expected_terms": [
+        "اهدأ"
+      ],
+      "response": "الله يهونها، خذ نفس واهدأ شوي.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_006",
+      "bucket": "regression",
+      "dialect": "saudi",
+      "prompt": "وش المقصود بالاحترام",
+      "intent": "definition",
+      "topic": "الاحترام",
+      "expected_terms": [
+        "تقدّر"
+      ],
+      "response": "يعني تقدّر الناس بكلامك وتصرفك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_007",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "ما معنى التعاون",
+      "intent": "definition",
+      "topic": "التعاون",
+      "expected_terms": [
+        "التعاون"
+      ],
+      "response": "الاحترام تقدير الناس بالكلام والفعل.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "reg_008",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "ما معنى الصبر",
+      "intent": "definition",
+      "topic": "الصبر",
+      "expected_terms": [
+        "الصبر"
+      ],
+      "response": "الاحترام تقدير الناس بالكلام والفعل.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "new_001",
+      "bucket": "new_topic",
+      "dialect": "msa",
+      "prompt": "ما معنى الصداقة",
+      "intent": "definition",
+      "topic": "الصداقة",
+      "expected_terms": [
+        "الصداقة"
+      ],
+      "response": "الاحترام تقدير الناس بالكلام والفعل.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "new_002",
+      "bucket": "new_topic",
+      "dialect": "saudi",
+      "prompt": "وش معنى الصداقة",
+      "intent": "definition",
+      "topic": "الصداقة",
+      "expected_terms": [
+        "الصداقة"
+      ],
+      "response": "يعني تقدّر الناس بكلامك وتصرفك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "new_003",
+      "bucket": "new_topic",
+      "dialect": "msa",
+      "prompt": "اشرح الصدق بجملة",
+      "intent": "definition",
+      "topic": "الصدق",
+      "expected_terms": [
+        "الصدق"
+      ],
+      "response": "خذ نفسًا هادئًا واهدأ خطوة الناس بالكلام والفعل.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "new_004",
+      "bucket": "new_topic",
+      "dialect": "saudi",
+      "prompt": "وش معنى الصدق",
+      "intent": "definition",
+      "topic": "الصدق",
+      "expected_terms": [
+        "الصدق"
+      ],
+      "response": "يعني كلامك وتصرفك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "new_005",
+      "bucket": "new_topic",
+      "dialect": "msa",
+      "prompt": "ما معنى التنظيم",
+      "intent": "definition",
+      "topic": "التنظيم",
+      "expected_terms": [
+        "التنظيم"
+      ],
+      "response": "الاحترام تقدير الناس بالكلام والفعل.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "new_006",
+      "bucket": "new_topic",
+      "dialect": "saudi",
+      "prompt": "وش معنى التنظيم",
+      "intent": "definition",
+      "topic": "التنظيم",
+      "expected_terms": [
+        "ترتب"
+      ],
+      "response": "يعني تقدّر الناس بكلامك وتصرفك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "new_007",
+      "bucket": "new_topic",
+      "dialect": "msa",
+      "prompt": "ما معنى الهدوء",
+      "intent": "definition",
+      "topic": "الهدوء",
+      "expected_terms": [
+        "الهدوء"
+      ],
+      "response": "اكتب تقدير القراءة توسع الفهم وتزيد المفردات.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "new_008",
+      "bucket": "new_topic",
+      "dialect": "saudi",
+      "prompt": "وش معنى الهدوء",
+      "intent": "definition",
+      "topic": "الهدوء",
+      "expected_terms": [
+        "الهدوء"
+      ],
+      "response": "يعني تقدّر الناس بكلامك وتصرفك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "held_001",
+      "bucket": "heldout",
+      "dialect": "msa",
+      "prompt": "الصداقة ماذا تعني",
+      "intent": "definition",
+      "topic": "الصداقة",
+      "expected_terms": [
+        "الصداقة"
+      ],
+      "response": "الاحترام تقدير الناس بالكلام والفعل.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "held_002",
+      "bucket": "heldout",
+      "dialect": "saudi",
+      "prompt": "الصدق وش يعني",
+      "intent": "definition",
+      "topic": "الصدق",
+      "expected_terms": [
+        "الحقيقة"
+      ],
+      "response": "الله يهونها، خذ نفس واهدأ شوي.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "held_003",
+      "bucket": "heldout",
+      "dialect": "msa",
+      "prompt": "اشرح التنظيم ببساطة",
+      "intent": "definition",
+      "topic": "التنظيم",
+      "expected_terms": [
+        "التنظيم"
+      ],
+      "response": "الاحترام تقدير الناس بالكلام والفعل.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "held_004",
+      "bucket": "heldout",
+      "dialect": "saudi",
+      "prompt": "الهدوء وش يعني",
+      "intent": "definition",
+      "topic": "الهدوء",
+      "expected_terms": [
+        "توترك"
+      ],
+      "response": "يعني تقدّر الناس بكلامك وتصرفك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "semantic_mismatch"
+    }
+  ]
+}

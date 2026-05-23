@@ -107,6 +107,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.35 | Live UI Trial Observations | مكتملة؛ live server UI/API trial مرّ `10/10` |
 | Phase 27.36 | Live UI Triage | مكتملة؛ quality-floor active وtriage مرّ `27/27` |
 | Phase 27.37 | Supported Topic Expansion | مكتملة؛ `الصبر` فُتح خلف semantic guard ومرّ `21/21` |
+| Phase 27.38 | Targeted Topic Curriculum/Probe | مكتملة جزئيًا؛ `6/20` ولا runtime switch |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2673,6 +2674,40 @@ controls = 3/3
 - [PHASE27_37_SUPPORTED_TOPIC_EXPANSION_REPORT.md](./PHASE27_37_SUPPORTED_TOPIC_EXPANSION_REPORT.md)
 - `artifacts/reports/phase27_37_supported_topic_expansion_report.json`
 - `artifacts/samples/phase27_37_supported_topic_expansion.md`
+
+---
+
+## Phase 27.38 — Targeted Topic Curriculum/Probe
+
+### الهدف
+
+تدريب probe صغير على موضوعات التعريف المحجوبة (`الصداقة`, `الصدق`,
+`التنظيم`, `الهدوء`) دون تكبير النموذج.
+
+### نتيجة التنفيذ
+
+```text
+checkpoint = sf-10m-step2400
+cases = 6/20
+regression = 6/8
+new_topic = 0/8
+heldout = 0/4
+runtime_switch_allowed = false
+```
+
+### القرار
+
+- لا نبدّل runtime.
+- يبقى زر `مولّد تجريبي` على مرشح Phase 27.33 مع فتح `الصبر` المحروس.
+- سبب الحجب: topic collapse نحو `الاحترام` وخسارة `التعاون`/`الصبر` في المرشح.
+- لا `SF-50M` ولا Phase 28.
+- التالي Phase 27.39: repair failed targeted topics.
+
+### artifacts
+
+- [PHASE27_38_TARGETED_TOPIC_CURRICULUM_PROBE_REPORT.md](./PHASE27_38_TARGETED_TOPIC_CURRICULUM_PROBE_REPORT.md)
+- `artifacts/reports/phase27_38_targeted_topic_curriculum_probe_report.json`
+- `artifacts/samples/phase27_38_targeted_topic_curriculum_probe.md`
 
 ---
 

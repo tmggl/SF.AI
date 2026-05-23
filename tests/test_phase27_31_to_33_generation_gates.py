@@ -126,3 +126,21 @@ def test_phase27_37_supported_topic_expansion_passes() -> None:
     assert report["summary"]["new_topic_total"] == 3
     assert report["summary"]["quality_floor_passed"] == 5
     assert report["summary"]["quality_floor_total"] == 5
+
+
+def test_phase27_38_targeted_topic_curriculum_probe_records_blocker() -> None:
+    report = _report("phase27_38_targeted_topic_curriculum_probe_report.json")
+    assert report["phase"] == "Phase 27.38"
+    assert report["status"] == "PARTIAL_TARGETED_TOPIC_CURRICULUM_KEEP_CURRENT_RUNTIME"
+    assert report["training_started"] is True
+    assert report["runtime_switch_allowed"] is False
+    assert report["sf50m_allowed"] is False
+    assert report["checkpoint_name"] == "sf-10m-step2400"
+    assert report["summary"]["passed"] == 6
+    assert report["summary"]["total"] == 20
+    assert report["summary"]["bucket_summary"]["regression"]["passed"] == 6
+    assert report["summary"]["bucket_summary"]["regression"]["total"] == 8
+    assert report["summary"]["bucket_summary"]["new_topic"]["passed"] == 0
+    assert report["summary"]["bucket_summary"]["new_topic"]["total"] == 8
+    assert report["summary"]["bucket_summary"]["heldout"]["passed"] == 0
+    assert report["summary"]["bucket_summary"]["heldout"]["total"] == 4

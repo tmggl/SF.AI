@@ -100,13 +100,14 @@
 | Phase 27.35 | Live UI Trial Observations | ✅ completed_ready_for_user_observation |
 | Phase 27.36 | Live UI Triage | ✅ completed_quality_floor_active |
 | Phase 27.37 | Supported Topic Expansion | ✅ completed_quality_gated |
+| Phase 27.38 | Targeted Topic Curriculum/Probe | ✅ completed_partial_keep_current_runtime |
 
 اقرأ التفاصيل في [PHASE_STATUS.md](./PHASE_STATUS.md) و [EXECUTION_PLAN.md](./EXECUTION_PLAN.md).
 
 ### الاختبارات
 
 ```
-راجع `docs/PHASE_STATUS.md` لآخر رقم اختبارات موثق بعد Phase 27.37.
+راجع `docs/PHASE_STATUS.md` لآخر رقم اختبارات موثق بعد Phase 27.38.
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -180,7 +181,7 @@ bash scripts/run_chat_server.sh
 - `sf_ai/datasets/corpus_governance.py`
 - `tests/test_corpus_governance.py`
 
-تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر وغير جاهز لاختبار سامي كمولد حواري. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`، لكنه لم يجعل المولد مقنعًا. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات. Phase 19 أضاف بوابة جاهزية SF-50M. Phase 20 أضاف بوابات تفعيل المجالات، ولا يفعّل أي skeleton تلقائيًا. Phase 21 ثبت خارطة Phase 22–30 للوصول إلى حوار مولّد مقنع. Phase 22 أضاف وأكمل بوابة Gold Dialogue Corpus v2: اكتمل عند 500/500 (`msa=250`, `saudi=250`). Phase 23 درّب tokenizer v2: `vocab=4493`, `merges=4386`. Phase 24–27.30 نقلت المولد عبر تجارب training/canary/repair حتى fresh mixed `16/18`. Phase 27.31–27.33 مررت كل بوابات التوليد المحلية بلا prompt leakage. Phase 27.34 أضافت تجربة واجهة/API محروسة عبر `generator_trial=true` وزر `مولّد تجريبي`، ومرّت `9/9` باستخدام `sf_10m_phase27_33` مع fallback للقالب. Phase 27.35 اختبرت الواجهة والسيرفر الحي عبر HTTP ومرّت `10/10` (`7/7` مولّد، `3/3` ضوابط template/safety). Phase 27.36 أضافت quality-floor للتجربة الحية ومرّت `27/27` (`18/18` مولّد، `5/5` quality-floor، `4/4` ضوابط). Phase 27.37 أضافت semantic topic guard وفتحت موضوع `الصبر` بصيغ مثبتة ومرّت `21/21`. الوضع الحالي `5943` (`msa=2949`, `saudi=2994`) والتالي Phase 27.38 targeted topic curriculum/probe؛ لا `SF-50M` قبل توسيع جودة الواجهة الحية.
+تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر وغير جاهز لاختبار سامي كمولد حواري. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`، لكنه لم يجعل المولد مقنعًا. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات. Phase 19 أضاف بوابة جاهزية SF-50M. Phase 20 أضاف بوابات تفعيل المجالات، ولا يفعّل أي skeleton تلقائيًا. Phase 21 ثبت خارطة Phase 22–30 للوصول إلى حوار مولّد مقنع. Phase 22 أضاف وأكمل بوابة Gold Dialogue Corpus v2: اكتمل عند 500/500 (`msa=250`, `saudi=250`). Phase 23 درّب tokenizer v2: `vocab=4493`, `merges=4386`. Phase 24–27.30 نقلت المولد عبر تجارب training/canary/repair حتى fresh mixed `16/18`. Phase 27.31–27.33 مررت كل بوابات التوليد المحلية بلا prompt leakage. Phase 27.34 أضافت تجربة واجهة/API محروسة عبر `generator_trial=true` وزر `مولّد تجريبي`، ومرّت `9/9` باستخدام `sf_10m_phase27_33` مع fallback للقالب. Phase 27.35 اختبرت الواجهة والسيرفر الحي عبر HTTP ومرّت `10/10` (`7/7` مولّد، `3/3` ضوابط template/safety). Phase 27.36 أضافت quality-floor للتجربة الحية ومرّت `27/27` (`18/18` مولّد، `5/5` quality-floor، `4/4` ضوابط). Phase 27.37 أضافت semantic topic guard وفتحت موضوع `الصبر` بصيغ مثبتة ومرّت `21/21`. Phase 27.38 درّبت probe مستهدفًا للموضوعات المحجوبة لكنه فشل `6/20`، لذلك لم يتغير runtime. الوضع الحالي `5943` (`msa=2949`, `saudi=2994`) والتالي Phase 27.39 repair failed targeted topics؛ لا `SF-50M` قبل نجاح موضوعات التعريف المحجوبة.
 
 ### Phase 12 — preflight جاهز فقط
 

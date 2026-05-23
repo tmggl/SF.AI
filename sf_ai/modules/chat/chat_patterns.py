@@ -84,9 +84,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.37: فتحنا موضوع الصبر خلف semantic guard، "
-    "ومرّت التوسعة الحية 21/21. التالي Phase 27.38 لبناء curriculum/probe "
-    "للموضوعات المحجوبة مثل الصداقة والصدق.",
+    "اكتملت Phase 27.38 جزئيًا: درّبنا probe للموضوعات المحجوبة، لكنه مرّ "
+    "6/20 فقط وظهر topic collapse نحو الاحترام. لذلك أبقينا runtime الحالي، "
+    "والتالي Phase 27.39 لإصلاح خلط الموضوعات.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

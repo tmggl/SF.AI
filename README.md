@@ -39,12 +39,12 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.37 / 30 — Supported Topic Expansion مرّت `21/21`.
-- **الأولوية الحالية:** Phase 27.38 targeted topic curriculum/probe للموضوعات المحجوبة؛ لا تدريب `SF-50M` ولا Phase 28 حتى تتوسع جودة الواجهة الحية.
+- **الرحلة الحالية:** Phase 27.38 / 30 — Targeted Topic Curriculum/Probe اكتملت جزئيًا.
+- **الأولوية الحالية:** Phase 27.39 repair failed targeted topics؛ لا تدريب `SF-50M` ولا Phase 28 حتى تنجح موضوعات التعريف المحجوبة.
 - **الشات الحالي:** runtime الافتراضي قالب/router، ومع زر `مولّد تجريبي` يستخدم `SF-10M Phase 27.33` خلف guard/fallback.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
-- **المولّد:** آخر checkpoint هو Phase 27.33 `sf-10m-step9800`; Phase 27.37 أضاف موضوع `الصبر` خلف semantic guard: `21/21` إجمالًا، منها `3/3` للموضوع الجديد.
+- **المولّد:** runtime التجريبي يبقى على Phase 27.33 `sf-10m-step9800`; Phase 27.38 درّب probe مرشحًا لكنه فشل `6/20`، لذلك لم يُفعّل.
 - **التقييم:** Phase 27 مرّر `19/19` turn في حوار متعدد الأدوار، لكنه أكد أن الردود ما زالت `template` وأن المولد غير جاهز.
 - **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.
 - **دورة البيانات:** Phase 18 أضاف تصدير مراجعة من الواجهة و`prepare_dialogue_batch.py`; وPhase 22 يعتمد الآن أيضًا دفعات مباشرة يؤلفها/يراجعها الوكيل بتفويض موثق، بدون انتظار حفظ أو تصدير من سامي.
@@ -86,6 +86,7 @@
 - **نتيجة Phase 27.35:** اختبار حي عبر HTTP على `/ui/chat` و`/chat/message` مرّ `10/10`: الواجهة تعرض الزر، وطلبات trial تستخدم `sf_10m_phase27_33`, والتحكم الآمن بقي template/composer. التقرير: [docs/PHASE27_35_LIVE_UI_TRIAL_OBSERVATIONS_REPORT.md](./docs/PHASE27_35_LIVE_UI_TRIAL_OBSERVATIONS_REPORT.md).
 - **نتيجة Phase 27.36:** أضيف quality-floor للتجربة الحية: raw `chat.general` وموضوعات التعريف غير المثبتة لا تذهب للمولّد. triage الحي مرّ `27/27`: `18/18` مولّد، `5/5` quality-floor، `4/4` ضوابط. التقرير: [docs/PHASE27_36_LIVE_UI_TRIAGE_REPORT.md](./docs/PHASE27_36_LIVE_UI_TRIAGE_REPORT.md).
 - **نتيجة Phase 27.37:** أضيف semantic topic guard وفتح موضوع `الصبر` بصيغ مثبتة فقط. التوسعة الحية مرّت `21/21`: `10/10` regression generated، `3/3` موضوع جديد، `5/5` quality-floor، `3/3` ضوابط. التقرير: [docs/PHASE27_37_SUPPORTED_TOPIC_EXPANSION_REPORT.md](./docs/PHASE27_37_SUPPORTED_TOPIC_EXPANSION_REPORT.md).
+- **نتيجة Phase 27.38:** دُرّب probe مستهدف للموضوعات المحجوبة (`الصداقة/الصدق/التنظيم/الهدوء`) لكنه مرّ `6/20` فقط وظهر topic collapse نحو `الاحترام`. القرار: لا runtime switch. التقرير: [docs/PHASE27_38_TARGETED_TOPIC_CURRICULUM_PROBE_REPORT.md](./docs/PHASE27_38_TARGETED_TOPIC_CURRICULUM_PROBE_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
@@ -161,6 +162,7 @@
 | Phase 27.35 | Live UI Trial Observations — live server UI/API trial passed 10/10 |
 | Phase 27.36 | Live UI Triage — quality floor active; live triage passed 27/27 |
 | Phase 27.37 | Supported Topic Expansion — الصبر added behind semantic guard; live gate passed 21/21 |
+| Phase 27.38 | Targeted Topic Curriculum/Probe — partial 6/20; runtime stays on 27.33 |
 | Phase 28 | SF-120M v0.1 Candidate — planned |
 | Phase 29 | Runtime Hybrid Assistant v1 — planned |
 | Phase 30 | Continuous Improvement Loop — planned |
