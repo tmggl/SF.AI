@@ -118,6 +118,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.46 | Core Dialogue Stabilization | مكتملة جزئيًا؛ `14/16` ولا runtime switch |
 | Phase 27.47 | New Topic Conditioning Repair | مكتملة؛ offline gate مرّ `16/16` |
 | Phase 27.48 | Guarded Runtime Switch for Phase 27.47 | مكتملة؛ live API gate مرّ `19/19` و`generator_trial` يستخدم `sf_10m_phase27_47` |
+| Phase 27.49 | Broader Live UI/API Probes | مكتملة؛ live API gate مرّ `33/33` وأصلح كشف النصيحة السعودية |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2926,6 +2927,44 @@ sf50m_allowed = false
 - `artifacts/reports/phase27_44_tokenizer_curriculum_repair_report.json`
 - `artifacts/reports/phase27_47_new_topic_conditioning_repair_report.json`
 - `artifacts/reports/phase27_48_guarded_runtime_switch_report.json`
+
+## Phase 27.49 — Broader Live UI/API Probes
+
+### الهدف
+
+توسيع اختبار `generator_trial=true` على السيرفر الحي للتأكد من أن
+`sf_10m_phase27_47` لا ينجح فقط في gate صغير، بل يصمد أمام صيغ فصحى وسعودية
+أكثر في سؤال الحال، الشكر، النصيحة، التخطيط، الدعم، والتعريفات المثبتة.
+
+### نتيجة التنفيذ
+
+```text
+candidate_generator = sf_10m_phase27_47
+cases = 33/33
+generated_social = 7/7
+generated_task = 8/8
+generated_definition = 11/11
+controls = 7/7
+runtime_default = template
+sf50m_allowed = false
+```
+
+### ملاحظة إصلاح
+
+فشل الاختبار أولًا في `وش تنصحني اسوي` لأنها سقطت إلى `chat.general`.
+أضيفت جذور `نصح/تنصح` إلى كشف intent وحارس alignment، ثم مرّت البوابة `33/33`.
+
+### القرار
+
+- يبقى المولد مفتوحًا فقط عند `generator_trial=true`.
+- لا `SF-50M` ولا Phase 28.
+- التالي Phase 27.50: targeted natural-prompt expansion plan.
+
+### artifacts
+
+- [PHASE27_49_BROADER_LIVE_UI_PROBES_REPORT.md](./PHASE27_49_BROADER_LIVE_UI_PROBES_REPORT.md)
+- `artifacts/reports/phase27_49_broader_live_ui_probes_report.json`
+- `artifacts/samples/phase27_49_broader_live_ui_probes.md`
 
 ---
 

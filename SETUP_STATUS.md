@@ -10,10 +10,10 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.48 / 30**
-- **المرحلة الحالية:** **Phase 27.48 — Guarded Runtime Switch for Phase 27.47** (اكتملت: `sf_10m_phase27_47` مرّ offline `16/16` وlive API `19/19`; الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **الرحلة الحالية:** **Phase 27.49 / 30**
+- **المرحلة الحالية:** **Phase 27.49 — Broader Live UI/API Probes** (اكتملت: `sf_10m_phase27_47` مرّ live API أوسع `33/33`; الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** Phase 27.49 broader live UI probes؛ Phase 28 و`SF-50M` محظوران حتى تنجح بوابات جودة أوسع.
+- **المرحلة التالية المقترحة:** Phase 27.50 targeted natural-prompt expansion plan؛ Phase 28 و`SF-50M` محظوران حتى تنجح بوابات جودة أوسع.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
@@ -109,6 +109,8 @@
 - **تقرير Phase 27.43:** `docs/PHASE27_43_GUARDED_DATA_BACKED_EXPANSION_REPORT.md`, `artifacts/reports/phase27_43_guarded_data_backed_expansion_report.json`.
 - **نتيجة Phase 27.44–27.48:** أُنشئ tokenizer v6، ثم أُصلح conditioning لموضوعي `الوفاء/الشجاعة`. مرّ `sf_10m_phase27_47` offline `16/16` ثم live API `19/19`. زر `مولّد تجريبي` يستخدمه الآن، والافتراضي ما زال `template`.
 - **تقرير Phase 27.44–27.48:** `docs/PHASE27_44_TO_48_RUNTIME_SWITCH_REPORT.md`, `artifacts/reports/phase27_48_guarded_runtime_switch_report.json`.
+- **نتيجة Phase 27.49:** وُسّعت probes الحية إلى `33/33`، وأُصلح كشف النصيحة لعبارة `وش تنصحني اسوي`.
+- **تقرير Phase 27.49:** `docs/PHASE27_49_BROADER_LIVE_UI_PROBES_REPORT.md`, `artifacts/reports/phase27_49_broader_live_ui_probes_report.json`.
 - **مقارنة tokenizer v1/v2:** v1 كان `vocab=261`, `merges=218`, `words_seen=723`, سعودي فقط. v2 تدرب على `500` سجل متوازن: `msa=250`, `saudi=250`.
 - **تحسن protected Saudi terms:** `average_tokens` انخفض من `4.0` في v1 إلى `2.3` في v2، ولا توجد `roundtrip_failures` أو `aggressive_split_terms`.
 - **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches=[]` لأن الجمع اكتمل.
@@ -329,7 +331,7 @@ make server-start
 
 آخر تحقق حي بعد restart:
 - السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`.
-- الكود الحالي بعد Phase 27.48 يعرض `Phase 27.48` في `/system/status` و`/health`; زر `مولّد تجريبي` يستخدم `sf_10m_phase27_47` خلف guard/fallback.
+- الكود الحالي بعد Phase 27.49 يعرض `Phase 27.49` في `/system/status` و`/health`; زر `مولّد تجريبي` يستخدم `sf_10m_phase27_47` خلف guard/fallback.
 - `GET /system/phase26-readiness` يرجع `can_start_sf50m_training=false`.
 - `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - `make server-status` read-only ولا يوقف السيرفر.
@@ -338,7 +340,7 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى إكمال Phase 27.48)
+## نتائج الاختبارات (حتى إكمال Phase 27.49)
 
 ```
 559 passed in 16.81s

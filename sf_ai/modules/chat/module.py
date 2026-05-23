@@ -319,7 +319,7 @@ def _generation_intent_for_prompt(
         )
     ):
         return "definition"
-    if any(term in text for term in ("نصيحه", "انصح", "دلني", "وجهني", "خطوه", "بدايه")):
+    if any(term in text for term in ("نصيحه", "نصح", "تنصح", "انصح", "دلني", "وجهني", "خطوه", "بدايه")):
         return "advice"
     if any(term in text for term in ("رتب", "انظم", "نظم", "مهامي", "يومي", "اولويات")):
         return "planning"

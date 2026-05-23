@@ -35,13 +35,14 @@
 - [docs/SOVEREIGN_TRAINING_QUALITY_TOOLING.md](./docs/SOVEREIGN_TRAINING_QUALITY_TOOLING.md) — قرار أدوات جودة التدريب المحلية.
 - [docs/SF_AI_ENGINEER_STATUS_REPORT.md](./docs/SF_AI_ENGINEER_STATUS_REPORT.md) — تقرير شامل يمكن تقديمه لمهندس خارجي لفهم الهدف والحالة والخطة.
 - [docs/PHASE27_44_TO_48_RUNTIME_SWITCH_REPORT.md](./docs/PHASE27_44_TO_48_RUNTIME_SWITCH_REPORT.md) — تقرير فتح `sf_10m_phase27_47` في المسار التجريبي المحروس.
+- [docs/PHASE27_49_BROADER_LIVE_UI_PROBES_REPORT.md](./docs/PHASE27_49_BROADER_LIVE_UI_PROBES_REPORT.md) — تقرير توسيع اختبارات الواجهة/API الحية إلى `33/33`.
 
 ---
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.48 / 30 — Guarded Runtime Switch for Phase 27.47 اكتملت.
-- **الأولوية الحالية:** Phase 27.49 broader live UI probes؛ لا تدريب `SF-50M` ولا Phase 28 قبل بوابات جودة أوسع.
+- **الرحلة الحالية:** Phase 27.49 / 30 — Broader Live UI/API Probes اكتملت.
+- **الأولوية الحالية:** Phase 27.50 targeted natural-prompt expansion plan؛ لا تدريب `SF-50M` ولا Phase 28 قبل بوابات جودة أوسع.
 - **الشات الحالي:** runtime الافتراضي قالب/router، ومع زر `مولّد تجريبي` يستخدم `SF-10M Phase 27.47` خلف guard/fallback.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -94,6 +95,7 @@
 - **نتيجة Phase 27.42:** وُسّعت probes الحية إلى `29/29`: الردود المثبتة بقيت مولّدة، والردود غير المطابقة حُجبت وعادت للقالب. التقرير: [docs/PHASE27_42_LIVE_UI_BROADER_PROBES_REPORT.md](./docs/PHASE27_42_LIVE_UI_BROADER_PROBES_REPORT.md).
 - **نتيجة Phase 27.43:** دُرّب مرشح weak-lane جديد لكنه فشل جزئيًا `10/16`; لا runtime switch، والواجهة بقيت على `sf_10m_phase27_40`. التقرير: [docs/PHASE27_43_GUARDED_DATA_BACKED_EXPANSION_REPORT.md](./docs/PHASE27_43_GUARDED_DATA_BACKED_EXPANSION_REPORT.md).
 - **نتيجة Phase 27.44–27.48:** tokenizer v6 ثم إصلاح conditioning لموضوعي `الوفاء/الشجاعة`; مرّ `sf_10m_phase27_47` offline `16/16` ثم live API `19/19`. زر `مولّد تجريبي` يستخدمه الآن، والافتراضي لا يزال القالب الآمن. التقرير: [docs/PHASE27_44_TO_48_RUNTIME_SWITCH_REPORT.md](./docs/PHASE27_44_TO_48_RUNTIME_SWITCH_REPORT.md).
+- **نتيجة Phase 27.49:** وسّعنا probes الحية إلى `33/33`، وأصلحنا كشف النصيحة السعودية لعبارة `وش تنصحني اسوي`. التقرير: [docs/PHASE27_49_BROADER_LIVE_UI_PROBES_REPORT.md](./docs/PHASE27_49_BROADER_LIVE_UI_PROBES_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 

@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.48: مرشح Phase 27.47 مرّ 16/16 offline ثم 19/19 على API الحي، والواجهة تستخدمه فقط عند تفعيل زر «مولّد تجريبي». التالي Phase 27.49 لتوسيع اختبارات الواجهة قبل أي"
+      "response_preview": "وصلنا إلى Phase 27.49: وسّعنا اختبار الواجهة/API إلى 33 حالة ومرّت كلها. المولّد التجريبي ما زال `sf_10m_phase27_47` خلف زر «مولّد تجريبي»، والافتراضي قالب آمن. التالي Phase 27.50 "
     },
     {
       "scenario_id": "clarification_repair_flow",

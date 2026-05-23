@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.48 / 30**
-- **المرحلة الحالية:** **Phase 27.48 — Guarded Runtime Switch for Phase 27.47**
-- **حالة المرحلة الحالية:** **مكتملة؛ `sf_10m_phase27_47` مرّ offline `16/16` ثم live API `19/19` داخل `generator_trial=true`**
-- **المرحلة التالية المقترحة:** Phase 27.49 broader live UI probes؛ لا Phase 28 ولا `SF-50M` قبل بوابات جودة أوسع.
+- **الرحلة الحالية:** **Phase 27.49 / 30**
+- **المرحلة الحالية:** **Phase 27.49 — Broader Live UI/API Probes**
+- **حالة المرحلة الحالية:** **مكتملة؛ `sf_10m_phase27_47` مرّ live API أوسع `33/33` داخل `generator_trial=true`**
+- **المرحلة التالية المقترحة:** Phase 27.50 targeted natural-prompt expansion plan؛ لا Phase 28 ولا `SF-50M` قبل بوابات جودة أوسع.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -97,6 +97,7 @@
 | Phase 27.46 | Core Dialogue Stabilization | ✅ completed_partial_keep_phase27_40_runtime | ✅ |
 | Phase 27.47 | New Topic Conditioning Repair | ✅ completed_ready_for_guarded_switch | ✅ |
 | Phase 27.48 | Guarded Runtime Switch for Phase 27.47 | ✅ completed_guarded_runtime_switch_phase27_47 | ✅ |
+| Phase 27.49 | Broader Live UI/API Probes | ✅ completed_broader_live_ui_probes_phase27_47 | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -747,6 +748,13 @@
   - الافتراضي ما زال `template`، والحالات العامة/الحساسة تبقى على fallback.
   - التالي Phase 27.49 broader live UI probes.
   - أضيف [PHASE27_44_TO_48_RUNTIME_SWITCH_REPORT.md](./PHASE27_44_TO_48_RUNTIME_SWITCH_REPORT.md).
+- بدأ وانتهى Phase 27.49 Broader Live UI/API Probes:
+  - وسّعنا live API gate إلى `33` حالة.
+  - اكتشفنا أن `وش تنصحني اسوي` كانت تسقط إلى `chat.general`.
+  - أضيفت جذور `نصح/تنصح` إلى مسار كشف النصيحة وحارس alignment.
+  - النتيجة بعد الإصلاح: `33/33`.
+  - التالي Phase 27.50 targeted natural-prompt expansion plan.
+  - أضيف [PHASE27_49_BROADER_LIVE_UI_PROBES_REPORT.md](./PHASE27_49_BROADER_LIVE_UI_PROBES_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -812,7 +820,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.48"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.49"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,

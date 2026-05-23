@@ -306,3 +306,22 @@ def test_phase27_48_guarded_runtime_switch_passes_live_gate() -> None:
     assert report["summary"]["bucket_summary"]["generated_new_topic"]["passed"] == 2
     assert report["summary"]["bucket_summary"]["generated_regression"]["passed"] == 8
     assert all(row["passed"] for row in report["rows"])
+
+
+def test_phase27_49_broader_live_ui_probes_pass() -> None:
+    report = _report("phase27_49_broader_live_ui_probes_report.json")
+    assert report["phase"] == "Phase 27.49"
+    assert report["status"] == "PASSED_BROADER_LIVE_UI_PROBES_PHASE27_47"
+    assert report["training_started"] is False
+    assert report["runtime_default"] == "template"
+    assert report["request_flag"] == "generator_trial=true"
+    assert report["candidate_generator"] == "sf_10m_phase27_47"
+    assert report["sf50m_allowed"] is False
+    assert report["phase28_allowed"] is False
+    assert report["user_test_allowed"] is True
+    assert report["summary"]["passed"] == 33
+    assert report["summary"]["total"] == 33
+    assert report["summary"]["bucket_summary"]["generated_social"]["passed"] == 7
+    assert report["summary"]["bucket_summary"]["generated_task"]["passed"] == 8
+    assert report["summary"]["bucket_summary"]["generated_definition"]["passed"] == 11
+    assert all(row["passed"] for row in report["rows"])
