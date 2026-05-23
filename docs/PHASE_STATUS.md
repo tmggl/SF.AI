@@ -9,8 +9,8 @@
 - **اسم المشروع:** SF.AI
 - **الرحلة الحالية:** **Phase 22 / 30**
 - **المرحلة الحالية:** **Phase 22 — Gold Dialogue Corpus v2**
-- **حالة المرحلة الحالية:** **بوابة جاهزية corpus v2 + review intake تعمل؛ corpus غير جاهز بعد (475/500، التوازن الأساسي مكتمل: msa=237، saudi=238)**
-- **المرحلة التالية المقترحة:** إكمال دفعات فصحى/سعودية محكومة يؤلفها/يراجعها الوكيل بتفويض موثق حتى تمر `make phase22-readiness`.
+- **حالة المرحلة الحالية:** **Phase 22 مكتملة؛ corpus v2 جاهز للانتقال إلى Phase 23 (500/500، msa=250، saudi=250)**
+- **المرحلة التالية المقترحة:** Phase 23 — Tokenizer v2 Retrain & Audit، بعد إعادة تشغيل بوابات Phase 22 والاختبارات.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ تم تحديث `default_registry.yaml` و`safety_terms.yaml` لفجوات finance/religion/security.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -47,7 +47,7 @@
 | Phase 19 | SF-50M Candidate Training | readiness_gate_active_not_ready | ✅ |
 | Phase 20 | Domain Activation Gates | ✅ gates_active_no_auto_activation | ✅ |
 | Phase 21 | Generative Roadmap & Quality Targets | ✅ completed | ✅ |
-| Phase 22 | Gold Dialogue Corpus v2 | readiness_gate_active_not_ready | ✅ |
+| Phase 22 | Gold Dialogue Corpus v2 | ✅ completed_ready_for_phase23 | ✅ |
 | Phase 23 | Tokenizer v2 Retrain & Audit | مخططة | ✅ |
 | Phase 24 | SF-10M v0.2 Quality Training | مخططة | ✅ |
 | Phase 25 | Generated Chat Canary v1 | مخططة | ✅ |
@@ -177,7 +177,7 @@
   - أضيف `make phase19-readiness`.
   - أضيف `GET /system/phase19-readiness`.
   - القرار الحالي: `NOT_READY_EXPAND_CORPUS_FIRST`.
-  - السبب: corpus الحالي `30` سجلًا فقط والحد الأدنى العملي الحالي `5000`.
+  - السبب: corpus الحالي `500` سجل فقط والحد الأدنى العملي الحالي `5000`.
   - أضيف lab bridge للرسائل غير الحساسة حتى يختبر سامي المولد الخام عبر مجالات skeleton داخل المختبر المحلي.
   - docs: [PHASE19_READINESS_REPORT.md](./PHASE19_READINESS_REPORT.md)
 - بدأ وانتهى Phase 20 Domain Activation Gates:
@@ -214,16 +214,16 @@
   - أضيف `sf_ai/datasets/phase22_readiness.py`.
   - أضيف `sf_ai/datasets/phase22_review_intake.py`.
   - أضيف تقرير [PHASE22_GOLD_DIALOGUE_CORPUS_V2_REPORT.md](./PHASE22_GOLD_DIALOGUE_CORPUS_V2_REPORT.md).
-  - القرار الحالي: `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2`.
-  - الموجود الحالي: 475 سجل تدريب جاهز: 237 `msa` و238 `saudi`.
-  - المتبقي: 25 سجل للوصول إلى 500.
-  - خطة الجمع الحالية: 25 مرنة، أي 1 batch تقديريًا ومخططًا.
-  - أضيفت بوابة اكتمال صارمة: `phase22-completion-gate`، وقرارها الحالي `PHASE22_INCOMPLETE_DO_NOT_ADVANCE`.
-  - أضيفت قائمة batches مفصلة داخل `phase22-plan`: `flex_004`، مع target records وأسماء ملفات وأوامر تحقق مباشرة.
-  - أضيفت مهمة batch فورية داخل `phase22-next-batch`: المهمة الحالية `flex_004`، 25 سجلًا مرنًا، مع checklist قبول وموضوعات تأليف لا تُعد بيانات تدريب.
+  - القرار الحالي: `READY_FOR_PHASE23_TOKENIZER_V2`.
+  - الموجود الحالي: 500 سجل تدريب جاهز: 250 `msa` و250 `saudi`.
+  - المتبقي: 0 سجل للوصول إلى 500.
+  - خطة الجمع الحالية: مكتملة؛ لا توجد batches متبقية في Phase 22.
+  - أضيفت بوابة اكتمال صارمة: `phase22-completion-gate`، وقرارها الحالي `PHASE22_COMPLETE_READY_FOR_PHASE23`.
+  - `phase22-plan` يعرض الآن `planned_batches=[]`.
+  - `phase22-next-batch` يعرض الآن `NO_BATCHES_REMAINING_RECHECK_READINESS`.
   - أضيفت ثمان دفعات فصيحة معتمدة: `data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl` إلى `dialogue_batch_v2_msa_008.jsonl`، بإجمالي 178 سجلًا فصيحًا `silver` مؤلفة/مراجعة بتفويض سامي، مع بطاقات provenance.
   - أضيفت سبع دفعات سعودية معتمدة: `data/corpus/chat/jsonl/dialogue_batch_v2_saudi_001.jsonl` إلى `dialogue_batch_v2_saudi_007.jsonl` بإجمالي 170 سجلًا سعوديًا `silver`، وأصبح الحد الأدنى السعودي مكتملًا مع seed/protected coverage.
-  - أضيفت أول ثلاث دفعات مرنة معتمدة: `data/corpus/chat/jsonl/dialogue_batch_v2_flex_001.jsonl` إلى `dialogue_batch_v2_flex_003.jsonl` بإجمالي 75 سجلًا `silver` موزعة بين الفصحى والسعودية.
+  - أضيفت أربع دفعات مرنة معتمدة: `data/corpus/chat/jsonl/dialogue_batch_v2_flex_001.jsonl` إلى `dialogue_batch_v2_flex_004.jsonl` بإجمالي 100 سجل `silver` موزعة بين الفصحى والسعودية.
   - أضيف seed مصطلحات فصحى تدريبي: `data/corpus/chat/jsonl/protected_terms_msa_seed_v1.jsonl` وفيه 22 سجلًا `gold` لتغطية مصطلحات تشغيل/حوكمة/تدريب أساسية.
   - أضيفت حقول فصل المستخدمين في schema/audit/UI/export/corpus: `owner_user_id`, `created_by_user_id`, `target_user_id`, `user_scope`.
   - المسار الحالي `sami-local` و`single_user`، والهدف منع خلط محادثات أو ذاكرة مستخدم مع مستخدم آخر عند التوسع لاحقًا.
@@ -232,7 +232,7 @@
   - أضيفت بوابة جودة داخل review intake: `quality_score`, `quality_label`, و`quality_blockers`.
   - أضيف مؤشر جودة التصدير داخل `/ui/chat` حتى يعرف سامي قبل التصدير هل الجلسة قصيرة أو صالحة للمراجعة.
   - أضيفت لوحة بوابة Phase 22 داخل `/ui/chat`، تقرأ `/system/phase22-readiness` و`/system/phase22-collection-plan` وتعرض عدد corpus الحالي، المتبقي، وحالة `msa/saudi`، والمهمة التالية مباشرة.
-  - أضيفت لوحة مهمة الجمع الحالية داخل `/ui/chat`، تقرأ `/system/phase22-next-batch` وتعرض `flex_004` وهدف 25 سجلًا وموضوعات تأليف عامة؛ الواجهة مختبر اختياري وليست شرطًا على سامي لحفظ أو تصدير أي شيء.
+  - أضيفت لوحة مهمة الجمع الحالية داخل `/ui/chat`، تقرأ `/system/phase22-next-batch`; بعد اكتمال `flex_004` تعرض عدم وجود دفعات متبقية. الواجهة مختبر اختياري وليست شرطًا على سامي لحفظ أو تصدير أي شيء.
   - أضيف زر `موضوعات أخرى` داخل لوحة مهمة الجمع الحالية للتنقل في بنك التأليف الفصيح، مع `authoring_topic_count` في metadata.
   - أضيف زر `حفظ للمراجعة` في `/ui/chat` وendpoint `POST /chat/review-export` لحفظ review JSONL محليًا في `data/corpus/chat/review/` فقط، مع رفض `training_allowed=true`.
   - القاعدة العملية الجديدة: ملف التصدير المفيد يجب أن يحتوي غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل، وبدون ردود `sf_10m_v0_1`.
@@ -240,7 +240,7 @@
   - صححت تشغيل الواجهة المستقرة: `generator=template` افتراضيًا، أي قوالب ثابتة لا مولد؛ و`SF-10M` الخام يبقى مختبرًا صريحًا فقط.
   - أضيفت حماية export/review intake لتمييز أي جلسة تحتوي ردود `sf_10m_v0_1` ومنع عدّها كـ candidate تدريب جودة.
   - أضيفت intents محددة لعبارات Phase 22 اليومية: اختبار الحوار الفصيح، الخطوة التالية، والفرق بين التدريب والتفعيل.
-  - الناقص الحاسم الآن: العدد الكلي فقط؛ الفصحى وصلت إلى 237، والسعودي وصل إلى 238، والمتبقي 25 سجل مرن.
+  - لا يوجد ناقص في Phase 22 حاليًا؛ الفصحى وصلت إلى 250، والسعودي وصل إلى 250، والمجموع 500.
   - لا تدريب جديد بدأ.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
@@ -338,7 +338,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-435 passed in 5.07s
+435 passed in 4.97s
 ```
 
 | ملف | عدد |

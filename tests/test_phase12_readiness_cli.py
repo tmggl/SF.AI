@@ -17,8 +17,8 @@ def test_phase12_readiness_decision_blocks_training_permission() -> None:
     assert decision.action == "PHASE12_V1_COMPLETED_CONTINUE_PHASE22_CORPUS_TARGET"
     assert decision.required_permission_phrase == "ابدأ Phase 12"
     assert decision.required_confirmation_flag == "--confirm-phase12-permission"
-    assert decision.corpus_training_ready == 475
-    assert decision.corpus_dialect_counts == {"msa": 237, "saudi": 238}
+    assert decision.corpus_training_ready == 500
+    assert decision.corpus_dialect_counts == {"msa": 250, "saudi": 250}
     assert decision.required_dialects == ("msa", "saudi")
     assert decision.missing_required_dialects == ()
     assert decision.language_balance_status == "READY_MSA_AND_SAUDI"
@@ -31,7 +31,7 @@ def test_phase12_readiness_decision_blocks_training_permission() -> None:
 def test_phase12_readiness_script_reports_stop_before_training() -> None:
     proc = subprocess.run(
         [sys.executable, "scripts/phase12_readiness.py"],
-        check=False,
+        check=True,
         capture_output=True,
         text=True,
     )

@@ -285,6 +285,7 @@ def test_real_corpus_dir_contains_only_explicit_reviewed_seeds() -> None:
         "dialogue_batch_v2_flex_001.jsonl",
         "dialogue_batch_v2_flex_002.jsonl",
         "dialogue_batch_v2_flex_003.jsonl",
+        "dialogue_batch_v2_flex_004.jsonl",
         "dialogue_batch_v2_msa_001.jsonl",
         "dialogue_batch_v2_msa_002.jsonl",
         "dialogue_batch_v2_msa_003.jsonl",

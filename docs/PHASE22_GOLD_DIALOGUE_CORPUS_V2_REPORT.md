@@ -3,7 +3,7 @@
 ## SF.AI — Phase 22 Gold Dialogue Corpus v2
 
 **Journey:** Phase 22 / 30  
-**Status:** readiness gate active; corpus not ready  
+**Status:** completed; ready for Phase 23 tokenizer v2
 **Language track:** Arabic MSA + Saudi only  
 **Lexicon track:** Saudi Seed v1 as reference, not direct chat corpus  
 **Training started:** no
@@ -17,7 +17,7 @@ Phase 22 لا يبدأ تدريب tokenizer أو نموذج.
 هذه المرحلة تبني بوابة corpus v2 حتى نعرف بدقة:
 
 - كم سجل حوار جاهز لدينا.
-- كم ينقص للوصول إلى 500 سجل.
+- هل اكتمل هدف 500 سجل.
 - هل يوجد توازن بين `msa` و`saudi`.
 - هل السجلات gold/silver ومصرح بها للتدريب.
 - هل يوجد أي كسر في الحوكمة.
@@ -69,41 +69,38 @@ Phase 22 لا يبدأ تدريب tokenizer أو نموذج.
 - `sf_ai/datasets/phase22_readiness.py`
 - `sf_ai/datasets/phase22_review_intake.py`
 
-القيم الحالية المتوقعة:
+القيم الحالية المتوقعة بعد `flex_004`:
 
 ```text
-training_records: 475
+training_records: 500
 target_records: 500
-remaining_records: 25
-dialect_counts: {"msa": 237, "saudi": 238}
+remaining_records: 0
+dialect_counts: {"msa": 250, "saudi": 250}
 missing_required_dialects: []
-status: NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2
-can_start_phase23: false
+status: READY_FOR_PHASE23_TOKENIZER_V2
+can_start_phase23: true
 synthetic_llm_data_allowed: false
-completion_gate: PHASE22_INCOMPLETE_DO_NOT_ADVANCE
+completion_gate: PHASE22_COMPLETE_READY_FOR_PHASE23
 ```
 
 وخطة الجمع الحالية:
 
 ```text
-remaining_records: 25
+remaining_records: 0
 batch_size: 25
-estimated_batches: 1
+estimated_batches: 0
 quota_by_dialect: {}
-flexible_records_after_minimums: 25
-planned_batches: 1
-next_batch: flex_004, dialect=msa_or_saudi, target_records=25
+flexible_records_after_minimums: 0
+planned_batches: 0
+next_batch: none
 ```
 
-`phase22-next-batch` يعرض المهمة الفورية للتأليف/المراجعة:
+`phase22-next-batch` بعد اكتمال المرحلة يعرض:
 
-- batch الحالي: `flex_004`.
-- الهدف: 25 سجلًا مرنًا فصيحًا أو سعوديًا.
-- يعرض checklist قبول قبل التحويل.
-- يعرض موضوعات عامة تساعد التأليف/المراجعة؛ هذه الموضوعات ليست corpus ولا synthetic dialogue.
-- يقرأ بنك موضوعات فصيح غير تدريبي من `resources/phase22_authoring/msa_prompt_bank_v1.json`.
-- بعد التأليف المباشر: `validate_dataset.py` ثم `corpus-audit` ثم `phase22-readiness`. مسار `phase22-review-intake` و`prepare-dialogue-batch` يبقى اختياريًا للمواد القادمة من الواجهة فقط.
-- شاشة `/ui/chat` تعرض هذه المهمة مباشرة وتضيف `phase22_next_batch` إلى `review_metadata` عند التصدير.
+- `NO_BATCHES_REMAINING_RECHECK_READINESS`.
+- `next_batch: none`.
+- أوامر إعادة التحقق: `make phase22-readiness` و`make phase22-completion-gate`.
+- لا يبدأ Phase 23 إلا بعد نجاح هذه البوابات والاختبارات.
 
 بنك التأليف الفصيح:
 
@@ -115,10 +112,10 @@ next_batch: flex_004, dialect=msa_or_saudi, target_records=25
 
 `phase22-completion-gate` هو مانع الانتقال النهائي:
 
-- يرجع حاليًا `PHASE22_INCOMPLETE_DO_NOT_ADVANCE`.
+- يرجع حاليًا `PHASE22_COMPLETE_READY_FOR_PHASE23`.
 - يجمع readiness + collection plan + next batch في قرار واحد.
-- لا يسمح بالانتقال إلى Phase 23 إلا بعد `PHASE22_COMPLETE_READY_FOR_PHASE23`.
-- يذكر النواقص الحالية مثل `corpus_below_phase22_target` و`complete_next_batch:flex_004`. التوازن اللهجي الأساسي مكتمل حاليًا، لذلك لا تظهر `dialect_balance_below_minimum`.
+- يسمح بالانتقال إلى Phase 23 من جهة corpus.
+- لا توجد نواقص حالية في Phase 22.
 
 تفصيل batches الرسمي:
 
@@ -126,8 +123,7 @@ next_batch: flex_004, dialect=msa_or_saudi, target_records=25
 - `protected_terms_msa_seed_v1` اكتمل: 22 سجلًا فصيحًا `gold` لتغطية مصطلحات التوكننة/الحوكمة.
 - `msa_008` اكتملت: 3 سجلات فصيحة، وأصبح الحد الأدنى للفصحى مكتملًا.
 - `saudi_001` إلى `saudi_007` اكتملت: 170 سجلًا سعوديًا owner-delegated agent-authored، وأغلق `saudi_007` آخر 20 سجلًا للحد الأدنى السعودي.
-- `flex_001` إلى `flex_003` اكتملت: 75 سجلًا مرنًا بعد اكتمال الحد الأدنى.
-- `flex_004`: 25 سجلًا مرنًا متبقيًا.
+- `flex_001` إلى `flex_004` اكتملت: 100 سجل مرن بعد اكتمال الحد الأدنى.
 
 ومسار review intake الحالي:
 
@@ -160,7 +156,7 @@ status: REVIEW_EXPORTS_READY_FOR_MANUAL_REVIEW
 
 وأضيفت لوحة مهمة الجمع الحالية داخل الشاشة نفسها:
 
-- تعرض `flex_004` وهدف 25 سجلًا.
+- كانت تعرض `flex_004` وهدف 25 سجلًا قبل اكتمالها، وتعرض الآن عدم وجود batch تالٍ.
 - تعرض موضوعات تأليف عامة لا تُعد بيانات تدريب.
 - تعرض زر `موضوعات أخرى` للتنقل في بنك الموضوعات الفصيح بدل حصر سامي في أول ثلاثة موضوعات.
 - تربط export بالـ batch عبر `review_metadata.phase22_next_batch`.
@@ -247,40 +243,37 @@ make phase22-review-intake
 make prepare-dialogue-batch ARGS="--input data/corpus/chat/review/<file>.jsonl --out data/corpus/chat/jsonl/dialogue_batch_v2_001.jsonl --quality silver --dialect saudi --training-allowed"
 ```
 
-أو للدفعة السعودية التالية:
-
-```bash
-make prepare-dialogue-batch ARGS="--input data/corpus/chat/review/<file>.jsonl --out data/corpus/chat/jsonl/dialogue_batch_v2_flex_004.jsonl --quality silver --dialect saudi --training-allowed"
-```
-
-وللمسار المباشر:
+وللمسار المباشر للتحقق من الدفعة الأخيرة:
 
 ```bash
 .venv/bin/python scripts/validate_dataset.py data/corpus/chat/jsonl/dialogue_batch_v2_flex_004.jsonl
 make corpus-audit
 make phase22-readiness
+make phase22-completion-gate
 ```
 
 ---
 
 ## متى ننتقل إلى Phase 23؟
 
-فقط عندما:
+تم الوصول إلى شروط الانتقال عندما:
 
 ```bash
 make corpus-audit
 make phase22-readiness
 make phase22-plan
 make phase22-review-intake
+make phase22-completion-gate
 ```
 
 يعطيان:
 
 - لا issues.
-- `training_records >= 500`.
+- `training_records=500`.
 - لا `missing_required_dialects`.
 - لا dialect shortfall.
 - `can_start_phase23=true`.
-- `quality_label` لمعظم ملفات review يكون `silver_candidate` أو `gold_candidate`.
+- `PHASE22_COMPLETE_READY_FOR_PHASE23`.
+- `quality_label` لملفات review يبقى تشخيصًا اختياريًا، وليس شرطًا لإكمال corpus المباشر.
 
-حتى ذلك الوقت تبقى الخطوة الصحيحة: جمع ومراجعة بيانات حوار حقيقية.
+الخطوة الصحيحة التالية: Phase 23 tokenizer v2 retrain & audit، مع عدم بدء تدريب نموذج جودة داخل Phase 22.

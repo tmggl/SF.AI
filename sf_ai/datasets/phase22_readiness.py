@@ -195,11 +195,29 @@ def build_phase22_readiness_decision(
         else "COLLECT_OWNER_APPROVED_MSA_SAUDI_DIALOGUES"
     )
 
-    dialect_note = (
-        "Phase 22 minimum MSA coverage is met; continue Saudi coverage before tokenizer v2."
-        if dialect_shortfalls.get("msa", 0) == 0 and dialect_shortfalls.get("saudi", 0) > 0
-        else "Phase 22 must fill required MSA/Saudi coverage before tokenizer v2."
-    )
+    if can_start:
+        dialect_note = (
+            "Phase 22 MSA/Saudi coverage is complete; recheck the gates before Phase 23."
+        )
+        recommended_commands = (
+            "make corpus-audit",
+            "make phase22-readiness",
+            "make phase22-completion-gate",
+            "start Phase 23 tokenizer v2 only through the documented phase workflow",
+        )
+    else:
+        dialect_note = (
+            "Phase 22 minimum MSA coverage is met; continue Saudi coverage before tokenizer v2."
+            if dialect_shortfalls.get("msa", 0) == 0 and dialect_shortfalls.get("saudi", 0) > 0
+            else "Phase 22 must fill required MSA/Saudi coverage before tokenizer v2."
+        )
+        recommended_commands = (
+            "write or collect owner-approved MSA/Saudi dialogue records with full provenance",
+            "write the next dialogue_batch_v2_* JSONL directly with full provenance",
+            "do not wait for user-side save/export/approval when the agent can author and verify the batch",
+            "make corpus-audit",
+            "make phase22-readiness",
+        )
 
     return Phase22ReadinessDecision(
         phase="Phase 22 — Gold Dialogue Corpus v2",
@@ -220,13 +238,7 @@ def build_phase22_readiness_decision(
         allowed_qualities=REQUIRED_QUALITIES,
         synthetic_llm_data_allowed=False,
         action=action,
-        recommended_commands=(
-            "write or collect owner-approved MSA/Saudi dialogue records with full provenance",
-            "write the next dialogue_batch_v2_* JSONL directly with full provenance",
-            "do not wait for user-side save/export/approval when the agent can author and verify the batch",
-            "make corpus-audit",
-            "make phase22-readiness",
-        ),
+        recommended_commands=recommended_commands,
         blockers=tuple(blockers),
         notes=(
             "This gate is read-only and starts no training.",
@@ -272,18 +284,34 @@ def build_phase22_collection_plan(
         batch_size=batch_size,
         corpus_path=root / decision.corpus_path,
     )
-    first_output = (
-        planned_batches[0].suggested_output_path
-        if planned_batches
-        else "data/corpus/chat/jsonl/<no_batches_remaining>.jsonl"
-    )
-    first_dialect = (
-        "msa"
-        if planned_batches and planned_batches[0].dialect == "msa_or_saudi"
-        else planned_batches[0].dialect
-        if planned_batches
-        else "msa"
-    )
+    if planned_batches:
+        first_output = planned_batches[0].suggested_output_path
+        first_dialect = (
+            "msa"
+            if planned_batches[0].dialect == "msa_or_saudi"
+            else planned_batches[0].dialect
+        )
+        next_commands = (
+            f"write {first_output} directly with {first_dialect} records and full provenance",
+            "make corpus-audit",
+            "make phase22-readiness",
+        )
+        notes = (
+            "This plan is read-only and does not generate corpus records.",
+            "The fastest useful path is to keep filling MSA until its minimum coverage is met.",
+            "Phase 23 remains blocked until phase22-readiness passes.",
+        )
+    else:
+        next_commands = (
+            "make corpus-audit",
+            "make phase22-readiness",
+            "make phase22-completion-gate",
+        )
+        notes = (
+            "This plan is read-only and does not generate corpus records.",
+            "All Phase 22 collection batches are complete under the current gate.",
+            "Phase 23 may start only through the documented tokenizer v2 workflow.",
+        )
 
     return Phase22CollectionPlan(
         phase="Phase 22 — Gold Dialogue Corpus v2 Collection Plan",
@@ -309,18 +337,10 @@ def build_phase22_collection_plan(
             "Sensitive medical/legal/finance/security/religion records stay out of general chat corpus.",
             "Keep current dialect scope to msa + saudi only.",
         ),
-        next_commands=(
-            f"write {first_output} directly with {first_dialect} records and full provenance",
-            "make corpus-audit",
-            "make phase22-readiness",
-        ),
+        next_commands=next_commands,
         planned_batches=planned_batches,
         synthetic_llm_data_allowed=False,
-        notes=(
-            "This plan is read-only and does not generate corpus records.",
-            "The fastest useful path is to keep filling MSA until its minimum coverage is met.",
-            "Phase 23 remains blocked until phase22-readiness passes.",
-        ),
+        notes=notes,
     )
 
 
@@ -341,8 +361,8 @@ def build_phase22_next_batch_brief(
             acceptance_checklist=(),
             suggested_topics=(),
             ui_instructions=(),
-            after_export_commands=("make phase22-readiness",),
-            warnings=("Do not start Phase 23 until phase22-readiness passes.",),
+            after_export_commands=("make phase22-readiness", "make phase22-completion-gate"),
+            warnings=("Do not start Phase 23 until phase22-readiness and completion gate pass.",),
         )
 
     return Phase22NextBatchBrief(

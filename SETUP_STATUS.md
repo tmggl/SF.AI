@@ -13,7 +13,7 @@
 - **الرحلة الحالية:** **Phase 22 / 30**
 - **المرحلة الحالية:** **Phase 22 — Gold Dialogue Corpus v2** (بوابة corpus v2 تعمل؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** إكمال دفعات فصحى/سعودية محكومة يؤلفها/يراجعها الوكيل بتفويض موثق حتى تمر `make phase22-readiness`.
+- **المرحلة التالية المقترحة:** Phase 23 — Tokenizer v2 Retrain & Audit، بعد أن أصبحت Phase 22 مكتملة وجاهزة للانتقال.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
@@ -23,25 +23,25 @@
 - **نتيجة Phase 17:** أضيف `ChatRagBridge` و`ContextBuilder`; الشات يستطيع استخدام snippets محلية عند حقن `HybridRetriever`، ويعرض `rag=used/not_used`.
 - **نتيجة Phase 18:** أضيف زر تصدير مراجعة من واجهة الشات + `scripts/prepare_dialogue_batch.py` + تقرير `artifacts/reports/dialogue_batch_report.json`; لا تدخل محادثات المستخدم إلى التدريب تلقائيًا.
 - **حماية Phase 18:** ملفات `data/corpus/**/review/*.jsonl` مستثناة من git افتراضيًا؛ العينة الآمنة الوحيدة المسموحة هي `sample_review_export.jsonl`.
-- **نتيجة Phase 19:** أضيفت بوابة `make phase19-readiness` و`GET /system/phase19-readiness`; القرار الحالي `NOT_READY_EXPAND_CORPUS_FIRST` لأن corpus الحالي 475 سجلًا فقط والحد الأدنى العملي 5000.
+- **نتيجة Phase 19:** أضيفت بوابة `make phase19-readiness` و`GET /system/phase19-readiness`; القرار الحالي `NOT_READY_EXPAND_CORPUS_FIRST` لأن corpus الحالي 500 سجل فقط والحد الأدنى العملي 5000.
 - **نتيجة Phase 20:** أضيفت بوابة `make phase20-gates` و`GET /system/phase20-gates`; لا مجال يتفعل تلقائيًا، و`chat` هو المجال النشط الوحيد.
 - **تصحيح Phase 20:** أضيف `sf_ai/modules/productivity/` كسكيلتون كامل بعد أن كشفت البوابة وجوده في registry دون module/manifest.
 - **نتيجة Phase 21:** أضيف `docs/GENERATIVE_ROADMAP.md` ومُدّدت الخطة إلى Phase 30؛ أول تدريب جودة مفيد قادم Phase 24، وأول هدف حوار مولّد مقنع Phase 26–28.
 - **مبدأ التكبير الرسمي:** `Progressive Scaling Strategy` — لا يتم رفع حجم النموذج إلا بعد نجاح المرحلة الحالية، والسلم الرسمي هو `SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+`.
-- **نتيجة Phase 22:** أضيف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-completion-gate` و`make phase22-review-intake` و`GET /system/phase22-readiness` و`GET /system/phase22-collection-plan` و`GET /system/phase22-next-batch` و`GET /system/phase22-completion-gate` و`GET /system/phase22-review-intake`; القرار الحالي `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2` لأن corpus الحالي 475/500. التوازن الأساسي اكتمل: `msa=237`, `saudi=238`، والمتبقي 25 سجل مرن للوصول إلى 500.
-- **بوابة اكتمال Phase 22:** `make phase22-completion-gate` يرجع الآن `PHASE22_INCOMPLETE_DO_NOT_ADVANCE`، ولا يُسمح بالانتقال إلى Phase 23 حتى يرجع `PHASE22_COMPLETE_READY_FOR_PHASE23`.
-- **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches`: `flex_004` مع عدد السجلات وملف الإخراج وأمر التحقق المباشر.
-- **مهمة batch التالية:** `make phase22-next-batch` يعرض الآن `flex_004` كالمهمة الفورية: 25 سجلًا مرنًا فصيحًا أو سعوديًا، مع checklist قبول وموضوعات تأليف عامة وليست بيانات تدريب.
+- **نتيجة Phase 22:** أضيف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-completion-gate` و`make phase22-review-intake` و`GET /system/phase22-readiness` و`GET /system/phase22-collection-plan` و`GET /system/phase22-next-batch` و`GET /system/phase22-completion-gate` و`GET /system/phase22-review-intake`; القرار الحالي `READY_FOR_PHASE23_TOKENIZER_V2` لأن corpus الحالي اكتمل 500/500. التوازن النهائي مكتمل: `msa=250`, `saudi=250`.
+- **بوابة اكتمال Phase 22:** `make phase22-completion-gate` يرجع الآن `PHASE22_COMPLETE_READY_FOR_PHASE23`، ولا توجد نواقص تمنع الانتقال إلى Phase 23.
+- **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches=[]` لأن الجمع اكتمل.
+- **مهمة batch التالية:** `make phase22-next-batch` يعرض الآن `NO_BATCHES_REMAINING_RECHECK_READINESS`; لا توجد دفعة أخرى داخل Phase 22.
 - **دفعات فصحى معتمدة:** أضيف `data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl` إلى `dialogue_batch_v2_msa_008.jsonl` بإجمالي 178 سجل فصيح `silver` مؤلفة/مراجعة بتفويض سامي، مع بطاقات provenance.
 - **دفعات سعودية معتمدة:** أضيف `data/corpus/chat/jsonl/dialogue_batch_v2_saudi_001.jsonl` إلى `dialogue_batch_v2_saudi_007.jsonl` بإجمالي 170 سجلًا سعوديًا `silver` مؤلفة/مراجعة بتفويض سامي، وبذلك اكتمل حد السعودي مع seed/protected coverage إلى 200/200.
-- **دفعات مرنة معتمدة:** أضيف `data/corpus/chat/jsonl/dialogue_batch_v2_flex_001.jsonl` إلى `dialogue_batch_v2_flex_003.jsonl` بإجمالي 75 سجلًا `silver` موزعة بين الفصحى والسعودية، فأصبح corpus الحالي 475/500.
+- **دفعات مرنة معتمدة:** أضيف `data/corpus/chat/jsonl/dialogue_batch_v2_flex_001.jsonl` إلى `dialogue_batch_v2_flex_004.jsonl` بإجمالي 100 سجل `silver` موزعة بين الفصحى والسعودية، فأصبح corpus الحالي 500/500.
 - **Seed مصطلحات فصحى تدريبي:** أضيف `data/corpus/chat/jsonl/protected_terms_msa_seed_v1.jsonl` وفيه 22 سجلًا فصيحًا `gold` لتغطية مصطلحات تشغيل/حوكمة/تدريب أساسية، مع بطاقة provenance.
 - **فصل المستخدمين من الأساس:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` حتى لا تختلط محادثات المستخدمين عند التوسع لاحقًا.
 - **بنك تأليف فصيح غير تدريبي:** أضيف `resources/phase22_authoring/msa_prompt_bank_v1.json` وفيه 80+ موضوعًا فصيحًا لتسهيل كتابة batches الفصحى؛ الملف `training_allowed=false` و`synthetic_llm_data=false` ولا يُنسخ إلى corpus.
 - **Review intake الحالي:** `data/corpus/chat/review/sample_review_export.jsonl` مرشح للمراجعة فقط؛ الأداة read-only ولا تنقل أي شيء إلى التدريب.
 - **بوابة جودة الحوار:** `phase22-review-intake` يعرض الآن `quality_score/quality_label/quality_blockers`; الجلسة المفيدة للتدريب تحتاج غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل وبدون `sf_10m_v0_1`.
-- **بوابة Phase 22 في الواجهة:** شاشة `/ui/chat` تعرض قراءة حية من `/system/phase22-readiness`: عدد corpus الحالي، المتبقي، حالة `msa/saudi`، وهل Phase 23 ما زالت محجوبة.
-- **مهمة الجمع الحالية في الواجهة:** شاشة `/ui/chat` تعرض `flex_004` من `/system/phase22-next-batch` مع هدف 25 سجلًا وموضوعات تأليف عامة. الواجهة مختبر اختياري؛ لا يعتمد بناء Phase 22 على حفظ/تصدير يدوي من سامي.
+- **بوابة Phase 22 في الواجهة:** شاشة `/ui/chat` تعرض قراءة حية من `/system/phase22-readiness`: عدد corpus الحالي، المتبقي، حالة `msa/saudi`، وأن Phase 23 أصبحت جاهزة من جهة corpus.
+- **مهمة الجمع الحالية في الواجهة:** شاشة `/ui/chat` تقرأ `/system/phase22-next-batch`؛ بعد اكتمال `flex_004` لا توجد دفعات Phase 22 متبقية. الواجهة مختبر اختياري؛ لا يعتمد بناء Phase 22 على حفظ/تصدير يدوي من سامي.
 - **تدوير موضوعات التأليف:** الواجهة تعرض زر `موضوعات أخرى` للتنقل داخل بنك الـ 94 موضوعًا الفصيح، وتضيف `authoring_topic_count` إلى metadata التصدير.
 - **حفظ محلي للمراجعة:** أضيف `POST /chat/review-export` وزر `حفظ للمراجعة` في `/ui/chat` لحفظ الجلسة مباشرة في `data/corpus/chat/review/` مع `training_allowed=false` و`quality=needs_review`; هذا اختياري للتشخيص فقط، والوكيل مسؤول عن بناء الدفعات المعتمدة مباشرة عند الحاجة.
 - **مؤشر جودة التصدير في الواجهة:** شاشة `/ui/chat` تعرض score جودة محلي قبل التصدير وتضع `ui_quality_score/ui_quality_label/ui_quality_blockers` داخل metadata.
@@ -253,10 +253,10 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى Phase 22 review intake)
+## نتائج الاختبارات (حتى إكمال Phase 22)
 
 ```
-435 passed in 5.07s
+435 passed in 4.97s
 ```
 
 التغطية الحالية:
@@ -302,7 +302,7 @@ make server-start
 
 ## خارطة النموذج اللغوي السيادي بعد Phase 11
 
-- **Phase 11:** حوكمة وتجهيز بيانات حوار عربي/سعودي — مكتملة كحوكمة، وفيها corpus seed سعودي صغير 30/30؛ ما زالت الفصحى `msa` مطلوبة قبل Phase 12.
+- **Phase 11:** حوكمة وتجهيز بيانات حوار عربي/سعودي — مكتملة كحوكمة، وبدأت بـ seed صغير ثم توسعت لاحقًا عبر Phase 22 إلى 500 سجل متوازن.
 - **Governance Layer:** قواعد الهندسة والهوية وخريطة المشروع ودورة الحياة — مكتملة قبل Phase 12.
 - **Phase 12:** تدريب SF-BPE tokenizer v1 من بيانات SF.AI فقط.
 - **Phase 13:** تدريب smoke صغير لإثبات أن النموذج يتعلم ويولد نصًا خامًا.

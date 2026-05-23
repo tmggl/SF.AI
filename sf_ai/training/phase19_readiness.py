@@ -107,7 +107,7 @@ def build_phase19_readiness_decision(
     action = (
         "START_SF50M_TRAINING"
         if can_start
-        else "USE_PHASE22_BATCHES_TO_GROW_REVIEWED_MSA_SAUDI_CORPUS"
+        else "FOLLOW_PHASE23_24_AND_CONTINUE_CORPUS_SCALING_BEFORE_SF50M"
     )
 
     return Phase19ReadinessDecision(
@@ -133,9 +133,10 @@ def build_phase19_readiness_decision(
         device=device.name,
         action=action,
         recommended_commands=(
-            "make phase22-next-batch",
-            "add owner-approved MSA/Saudi dialogue batches with full provenance",
             "make corpus-audit",
+            "make phase22-completion-gate",
+            "start Phase 23 tokenizer v2 through the documented roadmap",
+            "continue corpus scaling beyond 500 before any SF-50M training attempt",
             "make phase19-readiness",
         ),
         blockers=tuple(blockers),

@@ -67,8 +67,8 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 18 | Data Expansion Loop v1 | مكتملة كدورة بيانات محكومة |
 | Phase 19 | SF-50M Candidate Training | بوابة جاهزية مفعلة؛ التدريب غير جاهز لصغر corpus |
 | Phase 20 | Domain Activation Gates | مكتملة؛ لا تفعيل تلقائي |
-| Phase 21 | Generative Roadmap & Quality Targets | جارية |
-| Phase 22 | Gold Dialogue Corpus v2 | بوابة جاهزية مفعلة؛ corpus غير جاهز |
+| Phase 21 | Generative Roadmap & Quality Targets | مكتملة |
+| Phase 22 | Gold Dialogue Corpus v2 | مكتملة؛ corpus 500/500 جاهز لـ Phase 23 |
 | Phase 23 | Tokenizer v2 Retrain & Audit | مخططة |
 | Phase 24 | SF-10M v0.2 Quality Training | مخططة؛ أول تدريب جودة مفيد |
 | Phase 25 | Generated Chat Canary v1 | مخططة |

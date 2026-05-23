@@ -61,14 +61,14 @@
 | Phase 19 | SF-50M Candidate Training | readiness_gate_active_not_ready |
 | Phase 20 | Domain Activation Gates | ✅ gates_active_no_auto_activation |
 | Phase 21 | Generative Roadmap & Quality Targets | ✅ completed |
-| Phase 22 | Gold Dialogue Corpus v2 | readiness_gate_active_not_ready |
+| Phase 22 | Gold Dialogue Corpus v2 | ✅ completed_ready_for_phase23 |
 
 اقرأ التفاصيل في [PHASE_STATUS.md](./PHASE_STATUS.md) و [EXECUTION_PLAN.md](./EXECUTION_PLAN.md).
 
 ### الاختبارات
 
 ```
-435 passed in 5.07s
+435 passed in 4.97s
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -142,7 +142,7 @@ bash scripts/run_chat_server.sh
 - `sf_ai/datasets/corpus_governance.py`
 - `tests/test_corpus_governance.py`
 
-تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر وغير جاهز لاختبار سامي كمولد حواري. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`، لكنه لم يجعل المولد مقنعًا. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات. Phase 19 أضاف بوابة جاهزية SF-50M وقراره الحالي: وسّع corpus أولًا. Phase 20 أضاف بوابات تفعيل المجالات، ولا يفعّل أي skeleton تلقائيًا. Phase 21 ثبت خارطة Phase 22–30 للوصول إلى حوار مولّد مقنع. Phase 22 أضاف بوابة Gold Dialogue Corpus v2: الوضع الحالي 475/500 (`msa=237`, `saudi=238`) ولا يزال غير جاهز.
+تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر وغير جاهز لاختبار سامي كمولد حواري. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`، لكنه لم يجعل المولد مقنعًا. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات. Phase 19 أضاف بوابة جاهزية SF-50M وقراره الحالي: وسّع corpus أولًا. Phase 20 أضاف بوابات تفعيل المجالات، ولا يفعّل أي skeleton تلقائيًا. Phase 21 ثبت خارطة Phase 22–30 للوصول إلى حوار مولّد مقنع. Phase 22 أضاف وأكمل بوابة Gold Dialogue Corpus v2: الوضع الحالي 500/500 (`msa=250`, `saudi=250`) وجاهز لـ Phase 23.
 
 ### Phase 12 — preflight جاهز فقط
 
@@ -212,7 +212,7 @@ status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
 status: READY_FOR_PHASE_12_TOKENIZER_TRAINING
 ```
 
-تم تشغيل Phase 12 tokenizer v1 بإذن صريح من سامي على corpus صغير سابقًا. لا تعامل v1 كتشغيل لغوي متوازن؛ Phase 22 رفع corpus الحالي إلى 475 سجلًا فقط (`msa=237`, `saudi=238`). التوازن الأساسي اكتمل، لكن العدد الكلي ما زال غير كافٍ.
+تم تشغيل Phase 12 tokenizer v1 بإذن صريح من سامي على corpus صغير سابقًا. لا تعامل v1 كتشغيل لغوي متوازن؛ Phase 22 رفع corpus الحالي إلى 500 سجل (`msa=250`, `saudi=250`) وأصبح جاهزًا لإعادة تدريب tokenizer v2 في Phase 23.
 
 أضيفت بوابة تنفيذية فوق ذلك: `make train-bpe` و`scripts/train_bpe.py` يرفضان البدء بدون:
 
@@ -247,7 +247,7 @@ missing language balance: msa
 - `make phase19-readiness`
 - `GET /system/phase19-readiness`
 - القرار الحالي: `NOT_READY_EXPAND_CORPUS_FIRST`
-- السبب: corpus الحالي 475 سجلًا فقط، والحد الأدنى العملي الحالي 5000 سجل محكوم مع توازن `msa + saudi`.
+- السبب: corpus الحالي 500 سجل فقط، والحد الأدنى العملي الحالي 5000 سجل محكوم مع توازن `msa + saudi`.
 - مختبر سامي المحلي يسمح بتجربة المولد الخام على الرسائل غير الحساسة من مجالات skeleton عبر `SF_LAB_GENERATION_FOR_NON_SENSITIVE=true`.
 
 ### Phase 20 — Domain Activation Gates — تعمل
@@ -278,12 +278,12 @@ missing language balance: msa
 - `GET /system/phase22-collection-plan`
 - `GET /system/phase22-next-batch`
 - `GET /system/phase22-review-intake`
-- القرار الحالي: `NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2`
-- الموجود: 475 سجلًا: 237 `msa` و238 `saudi`
+- القرار الحالي: `READY_FOR_PHASE23_TOKENIZER_V2`
+- الموجود: 500 سجلًا: 250 `msa` و250 `saudi`
 - الهدف: 500 سجل، مع 200 على الأقل لكل من `msa` و`saudi`
-- خطة الجمع الحالية: 25 مرنة، نحو 1 batch بحجم 25
-- المهمة الفورية الحالية: `flex_004` عبر `make phase22-next-batch`
-- الدفعات المرنة المكتملة: `data/corpus/chat/jsonl/dialogue_batch_v2_flex_001.jsonl` إلى `dialogue_batch_v2_flex_003.jsonl` بإجمالي 75 سجلًا.
+- خطة الجمع الحالية: مكتملة، ولا توجد batches متبقية.
+- المهمة الفورية الحالية: إعادة التحقق عبر `make phase22-readiness` و`make phase22-completion-gate` قبل فتح Phase 23.
+- الدفعات المرنة المكتملة: `data/corpus/chat/jsonl/dialogue_batch_v2_flex_001.jsonl` إلى `dialogue_batch_v2_flex_004.jsonl` بإجمالي 100 سجل.
 - أضيفت ثمان دفعات فصيحة معتمدة: `data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl` إلى `dialogue_batch_v2_msa_008.jsonl` مع بطاقات provenance.
 - أضيف seed مصطلحات فصحى تدريبي: `data/corpus/chat/jsonl/protected_terms_msa_seed_v1.jsonl` وفيه 22 سجلًا `gold`; هذا corpus فعلي، وليس موردًا مرشحًا.
 - بنك التأليف الفصيح: `resources/phase22_authoring/msa_prompt_bank_v1.json`، ملف مساعدة فقط وليس corpus، وحقوله `training_allowed=false` و`synthetic_llm_data=false`.
@@ -303,7 +303,7 @@ missing language balance: msa
 
 ### تستطيع الآن العمل على:
 
-- أكمل الدفعات المرنة `flex_004` حتى تمر Phase 22 readiness، ثم أعد corpus-audit وPhase 19/20/22 gates.
+- افتح Phase 23 حسب الخطة بعد إعادة تشغيل بوابات Phase 22 والاختبارات كاملة؛ لا تبدأ تدريب نموذج جودة قبل Phase 24.
 
 ---
 
