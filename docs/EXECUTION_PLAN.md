@@ -109,6 +109,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.37 | Supported Topic Expansion | مكتملة؛ `الصبر` فُتح خلف semantic guard ومرّ `21/21` |
 | Phase 27.38 | Targeted Topic Curriculum/Probe | مكتملة جزئيًا؛ `6/20` ولا runtime switch |
 | Phase 27.39 | Topic-Isolation Repair | مكتملة جزئيًا؛ `10/24` ولا runtime switch |
+| Phase 27.40 | Tokenizer/Context Repair | مكتملة؛ `24/24` والمرشح جاهز لتصميم فتح محروس |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2744,6 +2745,43 @@ runtime_switch_allowed = false
 - [PHASE27_39_TOPIC_ISOLATION_REPAIR_REPORT.md](./PHASE27_39_TOPIC_ISOLATION_REPAIR_REPORT.md)
 - `artifacts/reports/phase27_39_topic_isolation_repair_report.json`
 - `artifacts/samples/phase27_39_topic_isolation_repair.md`
+
+---
+
+## Phase 27.40 — Tokenizer/Context Repair
+
+### الهدف
+
+حماية مصطلحات التعريف التي تكسرت في Phase 27.39، ثم إعادة probe بميزان
+لا يخسر المسارات الاجتماعية.
+
+### نتيجة التنفيذ
+
+```text
+tokenizer = artifacts/tokenizers/sf_bpe/v5_topic_terms
+max_pieces = 1
+checkpoint = sf-10m-step6400
+cases = 24/24
+regression = 8/8
+new_topic = 8/8
+heldout = 4/4
+isolation = 4/4
+runtime_switch_allowed = true
+```
+
+### القرار
+
+- لا نبدّل runtime تلقائيًا داخل هذه المرحلة.
+- المرشح `sf_10m_phase27_40` جاهز لتصميم فتح محروس.
+- لا `SF-50M` ولا Phase 28 حتى ينجح الاختبار الحي.
+- التالي Phase 27.41: guarded runtime switch design.
+
+### artifacts
+
+- [PHASE27_40_TOKENIZER_CONTEXT_REPAIR_REPORT.md](./PHASE27_40_TOKENIZER_CONTEXT_REPAIR_REPORT.md)
+- `artifacts/tokenizers/sf_bpe/v5_topic_terms/`
+- `artifacts/reports/phase27_40_tokenizer_context_repair_report.json`
+- `artifacts/samples/phase27_40_tokenizer_context_repair.md`
 
 ---
 

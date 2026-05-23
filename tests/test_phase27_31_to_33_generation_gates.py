@@ -164,3 +164,25 @@ def test_phase27_39_topic_isolation_repair_records_blocker() -> None:
     assert report["summary"]["bucket_summary"]["heldout"]["total"] == 4
     assert report["summary"]["bucket_summary"]["isolation"]["passed"] == 3
     assert report["summary"]["bucket_summary"]["isolation"]["total"] == 4
+
+
+def test_phase27_40_tokenizer_context_repair_passes_candidate_gate() -> None:
+    report = _report("phase27_40_tokenizer_context_repair_report.json")
+    assert report["phase"] == "Phase 27.40"
+    assert report["status"] == "PASSED_TOKENIZER_CONTEXT_REPAIR_READY_FOR_GUARDED_RUNTIME_CANDIDATE"
+    assert report["training_started"] is True
+    assert report["runtime_switch_allowed"] is True
+    assert report["sf50m_allowed"] is False
+    assert report["phase28_allowed"] is False
+    assert report["checkpoint_name"] == "sf-10m-step6400"
+    assert report["candidate_generator"] == "sf_10m_phase27_40"
+    assert report["tokenizer"]["sf_origin"] is True
+    assert report["tokenizer"]["path"] == "artifacts/tokenizers/sf_bpe/v5_topic_terms"
+    assert report["protected_phrase_behavior"]["max_pieces"] == 1
+    assert report["protected_phrase_behavior"]["all_roundtrip_ok"] is True
+    assert report["summary"]["passed"] == 24
+    assert report["summary"]["total"] == 24
+    assert report["summary"]["bucket_summary"]["regression"]["passed"] == 8
+    assert report["summary"]["bucket_summary"]["new_topic"]["passed"] == 8
+    assert report["summary"]["bucket_summary"]["heldout"]["passed"] == 4
+    assert report["summary"]["bucket_summary"]["isolation"]["passed"] == 4

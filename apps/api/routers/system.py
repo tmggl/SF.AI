@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.39 — Topic-Isolation Repair",
-        current_phase_status="completed_partial_keep_current_runtime",
+        current_phase="Phase 27.40 — Tokenizer/Context Repair",
+        current_phase_status="completed_candidate_ready_for_guarded_runtime_design",
         next_phase=(
-            "Phase 27.40 tokenizer/context repair for topic isolation; SF-50M remains blocked"
+            "Phase 27.41 guarded runtime switch design; SF-50M remains blocked"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -309,6 +309,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_39_topic_isolation_repair",
                 status="completed_partial_keep_current_runtime",
                 phase="Phase 27.39",
+            ),
+            ComponentStatus(
+                name="phase27_40_tokenizer_context_repair",
+                status="completed_candidate_ready_for_guarded_runtime_design",
+                phase="Phase 27.40",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

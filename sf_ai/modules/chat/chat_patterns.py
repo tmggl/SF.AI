@@ -84,9 +84,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.39 جزئيًا: درّبنا topic-isolation probe، وتحسن إلى "
-    "10/24 لكنه كشف كسورًا لفظية في المصطلحات الجديدة. لذلك أبقينا runtime "
-    "الحالي، والتالي Phase 27.40 لإصلاح tokenizer/context.",
+    "اكتملت Phase 27.40 بنجاح معملي: tokenizer v5 حمى المصطلحات الجديدة "
+    "ومرّ probe المرشح 24/24. لم نبدّل الواجهة تلقائيًا؛ التالي Phase 27.41 "
+    "لتصميم فتح محروس واختباره حيًا.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

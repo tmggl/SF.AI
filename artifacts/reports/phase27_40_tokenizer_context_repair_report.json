@@ -1,0 +1,652 @@
+{
+  "phase": "Phase 27.40",
+  "status": "PASSED_TOKENIZER_CONTEXT_REPAIR_READY_FOR_GUARDED_RUNTIME_CANDIDATE",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": true,
+  "training_scope": "SF-10M tokenizer/context repair only; no scaling",
+  "tokenizer": {
+    "path": "artifacts/tokenizers/sf_bpe/v5_topic_terms",
+    "sf_origin": true,
+    "vocab_size": 4751,
+    "merges": 4684,
+    "protected_terms": [
+      "وعليكم السلام",
+      "نفسًا هادئًا",
+      "نشتغل سوا",
+      "القراءة تفيد",
+      "تقدّر الناس",
+      "التعاون",
+      "الاحترام",
+      "الصبر",
+      "القراءة",
+      "الصداقة",
+      "الصدق",
+      "التنظيم",
+      "الهدوء",
+      "القراية"
+    ],
+    "protected_joiner": "▁"
+  },
+  "protected_phrase_behavior": {
+    "average_pieces": 1,
+    "max_pieces": 1,
+    "all_single_piece": true,
+    "all_roundtrip_ok": true,
+    "rows": [
+      {
+        "phrase": "وعليكم السلام",
+        "piece_count": 1,
+        "decoded": "وعليكم السلام",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "نفسًا هادئًا",
+        "piece_count": 1,
+        "decoded": "نفسًا هادئًا",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "نشتغل سوا",
+        "piece_count": 1,
+        "decoded": "نشتغل سوا",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "القراءة تفيد",
+        "piece_count": 1,
+        "decoded": "القراءة تفيد",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "تقدّر الناس",
+        "piece_count": 1,
+        "decoded": "تقدّر الناس",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "التعاون",
+        "piece_count": 1,
+        "decoded": "التعاون",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "الاحترام",
+        "piece_count": 1,
+        "decoded": "الاحترام",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "الصبر",
+        "piece_count": 1,
+        "decoded": "الصبر",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "القراءة",
+        "piece_count": 1,
+        "decoded": "القراءة",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "الصداقة",
+        "piece_count": 1,
+        "decoded": "الصداقة",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "الصدق",
+        "piece_count": 1,
+        "decoded": "الصدق",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "التنظيم",
+        "piece_count": 1,
+        "decoded": "التنظيم",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "الهدوء",
+        "piece_count": 1,
+        "decoded": "الهدوء",
+        "roundtrip_ok": true
+      },
+      {
+        "phrase": "القراية",
+        "piece_count": 1,
+        "decoded": "القراية",
+        "roundtrip_ok": true
+      }
+    ]
+  },
+  "checkpoint_root": "artifacts/eval/phase27_40_tokenizer_context_repair/checkpoints",
+  "checkpoint_name": "sf-10m-step6400",
+  "candidate_generator": "sf_10m_phase27_40",
+  "train_records": 2443,
+  "balanced_topics": [
+    "الاحترام",
+    "التعاون",
+    "التنظيم",
+    "الصبر",
+    "الصداقة",
+    "الصدق",
+    "القراءة",
+    "الهدوء"
+  ],
+  "summary": {
+    "passed": 24,
+    "total": 24,
+    "bucket_summary": {
+      "heldout": {
+        "passed": 4,
+        "total": 4
+      },
+      "isolation": {
+        "passed": 4,
+        "total": 4
+      },
+      "new_topic": {
+        "passed": 8,
+        "total": 8
+      },
+      "regression": {
+        "passed": 8,
+        "total": 8
+      }
+    },
+    "reason_counts": {
+      "passed": 24
+    }
+  },
+  "runtime_switch_allowed": true,
+  "sf50m_allowed": false,
+  "phase28_allowed": false,
+  "next_phase": "Phase 27.41 — guarded runtime switch design for phase27_40 candidate",
+  "torch_version": "2.12.0",
+  "rows": [
+    {
+      "id": "reg_001",
+      "bucket": "regression",
+      "dialect": "saudi",
+      "prompt": "كيفك اليوم",
+      "intent": "smalltalk",
+      "topic": "",
+      "expected_terms": [
+        "بخير"
+      ],
+      "response": "بخير ولله الحمد، أنت كيفك؟",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_002",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "شكرًا لمساعدتك",
+      "intent": "thanks",
+      "topic": "",
+      "expected_terms": [
+        "العفو"
+      ],
+      "response": "العفو، يسعدني أن أساعدك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_003",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "وجهني بخطوة بسيطة",
+      "intent": "advice",
+      "topic": "",
+      "expected_terms": [
+        "ابدأ"
+      ],
+      "response": "ابدأ بخطوة صغيرة وواضحة.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_004",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "رتب لي يومي بسرعة",
+      "intent": "planning",
+      "topic": "",
+      "expected_terms": [
+        "ثلاث"
+      ],
+      "response": "اكتب ثلاث مهام وابدأ بالأهم.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_005",
+      "bucket": "regression",
+      "dialect": "saudi",
+      "prompt": "توترت شوي وش اسوي",
+      "intent": "support",
+      "topic": "",
+      "expected_terms": [
+        "اهدأ"
+      ],
+      "response": "الله يهونها، خذ نفس واهدأ شوي.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_006",
+      "bucket": "regression",
+      "dialect": "saudi",
+      "prompt": "وش المقصود بالاحترام",
+      "intent": "definition",
+      "topic": "الاحترام",
+      "expected_terms": [
+        "تقدّر"
+      ],
+      "response": "الاحترام إنك تقدّر الناس بكلامك وتصرفك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_007",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "ما معنى التعاون",
+      "intent": "definition",
+      "topic": "التعاون",
+      "expected_terms": [
+        "التعاون"
+      ],
+      "response": "التعاون يعني أن يعمل الناس معًا لتخفيف الحمل.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_008",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "ما معنى الصبر",
+      "intent": "definition",
+      "topic": "الصبر",
+      "expected_terms": [
+        "الصبر"
+      ],
+      "response": "الصبر يعني الثبات وقت الصعوبة.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "new_001",
+      "bucket": "new_topic",
+      "dialect": "msa",
+      "prompt": "ما معنى الصداقة",
+      "intent": "definition",
+      "topic": "الصداقة",
+      "expected_terms": [
+        "الصداقة"
+      ],
+      "response": "الصداقة علاقة طيبة تقوم على الوفاء.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "new_002",
+      "bucket": "new_topic",
+      "dialect": "saudi",
+      "prompt": "وش معنى الصداقة",
+      "intent": "definition",
+      "topic": "الصداقة",
+      "expected_terms": [
+        "الصداقة"
+      ],
+      "response": "الصداقة إنك تلقى رفيق يوقف معك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "new_003",
+      "bucket": "new_topic",
+      "dialect": "msa",
+      "prompt": "اشرح الصدق بجملة",
+      "intent": "definition",
+      "topic": "الصدق",
+      "expected_terms": [
+        "الصدق"
+      ],
+      "response": "الصدق وضوح في القول والعمل.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "new_004",
+      "bucket": "new_topic",
+      "dialect": "saudi",
+      "prompt": "وش معنى الصدق",
+      "intent": "definition",
+      "topic": "الصدق",
+      "expected_terms": [
+        "الصدق"
+      ],
+      "response": "الصدق إن كلامك يكون واضح وما فيه خداع.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "new_005",
+      "bucket": "new_topic",
+      "dialect": "msa",
+      "prompt": "ما معنى التنظيم",
+      "intent": "definition",
+      "topic": "التنظيم",
+      "expected_terms": [
+        "التنظيم"
+      ],
+      "response": "التنظيم ترتيب الوقت والمهام بطريقة واضحة.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "new_006",
+      "bucket": "new_topic",
+      "dialect": "saudi",
+      "prompt": "وش معنى التنظيم",
+      "intent": "definition",
+      "topic": "التنظيم",
+      "expected_terms": [
+        "ترتب"
+      ],
+      "response": "التنظيم إنك ترتب وقتك ومهامك بوضوح.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "new_007",
+      "bucket": "new_topic",
+      "dialect": "msa",
+      "prompt": "ما معنى الهدوء",
+      "intent": "definition",
+      "topic": "الهدوء",
+      "expected_terms": [
+        "الهدوء"
+      ],
+      "response": "الهدوء سكينة تساعدك على التفكير بوضوح.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "new_008",
+      "bucket": "new_topic",
+      "dialect": "saudi",
+      "prompt": "وش معنى الهدوء",
+      "intent": "definition",
+      "topic": "الهدوء",
+      "expected_terms": [
+        "الهدوء"
+      ],
+      "response": "الهدوء إنك تهدأ وتاخذ الأمور بروية.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "held_001",
+      "bucket": "heldout",
+      "dialect": "msa",
+      "prompt": "الصداقة ماذا تعني",
+      "intent": "definition",
+      "topic": "الصداقة",
+      "expected_terms": [
+        "الصداقة"
+      ],
+      "response": "الصداقة مودة ووفاء بين الناس.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "held_002",
+      "bucket": "heldout",
+      "dialect": "saudi",
+      "prompt": "الصدق وش يعني",
+      "intent": "definition",
+      "topic": "الصدق",
+      "expected_terms": [
+        "الحقيقة"
+      ],
+      "response": "الصدق يعني تقول الحقيقة بوضوح.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "held_003",
+      "bucket": "heldout",
+      "dialect": "msa",
+      "prompt": "اشرح التنظيم ببساطة",
+      "intent": "definition",
+      "topic": "التنظيم",
+      "expected_terms": [
+        "التنظيم"
+      ],
+      "response": "التنظيم معرفة ما تفعل ومتى تبدأ.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "held_004",
+      "bucket": "heldout",
+      "dialect": "saudi",
+      "prompt": "الهدوء وش يعني",
+      "intent": "definition",
+      "topic": "الهدوء",
+      "expected_terms": [
+        "توترك"
+      ],
+      "response": "الهدوء يعني تخفف توترك وتتكلم بروية.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "iso_001",
+      "bucket": "isolation",
+      "dialect": "msa",
+      "prompt": "اشرح القراءة بجملة",
+      "intent": "definition",
+      "topic": "القراءة",
+      "expected_terms": [
+        "القراءة"
+      ],
+      "response": "القراءة طريق لاكتساب معرفة جديدة.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "iso_002",
+      "bucket": "isolation",
+      "dialect": "saudi",
+      "prompt": "القراية وش تعني",
+      "intent": "definition",
+      "topic": "القراءة",
+      "expected_terms": [
+        "القراية"
+      ],
+      "response": "القراية توسع فهمك وتزيد كلماتك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "iso_003",
+      "bucket": "isolation",
+      "dialect": "msa",
+      "prompt": "اشرح الاحترام بجملة",
+      "intent": "definition",
+      "topic": "الاحترام",
+      "expected_terms": [
+        "الاحترام"
+      ],
+      "response": "الاحترام معاملة الناس بقدر وذوق.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "iso_004",
+      "bucket": "isolation",
+      "dialect": "saudi",
+      "prompt": "فسر التعاون بالسعودي",
+      "intent": "definition",
+      "topic": "التعاون",
+      "expected_terms": [
+        "التعاون"
+      ],
+      "response": "التعاون إنك تساعد غيرك وتنجزون سوا.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "topic_isolated": true,
+      "forbidden_topics": [],
+      "passed": true,
+      "reason": "passed"
+    }
+  ]
+}
