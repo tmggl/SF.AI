@@ -25,9 +25,9 @@ def test_phase26_scaling_gate_blocks_sf50m_training_now() -> None:
     assert decision.status == "NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M"
     assert decision.target_model == "sf-50m"
     assert decision.can_start_sf50m_training is False
-    assert decision.corpus["training_records"] == 2143
+    assert decision.corpus["training_records"] == 3643
     assert decision.corpus["min_training_records"] == 5000
-    assert decision.corpus["dialects"] == {"msa": 1049, "saudi": 1094}
+    assert decision.corpus["dialects"] == {"msa": 1799, "saudi": 1844}
     assert decision.tokenizer["ready"] is True
     assert decision.phase24["training_passed"] is True
     assert decision.phase24["runtime_allowed"] is False
@@ -65,7 +65,7 @@ def test_phase26_readiness_endpoint() -> None:
     assert body["status"] == "NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M"
     assert body["language_track"] == ["msa", "saudi"]
     assert body["can_start_sf50m_training"] is False
-    assert body["corpus"]["training_records"] == 2143
+    assert body["corpus"]["training_records"] == 3643
     assert body["phase25"]["real_model_guard_reason"] == "malformed_token"
     assert body["scaling_gates"]["tokenization_audit"] is True
     assert body["scaling_gates"]["runtime_quality"] is False

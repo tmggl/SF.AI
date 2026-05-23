@@ -1,9 +1,9 @@
 {
   "policy": "training_forbidden_operational_internal_dialogue",
   "corpus_dir": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl",
-  "files_scanned": 30,
-  "records_before": 2143,
-  "records_after": 2143,
+  "files_scanned": 32,
+  "records_before": 3643,
+  "records_after": 3643,
   "records_removed": 0,
   "terms": {},
   "files": [

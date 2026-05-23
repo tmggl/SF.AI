@@ -10,15 +10,15 @@
   "recommended_action": "DO_NOT_TRAIN_SF50M_YET_EXPAND_CORPUS_AND_REPEAT_SF10M_CANARY",
   "corpus": {
     "path": "data/corpus/chat/jsonl",
-    "training_records": 2143,
+    "training_records": 3643,
     "min_training_records": 5000,
     "issue_count": 0,
     "dialects": {
-      "saudi": 1094,
-      "msa": 1049
+      "saudi": 1844,
+      "msa": 1799
     },
     "quality": {
-      "silver": 2112,
+      "silver": 3612,
       "gold": 31
     },
     "missing_required_dialects": []

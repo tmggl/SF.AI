@@ -76,16 +76,17 @@ phase26-readiness   : NOT_READY, corpus below 5000
 phase27 eval        : 19/19, remaining=4357, batches=9
 ```
 
-## الحالة بعد Batch 004 الطبيعي
+## الحالة بعد Batch 004 وBatch 005 الطبيعيين
 
-أضيفت دفعة طبيعية جديدة بحجم `1500` سجل (`750` فصحى + `750` سعودي).
-بعد تشغيل الفلتر مرة أخرى لم يُحذف أي سجل من الدفعة الجديدة:
+أضيفت دفعتان طبيعيتان كبيرتان، كل واحدة بحجم `1500` سجل (`750` فصحى
++ `750` سعودي). بعد تشغيل الفلتر مرة أخرى لم يُحذف أي سجل من الدفعات
+الجديدة:
 
 ```text
-corpus-audit        : 2143/2143 training-ready, issues=0
-msa                 : 1049
-saudi               : 1094
-phase27 eval        : 19/19, remaining=2857, batches=2 عند batch_size=1500
+corpus-audit        : 3643/3643 training-ready, issues=0
+msa                 : 1799
+saudi               : 1844
+phase27 eval        : 19/19, remaining=1357, batches=1 عند batch_size=1500
 ```
 
 ## القرار التالي

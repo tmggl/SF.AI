@@ -32,19 +32,19 @@
   "can_start_phase28": false,
   "phase26_status": "NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M",
   "corpus_expansion_plan": {
-    "current_records": 2143,
+    "current_records": 3643,
     "target_records": 5000,
-    "remaining_records": 2857,
+    "remaining_records": 1357,
     "batch_size": 1500,
-    "batches_needed_total": 2,
+    "batches_needed_total": 1,
     "target_per_dialect": 2500,
     "dialect_counts": {
-      "saudi": 1094,
-      "msa": 1049
+      "saudi": 1844,
+      "msa": 1799
     },
     "needed_by_dialect": {
-      "msa": 1451,
-      "saudi": 1406
+      "msa": 701,
+      "saudi": 656
     },
     "batches_by_dialect": {
       "msa": 1,
@@ -54,9 +54,9 @@
       "gold_total_target": 1000,
       "silver_total_target": 4000,
       "current_gold": 31,
-      "current_silver": 2112,
+      "current_silver": 3612,
       "needed_gold": 969,
-      "needed_silver": 1888
+      "needed_silver": 388
     },
     "category_targets_remaining": {
       "social_smalltalk": 600,
@@ -164,7 +164,7 @@
       "fallback_used": false,
       "generator": "template",
       "dispatch": "module:chat",
-      "detected_dialect": "saudi",
+      "detected_dialect": "msa",
       "response_preview": "أنا SF.AI — مساعد ذكاء اصطناعي يُبنى من الصفر بسيادة معرفية. ما أعتمد على نماذج خارجية، وأتعلّم من بيانات أنت تختارها."
     },
     {
@@ -250,7 +250,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27 كتقييم حوار v2 وخطة توسعة corpus. النتيجة: التوجيه نجح، لكن المولد ما زال قالبًا، ونحتاج رفع corpus من 2143 إلى 5000 قبل SF-50M."
+      "response_preview": "اكتملت Phase 27 كتقييم حوار v2 وخطة توسعة corpus. النتيجة: التوجيه نجح، لكن المولد ما زال قالبًا، ونحتاج رفع corpus من 3643 إلى 5000 قبل SF-50M."
     },
     {
       "scenario_id": "clarification_repair_flow",
