@@ -67,6 +67,68 @@ def test_iter_token_batches_assistant_scope_uses_ignore_index(tmp_path: Path) ->
     assert (targets != -100).any()
 
 
+def test_sample_isolated_packing_does_not_cross_dialogue_boundaries(tmp_path: Path) -> None:
+    corpus_file = tmp_path / "x.jsonl"
+    corpus_file.write_text(
+        '{"messages":[{"role":"user","content":"سؤال ألف"},'
+        '{"role":"assistant","content":"جواب ألف"}]}\n'
+        '{"messages":[{"role":"user","content":"سؤال باء"},'
+        '{"role":"assistant","content":"جواب باء"}]}\n',
+        encoding="utf-8",
+    )
+    ds = ChatDataset(root=tmp_path)
+    tok = CharTokenizer()
+    tok.train(ds.iter_dialogue_texts())
+
+    packed = list(
+        iter_token_batches(
+            tok,
+            ds,
+            batch_size=1,
+            seq_len=80,
+            device=torch.device("cpu"),
+            stream_format="dialogue",
+            loss_scope="assistant",
+            packing_mode="sample_isolated",
+        )
+    )
+
+    assert len(packed) == 2
+    decoded_inputs = [tok.decode(inputs[0].tolist()) for inputs, _ in packed]
+    assert "سؤال ألف" in decoded_inputs[0]
+    assert "جواب ألف" in decoded_inputs[0]
+    assert "سؤال باء" not in decoded_inputs[0]
+    assert "سؤال باء" in decoded_inputs[1]
+    assert "جواب باء" in decoded_inputs[1]
+    assert "سؤال ألف" not in decoded_inputs[1]
+
+
+def test_iter_token_batches_rejects_unknown_packing_mode(tmp_path: Path) -> None:
+    corpus_file = tmp_path / "x.jsonl"
+    corpus_file.write_text(
+        '{"messages":[{"role":"user","content":"مرحبا"},'
+        '{"role":"assistant","content":"أهلا"}]}\n',
+        encoding="utf-8",
+    )
+    ds = ChatDataset(root=tmp_path)
+    tok = CharTokenizer()
+    tok.train(ds.iter_dialogue_texts())
+
+    with pytest.raises(ValueError):
+        list(
+            iter_token_batches(
+                tok,
+                ds,
+                batch_size=1,
+                seq_len=8,
+                device=torch.device("cpu"),
+                stream_format="dialogue",
+                loss_scope="assistant",
+                packing_mode="bad",
+            )
+        )
+
+
 def test_dialogue_training_adds_dialect_condition_line() -> None:
     sample = StructuredSample(
         messages=[

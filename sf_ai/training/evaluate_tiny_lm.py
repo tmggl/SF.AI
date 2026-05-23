@@ -57,6 +57,8 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     p.add_argument("--stream-format", choices=["dialogue", "messages"], default="dialogue")
     p.add_argument("--loss-scope", choices=["full", "assistant"], default="full",
                    help="Match the training objective when computing eval loss")
+    p.add_argument("--packing-mode", choices=["packed", "sample_isolated"], default="packed",
+                   help="Match the training packing objective when computing eval loss")
     p.add_argument("--split-manifest", type=Path, default=None,
                    help="Optional deterministic split manifest produced by build_dialogue_split")
     p.add_argument("--split-name", choices=["train", "eval"], default="eval",
@@ -97,6 +99,7 @@ def run(argv: list[str]) -> int:
             loss_scope=args.loss_scope,
             split_manifest=args.split_manifest,
             split_name=args.split_name,
+            packing_mode=args.packing_mode,
         ):
             logits = model(inputs)
             loss = cross_entropy_lm(logits, targets)

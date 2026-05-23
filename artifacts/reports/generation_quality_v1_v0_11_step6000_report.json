@@ -1,0 +1,217 @@
+{
+  "phase": "Phase 27.9 — Generation Quality Harness",
+  "status": "BLOCKED_GENERATION_QUALITY_CANARY",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "suite_path": "/Users/sami/workSF/SF.AI/eval/prompts/generation_quality_v1.json",
+  "checkpoint_name": "sf-10m-step6000",
+  "generator_name": "sf_10m_v0_11_step6000_sample_isolated",
+  "total_prompts": 10,
+  "passed_prompts": 0,
+  "failed_prompts": 10,
+  "pass_rate": 0.0,
+  "guard_reason_counts": {
+    "model_artifact_fragment": 3,
+    "too_short": 1,
+    "thanks_mismatch": 1,
+    "passed": 5
+  },
+  "category_counts": {
+    "social": 3,
+    "style": 1,
+    "daily_advice": 2,
+    "explanation": 1,
+    "empathy": 1,
+    "format": 1,
+    "understanding": 1
+  },
+  "runtime_allowed": false,
+  "blockers": [
+    "generation_quality_failures",
+    "model_artifact_fragments",
+    "runtime_generation_blocked"
+  ],
+  "notes": [
+    "This harness evaluates raw native generation outside the chat UI.",
+    "Runtime remains template-first until this canary passes."
+  ],
+  "results": [
+    {
+      "id": "greeting_msa",
+      "category": "social",
+      "dialect": "msa",
+      "prompt": "السلام عليكم",
+      "passed": false,
+      "issues": [
+        "guard:model_artifact_fragment",
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_11_step6000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "model_artifact_fragment",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "الزبدة: اطلب تًا أن عن السهلة."
+    },
+    {
+      "id": "smalltalk_saudi",
+      "category": "social",
+      "dialect": "saudi",
+      "prompt": "كيفك",
+      "passed": false,
+      "issues": [
+        "guard:too_short",
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_11_step6000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "too_short",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "الطفكرك اليوبس."
+    },
+    {
+      "id": "thanks_msa",
+      "category": "social",
+      "dialect": "msa",
+      "prompt": "شكرا لك",
+      "passed": false,
+      "issues": [
+        "guard:thanks_mismatch",
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_11_step6000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "thanks_mismatch",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "الزبدة: افئة عن السهالفور ه عليك."
+    },
+    {
+      "id": "saudi_preference",
+      "category": "style",
+      "dialect": "saudi",
+      "prompt": "خلنا نتكلم سعودي",
+      "passed": false,
+      "issues": [
+        "guard:model_artifact_fragment",
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_11_step6000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "model_artifact_fragment",
+      "repetition_ratio": 0.1111,
+      "arabic_ratio": 1.0,
+      "response_preview": "الزبدة: اطلب تًا الحديث ه على مشغالتخمشغاستمشغمحددعه على عليك."
+    },
+    {
+      "id": "short_advice_msa",
+      "category": "daily_advice",
+      "dialect": "msa",
+      "prompt": "قل لي نصيحة بسيطة",
+      "passed": false,
+      "issues": [
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_11_step6000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "passed",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "التصرف المناسب هو: افئة عن السهلة."
+    },
+    {
+      "id": "short_advice_saudi",
+      "category": "daily_advice",
+      "dialect": "saudi",
+      "prompt": "وش رايك أتعلم كل يوم شوي",
+      "passed": false,
+      "issues": [
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_11_step6000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "passed",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "التصرف المناسب: افئة عن الشخعن ره عليك."
+    },
+    {
+      "id": "simple_explanation_msa",
+      "category": "explanation",
+      "dialect": "msa",
+      "prompt": "اشرح لي الصبر بجملة واحدة",
+      "passed": false,
+      "issues": [
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_11_step6000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "passed",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "التصرف المناسب هورتمهمة مهمة وحك التعامل معه ببساطة: اف."
+    },
+    {
+      "id": "feeling_saudi",
+      "category": "empathy",
+      "dialect": "saudi",
+      "prompt": "أنا متضايق اليوم",
+      "passed": false,
+      "issues": [
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_11_step6000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "passed",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "الأفضل أن تبدأ بهدوء: اطلب تدون عن الطرف ك عليك."
+    },
+    {
+      "id": "concise_answer_msa",
+      "category": "format",
+      "dialect": "msa",
+      "prompt": "أريد جوابا قصيرا",
+      "passed": false,
+      "issues": [
+        "guard:model_artifact_fragment",
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_11_step6000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "model_artifact_fragment",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "التصرف المناسب: اطلب تًا في الأمر وقتتحة."
+    },
+    {
+      "id": "what_do_you_understand",
+      "category": "understanding",
+      "dialect": "msa",
+      "prompt": "هل تفهم كلامي",
+      "passed": false,
+      "issues": [
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_11_step6000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "passed",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "الزبدة: ابدأ بتحية وتحية وادبدل الطرف ك التعامل معه ببساطة."
+    }
+  ]
+}

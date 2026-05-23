@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.15 / 30**
-- **المرحلة الحالية:** **Phase 27.15 — Social/Lexical Curriculum + No-Repeat Decoding**
-- **حالة المرحلة الحالية:** **مكتملة؛ eval تحسن لكن canary الدلالي الصارم حجب التوليد**
-- **المرحلة التالية المقترحة:** Phase 27.16 لإصلاح prompt-to-answer conditioning قبل أي تكبير إلى `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.16 / 30**
+- **المرحلة الحالية:** **Phase 27.16 — Prompt-to-Answer Objective Repair**
+- **حالة المرحلة الحالية:** **مكتملة؛ sample-isolated objective أضيف لكن runtime بقي محجوبًا**
+- **المرحلة التالية المقترحة:** Phase 27.17 micro-probe دقيق لأزواج سؤال/جواب قبل أي تكبير إلى `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -64,6 +64,7 @@
 | Phase 27.13 | SF-10M v0.8 Boundary/EOS Wider Training | ✅ completed_eval_improved_generation_still_blocked | ✅ |
 | Phase 27.14 | Sovereign Training Quality Tooling Decision | ✅ completed_tooling_adoption_decision_no_training | ✅ |
 | Phase 27.15 | Social/Lexical Curriculum + No-Repeat Decoding | ✅ completed_eval_improved_strict_generation_blocked | ✅ |
+| Phase 27.16 | Prompt-to-Answer Objective Repair | ✅ completed_objective_repair_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -462,6 +463,17 @@
   - أضيف [PHASE27_15_SOCIAL_LEXICAL_CURRICULUM_REPORT.md](./PHASE27_15_SOCIAL_LEXICAL_CURRICULUM_REPORT.md).
   - أضيف `artifacts/reports/sf_10m_v0_10_social_lexical_curriculum_report.json`.
   - أضيف `artifacts/reports/generation_quality_v1_v0_10_strict_report.json`.
+- بدأ وانتهى Phase 27.16 Prompt-to-Answer Objective Repair:
+  - أضيف `--packing-mode packed|sample_isolated` إلى `train_tiny_lm` و`evaluate_tiny_lm`.
+  - `sample_isolated` يمنع أن تعبر نافذة التدريب من عينة حوارية إلى عينة أخرى.
+  - دُرّب `SF-10M v0.11` 6000 خطوة باستخدام `assistant` loss و`sample_isolated`.
+  - أفضل eval: `sf-10m-step6000`, loss `4.0573`, perplexity `57.82`.
+  - المقارنة: `v0.11` أسوأ رقميًا من `v0.10` رغم نظافة العزل.
+  - canary: `step2000=2/10`, `step6000=0/10`, و`runtime_allowed=false`.
+  - القرار: `COMPLETED_OBJECTIVE_REPAIR_RUNTIME_BLOCKED`.
+  - لا تفعيل runtime ولا تدريب `SF-50M`.
+  - أضيف [PHASE27_16_PROMPT_TO_ANSWER_OBJECTIVE_REPORT.md](./PHASE27_16_PROMPT_TO_ANSWER_OBJECTIVE_REPORT.md).
+  - أضيف `artifacts/reports/sf_10m_v0_11_sample_isolated_objective_report.json`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -527,7 +539,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.15"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.16"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -558,7 +570,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-495 passed in 16.81s
+499 passed in 16.80s
 ```
 
 | ملف | عدد |

@@ -85,6 +85,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.13 | SF-10M v0.8 Boundary/EOS Wider Training | مكتملة؛ eval تحسن والتوليد محظور |
 | Phase 27.14 | Sovereign Training Quality Tooling Decision | مكتملة؛ أدوات جودة محلية دون تدريب |
 | Phase 27.15 | Social/Lexical Curriculum + No-Repeat Decoding | مكتملة؛ eval تحسن وcanary صارم يحجب |
+| Phase 27.16 | Prompt-to-Answer Objective Repair | مكتملة؛ sample isolation أضيف وruntime محظور |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -1916,6 +1917,65 @@ runtime_allowed = false
 ### بعد المرحلة
 نفّذ Phase 27.16: prompt-to-answer conditioning/objective repair قبل أي بيانات
 إضافية كبيرة أو scaling.
+
+---
+
+## Phase 27.16 — Prompt-to-Answer Objective Repair
+
+### الهدف
+إصلاح خلط العينات داخل training context قبل أي تكبير. المشكلة بعد Phase 27.15
+ليست نقص بيانات فقط، بل أن النموذج يتعلم stream لغويًا ولا يربط السؤال بجواب
+دقيق بما يكفي.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.16 بقرار:
+
+```text
+COMPLETED_OBJECTIVE_REPAIR_RUNTIME_BLOCKED
+```
+
+ما تحقق:
+
+- أضيف `--packing-mode` إلى `train_tiny_lm` و`evaluate_tiny_lm`.
+- الوضع الجديد `sample_isolated` يمنع عبور نافذة التدريب من عينة حوار إلى أخرى.
+- أضيفت اختبارات تثبت أن العزل لا يخلط حوارين داخل batch واحد.
+- دُرّب `SF-10M v0.11` على:
+  - `stream_format=dialogue`
+  - `loss_scope=assistant`
+  - `packing_mode=sample_isolated`
+  - `steps=6000`
+
+أفضل eval:
+
+```text
+checkpoint = sf-10m-step6000
+loss       = 4.0573
+perplexity = 57.82
+```
+
+canary:
+
+```text
+step2000 = 2/10, runtime_allowed=false
+step6000 = 0/10, runtime_allowed=false
+```
+
+### التشخيص
+
+العزل الهندسي صحيح، لكنه وحده لا يكفي. `v0.11` أسوأ رقميًا من `v0.10`
+رغم أنه أنظف من ناحية objective. لا يتم تفعيل النموذج ولا تكبيره.
+
+### artifacts
+
+- [PHASE27_16_PROMPT_TO_ANSWER_OBJECTIVE_REPORT.md](./PHASE27_16_PROMPT_TO_ANSWER_OBJECTIVE_REPORT.md)
+- `artifacts/reports/sf_10m_v0_11_sample_isolated_objective_report.json`
+- `artifacts/reports/generation_quality_v1_v0_11_step2000_report.json`
+- `artifacts/reports/generation_quality_v1_v0_11_step6000_report.json`
+
+### بعد المرحلة
+نفّذ Phase 27.17: targeted micro-probe لأزواج سؤال/جواب قصيرة مع شرط
+exact/semantic match قبل أي تدريب واسع أو `SF-50M`.
 
 ---
 

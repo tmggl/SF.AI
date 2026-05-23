@@ -84,9 +84,10 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.15: أضفنا no-repeat decoding و400 سجل gold اجتماعي/لغوي، "
-    "ودرّبنا SF-10M v0.10. تحسن eval إلى loss=3.0452 وppl=21.01، "
-    "لكن canary الدلالي الصارم بقي 0/10؛ لذلك لا تفعيل للواجهة ولا SF-50M.",
+    "اكتملت Phase 27.16: أضفنا تدريب sample-isolated حتى لا تختلط العينات "
+    "ودرّبنا SF-10M v0.11. النتيجة أوضحت أن العزل وحده لا يكفي: أفضل eval "
+    "كان loss=4.0573 وppl=57.82، وcanary بقي محجوبًا. التالي Phase 27.17 "
+    "micro-probe دقيق لأزواج سؤال/جواب قبل أي تكبير.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

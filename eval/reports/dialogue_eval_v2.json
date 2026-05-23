@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27.15: أضفنا no-repeat decoding و400 سجل gold اجتماعي/لغوي، ودرّبنا SF-10M v0.10. تحسن eval إلى loss=3.0452 وppl=21.01، لكن canary الدلالي الصارم بقي 0/10؛ لذلك لا تفع"
+      "response_preview": "اكتملت Phase 27.16: أضفنا تدريب sample-isolated حتى لا تختلط العينات ودرّبنا SF-10M v0.11. النتيجة أوضحت أن العزل وحده لا يكفي: أفضل eval كان loss=4.0573 وppl=57.82، وcanary بقي مح"
     },
     {
       "scenario_id": "clarification_repair_flow",

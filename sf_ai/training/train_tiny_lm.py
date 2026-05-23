@@ -69,16 +69,33 @@ def iter_token_batches(
     loss_scope: str = "full",
     split_manifest: str | Path | None = None,
     split_name: str = "train",
+    packing_mode: str = "packed",
 ) -> Iterator[tuple[torch.Tensor, torch.Tensor]]:
     """Stream (input_ids, targets) batches from a chat corpus."""
-    pool_ids: list[int] = []
-    pool_labels: list[int] = []
+    if packing_mode not in {"packed", "sample_isolated"}:
+        raise ValueError(f"unsupported packing_mode: {packing_mode}")
+
     texts = _iter_training_texts(
         dataset,
         stream_format=stream_format,
         split_manifest=split_manifest,
         split_name=split_name,
     )
+
+    if packing_mode == "sample_isolated":
+        yield from _iter_sample_isolated_batches(
+            tokenizer,
+            texts,
+            batch_size=batch_size,
+            seq_len=seq_len,
+            device=device,
+            stream_format=stream_format,
+            loss_scope=loss_scope,
+        )
+        return
+
+    pool_ids: list[int] = []
+    pool_labels: list[int] = []
     for text in texts:
         ids, labels = _encode_training_text(
             tokenizer,
@@ -104,6 +121,70 @@ def iter_token_batches(
             if loss_scope == "assistant" and bool((targets != -100).sum().item() == 0):
                 continue
             yield ids_tensor[:, :-1], targets
+
+
+def _iter_sample_isolated_batches(
+    tokenizer,
+    texts: Iterator[str],
+    *,
+    batch_size: int,
+    seq_len: int,
+    device: torch.device,
+    stream_format: str,
+    loss_scope: str,
+) -> Iterator[tuple[torch.Tensor, torch.Tensor]]:
+    """Yield fixed-size batches without crossing sample boundaries.
+
+    Packed streaming is efficient, but it can place the tail of one dialogue
+    next to the start of another inside the same causal context. Phase 27.16
+    uses this mode for prompt-to-answer repair: every training window belongs
+    to one governed sample, and padding targets stay masked.
+    """
+    pad_id = _token_id(tokenizer, ASSISTANT_EOS_TOKEN)
+    if pad_id is None:
+        pad_id = 0
+
+    batch_inputs: list[list[int]] = []
+    batch_targets: list[list[int]] = []
+    window = seq_len + 1
+
+    for text in texts:
+        ids, labels = _encode_training_text(
+            tokenizer,
+            text,
+            stream_format=stream_format,
+            loss_scope=loss_scope,
+        )
+        if len(ids) < 2 or len(labels) < 2:
+            continue
+
+        start = 0
+        while start < len(ids) - 1:
+            id_chunk = ids[start:start + window]
+            label_chunk = labels[start:start + window]
+            if len(id_chunk) < 2:
+                break
+            if len(id_chunk) < window:
+                pad = window - len(id_chunk)
+                id_chunk = [*id_chunk, *([pad_id] * pad)]
+                label_chunk = [*label_chunk, *([-100] * pad)]
+
+            targets = label_chunk[1:]
+            if loss_scope == "assistant" and not any(t != -100 for t in targets):
+                start += seq_len
+                continue
+
+            batch_inputs.append(id_chunk[:-1])
+            batch_targets.append(targets)
+            if len(batch_inputs) == batch_size:
+                yield (
+                    torch.tensor(batch_inputs, dtype=torch.long, device=device),
+                    torch.tensor(batch_targets, dtype=torch.long, device=device),
+                )
+                batch_inputs.clear()
+                batch_targets.clear()
+
+            start += seq_len
 
 
 def _encode_training_text(
@@ -250,6 +331,8 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
                    help="dialogue keeps role-marked samples together; messages preserves legacy flat streaming")
     p.add_argument("--loss-scope", choices=["full", "assistant"], default="full",
                    help="assistant masks user/context tokens and trains only assistant reply tokens")
+    p.add_argument("--packing-mode", choices=["packed", "sample_isolated"], default="packed",
+                   help="packed streams tokens efficiently; sample_isolated keeps every dialogue window separate")
     p.add_argument("--split-manifest", type=Path, default=None,
                    help="Optional deterministic split manifest produced by build_dialogue_split")
     p.add_argument("--split-name", choices=["train", "eval"], default="train",
@@ -316,6 +399,7 @@ def run(argv: list[str]) -> int:
             loss_scope=args.loss_scope,
             split_manifest=args.split_manifest,
             split_name=args.split_name,
+            packing_mode=args.packing_mode,
         ):
             produced_in_epoch += 1
             # Set LR per step.
@@ -365,7 +449,8 @@ def _save(ckpt_mgr: CheckpointManager, model: TinyTransformer, args, step: int, 
         notes=(
             f"seed={args.seed} batch={args.batch_size} seq={args.seq_len} "
             f"epochs={args.epochs} stream_format={args.stream_format} "
-            f"loss_scope={args.loss_scope} split={args.split_name if args.split_manifest else 'none'}"
+            f"loss_scope={args.loss_scope} packing_mode={args.packing_mode} "
+            f"split={args.split_name if args.split_manifest else 'none'}"
         ),
     )
     ckpt_mgr.save_metadata(name, meta)

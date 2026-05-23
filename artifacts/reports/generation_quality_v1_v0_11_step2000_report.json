@@ -1,0 +1,212 @@
+{
+  "phase": "Phase 27.9 — Generation Quality Harness",
+  "status": "BLOCKED_GENERATION_QUALITY_CANARY",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "suite_path": "/Users/sami/workSF/SF.AI/eval/prompts/generation_quality_v1.json",
+  "checkpoint_name": "sf-10m-step2000",
+  "generator_name": "sf_10m_v0_11_step2000_sample_isolated",
+  "total_prompts": 10,
+  "passed_prompts": 2,
+  "failed_prompts": 8,
+  "pass_rate": 0.2,
+  "guard_reason_counts": {
+    "greeting_mismatch": 1,
+    "social_smalltalk_mismatch": 1,
+    "thanks_mismatch": 1,
+    "saudi_preference_mismatch": 1,
+    "passed": 6
+  },
+  "category_counts": {
+    "social": 3,
+    "style": 1,
+    "daily_advice": 2,
+    "explanation": 1,
+    "empathy": 1,
+    "format": 1,
+    "understanding": 1
+  },
+  "runtime_allowed": false,
+  "blockers": [
+    "generation_quality_failures",
+    "runtime_generation_blocked"
+  ],
+  "notes": [
+    "This harness evaluates raw native generation outside the chat UI.",
+    "Runtime remains template-first until this canary passes."
+  ],
+  "results": [
+    {
+      "id": "greeting_msa",
+      "category": "social",
+      "dialect": "msa",
+      "prompt": "السلام عليكم",
+      "passed": false,
+      "issues": [
+        "guard:greeting_mismatch",
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_11_step2000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "greeting_mismatch",
+      "repetition_ratio": 0.1667,
+      "arabic_ratio": 1.0,
+      "response_preview": "الزبدة: اطلب وبهدوء: اطلب تببساطة: اشك"
+    },
+    {
+      "id": "smalltalk_saudi",
+      "category": "social",
+      "dialect": "saudi",
+      "prompt": "كيفك",
+      "passed": false,
+      "issues": [
+        "guard:social_smalltalk_mismatch",
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_11_step2000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "social_smalltalk_mismatch",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "تعامل معها بساطة: اطلب وء."
+    },
+    {
+      "id": "thanks_msa",
+      "category": "social",
+      "dialect": "msa",
+      "prompt": "شكرا لك",
+      "passed": false,
+      "issues": [
+        "guard:thanks_mismatch",
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_11_step2000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "thanks_mismatch",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "الزبدة: اطلب وبساطة: اشك"
+    },
+    {
+      "id": "saudi_preference",
+      "category": "style",
+      "dialect": "saudi",
+      "prompt": "خلنا نتكلم سعودي",
+      "passed": false,
+      "issues": [
+        "guard:saudi_preference_mismatch",
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_11_step2000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "saudi_preference_mismatch",
+      "repetition_ratio": 0.1667,
+      "arabic_ratio": 1.0,
+      "response_preview": "الزبدة: اطلب وشكروببهدوء: اطلب تبساطة: اشك"
+    },
+    {
+      "id": "short_advice_msa",
+      "category": "daily_advice",
+      "dialect": "msa",
+      "prompt": "قل لي نصيحة بسيطة",
+      "passed": false,
+      "issues": [
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_11_step2000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "passed",
+      "repetition_ratio": 0.1667,
+      "arabic_ratio": 1.0,
+      "response_preview": "الزبدة: اطلب وهدوء: اطلب تبساطة: اشك"
+    },
+    {
+      "id": "short_advice_saudi",
+      "category": "daily_advice",
+      "dialect": "saudi",
+      "prompt": "وش رايك أتعلم كل يوم شوي",
+      "passed": false,
+      "issues": [
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_11_step2000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "passed",
+      "repetition_ratio": 0.1667,
+      "arabic_ratio": 1.0,
+      "response_preview": "الزبدة: اطلب وء: اطلب تحتاتبدأ بهدوء."
+    },
+    {
+      "id": "simple_explanation_msa",
+      "category": "explanation",
+      "dialect": "msa",
+      "prompt": "اشرح لي الصبر بجملة واحدة",
+      "passed": true,
+      "issues": [],
+      "used": true,
+      "generator": "sf_10m_v0_11_step2000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "passed",
+      "repetition_ratio": 0.1429,
+      "arabic_ratio": 1.0,
+      "response_preview": "الزبدة: اطلب وء: اطلب ر واطلب وهدوء."
+    },
+    {
+      "id": "feeling_saudi",
+      "category": "empathy",
+      "dialect": "saudi",
+      "prompt": "أنا متضايق اليوم",
+      "passed": false,
+      "issues": [
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_11_step2000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "passed",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "الزبدة: ابدأ بهدوء: اطلب وء."
+    },
+    {
+      "id": "concise_answer_msa",
+      "category": "format",
+      "dialect": "msa",
+      "prompt": "أريد جوابا قصيرا",
+      "passed": true,
+      "issues": [],
+      "used": true,
+      "generator": "sf_10m_v0_11_step2000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "passed",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "الزبدة: اطلب وواطلب وء: ابدأ بهالفطة: اشكروببساطرتببهدوء."
+    },
+    {
+      "id": "what_do_you_understand",
+      "category": "understanding",
+      "dialect": "msa",
+      "prompt": "هل تفهم كلامي",
+      "passed": false,
+      "issues": [
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_11_step2000_sample_isolated",
+      "reason": "generated",
+      "guard_reason": "passed",
+      "repetition_ratio": 0.1667,
+      "arabic_ratio": 1.0,
+      "response_preview": "الزبدة: اطلب وبهدوء: اطلب تبساطة: اشك"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "phase": "Phase 27.16",
+  "title": "Prompt-to-answer conditioning/objective repair",
+  "status": "COMPLETED_OBJECTIVE_REPAIR_RUNTIME_BLOCKED",
+  "language_track": ["msa", "saudi"],
+  "lexicon": "Saudi Seed v1",
+  "model": {
+    "name": "SF-10M v0.11",
+    "size": "sf-10m",
+    "checkpoint_root": "artifacts/checkpoints/sf_10m_v0_11",
+    "best_eval_checkpoint": "sf-10m-step6000",
+    "candidate_generation_checkpoint": "sf-10m-step2000"
+  },
+  "training": {
+    "tokenizer": "artifacts/tokenizers/sf_bpe/v2",
+    "corpus": "data/corpus/chat/jsonl",
+    "split_manifest": "data/corpus/chat/splits/dialogue_split_v1.json",
+    "split_name": "train",
+    "stream_format": "dialogue",
+    "loss_scope": "assistant",
+    "packing_mode": "sample_isolated",
+    "seq_len": 64,
+    "batch_size": 4,
+    "steps": 6000,
+    "epochs": 20,
+    "lr": 0.0003,
+    "warmup": 300,
+    "min_lr": 0.00001,
+    "device": "mps",
+    "last_training_loss": 3.1785
+  },
+  "eval": {
+    "packing_mode": "sample_isolated",
+    "max_batches": 200,
+    "checkpoints": [
+      {"checkpoint": "sf-10m-step1000", "loss": 5.4265, "perplexity": 227.35},
+      {"checkpoint": "sf-10m-step2000", "loss": 5.1707, "perplexity": 176.03},
+      {"checkpoint": "sf-10m-step3000", "loss": 4.9630, "perplexity": 143.02},
+      {"checkpoint": "sf-10m-step4000", "loss": 4.6046, "perplexity": 99.95},
+      {"checkpoint": "sf-10m-step5000", "loss": 4.4191, "perplexity": 83.02},
+      {"checkpoint": "sf-10m-step6000", "loss": 4.0573, "perplexity": 57.82}
+    ],
+    "comparison": {
+      "previous_best": "SF-10M v0.10 step6000",
+      "previous_loss": 3.0452,
+      "previous_perplexity": 21.01,
+      "decision": "v0.11 is worse numerically than v0.10, despite cleaner sample isolation"
+    }
+  },
+  "generation_quality": {
+    "step2000": {
+      "report": "eval/reports/generation_quality_v1_v0_11_step2000.json",
+      "passed_prompts": 2,
+      "total_prompts": 10,
+      "pass_rate": 0.2,
+      "runtime_allowed": false,
+      "notes": "Some prompts passed formally, but previews remain semantically weak and not UI-ready."
+    },
+    "step6000": {
+      "report": "eval/reports/generation_quality_v1_v0_11_step6000.json",
+      "passed_prompts": 0,
+      "total_prompts": 10,
+      "pass_rate": 0.0,
+      "runtime_allowed": false
+    }
+  },
+  "implemented_changes": [
+    "Added --packing-mode packed|sample_isolated to train_tiny_lm.",
+    "Added matching --packing-mode to evaluate_tiny_lm.",
+    "Added sample-isolated batching so causal windows do not cross dialogue boundaries.",
+    "Added tests proving sample_isolated does not mix two dialogue samples."
+  ],
+  "decision": {
+    "runtime": "blocked",
+    "sf50m": "blocked",
+    "next_phase": "Phase 27.17 targeted micro-probe for exact prompt-to-answer mapping before any wider training"
+  }
+}

@@ -38,8 +38,8 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.15 / 30 — Social/Lexical Curriculum + No-Repeat Decoding اكتملت بتحسن eval وحجب صارم للتوليد.
-- **الأولوية الحالية:** Phase 27.16 لإصلاح prompt-to-answer conditioning؛ لا تدريب `SF-50M` ولا Phase 28 حتى تمر بوابات الجودة.
+- **الرحلة الحالية:** Phase 27.16 / 30 — Prompt-to-Answer Objective Repair اكتملت بإصلاح sample-isolated training مع حجب runtime.
+- **الأولوية الحالية:** Phase 27.17 micro-probe دقيق لأزواج سؤال/جواب؛ لا تدريب `SF-50M` ولا Phase 28 حتى تمر بوابات الجودة.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -69,6 +69,7 @@
 - **نتيجة Phase 27.13:** دُرّب `SF-10M v0.8` على split التدريب بصيغة boundary/EOS + dialect conditioning. أفضل eval: loss `3.1875`, perplexity `24.23`، لكن generation-quality الصارم بقي `3/10` بسبب fragments، لذلك runtime و`SF-50M` محظوران. التقرير: [docs/PHASE27_13_SF10M_V08_REPORT.md](./docs/PHASE27_13_SF10M_V08_REPORT.md).
 - **نتيجة Phase 27.14:** اعتُمدت طبقة `Sovereign Training Quality Tooling`: 10 أدوات محلية، منها EOS/boundaries، tracker، data scanner، curriculum، no-repeat controls، gold probes، checkpoint selector. لا تدريب جديد ولا تفعيل runtime. التقرير: [docs/SOVEREIGN_TRAINING_QUALITY_TOOLING.md](./docs/SOVEREIGN_TRAINING_QUALITY_TOOLING.md).
 - **نتيجة Phase 27.15:** أضيفت 400 عينة gold اجتماعية/لغوية، وأضيف no-repeat decoding. دُرّب `SF-10M v0.10`; أفضل eval: loss `3.0452`, perplexity `21.01`. بعد تشديد canary الدلالي بقي `0/10`، لذلك runtime و`SF-50M` محظوران. التقرير: [docs/PHASE27_15_SOCIAL_LEXICAL_CURRICULUM_REPORT.md](./docs/PHASE27_15_SOCIAL_LEXICAL_CURRICULUM_REPORT.md).
+- **نتيجة Phase 27.16:** أضيف `sample_isolated` packing لمنع اختلاط العينات داخل causal context، ودُرّب `SF-10M v0.11`. أفضل eval: loss `4.0573`, perplexity `57.82`، وcanary بقي محجوبًا (`step2000=2/10`, `step6000=0/10`). القرار: runtime و`SF-50M` محظوران. التقرير: [docs/PHASE27_16_PROMPT_TO_ANSWER_OBJECTIVE_REPORT.md](./docs/PHASE27_16_PROMPT_TO_ANSWER_OBJECTIVE_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
@@ -122,6 +123,7 @@
 | Phase 27.13 | SF-10M v0.8 Boundary/EOS Wider Training — eval improved; generation blocked |
 | Phase 27.14 | Sovereign Training Quality Tooling Decision — adopted local quality tools |
 | Phase 27.15 | Social/Lexical Curriculum + No-Repeat Decoding — eval improved; strict generation blocked |
+| Phase 27.16 | Prompt-to-Answer Objective Repair — sample isolation added; runtime blocked |
 | Phase 28 | SF-120M v0.1 Candidate — planned |
 | Phase 29 | Runtime Hybrid Assistant v1 — planned |
 | Phase 30 | Continuous Improvement Loop — planned |
