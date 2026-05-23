@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.12 / 30**
-- **المرحلة الحالية:** **Phase 27.12 — Assistant Boundary/EOS Repair**
-- **حالة المرحلة الحالية:** **مكتملة؛ gold overfit probe أثبت أن حدّ نهاية رد المساعد/EOS غير مضبوط**
-- **المرحلة التالية المقترحة:** إضافة assistant reply boundary/EOS قبل أي تكبير إلى `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.13 / 30**
+- **المرحلة الحالية:** **Phase 27.13 — SF-10M v0.8 Boundary/EOS Wider Training**
+- **حالة المرحلة الحالية:** **مكتملة؛ eval تحسن لكن generation-quality لا يزال يحجب runtime**
+- **المرحلة التالية المقترحة:** Phase 27.14 لإصلاح الدلالة واللغة ورفع generation-quality قبل أي تكبير إلى `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -61,6 +61,7 @@
 | Phase 27.10 | Short Response Repair | ✅ completed_numeric_improvement_generation_still_blocked | ✅ |
 | Phase 27.11 | Objective/Decoding Diagnosis | ✅ completed_stop_boundary_missing_generation_blocked | ✅ |
 | Phase 27.12 | Assistant Boundary/EOS Repair | ✅ completed_boundary_eos_partial_semantic_blocked | ✅ |
+| Phase 27.13 | SF-10M v0.8 Boundary/EOS Wider Training | ✅ completed_eval_improved_generation_still_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -424,6 +425,18 @@
   - أضيف [PHASE27_12_ASSISTANT_EOS_REPAIR_REPORT.md](./PHASE27_12_ASSISTANT_EOS_REPAIR_REPORT.md).
   - أضيف `artifacts/reports/phase27_12_eos_probe_report.json`.
   - أضيف `artifacts/samples/phase27_12_eos_probe_generations.md`.
+- بدأ وانتهى Phase 27.13 SF-10M v0.8 Boundary/EOS Wider Training:
+  - دُرّب `SF-10M v0.8` من الصفر 6000 خطوة على train split فقط.
+  - استخدم التدريب `assistant` loss و`dialogue` stream و`<eos>` وdialect conditioning.
+  - أفضل checkpoint: `sf-10m-step6000`.
+  - eval split: loss `3.1875`, perplexity `24.23`.
+  - أداة generation-quality تمرر dialect الآن إلى المولد، وتم تشديد `GenerationGuard` ضد fragments v0.8.
+  - generation-quality الصارم: `3/10`, `runtime_allowed=false`.
+  - القرار: `COMPLETED_EVAL_IMPROVED_GENERATION_STILL_BLOCKED`.
+  - لا تفعيل runtime ولا تدريب `SF-50M`.
+  - أضيف [PHASE27_13_SF10M_V08_REPORT.md](./PHASE27_13_SF10M_V08_REPORT.md).
+  - أضيف `artifacts/reports/sf_10m_v0_8_boundary_eos_training_report.json`.
+  - أضيف `artifacts/reports/generation_quality_v1_v0_8_report.json`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -489,7 +502,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.12"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.13"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -520,7 +533,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-487 passed in 16.53s
+489 passed in 16.23s
 ```
 
 | ملف | عدد |

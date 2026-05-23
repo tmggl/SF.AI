@@ -1,0 +1,70 @@
+{
+  "phase": "Phase 27.13",
+  "name": "SF-10M v0.8 Boundary/EOS Wider Training",
+  "status": "completed_eval_improved_generation_still_blocked",
+  "language_track": ["msa", "saudi"],
+  "lexicon_track": "Saudi Seed v1",
+  "runtime_generator_enabled": false,
+  "corpus": {
+    "total_records": 5543,
+    "training_ready": 5543,
+    "dialects": {"msa": 2749, "saudi": 2794}
+  },
+  "split": {
+    "manifest": "data/corpus/chat/splits/dialogue_split_v1.json",
+    "train": 4973,
+    "eval": 570,
+    "dialects": {
+      "train": {"msa": 2479, "saudi": 2494},
+      "eval": {"msa": 270, "saudi": 300}
+    }
+  },
+  "training": {
+    "model": "sf-10m",
+    "checkpoint_root": "artifacts/checkpoints/sf_10m_v0_8",
+    "best_checkpoint": "sf-10m-step6000",
+    "steps": 6000,
+    "batch_size": 4,
+    "seq_len": 64,
+    "loss_scope": "assistant",
+    "stream_format": "dialogue",
+    "boundary_eos_target": true,
+    "dialect_conditioning": true,
+    "first_logged_loss": 8.4837,
+    "last_loss": 2.7526,
+    "best_logged_train_loss": 1.2835
+  },
+  "eval": {
+    "split_name": "eval",
+    "max_batches": 200,
+    "checkpoints": [
+      {"name": "sf-10m-step1000", "loss": 4.9942, "perplexity": 147.56},
+      {"name": "sf-10m-step2000", "loss": 4.8111, "perplexity": 122.87},
+      {"name": "sf-10m-step3000", "loss": 4.2635, "perplexity": 71.06},
+      {"name": "sf-10m-step4000", "loss": 3.8897, "perplexity": 48.90},
+      {"name": "sf-10m-step5000", "loss": 3.6128, "perplexity": 37.07},
+      {"name": "sf-10m-step6000", "loss": 3.1875, "perplexity": 24.23}
+    ],
+    "best_checkpoint": "sf-10m-step6000"
+  },
+  "generation_quality": {
+    "report": "artifacts/reports/generation_quality_v1_v0_8_report.json",
+    "passed": 3,
+    "total": 10,
+    "pass_rate": 0.3,
+    "runtime_allowed": false,
+    "guard_reason_counts": {
+      "greeting_mismatch": 1,
+      "model_artifact_fragment": 4,
+      "thanks_mismatch": 1,
+      "saudi_preference_mismatch": 1,
+      "passed": 3
+    }
+  },
+  "quality_decision": {
+    "activate_in_chat_ui": false,
+    "start_sf50m": false,
+    "reason": "Eval loss improved strongly, but raw generation still produces malformed Arabic fragments and fails social alignment."
+  },
+  "next": "Phase 27.14 should improve generation semantics with a stricter lexical sanity gate and a targeted natural short-reply curriculum before any runtime activation or SF-50M scaling."
+}

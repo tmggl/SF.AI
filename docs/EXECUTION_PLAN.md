@@ -82,6 +82,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.10 | Short Response Repair | مكتملة بتحسن رقمي؛ التوليد ما زال محظورًا |
 | Phase 27.11 | Objective/Decoding Diagnosis | مكتملة؛ stop boundary/EOS مفقود |
 | Phase 27.12 | Assistant Boundary/EOS Repair | مكتملة جزئيًا؛ runtime محظور |
+| Phase 27.13 | SF-10M v0.8 Boundary/EOS Wider Training | مكتملة؛ eval تحسن والتوليد محظور |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -1736,8 +1737,66 @@ EOS حسّن التوقف ومنع جزءًا من الحشو، لكنه لم ي
 - `artifacts/samples/phase27_12_eos_probe_generations.md`
 
 ### بعد المرحلة
-درّب `SF-10M v0.8` بصيغة boundary/EOS + dialect conditioning على train split،
-ثم أعد eval وgeneration-quality. لا يبدأ `SF-50M`.
+نفّذ Phase 27.13: تدريب `SF-10M v0.8` بصيغة boundary/EOS + dialect conditioning
+على train split، ثم eval وgeneration-quality. لا يبدأ `SF-50M`.
+
+---
+
+## Phase 27.13 — SF-10M v0.8 Boundary/EOS Wider Training
+
+### الهدف
+اختبار ما إذا كان إصلاح boundary/EOS وdialect conditioning يتحولان إلى جودة
+توليد أفضل عند التدريب على corpus الأوسع، وليس فقط على gold probe صغير.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.13 بقرار:
+
+```text
+COMPLETED_EVAL_IMPROVED_GENERATION_STILL_BLOCKED
+```
+
+ما تحقق:
+
+- دُرّب `SF-10M v0.8` من الصفر 6000 خطوة على train split فقط.
+- استخدم التدريب:
+  - `stream_format=dialogue`
+  - `loss_scope=assistant`
+  - assistant `<eos>`
+  - dialect conditioning: `النطاق: فصحى` / `النطاق: سعودي`
+- أداة generation-quality صارت تمرر dialect للمولد.
+- تم تشديد `GenerationGuard` ضد fragments v0.8.
+
+نتيجة eval split:
+
+```text
+best_checkpoint = sf-10m-step6000
+eval_loss       = 3.1875
+perplexity      = 24.23
+```
+
+نتيجة generation-quality:
+
+```text
+passed          = 3/10
+runtime_allowed = false
+```
+
+### التشخيص
+
+هناك تحسن رقمي قوي مقارنة بـ v0.7، لكن الردود الخام ما زالت تكسر كلمات عربية
+وتفشل في التحيات والشكر وتفضيل اللهجة السعودية. هذا يعني أن المشكلة لم تعد
+boundary فقط؛ نحتاج إصلاح دلالي/لغوي موجه قبل أي تفعيل أو تكبير.
+
+### artifacts
+
+- [PHASE27_13_SF10M_V08_REPORT.md](./PHASE27_13_SF10M_V08_REPORT.md)
+- `artifacts/reports/sf_10m_v0_8_boundary_eos_training_report.json`
+- `artifacts/reports/generation_quality_v1_v0_8_report.json`
+
+### بعد المرحلة
+نفّذ Phase 27.14: semantic/lexical repair curriculum + stricter canary. لا يبدأ
+`SF-50M` ولا Phase 28.
 
 ---
 

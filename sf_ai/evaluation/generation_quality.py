@@ -190,6 +190,7 @@ def _evaluate_prompt(
 ) -> GenerationQualityResult:
     out = generator.generate(
         item.prompt,
+        dialect=item.dialect,
         max_new_tokens=max_new_tokens,
         temperature=temperature,
         top_k=top_k,

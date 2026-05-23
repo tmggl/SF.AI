@@ -84,9 +84,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.12: أضفنا EOS واضحًا لرد المساعد وconditioning للفصحى/السعودي. "
-    "تحسن probe إلى 5/16 تطابق كامل و9/16 بلا فشل guard، لكنه لا يكفي للتفعيل. "
-    "الخطوة التالية تدريب SF-10M v0.8 بهذه الصيغة على corpus أوسع قبل أي SF-50M.",
+    "اكتملت Phase 27.13: درّبنا SF-10M v0.8 بصيغة EOS/conditioning على split التدريب. "
+    "تحسن eval إلى loss=3.1875 وperplexity=24.23، لكن generation-quality بقي 3/10 "
+    "بسبب fragments، لذلك لا تفعيل للواجهة ولا SF-50M. التالي Phase 27.14 لإصلاح الدلالة واللغة.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

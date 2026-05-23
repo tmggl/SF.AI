@@ -37,8 +37,8 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.12 / 30 — Assistant Boundary/EOS Repair اكتملت جزئيًا وما زال runtime محظورًا.
-- **الأولوية الحالية:** فحص objective/batching/decoding بعمق؛ لا تدريب `SF-50M` ولا Phase 28 حتى تمر بوابات الجودة.
+- **الرحلة الحالية:** Phase 27.13 / 30 — SF-10M v0.8 Boundary/EOS Wider Training اكتملت بتحسن رقمي وما زال runtime محظورًا.
+- **الأولوية الحالية:** Phase 27.14 لإصلاح الدلالة واللغة ورفع generation-quality؛ لا تدريب `SF-50M` ولا Phase 28 حتى تمر بوابات الجودة.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
 - **البيانات الحالية:** corpus موثق `5543` سجلًا يمر `corpus-audit`: `2794` سعودي + `2749` فصحى. Phase 27.10 أضاف gold short repair، والـ split الحالي `train=4973`, `eval=570`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -65,6 +65,7 @@
 - **نتيجة Phase 27.10:** أضيفت 300 عينة gold قصيرة ودُرّب `SF-10M v0.7`; أفضل eval: loss `4.7512`, perplexity `115.72`. بعد تشديد الحارس بقي generation-quality `0/10`، لذلك runtime blocked. التقرير: [docs/PHASE27_10_SHORT_RESPONSE_REPAIR_REPORT.md](./docs/PHASE27_10_SHORT_RESPONSE_REPAIR_REPORT.md).
 - **نتيجة Phase 27.11:** probe ذهبي صغير (`16` ردًا) وصل إلى loss شبه صفري لكنه فشل `0/16 clean-stop`; النموذج يحفظ بدايات الردود ثم يواصل بتكرار/حشو. القرار: إصلاح boundary/EOS قبل أي SF-50M. التقرير: [docs/PHASE27_11_OBJECTIVE_PROBE_REPORT.md](./docs/PHASE27_11_OBJECTIVE_PROBE_REPORT.md).
 - **نتيجة Phase 27.12:** أضيف `<eos>` هدفًا صريحًا لرد المساعد، وconditioning للفصحى/السعودي من provenance. probe الحالي: `5/16` تطابق كامل و`9/16` بلا فشل guard؛ التحسن لا يكفي للتفعيل. التقرير: [docs/PHASE27_12_ASSISTANT_EOS_REPAIR_REPORT.md](./docs/PHASE27_12_ASSISTANT_EOS_REPAIR_REPORT.md).
+- **نتيجة Phase 27.13:** دُرّب `SF-10M v0.8` على split التدريب بصيغة boundary/EOS + dialect conditioning. أفضل eval: loss `3.1875`, perplexity `24.23`، لكن generation-quality الصارم بقي `3/10` بسبب fragments، لذلك runtime و`SF-50M` محظوران. التقرير: [docs/PHASE27_13_SF10M_V08_REPORT.md](./docs/PHASE27_13_SF10M_V08_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
@@ -115,6 +116,7 @@
 | Phase 27.10 | Short Response Repair — numeric improvement; runtime blocked |
 | Phase 27.11 | Objective/Decoding Diagnosis — stop boundary missing; scaling blocked |
 | Phase 27.12 | Assistant Boundary/EOS Repair — partial improvement; runtime blocked |
+| Phase 27.13 | SF-10M v0.8 Boundary/EOS Wider Training — eval improved; generation blocked |
 | Phase 28 | SF-120M v0.1 Candidate — planned |
 | Phase 29 | Runtime Hybrid Assistant v1 — planned |
 | Phase 30 | Continuous Improvement Loop — planned |
