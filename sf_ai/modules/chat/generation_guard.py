@@ -35,7 +35,6 @@ _MODEL_ARTIFACT_FRAGMENTS = (
     "مستمستم",
     "بالمو",
     "رتنا",
-    "تًا",
     # Observed in SF-10M v0.7 after short-response repair.
     "الدعج",
     "صعج",

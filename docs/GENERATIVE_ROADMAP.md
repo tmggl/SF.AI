@@ -60,6 +60,7 @@ SF.AI يملك الآن:
 | Phase 27.20 | `Tokenizer/protected phrases` | استراتيجية حماية العبارات قبل التدريب |
 | Phase 27.21 | `Tokenizer v3 + micro-probe` | تدريب tokenizer v3 ثم اختبار probe قبل runtime |
 | Phase 27.22 | `Spacing/boundary repair` | علاج لصق الكلمات قبل runtime |
+| Phase 27.23 | `Semantic/lexical repair` | علاج الخلط الدلالي واللفظي المتبقي |
 | بعد نجاح SF-10M | `SF-50M v0.1` | نجاح جودة SF-10M/canary + إعادة Phase 26 readiness |
 | Phase 28 | `SF-120M v0.1` | نجاح SF-50M + scaling gate |
 
@@ -90,6 +91,7 @@ SF.AI يملك الآن:
 - **Phase 27.19:** repair probe على 52 مثالًا بقي `27/32`؛ أمثلة repair وحدها لا تكفي، ويلزم قرار tokenizer/protected phrases.
 - **Phase 27.20:** أضيف دعم protected phrases داخل tokenizer؛ العبارات الخمس صارت قابلة للحفظ كقطعة واحدة في tokenizer v3، لكن runtime ما زال محظورًا حتى retrain + micro-probe.
 - **Phase 27.21:** tokenizer v3 نجح في protected phrases، لكن micro-probe فشل `25/32` بسبب spacing/boundary؛ runtime وSF-50M محظوران.
+- **Phase 27.22:** spacing/boundary repair رفع micro-probe إلى `29/32` وأزال اللصق، لكن بقي semantic/lexical failure يمنع runtime.
 - **Phase 28:** أول قفزة بعد SF-50M إذا أثبت 50M قيمة واضحة.
 - **Phase 29:** إدخاله في الواجهة كتجربة يومية مع router/safety/memory.
 

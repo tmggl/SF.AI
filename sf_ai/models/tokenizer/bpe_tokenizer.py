@@ -263,7 +263,13 @@ class BPETokenizer:
             tok = id_to_token.get(i)
             if tok is None or tok in special:
                 continue
-            symbols.append(tok)
+            if tok in self._protected_surface_to_term:
+                # A protected phrase token represents one or more words but
+                # does not naturally carry '</w>'. Restore an explicit boundary
+                # so the next generated token cannot glue to the phrase.
+                symbols.append(tok + END_OF_WORD)
+            else:
+                symbols.append(tok)
         # Join: every '</w>' marks the end of a word → insert space afterwards.
         joined = "".join(symbols)
         joined = joined.replace(END_OF_WORD, " ")

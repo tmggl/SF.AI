@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.21 / 30**
-- **المرحلة الحالية:** **Phase 27.21 — Tokenizer v3 Protected-Phrase Micro-Probe**
-- **حالة المرحلة الحالية:** **مكتملة؛ tokenizer v3 نجح في protected phrases لكن micro-probe فشل 25/32 وruntime بقي محجوبًا**
-- **المرحلة التالية المقترحة:** Phase 27.22 spacing/boundary loss repair قبل أي runtime أو `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.22 / 30**
+- **المرحلة الحالية:** **Phase 27.22 — Spacing/Boundary Loss Repair**
+- **حالة المرحلة الحالية:** **مكتملة جزئيًا؛ micro-probe تحسن إلى 29/32 لكن runtime بقي محجوبًا**
+- **المرحلة التالية المقترحة:** Phase 27.23 semantic/lexical confusion repair قبل أي runtime أو `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -70,6 +70,7 @@
 | Phase 27.19 | Hygiene Repair Corpus/Probe | ✅ completed_repair_probe_still_runtime_blocked | ✅ |
 | Phase 27.20 | Tokenizer/Protected-Phrase Strategy | ✅ completed_ready_for_tokenizer_v3_runtime_blocked | ✅ |
 | Phase 27.21 | Tokenizer v3 Protected-Phrase Micro-Probe | ✅ completed_micro_probe_failed_runtime_blocked | ✅ |
+| Phase 27.22 | Spacing/Boundary Loss Repair | ✅ completed_partial_repair_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -538,6 +539,18 @@
   - لا تفعيل runtime ولا تدريب `SF-50M`.
   - أضيف [PHASE27_21_TOKENIZER_V3_MICRO_PROBE_REPORT.md](./PHASE27_21_TOKENIZER_V3_MICRO_PROBE_REPORT.md).
   - أضيف `artifacts/reports/phase27_21_tokenizer_v3_micro_probe_report.json`.
+- بدأ وانتهى Phase 27.22 Spacing/Boundary Loss Repair:
+  - أصلح `BPETokenizer.decode` لإضافة word boundary بعد protected phrase token.
+  - أصلح `GenerationGuard` حتى لا يحجب tanween صحيح مثل `وقتًا`.
+  - أعيد تقييم checkpoint Phase 27.21 نفسه دون تدريب جديد.
+  - النتيجة تحسنت من `25/32` إلى `29/32`.
+  - `exact_clean=29/32`, `semantic=30/32`, `guard_passed=32/32`.
+  - اختفت كل markers الملتحمة: `سواونخفف`, `تفيدوتوسع`, `هادئًاوابدأ`.
+  - بقيت 3 إخفاقات: تعاون فصيح، احترام، وقراءة سعودي.
+  - القرار: `PARTIAL_SPACING_BOUNDARY_REPAIR_BLOCK_RUNTIME`.
+  - لا تفعيل runtime ولا تدريب `SF-50M`.
+  - أضيف [PHASE27_22_SPACING_BOUNDARY_REPAIR_REPORT.md](./PHASE27_22_SPACING_BOUNDARY_REPAIR_REPORT.md).
+  - أضيف `artifacts/reports/phase27_22_spacing_boundary_repair_report.json`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -603,7 +616,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.21"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.22"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,

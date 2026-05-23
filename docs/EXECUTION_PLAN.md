@@ -91,6 +91,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.19 | Hygiene Repair Corpus/Probe | مكتملة؛ أمثلة repair وحدها لم تكف |
 | Phase 27.20 | Tokenizer/Protected-Phrase Strategy | مكتملة؛ دعم protected phrases جاهز لـ tokenizer v3 |
 | Phase 27.21 | Tokenizer v3 Protected-Phrase Micro-Probe | مكتملة؛ tokenizer نجح وmicro-probe فشل 25/32 |
+| Phase 27.22 | Spacing/Boundary Loss Repair | مكتملة جزئيًا؛ micro-probe تحسن إلى 29/32 |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2258,6 +2259,59 @@ FAILED_TOKENIZER_V3_MICRO_PROBE_BLOCK_RUNTIME
 - `artifacts/tokenizers/sf_bpe/v3/`
 - `artifacts/reports/phase27_21_tokenizer_v3_micro_probe_report.json`
 - `artifacts/samples/phase27_21_tokenizer_v3_micro_probe_generations.md`
+
+---
+
+## Phase 27.22 — Spacing/Boundary Loss Repair
+
+### الهدف
+
+علاج لصق الكلمات بعد protected phrases وإزالة false positive في الحارس قبل
+أي تدريب جديد.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.22 بقرار:
+
+```text
+PARTIAL_SPACING_BOUNDARY_REPAIR_BLOCK_RUNTIME
+```
+
+ما تحقق:
+
+- `BPETokenizer.decode` يضيف word boundary بعد protected phrase token.
+- `GenerationGuard` لم يعد يحجب tanween صحيح مثل `وقتًا`.
+- أعيد تقييم checkpoint Phase 27.21 نفسه دون تدريب جديد.
+
+النتيجة:
+
+```text
+passed       = 29/32
+exact_clean  = 29/32
+semantic     = 30/32
+guard_passed = 32/32
+glued_left   = 0
+```
+
+### التشخيص
+
+إصلاح spacing نجح. المتبقي semantic/lexical confusion:
+
+- `التعانشتغل` بدل جواب فصيح عن التعاون.
+- `الاحتردم` بدل `الاحترام`.
+- جواب القراءة السعودي لا يذكر `كلماتك`.
+
+### القرار
+
+- لا runtime.
+- لا `SF-50M`.
+- التالي Phase 27.23: semantic/lexical confusion repair.
+
+### artifacts
+
+- [PHASE27_22_SPACING_BOUNDARY_REPAIR_REPORT.md](./PHASE27_22_SPACING_BOUNDARY_REPAIR_REPORT.md)
+- `artifacts/reports/phase27_22_spacing_boundary_repair_report.json`
+- `artifacts/samples/phase27_22_spacing_boundary_repair_generations.md`
 
 ---
 

@@ -84,9 +84,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.21: درّبنا tokenizer v3 مع protected phrases وشغلنا micro-probe. "
-    "التمثيل نجح، لكن المولد حقق 25/32 فقط وظهرت مشكلة لصق كلمات مثل سواونخفف. "
-    "التالي Phase 27.22 لإصلاح spacing/boundary قبل أي تفعيل للواجهة.",
+    "اكتملت Phase 27.22: أصلحنا spacing/boundary فاختفى لصق الكلمات، "
+    "وتحسن micro-probe من 25/32 إلى 29/32. بقيت 3 إخفاقات دلالية/لفظية، "
+    "لذلك التالي Phase 27.23 لإصلاح semantic/lexical confusion قبل أي تفعيل.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

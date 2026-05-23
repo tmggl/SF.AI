@@ -119,6 +119,20 @@ def test_bpe_protected_phrase_roundtrip_single_piece() -> None:
     assert tok.decode(tok.encode(text)) == text
 
 
+def test_bpe_decode_keeps_boundary_after_protected_phrase() -> None:
+    tok = BPETokenizer(
+        config=TokenizerConfig(
+            vocab_size=300,
+            min_frequency=1,
+            protected_terms=("نشتغل سوا",),
+        )
+    )
+    tok.train(["نشتغل سوا ونخفف الحمل"])
+
+    ids = tok.encode("نشتغل سوا") + tok.encode("ونخفف الحمل")
+    assert tok.decode(ids) == "نشتغل سوا ونخفف الحمل"
+
+
 def test_bpe_save_load_roundtrip(tmp_path: Path) -> None:
     cfg = TokenizerConfig(vocab_size=200, min_frequency=1)
     tok = BPETokenizer(config=cfg)

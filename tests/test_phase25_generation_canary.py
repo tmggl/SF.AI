@@ -71,6 +71,14 @@ def test_phase25_generation_guard_blocks_repeated_short_phrase() -> None:
     assert verdict.reason == "repeated_phrase"
 
 
+def test_phase27_22_generation_guard_allows_valid_tanween_words() -> None:
+    verdict = GenerationGuard().inspect(
+        "اخرج مبكرًا واترك وقتًا إضافيًا."
+    )
+    assert verdict.allowed is True
+    assert verdict.reason == "passed"
+
+
 def test_phase25_generation_guard_requires_social_prompt_alignment() -> None:
     verdict = GenerationGuard().inspect_for_prompt(
         "كيفك",

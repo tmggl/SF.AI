@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.21 — Tokenizer v3 Protected-Phrase Micro-Probe",
-        current_phase_status="completed_tokenizer_v3_micro_probe_runtime_blocked",
+        current_phase="Phase 27.22 — Spacing/Boundary Loss Repair",
+        current_phase_status="completed_partial_spacing_boundary_repair_runtime_blocked",
         next_phase=(
-            "Phase 27.22 spacing/boundary loss repair before runtime"
+            "Phase 27.23 semantic/lexical confusion repair before runtime"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -219,6 +219,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_21_tokenizer_v3_micro_probe",
                 status="completed_micro_probe_failed_runtime_blocked",
                 phase="Phase 27.21",
+            ),
+            ComponentStatus(
+                name="phase27_22_spacing_boundary_repair",
+                status="completed_partial_repair_runtime_blocked",
+                phase="Phase 27.22",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),
