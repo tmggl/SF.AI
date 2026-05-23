@@ -1,0 +1,343 @@
+{
+  "phase": "Phase 27.45",
+  "status": "PARTIAL_SEMANTIC_TOPIC_BALANCE_KEEP_PHASE27_40_RUNTIME",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": true,
+  "training_scope": "SF-10M semantic topic balance repair only; no scaling",
+  "tokenizer": "artifacts/tokenizers/sf_bpe/v6_weak_lane_terms",
+  "checkpoint_root": "artifacts/eval/phase27_45_semantic_topic_balance_repair/checkpoints",
+  "checkpoint_name": "sf-10m-step7200",
+  "candidate_generator": "sf_10m_phase27_45",
+  "train_records": 4509,
+  "summary": {
+    "passed": 9,
+    "total": 16,
+    "bucket_summary": {
+      "new_topic": {
+        "passed": 0,
+        "total": 2
+      },
+      "regression": {
+        "passed": 5,
+        "total": 8
+      },
+      "weak_lane": {
+        "passed": 4,
+        "total": 6
+      }
+    },
+    "reason_counts": {
+      "passed": 9,
+      "guard:thanks_mismatch": 2,
+      "semantic_mismatch": 2,
+      "guard:social_smalltalk_mismatch": 1,
+      "guard:advice_mismatch": 1,
+      "guard:support_mismatch": 1
+    }
+  },
+  "runtime_switch_allowed": false,
+  "sf50m_allowed": false,
+  "phase28_allowed": false,
+  "previous_phase27_44": {
+    "status": "PARTIAL_TOKENIZER_CURRICULUM_REPAIR_KEEP_PHASE27_40_RUNTIME",
+    "passed": 11,
+    "total": 16
+  },
+  "next_phase": "Phase 27.46 — inspect remaining semantic blockers",
+  "torch_version": "2.12.0",
+  "rows": [
+    {
+      "id": "weak_smalltalk_akhbarak",
+      "bucket": "weak_lane",
+      "dialect": "saudi",
+      "prompt": "وش اخبارك",
+      "intent": "smalltalk",
+      "topic": "",
+      "expected_terms": [
+        "بخير"
+      ],
+      "response": "بخير ولله الحمدك وقت الخوف.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "weak_smalltalk_oloomk",
+      "bucket": "weak_lane",
+      "dialect": "saudi",
+      "prompt": "علومك",
+      "intent": "smalltalk",
+      "topic": "",
+      "expected_terms": [
+        "بخير"
+      ],
+      "response": "بخير ولله الحمدك وقت الخوف.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "weak_thanks_mashkoor",
+      "bucket": "weak_lane",
+      "dialect": "msa",
+      "prompt": "مشكور",
+      "intent": "thanks",
+      "topic": "",
+      "expected_terms": [
+        "العفو"
+      ],
+      "response": "ناس معًا لتامل.",
+      "generator_used": true,
+      "guard_allowed": false,
+      "guard_reason": "thanks_mismatch",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "guard:thanks_mismatch"
+    },
+    {
+      "id": "weak_thanks_tislam",
+      "bucket": "weak_lane",
+      "dialect": "msa",
+      "prompt": "تسلم",
+      "intent": "thanks",
+      "topic": "",
+      "expected_terms": [
+        "العفو"
+      ],
+      "response": "ناس معًا لتامل.",
+      "generator_used": true,
+      "guard_allowed": false,
+      "guard_reason": "thanks_mismatch",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "guard:thanks_mismatch"
+    },
+    {
+      "id": "weak_planning_time",
+      "bucket": "weak_lane",
+      "dialect": "msa",
+      "prompt": "نظم وقتي",
+      "intent": "planning",
+      "topic": "",
+      "expected_terms": [
+        "مهام"
+      ],
+      "response": "اكتب ثلاث مهام وابدأ بكلامك وتزيد المفردات.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "weak_planning_priorities",
+      "bucket": "weak_lane",
+      "dialect": "saudi",
+      "prompt": "ابي ارتب اولوياتي",
+      "intent": "planning",
+      "topic": "",
+      "expected_terms": [
+        "ابدأ"
+      ],
+      "response": "اكتب أهم ثلاث أشياء وابدأ بالأول.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "new_definition_wafa",
+      "bucket": "new_topic",
+      "dialect": "msa",
+      "prompt": "ما معنى الوفاء",
+      "intent": "definition",
+      "topic": "الوفاء",
+      "expected_terms": [
+        "الوفاء"
+      ],
+      "response": "الهدوء سكينة تساعدك على التفكير بوضوح.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "new_definition_courage",
+      "bucket": "new_topic",
+      "dialect": "msa",
+      "prompt": "اشرح الشجاعة",
+      "intent": "definition",
+      "topic": "الشجاعة",
+      "expected_terms": [
+        "الشجاعة"
+      ],
+      "response": "الصداقة مودة ووفاء بين الناس.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "semantic_mismatch"
+    },
+    {
+      "id": "reg_smalltalk",
+      "bucket": "regression",
+      "dialect": "saudi",
+      "prompt": "كيفك اليوم",
+      "intent": "smalltalk",
+      "topic": "",
+      "expected_terms": [
+        "بخير"
+      ],
+      "response": "اكتب أهم ثلاث أشياء وابدأ بالأول.",
+      "generator_used": true,
+      "guard_allowed": false,
+      "guard_reason": "social_smalltalk_mismatch",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "guard:social_smalltalk_mismatch"
+    },
+    {
+      "id": "reg_advice",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "انصحني ببداية بسيطة",
+      "intent": "advice",
+      "topic": "",
+      "expected_terms": [
+        "ابدأ"
+      ],
+      "response": "في الود ودة مل.",
+      "generator_used": true,
+      "guard_allowed": false,
+      "guard_reason": "advice_mismatch",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "guard:advice_mismatch"
+    },
+    {
+      "id": "reg_planning",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "كيف ارتب مهامي",
+      "intent": "planning",
+      "topic": "",
+      "expected_terms": [
+        "مهام"
+      ],
+      "response": "اكتب ثلاث مهام وابدأ بكلامك وتر.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_support",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "انا متوتر",
+      "intent": "support",
+      "topic": "",
+      "expected_terms": [
+        "نفس",
+        "اهدأ"
+      ],
+      "response": "الصدق وضوح في واب وقت الخوالعمإنك تثبت معك.",
+      "generator_used": true,
+      "guard_allowed": false,
+      "guard_reason": "support_mismatch",
+      "semantic_match": false,
+      "passed": false,
+      "reason": "guard:support_mismatch"
+    },
+    {
+      "id": "reg_friendship",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "ما معنى الصداقة",
+      "intent": "definition",
+      "topic": "الصداقة",
+      "expected_terms": [
+        "الصداقة"
+      ],
+      "response": "الصداقة علاقة طيبة تقوم على الوفاء.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_truth",
+      "bucket": "regression",
+      "dialect": "saudi",
+      "prompt": "الصدق وش يعني",
+      "intent": "definition",
+      "topic": "الصدق",
+      "expected_terms": [
+        "الصدق"
+      ],
+      "response": "الصدق يعني تقول الحقيقة بوضوح.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_order",
+      "bucket": "regression",
+      "dialect": "msa",
+      "prompt": "ما معنى التنظيم",
+      "intent": "definition",
+      "topic": "التنظيم",
+      "expected_terms": [
+        "التنظيم"
+      ],
+      "response": "التنظيم ترتيب الوقت والمهام بطريقة واضحة.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "reg_calm",
+      "bucket": "regression",
+      "dialect": "saudi",
+      "prompt": "الهدوء وش يعني",
+      "intent": "definition",
+      "topic": "الهدوء",
+      "expected_terms": [
+        "الهدوء"
+      ],
+      "response": "الهدوء يعني تخفف توترك وتتكلم بروية.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "semantic_match": true,
+      "passed": true,
+      "reason": "passed"
+    }
+  ]
+}

@@ -239,3 +239,70 @@ def test_phase27_43_guarded_data_backed_expansion_blocks_runtime_switch() -> Non
     assert report["summary"]["bucket_summary"]["weak_lane"]["passed"] == 4
     assert report["summary"]["bucket_summary"]["regression"]["passed"] == 6
     assert report["summary"]["bucket_summary"]["new_topic"]["passed"] == 0
+
+
+def test_phase27_44_tokenizer_curriculum_repair_records_partial_result() -> None:
+    report = _report("phase27_44_tokenizer_curriculum_repair_report.json")
+    assert report["phase"] == "Phase 27.44"
+    assert report["status"] == "PARTIAL_TOKENIZER_CURRICULUM_REPAIR_KEEP_PHASE27_40_RUNTIME"
+    assert report["training_started"] is True
+    assert report["tokenizer"]["path"] == "artifacts/tokenizers/sf_bpe/v6_weak_lane_terms"
+    assert report["protected_phrase_behavior"]["max_pieces"] == 1
+    assert report["protected_phrase_behavior"]["all_roundtrip_ok"] is True
+    assert report["runtime_switch_allowed"] is False
+    assert report["summary"]["passed"] == 11
+    assert report["summary"]["total"] == 16
+    assert report["summary"]["bucket_summary"]["weak_lane"]["passed"] == 6
+
+
+def test_phase27_45_semantic_topic_balance_records_regression() -> None:
+    report = _report("phase27_45_semantic_topic_balance_repair_report.json")
+    assert report["phase"] == "Phase 27.45"
+    assert report["status"] == "PARTIAL_SEMANTIC_TOPIC_BALANCE_KEEP_PHASE27_40_RUNTIME"
+    assert report["training_started"] is True
+    assert report["runtime_switch_allowed"] is False
+    assert report["summary"]["passed"] == 9
+    assert report["summary"]["total"] == 16
+
+
+def test_phase27_46_core_dialogue_stabilization_nearly_passes() -> None:
+    report = _report("phase27_46_core_dialogue_stabilization_report.json")
+    assert report["phase"] == "Phase 27.46"
+    assert report["status"] == "PARTIAL_CORE_DIALOGUE_STABILIZATION_KEEP_PHASE27_40_RUNTIME"
+    assert report["training_started"] is True
+    assert report["runtime_switch_allowed"] is False
+    assert report["summary"]["passed"] == 14
+    assert report["summary"]["bucket_summary"]["weak_lane"]["passed"] == 6
+    assert report["summary"]["bucket_summary"]["regression"]["passed"] == 8
+    assert report["summary"]["bucket_summary"]["new_topic"]["passed"] == 0
+
+
+def test_phase27_47_new_topic_conditioning_passes_offline_gate() -> None:
+    report = _report("phase27_47_new_topic_conditioning_repair_report.json")
+    assert report["phase"] == "Phase 27.47"
+    assert report["status"] == "PASSED_NEW_TOPIC_CONDITIONING_READY_FOR_GUARDED_SWITCH"
+    assert report["training_started"] is True
+    assert report["candidate_generator"] == "sf_10m_phase27_47"
+    assert report["runtime_switch_allowed"] is True
+    assert report["conditioning_repair"]["added_topic_line_for"] == ["الوفاء", "الشجاعة"]
+    assert report["summary"]["passed"] == 16
+    assert report["summary"]["total"] == 16
+
+
+def test_phase27_48_guarded_runtime_switch_passes_live_gate() -> None:
+    report = _report("phase27_48_guarded_runtime_switch_report.json")
+    assert report["phase"] == "Phase 27.48"
+    assert report["status"] == "PASSED_GUARDED_RUNTIME_SWITCH_PHASE27_47"
+    assert report["training_started"] is False
+    assert report["runtime_default"] == "template"
+    assert report["request_flag"] == "generator_trial=true"
+    assert report["candidate_generator"] == "sf_10m_phase27_47"
+    assert report["candidate_tokenizer"] == "artifacts/tokenizers/sf_bpe/v6_weak_lane_terms"
+    assert report["sf50m_allowed"] is False
+    assert report["user_test_allowed"] is True
+    assert report["summary"]["passed"] == 19
+    assert report["summary"]["total"] == 19
+    assert report["summary"]["bucket_summary"]["generated_weak"]["passed"] == 6
+    assert report["summary"]["bucket_summary"]["generated_new_topic"]["passed"] == 2
+    assert report["summary"]["bucket_summary"]["generated_regression"]["passed"] == 8
+    assert all(row["passed"] for row in report["rows"])

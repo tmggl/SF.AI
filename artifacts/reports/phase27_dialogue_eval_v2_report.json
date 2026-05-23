@@ -215,7 +215,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "تقدر تختبر المولّد الآن من زر «مولّد تجريبي»، لكن داخل نطاقات محددة: سؤال الحال، الشكر، نصيحة قصيرة، ترتيب بسيط، دعم خفيف، وتعريفات مثبتة مثل الصداقة والصدق والتنظيم والهدوء."
+      "response_preview": "تقدر تختبر المولّد الآن من زر «مولّد تجريبي»، لكن داخل نطاقات محددة: سؤال الحال، الشكر، نصيحة قصيرة، ترتيب بسيط، دعم خفيف، وتعريفات مثبتة مثل الصداقة والصدق والتنظيم والهدوء والوفا"
     },
     {
       "scenario_id": "project_meta_flow",
@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27.43 جزئيًا: درّبنا مرشح weak-lane لكنه مرّ 10/16 فقط، لذلك لم نبدّل الواجهة وبقي runtime على Phase 27.40. التالي Phase 27.44 لإصلاح tokenizer/curriculum قبل أي فتح ج"
+      "response_preview": "وصلنا إلى Phase 27.48: مرشح Phase 27.47 مرّ 16/16 offline ثم 19/19 على API الحي، والواجهة تستخدمه فقط عند تفعيل زر «مولّد تجريبي». التالي Phase 27.49 لتوسيع اختبارات الواجهة قبل أي"
     },
     {
       "scenario_id": "clarification_repair_flow",

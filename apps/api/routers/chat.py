@@ -60,7 +60,7 @@ def chat_message(payload: ChatRequest) -> ChatResponse:
 
 @lru_cache(maxsize=1)
 def _get_guarded_trial_orchestrator() -> Orchestrator:
-    """Build the explicit Phase 27.43 local generator trial path.
+    """Build the explicit Phase 27.47 local generator trial path.
 
     This is not the default runtime brain. The UI/API must opt in per request
     via `generator_trial=true`; sensitive/non-chat domains still route through
@@ -75,15 +75,15 @@ def _get_guarded_trial_orchestrator() -> Orchestrator:
         max_new_tokens=24,
         temperature=1.0,
         top_k=0,
-        candidate_generator="sf_10m_phase27_40",
+        candidate_generator="sf_10m_phase27_47",
     )
     generator = NativeGenerator(
         NativeGeneratorConfig(
-            tokenizer_path=PROJECT_DIR / "artifacts/tokenizers/sf_bpe/v5_topic_terms",
+            tokenizer_path=PROJECT_DIR / "artifacts/tokenizers/sf_bpe/v6_weak_lane_terms",
             checkpoints_root=PROJECT_DIR
-            / "artifacts/eval/phase27_40_tokenizer_context_repair/checkpoints",
-            checkpoint_name="sf-10m-step6400",
-            generator_name="sf_10m_phase27_40",
+            / "artifacts/eval/phase27_47_new_topic_conditioning_repair/checkpoints",
+            checkpoint_name="sf-10m-step4600",
+            generator_name="sf_10m_phase27_47",
             model_size="sf-10m",
             seq_len=64,
             max_new_tokens=24,

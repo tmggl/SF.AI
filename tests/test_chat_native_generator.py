@@ -430,7 +430,7 @@ def test_guarded_runtime_trial_blocks_unstable_definition_topic_before_generator
         ),
         native_generator=gen,  # type: ignore[arg-type]
     )
-    analysis = pipe.analyze_user_text("اشرح لي الشجاعة ببساطة")
+    analysis = pipe.analyze_user_text("اشرح لي الكرم ببساطة")
     out = mod.handle(analysis, intent="chat.general", session_id="phase2736-topic")
     assert gen.calls == []
     assert "generator:template" in out.notes

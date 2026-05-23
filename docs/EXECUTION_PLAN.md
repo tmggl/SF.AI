@@ -113,6 +113,11 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.41 | Guarded Runtime Switch | مكتملة؛ HTTP gate مرّ `22/22` و`generator_trial` يستخدم `sf_10m_phase27_40` |
 | Phase 27.42 | Live UI Broader Probes | مكتملة؛ broader gate مرّ `29/29` وحجب الردود غير المطابقة |
 | Phase 27.43 | Guarded Data-Backed Expansion | مكتملة جزئيًا؛ weak-lane candidate مرّ `10/16` ولا runtime switch |
+| Phase 27.44 | Tokenizer/Curriculum Repair | مكتملة جزئيًا؛ tokenizer v6 وweak-lane `6/6` لكن الإجمالي `11/16` |
+| Phase 27.45 | Semantic Topic Balance Repair | مكتملة جزئيًا؛ `9/16` ولا runtime switch |
+| Phase 27.46 | Core Dialogue Stabilization | مكتملة جزئيًا؛ `14/16` ولا runtime switch |
+| Phase 27.47 | New Topic Conditioning Repair | مكتملة؛ offline gate مرّ `16/16` |
+| Phase 27.48 | Guarded Runtime Switch for Phase 27.47 | مكتملة؛ live API gate مرّ `19/19` و`generator_trial` يستخدم `sf_10m_phase27_47` |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2886,6 +2891,41 @@ sf50m_allowed = false
 - [PHASE27_43_GUARDED_DATA_BACKED_EXPANSION_REPORT.md](./PHASE27_43_GUARDED_DATA_BACKED_EXPANSION_REPORT.md)
 - `artifacts/reports/phase27_43_guarded_data_backed_expansion_report.json`
 - `artifacts/samples/phase27_43_guarded_data_backed_expansion.md`
+
+## Phase 27.44–27.48 — Tokenizer/Conditioning Repair and Guarded Switch
+
+### الهدف
+
+إصلاح المسارات الضعيفة بدون تكبير النموذج: tokenizer v6 يحمي العبارات
+السعودية والمفاهيم، ثم نواة حوار صغيرة تثبت أن `SF-10M` يستطيع الرد
+بشكل مفهوم داخل نطاق ضيق قبل أي توسعة.
+
+### نتيجة التنفيذ
+
+```text
+phase27_44 = 11/16, tokenizer v6 max_pieces=1
+phase27_45 = 9/16
+phase27_46 = 14/16
+phase27_47 = 16/16 offline
+phase27_48 = 19/19 live API
+candidate_generator = sf_10m_phase27_47
+runtime_default = template
+request_flag = generator_trial=true
+sf50m_allowed = false
+```
+
+### القرار
+
+- فُتح `sf_10m_phase27_47` فقط عند تفعيل `generator_trial=true`.
+- الافتراضي ما زال القالب الآمن.
+- لا `SF-50M` ولا Phase 28 قبل Phase 27.49 broader live UI probes.
+
+### artifacts
+
+- [PHASE27_44_TO_48_RUNTIME_SWITCH_REPORT.md](./PHASE27_44_TO_48_RUNTIME_SWITCH_REPORT.md)
+- `artifacts/reports/phase27_44_tokenizer_curriculum_repair_report.json`
+- `artifacts/reports/phase27_47_new_topic_conditioning_repair_report.json`
+- `artifacts/reports/phase27_48_guarded_runtime_switch_report.json`
 
 ---
 

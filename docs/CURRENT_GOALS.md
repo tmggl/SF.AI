@@ -52,7 +52,7 @@ Phase 27.25 اختبرت checkpoint نفسه على أسئلة held-out جديد
 `16/18` مع intent/topic conditioning. Phase 27.31–27.33 أكملت natural
 intent/topic + balanced calibration + advice/micro stabilization، ووصلت إلى
 كل البوابات المحلية كاملة: fresh mixed `18/18` وmicro `32/32` بلا تسريب.
-الخطوة الحالية ليست تكبير النموذج. Phase 27.43 درّب مرشح weak-lane لكنه مرّ `10/16` فقط؛ التالي Phase 27.44 لإصلاح tokenizer/curriculum قبل أي فتح جديد.
+الخطوة الحالية ليست تكبير النموذج. Phase 27.48 فتح `sf_10m_phase27_47` داخل `generator_trial=true` فقط بعد نجاح offline `16/16` وlive API `19/19`؛ التالي Phase 27.49 لتوسيع اختبارات الواجهة الحية قبل أي فتح أوسع.
 
 الخطوة العملية الحالية:
 
@@ -203,7 +203,12 @@ SF.AI حاليًا:
 - **Phase 27.41:** Guarded Runtime Switch — مكتمل؛ HTTP gate مرّ `22/22` و`generator_trial` يستخدم `sf_10m_phase27_40`.
 - **Phase 27.42:** Live UI Broader Probes — مكتمل؛ HTTP gate مرّ `29/29` وحجب الردود غير المطابقة.
 - **Phase 27.43:** Guarded Data-Backed Expansion — مكتمل جزئيًا؛ `10/16` ولا runtime switch.
-- **Phase 27.44:** Tokenizer/Curriculum Repair for Weak-Lane Stability — التالي.
+- **Phase 27.44:** Tokenizer/Curriculum Repair for Weak-Lane Stability — مكتمل جزئيًا؛ `11/16`, weak-lane `6/6`.
+- **Phase 27.45:** Semantic Topic Balance Repair — مكتمل جزئيًا؛ `9/16`, لا runtime switch.
+- **Phase 27.46:** Core Dialogue Stabilization — مكتمل جزئيًا؛ `14/16`, بقيت موضوعات جديدة.
+- **Phase 27.47:** New Topic Conditioning Repair — مكتمل؛ offline `16/16`.
+- **Phase 27.48:** Guarded Runtime Switch — مكتمل؛ live API `19/19`, و`generator_trial` يستخدم `sf_10m_phase27_47`.
+- **Phase 27.49:** Broader Live UI Probes — التالي.
 - **Phase 28:** تدريب `SF-120M v0.1`؛ أول قفزة بعد نجاح `SF-50M`.
 - **Phase 29:** Runtime Hybrid Assistant v1.
 - **Phase 30:** Continuous Improvement Loop.

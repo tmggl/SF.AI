@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.43 — Guarded Data-Backed Expansion",
-        current_phase_status="completed_partial_keep_phase27_40_runtime",
+        current_phase="Phase 27.48 — Guarded Runtime Switch for Phase 27.47",
+        current_phase_status="completed_guarded_runtime_switch_phase27_47",
         next_phase=(
-            "Phase 27.44 tokenizer/curriculum repair for weak-lane stability; SF-50M remains blocked"
+            "Phase 27.49 broader live UI probes for sf_10m_phase27_47; SF-50M remains blocked"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -329,6 +329,31 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_43_guarded_data_backed_expansion",
                 status="completed_partial_keep_phase27_40_runtime",
                 phase="Phase 27.43",
+            ),
+            ComponentStatus(
+                name="phase27_44_tokenizer_curriculum_repair",
+                status="completed_partial_keep_phase27_40_runtime",
+                phase="Phase 27.44",
+            ),
+            ComponentStatus(
+                name="phase27_45_semantic_topic_balance_repair",
+                status="completed_partial_keep_phase27_40_runtime",
+                phase="Phase 27.45",
+            ),
+            ComponentStatus(
+                name="phase27_46_core_dialogue_stabilization",
+                status="completed_partial_keep_phase27_40_runtime",
+                phase="Phase 27.46",
+            ),
+            ComponentStatus(
+                name="phase27_47_new_topic_conditioning_repair",
+                status="completed_ready_for_guarded_switch",
+                phase="Phase 27.47",
+            ),
+            ComponentStatus(
+                name="phase27_48_guarded_runtime_switch",
+                status="completed_guarded_runtime_switch_phase27_47",
+                phase="Phase 27.48",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

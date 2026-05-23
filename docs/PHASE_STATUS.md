@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.43 / 30**
-- **المرحلة الحالية:** **Phase 27.43 — Guarded Data-Backed Expansion**
-- **حالة المرحلة الحالية:** **مكتملة جزئيًا؛ تدريب weak-lane مرّ `10/16` فقط، وruntime يبقى على Phase 27.40**
-- **المرحلة التالية المقترحة:** Phase 27.44 tokenizer/curriculum repair for weak-lane stability؛ لا Phase 28 ولا `SF-50M` قبل بوابات جودة أوسع.
+- **الرحلة الحالية:** **Phase 27.48 / 30**
+- **المرحلة الحالية:** **Phase 27.48 — Guarded Runtime Switch for Phase 27.47**
+- **حالة المرحلة الحالية:** **مكتملة؛ `sf_10m_phase27_47` مرّ offline `16/16` ثم live API `19/19` داخل `generator_trial=true`**
+- **المرحلة التالية المقترحة:** Phase 27.49 broader live UI probes؛ لا Phase 28 ولا `SF-50M` قبل بوابات جودة أوسع.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -92,6 +92,11 @@
 | Phase 27.41 | Guarded Runtime Switch | ✅ completed_candidate_opened_in_guarded_trial | ✅ |
 | Phase 27.42 | Live UI Broader Probes | ✅ completed_live_ui_broader_probes_guarded | ✅ |
 | Phase 27.43 | Guarded Data-Backed Expansion | ✅ completed_partial_keep_phase27_40_runtime | ✅ |
+| Phase 27.44 | Tokenizer/Curriculum Repair | ✅ completed_partial_keep_phase27_40_runtime | ✅ |
+| Phase 27.45 | Semantic Topic Balance Repair | ✅ completed_partial_keep_phase27_40_runtime | ✅ |
+| Phase 27.46 | Core Dialogue Stabilization | ✅ completed_partial_keep_phase27_40_runtime | ✅ |
+| Phase 27.47 | New Topic Conditioning Repair | ✅ completed_ready_for_guarded_switch | ✅ |
+| Phase 27.48 | Guarded Runtime Switch for Phase 27.47 | ✅ completed_guarded_runtime_switch_phase27_47 | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -718,6 +723,30 @@
   - القرار: لا runtime switch؛ الواجهة تبقى على `sf_10m_phase27_40` داخل `generator_trial=true`.
   - التالي Phase 27.44 tokenizer/curriculum repair for weak-lane stability.
   - أضيف [PHASE27_43_GUARDED_DATA_BACKED_EXPANSION_REPORT.md](./PHASE27_43_GUARDED_DATA_BACKED_EXPANSION_REPORT.md).
+- بدأ وانتهى Phase 27.44 Tokenizer/Curriculum Repair:
+  - أُنشئ tokenizer v6 في `artifacts/tokenizers/sf_bpe/v6_weak_lane_terms`.
+  - protected phrases وصلت إلى `max_pieces=1` مع roundtrip صحيح.
+  - الاختبار: `11/16`; weak-lane نجح `6/6` لكن regressions بقيت جزئية.
+  - القرار: لا runtime switch.
+- بدأ وانتهى Phase 27.45 Semantic Topic Balance Repair:
+  - حاولنا موازنة تعريفات الموضوعات بعد خلط 27.44.
+  - الاختبار: `9/16`.
+  - القرار: التجربة تراجعت، لا runtime switch.
+- بدأ وانتهى Phase 27.46 Core Dialogue Stabilization:
+  - ركزنا على نواة حوار صغيرة بدل توسعة واسعة.
+  - الاختبار: `14/16`; كل weak-lane وregressions نجحت، وبقي `الوفاء/الشجاعة`.
+  - القرار: لا runtime switch حتى إصلاح conditioning.
+- بدأ وانتهى Phase 27.47 New Topic Conditioning Repair:
+  - أصلحنا سجلات التدريب لتضيف `المصطلح: الوفاء` و`المصطلح: الشجاعة`.
+  - الاختبار offline: `16/16`.
+  - المرشح: `sf_10m_phase27_47`, checkpoint `sf-10m-step4600`, tokenizer v6.
+  - القرار: جاهز لبوابة runtime محروسة.
+- بدأ وانتهى Phase 27.48 Guarded Runtime Switch:
+  - فُتح `sf_10m_phase27_47` في `generator_trial=true` فقط.
+  - الاختبار live API: `19/19`.
+  - الافتراضي ما زال `template`، والحالات العامة/الحساسة تبقى على fallback.
+  - التالي Phase 27.49 broader live UI probes.
+  - أضيف [PHASE27_44_TO_48_RUNTIME_SWITCH_REPORT.md](./PHASE27_44_TO_48_RUNTIME_SWITCH_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -783,7 +812,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.43"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.48"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,

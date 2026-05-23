@@ -75,6 +75,11 @@ SF.AI يملك الآن:
 | Phase 27.41 | `Guarded runtime switch` | `generator_trial=true` يستخدم `sf_10m_phase27_40`; HTTP gate `22/22` |
 | Phase 27.42 | `Live UI broader probes` | broader HTTP gate `29/29`; misaligned generations blocked |
 | Phase 27.43 | `Guarded data-backed expansion` | weak-lane candidate partial `10/16`; runtime stays on 27.40 |
+| Phase 27.44 | `Tokenizer/curriculum repair` | tokenizer v6؛ partial `11/16`, weak-lane `6/6` |
+| Phase 27.45 | `Semantic topic balance repair` | partial `9/16`; التوسيع العريض سبّب regression |
+| Phase 27.46 | `Core dialogue stabilization` | partial `14/16`; بقي `الوفاء/الشجاعة` |
+| Phase 27.47 | `New topic conditioning repair` | offline `16/16`; أصلح train/eval conditioning |
+| Phase 27.48 | `Guarded runtime switch` | live API `19/19`; `generator_trial=true` يستخدم `sf_10m_phase27_47` |
 | بعد نجاح SF-10M | `SF-50M v0.1` | نجاح جودة SF-10M/canary + إعادة Phase 26 readiness |
 | Phase 28 | `SF-120M v0.1` | نجاح SF-50M + scaling gate |
 
@@ -121,7 +126,8 @@ SF.AI يملك الآن:
 - **Phase 27.41:** فتحت `sf_10m_phase27_40` اختياريًا عبر `generator_trial=true`; البوابة الحية مرّت `22/22`.
 - **Phase 27.42:** وسعت probes الواجهة ومرّت `29/29`; الردود غير المطابقة تُحجب بدل أن تظهر للمستخدم.
 - **Phase 27.43:** دربت مرشح weak-lane لكنه مرّ `10/16` فقط؛ لا runtime switch.
-- **Phase 27.44:** إصلاح tokenizer/curriculum للمسارات الضعيفة قبل أي تكبير.
+- **Phase 27.44–27.48:** أنشأت tokenizer v6، أصلحت conditioning لموضوعي `الوفاء/الشجاعة`، وفتحت `sf_10m_phase27_47` داخل `generator_trial=true` بعد gate حي `19/19`.
+- **Phase 27.49:** توسيع probes الحية من الواجهة قبل أي تكبير.
 - **Phase 28:** أول قفزة بعد SF-50M إذا أثبت 50M قيمة واضحة.
 - **Phase 29:** إدخاله في الواجهة كتجربة يومية مع router/safety/memory.
 
