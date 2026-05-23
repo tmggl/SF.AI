@@ -26,10 +26,10 @@ def test_phase22_readiness_reports_current_gap() -> None:
     assert decision.phase.startswith("Phase 22")
     assert decision.status == "NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2"
     assert decision.can_start_phase23 is False
-    assert decision.training_records == 280
+    assert decision.training_records == 305
     assert decision.target_records == 500
-    assert decision.remaining_records == 220
-    assert decision.dialect_counts == {"msa": 200, "saudi": 80}
+    assert decision.remaining_records == 195
+    assert decision.dialect_counts == {"msa": 200, "saudi": 105}
     assert decision.missing_required_dialects == ()
     assert decision.synthetic_llm_data_allowed is False
     assert "corpus_below_phase22_target" in decision.blockers
@@ -40,7 +40,7 @@ def test_phase22_readiness_requires_balance_before_phase23() -> None:
     decision = build_phase22_readiness_decision()
     assert decision.min_per_dialect == 200
     assert decision.dialect_shortfalls["msa"] == 0
-    assert decision.dialect_shortfalls["saudi"] == 120
+    assert decision.dialect_shortfalls["saudi"] == 95
     assert "dialect_balance_below_minimum" in decision.blockers
 
 
@@ -51,7 +51,7 @@ def test_phase22_endpoint() -> None:
     assert body["phase"].startswith("Phase 22")
     assert body["status"] == "NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2"
     assert body["can_start_phase23"] is False
-    assert body["training_records"] == 280
+    assert body["training_records"] == 305
     assert body["target_records"] == 500
     assert body["allowed_dialects"] == ["msa", "saudi"]
     assert body["synthetic_llm_data_allowed"] is False
@@ -60,20 +60,20 @@ def test_phase22_endpoint() -> None:
 def test_phase22_collection_plan_calculates_real_quotas() -> None:
     plan = build_phase22_collection_plan()
     assert plan.status == "COLLECT_REVIEWED_MSA_SAUDI_DIALOGUE_BATCHES"
-    assert plan.current_records == 280
-    assert plan.remaining_records == 220
+    assert plan.current_records == 305
+    assert plan.remaining_records == 195
     assert plan.batch_size == 25
-    assert plan.estimated_batches == 9
-    assert plan.quota_by_dialect == {"saudi": 120}
+    assert plan.estimated_batches == 8
+    assert plan.quota_by_dialect == {"saudi": 95}
     assert plan.flexible_records_after_minimums == 100
     assert plan.synthetic_llm_data_allowed is False
     assert any("No external or unprovenanced synthetic LLM data" in rule for rule in plan.review_rules)
-    assert len(plan.planned_batches) == 9
-    assert plan.planned_batches[0].batch_id == "saudi_003"
+    assert len(plan.planned_batches) == 8
+    assert plan.planned_batches[0].batch_id == "saudi_004"
     assert plan.planned_batches[0].dialect == "saudi"
     assert plan.planned_batches[0].target_records == 25
-    assert plan.planned_batches[4].batch_id == "saudi_007"
-    assert plan.planned_batches[4].target_records == 20
+    assert plan.planned_batches[3].batch_id == "saudi_007"
+    assert plan.planned_batches[3].target_records == 20
     assert plan.planned_batches[-1].batch_id == "flex_004"
     assert "synthetic LLM data خارجي" in plan.planned_batches[0].user_task
 
@@ -84,12 +84,12 @@ def test_phase22_collection_plan_endpoint() -> None:
     body = r.json()
     assert body["phase"].startswith("Phase 22")
     assert body["batch_size"] == 50
-    assert body["estimated_batches"] == 5
-    assert body["quota_by_dialect"] == {"saudi": 120}
+    assert body["estimated_batches"] == 4
+    assert body["quota_by_dialect"] == {"saudi": 95}
     assert body["synthetic_llm_data_allowed"] is False
-    assert len(body["planned_batches"]) == 5
-    assert body["planned_batches"][0]["batch_id"] == "saudi_003"
-    assert body["planned_batches"][0]["suggested_output_path"].endswith("dialogue_batch_v2_saudi_003.jsonl")
+    assert len(body["planned_batches"]) == 4
+    assert body["planned_batches"][0]["batch_id"] == "saudi_004"
+    assert body["planned_batches"][0]["suggested_output_path"].endswith("dialogue_batch_v2_saudi_004.jsonl")
     assert body["planned_batches"][-1]["batch_id"] == "flex_002"
 
 
@@ -97,7 +97,7 @@ def test_phase22_next_batch_brief_points_to_next_saudi_batch() -> None:
     brief = build_phase22_next_batch_brief()
     assert brief.status == "AUTHOR_NEXT_REVIEW_BATCH"
     assert brief.next_batch is not None
-    assert brief.next_batch.batch_id == "saudi_003"
+    assert brief.next_batch.batch_id == "saudi_004"
     assert brief.next_batch.dialect == "saudi"
     assert brief.next_batch.target_records == 25
     assert "Saudi coverage is below" in brief.why_this_batch
@@ -105,7 +105,7 @@ def test_phase22_next_batch_brief_points_to_next_saudi_batch() -> None:
     assert any("not training data" in warning for warning in brief.warnings)
     assert any("القاموس" in topic and "بيانات التدريب" in topic for topic in brief.suggested_topics)
     assert len(brief.suggested_topics) >= 6
-    assert "validate_dataset.py data/corpus/chat/jsonl/dialogue_batch_v2_saudi_003.jsonl" in brief.after_export_commands[0]
+    assert "validate_dataset.py data/corpus/chat/jsonl/dialogue_batch_v2_saudi_004.jsonl" in brief.after_export_commands[0]
     assert brief.after_export_commands[1] == "make corpus-audit"
 
 
@@ -126,12 +126,12 @@ def test_phase22_next_batch_endpoint() -> None:
     body = r.json()
     assert body["phase"].startswith("Phase 22")
     assert body["status"] == "AUTHOR_NEXT_REVIEW_BATCH"
-    assert body["next_batch"]["batch_id"] == "saudi_003"
+    assert body["next_batch"]["batch_id"] == "saudi_004"
     assert body["next_batch"]["dialect"] == "saudi"
     assert body["next_batch"]["target_records"] == 25
     assert len(body["suggested_topics"]) >= 6
     assert body["warnings"]
-    assert "validate_dataset.py data/corpus/chat/jsonl/dialogue_batch_v2_saudi_003.jsonl" in body["after_export_commands"][0]
+    assert "validate_dataset.py data/corpus/chat/jsonl/dialogue_batch_v2_saudi_004.jsonl" in body["after_export_commands"][0]
 
 
 def test_phase22_completion_gate_blocks_advancement_until_complete() -> None:
@@ -139,16 +139,16 @@ def test_phase22_completion_gate_blocks_advancement_until_complete() -> None:
     assert gate.status == "PHASE22_INCOMPLETE_DO_NOT_ADVANCE"
     assert gate.can_advance_phase23 is False
     assert gate.readiness_status == "NOT_READY_BUILD_GOLD_DIALOGUE_CORPUS_V2"
-    assert gate.training_records == 280
+    assert gate.training_records == 305
     assert gate.target_records == 500
-    assert gate.remaining_records == 220
-    assert gate.current_next_batch == "saudi_003"
+    assert gate.remaining_records == 195
+    assert gate.current_next_batch == "saudi_004"
     assert gate.completion_checks["corpus_target_met"] is False
     assert gate.completion_checks["required_dialects_present"] is True
     assert gate.completion_checks["dialect_balance_met"] is False
     assert gate.completion_checks["no_corpus_governance_issues"] is True
     assert "corpus_below_phase22_target" in gate.missing_requirements
-    assert "complete_next_batch:saudi_003" in gate.missing_requirements
+    assert "complete_next_batch:saudi_004" in gate.missing_requirements
     assert any("phase22-completion-gate" in item for item in gate.required_before_advance)
 
 
@@ -159,9 +159,9 @@ def test_phase22_completion_gate_endpoint() -> None:
     assert body["phase"].startswith("Phase 22")
     assert body["status"] == "PHASE22_INCOMPLETE_DO_NOT_ADVANCE"
     assert body["can_advance_phase23"] is False
-    assert body["current_next_batch"] == "saudi_003"
+    assert body["current_next_batch"] == "saudi_004"
     assert body["completion_checks"]["corpus_target_met"] is False
-    assert "complete_next_batch:saudi_003" in body["missing_requirements"]
+    assert "complete_next_batch:saudi_004" in body["missing_requirements"]
 
 
 def test_phase22_cli_is_read_only() -> None:
@@ -186,9 +186,9 @@ def test_phase22_collection_plan_cli_is_read_only() -> None:
     )
     assert proc.returncode == 0
     assert "Phase 22 collection plan" in proc.stdout
-    assert "estimated_batches             : 5" in proc.stdout
+    assert "estimated_batches             : 4" in proc.stdout
     assert "planned batches:" in proc.stdout
-    assert "#01 saudi_003 (saudi, 50 records, minimum_saudi)" in proc.stdout
+    assert "#01 saudi_004 (saudi, 50 records, minimum_saudi)" in proc.stdout
     assert "synthetic_llm_data_allowed    : false" in proc.stdout
 
 
@@ -201,7 +201,7 @@ def test_phase22_next_batch_cli_is_read_only() -> None:
     )
     assert proc.returncode == 0
     assert "Phase 22 next batch" in proc.stdout
-    assert "next_batch                    : saudi_003" in proc.stdout
+    assert "next_batch                    : saudi_004" in proc.stdout
     assert "suggested topics (not training data):" in proc.stdout
     assert "Do not run tokenizer or model training" in proc.stdout
 
@@ -217,7 +217,7 @@ def test_phase22_completion_gate_cli_is_read_only() -> None:
     assert "Phase 22 completion gate" in proc.stdout
     assert "status                        : PHASE22_INCOMPLETE_DO_NOT_ADVANCE" in proc.stdout
     assert "can_advance_phase23           : false" in proc.stdout
-    assert "current_next_batch            : saudi_003" in proc.stdout
+    assert "current_next_batch            : saudi_004" in proc.stdout
 
 
 def test_system_status_reports_phase22_component() -> None:
