@@ -10,10 +10,10 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.14 / 30**
-- **المرحلة الحالية:** **Phase 27.14 — Sovereign Training Quality Tooling Decision** (اكتملت: تثبيت أدوات جودة التدريب المحلية بدون تدريب جديد؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **الرحلة الحالية:** **Phase 27.15 / 30**
+- **المرحلة الحالية:** **Phase 27.15 — Social/Lexical Curriculum + No-Repeat Decoding** (اكتملت: eval تحسن لكن canary الدلالي الصارم حجب التوليد؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** Phase 27.15 لإصلاح الدلالة واللغة ورفع generation-quality؛ Phase 28 و`SF-50M` محظوران حتى تنجح البوابات.
+- **المرحلة التالية المقترحة:** Phase 27.16 لإصلاح prompt-to-answer conditioning؛ Phase 28 و`SF-50M` محظوران حتى تنجح البوابات.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
@@ -61,6 +61,8 @@
 - **تقرير Phase 27.13:** `docs/PHASE27_13_SF10M_V08_REPORT.md`, `artifacts/reports/sf_10m_v0_8_boundary_eos_training_report.json`, `artifacts/reports/generation_quality_v1_v0_8_report.json`.
 - **نتيجة Phase 27.14:** اعتُمدت أدوات جودة التدريب السيادية رسميًا: EOS/boundaries، sequence packing، local experiment tracker، data quality scanner، curriculum sampler، no-repeat controls، gold probes، checkpoint selector، local logs، tokenizer boundary audit. لا تدريب جديد ولا تفعيل runtime.
 - **تقرير Phase 27.14:** `docs/SOVEREIGN_TRAINING_QUALITY_TOOLING.md`, `artifacts/reports/phase27_14_quality_tooling_decision_report.json`, `artifacts/reports/experiment_registry.jsonl`.
+- **نتيجة Phase 27.15:** أضيفت 400 عينة gold اجتماعية/لغوية (`msa=200`, `saudi=200`) وno-repeat decoding. corpus صار `5943` بلا issues. دُرّب `SF-10M v0.10`: أفضل eval `loss=3.0452`, `perplexity=21.01`; canary الدلالي الصارم `0/10`, وruntime محظور.
+- **تقرير Phase 27.15:** `docs/PHASE27_15_SOCIAL_LEXICAL_CURRICULUM_REPORT.md`, `artifacts/reports/sf_10m_v0_10_social_lexical_curriculum_report.json`, `artifacts/reports/generation_quality_v1_v0_10_strict_report.json`.
 - **مقارنة tokenizer v1/v2:** v1 كان `vocab=261`, `merges=218`, `words_seen=723`, سعودي فقط. v2 تدرب على `500` سجل متوازن: `msa=250`, `saudi=250`.
 - **تحسن protected Saudi terms:** `average_tokens` انخفض من `4.0` في v1 إلى `2.3` في v2، ولا توجد `roundtrip_failures` أو `aggressive_split_terms`.
 - **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches=[]` لأن الجمع اكتمل.
@@ -281,7 +283,7 @@ make server-start
 
 آخر تحقق حي بعد restart:
 - السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`، PID `7733`.
-- الكود الحالي بعد Phase 27.14 يعرض `Phase 27.14` في `/system/status` و`/health`، ويعرض `GET /system/phase27-dialogue-eval` تقييم الحوار وخطة corpus.
+- الكود الحالي بعد Phase 27.15 يعرض `Phase 27.15` في `/system/status` و`/health`، ويعرض `GET /system/phase27-dialogue-eval` تقييم الحوار وخطة corpus.
 - `GET /system/phase26-readiness` يرجع `can_start_sf50m_training=false`.
 - `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - `make server-status` read-only ولا يوقف السيرفر.
@@ -290,10 +292,10 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى إكمال Phase 27.14)
+## نتائج الاختبارات (حتى إكمال Phase 27.15)
 
 ```
-491 passed in 16.25s
+495 passed in 16.81s
 ```
 
 التغطية الحالية:

@@ -171,6 +171,12 @@ def test_native_generator_status_checks_sovereign_artifact_locations() -> None:
     assert isinstance(status.checkpoint_state_exists, bool)
 
 
+def test_native_generator_default_decoding_controls_are_enabled() -> None:
+    cfg = NativeGeneratorConfig()
+    assert cfg.no_repeat_ngram_size == 3
+    assert cfg.repetition_penalty > 1.0
+
+
 def test_native_generator_returns_missing_checkpoint_without_throwing(tmp_path: Path) -> None:
     gen = NativeGenerator(
         NativeGeneratorConfig(

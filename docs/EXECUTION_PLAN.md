@@ -84,6 +84,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.12 | Assistant Boundary/EOS Repair | مكتملة جزئيًا؛ runtime محظور |
 | Phase 27.13 | SF-10M v0.8 Boundary/EOS Wider Training | مكتملة؛ eval تحسن والتوليد محظور |
 | Phase 27.14 | Sovereign Training Quality Tooling Decision | مكتملة؛ أدوات جودة محلية دون تدريب |
+| Phase 27.15 | Social/Lexical Curriculum + No-Repeat Decoding | مكتملة؛ eval تحسن وcanary صارم يحجب |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -1849,6 +1850,72 @@ start_phase28            = blocked
 ### بعد المرحلة
 نفّذ Phase 27.15: targeted social/lexical curriculum + decoder no-repeat controls
 لـ `SF-10M`. لا يبدأ `SF-50M` ولا Phase 28.
+
+---
+
+## Phase 27.15 — Social/Lexical Curriculum + No-Repeat Decoding
+
+### الهدف
+إصلاح جزء من مشاكل الرد الاجتماعي والكسور اللفظية عبر بيانات gold موجهة
+وقيود decoding محلية، ثم قياس صارم لا يقبل النص العربي الشكلي.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.15 بقرار:
+
+```text
+COMPLETED_EVAL_IMPROVED_STRICT_GENERATION_BLOCKED
+```
+
+ما تحقق:
+
+- أضيف no-repeat decoding:
+  - `no_repeat_ngram_size=3`
+  - `repetition_penalty=1.08`
+- أضيفت 400 عينة gold:
+  - `200` فصحى.
+  - `200` سعودي.
+  - حوار يومي طبيعي فقط.
+- corpus أصبح:
+
+```text
+total_records  = 5943
+training_ready = 5943
+issues         = 0
+```
+
+- دُرّب `SF-10M v0.10`.
+- أفضل eval:
+
+```text
+checkpoint = sf-10m-step6000
+loss       = 3.0452
+perplexity = 21.01
+```
+
+- تم تشديد `generation_quality_v1` بإضافة required semantic terms لكل prompt.
+- بعد التشديد:
+
+```text
+passed          = 0/10
+runtime_allowed = false
+```
+
+### التشخيص
+
+البيانات والـ decoding حسّنا loss، لكن النموذج لا يربط prompt بالجواب الصحيح
+بشكل كافٍ. المشكلة التالية ليست "زيادة بيانات" فقط، بل objective/conditioning
+يربط السؤال بالرد.
+
+### artifacts
+
+- [PHASE27_15_SOCIAL_LEXICAL_CURRICULUM_REPORT.md](./PHASE27_15_SOCIAL_LEXICAL_CURRICULUM_REPORT.md)
+- `artifacts/reports/sf_10m_v0_10_social_lexical_curriculum_report.json`
+- `artifacts/reports/generation_quality_v1_v0_10_strict_report.json`
+
+### بعد المرحلة
+نفّذ Phase 27.16: prompt-to-answer conditioning/objective repair قبل أي بيانات
+إضافية كبيرة أو scaling.
 
 ---
 

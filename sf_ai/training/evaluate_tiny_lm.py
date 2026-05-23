@@ -52,6 +52,8 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
                    help="Use temperature/top-k sampling instead of greedy")
     p.add_argument("--temperature", type=float, default=1.0)
     p.add_argument("--top-k", type=int, default=20)
+    p.add_argument("--no-repeat-ngram-size", type=int, default=0)
+    p.add_argument("--repetition-penalty", type=float, default=1.0)
     p.add_argument("--stream-format", choices=["dialogue", "messages"], default="dialogue")
     p.add_argument("--loss-scope", choices=["full", "assistant"], default="full",
                    help="Match the training objective when computing eval loss")
@@ -118,7 +120,9 @@ def run(argv: list[str]) -> int:
         return 0
     gen_cfg = GenerationConfig(max_new_tokens=args.max_new_tokens,
                                 temperature=args.temperature, top_k=args.top_k,
-                                eos_token_id=tok.vocab.get(ASSISTANT_EOS_TOKEN))
+                                eos_token_id=tok.vocab.get(ASSISTANT_EOS_TOKEN),
+                                no_repeat_ngram_size=args.no_repeat_ngram_size,
+                                repetition_penalty=args.repetition_penalty)
     if args.sample:
         out = sample_generate(model, prompt_ids, gen_cfg)
     else:

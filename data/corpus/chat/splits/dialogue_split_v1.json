@@ -4,29 +4,29 @@
   "salt": "sf-ai-dialogue-v1",
   "eval_ratio": 0.1,
   "corpus_root": "data/corpus/chat/jsonl",
-  "total_records": 5543,
+  "total_records": 5943,
   "counts": {
-    "train": 4973,
-    "eval": 570
+    "train": 5343,
+    "eval": 600
   },
   "dialects": {
     "train": {
-      "saudi": 2494,
-      "msa": 2479
+      "saudi": 2682,
+      "msa": 2661
     },
     "eval": {
-      "saudi": 300,
-      "msa": 270
+      "saudi": 312,
+      "msa": 288
     }
   },
   "qualities": {
     "train": {
       "silver": 4582,
-      "gold": 391
+      "gold": 761
     },
     "eval": {
       "silver": 530,
-      "gold": 40
+      "gold": 70
     }
   },
   "records": [
@@ -44123,6 +44123,3206 @@
       "line": 150,
       "split": "train",
       "sha256": "88a82343ee1c4e452c2c470d18f2ca1e6ed561a757b438ef7d761ab78ec71807",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 1,
+      "split": "train",
+      "sha256": "c394d320094a7a38239a30a359cee88987ca3f360ef73d3cf7ac109408576c3c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 2,
+      "split": "train",
+      "sha256": "3030e3e8b34ca4d52e7467fba2733227cd03ffb52cbf6c282fa8d56cc5949140",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 3,
+      "split": "train",
+      "sha256": "baeddf57f2fab2b6c413e5b17c300a4bbd96bf8440a5272fd1dc3b8c7ffd9f54",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 4,
+      "split": "train",
+      "sha256": "ce99e27cc0f7923935b41d6b9dae1d6cdee4ea4ccea82221bb0ad07e783fce4d",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 5,
+      "split": "train",
+      "sha256": "34892fb2f13981830e7ab5d9abb6bd9b0c3201b4bd95542ce98c83e2ed707e42",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 6,
+      "split": "train",
+      "sha256": "c394d320094a7a38239a30a359cee88987ca3f360ef73d3cf7ac109408576c3c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 7,
+      "split": "train",
+      "sha256": "3030e3e8b34ca4d52e7467fba2733227cd03ffb52cbf6c282fa8d56cc5949140",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 8,
+      "split": "train",
+      "sha256": "baeddf57f2fab2b6c413e5b17c300a4bbd96bf8440a5272fd1dc3b8c7ffd9f54",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 9,
+      "split": "train",
+      "sha256": "ce99e27cc0f7923935b41d6b9dae1d6cdee4ea4ccea82221bb0ad07e783fce4d",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 10,
+      "split": "train",
+      "sha256": "34892fb2f13981830e7ab5d9abb6bd9b0c3201b4bd95542ce98c83e2ed707e42",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 11,
+      "split": "train",
+      "sha256": "b1dc6a77f044f529c9fe9c4888f5031742c967aabfbd5c8913166c656ce87ebb",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 12,
+      "split": "train",
+      "sha256": "144c3c2856318ef725d470d7a3ad8ccda8a991cea45b67b6992e500e4d53e8ba",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 13,
+      "split": "train",
+      "sha256": "4d5a40f41475ff309cbd49b207c09a8cbe98ffab5bda8c1f26b704af3da683bd",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 14,
+      "split": "train",
+      "sha256": "915bc067148cc587dd973f66a327373bf7095105823c71f5728f36a31af025c2",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 15,
+      "split": "train",
+      "sha256": "71db4b38def9aa6498f8249fbac6a468a2b3e2ebd37e4cb6150c35a82d60637e",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 16,
+      "split": "train",
+      "sha256": "b1dc6a77f044f529c9fe9c4888f5031742c967aabfbd5c8913166c656ce87ebb",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 17,
+      "split": "train",
+      "sha256": "144c3c2856318ef725d470d7a3ad8ccda8a991cea45b67b6992e500e4d53e8ba",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 18,
+      "split": "train",
+      "sha256": "4d5a40f41475ff309cbd49b207c09a8cbe98ffab5bda8c1f26b704af3da683bd",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 19,
+      "split": "train",
+      "sha256": "915bc067148cc587dd973f66a327373bf7095105823c71f5728f36a31af025c2",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 20,
+      "split": "train",
+      "sha256": "71db4b38def9aa6498f8249fbac6a468a2b3e2ebd37e4cb6150c35a82d60637e",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 21,
+      "split": "train",
+      "sha256": "9e889a15e083bc4ec61a557327a996b38588ded1bcb7efe44d841f736dc0632b",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 22,
+      "split": "train",
+      "sha256": "ed0b2fb287fab1703fb4daa0d7246de011cfffc8519de9acb1890decfff0184c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 23,
+      "split": "train",
+      "sha256": "ee016333d7d6dfb35f1cbc37da2c0b2d2a692604d3b33ed04aae8233d941e8a2",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 24,
+      "split": "train",
+      "sha256": "e82958dd27acdd28159be20e0f519b97f6a80eab5a779811f3655f71d72e41c7",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 25,
+      "split": "train",
+      "sha256": "d73a877aaa66df4f6bc8c4d3364097b5eb32906bed12ef9a66a495776d5654b8",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 26,
+      "split": "train",
+      "sha256": "9e889a15e083bc4ec61a557327a996b38588ded1bcb7efe44d841f736dc0632b",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 27,
+      "split": "train",
+      "sha256": "ed0b2fb287fab1703fb4daa0d7246de011cfffc8519de9acb1890decfff0184c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 28,
+      "split": "train",
+      "sha256": "ee016333d7d6dfb35f1cbc37da2c0b2d2a692604d3b33ed04aae8233d941e8a2",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 29,
+      "split": "train",
+      "sha256": "e82958dd27acdd28159be20e0f519b97f6a80eab5a779811f3655f71d72e41c7",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 30,
+      "split": "train",
+      "sha256": "d73a877aaa66df4f6bc8c4d3364097b5eb32906bed12ef9a66a495776d5654b8",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 31,
+      "split": "train",
+      "sha256": "27a8a9d519ff796e5fce5df8f59a99ab058a3cbca2b9df347026da1999710e94",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 32,
+      "split": "train",
+      "sha256": "6483a2553cf775d77ace038231359ae3e18888789956abac09fba97fc31d8387",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 33,
+      "split": "train",
+      "sha256": "8be22d68377b404c4df28efed044d97499974a0fbc7fc4d4c47d3cb96702a3f3",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 34,
+      "split": "eval",
+      "sha256": "47eaa97e471304ec1f7bda6a74008e53e9bc6196be07e454dce18250ce07e4d8",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 35,
+      "split": "train",
+      "sha256": "0e187abefa343e588287e339684b490cd3b6166f3757cb39c1f1240667e6027b",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 36,
+      "split": "train",
+      "sha256": "27a8a9d519ff796e5fce5df8f59a99ab058a3cbca2b9df347026da1999710e94",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 37,
+      "split": "train",
+      "sha256": "6483a2553cf775d77ace038231359ae3e18888789956abac09fba97fc31d8387",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 38,
+      "split": "train",
+      "sha256": "8be22d68377b404c4df28efed044d97499974a0fbc7fc4d4c47d3cb96702a3f3",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 39,
+      "split": "eval",
+      "sha256": "47eaa97e471304ec1f7bda6a74008e53e9bc6196be07e454dce18250ce07e4d8",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 40,
+      "split": "train",
+      "sha256": "0e187abefa343e588287e339684b490cd3b6166f3757cb39c1f1240667e6027b",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 41,
+      "split": "train",
+      "sha256": "8cbdc94b84a558c95587242034d0adeb25bd7e6bc11f97291d7bfe2171d99136",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 42,
+      "split": "eval",
+      "sha256": "2ea609a6895636b2844071fb53d81a9f0daa1a57c8d8f307e25b047113a1a2b7",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 43,
+      "split": "train",
+      "sha256": "5662e3811fdd6ec81a8edccd42dec8ebcb9a53f951c546a458c190d3c178c009",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 44,
+      "split": "eval",
+      "sha256": "9d0d6a21ee80178e346d842aef44f0047b49f4a73e6f70192514c974db1391fb",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 45,
+      "split": "train",
+      "sha256": "c43ef83056294135faf4eb1eb66af0b127d13b848a86c2f43a3a367bbdaf596a",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 46,
+      "split": "train",
+      "sha256": "8cbdc94b84a558c95587242034d0adeb25bd7e6bc11f97291d7bfe2171d99136",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 47,
+      "split": "eval",
+      "sha256": "2ea609a6895636b2844071fb53d81a9f0daa1a57c8d8f307e25b047113a1a2b7",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 48,
+      "split": "train",
+      "sha256": "5662e3811fdd6ec81a8edccd42dec8ebcb9a53f951c546a458c190d3c178c009",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 49,
+      "split": "eval",
+      "sha256": "9d0d6a21ee80178e346d842aef44f0047b49f4a73e6f70192514c974db1391fb",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 50,
+      "split": "train",
+      "sha256": "c43ef83056294135faf4eb1eb66af0b127d13b848a86c2f43a3a367bbdaf596a",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 51,
+      "split": "train",
+      "sha256": "81bb1694442a80c569a1f6303f0fb19f74876e2be292d848106863303ca0467a",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 52,
+      "split": "train",
+      "sha256": "4db185519c809b1f8ee9e511e953d2dc1bfe9e2ba2952517fc88dfc22f50674a",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 53,
+      "split": "train",
+      "sha256": "e0f021597db92c1923f2631a306aa91983f0096d9bf7f26af9a06c85b49d1654",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 54,
+      "split": "eval",
+      "sha256": "af6a6d01e4119e3cc3ec088026419824a27f36af2904309ae2148b32b41494ba",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 55,
+      "split": "train",
+      "sha256": "57dd628fdfd18a5fb17d22ef432be35b77dbd0cd0de14a01fdd5a947d836f22e",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 56,
+      "split": "train",
+      "sha256": "81bb1694442a80c569a1f6303f0fb19f74876e2be292d848106863303ca0467a",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 57,
+      "split": "train",
+      "sha256": "4db185519c809b1f8ee9e511e953d2dc1bfe9e2ba2952517fc88dfc22f50674a",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 58,
+      "split": "train",
+      "sha256": "e0f021597db92c1923f2631a306aa91983f0096d9bf7f26af9a06c85b49d1654",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 59,
+      "split": "eval",
+      "sha256": "af6a6d01e4119e3cc3ec088026419824a27f36af2904309ae2148b32b41494ba",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 60,
+      "split": "train",
+      "sha256": "57dd628fdfd18a5fb17d22ef432be35b77dbd0cd0de14a01fdd5a947d836f22e",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 61,
+      "split": "train",
+      "sha256": "b39473419503fcead813f68eaf03d0c0860749be3aac60d284b99a38b3f19a9f",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 62,
+      "split": "train",
+      "sha256": "e82236466f50741f72a60d434894cb2f341f01876d560f41f6e0b62a1dd4ff65",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 63,
+      "split": "train",
+      "sha256": "72df9fc48278a24cb58b3fd50cb9411b05aabeb0e56b5a296115d2759d514d69",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 64,
+      "split": "train",
+      "sha256": "f1d153e7c49de8b580bcf117dbcd434971cb1a260d09d6122b2429115cafac45",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 65,
+      "split": "train",
+      "sha256": "b36a41e4fc84e7aaac9ddae7de7de41a24e50b4e4de47e884583dfc24738be00",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 66,
+      "split": "train",
+      "sha256": "b39473419503fcead813f68eaf03d0c0860749be3aac60d284b99a38b3f19a9f",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 67,
+      "split": "train",
+      "sha256": "e82236466f50741f72a60d434894cb2f341f01876d560f41f6e0b62a1dd4ff65",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 68,
+      "split": "train",
+      "sha256": "72df9fc48278a24cb58b3fd50cb9411b05aabeb0e56b5a296115d2759d514d69",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 69,
+      "split": "train",
+      "sha256": "f1d153e7c49de8b580bcf117dbcd434971cb1a260d09d6122b2429115cafac45",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 70,
+      "split": "train",
+      "sha256": "b36a41e4fc84e7aaac9ddae7de7de41a24e50b4e4de47e884583dfc24738be00",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 71,
+      "split": "train",
+      "sha256": "b31cac89fc058fa222153acdd37cc89a0e2a1544293ba71ac21e903f859f29e3",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 72,
+      "split": "train",
+      "sha256": "e55ead6d6086e9261364ab0e04d0d0ac44cc564052b05d518fcca0483b8dff36",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 73,
+      "split": "train",
+      "sha256": "80059c712c6f917e0c50e894e119129efa466230ff364cb75dca8a73e45e8fe9",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 74,
+      "split": "train",
+      "sha256": "bb44ccd27aaacd5a73567f074261691cf514fc81f2fb83333f11f4b1bcec6526",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 75,
+      "split": "train",
+      "sha256": "9ff6e4f30c1a9dce6785848f7a626552fd6699fc248e987d193389bb3fa15b0d",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 76,
+      "split": "train",
+      "sha256": "b31cac89fc058fa222153acdd37cc89a0e2a1544293ba71ac21e903f859f29e3",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 77,
+      "split": "train",
+      "sha256": "e55ead6d6086e9261364ab0e04d0d0ac44cc564052b05d518fcca0483b8dff36",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 78,
+      "split": "train",
+      "sha256": "80059c712c6f917e0c50e894e119129efa466230ff364cb75dca8a73e45e8fe9",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 79,
+      "split": "train",
+      "sha256": "bb44ccd27aaacd5a73567f074261691cf514fc81f2fb83333f11f4b1bcec6526",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 80,
+      "split": "train",
+      "sha256": "9ff6e4f30c1a9dce6785848f7a626552fd6699fc248e987d193389bb3fa15b0d",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 81,
+      "split": "train",
+      "sha256": "231a1b9aa7559ead0cb14eb81323939a2bec872d7cc4f3fb0159ecc366482bf6",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 82,
+      "split": "train",
+      "sha256": "1717fae6f49f5349b987c29bba3b8e1098985bc6ed67a133e7ee1c827d356303",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 83,
+      "split": "train",
+      "sha256": "2b2b97f5ab54b777d44c3b7d4d9ced6331e9c7def1386bd77d47f39e12f18ece",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 84,
+      "split": "train",
+      "sha256": "ed02f9aa88c84313207aaee1c478b2f298cdc383767b667dd7fd46db35f2f493",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 85,
+      "split": "train",
+      "sha256": "1cce88d8d84a470a68d83e8b2e6327c4f5451f476beb4bc03f3f16660a93ffa1",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 86,
+      "split": "train",
+      "sha256": "231a1b9aa7559ead0cb14eb81323939a2bec872d7cc4f3fb0159ecc366482bf6",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 87,
+      "split": "train",
+      "sha256": "1717fae6f49f5349b987c29bba3b8e1098985bc6ed67a133e7ee1c827d356303",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 88,
+      "split": "train",
+      "sha256": "2b2b97f5ab54b777d44c3b7d4d9ced6331e9c7def1386bd77d47f39e12f18ece",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 89,
+      "split": "train",
+      "sha256": "ed02f9aa88c84313207aaee1c478b2f298cdc383767b667dd7fd46db35f2f493",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 90,
+      "split": "train",
+      "sha256": "1cce88d8d84a470a68d83e8b2e6327c4f5451f476beb4bc03f3f16660a93ffa1",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 91,
+      "split": "train",
+      "sha256": "c11cdb1413572702df60fb1e2ed8bdce46275ef4f24b10a8be5e8e60e81f75c4",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 92,
+      "split": "train",
+      "sha256": "d1f55d8a5ca918840009bff78134ab9c1e7196f05e82f75eb0c699e15e3e5cbf",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 93,
+      "split": "train",
+      "sha256": "24e88a7d0e6089ccf5fd9e0dee625c0c14e07d6c2a79afdec71a9f2feeb985fc",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 94,
+      "split": "train",
+      "sha256": "2fb93639f38b9bdea970e0d6ba16edfa2cf20900b177c72d7ded4b45ee273d67",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 95,
+      "split": "train",
+      "sha256": "459d9f629b751fbcc947a8a6b4d7a2f712a3848c76b6083d1c95feb5fa85b139",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 96,
+      "split": "train",
+      "sha256": "c11cdb1413572702df60fb1e2ed8bdce46275ef4f24b10a8be5e8e60e81f75c4",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 97,
+      "split": "train",
+      "sha256": "d1f55d8a5ca918840009bff78134ab9c1e7196f05e82f75eb0c699e15e3e5cbf",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 98,
+      "split": "train",
+      "sha256": "24e88a7d0e6089ccf5fd9e0dee625c0c14e07d6c2a79afdec71a9f2feeb985fc",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 99,
+      "split": "train",
+      "sha256": "2fb93639f38b9bdea970e0d6ba16edfa2cf20900b177c72d7ded4b45ee273d67",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 100,
+      "split": "train",
+      "sha256": "459d9f629b751fbcc947a8a6b4d7a2f712a3848c76b6083d1c95feb5fa85b139",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 101,
+      "split": "train",
+      "sha256": "831b48c66c9ac2e41d9f4a54453f661fa9147fd32e8c7c661955087fd0b1544c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 102,
+      "split": "train",
+      "sha256": "76ca976ebb24e6ac11807b3db3677f2466503eaa78efa374f56b759f4a31f085",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 103,
+      "split": "eval",
+      "sha256": "0b64c22cfdf4d801a6ff258fe91aac96f1fa5d658a8c7778c5c7dedf727f5d9a",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 104,
+      "split": "train",
+      "sha256": "d673afcf35c6d24985cbacebfab99cf8dec899f76d2b88d1413345a4d98d8211",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 105,
+      "split": "train",
+      "sha256": "84d6b7757548356a5465a9032701f2dd8005664e1de47446d3f3dd9988f21783",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 106,
+      "split": "train",
+      "sha256": "831b48c66c9ac2e41d9f4a54453f661fa9147fd32e8c7c661955087fd0b1544c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 107,
+      "split": "train",
+      "sha256": "76ca976ebb24e6ac11807b3db3677f2466503eaa78efa374f56b759f4a31f085",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 108,
+      "split": "eval",
+      "sha256": "0b64c22cfdf4d801a6ff258fe91aac96f1fa5d658a8c7778c5c7dedf727f5d9a",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 109,
+      "split": "train",
+      "sha256": "d673afcf35c6d24985cbacebfab99cf8dec899f76d2b88d1413345a4d98d8211",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 110,
+      "split": "train",
+      "sha256": "84d6b7757548356a5465a9032701f2dd8005664e1de47446d3f3dd9988f21783",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 111,
+      "split": "train",
+      "sha256": "cbcf3e43bdb887f66d8cc483d266a404e1e21ac2e9c408cd5845464f971efa60",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 112,
+      "split": "train",
+      "sha256": "d0abc9368cc750f808744bcf881943643b60e35d0d6aa56b2da1e72f6ea941a1",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 113,
+      "split": "train",
+      "sha256": "ebe5abb91a4fdb3b91dcf08b54e033f714d242d55e0b3d70d933633d6288d8f3",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 114,
+      "split": "train",
+      "sha256": "c6037741eb72d9c2f464b47b92e347401b1f983a0f0b74a82f755f3071ffbab0",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 115,
+      "split": "train",
+      "sha256": "7ef41ba41f1ef007ba7f679223bbce58381a040d0f26a5fa610224c253e0c5dd",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 116,
+      "split": "train",
+      "sha256": "cbcf3e43bdb887f66d8cc483d266a404e1e21ac2e9c408cd5845464f971efa60",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 117,
+      "split": "train",
+      "sha256": "d0abc9368cc750f808744bcf881943643b60e35d0d6aa56b2da1e72f6ea941a1",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 118,
+      "split": "train",
+      "sha256": "ebe5abb91a4fdb3b91dcf08b54e033f714d242d55e0b3d70d933633d6288d8f3",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 119,
+      "split": "train",
+      "sha256": "c6037741eb72d9c2f464b47b92e347401b1f983a0f0b74a82f755f3071ffbab0",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 120,
+      "split": "train",
+      "sha256": "7ef41ba41f1ef007ba7f679223bbce58381a040d0f26a5fa610224c253e0c5dd",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 121,
+      "split": "train",
+      "sha256": "8d2d0e5c9ec0c318dfd6202498ca623ab7cab6599405469d470ee5754082a58a",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 122,
+      "split": "train",
+      "sha256": "744232eb138b545e3b3f6059a46f2b204784d00d5b0c8304c6dbd192a6f42f6d",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 123,
+      "split": "train",
+      "sha256": "217e3b3ce000e6b3b5130712b7126db807b3b7a1db60ca6610bfd69ca2fe2ca4",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 124,
+      "split": "train",
+      "sha256": "e0d3841c70edb709665d5c66dca2fa1f1e100ce1919f5b00fcb4412f28b01355",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 125,
+      "split": "train",
+      "sha256": "c468c23d5331b636a4d364f875477602414463984fa3a4510f60c4aeecbc1ac9",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 126,
+      "split": "train",
+      "sha256": "8d2d0e5c9ec0c318dfd6202498ca623ab7cab6599405469d470ee5754082a58a",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 127,
+      "split": "train",
+      "sha256": "744232eb138b545e3b3f6059a46f2b204784d00d5b0c8304c6dbd192a6f42f6d",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 128,
+      "split": "train",
+      "sha256": "217e3b3ce000e6b3b5130712b7126db807b3b7a1db60ca6610bfd69ca2fe2ca4",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 129,
+      "split": "train",
+      "sha256": "e0d3841c70edb709665d5c66dca2fa1f1e100ce1919f5b00fcb4412f28b01355",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 130,
+      "split": "train",
+      "sha256": "c468c23d5331b636a4d364f875477602414463984fa3a4510f60c4aeecbc1ac9",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 131,
+      "split": "train",
+      "sha256": "c3a72e060c4b2bd4ca3f4fd5905c5ce1bab9feeee5d3e6e02333865e004a1eb7",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 132,
+      "split": "train",
+      "sha256": "759833526093fa14dd974597a3eaa2561ed4587ee234ba02ae3f0eddd5a07f24",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 133,
+      "split": "train",
+      "sha256": "0955d9af3a91fe56d1516dfd41fed537ff1dc342896c38dd398b04322aedc856",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 134,
+      "split": "train",
+      "sha256": "627bfb6b0bbd868816d4d186feaab9b732e29a409ea3d7bccb465802c88d5a47",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 135,
+      "split": "train",
+      "sha256": "c9a262ae258b1523af634491266fcd604a81a73dee6ac73836b4840e37a33dce",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 136,
+      "split": "train",
+      "sha256": "c3a72e060c4b2bd4ca3f4fd5905c5ce1bab9feeee5d3e6e02333865e004a1eb7",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 137,
+      "split": "train",
+      "sha256": "759833526093fa14dd974597a3eaa2561ed4587ee234ba02ae3f0eddd5a07f24",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 138,
+      "split": "train",
+      "sha256": "0955d9af3a91fe56d1516dfd41fed537ff1dc342896c38dd398b04322aedc856",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 139,
+      "split": "train",
+      "sha256": "627bfb6b0bbd868816d4d186feaab9b732e29a409ea3d7bccb465802c88d5a47",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 140,
+      "split": "train",
+      "sha256": "c9a262ae258b1523af634491266fcd604a81a73dee6ac73836b4840e37a33dce",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 141,
+      "split": "train",
+      "sha256": "a4f67d5685a02b354b1a6c7dc064c258592b1d66dcb2ce31f54126e164e75f69",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 142,
+      "split": "train",
+      "sha256": "8907eeb82f349c72b380582429074bce8e3d2a21fda699d244e0aadaeabb236b",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 143,
+      "split": "train",
+      "sha256": "2325614a08f855e1a84dbf11df207bab9da25ea732fe1fe9802e66bc47da6a68",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 144,
+      "split": "train",
+      "sha256": "413d54ea87bab90043566bde76bbf1bee9f7879d8b699c068ec9104973035884",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 145,
+      "split": "eval",
+      "sha256": "1274aea3002d06c8492c973b8d6e9019b6a755f157c5b6c8a38020e5b70ee31c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 146,
+      "split": "train",
+      "sha256": "a4f67d5685a02b354b1a6c7dc064c258592b1d66dcb2ce31f54126e164e75f69",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 147,
+      "split": "train",
+      "sha256": "8907eeb82f349c72b380582429074bce8e3d2a21fda699d244e0aadaeabb236b",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 148,
+      "split": "train",
+      "sha256": "2325614a08f855e1a84dbf11df207bab9da25ea732fe1fe9802e66bc47da6a68",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 149,
+      "split": "train",
+      "sha256": "413d54ea87bab90043566bde76bbf1bee9f7879d8b699c068ec9104973035884",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 150,
+      "split": "eval",
+      "sha256": "1274aea3002d06c8492c973b8d6e9019b6a755f157c5b6c8a38020e5b70ee31c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 151,
+      "split": "train",
+      "sha256": "ffe9d1f397f22e530fc91a8689cbdaaaca307bc01393f9ca935cff663dc8106c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 152,
+      "split": "train",
+      "sha256": "46c1452bb95781d15c19550f6f37cbd035316afaf4da3bc77010833290c89e86",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 153,
+      "split": "eval",
+      "sha256": "dfeca28c34c95eb3de9018d5d5512aa3fee8151ed45bac2f6e17c4681f22e0bc",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 154,
+      "split": "eval",
+      "sha256": "1011d43ca0480998f185219741dc2a793cdf5b9fcaa619d5aa316505c283cc2f",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 155,
+      "split": "train",
+      "sha256": "416439504f456b4ced60b1eb05a4d5b9a84a0d223f76c7761cee90f15441c692",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 156,
+      "split": "train",
+      "sha256": "ffe9d1f397f22e530fc91a8689cbdaaaca307bc01393f9ca935cff663dc8106c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 157,
+      "split": "train",
+      "sha256": "46c1452bb95781d15c19550f6f37cbd035316afaf4da3bc77010833290c89e86",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 158,
+      "split": "eval",
+      "sha256": "dfeca28c34c95eb3de9018d5d5512aa3fee8151ed45bac2f6e17c4681f22e0bc",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 159,
+      "split": "eval",
+      "sha256": "1011d43ca0480998f185219741dc2a793cdf5b9fcaa619d5aa316505c283cc2f",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 160,
+      "split": "train",
+      "sha256": "416439504f456b4ced60b1eb05a4d5b9a84a0d223f76c7761cee90f15441c692",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 161,
+      "split": "eval",
+      "sha256": "0aa2c999bd3afe3e4b7f07d92f6e405fa1be6f78e081265fd861f3eaa3f43683",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 162,
+      "split": "train",
+      "sha256": "b6f0cc4b9e6635c89fca9e7b4531f26a673e1f98f15c73ae0be925bbc2864acd",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 163,
+      "split": "train",
+      "sha256": "8d6e119bd599837728f7af7d6433e3837726eb4ffe6ae7abbdf7b0242ba196a5",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 164,
+      "split": "train",
+      "sha256": "25a82df56c4408eb8eee62bc92318539e3c42f72e7875a9aa3259140841a4b1c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 165,
+      "split": "train",
+      "sha256": "f58fa2a9c5ef9dbf356496a63dbf3249dc26bf0fe83c38bef261e5fb2ef9188d",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 166,
+      "split": "eval",
+      "sha256": "0aa2c999bd3afe3e4b7f07d92f6e405fa1be6f78e081265fd861f3eaa3f43683",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 167,
+      "split": "train",
+      "sha256": "b6f0cc4b9e6635c89fca9e7b4531f26a673e1f98f15c73ae0be925bbc2864acd",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 168,
+      "split": "train",
+      "sha256": "8d6e119bd599837728f7af7d6433e3837726eb4ffe6ae7abbdf7b0242ba196a5",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 169,
+      "split": "train",
+      "sha256": "25a82df56c4408eb8eee62bc92318539e3c42f72e7875a9aa3259140841a4b1c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 170,
+      "split": "train",
+      "sha256": "f58fa2a9c5ef9dbf356496a63dbf3249dc26bf0fe83c38bef261e5fb2ef9188d",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 171,
+      "split": "train",
+      "sha256": "15b93d7f1b7a3a6343f63cf3f678d63cf4e5c3b3c280cb7702e821dfe6b8fc6c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 172,
+      "split": "train",
+      "sha256": "22df91c8ac6fb1dc3a4266f38eaa8592ac393f038e872b32e1f604231abadfa4",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 173,
+      "split": "train",
+      "sha256": "d0bc9056452c7b82cbe76dc9ed501271b325757dfe108fad42847f4ca47a2c85",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 174,
+      "split": "train",
+      "sha256": "69a9826eea0b8b13b492cc6adc63e983345ac011a6a23f96b76d9a8f3d7dd8af",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 175,
+      "split": "train",
+      "sha256": "848b03d7a636e28c7a4cabedcac1430d161bbdb1ba7805f5cee10c95f5105abb",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 176,
+      "split": "train",
+      "sha256": "15b93d7f1b7a3a6343f63cf3f678d63cf4e5c3b3c280cb7702e821dfe6b8fc6c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 177,
+      "split": "train",
+      "sha256": "22df91c8ac6fb1dc3a4266f38eaa8592ac393f038e872b32e1f604231abadfa4",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 178,
+      "split": "train",
+      "sha256": "d0bc9056452c7b82cbe76dc9ed501271b325757dfe108fad42847f4ca47a2c85",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 179,
+      "split": "train",
+      "sha256": "69a9826eea0b8b13b492cc6adc63e983345ac011a6a23f96b76d9a8f3d7dd8af",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 180,
+      "split": "train",
+      "sha256": "848b03d7a636e28c7a4cabedcac1430d161bbdb1ba7805f5cee10c95f5105abb",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 181,
+      "split": "train",
+      "sha256": "7f7e2f1f894856830861584b8f06248892dd786e85c163a7e3c106cbf0aab782",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 182,
+      "split": "train",
+      "sha256": "96f51c44f9397f3fcc4539da156c2f669894f1b39bd3e9cbdd685293fc212734",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 183,
+      "split": "train",
+      "sha256": "1f50f7d26754935672bb7600adf870ab2725c0b3f02b273da14438d275237f9d",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 184,
+      "split": "train",
+      "sha256": "169c0721929b38fe71369a097ab196cafdafed8203e2df6e2639f7111a1c0c61",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 185,
+      "split": "train",
+      "sha256": "97b8db210b2bc8c0ebb938ac9af7177a8b497923a2c72f07aa28decef5dd1ce1",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 186,
+      "split": "train",
+      "sha256": "7f7e2f1f894856830861584b8f06248892dd786e85c163a7e3c106cbf0aab782",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 187,
+      "split": "train",
+      "sha256": "96f51c44f9397f3fcc4539da156c2f669894f1b39bd3e9cbdd685293fc212734",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 188,
+      "split": "train",
+      "sha256": "1f50f7d26754935672bb7600adf870ab2725c0b3f02b273da14438d275237f9d",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 189,
+      "split": "train",
+      "sha256": "169c0721929b38fe71369a097ab196cafdafed8203e2df6e2639f7111a1c0c61",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 190,
+      "split": "train",
+      "sha256": "97b8db210b2bc8c0ebb938ac9af7177a8b497923a2c72f07aa28decef5dd1ce1",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 191,
+      "split": "train",
+      "sha256": "db400c771bd39f8821efe7e4f25910bcd82d936dd71d9e6c9d874951afd662c4",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 192,
+      "split": "train",
+      "sha256": "755426cbc9b0922678b1cd5a4f80d60e87978b78340696439e84ee298507c04d",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 193,
+      "split": "train",
+      "sha256": "52a3f2b9fb9e7757ad49a4ff99efd93c98011fb0d6a4092d843ae4aaaf7d87dc",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 194,
+      "split": "train",
+      "sha256": "ac015ca55bdd827b0e028068b6316ac0cf91fe8747a163688c442a4f31a895a4",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 195,
+      "split": "train",
+      "sha256": "ee30bd9d3a3b5f8341ca3e5cc375fdec33b3a7867d58d479fdf7b4a75081281f",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 196,
+      "split": "train",
+      "sha256": "db400c771bd39f8821efe7e4f25910bcd82d936dd71d9e6c9d874951afd662c4",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 197,
+      "split": "train",
+      "sha256": "755426cbc9b0922678b1cd5a4f80d60e87978b78340696439e84ee298507c04d",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 198,
+      "split": "train",
+      "sha256": "52a3f2b9fb9e7757ad49a4ff99efd93c98011fb0d6a4092d843ae4aaaf7d87dc",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 199,
+      "split": "train",
+      "sha256": "ac015ca55bdd827b0e028068b6316ac0cf91fe8747a163688c442a4f31a895a4",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "line": 200,
+      "split": "train",
+      "sha256": "ee30bd9d3a3b5f8341ca3e5cc375fdec33b3a7867d58d479fdf7b4a75081281f",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 1,
+      "split": "train",
+      "sha256": "d1c4e61d08abdba717a1c1f150b9ed75f3187b9a1ee091da9db4c8b9544590db",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 2,
+      "split": "train",
+      "sha256": "d7971e13904140a6e32eee487ec1bab5f993f30bb6b8349a54125c91da39a3f9",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 3,
+      "split": "train",
+      "sha256": "a868bb7051fd2d28b229eeb72ef62f281f35b030f688eafc23beceb1a143e547",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 4,
+      "split": "train",
+      "sha256": "1caf11f16a18bf9d5fc0245b57dd3af42e5389c0f18f19f93fb0c01ff3504dd5",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 5,
+      "split": "eval",
+      "sha256": "74bedd503694bd9d9bf2c781324566dc27d69c9448a8adc709119d95454be19c",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 6,
+      "split": "train",
+      "sha256": "d1c4e61d08abdba717a1c1f150b9ed75f3187b9a1ee091da9db4c8b9544590db",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 7,
+      "split": "train",
+      "sha256": "d7971e13904140a6e32eee487ec1bab5f993f30bb6b8349a54125c91da39a3f9",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 8,
+      "split": "train",
+      "sha256": "a868bb7051fd2d28b229eeb72ef62f281f35b030f688eafc23beceb1a143e547",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 9,
+      "split": "train",
+      "sha256": "1caf11f16a18bf9d5fc0245b57dd3af42e5389c0f18f19f93fb0c01ff3504dd5",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 10,
+      "split": "eval",
+      "sha256": "74bedd503694bd9d9bf2c781324566dc27d69c9448a8adc709119d95454be19c",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 11,
+      "split": "train",
+      "sha256": "49510e0cba4613557f5b46db52e40979457816a068c087d207956cd19f50e2c6",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 12,
+      "split": "train",
+      "sha256": "396f6a1ddc3a84ef60f83d5f57a2103cbf446d5458cf864b78ccf90e3ab8243c",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 13,
+      "split": "train",
+      "sha256": "aff04980fde2bd5bd84e72a93233b5d83326dfd28264c91a0b112de4ef789f52",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 14,
+      "split": "train",
+      "sha256": "3f07c5e867a2ed1ad2fa38fa347f7c21ac7c9333ae7582a1ab7a07c95f7c1988",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 15,
+      "split": "train",
+      "sha256": "e132add80cad319700bb9c33fd6caa0c6266668f9db648fcca5d89468ebb0685",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 16,
+      "split": "train",
+      "sha256": "49510e0cba4613557f5b46db52e40979457816a068c087d207956cd19f50e2c6",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 17,
+      "split": "train",
+      "sha256": "396f6a1ddc3a84ef60f83d5f57a2103cbf446d5458cf864b78ccf90e3ab8243c",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 18,
+      "split": "train",
+      "sha256": "aff04980fde2bd5bd84e72a93233b5d83326dfd28264c91a0b112de4ef789f52",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 19,
+      "split": "train",
+      "sha256": "3f07c5e867a2ed1ad2fa38fa347f7c21ac7c9333ae7582a1ab7a07c95f7c1988",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 20,
+      "split": "train",
+      "sha256": "e132add80cad319700bb9c33fd6caa0c6266668f9db648fcca5d89468ebb0685",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 21,
+      "split": "train",
+      "sha256": "921ebbe9120fe04f0a0f8220e1e4a28d54166143fb747fa87ea5af7db31265e7",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 22,
+      "split": "train",
+      "sha256": "0f206407ac462cfa49ac2a217823c54c9b77326bbe781bb90673cd134d9ef163",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 23,
+      "split": "train",
+      "sha256": "497fcac72e7bb6c25f1bb1edda1644adbd7bdb078af57c2742a268c986010d62",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 24,
+      "split": "train",
+      "sha256": "3e6c5e6a5d90a90c7ece8baa60c5545a9c4a08c5137a14f946ea89b74bd8a919",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 25,
+      "split": "train",
+      "sha256": "35da3380a1944aa7e68a3b5736314a6625b565559d2c66d18d0b1c3363181681",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 26,
+      "split": "train",
+      "sha256": "921ebbe9120fe04f0a0f8220e1e4a28d54166143fb747fa87ea5af7db31265e7",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 27,
+      "split": "train",
+      "sha256": "0f206407ac462cfa49ac2a217823c54c9b77326bbe781bb90673cd134d9ef163",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 28,
+      "split": "train",
+      "sha256": "497fcac72e7bb6c25f1bb1edda1644adbd7bdb078af57c2742a268c986010d62",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 29,
+      "split": "train",
+      "sha256": "3e6c5e6a5d90a90c7ece8baa60c5545a9c4a08c5137a14f946ea89b74bd8a919",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 30,
+      "split": "train",
+      "sha256": "35da3380a1944aa7e68a3b5736314a6625b565559d2c66d18d0b1c3363181681",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 31,
+      "split": "train",
+      "sha256": "d211e4d078d19c6832e85bd92b8a2b26c99a2f28ed77f2b42d824a5a45a51bc5",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 32,
+      "split": "train",
+      "sha256": "313bddb50ee0721f9d0eb712e092d87f90aaa1e430745705217b037ca39ec8a7",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 33,
+      "split": "train",
+      "sha256": "0ecb2d8a56614d0a6962270b0e679ba585720c053d4bf8f68205ec70f25b9962",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 34,
+      "split": "train",
+      "sha256": "9bd2a985dbdbda1406926e1e41964656c57890932cb0d118a8eecdcc9c5ede65",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 35,
+      "split": "train",
+      "sha256": "e1443d33786bac6c33f5f7d2e392567f249a3a2dca7a69cdba7deb690c83c262",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 36,
+      "split": "train",
+      "sha256": "d211e4d078d19c6832e85bd92b8a2b26c99a2f28ed77f2b42d824a5a45a51bc5",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 37,
+      "split": "train",
+      "sha256": "313bddb50ee0721f9d0eb712e092d87f90aaa1e430745705217b037ca39ec8a7",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 38,
+      "split": "train",
+      "sha256": "0ecb2d8a56614d0a6962270b0e679ba585720c053d4bf8f68205ec70f25b9962",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 39,
+      "split": "train",
+      "sha256": "9bd2a985dbdbda1406926e1e41964656c57890932cb0d118a8eecdcc9c5ede65",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 40,
+      "split": "train",
+      "sha256": "e1443d33786bac6c33f5f7d2e392567f249a3a2dca7a69cdba7deb690c83c262",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 41,
+      "split": "train",
+      "sha256": "8e0db3d06b9d943810660dec4ba64eb1abe9b0492ab4c782540a37565cb31e06",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 42,
+      "split": "train",
+      "sha256": "0fb9fea911bf9e83a039ce3ed48d49271ce8f6c48059cd2d91ce3c27ac004f0e",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 43,
+      "split": "train",
+      "sha256": "8a57ac5ddd56dc2003d0cfe4e716caa04cd32b8a450889cb7c49cef1c88d5002",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 44,
+      "split": "train",
+      "sha256": "81f16a085874b8e7e25265863e0f8e79f22c5e9f3babb858a0a0544de2b750af",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 45,
+      "split": "train",
+      "sha256": "258d8a18644123dcbbbc6c060fc3f8d881dfa3f955b7e1fb0508289fea5b8767",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 46,
+      "split": "train",
+      "sha256": "8e0db3d06b9d943810660dec4ba64eb1abe9b0492ab4c782540a37565cb31e06",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 47,
+      "split": "train",
+      "sha256": "0fb9fea911bf9e83a039ce3ed48d49271ce8f6c48059cd2d91ce3c27ac004f0e",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 48,
+      "split": "train",
+      "sha256": "8a57ac5ddd56dc2003d0cfe4e716caa04cd32b8a450889cb7c49cef1c88d5002",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 49,
+      "split": "train",
+      "sha256": "81f16a085874b8e7e25265863e0f8e79f22c5e9f3babb858a0a0544de2b750af",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 50,
+      "split": "train",
+      "sha256": "258d8a18644123dcbbbc6c060fc3f8d881dfa3f955b7e1fb0508289fea5b8767",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 51,
+      "split": "train",
+      "sha256": "c551df658ec224d914a78f784b79b62b6c89decadccd5aab1a40cc6ea0478c7b",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 52,
+      "split": "train",
+      "sha256": "372eb8837066e7a543fee27409e52f657cebb277c615d8eed7bf733ba2fdd357",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 53,
+      "split": "train",
+      "sha256": "99fdcdd3505ec01f075f007480b4344a52d98e24865b2cc8f9c165470b3da09d",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 54,
+      "split": "train",
+      "sha256": "e9ac722e6cd0f9ff128b1069d9fc8c66037c08cc97447d6fad3e16fdcdd7ee53",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 55,
+      "split": "eval",
+      "sha256": "4051b0586806179229ec0fe4772c3260c59f9025c8e4c98d59cb0f778b18738a",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 56,
+      "split": "train",
+      "sha256": "c551df658ec224d914a78f784b79b62b6c89decadccd5aab1a40cc6ea0478c7b",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 57,
+      "split": "train",
+      "sha256": "372eb8837066e7a543fee27409e52f657cebb277c615d8eed7bf733ba2fdd357",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 58,
+      "split": "train",
+      "sha256": "99fdcdd3505ec01f075f007480b4344a52d98e24865b2cc8f9c165470b3da09d",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 59,
+      "split": "train",
+      "sha256": "e9ac722e6cd0f9ff128b1069d9fc8c66037c08cc97447d6fad3e16fdcdd7ee53",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 60,
+      "split": "eval",
+      "sha256": "4051b0586806179229ec0fe4772c3260c59f9025c8e4c98d59cb0f778b18738a",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 61,
+      "split": "train",
+      "sha256": "bd851700ec0ec5b6d183e642b59c4fae4747ad5bb1bd7c99583d1de156f2fbf7",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 62,
+      "split": "train",
+      "sha256": "5c0e92f88ff940f1ba17f9842a1b1a9961c78111f41338cf3f06db235260aad0",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 63,
+      "split": "train",
+      "sha256": "2f342e839409a1bffe0be005a4b559666c004e7d6f4b7db6a4329223252c6266",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 64,
+      "split": "train",
+      "sha256": "e314acf13b68063f32ac4dbf4a2524bd235655c9204d6e29cb6b0c8e653b3c55",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 65,
+      "split": "train",
+      "sha256": "48d7d56d3433737e1d89a38a73d08acd2d9821a960f905cc9907758440a5a605",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 66,
+      "split": "train",
+      "sha256": "bd851700ec0ec5b6d183e642b59c4fae4747ad5bb1bd7c99583d1de156f2fbf7",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 67,
+      "split": "train",
+      "sha256": "5c0e92f88ff940f1ba17f9842a1b1a9961c78111f41338cf3f06db235260aad0",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 68,
+      "split": "train",
+      "sha256": "2f342e839409a1bffe0be005a4b559666c004e7d6f4b7db6a4329223252c6266",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 69,
+      "split": "train",
+      "sha256": "e314acf13b68063f32ac4dbf4a2524bd235655c9204d6e29cb6b0c8e653b3c55",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 70,
+      "split": "train",
+      "sha256": "48d7d56d3433737e1d89a38a73d08acd2d9821a960f905cc9907758440a5a605",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 71,
+      "split": "train",
+      "sha256": "7435ccdb97b7efa71a5d916b6187c03002ba1d75ffcc033c8edbd8bed23c65e3",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 72,
+      "split": "train",
+      "sha256": "93d71247944aba53a6c4b2f42b1322819072a30c1bb6c1075aab5d4ab0383d35",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 73,
+      "split": "train",
+      "sha256": "733bf6ca0743b3e6cb7e6a2c67a79ab0a3431845f62a32d758125273b979e4a2",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 74,
+      "split": "train",
+      "sha256": "4b51d59937a42c5bd3ae3879930d7cb702eda0acd3d9f6e89f5f91f8e454199e",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 75,
+      "split": "train",
+      "sha256": "332833aae3dd15d900c94d964811ee79e875b1ec4ea5974540619c2f2b256ea6",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 76,
+      "split": "train",
+      "sha256": "7435ccdb97b7efa71a5d916b6187c03002ba1d75ffcc033c8edbd8bed23c65e3",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 77,
+      "split": "train",
+      "sha256": "93d71247944aba53a6c4b2f42b1322819072a30c1bb6c1075aab5d4ab0383d35",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 78,
+      "split": "train",
+      "sha256": "733bf6ca0743b3e6cb7e6a2c67a79ab0a3431845f62a32d758125273b979e4a2",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 79,
+      "split": "train",
+      "sha256": "4b51d59937a42c5bd3ae3879930d7cb702eda0acd3d9f6e89f5f91f8e454199e",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 80,
+      "split": "train",
+      "sha256": "332833aae3dd15d900c94d964811ee79e875b1ec4ea5974540619c2f2b256ea6",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 81,
+      "split": "train",
+      "sha256": "612a746eea51d16c84a4d623949c506657ddd87c2f0ac62586336a5dfe0c6eb6",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 82,
+      "split": "train",
+      "sha256": "7a52fde4f30377c900f1fae36ad749d845217054099e01d2dcaa135667008518",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 83,
+      "split": "train",
+      "sha256": "c8ed4c470fca41ec71f16d7e11f362bff7e7b5e9ef41ffb9c39d3965bea5330f",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 84,
+      "split": "train",
+      "sha256": "b4fed99260d722466a4e36cd5e0f18635f10cacc3fe2b656591ec4df4629fb2e",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 85,
+      "split": "train",
+      "sha256": "25dafd13f17b991e4053361356eb0beece72dad2a63661f05b19267507c74cb2",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 86,
+      "split": "train",
+      "sha256": "612a746eea51d16c84a4d623949c506657ddd87c2f0ac62586336a5dfe0c6eb6",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 87,
+      "split": "train",
+      "sha256": "7a52fde4f30377c900f1fae36ad749d845217054099e01d2dcaa135667008518",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 88,
+      "split": "train",
+      "sha256": "c8ed4c470fca41ec71f16d7e11f362bff7e7b5e9ef41ffb9c39d3965bea5330f",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 89,
+      "split": "train",
+      "sha256": "b4fed99260d722466a4e36cd5e0f18635f10cacc3fe2b656591ec4df4629fb2e",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 90,
+      "split": "train",
+      "sha256": "25dafd13f17b991e4053361356eb0beece72dad2a63661f05b19267507c74cb2",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 91,
+      "split": "train",
+      "sha256": "ca97bad6b7d61614122521867f69f6bc93b1a8456493265b9fac5679a44d2b3d",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 92,
+      "split": "train",
+      "sha256": "cc323dd389234d4dc6eadd4592c9514bb0fc6fba12933119ecf03b8c514f0880",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 93,
+      "split": "train",
+      "sha256": "c697a6ccf6c8f7fb68f878b4c4349ab833edde0ace59a792e21e2fe2731aca0f",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 94,
+      "split": "train",
+      "sha256": "fe27e71193b721295d791b09c828ad35ec2ff72307ba91992ee1fc1a15d7e6e0",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 95,
+      "split": "train",
+      "sha256": "0a81d696ee526701fbe483398b6f07bff749d26c7849657e9ec58540d57abdf2",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 96,
+      "split": "train",
+      "sha256": "ca97bad6b7d61614122521867f69f6bc93b1a8456493265b9fac5679a44d2b3d",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 97,
+      "split": "train",
+      "sha256": "cc323dd389234d4dc6eadd4592c9514bb0fc6fba12933119ecf03b8c514f0880",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 98,
+      "split": "train",
+      "sha256": "c697a6ccf6c8f7fb68f878b4c4349ab833edde0ace59a792e21e2fe2731aca0f",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 99,
+      "split": "train",
+      "sha256": "fe27e71193b721295d791b09c828ad35ec2ff72307ba91992ee1fc1a15d7e6e0",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 100,
+      "split": "train",
+      "sha256": "0a81d696ee526701fbe483398b6f07bff749d26c7849657e9ec58540d57abdf2",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 101,
+      "split": "train",
+      "sha256": "349dfcb7e5af244e310759367bf9ac999b559e70fa98e048669fb082206fc67f",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 102,
+      "split": "train",
+      "sha256": "53502ac193eabca567b7db29b1580762d1fe8f801a806e0a9897deccefad1645",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 103,
+      "split": "train",
+      "sha256": "56321759fbbf25f864bdffd11b80891429f4ab2ff4d9f820774af29d41699e77",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 104,
+      "split": "train",
+      "sha256": "752ea72fd99fd02a804522c91a282f8e181364b318c887b88f7ab526247d6c03",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 105,
+      "split": "train",
+      "sha256": "3452ea88d8fd5eb97667232e7287a25e4af76df5d2d01195ad7e9a0ccfabf3db",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 106,
+      "split": "train",
+      "sha256": "349dfcb7e5af244e310759367bf9ac999b559e70fa98e048669fb082206fc67f",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 107,
+      "split": "train",
+      "sha256": "53502ac193eabca567b7db29b1580762d1fe8f801a806e0a9897deccefad1645",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 108,
+      "split": "train",
+      "sha256": "56321759fbbf25f864bdffd11b80891429f4ab2ff4d9f820774af29d41699e77",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 109,
+      "split": "train",
+      "sha256": "752ea72fd99fd02a804522c91a282f8e181364b318c887b88f7ab526247d6c03",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 110,
+      "split": "train",
+      "sha256": "3452ea88d8fd5eb97667232e7287a25e4af76df5d2d01195ad7e9a0ccfabf3db",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 111,
+      "split": "train",
+      "sha256": "4c5569a4b6a63533dc53fde29b97ef348de835adaaf97bfcb983fec47ed27438",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 112,
+      "split": "train",
+      "sha256": "766283bcd4d1633a6353480056ba0237f3128c904448305f2f66c86f8361042d",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 113,
+      "split": "train",
+      "sha256": "9f16e8ad6ba667382bfd31882fd7b51634e6306525fbda5b7958f163cdfe869b",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 114,
+      "split": "train",
+      "sha256": "701028b8f7169046478d8c46325d30ff268d9b2993437d5b8c0771fb51b57ae1",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 115,
+      "split": "train",
+      "sha256": "48a6c2ce65eab67dd761a31769ada316204213d28178ec03ada77a84853b59d7",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 116,
+      "split": "train",
+      "sha256": "4c5569a4b6a63533dc53fde29b97ef348de835adaaf97bfcb983fec47ed27438",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 117,
+      "split": "train",
+      "sha256": "766283bcd4d1633a6353480056ba0237f3128c904448305f2f66c86f8361042d",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 118,
+      "split": "train",
+      "sha256": "9f16e8ad6ba667382bfd31882fd7b51634e6306525fbda5b7958f163cdfe869b",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 119,
+      "split": "train",
+      "sha256": "701028b8f7169046478d8c46325d30ff268d9b2993437d5b8c0771fb51b57ae1",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 120,
+      "split": "train",
+      "sha256": "48a6c2ce65eab67dd761a31769ada316204213d28178ec03ada77a84853b59d7",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 121,
+      "split": "train",
+      "sha256": "c4302bfbc0bb834a5c53a20e5f7b544b59be4fadf944ceaeb6066fa06be3d6dc",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 122,
+      "split": "train",
+      "sha256": "79473fd82f474de672c5d94f28da5a001f70b08ad4ee093a941c9ca4d2f6a7f7",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 123,
+      "split": "train",
+      "sha256": "5416e66395928e094971ea254799fe7b350eedcccd77edd8ec2bb57dfa29a52d",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 124,
+      "split": "train",
+      "sha256": "22d3a72816b9a3004c40d58fae5bbe459fe0d11c10af247478d3c3a97067155c",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 125,
+      "split": "train",
+      "sha256": "08c787412d422f1f52acb2b71fee3a367aac7f84fda53b1ee3685ec7eff3386e",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 126,
+      "split": "train",
+      "sha256": "c4302bfbc0bb834a5c53a20e5f7b544b59be4fadf944ceaeb6066fa06be3d6dc",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 127,
+      "split": "train",
+      "sha256": "79473fd82f474de672c5d94f28da5a001f70b08ad4ee093a941c9ca4d2f6a7f7",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 128,
+      "split": "train",
+      "sha256": "5416e66395928e094971ea254799fe7b350eedcccd77edd8ec2bb57dfa29a52d",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 129,
+      "split": "train",
+      "sha256": "22d3a72816b9a3004c40d58fae5bbe459fe0d11c10af247478d3c3a97067155c",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 130,
+      "split": "train",
+      "sha256": "08c787412d422f1f52acb2b71fee3a367aac7f84fda53b1ee3685ec7eff3386e",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 131,
+      "split": "eval",
+      "sha256": "f696e606bb5287f32b2f26fa43f16182f24a44d3de30e4bc66ea6ed1514de6b2",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 132,
+      "split": "train",
+      "sha256": "40a9255fb8f1a78357304112e1d8045fc7625b34677d36049e5476c7123538b2",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 133,
+      "split": "eval",
+      "sha256": "7cdc3fd57f56f78e9d8103513f7e5605ea814e16604671de7f4fc3266cbe3607",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 134,
+      "split": "train",
+      "sha256": "cb5b4713b8f72e2496c129d685c42e254b1bbda70a5cec84fc7b25ee9f0d3d64",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 135,
+      "split": "train",
+      "sha256": "4b6a6a65b755d552c185d0ea704d6a837c3efd848c1a84a7afd8265902c12624",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 136,
+      "split": "eval",
+      "sha256": "f696e606bb5287f32b2f26fa43f16182f24a44d3de30e4bc66ea6ed1514de6b2",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 137,
+      "split": "train",
+      "sha256": "40a9255fb8f1a78357304112e1d8045fc7625b34677d36049e5476c7123538b2",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 138,
+      "split": "eval",
+      "sha256": "7cdc3fd57f56f78e9d8103513f7e5605ea814e16604671de7f4fc3266cbe3607",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 139,
+      "split": "train",
+      "sha256": "cb5b4713b8f72e2496c129d685c42e254b1bbda70a5cec84fc7b25ee9f0d3d64",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 140,
+      "split": "train",
+      "sha256": "4b6a6a65b755d552c185d0ea704d6a837c3efd848c1a84a7afd8265902c12624",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 141,
+      "split": "train",
+      "sha256": "9a4d3da88e886cd982b67d4c2eca95b45083079e420498d21296df1bc3a8f73f",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 142,
+      "split": "train",
+      "sha256": "df06496891e8498a1b2e11af85ecc2dd331ad283a3fc9d682e06c2df29874d41",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 143,
+      "split": "train",
+      "sha256": "c252a34143d3b6abf70054eada7f92dce2f406947390d95e747e0c7b02242297",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 144,
+      "split": "train",
+      "sha256": "58759b59144f05b58bce25deab603d82f7542331bed2b0c150bd905eacc88455",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 145,
+      "split": "train",
+      "sha256": "d8b4328dfaeb68a51d9a6b4237f1baea13a0a910c679b88e21481019c5298759",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 146,
+      "split": "train",
+      "sha256": "9a4d3da88e886cd982b67d4c2eca95b45083079e420498d21296df1bc3a8f73f",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 147,
+      "split": "train",
+      "sha256": "df06496891e8498a1b2e11af85ecc2dd331ad283a3fc9d682e06c2df29874d41",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 148,
+      "split": "train",
+      "sha256": "c252a34143d3b6abf70054eada7f92dce2f406947390d95e747e0c7b02242297",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 149,
+      "split": "train",
+      "sha256": "58759b59144f05b58bce25deab603d82f7542331bed2b0c150bd905eacc88455",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 150,
+      "split": "train",
+      "sha256": "d8b4328dfaeb68a51d9a6b4237f1baea13a0a910c679b88e21481019c5298759",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 151,
+      "split": "eval",
+      "sha256": "fa039c5a48ad1f09145d9f6178041ac84d4d46ee9470b7d06128c54c92743b0e",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 152,
+      "split": "train",
+      "sha256": "b4b94f307880a3b0235320aee071fed42c2cf42dfc650d092ab4e0d2c23b0ed9",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 153,
+      "split": "train",
+      "sha256": "a9d4a122fa3f88e280666dc65542d15ce711ed3b50cf5abf2c9a4cba07ab279a",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 154,
+      "split": "train",
+      "sha256": "d88b25da44a7075875340e84901315230ee9905467e92cff6354fa3a3a5651b8",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 155,
+      "split": "train",
+      "sha256": "7470cc8f992f385ff0d94ab14f0b970d5f8427b70ba330b537065243670051dd",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 156,
+      "split": "eval",
+      "sha256": "fa039c5a48ad1f09145d9f6178041ac84d4d46ee9470b7d06128c54c92743b0e",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 157,
+      "split": "train",
+      "sha256": "b4b94f307880a3b0235320aee071fed42c2cf42dfc650d092ab4e0d2c23b0ed9",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 158,
+      "split": "train",
+      "sha256": "a9d4a122fa3f88e280666dc65542d15ce711ed3b50cf5abf2c9a4cba07ab279a",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 159,
+      "split": "train",
+      "sha256": "d88b25da44a7075875340e84901315230ee9905467e92cff6354fa3a3a5651b8",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 160,
+      "split": "train",
+      "sha256": "7470cc8f992f385ff0d94ab14f0b970d5f8427b70ba330b537065243670051dd",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 161,
+      "split": "train",
+      "sha256": "7e0d648102f064887a504ddc3237ad972cd096b78bbac7b012a84c1aab2c257a",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 162,
+      "split": "train",
+      "sha256": "d9b1f54758bb6e841388a80ba2652ff5e318124080ff47f15d54f4794695b6fa",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 163,
+      "split": "train",
+      "sha256": "7d293dd4fbb796b7f4bdb978c2a752699b31a6771305fe23c07f043bf35c1cd0",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 164,
+      "split": "train",
+      "sha256": "af515b4f4b515f9753bc525f0e3be6039664a61eeedb3305dbae5698f67281c6",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 165,
+      "split": "train",
+      "sha256": "5ea76bbef3d41920d3790c8b97ee8a36812260faf12a0936f7089e16daa72ddb",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 166,
+      "split": "train",
+      "sha256": "7e0d648102f064887a504ddc3237ad972cd096b78bbac7b012a84c1aab2c257a",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 167,
+      "split": "train",
+      "sha256": "d9b1f54758bb6e841388a80ba2652ff5e318124080ff47f15d54f4794695b6fa",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 168,
+      "split": "train",
+      "sha256": "7d293dd4fbb796b7f4bdb978c2a752699b31a6771305fe23c07f043bf35c1cd0",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 169,
+      "split": "train",
+      "sha256": "af515b4f4b515f9753bc525f0e3be6039664a61eeedb3305dbae5698f67281c6",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 170,
+      "split": "train",
+      "sha256": "5ea76bbef3d41920d3790c8b97ee8a36812260faf12a0936f7089e16daa72ddb",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 171,
+      "split": "train",
+      "sha256": "5a0850f9b72009a995db282caf3486add652daf6823870d1bc3c4c707e2512ad",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 172,
+      "split": "train",
+      "sha256": "3a8eaace9d6e80fde6f02e40b1d87e243c88953dc79ee172863d5f1e3bd542f8",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 173,
+      "split": "train",
+      "sha256": "e6b1d9c154246617dc7cc1c9cfa2cc19128b32e7644f6e5b33ca1a4a7c2cba5a",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 174,
+      "split": "train",
+      "sha256": "7ca6efa628675773bfa30d6573710d4bd3ef4e886c5f70823b036d0641f06192",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 175,
+      "split": "train",
+      "sha256": "46dc2ba8768eefdbc5c6d24844c392198b87dc2f48c92951337d0657a280868e",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 176,
+      "split": "train",
+      "sha256": "5a0850f9b72009a995db282caf3486add652daf6823870d1bc3c4c707e2512ad",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 177,
+      "split": "train",
+      "sha256": "3a8eaace9d6e80fde6f02e40b1d87e243c88953dc79ee172863d5f1e3bd542f8",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 178,
+      "split": "train",
+      "sha256": "e6b1d9c154246617dc7cc1c9cfa2cc19128b32e7644f6e5b33ca1a4a7c2cba5a",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 179,
+      "split": "train",
+      "sha256": "7ca6efa628675773bfa30d6573710d4bd3ef4e886c5f70823b036d0641f06192",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 180,
+      "split": "train",
+      "sha256": "46dc2ba8768eefdbc5c6d24844c392198b87dc2f48c92951337d0657a280868e",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 181,
+      "split": "train",
+      "sha256": "d9e07a63e00ba9a455696da8703d684a99db094d6d5def8bf0ace48070d27949",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 182,
+      "split": "train",
+      "sha256": "9f6046f94ae3734cd2f545ef3df9a95b65e53215770d66a332681c1d7ffba9f1",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 183,
+      "split": "train",
+      "sha256": "e45e93b73cd64831a35ae2109924a0b317f974f1a4006c9159cb5c1fe7f10369",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 184,
+      "split": "eval",
+      "sha256": "af0fdfb9e6025f69c4bd7c9d703089acc6559ad61832cb5afe8593e859e50dd7",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 185,
+      "split": "train",
+      "sha256": "fb1bec8cdd02a66d652cd04a096495ee8175b3043bba8513aab285b00a31621d",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 186,
+      "split": "train",
+      "sha256": "d9e07a63e00ba9a455696da8703d684a99db094d6d5def8bf0ace48070d27949",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 187,
+      "split": "train",
+      "sha256": "9f6046f94ae3734cd2f545ef3df9a95b65e53215770d66a332681c1d7ffba9f1",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 188,
+      "split": "train",
+      "sha256": "e45e93b73cd64831a35ae2109924a0b317f974f1a4006c9159cb5c1fe7f10369",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 189,
+      "split": "eval",
+      "sha256": "af0fdfb9e6025f69c4bd7c9d703089acc6559ad61832cb5afe8593e859e50dd7",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 190,
+      "split": "train",
+      "sha256": "fb1bec8cdd02a66d652cd04a096495ee8175b3043bba8513aab285b00a31621d",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 191,
+      "split": "train",
+      "sha256": "7669f971a5ca103dad355cf00e97d3d87b1cec870775f1d7b392d81ed0f0d92d",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 192,
+      "split": "train",
+      "sha256": "89cf1ae8a58def2edc0fbcf1c447c61eb4f5f529046b885a984e421fc456a400",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 193,
+      "split": "train",
+      "sha256": "e3906ba941f951feaa2f4786ae1cf246a0223384aeb014e2dd069a1bf2a1882c",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 194,
+      "split": "train",
+      "sha256": "410f85bdc26894097396c6551bcc26665caed6ac6336e7689f2910775045f3a2",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 195,
+      "split": "train",
+      "sha256": "2e036f4551e3792ff7b51eccf7b0eef05c62124ca2c020a1c2546a390d3a89a2",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 196,
+      "split": "train",
+      "sha256": "7669f971a5ca103dad355cf00e97d3d87b1cec870775f1d7b392d81ed0f0d92d",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 197,
+      "split": "train",
+      "sha256": "89cf1ae8a58def2edc0fbcf1c447c61eb4f5f529046b885a984e421fc456a400",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 198,
+      "split": "train",
+      "sha256": "e3906ba941f951feaa2f4786ae1cf246a0223384aeb014e2dd069a1bf2a1882c",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 199,
+      "split": "train",
+      "sha256": "410f85bdc26894097396c6551bcc26665caed6ac6336e7689f2910775045f3a2",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+      "line": 200,
+      "split": "train",
+      "sha256": "2e036f4551e3792ff7b51eccf7b0eef05c62124ca2c020a1c2546a390d3a89a2",
       "dialect": "saudi",
       "quality": "gold"
     },

@@ -22,6 +22,18 @@ class _GoodGenerator:
             text = "العفو، حياك الله، وشاكر لك لطفك."
         elif "سعودي" in prompt:
             text = "أبشر، نتكلم باللهجة السعودية الواضحة."
+        elif "نصيحة" in prompt:
+            text = "نصيحة بسيطة: ابدأ بخطوة صغيرة ورتب أولويتك."
+        elif "أتعلم" in prompt:
+            text = "تعلم شوي كل يوم واستمر بهدوء."
+        elif "الصبر" in prompt:
+            text = "الصبر أن تثبت بهدوء وقت الصعوبة."
+        elif "متضايق" in prompt:
+            text = "أفهم إنك متضايق، اهدأ قليلًا وأنا معك."
+        elif "قصيرا" in prompt:
+            text = "باختصار: جواب قصير وواضح."
+        elif "تفهم" in prompt:
+            text = "نعم، أفهم كلامك بوضوح."
         else:
             text = "خذ خطوة صغيرة وواضحة، ثم كررها بهدوء."
         return NativeGenerationResult(True, text, "fake_good", "generated")

@@ -1,0 +1,97 @@
+{
+  "phase": "Phase 27.15",
+  "name": "SF-10M Social/Lexical Curriculum + No-Repeat Decoding",
+  "status": "completed_eval_improved_strict_generation_blocked",
+  "language_track": ["msa", "saudi"],
+  "lexicon_track": "Saudi Seed v1",
+  "runtime_generator_enabled": false,
+  "curriculum": {
+    "records_added": 400,
+    "msa": 200,
+    "saudi": 200,
+    "quality": "gold",
+    "sources": [
+      "sf-ai-social-lexical-curriculum-msa-v1",
+      "sf-ai-social-lexical-curriculum-saudi-v1"
+    ],
+    "files": [
+      "data/corpus/chat/jsonl/dialogue_batch_v9_social_lexical_msa_009.jsonl",
+      "data/corpus/chat/jsonl/dialogue_batch_v9_social_lexical_saudi_009.jsonl"
+    ]
+  },
+  "corpus": {
+    "total_records": 5943,
+    "training_ready": 5943,
+    "issues": 0,
+    "dialects": {"msa": 2949, "saudi": 2994},
+    "quality": {"gold": 831, "silver": 5112}
+  },
+  "split": {
+    "manifest": "data/corpus/chat/splits/dialogue_split_v1.json",
+    "train": 5343,
+    "eval": 600,
+    "dialects": {
+      "train": {"msa": 2661, "saudi": 2682},
+      "eval": {"msa": 288, "saudi": 312}
+    }
+  },
+  "decoding_controls": {
+    "no_repeat_ngram_size": 3,
+    "repetition_penalty": 1.08
+  },
+  "training": {
+    "model": "sf-10m",
+    "checkpoint_root": "artifacts/checkpoints/sf_10m_v0_10",
+    "steps": 6000,
+    "batch_size": 4,
+    "seq_len": 64,
+    "loss_scope": "assistant",
+    "stream_format": "dialogue",
+    "boundary_eos_target": true,
+    "dialect_conditioning": true,
+    "first_logged_loss": 8.4837,
+    "last_loss": 1.7668
+  },
+  "eval": {
+    "split_name": "eval",
+    "max_batches": 200,
+    "best_checkpoint_by_eval": "sf-10m-step6000",
+    "checkpoints": [
+      {"name": "sf-10m-step1000", "loss": 4.9944, "perplexity": 147.59},
+      {"name": "sf-10m-step2000", "loss": 5.0831, "perplexity": 161.28},
+      {"name": "sf-10m-step3000", "loss": 4.3987, "perplexity": 81.34},
+      {"name": "sf-10m-step4000", "loss": 4.0198, "perplexity": 55.69},
+      {"name": "sf-10m-step5000", "loss": 3.7826, "perplexity": 43.93},
+      {"name": "sf-10m-step6000", "loss": 3.0452, "perplexity": 21.01}
+    ]
+  },
+  "generation_quality": {
+    "suite": "eval/prompts/generation_quality_v1.json",
+    "report": "artifacts/reports/generation_quality_v1_v0_10_strict_report.json",
+    "strict_suite_upgraded": true,
+    "checkpoint": "sf-10m-step6000",
+    "passed": 0,
+    "total": 10,
+    "pass_rate": 0.0,
+    "runtime_allowed": false,
+    "primary_reasons": [
+      "greeting_mismatch",
+      "model_artifact_fragment",
+      "thanks_mismatch",
+      "too_short",
+      "missing_required_terms"
+    ]
+  },
+  "discarded_experiments": [
+    {
+      "name": "sf_10m_v0_9",
+      "reason": "initial curriculum mixed unrelated replies for the same prompt; used only as diagnosis and not adopted"
+    }
+  ],
+  "decision": {
+    "activate_in_chat_ui": false,
+    "start_sf50m": false,
+    "reason": "No-repeat decoding and targeted curriculum improved eval loss, but strict semantic generation quality is still 0/10."
+  },
+  "next": "Phase 27.16 should repair prompt-to-answer conditioning/objective before adding more data or scaling."
+}

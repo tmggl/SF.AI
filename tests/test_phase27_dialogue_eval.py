@@ -49,7 +49,7 @@ def test_phase27_dialogue_eval_passes_baseline_but_blocks_scaling() -> None:
     assert report.can_start_phase28 is False
     assert report.generator_modes == {"template": 19}
     assert report.phase26_status == "NOT_READY_IMPROVE_SF10M_AND_CANARY"
-    assert report.corpus_expansion_plan["current_records"] == 5543
+    assert report.corpus_expansion_plan["current_records"] == 5943
     assert report.corpus_expansion_plan["target_records"] == 5000
     assert report.corpus_expansion_plan["remaining_records"] == 0
     assert report.corpus_expansion_plan["needed_by_dialect"] == {

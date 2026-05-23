@@ -36,7 +36,7 @@
     "category": "daily_advice",
     "dialect": "msa",
     "prompt": "قل لي نصيحة بسيطة",
-    "required_terms": [],
+    "required_terms": ["نصيحة", "خطوة", "ابدأ", "رتب"],
     "forbidden_terms": ["الطرو", "حارين", "استعجه", "مستمستم"]
   },
   {
@@ -44,7 +44,7 @@
     "category": "daily_advice",
     "dialect": "saudi",
     "prompt": "وش رايك أتعلم كل يوم شوي",
-    "required_terms": [],
+    "required_terms": ["تعلم", "كل يوم", "شوي", "استمر"],
     "forbidden_terms": ["الطرو", "حارين", "استعجه", "مستمستم"]
   },
   {
@@ -52,7 +52,7 @@
     "category": "explanation",
     "dialect": "msa",
     "prompt": "اشرح لي الصبر بجملة واحدة",
-    "required_terms": [],
+    "required_terms": ["الصبر", "هدوء", "تثبت"],
     "forbidden_terms": ["الطرو", "حارين", "استعجه", "مستمستم"]
   },
   {
@@ -60,7 +60,7 @@
     "category": "empathy",
     "dialect": "saudi",
     "prompt": "أنا متضايق اليوم",
-    "required_terms": [],
+    "required_terms": ["متضايق", "ضيق", "معك", "اهدأ"],
     "forbidden_terms": ["الطرو", "حارين", "استعجه", "مستمستم"]
   },
   {
@@ -68,7 +68,7 @@
     "category": "format",
     "dialect": "msa",
     "prompt": "أريد جوابا قصيرا",
-    "required_terms": [],
+    "required_terms": ["باختصار", "مختصر", "الزبدة", "قصير"],
     "forbidden_terms": ["الطرو", "حارين", "استعجه", "مستمستم"]
   },
   {
@@ -76,7 +76,7 @@
     "category": "understanding",
     "dialect": "msa",
     "prompt": "هل تفهم كلامي",
-    "required_terms": [],
+    "required_terms": ["نعم", "أفهم", "كلامك"],
     "forbidden_terms": ["الطرو", "حارين", "استعجه", "مستمستم"]
   }
 ]

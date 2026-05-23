@@ -328,6 +328,8 @@ def test_real_corpus_dir_contains_only_explicit_reviewed_seeds() -> None:
         "dialogue_batch_v7_gold_social_saudi_007.jsonl",
         "dialogue_batch_v8_short_repair_msa_008.jsonl",
         "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+        "dialogue_batch_v9_social_lexical_msa_009.jsonl",
+        "dialogue_batch_v9_social_lexical_saudi_009.jsonl",
         "first_dialogue_seed.jsonl",
         "protected_terms_msa_seed_v1.jsonl",
         "protected_terms_seed_v1.jsonl",

@@ -29,6 +29,8 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--max-new-tokens", type=int, default=48)
     p.add_argument("--temperature", type=float, default=0.20)
     p.add_argument("--top-k", type=int, default=0)
+    p.add_argument("--no-repeat-ngram-size", type=int, default=3)
+    p.add_argument("--repetition-penalty", type=float, default=1.08)
     p.add_argument("--device", type=str, default="auto")
     return p.parse_args()
 
@@ -46,6 +48,8 @@ def main() -> int:
             max_new_tokens=args.max_new_tokens,
             temperature=args.temperature,
             top_k=args.top_k,
+            no_repeat_ngram_size=args.no_repeat_ngram_size,
+            repetition_penalty=args.repetition_penalty,
             device=args.device,
             dialogue_prompt=True,
         )

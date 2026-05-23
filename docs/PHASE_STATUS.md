@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.14 / 30**
-- **المرحلة الحالية:** **Phase 27.14 — Sovereign Training Quality Tooling Decision**
-- **حالة المرحلة الحالية:** **مكتملة؛ أدوات جودة التدريب المحلية اعتُمدت دون تدريب جديد**
-- **المرحلة التالية المقترحة:** Phase 27.15 لإصلاح الدلالة واللغة ورفع generation-quality قبل أي تكبير إلى `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.15 / 30**
+- **المرحلة الحالية:** **Phase 27.15 — Social/Lexical Curriculum + No-Repeat Decoding**
+- **حالة المرحلة الحالية:** **مكتملة؛ eval تحسن لكن canary الدلالي الصارم حجب التوليد**
+- **المرحلة التالية المقترحة:** Phase 27.16 لإصلاح prompt-to-answer conditioning قبل أي تكبير إلى `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -63,6 +63,7 @@
 | Phase 27.12 | Assistant Boundary/EOS Repair | ✅ completed_boundary_eos_partial_semantic_blocked | ✅ |
 | Phase 27.13 | SF-10M v0.8 Boundary/EOS Wider Training | ✅ completed_eval_improved_generation_still_blocked | ✅ |
 | Phase 27.14 | Sovereign Training Quality Tooling Decision | ✅ completed_tooling_adoption_decision_no_training | ✅ |
+| Phase 27.15 | Social/Lexical Curriculum + No-Repeat Decoding | ✅ completed_eval_improved_strict_generation_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -446,7 +447,21 @@
   - أضيف سجل التجارب المحلي: `artifacts/reports/experiment_registry.jsonl`.
   - القرار: `COMPLETED_TOOLING_ADOPTION_DECISION_NO_TRAINING`.
   - runtime المولد و`SF-50M` وPhase 28 ما زالت محظورة حتى تنجح بوابات الجودة.
-  - التالي: Phase 27.15 لإصلاح social/lexical curriculum وdecoder no-repeat controls.
+  - التالي وقتها: Phase 27.15 لإصلاح social/lexical curriculum وdecoder no-repeat controls.
+- بدأ وانتهى Phase 27.15 Social/Lexical Curriculum + No-Repeat Decoding:
+  - أضيف no-repeat decoding إلى `GenerationConfig`.
+  - أضيفت 400 عينة gold اجتماعية/لغوية: `msa=200`, `saudi=200`.
+  - corpus الحالي: `5943` سجلًا، `issues=0`.
+  - split الحالي: `train=5343`, `eval=600`.
+  - دُرّب `SF-10M v0.10` 6000 خطوة.
+  - أفضل eval: `sf-10m-step6000`, loss `3.0452`, perplexity `21.01`.
+  - تم تشديد `generation_quality_v1` ليطلب required semantic terms لكل prompt.
+  - canary الدلالي الصارم: `0/10`, `runtime_allowed=false`.
+  - القرار: `COMPLETED_EVAL_IMPROVED_STRICT_GENERATION_BLOCKED`.
+  - لا تفعيل runtime ولا تدريب `SF-50M`.
+  - أضيف [PHASE27_15_SOCIAL_LEXICAL_CURRICULUM_REPORT.md](./PHASE27_15_SOCIAL_LEXICAL_CURRICULUM_REPORT.md).
+  - أضيف `artifacts/reports/sf_10m_v0_10_social_lexical_curriculum_report.json`.
+  - أضيف `artifacts/reports/generation_quality_v1_v0_10_strict_report.json`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -512,7 +527,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.13"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.15"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -543,7 +558,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-491 passed in 16.25s
+495 passed in 16.81s
 ```
 
 | ملف | عدد |

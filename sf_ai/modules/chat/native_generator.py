@@ -36,6 +36,8 @@ class NativeGeneratorConfig:
     max_new_tokens: int = 48
     temperature: float = 0.20
     top_k: int = 0
+    no_repeat_ngram_size: int = 3
+    repetition_penalty: float = 1.08
     device: str = "auto"
     dialogue_prompt: bool = True
 
@@ -122,6 +124,8 @@ class NativeGenerator:
             temperature=temperature or self.config.temperature,
             top_k=self.config.top_k if top_k is None else top_k,
             eos_token_id=tok.vocab.get(ASSISTANT_EOS_TOKEN),
+            no_repeat_ngram_size=self.config.no_repeat_ngram_size,
+            repetition_penalty=self.config.repetition_penalty,
         )
         if cfg.top_k > 0 or cfg.temperature != 1.0:
             out = sample_generate(model, input_ids, cfg)

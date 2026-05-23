@@ -73,6 +73,14 @@ _MODEL_ARTIFACT_FRAGMENTS = (
     "التصمن",
     "ياذكر",
     "هوياستمرغم",
+    # Observed in SF-10M v0.10 after social/lexical curriculum.
+    "الصوري ين",
+    "روري",
+    "مة مك",
+    "المفاجعليك",
+    "تخيارين",
+    "خياروح",
+    "يارين",
 )
 _BROKEN_PREFIX_RE = re.compile(r"^\s*[\u0600-\u06FF]\s*[؟?]")
 _REPEATED_ARABIC_BIGRAM_RE = re.compile(r"([\u0600-\u06FF]{2})\1")

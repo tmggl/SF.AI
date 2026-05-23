@@ -1,0 +1,220 @@
+{
+  "phase": "Phase 27.9 — Generation Quality Harness",
+  "status": "BLOCKED_GENERATION_QUALITY_CANARY",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "suite_path": "/Users/sami/workSF/SF.AI/eval/prompts/generation_quality_v1.json",
+  "checkpoint_name": "sf-10m-step6000",
+  "generator_name": "sf_10m_v0_10_step6000_strict",
+  "total_prompts": 10,
+  "passed_prompts": 0,
+  "failed_prompts": 10,
+  "pass_rate": 0.0,
+  "guard_reason_counts": {
+    "greeting_mismatch": 1,
+    "model_artifact_fragment": 4,
+    "thanks_mismatch": 1,
+    "too_short": 1,
+    "passed": 3
+  },
+  "category_counts": {
+    "social": 3,
+    "style": 1,
+    "daily_advice": 2,
+    "explanation": 1,
+    "empathy": 1,
+    "format": 1,
+    "understanding": 1
+  },
+  "runtime_allowed": false,
+  "blockers": [
+    "generation_quality_failures",
+    "model_artifact_fragments",
+    "runtime_generation_blocked"
+  ],
+  "notes": [
+    "This harness evaluates raw native generation outside the chat UI.",
+    "Runtime remains template-first until this canary passes."
+  ],
+  "results": [
+    {
+      "id": "greeting_msa",
+      "category": "social",
+      "dialect": "msa",
+      "prompt": "السلام عليكم",
+      "passed": false,
+      "issues": [
+        "guard:greeting_mismatch",
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_10_step6000_strict",
+      "reason": "generated",
+      "guard_reason": "greeting_mismatch",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "وعليك، حاضر إذا احتجت."
+    },
+    {
+      "id": "smalltalk_saudi",
+      "category": "social",
+      "dialect": "saudi",
+      "prompt": "كيفك",
+      "passed": false,
+      "issues": [
+        "guard:model_artifact_fragment",
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_10_step6000_strict",
+      "reason": "generated",
+      "guard_reason": "model_artifact_fragment",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "لا، بخيارين وسبب له: الهدوء."
+    },
+    {
+      "id": "thanks_msa",
+      "category": "social",
+      "dialect": "msa",
+      "prompt": "شكرا لك",
+      "passed": false,
+      "issues": [
+        "guard:thanks_mismatch",
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_10_step6000_strict",
+      "reason": "generated",
+      "guard_reason": "thanks_mismatch",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "لا، الاعتذار الواضح يكفي."
+    },
+    {
+      "id": "saudi_preference",
+      "category": "style",
+      "dialect": "saudi",
+      "prompt": "خلنا نتكلم سعودي",
+      "passed": false,
+      "issues": [
+        "guard:too_short",
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_10_step6000_strict",
+      "reason": "generated",
+      "guard_reason": "too_short",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "ورتخير."
+    },
+    {
+      "id": "short_advice_msa",
+      "category": "daily_advice",
+      "dialect": "msa",
+      "prompt": "قل لي نصيحة بسيطة",
+      "passed": false,
+      "issues": [
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_10_step6000_strict",
+      "reason": "generated",
+      "guard_reason": "passed",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "لا، خله يرتك ثم ما ياره بلطف."
+    },
+    {
+      "id": "short_advice_saudi",
+      "category": "daily_advice",
+      "dialect": "saudi",
+      "prompt": "وش رايك أتعلم كل يوم شوي",
+      "passed": false,
+      "issues": [
+        "guard:model_artifact_fragment",
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_10_step6000_strict",
+      "reason": "generated",
+      "guard_reason": "model_artifact_fragment",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "لا، السلام روري أول ثم اللي ممكن مة مك."
+    },
+    {
+      "id": "simple_explanation_msa",
+      "category": "explanation",
+      "dialect": "msa",
+      "prompt": "اشرح لي الصبر بجملة واحدة",
+      "passed": false,
+      "issues": [
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_10_step6000_strict",
+      "reason": "generated",
+      "guard_reason": "passed",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "لا، الاعتذار الواضح يكفي."
+    },
+    {
+      "id": "feeling_saudi",
+      "category": "empathy",
+      "dialect": "saudi",
+      "prompt": "أنا متضايق اليوم",
+      "passed": false,
+      "issues": [
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_10_step6000_strict",
+      "reason": "generated",
+      "guard_reason": "passed",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "لا، الاعتذار الواضح يكفي."
+    },
+    {
+      "id": "concise_answer_msa",
+      "category": "format",
+      "dialect": "msa",
+      "prompt": "أريد جوابا قصيرا",
+      "passed": false,
+      "issues": [
+        "guard:model_artifact_fragment",
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_10_step6000_strict",
+      "reason": "generated",
+      "guard_reason": "model_artifact_fragment",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "كرًا لتخيارين وسبب لل من شعوره."
+    },
+    {
+      "id": "what_do_you_understand",
+      "category": "understanding",
+      "dialect": "msa",
+      "prompt": "هل تفهم كلامي",
+      "passed": false,
+      "issues": [
+        "guard:model_artifact_fragment",
+        "missing_required_term"
+      ],
+      "used": true,
+      "generator": "sf_10m_v0_10_step6000_strict",
+      "reason": "generated",
+      "guard_reason": "model_artifact_fragment",
+      "repetition_ratio": 0.0,
+      "arabic_ratio": 1.0,
+      "response_preview": "العفو، يارين خياروء."
+    }
+  ]
+}

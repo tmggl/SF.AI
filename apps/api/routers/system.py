@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.14 — Sovereign Training Quality Tooling Decision",
-        current_phase_status="completed_tooling_adoption_decision_no_training",
+        current_phase="Phase 27.15 — Social/Lexical Curriculum + No-Repeat Decoding",
+        current_phase_status="completed_eval_improved_strict_generation_blocked",
         next_phase=(
-            "Phase 27.15 SF-10M semantic and lexical repair before any SF-50M scaling"
+            "Phase 27.16 SF-10M prompt-to-answer conditioning repair before any SF-50M scaling"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -184,6 +184,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_14_sovereign_quality_tooling",
                 status="completed_no_training",
                 phase="Phase 27.14",
+            ),
+            ComponentStatus(
+                name="phase27_15_social_lexical_curriculum",
+                status="completed_eval_improved_runtime_blocked",
+                phase="Phase 27.15",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

@@ -253,6 +253,36 @@ def test_sample_generate_extends_sequence_with_topk() -> None:
     assert out.shape == (1, prompt.shape[1] + cfg_gen.max_new_tokens)
 
 
+class _RepeatBiasedModel:
+    class _Cfg:
+        max_seq_len = 16
+
+    config = _Cfg()
+
+    def eval(self) -> None:
+        return None
+
+    def __call__(self, ids):  # type: ignore[no-untyped-def]
+        batch, seq_len = ids.shape
+        logits = torch.zeros(batch, seq_len, 6)
+        logits[:, -1, 2] = 10.0
+        logits[:, -1, 3] = 9.0
+        logits[:, -1, 4] = 8.0
+        return logits
+
+
+def test_greedy_generate_blocks_repeated_bigrams() -> None:
+    prompt = torch.tensor([[1, 2]])
+    out = greedy_generate(
+        _RepeatBiasedModel(),
+        prompt,
+        GenerationConfig(max_new_tokens=4, no_repeat_ngram_size=2),
+    )
+    tokens = out[0].tolist()
+    bigrams = list(zip(tokens, tokens[1:]))
+    assert len(bigrams) == len(set(bigrams))
+
+
 def test_generation_config_rejects_bad_values() -> None:
     with pytest.raises(ValueError):
         GenerationConfig(max_new_tokens=0)
@@ -260,6 +290,10 @@ def test_generation_config_rejects_bad_values() -> None:
         GenerationConfig(temperature=0)
     with pytest.raises(ValueError):
         GenerationConfig(top_k=-1)
+    with pytest.raises(ValueError):
+        GenerationConfig(no_repeat_ngram_size=-1)
+    with pytest.raises(ValueError):
+        GenerationConfig(repetition_penalty=0.99)
 
 
 # ---------- Training step ----------

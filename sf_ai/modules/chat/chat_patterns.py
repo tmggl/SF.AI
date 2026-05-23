@@ -84,9 +84,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.14: ثبّتنا Sovereign Training Quality Tooling كقرار رسمي. "
-    "اعتمدنا 10 أدوات محلية منها EOS، tracker، checkpoint selector، وgold probes. "
-    "لا تدريب جديد ولا تفعيل للواجهة؛ التالي Phase 27.15 لإصلاح الدلالة واللغة في SF-10M.",
+    "اكتملت Phase 27.15: أضفنا no-repeat decoding و400 سجل gold اجتماعي/لغوي، "
+    "ودرّبنا SF-10M v0.10. تحسن eval إلى loss=3.0452 وppl=21.01، "
+    "لكن canary الدلالي الصارم بقي 0/10؛ لذلك لا تفعيل للواجهة ولا SF-50M.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

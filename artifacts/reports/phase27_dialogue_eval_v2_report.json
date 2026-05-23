@@ -32,15 +32,15 @@
   "can_start_phase28": false,
   "phase26_status": "NOT_READY_IMPROVE_SF10M_AND_CANARY",
   "corpus_expansion_plan": {
-    "current_records": 5543,
+    "current_records": 5943,
     "target_records": 5000,
     "remaining_records": 0,
     "batch_size": 1500,
     "batches_needed_total": 0,
     "target_per_dialect": 2500,
     "dialect_counts": {
-      "saudi": 2794,
-      "msa": 2749
+      "saudi": 2994,
+      "msa": 2949
     },
     "needed_by_dialect": {
       "msa": 0,
@@ -53,9 +53,9 @@
     "quality_targets": {
       "gold_total_target": 1000,
       "silver_total_target": 4000,
-      "current_gold": 431,
+      "current_gold": 831,
       "current_silver": 5112,
-      "needed_gold": 569,
+      "needed_gold": 169,
       "needed_silver": 0
     },
     "category_targets_remaining": {
@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27.14: ثبّتنا Sovereign Training Quality Tooling كقرار رسمي. اعتمدنا 10 أدوات محلية منها EOS، tracker، checkpoint selector، وgold probes. لا تدريب جديد ولا تفعيل للواج"
+      "response_preview": "اكتملت Phase 27.15: أضفنا no-repeat decoding و400 سجل gold اجتماعي/لغوي، ودرّبنا SF-10M v0.10. تحسن eval إلى loss=3.0452 وppl=21.01، لكن canary الدلالي الصارم بقي 0/10؛ لذلك لا تفع"
     },
     {
       "scenario_id": "clarification_repair_flow",
