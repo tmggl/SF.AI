@@ -13,7 +13,7 @@ def test_phase19_readiness_reports_current_corpus_is_too_small() -> None:
 
     assert decision.phase.startswith("Phase 19")
     assert decision.target_model == "sf-50m"
-    assert decision.training_records == 450
+    assert decision.training_records == 475
     assert decision.min_training_records == 5000
     assert decision.can_start_training is False
     assert decision.lab_experiment_allowed is True
