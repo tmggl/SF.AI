@@ -86,6 +86,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.14 | Sovereign Training Quality Tooling Decision | مكتملة؛ أدوات جودة محلية دون تدريب |
 | Phase 27.15 | Social/Lexical Curriculum + No-Repeat Decoding | مكتملة؛ eval تحسن وcanary صارم يحجب |
 | Phase 27.16 | Prompt-to-Answer Objective Repair | مكتملة؛ sample isolation أضيف وruntime محظور |
+| Phase 27.17 | Prompt-to-Answer Micro-Probe | مكتملة؛ 27/32 breakthrough وruntime محظور |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -1976,6 +1977,70 @@ step6000 = 0/10, runtime_allowed=false
 ### بعد المرحلة
 نفّذ Phase 27.17: targeted micro-probe لأزواج سؤال/جواب قصيرة مع شرط
 exact/semantic match قبل أي تدريب واسع أو `SF-50M`.
+
+---
+
+## Phase 27.17 — Prompt-to-Answer Micro-Probe
+
+### الهدف
+اختبار قدرة `SF-10M` على تعلم أزواج سؤال/جواب قصيرة ومحددة، بدل قياس
+نص عربي عام. هذا probe داخلي ولا يضيف corpus عامة.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.17 بقرار:
+
+```text
+FAILED_PROMPT_ANSWER_MICRO_PROBE_BLOCK_RUNTIME
+```
+
+ما تحقق:
+
+- أضيف `scripts/phase27_17_prompt_answer_micro_probe.py`.
+- أضيف `make phase27-prompt-answer-probe`.
+- شُغّل probe من `32` زوجًا:
+  - `16` فصحى.
+  - `16` سعودي.
+- التدريب بقي سياديًا:
+  - `loss_scope=assistant`
+  - `packing_mode=sample_isolated`
+  - `steps=2400`
+
+النتيجة:
+
+```text
+passed       = 27/32
+exact_clean  = 28/32
+semantic     = 29/32
+guard_passed = 29/32
+```
+
+### التشخيص
+
+هذا أول proof واضح أن النموذج يستطيع ربط سؤال بجواب داخل micro-context.
+لكن الفشل المتبقي ليس بسيطًا للواجهة؛ توجد كسور لفظية/حروفية:
+
+```text
+وعليكأهلًا السم، أهلًا بك.
+التعاعاون يعني أن ننجز معًا بدل الانفراد.
+هوش تحتاجججبعيادة.
+```
+
+### القرار
+
+- لا runtime.
+- لا `SF-50M`.
+- لا Phase 28.
+- التالي Phase 27.18: tokenization/decoding hygiene repair.
+
+### artifacts
+
+- [PHASE27_17_PROMPT_ANSWER_MICRO_PROBE_REPORT.md](./PHASE27_17_PROMPT_ANSWER_MICRO_PROBE_REPORT.md)
+- `artifacts/reports/phase27_17_prompt_answer_micro_probe_report.json`
+- `artifacts/samples/phase27_17_prompt_answer_micro_probe_generations.md`
+
+### بعد المرحلة
+نفّذ Phase 27.18 لإصلاح الكسور اللفظية قبل أي تدريب واسع.
 
 ---
 

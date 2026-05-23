@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.16 — Prompt-to-Answer Objective Repair",
-        current_phase_status="completed_objective_repair_runtime_blocked",
+        current_phase="Phase 27.17 — Prompt-to-Answer Micro-Probe",
+        current_phase_status="completed_micro_probe_breakthrough_runtime_blocked",
         next_phase=(
-            "Phase 27.17 SF-10M targeted micro-probe for exact prompt-to-answer mapping before any SF-50M scaling"
+            "Phase 27.18 SF-10M tokenization/decoding hygiene repair before any SF-50M scaling"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -194,6 +194,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_16_prompt_to_answer_objective",
                 status="completed_objective_repair_runtime_blocked",
                 phase="Phase 27.16",
+            ),
+            ComponentStatus(
+                name="phase27_17_prompt_answer_micro_probe",
+                status="completed_breakthrough_runtime_blocked",
+                phase="Phase 27.17",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

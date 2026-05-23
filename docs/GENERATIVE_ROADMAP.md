@@ -55,6 +55,7 @@ SF.AI يملك الآن:
 | Phase 27.15 | `SF-10M v0.10` | curriculum + no-repeat؛ eval تحسن وcanary صارم 0/10 |
 | Phase 27.16 | `SF-10M v0.11` | sample-isolated objective؛ runtime محظور |
 | Phase 27.17 | `SF-10M micro-probe` | exact prompt-to-answer قبل أي تدريب واسع |
+| Phase 27.18 | `SF-10M hygiene repair` | إصلاح كسور tokenization/decoding |
 | بعد نجاح SF-10M | `SF-50M v0.1` | نجاح جودة SF-10M/canary + إعادة Phase 26 readiness |
 | Phase 28 | `SF-120M v0.1` | نجاح SF-50M + scaling gate |
 
@@ -80,6 +81,7 @@ SF.AI يملك الآن:
 - **Phase 27.14:** اعتمدنا أدوات الجودة السيادية كسياسة تنفيذ: tracker محلي، checkpoint selector، probes، curriculum/no-repeat كمتطلبات قبل التفعيل.
 - **Phase 27.15:** `SF-10M v0.10` حسّن eval إلى loss `3.0452`/ppl `21.01`، لكن canary الدلالي الصارم كشف أن الربط بين السؤال والجواب ما زال فاشلًا `0/10`.
 - **Phase 27.16:** أضاف sample-isolated packing ودرب `SF-10M v0.11`; أفضل eval `4.0573`/ppl `57.82` وcanary بقي محجوبًا، لذلك لا runtime ولا SF-50M.
+- **Phase 27.17:** prompt-answer micro-probe وصل إلى `27/32`، وهذا breakthrough جزئي، لكن الكسور اللفظية أبقت runtime محظورًا.
 - **Phase 28:** أول قفزة بعد SF-50M إذا أثبت 50M قيمة واضحة.
 - **Phase 29:** إدخاله في الواجهة كتجربة يومية مع router/safety/memory.
 

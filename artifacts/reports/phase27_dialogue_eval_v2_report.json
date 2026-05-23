@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27.16: أضفنا تدريب sample-isolated حتى لا تختلط العينات ودرّبنا SF-10M v0.11. النتيجة أوضحت أن العزل وحده لا يكفي: أفضل eval كان loss=4.0573 وppl=57.82، وcanary بقي مح"
+      "response_preview": "اكتملت Phase 27.17: شغّلنا micro-probe من 32 زوج سؤال/جواب فصحى وسعودي، ووصل SF-10M إلى 27/32 ردًا صحيحًا. هذا تقدم حقيقي، لكنه لا يكفي للواجهة لأن الفشل المتبقي كسور لفظية مثل حرو"
     },
     {
       "scenario_id": "clarification_repair_flow",

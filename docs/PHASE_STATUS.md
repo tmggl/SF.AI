@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.16 / 30**
-- **المرحلة الحالية:** **Phase 27.16 — Prompt-to-Answer Objective Repair**
-- **حالة المرحلة الحالية:** **مكتملة؛ sample-isolated objective أضيف لكن runtime بقي محجوبًا**
-- **المرحلة التالية المقترحة:** Phase 27.17 micro-probe دقيق لأزواج سؤال/جواب قبل أي تكبير إلى `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.17 / 30**
+- **المرحلة الحالية:** **Phase 27.17 — Prompt-to-Answer Micro-Probe**
+- **حالة المرحلة الحالية:** **مكتملة؛ 27/32 في micro-probe لكن runtime بقي محجوبًا**
+- **المرحلة التالية المقترحة:** Phase 27.18 لإصلاح tokenization/decoding hygiene قبل أي تكبير إلى `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -65,6 +65,7 @@
 | Phase 27.14 | Sovereign Training Quality Tooling Decision | ✅ completed_tooling_adoption_decision_no_training | ✅ |
 | Phase 27.15 | Social/Lexical Curriculum + No-Repeat Decoding | ✅ completed_eval_improved_strict_generation_blocked | ✅ |
 | Phase 27.16 | Prompt-to-Answer Objective Repair | ✅ completed_objective_repair_runtime_blocked | ✅ |
+| Phase 27.17 | Prompt-to-Answer Micro-Probe | ✅ completed_micro_probe_breakthrough_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -474,6 +475,17 @@
   - لا تفعيل runtime ولا تدريب `SF-50M`.
   - أضيف [PHASE27_16_PROMPT_TO_ANSWER_OBJECTIVE_REPORT.md](./PHASE27_16_PROMPT_TO_ANSWER_OBJECTIVE_REPORT.md).
   - أضيف `artifacts/reports/sf_10m_v0_11_sample_isolated_objective_report.json`.
+- بدأ وانتهى Phase 27.17 Prompt-to-Answer Micro-Probe:
+  - أضيف `scripts/phase27_17_prompt_answer_micro_probe.py`.
+  - أضيف `make phase27-prompt-answer-probe`.
+  - شُغّل probe داخلي على `32` زوج سؤال/جواب (`msa=16`, `saudi=16`) داخل `artifacts/eval`.
+  - التدريب: `SF-10M`, `steps=2400`, `loss_scope=assistant`, `packing_mode=sample_isolated`.
+  - النتيجة: `passed=27/32`, `exact_clean=28/32`, `semantic_match=29/32`, `guard_passed=29/32`.
+  - الفشل المتبقي: كسور لفظية/حروفية مثل `وعليكأهلًا`, `التعاعاون`, `هوش تحتاجججبعيادة`.
+  - القرار: `FAILED_PROMPT_ANSWER_MICRO_PROBE_BLOCK_RUNTIME`.
+  - لا تفعيل runtime ولا تدريب `SF-50M`.
+  - أضيف [PHASE27_17_PROMPT_ANSWER_MICRO_PROBE_REPORT.md](./PHASE27_17_PROMPT_ANSWER_MICRO_PROBE_REPORT.md).
+  - أضيف `artifacts/reports/phase27_17_prompt_answer_micro_probe_report.json`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -539,7 +551,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.16"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.17"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -570,7 +582,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-499 passed in 16.80s
+501 passed in 16.74s
 ```
 
 | ملف | عدد |
