@@ -1,6 +1,6 @@
-# dialogue_batch_v2_saudi_001.jsonl
+# dialogue_batch_v4_saudi_004.jsonl
 
-- records: 1
+- records: 750
 - dialect: saudi
 - language: ar
 - quality: silver

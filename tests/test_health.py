@@ -70,11 +70,11 @@ def test_system_corpus_audit_reports_reviewed_seeds_ready() -> None:
     body = r.json()
     assert body["corpus"] == "data/corpus/chat/jsonl"
     assert body["status"] == "READY_FOR_PHASE_12_TOKENIZER_TRAINING"
-    assert body["total_records"] == 643
-    assert body["training_ready"] == 643
+    assert body["total_records"] == 2143
+    assert body["training_ready"] == 2143
     assert body["issue_count"] == 0
-    assert body["dialect_counts"] == {"msa": 299, "saudi": 344}
-    assert body["quality_counts"] == {"gold": 31, "silver": 612}
+    assert body["dialect_counts"] == {"msa": 1049, "saudi": 1094}
+    assert body["quality_counts"] == {"gold": 31, "silver": 2112}
 
 
 def test_system_source_inventory_reports_reference_layers() -> None:
@@ -102,9 +102,9 @@ def test_system_phase12_readiness_is_read_only_and_permission_gated() -> None:
     assert body["required_permission_phrase"] == "ابدأ Phase 12"
     assert body["required_confirmation_flag"] == "--confirm-phase12-permission"
     assert body["corpus_status"] == "READY_FOR_PHASE_12_TOKENIZER_TRAINING"
-    assert body["corpus_training_ready"] == 643
+    assert body["corpus_training_ready"] == 2143
     assert body["corpus_issue_count"] == 0
-    assert body["corpus_dialect_counts"] == {"msa": 299, "saudi": 344}
+    assert body["corpus_dialect_counts"] == {"msa": 1049, "saudi": 1094}
     assert body["required_dialects"] == ["msa", "saudi"]
     assert body["missing_required_dialects"] == []
     assert body["language_balance_status"] == "READY_MSA_AND_SAUDI"
@@ -124,7 +124,7 @@ def test_system_phase19_readiness_reports_training_gate() -> None:
     assert body["status"] == "NOT_READY_EXPAND_CORPUS_FIRST"
     assert body["can_start_training"] is False
     assert body["lab_experiment_allowed"] is True
-    assert body["training_records"] == 643
+    assert body["training_records"] == 2143
     assert body["min_training_records"] == 5000
     assert body["target_model"] == "sf-50m"
     assert "corpus_too_small_for_sf50m" in body["blockers"]
@@ -138,8 +138,8 @@ def test_system_phase23_tokenizer_audit_reports_v2_ready() -> None:
     assert body["status"] == "COMPLETED_READY_FOR_PHASE24"
     assert body["tokenizer"]["sf_origin"] is True
     assert body["tokenizer"]["vocab_size"] == 4493
-    assert body["corpus"]["training_ready"] == 643
-    assert body["corpus"]["dialects"] == {"msa": 299, "saudi": 344}
+    assert body["corpus"]["training_ready"] == 2143
+    assert body["corpus"]["dialects"] == {"msa": 1049, "saudi": 1094}
     assert body["decision"]["runtime_chat_should_use_this_directly"] is False
 
 

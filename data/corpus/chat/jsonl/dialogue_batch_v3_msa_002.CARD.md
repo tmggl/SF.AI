@@ -8,8 +8,8 @@
 - training_allowed: true
 - owner_user_id: sami-local
 - target_user_id: sami-local
-- source_type: owner-delegated agent-authored
+- source: sf-ai-natural-dialogue-msa
+- content_scope: everyday natural human dialogue only
+- operational_internal_dialogue: forbidden
 - external_sources: none
 - pretrained_model_outputs: none
-- purpose: Phase 27 large corpus expansion toward SF-50M readiness
-- notes: batch 002 raises the governed batch size to 500 total records.
