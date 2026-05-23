@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.30 / 30**
-- **المرحلة الحالية:** **Phase 27.30 — Fresh Mixed Shadow Canary**
-- **حالة المرحلة الحالية:** **مكتملة كاختبار؛ fresh mixed shadow فشل (`16/18`) ولذلك runtime محجوب**
-- **المرحلة التالية المقترحة:** Phase 27.31 broader natural intent/topic dataset قبل أي runtime أو `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.33 / 30**
+- **المرحلة الحالية:** **Phase 27.33 — Advice + Micro Stabilization**
+- **حالة المرحلة الحالية:** **مكتملة؛ كل بوابات التوليد المحلية مرّت بلا prompt leakage، والمرحلة التالية تصميم runtime trial محروس**
+- **المرحلة التالية المقترحة:** Phase 27.34 guarded runtime trial design؛ لا Phase 28 ولا `SF-50M` قبل تجربة الواجهة المحروسة.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -79,6 +79,9 @@
 | Phase 27.28 | Intent-Conditioned Repair | ✅ completed_intent_conditioning_partial_runtime_blocked | ✅ |
 | Phase 27.29 | Topic-Conditioned Definition Repair | ✅ completed_topic_conditioning_leakage_blocked | ✅ |
 | Phase 27.30 | Fresh Mixed Shadow Canary | ✅ completed_16_of_18_runtime_blocked | ✅ |
+| Phase 27.31 | Natural Intent/Topic Dataset | ✅ completed_partial_runtime_blocked | ✅ |
+| Phase 27.32 | Balanced Natural Calibration | ✅ completed_partial_runtime_blocked | ✅ |
+| Phase 27.33 | Advice + Micro Stabilization | ✅ completed_all_generation_gates_passed_trial_design_ready | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -598,6 +601,14 @@
   - لا تفعيل runtime ولا تدريب `SF-50M`.
   - التالي Phase 27.31 broader natural intent/topic dataset.
   - أضيف [PHASE27_26_TO_30_REPAIR_SERIES_REPORT.md](./PHASE27_26_TO_30_REPAIR_SERIES_REPORT.md).
+- بدأ وانتهى Phase 27.31–27.33 Natural Generation Gate Series:
+  - Phase 27.31: natural intent/topic dataset؛ natural shadow `20/20` وmicro `32/32`، لكن fresh mixed `15/18`.
+  - Phase 27.32: balanced natural calibration؛ definition `6/6` وcalibration `12/12`، لكن fresh mixed `16/18` وmicro `29/32`.
+  - Phase 27.33: advice + micro stabilization؛ heldout `16/16`, shadow `16/16`, definition `6/6`, fresh mixed `18/18`, natural shadow `20/20`, calibration `12/12`, advice `4/4`, micro `32/32`.
+  - prompt leakage: none.
+  - القرار: `PASSED_ADVICE_MICRO_STABILIZATION_READY_FOR_GUARDED_TRIAL_DESIGN`.
+  - لا تفعيل افتراضي للواجهة بعد؛ التالي Phase 27.34 guarded runtime trial design.
+  - أضيف [PHASE27_31_TO_33_GENERATION_GATE_REPORT.md](./PHASE27_31_TO_33_GENERATION_GATE_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -663,7 +674,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.30"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.33"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -694,7 +705,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-531 passed in 17.10s
+534 passed in 17.38s
 ```
 
 | ملف | عدد |

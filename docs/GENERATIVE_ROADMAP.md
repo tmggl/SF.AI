@@ -64,6 +64,7 @@ SF.AI يملك الآن:
 | Phase 27.24 | `Minimal lexical stabilization` | تثبيت ألفاظ فصيحة قليلة دون تكبير |
 | Phase 27.25 | `Held-out generation canary` | فشل `8/16` على أسئلة جديدة؛ runtime محظور |
 | Phase 27.26–27.30 | `Repair series` | تحسن إلى fresh mixed shadow `16/18`؛ runtime محظور |
+| Phase 27.31–27.33 | `Natural generation gates` | كل البوابات المحلية مرّت؛ جاهز لتصميم guarded runtime trial |
 | بعد نجاح SF-10M | `SF-50M v0.1` | نجاح جودة SF-10M/canary + إعادة Phase 26 readiness |
 | Phase 28 | `SF-120M v0.1` | نجاح SF-50M + scaling gate |
 
@@ -99,6 +100,7 @@ SF.AI يملك الآن:
 - **Phase 27.24:** minimal lexical stabilization رفع micro-probe إلى `32/32`، لكن لا runtime قبل held-out canary.
 - **Phase 27.25:** held-out canary فشل `8/16`: التعريفات نجحت، لكن التحية/النصيحة/التخطيط/الدعم لم تعمم بما يكفي، لذلك runtime وSF-50M محظوران.
 - **Phase 27.26–27.30:** repair series أضاف intent/topic conditioning ورفع fresh mixed shadow إلى `16/18`، لكن الفشلين المتبقيين يمنعان runtime.
+- **Phase 27.31–27.33:** natural intent/topic ثم balanced calibration ثم advice/micro stabilization رفعت البوابات إلى `fresh mixed 18/18`, `natural 20/20`, `calibration 12/12`, `advice 4/4`, `micro 32/32` بلا prompt leakage. التالي guarded runtime trial design، لا فتح افتراضي ولا SF-50M بعد.
 - **Phase 28:** أول قفزة بعد SF-50M إذا أثبت 50M قيمة واضحة.
 - **Phase 29:** إدخاله في الواجهة كتجربة يومية مع router/safety/memory.
 

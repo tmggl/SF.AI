@@ -84,9 +84,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.30: fresh mixed shadow وصل إلى 16/18 فقط. "
-    "المولد تحسن كثيرًا لكنه لم يفتح للواجهة؛ التالي Phase 27.31 "
-    "لتوسيع بيانات intent/topic الطبيعية قبل أي runtime.",
+    "اكتملت Phase 27.33: مرّت بوابات التوليد المحلية كلها "
+    "(fresh mixed 18/18، shadow طبيعي 20/20، micro 32/32) بلا تسريب. "
+    "التالي Phase 27.34 لتصميم تجربة واجهة محروسة؛ لم يُفتح runtime افتراضيًا بعد.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

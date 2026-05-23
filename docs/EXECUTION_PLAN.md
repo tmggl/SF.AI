@@ -100,6 +100,9 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.28 | Intent-Conditioned Repair | مكتملة؛ shadow `12/16` |
 | Phase 27.29 | Topic-Conditioned Definition Repair | مكتملة؛ حُجبت بسبب shadow leakage |
 | Phase 27.30 | Fresh Mixed Shadow Canary | مكتملة؛ فشل `16/18` وruntime محظور |
+| Phase 27.31 | Natural Intent/Topic Dataset | مكتملة جزئيًا؛ natural shadow `20/20` وruntime محظور |
+| Phase 27.32 | Balanced Natural Calibration | مكتملة جزئيًا؛ calibration `12/12` وruntime محظور |
+| Phase 27.33 | Advice + Micro Stabilization | مكتملة؛ كل بوابات التوليد المحلية مرّت، جاهزة لتصميم guarded trial |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2498,6 +2501,42 @@ Phase 27.30 = fresh mixed shadow 16/18
 - `artifacts/reports/phase27_28_intent_conditioned_repair_report.json`
 - `artifacts/reports/phase27_29_topic_conditioned_definition_repair_report.json`
 - `artifacts/reports/phase27_30_fresh_mixed_shadow_canary_report.json`
+
+---
+
+## Phase 27.31–27.33 — Natural Generation Gate Series
+
+### الهدف
+
+إكمال فجوات Phase 27.30 بدون فتح runtime مبكرًا:
+
+- توسيع الشكر وسؤال الحال الطبيعي.
+- موازنة intent/topic حتى لا تسحب بيانات الشكر بقية المسارات.
+- تثبيت advice + micro-probe قبل أي تجربة واجهة.
+
+### نتيجة التنفيذ
+
+```text
+Phase 27.31 = natural shadow 20/20, micro 32/32, fresh mixed 15/18
+Phase 27.32 = definition 6/6, calibration 12/12, fresh mixed 16/18, micro 29/32
+Phase 27.33 = heldout 16/16, shadow 16/16, definition 6/6,
+              fresh mixed 18/18, natural 20/20, calibration 12/12,
+              advice 4/4, micro 32/32, leakage none
+```
+
+### القرار
+
+- `SF-10M` صار جاهزًا لتصميم تجربة runtime محروسة.
+- لا تفعيل افتراضي للواجهة بعد.
+- لا `SF-50M` ولا Phase 28 قبل نجاح تجربة الواجهة الفعلية.
+- التالي Phase 27.34: guarded runtime trial design.
+
+### artifacts
+
+- [PHASE27_31_TO_33_GENERATION_GATE_REPORT.md](./PHASE27_31_TO_33_GENERATION_GATE_REPORT.md)
+- `artifacts/reports/phase27_31_natural_intent_topic_dataset_report.json`
+- `artifacts/reports/phase27_32_balanced_natural_calibration_report.json`
+- `artifacts/reports/phase27_33_advice_micro_stabilization_report.json`
 
 ---
 

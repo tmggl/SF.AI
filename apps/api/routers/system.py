@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.30 — Fresh Mixed Shadow Canary",
-        current_phase_status="completed_fresh_mixed_shadow_failed_runtime_blocked",
+        current_phase="Phase 27.33 — Advice + Micro Stabilization",
+        current_phase_status="completed_generation_gates_passed_runtime_trial_design_ready",
         next_phase=(
-            "Phase 27.31 broader natural intent/topic dataset before runtime"
+            "Phase 27.34 guarded runtime trial design; no public/default runtime activation yet"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -264,6 +264,21 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_30_fresh_mixed_shadow_canary",
                 status="completed_16_of_18_runtime_blocked",
                 phase="Phase 27.30",
+            ),
+            ComponentStatus(
+                name="phase27_31_natural_intent_topic_dataset",
+                status="completed_partial_runtime_blocked",
+                phase="Phase 27.31",
+            ),
+            ComponentStatus(
+                name="phase27_32_balanced_natural_calibration",
+                status="completed_partial_runtime_blocked",
+                phase="Phase 27.32",
+            ),
+            ComponentStatus(
+                name="phase27_33_advice_micro_stabilization",
+                status="completed_all_generation_gates_passed_trial_design_ready",
+                phase="Phase 27.33",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),
