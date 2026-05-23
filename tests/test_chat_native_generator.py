@@ -40,6 +40,16 @@ class _BadGenerator:
         )
 
 
+class _MisalignedSocialGenerator:
+    def generate(self, prompt: str, **_: object) -> NativeGenerationResult:
+        return NativeGenerationResult(
+            used=True,
+            text="أفهم طلبك. أستطيع ترتيب الفكرة وشرحها بخطوات قصيرة.",
+            generator="sf_10m_v0_2",
+            reason="generated",
+        )
+
+
 def test_generation_policy_disabled_by_default() -> None:
     decision = GenerationPolicy(enabled=False).decide(
         domain="chat",
@@ -218,6 +228,19 @@ def test_chat_module_blocks_bad_canary_output_and_keeps_template() -> None:
     out = mod.handle(analysis, intent="chat.general", session_id="phase25-bad")
     assert "رد مولد تجريبي" not in out.text
     assert "generator:template" in out.notes
+
+
+def test_chat_module_blocks_prompt_misaligned_social_generation() -> None:
+    pipe = get_default_pipeline()
+    mod = ChatModule(
+        generation_policy=GenerationPolicy(enabled=True, experimental_runtime=True, canary=True),
+        native_generator=_MisalignedSocialGenerator(),  # type: ignore[arg-type]
+    )
+    analysis = pipe.analyze_user_text("كيفك")
+    out = mod.handle(analysis, intent="chat.general", session_id="phase27-guard")
+    assert out.text != "أفهم طلبك. أستطيع ترتيب الفكرة وشرحها بخطوات قصيرة."
+    assert "generator:template" in out.notes
+    assert "generation_guard:social_smalltalk_mismatch" in out.notes
     assert "native_generator:canary_blocked" in out.notes
     assert any(note.startswith("generation_guard:") for note in out.notes)
 

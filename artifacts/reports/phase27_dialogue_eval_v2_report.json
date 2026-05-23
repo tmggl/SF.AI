@@ -32,15 +32,15 @@
   "can_start_phase28": false,
   "phase26_status": "NOT_READY_IMPROVE_SF10M_AND_CANARY",
   "corpus_expansion_plan": {
-    "current_records": 5143,
+    "current_records": 5243,
     "target_records": 5000,
     "remaining_records": 0,
     "batch_size": 1500,
     "batches_needed_total": 0,
     "target_per_dialect": 2500,
     "dialect_counts": {
-      "saudi": 2594,
-      "msa": 2549
+      "saudi": 2644,
+      "msa": 2599
     },
     "needed_by_dialect": {
       "msa": 0,
@@ -53,9 +53,9 @@
     "quality_targets": {
       "gold_total_target": 1000,
       "silver_total_target": 4000,
-      "current_gold": 31,
+      "current_gold": 131,
       "current_silver": 5112,
-      "needed_gold": 969,
+      "needed_gold": 869,
       "needed_silver": 0
     },
     "category_targets_remaining": {
@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27.6: جرّبنا تدريب SF-10M v0.5 على رد المساعد فقط. الهدف الهندسي تحسن، لكن الردود ما زالت مكررة وغير جاهزة للواجهة. الخطوة التالية split ثابت وبيانات gold اجتماعية وca"
+      "response_preview": "اكتملت Phase 27.7: ثبتنا split ثابتًا للتدريب/التقييم، وأضفنا gold social dialogue صغيرًا، وشددنا canary الصلة بالسؤال. الخطوة التالية هي تدريب SF-10M v0.6 على train split فقط، ثم "
     },
     {
       "scenario_id": "clarification_repair_flow",

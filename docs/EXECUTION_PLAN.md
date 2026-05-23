@@ -76,6 +76,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27 | Dialogue Evaluation v2 + corpus expansion plan | مكتملة؛ baseline pass وcorpus gate ناجح |
 | Phase 27.5 | SF-10M Dialogue-Format Repair | مكتملة بحدود؛ runtime محظور |
 | Phase 27.6 | SF-10M Assistant-Target Training | مكتملة بحدود؛ runtime محظور |
+| Phase 27.7 | Fixed Split + Gold Social Canary | مكتملة؛ split ثابت + canary أقوى، runtime محظور |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -1447,6 +1448,59 @@ best eval  = step2000 loss 6.5718, perplexity 714.65
 ### بعد المرحلة
 ابنِ fixed train/eval split، وأضف gold social dialogue صغير عالي الجودة، وشدد
 canary الصلة بالسؤال والتكرار قبل أي تكبير.
+
+---
+
+## Phase 27.7 — Fixed Split + Gold Social Canary
+
+### الهدف
+إغلاق فجوة تقييم مهمة قبل التدريب التالي: يجب ألا يقيس المشروع النموذج على
+نفس تيار التدريب، ويجب ألا يسمح canary برد عربي شكلي لا يجيب السؤال.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.7 بقرار:
+
+```text
+COMPLETED_QUALITY_GATE_RUNTIME_BLOCKED
+```
+
+ما تحقق:
+
+- أضيف `sf_ai/datasets/splits.py` لبناء split ثابت من corpus الحوار.
+- أضيف `scripts/build_dialogue_split.py` وهدف `make build-dialogue-split`.
+- أضيف `data/corpus/chat/splits/dialogue_split_v1.json`.
+- أضيف `--split-manifest` و`--split-name` إلى التدريب والتقييم.
+- أضيفت دفعة gold social dialogue صغيرة: 100 سجل طبيعي من تأليف المشروع فقط.
+- أضيف `GenerationGuard.inspect_for_prompt()` كحارس prompt-aware.
+
+نتيجة corpus/split:
+
+```text
+records = 5243
+train   = 4703
+eval    = 540
+msa     = 2599
+saudi   = 2644
+issues  = 0
+```
+
+قرار الجودة:
+
+- التدريب التالي يجب أن يستخدم `split-name=train`.
+- التقييم المقبول يجب أن يستخدم `split-name=eval`.
+- لا يتم تفعيل أي checkpoint في الواجهة إلا إذا مر repetition/hallucination/runtime quality.
+- `SF-50M` لا يبدأ قبل نجاح `SF-10M v0.6` على هذا split أو وجود مبرر جودة موثق.
+
+### artifacts
+
+- [PHASE27_7_FIXED_SPLIT_GOLD_SOCIAL_CANARY_REPORT.md](./PHASE27_7_FIXED_SPLIT_GOLD_SOCIAL_CANARY_REPORT.md)
+- `artifacts/reports/phase27_7_fixed_split_gold_social_canary_report.json`
+- `data/corpus/chat/splits/dialogue_split_v1.json`
+
+### بعد المرحلة
+درّب `SF-10M v0.6` على `train split` فقط بخسارة assistant-target، ثم قيّمه على
+`eval split`، ثم شغّل canary prompt-aware قبل أي تشغيل واجهة أو قرار تكبير.
 
 ---
 

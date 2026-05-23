@@ -1,0 +1,65 @@
+{
+  "phase": "Phase 27.7",
+  "name": "Fixed Split + Gold Social Canary",
+  "status": "completed_quality_gate_runtime_blocked",
+  "language_track": ["msa", "saudi"],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_generator_enabled": false,
+  "corpus": {
+    "root": "data/corpus/chat/jsonl",
+    "total_records": 5243,
+    "training_ready": 5243,
+    "issues": 0,
+    "dialects": {
+      "msa": 2599,
+      "saudi": 2644
+    },
+    "quality": {
+      "gold": 131,
+      "silver": 5112
+    }
+  },
+  "split": {
+    "manifest": "data/corpus/chat/splits/dialogue_split_v1.json",
+    "method": "sha256_bucket",
+    "salt": "sf-ai-dialogue-v1",
+    "eval_ratio": 0.1,
+    "counts": {
+      "train": 4703,
+      "eval": 540
+    },
+    "dialects": {
+      "train": {
+        "saudi": 2360,
+        "msa": 2343
+      },
+      "eval": {
+        "saudi": 284,
+        "msa": 256
+      }
+    }
+  },
+  "gold_social_batch": {
+    "records": 100,
+    "msa": 50,
+    "saudi": 50,
+    "source_msa": "sf-ai-gold-social-dialogue-msa-v1",
+    "source_saudi": "sf-ai-gold-social-dialogue-saudi-v1"
+  },
+  "canary": {
+    "prompt_aware": true,
+    "checks": [
+      "corpus_artifact",
+      "fragmentation",
+      "malformed_token",
+      "repetition",
+      "repeated_phrase",
+      "social_smalltalk_mismatch",
+      "greeting_mismatch",
+      "thanks_mismatch",
+      "saudi_preference_mismatch"
+    ]
+  },
+  "next": "Train SF-10M v0.6 on the train split and evaluate held-out eval split before any SF-50M decision."
+}

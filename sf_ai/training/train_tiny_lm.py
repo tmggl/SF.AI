@@ -27,6 +27,7 @@ import torch
 import torch.nn as nn
 
 from sf_ai.datasets import ChatDataset
+from sf_ai.datasets.splits import iter_split_samples
 from sf_ai.models.tokenizer import BPETokenizer, CharTokenizer
 from sf_ai.models.transformer import (
     TinyTransformer,
@@ -63,14 +64,17 @@ def iter_token_batches(
     device: torch.device,
     stream_format: str = "dialogue",
     loss_scope: str = "full",
+    split_manifest: str | Path | None = None,
+    split_name: str = "train",
 ) -> Iterator[tuple[torch.Tensor, torch.Tensor]]:
     """Stream (input_ids, targets) batches from a chat corpus."""
     pool_ids: list[int] = []
     pool_labels: list[int] = []
-    texts = (
-        dataset.iter_dialogue_texts()
-        if stream_format == "dialogue"
-        else (msg.content for msg in dataset.iter_messages())
+    texts = _iter_training_texts(
+        dataset,
+        stream_format=stream_format,
+        split_manifest=split_manifest,
+        split_name=split_name,
     )
     for text in texts:
         ids, labels = _encode_training_text(
@@ -112,6 +116,42 @@ def _encode_training_text(
     if loss_scope != "assistant":
         raise ValueError(f"unsupported loss_scope: {loss_scope}")
     return _encode_assistant_target_dialogue(tokenizer, text)
+
+
+def _iter_training_texts(
+    dataset: ChatDataset,
+    *,
+    stream_format: str,
+    split_manifest: str | Path | None = None,
+    split_name: str = "train",
+) -> Iterator[str]:
+    if split_manifest is None:
+        if stream_format == "dialogue":
+            yield from dataset.iter_dialogue_texts()
+        else:
+            yield from (msg.content for msg in dataset.iter_messages())
+        return
+
+    for sample in iter_split_samples(dataset.root, split_manifest, split_name=split_name):
+        messages = sample.messages if hasattr(sample, "messages") else sample.to_messages()
+        if stream_format == "dialogue":
+            lines: list[str] = []
+            for msg in messages:
+                content = msg.content.strip()
+                if not content:
+                    continue
+                if msg.role == "user":
+                    lines.append(f"المستخدم: {content}")
+                elif msg.role == "assistant":
+                    lines.append(f"المساعد: {content}")
+                elif msg.role == "system":
+                    lines.append(f"النظام: {content}")
+            if lines:
+                yield "\n".join(lines) + "\n"
+        else:
+            for msg in messages:
+                if msg.content.strip():
+                    yield msg.content
 
 
 def _encode_assistant_target_dialogue(tokenizer, text: str) -> tuple[list[int], list[int]]:
@@ -191,6 +231,10 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
                    help="dialogue keeps role-marked samples together; messages preserves legacy flat streaming")
     p.add_argument("--loss-scope", choices=["full", "assistant"], default="full",
                    help="assistant masks user/context tokens and trains only assistant reply tokens")
+    p.add_argument("--split-manifest", type=Path, default=None,
+                   help="Optional deterministic split manifest produced by build_dialogue_split")
+    p.add_argument("--split-name", choices=["train", "eval"], default="train",
+                   help="Split to stream when --split-manifest is provided")
     p.add_argument("--dry-run", action="store_true",
                    help="Build everything but skip the training loop")
     return p.parse_args(argv)
@@ -251,6 +295,8 @@ def run(argv: list[str]) -> int:
             device=torch_device,
             stream_format=args.stream_format,
             loss_scope=args.loss_scope,
+            split_manifest=args.split_manifest,
+            split_name=args.split_name,
         ):
             produced_in_epoch += 1
             # Set LR per step.
@@ -300,7 +346,7 @@ def _save(ckpt_mgr: CheckpointManager, model: TinyTransformer, args, step: int, 
         notes=(
             f"seed={args.seed} batch={args.batch_size} seq={args.seq_len} "
             f"epochs={args.epochs} stream_format={args.stream_format} "
-            f"loss_scope={args.loss_scope}"
+            f"loss_scope={args.loss_scope} split={args.split_name if args.split_manifest else 'none'}"
         ),
     )
     ckpt_mgr.save_metadata(name, meta)

@@ -35,6 +35,14 @@ from sf_ai.datasets.source_inventory import (
     SourceInventoryReport,
     build_source_inventory,
 )
+from sf_ai.datasets.splits import (
+    SplitEntry,
+    assign_split,
+    build_split_entries,
+    iter_split_samples,
+    load_split_entries,
+    write_split_manifest,
+)
 from sf_ai.datasets.loaders import iter_chat_samples, iter_jsonl
 from sf_ai.datasets.schemas import (
     ChatMessage,
@@ -67,10 +75,15 @@ __all__ = [
     "SaudiSeedStats",
     "SourceInventoryItem",
     "SourceInventoryReport",
+    "SplitEntry",
     "ValidationReport",
+    "assign_split",
+    "build_split_entries",
     "iter_chat_samples",
     "iter_jsonl",
     "iter_saudi_seed_entries",
+    "iter_split_samples",
+    "load_split_entries",
     "load_saudi_seed",
     "parse_record",
     "audit_jsonl_directory_for_training",
@@ -82,4 +95,5 @@ __all__ = [
     "build_source_inventory",
     "validate_jsonl_file",
     "validate_record",
+    "write_split_manifest",
 ]

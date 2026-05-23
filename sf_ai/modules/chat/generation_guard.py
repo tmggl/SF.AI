@@ -28,6 +28,34 @@ _CORPUS_ARTIFACTS = (
 )
 _BROKEN_PREFIX_RE = re.compile(r"^\s*[\u0600-\u06FF]\s*[؟?]")
 _REPEATED_ARABIC_BIGRAM_RE = re.compile(r"([\u0600-\u06FF]{2})\1")
+_REPEATED_SHORT_PHRASE_RE = re.compile(
+    r"\b([\w\u0600-\u06FF]{2,}(?:\s+[\w\u0600-\u06FF]{2,}){0,2})\b"
+    r"(?:\s+\1\b){2,}",
+    re.IGNORECASE,
+)
+
+_SOCIAL_PROMPT_RULES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
+    (
+        ("كيفك", "كيف حالك", "وشلونك", "شلونك", "علومك"),
+        ("بخير", "تمام", "الحمد", "أنا"),
+        "social_smalltalk_mismatch",
+    ),
+    (
+        ("السلام عليكم", "سلام عليكم"),
+        ("وعليكم", "أهل", "حياك"),
+        "greeting_mismatch",
+    ),
+    (
+        ("شكرا", "شكرًا", "مشكور", "يعطيك العافية", "تسلم"),
+        ("العفو", "حياك", "تسلم", "الله يعافيك"),
+        "thanks_mismatch",
+    ),
+    (
+        ("سعودي", "بالسعودي", "لهجة سعودية"),
+        ("سعودي", "السعودية", "اللهجة", "أبشر", "حياك"),
+        "saudi_preference_mismatch",
+    ),
+)
 
 
 @dataclass(frozen=True)
@@ -61,6 +89,8 @@ class GenerationGuard:
             return self._verdict(False, "too_fragmented", cleaned)
         if any(marker in cleaned for marker in _CORPUS_ARTIFACTS):
             return self._verdict(False, "corpus_artifact", cleaned)
+        if _REPEATED_SHORT_PHRASE_RE.search(cleaned):
+            return self._verdict(False, "repeated_phrase", cleaned)
 
         repetition = _repetition_ratio(cleaned)
         arabic = _arabic_ratio(cleaned)
@@ -69,6 +99,32 @@ class GenerationGuard:
         if arabic < self.min_arabic_ratio:
             return GenerationGuardVerdict(False, "low_arabic_ratio", repetition, arabic)
         return GenerationGuardVerdict(True, "passed", repetition, arabic)
+
+    def inspect_for_prompt(self, prompt: str, text: str) -> GenerationGuardVerdict:
+        """Inspect generated text and require obvious social prompt alignment.
+
+        The native model is still immature. A generic Arabic-looking sentence is
+        not enough for runtime: common social prompts must receive a recognisable
+        social answer, otherwise templates remain safer for the single-user UI.
+        """
+
+        verdict = self.inspect(text)
+        if not verdict.allowed:
+            return verdict
+
+        p = _normalize_surface(prompt)
+        t = _normalize_surface(text)
+        for triggers, expected_terms, reason in _SOCIAL_PROMPT_RULES:
+            if any(trigger in p for trigger in triggers) and not any(
+                term in t for term in expected_terms
+            ):
+                return GenerationGuardVerdict(
+                    allowed=False,
+                    reason=reason,
+                    repetition_ratio=verdict.repetition_ratio,
+                    arabic_ratio=verdict.arabic_ratio,
+                )
+        return verdict
 
     def _verdict(self, allowed: bool, reason: str, text: str) -> GenerationGuardVerdict:
         return GenerationGuardVerdict(
@@ -104,3 +160,16 @@ def _has_malformed_token(text: str) -> bool:
         if len(token) >= 6 and _REPEATED_ARABIC_BIGRAM_RE.search(token):
             return True
     return False
+
+
+def _normalize_surface(text: str) -> str:
+    return (
+        (text or "")
+        .replace("أ", "ا")
+        .replace("إ", "ا")
+        .replace("آ", "ا")
+        .replace("ى", "ي")
+        .replace("ة", "ه")
+        .strip()
+        .lower()
+    )

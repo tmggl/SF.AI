@@ -51,6 +51,10 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     p.add_argument("--stream-format", choices=["dialogue", "messages"], default="dialogue")
     p.add_argument("--loss-scope", choices=["full", "assistant"], default="full",
                    help="Match the training objective when computing eval loss")
+    p.add_argument("--split-manifest", type=Path, default=None,
+                   help="Optional deterministic split manifest produced by build_dialogue_split")
+    p.add_argument("--split-name", choices=["train", "eval"], default="eval",
+                   help="Split to stream when --split-manifest is provided")
     p.add_argument("--chat-prompt", action="store_true",
                    help="Wrap prompt as المستخدم/المساعد dialogue before generation")
     return p.parse_args(argv)
@@ -85,6 +89,8 @@ def run(argv: list[str]) -> int:
             tok, dataset, batch_size=args.batch_size, seq_len=args.seq_len,
             device=torch_device, stream_format=args.stream_format,
             loss_scope=args.loss_scope,
+            split_manifest=args.split_manifest,
+            split_name=args.split_name,
         ):
             logits = model(inputs)
             loss = cross_entropy_lm(logits, targets)

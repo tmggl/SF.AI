@@ -1,7 +1,7 @@
 # SF.AI — Makefile
 # Phase 1 set of operational commands.
 
-.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit phase12-readiness phase19-readiness phase20-gates phase22-readiness phase22-plan phase22-next-batch phase22-completion-gate phase22-review-intake phase23-tokenizer-audit phase26-readiness phase27-dialogue-eval prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
+.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit build-dialogue-split phase12-readiness phase19-readiness phase20-gates phase22-readiness phase22-plan phase22-next-batch phase22-completion-gate phase22-review-intake phase23-tokenizer-audit phase26-readiness phase27-dialogue-eval prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
 
 PY ?= .venv/bin/python
 UVICORN ?= uvicorn
@@ -25,6 +25,7 @@ help:
 	@echo "  make source-inventory     Show all local data/reference sources"
 	@echo "  make corpus-audit         Audit JSONL corpus before Phase 12"
 	@echo "  make tokenization-audit   Audit tokenization policy before Phase 12"
+	@echo "  make build-dialogue-split Build fixed train/eval split manifest"
 	@echo "  make phase12-readiness    Read-only Phase 12 decision: ready vs allowed"
 	@echo "  make phase19-readiness    Read-only Phase 19 decision before SF-50M"
 	@echo "  make phase20-gates        Read-only Phase 20 domain activation gates"
@@ -98,6 +99,9 @@ corpus-audit:
 
 tokenization-audit:
 	$(PY) scripts/audit_tokenization_policy.py $(ARGS)
+
+build-dialogue-split:
+	$(PY) scripts/build_dialogue_split.py $(ARGS)
 
 phase12-readiness:
 	$(PY) scripts/phase12_readiness.py

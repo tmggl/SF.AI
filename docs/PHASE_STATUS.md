@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.6 / 30**
-- **المرحلة الحالية:** **Phase 27.6 — SF-10M Assistant-Target Training**
-- **حالة المرحلة الحالية:** **مكتملة بحدود؛ `SF-10M v0.5` جرّب loss على رد المساعد فقط لكنه محظور runtime**
-- **المرحلة التالية المقترحة:** fixed train/eval split + gold social dialogue + canary أقوى؛ Phase 28 محظورة حتى ينجح `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.7 / 30**
+- **المرحلة الحالية:** **Phase 27.7 — Fixed Split + Gold Social Canary**
+- **حالة المرحلة الحالية:** **مكتملة كبوابة جودة؛ split ثابت + gold social + canary prompt-aware، ولا يزال runtime المولّد محظورًا**
+- **المرحلة التالية المقترحة:** تدريب `SF-10M v0.6` على `train split` فقط، ثم تقييم `held-out eval split` قبل أي تفكير في `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -55,6 +55,7 @@
 | Phase 27 | Dialogue Evaluation v2 and corpus expansion plan | ✅ completed_baseline_pass_corpus_gate_passed | ✅ |
 | Phase 27.5 | SF-10M Dialogue-Format Repair | ✅ completed_with_limits_runtime_blocked | ✅ |
 | Phase 27.6 | SF-10M Assistant-Target Training | ✅ completed_with_limits_runtime_blocked | ✅ |
+| Phase 27.7 | Fixed Split + Gold Social Canary | ✅ completed_quality_gate_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -317,7 +318,7 @@
   - أضيف `dialogue_batch_v5_saudi_005.jsonl` وفيه 750 سجل سعودي طبيعي.
   - أضيف `dialogue_batch_v6_msa_006.jsonl` وفيه 750 سجل فصيح طبيعي.
   - أضيف `dialogue_batch_v6_saudi_006.jsonl` وفيه 750 سجل سعودي طبيعي.
-  - corpus الحالي صار `5143`: `msa=2549`, `saudi=2594`.
+  - corpus بعد Batch 006 صار `5143`: `msa=2549`, `saudi=2594`.
   - المتبقي إلى هدف `5000` صار `0` سجلًا.
   - أضيف [PHASE27_CORPUS_EXPANSION_BATCH_001_REPORT.md](./PHASE27_CORPUS_EXPANSION_BATCH_001_REPORT.md).
 - بدأ وانتهى Phase 27.5 SF-10M Dialogue-Format Repair:
@@ -351,6 +352,20 @@
   - أضيف [PHASE27_CORPUS_EXPANSION_BATCH_004_REPORT.md](./PHASE27_CORPUS_EXPANSION_BATCH_004_REPORT.md).
   - أضيف [PHASE27_CORPUS_EXPANSION_BATCH_005_REPORT.md](./PHASE27_CORPUS_EXPANSION_BATCH_005_REPORT.md).
   - أضيف [PHASE27_CORPUS_EXPANSION_BATCH_006_REPORT.md](./PHASE27_CORPUS_EXPANSION_BATCH_006_REPORT.md).
+- بدأ وانتهى Phase 27.7 Fixed Split + Gold Social Canary:
+  - أضيف split manifest ثابت: `data/corpus/chat/splits/dialogue_split_v1.json`.
+  - طريقة split: `sha256_bucket` مع salt موثق ونسبة eval `0.10`.
+  - counts: `train=4703`, `eval=540`.
+  - dialects: train `saudi=2360`, `msa=2343`; eval `saudi=284`, `msa=256`.
+  - أضيفت دفعة gold اجتماعية صغيرة: 100 سجل طبيعي (`50` فصيح + `50` سعودي).
+  - corpus الحالي صار `5243`: `msa=2599`, `saudi=2644`; كل السجلات `training_ready`.
+  - أضيف `--split-manifest` و`--split-name` إلى training/evaluation حتى يتدرب v0.6 على train فقط ويُقاس على eval held-out.
+  - أضيف `GenerationGuard.inspect_for_prompt()` لمنع الردود العربية الشكلية غير المتصلة بالسؤال.
+  - canary الآن يحجب mismatch في أسئلة اجتماعية شائعة مثل `كيفك` و`شكرا` و`السلام عليكم` وتفضيل `سعودي`.
+  - القرار: `COMPLETED_QUALITY_GATE_RUNTIME_BLOCKED`.
+  - لا يتم تفعيل أي checkpoint مولّد في الواجهة حتى ينجح v0.6 على split الثابت وcanary prompt-aware.
+  - أضيف [PHASE27_7_FIXED_SPLIT_GOLD_SOCIAL_CANARY_REPORT.md](./PHASE27_7_FIXED_SPLIT_GOLD_SOCIAL_CANARY_REPORT.md).
+  - أضيف `artifacts/reports/phase27_7_fixed_split_gold_social_canary_report.json`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -416,7 +431,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.6"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.7"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -447,7 +462,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-469 passed in 16.14s
+476 passed in 16.43s
 ```
 
 | ملف | عدد |

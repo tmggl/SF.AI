@@ -225,7 +225,10 @@ class ChatModule:
                 "generator:template",
                 f"native_generator:{result.reason}",
             )
-        verdict = self.generation_guard.inspect(result.text)
+        verdict = self.generation_guard.inspect_for_prompt(
+            analysis.original_text,
+            result.text,
+        )
         if not verdict.allowed:
             return fallback_text, (
                 "generator:template",

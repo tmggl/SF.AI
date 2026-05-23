@@ -36,7 +36,33 @@ def test_phase25_generation_guard_blocks_repetition() -> None:
         "تمام تمام تمام تمام تمام تمام تمام تمام تمام"
     )
     assert verdict.allowed is False
-    assert verdict.reason == "repetition"
+    assert verdict.reason in {"repetition", "repeated_phrase"}
+
+
+def test_phase25_generation_guard_blocks_repeated_short_phrase() -> None:
+    verdict = GenerationGuard().inspect(
+        "المعنى واضح المعنى واضح المعنى واضح وأحتاج صياغة أفضل."
+    )
+    assert verdict.allowed is False
+    assert verdict.reason == "repeated_phrase"
+
+
+def test_phase25_generation_guard_requires_social_prompt_alignment() -> None:
+    verdict = GenerationGuard().inspect_for_prompt(
+        "كيفك",
+        "أفهم طلبك. الخطوة التالية أن نرتب السؤال ونجيب عليه بوضوح.",
+    )
+    assert verdict.allowed is False
+    assert verdict.reason == "social_smalltalk_mismatch"
+
+
+def test_phase25_generation_guard_allows_aligned_social_reply() -> None:
+    verdict = GenerationGuard().inspect_for_prompt(
+        "كيفك",
+        "أنا بخير الحمد لله، وأنت كيف حالك؟",
+    )
+    assert verdict.allowed is True
+    assert verdict.reason == "passed"
 
 
 def test_phase25_policy_requires_all_three_flags() -> None:

@@ -84,9 +84,10 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.6: جرّبنا تدريب SF-10M v0.5 على رد المساعد فقط. "
-    "الهدف الهندسي تحسن، لكن الردود ما زالت مكررة وغير جاهزة للواجهة. "
-    "الخطوة التالية split ثابت وبيانات gold اجتماعية وcanary أقوى قبل أي تكبير.",
+    "اكتملت Phase 27.7: ثبتنا split ثابتًا للتدريب/التقييم، وأضفنا gold "
+    "social dialogue صغيرًا، وشددنا canary الصلة بالسؤال. الخطوة التالية "
+    "هي تدريب SF-10M v0.6 على train split فقط، ثم تقييم held-out eval split "
+    "قبل التفكير في SF-50M.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (
