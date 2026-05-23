@@ -109,7 +109,8 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.37 | Supported Topic Expansion | مكتملة؛ `الصبر` فُتح خلف semantic guard ومرّ `21/21` |
 | Phase 27.38 | Targeted Topic Curriculum/Probe | مكتملة جزئيًا؛ `6/20` ولا runtime switch |
 | Phase 27.39 | Topic-Isolation Repair | مكتملة جزئيًا؛ `10/24` ولا runtime switch |
-| Phase 27.40 | Tokenizer/Context Repair | مكتملة؛ `24/24` والمرشح جاهز لتصميم فتح محروس |
+| Phase 27.40 | Tokenizer/Context Repair | مكتملة؛ `24/24` والمرشح فُتح لاحقًا في trial محروس |
+| Phase 27.41 | Guarded Runtime Switch | مكتملة؛ HTTP gate مرّ `22/22` و`generator_trial` يستخدم `sf_10m_phase27_40` |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2782,6 +2783,41 @@ runtime_switch_allowed = true
 - `artifacts/tokenizers/sf_bpe/v5_topic_terms/`
 - `artifacts/reports/phase27_40_tokenizer_context_repair_report.json`
 - `artifacts/samples/phase27_40_tokenizer_context_repair.md`
+
+## Phase 27.41 — Guarded Runtime Switch
+
+### الهدف
+
+ربط مرشح Phase 27.40 بمسار الواجهة/API الاختياري فقط، مع بقاء runtime
+الافتراضي على القالب الآمن، وإثبات ذلك عبر HTTP حي.
+
+### نتيجة التنفيذ
+
+```text
+request_flag = generator_trial=true
+candidate_generator = sf_10m_phase27_40
+tokenizer = artifacts/tokenizers/sf_bpe/v5_topic_terms
+checkpoint = sf-10m-step6400
+live_http_cases = 22/22
+generated_lanes = 17/17
+template_safety_controls = 5/5
+runtime_default = template
+sf50m_allowed = false
+```
+
+### القرار
+
+- الواجهة تستطيع اختبار المولد الحقيقي عند تفعيل زر `مولّد تجريبي`.
+- أي prompt خارج المسارات المثبتة يعود إلى القالب/fallback.
+- لا تدريب جديد في هذه المرحلة.
+- لا `SF-50M` ولا Phase 28 بعد.
+- التالي Phase 27.42: live UI observation and broader guarded probes.
+
+### artifacts
+
+- [PHASE27_41_GUARDED_RUNTIME_SWITCH_REPORT.md](./PHASE27_41_GUARDED_RUNTIME_SWITCH_REPORT.md)
+- `artifacts/reports/phase27_41_guarded_runtime_switch_report.json`
+- `artifacts/samples/phase27_41_guarded_runtime_switch.md`
 
 ---
 

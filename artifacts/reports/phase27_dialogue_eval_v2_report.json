@@ -215,7 +215,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "تقدر تختبر المولّد الآن من زر «مولّد تجريبي»، لكن داخل نطاقات محددة: سؤال الحال، الشكر، نصيحة قصيرة، ترتيب بسيط، دعم خفيف، وتعريفات مثبتة مثل الاحترام والتعاون والقراءة."
+      "response_preview": "تقدر تختبر المولّد الآن من زر «مولّد تجريبي»، لكن داخل نطاقات محددة: سؤال الحال، الشكر، نصيحة قصيرة، ترتيب بسيط، دعم خفيف، وتعريفات مثبتة مثل الصداقة والصدق والتنظيم والهدوء."
     },
     {
       "scenario_id": "project_meta_flow",
@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27.40 بنجاح معملي: tokenizer v5 حمى المصطلحات الجديدة ومرّ probe المرشح 24/24. لم نبدّل الواجهة تلقائيًا؛ التالي Phase 27.41 لتصميم فتح محروس واختباره حيًا."
+      "response_preview": "اكتملت Phase 27.41: مسار «مولّد تجريبي» يستخدم الآن sf_10m_phase27_40 ومرّ اختبار HTTP الحي 22/22. التالي Phase 27.42 لمراقبة الواجهة وتوسيع probes المحروسة."
     },
     {
       "scenario_id": "clarification_repair_flow",

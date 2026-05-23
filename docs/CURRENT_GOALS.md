@@ -52,7 +52,7 @@ Phase 27.25 اختبرت checkpoint نفسه على أسئلة held-out جديد
 `16/18` مع intent/topic conditioning. Phase 27.31–27.33 أكملت natural
 intent/topic + balanced calibration + advice/micro stabilization، ووصلت إلى
 كل البوابات المحلية كاملة: fresh mixed `18/18` وmicro `32/32` بلا تسريب.
-الخطوة الحالية ليست تكبير النموذج، بل Phase 27.41 لتصميم فتح runtime محروس بعد نجاح Phase 27.40 معمليًا `24/24`.
+الخطوة الحالية ليست تكبير النموذج. Phase 27.41 فتح مرشح `sf_10m_phase27_40` في `generator_trial=true` ومرّ حيًا `22/22`; التالي Phase 27.42 لمراقبة الواجهة وتوسيع probes المحروسة.
 
 الخطوة العملية الحالية:
 
@@ -199,8 +199,9 @@ SF.AI حاليًا:
 - **Phase 27.37:** Supported Topic Expansion — مكتمل؛ موضوع `الصبر` مرّ `3/3` خلف semantic guard.
 - **Phase 27.38:** Targeted Topic Curriculum/Probe — مكتمل جزئيًا؛ `6/20` ولا runtime switch.
 - **Phase 27.39:** Topic-Isolation Repair — مكتمل جزئيًا؛ `10/24` ولا runtime switch.
-- **Phase 27.40:** Tokenizer/Context Repair — مكتمل؛ `24/24` والمرشح جاهز لتصميم runtime محروس.
-- **Phase 27.41:** Guarded Runtime Switch Design — التالي.
+- **Phase 27.40:** Tokenizer/Context Repair — مكتمل؛ `24/24` والمرشح فُتح لاحقًا في trial محروس.
+- **Phase 27.41:** Guarded Runtime Switch — مكتمل؛ HTTP gate مرّ `22/22` و`generator_trial` يستخدم `sf_10m_phase27_40`.
+- **Phase 27.42:** Live UI Observation + Broader Guarded Probes — التالي.
 - **Phase 28:** تدريب `SF-120M v0.1`؛ أول قفزة بعد نجاح `SF-50M`.
 - **Phase 29:** Runtime Hybrid Assistant v1.
 - **Phase 30:** Continuous Improvement Loop.

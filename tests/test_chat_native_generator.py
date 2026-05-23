@@ -84,6 +84,20 @@ class _DefinitionMismatchGenerator:
         )
 
 
+class _Phase2740DefinitionGenerator:
+    def __init__(self) -> None:
+        self.calls: list[dict[str, object]] = []
+
+    def generate(self, prompt: str, **kwargs: object) -> NativeGenerationResult:
+        self.calls.append({"prompt": prompt, **kwargs})
+        return NativeGenerationResult(
+            used=True,
+            text="الصداقة علاقة طيبة تقوم على الثقة والوفاء.",
+            generator="sf_10m_phase27_40",
+            reason="generated",
+        )
+
+
 def test_generation_policy_disabled_by_default() -> None:
     decision = GenerationPolicy(enabled=False).decide(
         domain="chat",
@@ -171,6 +185,24 @@ def test_generation_policy_allows_canary_high_confidence_freeform_chat() -> None
     )
     assert decision.allowed is True
     assert decision.generator == "sf_10m_phase27_33"
+
+
+def test_generation_policy_can_name_new_guarded_candidate() -> None:
+    decision = GenerationPolicy(
+        enabled=True,
+        experimental_runtime=True,
+        canary=True,
+        candidate_generator="sf_10m_phase27_40",
+    ).decide(
+        domain="chat",
+        intent="chat.general",
+        confidence=0.95,
+        domain_status="active",
+        requires_safety=False,
+        fallback_used=False,
+    )
+    assert decision.allowed is True
+    assert decision.generator == "sf_10m_phase27_40"
 
 
 def test_generation_policy_keeps_social_intents_on_templates() -> None:
@@ -398,11 +430,33 @@ def test_guarded_runtime_trial_blocks_unstable_definition_topic_before_generator
         ),
         native_generator=gen,  # type: ignore[arg-type]
     )
-    analysis = pipe.analyze_user_text("اشرح لي الصداقة ببساطة")
+    analysis = pipe.analyze_user_text("اشرح لي الشجاعة ببساطة")
     out = mod.handle(analysis, intent="chat.general", session_id="phase2736-topic")
     assert gen.calls == []
     assert "generator:template" in out.notes
     assert "native_generator:trial_unsupported_definition_topic" in out.notes
+
+
+def test_guarded_runtime_trial_allows_phase2740_definition_topic() -> None:
+    pipe = get_default_pipeline()
+    gen = _Phase2740DefinitionGenerator()
+    mod = ChatModule(
+        generation_policy=GenerationPolicy(
+            enabled=True,
+            experimental_runtime=True,
+            canary=True,
+            guarded_runtime_trial=True,
+            candidate_generator="sf_10m_phase27_40",
+        ),
+        native_generator=gen,  # type: ignore[arg-type]
+    )
+    analysis = pipe.analyze_user_text("ما معنى الصداقة")
+    out = mod.handle(analysis, intent="chat.general", session_id="phase2741-topic")
+    assert "الصداقة" in out.text
+    assert gen.calls[-1]["intent"] == "definition"
+    assert gen.calls[-1]["topic"] == "الصداقة"
+    assert "generator:sf_10m_phase27_40" in out.notes
+    assert "native_generator:intent:definition" in out.notes
 
 
 def test_guarded_runtime_trial_blocks_definition_topic_mismatch_after_generation() -> None:

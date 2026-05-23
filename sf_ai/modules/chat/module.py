@@ -302,7 +302,22 @@ def _generation_intent_for_prompt(
         return "thanks"
     if any(term in text for term in ("كيفك", "كيف حالك", "وش اخبارك", "علومك", "طمني عنك")):
         return "smalltalk"
-    if any(term in text for term in ("معني", "يعني", "عرف", "اشرح", "فسر", "فائده", "فايده", "تفيد", "المقصود")):
+    if any(
+        term in text
+        for term in (
+            "معني",
+            "يعني",
+            "تعني",
+            "ماذا",
+            "عرف",
+            "اشرح",
+            "فسر",
+            "فائده",
+            "فايده",
+            "تفيد",
+            "المقصود",
+        )
+    ):
         return "definition"
     if any(term in text for term in ("نصيحه", "انصح", "دلني", "وجهني", "خطوه", "بدايه")):
         return "advice"
@@ -323,6 +338,14 @@ def _generation_topic_for_prompt(prompt: str) -> str:
         return "الاحترام"
     if "قراء" in text or "قراي" in text:
         return "القراءة"
+    if "صداق" in text:
+        return "الصداقة"
+    if "صدق" in text:
+        return "الصدق"
+    if "تنظيم" in text or "نظم" in text:
+        return "التنظيم"
+    if "هدوء" in text or "هادئ" in text or "هداوه" in text:
+        return "الهدوء"
     return ""
 
 
@@ -332,7 +355,7 @@ def _guarded_trial_quality_floor(
     generation_topic: str,
     guarded_trial: bool,
 ) -> str | None:
-    """Keep the single-user generator trial inside proven Phase 27.33 lanes."""
+    """Keep the single-user generator trial inside proven Phase 27.40 lanes."""
     if not guarded_trial:
         return None
     if generation_intent == "chat.general":
@@ -347,6 +370,10 @@ _DEFINITION_TOPIC_TERMS: dict[str, tuple[str, ...]] = {
     "التعاون": ("تعاون", "ننجز", "سوا", "معا", "نخفف"),
     "الاحترام": ("احترام", "تقدير", "تقدر", "الناس", "تصرف"),
     "القراءة": ("قراء", "قراي", "فهم", "كلمات", "مفردات"),
+    "الصداقة": ("صداق", "صديق", "الوفاء", "ثقة", "قرب"),
+    "الصدق": ("صدق", "الحقيقة", "واضح", "امانة", "أمانة"),
+    "التنظيم": ("تنظيم", "ترتيب", "وقت", "مهام", "خطوات"),
+    "الهدوء": ("هدوء", "هادئ", "راحة", "ترو", "توتر"),
 }
 
 

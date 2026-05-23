@@ -39,12 +39,12 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.40 / 30 — Tokenizer/Context Repair اكتملت بنجاح معملي.
-- **الأولوية الحالية:** Phase 27.41 guarded runtime switch design؛ لا تدريب `SF-50M` ولا Phase 28 قبل اختبار فتح المرشح الجديد حيًا.
-- **الشات الحالي:** runtime الافتراضي قالب/router، ومع زر `مولّد تجريبي` يستخدم `SF-10M Phase 27.33` خلف guard/fallback.
+- **الرحلة الحالية:** Phase 27.41 / 30 — Guarded Runtime Switch اكتملت بنجاح حي عبر HTTP.
+- **الأولوية الحالية:** Phase 27.42 live UI observation and broader guarded probes؛ لا تدريب `SF-50M` ولا Phase 28 قبل بوابات جودة أوسع.
+- **الشات الحالي:** runtime الافتراضي قالب/router، ومع زر `مولّد تجريبي` يستخدم `SF-10M Phase 27.40` خلف guard/fallback.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
-- **المولّد:** runtime التجريبي يبقى على Phase 27.33 `sf-10m-step9800` حتى Phase 27.41؛ Phase 27.40 مرّ `24/24` كمرشح `sf_10m_phase27_40` لكنه لم يُفتح تلقائيًا بعد.
+- **المولّد:** runtime التجريبي المفتوح اختياريًا يستخدم Phase 27.40 `sf-10m-step6400` عبر `generator_trial=true`; الافتراضي ما زال القالب الآمن.
 - **التقييم:** Phase 27 مرّر `19/19` turn في حوار متعدد الأدوار، لكنه أكد أن الردود ما زالت `template` وأن المولد غير جاهز.
 - **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.
 - **دورة البيانات:** Phase 18 أضاف تصدير مراجعة من الواجهة و`prepare_dialogue_batch.py`; وPhase 22 يعتمد الآن أيضًا دفعات مباشرة يؤلفها/يراجعها الوكيل بتفويض موثق، بدون انتظار حفظ أو تصدير من سامي.
@@ -88,7 +88,8 @@
 - **نتيجة Phase 27.37:** أضيف semantic topic guard وفتح موضوع `الصبر` بصيغ مثبتة فقط. التوسعة الحية مرّت `21/21`: `10/10` regression generated، `3/3` موضوع جديد، `5/5` quality-floor، `3/3` ضوابط. التقرير: [docs/PHASE27_37_SUPPORTED_TOPIC_EXPANSION_REPORT.md](./docs/PHASE27_37_SUPPORTED_TOPIC_EXPANSION_REPORT.md).
 - **نتيجة Phase 27.38:** دُرّب probe مستهدف للموضوعات المحجوبة (`الصداقة/الصدق/التنظيم/الهدوء`) لكنه مرّ `6/20` فقط وظهر topic collapse نحو `الاحترام`. القرار: لا runtime switch. التقرير: [docs/PHASE27_38_TARGETED_TOPIC_CURRICULUM_PROBE_REPORT.md](./docs/PHASE27_38_TARGETED_TOPIC_CURRICULUM_PROBE_REPORT.md).
 - **نتيجة Phase 27.39:** دُرّب topic-isolation probe متوازن للموضوعات الثمانية. تحسن جزئيًا إلى `10/24`، لكنه كشف كسورًا لفظية في `الصداقة/الصدق/التنظيم` وتسربًا محدودًا، لذلك لا runtime switch. التقرير: [docs/PHASE27_39_TOPIC_ISOLATION_REPAIR_REPORT.md](./docs/PHASE27_39_TOPIC_ISOLATION_REPAIR_REPORT.md).
-- **نتيجة Phase 27.40:** أُنشئ tokenizer v5 محمي للموضوعات الجديدة، ومرّ probe السياق `24/24` (`regression/new_topic/heldout/isolation` كلها كاملة). القرار: جاهز لتصميم runtime محروس في Phase 27.41، لا فتح تلقائي. التقرير: [docs/PHASE27_40_TOKENIZER_CONTEXT_REPAIR_REPORT.md](./docs/PHASE27_40_TOKENIZER_CONTEXT_REPAIR_REPORT.md).
+- **نتيجة Phase 27.40:** أُنشئ tokenizer v5 محمي للموضوعات الجديدة، ومرّ probe السياق `24/24` (`regression/new_topic/heldout/isolation` كلها كاملة). التقرير: [docs/PHASE27_40_TOKENIZER_CONTEXT_REPAIR_REPORT.md](./docs/PHASE27_40_TOKENIZER_CONTEXT_REPAIR_REPORT.md).
+- **نتيجة Phase 27.41:** فُتح مرشح `sf_10m_phase27_40` في مسار `generator_trial=true` فقط، ومرّت بوابة HTTP الحية `22/22`: `17/17` رد مولّد و`5/5` ضوابط قالب/سلامة. التقرير: [docs/PHASE27_41_GUARDED_RUNTIME_SWITCH_REPORT.md](./docs/PHASE27_41_GUARDED_RUNTIME_SWITCH_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
@@ -166,7 +167,8 @@
 | Phase 27.37 | Supported Topic Expansion — الصبر added behind semantic guard; live gate passed 21/21 |
 | Phase 27.38 | Targeted Topic Curriculum/Probe — partial 6/20; runtime stays on 27.33 |
 | Phase 27.39 | Topic-Isolation Repair — partial 10/24; tokenizer/context repair next |
-| Phase 27.40 | Tokenizer/Context Repair — passed 24/24; guarded runtime switch design next |
+| Phase 27.40 | Tokenizer/Context Repair — passed 24/24; candidate opened in guarded trial |
+| Phase 27.41 | Guarded Runtime Switch — live HTTP gate passed 22/22; generator_trial uses sf_10m_phase27_40 |
 | Phase 28 | SF-120M v0.1 Candidate — planned |
 | Phase 29 | Runtime Hybrid Assistant v1 — planned |
 | Phase 30 | Continuous Improvement Loop — planned |

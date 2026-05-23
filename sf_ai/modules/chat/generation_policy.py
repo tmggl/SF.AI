@@ -57,6 +57,7 @@ class GenerationPolicy:
     max_new_tokens: int = 24
     temperature: float = 1.0
     top_k: int = 0
+    candidate_generator: str = "sf_10m_phase27_33"
 
     @classmethod
     def from_env(cls) -> GenerationPolicy:
@@ -97,7 +98,7 @@ class GenerationPolicy:
             return GenerationDecision(False, "canary_disabled")
         if intent in _TEMPLATE_FIRST_INTENTS and not self.guarded_runtime_trial:
             return GenerationDecision(False, "guarded_runtime_trial_disabled")
-        return GenerationDecision(True, "allowed", generator="sf_10m_phase27_33")
+        return GenerationDecision(True, "allowed", generator=self.candidate_generator)
 
 
 _GUARDED_TRIAL_SOCIAL_INTENTS: frozenset[str] = frozenset(

@@ -186,3 +186,23 @@ def test_phase27_40_tokenizer_context_repair_passes_candidate_gate() -> None:
     assert report["summary"]["bucket_summary"]["new_topic"]["passed"] == 8
     assert report["summary"]["bucket_summary"]["heldout"]["passed"] == 4
     assert report["summary"]["bucket_summary"]["isolation"]["passed"] == 4
+
+
+def test_phase27_41_guarded_runtime_switch_passes_live_gate() -> None:
+    report = _report("phase27_41_guarded_runtime_switch_report.json")
+    assert report["phase"] == "Phase 27.41"
+    assert report["status"] == "PASSED_GUARDED_RUNTIME_SWITCH_PHASE27_40"
+    assert report["training_started"] is False
+    assert report["runtime_default"] == "template"
+    assert report["request_flag"] == "generator_trial=true"
+    assert report["candidate_generator"] == "sf_10m_phase27_40"
+    assert report["candidate_tokenizer"] == "artifacts/tokenizers/sf_bpe/v5_topic_terms"
+    assert report["sf50m_allowed"] is False
+    assert report["user_test_allowed"] is True
+    assert report["summary"]["passed"] == 22
+    assert report["summary"]["total"] == 22
+    generated = [row for row in report["rows"] if row["actual_generator"] == "sf_10m_phase27_40"]
+    controls = [row for row in report["rows"] if row["actual_generator"] == "template"]
+    assert len(generated) == 17
+    assert len(controls) == 5
+    assert all(row["passed"] for row in report["rows"])

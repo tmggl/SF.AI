@@ -1,0 +1,532 @@
+{
+  "phase": "Phase 27.41",
+  "status": "PASSED_GUARDED_RUNTIME_SWITCH_PHASE27_40",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_default": "template",
+  "request_flag": "generator_trial=true",
+  "candidate_generator": "sf_10m_phase27_40",
+  "candidate_checkpoint": "artifacts/eval/phase27_40_tokenizer_context_repair/checkpoints/sf-10m-step6400",
+  "candidate_tokenizer": "artifacts/tokenizers/sf_bpe/v5_topic_terms",
+  "sf50m_allowed": false,
+  "user_test_allowed": true,
+  "summary": {
+    "passed": 22,
+    "total": 22
+  },
+  "rows": [
+    {
+      "id": "social_smalltalk",
+      "prompt": "كيفك اليوم",
+      "expected_generator": "sf_10m_phase27_40",
+      "actual_generator": "sf_10m_phase27_40",
+      "expected_terms": [
+        "بخير",
+        "كيفك"
+      ],
+      "expected_notes": [],
+      "response": "بخير ولله الحمد، أنت كيفك؟",
+      "intent": "chat.smalltalk",
+      "domain": "chat",
+      "confidence": 0.8462,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:السعودية,language:ar,rag:not_configured,generator:sf_10m_phase27_40,native_generator:generated,native_generator:canary_passed,native_generator:intent:chat.smalltalk",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "social_thanks",
+      "prompt": "شكرا لك",
+      "expected_generator": "sf_10m_phase27_40",
+      "actual_generator": "sf_10m_phase27_40",
+      "expected_terms": [
+        "العفو"
+      ],
+      "expected_notes": [],
+      "response": "العفو، يسعدني أن أساعدك.",
+      "intent": "chat.thanks",
+      "domain": "chat",
+      "confidence": 0.8,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:sf_10m_phase27_40,native_generator:generated,native_generator:canary_passed,native_generator:intent:chat.thanks",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "advice_step",
+      "prompt": "وجهني بخطوة بسيطة",
+      "expected_generator": "sf_10m_phase27_40",
+      "actual_generator": "sf_10m_phase27_40",
+      "expected_terms": [
+        "ابدأ",
+        "خطوة"
+      ],
+      "expected_notes": [],
+      "response": "ابدأ بخطوة صغيرة وواضحة.",
+      "intent": "chat.general",
+      "domain": "chat",
+      "confidence": 0.0,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:sf_10m_phase27_40,native_generator:generated,native_generator:canary_passed,native_generator:intent:advice",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "planning_day",
+      "prompt": "رتب لي يومي بسرعة",
+      "expected_generator": "sf_10m_phase27_40",
+      "actual_generator": "sf_10m_phase27_40",
+      "expected_terms": [
+        "ثلاث",
+        "مهام"
+      ],
+      "expected_notes": [],
+      "response": "اكتب ثلاث مهام وابدأ بالأهم.",
+      "intent": "chat.general",
+      "domain": "chat",
+      "confidence": 0.0,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:sf_10m_phase27_40,native_generator:generated,native_generator:canary_passed,native_generator:intent:planning",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "support_calm",
+      "prompt": "توترت شوي وش اسوي",
+      "expected_generator": "sf_10m_phase27_40",
+      "actual_generator": "sf_10m_phase27_40",
+      "expected_terms": [
+        "اهدأ",
+        "نفس"
+      ],
+      "expected_notes": [],
+      "response": "الله يهونها، خذ نفس واهدأ شوي.",
+      "intent": "chat.general",
+      "domain": "chat",
+      "confidence": 0.0,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:السعودية,language:ar,rag:not_configured,generator:sf_10m_phase27_40,native_generator:generated,native_generator:canary_passed,native_generator:intent:support",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "definition_patience",
+      "prompt": "ما معنى الصبر",
+      "expected_generator": "sf_10m_phase27_40",
+      "actual_generator": "sf_10m_phase27_40",
+      "expected_terms": [
+        "الصبر",
+        "الثبات"
+      ],
+      "expected_notes": [],
+      "response": "الصبر يعني الثبات وقت الصعوبة.",
+      "intent": "chat.general",
+      "domain": "chat",
+      "confidence": 0.0,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:sf_10m_phase27_40,native_generator:generated,native_generator:canary_passed,native_generator:intent:definition",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "definition_cooperation",
+      "prompt": "وش معنى التعاون",
+      "expected_generator": "sf_10m_phase27_40",
+      "actual_generator": "sf_10m_phase27_40",
+      "expected_terms": [
+        "التعاون",
+        "سوا"
+      ],
+      "expected_notes": [],
+      "response": "التعاون يعني نشتغل سوا ونخفف الحمل.",
+      "intent": "chat.general",
+      "domain": "chat",
+      "confidence": 0.0,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:السعودية,language:ar,rag:not_configured,generator:sf_10m_phase27_40,native_generator:generated,native_generator:canary_passed,native_generator:intent:definition",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "definition_respect",
+      "prompt": "اشرح الاحترام بجملة",
+      "expected_generator": "sf_10m_phase27_40",
+      "actual_generator": "sf_10m_phase27_40",
+      "expected_terms": [
+        "الاحترام",
+        "الناس"
+      ],
+      "expected_notes": [],
+      "response": "الاحترام معاملة الناس بقدر وذوق.",
+      "intent": "chat.general",
+      "domain": "chat",
+      "confidence": 0.0,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:sf_10m_phase27_40,native_generator:generated,native_generator:canary_passed,native_generator:intent:definition",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "definition_reading",
+      "prompt": "القراية وش تعني",
+      "expected_generator": "sf_10m_phase27_40",
+      "actual_generator": "sf_10m_phase27_40",
+      "expected_terms": [
+        "القراية",
+        "كلماتك"
+      ],
+      "expected_notes": [],
+      "response": "القراية توسع فهمك وتزيد كلماتك.",
+      "intent": "chat.general",
+      "domain": "chat",
+      "confidence": 0.0,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:السعودية,language:ar,rag:not_configured,generator:sf_10m_phase27_40,native_generator:generated,native_generator:canary_passed,native_generator:intent:definition",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "definition_friendship",
+      "prompt": "ما معنى الصداقة",
+      "expected_generator": "sf_10m_phase27_40",
+      "actual_generator": "sf_10m_phase27_40",
+      "expected_terms": [
+        "الصداقة",
+        "الوفاء"
+      ],
+      "expected_notes": [],
+      "response": "الصداقة علاقة طيبة تقوم على الوفاء.",
+      "intent": "chat.general",
+      "domain": "chat",
+      "confidence": 0.0,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:sf_10m_phase27_40,native_generator:generated,native_generator:canary_passed,native_generator:intent:definition",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "definition_truth",
+      "prompt": "الصدق وش يعني",
+      "expected_generator": "sf_10m_phase27_40",
+      "actual_generator": "sf_10m_phase27_40",
+      "expected_terms": [
+        "الصدق",
+        "الحقيقة"
+      ],
+      "expected_notes": [],
+      "response": "الصدق يعني تقول الحقيقة بوضوح.",
+      "intent": "chat.general",
+      "domain": "chat",
+      "confidence": 0.0,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:السعودية,language:ar,rag:not_configured,generator:sf_10m_phase27_40,native_generator:generated,native_generator:canary_passed,native_generator:intent:definition",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "definition_order",
+      "prompt": "وش معنى التنظيم",
+      "expected_generator": "sf_10m_phase27_40",
+      "actual_generator": "sf_10m_phase27_40",
+      "expected_terms": [
+        "التنظيم",
+        "ترتب"
+      ],
+      "expected_notes": [],
+      "response": "التنظيم إنك ترتب وقتك ومهامك بوضوح.",
+      "intent": "chat.general",
+      "domain": "chat",
+      "confidence": 0.0,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:السعودية,language:ar,rag:not_configured,generator:sf_10m_phase27_40,native_generator:generated,native_generator:canary_passed,native_generator:intent:definition",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "definition_calm",
+      "prompt": "ما معنى الهدوء",
+      "expected_generator": "sf_10m_phase27_40",
+      "actual_generator": "sf_10m_phase27_40",
+      "expected_terms": [
+        "الهدوء",
+        "التفكير"
+      ],
+      "expected_notes": [],
+      "response": "الهدوء سكينة تساعدك على التفكير بوضوح.",
+      "intent": "chat.general",
+      "domain": "chat",
+      "confidence": 0.0,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:sf_10m_phase27_40,native_generator:generated,native_generator:canary_passed,native_generator:intent:definition",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "heldout_friendship",
+      "prompt": "الصداقة ماذا تعني",
+      "expected_generator": "sf_10m_phase27_40",
+      "actual_generator": "sf_10m_phase27_40",
+      "expected_terms": [
+        "الصداقة",
+        "مودة"
+      ],
+      "expected_notes": [],
+      "response": "الصداقة مودة ووفاء بين الناس.",
+      "intent": "chat.general",
+      "domain": "chat",
+      "confidence": 0.0,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:sf_10m_phase27_40,native_generator:generated,native_generator:canary_passed,native_generator:intent:definition",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "heldout_truth",
+      "prompt": "اشرح الصدق بجملة",
+      "expected_generator": "sf_10m_phase27_40",
+      "actual_generator": "sf_10m_phase27_40",
+      "expected_terms": [
+        "الصدق",
+        "وضوح"
+      ],
+      "expected_notes": [],
+      "response": "الصدق وضوح في القول والعمل.",
+      "intent": "chat.general",
+      "domain": "chat",
+      "confidence": 0.0,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:sf_10m_phase27_40,native_generator:generated,native_generator:canary_passed,native_generator:intent:definition",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "heldout_order",
+      "prompt": "اشرح التنظيم ببساطة",
+      "expected_generator": "sf_10m_phase27_40",
+      "actual_generator": "sf_10m_phase27_40",
+      "expected_terms": [
+        "التنظيم",
+        "تبدأ"
+      ],
+      "expected_notes": [],
+      "response": "التنظيم معرفة ما تفعل ومتى تبدأ.",
+      "intent": "chat.general",
+      "domain": "chat",
+      "confidence": 0.0,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:sf_10m_phase27_40,native_generator:generated,native_generator:canary_passed,native_generator:intent:definition",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "heldout_calm",
+      "prompt": "الهدوء وش يعني",
+      "expected_generator": "sf_10m_phase27_40",
+      "actual_generator": "sf_10m_phase27_40",
+      "expected_terms": [
+        "الهدوء",
+        "توترك"
+      ],
+      "expected_notes": [],
+      "response": "الهدوء يعني تخفف توترك وتتكلم بروية.",
+      "intent": "chat.general",
+      "domain": "chat",
+      "confidence": 0.0,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:السعودية,language:ar,rag:not_configured,generator:sf_10m_phase27_40,native_generator:generated,native_generator:canary_passed,native_generator:intent:definition",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "control_identity_template",
+      "prompt": "من أنت",
+      "expected_generator": "template",
+      "actual_generator": "template",
+      "expected_terms": [
+        "SF.AI"
+      ],
+      "expected_notes": [
+        "native_generator:template_first_social_intent"
+      ],
+      "response": "أنا SF.AI — مساعد ذكاء اصطناعي يُبنى من الصفر بسيادة معرفية. ما أعتمد على نماذج خارجية، وأتعلّم من بيانات أنت تختارها.",
+      "intent": "chat.identity",
+      "domain": "chat",
+      "confidence": 0.7895,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:السعودية,language:ar,rag:not_configured,generator:template,native_generator:template_first_social_intent",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "control_capability_template",
+      "prompt": "وش تقدر تسوي",
+      "expected_generator": "template",
+      "actual_generator": "template",
+      "expected_terms": [
+        "أفهم",
+        "الفصحى"
+      ],
+      "expected_notes": [
+        "native_generator:template_first_social_intent"
+      ],
+      "response": "حاليًا أقدر: أفهم العربية الفصحى واللهجة السعودية، أصحّح أخطاء إملائية بسيطة، أوجّه السؤال داخل النظام، وأعطيك ردًا موضوعيًا. ما زلت لست نموذج توليد حر؛ أنا الآن نظام قواعد وتوجيه، والتوليد الذكي يحتاج تدريب النموذج السيادي على بياناتك.",
+      "intent": "chat.capability",
+      "domain": "chat",
+      "confidence": 0.8462,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:السعودية,language:ar,rag:not_configured,generator:template,native_generator:template_first_social_intent",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "control_sensitive_medical",
+      "prompt": "عندي ألم في الراس",
+      "expected_generator": "template",
+      "actual_generator": "template",
+      "expected_terms": [
+        "طبيب"
+      ],
+      "expected_notes": [],
+      "response": "أرى أن سؤالك صحي/طبي. لن أعطي تشخيصًا أو وصفة. أنصحك تتواصل مع طبيب مختص. أقدر أكون معك لو حبيت تكتب وتفضفض.",
+      "intent": "medical.general",
+      "domain": "medical",
+      "confidence": 0.8,
+      "dispatch": "composer",
+      "module_notes": "",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "control_unsupported_definition_topic",
+      "prompt": "ما معنى الشجاعة",
+      "expected_generator": "template",
+      "actual_generator": "template",
+      "expected_terms": [
+        "فهمت"
+      ],
+      "expected_notes": [
+        "native_generator:trial_unsupported_definition_topic"
+      ],
+      "response": "فهمت عليك بشكل عام. قدراتي محدودة، فعطِني تفصيل أكثر عشان أرد عليك بدقة.",
+      "intent": "chat.general",
+      "domain": "chat",
+      "confidence": 0.0,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:template,native_generator:trial_unsupported_definition_topic",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "control_raw_general",
+      "prompt": "موضوع مفتوح بلا تفاصيل",
+      "expected_generator": "template",
+      "actual_generator": "template",
+      "expected_terms": [
+        "فهمت"
+      ],
+      "expected_notes": [
+        "native_generator:trial_unsupported_general"
+      ],
+      "response": "فهمت عليك بشكل عام. قدراتي محدودة، فعطِني تفصيل أكثر عشان أرد عليك بدقة.",
+      "intent": "chat.general",
+      "domain": "chat",
+      "confidence": 0.0,
+      "dispatch": "module:chat",
+      "module_notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:template,native_generator:trial_unsupported_general",
+      "generator_ok": true,
+      "terms_ok": true,
+      "notes_ok": true,
+      "forbidden_ok": true,
+      "passed": true,
+      "reason": "passed"
+    }
+  ]
+}

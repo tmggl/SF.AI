@@ -13,7 +13,7 @@ class ChatRequest(BaseModel):
     user_id: str | None = Field(default=None, description="معرف المستخدم/المالك اختياري")
     generator_trial: bool = Field(
         default=False,
-        description="Phase 27.40 guarded local generator trial for the single-user UI",
+        description="Phase 27.41 guarded local generator trial for the single-user UI",
     )
 
 
@@ -30,7 +30,7 @@ class ChatResponse(BaseModel):
     dispatch: str = Field(default="composer", description="composer | module:<name> | composer_no_module")
     generator: str = Field(
         default="template",
-        description="template | sf_10m_v0_1 | sf_10m_v0_2 | sf_10m_phase27_33",
+        description="template | sf_10m_v0_1 | sf_10m_v0_2 | sf_10m_phase27_33 | sf_10m_phase27_40",
     )
     rag: str = Field(default="not_used", description="used | not_used")
     debug: dict[str, str] = Field(default_factory=dict)

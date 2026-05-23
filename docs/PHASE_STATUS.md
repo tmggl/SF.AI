@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.40 / 30**
-- **المرحلة الحالية:** **Phase 27.40 — Tokenizer/Context Repair**
-- **حالة المرحلة الحالية:** **مكتملة معمليًا؛ tokenizer/context probe مرّ `24/24` والمرشح جاهز لتصميم فتح محروس**
-- **المرحلة التالية المقترحة:** Phase 27.41 guarded runtime switch design؛ لا Phase 28 ولا `SF-50M` قبل نجاح فتح المرشح الجديد حيًا.
+- **الرحلة الحالية:** **Phase 27.41 / 30**
+- **المرحلة الحالية:** **Phase 27.41 — Guarded Runtime Switch**
+- **حالة المرحلة الحالية:** **مكتملة حيًا؛ HTTP guarded runtime switch مرّ `22/22` وفتح `sf_10m_phase27_40` اختياريًا**
+- **المرحلة التالية المقترحة:** Phase 27.42 live UI observation and broader guarded probes؛ لا Phase 28 ولا `SF-50M` قبل بوابات جودة أوسع.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -88,7 +88,8 @@
 | Phase 27.37 | Supported Topic Expansion | ✅ completed_quality_gated | ✅ |
 | Phase 27.38 | Targeted Topic Curriculum/Probe | ✅ completed_partial_keep_current_runtime | ✅ |
 | Phase 27.39 | Topic-Isolation Repair | ✅ completed_partial_keep_current_runtime | ✅ |
-| Phase 27.40 | Tokenizer/Context Repair | ✅ completed_candidate_ready_for_guarded_runtime_design | ✅ |
+| Phase 27.40 | Tokenizer/Context Repair | ✅ completed_candidate_opened_in_guarded_trial | ✅ |
+| Phase 27.41 | Guarded Runtime Switch | ✅ completed_guarded_runtime_switch_phase27_40 | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -682,9 +683,18 @@
   - new_topic: `8/8`.
   - heldout: `4/4`.
   - isolation: `4/4`.
-  - القرار: المرشح `sf_10m_phase27_40` جاهز لتصميم فتح محروس، لكن runtime لم يتبدل تلقائيًا.
-  - التالي Phase 27.41 guarded runtime switch design.
+  - القرار: المرشح `sf_10m_phase27_40` جاهز لتصميم فتح محروس، ثم فُتح في Phase 27.41 داخل `generator_trial=true` فقط.
+  - التالي Phase 27.42 live UI observation and broader guarded probes.
   - أضيف [PHASE27_40_TOKENIZER_CONTEXT_REPAIR_REPORT.md](./PHASE27_40_TOKENIZER_CONTEXT_REPAIR_REPORT.md).
+- بدأ وانتهى Phase 27.41 Guarded Runtime Switch:
+  - مسار `generator_trial=true` صار يستخدم tokenizer v5 + checkpoint `sf-10m-step6400`.
+  - المرشح المفتوح اختياريًا هو `sf_10m_phase27_40`.
+  - فُحص `/chat/message` حيًا عبر HTTP: `22/22` passed.
+  - generated lanes: `17/17`.
+  - template/safety controls: `5/5`.
+  - runtime الافتراضي ما زال `template`؛ لا فتح عام ولا `SF-50M`.
+  - التالي Phase 27.42 live UI observation and broader guarded probes.
+  - أضيف [PHASE27_41_GUARDED_RUNTIME_SWITCH_REPORT.md](./PHASE27_41_GUARDED_RUNTIME_SWITCH_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -750,7 +760,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.40"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.41"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -781,7 +791,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-549 passed in 17.08s
+552 passed in 17.02s
 ```
 
 | ملف | عدد |
