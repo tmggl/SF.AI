@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27.41: مسار «مولّد تجريبي» يستخدم الآن sf_10m_phase27_40 ومرّ اختبار HTTP الحي 22/22. التالي Phase 27.42 لمراقبة الواجهة وتوسيع probes المحروسة."
+      "response_preview": "اكتملت Phase 27.42: اختبرنا الواجهة/API على نطاق أوسع ومرّت 29/29. المولد يرد في المسارات المثبتة، والحارس يرجع للقالب عند الرد غير المطابق. التالي Phase 27.43 لتوسعة محروسة مبنية "
     },
     {
       "scenario_id": "clarification_repair_flow",

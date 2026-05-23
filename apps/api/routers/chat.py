@@ -60,7 +60,7 @@ def chat_message(payload: ChatRequest) -> ChatResponse:
 
 @lru_cache(maxsize=1)
 def _get_guarded_trial_orchestrator() -> Orchestrator:
-    """Build the explicit Phase 27.41 local generator trial path.
+    """Build the explicit Phase 27.42 local generator trial path.
 
     This is not the default runtime brain. The UI/API must opt in per request
     via `generator_trial=true`; sensitive/non-chat domains still route through

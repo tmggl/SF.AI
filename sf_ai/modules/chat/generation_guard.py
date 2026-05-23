@@ -98,7 +98,7 @@ _REPEATED_SHORT_PHRASE_RE = re.compile(
 
 _SOCIAL_PROMPT_RULES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
     (
-        ("كيفك", "كيف حالك", "وشلونك", "شلونك", "علومك"),
+        ("كيفك", "كيف حالك", "وش اخبارك", "وش أخبارك", "اخبارك", "أخبارك", "وشلونك", "شلونك", "علومك"),
         ("بخير", "تمام", "الحمد", "أنا"),
         "social_smalltalk_mismatch",
     ),
@@ -116,6 +116,24 @@ _SOCIAL_PROMPT_RULES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] =
         ("سعودي", "لهجة سعودية"),
         ("سعودي", "السعودية", "اللهجة", "أبشر", "حياك"),
         "saudi_preference_mismatch",
+    ),
+)
+
+_TASK_PROMPT_RULES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
+    (
+        ("رتب", "نظم", "انظم", "مهامي", "اولوياتي", "أولوياتي", "وقتي", "يومي"),
+        ("مهام", "المهام", "الأهم", "الاهم", "وقت", "ترتب", "رتب", "ابدأ", "اولويات", "أولويات"),
+        "planning_mismatch",
+    ),
+    (
+        ("نصيحه", "نصيحة", "انصح", "دلني", "وجهني", "خطوه", "خطوة", "بدايه", "بداية"),
+        ("ابدأ", "ابدا", "خطوة", "خطوه", "بسيط", "واضح", "لا تكثر"),
+        "advice_mismatch",
+    ),
+    (
+        ("توتر", "قلق", "متوتر", "قلقان", "اهدأ", "اهدا", "تهدئه", "تهدئة"),
+        ("اهدأ", "اهدا", "نفس", "هون", "يهوّن", "يهون", "هدوء", "خطوة", "شوي"),
+        "support_mismatch",
     ),
 )
 
@@ -182,7 +200,17 @@ class GenerationGuard:
             if reason == "saudi_preference_mismatch" and "بالسعودي" in p:
                 continue
             if any(trigger in p for trigger in triggers) and not any(
-                term in t for term in expected_terms
+                _normalize_surface(term) in t for term in expected_terms
+            ):
+                return GenerationGuardVerdict(
+                    allowed=False,
+                    reason=reason,
+                    repetition_ratio=verdict.repetition_ratio,
+                    arabic_ratio=verdict.arabic_ratio,
+                )
+        for triggers, expected_terms, reason in _TASK_PROMPT_RULES:
+            if any(trigger in p for trigger in triggers) and not any(
+                _normalize_surface(term) in t for term in expected_terms
             ):
                 return GenerationGuardVerdict(
                     allowed=False,

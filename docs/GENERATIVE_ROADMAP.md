@@ -73,6 +73,7 @@ SF.AI يملك الآن:
 | Phase 27.39 | `Topic-isolation repair` | probe جزئي `10/24`; لا runtime switch |
 | Phase 27.40 | `Tokenizer/context repair` | tokenizer v5 + probe `24/24`; المرشح فُتح لاحقًا في trial محروس |
 | Phase 27.41 | `Guarded runtime switch` | `generator_trial=true` يستخدم `sf_10m_phase27_40`; HTTP gate `22/22` |
+| Phase 27.42 | `Live UI broader probes` | broader HTTP gate `29/29`; misaligned generations blocked |
 | بعد نجاح SF-10M | `SF-50M v0.1` | نجاح جودة SF-10M/canary + إعادة Phase 26 readiness |
 | Phase 28 | `SF-120M v0.1` | نجاح SF-50M + scaling gate |
 
@@ -117,7 +118,8 @@ SF.AI يملك الآن:
 - **Phase 27.39:** دربت topic-isolation probe متوازنًا. تحسن جزئيًا إلى `10/24`، لكنه كشف كسورًا لفظية في المصطلحات الجديدة؛ runtime لم يتغير.
 - **Phase 27.40:** أنشأت tokenizer v5 محميًا ودربت probe متوازنًا مرّ `24/24`.
 - **Phase 27.41:** فتحت `sf_10m_phase27_40` اختياريًا عبر `generator_trial=true`; البوابة الحية مرّت `22/22`.
-- **Phase 27.42:** مراقبة واجهة وتوسيع probes المحروسة قبل أي تكبير.
+- **Phase 27.42:** وسعت probes الواجهة ومرّت `29/29`; الردود غير المطابقة تُحجب بدل أن تظهر للمستخدم.
+- **Phase 27.43:** توسعة بيانات محروسة للمسارات الضعيفة قبل أي تكبير.
 - **Phase 28:** أول قفزة بعد SF-50M إذا أثبت 50M قيمة واضحة.
 - **Phase 29:** إدخاله في الواجهة كتجربة يومية مع router/safety/memory.
 

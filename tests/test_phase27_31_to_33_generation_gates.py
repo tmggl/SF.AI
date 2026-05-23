@@ -206,3 +206,20 @@ def test_phase27_41_guarded_runtime_switch_passes_live_gate() -> None:
     assert len(generated) == 17
     assert len(controls) == 5
     assert all(row["passed"] for row in report["rows"])
+
+
+def test_phase27_42_live_ui_broader_probes_pass_guarded_gate() -> None:
+    report = _report("phase27_42_live_ui_broader_probes_report.json")
+    assert report["phase"] == "Phase 27.42"
+    assert report["status"] == "PASSED_LIVE_UI_BROADER_PROBES_GUARDED"
+    assert report["training_started"] is False
+    assert report["runtime_default"] == "template"
+    assert report["candidate_generator"] == "sf_10m_phase27_40"
+    assert report["sf50m_allowed"] is False
+    assert report["phase28_allowed"] is False
+    assert report["summary"]["passed"] == 29
+    assert report["summary"]["total"] == 29
+    assert report["summary"]["bucket_summary"]["guarded_fallback"]["passed"] == 2
+    assert report["summary"]["bucket_summary"]["quality_floor"]["passed"] == 3
+    assert report["summary"]["bucket_summary"]["generated_definition"]["passed"] == 9
+    assert all(row["passed"] for row in report["rows"])

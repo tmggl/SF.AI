@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.41 / 30**
-- **المرحلة الحالية:** **Phase 27.41 — Guarded Runtime Switch**
-- **حالة المرحلة الحالية:** **مكتملة حيًا؛ HTTP guarded runtime switch مرّ `22/22` وفتح `sf_10m_phase27_40` اختياريًا**
-- **المرحلة التالية المقترحة:** Phase 27.42 live UI observation and broader guarded probes؛ لا Phase 28 ولا `SF-50M` قبل بوابات جودة أوسع.
+- **الرحلة الحالية:** **Phase 27.42 / 30**
+- **المرحلة الحالية:** **Phase 27.42 — Live UI Broader Probes**
+- **حالة المرحلة الحالية:** **مكتملة حيًا؛ broader UI/API probes مرّت `29/29` مع حجب misaligned generator outputs**
+- **المرحلة التالية المقترحة:** Phase 27.43 guarded data-backed expansion؛ لا Phase 28 ولا `SF-50M` قبل بوابات جودة أوسع.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -89,7 +89,8 @@
 | Phase 27.38 | Targeted Topic Curriculum/Probe | ✅ completed_partial_keep_current_runtime | ✅ |
 | Phase 27.39 | Topic-Isolation Repair | ✅ completed_partial_keep_current_runtime | ✅ |
 | Phase 27.40 | Tokenizer/Context Repair | ✅ completed_candidate_opened_in_guarded_trial | ✅ |
-| Phase 27.41 | Guarded Runtime Switch | ✅ completed_guarded_runtime_switch_phase27_40 | ✅ |
+| Phase 27.41 | Guarded Runtime Switch | ✅ completed_candidate_opened_in_guarded_trial | ✅ |
+| Phase 27.42 | Live UI Broader Probes | ✅ completed_live_ui_broader_probes_guarded | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -695,6 +696,16 @@
   - runtime الافتراضي ما زال `template`؛ لا فتح عام ولا `SF-50M`.
   - التالي Phase 27.42 live UI observation and broader guarded probes.
   - أضيف [PHASE27_41_GUARDED_RUNTIME_SWITCH_REPORT.md](./PHASE27_41_GUARDED_RUNTIME_SWITCH_REPORT.md).
+- بدأ وانتهى Phase 27.42 Live UI Broader Probes:
+  - أضيف حارس alignment أوسع لسؤال الحال والتخطيط والنصيحة والدعم.
+  - صُحح false-positive في safety: `ما فائدة القراءة` لم تعد تُحجب كمال/استثمار.
+  - فُحص `/chat/message` حيًا: `29/29` passed.
+  - generated lanes: `20/20`.
+  - guarded fallback / quality-floor / controls: `9/9`.
+  - أمثلة حُجبت عمدًا: `وش اخبارك` و`نظم وقتي` عندما أعطى المولد ردًا غير مطابق.
+  - القرار: تجربة الواجهة أوسع وأكثر أمانًا، لكن الافتراضي لا يزال `template` ولا `SF-50M`.
+  - التالي Phase 27.43 guarded data-backed expansion.
+  - أضيف [PHASE27_42_LIVE_UI_BROADER_PROBES_REPORT.md](./PHASE27_42_LIVE_UI_BROADER_PROBES_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -760,7 +771,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.41"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.42"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -791,7 +802,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-552 passed in 17.02s
+558 passed in 16.99s
 ```
 
 | ملف | عدد |

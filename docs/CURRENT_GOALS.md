@@ -52,7 +52,7 @@ Phase 27.25 اختبرت checkpoint نفسه على أسئلة held-out جديد
 `16/18` مع intent/topic conditioning. Phase 27.31–27.33 أكملت natural
 intent/topic + balanced calibration + advice/micro stabilization، ووصلت إلى
 كل البوابات المحلية كاملة: fresh mixed `18/18` وmicro `32/32` بلا تسريب.
-الخطوة الحالية ليست تكبير النموذج. Phase 27.41 فتح مرشح `sf_10m_phase27_40` في `generator_trial=true` ومرّ حيًا `22/22`; التالي Phase 27.42 لمراقبة الواجهة وتوسيع probes المحروسة.
+الخطوة الحالية ليست تكبير النموذج. Phase 27.42 وسّع اختبار الواجهة إلى `29/29` وحجب الردود غير المطابقة؛ التالي Phase 27.43 لتوسعة بيانات محروسة للمسارات الضعيفة.
 
 الخطوة العملية الحالية:
 
@@ -201,7 +201,8 @@ SF.AI حاليًا:
 - **Phase 27.39:** Topic-Isolation Repair — مكتمل جزئيًا؛ `10/24` ولا runtime switch.
 - **Phase 27.40:** Tokenizer/Context Repair — مكتمل؛ `24/24` والمرشح فُتح لاحقًا في trial محروس.
 - **Phase 27.41:** Guarded Runtime Switch — مكتمل؛ HTTP gate مرّ `22/22` و`generator_trial` يستخدم `sf_10m_phase27_40`.
-- **Phase 27.42:** Live UI Observation + Broader Guarded Probes — التالي.
+- **Phase 27.42:** Live UI Broader Probes — مكتمل؛ HTTP gate مرّ `29/29` وحجب الردود غير المطابقة.
+- **Phase 27.43:** Guarded Data-Backed Expansion — التالي.
 - **Phase 28:** تدريب `SF-120M v0.1`؛ أول قفزة بعد نجاح `SF-50M`.
 - **Phase 29:** Runtime Hybrid Assistant v1.
 - **Phase 30:** Continuous Improvement Loop.

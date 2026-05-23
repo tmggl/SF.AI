@@ -9,6 +9,19 @@ from sf_ai.core.nlp._lexicons import load_lexicon
 
 _TOKEN_RE = re.compile(r"[\w\u0600-\u06FF]+", re.UNICODE)
 
+_BENEFIT_NON_FINANCE_CONTEXT = {
+    "قراءة",
+    "القراءة",
+    "قراية",
+    "القراية",
+    "تعلم",
+    "التعلم",
+    "دراسة",
+    "الدراسة",
+    "رياضة",
+    "الرياضة",
+}
+
 
 def _tokenize_for_safety(text: str) -> tuple[str, ...]:
     return tuple(match.group(0) for match in _TOKEN_RE.finditer(text))
@@ -42,8 +55,23 @@ class SafetyScanner:
                 continue
             for domain, terms in self._flags.items():
                 for term in terms:
+                    if _is_contextual_false_positive(variant, domain, term):
+                        continue
                     if _contains_safety_term(variant, term):
                         flag = f"{domain}:{term}"
                         if flag not in hits:
                             hits.append(flag)
         return tuple(hits)
+
+
+def _is_contextual_false_positive(variant: str, domain: str, term: str) -> bool:
+    """Avoid treating everyday "benefit of reading" phrases as finance.
+
+    The finance flag keeps `فائدة` for loan/bank contexts, but common
+    educational questions like "ما فائدة القراءة؟" should not block the
+    generator as financial advice.
+    """
+    if domain != "finance" or term not in {"فائدة", "فائده"}:
+        return False
+    tokens = {token.lower() for token in _tokenize_for_safety(variant)}
+    return bool(tokens & _BENEFIT_NON_FINANCE_CONTEXT)

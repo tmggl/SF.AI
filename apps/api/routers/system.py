@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.41 — Guarded Runtime Switch",
-        current_phase_status="completed_guarded_runtime_switch_phase27_40",
+        current_phase="Phase 27.42 — Live UI Broader Probes",
+        current_phase_status="completed_live_ui_broader_probes_guarded",
         next_phase=(
-            "Phase 27.42 live UI observation and broader guarded probes; SF-50M remains blocked"
+            "Phase 27.43 guarded data-backed expansion; SF-50M remains blocked"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -317,8 +317,13 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
             ),
             ComponentStatus(
                 name="phase27_41_guarded_runtime_switch",
-                status="completed_guarded_runtime_switch_phase27_40",
+                status="completed_candidate_opened_in_guarded_trial",
                 phase="Phase 27.41",
+            ),
+            ComponentStatus(
+                name="phase27_42_live_ui_broader_probes",
+                status="completed_live_ui_broader_probes_guarded",
+                phase="Phase 27.42",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

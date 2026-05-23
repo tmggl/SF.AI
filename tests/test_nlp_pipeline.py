@@ -56,6 +56,16 @@ def test_pipeline_safety_does_not_match_substrings() -> None:
     assert not any(flag.startswith("medical:") for flag in a.safety_flags)
 
 
+def test_pipeline_safety_does_not_flag_reading_benefit_as_finance() -> None:
+    a = get_default_pipeline().analyze_user_text("ما فائدة القراءة")
+    assert "finance:فائدة" not in a.safety_flags
+
+
+def test_pipeline_safety_still_flags_finance_benefit_with_bank_context() -> None:
+    a = get_default_pipeline().analyze_user_text("ما فائدة البنك")
+    assert "finance:فائدة" in a.safety_flags
+
+
 def test_pipeline_safety_matches_multiword_terms() -> None:
     p = NLPPipeline()
     a = p.analyze_user_text("كيف أغيّر كلمة مرور الحساب؟")

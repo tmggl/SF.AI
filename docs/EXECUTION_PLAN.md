@@ -111,6 +111,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.39 | Topic-Isolation Repair | مكتملة جزئيًا؛ `10/24` ولا runtime switch |
 | Phase 27.40 | Tokenizer/Context Repair | مكتملة؛ `24/24` والمرشح فُتح لاحقًا في trial محروس |
 | Phase 27.41 | Guarded Runtime Switch | مكتملة؛ HTTP gate مرّ `22/22` و`generator_trial` يستخدم `sf_10m_phase27_40` |
+| Phase 27.42 | Live UI Broader Probes | مكتملة؛ broader gate مرّ `29/29` وحجب الردود غير المطابقة |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2818,6 +2819,39 @@ sf50m_allowed = false
 - [PHASE27_41_GUARDED_RUNTIME_SWITCH_REPORT.md](./PHASE27_41_GUARDED_RUNTIME_SWITCH_REPORT.md)
 - `artifacts/reports/phase27_41_guarded_runtime_switch_report.json`
 - `artifacts/samples/phase27_41_guarded_runtime_switch.md`
+
+## Phase 27.42 — Live UI Broader Probes
+
+### الهدف
+
+توسيع اختبار الواجهة/API الحي بعد فتح `sf_10m_phase27_40`، مع إضافة حارس
+alignment يمنع الردود غير المطابقة من المرور كمخرجات مولدة.
+
+### نتيجة التنفيذ
+
+```text
+request_flag = generator_trial=true
+candidate_generator = sf_10m_phase27_40
+live_http_cases = 29/29
+generated_lanes = 20/20
+guarded_fallback_quality_controls = 9/9
+runtime_default = template
+sf50m_allowed = false
+```
+
+### القرار
+
+- تجربة الواجهة أوسع وأكثر أمانًا.
+- `ما فائدة القراءة` لم تعد تُحجب كمالية/استثمار.
+- `وش اخبارك` و`نظم وقتي` يرجعان للقالب إذا أعطى المولد ردًا غير مطابق.
+- لا تدريب جديد ولا تكبير.
+- التالي Phase 27.43: guarded data-backed expansion.
+
+### artifacts
+
+- [PHASE27_42_LIVE_UI_BROADER_PROBES_REPORT.md](./PHASE27_42_LIVE_UI_BROADER_PROBES_REPORT.md)
+- `artifacts/reports/phase27_42_live_ui_broader_probes_report.json`
+- `artifacts/samples/phase27_42_live_ui_broader_probes.md`
 
 ---
 

@@ -23,7 +23,7 @@ def test_health_ok() -> None:
     body = r.json()
     assert body["status"] == "ok"
     assert body["project"] == "SF.AI"
-    assert body["phase"] == "Phase 27.41"
+    assert body["phase"] == "Phase 27.42"
 
 
 def test_system_status_sovereign_flags() -> None:
@@ -31,9 +31,9 @@ def test_system_status_sovereign_flags() -> None:
     assert r.status_code == 200
     body = r.json()
     assert body["project"] == "SF.AI"
-    assert body["current_phase"].startswith("Phase 27.41")
-    assert body["current_phase_status"] == "completed_guarded_runtime_switch_phase27_40"
-    assert "Phase 27.42" in body["next_phase"]
+    assert body["current_phase"].startswith("Phase 27.42")
+    assert body["current_phase_status"] == "completed_live_ui_broader_probes_guarded"
+    assert "Phase 27.43" in body["next_phase"]
     assert body["sovereign"] is True
     assert body["uses_external_llm"] is False
     assert body["uses_pretrained_weights"] is False
