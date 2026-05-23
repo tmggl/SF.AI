@@ -11,7 +11,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from sf_ai.training.train_tokenizer import PHASE12_PERMISSION_ERROR, run
+from sf_ai.training.train_tokenizer import TOKENIZER_PERMISSION_ERROR, run
 
 
 def test_train_tokenizer_refuses_without_phase12_confirmation(
@@ -30,7 +30,7 @@ def test_train_tokenizer_refuses_without_phase12_confirmation(
 
     captured = capsys.readouterr()
     assert code == 2
-    assert PHASE12_PERMISSION_ERROR in captured.err
+    assert TOKENIZER_PERMISSION_ERROR in captured.err
     assert not out_dir.exists()
 
 
@@ -52,5 +52,5 @@ def test_train_bpe_script_refuses_without_phase12_confirmation(tmp_path: Path) -
     )
 
     assert proc.returncode == 2
-    assert PHASE12_PERMISSION_ERROR in proc.stderr
+    assert TOKENIZER_PERMISSION_ERROR in proc.stderr
     assert not out_dir.exists()

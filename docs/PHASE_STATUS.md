@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 22 / 30**
-- **المرحلة الحالية:** **Phase 22 — Gold Dialogue Corpus v2**
-- **حالة المرحلة الحالية:** **Phase 22 مكتملة؛ corpus v2 جاهز للانتقال إلى Phase 23 (500/500، msa=250، saudi=250)**
-- **المرحلة التالية المقترحة:** Phase 23 — Tokenizer v2 Retrain & Audit، بعد إعادة تشغيل بوابات Phase 22 والاختبارات.
+- **الرحلة الحالية:** **Phase 23 / 30**
+- **المرحلة الحالية:** **Phase 23 — Tokenizer v2 Retrain & Audit**
+- **حالة المرحلة الحالية:** **مكتملة؛ tokenizer v2 جاهز للانتقال إلى Phase 24 (`vocab=4493`, `merges=4386`)**
+- **المرحلة التالية المقترحة:** Phase 24 — SF-10M v0.2 Quality Training، مع tokenizer v2 وبدون تفعيل runtime واسع قبل canary.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ تم تحديث `default_registry.yaml` و`safety_terms.yaml` لفجوات finance/religion/security.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -48,7 +48,7 @@
 | Phase 20 | Domain Activation Gates | ✅ gates_active_no_auto_activation | ✅ |
 | Phase 21 | Generative Roadmap & Quality Targets | ✅ completed | ✅ |
 | Phase 22 | Gold Dialogue Corpus v2 | ✅ completed_ready_for_phase23 | ✅ |
-| Phase 23 | Tokenizer v2 Retrain & Audit | مخططة | ✅ |
+| Phase 23 | Tokenizer v2 Retrain & Audit | ✅ completed_ready_for_phase24 | ✅ |
 | Phase 24 | SF-10M v0.2 Quality Training | مخططة | ✅ |
 | Phase 25 | Generated Chat Canary v1 | مخططة | ✅ |
 | Phase 26 | SF-50M v0.1 Dialogue Model | مخططة | ✅ |
@@ -82,7 +82,7 @@
 - أضيف `data/corpus/chat/jsonl/protected_terms_seed_v1.jsonl`: seed صغير فيه 10 محادثات سعودية `gold` لتغطية protected terms المتبقية.
 - نتيجة الوضع الحالي بعد `make corpus-audit`: `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد `30/30`.
 - نتيجة تدريب Phase 12: `artifacts/tokenizers/sf_bpe/v1`, `vocab=261`, `merges=218`, `sf_origin=true`.
-- نتيجة `make phase12-readiness`: يعرض أن v1 اكتمل وأن `msa + saudi` موجودتان حاليًا، مع بقاء Phase 22 مسؤولة عن تكبير corpus قبل أي تدريب جودة جديد.
+- نتيجة `make phase12-readiness`: يعرض أن v1 اكتمل وأن `msa + saudi` موجودتان حاليًا؛ tokenizer v2 أصبح جاهزًا لاحقًا في Phase 23.
 - أضيف حقل `provenance.quality` إلى schema.
 - أضيف حقل `provenance.training_allowed` إلى schema، وصار شرطًا في corpus governance.
 - قيود Phase 11: `domain=chat`, `lang=ar`, `dialect ∈ {msa, saudi}`, ووجود user+assistant وsource/license/quality/training_allowed.
@@ -118,7 +118,7 @@
   - missing MSA remains documented
 - أضيف `GET /system/phase12-readiness` كقرار API موحد:
   - `preflight_pass=true` بعد توفر `msa + saudi`
-  - `can_train_now=false` لأن tokenizer v1 مكتمل، والمرحلة الحالية هي تكبير corpus ضمن Phase 22
+  - `can_train_now=false` لأن tokenizer v1 مكتمل، وPhase 23 وفرت tokenizer v2 للمرحلة التالية
   - `missing_required_dialects=[]`
   - `required_confirmation_flag=--confirm-phase12-permission`
 - أضيف `make phase12-readiness` كقرار CLI مطابق للـ API بدون restart للسيرفر.
@@ -242,6 +242,18 @@
   - أضيفت intents محددة لعبارات Phase 22 اليومية: اختبار الحوار الفصيح، الخطوة التالية، والفرق بين التدريب والتفعيل.
   - لا يوجد ناقص في Phase 22 حاليًا؛ الفصحى وصلت إلى 250، والسعودي وصل إلى 250، والمجموع 500.
   - لا تدريب جديد بدأ.
+- بدأ وانتهى Phase 23 Tokenizer v2 Retrain & Audit:
+  - أُعيد تدريب SF-BPE tokenizer من corpus Phase 22 المتوازن فقط.
+  - artifact: `artifacts/tokenizers/sf_bpe/v2/`.
+  - أضيف `make phase23-tokenizer-audit`.
+  - أضيف `GET /system/phase23-tokenizer-audit`.
+  - أضيف [PHASE23_TOKENIZER_V2_REPORT.md](./PHASE23_TOKENIZER_V2_REPORT.md).
+  - القرار الحالي: `COMPLETED_READY_FOR_PHASE24`.
+  - النتائج: `vocab=4493`, `merges=4386`, `words_seen=23190`, `unique_words=2492`.
+  - corpus المستخدم: 500 سجل، `msa=250`, `saudi=250`, بدون issues.
+  - مقارنة v1/v2: v1 كان `vocab=261`, `merges=218`, سعودي فقط؛ v2 صار متوازنًا وأوسع.
+  - protected Saudi terms: متوسط tokens تحسن من `4.0` إلى `2.3`، ولا توجد roundtrip failures أو aggressive splits.
+  - لا تدريب نموذج لغوي بدأ في Phase 23.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -307,7 +319,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 11"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 23"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -338,7 +350,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-435 passed in 4.97s
+442 passed in 5.19s
 ```
 
 | ملف | عدد |
@@ -360,7 +372,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_health.py | 11 |
 | test_intent_detector.py | 7 |
 | test_mo3jam_importer.py | 13 |
-| test_new_chat_intents.py | 38 (Phase 9/19 social polish + Phase 22 guidance) |
+| test_new_chat_intents.py | 38 (Phase 9/19 social polish + phase guidance) |
 | test_nlp_pipeline.py | 9 |
 | test_orchestrator.py | 7 |
 | test_phase10_skeleton_domains.py | 4 (Phase 10) |
@@ -369,6 +381,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_phase20_domain_activation_gates.py | 6 (Phase 20) |
 | test_phase22_readiness.py | 15 (Phase 22) |
 | test_phase22_review_intake.py | 7 (Phase 22) |
+| test_phase23_tokenizer_artifacts.py | 6 (Phase 23) |
 | test_rag_sparse_retrieval.py | 14 (Phase 8) |
 | test_research_summarizer.py | 20 |
 | test_response_composer.py | 6 |

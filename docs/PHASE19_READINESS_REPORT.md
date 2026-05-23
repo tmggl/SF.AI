@@ -65,13 +65,11 @@ blockers:
 
 ## الخطوة الصحيحة التالية
 
-استخدم Phase 22 لتوسيع corpus مباشرة. المسار الأساسي الآن أن يؤلف الوكيل الدفعات، يراجعها، ويعتمدها بتفويض سامي الموثق، ثم يشغل audit/tests قبل الرفع. مسار review من الواجهة يبقى اختياريًا فقط:
+Phase 22 اكتمل إلى 500 سجل، وPhase 23 درّب tokenizer v2. ما زال SF-50M غير جاهز لأن الحد العملي له 5000 سجل تقريبًا؛ المسار الصحيح الآن هو Phase 24 ثم مواصلة تكبير corpus لاحقًا قبل أي SF-50M:
 
 ```bash
-make phase22-next-batch
-.venv/bin/python scripts/validate_dataset.py data/corpus/chat/jsonl/dialogue_batch_v2_<batch>.jsonl
 make corpus-audit
-make phase22-readiness
+make phase23-tokenizer-audit
 make phase19-readiness
 ```
 

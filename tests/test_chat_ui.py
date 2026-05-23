@@ -195,11 +195,11 @@ def test_save_review_export_rejects_missing_user_ownership(
     assert not list(tmp_path.glob("*.jsonl"))
 
 
-def test_system_status_reports_phase_22_with_chat_ui() -> None:
+def test_system_status_reports_current_phase_with_chat_ui() -> None:
     r = client.get("/system/status")
     assert r.status_code == 200
     body = r.json()
-    assert "Phase 22" in body["current_phase"]
+    assert "Phase 23" in body["current_phase"]
     assert any(c["name"] == "chat_ui" and c["status"] == "active"
                for c in body["components"])
     assert any(c["name"] == "native_generator" and c["status"] == "ready_offline"

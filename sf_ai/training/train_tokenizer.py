@@ -18,6 +18,11 @@ PHASE12_PERMISSION_ERROR = (
     "Re-run with --confirm-phase12-permission only after Sami says: "
     '"ابدأ Phase 12".'
 )
+TOKENIZER_PERMISSION_ERROR = (
+    "Tokenizer training requires an explicit phase confirmation flag. "
+    "Use --confirm-phase12-permission for Phase 12 v1 or "
+    "--confirm-phase23-tokenizer for Phase 23 v2."
+)
 
 
 def parse_args(argv: list[str]) -> argparse.Namespace:
@@ -37,13 +42,21 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
             "starting Phase 12 tokenizer training."
         ),
     )
+    p.add_argument(
+        "--confirm-phase23-tokenizer",
+        action="store_true",
+        help=(
+            "Required gate for Phase 23 tokenizer v2 retraining after "
+            "Phase 22 completion gate passes."
+        ),
+    )
     return p.parse_args(argv)
 
 
 def run(argv: list[str]) -> int:
     args = parse_args(argv)
-    if not args.confirm_phase12_permission:
-        print(f"error: {PHASE12_PERMISSION_ERROR}", file=sys.stderr)
+    if not (args.confirm_phase12_permission or args.confirm_phase23_tokenizer):
+        print(f"error: {TOKENIZER_PERMISSION_ERROR}", file=sys.stderr)
         return 2
 
     cfg = TokenizerConfig(

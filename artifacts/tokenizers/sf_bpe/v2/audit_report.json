@@ -1,0 +1,165 @@
+{
+  "phase": "Phase 23 — Tokenizer v2 Retrain & Audit",
+  "status": "COMPLETED_READY_FOR_PHASE24",
+  "artifact_dir": "artifacts/tokenizers/sf_bpe/v2",
+  "previous_artifact_dir": "artifacts/tokenizers/sf_bpe/v1",
+  "tokenizer": {
+    "type": "bpe",
+    "sf_origin": true,
+    "vocab_size": 4493,
+    "merges": 4386,
+    "words_seen": 23190,
+    "unique_words": 2492,
+    "base_alphabet_size": 107,
+    "lowercase": false,
+    "byte_level": false
+  },
+  "corpus": {
+    "root": "data/corpus/chat/jsonl",
+    "total_records": 500,
+    "training_ready": 500,
+    "issues": 0,
+    "dialects": {
+      "msa": 250,
+      "saudi": 250
+    },
+    "quality": {
+      "silver": 448,
+      "gold": 52
+    },
+    "source_count": 22
+  },
+  "tokenization_policy": {
+    "protected_terms_total": 30,
+    "protected_terms_covered": 30,
+    "coverage_ratio": 1.0,
+    "warnings": [],
+    "protected_terms_path": "resources/tokenization/protected_terms_saudi.txt",
+    "preferred_merges_path": "resources/tokenization/preferred_merges.txt",
+    "rules_path": "resources/tokenization/tokenization_rules.yaml",
+    "encoding": "utf-8",
+    "no_pretrained_vocab": true,
+    "no_pretrained_merges": true
+  },
+  "protected_terms_behavior": {
+    "terms_checked": 30,
+    "v2_roundtrip_failures": [],
+    "aggressive_split_terms": [],
+    "average_v1_tokens": 4,
+    "average_v2_tokens": 2.3,
+    "max_v1_tokens": 10,
+    "max_v2_tokens": 6,
+    "samples": [
+      {
+        "term": "وش",
+        "v1_tokens": 3,
+        "v2_tokens": 1,
+        "v2_decoded": "وش",
+        "v2_roundtrip_ok": true,
+        "aggressive_split": false
+      },
+      {
+        "term": "وشو",
+        "v1_tokens": 3,
+        "v2_tokens": 2,
+        "v2_decoded": "وشو",
+        "v2_roundtrip_ok": true,
+        "aggressive_split": false
+      },
+      {
+        "term": "وشلون",
+        "v1_tokens": 5,
+        "v2_tokens": 1,
+        "v2_decoded": "وشلون",
+        "v2_roundtrip_ok": true,
+        "aggressive_split": false
+      },
+      {
+        "term": "شلون",
+        "v1_tokens": 4,
+        "v2_tokens": 3,
+        "v2_decoded": "شلون",
+        "v2_roundtrip_ok": true,
+        "aggressive_split": false
+      },
+      {
+        "term": "وين",
+        "v1_tokens": 2,
+        "v2_tokens": 1,
+        "v2_decoded": "وين",
+        "v2_roundtrip_ok": true,
+        "aggressive_split": false
+      },
+      {
+        "term": "ليه",
+        "v1_tokens": 2,
+        "v2_tokens": 1,
+        "v2_decoded": "ليه",
+        "v2_roundtrip_ok": true,
+        "aggressive_split": false
+      },
+      {
+        "term": "ليش",
+        "v1_tokens": 4,
+        "v2_tokens": 1,
+        "v2_decoded": "ليش",
+        "v2_roundtrip_ok": true,
+        "aggressive_split": false
+      },
+      {
+        "term": "مين",
+        "v1_tokens": 2,
+        "v2_tokens": 1,
+        "v2_decoded": "مين",
+        "v2_roundtrip_ok": true,
+        "aggressive_split": false
+      },
+      {
+        "term": "إيش",
+        "v1_tokens": 4,
+        "v2_tokens": 3,
+        "v2_decoded": "إيش",
+        "v2_roundtrip_ok": true,
+        "aggressive_split": false
+      },
+      {
+        "term": "ترا",
+        "v1_tokens": 3,
+        "v2_tokens": 2,
+        "v2_decoded": "ترا",
+        "v2_roundtrip_ok": true,
+        "aggressive_split": false
+      }
+    ]
+  },
+  "comparison_with_v1": {
+    "v1_vocab_size": 261,
+    "v2_vocab_size": 4493,
+    "vocab_delta": 4232,
+    "v1_merges": 218,
+    "v2_merges": 4386,
+    "merges_delta": 4168,
+    "v1_words_seen": 723,
+    "v2_words_seen": 23190,
+    "v1_unique_words": 64,
+    "v2_unique_words": 2492,
+    "protected_term_average_tokens_improved": true
+  },
+  "sovereignty": {
+    "external_llm_api_used": false,
+    "pretrained_weights_used": false,
+    "pretrained_embeddings_used": false,
+    "pretrained_tokenizer_used": false,
+    "pretrained_vocab_used": false,
+    "pretrained_merges_used": false,
+    "synthetic_llm_corpus_used": false,
+    "sf_origin": true
+  },
+  "decision": {
+    "phase23_training_started": true,
+    "phase23_training_completed": true,
+    "suitable_for_phase24_quality_training": true,
+    "runtime_chat_should_use_this_directly": false,
+    "next_recommended_phase": "Phase 24 — SF-10M v0.2 Quality Training"
+  }
+}

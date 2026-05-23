@@ -14,8 +14,8 @@ under data/corpus/chat/jsonl/ first (see docs/DATASET_FORMAT.md).
 NEVER load vocab/merges from any external tokenizer. The training produces
 SF-origin artifacts only.
 
-Also refuses to start Phase 12 tokenizer training unless Sami has explicitly
-approved it and the command includes --confirm-phase12-permission.
+Also refuses to start tokenizer training unless the command includes the
+explicit phase confirmation flag for the current phase.
 """
 
 from __future__ import annotations
@@ -32,7 +32,7 @@ from sf_ai.models.tokenizer import (  # noqa: E402
     TokenizerConfig,
     train_bpe_from_corpus,
 )
-from sf_ai.training.train_tokenizer import PHASE12_PERMISSION_ERROR  # noqa: E402
+from sf_ai.training.train_tokenizer import TOKENIZER_PERMISSION_ERROR  # noqa: E402
 
 
 def main(argv: list[str]) -> int:
@@ -49,10 +49,15 @@ def main(argv: list[str]) -> int:
         action="store_true",
         help="Required after explicit Sami approval to start Phase 12 tokenizer training",
     )
+    p.add_argument(
+        "--confirm-phase23-tokenizer",
+        action="store_true",
+        help="Required to start Phase 23 tokenizer v2 after Phase 22 completion gate",
+    )
     args = p.parse_args(argv)
 
-    if not args.confirm_phase12_permission:
-        print(f"error: {PHASE12_PERMISSION_ERROR}", file=sys.stderr)
+    if not (args.confirm_phase12_permission or args.confirm_phase23_tokenizer):
+        print(f"error: {TOKENIZER_PERMISSION_ERROR}", file=sys.stderr)
         return 2
 
     config = TokenizerConfig(

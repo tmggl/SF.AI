@@ -1,0 +1,19 @@
+{
+  "tokenizer_type": "sf_bpe",
+  "version": "v2",
+  "vocab_size_requested": 8000,
+  "vocab_size_actual": 4493,
+  "min_frequency": 2,
+  "special_tokens": [
+    "<pad>",
+    "<bos>",
+    "<eos>",
+    "<unk>"
+  ],
+  "lowercase": false,
+  "byte_level": false,
+  "encoding": "utf-8",
+  "sovereign": true,
+  "pretrained_vocab_used": false,
+  "pretrained_merges_used": false
+}

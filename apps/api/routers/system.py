@@ -41,6 +41,7 @@ from sf_ai.datasets.phase22_review_intake import build_phase22_review_intake_rep
 from sf_ai.datasets.source_inventory import build_source_inventory
 from sf_ai.training.phase12_readiness import build_phase12_readiness_decision
 from sf_ai.training.phase19_readiness import build_phase19_readiness_decision
+from sf_ai.training.phase23_tokenizer import build_phase23_tokenizer_audit
 
 router = APIRouter(prefix="/system", tags=["system"])
 
@@ -54,9 +55,9 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 22 — Gold Dialogue Corpus v2",
-        current_phase_status="not_ready_build_gold_dialogue_corpus_v2",
-        next_phase="Collect reviewed user-authored MSA+Saudi dialogue until Phase 22 readiness passes",
+        current_phase="Phase 23 — Tokenizer v2 Retrain & Audit",
+        current_phase_status="completed_ready_for_phase24",
+        next_phase="Phase 24 — SF-10M v0.2 Quality Training",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -129,7 +130,7 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
             ComponentStatus(name="business_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="ecommerce_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="corpus_governance", status="active", phase="Phase 11"),
-            ComponentStatus(name="training_corpus", status="waiting_for_user_data", phase="Phase 11"),
+            ComponentStatus(name="training_corpus", status="active", phase="Phase 22"),
             ComponentStatus(name="phase12_corpus_preflight", status="active", phase="Phase 12"),
             ComponentStatus(name="native_generator", status="ready_offline", phase="Phase 15"),
             ComponentStatus(name="generation_policy", status="active", phase="Phase 15"),
@@ -148,6 +149,8 @@ def system_status(settings: Settings = Depends(get_settings)) -> SystemStatusRes
             ComponentStatus(name="phase22_completion_gate", status="active", phase="Phase 22"),
             ComponentStatus(name="phase22_review_intake", status="active", phase="Phase 22"),
             ComponentStatus(name="phase22_dialogue_quality_gate", status="active", phase="Phase 22"),
+            ComponentStatus(name="phase23_tokenizer_v2", status="active", phase="Phase 23"),
+            ComponentStatus(name="phase23_tokenizer_audit", status="active", phase="Phase 23"),
         ],
     )
 
@@ -466,3 +469,9 @@ def phase22_review_intake(max_files: int | None = None) -> Phase22ReviewIntakeRe
         recommended_next_commands=list(report.recommended_next_commands),
         notes=list(report.notes),
     )
+
+
+@router.get("/phase23-tokenizer-audit")
+def phase23_tokenizer_audit() -> dict[str, object]:
+    """Read-only Phase 23 tokenizer v2 audit summary."""
+    return build_phase23_tokenizer_audit().to_json()

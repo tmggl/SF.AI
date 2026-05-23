@@ -134,8 +134,8 @@ def build_phase19_readiness_decision(
         action=action,
         recommended_commands=(
             "make corpus-audit",
-            "make phase22-completion-gate",
-            "start Phase 23 tokenizer v2 through the documented roadmap",
+            "make phase23-tokenizer-audit",
+            "start Phase 24 quality training through the documented roadmap",
             "continue corpus scaling beyond 500 before any SF-50M training attempt",
             "make phase19-readiness",
         ),

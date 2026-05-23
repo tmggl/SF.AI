@@ -1,7 +1,7 @@
 # SF.AI — Makefile
 # Phase 1 set of operational commands.
 
-.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit phase12-readiness phase19-readiness phase20-gates phase22-readiness phase22-plan phase22-next-batch phase22-completion-gate phase22-review-intake prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
+.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit phase12-readiness phase19-readiness phase20-gates phase22-readiness phase22-plan phase22-next-batch phase22-completion-gate phase22-review-intake phase23-tokenizer-audit prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
 
 PY ?= .venv/bin/python
 UVICORN ?= uvicorn
@@ -33,8 +33,9 @@ help:
 	@echo "  make phase22-next-batch   Show the immediate Phase 22 authoring task"
 	@echo "  make phase22-completion-gate Strict Phase 22 completion gate before Phase 23"
 	@echo "  make phase22-review-intake Scan review exports before corpus conversion"
+	@echo "  make phase23-tokenizer-audit Finalize/audit Phase 23 tokenizer v2"
 	@echo "  make prepare-dialogue-batch ARGS=...  Prepare reviewed chat exports (Phase 18)"
-	@echo "  make train-bpe ARGS=...   Train SF-BPE tokenizer (requires Phase 12 confirmation flag)"
+	@echo "  make train-bpe ARGS=...   Train SF-BPE tokenizer (requires phase confirmation flag)"
 	@echo "  make train-lm ARGS=...    Train SF native LM (Phase 6)"
 	@echo "  make eval-lm ARGS=...     Evaluate a SF.AI checkpoint"
 	@echo "  make eval-phase16         Run Phase 16 chat/safety/style gate"
@@ -120,11 +121,14 @@ phase22-completion-gate:
 phase22-review-intake:
 	$(PY) scripts/phase22_review_intake.py $(ARGS)
 
+phase23-tokenizer-audit:
+	$(PY) scripts/phase23_tokenizer_audit.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 
-# Phase 12 — train SF-BPE tokenizer.
-# Requires explicit Sami approval and --confirm-phase12-permission.
+# Phase 12/23 — train SF-BPE tokenizer.
+# Requires explicit phase approval flag.
 # Example after approval only:
 #   make train-bpe ARGS="--confirm-phase12-permission --corpus data/corpus/chat/jsonl --out artifacts/tokenizers/sf_bpe/v1"
 train-bpe:

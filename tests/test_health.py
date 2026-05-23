@@ -23,6 +23,7 @@ def test_health_ok() -> None:
     body = r.json()
     assert body["status"] == "ok"
     assert body["project"] == "SF.AI"
+    assert body["phase"] == "Phase 23"
 
 
 def test_system_status_sovereign_flags() -> None:
@@ -30,6 +31,9 @@ def test_system_status_sovereign_flags() -> None:
     assert r.status_code == 200
     body = r.json()
     assert body["project"] == "SF.AI"
+    assert body["current_phase"].startswith("Phase 23")
+    assert body["current_phase_status"] == "completed_ready_for_phase24"
+    assert body["next_phase"].startswith("Phase 24")
     assert body["sovereign"] is True
     assert body["uses_external_llm"] is False
     assert body["uses_pretrained_weights"] is False
@@ -37,6 +41,7 @@ def test_system_status_sovereign_flags() -> None:
     assert body["uses_pretrained_tokenizer"] is False
     assert any(c["name"] == "api" and c["status"] == "active" for c in body["components"])
     assert any(c["name"] == "orchestrator" and c["status"] == "active" for c in body["components"])
+    assert any(c["name"] == "phase23_tokenizer_v2" and c["status"] == "active" for c in body["components"])
 
 
 def test_system_corpus_audit_reports_reviewed_seeds_ready() -> None:
@@ -103,6 +108,19 @@ def test_system_phase19_readiness_reports_training_gate() -> None:
     assert body["min_training_records"] == 5000
     assert body["target_model"] == "sf-50m"
     assert "corpus_too_small_for_sf50m" in body["blockers"]
+
+
+def test_system_phase23_tokenizer_audit_reports_v2_ready() -> None:
+    r = client.get("/system/phase23-tokenizer-audit")
+    assert r.status_code == 200
+    body = r.json()
+    assert body["phase"].startswith("Phase 23")
+    assert body["status"] == "COMPLETED_READY_FOR_PHASE24"
+    assert body["tokenizer"]["sf_origin"] is True
+    assert body["tokenizer"]["vocab_size"] == 4493
+    assert body["corpus"]["training_ready"] == 500
+    assert body["corpus"]["dialects"] == {"msa": 250, "saudi": 250}
+    assert body["decision"]["runtime_chat_should_use_this_directly"] is False
 
 
 def test_chat_greeting_routes_through_module() -> None:
