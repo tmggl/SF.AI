@@ -144,7 +144,7 @@ missing_required_dialects=[]
 required_confirmation_flag=--confirm-phase12-permission
 ```
 
-تحديث Phase 22: أصبحت `msa + saudi` موجودتين في corpus، لكن Phase 22 لا تزال تجمع العدد والتوازن اللازمين قبل أي تدريب جودة جديد.
+تحديث Phase 22: أصبحت `msa + saudi` موجودتين ومتوازنتين في corpus، لكن Phase 22 لا تزال تجمع العدد اللازم قبل أي تدريب جودة جديد.
 
 والقرار نفسه متاح من الطرفية بدون restart للسيرفر:
 

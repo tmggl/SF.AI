@@ -45,11 +45,11 @@ def test_system_corpus_audit_reports_reviewed_seeds_ready() -> None:
     body = r.json()
     assert body["corpus"] == "data/corpus/chat/jsonl"
     assert body["status"] == "READY_FOR_PHASE_12_TOKENIZER_TRAINING"
-    assert body["total_records"] == 380
-    assert body["training_ready"] == 380
+    assert body["total_records"] == 400
+    assert body["training_ready"] == 400
     assert body["issue_count"] == 0
-    assert body["dialect_counts"] == {"msa": 200, "saudi": 180}
-    assert body["quality_counts"] == {"gold": 52, "silver": 328}
+    assert body["dialect_counts"] == {"msa": 200, "saudi": 200}
+    assert body["quality_counts"] == {"gold": 52, "silver": 348}
 
 
 def test_system_source_inventory_reports_reference_layers() -> None:
@@ -77,9 +77,9 @@ def test_system_phase12_readiness_is_read_only_and_permission_gated() -> None:
     assert body["required_permission_phrase"] == "ابدأ Phase 12"
     assert body["required_confirmation_flag"] == "--confirm-phase12-permission"
     assert body["corpus_status"] == "READY_FOR_PHASE_12_TOKENIZER_TRAINING"
-    assert body["corpus_training_ready"] == 380
+    assert body["corpus_training_ready"] == 400
     assert body["corpus_issue_count"] == 0
-    assert body["corpus_dialect_counts"] == {"msa": 200, "saudi": 180}
+    assert body["corpus_dialect_counts"] == {"msa": 200, "saudi": 200}
     assert body["required_dialects"] == ["msa", "saudi"]
     assert body["missing_required_dialects"] == []
     assert body["language_balance_status"] == "READY_MSA_AND_SAUDI"
@@ -99,7 +99,7 @@ def test_system_phase19_readiness_reports_training_gate() -> None:
     assert body["status"] == "NOT_READY_EXPAND_CORPUS_FIRST"
     assert body["can_start_training"] is False
     assert body["lab_experiment_allowed"] is True
-    assert body["training_records"] == 380
+    assert body["training_records"] == 400
     assert body["min_training_records"] == 5000
     assert body["target_model"] == "sf-50m"
     assert "corpus_too_small_for_sf50m" in body["blockers"]
