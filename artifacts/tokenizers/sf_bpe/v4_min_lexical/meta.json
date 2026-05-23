@@ -1,0 +1,204 @@
+{
+  "tokenizer_type": "bpe",
+  "sf_origin": true,
+  "vocab_size": 4708,
+  "merges": 4648,
+  "special_tokens": [
+    "<pad>",
+    "<bos>",
+    "<eos>",
+    "<unk>"
+  ],
+  "lowercase": false,
+  "byte_level": false,
+  "protected_terms": [
+    "وعليكم السلام",
+    "نفسًا هادئًا",
+    "نشتغل سوا",
+    "القراءة تفيد",
+    "تقدّر الناس",
+    "التعاون",
+    "الاحترام"
+  ],
+  "protected_joiner": "▁",
+  "training_stats": {
+    "words_seen": 194291,
+    "unique_words": 2716,
+    "merges_learned": 4648,
+    "base_alphabet_size": 53
+  },
+  "training_meta": {
+    "name": "sf_bpe_v4_min_lexical_phase27_24",
+    "created_at": "2026-05-23T17:17:38.486901+00:00",
+    "corpus_root": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl",
+    "source_files": [
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v2_flex_001.jsonl",
+        "blake2b_16": "66eeecc408cb493fa896b24d1b5f69ae"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v2_flex_002.jsonl",
+        "blake2b_16": "87b48f52ba1cd33c369ac97da7972f2f"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v2_flex_003.jsonl",
+        "blake2b_16": "fd607ffd3cbe78b84389d418440b4648"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v2_flex_004.jsonl",
+        "blake2b_16": "cae66941d9efbd404e4d88758ea67670"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl",
+        "blake2b_16": "34bb5132f76bacabcdc6dd1cf6773e09"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v2_msa_002.jsonl",
+        "blake2b_16": "cae66941d9efbd404e4d88758ea67670"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v2_msa_003.jsonl",
+        "blake2b_16": "cae66941d9efbd404e4d88758ea67670"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v2_msa_004.jsonl",
+        "blake2b_16": "b9705aba670d63d294d74abd72d7cb6e"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v2_msa_005.jsonl",
+        "blake2b_16": "cae66941d9efbd404e4d88758ea67670"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v2_msa_006.jsonl",
+        "blake2b_16": "68bd34d35406c4c61e38c2cf55625726"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v2_msa_007.jsonl",
+        "blake2b_16": "eef48c47748fff398c954a29679e2651"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v2_msa_008.jsonl",
+        "blake2b_16": "cae66941d9efbd404e4d88758ea67670"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v2_saudi_001.jsonl",
+        "blake2b_16": "8d09353d9560a824c9450e7188485fd6"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v2_saudi_002.jsonl",
+        "blake2b_16": "edbd0282d77e639594a3298809a2c6ac"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v2_saudi_003.jsonl",
+        "blake2b_16": "dd062227f6334a552a0295658581ccfa"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v2_saudi_004.jsonl",
+        "blake2b_16": "51a27acce442f7edad9d27af6ab64cb9"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v2_saudi_005.jsonl",
+        "blake2b_16": "cae66941d9efbd404e4d88758ea67670"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v2_saudi_006.jsonl",
+        "blake2b_16": "cae66941d9efbd404e4d88758ea67670"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v2_saudi_007.jsonl",
+        "blake2b_16": "cae66941d9efbd404e4d88758ea67670"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v3_msa_001.jsonl",
+        "blake2b_16": "cae66941d9efbd404e4d88758ea67670"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v3_msa_002.jsonl",
+        "blake2b_16": "88540ad500eeba1d8dcb6ac60361f261"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v3_msa_003.jsonl",
+        "blake2b_16": "7184641f749c65328c6a1e8cf7e2a6db"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v3_saudi_001.jsonl",
+        "blake2b_16": "d1ffb03c6bf04ca449436b5b7c26fe97"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v3_saudi_002.jsonl",
+        "blake2b_16": "db5c6897c6c7b08f476213355f386850"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v3_saudi_003.jsonl",
+        "blake2b_16": "168c6a44a84df5d74365d0b14d65956b"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v4_msa_004.jsonl",
+        "blake2b_16": "780710d1aa6e965a81afe22a6eb5e3a0"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v4_saudi_004.jsonl",
+        "blake2b_16": "aae4434b2dc6990ae788ff9fa687645d"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v5_msa_005.jsonl",
+        "blake2b_16": "a87e58915980fb37e2a5b2b03bfa86f6"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v5_saudi_005.jsonl",
+        "blake2b_16": "71bb3ba227f98420cac20bc906d5e25c"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v6_msa_006.jsonl",
+        "blake2b_16": "cd00b88e52be3eee12861afcdba28150"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v6_saudi_006.jsonl",
+        "blake2b_16": "c4400fb38919b427d952f2a6f318cec0"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v7_gold_social_msa_007.jsonl",
+        "blake2b_16": "a212315a13d947cca1aab77275fa35cd"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v7_gold_social_saudi_007.jsonl",
+        "blake2b_16": "9f724a55776b071edad8eac1be833fce"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v8_short_repair_msa_008.jsonl",
+        "blake2b_16": "2652f32e3971f97a17c3901751ab1e24"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v8_short_repair_saudi_008.jsonl",
+        "blake2b_16": "13175613420ebca0e9f1aa5fa126c203"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v9_social_lexical_msa_009.jsonl",
+        "blake2b_16": "38bc2999aa2959a882235f1b83f292e4"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v9_social_lexical_saudi_009.jsonl",
+        "blake2b_16": "ea540deac353dbe359d5f9677dd69bf9"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/first_dialogue_seed.jsonl",
+        "blake2b_16": "3de2105e95bafea55c98f63b8be59c2d"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/protected_terms_msa_seed_v1.jsonl",
+        "blake2b_16": "7cf8eccf9f68652ad74c5dc328110082"
+      },
+      {
+        "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/protected_terms_seed_v1.jsonl",
+        "blake2b_16": "47dcc5851352882874384646eeedbfba"
+      }
+    ],
+    "extra_texts_count": 0,
+    "stats": {
+      "words_seen": 194291,
+      "unique_words": 2716,
+      "merges_learned": 4648,
+      "base_alphabet_size": 53
+    }
+  }
+}

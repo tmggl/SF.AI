@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.23 / 30**
-- **المرحلة الحالية:** **Phase 27.23 — Semantic/Lexical Confusion Repair**
-- **حالة المرحلة الحالية:** **مكتملة جزئيًا؛ micro-probe تحسن إلى 30/32 لكن runtime بقي محجوبًا**
-- **المرحلة التالية المقترحة:** Phase 27.24 minimal lexical stabilization قبل أي runtime أو `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.24 / 30**
+- **المرحلة الحالية:** **Phase 27.24 — Minimal Lexical Stabilization**
+- **حالة المرحلة الحالية:** **مكتملة معمليًا؛ micro-probe وصل إلى 32/32 لكن runtime بقي محجوبًا**
+- **المرحلة التالية المقترحة:** Phase 27.25 held-out generation-quality canary قبل أي runtime أو `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -72,6 +72,7 @@
 | Phase 27.21 | Tokenizer v3 Protected-Phrase Micro-Probe | ✅ completed_micro_probe_failed_runtime_blocked | ✅ |
 | Phase 27.22 | Spacing/Boundary Loss Repair | ✅ completed_partial_repair_runtime_blocked | ✅ |
 | Phase 27.23 | Semantic/Lexical Confusion Repair | ✅ completed_partial_repair_runtime_blocked | ✅ |
+| Phase 27.24 | Minimal Lexical Stabilization | ✅ completed_micro_probe_passed_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -562,6 +563,15 @@
   - لا تفعيل runtime ولا تدريب `SF-50M`.
   - أضيف [PHASE27_23_SEMANTIC_LEXICAL_REPAIR_REPORT.md](./PHASE27_23_SEMANTIC_LEXICAL_REPAIR_REPORT.md).
   - أضيف `artifacts/reports/phase27_23_semantic_lexical_repair_report.json`.
+- بدأ وانتهى Phase 27.24 Minimal Lexical Stabilization:
+  - أضيف tokenizer محدود `artifacts/tokenizers/sf_bpe/v4_min_lexical`.
+  - protected terms الحالية: عبارات Phase 27.20 الخمس + `التعاون` + `الاحترام`.
+  - دُرّب micro-probe داخلي متوازن `5600` خطوة.
+  - النتيجة وصلت إلى `passed=32/32`, `exact_clean=32/32`, `semantic=32/32`, `guard_passed=32/32`.
+  - القرار: `PASSED_MINIMAL_LEXICAL_STABILIZATION_HOLD_RUNTIME_FOR_CANARY`.
+  - لا تفعيل runtime ولا تدريب `SF-50M` حتى Phase 27.25 held-out generation-quality canary.
+  - أضيف [PHASE27_24_MINIMAL_LEXICAL_STABILIZATION_REPORT.md](./PHASE27_24_MINIMAL_LEXICAL_STABILIZATION_REPORT.md).
+  - أضيف `artifacts/reports/phase27_24_minimal_lexical_stabilization_report.json`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -627,7 +637,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.23"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.24"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -658,7 +668,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-520 passed in 16.97s
+522 passed in 17.48s
 ```
 
 | ملف | عدد |

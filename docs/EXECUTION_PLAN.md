@@ -93,6 +93,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.21 | Tokenizer v3 Protected-Phrase Micro-Probe | مكتملة؛ tokenizer نجح وmicro-probe فشل 25/32 |
 | Phase 27.22 | Spacing/Boundary Loss Repair | مكتملة جزئيًا؛ micro-probe تحسن إلى 29/32 |
 | Phase 27.23 | Semantic/Lexical Confusion Repair | مكتملة جزئيًا؛ micro-probe تحسن إلى 30/32 |
+| Phase 27.24 | Minimal Lexical Stabilization | مكتملة؛ micro-probe وصل إلى 32/32 |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2364,6 +2365,55 @@ guard_passed = 31/32
 - [PHASE27_23_SEMANTIC_LEXICAL_REPAIR_REPORT.md](./PHASE27_23_SEMANTIC_LEXICAL_REPAIR_REPORT.md)
 - `artifacts/reports/phase27_23_semantic_lexical_repair_report.json`
 - `artifacts/samples/phase27_23_semantic_lexical_repair_generations.md`
+
+---
+
+## Phase 27.24 — Minimal Lexical Stabilization
+
+### الهدف
+
+تثبيت آخر كلمتين فصيحتين فشلتا في Phase 27.23:
+
+- `التعاون`
+- `الاحترام`
+
+دون توسعة corpus عام ودون تكبير النموذج.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.24 بقرار:
+
+```text
+PASSED_MINIMAL_LEXICAL_STABILIZATION_HOLD_RUNTIME_FOR_CANARY
+```
+
+ما تحقق:
+
+- أضيف `artifacts/tokenizers/sf_bpe/v4_min_lexical`.
+- الحماية اقتصرت على عبارات Phase 27.20 الخمس + `التعاون` + `الاحترام`.
+- دُرّب micro-probe داخلي متوازن.
+
+النتيجة:
+
+```text
+passed       = 32/32
+exact_clean  = 32/32
+semantic     = 32/32
+guard_passed = 32/32
+```
+
+### القرار
+
+- لا runtime بعد.
+- لا `SF-50M`.
+- التالي Phase 27.25: held-out generation-quality canary.
+
+### artifacts
+
+- [PHASE27_24_MINIMAL_LEXICAL_STABILIZATION_REPORT.md](./PHASE27_24_MINIMAL_LEXICAL_STABILIZATION_REPORT.md)
+- `artifacts/reports/phase27_24_minimal_lexical_stabilization_report.json`
+- `artifacts/samples/phase27_24_minimal_lexical_stabilization_generations.md`
+- `artifacts/tokenizers/sf_bpe/v4_min_lexical/`
 
 ---
 

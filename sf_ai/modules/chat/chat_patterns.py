@@ -84,9 +84,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.23 جزئيًا: تحسن micro-probe من 29/32 إلى 30/32، "
-    "لكن بقي خلل lexical في «التعاون» و«الاحترام». لذلك التالي Phase 27.24 "
-    "لـ minimal lexical stabilization قبل أي تفعيل.",
+    "اكتملت Phase 27.24: وصل micro-probe إلى 32/32 بعد تثبيت «التعاون» "
+    "و«الاحترام». لم أفتح المولد للواجهة بعد؛ التالي Phase 27.25 لاختبار "
+    "held-out generation-quality canary قبل أي تفعيل.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (
