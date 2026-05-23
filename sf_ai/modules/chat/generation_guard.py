@@ -36,6 +36,21 @@ _MODEL_ARTIFACT_FRAGMENTS = (
     "بالمو",
     "رتنا",
     "تًا",
+    # Observed in SF-10M v0.7 after short-response repair.
+    "الدعج",
+    "صعج",
+    "عجه",
+    "حياذكر",
+    "بععجه",
+    "آالطف",
+    "الموقت",
+    "تقللا",
+    "وازعج",
+    "لللم",
+    "خياهر",
+    "موعد عج",
+    "تزعريف",
+    "الزعج",
 )
 _BROKEN_PREFIX_RE = re.compile(r"^\s*[\u0600-\u06FF]\s*[؟?]")
 _REPEATED_ARABIC_BIGRAM_RE = re.compile(r"([\u0600-\u06FF]{2})\1")

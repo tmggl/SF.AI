@@ -16,18 +16,18 @@
   },
   "corpus": {
     "root": "data/corpus/chat/jsonl",
-    "total_records": 5243,
-    "training_ready": 5243,
+    "total_records": 5543,
+    "training_ready": 5543,
     "issues": 0,
     "dialects": {
-      "saudi": 2644,
-      "msa": 2599
+      "saudi": 2794,
+      "msa": 2749
     },
     "quality": {
       "silver": 5112,
-      "gold": 131
+      "gold": 431
     },
-    "source_count": 4
+    "source_count": 6
   },
   "tokenization_policy": {
     "protected_terms_total": 30,

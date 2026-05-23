@@ -28,30 +28,13 @@ def test_ui_chat_serves_html() -> None:
     assert "المحادثة جاهزة" in body
     assert "قالب ثابت - ليس مولدًا" in body
     assert "Canary SF-10M v0.2" in body
-    assert "بوابة Phase 22" in body
-    assert "/system/phase22-readiness" in body
-    assert "/system/phase22-collection-plan?batch_size=25" in body
-    assert "مهمة الجمع الحالية" in body
-    assert "/system/phase22-next-batch" in body
-    assert "phase22_next_batch" in body
-    assert "موضوعات أخرى" in body
-    assert "authoring_topic_count" in body
-    assert "هذه موضوعات مساعدة وليست بيانات تدريب" in body
-    assert "غير جاهز للتوكنزر بعد" in body
-    assert "جودة التصدير" in body
-    assert "quality-score" in body
-    assert "ui_quality_score" in body
-    assert "ui_quality_label" in body
     assert "ذاكرة:" in body
-    assert "تصدير" in body
-    assert "حفظ للمراجعة" in body
-    assert "/chat/review-export" in body
+    assert "تصدير" not in body
+    assert "حفظ للمراجعة" not in body
+    assert "/chat/review-export" not in body
+    assert "جودة التصدير" not in body
+    assert "بوابة Phase 22" not in body
     assert "user-badge" in body
-    assert "owner_user_id" in body
-    assert "target_user_id" in body
-    assert "user_scope" in body
-    assert "training_allowed: false" in body or "training_allowed\": false" in body
-    assert "sfai_chat_review_" in body
 
 
 def test_get_chat_redirects_to_ui() -> None:
@@ -237,7 +220,7 @@ def test_system_status_reports_current_phase_with_chat_ui() -> None:
     r = client.get("/system/status")
     assert r.status_code == 200
     body = r.json()
-    assert "Phase 27.9" in body["current_phase"]
+    assert "Phase 27.10" in body["current_phase"]
     assert any(c["name"] == "chat_ui" and c["status"] == "active"
                for c in body["components"])
     assert any(c["name"] == "native_generator" and c["status"] == "ready_offline"
@@ -248,9 +231,9 @@ def test_system_status_reports_current_phase_with_chat_ui() -> None:
                for c in body["components"])
     assert any(c["name"] == "dialogue_batch_preparation" and c["status"] == "active"
                for c in body["components"])
-    assert any(c["name"] == "chat_review_export" and c["status"] == "active"
+    assert any(c["name"] == "chat_review_export" and c["status"] == "internal_only"
                for c in body["components"])
-    assert any(c["name"] == "chat_review_local_save" and c["status"] == "active"
+    assert any(c["name"] == "chat_review_local_save" and c["status"] == "internal_only"
                for c in body["components"])
     assert any(c["name"] == "phase19_readiness" and c["status"] == "active"
                for c in body["components"])

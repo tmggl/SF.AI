@@ -39,6 +39,14 @@ def test_phase27_8_generation_guard_blocks_v06_fragment() -> None:
     assert verdict.reason == "model_artifact_fragment"
 
 
+def test_phase27_10_generation_guard_blocks_v07_fragment() -> None:
+    verdict = GenerationGuard().inspect(
+        "ابدأ بهالفكرة: اطلب الوضوح وحياذكر السبب بععجه بوضوح."
+    )
+    assert verdict.allowed is False
+    assert verdict.reason == "model_artifact_fragment"
+
+
 def test_phase25_generation_guard_blocks_repetition() -> None:
     verdict = GenerationGuard().inspect(
         "تمام تمام تمام تمام تمام تمام تمام تمام تمام"

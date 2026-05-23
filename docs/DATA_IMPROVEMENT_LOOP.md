@@ -18,9 +18,10 @@
 > المحادثة لا تدخل التدريب إلا إذا امتلكت provenance كاملًا ومرت بفحص
 > governance مع `training_allowed=true`.
 
-تحديث Phase 22: سامي فوّض الوكيل أن يؤلف ويراجع ويعتمد دفعات corpus
-مباشرة. لذلك لم يعد حفظ/تصدير سامي اليدوي شرطًا للتقدم؛ مسار review من
-الواجهة يبقى اختياريًا للتشخيص فقط.
+تحديث Phase 27.10: سامي فوّض الوكيل أن يؤلف ويراجع ويعتمد دفعات corpus
+مباشرة. لذلك لم يعد حفظ/تصدير سامي اليدوي شرطًا للتقدم، وأُزيلت أزرار
+الحفظ/التصدير من `/ui/chat`. أي مسار review export باقٍ كأداة داخلية
+للوكيل فقط.
 
 ---
 
@@ -33,9 +34,8 @@ agent-authored governed batch
   → make corpus-audit
   → training لاحقًا
 
-optional UI review path
-  → /ui/chat
-  → زر "حفظ للمراجعة" أو "تصدير"
+internal review path
+  → agent-only review payload
   → data/corpus/chat/review/*.jsonl
   → scripts/prepare_dialogue_batch.py
   → data/corpus/chat/jsonl/*.jsonl
@@ -46,9 +46,10 @@ optional UI review path
 
 ## واجهة الشات
 
-زر `تصدير` في `/ui/chat` ينشئ ملف JSONL محلي يحتوي المحادثة الحالية.
+لا تعرض `/ui/chat` زر تصدير أو حفظ للمراجعة. الواجهة مخصصة لاختبار الحوار
+والتشخيص فقط، حتى لا يختلط اختبار سامي اليدوي بمسارات corpus.
 
-التصدير يضع:
+أي review payload داخلي يجب أن يضع:
 
 ```json
 "training_allowed": false

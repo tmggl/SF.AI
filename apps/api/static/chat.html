@@ -247,8 +247,6 @@
       <span class="badge" id="session-badge">جلسة: —</span>
       <span class="badge" id="user-badge">مستخدم: —</span>
       <span class="badge" id="sov-badge">سيادي ✓</span>
-      <button class="icon-btn" id="export-btn" title="تصدير المحادثة للمراجعة">تصدير</button>
-      <button class="icon-btn" id="save-review-btn" title="حفظ المحادثة داخل data/corpus/chat/review">حفظ للمراجعة</button>
       <button class="icon-btn" id="clear-btn" title="مسح المحادثة">مسح</button>
     </div>
   </header>
@@ -275,40 +273,6 @@
       <div class="divider"></div>
       <h2>الإشارات</h2>
       <div class="signals" id="signals"></div>
-      <div class="divider"></div>
-      <h2>بوابة Phase 22</h2>
-      <div class="quality-box bad" id="phase22-box">
-        <div class="quality-score">
-          <span id="phase22-label">جاري فحص corpus…</span>
-          <code id="phase22-score">—</code>
-        </div>
-        <div class="quality-meter"><div class="quality-fill" id="phase22-fill"></div></div>
-        <div class="quality-details" id="phase22-details">أفحص عدد السجلات وتوازن الفصحى/السعودي.</div>
-      </div>
-      <div class="divider"></div>
-      <h2>مهمة الجمع الحالية</h2>
-      <div class="quality-box mid" id="next-batch-box">
-        <div class="quality-score">
-          <span id="next-batch-label">جاري جلب المهمة…</span>
-          <code id="next-batch-target">—</code>
-        </div>
-        <div class="quality-details" id="next-batch-details">تعرض المهمة التالية من Phase 22.</div>
-        <ul class="brief-list" id="next-batch-topics"></ul>
-        <div class="brief-actions">
-          <button id="next-topic-btn" type="button">موضوعات أخرى</button>
-          <span class="brief-count" id="next-topic-count">—</span>
-        </div>
-      </div>
-      <div class="divider"></div>
-      <h2>جودة التصدير</h2>
-      <div class="quality-box bad" id="quality-box">
-        <div class="quality-score">
-          <span id="quality-label">غير جاهز للتدريب</span>
-          <code id="quality-score">0/100</code>
-        </div>
-        <div class="quality-meter"><div class="quality-fill" id="quality-fill"></div></div>
-        <div class="quality-details" id="quality-details">احتاج 3 أدوار منك و3 ردود من المساعد على الأقل.</div>
-      </div>
       <div class="divider"></div>
       <h2>تصحيحات إملائية / لهجية</h2>
       <div id="corrections" style="font-size:12px; color: var(--muted);">—</div>
@@ -362,135 +326,12 @@
   const correctionsEl = document.getElementById("corrections");
   const safetyEl = document.getElementById("safety-flags");
   const phaseEl = document.getElementById("phase-line");
-  const qualityBox = document.getElementById("quality-box");
-  const qualityLabelEl = document.getElementById("quality-label");
-  const qualityScoreEl = document.getElementById("quality-score");
-  const qualityFillEl = document.getElementById("quality-fill");
-  const qualityDetailsEl = document.getElementById("quality-details");
-  const phase22Box = document.getElementById("phase22-box");
-  const phase22LabelEl = document.getElementById("phase22-label");
-  const phase22ScoreEl = document.getElementById("phase22-score");
-  const phase22FillEl = document.getElementById("phase22-fill");
-  const phase22DetailsEl = document.getElementById("phase22-details");
-  const nextBatchBox = document.getElementById("next-batch-box");
-  const nextBatchLabelEl = document.getElementById("next-batch-label");
-  const nextBatchTargetEl = document.getElementById("next-batch-target");
-  const nextBatchDetailsEl = document.getElementById("next-batch-details");
-  const nextBatchTopicsEl = document.getElementById("next-batch-topics");
-  const nextTopicBtn = document.getElementById("next-topic-btn");
-  const nextTopicCountEl = document.getElementById("next-topic-count");
-  let currentNextBatch = null;
-  let currentSuggestedTopics = [];
-  let topicPage = 0;
 
   // Fetch phase info.
   fetch("/system/status").then(r => r.json()).then(data => {
     phaseEl.textContent = data.current_phase + " — " + data.env;
   }).catch(() => {
     phaseEl.textContent = "تعذر جلب /system/status";
-  });
-
-  function updatePhase22Gate() {
-    fetch("/system/phase22-readiness").then(r => r.json()).then(data => {
-      const target = Number(data.target_records || 0);
-      const records = Number(data.training_records || 0);
-      const pct = target ? Math.max(0, Math.min(100, Math.round((records / target) * 100))) : 0;
-      const missing = (data.missing_required_dialects || []).join("، ") || "لا يوجد";
-      const shortfalls = data.dialect_shortfalls || {};
-      const shortfallText = Object.keys(shortfalls).length
-        ? Object.entries(shortfalls).map(([k, v]) => k + ": " + v).join("، ")
-        : "مكتمل";
-      phase22Box.classList.remove("good", "mid", "bad");
-      phase22Box.classList.add(data.can_start_phase23 ? "good" : (pct >= 50 ? "mid" : "bad"));
-      phase22LabelEl.textContent = data.can_start_phase23 ? "Corpus v2 مكتمل" : "غير جاهز للتوكنزر بعد";
-      phase22ScoreEl.textContent = records + "/" + target;
-      phase22FillEl.style.width = pct + "%";
-      phase22DetailsEl.textContent =
-        "المتبقي: " + data.remaining_records +
-        " · الناقص لهجيًا: " + shortfallText +
-        " · اللهجات المفقودة: " + missing +
-        " · تدريب synthetic LLM: ممنوع";
-      fetch("/system/phase22-collection-plan?batch_size=25").then(r => r.json()).then(plan => {
-        const next = (plan.planned_batches || [])[0];
-        if (next) {
-          phase22DetailsEl.textContent +=
-            " · المهمة التالية: " + next.batch_id +
-            " (" + next.dialect + "، " + next.target_records + " سجل)";
-        }
-      }).catch(() => {});
-    }).catch(() => {
-      phase22LabelEl.textContent = "تعذر فحص Phase 22";
-      phase22ScoreEl.textContent = "—";
-      phase22FillEl.style.width = "0%";
-      phase22DetailsEl.textContent = "تأكد من تشغيل السيرفر ثم حدّث الصفحة.";
-    });
-  }
-
-  updatePhase22Gate();
-
-  function updateNextBatchBrief() {
-    fetch("/system/phase22-next-batch").then(r => r.json()).then(brief => {
-      const batch = brief.next_batch;
-      currentNextBatch = batch || null;
-      nextBatchBox.classList.remove("good", "mid", "bad");
-      if (!batch) {
-        nextBatchBox.classList.add("good");
-        nextBatchLabelEl.textContent = "لا توجد batch حالية";
-        nextBatchTargetEl.textContent = "—";
-        nextBatchDetailsEl.textContent = brief.why_this_batch || "أعد فحص readiness.";
-        setSuggestedTopics([]);
-        return;
-      }
-      nextBatchBox.classList.add("mid");
-      nextBatchLabelEl.textContent = batch.batch_id + " · " + batch.dialect;
-      nextBatchTargetEl.textContent = batch.target_records + " سجل";
-      nextBatchDetailsEl.textContent =
-        "اكتب حواراتك أنت فقط. هذه موضوعات مساعدة وليست بيانات تدريب.";
-      setSuggestedTopics(brief.suggested_topics || []);
-    }).catch(() => {
-      currentNextBatch = null;
-      setSuggestedTopics([]);
-      nextBatchBox.classList.remove("good", "mid", "bad");
-      nextBatchBox.classList.add("bad");
-      nextBatchLabelEl.textContent = "تعذر جلب المهمة";
-      nextBatchTargetEl.textContent = "—";
-      nextBatchDetailsEl.textContent = "تأكد من تشغيل السيرفر ثم حدّث الصفحة.";
-    });
-  }
-
-  updateNextBatchBrief();
-
-  function setSuggestedTopics(topics) {
-    currentSuggestedTopics = topics.filter((topic) => (topic || "").trim());
-    topicPage = 0;
-    renderSuggestedTopics();
-  }
-
-  function renderSuggestedTopics() {
-    nextBatchTopicsEl.innerHTML = "";
-    const pageSize = 3;
-    const total = currentSuggestedTopics.length;
-    if (!total) {
-      nextTopicCountEl.textContent = "—";
-      nextTopicBtn.disabled = true;
-      return;
-    }
-    const pages = Math.ceil(total / pageSize);
-    const start = (topicPage % pages) * pageSize;
-    currentSuggestedTopics.slice(start, start + pageSize).forEach((topic) => {
-      const item = document.createElement("li");
-      item.textContent = topic;
-      nextBatchTopicsEl.appendChild(item);
-    });
-    nextTopicBtn.disabled = total <= pageSize;
-    nextTopicCountEl.textContent =
-      "يعرض " + (start + 1) + "-" + Math.min(start + pageSize, total) + " من " + total;
-  }
-
-  nextTopicBtn.addEventListener("click", () => {
-    if (!currentSuggestedTopics.length) return;
-    topicPage += 1;
-    renderSuggestedTopics();
   });
 
   function el(tag, opts = {}) {
@@ -539,7 +380,6 @@
 
   function saveTranscript() {
     localStorage.setItem(TRANSCRIPT_KEY, JSON.stringify(transcript.slice(-80)));
-    updateExportQuality();
   }
 
   function recordTurn(role, content, extra = {}) {
@@ -550,73 +390,6 @@
       ...extra
     });
     saveTranscript();
-  }
-
-  function exportQuality() {
-    const users = transcript.filter((t) => t.role === "user" && (t.content || "").trim());
-    const assistants = transcript.filter((t) => t.role === "assistant" && (t.content || "").trim());
-    const raw = assistants.filter((t) =>
-      t.generator === "sf_10m_v0_1" || t.generator === "sf_10m_v0_2"
-    );
-    const sensitive = assistants.filter((t) => t.requires_safety);
-    if (users.length === 0 && assistants.length === 0) {
-      return {
-        score: 0,
-        label: "غير جاهز للتدريب",
-        blockers: ["ابدأ محادثة من 3 أدوار على الأقل"],
-        users: 0,
-        assistants: 0,
-        raw: 0
-      };
-    }
-    let score = 100;
-    const blockers = [];
-    if (users.length < 3) {
-      score -= 20;
-      blockers.push("أضف " + (3 - users.length) + " دور/أدوار منك");
-    }
-    if (assistants.length < 3) {
-      score -= 20;
-      blockers.push("أضف " + (3 - assistants.length) + " رد/ردود من المساعد");
-    }
-    if (raw.length > 0) {
-      score -= 60;
-      blockers.push("فيها ردود من SF-10M الخام");
-    }
-    if (sensitive.length > 0) {
-      score -= 35;
-      blockers.push("فيها محتوى حساس يحتاج استبعاد");
-    }
-    const userChars = users.reduce((n, t) => n + (t.content || "").trim().length, 0);
-    const assistantChars = assistants.reduce((n, t) => n + (t.content || "").trim().length, 0);
-    if (users.length && userChars / users.length < 12) {
-      score -= 8;
-      blockers.push("أسئلتك قصيرة جدًا");
-    }
-    if (assistants.length && assistantChars / assistants.length < 35) {
-      score -= 12;
-      blockers.push("ردود المساعد قصيرة جدًا");
-    }
-    score = Math.max(0, Math.min(100, score));
-    let label = "غير جاهز للتدريب";
-    if (score >= 85 && blockers.length === 0) label = "مرشح قوي للمراجعة";
-    else if (score >= 70) label = "مرشح متوسط بعد مراجعة";
-    else if (score >= 45) label = "يحتاج أدوار أكثر";
-    return { score, label, blockers, users: users.length, assistants: assistants.length, raw: raw.length };
-  }
-
-  function updateExportQuality() {
-    const q = exportQuality();
-    qualityBox.classList.remove("good", "mid", "bad");
-    qualityBox.classList.add(q.score >= 85 ? "good" : (q.score >= 45 ? "mid" : "bad"));
-    qualityLabelEl.textContent = q.label;
-    qualityScoreEl.textContent = q.score + "/100";
-    qualityFillEl.style.width = q.score + "%";
-    const parts = ["أدوارك: " + q.users, "ردود المساعد: " + q.assistants];
-    if (q.raw) parts.push("ردود خام: " + q.raw);
-    if (q.blockers.length) parts.push("النواقص: " + q.blockers.join("، "));
-    else parts.push("مناسب للمراجعة قبل التحويل إلى corpus");
-    qualityDetailsEl.textContent = parts.join(" · ");
   }
 
   function escapeText(t) { return (t || "").toString(); }
@@ -749,7 +522,6 @@
     signalsEl.innerHTML = "";
     correctionsEl.textContent = "—";
     safetyEl.textContent = "—";
-    updateExportQuality();
     // Rotate to a fresh session so the server's short-term memory starts over.
     const newId = "sf-" + Math.random().toString(36).slice(2, 10);
     localStorage.removeItem(TRANSCRIPT_KEY);
@@ -761,129 +533,6 @@
   document.getElementById("clear-btn").addEventListener("click", () => {
     if (confirm("هل تريد مسح المحادثة وبدء جلسة جديدة؟")) clearChat();
   });
-
-  function buildReviewRecord() {
-    const rawGeneratorTurns = transcript.filter(
-      (t) => t.role === "assistant" &&
-        (t.generator === "sf_10m_v0_1" || t.generator === "sf_10m_v0_2")
-    );
-    const clean = transcript
-      .filter((t) => (t.role === "user" || t.role === "assistant") && (t.content || "").trim())
-      .map((t) => {
-        const msg = { role: t.role, content: t.content.trim() };
-        if (t.role === "assistant") {
-          msg.generator = t.generator || "template";
-          msg.intent = t.intent || "";
-          msg.domain = t.domain || "";
-        }
-        return msg;
-      });
-    const hasUser = clean.some((m) => m.role === "user");
-    const hasAssistant = clean.some((m) => m.role === "assistant");
-    if (!hasUser || !hasAssistant) {
-      alert("احتاج رسالة منك ورد من المساعد قبل التصدير.");
-      return null;
-    }
-    const quality = exportQuality();
-    if (quality.score < 70) {
-      const ok = confirm(
-        "جودة التصدير الحالية " + quality.score + "/100 (" + quality.label + "). " +
-        "الأفضل تكمل 3 أدوار منك و3 ردود من المساعد قبل التصدير. هل تريد التصدير الآن للمراجعة فقط؟"
-      );
-      if (!ok) return null;
-    }
-    if (rawGeneratorTurns.length > 0) {
-      const ok = confirm(
-        "هذه الجلسة تحتوي ردودًا من نموذج SF-10M الخام (" +
-        rawGeneratorTurns.length +
-        "). صدّرها للمراجعة فقط، ولا تستخدمها كبيانات تدريب جودة. هل تريد المتابعة؟"
-      );
-      if (!ok) return null;
-    }
-    return {
-      domain: "chat",
-      lang: "ar",
-      messages: clean,
-      review_metadata: {
-        exported_from: "ui",
-        session_id: SESSION_ID,
-        owner_user_id: USER_ID,
-        exported_by_user_id: USER_ID,
-        target_user_id: USER_ID,
-        user_scope: "single_user",
-        phase22_next_batch: currentNextBatch ? {
-          batch_id: currentNextBatch.batch_id,
-          dialect: currentNextBatch.dialect,
-          target_records: currentNextBatch.target_records,
-          suggested_output_path: currentNextBatch.suggested_output_path,
-          authoring_topic_count: currentSuggestedTopics.length
-        } : null,
-        ui_quality_score: quality.score,
-        ui_quality_label: quality.label,
-        ui_quality_blockers: quality.blockers,
-        assistant_generator_counts: {
-          template: transcript.filter((t) => t.role === "assistant" && (t.generator || "template") === "template").length,
-          sf_10m_v0_1: transcript.filter((t) => t.role === "assistant" && t.generator === "sf_10m_v0_1").length,
-          sf_10m_v0_2: transcript.filter((t) => t.role === "assistant" && t.generator === "sf_10m_v0_2").length
-        },
-        contains_raw_generator_output: rawGeneratorTurns.length > 0
-      },
-      provenance: {
-        source: "sf-ai-chat-ui-review-export",
-        license: "user-review-required",
-        language: "ar",
-        dialect: "saudi",
-        quality: "needs_review",
-        training_allowed: false,
-        owner_user_id: USER_ID,
-        created_by_user_id: USER_ID,
-        target_user_id: USER_ID,
-        user_scope: "single_user",
-        notes: rawGeneratorTurns.length > 0
-          ? "Exported locally from UI; contains raw SF-10M generator output for review only, not quality training."
-          : "Exported locally from UI. Review with scripts/prepare_dialogue_batch.py before training."
-      }
-    };
-  }
-
-  function exportForReview() {
-    const record = buildReviewRecord();
-    if (!record) return;
-    const blob = new Blob([JSON.stringify(record) + "\n"], { type: "application/jsonl;charset=utf-8" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "sfai_chat_review_" + SESSION_ID + ".jsonl";
-    document.body.appendChild(a);
-    a.click();
-    URL.revokeObjectURL(a.href);
-    a.remove();
-  }
-
-  async function saveReviewToServer() {
-    const record = buildReviewRecord();
-    if (!record) return;
-    const btn = document.getElementById("save-review-btn");
-    btn.disabled = true;
-    try {
-      const r = await fetch("/chat/review-export", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ session_id: SESSION_ID, user_id: USER_ID, record })
-      });
-      const body = await r.json();
-      if (!r.ok) {
-        alert("تعذر الحفظ للمراجعة: " + (body.detail || ("HTTP " + r.status)));
-        return;
-      }
-      alert("حُفظت الجلسة للمراجعة فقط:\n" + body.path);
-    } catch (e) {
-      alert("تعذر الاتصال بالخادم أثناء الحفظ: " + e.message);
-    } finally {
-      btn.disabled = false;
-    }
-  }
-  document.getElementById("export-btn").addEventListener("click", exportForReview);
-  document.getElementById("save-review-btn").addEventListener("click", saveReviewToServer);
 
   sendBtn.addEventListener("click", send);
   inputEl.addEventListener("keydown", (e) => {
@@ -898,7 +547,6 @@
     inputEl.style.height = Math.min(200, inputEl.scrollHeight) + "px";
   });
 
-  updateExportQuality();
   inputEl.focus();
 })();
 </script>

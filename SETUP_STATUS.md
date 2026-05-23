@@ -10,10 +10,10 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.9 / 30**
-- **المرحلة الحالية:** **Phase 27.9 — Generation Quality Harness** (اكتملت وتحجب v0.6 آليًا؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **الرحلة الحالية:** **Phase 27.10 / 30**
+- **المرحلة الحالية:** **Phase 27.10 — Short Response Repair** (اكتملت بتحسن رقمي دون جاهزية توليد؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** إصلاح fragments في توليد `SF-10M`; Phase 28 محظورة حتى ينجح `SF-50M`.
+- **المرحلة التالية المقترحة:** فحص objective/batching/decoding بعمق؛ Phase 28 محظورة حتى ينجح `SF-50M`.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
@@ -51,6 +51,8 @@
 - **تقرير Phase 27.8:** `docs/PHASE27_8_SF10M_V0_6_SPLIT_TRAINING_REPORT.md`, `artifacts/reports/sf_10m_v0_6_split_training_report.json`, `artifacts/samples/sf_10m_v0_6_generations.md`.
 - **نتيجة Phase 27.9:** أضيف `make phase27-generation-quality` وprompt suite `eval/prompts/generation_quality_v1.json`. نتيجة v0.6: `0/10` prompts passed، و`runtime_allowed=false` بسبب `model_artifact_fragment`.
 - **تقرير Phase 27.9:** `docs/PHASE27_9_GENERATION_QUALITY_HARNESS_REPORT.md`, `eval/reports/generation_quality_v1.json`, `artifacts/reports/generation_quality_v1_report.json`.
+- **نتيجة Phase 27.10:** أضيفت دفعة short-response repair بعدد `300` سجل gold (`150` فصيح + `150` سعودي)، وأصبح corpus `5543` (`msa=2749`, `saudi=2794`, `gold=431`). دُرّب `SF-10M v0.7`: أفضل eval `loss=4.7512`, `perplexity=115.72`، لكن generation-quality بقي `0/10` بعد تشديد الحارس.
+- **تقرير Phase 27.10:** `docs/PHASE27_10_SHORT_RESPONSE_REPAIR_REPORT.md`, `artifacts/reports/sf_10m_v0_7_short_repair_report.json`, `artifacts/samples/sf_10m_v0_7_generations.md`.
 - **مقارنة tokenizer v1/v2:** v1 كان `vocab=261`, `merges=218`, `words_seen=723`, سعودي فقط. v2 تدرب على `500` سجل متوازن: `msa=250`, `saudi=250`.
 - **تحسن protected Saudi terms:** `average_tokens` انخفض من `4.0` في v1 إلى `2.3` في v2، ولا توجد `roundtrip_failures` أو `aggressive_split_terms`.
 - **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches=[]` لأن الجمع اكتمل.
@@ -64,10 +66,9 @@
 - **Review intake الحالي:** `data/corpus/chat/review/sample_review_export.jsonl` مرشح للمراجعة فقط؛ الأداة read-only ولا تنقل أي شيء إلى التدريب.
 - **بوابة جودة الحوار:** `phase22-review-intake` يعرض الآن `quality_score/quality_label/quality_blockers`; الجلسة المفيدة للتدريب تحتاج غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل وبدون ردود raw من `sf_10m_v0_1/sf_10m_v0_2`.
 - **بوابة Phase 22 في الواجهة:** شاشة `/ui/chat` تعرض قراءة حية من `/system/phase22-readiness`: عدد corpus الحالي، المتبقي، حالة `msa/saudi`، وأن corpus v2 مكتمل من جهة البيانات.
-- **مهمة الجمع الحالية في الواجهة:** شاشة `/ui/chat` تقرأ `/system/phase22-next-batch`؛ بعد اكتمال `flex_004` لا توجد دفعات Phase 22 متبقية. الواجهة مختبر اختياري؛ لا يعتمد بناء Phase 22 على حفظ/تصدير يدوي من سامي.
-- **تدوير موضوعات التأليف:** الواجهة تعرض زر `موضوعات أخرى` للتنقل داخل بنك الـ 94 موضوعًا الفصيح، وتضيف `authoring_topic_count` إلى metadata التصدير.
-- **حفظ محلي للمراجعة:** أضيف `POST /chat/review-export` وزر `حفظ للمراجعة` في `/ui/chat` لحفظ الجلسة مباشرة في `data/corpus/chat/review/` مع `training_allowed=false` و`quality=needs_review`; هذا اختياري للتشخيص فقط، والوكيل مسؤول عن بناء الدفعات المعتمدة مباشرة عند الحاجة.
-- **مؤشر جودة التصدير في الواجهة:** شاشة `/ui/chat` تعرض score جودة محلي قبل التصدير وتضع `ui_quality_score/ui_quality_label/ui_quality_blockers` داخل metadata.
+- **مهمة الجمع الحالية:** endpoints Phase 22 بقيت داخلية للوكيل، لكن شاشة `/ui/chat` لم تعد تعرض جمع/تصدير/حفظ يدوي. الواجهة الآن لاختبار الحوار فقط.
+- **حفظ المراجعة الداخلي:** `POST /chat/review-export` باقٍ كمسار داخلي محكوم عند الحاجة، وليس زرًا ظاهرًا للمستخدم في `/ui/chat`.
+- **اعتماد البيانات:** الوكيل يؤلف/يراجع/يعتمد دفعات corpus مباشرة عند وضوح الجودة؛ لا يُطلب من سامي حفظ أو تصدير يدوي.
 - **تصحيح تشغيل المولّد:** الواجهة المستقرة عادت إلى `generator=template` افتراضيًا؛ هذا يعني قوالب ثابتة لا توليدًا ذكيًا. `SF-10M` الخام لا يدخل ردود الشات إلا بفلاغات مختبر صريحة.
 - **مختبر سامي المحلي:** يمكن تشغيل المولّد الخام عبر `SF_ENABLE_NATIVE_GENERATOR=true` و`SF_NATIVE_GENERATOR_EXPERIMENTAL=true`، وتمكين الرسائل غير الحساسة من مجالات skeleton عبر `SF_LAB_GENERATION_FOR_NON_SENSITIVE=true` عند الاختبار فقط.
 - **حماية التصدير:** إذا صدّرت جلسة تحتوي ردودًا من `sf_10m_v0_1/sf_10m_v0_2`، تضع الواجهة metadata واضحًا، و`phase22-review-intake` لا يعدّها candidate تدريب جودة.
@@ -92,7 +93,7 @@
 - **فحص Phase 23 tokenizer:** `make phase23-tokenizer-audit`، وهو يكتب/يحدّث ملفات `tokenizer_config.json`, `provenance.json`, `audit_report.json` داخل `artifacts/tokenizers/sf_bpe/v2/`.
 - **تقرير Phase 12:** `docs/PHASE12_TOKENIZER_V1_REPORT.md`، وحالته: `COMPLETED_WITH_LIMITS`.
 - **تحسين اللغة الأخير:** التركيز الافتراضي الآن على العربية الفصحى + اللهجة السعودية فقط، مع إيقاف اللهجات الأخرى افتراضيًا.
-- **تحسين المحادثة الأخير:** واجهة فاتحة أوضح للشات، خطوط أكبر، أزرار أوضح، لوحة تشخيص مقروءة، تسمية عربية لـ `generator/rag/dispatch`، وزر `تصدير` لمراجعة المحادثة.
+- **تحسين المحادثة الأخير:** واجهة فاتحة أوضح للشات، خطوط أكبر، أزرار أوضح، لوحة تشخيص مقروءة، وتسمية عربية لـ `generator/rag/dispatch` بدون أزرار حفظ/تصدير يدوية.
 - **خلفية:** بعد Phase 7 أضاف المستخدم قاموس سعودي تأليفي (Phase 3.6)، ثم أُكملت Phase 8 (RAG)، Phase 9 (الشاشة)، Phase 10 (هياكل المجالات).
 - **آخر تحديث:** 2026-05-23
 
@@ -272,7 +273,7 @@ make server-start
 
 آخر تحقق حي بعد restart:
 - السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`، PID `7733`.
-- الكود الحالي بعد Phase 27.9 يعرض `Phase 27.9` في `/system/status` و`/health`، ويعرض `GET /system/phase27-dialogue-eval` تقييم الحوار وخطة corpus.
+- الكود الحالي بعد Phase 27.10 يعرض `Phase 27.10` في `/system/status` و`/health`، ويعرض `GET /system/phase27-dialogue-eval` تقييم الحوار وخطة corpus.
 - `GET /system/phase26-readiness` يرجع `can_start_sf50m_training=false`.
 - `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - `make server-status` read-only ولا يوقف السيرفر.
@@ -281,10 +282,10 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى إكمال Phase 27.9)
+## نتائج الاختبارات (حتى إكمال Phase 27.10)
 
 ```
-481 passed in 16.47s
+482 passed in 25.53s
 ```
 
 التغطية الحالية:

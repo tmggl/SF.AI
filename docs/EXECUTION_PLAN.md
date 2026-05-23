@@ -79,6 +79,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.7 | Fixed Split + Gold Social Canary | مكتملة؛ split ثابت + canary أقوى، runtime محظور |
 | Phase 27.8 | SF-10M v0.6 Split Training | مكتملة بتحسن رقمي؛ runtime محظور |
 | Phase 27.9 | Generation Quality Harness | مكتملة؛ harness يحجب v0.6 آليًا |
+| Phase 27.10 | Short Response Repair | مكتملة بتحسن رقمي؛ التوليد ما زال محظورًا |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -1589,6 +1590,50 @@ primary reason  = model_artifact_fragment
 ### بعد المرحلة
 أصلح fragments قبل أي تكبير: فحص tokenizer/decoding، ثم تدريب إصلاحي صغير
 على gold social أو short-response corpus، ثم إعادة Phase 27.9.
+
+---
+
+## Phase 27.10 — Short Response Repair
+
+### الهدف
+اختبار ما إذا كانت دفعة gold قصيرة ومركزة تقلل fragments في `SF-10M` بدون
+القفز إلى حجم أكبر.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.10 بقرار:
+
+```text
+COMPLETED_NUMERIC_IMPROVEMENT_GENERATION_STILL_BLOCKED
+```
+
+ما تحقق:
+
+- أضيفت `300` عينة gold قصيرة (`150` فصحى + `150` سعودي).
+- أصبح corpus `5543` سجلًا، والـ gold `431`.
+- دُرّب `SF-10M v0.7` على split الجديد.
+- تم توسيع `GenerationGuard` للـ fragments التي ظهرت بعد v0.7.
+
+نتيجة `SF-10M v0.7`:
+
+```text
+train = 4973
+eval  = 570
+loss  = 8.4840 → 3.1259
+best eval = step4000 loss 4.7512, perplexity 115.72
+generation_quality = 0/10
+runtime_allowed = false
+```
+
+### artifacts
+
+- [PHASE27_10_SHORT_RESPONSE_REPAIR_REPORT.md](./PHASE27_10_SHORT_RESPONSE_REPAIR_REPORT.md)
+- `artifacts/reports/sf_10m_v0_7_short_repair_report.json`
+- `artifacts/samples/sf_10m_v0_7_generations.md`
+
+### بعد المرحلة
+لا تكبير. افحص objective/batching/decoding؛ جرّب training comparison على gold-only
+كمعمل، لا كتفعيل runtime.
 
 ---
 

@@ -1,0 +1,62 @@
+{
+  "phase": "Phase 27.10",
+  "name": "Short Response Repair",
+  "status": "completed_numeric_improvement_generation_still_blocked",
+  "language_track": ["msa", "saudi"],
+  "lexicon_track": "Saudi Seed v1",
+  "runtime_generator_enabled": false,
+  "corpus": {
+    "total_records": 5543,
+    "training_ready": 5543,
+    "dialects": {"msa": 2749, "saudi": 2794},
+    "quality": {"gold": 431, "silver": 5112}
+  },
+  "split": {
+    "train": 4973,
+    "eval": 570
+  },
+  "repair_batch": {
+    "records": 300,
+    "msa": 150,
+    "saudi": 150,
+    "quality": "gold",
+    "sources": [
+      "sf-ai-short-response-repair-msa-v1",
+      "sf-ai-short-response-repair-saudi-v1"
+    ]
+  },
+  "training": {
+    "model": "sf-10m",
+    "checkpoint_root": "artifacts/checkpoints/sf_10m_v0_7",
+    "best_checkpoint": "sf-10m-step4000",
+    "steps": 4000,
+    "batch_size": 4,
+    "seq_len": 64,
+    "loss_scope": "assistant",
+    "first_logged_loss": 8.4840,
+    "last_loss": 3.1259,
+    "best_logged_train_loss": 2.4569
+  },
+  "eval": {
+    "split_name": "eval",
+    "checkpoints": [
+      {"name": "sf-10m-step1000", "loss": 6.1050, "perplexity": 448.09},
+      {"name": "sf-10m-step2000", "loss": 5.4491, "perplexity": 232.54},
+      {"name": "sf-10m-step3000", "loss": 5.3479, "perplexity": 210.17},
+      {"name": "sf-10m-step4000", "loss": 4.7512, "perplexity": 115.72}
+    ],
+    "best_checkpoint": "sf-10m-step4000"
+  },
+  "generation_quality": {
+    "report": "artifacts/reports/generation_quality_v1_v0_7_report.json",
+    "passed": 0,
+    "total": 10,
+    "runtime_allowed": false,
+    "primary_block_reason": "model_artifact_fragment"
+  },
+  "decision": {
+    "activate_in_chat_ui": false,
+    "start_sf50m": false,
+    "reason": "Eval improved, but short generation remains malformed."
+  }
+}

@@ -72,13 +72,14 @@
 | Phase 27.7 | Fixed Split + Gold Social Canary | ✅ completed_quality_gate_runtime_blocked |
 | Phase 27.8 | SF-10M v0.6 Split Training | ✅ completed_with_numeric_improvement_runtime_blocked |
 | Phase 27.9 | Generation Quality Harness | ✅ completed_harness_blocks_v0_6_runtime |
+| Phase 27.10 | Short Response Repair | ✅ completed_numeric_improvement_generation_still_blocked |
 
 اقرأ التفاصيل في [PHASE_STATUS.md](./PHASE_STATUS.md) و [EXECUTION_PLAN.md](./EXECUTION_PLAN.md).
 
 ### الاختبارات
 
 ```
-راجع `docs/PHASE_STATUS.md` لآخر رقم اختبارات موثق بعد Phase 27.9.
+راجع `docs/PHASE_STATUS.md` لآخر رقم اختبارات موثق بعد Phase 27.10.
 ```
 
 شغّل: `cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests`.
@@ -95,7 +96,7 @@
 - Phase 22 readiness: `GET /system/phase22-readiness`.
 - Phase 22 collection plan: `GET /system/phase22-collection-plan`.
 - Phase 22 review intake: `GET /system/phase22-review-intake`.
-- `/ui/chat` تعرض بوابة Phase 22 الحية وجودة التصدير؛ لا تعرض ذلك كدليل على وجود مولد جاهز.
+- `/ui/chat` مخصصة لاختبار الحوار فقط. لا تعرض أزرار حفظ/تصدير أو مهام جمع؛ الوكيل يتولى ذلك داخليًا عند الحاجة.
 - Source inventory: `GET /system/source-inventory`.
 
 تشغيل يدوي:
@@ -152,7 +153,7 @@ bash scripts/run_chat_server.sh
 - `sf_ai/datasets/corpus_governance.py`
 - `tests/test_corpus_governance.py`
 
-تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر وغير جاهز لاختبار سامي كمولد حواري. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`، لكنه لم يجعل المولد مقنعًا. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات. Phase 19 أضاف بوابة جاهزية SF-50M. Phase 20 أضاف بوابات تفعيل المجالات، ولا يفعّل أي skeleton تلقائيًا. Phase 21 ثبت خارطة Phase 22–30 للوصول إلى حوار مولّد مقنع. Phase 22 أضاف وأكمل بوابة Gold Dialogue Corpus v2: اكتمل عند 500/500 (`msa=250`, `saudi=250`). Phase 23 درّب tokenizer v2: `vocab=4493`, `merges=4386`. Phase 24 درّب `SF-10M v0.2` 2000 خطوة، وحقق eval loss `2.5779` وperplexity `13.17`، لكنه ما زال غير متماسك ولذلك runtime محظور. Phase 25 أضاف canary guard وحجب تجربة v0.2 الحقيقية بـ `generation_guard:malformed_token`. Phase 26 أضاف بوابة readiness ورفض تدريب `SF-50M` الآن رغم نجاح corpus gate، لأن runtime quality لم تنجح. Phase 27 أضاف eval v2 متعدد الأدوار وخطة corpus: `19/19` baseline، لكن كل الردود `template`. بدأت التوسعة بعد ذلك بإضافة Batch 001 ثم Batch 002 ثم Batch 003، ثم تنظيف الحوارات التشغيلية، ثم Batch 004 وBatch 005 وBatch 006 الطبيعية بحجم `1500` لكل دفعة. Phase 27.5/27.6 جربتا تدريب SF-10M بصيغة الحوار وassistant-target وبقي runtime محظورًا. Phase 27.7 أضاف split ثابتًا (`train=4703`, `eval=540`)، و100 gold social، وcanary prompt-aware. Phase 27.8 درّب `SF-10M v0.6` على train split وقاس eval split: أفضل loss `5.0227`/ppl `151.82`، لكن canary حجب 10/10 عينات بسبب fragments. Phase 27.9 أضاف generation quality harness: `make phase27-generation-quality` يثبت `0/10` passed و`model_artifact_fragment`; الوضع الحالي `5243` (`msa=2599`, `saudi=2644`) والتالي هو إصلاح fragments قبل أي `SF-50M`.
+تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر وغير جاهز لاختبار سامي كمولد حواري. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`، لكنه لم يجعل المولد مقنعًا. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات. Phase 19 أضاف بوابة جاهزية SF-50M. Phase 20 أضاف بوابات تفعيل المجالات، ولا يفعّل أي skeleton تلقائيًا. Phase 21 ثبت خارطة Phase 22–30 للوصول إلى حوار مولّد مقنع. Phase 22 أضاف وأكمل بوابة Gold Dialogue Corpus v2: اكتمل عند 500/500 (`msa=250`, `saudi=250`). Phase 23 درّب tokenizer v2: `vocab=4493`, `merges=4386`. Phase 24 درّب `SF-10M v0.2` 2000 خطوة، وحقق eval loss `2.5779` وperplexity `13.17`، لكنه ما زال غير متماسك ولذلك runtime محظور. Phase 25 أضاف canary guard وحجب تجربة v0.2 الحقيقية بـ `generation_guard:malformed_token`. Phase 26 أضاف بوابة readiness ورفض تدريب `SF-50M` الآن رغم نجاح corpus gate، لأن runtime quality لم تنجح. Phase 27 أضاف eval v2 متعدد الأدوار وخطة corpus: `19/19` baseline، لكن كل الردود `template`. بدأت التوسعة بعد ذلك بإضافة Batch 001 ثم Batch 002 ثم Batch 003، ثم تنظيف الحوارات التشغيلية، ثم Batch 004 وBatch 005 وBatch 006 الطبيعية بحجم `1500` لكل دفعة. Phase 27.5/27.6 جربتا تدريب SF-10M بصيغة الحوار وassistant-target وبقي runtime محظورًا. Phase 27.7 أضاف split ثابتًا (`train=4703`, `eval=540`)، و100 gold social، وcanary prompt-aware. Phase 27.8 درّب `SF-10M v0.6` على train split وقاس eval split: أفضل loss `5.0227`/ppl `151.82`، لكن canary حجب 10/10 عينات بسبب fragments. Phase 27.9 أضاف generation quality harness: `make phase27-generation-quality` يثبت `0/10` passed و`model_artifact_fragment`. Phase 27.10 أضاف `300` gold short-response ودرب `SF-10M v0.7`: أفضل eval `4.7512`/ppl `115.72`، لكن generation-quality بقي `0/10`; الوضع الحالي `5543` (`msa=2749`, `saudi=2794`) والتالي فحص objective/batching/decoding قبل أي `SF-50M`.
 
 ### Phase 12 — preflight جاهز فقط
 
@@ -245,7 +246,7 @@ missing language balance: msa
 
 أضيفت طبقة تمنع التعلم الخفي من محادثات سامي، لكنها تجعل جمع البيانات أسهل:
 
-- زر `تصدير` في [apps/api/static/chat.html](../apps/api/static/chat.html) يخرج JSONL محليًا للمراجعة.
+- لا تعرض [apps/api/static/chat.html](../apps/api/static/chat.html) زر تصدير للمستخدم. أي review export يجب أن ينفذه الوكيل داخليًا إذا احتاجه.
 - export يضع دائمًا `training_allowed=false`, `quality=needs_review`, `license=user-review-required`.
 - [scripts/prepare_dialogue_batch.py](../scripts/prepare_dialogue_batch.py) يحول المراجعات إلى corpus تدريبي فقط عند تمرير `--training-allowed`.
 - [sf_ai/datasets/dialogue_batch.py](../sf_ai/datasets/dialogue_batch.py) يفرض provenance/dialect/quality ويتخطى السجلات الحساسة افتراضيًا.
@@ -298,14 +299,14 @@ missing language balance: msa
 - أضيف seed مصطلحات فصحى تدريبي: `data/corpus/chat/jsonl/protected_terms_msa_seed_v1.jsonl` وفيه 22 سجلًا `gold`; هذا corpus فعلي، وليس موردًا مرشحًا.
 - بنك التأليف الفصيح: `resources/phase22_authoring/msa_prompt_bank_v1.json`، ملف مساعدة فقط وليس corpus، وحقوله `training_allowed=false` و`synthetic_llm_data=false`.
 - مصطلحات الفصحى المرشحة: `resources/tokenization/protected_terms_msa_candidate.txt` و`resources/tokenization/preferred_merges_msa_candidate.txt`. هذه موارد سياسة غير نشطة، ليست corpus ولا vocab pretrained، وتُستخدم لتوجيه دفعات الفصحى القادمة قبل تفعيلها في tokenizer.
-- حفظ review المحلي: `POST /chat/review-export` وزر `حفظ للمراجعة` في `/ui/chat` يكتبان إلى `data/corpus/chat/review/` فقط مع `training_allowed=false`.
+- حفظ review المحلي: `POST /chat/review-export` باقٍ كأداة داخلية تكتب إلى `data/corpus/chat/review/` فقط مع `training_allowed=false`، لكنه غير ظاهر في `/ui/chat`.
 - كل export/training record يحمل الآن user ownership:
   `owner_user_id`, `created_by_user_id`, `target_user_id`, `user_scope`.
 - المسار الحالي `single_user` بمعرف `sami-local` حتى لا تختلط محادثات المستخدمين عند التوسع لاحقًا.
 - بروتوكول سامي الجديد: الوكيل هو من يختبر الواجهة/API ويؤلف ويراجع ويعتمد دفعات corpus ويرتّب الملفات والتقارير. لا تطلب من سامي خطوات حفظ/تصدير/اعتماد يدوية إذا كنت تستطيع تنفيذها. سامي يستلم النتيجة النهائية ويقرر الاقتناع فقط.
 - review intake الحالي: `data/corpus/chat/review/sample_review_export.jsonl` مرشح للمراجعة فقط؛ لا يدخل التدريب تلقائيًا.
 - `phase22-review-intake` يعرض أيضًا `quality_score`, `quality_label`, و`quality_blockers`; لا تعتبر جلسة قوية للتدريب إلا إذا كانت متعددة الأدوار غالبًا 3 user + 3 assistant على الأقل.
-- `/ui/chat` يعرض مؤشر جودة تصدير محليًا، ويضيف `ui_quality_score/ui_quality_label/ui_quality_blockers` إلى export metadata.
+- `/ui/chat` لم يعد يعرض مؤشر جودة التصدير. قياس جودة أي review export مسؤولية أدوات الوكيل الداخلية.
 - الواجهة المستقرة يجب أن تعمل بـ `generator=template` افتراضيًا، وهذا يعني قوالب ثابتة لا مولدًا مقنعًا. Phase 25 canary حجب `SF-10M v0.2` الحقيقي؛ لا تعرضه كنجاح حواري.
 - أي export يحتوي ردود `sf_10m_v0_1/sf_10m_v0_2` يجب أن يبقى review evidence فقط، و`phase22-review-intake` يميّزه ولا يعدّه candidate تدريب جودة.
 - الممنوع: synthetic LLM data من مصدر خارجي أو مجهول.

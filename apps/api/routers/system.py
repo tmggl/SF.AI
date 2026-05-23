@@ -61,9 +61,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.9 — Generation Quality Harness",
-        current_phase_status="completed_harness_blocks_v0_6_runtime",
-        next_phase="Repair SF-10M short-generation fragments before any SF-50M scaling",
+        current_phase="Phase 27.10 — Short Response Repair",
+        current_phase_status="completed_numeric_improvement_generation_still_blocked",
+        next_phase=(
+            "Investigate SF-10M training/objective/decoding fixes before any SF-50M scaling"
+        ),
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -158,6 +160,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 status="active_runtime_gate",
                 phase="Phase 27.9",
             ),
+            ComponentStatus(
+                name="phase27_10_short_response_repair",
+                status="completed_runtime_blocked",
+                phase="Phase 27.10",
+            ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="files_module", status="skeleton_only", phase="Phase 10"),
@@ -184,8 +191,8 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
             ComponentStatus(name="rag", status="active", phase="Phase 8"),
             ComponentStatus(name="chat_rag_bridge", status="ready_offline", phase="Phase 17"),
             ComponentStatus(name="dialogue_batch_preparation", status="active", phase="Phase 18"),
-            ComponentStatus(name="chat_review_export", status="active", phase="Phase 18"),
-            ComponentStatus(name="chat_review_local_save", status="active", phase="Phase 22"),
+            ComponentStatus(name="chat_review_export", status="internal_only", phase="Phase 18"),
+            ComponentStatus(name="chat_review_local_save", status="internal_only", phase="Phase 22"),
             ComponentStatus(name="phase19_readiness", status="active", phase="Phase 19"),
             ComponentStatus(name="domain_activation_gates", status="active", phase="Phase 20"),
             ComponentStatus(name="generative_roadmap", status="active", phase="Phase 21"),

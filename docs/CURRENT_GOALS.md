@@ -17,7 +17,8 @@
 تسطيح الرسائل، وPhase 27.6 أثبتت أن assistant-target يحسن تصميم الهدف،
 ثم Phase 27.7 ثبتت split ثابتًا وcanary أقوى، وPhase 27.8 درّبت
 `SF-10M v0.6` ووجدت تحسنًا رقميًا دون جاهزية runtime، وPhase 27.9 ثبتت
-بوابة توليد آلية تحجب v0.6 بنسبة 10/10.
+بوابة توليد آلية، وPhase 27.10 درّبت `SF-10M v0.7` بتحسن رقمي لكن توليد
+محجوب.
 
 الخطوة العملية الحالية:
 
@@ -64,12 +65,15 @@
   runtime محظور ولا يبدأ `SF-50M`.
 - Phase 27.9 اكتمل: أضيف generation quality harness وprompt suite قصير؛
   نتيجة v0.6: `0/10` passed، والسبب `model_artifact_fragment`.
+- Phase 27.10 اكتمل: أضيفت `300` عينة gold قصيرة ودُرّب `SF-10M v0.7`.
+  أفضل eval `loss=4.7512`, `perplexity=115.72`، لكن generation-quality بقي
+  `0/10` بعد تشديد الحارس.
 
 الجرد الحالي يرى:
 
 - قاموس Saudi Seed v1 المحلي: 516 مدخل، مرجع لهجي خاص لا يُرفع.
 - مهام اللهجة السعودية المشتقة: 1032 سجل، تصلح كمرشح tokenizer/تحويل لاحق، وليست chat corpus مباشرًا.
-- `chat/jsonl`: يحتوي الآن 5243 سجل حوار محكوم. أول 500 استُخدمت لتدريب tokenizer v2، ثم بدأت توسعة Phase 27 بعد ذلك.
+- `chat/jsonl`: يحتوي الآن 5543 سجل حوار محكوم. أول 500 استُخدمت لتدريب tokenizer v2، ثم بدأت توسعة Phase 27 بعد ذلك.
 - `chat/splits`: يحتوي split ثابت `dialogue_split_v1.json` للتدريب/التقييم.
 - `chat/review`: مخرجات مراجعة من واجهة الشات؛ ليست تدريبًا حتى تمر عبر `prepare_dialogue_batch.py` مع `--training-allowed`.
 
@@ -122,6 +126,7 @@ SF.AI حاليًا:
 - **Phase 27.7:** split ثابت + gold social + canary أقوى — مكتمل كبوابة جودة، runtime محظور.
 - **Phase 27.8:** تدريب `SF-10M v0.6` على split ثابت — مكتمل بتحسن رقمي، runtime محظور.
 - **Phase 27.9:** harness جودة توليد آلي — مكتمل ويحجب v0.6، runtime محظور.
+- **Phase 27.10:** short-response repair + `SF-10M v0.7` — مكتمل بتحسن رقمي، runtime محظور.
 - **Phase 28:** تدريب `SF-120M v0.1`؛ أول قفزة بعد نجاح `SF-50M`.
 - **Phase 29:** Runtime Hybrid Assistant v1.
 - **Phase 30:** Continuous Improvement Loop.

@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.9 / 30**
-- **المرحلة الحالية:** **Phase 27.9 — Generation Quality Harness**
-- **حالة المرحلة الحالية:** **مكتملة؛ harness آلي يحجب `SF-10M v0.6` بنسبة 10/10 بسبب fragments**
-- **المرحلة التالية المقترحة:** إصلاح مصدر fragments في `SF-10M` قبل أي تكبير إلى `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.10 / 30**
+- **المرحلة الحالية:** **Phase 27.10 — Short Response Repair**
+- **حالة المرحلة الحالية:** **مكتملة بتحسن رقمي؛ `SF-10M v0.7` أفضل على eval لكنه ما زال محجوبًا في التوليد**
+- **المرحلة التالية المقترحة:** فحص objective/batching/decoding بعمق قبل أي تكبير إلى `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -58,6 +58,7 @@
 | Phase 27.7 | Fixed Split + Gold Social Canary | ✅ completed_quality_gate_runtime_blocked | ✅ |
 | Phase 27.8 | SF-10M v0.6 Split Training | ✅ completed_with_numeric_improvement_runtime_blocked | ✅ |
 | Phase 27.9 | Generation Quality Harness | ✅ completed_harness_blocks_v0_6_runtime | ✅ |
+| Phase 27.10 | Short Response Repair | ✅ completed_numeric_improvement_generation_still_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -235,11 +236,11 @@
   - أضيف بنك تأليف فصيح غير تدريبي في `resources/phase22_authoring/msa_prompt_bank_v1.json`: أكثر من 80 موضوعًا فصيحًا لبناء batches الفصحى، مع `training_allowed=false` و`synthetic_llm_data=false`.
   - review intake الحالي: ملف عينة واحد في `data/corpus/chat/review/` مرشح للمراجعة، ولا يدخل التدريب تلقائيًا.
   - أضيفت بوابة جودة داخل review intake: `quality_score`, `quality_label`, و`quality_blockers`.
-  - أضيف مؤشر جودة التصدير داخل `/ui/chat` حتى يعرف سامي قبل التصدير هل الجلسة قصيرة أو صالحة للمراجعة.
+  - أضيف مؤشر جودة التصدير داخل `/ui/chat` تاريخيًا، ثم أُخفي لاحقًا لأن الواجهة أصبحت لاختبار الحوار فقط والوكيل يتولى حفظ/اعتماد البيانات.
   - أضيفت لوحة بوابة Phase 22 داخل `/ui/chat`، تقرأ `/system/phase22-readiness` و`/system/phase22-collection-plan` وتعرض عدد corpus الحالي، المتبقي، وحالة `msa/saudi`، والمهمة التالية مباشرة.
-  - أضيفت لوحة مهمة الجمع الحالية داخل `/ui/chat`، تقرأ `/system/phase22-next-batch`; بعد اكتمال `flex_004` تعرض عدم وجود دفعات متبقية. الواجهة مختبر اختياري وليست شرطًا على سامي لحفظ أو تصدير أي شيء.
+  - أضيفت لوحة مهمة الجمع الحالية داخل `/ui/chat` تاريخيًا، ثم أُخفيت لاحقًا. endpoints Phase 22 باقية للوكيل فقط.
   - أضيف زر `موضوعات أخرى` داخل لوحة مهمة الجمع الحالية للتنقل في بنك التأليف الفصيح، مع `authoring_topic_count` في metadata.
-  - أضيف زر `حفظ للمراجعة` في `/ui/chat` وendpoint `POST /chat/review-export` لحفظ review JSONL محليًا في `data/corpus/chat/review/` فقط، مع رفض `training_allowed=true`.
+  - أضيف endpoint `POST /chat/review-export` لحفظ review JSONL محليًا في `data/corpus/chat/review/` فقط، مع رفض `training_allowed=true`; الزر لم يعد ظاهرًا في `/ui/chat`.
   - القاعدة العملية الجديدة: ملف التصدير المفيد يجب أن يحتوي غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل، وبدون ردود raw من `sf_10m_v0_1/sf_10m_v0_2`.
   - القاعدة العملية الأحدث: الوكيل يستطيع تأليف/مراجعة/اعتماد دفعات Phase 22 مباشرة كـ `owner-delegated agent-authored` بدون انتظار حفظ أو تصدير من سامي، بشرط اكتمال `source/license/quality/training_allowed/user_scope/notes` ونجاح الاختبارات.
   - صححت تشغيل الواجهة المستقرة: `generator=template` افتراضيًا، أي قوالب ثابتة لا مولد؛ و`SF-10M` الخام يبقى مختبرًا صريحًا فقط.
@@ -389,6 +390,18 @@
   - القرار: `COMPLETED_GENERATION_QUALITY_HARNESS_BLOCKING_V0_6`.
   - أضيف [PHASE27_9_GENERATION_QUALITY_HARNESS_REPORT.md](./PHASE27_9_GENERATION_QUALITY_HARNESS_REPORT.md).
   - أضيف `artifacts/reports/generation_quality_v1_report.json`.
+- بدأ وانتهى Phase 27.10 Short Response Repair:
+  - أضيفت دفعة إصلاح قصيرة `300` سجل gold: `150` فصيح + `150` سعودي.
+  - corpus الحالي صار `5543`: `msa=2749`, `saudi=2794`, `gold=431`, `silver=5112`.
+  - split الحالي: `train=4973`, `eval=570`.
+  - أضيف `scripts/phase27_10_write_short_response_repair_batch.py`.
+  - دُرّب `SF-10M v0.7` على split الجديد: loss `8.4840 → 3.1259`.
+  - أفضل eval: `sf-10m-step4000`, loss `4.7512`, perplexity `115.72`.
+  - بعد توسيع `GenerationGuard` للـ fragments الجديدة، `phase27-generation-quality` على v0.7 أعطى `0/10` و`runtime_allowed=false`.
+  - القرار: `COMPLETED_NUMERIC_IMPROVEMENT_GENERATION_STILL_BLOCKED`.
+  - أضيف [PHASE27_10_SHORT_RESPONSE_REPAIR_REPORT.md](./PHASE27_10_SHORT_RESPONSE_REPAIR_REPORT.md).
+  - أضيف `artifacts/reports/sf_10m_v0_7_short_repair_report.json`.
+  - أضيف `artifacts/samples/sf_10m_v0_7_generations.md`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -422,7 +435,7 @@
   - **لا CDNs، لا Node، لا build step** — تعمل من المتصفح مباشرة.
 - `apps/api/routers/ui.py` — GET `/ui/chat` يخدم الـ HTML.
 - `apps/api/main.py` — أضيف `ui.router`، و GET `/chat` redirect → `/ui/chat`.
-- اختبارات: 7 في `test_chat_ui.py` تشمل مؤشر جودة التصدير ولوحة بوابة Phase 22 ومهمة الجمع الحالية وحفظ review المحلي وفصل المستخدمين.
+- اختبارات: `test_chat_ui.py` يثبت أن `/ui/chat` للاختبار فقط بلا أزرار حفظ/تصدير، مع بقاء endpoint المراجعة الداخلي وفصل المستخدمين.
 
 ### Phase 9 Polish — Comfortable Chat + Accurate Routing
 
@@ -454,7 +467,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.9"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.10"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -485,7 +498,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-481 passed in 16.47s
+482 passed in 25.53s
 ```
 
 | ملف | عدد |

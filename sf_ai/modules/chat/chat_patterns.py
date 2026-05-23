@@ -84,9 +84,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.9: ثبتنا generation quality harness يقيس المولد الخام "
-    "على 10 prompts فصحى/سعودية. النتيجة حجب SF-10M v0.6 بنسبة 10/10 بسبب "
-    "fragments مشوهة. الخطوة التالية إصلاح مصدر هذه fragments قبل أي SF-50M.",
+    "اكتملت Phase 27.10: أضفنا 300 رد قصير gold ودرّبنا SF-10M v0.7. "
+    "تحسن eval إلى loss 4.7512، لكن generation quality بقي 0/10 بعد تشديد "
+    "الحارس. الخطوة التالية إصلاح أعمق للهدف أو طريقة التدريب قبل أي SF-50M.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

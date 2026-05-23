@@ -32,15 +32,15 @@
   "can_start_phase28": false,
   "phase26_status": "NOT_READY_IMPROVE_SF10M_AND_CANARY",
   "corpus_expansion_plan": {
-    "current_records": 5243,
+    "current_records": 5543,
     "target_records": 5000,
     "remaining_records": 0,
     "batch_size": 1500,
     "batches_needed_total": 0,
     "target_per_dialect": 2500,
     "dialect_counts": {
-      "saudi": 2644,
-      "msa": 2599
+      "saudi": 2794,
+      "msa": 2749
     },
     "needed_by_dialect": {
       "msa": 0,
@@ -53,9 +53,9 @@
     "quality_targets": {
       "gold_total_target": 1000,
       "silver_total_target": 4000,
-      "current_gold": 131,
+      "current_gold": 431,
       "current_silver": 5112,
-      "needed_gold": 869,
+      "needed_gold": 569,
       "needed_silver": 0
     },
     "category_targets_remaining": {
@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27.9: ثبتنا generation quality harness يقيس المولد الخام على 10 prompts فصحى/سعودية. النتيجة حجب SF-10M v0.6 بنسبة 10/10 بسبب fragments مشوهة. الخطوة التالية إصلاح مصد"
+      "response_preview": "اكتملت Phase 27.10: أضفنا 300 رد قصير gold ودرّبنا SF-10M v0.7. تحسن eval إلى loss 4.7512، لكن generation quality بقي 0/10 بعد تشديد الحارس. الخطوة التالية إصلاح أعمق للهدف أو طريق"
     },
     {
       "scenario_id": "clarification_repair_flow",

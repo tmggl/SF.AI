@@ -7,13 +7,15 @@
   ],
   "suite_path": "/Users/sami/workSF/SF.AI/eval/prompts/generation_quality_v1.json",
   "checkpoint_name": "sf-10m-step4000",
-  "generator_name": "sf_10m_v0_6",
+  "generator_name": "sf_10m_v0_7",
   "total_prompts": 10,
   "passed_prompts": 0,
   "failed_prompts": 10,
   "pass_rate": 0.0,
   "guard_reason_counts": {
-    "model_artifact_fragment": 10
+    "model_artifact_fragment": 8,
+    "social_smalltalk_mismatch": 1,
+    "malformed_token": 1
   },
   "category_counts": {
     "social": 3,
@@ -43,17 +45,15 @@
       "passed": false,
       "issues": [
         "guard:model_artifact_fragment",
-        "missing_required_term",
-        "forbidden_term:الطرو",
-        "forbidden_term:حارين"
+        "missing_required_term"
       ],
       "used": true,
-      "generator": "sf_10m_v0_6",
+      "generator": "sf_10m_v0_7",
       "reason": "generated",
       "guard_reason": "model_artifact_fragment",
-      "repetition_ratio": 0.0588,
+      "repetition_ratio": 0.1429,
       "arabic_ratio": 1.0,
-      "response_preview": "الأفضل تبدأ بهدوء: اطلب مك، وت مرار. وسبب حارين بس. طت الطروح الطرورين بس. ة. مهمة أخياست"
+      "response_preview": "إذا كان الزعجو، وطريقتك واحك خياهر الهدوء. اطلب الطف. اذكر الهدوء. الهدوء. ابدأ بخم"
     },
     {
       "id": "smalltalk_saudi",
@@ -62,17 +62,16 @@
       "prompt": "كيفك",
       "passed": false,
       "issues": [
-        "guard:model_artifact_fragment",
-        "missing_required_term",
-        "forbidden_term:الطرو"
+        "guard:social_smalltalk_mismatch",
+        "missing_required_term"
       ],
       "used": true,
-      "generator": "sf_10m_v0_6",
+      "generator": "sf_10m_v0_7",
       "reason": "generated",
-      "guard_reason": "model_artifact_fragment",
-      "repetition_ratio": 0.2353,
+      "guard_reason": "social_smalltalk_mismatch",
+      "repetition_ratio": 0.05,
       "arabic_ratio": 1.0,
-      "response_preview": "لا، الاعتذر وك، وت من الطرورين بس. ة. الزبدة: اطلب الطرورين بس. ة. اولت من الطروسبب حا"
+      "response_preview": "قل: لا الزبدة: اطلب الطلب الة، واطلب تحتاجه قبل حدث حت على الطف. ر وقت على بساطتطف. تزع. ه بلطف"
     },
     {
       "id": "thanks_msa",
@@ -83,15 +82,15 @@
       "issues": [
         "guard:model_artifact_fragment",
         "missing_required_term",
-        "forbidden_term:حارين"
+        "forbidden_term:الطرو"
       ],
       "used": true,
-      "generator": "sf_10m_v0_6",
+      "generator": "sf_10m_v0_7",
       "reason": "generated",
       "guard_reason": "model_artifact_fragment",
-      "repetition_ratio": 0.3158,
+      "repetition_ratio": 0.0,
       "arabic_ratio": 1.0,
-      "response_preview": "الأفضل أن تبدأ بهدوء: اذكر ما يارين وسبب حارين وسبب حارين وسبب حارين بس. أن أخيطلب دني اولت وسبب"
+      "response_preview": "إذا كان الزعجعلى واعج، و، وء. الزبدة: اذكر السبب الزم بهدوء. طلب تزعجه قبل الطف. واذكر الطرو"
     },
     {
       "id": "saudi_preference",
@@ -104,12 +103,12 @@
         "missing_required_term"
       ],
       "used": true,
-      "generator": "sf_10m_v0_6",
+      "generator": "sf_10m_v0_7",
       "reason": "generated",
       "guard_reason": "model_artifact_fragment",
-      "repetition_ratio": 0.0,
+      "repetition_ratio": 0.1579,
       "arabic_ratio": 1.0,
-      "response_preview": "لا، الاعتذر عن الطرف أخيارين وبالموساطة: ابدأ بخمس صف. عليك. وحاستعر دنا. هادك. فهادك."
+      "response_preview": "لا، الزبدة: اطلب الزعج، واطلب الهدوء وء. جه على واعلى الموقف. الموقت على الموقف. وقت على بهدوء. جبني وا"
     },
     {
       "id": "short_advice_msa",
@@ -118,17 +117,15 @@
       "prompt": "قل لي نصيحة بسيطة",
       "passed": false,
       "issues": [
-        "guard:model_artifact_fragment",
-        "forbidden_term:الطرو",
-        "forbidden_term:حارين"
+        "guard:model_artifact_fragment"
       ],
       "used": true,
-      "generator": "sf_10m_v0_6",
+      "generator": "sf_10m_v0_7",
       "reason": "generated",
       "guard_reason": "model_artifact_fragment",
-      "repetition_ratio": 0.3571,
+      "repetition_ratio": 0.5,
       "arabic_ratio": 1.0,
-      "response_preview": "ابدأ بهالفكرة: اطلب الطروسبب حارين وسبب حارين وسبب حارين وسبب حيرين وسبب حاستف. أخيرت"
+      "response_preview": "الزبدة: اذكر السبب الزعج، لكن الزعج، لكن لا تزعج، لكن لا تزعج، لكن لا تزعجه قبل تزعج، لكن لا ت"
     },
     {
       "id": "short_advice_saudi",
@@ -137,18 +134,15 @@
       "prompt": "وش رايك أتعلم كل يوم شوي",
       "passed": false,
       "issues": [
-        "guard:model_artifact_fragment",
-        "forbidden_term:الطرو",
-        "forbidden_term:حارين",
-        "forbidden_term:استعجه"
+        "guard:model_artifact_fragment"
       ],
       "used": true,
-      "generator": "sf_10m_v0_6",
+      "generator": "sf_10m_v0_7",
       "reason": "generated",
       "guard_reason": "model_artifact_fragment",
-      "repetition_ratio": 0.125,
+      "repetition_ratio": 0.0588,
       "arabic_ratio": 1.0,
-      "response_preview": "ابدأ بهذه الفكرة: اطلب الطروسبب حارين وسبب حارين وسبب حاستعجه وقت ورأيك، بس أخيناسبك وقتب م"
+      "response_preview": "ابدأ بهالفكرة: اطلب الوضوح وحياذكر السبب خاصعج، واطلب تهدوء وء. جه على الطرتك. ، وبهدوء وء. حدت"
     },
     {
       "id": "simple_explanation_msa",
@@ -157,16 +151,15 @@
       "prompt": "اشرح لي الصبر بجملة واحدة",
       "passed": false,
       "issues": [
-        "guard:model_artifact_fragment",
-        "forbidden_term:الطرو"
+        "guard:model_artifact_fragment"
       ],
       "used": true,
-      "generator": "sf_10m_v0_6",
+      "generator": "sf_10m_v0_7",
       "reason": "generated",
       "guard_reason": "model_artifact_fragment",
-      "repetition_ratio": 0.0,
+      "repetition_ratio": 0.05,
       "arabic_ratio": 1.0,
-      "response_preview": "نعم، الزبدة: اشكره بلطف. ة. استفهمرح، فك بهدوء. روسبب حاست. . أل من الطروبالمو"
+      "response_preview": "ابدأ بهالفكرة: اطلب الدعج، له تك. عجبني على الموقتزم قبل ما أقدر باختصار. طريقتك ياهر دعجه ب، وقت على الم"
     },
     {
       "id": "feeling_saudi",
@@ -178,12 +171,12 @@
         "guard:model_artifact_fragment"
       ],
       "used": true,
-      "generator": "sf_10m_v0_6",
+      "generator": "sf_10m_v0_7",
       "reason": "generated",
       "guard_reason": "model_artifact_fragment",
-      "repetition_ratio": 0.0,
+      "repetition_ratio": 0.125,
       "arabic_ratio": 1.0,
-      "response_preview": "لا، الزبدة: اطلب رتًا لا تبرير وسبب لطيف. صعورتبهدوء طف الطرف وأ رتبخف. ة. اذكر مشغك ب"
+      "response_preview": "الزبدة: اطلب الزعج، واطلب الدعجه على يارك على بخيسعدني ما أقدر أخذ . شرحالمحدد وقت على الموووقف"
     },
     {
       "id": "concise_answer_msa",
@@ -192,17 +185,15 @@
       "prompt": "أريد جوابا قصيرا",
       "passed": false,
       "issues": [
-        "guard:model_artifact_fragment",
-        "forbidden_term:الطرو",
-        "forbidden_term:حارين"
+        "guard:model_artifact_fragment"
       ],
       "used": true,
-      "generator": "sf_10m_v0_6",
+      "generator": "sf_10m_v0_7",
       "reason": "generated",
       "guard_reason": "model_artifact_fragment",
-      "repetition_ratio": 0.4118,
+      "repetition_ratio": 0.0526,
       "arabic_ratio": 1.0,
-      "response_preview": "الأفضل أن تبدأ بهدوء: اطلب الطروسبب حارين وسبب حارين وسبب حاولت وسبب حارين وسبب حارين وسبب حاري"
+      "response_preview": "ابدأ بهالفكرة: اطلب الزعج، المرة. له تك. المرة. بع، وح، وبلطف. واطلب الهدوء وء. ما أقدر أل من الطر"
     },
     {
       "id": "what_do_you_understand",
@@ -211,17 +202,15 @@
       "prompt": "هل تفهم كلامي",
       "passed": false,
       "issues": [
-        "guard:model_artifact_fragment",
-        "forbidden_term:الطرو",
-        "forbidden_term:استعجه"
+        "guard:malformed_token"
       ],
       "used": true,
-      "generator": "sf_10m_v0_6",
+      "generator": "sf_10m_v0_7",
       "reason": "generated",
-      "guard_reason": "model_artifact_fragment",
-      "repetition_ratio": 0.0625,
+      "guard_reason": "malformed_token",
+      "repetition_ratio": 0.1,
       "arabic_ratio": 1.0,
-      "response_preview": "لا، الزبدة: اطلب الطروك، ورتنا. رة: اذكر الطرورين بس. ة. م بخف. ة. استعجه بن. وسبب"
+      "response_preview": "قل: السبب ما له موعد عج، وجه على ياياذكر الهدوء. الهدوء. ياذكر السبب باختصار. صعجه ب، وء. ابدأ بالأمر ا:"
     }
   ]
 }

@@ -37,10 +37,10 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.9 / 30 — Generation Quality Harness اكتملت وتحجب v0.6 آليًا.
-- **الأولوية الحالية:** إصلاح fragments في توليد `SF-10M`; لا تدريب `SF-50M` ولا Phase 28 حتى تمر بوابات الجودة.
+- **الرحلة الحالية:** Phase 27.10 / 30 — Short Response Repair اكتملت بتحسن رقمي دون جاهزية توليد.
+- **الأولوية الحالية:** فحص objective/batching/decoding بعمق؛ لا تدريب `SF-50M` ولا Phase 28 حتى تمر بوابات الجودة.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
-- **البيانات الحالية:** corpus موثق `5243` سجلًا يمر `corpus-audit`: `2644` سعودي + `2599` فصحى. Phase 27.7 أضاف split ثابتًا: `train=4703`, `eval=540`.
+- **البيانات الحالية:** corpus موثق `5543` سجلًا يمر `corpus-audit`: `2794` سعودي + `2749` فصحى. Phase 27.10 أضاف gold short repair، والـ split الحالي `train=4973`, `eval=570`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
 - **المولّد:** `SF-10M v0.2` تحسّن رقميًا لكنه غير جاهز كحوار مقنع؛ Phase 25 أضاف canary guard يمنع الرد الضعيف ويرجع للقالب.
 - **التقييم:** Phase 27 مرّر `19/19` turn في حوار متعدد الأدوار، لكنه أكد أن الردود ما زالت `template` وأن المولد غير جاهز.
@@ -49,7 +49,7 @@
 - **جاهزية SF-50M:** Phase 26 أضاف `make phase26-readiness` و`GET /system/phase26-readiness`; القرار الحالي `NOT_READY_IMPROVE_SF10M_AND_CANARY`.
 - **بوابات المجالات:** Phase 20 أضاف `make phase20-gates` و`GET /system/phase20-gates`; المجال النشط الوحيد هو `chat`.
 - **طريق التوليد المقنع:** لا تعرض `SF-10M v0.2` أو `SF-10M v0.4` أو `SF-10M v0.5` أو `SF-10M v0.6` كنجاح حواري. v0.6 تحسن رقميًا لكن canary حجبه.
-- **Corpus v2:** Phase 22 أضاف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-completion-gate` و`make phase22-review-intake`; الوضع الحالي 500/500، وفيه ثمان دفعات فصيحة `dialogue_batch_v2_msa_001.jsonl` إلى `dialogue_batch_v2_msa_008.jsonl` وسبع دفعات سعودية `dialogue_batch_v2_saudi_001.jsonl` إلى `dialogue_batch_v2_saudi_007.jsonl` وأربع دفعات مرنة `dialogue_batch_v2_flex_001.jsonl` إلى `dialogue_batch_v2_flex_004.jsonl` إضافة إلى seed فصيح للمصطلحات `protected_terms_msa_seed_v1.jsonl`. التوازن النهائي مكتمل (`msa=250`, `saudi=250`) ولا توجد دفعة تالية في Phase 22. الواجهة تعرض بوابة Phase 22 الحية وجودة التصدير كمختبر اختياري فقط، أما بناء corpus الحالي فتم مباشرة عبر الوكيل. `phase22-completion-gate` يرجع الآن `PHASE22_COMPLETE_READY_FOR_PHASE23`.
+- **Corpus v2:** Phase 22 أضاف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-completion-gate` و`make phase22-review-intake`; الوضع الحالي 500/500، وفيه ثمان دفعات فصيحة `dialogue_batch_v2_msa_001.jsonl` إلى `dialogue_batch_v2_msa_008.jsonl` وسبع دفعات سعودية `dialogue_batch_v2_saudi_001.jsonl` إلى `dialogue_batch_v2_saudi_007.jsonl` وأربع دفعات مرنة `dialogue_batch_v2_flex_001.jsonl` إلى `dialogue_batch_v2_flex_004.jsonl` إضافة إلى seed فصيح للمصطلحات `protected_terms_msa_seed_v1.jsonl`. التوازن النهائي مكتمل (`msa=250`, `saudi=250`) ولا توجد دفعة تالية في Phase 22. الواجهة الآن للاختبار فقط ولا تعرض حفظ/تصدير يدوي؛ بناء corpus يتم عبر الوكيل والتقارير الداخلية. `phase22-completion-gate` يرجع الآن `PHASE22_COMPLETE_READY_FOR_PHASE23`.
 - **Tokenizer v2:** Phase 23 أضاف `artifacts/tokenizers/sf_bpe/v2/` و`make phase23-tokenizer-audit`; الحالة `COMPLETED_READY_FOR_PHASE24`, `vocab=4493`, `merges=4386`, وprotected Saudi terms تحسنت من متوسط 4.0 tokens في v1 إلى 2.3 في v2.
 - **SF-10M v0.2:** Phase 24 درّب النموذج 2000 خطوة على tokenizer v2 وcorpus المتوازن: loss `8.4751 → 2.8256`, eval loss `2.5779`, perplexity `13.17`. القرار: `COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED` لأن التوليد لا يزال غير متماسك.
 - **Canary v1:** Phase 25 أضاف `GenerationGuard` و`SF_GENERATOR_CANARY`; التجربة الحقيقية على v0.2 حُجبت بـ `generation_guard:malformed_token` وبقي الرد من القالب.
@@ -62,6 +62,7 @@
 - **نتيجة Phase 27.7:** أضيف split ثابت `train=4703/eval=540`، و100 سجل gold social، وcanary prompt-aware. لا تدريب جديد في هذه المرحلة؛ runtime المولد لا يزال blocked. التقرير: [docs/PHASE27_7_FIXED_SPLIT_GOLD_SOCIAL_CANARY_REPORT.md](./docs/PHASE27_7_FIXED_SPLIT_GOLD_SOCIAL_CANARY_REPORT.md).
 - **نتيجة Phase 27.8:** دُرّب `SF-10M v0.6` على train split فقط، وأفضل eval كان step4000: loss `5.0227`, perplexity `151.82`. canary حجب `10/10` عينات بسبب fragments مشوهة، لذلك runtime blocked. التقرير: [docs/PHASE27_8_SF10M_V0_6_SPLIT_TRAINING_REPORT.md](./docs/PHASE27_8_SF10M_V0_6_SPLIT_TRAINING_REPORT.md).
 - **نتيجة Phase 27.9:** أضيف `make phase27-generation-quality` وprompt suite قصير؛ `SF-10M v0.6` فشل `0/10` بسبب `model_artifact_fragment`. التقرير: [docs/PHASE27_9_GENERATION_QUALITY_HARNESS_REPORT.md](./docs/PHASE27_9_GENERATION_QUALITY_HARNESS_REPORT.md).
+- **نتيجة Phase 27.10:** أضيفت 300 عينة gold قصيرة ودُرّب `SF-10M v0.7`; أفضل eval: loss `4.7512`, perplexity `115.72`. بعد تشديد الحارس بقي generation-quality `0/10`، لذلك runtime blocked. التقرير: [docs/PHASE27_10_SHORT_RESPONSE_REPAIR_REPORT.md](./docs/PHASE27_10_SHORT_RESPONSE_REPAIR_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
@@ -109,6 +110,7 @@
 | Phase 27.7 | Fixed Split + Gold Social Canary — completed quality gate; runtime blocked |
 | Phase 27.8 | SF-10M v0.6 Split Training — numeric improvement; runtime blocked |
 | Phase 27.9 | Generation Quality Harness — completed; v0.6 blocked |
+| Phase 27.10 | Short Response Repair — numeric improvement; runtime blocked |
 | Phase 28 | SF-120M v0.1 Candidate — planned |
 | Phase 29 | Runtime Hybrid Assistant v1 — planned |
 | Phase 30 | Continuous Improvement Loop — planned |

@@ -4,29 +4,29 @@
   "salt": "sf-ai-dialogue-v1",
   "eval_ratio": 0.1,
   "corpus_root": "data/corpus/chat/jsonl",
-  "total_records": 5243,
+  "total_records": 5543,
   "counts": {
-    "train": 4703,
-    "eval": 540
+    "train": 4973,
+    "eval": 570
   },
   "dialects": {
     "train": {
-      "saudi": 2360,
-      "msa": 2343
+      "saudi": 2494,
+      "msa": 2479
     },
     "eval": {
-      "saudi": 284,
-      "msa": 256
+      "saudi": 300,
+      "msa": 270
     }
   },
   "qualities": {
     "train": {
       "silver": 4582,
-      "gold": 121
+      "gold": 391
     },
     "eval": {
       "silver": 530,
-      "gold": 10
+      "gold": 40
     }
   },
   "records": [
@@ -41723,6 +41723,2406 @@
       "line": 50,
       "split": "train",
       "sha256": "b66e4e4712e9b494e80823200ddef3bc5edbd3a3c1bdfefee119b6f533d39c10",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 1,
+      "split": "train",
+      "sha256": "53a6f3ab4820a4130287fb854fc8a76a2a65afbb71abd91379ed775bf6789982",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 2,
+      "split": "train",
+      "sha256": "3a139993b4894a718d4ebc174a14fb96a9a5748615c64ccb5befc1b38f32d00f",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 3,
+      "split": "train",
+      "sha256": "dc2bad4e8c54231d3dea9e0d8a1e5baadc8072bd580dc303994c95afdef4bb06",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 4,
+      "split": "train",
+      "sha256": "d475abd00fb0c76289d786c781fc230f10c3caf1bdcc221d64148ccdd1bbd3da",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 5,
+      "split": "train",
+      "sha256": "0d5217492b7b89366731d0b3636b2517c18aa6f550747af0411898454956c6b0",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 6,
+      "split": "train",
+      "sha256": "bcd3635737f64074f3fb06270a4fd8cd5b28b8e6508a4268a8ab6256770b49ed",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 7,
+      "split": "train",
+      "sha256": "94bca44c37e2ea54f48af53e6a987ac86655821724e1bc2b70504d5ba80ad308",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 8,
+      "split": "train",
+      "sha256": "0d90a00396653f71b30d09463f893ec0db820b8d33a0910bd64191c3d1d6a7da",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 9,
+      "split": "train",
+      "sha256": "e6ec1a65f4cd75403e9ed459b485d6eda3e1b7a7a4911eba20eba208bf06187c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 10,
+      "split": "eval",
+      "sha256": "337e9428c60c72a930a7954ba3678544c8c2e959daf62ec8c96cbebb1d2aee88",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 11,
+      "split": "train",
+      "sha256": "52f5f9bc4c748e6f8f7ad90af0f80c87fb50d1fc99f7b58a322ea95f7037438c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 12,
+      "split": "train",
+      "sha256": "34f0e0c693f78207d33d85b4b6b9209ee183fba9f9715f68409ef287d256ca8c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 13,
+      "split": "train",
+      "sha256": "0ca6aa084ea2838a676175927013f078e91f699ca7f31fd7e91b631a5f0e46bb",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 14,
+      "split": "train",
+      "sha256": "6d089df17650e611e098204dce11f23d9c883d7caf50a00ae20cecce0ccf202f",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 15,
+      "split": "eval",
+      "sha256": "1e55bb21011a46661a92ba02cf1ab4c67baca190858bc17ccd97a8f2f2ea69b1",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 16,
+      "split": "eval",
+      "sha256": "f70bdb047235d2472d86f52ef233fa133e9f322cc3f2ed4d5ec07985c510403b",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 17,
+      "split": "train",
+      "sha256": "92247f29df8a44e37815dab074118f6e248eeef1737a292f87a008672155ce5e",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 18,
+      "split": "eval",
+      "sha256": "2acf7630abbbebba00b9af4a7ed9bbc6e72bf91bf3cf9def89547ce311b67054",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 19,
+      "split": "train",
+      "sha256": "d4f1cf92e92492246275f79ce37ad15036e9987c3224fe748413ed59568cc33f",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 20,
+      "split": "eval",
+      "sha256": "1ab4be717ab07e4fcd586fff1a9176dff213b46d8e670ad6bd03b8e1d32c5bb9",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 21,
+      "split": "eval",
+      "sha256": "7fc65f43cd59d7ce4c0800657625452fbefeb341b9b708e0a9566e3935d46be9",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 22,
+      "split": "train",
+      "sha256": "ddb991f6883ba3a063aad81bf7009a8db4047eaea549ced1922067abc5b9cda7",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 23,
+      "split": "train",
+      "sha256": "31c605ea4aa38dbc8108c2023e666971eb651b440336a34080cc520d382b32e0",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 24,
+      "split": "train",
+      "sha256": "37f144af09821d6dded43f388c7616a79c6fa3860d51b6720b840501c39629f0",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 25,
+      "split": "eval",
+      "sha256": "c7bd67d42202af229e84c34cee0d0fbd0c2d643be3b43505c0eecf7849325cf9",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 26,
+      "split": "train",
+      "sha256": "5a8fd78359628aed33e1f80a8deb5938d548dd7f7efa7084a2c8013ab0e7157a",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 27,
+      "split": "train",
+      "sha256": "b858a0ea395a6b05dbf678ba83055ac6fb62279e6ecb13058d18671adb4f73b9",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 28,
+      "split": "train",
+      "sha256": "2a1da3603f070be9c578e6c48467f6cedb4df5004308d53898bedc29de9669d7",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 29,
+      "split": "train",
+      "sha256": "4e2a1ee97ac7b12582f5c839968a1f21507b95700d6043f3c985fb2611453206",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 30,
+      "split": "train",
+      "sha256": "51c2116dacac5f4517255f53c466389c7e747c9c8d4b4822cc0cb61c1532b490",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 31,
+      "split": "train",
+      "sha256": "74412f10f50f40b1997e5191d5aac40f24d490b3477c83077f28886a68db2944",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 32,
+      "split": "train",
+      "sha256": "dee3c933227b0e930abd7fcb9d89b1610403f57524a1ce5f91f2d8e82fc0c54d",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 33,
+      "split": "train",
+      "sha256": "ec337b6ffff6e67ecdc8fb08ef6e98b42f611c504806fdb4ee1fbd7d57136d05",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 34,
+      "split": "eval",
+      "sha256": "6a6fb4267c8b987ba8c327c87a814c9c9e3e0f719811de079b2f333e8117cca4",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 35,
+      "split": "train",
+      "sha256": "07f4b43d6f57e01475a34b0f7052d6144c0bf9dd9029c349bff362b6f2568f4b",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 36,
+      "split": "train",
+      "sha256": "82f1d99b884e1e6dacabf982741a0017b8d3e54f27d40172928252b5dcfc8d81",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 37,
+      "split": "train",
+      "sha256": "58d51ef7e711905929780ae8a641b1ae0d89898c09ba2a9b47931040691515ff",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 38,
+      "split": "train",
+      "sha256": "4ace4cb77cba5a0c0b35e945810c7d8c0ecd2d89e42e4556166ec6f4e7d19405",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 39,
+      "split": "train",
+      "sha256": "608f6efce12403e1989360458ac2868e3023bd61f9ce1171f07e6a6d5de44377",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 40,
+      "split": "train",
+      "sha256": "34d32ff42717058d7377f8b31577ed84358fc6c7be1dae274f78ef5a9ab72638",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 41,
+      "split": "train",
+      "sha256": "5304e8f79bea2e080572f980e78285083812339b7fc43b8ed3f445ec6eab0439",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 42,
+      "split": "train",
+      "sha256": "da7856748d3fffcb2c27682a0da492dd34ea6f458786ba9c6b8f4cc1e05da683",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 43,
+      "split": "train",
+      "sha256": "06b24a69821516395278845299a8e81d41a2ab4744e95f4824d78b95412cecb8",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 44,
+      "split": "train",
+      "sha256": "6be067060e6f349b95e5a81d72257bace1c547a004d8ee517db5459c3439e5d9",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 45,
+      "split": "train",
+      "sha256": "1b3066005ce16a6a14b7c76594e470069f77acfb667b781f6230baabc864dafa",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 46,
+      "split": "train",
+      "sha256": "9825dc0b565009c0094305b9938d2a44404d0b8ec63fd0a9564f3c28c3fb140f",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 47,
+      "split": "train",
+      "sha256": "16a70a1e27ba0605519a9a55f5f824d391b6bc755f6ab6388be797a51603e7ea",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 48,
+      "split": "train",
+      "sha256": "4709ed3be6e4060df19d6418f6d45543c57ee05a9e2777dce444079db90c56d1",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 49,
+      "split": "train",
+      "sha256": "3003699b8bc9bae93b547287e7a5a3d7fd9a8ee0c2c62fc6b24146f9c73858ed",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 50,
+      "split": "train",
+      "sha256": "8e3584e6edfb54eead183d7cfcc71b1b28f1f706da20a11c8656d8e5e1b4ca70",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 51,
+      "split": "train",
+      "sha256": "a45647572816116b02468c03e86c28c91523d2e557172022520ee7665049bdd9",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 52,
+      "split": "train",
+      "sha256": "08c6b63e79b1c05d87506f4c8a9a12d46b604324db718734c678c7beb5a2132b",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 53,
+      "split": "eval",
+      "sha256": "35d84ab7d1c62de5c67630588e363d3d9b139051e8ff245cd0a55473cc111f65",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 54,
+      "split": "train",
+      "sha256": "77a0cacc6bdc08cc06a6498b539225712fa78f38016f1035a3d2ed1e2943e619",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 55,
+      "split": "train",
+      "sha256": "15325a6faabb98c5c18e5f84bf5051a1c85b75f3e03d83c21fc318298bc6e6fc",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 56,
+      "split": "train",
+      "sha256": "92fb8994f31effae60cebe623b9cec384ba0d13d7df00a2cae4e94d3c7dbce6d",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 57,
+      "split": "train",
+      "sha256": "147873f03b7439e003d596dc3dd051fbe6dfa40cd7fb036b93622720eb0f95d7",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 58,
+      "split": "train",
+      "sha256": "a63dbe187e67a73b3607259e404d63b9e327b6bcf3876b59d7b4f34adfdef103",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 59,
+      "split": "train",
+      "sha256": "7b40272baef1c51126397a92a06c7457761a539200f2946c3ab5970b1ff63379",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 60,
+      "split": "train",
+      "sha256": "0f560ed284ba270a367b961572e41b9b814757d951bdd8e13a81570093f84299",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 61,
+      "split": "train",
+      "sha256": "1dbfa678d8afc3a2c9530678122a8dd9ff0f6bc5b2579df721e690c5abb61845",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 62,
+      "split": "train",
+      "sha256": "45e89ed46bd4a4d66f7c2721af7f57a100cb0086e0121d2a01a88ab826913c60",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 63,
+      "split": "eval",
+      "sha256": "b3605e12a6f5591eae283579dbc7435ff76cd00b6e8bf4126bebb2e28d5e4d5e",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 64,
+      "split": "train",
+      "sha256": "6679844aa3c8ece395056acf42ebcfd0fe3953b018d4e842517ee0532cd70b06",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 65,
+      "split": "train",
+      "sha256": "bf27b2c17c34350beb4efe060f6d34b99c396b4dd83c4beca6eb1ddd2ea7b8cc",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 66,
+      "split": "train",
+      "sha256": "d06e38714100bbdcc192693d7a25388541ecddb06241903bfa9d0fffaa25ea64",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 67,
+      "split": "train",
+      "sha256": "838876429a775df8e40a6316e2997e1919d903b821676183d332766546458653",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 68,
+      "split": "train",
+      "sha256": "56a43c2b073412388150a770b6f009e48e7b1e95f154306b9681c618ae4046fc",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 69,
+      "split": "train",
+      "sha256": "2cf07d05956dcca03b36914ae3129062cf7d4105e87670932099df061b589dd1",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 70,
+      "split": "train",
+      "sha256": "e9e9f736345c32852b615c3ef57d6a897f191d2e431600bcd2de894ebc263078",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 71,
+      "split": "train",
+      "sha256": "05deaed179814fcaebdd0b3d328f34e6c8a215cfde733b5eaea6c89879f07a36",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 72,
+      "split": "train",
+      "sha256": "34a950136eb3ac9818849cee5e42881f4a4207325b2e51674f91bf57709a4fb8",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 73,
+      "split": "train",
+      "sha256": "c6986097bf5ae61153b42072c5a7f00d99400c1fa9ea234a8499b1f924702256",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 74,
+      "split": "eval",
+      "sha256": "f9cf7067aea802ed78404b69d628f359366640c1c73589cd685c0b9b7bc5f3f7",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 75,
+      "split": "train",
+      "sha256": "826915b34d1039bd522ab57ffff971395d7644d59063031d6d1f01c94c5e68fa",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 76,
+      "split": "train",
+      "sha256": "32195a5050d3da2b24b0b105c1d04a6994ffaed566af4056781095a2faa1311a",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 77,
+      "split": "train",
+      "sha256": "ea3bec6edfd9e86cd64010c43ee1b57f77d381db7f7ad604745be78dbea3afb7",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 78,
+      "split": "train",
+      "sha256": "2a70d243cee0696dbf085ee39ee31c7116866321d43166331cd43e91b0daa587",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 79,
+      "split": "train",
+      "sha256": "83fa72b8b276840c3973a62f415809335983486ff2d852d723556f58bca89916",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 80,
+      "split": "train",
+      "sha256": "0e4349740362991943e0636e6157a9172bf523d24843b492f20cee03db6f6870",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 81,
+      "split": "train",
+      "sha256": "738737ae430e9bed1e77b2fa6314cecf11461917c57b675f6485cb6b18852257",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 82,
+      "split": "train",
+      "sha256": "72f9d6b9dbe9a352fd57e421dc5a4bc9c01df17c815c642d3b75ff58ac1bca7b",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 83,
+      "split": "train",
+      "sha256": "f3c0fe68e0ad2245dac5500074a61e7771b8feae8df5365b8a70fb3ee1e189f5",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 84,
+      "split": "train",
+      "sha256": "a4954421f44e5560bb0b9f25e12d45839d29450085d393b8be564e6d30ff0f2f",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 85,
+      "split": "train",
+      "sha256": "6b0935eccb98d90e16b0127cf016cad870df7c47bf109e1d160f667888530c58",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 86,
+      "split": "train",
+      "sha256": "ba09d34eb98d35249941d5420aaf857452262f0c58a9909e0a18d29a0f855403",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 87,
+      "split": "train",
+      "sha256": "b20f99d64209c283f84a8f1a0bcc300d7098a6c7d68e2543e1ba4eff916763be",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 88,
+      "split": "train",
+      "sha256": "a23ff54ab3b3afa350f8693985370528caf835018b74d5e94e86b43d95bdefd4",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 89,
+      "split": "train",
+      "sha256": "6032f7ad901be2e07f1f532b062899cb3c260db6223127d93f167560dd59a338",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 90,
+      "split": "train",
+      "sha256": "315917df640c2ae0bec753322a184db1c1018842e846d97ab9239010eabaf61b",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 91,
+      "split": "train",
+      "sha256": "6446231890c8914b0a1553ff46129d6f9067d37ca05a3d8a157a6a0a74444ecb",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 92,
+      "split": "train",
+      "sha256": "8570ef0b67435351331d67b9bf40b20e747313b1d3b6ef897c5715381f5a8170",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 93,
+      "split": "train",
+      "sha256": "b7e637c7264140bf85530b5861a0b26d267ae156195481f04d5306760f205e19",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 94,
+      "split": "train",
+      "sha256": "2e0769fe6f4557e579fb967be95a1933531080246a7592a1cad6c8440305bfb1",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 95,
+      "split": "train",
+      "sha256": "b42f30ea4ec562611fb90187324e71f111c678ec79ed09bcffc74fdb2979eea1",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 96,
+      "split": "train",
+      "sha256": "467e2b26675ed7a8a136c239280d179e9c58214f721dc0214263c155e9fb7ecd",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 97,
+      "split": "train",
+      "sha256": "f42a01da348cb8523c607f9ca19f292114f38c52015fffb249d5dc27e5dcac3c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 98,
+      "split": "train",
+      "sha256": "cce9eb29dc2472be62c451d2ee5d793313fa6c51640b80f51fef5de09dae38ff",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 99,
+      "split": "train",
+      "sha256": "a8127b1a4fc1633a55c4031b1f14963346c4eaf9e3cef276a38416faccc9cf25",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 100,
+      "split": "train",
+      "sha256": "81a7a935e7fdbf5d205f6e8a00493ede5756d553c8fd5a5a3e7fdec2dcbcb025",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 101,
+      "split": "train",
+      "sha256": "f049d28aaa384ac1f2636500ae07764102bd663d34a6c7b2c9ce9e2f28c26c88",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 102,
+      "split": "train",
+      "sha256": "1354ca0658fad8c7f0fc9ce978cdde616d6e81cbe3b1e9504a45c89b74aac31a",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 103,
+      "split": "train",
+      "sha256": "0798adb116c7b6224ccf3060d3070763ab6ac0fefe4ce65efed4b78205ef9c40",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 104,
+      "split": "train",
+      "sha256": "74a2ba236cd6c75b988854cf8078a3eedd928562206d2ead2ae4e51eee5a27f9",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 105,
+      "split": "train",
+      "sha256": "d8fc651b0e5143c3148abd83f0ad73313a74d2f8867ff3d225c4adfe239a6af0",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 106,
+      "split": "train",
+      "sha256": "036b76b7956187fdc6fd57d503bb7d2c10146368771020f494f4cdca8073c826",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 107,
+      "split": "train",
+      "sha256": "ce8445f3e0b7047718b4864ca323fa45a2cf69bf9bea973318c4f3348ea27417",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 108,
+      "split": "train",
+      "sha256": "48265e196142676b767aaf2ed510f93e6e2b7dcfb824b44d16d3d1ed1b996c23",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 109,
+      "split": "train",
+      "sha256": "5477714bf1ed1bb1a3b58a798f45bdfbd8b762b2208d58d0090ff6f29e6f8eef",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 110,
+      "split": "eval",
+      "sha256": "8cda69354ebb2c42d1b762b744519fd1b37b14a08b6e88a1e77bc79a394ae95c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 111,
+      "split": "train",
+      "sha256": "065757e702f2b0d6bda42f13068d88ce6fb21a10b3b867eb9e49cec2bf3a9dba",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 112,
+      "split": "train",
+      "sha256": "529769c38b83eb5f3f0e26d29cdaebba63fed02bdbbd4352a27cfd621ce44f3a",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 113,
+      "split": "eval",
+      "sha256": "e77df90237568983b57b56336873e346a0291c42ba53ee2492deda5b6de9b979",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 114,
+      "split": "train",
+      "sha256": "6f0e284c4ed5280f9f00529404b91f73869d0479d39b0163d15e1a621084f5b0",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 115,
+      "split": "train",
+      "sha256": "78ddf692a16936f2e4d2681a29dae2fd844db9d4a1c3505f61ad908ddaabc1f6",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 116,
+      "split": "train",
+      "sha256": "9a8ba753d38ebf4af67cb8c7ae19ebc24c169cae32b487e58abe3fe2f55da548",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 117,
+      "split": "train",
+      "sha256": "8d91207a696b0bac0fd496e08c428f13e4b5959fe4f2da444dbb4f039d1b9849",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 118,
+      "split": "train",
+      "sha256": "3ada01b8d06776addb75e9ac5241d6235ee7e523a0f93dc5425c55c3ceecdc04",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 119,
+      "split": "train",
+      "sha256": "3dfcf85ea9c3aa6dd5758b215151334811617e955ee67901a4e562d10c7c6436",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 120,
+      "split": "train",
+      "sha256": "11e6d0dea7f350d0b49b1326fdedfdc13001d5d90b047defb65370794ba4afdd",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 121,
+      "split": "train",
+      "sha256": "30a7e22c2891c4e255fc7c0deea2f8997b1734ad44cf50ffea02ac02f4df9eea",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 122,
+      "split": "train",
+      "sha256": "d745d39b57d86e81eb49fd0bc33e9b60b178677d39c96f07b4d45207872fa32f",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 123,
+      "split": "train",
+      "sha256": "48beee9f00c434f4dea4712b3b76193a6b3fd67e1e21a0069bb174b3391abb5d",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 124,
+      "split": "train",
+      "sha256": "dd058d75d212a6707a84b1c7dbd88cc82445523b09dd5932894783758b0a66fa",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 125,
+      "split": "train",
+      "sha256": "260b22f56121453d0cc6170c50fe3dee549b061ad39c964b345716a4076d3c0c",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 126,
+      "split": "eval",
+      "sha256": "07056d7d49cde29106c33ff66aa28db8c7a7e2c349e8ba2c3b1cae1260dbdc0a",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 127,
+      "split": "train",
+      "sha256": "dee4d282cbe525e2962420f6709a12e42d8dbf2ed7baa59f742d78dd84e4468f",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 128,
+      "split": "train",
+      "sha256": "ae0751ac2b95e9e23e6d07a8bbf3462e15dfda26211f7c675317f3a3d3d0e3ef",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 129,
+      "split": "train",
+      "sha256": "0e1688d646fc22ef74db1cf1cdf6ea8c7c88155c9b7127c3f88e7e19c4019cc3",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 130,
+      "split": "train",
+      "sha256": "5590a73c4eacd377b9f6c6636e676eb44d39536018a4e1997f593fde162d70df",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 131,
+      "split": "train",
+      "sha256": "0a9704be28a5e90bf1f0b62de0563cb4aded71942747d62a285f33b6f858b9d6",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 132,
+      "split": "train",
+      "sha256": "9e79c1b8881bc01d67b7d6eda0ec6e366b710cd5f92a8b3d98228ab6af5c7206",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 133,
+      "split": "train",
+      "sha256": "665d1721f8fc69e6eca9f395f2bb5fcc97b6e8fab90cc713b7a19175791803ce",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 134,
+      "split": "train",
+      "sha256": "d09d369645cc274ee1cc8152e5458c93dde516aa90790734833680ac3842fe56",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 135,
+      "split": "train",
+      "sha256": "657d181c4d5f3c9e6a7c6fd9a996c397ff7502469e398ad4372b37e1753a7e2b",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 136,
+      "split": "train",
+      "sha256": "2f7ca926a0cb3f07e38d7a170e684f8d035b611ad373eb83d712eeea10a04bb0",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 137,
+      "split": "train",
+      "sha256": "b260921911ec320db1e189a0e1ad46dc85c3b615e466a52f2c448a7e8d9288ec",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 138,
+      "split": "train",
+      "sha256": "192dec05a190a3c355410b7d3701f4b7fa7d8e67e4b44e8c3c264c38ce096b8a",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 139,
+      "split": "train",
+      "sha256": "a0dd36e4af2e449a9c7ac8041b0e147dcf6018afafbb58d8691099874d37966f",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 140,
+      "split": "train",
+      "sha256": "64ae7386728dbd19494f42ee65da112bb90f61be17051cdb23b67c847fa9bf75",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 141,
+      "split": "train",
+      "sha256": "01690e62311e461873a901445fff24ba4a4be4bd35d52149b3bc5d54543155a7",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 142,
+      "split": "train",
+      "sha256": "10f4f368d101973a3edee040dec61cdc793fb30a201db0e6038b039dc41ab875",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 143,
+      "split": "train",
+      "sha256": "8d4b5a4cd28a600fbc4733e4afe188dc128c296c3bfc8bdcfd4e719ccc479108",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 144,
+      "split": "train",
+      "sha256": "ecd4a1f7fb2c7d16e30b4d9bcdf2eedccac443ff3ed50956abbc95ccb94a0d12",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 145,
+      "split": "train",
+      "sha256": "1efa71cb089226f1932bbca3259ae9976a2e872792a91c67c6eeecd64a6216e1",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 146,
+      "split": "train",
+      "sha256": "a1b6292cfe45e44e3b3727c4e1d912b22ab413e8a1bc062589c3dcfb05ff3260",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 147,
+      "split": "train",
+      "sha256": "505dbddc804cc97a116d719a7b3499642b019a4c5e23ff59993e5565d92b8f09",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 148,
+      "split": "train",
+      "sha256": "dd80019afa9fd7c84a6ff229458283f7d7b4dc09c656d8c5df5f7265ae0aab62",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 149,
+      "split": "train",
+      "sha256": "e6e27597a440109edb31749ec0d4691d49f20a82a85a51141f297e5d3ac320d8",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_msa_008.jsonl",
+      "line": 150,
+      "split": "train",
+      "sha256": "20e0dddd51f04248a68ae78131cd3d19eaf32fdde48dc80ca77adfa47b2f6b3b",
+      "dialect": "msa",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 1,
+      "split": "train",
+      "sha256": "d8b8ed9cfa997982b1429feb969ebd132564717274e20b5bf5bf11ea51d2914d",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 2,
+      "split": "train",
+      "sha256": "1e122785eca3b6ad19a5ab83a535184c28c553141a18caa215d547507df3f978",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 3,
+      "split": "train",
+      "sha256": "e83b9f52ae102c2159dc30f5fd9133f4b4dfe479ff3996e2df4ef432f256a142",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 4,
+      "split": "train",
+      "sha256": "fcc22a68e2946bceb160a228dc70a8380a249a1ed4fd7352a24681d858b8f679",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 5,
+      "split": "train",
+      "sha256": "52b895821cf80dae829454c50b6202740a33bb3cd2045b27b4b4f15ed1f5d2c8",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 6,
+      "split": "train",
+      "sha256": "7b372f5e5ceaee3f1049ee9ade0aef109e3ae8e0eaa68815bcfab522925ae920",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 7,
+      "split": "train",
+      "sha256": "fa173ab9ab356e48a2210d22ddfd72acec27031043abceedf4b2ed5d44dfde96",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 8,
+      "split": "eval",
+      "sha256": "0c18bc2fff89424f18da2b3369edd3bdcc3a39fe5dd3293f5b6a9efb63ae14e0",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 9,
+      "split": "train",
+      "sha256": "34fbe40aa55cf4c069022591908de139c032c2e9cd8dbd4a4c76df80a0b53aee",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 10,
+      "split": "train",
+      "sha256": "c50776874c9a9d8028b2db772734b6a6452345079837edaaba5321cc4e171fdb",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 11,
+      "split": "train",
+      "sha256": "82af928fff8f1c69276d80d01620ea7eba585a5db72dc6f96d4732e2c483a59c",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 12,
+      "split": "eval",
+      "sha256": "ad054aa0c57865e1f5f2443c81fb4a8e847765edbf5786d7eab67e12041fcb16",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 13,
+      "split": "train",
+      "sha256": "c6d07e18433d6c48a77591c0473a45a0583fd61ab42b96d6aea52437b27736bf",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 14,
+      "split": "train",
+      "sha256": "0ab6c0cff7b914c01bab93a5b304b08023ce6ca1ca37088a09bc5f4fc7740171",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 15,
+      "split": "train",
+      "sha256": "12a9b54cf35eb1a811a07bb4d07f93a9fa29b96e68a11a4c325f5663027ec269",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 16,
+      "split": "train",
+      "sha256": "5bdaa7ba4e9c548269452a77b44ec6d75b8d21e41ce81d226abfb176de29f305",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 17,
+      "split": "train",
+      "sha256": "54b92d6fd3722b9ffd7e77f4f8bc01ab3a57eb6070049be8cb94bcdfd785f003",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 18,
+      "split": "train",
+      "sha256": "104fe8c7add02937fe6c1b1f994f5217890401c726203331eea72a04746aa8ba",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 19,
+      "split": "train",
+      "sha256": "e78f5049a2425eeec4ae694de07e5553c08e021da8ff99bba8a3297b4b18c47b",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 20,
+      "split": "train",
+      "sha256": "2126e040af8215334f9d06f8f6df55bced0dc3dd15597a7c4d00e8b6e1236739",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 21,
+      "split": "train",
+      "sha256": "9afee8291ce77fd8b0256210cd929c81f3b94b961cfe0b8221395a1a038127e3",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 22,
+      "split": "train",
+      "sha256": "df91c516c2111973e484b78cca389918c28a36b2dbf5741524900fd70705406f",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 23,
+      "split": "train",
+      "sha256": "b4c4a3d2228859c1911ae1436053e725b378cf161132f2f057e15fadd4af181d",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 24,
+      "split": "train",
+      "sha256": "866851d782fb76350853e5b14862aefbf9f9b2fa5ff759af57898448ff390280",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 25,
+      "split": "train",
+      "sha256": "737fdc59d151db826be4fde2dd6fa86a7d1ad12872dba941f482b874dd13c69b",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 26,
+      "split": "train",
+      "sha256": "c5c4c46bf9bb4969494f517db524e7daeba11983383dc6628aed24780379fe65",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 27,
+      "split": "train",
+      "sha256": "134eb7ce40fc5144b9b49739ce48d16649f78da6d30ae0512d2dce608d8da531",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 28,
+      "split": "train",
+      "sha256": "0ec92f270dd46fd4cde003f293633484df0ac6341109bd6a140e3bc43714394f",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 29,
+      "split": "train",
+      "sha256": "bc64cb29a5c91926b2ef0aed25817f0f7f92c6de18a83e7ffde6af99636a32d8",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 30,
+      "split": "eval",
+      "sha256": "11193b604fd639de27bf8820458c9cef378957669c01ec321f873af0f818aeb0",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 31,
+      "split": "train",
+      "sha256": "8737798fd3263fcf34c06aeb29989a1266d5549e00518b56a7b2a227b67785e4",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 32,
+      "split": "train",
+      "sha256": "8a0aff49508c8627a2940f7b086d5fb49bcbdd5b7d9d63c1c87ad6104ce654ab",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 33,
+      "split": "eval",
+      "sha256": "6e204539310d76a7a289c09b573aab8a1da68e14a625476a7087f611a475eb76",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 34,
+      "split": "train",
+      "sha256": "71f87e708bd203435dce374ef85bbe41d2c0b04ea6e6911123fa1cdd0b17b789",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 35,
+      "split": "train",
+      "sha256": "5d8c52c0b62148e687146a54d2f0c4f3e5795de43a48d1d52edea7c131739c8c",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 36,
+      "split": "train",
+      "sha256": "c237e90e956c589616537faeb69548ee71c74331089bf26cbc55bbc750af6e02",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 37,
+      "split": "train",
+      "sha256": "6e9554409d6106e74f967a6de547f6f550e3387d392a1831e1b748f67991b308",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 38,
+      "split": "train",
+      "sha256": "d44d17cada2fc5b21c3895205e35029f77cd792d3a2e0c84a35a2f5b0329d8bf",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 39,
+      "split": "train",
+      "sha256": "7079e77bba569a06614d621af454c33792fc9c4ddc018551d6850374a9c74fb2",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 40,
+      "split": "train",
+      "sha256": "2e49f670fd527f76cc2b63edbac6a1de2a4e2d8fb6943b483d8c36356b82459b",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 41,
+      "split": "train",
+      "sha256": "f00cac36f0605ab5b8e480f7418c07c6029970759b7cce69136e0d5b90644b97",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 42,
+      "split": "train",
+      "sha256": "fc924c61880c338d79d657f69c8f3170388da92bd4b775d63924ccc2cf69ca04",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 43,
+      "split": "train",
+      "sha256": "999ae551b5411756d67ad24d53578af67f5aa780902c21e158af9554327f3f75",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 44,
+      "split": "train",
+      "sha256": "105891154f4188570cb9198bd5da5cc3fc1c928fd244511fe5bc45283b4ada9b",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 45,
+      "split": "train",
+      "sha256": "a87669bee3e858460391b807b44a4f77ebb39fe411d0fc2cbe890e069ea5123b",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 46,
+      "split": "train",
+      "sha256": "87d6afed0c31c1b1413417e3c4939efb46671d181cb1dc993d6213d74627db9a",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 47,
+      "split": "eval",
+      "sha256": "2fdf5c0516f26ddcbeaa3957fe854c3e6563aa7238c8707264ef78ef4f011c13",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 48,
+      "split": "train",
+      "sha256": "21bcf338723f1be1ea938a238ea03552dce5bf8340a24c6136fb0c062a211285",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 49,
+      "split": "eval",
+      "sha256": "086e56c2469176396984ef4a792a76492c8d6b5bcbcfccbccb2cfa0b9c3ae415",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 50,
+      "split": "train",
+      "sha256": "c115a581fc8a2cfa57b78d63768cb722379f25c4aa6a8539d5c5d6b5f5e85b6c",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 51,
+      "split": "train",
+      "sha256": "21769d68fd9ca02ce1ade7c69abece78170a97584043d73bd51dd09c5a2bf762",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 52,
+      "split": "train",
+      "sha256": "b230deaa5412478103d079021f8b08c91287cc4ce98eadb9fa499345daa7b52b",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 53,
+      "split": "train",
+      "sha256": "82841b7728ed089ae6d5ef6b2960d1e8cbee1ee42f7754175f4f148259b75ccb",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 54,
+      "split": "train",
+      "sha256": "e25f60c939290682e1f2dcf4c409464996c460f1dfabd5fca81c774b286d110f",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 55,
+      "split": "train",
+      "sha256": "fe12ed63ffec81de9748326c4fe73d55300913444e32cf46ab36368e98ee48a4",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 56,
+      "split": "train",
+      "sha256": "b544a944b8f1c8f130283dcb3247776817e76eb76faee5185f4fd89ff9a7827d",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 57,
+      "split": "train",
+      "sha256": "1eaedca718a0bd0a4e5f9a61956843854a44b98c15c8bb312cb870f27d1b3500",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 58,
+      "split": "train",
+      "sha256": "a99791038ccf67fc7af2c111a95a9d9c0e014af844a26c1a5c3f90876c250b90",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 59,
+      "split": "train",
+      "sha256": "79cb8558ff045c7d4cbcac81db27e39eb5ab7ae96a1f7bb3958372866e99bdfe",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 60,
+      "split": "train",
+      "sha256": "950c41b9f028a80810ef70bcfee09a3865190e8f6c9643c759e31bc5deb14837",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 61,
+      "split": "train",
+      "sha256": "7f2829b2920035baa6528227709b6e643f70a3e2af5e434c9f58ef0366c9fa02",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 62,
+      "split": "train",
+      "sha256": "b2bcd0f45c65ffecdeaa64ec89623192a7bbbe803c011c17ea2ce6bfaf17a665",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 63,
+      "split": "train",
+      "sha256": "e80af9bbafa29a9f654ea2908347cd4ee3080c7996bdec43c6ad66dfb6f24557",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 64,
+      "split": "train",
+      "sha256": "3960ce15a4242319a31485da61630eeb4fa5824d4d373a43c8993f413aefb344",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 65,
+      "split": "eval",
+      "sha256": "c63436c16541034be19ba732b1b31f4a605d2f62c8b870ade46694285afbfbdf",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 66,
+      "split": "train",
+      "sha256": "3c14ae26ed4151f344224c1253671a38b782611b5dd1e5b52f1e9f1487c47db9",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 67,
+      "split": "train",
+      "sha256": "c0715c2cd9f686f2ff4668381e14303e70dcccc2bda0a86e02b78c1697adf3ae",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 68,
+      "split": "train",
+      "sha256": "bef6004aa3fa206e0fae96f0d170cadb43dc1b8d15b96533069c564ebfad72fd",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 69,
+      "split": "train",
+      "sha256": "391de4fa72bbfdd9b54097c7a946eb83637a16ffcab67b63b517fa69b044b5ff",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 70,
+      "split": "train",
+      "sha256": "ee8adc5265f20e679f6c64347a5f4179cc4bb57a1747d2231c9c9bbe9e637137",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 71,
+      "split": "train",
+      "sha256": "4a7fce51f325b62a22c34b9ef83509a6880d3048f1afa8f42a688d9180d554fc",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 72,
+      "split": "train",
+      "sha256": "b9fe464ebf209d49ce1240e59791f3dde91b667dafa7264c4d6bf34b12059fd8",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 73,
+      "split": "train",
+      "sha256": "f7a66c8dc4cfc0f6099d638689105ff28602814b19fcc307f20d504244c9f958",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 74,
+      "split": "eval",
+      "sha256": "67914c468921494d73ec2a7b1b0c0686dc161a799c56a7224e1e19758b3c04a7",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 75,
+      "split": "train",
+      "sha256": "3c6ec217694d3b441b8888d1462833eca3f4adcac1daac85821f8b9f972a1a21",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 76,
+      "split": "train",
+      "sha256": "2fb379bb85cc0fc1bebc049bfc1475fcfeb5750bb056792da1dd7b88ea19c31d",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 77,
+      "split": "train",
+      "sha256": "69dc8c71ef638f12a3bde9da92f7f2deae0821b933074771c77491c6cdef37f7",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 78,
+      "split": "train",
+      "sha256": "a3a9fa7b966f8f84b80888c1adfb26a87655013a0301a935719aa3aa6604ecc8",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 79,
+      "split": "eval",
+      "sha256": "3d096119cd15f9a5af7231c45e136595d0b361ca0d0891e4583ef603d7d7b325",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 80,
+      "split": "train",
+      "sha256": "0600ec043a06205bbc9980af8e66eee43de0482a56ec3a949757b762f5b3e040",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 81,
+      "split": "train",
+      "sha256": "c6e9bf03921df905ae4648e82a5f8665b406076255751a17e807890fe7fd939c",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 82,
+      "split": "train",
+      "sha256": "2f33561c58bba819dbc8e4f3fefaec250e71808c106b73c163900ff3d6d55c07",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 83,
+      "split": "train",
+      "sha256": "4c6417c441170921d231224cf2db9f89fc79b0854a8e9fa45fccff246f815b65",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 84,
+      "split": "train",
+      "sha256": "ff732bff8276f73a6000cc005c6137ebe00889a71c4ec33b1bcc9aac6ec00933",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 85,
+      "split": "train",
+      "sha256": "4721940f281fd7a453ee0451692004db043fea7df524e5c1fd42d8d579c2fe28",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 86,
+      "split": "eval",
+      "sha256": "827a5e71e29bdc00a2869ceafbb542c156e3585eb9f152ffa72a568f2cb2d77c",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 87,
+      "split": "train",
+      "sha256": "7c360453f718ba92929c2ec1dd3f5e7da4b3d46ef0be8181a8c1bfe8a038c0ee",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 88,
+      "split": "train",
+      "sha256": "c077d0d0ca820540a81c3d2e66d8d09f2738b2add43c328ed76aada26b0179e8",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 89,
+      "split": "train",
+      "sha256": "f5630d8340a5480614b7f7cc74de38f3f5f2da5ad12c9aa2c953a78e565a71ce",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 90,
+      "split": "train",
+      "sha256": "6b1e4302ca5e9afb8684abd21dcf4c8294a17511d0215e0a7ccc38e77618bb22",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 91,
+      "split": "train",
+      "sha256": "b8e5ec641fd568da0db1a907e45760cd8978e5b0fb703265ee51ef85fc509e2f",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 92,
+      "split": "train",
+      "sha256": "ca985ba4592a39fd6da450459bc9a3906a3ecaf62f8c4dfd39a29579dc8f0203",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 93,
+      "split": "train",
+      "sha256": "9d307944e648d0ea76317e86b66b09b5a8efc7c89d07ea84dec74019e7f3ef39",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 94,
+      "split": "train",
+      "sha256": "b4ac5e848c03879b83344246505dae5ad457c912fc368049e12ba27f3326d0d5",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 95,
+      "split": "train",
+      "sha256": "a662cc49c2a96ae6a179056090c3f435c031a5990368fafb259b0e503c87e216",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 96,
+      "split": "train",
+      "sha256": "52f0cf52669d6bed11f95764799e721fc6abf17a411ff966593e1f0712f50263",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 97,
+      "split": "train",
+      "sha256": "2db8f388690438558d76abe48c7d1c5b4594e50418c0d36bd5efadf71b3a5376",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 98,
+      "split": "train",
+      "sha256": "0c1487c21961a1a12e275a7f7989c82402aef45ec8bbad24e755c926ba544cec",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 99,
+      "split": "train",
+      "sha256": "c907efe5ffcdbb647275603260d8c81692c2b7cf0ee310c92d50319688e435a9",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 100,
+      "split": "train",
+      "sha256": "24a329f0a5b8ab2f16697a96721b76f1849e774f006b4b2fa682d81c117d96bf",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 101,
+      "split": "train",
+      "sha256": "e67ccfc1293e5de60f81306eb6ab5b1c6890a32a2672b79e99dfc0f965303a27",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 102,
+      "split": "train",
+      "sha256": "7fdb94fbdcab3e0b4ff7337e5a63ac76c1a68f7afd87bc74a52a72ad1ff8dfe6",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 103,
+      "split": "train",
+      "sha256": "b3390058584591dee60ece2e6aa6caf3212d44830f2d5f4a73e17832fc315e9a",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 104,
+      "split": "train",
+      "sha256": "a62bb3288b261a4de48f513177710f24330a7cfe7c722174af8032ec47167ff1",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 105,
+      "split": "train",
+      "sha256": "79853caa744532bfd1c97a446e8e577b0630d407c8388b5b7a2f7a66f005cb01",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 106,
+      "split": "train",
+      "sha256": "373a0ca3dd74f691450c8a431e0959a29a2988134c143f7bb2a78c4374b3642c",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 107,
+      "split": "train",
+      "sha256": "96e6df34775134703e04e9c08d60aab8276ea160e44282dc22fc5acf7bd62c7f",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 108,
+      "split": "train",
+      "sha256": "553d0a8a9929fbdada4b170858b6862f30841cd1b8ae23c4129a4f8f13a8eeff",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 109,
+      "split": "train",
+      "sha256": "940c6b36a9fa340194da2257b9a78e1949d753c5ce61c99d671f9f3d120f388e",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 110,
+      "split": "train",
+      "sha256": "e3de80976a5e71b7efc4483ca2c941dc7e123e4aa854be21ab895643a080fb9f",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 111,
+      "split": "train",
+      "sha256": "cf7ff6d12e23e3148f3951ed388ce7650c337c110997bfc79b58381429473839",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 112,
+      "split": "train",
+      "sha256": "15b8e50cfa0f6fb8c865d442b2f598f3a47608a09144ee91f7190545542931cd",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 113,
+      "split": "train",
+      "sha256": "9cbacc9ba9995b4b96604686a184169c1e2acb822b74bbf608583e47ebfd35e1",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 114,
+      "split": "train",
+      "sha256": "135673354c244cb24df7318634625bc67255f9df21a382734fea547e493132ff",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 115,
+      "split": "train",
+      "sha256": "f34f3fd0a5e7092b4bfbdac9cf757125d031b2197e243640d83226dccf11c79b",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 116,
+      "split": "train",
+      "sha256": "61e8cba46672d18743fbfcd68f8cd2f6da96fbeaa6a3bc2edd392bba3de064be",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 117,
+      "split": "train",
+      "sha256": "db284df5de324be0cb87640eb3a0095908f8c93cfd110500129ba5d251376da0",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 118,
+      "split": "train",
+      "sha256": "a103a0dca0fdeeec167d9a802c22e6dd14a3ae5e9b1cf3f9ac4bbf515afa9c93",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 119,
+      "split": "train",
+      "sha256": "e13b8bc972ee6b7b8f6b1ff4d55d147bf0fd372f1da7525da9f15061196e637b",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 120,
+      "split": "train",
+      "sha256": "442519179c6a9a7768b7e4042ec12f7c97e2803a72d874a22f518d2145d9d472",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 121,
+      "split": "train",
+      "sha256": "4632495d3992d916fa0a8ba4d4a1e239b51b00491fe0edb25767809d901988ce",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 122,
+      "split": "train",
+      "sha256": "af925f906c31e7879d62528613f5a535ce83c47788ebef688f5e1bf315f2c510",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 123,
+      "split": "train",
+      "sha256": "b12171ea3be1d8f74c56a7a09b2434b84d92377eeb6f5350b98005a87776bea1",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 124,
+      "split": "train",
+      "sha256": "40df2589492053d0dd36f26dbe6416f6a93e2e9e9d26f74c04f3566cee28227a",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 125,
+      "split": "eval",
+      "sha256": "e0f8d832b6383006de6a51b39b4f18188bb65c0b3ad09ea397190cfe853cb9d1",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 126,
+      "split": "train",
+      "sha256": "df179e4fb8e0c132b22e830a88c11fc71a703d0b443b5d39d198014697f2f10d",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 127,
+      "split": "train",
+      "sha256": "719a216262fab9367e4eb8f8d929b38db5f77b10697132f4d142e691b4cdcbd4",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 128,
+      "split": "train",
+      "sha256": "0cc2298b8785a7bd63fc2f81c02b9ab60abb08f3aa3251f8e640a95ead35e830",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 129,
+      "split": "train",
+      "sha256": "adcae8a29763a457621e99cb554ab62b64ee9fc3381a386567b3df0b269f784d",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 130,
+      "split": "train",
+      "sha256": "955112d65c9a9d2bd06cd1f4cb93bea2cd8f4ae242c14f3ff293c3f2d7cf08e5",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 131,
+      "split": "train",
+      "sha256": "d0f815e3b46f8c824c1c9e009af9b58c03bde5659d5996417b2aee2ecb20e14f",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 132,
+      "split": "train",
+      "sha256": "a5e2daae279beb19b7f23b1152e1867087d10cbe93420353a622ead4c62f339a",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 133,
+      "split": "train",
+      "sha256": "3bd3f7a94d505fbc2085a85efbf2a90570b064c56f6d8a2830b58b0f00213fcc",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 134,
+      "split": "train",
+      "sha256": "44c3d4254f7cdef9e3d97998500d739234e7fb024a350a64fb2b4e0ddb367bbf",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 135,
+      "split": "train",
+      "sha256": "b10de75e40253f7a3567e3d4581d8583e34c1a539d808289aa5e1185e5606941",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 136,
+      "split": "eval",
+      "sha256": "fd75b8dbc0d202e87d02f974f460d7ae2df7bdf7bbc251a67ecd23aa4662a302",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 137,
+      "split": "train",
+      "sha256": "1b9bee069552f6fa3fd4c6b699c34b8d8ff87c393076c23db27583c03846ee87",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 138,
+      "split": "train",
+      "sha256": "1dda2028718c6948e2d97dea4d894ea45e974d8ce735bd16bb1f34508a1823e3",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 139,
+      "split": "train",
+      "sha256": "9d57f29381fb23f874ca2b29bb82df049647a40b9f83ce33cc74db57137fcbe6",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 140,
+      "split": "train",
+      "sha256": "1235fde949dc888d3a105a0593e122d1a8ff2cd4b7455d7302e99d76a329ca76",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 141,
+      "split": "train",
+      "sha256": "7bc666e5ea12feced035e94d4bdc75679e8c2560f947185120ab1c6eb0240561",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 142,
+      "split": "train",
+      "sha256": "95c7667b1b0d3a554320ecc4d44fb422743dc651f7f56077f5b07c82c0d60b22",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 143,
+      "split": "train",
+      "sha256": "d30aaecf9f64784d853547c6779ab6a3d14ed5aa3d4ea8ed3c6717dc07af2932",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 144,
+      "split": "eval",
+      "sha256": "5a1711ca0b0505f75e5d0d3c74cdb990f85c4ce19ef312b0e9b960c9f5f73cbc",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 145,
+      "split": "eval",
+      "sha256": "2c0021f420525b1853be0d1c84d8e9e7534f7efebc65576483b316376bc59226",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 146,
+      "split": "eval",
+      "sha256": "215fc1f33bd4c130fc29bd8530b5f36c75b9eea00e1bc53db1160f2c18d15352",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 147,
+      "split": "train",
+      "sha256": "d05815e6a660b246335436dcb3147d882a06cef12350bd1abd3ff8e75443b0ac",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 148,
+      "split": "eval",
+      "sha256": "dcd755cf40d5d8c3cbc960d92270271a6171da824bacdf3bc2b0ce20e2dcdda8",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 149,
+      "split": "train",
+      "sha256": "6d460f144f97d6b5aec7cc5938df8032af5a901e4652742d4fb358ec9a4c089e",
+      "dialect": "saudi",
+      "quality": "gold"
+    },
+    {
+      "file": "dialogue_batch_v8_short_repair_saudi_008.jsonl",
+      "line": 150,
+      "split": "train",
+      "sha256": "88a82343ee1c4e452c2c470d18f2ca1e6ed561a757b438ef7d761ab78ec71807",
       "dialect": "saudi",
       "quality": "gold"
     },
