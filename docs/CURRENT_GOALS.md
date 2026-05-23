@@ -52,7 +52,7 @@ Phase 27.25 اختبرت checkpoint نفسه على أسئلة held-out جديد
 `16/18` مع intent/topic conditioning. Phase 27.31–27.33 أكملت natural
 intent/topic + balanced calibration + advice/micro stabilization، ووصلت إلى
 كل البوابات المحلية كاملة: fresh mixed `18/18` وmicro `32/32` بلا تسريب.
-الخطوة الحالية ليست تكبير النموذج. Phase 27.50 جعل الواجهة و`/chat/message` مختبرًا مولّدًا فقط: لا قوالب ظاهرة، إما رد من `sf_10m_phase27_47` أو `generator_blocked` فارغ؛ التالي Phase 27.51 لتوسيع prompts الطبيعية بدقة.
+الخطوة الحالية ليست تكبير النموذج. Phase 27.50 جعل الواجهة و`/chat/message` مختبرًا مولّدًا فقط: لا قوالب ظاهرة، إما رد من `sf_10m_phase27_47` أو `generator_blocked` فارغ. Phase 27.51 أثبت أن checkpoint الحالي لا يعمم على حوار طبيعي مفتوح (`raw natural=1/20`)، لذلك التالي Phase 27.52 لإصلاح هدف الحوار الطبيعي بالتدريب والبيانات، لا بتوسيع كلمات مفتاحية.
 
 الخطوة العملية الحالية:
 
@@ -210,7 +210,8 @@ SF.AI حاليًا:
 - **Phase 27.48:** Guarded Runtime Switch — مكتمل؛ live API `19/19`, و`generator_trial` يستخدم `sf_10m_phase27_47`.
 - **Phase 27.49:** Broader Live UI Probes — مكتمل؛ live API `33/33`.
 - **Phase 27.50:** Generator-Only UI Lab Mode — مكتمل؛ لا قوالب في `/chat/message`, gate `7/7`.
-- **Phase 27.51:** Targeted Natural-Prompt Expansion Plan — التالي.
+- **Phase 27.51:** Open-Dialogue Generalization Audit — مكتمل؛ فشل مفيد، live `3/22`, raw natural `1/20`.
+- **Phase 27.52:** Natural Dialogue Objective Repair — التالي.
 - **Phase 28:** تدريب `SF-120M v0.1`؛ أول قفزة بعد نجاح `SF-50M`.
 - **Phase 29:** Runtime Hybrid Assistant v1.
 - **Phase 30:** Continuous Improvement Loop.

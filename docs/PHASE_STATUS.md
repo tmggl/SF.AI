@@ -7,12 +7,12 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.50 / 30**
-- **المرحلة الحالية:** **Phase 27.50 — Generator-Only UI Lab Mode**
-- **حالة المرحلة الحالية:** **مكتملة؛ `/chat/message` لا يعرض قوالب: المولد `sf_10m_phase27_47` أو `generator_blocked` فارغ**
-- **المرحلة التالية المقترحة:** Phase 27.51 targeted natural-prompt expansion plan؛ لا Phase 28 ولا `SF-50M` قبل بوابات جودة أوسع.
+- **الرحلة الحالية:** **Phase 27.51 / 30**
+- **المرحلة الحالية:** **Phase 27.51 — Open-Dialogue Generalization Audit**
+- **حالة المرحلة الحالية:** **مكتملة بنتيجة فشل مقصود؛ المولد الحالي لا يعمم على حوار طبيعي مفتوح ويحتاج Phase 27.52 تدريب/إصلاح هدف حواري**
+- **المرحلة التالية المقترحة:** Phase 27.52 Natural Dialogue Objective Repair؛ لا Phase 28 ولا `SF-50M` قبل بوابات حوار مفتوح.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
-- **تاريخ آخر تحديث:** 2026-05-23
+- **تاريخ آخر تحديث:** 2026-05-24
 
 ---
 
@@ -99,6 +99,7 @@
 | Phase 27.48 | Guarded Runtime Switch for Phase 27.47 | ✅ completed_guarded_runtime_switch_phase27_47 | ✅ |
 | Phase 27.49 | Broader Live UI/API Probes | ✅ completed_broader_live_ui_probes_phase27_47 | ✅ |
 | Phase 27.50 | Generator-Only UI Lab Mode | ✅ completed_generator_only_ui_gate | ✅ |
+| Phase 27.51 | Open-Dialogue Generalization Audit | ✅ completed_failed_training_required | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -762,8 +763,17 @@
   - إذا رجع المسار الداخلي إلى template، يخفي API القالب ويعيد `response=""` مع `generator=generator_blocked`.
   - الاختبار الحي: `7/7`.
   - smoke: `وش الاخبار/علومك/نظم وقتي` مولّدة، و`من أنت/ما معنى الكرم` بلا رد بدل قالب.
-  - التالي Phase 27.51 targeted natural-prompt expansion plan.
+  - التالي Phase 27.51 open-dialogue generalization audit.
   - أضيف [PHASE27_50_GENERATOR_ONLY_UI_GATE_REPORT.md](./PHASE27_50_GENERATOR_ONLY_UI_GATE_REPORT.md).
+- بدأ وانتهى Phase 27.51 Open-Dialogue Generalization Audit:
+  - أضيفت بوابة `make phase27-open-dialogue-generalization-audit`.
+  - اختبرت live API وraw checkpoint بلا intent/topic conditioning على prompts طبيعية غير محفوظة.
+  - النتيجة: `FAILED_OPEN_DIALOGUE_GENERALIZATION_AUDIT_TRAINING_REQUIRED`.
+  - live API: `3/22`.
+  - raw checkpoint: `3/22`، وnatural raw prompts: `1/20`.
+  - السبب الجذري: `sf_10m_phase27_47` ما زال يخلط جملًا محفوظة ولا يعمم على الحوار المفتوح.
+  - القرار: لا `SF-50M` ولا Phase 28؛ التالي Phase 27.52 Natural Dialogue Objective Repair.
+  - أضيف [PHASE27_51_OPEN_DIALOGUE_GENERALIZATION_AUDIT_REPORT.md](./PHASE27_51_OPEN_DIALOGUE_GENERALIZATION_AUDIT_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 

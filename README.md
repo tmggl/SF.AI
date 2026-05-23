@@ -37,17 +37,18 @@
 - [docs/PHASE27_44_TO_48_RUNTIME_SWITCH_REPORT.md](./docs/PHASE27_44_TO_48_RUNTIME_SWITCH_REPORT.md) — تقرير فتح `sf_10m_phase27_47` في المسار التجريبي المحروس.
 - [docs/PHASE27_49_BROADER_LIVE_UI_PROBES_REPORT.md](./docs/PHASE27_49_BROADER_LIVE_UI_PROBES_REPORT.md) — تقرير توسيع اختبارات الواجهة/API الحية إلى `33/33`.
 - [docs/PHASE27_50_GENERATOR_ONLY_UI_GATE_REPORT.md](./docs/PHASE27_50_GENERATOR_ONLY_UI_GATE_REPORT.md) — تقرير تحويل الواجهة إلى مختبر مولّد فقط بلا قوالب.
+- [docs/PHASE27_51_OPEN_DIALOGUE_GENERALIZATION_AUDIT_REPORT.md](./docs/PHASE27_51_OPEN_DIALOGUE_GENERALIZATION_AUDIT_REPORT.md) — تقرير يثبت أن الحوار الطبيعي المفتوح يحتاج تدريبًا جديدًا، لا توسيع كلمات مفتاحية.
 
 ---
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.50 / 30 — Generator-Only UI Lab Mode اكتملت.
-- **الأولوية الحالية:** Phase 27.51 targeted natural-prompt expansion plan؛ لا تدريب `SF-50M` ولا Phase 28 قبل بوابات جودة أوسع.
+- **الرحلة الحالية:** Phase 27.51 / 30 — Open-Dialogue Generalization Audit اكتملت بنتيجة فشل مفيد.
+- **الأولوية الحالية:** Phase 27.52 Natural Dialogue Objective Repair؛ لا تدريب `SF-50M` ولا Phase 28 قبل بوابات حوار مفتوح أوسع.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
-- **المولّد:** `/chat/message` والواجهة يستخدمان Phase 27.47 `sf-10m-step4600` مباشرة في المختبر المحلي؛ لا زر ولا مفتاح تبديل، وغير المدعوم يرجع `generator_blocked` مع رد فارغ بدل أي قالب.
+- **المولّد:** `/chat/message` والواجهة يستخدمان Phase 27.47 `sf-10m-step4600` مباشرة في المختبر المحلي؛ لا زر ولا مفتاح تبديل، وغير المدعوم يرجع `generator_blocked` مع رد فارغ بدل أي قالب. Phase 27.51 أثبت أن هذا ليس حوارًا عامًا بعد، بل مولد ضيق يحتاج إصلاح هدف تدريبي.
 - **التقييم:** Phase 27 مرّر `19/19` turn في حوار متعدد الأدوار، لكنه أكد أن الردود ما زالت `template` وأن المولد غير جاهز.
 - **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.
 - **دورة البيانات:** Phase 18 أضاف تصدير مراجعة من الواجهة و`prepare_dialogue_batch.py`; وPhase 22 يعتمد الآن أيضًا دفعات مباشرة يؤلفها/يراجعها الوكيل بتفويض موثق، بدون انتظار حفظ أو تصدير من سامي.
@@ -98,6 +99,7 @@
 - **نتيجة Phase 27.44–27.48:** tokenizer v6 ثم إصلاح conditioning لموضوعي `الوفاء/الشجاعة`; مرّ `sf_10m_phase27_47` offline `16/16` ثم live API `19/19`. زر `مولّد تجريبي` يستخدمه الآن، والافتراضي لا يزال القالب الآمن. التقرير: [docs/PHASE27_44_TO_48_RUNTIME_SWITCH_REPORT.md](./docs/PHASE27_44_TO_48_RUNTIME_SWITCH_REPORT.md).
 - **نتيجة Phase 27.49:** وسّعنا probes الحية إلى `33/33`، وأصلحنا كشف النصيحة السعودية لعبارة `وش تنصحني اسوي`. التقرير: [docs/PHASE27_49_BROADER_LIVE_UI_PROBES_REPORT.md](./docs/PHASE27_49_BROADER_LIVE_UI_PROBES_REPORT.md).
 - **نتيجة Phase 27.50:** أُزيل زر `مولّد تجريبي`، وأصبح `/chat/message` مولّدًا فقط: `7/7`، بلا قوالب في الواجهة. التقرير: [docs/PHASE27_50_GENERATOR_ONLY_UI_GATE_REPORT.md](./docs/PHASE27_50_GENERATOR_ONLY_UI_GATE_REPORT.md).
+- **نتيجة Phase 27.51:** اختبار open-dialogue كشف أن live API نجح `3/22` وأن raw checkpoint بلا conditioning نجح `1/20` فقط على prompts طبيعية؛ التالي تدريب/إصلاح هدف حواري لا keyword expansion. التقرير: [docs/PHASE27_51_OPEN_DIALOGUE_GENERALIZATION_AUDIT_REPORT.md](./docs/PHASE27_51_OPEN_DIALOGUE_GENERALIZATION_AUDIT_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 

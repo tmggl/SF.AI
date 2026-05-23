@@ -120,6 +120,8 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.48 | Guarded Runtime Switch for Phase 27.47 | مكتملة؛ live API gate مرّ `19/19` و`generator_trial` يستخدم `sf_10m_phase27_47` |
 | Phase 27.49 | Broader Live UI/API Probes | مكتملة؛ live API gate مرّ `33/33` وأصلح كشف النصيحة السعودية |
 | Phase 27.50 | Generator-Only UI Lab Mode | مكتملة؛ `/chat/message` بلا قوالب، gate `7/7` |
+| Phase 27.51 | Open-Dialogue Generalization Audit | مكتملة؛ فشل مفيد، live `3/22`, raw natural `1/20`, التدريب مطلوب |
+| Phase 27.52 | Natural Dialogue Objective Repair | التالية؛ تدريب/إصلاح هدف الحوار الطبيعي لا keyword expansion |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2995,6 +2997,41 @@ cases = 7/7
 - [PHASE27_50_GENERATOR_ONLY_UI_GATE_REPORT.md](./PHASE27_50_GENERATOR_ONLY_UI_GATE_REPORT.md)
 - `artifacts/reports/phase27_50_generator_only_ui_gate_report.json`
 - `artifacts/samples/phase27_50_generator_only_ui_gate.md`
+
+---
+
+## Phase 27.51 — Open-Dialogue Generalization Audit
+
+### الهدف
+إثبات هل `sf_10m_phase27_47` يستطيع الحوار الطبيعي خارج المسارات المحروسة، أو أنه ما زال يعتمد على memorized lanes وtopic/intent conditioning.
+
+### ما تم
+- أضيف `scripts/phase27_51_open_dialogue_generalization_audit.py`.
+- أضيف هدف `make phase27-open-dialogue-generalization-audit`.
+- شُغّل الاختبار على:
+  - live API generator-only.
+  - raw checkpoint بلا intent/topic conditioning.
+- شملت العينات follow-up, open social, topic discussion, planning, support.
+
+### النتيجة
+- الحالة: `FAILED_OPEN_DIALOGUE_GENERALIZATION_AUDIT_TRAINING_REQUIRED`.
+- live API: `3/22`.
+- raw checkpoint: `3/22`.
+- raw natural prompts: `1/20`.
+
+### القرار
+لا نعدّ Phase 27.47 حوارًا ذكيًا عامًا. لا `SF-50M` ولا Phase 28.
+
+التالي:
+
+**Phase 27.52 — Natural Dialogue Objective Repair**
+
+الهدف القادم تدريب/إصلاح هدف حواري طبيعي، لا إضافة كلمات مفتاحية ولا توسيع whitelist.
+
+### artifacts
+- [PHASE27_51_OPEN_DIALOGUE_GENERALIZATION_AUDIT_REPORT.md](./PHASE27_51_OPEN_DIALOGUE_GENERALIZATION_AUDIT_REPORT.md)
+- `artifacts/reports/phase27_51_open_dialogue_generalization_audit.json`
+- `artifacts/samples/phase27_51_open_dialogue_generalization_audit.md`
 
 ---
 

@@ -339,3 +339,17 @@ def test_phase27_50_generator_only_ui_gate_passes() -> None:
     assert report["summary"]["total"] == 7
     assert all(row["actual_generator"] != "template" for row in report["rows"])
     assert all(row["passed"] for row in report["rows"])
+
+
+def test_phase27_51_open_dialogue_generalization_audit_blocks_scaling() -> None:
+    report = _report("phase27_51_open_dialogue_generalization_audit.json")
+    assert report["phase"] == "Phase 27.51"
+    assert report["status"] == "FAILED_OPEN_DIALOGUE_GENERALIZATION_AUDIT_TRAINING_REQUIRED"
+    assert report["training_started"] is False
+    assert report["template_answers_allowed"] is False
+    assert report["keyword_lane_success_is_not_enough"] is True
+    assert report["candidate_generator"] == "sf_10m_phase27_47"
+    assert report["summary"]["live_api"]["passed"] == 3
+    assert report["summary"]["live_api"]["total"] == 22
+    assert report["summary"]["raw_unconditioned"]["natural_passed"] == 1
+    assert report["summary"]["raw_unconditioned"]["natural_total"] == 20

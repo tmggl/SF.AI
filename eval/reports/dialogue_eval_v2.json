@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.50: ألغينا زر التجربة من الواجهة وجعلنا /chat/message مختبرًا مولّدًا فقط. إذا لم يستطع `sf_10m_phase27_47` الرد فلن يظهر قالب بديل. التالي Phase 27.51 لتوسيع pr"
+      "response_preview": "وصلنا إلى Phase 27.51: أثبتنا أن `sf_10m_phase27_47` مولّد ضيق لا يعمم على الحوار الطبيعي المفتوح. لا قوالب في الواجهة، لكن الرد المقنع يحتاج Phase 27.52 لإصلاح هدف الحوار بالتدريب"
     },
     {
       "scenario_id": "clarification_repair_flow",

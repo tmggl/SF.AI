@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.50 — Generator-Only UI Lab Mode",
-        current_phase_status="completed_generator_only_ui_gate",
+        current_phase="Phase 27.51 — Open-Dialogue Generalization Audit",
+        current_phase_status="completed_failed_open_dialogue_training_required",
         next_phase=(
-            "Phase 27.51 targeted natural-prompt expansion plan for sf_10m_phase27_47; SF-50M remains blocked"
+            "Phase 27.52 natural dialogue objective repair; no SF-50M/Phase 28 until open-dialogue gates pass"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -364,6 +364,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_50_generator_only_ui_gate",
                 status="completed_generator_only_ui_gate",
                 phase="Phase 27.50",
+            ),
+            ComponentStatus(
+                name="phase27_51_open_dialogue_generalization_audit",
+                status="completed_failed_training_required",
+                phase="Phase 27.51",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

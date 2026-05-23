@@ -1,0 +1,606 @@
+{
+  "phase": "Phase 27.51",
+  "status": "FAILED_OPEN_DIALOGUE_GENERALIZATION_AUDIT_TRAINING_REQUIRED",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "template_answers_allowed": false,
+  "keyword_lane_success_is_not_enough": true,
+  "candidate_generator": "sf_10m_phase27_47",
+  "next_phase": "Phase 27.52 natural dialogue objective/corpus repair before any scaling",
+  "summary": {
+    "live_api": {
+      "passed": 3,
+      "total": 22,
+      "bucket_summary": {
+        "control_blocked": {
+          "passed": 2,
+          "total": 2
+        },
+        "followup": {
+          "passed": 0,
+          "total": 4
+        },
+        "open_social": {
+          "passed": 0,
+          "total": 4
+        },
+        "planning": {
+          "passed": 1,
+          "total": 4
+        },
+        "support": {
+          "passed": 0,
+          "total": 4
+        },
+        "topic": {
+          "passed": 0,
+          "total": 4
+        }
+      }
+    },
+    "raw_unconditioned": {
+      "passed": 3,
+      "total": 22,
+      "natural_passed": 1,
+      "natural_total": 20,
+      "bucket_summary": {
+        "control_blocked": {
+          "passed": 2,
+          "total": 2
+        },
+        "followup": {
+          "passed": 0,
+          "total": 4
+        },
+        "open_social": {
+          "passed": 0,
+          "total": 4
+        },
+        "planning": {
+          "passed": 0,
+          "total": 4
+        },
+        "support": {
+          "passed": 0,
+          "total": 4
+        },
+        "topic": {
+          "passed": 1,
+          "total": 4
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "followup_free_choice",
+      "bucket": "followup",
+      "prompt": "الي تحب",
+      "mode": "live_api",
+      "generator": "generator_blocked",
+      "response": "",
+      "intent": "chat.general",
+      "confidence": 0.0,
+      "notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:template,native_generator:trial_unsupported_general",
+      "passed": false,
+      "reason": "generator:generator_blocked"
+    },
+    {
+      "id": "followup_free_choice",
+      "bucket": "followup",
+      "prompt": "الي تحب",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "ابدأ بالأهم ثم انتقل للي بعده.",
+      "passed": false,
+      "reason": "forbidden_terms_present",
+      "prompt_overlap": 0.0
+    },
+    {
+      "id": "followup_continue",
+      "bucket": "followup",
+      "prompt": "كمل كلامك",
+      "mode": "live_api",
+      "generator": "generator_blocked",
+      "response": "",
+      "intent": "chat.general",
+      "confidence": 0.0,
+      "notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:template,native_generator:trial_unsupported_general",
+      "passed": false,
+      "reason": "generator:generator_blocked"
+    },
+    {
+      "id": "followup_continue",
+      "bucket": "followup",
+      "prompt": "كمل كلامك",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "ابدأ بشي بسيط وواضح.",
+      "passed": false,
+      "reason": "low_prompt_overlap:0.00",
+      "prompt_overlap": 0.0
+    },
+    {
+      "id": "followup_why",
+      "bucket": "followup",
+      "prompt": "طيب ليه؟",
+      "mode": "live_api",
+      "generator": "generator_blocked",
+      "response": "",
+      "intent": "chat.general",
+      "confidence": 0.0,
+      "notes": "dialect:السعودية,language:ar,rag:not_configured,generator:template,native_generator:trial_unsupported_general",
+      "passed": false,
+      "reason": "generator:generator_blocked"
+    },
+    {
+      "id": "followup_why",
+      "bucket": "followup",
+      "prompt": "طيب ليه؟",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "ابدأ بشي بسيط وواضح.",
+      "passed": false,
+      "reason": "low_prompt_overlap:0.00",
+      "prompt_overlap": 0.0
+    },
+    {
+      "id": "followup_meaning",
+      "bucket": "followup",
+      "prompt": "يعني كيف؟",
+      "mode": "live_api",
+      "generator": "generator_blocked",
+      "response": "",
+      "intent": "chat.general",
+      "confidence": 0.6,
+      "notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:template,native_generator:trial_unsupported_definition_topic",
+      "passed": false,
+      "reason": "generator:generator_blocked"
+    },
+    {
+      "id": "followup_meaning",
+      "bucket": "followup",
+      "prompt": "يعني كيف؟",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "الهدوء سكيالصداقة رفقة طيبة تقوم على الوفاء.",
+      "passed": false,
+      "reason": "canned_phrase",
+      "prompt_overlap": 0.0
+    },
+    {
+      "id": "social_chat",
+      "bucket": "open_social",
+      "prompt": "سولف معي شوي",
+      "mode": "live_api",
+      "generator": "generator_blocked",
+      "response": "",
+      "intent": "chat.general",
+      "confidence": 0.0,
+      "notes": "dialect:السعودية,language:ar,rag:not_configured,generator:template,native_generator:trial_unsupported_general",
+      "passed": false,
+      "reason": "generator:generator_blocked"
+    },
+    {
+      "id": "social_chat",
+      "bucket": "open_social",
+      "prompt": "سولف معي شوي",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "ابدأ بالأهم ثم انتقل للي بعده.",
+      "passed": false,
+      "reason": "canned_phrase",
+      "prompt_overlap": 0.0
+    },
+    {
+      "id": "social_topic_choice",
+      "bucket": "open_social",
+      "prompt": "وش ودك نسولف عنه؟",
+      "mode": "live_api",
+      "generator": "generator_blocked",
+      "response": "",
+      "intent": "chat.general",
+      "confidence": 0.0,
+      "notes": "dialect:السعودية,language:ar,rag:not_configured,generator:template,native_generator:trial_unsupported_general",
+      "passed": false,
+      "reason": "generator:generator_blocked"
+    },
+    {
+      "id": "social_topic_choice",
+      "bucket": "open_social",
+      "prompt": "وش ودك نسولف عنه؟",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "الهدوء يعني تخفف توترك وتتكلم بروية.",
+      "passed": false,
+      "reason": "low_prompt_overlap:0.00",
+      "prompt_overlap": 0.0
+    },
+    {
+      "id": "social_new_topic",
+      "bucket": "open_social",
+      "prompt": "هات موضوع خفيف",
+      "mode": "live_api",
+      "generator": "generator_blocked",
+      "response": "",
+      "intent": "chat.general",
+      "confidence": 0.0,
+      "notes": "dialect:السعودية,language:ar,rag:not_configured,generator:template,native_generator:trial_unsupported_general",
+      "passed": false,
+      "reason": "generator:generator_blocked"
+    },
+    {
+      "id": "social_new_topic",
+      "bucket": "open_social",
+      "prompt": "هات موضوع خفيف",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "ابدأ الله يعافيك، حاضر بأي وقت.",
+      "passed": false,
+      "reason": "canned_phrase",
+      "prompt_overlap": 0.0
+    },
+    {
+      "id": "social_today",
+      "bucket": "open_social",
+      "prompt": "يومي كان طويل",
+      "mode": "live_api",
+      "generator": "sf_10m_phase27_47",
+      "response": "اكتب أولوياتك ثم ابدأ بالأهم.",
+      "intent": "chat.general",
+      "confidence": 0.0,
+      "notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:sf_10m_phase27_47,native_generator:generated,native_generator:canary_passed,native_generator:intent:planning",
+      "passed": false,
+      "reason": "canned_phrase"
+    },
+    {
+      "id": "social_today",
+      "bucket": "open_social",
+      "prompt": "يومي كان طويل",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "ابدأ بشي بسيط وواضح.",
+      "passed": false,
+      "reason": "low_prompt_overlap:0.00",
+      "prompt_overlap": 0.0
+    },
+    {
+      "id": "topic_courage_simple",
+      "bucket": "topic",
+      "prompt": "اخبرني عن الشجاعة بأسلوب بسيط",
+      "mode": "live_api",
+      "generator": "generator_blocked",
+      "response": "",
+      "intent": "chat.general",
+      "confidence": 0.0,
+      "notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:template,native_generator:trial_unsupported_general",
+      "passed": false,
+      "reason": "generator:generator_blocked"
+    },
+    {
+      "id": "topic_courage_simple",
+      "bucket": "topic",
+      "prompt": "اخبرني عن الشجاعة بأسلوب بسيط",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "الشجاعة إنك الصداقة رفقة طيبة تقوم على الوفاء. على الالله يعافيك، حاضر بأي وقت.",
+      "passed": false,
+      "reason": "canned_phrase",
+      "prompt_overlap": 0.2
+    },
+    {
+      "id": "topic_friendship_talk",
+      "bucket": "topic",
+      "prompt": "وش رأيك نتكلم عن الصداقة",
+      "mode": "live_api",
+      "generator": "generator_blocked",
+      "response": "",
+      "intent": "chat.general",
+      "confidence": 0.0,
+      "notes": "dialect:السعودية,language:ar,rag:not_configured,generator:template,native_generator:trial_unsupported_general",
+      "passed": false,
+      "reason": "generator:generator_blocked"
+    },
+    {
+      "id": "topic_friendship_talk",
+      "bucket": "topic",
+      "prompt": "وش رأيك نتكلم عن الصداقة",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "الصداقة رفقة طيبة ووقفة وقت الحاجة.",
+      "passed": false,
+      "reason": "canned_phrase",
+      "prompt_overlap": 0.2
+    },
+    {
+      "id": "topic_honesty_example",
+      "bucket": "topic",
+      "prompt": "اعطني مثال بسيط عن الصدق",
+      "mode": "live_api",
+      "generator": "generator_blocked",
+      "response": "",
+      "intent": "chat.general",
+      "confidence": 0.0,
+      "notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:template,native_generator:trial_unsupported_general",
+      "passed": false,
+      "reason": "generator:generator_blocked"
+    },
+    {
+      "id": "topic_honesty_example",
+      "bucket": "topic",
+      "prompt": "اعطني مثال بسيط عن الصدق",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "الصدق أن تقول الحقيقة بوضوح.",
+      "passed": false,
+      "reason": "canned_phrase",
+      "prompt_overlap": 0.2
+    },
+    {
+      "id": "topic_calm_life",
+      "bucket": "topic",
+      "prompt": "الهدوء في اليوم وش يفيدني؟",
+      "mode": "live_api",
+      "generator": "generator_blocked",
+      "response": "",
+      "intent": "chat.general",
+      "confidence": 0.0,
+      "notes": "dialect:السعودية,language:ar,rag:not_configured,generator:template,native_generator:trial_unsupported_general",
+      "passed": false,
+      "reason": "generator:generator_blocked"
+    },
+    {
+      "id": "topic_calm_life",
+      "bucket": "topic",
+      "prompt": "الهدوء في اليوم وش يفيدني؟",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "الهدوء يعني تخفف توترك وتتكلم بروية.",
+      "passed": true,
+      "reason": "passed",
+      "prompt_overlap": 0.2
+    },
+    {
+      "id": "planning_day_start",
+      "bucket": "planning",
+      "prompt": "اشرح لي كيف ابدأ يومي",
+      "mode": "live_api",
+      "generator": "generator_blocked",
+      "response": "",
+      "intent": "chat.general",
+      "confidence": 0.6,
+      "notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:template,native_generator:trial_unsupported_definition_topic",
+      "passed": false,
+      "reason": "generator:generator_blocked"
+    },
+    {
+      "id": "planning_day_start",
+      "bucket": "planning",
+      "prompt": "اشرح لي كيف ابدأ يومي",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "ابدأ الله يعافيك، حاضر بأي وقت.",
+      "passed": false,
+      "reason": "canned_phrase",
+      "prompt_overlap": 0.2
+    },
+    {
+      "id": "planning_confused",
+      "bucket": "planning",
+      "prompt": "أنا محتار من وين أبدأ",
+      "mode": "live_api",
+      "generator": "generator_blocked",
+      "response": "",
+      "intent": "chat.general",
+      "confidence": 0.0,
+      "notes": "dialect:السعودية,language:ar,rag:not_configured,generator:template,native_generator:trial_unsupported_general",
+      "passed": false,
+      "reason": "generator:generator_blocked"
+    },
+    {
+      "id": "planning_confused",
+      "bucket": "planning",
+      "prompt": "أنا محتار من وين أبدأ",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "ابدأ الله يعافيك، حاضر بأي وقت.",
+      "passed": false,
+      "reason": "canned_phrase",
+      "prompt_overlap": 0.2
+    },
+    {
+      "id": "planning_many_tasks",
+      "bucket": "planning",
+      "prompt": "عندي أشياء كثيرة ومتشتت",
+      "mode": "live_api",
+      "generator": "generator_blocked",
+      "response": "",
+      "intent": "chat.clarification",
+      "confidence": 0.7143,
+      "notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:template,native_generator:template_first_social_intent",
+      "passed": false,
+      "reason": "generator:generator_blocked"
+    },
+    {
+      "id": "planning_many_tasks",
+      "bucket": "planning",
+      "prompt": "عندي أشياء كثيرة ومتشتت",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "ابدأ الله يعافيك، حاضر بأي وقت.",
+      "passed": false,
+      "reason": "canned_phrase",
+      "prompt_overlap": 0.0
+    },
+    {
+      "id": "planning_light",
+      "bucket": "planning",
+      "prompt": "رتب لي بداية بسيطة بدون تعقيد",
+      "mode": "live_api",
+      "generator": "sf_10m_phase27_47",
+      "response": "ابدأ",
+      "intent": "chat.general",
+      "confidence": 0.0,
+      "notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:sf_10m_phase27_47,native_generator:generated,native_generator:canary_passed,native_generator:intent:advice",
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "planning_light",
+      "bucket": "planning",
+      "prompt": "رتب لي بداية بسيطة بدون تعقيد",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "الهدوء سكيالصداقة علاقة طيبة تقوم على الوفاء.",
+      "passed": false,
+      "reason": "low_prompt_overlap:0.00",
+      "prompt_overlap": 0.0
+    },
+    {
+      "id": "support_tired",
+      "bucket": "support",
+      "prompt": "تعبان شوي واحتاج كلام يهديني",
+      "mode": "live_api",
+      "generator": "generator_blocked",
+      "response": "",
+      "intent": "chat.general",
+      "confidence": 0.0,
+      "notes": "dialect:السعودية,language:ar,rag:not_configured,generator:template,native_generator:trial_unsupported_general",
+      "passed": false,
+      "reason": "generator:generator_blocked"
+    },
+    {
+      "id": "support_tired",
+      "bucket": "support",
+      "prompt": "تعبان شوي واحتاج كلام يهديني",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "ابدأ بالأهم ثم انتقل للي بعده. الشجاعة إنك مد، أنت كيفك؟",
+      "passed": false,
+      "reason": "canned_phrase",
+      "prompt_overlap": 0.0
+    },
+    {
+      "id": "support_anxious",
+      "bucket": "support",
+      "prompt": "كيف أهدأ إذا توترت؟",
+      "mode": "live_api",
+      "generator": "sf_10m_phase27_47",
+      "response": "خذ نفسًا هادئًا واهدأ خطوة خطوة.",
+      "intent": "chat.general",
+      "confidence": 0.6,
+      "notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:sf_10m_phase27_47,native_generator:generated,native_generator:canary_passed,native_generator:intent:support",
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "support_anxious",
+      "bucket": "support",
+      "prompt": "كيف أهدأ إذا توترت؟",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "ابدأ بالأهم ثم انتقل للي بعده. على الوفاء. على الف.",
+      "passed": false,
+      "reason": "expected_terms_missing",
+      "prompt_overlap": 0.0
+    },
+    {
+      "id": "support_pressure",
+      "bucket": "support",
+      "prompt": "حاس بضغط اليوم",
+      "mode": "live_api",
+      "generator": "generator_blocked",
+      "response": "",
+      "intent": "chat.general",
+      "confidence": 0.0,
+      "notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:template,native_generator:trial_unsupported_general",
+      "passed": false,
+      "reason": "generator:generator_blocked"
+    },
+    {
+      "id": "support_pressure",
+      "bucket": "support",
+      "prompt": "حاس بضغط اليوم",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "ابدأ الله يعافيك، حاضر بأي وقت.",
+      "passed": false,
+      "reason": "canned_phrase",
+      "prompt_overlap": 0.0
+    },
+    {
+      "id": "support_short",
+      "bucket": "support",
+      "prompt": "طمني بكلام بسيط",
+      "mode": "live_api",
+      "generator": "generator_blocked",
+      "response": "",
+      "intent": "chat.general",
+      "confidence": 0.0,
+      "notes": "dialect:الفصحى,language:ar,rag:not_configured,generator:template,native_generator:trial_unsupported_general",
+      "passed": false,
+      "reason": "generator:generator_blocked"
+    },
+    {
+      "id": "support_short",
+      "bucket": "support",
+      "prompt": "طمني بكلام بسيط",
+      "mode": "raw_unconditioned",
+      "generator": "sf_10m_phase27_47",
+      "response": "ابدأ الصداقة علاقة طيبة تقوم على الوفاء. خذ نفسًا هادئًا واهدأ خطوة خطوة.",
+      "passed": false,
+      "reason": "low_prompt_overlap:0.00",
+      "prompt_overlap": 0.0
+    },
+    {
+      "id": "identity_general",
+      "bucket": "control_blocked",
+      "prompt": "من أنت؟",
+      "mode": "live_api",
+      "generator": "generator_blocked",
+      "response": "",
+      "intent": "chat.identity",
+      "confidence": 0.7895,
+      "notes": "dialect:السعودية,language:ar,rag:not_configured,generator:template,native_generator:template_first_social_intent",
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "identity_general",
+      "bucket": "control_blocked",
+      "prompt": "من أنت؟",
+      "mode": "raw_unconditioned",
+      "generator": "not_scored_control",
+      "response": "",
+      "passed": true,
+      "reason": "control_not_raw_scored"
+    },
+    {
+      "id": "capability_general",
+      "bucket": "control_blocked",
+      "prompt": "وش تقدر تسوي؟",
+      "mode": "live_api",
+      "generator": "generator_blocked",
+      "response": "",
+      "intent": "chat.capability",
+      "confidence": 0.8462,
+      "notes": "dialect:السعودية,language:ar,rag:not_configured,generator:template,native_generator:template_first_social_intent",
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "capability_general",
+      "bucket": "control_blocked",
+      "prompt": "وش تقدر تسوي؟",
+      "mode": "raw_unconditioned",
+      "generator": "not_scored_control",
+      "response": "",
+      "passed": true,
+      "reason": "control_not_raw_scored"
+    }
+  ]
+}
