@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.10 — Short Response Repair",
-        current_phase_status="completed_numeric_improvement_generation_still_blocked",
+        current_phase="Phase 27.11 — Objective/Decoding Diagnosis",
+        current_phase_status="completed_stop_boundary_missing_generation_blocked",
         next_phase=(
-            "Investigate SF-10M training/objective/decoding fixes before any SF-50M scaling"
+            "Add explicit SF-10M assistant reply boundary/EOS objective before any SF-50M scaling"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -164,6 +164,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_10_short_response_repair",
                 status="completed_runtime_blocked",
                 phase="Phase 27.10",
+            ),
+            ComponentStatus(
+                name="phase27_11_objective_probe",
+                status="completed_stop_boundary_blocked",
+                phase="Phase 27.11",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

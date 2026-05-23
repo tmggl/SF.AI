@@ -18,7 +18,8 @@
 ثم Phase 27.7 ثبتت split ثابتًا وcanary أقوى، وPhase 27.8 درّبت
 `SF-10M v0.6` ووجدت تحسنًا رقميًا دون جاهزية runtime، وPhase 27.9 ثبتت
 بوابة توليد آلية، وPhase 27.10 درّبت `SF-10M v0.7` بتحسن رقمي لكن توليد
-محجوب.
+محجوب. Phase 27.11 أثبتت أن المشكلة الآن في حدّ نهاية رد المساعد/EOS:
+النموذج يحفظ بدايات الردود ثم يواصل التوليد.
 
 الخطوة العملية الحالية:
 
@@ -68,6 +69,7 @@
 - Phase 27.10 اكتمل: أضيفت `300` عينة gold قصيرة ودُرّب `SF-10M v0.7`.
   أفضل eval `loss=4.7512`, `perplexity=115.72`، لكن generation-quality بقي
   `0/10` بعد تشديد الحارس.
+- Phase 27.11 اكتمل: gold overfit probe فشل `0/16 clean-stop`; يجب إصلاح boundary/EOS.
 
 الجرد الحالي يرى:
 
@@ -127,6 +129,7 @@ SF.AI حاليًا:
 - **Phase 27.8:** تدريب `SF-10M v0.6` على split ثابت — مكتمل بتحسن رقمي، runtime محظور.
 - **Phase 27.9:** harness جودة توليد آلي — مكتمل ويحجب v0.6، runtime محظور.
 - **Phase 27.10:** short-response repair + `SF-10M v0.7` — مكتمل بتحسن رقمي، runtime محظور.
+- **Phase 27.11:** objective/decoding probe — مكتمل؛ stop boundary مفقود، runtime محظور.
 - **Phase 28:** تدريب `SF-120M v0.1`؛ أول قفزة بعد نجاح `SF-50M`.
 - **Phase 29:** Runtime Hybrid Assistant v1.
 - **Phase 30:** Continuous Improvement Loop.

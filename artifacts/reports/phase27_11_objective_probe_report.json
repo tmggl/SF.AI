@@ -1,0 +1,310 @@
+{
+  "phase": "Phase 27.11 — Objective/Decoding Diagnosis",
+  "status": "FAILED_GOLD_OVERFIT_PROBE_BLOCK_SCALING",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "records": 16,
+  "records_per_dialect": 8,
+  "steps_requested": 1000,
+  "checkpoint_name": "sf-10m-step1000",
+  "passed": 0,
+  "failed": 16,
+  "pass_rate": 0.0,
+  "reason_counts": {
+    "guard:repetition": 6,
+    "overgenerates_after_expected": 10
+  },
+  "diagnosis": "The model memorizes some response prefixes but over-generates because reply boundary/EOS learning is missing or too weak.",
+  "decision": "Do not scale to SF-50M; add explicit assistant reply boundary/EOS objective and stop decoding before scaling.",
+  "results": [
+    {
+      "id": 0,
+      "dialect": "msa",
+      "prompt": "السلام عليكم",
+      "expected": "وعليكم السلام، أهلًا بك.",
+      "generated": "وعليكم السلام، أهلًا بك. بك. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار.",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "repetition",
+      "expected_terms": [
+        "وعليكم",
+        "السلام",
+        "أهلًا"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "guard:repetition"
+    },
+    {
+      "id": 1,
+      "dialect": "msa",
+      "prompt": "السلام عليكم",
+      "expected": "وعليكم السلام، أهلًا بك باختصار.",
+      "generated": "وعليكم السلام، أهلًا بك. بك. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار.",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "repetition",
+      "expected_terms": [
+        "وعليكم",
+        "السلام",
+        "أهلًا"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "guard:repetition"
+    },
+    {
+      "id": 2,
+      "dialect": "msa",
+      "prompt": "السلام عليكم",
+      "expected": "وعليكم السلام، أهلًا بك من فضلك.",
+      "generated": "وعليكم السلام، أهلًا بك. بك. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار.",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "repetition",
+      "expected_terms": [
+        "وعليكم",
+        "السلام",
+        "أهلًا"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "guard:repetition"
+    },
+    {
+      "id": 3,
+      "dialect": "msa",
+      "prompt": "مرحبًا",
+      "expected": "مرحبًا بك، تفضل.",
+      "generated": "مرحبًا بك، تفضل. ل. ل. ل. ل. فضل من فضلك. . . . . . .",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "passed",
+      "expected_terms": [
+        "مرحبًا",
+        "تفضل"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "overgenerates_after_expected"
+    },
+    {
+      "id": 4,
+      "dialect": "msa",
+      "prompt": "مرحبًا",
+      "expected": "مرحبًا بك، تفضل باختصار.",
+      "generated": "مرحبًا بك، تفضل. ل. ل. ل. ل. فضل من فضلك. . . . . . .",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "passed",
+      "expected_terms": [
+        "مرحبًا",
+        "تفضل",
+        "باختصار"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "overgenerates_after_expected"
+    },
+    {
+      "id": 5,
+      "dialect": "msa",
+      "prompt": "مرحبًا",
+      "expected": "مرحبًا بك، تفضل من فضلك.",
+      "generated": "مرحبًا بك، تفضل. ل. ل. ل. ل. فضل من فضلك. . . . . . .",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "passed",
+      "expected_terms": [
+        "مرحبًا",
+        "تفضل",
+        "فضلك"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "overgenerates_after_expected"
+    },
+    {
+      "id": 6,
+      "dialect": "msa",
+      "prompt": "صباح الخير",
+      "expected": "صباح النور، يومك سعيد.",
+      "generated": "صباح النور، يومك سعحياك الله من فضلك. . . . . . .",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "passed",
+      "expected_terms": [
+        "صباح",
+        "النور",
+        "يومك"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "overgenerates_after_expected"
+    },
+    {
+      "id": 7,
+      "dialect": "msa",
+      "prompt": "صباح الخير",
+      "expected": "صباح النور، يومك سعيد باختصار.",
+      "generated": "صباح النور، يومك سعحياك الله من فضلك. . . . . . .",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "passed",
+      "expected_terms": [
+        "صباح",
+        "النور",
+        "يومك"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "overgenerates_after_expected"
+    },
+    {
+      "id": 8,
+      "dialect": "saudi",
+      "prompt": "السلام عليكم",
+      "expected": "وعليكم السلام، حياك الله.",
+      "generated": "وعليكم السلام، أهلًا بك. بك. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار.",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "repetition",
+      "expected_terms": [
+        "وعليكم",
+        "السلام",
+        "حياك"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "guard:repetition"
+    },
+    {
+      "id": 9,
+      "dialect": "saudi",
+      "prompt": "السلام عليكم",
+      "expected": "وعليكم السلام، حياك الله باختصار.",
+      "generated": "وعليكم السلام، أهلًا بك. بك. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار.",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "repetition",
+      "expected_terms": [
+        "وعليكم",
+        "السلام",
+        "حياك"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "guard:repetition"
+    },
+    {
+      "id": 10,
+      "dialect": "saudi",
+      "prompt": "السلام عليكم",
+      "expected": "وعليكم السلام، حياك الله من فضلك.",
+      "generated": "وعليكم السلام، أهلًا بك. بك. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار. باختصار.",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "repetition",
+      "expected_terms": [
+        "وعليكم",
+        "السلام",
+        "حياك"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "guard:repetition"
+    },
+    {
+      "id": 11,
+      "dialect": "saudi",
+      "prompt": "هلا",
+      "expected": "هلا بك، تفضل.",
+      "generated": "هلا بك، تفضل. ل. ل. فضل من فضلك. . . . . . . . . .",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "passed",
+      "expected_terms": [
+        "هلا",
+        "تفضل"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "overgenerates_after_expected"
+    },
+    {
+      "id": 12,
+      "dialect": "saudi",
+      "prompt": "هلا",
+      "expected": "هلا بك، تفضل باختصار.",
+      "generated": "هلا بك، تفضل. ل. ل. فضل من فضلك. . . . . . . . . .",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "passed",
+      "expected_terms": [
+        "هلا",
+        "تفضل",
+        "باختصار"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "overgenerates_after_expected"
+    },
+    {
+      "id": 13,
+      "dialect": "saudi",
+      "prompt": "هلا",
+      "expected": "هلا بك، تفضل من فضلك.",
+      "generated": "هلا بك، تفضل. ل. ل. فضل من فضلك. . . . . . . . . .",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "passed",
+      "expected_terms": [
+        "هلا",
+        "تفضل",
+        "فضلك"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "overgenerates_after_expected"
+    },
+    {
+      "id": 14,
+      "dialect": "saudi",
+      "prompt": "صباح الخير",
+      "expected": "صباح النور، عسى يومك طيب.",
+      "generated": "صباح النور، يومك سعحياك الله من فضلك. . . . . . .",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "passed",
+      "expected_terms": [
+        "صباح",
+        "النور",
+        "عسى"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "overgenerates_after_expected"
+    },
+    {
+      "id": 15,
+      "dialect": "saudi",
+      "prompt": "صباح الخير",
+      "expected": "صباح النور، عسى يومك طيب باختصار.",
+      "generated": "صباح النور، يومك سعحياك الله من فضلك. . . . . . .",
+      "used": true,
+      "generator_reason": "generated",
+      "guard_reason": "passed",
+      "expected_terms": [
+        "صباح",
+        "النور",
+        "عسى"
+      ],
+      "clean_stop": false,
+      "passed": false,
+      "reason": "overgenerates_after_expected"
+    }
+  ]
+}

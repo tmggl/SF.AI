@@ -37,7 +37,7 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.10 / 30 — Short Response Repair اكتملت بتحسن رقمي دون جاهزية توليد.
+- **الرحلة الحالية:** Phase 27.11 / 30 — Objective/Decoding Diagnosis اكتملت وأثبتت أن حدّ نهاية الرد غير مضبوط.
 - **الأولوية الحالية:** فحص objective/batching/decoding بعمق؛ لا تدريب `SF-50M` ولا Phase 28 حتى تمر بوابات الجودة.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
 - **البيانات الحالية:** corpus موثق `5543` سجلًا يمر `corpus-audit`: `2794` سعودي + `2749` فصحى. Phase 27.10 أضاف gold short repair، والـ split الحالي `train=4973`, `eval=570`.
@@ -63,6 +63,7 @@
 - **نتيجة Phase 27.8:** دُرّب `SF-10M v0.6` على train split فقط، وأفضل eval كان step4000: loss `5.0227`, perplexity `151.82`. canary حجب `10/10` عينات بسبب fragments مشوهة، لذلك runtime blocked. التقرير: [docs/PHASE27_8_SF10M_V0_6_SPLIT_TRAINING_REPORT.md](./docs/PHASE27_8_SF10M_V0_6_SPLIT_TRAINING_REPORT.md).
 - **نتيجة Phase 27.9:** أضيف `make phase27-generation-quality` وprompt suite قصير؛ `SF-10M v0.6` فشل `0/10` بسبب `model_artifact_fragment`. التقرير: [docs/PHASE27_9_GENERATION_QUALITY_HARNESS_REPORT.md](./docs/PHASE27_9_GENERATION_QUALITY_HARNESS_REPORT.md).
 - **نتيجة Phase 27.10:** أضيفت 300 عينة gold قصيرة ودُرّب `SF-10M v0.7`; أفضل eval: loss `4.7512`, perplexity `115.72`. بعد تشديد الحارس بقي generation-quality `0/10`، لذلك runtime blocked. التقرير: [docs/PHASE27_10_SHORT_RESPONSE_REPAIR_REPORT.md](./docs/PHASE27_10_SHORT_RESPONSE_REPAIR_REPORT.md).
+- **نتيجة Phase 27.11:** probe ذهبي صغير (`16` ردًا) وصل إلى loss شبه صفري لكنه فشل `0/16 clean-stop`; النموذج يحفظ بدايات الردود ثم يواصل بتكرار/حشو. القرار: إصلاح boundary/EOS قبل أي SF-50M. التقرير: [docs/PHASE27_11_OBJECTIVE_PROBE_REPORT.md](./docs/PHASE27_11_OBJECTIVE_PROBE_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
@@ -111,6 +112,7 @@
 | Phase 27.8 | SF-10M v0.6 Split Training — numeric improvement; runtime blocked |
 | Phase 27.9 | Generation Quality Harness — completed; v0.6 blocked |
 | Phase 27.10 | Short Response Repair — numeric improvement; runtime blocked |
+| Phase 27.11 | Objective/Decoding Diagnosis — stop boundary missing; scaling blocked |
 | Phase 28 | SF-120M v0.1 Candidate — planned |
 | Phase 29 | Runtime Hybrid Assistant v1 — planned |
 | Phase 30 | Continuous Improvement Loop — planned |

@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.10 / 30**
-- **المرحلة الحالية:** **Phase 27.10 — Short Response Repair**
-- **حالة المرحلة الحالية:** **مكتملة بتحسن رقمي؛ `SF-10M v0.7` أفضل على eval لكنه ما زال محجوبًا في التوليد**
-- **المرحلة التالية المقترحة:** فحص objective/batching/decoding بعمق قبل أي تكبير إلى `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.11 / 30**
+- **المرحلة الحالية:** **Phase 27.11 — Objective/Decoding Diagnosis**
+- **حالة المرحلة الحالية:** **مكتملة؛ gold overfit probe أثبت أن حدّ نهاية رد المساعد/EOS غير مضبوط**
+- **المرحلة التالية المقترحة:** إضافة assistant reply boundary/EOS قبل أي تكبير إلى `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -59,6 +59,7 @@
 | Phase 27.8 | SF-10M v0.6 Split Training | ✅ completed_with_numeric_improvement_runtime_blocked | ✅ |
 | Phase 27.9 | Generation Quality Harness | ✅ completed_harness_blocks_v0_6_runtime | ✅ |
 | Phase 27.10 | Short Response Repair | ✅ completed_numeric_improvement_generation_still_blocked | ✅ |
+| Phase 27.11 | Objective/Decoding Diagnosis | ✅ completed_stop_boundary_missing_generation_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -402,6 +403,16 @@
   - أضيف [PHASE27_10_SHORT_RESPONSE_REPAIR_REPORT.md](./PHASE27_10_SHORT_RESPONSE_REPAIR_REPORT.md).
   - أضيف `artifacts/reports/sf_10m_v0_7_short_repair_report.json`.
   - أضيف `artifacts/samples/sf_10m_v0_7_generations.md`.
+- بدأ وانتهى Phase 27.11 Objective/Decoding Diagnosis:
+  - أضيف `scripts/phase27_11_objective_probe.py` و`make phase27-objective-probe`.
+  - شُغّل gold overfit probe على `16` ردًا قصيرًا (`msa=8`, `saudi=8`).
+  - وصل التدريب إلى loss شبه صفري على micro-corpus، لكن clean-stop بقي `0/16`.
+  - الأسباب: `guard:repetition=6`, `overgenerates_after_expected=10`.
+  - التشخيص: النموذج يحفظ بدايات الردود لكنه لا يتعلم نهاية رد المساعد.
+  - القرار: `FAILED_GOLD_OVERFIT_PROBE_BLOCK_SCALING`.
+  - أضيف [PHASE27_11_OBJECTIVE_PROBE_REPORT.md](./PHASE27_11_OBJECTIVE_PROBE_REPORT.md).
+  - أضيف `artifacts/reports/phase27_11_objective_probe_report.json`.
+  - أضيف `artifacts/samples/phase27_11_objective_probe_generations.md`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -467,7 +478,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.10"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.11"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -498,7 +509,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-482 passed in 25.53s
+484 passed in 17.77s
 ```
 
 | ملف | عدد |

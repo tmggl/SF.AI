@@ -80,6 +80,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.8 | SF-10M v0.6 Split Training | مكتملة بتحسن رقمي؛ runtime محظور |
 | Phase 27.9 | Generation Quality Harness | مكتملة؛ harness يحجب v0.6 آليًا |
 | Phase 27.10 | Short Response Repair | مكتملة بتحسن رقمي؛ التوليد ما زال محظورًا |
+| Phase 27.11 | Objective/Decoding Diagnosis | مكتملة؛ stop boundary/EOS مفقود |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -1634,6 +1635,56 @@ runtime_allowed = false
 ### بعد المرحلة
 لا تكبير. افحص objective/batching/decoding؛ جرّب training comparison على gold-only
 كمعمل، لا كتفعيل runtime.
+
+---
+
+## Phase 27.11 — Objective/Decoding Diagnosis
+
+### الهدف
+تحديد هل فشل `SF-10M` سببه نقص بيانات عام، أم خلل في هدف التدريب/حدود الرد/decoding.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.11 بقرار:
+
+```text
+FAILED_GOLD_OVERFIT_PROBE_BLOCK_SCALING
+```
+
+ما تحقق:
+
+- أضيف `scripts/phase27_11_objective_probe.py`.
+- أضيف `make phase27-objective-probe`.
+- شُغّل probe على `16` ردًا gold قصيرًا فقط (`msa=8`, `saudi=8`).
+- وصل التدريب إلى loss شبه صفري، لكن التوليد فشل `0/16 clean-stop`.
+
+النتيجة:
+
+```text
+checkpoint = sf-10m-step1000
+passed = 0/16
+guard:repetition = 6
+overgenerates_after_expected = 10
+```
+
+### التشخيص
+
+النموذج يحفظ بدايات الردود، لكنه لا يعرف أين يتوقف. هذا يعني أن المرحلة
+التالية يجب أن تضيف حدًا صريحًا لرد المساعد:
+
+- assistant reply boundary
+- EOS/stop token سيادي
+- loss target يتعلم نهاية الرد
+- decoding يتوقف عند الحد
+
+### artifacts
+
+- [PHASE27_11_OBJECTIVE_PROBE_REPORT.md](./PHASE27_11_OBJECTIVE_PROBE_REPORT.md)
+- `artifacts/reports/phase27_11_objective_probe_report.json`
+- `artifacts/samples/phase27_11_objective_probe_generations.md`
+
+### بعد المرحلة
+لا يبدأ `SF-50M`. نفّذ Phase 27.12 لإصلاح boundary/EOS ثم أعد probe وgeneration-quality.
 
 ---
 
