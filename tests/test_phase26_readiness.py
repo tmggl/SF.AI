@@ -22,7 +22,7 @@ def test_phase26_scaling_gate_blocks_sf50m_training_now() -> None:
     decision = build_phase26_scaling_decision()
 
     assert decision.phase.startswith("Phase 26")
-    assert decision.status == "NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M"
+    assert decision.status == "NOT_READY_IMPROVE_SF10M_AND_CANARY"
     assert decision.target_model == "sf-50m"
     assert decision.can_start_sf50m_training is False
     assert decision.corpus["training_records"] == 5143
@@ -51,7 +51,7 @@ def test_phase26_cli_writes_report_and_is_read_only() -> None:
     assert "can_start_sf50m_training      : false" in proc.stdout
     assert "corpus_below_sf50m_minimum" not in proc.stdout
     report = json.loads(REPORT.read_text(encoding="utf-8"))
-    assert report["status"] == "NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M"
+    assert report["status"] == "NOT_READY_IMPROVE_SF10M_AND_CANARY"
     assert report["can_start_sf50m_training"] is False
     assert report["target_config"]["name"] == "sf-50m"
     assert report["target_config"]["sovereign"] is True
@@ -62,7 +62,7 @@ def test_phase26_readiness_endpoint() -> None:
     assert r.status_code == 200
     body = r.json()
     assert body["phase"].startswith("Phase 26")
-    assert body["status"] == "NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M"
+    assert body["status"] == "NOT_READY_IMPROVE_SF10M_AND_CANARY"
     assert body["language_track"] == ["msa", "saudi"]
     assert body["can_start_sf50m_training"] is False
     assert body["corpus"]["training_records"] == 5143

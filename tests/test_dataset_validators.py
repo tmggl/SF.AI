@@ -275,6 +275,17 @@ def test_chat_dataset_iter_messages_streams(tmp_path: Path) -> None:
     assert [m.content for m in msgs] == ["a", "b"]
 
 
+def test_chat_dataset_iter_dialogue_texts_keeps_role_context(tmp_path: Path) -> None:
+    f = tmp_path / "x.jsonl"
+    f.write_text(
+        '{"messages":[{"role":"user","content":"مرحبا"},{"role":"assistant","content":"أهلا"}]}\n',
+        encoding="utf-8",
+    )
+    ds = ChatDataset(root=tmp_path)
+    texts = list(ds.iter_dialogue_texts())
+    assert texts == ["المستخدم: مرحبا\nالمساعد: أهلا\n"]
+
+
 def test_real_corpus_dir_contains_only_explicit_reviewed_seeds() -> None:
     # Sanity: corpus content must be explicit and reviewed, not auto-filled.
     corpus = Path(__file__).resolve().parent.parent / "data" / "corpus" / "chat"

@@ -73,7 +73,8 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 24 | SF-10M v0.2 Quality Training | مكتملة بحدود؛ runtime محظور |
 | Phase 25 | Generated Chat Canary v1 | مكتملة كحماية؛ real model blocked |
 | Phase 26 | SF-50M v0.1 Readiness | مكتملة؛ التدريب غير جاهز حسب scaling gates |
-| Phase 27 | Dialogue Evaluation v2 + corpus expansion plan | مكتملة؛ baseline pass والتوسعة مطلوبة |
+| Phase 27 | Dialogue Evaluation v2 + corpus expansion plan | مكتملة؛ baseline pass وcorpus gate ناجح |
+| Phase 27.5 | SF-10M Dialogue-Format Repair | مكتملة بحدود؛ runtime محظور |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -1262,7 +1263,7 @@ fallback: template
 اكتملت Phase 26 بقرار:
 
 ```text
-NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M
+NOT_READY_IMPROVE_SF10M_AND_CANARY
 can_start_sf50m_training=false
 ```
 
@@ -1306,7 +1307,7 @@ can_start_sf50m_training=false
 اكتملت Phase 27 بقرار:
 
 ```text
-COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_EXPANSION_REQUIRED
+COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_CORPUS_GATE_PASSED
 ```
 
 النتائج:
@@ -1340,8 +1341,61 @@ needed_by_dialect    = msa=0, saudi=0
 - `artifacts/reports/phase27_dialogue_eval_v2_report.json`
 
 ### بعد المرحلة
-لا تنتقل إلى Phase 28 الآن. نفّذ توسعة corpus، ثم أعد Phase 26 readiness،
-ثم افتح `SF-50M` فقط إذا مرت gates.
+لا تنتقل إلى Phase 28 الآن. بعد اكتمال توسعة corpus، نفّذ إصلاح جودة
+`SF-10M` بصيغة حوارية قبل أي تكبير.
+
+---
+
+## Phase 27.5 — SF-10M Dialogue-Format Repair
+
+### الهدف
+إصلاح طريقة تدريب/تقييم `SF-10M` بعد اكتمال corpus gate عند `5143` سجلًا،
+لأن التدريب السابق كان يسطّح الرسائل ولا يحفظ علاقة المستخدم بالمساعد.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.5 بقرار:
+
+```text
+COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED
+```
+
+ما تحقق:
+
+- أضيف بث حواري كامل عبر `ChatDataset.iter_dialogue_texts()`.
+- أصبح `train_tiny_lm` يستخدم `--stream-format dialogue` افتراضيًا.
+- أضيف `--chat-prompt` إلى `evaluate_tiny_lm`.
+- أضيف استخراج رد المساعد من النص المولّد حتى لا تختلط علامات الأدوار بالرد.
+- دُرّب `SF-10M v0.4` على corpus كامل بصيغة حوارية.
+
+نتيجة التدريب:
+
+```text
+model      = sf-10m
+params     = 7,444,992
+records    = 5143
+steps      = 4000
+loss       = 8.4662 → 1.4070
+eval loss  = 5.8267
+perplexity = 339.24
+```
+
+قرار الجودة:
+
+- النموذج تعلّم صيغة الأدوار أفضل من التدريب المسطح.
+- الردود ما زالت غير مرتبطة كفاية بالسؤال.
+- لا يتم تفعيل `SF-10M v0.4` في الواجهة.
+- لا يبدأ `SF-50M` ولا Phase 28 حتى ينجح نموذج أصغر في canary حقيقي.
+
+### artifacts
+
+- [PHASE27_5_SF10M_DIALOGUE_FORMAT_REPORT.md](./PHASE27_5_SF10M_DIALOGUE_FORMAT_REPORT.md)
+- `artifacts/reports/sf_10m_v0_4_dialogue_format_report.json`
+- `artifacts/samples/sf_10m_v0_4_generations.md`
+
+### بعد المرحلة
+نفّذ إصلاحًا نوعيًا قبل التكبير: assistant-target training أو loss masking،
+ثم canary حقيقي على `SF-10M`. افتح `SF-50M` فقط إذا مرّت بوابات الجودة.
 
 ---
 

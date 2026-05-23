@@ -1,0 +1,96 @@
+{
+  "phase": "Phase 27.5 — SF-10M Dialogue-Format Repair",
+  "status": "COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED",
+  "journey": "Phase 27.5 / 30",
+  "language_track": ["msa", "saudi"],
+  "lexicon_track": "Saudi Seed v1",
+  "purpose": "Repair SF-10M training/evaluation so the model learns dialogue role context instead of flattened isolated messages.",
+  "sovereignty": {
+    "pretrained_weights_used": false,
+    "pretrained_tokenizer_used": false,
+    "external_llm_used": false,
+    "synthetic_llm_data_used": false
+  },
+  "corpus": {
+    "path": "data/corpus/chat/jsonl",
+    "records": 5143,
+    "dialects": {
+      "msa": 2549,
+      "saudi": 2594
+    },
+    "operational_internal_dialogue_allowed": false,
+    "training_allowed_required": true
+  },
+  "tokenizer": {
+    "path": "artifacts/tokenizers/sf_bpe/v2",
+    "sf_origin": true
+  },
+  "code_changes": {
+    "dialogue_streaming": "ChatDataset.iter_dialogue_texts() streams full samples with Arabic role markers.",
+    "training_stream_format": "train_tiny_lm defaults to --stream-format dialogue, with messages retained as a diagnostic option.",
+    "evaluation_chat_prompt": "evaluate_tiny_lm supports --chat-prompt and extracts the assistant segment.",
+    "runtime_extraction": "NativeGenerator extracts only the assistant continuation when dialogue_prompt=true."
+  },
+  "model": {
+    "name": "sf-10m",
+    "parameters": 7444992,
+    "random_init": true,
+    "device": "mps"
+  },
+  "training": {
+    "run_name": "sf_10m_v0_4",
+    "stream_format": "dialogue",
+    "steps": 4000,
+    "epochs": 8,
+    "seq_len": 64,
+    "batch_size": 4,
+    "learning_rate": 0.0003,
+    "warmup": 100,
+    "min_lr": 0.00001,
+    "seed": 20260525,
+    "first_logged_loss": 8.4662,
+    "last_logged_loss": 1.4070,
+    "checkpoint": "artifacts/checkpoints/sf_10m_v0_4/sf-10m-step4000",
+    "checkpoint_tracked_in_git": false
+  },
+  "evaluation": {
+    "checkpoint": "sf-10m-step4000",
+    "stream_format": "dialogue",
+    "chat_prompt": true,
+    "batches": 20,
+    "loss": 5.8267,
+    "perplexity": 339.24,
+    "samples": [
+      {
+        "prompt": "كيفك",
+        "output": "لا، الاعتذار الطرف الآخر.",
+        "verdict": "not_relevant"
+      },
+      {
+        "prompt": "السلام عليكم",
+        "output": "لا، الجواب العملي: ابدأ بتحية بسيطًا.",
+        "verdict": "partially_arabic_but_not_good_chat"
+      },
+      {
+        "prompt": "اشرح لي الماء",
+        "output": "لا، الاعتذار الطرف الآخر.",
+        "verdict": "not_relevant"
+      }
+    ]
+  },
+  "generation_quality": {
+    "role_structure_learned_better_than_flattened_training": true,
+    "still_incoherent": true,
+    "question_relevance_failed": true,
+    "short_social_chat_failed": true,
+    "suitable_for_chat_runtime": false,
+    "runtime_blocked": true
+  },
+  "decision": {
+    "phase27_5_completed": true,
+    "can_enable_v0_4_in_ui": false,
+    "can_start_sf50m": false,
+    "can_start_phase28": false,
+    "next_recommended_work": "Assistant-target training/loss masking plus real-model dialogue canary before any scaling."
+  }
+}

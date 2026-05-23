@@ -194,11 +194,12 @@ def run_phase27_dialogue_eval(
         blockers.append("phase26_sf50m_gate_not_ready")
     blockers.append("sf50m_not_trained_or_validated")
 
-    status = (
-        "COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_EXPANSION_REQUIRED"
-        if dialogue_baseline_passed
-        else "FAILED_DIALOGUE_EVAL_V2_FIX_ROUTING_BEFORE_EXPANSION"
-    )
+    if dialogue_baseline_passed and corpus_plan["remaining_records"] == 0:
+        status = "COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_CORPUS_GATE_PASSED"
+    elif dialogue_baseline_passed:
+        status = "COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_EXPANSION_REQUIRED"
+    else:
+        status = "FAILED_DIALOGUE_EVAL_V2_FIX_ROUTING_BEFORE_EXPANSION"
 
     return Phase27DialogueEvalReport(
         phase="Phase 27 — Dialogue Evaluation v2 + Corpus Expansion Plan",
@@ -225,8 +226,8 @@ def run_phase27_dialogue_eval(
         recommended_commands=(
             "make phase27-dialogue-eval",
             "make corpus-audit",
-            "expand governed msa+saudi corpus toward 5000 records",
-            "rerun make phase26-readiness after corpus expansion and SF-10M canary repair",
+            "make phase26-readiness",
+            "repair SF-10M assistant-target quality before scaling",
         ),
         notes=(
             "Phase 27 evaluates the current routing/runtime baseline; it does not train.",

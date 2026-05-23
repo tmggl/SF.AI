@@ -1,6 +1,6 @@
 {
   "phase": "Phase 27 — Dialogue Evaluation v2 + Corpus Expansion Plan",
-  "status": "COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_EXPANSION_REQUIRED",
+  "status": "COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_CORPUS_GATE_PASSED",
   "language_track": [
     "msa",
     "saudi"
@@ -30,7 +30,7 @@
   "open_generator_ready": false,
   "can_reopen_sf50m_gate": false,
   "can_start_phase28": false,
-  "phase26_status": "NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M",
+  "phase26_status": "NOT_READY_IMPROVE_SF10M_AND_CANARY",
   "corpus_expansion_plan": {
     "current_records": 5143,
     "target_records": 5000,
@@ -88,8 +88,8 @@
   "recommended_commands": [
     "make phase27-dialogue-eval",
     "make corpus-audit",
-    "expand governed msa+saudi corpus toward 5000 records",
-    "rerun make phase26-readiness after corpus expansion and SF-10M canary repair"
+    "make phase26-readiness",
+    "repair SF-10M assistant-target quality before scaling"
   ],
   "notes": [
     "Phase 27 evaluates the current routing/runtime baseline; it does not train.",
@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27 كتقييم حوار v2 وخطة توسعة corpus. النتيجة: التوجيه نجح، لكن المولد ما زال قالبًا. corpus gate تجاوز 5000، والمانع الآن جودة SF-10M وcanary."
+      "response_preview": "اكتملت Phase 27.5: درّبنا SF-10M v0.4 بصيغة حوارية كاملة. تحسن التدريب رقميًا، لكن الردود لا تزال غير مناسبة للواجهة. الخطوة التالية إصلاح assistant-target/loss masking قبل أي تكبي"
     },
     {
       "scenario_id": "clarification_repair_flow",

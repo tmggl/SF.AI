@@ -7,11 +7,11 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27 / 30**
-- **المرحلة الحالية:** **Phase 27 — Dialogue Evaluation v2 + Corpus Expansion Plan**
-- **حالة المرحلة الحالية:** **مكتملة كـ baseline eval؛ توسعة corpus مطلوبة قبل SF-50M**
-- **المرحلة التالية المقترحة:** إعادة تدريب/تحسين `SF-10M` وإصلاح canary؛ Phase 28 محظورة حتى ينجح `SF-50M`.
-- **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ تم تحديث `default_registry.yaml` و`safety_terms.yaml` لفجوات finance/religion/security.
+- **الرحلة الحالية:** **Phase 27.5 / 30**
+- **المرحلة الحالية:** **Phase 27.5 — SF-10M Dialogue-Format Repair**
+- **حالة المرحلة الحالية:** **مكتملة بحدود؛ `SF-10M v0.4` تعلّم صيغة الحوار لكنه محظور runtime**
+- **المرحلة التالية المقترحة:** assistant-target training / loss masking ثم canary حقيقي على `SF-10M`; Phase 28 محظورة حتى ينجح `SF-50M`.
+- **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
 ---
@@ -51,8 +51,9 @@
 | Phase 23 | Tokenizer v2 Retrain & Audit | ✅ completed_ready_for_phase24 | ✅ |
 | Phase 24 | SF-10M v0.2 Quality Training | ✅ completed_with_limits_runtime_blocked | ✅ |
 | Phase 25 | Generated Chat Canary v1 | ✅ completed_guarded_canary_real_model_blocked | ✅ |
-| Phase 26 | SF-50M v0.1 Readiness | ✅ completed_not_ready_expand_corpus_and_improve_sf10m | ✅ |
-| Phase 27 | Dialogue Evaluation v2 and corpus expansion plan | ✅ completed_baseline_pass_expansion_required | ✅ |
+| Phase 26 | SF-50M v0.1 Readiness | ✅ completed_not_ready_improve_sf10m_and_canary | ✅ |
+| Phase 27 | Dialogue Evaluation v2 and corpus expansion plan | ✅ completed_baseline_pass_corpus_gate_passed | ✅ |
+| Phase 27.5 | SF-10M Dialogue-Format Repair | ✅ completed_with_limits_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -281,7 +282,7 @@
   - أضيف `sf_ai/training/phase26_readiness.py`.
   - أضيف `scripts/phase26_readiness.py` وهدف `make phase26-readiness`.
   - أضيف endpoint حي: `GET /system/phase26-readiness`.
-  - القرار: `NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M`.
+  - القرار: `NOT_READY_IMPROVE_SF10M_AND_CANARY`.
   - `can_start_sf50m_training=false`.
   - corpus كان `500` سجل عند قرار Phase 26، ثم صار `5143` بعد تنظيف الحوارات التشغيلية والتوسعة الطبيعية؛ corpus gate صار ناجحًا.
   - tokenizer v2 جاهز، لكن runtime quality غير جاهزة لأن Phase 25 حجب `SF-10M v0.2`.
@@ -318,6 +319,20 @@
   - corpus الحالي صار `5143`: `msa=2549`, `saudi=2594`.
   - المتبقي إلى هدف `5000` صار `0` سجلًا.
   - أضيف [PHASE27_CORPUS_EXPANSION_BATCH_001_REPORT.md](./PHASE27_CORPUS_EXPANSION_BATCH_001_REPORT.md).
+- بدأ وانتهى Phase 27.5 SF-10M Dialogue-Format Repair:
+  - أضيف `ChatDataset.iter_dialogue_texts()` حتى يتدرب النموذج على حوار كامل بعلامات `المستخدم:` و`المساعد:` بدل رسائل منفصلة.
+  - أصبح `train_tiny_lm` يستخدم `--stream-format dialogue` افتراضيًا، مع إبقاء `messages` للتشخيص.
+  - أضيف `--chat-prompt` إلى `evaluate_tiny_lm`.
+  - أضيف `extract_dialogue_reply()` لاستخراج رد المساعد فقط من النص المولّد.
+  - دُرّب `SF-10M v0.4` على corpus الحالي `5143` سجلًا، `steps=4000`, `seq_len=64`, `batch_size=4`, `device=mps`.
+  - loss التدريب انخفض من `8.4662` إلى `1.4070`.
+  - eval على `20` batch: `loss=5.8267`, `perplexity=339.24`.
+  - العينات صارت عربية قصيرة لكنها غير مرتبطة كفاية بالسؤال، مثل: `لا، الاعتذار الطرف الآخر.`
+  - القرار: `COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED`.
+  - لا يتم تفعيل `SF-10M v0.4` في الواجهة، ولا يبدأ `SF-50M` قبل إصلاح جودة الردود.
+  - أضيف [PHASE27_5_SF10M_DIALOGUE_FORMAT_REPORT.md](./PHASE27_5_SF10M_DIALOGUE_FORMAT_REPORT.md).
+  - أضيف `artifacts/reports/sf_10m_v0_4_dialogue_format_report.json`.
+  - أضيف `artifacts/samples/sf_10m_v0_4_generations.md`.
   - أضيف [PHASE27_CORPUS_EXPANSION_BATCH_002_REPORT.md](./PHASE27_CORPUS_EXPANSION_BATCH_002_REPORT.md).
   - أضيف [PHASE27_CORPUS_EXPANSION_BATCH_003_REPORT.md](./PHASE27_CORPUS_EXPANSION_BATCH_003_REPORT.md).
   - أضيف [PHASE27_CORPUS_EXPANSION_BATCH_004_REPORT.md](./PHASE27_CORPUS_EXPANSION_BATCH_004_REPORT.md).
@@ -388,7 +403,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.5"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -419,7 +434,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-460 passed in 8.52s
+467 passed in 16.39s
 ```
 
 | ملف | عدد |

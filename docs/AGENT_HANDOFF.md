@@ -66,7 +66,8 @@
 | Phase 24 | SF-10M v0.2 Quality Training | ✅ completed_with_limits_runtime_blocked |
 | Phase 25 | Generated Chat Canary v1 | ✅ completed_guarded_canary_real_model_blocked |
 | Phase 26 | SF-50M v0.1 Readiness | ✅ completed_not_ready_expand_corpus_and_improve_sf10m |
-| Phase 27 | Dialogue Evaluation v2 + Corpus Expansion Plan | ✅ completed_baseline_pass_expansion_required |
+| Phase 27 | Dialogue Evaluation v2 + Corpus Expansion Plan | ✅ completed_baseline_pass_corpus_gate_passed |
+| Phase 27.5 | SF-10M Dialogue-Format Repair | ✅ completed_with_limits_runtime_blocked |
 
 اقرأ التفاصيل في [PHASE_STATUS.md](./PHASE_STATUS.md) و [EXECUTION_PLAN.md](./EXECUTION_PLAN.md).
 
@@ -365,7 +366,7 @@ sf_ai/datasets/                 schemas + validators + loaders + saudi_seed
 resources/lexicons/             YAML lexicons (Phase 3) + imported/ (Phase 3.5/3.6)
 data/corpus/                    حوار المستخدم + قاموس سعودي
 docs/                           كل الوثائق الفنية
-tests/                          435 اختبار، 48 ملف
+tests/                          467 اختبار، 53 ملف
 scripts/                        CLI: run_chat_server, validate_dataset, train_bpe, import_mo3jam_saudi
 ```
 

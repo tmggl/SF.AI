@@ -1,13 +1,13 @@
 {
   "phase": "Phase 26 — SF-50M v0.1 Dialogue Model Readiness",
-  "status": "NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M",
+  "status": "NOT_READY_IMPROVE_SF10M_AND_CANARY",
   "language_track": [
     "msa",
     "saudi"
   ],
   "target_model": "sf-50m",
   "can_start_sf50m_training": false,
-  "recommended_action": "DO_NOT_TRAIN_SF50M_YET_EXPAND_CORPUS_AND_REPEAT_SF10M_CANARY",
+  "recommended_action": "DO_NOT_TRAIN_SF50M_YET_IMPROVE_SF10M_CANARY",
   "corpus": {
     "path": "data/corpus/chat/jsonl",
     "training_records": 5143,
@@ -80,8 +80,8 @@
     "make corpus-audit",
     "make phase23-tokenizer-audit",
     "make phase26-readiness",
-    "expand governed msa+saudi corpus toward 5000 records",
-    "repeat SF-10M quality training/canary after corpus expansion"
+    "repair SF-10M assistant-target quality",
+    "repeat SF-10M quality training/canary"
   ],
   "notes": [
     "This decision is read-only and starts no training.",

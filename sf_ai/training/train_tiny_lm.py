@@ -61,11 +61,17 @@ def iter_token_batches(
     batch_size: int,
     seq_len: int,
     device: torch.device,
+    stream_format: str = "dialogue",
 ) -> Iterator[tuple[torch.Tensor, torch.Tensor]]:
     """Stream (input_ids, targets) batches from a chat corpus."""
     pool: list[int] = []
-    for msg in dataset.iter_messages():
-        ids = tokenizer.encode(msg.content)
+    texts = (
+        dataset.iter_dialogue_texts()
+        if stream_format == "dialogue"
+        else (msg.content for msg in dataset.iter_messages())
+    )
+    for text in texts:
+        ids = tokenizer.encode(text)
         if not ids:
             continue
         pool.extend(ids)
@@ -121,6 +127,8 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     p.add_argument("--checkpoint-name", type=str, default="sf-10m-step0")
     p.add_argument("--save-every", type=int, default=50)
     p.add_argument("--seed", type=int, default=1337)
+    p.add_argument("--stream-format", choices=["dialogue", "messages"], default="dialogue",
+                   help="dialogue keeps role-marked samples together; messages preserves legacy flat streaming")
     p.add_argument("--dry-run", action="store_true",
                    help="Build everything but skip the training loop")
     return p.parse_args(argv)
@@ -179,6 +187,7 @@ def run(argv: list[str]) -> int:
             batch_size=args.batch_size,
             seq_len=args.seq_len,
             device=torch_device,
+            stream_format=args.stream_format,
         ):
             produced_in_epoch += 1
             # Set LR per step.
@@ -227,7 +236,7 @@ def _save(ckpt_mgr: CheckpointManager, model: TinyTransformer, args, step: int, 
         config_hash="",
         notes=(
             f"seed={args.seed} batch={args.batch_size} seq={args.seq_len} "
-            f"epochs={args.epochs}"
+            f"epochs={args.epochs} stream_format={args.stream_format}"
         ),
     )
     ckpt_mgr.save_metadata(name, meta)

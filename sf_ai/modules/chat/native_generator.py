@@ -36,6 +36,7 @@ class NativeGeneratorConfig:
     temperature: float = 0.20
     top_k: int = 0
     device: str = "auto"
+    dialogue_prompt: bool = True
 
 
 @dataclass(frozen=True)
@@ -52,6 +53,24 @@ class NativeGeneratorStatus:
     checkpoint_meta_exists: bool
     checkpoint_state_exists: bool
     generator: str = "sf_10m_v0_2"
+
+
+def extract_dialogue_reply(decoded: str, model_prompt: str) -> str:
+    """Extract the assistant continuation from a dialogue-formatted sample."""
+    text = decoded.strip()
+    if not text:
+        return ""
+
+    if text.startswith(model_prompt):
+        text = text[len(model_prompt):].strip()
+    elif "المساعد:" in text:
+        text = text.split("المساعد:", 1)[1].strip()
+
+    if text.startswith("المساعد:"):
+        text = text[len("المساعد:"):].strip()
+    if "المستخدم:" in text:
+        text = text.split("المستخدم:", 1)[0].strip()
+    return text.strip()
 
 
 class NativeGenerator:
@@ -90,7 +109,12 @@ class NativeGenerator:
             return NativeGenerationResult(False, "", status.generator, "missing_checkpoint")
 
         tok, model, device = self._load()
-        prompt_ids = tok.encode(prompt)
+        model_prompt = (
+            f"المستخدم: {prompt.strip()}\nالمساعد:"
+            if self.config.dialogue_prompt
+            else prompt
+        )
+        prompt_ids = tok.encode(model_prompt)
         if not prompt_ids:
             return NativeGenerationResult(False, "", status.generator, "prompt_not_tokenized")
 
@@ -105,10 +129,10 @@ class NativeGenerator:
         else:
             out = greedy_generate(model, input_ids, cfg)
         text = tok.decode(out[0].detach().cpu().tolist()).strip()
-        if text.startswith(prompt):
-            continuation = text[len(prompt):].strip()
-            if continuation:
-                text = continuation
+        if self.config.dialogue_prompt:
+            text = extract_dialogue_reply(text, model_prompt)
+        elif text.startswith(model_prompt):
+            text = text[len(model_prompt):].strip()
         if not text:
             return NativeGenerationResult(False, "", status.generator, "empty_generation")
         return NativeGenerationResult(True, text, status.generator, "generated")

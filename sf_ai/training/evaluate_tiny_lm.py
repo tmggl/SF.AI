@@ -25,6 +25,7 @@ from sf_ai.models.transformer import (
     perplexity,
     sample_generate,
 )
+from sf_ai.modules.chat.native_generator import extract_dialogue_reply
 from sf_ai.training.checkpoints import CheckpointManager
 from sf_ai.training.device import DeviceManager
 from sf_ai.training.train_tiny_lm import iter_token_batches, load_sovereign_tokenizer
@@ -47,6 +48,9 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
                    help="Use temperature/top-k sampling instead of greedy")
     p.add_argument("--temperature", type=float, default=1.0)
     p.add_argument("--top-k", type=int, default=20)
+    p.add_argument("--stream-format", choices=["dialogue", "messages"], default="dialogue")
+    p.add_argument("--chat-prompt", action="store_true",
+                   help="Wrap prompt as المستخدم/المساعد dialogue before generation")
     return p.parse_args(argv)
 
 
@@ -77,7 +81,7 @@ def run(argv: list[str]) -> int:
     with torch.no_grad():
         for inputs, targets in iter_token_batches(
             tok, dataset, batch_size=args.batch_size, seq_len=args.seq_len,
-            device=torch_device,
+            device=torch_device, stream_format=args.stream_format,
         ):
             logits = model(inputs)
             loss = cross_entropy_lm(logits, targets)
@@ -94,7 +98,8 @@ def run(argv: list[str]) -> int:
         print("no batches produced — corpus may be too small")
 
     # A short generation sample.
-    prompt_ids = torch.tensor([tok.encode(args.prompt)], dtype=torch.long, device=torch_device)
+    prompt = f"المستخدم: {args.prompt}\nالمساعد:" if args.chat_prompt else args.prompt
+    prompt_ids = torch.tensor([tok.encode(prompt)], dtype=torch.long, device=torch_device)
     if prompt_ids.numel() == 0:
         print("(prompt produced no tokens — skipping generation)")
         return 0
@@ -105,6 +110,10 @@ def run(argv: list[str]) -> int:
     else:
         out = greedy_generate(model, prompt_ids, gen_cfg)
     decoded = tok.decode(out[0].cpu().tolist())
+    if args.chat_prompt:
+        decoded = extract_dialogue_reply(decoded, prompt)
+    elif decoded.startswith(prompt):
+        decoded = decoded[len(prompt):].strip()
     print("\n=== generation ===")
     print(decoded)
     return 0

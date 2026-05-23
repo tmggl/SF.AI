@@ -92,6 +92,34 @@ class ChatDataset:
             else:
                 yield from sample.to_messages()
 
+    def iter_dialogue_texts(self, *, clean: bool = True) -> Iterator[str]:
+        """Stream whole dialogues with explicit Arabic role markers.
+
+        LM training needs to learn "user asks → assistant answers". Flattening
+        every message independently teaches local phrasing but discards the
+        conversational contract. This format keeps each sample together while
+        staying plain UTF-8 text for the sovereign tokenizer/model stack.
+        """
+        for sample in self.iter_samples(clean=clean):
+            messages = (
+                sample.messages
+                if isinstance(sample, StructuredSample)
+                else sample.to_messages()
+            )
+            lines: list[str] = []
+            for msg in messages:
+                content = msg.content.strip()
+                if not content:
+                    continue
+                if msg.role == "user":
+                    lines.append(f"المستخدم: {content}")
+                elif msg.role == "assistant":
+                    lines.append(f"المساعد: {content}")
+                elif msg.role == "system":
+                    lines.append(f"النظام: {content}")
+            if lines:
+                yield "\n".join(lines) + "\n"
+
     # ----- stats -----
 
     def stats(self) -> DatasetStats:

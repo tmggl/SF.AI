@@ -17,6 +17,7 @@ from sf_ai.modules.chat import (
     NativeGenerator,
     NativeGeneratorConfig,
 )
+from sf_ai.modules.chat.native_generator import extract_dialogue_reply
 
 
 class _FakeGenerator:
@@ -171,6 +172,18 @@ def test_native_generator_returns_missing_checkpoint_without_throwing(tmp_path: 
     assert out.used is False
     assert out.generator == "sf_10m_v0_2"
     assert out.reason == "missing_checkpoint"
+
+
+def test_extract_dialogue_reply_prefers_assistant_segment() -> None:
+    prompt = "المستخدم: كيفك\nالمساعد:"
+    decoded = "المستخدم: كيفك\nالمساعد: بخير الحمد لله.\nالمستخدم: ممتاز"
+    assert extract_dialogue_reply(decoded, prompt) == "بخير الحمد لله."
+
+
+def test_extract_dialogue_reply_handles_tokenizer_spacing() -> None:
+    prompt = "المستخدم: كيفك\nالمساعد:"
+    decoded = " المستخدم: كيفك \n المساعد: تمام، وأنت؟ المستخدم: بخير"
+    assert extract_dialogue_reply(decoded, prompt) == "تمام، وأنت؟"
 
 
 def test_chat_module_exposes_template_generator_metadata() -> None:

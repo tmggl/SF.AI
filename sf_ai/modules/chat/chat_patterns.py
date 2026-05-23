@@ -84,8 +84,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27 كتقييم حوار v2 وخطة توسعة corpus. النتيجة: التوجيه نجح، "
-    "لكن المولد ما زال قالبًا. corpus gate تجاوز 5000، والمانع الآن جودة SF-10M وcanary.",
+    "اكتملت Phase 27.5: درّبنا SF-10M v0.4 بصيغة حوارية كاملة. "
+    "تحسن التدريب رقميًا، لكن الردود لا تزال غير مناسبة للواجهة. "
+    "الخطوة التالية إصلاح assistant-target/loss masking قبل أي تكبير.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

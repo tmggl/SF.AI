@@ -5,7 +5,7 @@
 **Journey:** Phase 27 / 30  
 **Language track:** `msa + saudi` only  
 **Lexicon track:** Saudi Seed v1 + local Saudi/Gulf runtime seed  
-**Status:** `COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_EXPANSION_REQUIRED`
+**Status:** `COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_CORPUS_GATE_PASSED`
 
 ## الهدف
 
@@ -31,7 +31,7 @@ can_start_phase28    : false
 - التوجيه والردود القالبية نجحت كـ baseline.
 - هذا ليس حوارًا مولدًا مقنعًا.
 - كل الردود لا تزال `template`.
-- Phase 28 محجوبة حتى ينجح `SF-50M` أولًا، و`SF-50M` نفسه محجوب حتى نوسع corpus ونصلح canary.
+- Phase 28 محجوبة حتى ينجح `SF-50M` أولًا، و`SF-50M` نفسه محجوب حتى نصلح جودة `SF-10M` وcanary.
 
 ## خطة توسيع corpus
 
@@ -42,7 +42,7 @@ remaining_records : 0
 needed_msa        : 0
 needed_saudi      : 0
 batch_size        : 1500
-batches_total     : 1
+batches_total     : 0
 gold_target       : 1000
 needed_gold       : 969
 needed_silver     : 0

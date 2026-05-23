@@ -148,15 +148,11 @@ def build_phase26_scaling_decision(
         blockers.append("repetition_checks_failed")
 
     can_start = not blockers
-    status = (
-        "READY_FOR_SF50M_TRAINING"
-        if can_start
-        else "NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M"
-    )
+    status = "READY_FOR_SF50M_TRAINING" if can_start else "NOT_READY_IMPROVE_SF10M_AND_CANARY"
     action = (
         "START_SF50M_TRAINING"
         if can_start
-        else "DO_NOT_TRAIN_SF50M_YET_EXPAND_CORPUS_AND_REPEAT_SF10M_CANARY"
+        else "DO_NOT_TRAIN_SF50M_YET_IMPROVE_SF10M_CANARY"
     )
 
     return Phase26ScalingDecision(
@@ -218,8 +214,8 @@ def build_phase26_scaling_decision(
             "make corpus-audit",
             "make phase23-tokenizer-audit",
             "make phase26-readiness",
-            "expand governed msa+saudi corpus toward 5000 records",
-            "repeat SF-10M quality training/canary after corpus expansion",
+            "repair SF-10M assistant-target quality",
+            "repeat SF-10M quality training/canary",
         ),
         notes=(
             "This decision is read-only and starts no training.",

@@ -38,7 +38,7 @@ def test_dialogue_v2_suite_is_multiturn_msa_saudi_only() -> None:
 
 def test_phase27_dialogue_eval_passes_baseline_but_blocks_scaling() -> None:
     report = run_phase27_dialogue_eval()
-    assert report.status == "COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_EXPANSION_REQUIRED"
+    assert report.status == "COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_CORPUS_GATE_PASSED"
     assert report.total_scenarios == 7
     assert report.total_turns == 19
     assert report.passed_turns == 19
@@ -48,7 +48,7 @@ def test_phase27_dialogue_eval_passes_baseline_but_blocks_scaling() -> None:
     assert report.can_reopen_sf50m_gate is False
     assert report.can_start_phase28 is False
     assert report.generator_modes == {"template": 19}
-    assert report.phase26_status == "NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M"
+    assert report.phase26_status == "NOT_READY_IMPROVE_SF10M_AND_CANARY"
     assert report.corpus_expansion_plan["current_records"] == 5143
     assert report.corpus_expansion_plan["target_records"] == 5000
     assert report.corpus_expansion_plan["remaining_records"] == 0
@@ -70,7 +70,7 @@ def test_phase27_cli_writes_eval_and_artifact_reports() -> None:
     assert "SF.AI — Phase 27 dialogue evaluation v2" in proc.stdout
     assert "turns                     : 19/19" in proc.stdout
     report = json.loads(REPORT.read_text(encoding="utf-8"))
-    assert report["status"] == "COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_EXPANSION_REQUIRED"
+    assert report["status"] == "COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_CORPUS_GATE_PASSED"
     assert report["can_start_phase28"] is False
     assert report["corpus_expansion_plan"]["remaining_records"] == 0
 
@@ -80,7 +80,7 @@ def test_phase27_dialogue_eval_endpoint() -> None:
     assert r.status_code == 200
     body = r.json()
     assert body["phase"].startswith("Phase 27")
-    assert body["status"] == "COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_EXPANSION_REQUIRED"
+    assert body["status"] == "COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_CORPUS_GATE_PASSED"
     assert body["language_track"] == ["msa", "saudi"]
     assert body["passed_turns"] == body["total_turns"] == 19
     assert body["generator_modes"] == {"template": 19}
