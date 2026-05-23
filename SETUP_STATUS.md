@@ -36,18 +36,18 @@
 - **Checkpoint Phase 24 المحلي:** `artifacts/checkpoints/sf_10m_v0_2/sf-10m-step2000`; ملفات checkpoints مستثناة من git حسب السياسة.
 - **نتيجة Phase 25:** أضيف `GenerationGuard` وفلاغ `SF_GENERATOR_CANARY` ومسار `sf_10m_v0_2` guarded. التجربة الحقيقية حُجبت بـ `generation_guard:malformed_token` ورجع الرد إلى `template`. القرار `COMPLETED_GUARDED_CANARY_REAL_MODEL_BLOCKED`.
 - **تقرير Phase 25:** `docs/PHASE25_GENERATED_CHAT_CANARY_REPORT.md`, `artifacts/reports/phase25_generation_canary_report.json`.
-- **نتيجة Phase 26:** أضيفت بوابة `make phase26-readiness` و`GET /system/phase26-readiness`. القرار `NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M`: لا تدريب `SF-50M` الآن؛ corpus الحالي بعد Batch 002 صار `1050` والحد العملي `5000`، وPhase 25 حجب النموذج الحقيقي، وruntime quality/hallucination/repetition gates غير ناجحة.
+- **نتيجة Phase 26:** أضيفت بوابة `make phase26-readiness` و`GET /system/phase26-readiness`. القرار `NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M`: لا تدريب `SF-50M` الآن؛ corpus الحالي بعد Batch 003 صار `1550` والحد العملي `5000`، وPhase 25 حجب النموذج الحقيقي، وruntime quality/hallucination/repetition gates غير ناجحة.
 - **تقرير Phase 26:** `docs/PHASE26_SF50M_READINESS_REPORT.md`, `artifacts/reports/phase26_sf50m_readiness_report.json`.
-- **نتيجة Phase 27:** أضيف `make phase27-dialogue-eval` و`GET /system/phase27-dialogue-eval`. suite متعدد الأدوار نجح `19/19`، لكنه أثبت أن الردود الحالية `template` وليست مولدًا مفتوحًا. بعد Batch 002: المتبقي `3950` سجلًا عبر `8` دفعات كبيرة تقريبًا بحجم 500، بالتوازن `msa=1975`, `saudi=1975`.
+- **نتيجة Phase 27:** أضيف `make phase27-dialogue-eval` و`GET /system/phase27-dialogue-eval`. suite متعدد الأدوار نجح `19/19`، لكنه أثبت أن الردود الحالية `template` وليست مولدًا مفتوحًا. بعد Batch 003: المتبقي `3450` سجلًا عبر `7` دفعات كبيرة تقريبًا بحجم 500، بالتوازن `msa=1725`, `saudi=1725`.
 - **تقرير Phase 27:** `docs/PHASE27_DIALOGUE_EVAL_V2_REPORT.md`, `eval/reports/dialogue_eval_v2.json`, `artifacts/reports/phase27_dialogue_eval_v2_report.json`.
-- **دفعات توسعة Phase 27:** أضيف Batch 001 بإجمالي 50 سجلًا، ثم Batch 002 الكبيرة بإجمالي 500 سجل (`250` فصيح + `250` سعودي). corpus الحالي صار `1050`: `msa=525`, `saudi=525`, والمتبقي إلى `5000` صار `3950` سجلًا.
+- **دفعات توسعة Phase 27:** أضيف Batch 001 بإجمالي 50 سجلًا، ثم Batch 002 وBatch 003 الكبيرتان بإجمالي 1000 سجل، كل واحدة `250` فصيح + `250` سعودي. corpus الحالي صار `1550`: `msa=775`, `saudi=775`, والمتبقي إلى `5000` صار `3450` سجلًا.
 - **مقارنة tokenizer v1/v2:** v1 كان `vocab=261`, `merges=218`, `words_seen=723`, سعودي فقط. v2 تدرب على `500` سجل متوازن: `msa=250`, `saudi=250`.
 - **تحسن protected Saudi terms:** `average_tokens` انخفض من `4.0` في v1 إلى `2.3` في v2، ولا توجد `roundtrip_failures` أو `aggressive_split_terms`.
 - **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches=[]` لأن الجمع اكتمل.
 - **مهمة batch التالية:** `make phase22-next-batch` يعرض الآن `NO_BATCHES_REMAINING_RECHECK_READINESS`; لا توجد دفعة أخرى داخل Phase 22.
 - **دفعات فصحى معتمدة:** أضيف `data/corpus/chat/jsonl/dialogue_batch_v2_msa_001.jsonl` إلى `dialogue_batch_v2_msa_008.jsonl` بإجمالي 178 سجل فصيح `silver` مؤلفة/مراجعة بتفويض سامي، مع بطاقات provenance.
 - **دفعات سعودية معتمدة:** أضيف `data/corpus/chat/jsonl/dialogue_batch_v2_saudi_001.jsonl` إلى `dialogue_batch_v2_saudi_007.jsonl` بإجمالي 170 سجلًا سعوديًا `silver` مؤلفة/مراجعة بتفويض سامي، وبذلك اكتمل حد السعودي مع seed/protected coverage إلى 200/200.
-- **دفعات مرنة معتمدة:** أضيف `data/corpus/chat/jsonl/dialogue_batch_v2_flex_001.jsonl` إلى `dialogue_batch_v2_flex_004.jsonl` بإجمالي 100 سجل `silver` موزعة بين الفصحى والسعودية، فأصبح corpus Phase 22 مكتملًا عند 500/500، ثم بدأت توسعة Phase 27 إلى 1050.
+- **دفعات مرنة معتمدة:** أضيف `data/corpus/chat/jsonl/dialogue_batch_v2_flex_001.jsonl` إلى `dialogue_batch_v2_flex_004.jsonl` بإجمالي 100 سجل `silver` موزعة بين الفصحى والسعودية، فأصبح corpus Phase 22 مكتملًا عند 500/500، ثم بدأت توسعة Phase 27 إلى 1550.
 - **Seed مصطلحات فصحى تدريبي:** أضيف `data/corpus/chat/jsonl/protected_terms_msa_seed_v1.jsonl` وفيه 22 سجلًا فصيحًا `gold` لتغطية مصطلحات تشغيل/حوكمة/تدريب أساسية، مع بطاقة provenance.
 - **فصل المستخدمين من الأساس:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` حتى لا تختلط محادثات المستخدمين عند التوسع لاحقًا.
 - **بنك تأليف فصيح غير تدريبي:** أضيف `resources/phase22_authoring/msa_prompt_bank_v1.json` وفيه 80+ موضوعًا فصيحًا لتسهيل كتابة batches الفصحى؛ الملف `training_allowed=false` و`synthetic_llm_data=false` ولا يُنسخ إلى corpus.
@@ -274,7 +274,7 @@ make server-start
 ## نتائج الاختبارات (حتى إكمال Phase 27)
 
 ```
-460 passed in 8.10s
+460 passed in 8.52s
 ```
 
 التغطية الحالية:
