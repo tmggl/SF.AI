@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27.22: أصلحنا spacing/boundary فاختفى لصق الكلمات، وتحسن micro-probe من 25/32 إلى 29/32. بقيت 3 إخفاقات دلالية/لفظية، لذلك التالي Phase 27.23 لإصلاح semantic/lexical c"
+      "response_preview": "اكتملت Phase 27.23 جزئيًا: تحسن micro-probe من 29/32 إلى 30/32، لكن بقي خلل lexical في «التعاون» و«الاحترام». لذلك التالي Phase 27.24 لـ minimal lexical stabilization قبل أي تفعيل."
     },
     {
       "scenario_id": "clarification_repair_flow",

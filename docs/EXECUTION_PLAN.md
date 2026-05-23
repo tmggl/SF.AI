@@ -92,6 +92,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.20 | Tokenizer/Protected-Phrase Strategy | مكتملة؛ دعم protected phrases جاهز لـ tokenizer v3 |
 | Phase 27.21 | Tokenizer v3 Protected-Phrase Micro-Probe | مكتملة؛ tokenizer نجح وmicro-probe فشل 25/32 |
 | Phase 27.22 | Spacing/Boundary Loss Repair | مكتملة جزئيًا؛ micro-probe تحسن إلى 29/32 |
+| Phase 27.23 | Semantic/Lexical Confusion Repair | مكتملة جزئيًا؛ micro-probe تحسن إلى 30/32 |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2312,6 +2313,57 @@ glued_left   = 0
 - [PHASE27_22_SPACING_BOUNDARY_REPAIR_REPORT.md](./PHASE27_22_SPACING_BOUNDARY_REPAIR_REPORT.md)
 - `artifacts/reports/phase27_22_spacing_boundary_repair_report.json`
 - `artifacts/samples/phase27_22_spacing_boundary_repair_generations.md`
+
+---
+
+## Phase 27.23 — Semantic/Lexical Confusion Repair
+
+### الهدف
+
+علاج إخفاقات Phase 27.22 الدلالية/اللفظية المتبقية دون تفعيل runtime ودون
+تكبير النموذج.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.23 بقرار:
+
+```text
+PARTIAL_SEMANTIC_LEXICAL_REPAIR_BLOCK_RUNTIME
+```
+
+ما تحقق:
+
+- جُرّبت محاولة tokenizer v4 أوسع ورُفضت لأنها سببت answer collapse.
+- اعتُمد tokenizer v3 لأنه وصل سابقًا إلى `29/32`.
+- أضيف training repair متوازن: قاعدة 32 مكررة + أمثلة contrastive محدودة.
+
+النتيجة:
+
+```text
+passed       = 30/32
+exact_clean  = 30/32
+semantic     = 30/32
+guard_passed = 31/32
+```
+
+### التشخيص
+
+تحسن `القراءة وش تفيد`، لكن بقي lexical instability في الفصحى:
+
+- `التعاون`
+- `الاحترام`
+
+### القرار
+
+- لا runtime.
+- لا `SF-50M`.
+- التالي Phase 27.24: minimal lexical stabilization.
+
+### artifacts
+
+- [PHASE27_23_SEMANTIC_LEXICAL_REPAIR_REPORT.md](./PHASE27_23_SEMANTIC_LEXICAL_REPAIR_REPORT.md)
+- `artifacts/reports/phase27_23_semantic_lexical_repair_report.json`
+- `artifacts/samples/phase27_23_semantic_lexical_repair_generations.md`
 
 ---
 

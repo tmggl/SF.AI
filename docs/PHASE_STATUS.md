@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.22 / 30**
-- **المرحلة الحالية:** **Phase 27.22 — Spacing/Boundary Loss Repair**
-- **حالة المرحلة الحالية:** **مكتملة جزئيًا؛ micro-probe تحسن إلى 29/32 لكن runtime بقي محجوبًا**
-- **المرحلة التالية المقترحة:** Phase 27.23 semantic/lexical confusion repair قبل أي runtime أو `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.23 / 30**
+- **المرحلة الحالية:** **Phase 27.23 — Semantic/Lexical Confusion Repair**
+- **حالة المرحلة الحالية:** **مكتملة جزئيًا؛ micro-probe تحسن إلى 30/32 لكن runtime بقي محجوبًا**
+- **المرحلة التالية المقترحة:** Phase 27.24 minimal lexical stabilization قبل أي runtime أو `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -71,6 +71,7 @@
 | Phase 27.20 | Tokenizer/Protected-Phrase Strategy | ✅ completed_ready_for_tokenizer_v3_runtime_blocked | ✅ |
 | Phase 27.21 | Tokenizer v3 Protected-Phrase Micro-Probe | ✅ completed_micro_probe_failed_runtime_blocked | ✅ |
 | Phase 27.22 | Spacing/Boundary Loss Repair | ✅ completed_partial_repair_runtime_blocked | ✅ |
+| Phase 27.23 | Semantic/Lexical Confusion Repair | ✅ completed_partial_repair_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -551,6 +552,16 @@
   - لا تفعيل runtime ولا تدريب `SF-50M`.
   - أضيف [PHASE27_22_SPACING_BOUNDARY_REPAIR_REPORT.md](./PHASE27_22_SPACING_BOUNDARY_REPAIR_REPORT.md).
   - أضيف `artifacts/reports/phase27_22_spacing_boundary_repair_report.json`.
+- بدأ وانتهى Phase 27.23 Semantic/Lexical Confusion Repair:
+  - جُرّبت محاولة tokenizer v4 أوسع ورُفضت لأنها سببت answer collapse (`8/32`).
+  - اعتُمد tokenizer v3 مع تدريب repair متوازن: قاعدة 32 مكررة + أمثلة contrastive محدودة.
+  - النتيجة تحسنت من `29/32` إلى `30/32`.
+  - `exact_clean=30/32`, `semantic=30/32`, `guard_passed=31/32`.
+  - بقي خللان lexical: `التعاون` و`الاحترام`.
+  - القرار: `PARTIAL_SEMANTIC_LEXICAL_REPAIR_BLOCK_RUNTIME`.
+  - لا تفعيل runtime ولا تدريب `SF-50M`.
+  - أضيف [PHASE27_23_SEMANTIC_LEXICAL_REPAIR_REPORT.md](./PHASE27_23_SEMANTIC_LEXICAL_REPAIR_REPORT.md).
+  - أضيف `artifacts/reports/phase27_23_semantic_lexical_repair_report.json`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -616,7 +627,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.22"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.23"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -647,7 +658,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-506 passed in 16.76s
+520 passed in 16.97s
 ```
 
 | ملف | عدد |
