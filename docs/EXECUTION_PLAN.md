@@ -122,7 +122,8 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.50 | Generator-Only UI Lab Mode | مكتملة؛ `/chat/message` بلا قوالب، gate `7/7` |
 | Phase 27.51 | Open-Dialogue Generalization Audit | مكتملة؛ فشل مفيد، live `3/22`, raw natural `1/20`, التدريب مطلوب |
 | Phase 27.52 | Natural Dialogue Objective Repair | مكتملة جزئيًا؛ دبل تدريب `9200` خطوة، raw natural `5/20`, لا runtime switch |
-| Phase 27.53 | Natural Dialogue Diversity Expansion | التالية؛ تنويع الأزواج الفريدة بدل زيادة الخطوات فقط |
+| Phase 27.53 | Natural Dialogue Diversity Expansion | مكتملة جزئيًا؛ `10,540` زوجًا و`18,000` خطوة، raw natural `2/36`, لا runtime switch |
+| Phase 27.54 | Capacity/Objectivity Gate | التالية؛ تحديد هل العائق سعة النموذج أم الهدف/التوكنة قبل أي تكبير |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3069,6 +3070,42 @@ cases = 7/7
 - `artifacts/reports/phase27_52_natural_dialogue_objective_repair_report.json`
 - `artifacts/samples/phase27_52_natural_dialogue_objective_repair.md`
 - checkpoint محلي غير مرفوع: `artifacts/eval/phase27_52_natural_dialogue_objective_repair/checkpoints/sf-10m-step9200/state.pt`
+
+---
+
+## Phase 27.53 — Natural Dialogue Diversity Expansion
+
+### الهدف
+تنفيذ توسعة كبيرة للحوار الطبيعي العام داخل `SF-10M`: آلاف الأزواج الفريدة بدل تكرار أمثلة قليلة.
+
+### ما تم
+- أضيف `scripts/phase27_53_natural_dialogue_diversity_expansion.py`.
+- أضيف `make phase27-natural-dialogue-diversity-expansion`.
+- وُلد `10,540` سجلًا فريدًا:
+  - `5,270` فصحى.
+  - `5,270` سعودي.
+- السجلات اجتازت governance audit وتستبعد حوار المشروع والتشغيل.
+- التدريب: `18,000` خطوة، `batch_size=2`, `seq_len=80`.
+
+### النتيجة
+- الحالة: `PARTIAL_NATURAL_DIALOGUE_DIVERSITY_KEEP_PHASE27_47_RUNTIME`.
+- held-out raw natural: `2/36`.
+- ظهرت مشاكل خلط/fragments رغم توسعة البيانات.
+
+### القرار
+لا يتم فتح `sf_10m_phase27_53` في الواجهة. لا Phase 28 ولا تكبير تلقائي.
+
+التالي:
+
+**Phase 27.54 — Capacity/Objectivity Gate**
+
+الهدف القادم تحديد هل الفشل بسبب سعة `SF-10M` أم بسبب الهدف/التوكنة/أسلوب البيانات قبل أي تدريب أكبر.
+
+### artifacts
+- [PHASE27_53_NATURAL_DIALOGUE_DIVERSITY_EXPANSION_REPORT.md](./PHASE27_53_NATURAL_DIALOGUE_DIVERSITY_EXPANSION_REPORT.md)
+- `artifacts/reports/phase27_53_natural_dialogue_diversity_expansion_report.json`
+- `artifacts/samples/phase27_53_natural_dialogue_diversity_expansion.md`
+- checkpoint محلي غير مرفوع: `artifacts/eval/phase27_53_natural_dialogue_diversity_expansion/checkpoints/sf-10m-step18000/state.pt`
 
 ---
 

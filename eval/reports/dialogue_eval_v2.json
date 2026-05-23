@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.52: ضاعفنا تدريب `SF-10M` بأمان إلى 9200 خطوة، وتحسن raw natural من 1/20 إلى 5/20 فقط. لا نفتح checkpoint الجديد؛ التالي Phase 27.53 لزيادة تنوع الحوار بدل زيادة"
+      "response_preview": "وصلنا إلى Phase 27.53: درّبنا `SF-10M` على 10,540 زوجًا حواريًا فريدًا و18,000 خطوة، لكن raw natural كان 2/36 فقط. لا نفتح checkpoint الجديد؛ التالي Phase 27.54 لمعرفة هل العائق سع"
     },
     {
       "scenario_id": "clarification_repair_flow",

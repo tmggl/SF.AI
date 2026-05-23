@@ -372,3 +372,23 @@ def test_phase27_52_natural_dialogue_objective_repair_stays_guarded() -> None:
     assert report["runtime_switch_allowed"] is False
     assert report["sf50m_allowed"] is False
     assert report["phase28_allowed"] is False
+
+
+def test_phase27_53_natural_dialogue_diversity_expansion_stays_guarded() -> None:
+    report = _report("phase27_53_natural_dialogue_diversity_expansion_report.json")
+    assert report["phase"] == "Phase 27.53"
+    assert report["status"] == "PARTIAL_NATURAL_DIALOGUE_DIVERSITY_KEEP_PHASE27_47_RUNTIME"
+    assert report["training_started"] is True
+    assert report["model_size"] == "sf-10m"
+    assert report["progressive_scaling_respected"] is True
+    assert report["candidate_generator"] == "sf_10m_phase27_53"
+    assert report["unique_train_records"] == 10540
+    assert report["dialect_counts"] == {"msa": 5270, "saudi": 5270}
+    assert report["training_budget"]["steps"] == 18000
+    assert report["governance"]["external_data_used"] is False
+    assert report["governance"]["operational_dialogue_excluded"] is True
+    assert report["summary"]["passed"] == 2
+    assert report["summary"]["total"] == 36
+    assert report["runtime_switch_allowed"] is False
+    assert report["sf50m_allowed"] is False
+    assert report["phase28_allowed"] is False

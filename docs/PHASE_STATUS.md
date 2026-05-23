@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.52 / 30**
-- **المرحلة الحالية:** **Phase 27.52 — Natural Dialogue Objective Repair**
-- **حالة المرحلة الحالية:** **مكتملة جزئيًا؛ دبل تدريب آمن داخل SF-10M رفع raw natural من 1/20 إلى 5/20 فقط، لذلك runtime يبقى على Phase 27.47**
-- **المرحلة التالية المقترحة:** Phase 27.53 Natural Dialogue Diversity Expansion؛ لا Phase 28 ولا `SF-50M` قبل بوابات حوار مفتوح.
+- **الرحلة الحالية:** **Phase 27.53 / 30**
+- **المرحلة الحالية:** **Phase 27.53 — Natural Dialogue Diversity Expansion**
+- **حالة المرحلة الحالية:** **مكتملة جزئيًا؛ 10,540 زوجًا فريدًا و18,000 خطوة لم تكفِ، raw natural = 2/36، لذلك runtime يبقى على Phase 27.47**
+- **المرحلة التالية المقترحة:** Phase 27.54 Capacity/Objectivity Gate؛ لا Phase 28 ولا `SF-50M` قبل إثبات أن التوسيع مبرر.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -101,6 +101,7 @@
 | Phase 27.50 | Generator-Only UI Lab Mode | ✅ completed_generator_only_ui_gate | ✅ |
 | Phase 27.51 | Open-Dialogue Generalization Audit | ✅ completed_failed_training_required | ✅ |
 | Phase 27.52 | Natural Dialogue Objective Repair | ✅ completed_partial_keep_phase27_47_runtime | ✅ |
+| Phase 27.53 | Natural Dialogue Diversity Expansion | ✅ completed_partial_keep_phase27_47_runtime | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -786,6 +787,16 @@
   - الفشل: followup `0/4`, open_social `0/4`, support `0/4`.
   - القرار: لا runtime switch؛ لا `SF-50M` ولا Phase 28؛ التالي Phase 27.53 لتوسيع تنوع الحوار بدل زيادة الخطوات فقط.
   - أضيف [PHASE27_52_NATURAL_DIALOGUE_OBJECTIVE_REPAIR_REPORT.md](./PHASE27_52_NATURAL_DIALOGUE_OBJECTIVE_REPAIR_REPORT.md).
+- بدأ وانتهى Phase 27.53 Natural Dialogue Diversity Expansion:
+  - أضيف `make phase27-natural-dialogue-diversity-expansion`.
+  - ولّد `10,540` سجلًا فريدًا: `5,270` فصحى و`5,270` سعودي.
+  - السجلات اجتازت governance audit، ولا تحتوي حوار تشغيل/مشروع.
+  - دُرّب `SF-10M` فقط، بدون تكبير حجم، على `18,000` خطوة.
+  - checkpoint محلي: `artifacts/eval/phase27_53_natural_dialogue_diversity_expansion/checkpoints/sf-10m-step18000`.
+  - نتيجة held-out raw natural: `2/36`.
+  - السبب الجذري الظاهر: خلط أجزاء من ردود مختلفة وفقدان ارتباط prompt بالرد، مع fragments مثل `نقدر نًا`.
+  - القرار: لا runtime switch؛ لا `SF-50M` ولا Phase 28 تلقائيًا؛ التالي Phase 27.54 Capacity/Objectivity Gate.
+  - أضيف [PHASE27_53_NATURAL_DIALOGUE_DIVERSITY_EXPANSION_REPORT.md](./PHASE27_53_NATURAL_DIALOGUE_DIVERSITY_EXPANSION_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 

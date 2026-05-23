@@ -1,0 +1,835 @@
+{
+  "phase": "Phase 27.53",
+  "status": "PARTIAL_NATURAL_DIALOGUE_DIVERSITY_KEEP_PHASE27_47_RUNTIME",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": true,
+  "training_scope": "SF-10M natural dialogue diversity expansion; no model-size scaling",
+  "progressive_scaling_respected": true,
+  "model_size": "sf-10m",
+  "tokenizer": "artifacts/tokenizers/sf_bpe/v6_weak_lane_terms",
+  "checkpoint_root": "artifacts/eval/phase27_53_natural_dialogue_diversity_expansion/checkpoints",
+  "checkpoint_name": "sf-10m-step18000",
+  "candidate_generator": "sf_10m_phase27_53",
+  "unique_train_records": 10540,
+  "dialect_counts": {
+    "msa": 5270,
+    "saudi": 5270
+  },
+  "category_counts": {
+    "explain": 600,
+    "topic": 600,
+    "question": 600,
+    "example": 600,
+    "open_social": 60,
+    "support": 400,
+    "planning": 320,
+    "writing": 400,
+    "communication": 200,
+    "decision": 240,
+    "learning": 120,
+    "open_general": 6400
+  },
+  "training_budget": {
+    "steps": 18000,
+    "batch_size": 2,
+    "seq_len": 80,
+    "lr": 0.00038,
+    "warmup": 360
+  },
+  "governance": {
+    "owner_delegated_agent_authored": true,
+    "external_data_used": false,
+    "pretrained_used": false,
+    "operational_dialogue_excluded": true,
+    "records_governance_audited": true
+  },
+  "no_keyword_lane_claim": {
+    "intent_conditioning_used_in_training": false,
+    "topic_conditioning_used_in_training": false,
+    "raw_eval_intent": null,
+    "raw_eval_topic": null
+  },
+  "summary": {
+    "passed": 2,
+    "total": 36,
+    "bucket_summary": {
+      "decision": {
+        "passed": 0,
+        "total": 4
+      },
+      "followup": {
+        "passed": 0,
+        "total": 4
+      },
+      "learning": {
+        "passed": 0,
+        "total": 4
+      },
+      "open_general": {
+        "passed": 1,
+        "total": 4
+      },
+      "open_social": {
+        "passed": 1,
+        "total": 4
+      },
+      "planning": {
+        "passed": 0,
+        "total": 4
+      },
+      "support": {
+        "passed": 0,
+        "total": 4
+      },
+      "topic": {
+        "passed": 0,
+        "total": 4
+      },
+      "writing": {
+        "passed": 0,
+        "total": 4
+      }
+    },
+    "reason_counts": {
+      "passed": 2,
+      "expected_terms_missing": 27,
+      "low_prompt_overlap:0.00": 7
+    }
+  },
+  "runtime_switch_allowed": false,
+  "sf50m_allowed": false,
+  "phase28_allowed": false,
+  "previous_phase27_52": {
+    "raw_natural_passed": 5,
+    "raw_natural_total": 20
+  },
+  "next_phase": "Phase 27.54 — inspect diversity failures and consider tokenizer/model-capacity gate",
+  "torch_version": "2.12.0",
+  "rows": [
+    {
+      "id": "social_saudi_1",
+      "bucket": "open_social",
+      "dialect": "saudi",
+      "prompt": "سولف معي شوي عن يومك",
+      "expected_any": [
+        "نسولف",
+        "اليوم",
+        "حياك"
+      ],
+      "response": "خلنا نتكلم عن اليوم، ولا تنتظر : أهم شي تخليه قريب من حياتك مو كلام بعيد.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "canned_phrase": false,
+      "prompt_overlap": 0.2,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "social_saudi_2",
+      "bucket": "open_social",
+      "dialect": "saudi",
+      "prompt": "هات سالفة خفيفة عن الشغل",
+      "expected_any": [
+        "الشغل",
+        "نسولف",
+        "سالفة"
+      ],
+      "response": "نقدر نًا. أخبرني عن شيء بسيط حدث في يومك، ونبدأ منه.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.2,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "social_msa_1",
+      "bucket": "open_social",
+      "dialect": "msa",
+      "prompt": "أريد حديثًا خفيفًا عن القراءة",
+      "expected_any": [
+        "القراءة",
+        "حديث",
+        "نتحدث"
+      ],
+      "response": "نقدر نًا. أخبرني عن شيء بسيط حدث في يومك، ونبدأ منه.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.2,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "social_msa_2",
+      "bucket": "open_social",
+      "dialect": "msa",
+      "prompt": "اقترح موضوعًا بسيطًا نتكلم عنه",
+      "expected_any": [
+        "موضوع",
+        "نتحدث",
+        "يومك"
+      ],
+      "response": "حسنًا. أخبرني عن شيء بسيط حدث في يومك، ونبدأ منه.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "low_prompt_overlap:0.00"
+    },
+    {
+      "id": "follow_saudi_1",
+      "bucket": "followup",
+      "dialect": "saudi",
+      "prompt": "يعني وش أسوي بعدها",
+      "expected_any": [
+        "خطوة",
+        "بعدها",
+        "ابدأ"
+      ],
+      "response": "خفف الجملة قصيرة، ثم قل الفكرة الأساسية بلطف ووضوح.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "follow_saudi_2",
+      "bucket": "followup",
+      "dialect": "saudi",
+      "prompt": "وضح لي أكثر بدون لف",
+      "expected_any": [
+        "أقصد",
+        "خطوة",
+        "ببساطة"
+      ],
+      "response": "السبب، ثم ما تريد الوصول إليه.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "follow_msa_1",
+      "bucket": "followup",
+      "dialect": "msa",
+      "prompt": "لم أفهم الفكرة جيدًا",
+      "expected_any": [
+        "أقصد",
+        "ببساطة",
+        "خطوة"
+      ],
+      "response": "خلنا نتكلم عن شيء بسيط حدث في يومك، : أهم شي تخليه قريب من حياتك مباشرة، واشكر الشخص على وقته.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "follow_msa_2",
+      "bucket": "followup",
+      "dialect": "msa",
+      "prompt": "ما الخطوة التالية",
+      "expected_any": [
+        "خطوة",
+        "بعد",
+        "اختر"
+      ],
+      "response": "فائدة الفكرة تظهر عندما يساعدك على فهم نفسك أو ترتب يومك بوضوح.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "planning_saudi_1",
+      "bucket": "planning",
+      "dialect": "saudi",
+      "prompt": "يومي زحمة ومشاويري كثيرة",
+      "expected_any": [
+        "ابدأ",
+        "ضروري",
+        "رتب"
+      ],
+      "response": "ابدأ بما تستطيع فعله اليوم، ولا تنتظر أن تكون الظروف كاملة.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "low_prompt_overlap:0.00"
+    },
+    {
+      "id": "planning_saudi_2",
+      "bucket": "planning",
+      "dialect": "saudi",
+      "prompt": "كيف أنظم وقتي بدون توتر",
+      "expected_any": [
+        "وقت",
+        "ابدأ",
+        "قسّم"
+      ],
+      "response": "اجعل الجملة قصيرة، واذكر الشيء المطلوب بدل الدوران حوله.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "planning_msa_1",
+      "bucket": "planning",
+      "dialect": "msa",
+      "prompt": "لدي أعمال كثيرة ولا أعرف البداية",
+      "expected_any": [
+        "ابدأ",
+        "أولويات",
+        "مهمة"
+      ],
+      "response": "لا بأس. ابدأ بكلمة واحدة عن شعورك الآن، وسأساعدك نرتبها.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "low_prompt_overlap:0.00"
+    },
+    {
+      "id": "planning_msa_2",
+      "bucket": "planning",
+      "dialect": "msa",
+      "prompt": "ساعدني أرتب الدراسة هذا الأسبوع",
+      "expected_any": [
+        "الدراسة",
+        "رتب",
+        "وقت"
+      ],
+      "response": "اكتب الفكرة الأولى، ثم السبب، ثم ما تريد الوصول إليه.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "support_saudi_1",
+      "bucket": "support",
+      "dialect": "saudi",
+      "prompt": "حاس بضغط واحتاج تهدئة",
+      "expected_any": [
+        "نفس",
+        "خفف",
+        "خطوة"
+      ],
+      "response": "خلنا نتكلم عن شيء بسيط حدث في يومك، : أهم شي تخليه قريب من حياتك مباشرة، واشكر الشخص على وقته.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "support_saudi_2",
+      "bucket": "support",
+      "dialect": "saudi",
+      "prompt": "متضايق شوي وش أسوي",
+      "expected_any": [
+        "نفس",
+        "اهدأ",
+        "خطوة"
+      ],
+      "response": "خفف الجملة قصيرة، ثم قل الفكرة الأساسية بلطف ووضوح.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "support_msa_1",
+      "bucket": "support",
+      "dialect": "msa",
+      "prompt": "أشعر بتوتر وأحتاج كلامًا مطمئنًا",
+      "expected_any": [
+        "نفس",
+        "بهدوء",
+        "خطوة"
+      ],
+      "response": "خلنا نتكلم عن شيء بسيط حدث في يومك، ونبدأ منه.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "support_msa_2",
+      "bucket": "support",
+      "dialect": "msa",
+      "prompt": "اليوم كان مرهقًا وأريد راحة",
+      "expected_any": [
+        "راحة",
+        "أفهمك",
+        "بهدوء"
+      ],
+      "response": "خلنا نتكلم عن شيء بسيط حدث في يومك، ونبدأ منه.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "writing_saudi_1",
+      "bucket": "writing",
+      "dialect": "saudi",
+      "prompt": "اكتب لي اعتذار لطيف لصديق",
+      "expected_any": [
+        "آسف",
+        "أعتذر",
+        "لطيفة",
+        "صديق"
+      ],
+      "response": "تقدر تقول: هلا، حبيت أرسل لك نتيجة واضحة بسرعة. وأقربدون لف.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "writing_saudi_2",
+      "bucket": "writing",
+      "dialect": "saudi",
+      "prompt": "صغ لي رد شكر قصير",
+      "expected_any": [
+        "شكر",
+        "أقدّر",
+        "ممتن"
+      ],
+      "response": "صيغة مناسبة: أقدّر أسهل عليك الحين وأقرب لاحتياجك؟",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "low_prompt_overlap:0.00"
+    },
+    {
+      "id": "writing_msa_1",
+      "bucket": "writing",
+      "dialect": "msa",
+      "prompt": "اكتب لي طلب موعد بصيغة مهذبة",
+      "expected_any": [
+        "موعد",
+        "وقت",
+        "أقدّر"
+      ],
+      "response": "تقدر تقول: هلا، حبيت أرسل لك نتيجة بدأ منه.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "writing_msa_2",
+      "bucket": "writing",
+      "dialect": "msa",
+      "prompt": "كيف أرد على مجاملة جميلة",
+      "expected_any": [
+        "شكر",
+        "لطيف",
+        "أقدّر"
+      ],
+      "response": "اجعل الجملة قصيرة، واذكر الشيء المطلوب بدل الدوران حوله.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "decision_saudi_1",
+      "bucket": "decision",
+      "dialect": "saudi",
+      "prompt": "أرتاح شوي ولا أبدأ الحين",
+      "expected_any": [
+        "ابدأ",
+        "راحة",
+        "اختر"
+      ],
+      "response": "حسنًا. أخبرني عن شيء بسيط حدث في يومك، ونبدأ منه.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "decision_saudi_2",
+      "bucket": "decision",
+      "dialect": "saudi",
+      "prompt": "أرسل الرسالة الحين ولا أنتظر",
+      "expected_any": [
+        "رسالة",
+        "انتظر",
+        "اختر"
+      ],
+      "response": "خلنا نتكلم عن شيء بسيط حدث في يومك، ونبدأ منه.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "decision_msa_1",
+      "bucket": "decision",
+      "dialect": "msa",
+      "prompt": "هل أقرأ قليلًا أم أمشي عشر دقائق",
+      "expected_any": [
+        "اختر",
+        "أقرب",
+        "يريحك"
+      ],
+      "response": "حسنًا. أخبرني عن شيء بسيط حدث في يومك، ونبدأ منه.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "decision_msa_2",
+      "bucket": "decision",
+      "dialect": "msa",
+      "prompt": "أجهز للغد أم أنهي عمل اليوم",
+      "expected_any": [
+        "اليوم",
+        "الغد",
+        "قارن"
+      ],
+      "response": "لا بأس. ابدأ بكلمة واحدة عن شعورك الآن، وسأساعدك نرتبها.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "topic_saudi_1",
+      "bucket": "topic",
+      "dialect": "saudi",
+      "prompt": "تكلم عن الوفاء بمثال قريب",
+      "expected_any": [
+        "الوفاء",
+        "مثال",
+        "معروف"
+      ],
+      "response": "خلنا نتكلم عن وقت: أهم شي تخليه قريب من حياتك مو كلام بعيد.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.4,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "topic_saudi_2",
+      "bucket": "topic",
+      "dialect": "saudi",
+      "prompt": "وش فايدة الهدوء في التعامل",
+      "expected_any": [
+        "الهدوء",
+        "تفكر",
+        "استعجال"
+      ],
+      "response": "خفف حوله.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "topic_msa_1",
+      "bucket": "topic",
+      "dialect": "msa",
+      "prompt": "حدثني عن الشجاعة دون تعقيد",
+      "expected_any": [
+        "الشجاعة",
+        "الخوف",
+        "الصواب"
+      ],
+      "response": "ابدأ بتحية قصيرة، ثم قل الفكرة الأساسية بلطف ووضوح.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "topic_msa_2",
+      "bucket": "topic",
+      "dialect": "msa",
+      "prompt": "أعطني مثالًا عن الاحترام",
+      "expected_any": [
+        "الاحترام",
+        "الناس",
+        "تقدير"
+      ],
+      "response": "خلنا نتكلم عن الأكلأهم شي تخليه قريب من حياتك مو كلام بعيد.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.25,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "learning_saudi_1",
+      "bucket": "learning",
+      "dialect": "saudi",
+      "prompt": "علمني طريقة بسيطة لتحسين التركيز",
+      "expected_any": [
+        "التركيز",
+        "خطوة",
+        "يوم"
+      ],
+      "response": "ابدأ بتحسين الوقت بخطوة صغيرة كل يوم، وزدها إذا صارت سهلة.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "low_prompt_overlap:0.00"
+    },
+    {
+      "id": "learning_saudi_2",
+      "bucket": "learning",
+      "dialect": "saudi",
+      "prompt": "كيف أتعلم القراءة بشكل أحسن",
+      "expected_any": [
+        "القراية",
+        "القراءة",
+        "كل يوم"
+      ],
+      "response": "اجعل الجملة قصيرة، واذكر الشيء المطلوب بدل الدوران حوله.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "learning_msa_1",
+      "bucket": "learning",
+      "dialect": "msa",
+      "prompt": "كيف أحسن عاداتي بهدوء",
+      "expected_any": [
+        "عادة",
+        "خطوة",
+        "يومية"
+      ],
+      "response": "اجعل الجملة قصيرة، واذكر الشيء المطلوب بدل الدوران حوله.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "learning_msa_2",
+      "bucket": "learning",
+      "dialect": "msa",
+      "prompt": "اشرح لي طريقة بسيطة للمذاكرة",
+      "expected_any": [
+        "المذاكرة",
+        "قسّم",
+        "وقت"
+      ],
+      "response": "السبب، ثم ما تريد الوصول إليه.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "general_saudi_1",
+      "bucket": "open_general",
+      "dialect": "saudi",
+      "prompt": "مدري وش أقول بس ودي أتكلم",
+      "expected_any": [
+        "شعورك",
+        "كلمة",
+        "أساعدك"
+      ],
+      "response": "خفف حوله.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "general_saudi_2",
+      "bucket": "open_general",
+      "dialect": "saudi",
+      "prompt": "أبي نصيحة عامة تنفعني اليوم",
+      "expected_any": [
+        "اليوم",
+        "ابدأ",
+        "تقدر"
+      ],
+      "response": "ابدأ بما تستطيع فعله اليوم، ولا تنتظر أن تكون الظروف كاملة.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "low_prompt_overlap:0.00"
+    },
+    {
+      "id": "general_msa_1",
+      "bucket": "open_general",
+      "dialect": "msa",
+      "prompt": "لا أعرف كيف أبدأ الكلام",
+      "expected_any": [
+        "ابدأ",
+        "كلمة",
+        "فكرة"
+      ],
+      "response": "لا بأس. ابدأ بكلمة واحدة عن شعورك الآن، وسأساعدك نرتبها.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "canned_phrase": false,
+      "prompt_overlap": 0.4,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "general_msa_2",
+      "bucket": "open_general",
+      "dialect": "msa",
+      "prompt": "أحتاج ردًا قصيرًا ومهذبًا",
+      "expected_any": [
+        "شكر",
+        "قصير",
+        "واضح"
+      ],
+      "response": "قل: شكرًا لك، وصلتني فكرتك، وسأرد عليك قريبًا.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "canned_phrase": false,
+      "prompt_overlap": 0.0,
+      "passed": false,
+      "reason": "low_prompt_overlap:0.00"
+    }
+  ]
+}
