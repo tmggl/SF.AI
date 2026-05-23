@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.13 — SF-10M v0.8 Boundary/EOS Wider Training",
-        current_phase_status="completed_eval_improved_generation_still_blocked",
+        current_phase="Phase 27.14 — Sovereign Training Quality Tooling Decision",
+        current_phase_status="completed_tooling_adoption_decision_no_training",
         next_phase=(
-            "Phase 27.14 SF-10M semantic and lexical repair before any SF-50M scaling"
+            "Phase 27.15 SF-10M semantic and lexical repair before any SF-50M scaling"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -179,6 +179,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_13_sf10m_v0_8_boundary_eos_training",
                 status="completed_eval_improved_runtime_blocked",
                 phase="Phase 27.13",
+            ),
+            ComponentStatus(
+                name="phase27_14_sovereign_quality_tooling",
+                status="completed_no_training",
+                phase="Phase 27.14",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

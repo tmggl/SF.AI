@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27.13: درّبنا SF-10M v0.8 بصيغة EOS/conditioning على split التدريب. تحسن eval إلى loss=3.1875 وperplexity=24.23، لكن generation-quality بقي 3/10 بسبب fragments، لذلك ل"
+      "response_preview": "اكتملت Phase 27.14: ثبّتنا Sovereign Training Quality Tooling كقرار رسمي. اعتمدنا 10 أدوات محلية منها EOS، tracker، checkpoint selector، وgold probes. لا تدريب جديد ولا تفعيل للواج"
     },
     {
       "scenario_id": "clarification_repair_flow",

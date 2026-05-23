@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.13 / 30**
-- **المرحلة الحالية:** **Phase 27.13 — SF-10M v0.8 Boundary/EOS Wider Training**
-- **حالة المرحلة الحالية:** **مكتملة؛ eval تحسن لكن generation-quality لا يزال يحجب runtime**
-- **المرحلة التالية المقترحة:** Phase 27.14 لإصلاح الدلالة واللغة ورفع generation-quality قبل أي تكبير إلى `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.14 / 30**
+- **المرحلة الحالية:** **Phase 27.14 — Sovereign Training Quality Tooling Decision**
+- **حالة المرحلة الحالية:** **مكتملة؛ أدوات جودة التدريب المحلية اعتُمدت دون تدريب جديد**
+- **المرحلة التالية المقترحة:** Phase 27.15 لإصلاح الدلالة واللغة ورفع generation-quality قبل أي تكبير إلى `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -62,6 +62,7 @@
 | Phase 27.11 | Objective/Decoding Diagnosis | ✅ completed_stop_boundary_missing_generation_blocked | ✅ |
 | Phase 27.12 | Assistant Boundary/EOS Repair | ✅ completed_boundary_eos_partial_semantic_blocked | ✅ |
 | Phase 27.13 | SF-10M v0.8 Boundary/EOS Wider Training | ✅ completed_eval_improved_generation_still_blocked | ✅ |
+| Phase 27.14 | Sovereign Training Quality Tooling Decision | ✅ completed_tooling_adoption_decision_no_training | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -437,6 +438,15 @@
   - أضيف [PHASE27_13_SF10M_V08_REPORT.md](./PHASE27_13_SF10M_V08_REPORT.md).
   - أضيف `artifacts/reports/sf_10m_v0_8_boundary_eos_training_report.json`.
   - أضيف `artifacts/reports/generation_quality_v1_v0_8_report.json`.
+- بدأ وانتهى Phase 27.14 Sovereign Training Quality Tooling Decision:
+  - اعتُمدت 10 أدوات جودة محلية بدون أي تدريب جديد.
+  - أضيف `LocalExperimentTracker` لتسجيل التجارب في JSONL محلي.
+  - أضيف `make phase27-quality-tooling`.
+  - أضيف تقرير قرار الأدوات: `artifacts/reports/phase27_14_quality_tooling_decision_report.json`.
+  - أضيف سجل التجارب المحلي: `artifacts/reports/experiment_registry.jsonl`.
+  - القرار: `COMPLETED_TOOLING_ADOPTION_DECISION_NO_TRAINING`.
+  - runtime المولد و`SF-50M` وPhase 28 ما زالت محظورة حتى تنجح بوابات الجودة.
+  - التالي: Phase 27.15 لإصلاح social/lexical curriculum وdecoder no-repeat controls.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -533,7 +543,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-489 passed in 16.23s
+491 passed in 16.25s
 ```
 
 | ملف | عدد |

@@ -83,6 +83,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.11 | Objective/Decoding Diagnosis | مكتملة؛ stop boundary/EOS مفقود |
 | Phase 27.12 | Assistant Boundary/EOS Repair | مكتملة جزئيًا؛ runtime محظور |
 | Phase 27.13 | SF-10M v0.8 Boundary/EOS Wider Training | مكتملة؛ eval تحسن والتوليد محظور |
+| Phase 27.14 | Sovereign Training Quality Tooling Decision | مكتملة؛ أدوات جودة محلية دون تدريب |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -1795,8 +1796,59 @@ boundary فقط؛ نحتاج إصلاح دلالي/لغوي موجه قبل أي
 - `artifacts/reports/generation_quality_v1_v0_8_report.json`
 
 ### بعد المرحلة
-نفّذ Phase 27.14: semantic/lexical repair curriculum + stricter canary. لا يبدأ
-`SF-50M` ولا Phase 28.
+نفّذ Phase 27.14: تثبيت قرار أدوات جودة التدريب السيادية قبل semantic/lexical
+repair. لا يبدأ `SF-50M` ولا Phase 28.
+
+---
+
+## Phase 27.14 — Sovereign Training Quality Tooling Decision
+
+### الهدف
+تحويل قائمة الأدوات المسموحة إلى سياسة تنفيذ رسمية قابلة للاختبار، بدون تدريب
+جديد وبدون تفعيل runtime.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.14 بقرار:
+
+```text
+COMPLETED_TOOLING_ADOPTION_DECISION_NO_TRAINING
+```
+
+الأدوات المعتمدة:
+
+- Assistant EOS / stop boundary.
+- Sequence packing with boundaries.
+- Local experiment tracker.
+- Data quality scanner.
+- Curriculum sampler.
+- No-repeat decoding controls.
+- Gold-only micro probes.
+- Checkpoint selector.
+- Local JSON/JSONL logs.
+- Tokenizer boundary audit.
+
+ما أضيف:
+
+- `sf_ai/training/experiment_tracker.py`
+- `scripts/phase27_14_quality_tooling.py`
+- `make phase27-quality-tooling`
+- `docs/SOVEREIGN_TRAINING_QUALITY_TOOLING.md`
+- `artifacts/reports/phase27_14_quality_tooling_decision_report.json`
+- `artifacts/reports/experiment_registry.jsonl`
+
+### قرار الحجب
+
+```text
+runtime_generator_enabled = false
+training_started         = false
+start_sf50m              = blocked
+start_phase28            = blocked
+```
+
+### بعد المرحلة
+نفّذ Phase 27.15: targeted social/lexical curriculum + decoder no-repeat controls
+لـ `SF-10M`. لا يبدأ `SF-50M` ولا Phase 28.
 
 ---
 

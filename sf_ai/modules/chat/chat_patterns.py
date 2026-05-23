@@ -84,9 +84,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.13: درّبنا SF-10M v0.8 بصيغة EOS/conditioning على split التدريب. "
-    "تحسن eval إلى loss=3.1875 وperplexity=24.23، لكن generation-quality بقي 3/10 "
-    "بسبب fragments، لذلك لا تفعيل للواجهة ولا SF-50M. التالي Phase 27.14 لإصلاح الدلالة واللغة.",
+    "اكتملت Phase 27.14: ثبّتنا Sovereign Training Quality Tooling كقرار رسمي. "
+    "اعتمدنا 10 أدوات محلية منها EOS، tracker، checkpoint selector، وgold probes. "
+    "لا تدريب جديد ولا تفعيل للواجهة؛ التالي Phase 27.15 لإصلاح الدلالة واللغة في SF-10M.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

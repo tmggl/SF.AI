@@ -24,6 +24,7 @@ Phase 27.12 أضافت EOS وconditioning للفصحى/السعودي وحققت
 Phase 27.13 درّبت `SF-10M v0.8` على split التدريب بهذه الصيغة؛ eval تحسن
 إلى loss `3.1875` وperplexity `24.23`، لكن generation-quality الصارم بقي
 `3/10` بسبب fragments ومطابقة اجتماعية ضعيفة. runtime ما زال محظورًا.
+Phase 27.14 ثبّتت أدوات جودة التدريب السيادية كقرار رسمي، بدون تدريب جديد.
 
 الخطوة العملية الحالية:
 
@@ -76,6 +77,7 @@ Phase 27.13 درّبت `SF-10M v0.8` على split التدريب بهذه الص
 - Phase 27.11 اكتمل: gold overfit probe فشل `0/16 clean-stop`; يجب إصلاح boundary/EOS.
 - Phase 27.12 اكتمل جزئيًا: EOS + dialect conditioning؛ `5/16` تطابق كامل و`9/16` بلا فشل guard.
 - Phase 27.13 اكتمل: `SF-10M v0.8` حسّن eval إلى ppl `24.23`، لكن generation-quality `3/10` وruntime محظور.
+- Phase 27.14 اكتمل: اعتماد أدوات الجودة السيادية وملف تتبع التجارب المحلي.
 
 الجرد الحالي يرى:
 
@@ -138,6 +140,7 @@ SF.AI حاليًا:
 - **Phase 27.11:** objective/decoding probe — مكتمل؛ stop boundary مفقود، runtime محظور.
 - **Phase 27.12:** assistant EOS/boundary repair — مكتمل جزئيًا، runtime محظور.
 - **Phase 27.13:** SF-10M v0.8 wider training — مكتمل بتحسن eval، runtime محظور.
+- **Phase 27.14:** Sovereign Training Quality Tooling — مكتمل بدون تدريب جديد.
 - **Phase 28:** تدريب `SF-120M v0.1`؛ أول قفزة بعد نجاح `SF-50M`.
 - **Phase 29:** Runtime Hybrid Assistant v1.
 - **Phase 30:** Continuous Improvement Loop.

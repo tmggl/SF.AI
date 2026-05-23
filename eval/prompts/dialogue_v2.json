@@ -103,7 +103,7 @@
         "expected_status": "active",
         "expected_generator": "template",
         "expected_requires_safety": false,
-        "required_response_terms": ["Phase 27.13", "SF-10M"],
+        "required_response_terms": ["Phase 27.14", "SF-10M"],
         "forbidden_response_terms": ["نبدأ SF-50M الآن"]
       }
     ]
