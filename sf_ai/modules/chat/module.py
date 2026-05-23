@@ -78,7 +78,9 @@ class ChatModule:
         self.store = store or ConversationStore(max_turns=max_turns)
         self.builder = builder or ChatResponseBuilder()
         self.generation_policy = generation_policy or GenerationPolicy.from_env()
-        self.generation_guard = generation_guard or GenerationGuard()
+        self.generation_guard = generation_guard or GenerationGuard(
+            min_chars=4 if self.generation_policy.guarded_runtime_trial else 18
+        )
         self.native_generator = native_generator
         if (
             self.native_generator is None
@@ -214,10 +216,20 @@ class ChatModule:
             return fallback_text, ("generator:template", f"native_generator:{decision.reason}")
 
         generator = self.native_generator or NativeGenerator()
+        generation_intent = _generation_intent_for_prompt(
+            analysis.original_text,
+            routed_intent=intent,
+            guarded_trial=self.generation_policy.guarded_runtime_trial,
+        )
         result = generator.generate(
             analysis.original_text,
-            dialect=analysis.detected_dialect,
-            intent=intent,
+            dialect=_generation_dialect_for_prompt(
+                analysis.original_text,
+                detected_dialect=analysis.detected_dialect,
+                guarded_trial=self.generation_policy.guarded_runtime_trial,
+            ),
+            intent=generation_intent,
+            topic=_generation_topic_for_prompt(analysis.original_text),
             max_new_tokens=self.generation_policy.max_new_tokens,
             temperature=self.generation_policy.temperature,
             top_k=self.generation_policy.top_k,
@@ -245,6 +257,7 @@ class ChatModule:
                 f"generator:{result.generator}",
                 "native_generator:generated",
                 "native_generator:canary_passed",
+                f"native_generator:intent:{generation_intent}",
             ),
         )
 
@@ -252,3 +265,81 @@ class ChatModule:
 @lru_cache(maxsize=1)
 def get_default_chat_module() -> ChatModule:
     return ChatModule()
+
+
+def _generation_intent_for_prompt(
+    prompt: str,
+    *,
+    routed_intent: str,
+    guarded_trial: bool,
+) -> str:
+    if not guarded_trial or routed_intent != "chat.general":
+        return routed_intent
+
+    text = _surface(prompt)
+    if any(term in text for term in ("شكرا", "مشكور", "يعطيك العافيه", "تسلم", "ممتن")):
+        return "thanks"
+    if any(term in text for term in ("كيفك", "كيف حالك", "وش اخبارك", "علومك", "طمني عنك")):
+        return "smalltalk"
+    if any(term in text for term in ("معني", "يعني", "عرف", "اشرح", "فسر", "فائده", "فايده", "تفيد", "المقصود")):
+        return "definition"
+    if any(term in text for term in ("نصيحه", "انصح", "دلني", "وجهني", "خطوه", "بدايه")):
+        return "advice"
+    if any(term in text for term in ("رتب", "انظم", "نظم", "مهامي", "يومي", "اولويات")):
+        return "planning"
+    if any(term in text for term in ("توتر", "قلق", "اهدأ", "اهدا", "تهدئه", "متوتر")):
+        return "support"
+    return routed_intent
+
+
+def _generation_topic_for_prompt(prompt: str) -> str:
+    text = _surface(prompt)
+    if "تعاون" in text:
+        return "التعاون"
+    if "احترام" in text:
+        return "الاحترام"
+    if "قراء" in text or "قراي" in text:
+        return "القراءة"
+    return ""
+
+
+def _generation_dialect_for_prompt(
+    prompt: str,
+    *,
+    detected_dialect: str,
+    guarded_trial: bool,
+) -> str:
+    if not guarded_trial:
+        return detected_dialect
+    text = _surface(prompt)
+    saudi_markers = (
+        "وش",
+        "ابي",
+        "كيفك",
+        "علومك",
+        "قرايه",
+        "القرايه",
+        "قراية",
+        "القراية",
+        "شوي",
+        "الحين",
+        "يعطيك العافيه",
+        "مشكور",
+        "تسلم",
+    )
+    if any(marker in text for marker in saudi_markers):
+        return "saudi"
+    return detected_dialect
+
+
+def _surface(text: str) -> str:
+    return (
+        (text or "")
+        .replace("أ", "ا")
+        .replace("إ", "ا")
+        .replace("آ", "ا")
+        .replace("ى", "ي")
+        .replace("ة", "ه")
+        .strip()
+        .lower()
+    )

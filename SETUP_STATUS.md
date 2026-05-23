@@ -10,10 +10,10 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.33 / 30**
-- **المرحلة الحالية:** **Phase 27.33 — Advice + Micro Stabilization** (اكتملت: كل بوابات التوليد المحلية مرّت، والشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **الرحلة الحالية:** **Phase 27.34 / 30**
+- **المرحلة الحالية:** **Phase 27.34 — Guarded Runtime Trial** (اكتملت: مسار المولّد المحروس مرّ `9/9`، والشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** Phase 27.34 guarded runtime trial design؛ Phase 28 و`SF-50M` محظوران حتى تنجح تجربة الواجهة المحروسة.
+- **المرحلة التالية المقترحة:** Phase 27.35 live UI trial observations؛ Phase 28 و`SF-50M` محظوران حتى تنجح ملاحظات الواجهة الحية.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
@@ -87,6 +87,8 @@
 - **تقرير Phase 27.26–27.30:** `docs/PHASE27_26_TO_30_REPAIR_SERIES_REPORT.md`, وتقارير JSON لكل مرحلة داخل `artifacts/reports/`.
 - **نتيجة Phase 27.31–27.33:** 27.31 أضاف natural intent/topic data ومرّر `natural_shadow=20/20` لكنه بقي محجوبًا. 27.32 أضاف balanced calibration ومرّر `calibration=12/12` لكنه بقي محجوبًا. 27.33 أضاف advice + micro stabilization ومرّر كل البوابات: `heldout=16/16`, `shadow=16/16`, `definition=6/6`, `fresh_mixed=18/18`, `natural=20/20`, `calibration=12/12`, `advice=4/4`, `micro=32/32`, بلا prompt leakage. القرار: جاهز لتصميم guarded runtime trial.
 - **تقرير Phase 27.31–27.33:** `docs/PHASE27_31_TO_33_GENERATION_GATE_REPORT.md`, وتقارير JSON لكل مرحلة داخل `artifacts/reports/`.
+- **نتيجة Phase 27.34:** أضيف `generator_trial=true` إلى `/chat/message` وزر `مولّد تجريبي` في `/ui/chat`. بوابة runtime المحروس مرّت `9/9` باستخدام `sf_10m_phase27_33` مع fallback للقالب، وبقيت الهوية والمجالات الحساسة على المسار الآمن.
+- **تقرير Phase 27.34:** `docs/PHASE27_34_GUARDED_RUNTIME_TRIAL_REPORT.md`, `artifacts/reports/phase27_34_guarded_runtime_trial_report.json`.
 - **مقارنة tokenizer v1/v2:** v1 كان `vocab=261`, `merges=218`, `words_seen=723`, سعودي فقط. v2 تدرب على `500` سجل متوازن: `msa=250`, `saudi=250`.
 - **تحسن protected Saudi terms:** `average_tokens` انخفض من `4.0` في v1 إلى `2.3` في v2، ولا توجد `roundtrip_failures` أو `aggressive_split_terms`.
 - **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches=[]` لأن الجمع اكتمل.
@@ -306,8 +308,8 @@ make server-start
 ثم زر `http://127.0.0.1:8123/ui/chat` أو `http://127.0.0.1:8123/docs`.
 
 آخر تحقق حي بعد restart:
-- السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`، PID `95996`.
-- الكود الحالي بعد Phase 27.33 يعرض `Phase 27.33` في `/system/status` و`/health`، ويعرض `GET /system/phase27-dialogue-eval` تقييم الحوار وخطة corpus.
+- السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`.
+- الكود الحالي بعد Phase 27.34 يعرض `Phase 27.34` في `/system/status` و`/health`، ويعرض `GET /system/phase27-dialogue-eval` تقييم الحوار وخطة corpus.
 - `GET /system/phase26-readiness` يرجع `can_start_sf50m_training=false`.
 - `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - `make server-status` read-only ولا يوقف السيرفر.
@@ -316,10 +318,10 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى إكمال Phase 27.33)
+## نتائج الاختبارات (حتى إكمال Phase 27.34)
 
 ```
-534 passed in 17.38s
+537 passed in 17.07s
 ```
 
 التغطية الحالية:

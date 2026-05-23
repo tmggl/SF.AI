@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.33 — Advice + Micro Stabilization",
-        current_phase_status="completed_generation_gates_passed_runtime_trial_design_ready",
+        current_phase="Phase 27.34 — Guarded Runtime Trial",
+        current_phase_status="completed_guarded_runtime_trial_ready_for_ui_test",
         next_phase=(
-            "Phase 27.34 guarded runtime trial design; no public/default runtime activation yet"
+            "Phase 27.35 live UI trial observations; SF-50M remains blocked"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -279,6 +279,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_33_advice_micro_stabilization",
                 status="completed_all_generation_gates_passed_trial_design_ready",
                 phase="Phase 27.33",
+            ),
+            ComponentStatus(
+                name="phase27_34_guarded_runtime_trial",
+                status="completed_ready_for_ui_test",
+                phase="Phase 27.34",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

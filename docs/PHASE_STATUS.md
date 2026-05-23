@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.33 / 30**
-- **المرحلة الحالية:** **Phase 27.33 — Advice + Micro Stabilization**
-- **حالة المرحلة الحالية:** **مكتملة؛ كل بوابات التوليد المحلية مرّت بلا prompt leakage، والمرحلة التالية تصميم runtime trial محروس**
-- **المرحلة التالية المقترحة:** Phase 27.34 guarded runtime trial design؛ لا Phase 28 ولا `SF-50M` قبل تجربة الواجهة المحروسة.
+- **الرحلة الحالية:** **Phase 27.34 / 30**
+- **المرحلة الحالية:** **Phase 27.34 — Guarded Runtime Trial**
+- **حالة المرحلة الحالية:** **مكتملة؛ مسار المولّد المحروس عبر الواجهة/API مرّ `9/9`**
+- **المرحلة التالية المقترحة:** Phase 27.35 live UI trial observations؛ لا Phase 28 ولا `SF-50M` قبل ملاحظات واجهة ناجحة.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -82,6 +82,7 @@
 | Phase 27.31 | Natural Intent/Topic Dataset | ✅ completed_partial_runtime_blocked | ✅ |
 | Phase 27.32 | Balanced Natural Calibration | ✅ completed_partial_runtime_blocked | ✅ |
 | Phase 27.33 | Advice + Micro Stabilization | ✅ completed_all_generation_gates_passed_trial_design_ready | ✅ |
+| Phase 27.34 | Guarded Runtime Trial | ✅ completed_ready_for_ui_test | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -264,10 +265,10 @@
   - أضيفت لوحة مهمة الجمع الحالية داخل `/ui/chat` تاريخيًا، ثم أُخفيت لاحقًا. endpoints Phase 22 باقية للوكيل فقط.
   - أضيف زر `موضوعات أخرى` داخل لوحة مهمة الجمع الحالية للتنقل في بنك التأليف الفصيح، مع `authoring_topic_count` في metadata.
   - أضيف endpoint `POST /chat/review-export` لحفظ review JSONL محليًا في `data/corpus/chat/review/` فقط، مع رفض `training_allowed=true`; الزر لم يعد ظاهرًا في `/ui/chat`.
-  - القاعدة العملية الجديدة: ملف التصدير المفيد يجب أن يحتوي غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل، وبدون ردود raw من `sf_10m_v0_1/sf_10m_v0_2`.
+  - القاعدة العملية الجديدة: ملف التصدير المفيد يجب أن يحتوي غالبًا 3 أدوار مستخدم + 3 ردود مساعد على الأقل، وبدون ردود raw من `sf_10m_v0_1/sf_10m_v0_2/sf_10m_phase27_33`.
   - القاعدة العملية الأحدث: الوكيل يستطيع تأليف/مراجعة/اعتماد دفعات Phase 22 مباشرة كـ `owner-delegated agent-authored` بدون انتظار حفظ أو تصدير من سامي، بشرط اكتمال `source/license/quality/training_allowed/user_scope/notes` ونجاح الاختبارات.
   - صححت تشغيل الواجهة المستقرة: `generator=template` افتراضيًا، أي قوالب ثابتة لا مولد؛ و`SF-10M` الخام يبقى مختبرًا صريحًا فقط.
-  - أضيفت حماية export/review intake لتمييز أي جلسة تحتوي ردود `sf_10m_v0_1/sf_10m_v0_2` ومنع عدّها كـ candidate تدريب جودة.
+  - أضيفت حماية export/review intake لتمييز أي جلسة تحتوي ردود `sf_10m_v0_1/sf_10m_v0_2/sf_10m_phase27_33` ومنع عدّها كـ candidate تدريب جودة.
   - أضيفت intents محددة لعبارات Phase 22 اليومية: اختبار الحوار الفصيح، الخطوة التالية، والفرق بين التدريب والتفعيل.
   - لا يوجد ناقص في Phase 22 حاليًا؛ الفصحى وصلت إلى 250، والسعودي وصل إلى 250، والمجموع 500.
   - لا تدريب جديد بدأ.
@@ -609,6 +610,14 @@
   - القرار: `PASSED_ADVICE_MICRO_STABILIZATION_READY_FOR_GUARDED_TRIAL_DESIGN`.
   - لا تفعيل افتراضي للواجهة بعد؛ التالي Phase 27.34 guarded runtime trial design.
   - أضيف [PHASE27_31_TO_33_GENERATION_GATE_REPORT.md](./PHASE27_31_TO_33_GENERATION_GATE_REPORT.md).
+- بدأ وانتهى Phase 27.34 Guarded Runtime Trial:
+  - أضيف حقل `generator_trial=true` إلى `/chat/message`.
+  - أضيف زر `مولّد تجريبي` في `/ui/chat`.
+  - مسار التجربة يستخدم `sf_10m_phase27_33` مع `GenerationGuard` وfallback للقالب.
+  - بوابة runtime المحروس مرّت `9/9`: سبعة prompts مولدة + تحكمان template/safety.
+  - القرار: `PASSED_GUARDED_RUNTIME_TRIAL_READY_FOR_UI_TEST`.
+  - التالي Phase 27.35 live UI trial observations.
+  - أضيف [PHASE27_34_GUARDED_RUNTIME_TRIAL_REPORT.md](./PHASE27_34_GUARDED_RUNTIME_TRIAL_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -674,7 +683,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.33"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.34"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -705,7 +714,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-534 passed in 17.38s
+537 passed in 17.07s
 ```
 
 | ملف | عدد |

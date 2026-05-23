@@ -25,7 +25,7 @@ class _FakeGenerator:
         return NativeGenerationResult(
             used=True,
             text=f"رد مولد تجريبي على: {prompt}",
-            generator="sf_10m_v0_2",
+            generator="sf_10m_phase27_33",
             reason="generated",
         )
 
@@ -35,7 +35,7 @@ class _BadGenerator:
         return NativeGenerationResult(
             used=True,
             text="المعنى: المعنى: corpus Phase tokenizer / / /",
-            generator="sf_10m_v0_2",
+            generator="sf_10m_phase27_33",
             reason="generated",
         )
 
@@ -45,7 +45,31 @@ class _MisalignedSocialGenerator:
         return NativeGenerationResult(
             used=True,
             text="أفهم طلبك. أستطيع ترتيب الفكرة وشرحها بخطوات قصيرة.",
-            generator="sf_10m_v0_2",
+            generator="sf_10m_phase27_33",
+            reason="generated",
+        )
+
+
+class _CapturingGenerator:
+    def __init__(self) -> None:
+        self.calls: list[dict[str, object]] = []
+
+    def generate(self, prompt: str, **kwargs: object) -> NativeGenerationResult:
+        self.calls.append({"prompt": prompt, **kwargs})
+        return NativeGenerationResult(
+            used=True,
+            text="ابدأ بخطوة صغيرة وواضحة.",
+            generator="sf_10m_phase27_33",
+            reason="generated",
+        )
+
+
+class _AlignedSmalltalkGenerator:
+    def generate(self, prompt: str, **_: object) -> NativeGenerationResult:
+        return NativeGenerationResult(
+            used=True,
+            text="بخير ولله الحمد، أنت كيفك؟",
+            generator="sf_10m_phase27_33",
             reason="generated",
         )
 
@@ -136,7 +160,7 @@ def test_generation_policy_allows_canary_high_confidence_freeform_chat() -> None
         fallback_used=False,
     )
     assert decision.allowed is True
-    assert decision.generator == "sf_10m_v0_2"
+    assert decision.generator == "sf_10m_phase27_33"
 
 
 def test_generation_policy_keeps_social_intents_on_templates() -> None:
@@ -163,7 +187,7 @@ def test_generation_policy_keeps_social_intents_on_templates() -> None:
 
 def test_native_generator_status_checks_sovereign_artifact_locations() -> None:
     status = NativeGenerator().status()
-    assert status.generator == "sf_10m_v0_2"
+    assert status.generator == "sf_10m_phase27_33"
     assert status.tokenizer_exists is True
     # Checkpoint state is intentionally ignored by git, so CI or a fresh clone
     # may only have metadata. The status surface must report both facts.
@@ -186,7 +210,7 @@ def test_native_generator_returns_missing_checkpoint_without_throwing(tmp_path: 
     )
     out = gen.generate("مرحبا")
     assert out.used is False
-    assert out.generator == "sf_10m_v0_2"
+    assert out.generator == "sf_10m_phase27_33"
     assert out.reason == "missing_checkpoint"
 
 
@@ -239,7 +263,7 @@ def test_chat_module_uses_native_generator_in_explicit_experimental_mode() -> No
     analysis = pipe.analyze_user_text("اكتب رد قصير")
     out = mod.handle(analysis, intent="chat.general", session_id="phase15-exp")
     assert out.text == "رد مولد تجريبي على: اكتب رد قصير"
-    assert "generator:sf_10m_v0_2" in out.notes
+    assert "generator:sf_10m_phase27_33" in out.notes
     assert "native_generator:canary_passed" in out.notes
 
 
@@ -296,6 +320,43 @@ def test_chat_module_keeps_smalltalk_on_template_when_experimental() -> None:
     assert "native_generator:template_first_social_intent" in out.notes
 
 
+def test_guarded_runtime_trial_allows_social_generation() -> None:
+    pipe = get_default_pipeline()
+    mod = ChatModule(
+        generation_policy=GenerationPolicy(
+            enabled=True,
+            experimental_runtime=True,
+            canary=True,
+            guarded_runtime_trial=True,
+        ),
+        native_generator=_AlignedSmalltalkGenerator(),  # type: ignore[arg-type]
+    )
+    analysis = pipe.analyze_user_text("كيفك")
+    out = mod.handle(analysis, intent="chat.smalltalk", session_id="phase2734-social")
+    assert "بخير" in out.text
+    assert "generator:sf_10m_phase27_33" in out.notes
+    assert "native_generator:canary_passed" in out.notes
+
+
+def test_guarded_runtime_trial_infers_generation_intent_for_general_prompt() -> None:
+    pipe = get_default_pipeline()
+    gen = _CapturingGenerator()
+    mod = ChatModule(
+        generation_policy=GenerationPolicy(
+            enabled=True,
+            experimental_runtime=True,
+            canary=True,
+            guarded_runtime_trial=True,
+        ),
+        native_generator=gen,  # type: ignore[arg-type]
+    )
+    analysis = pipe.analyze_user_text("وجهني بخطوة بسيطة")
+    out = mod.handle(analysis, intent="chat.general", session_id="phase2734-advice")
+    assert out.text == "ابدأ بخطوة صغيرة وواضحة."
+    assert gen.calls[-1]["intent"] == "advice"
+    assert "native_generator:intent:advice" in out.notes
+
+
 def test_chat_api_response_includes_generator_metadata() -> None:
     client = TestClient(app)
     r = client.post(
@@ -325,7 +386,7 @@ def test_lab_generation_can_cover_non_sensitive_skeleton_domains(monkeypatch) ->
 
     assert result.domain == "coding"
     assert result.debug["dispatch"] == "module:chat_lab"
-    assert result.debug["generator"] == "sf_10m_v0_2"
+    assert result.debug["generator"] == "sf_10m_phase27_33"
     assert "رد مولد تجريبي" in result.response
     assert "lab_domain:coding" in result.debug["module_notes"]
 

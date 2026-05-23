@@ -60,3 +60,17 @@ def test_phase27_33_passes_all_generation_gates_without_leakage() -> None:
     assert report["training"]["natural_shadow_prompt_leakage"] == []
     assert report["training"]["calibration_shadow_prompt_leakage"] == []
     assert report["training"]["advice_shadow_prompt_leakage"] == []
+
+
+def test_phase27_34_guarded_runtime_trial_passes_ui_smoke() -> None:
+    report = _report("phase27_34_guarded_runtime_trial_report.json")
+    assert report["phase"] == "Phase 27.34"
+    assert report["status"] == "PASSED_GUARDED_RUNTIME_TRIAL_READY_FOR_UI_TEST"
+    assert report["ui_test_allowed"] is True
+    assert report["sf50m_allowed"] is False
+    assert report["summary"]["passed"] == 9
+    assert report["summary"]["total"] == 9
+    assert report["summary"]["generator_passed"] == 7
+    assert report["summary"]["template_controls_passed"] == 2
+    assert report["trial_policy"]["request_flag"] == "generator_trial=true"
+    assert report["trial_policy"]["candidate_generator"] == "sf_10m_phase27_33"

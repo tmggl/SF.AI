@@ -27,14 +27,14 @@ from sf_ai.training.train_tiny_lm import ASSISTANT_EOS_TOKEN
 
 @dataclass(frozen=True)
 class NativeGeneratorConfig:
-    tokenizer_path: Path = Path("artifacts/tokenizers/sf_bpe/v2")
-    checkpoints_root: Path = Path("artifacts/checkpoints/sf_10m_v0_2")
-    checkpoint_name: str = "sf-10m-step2000"
-    generator_name: str = "sf_10m_v0_2"
+    tokenizer_path: Path = Path("artifacts/tokenizers/sf_bpe/v4_min_lexical")
+    checkpoints_root: Path = Path("artifacts/eval/phase27_33_advice_micro_stabilization/checkpoints")
+    checkpoint_name: str = "sf-10m-step9800"
+    generator_name: str = "sf_10m_phase27_33"
     model_size: str = "sf-10m"
     seq_len: int = 64
-    max_new_tokens: int = 48
-    temperature: float = 0.20
+    max_new_tokens: int = 24
+    temperature: float = 1.0
     top_k: int = 0
     no_repeat_ngram_size: int = 3
     repetition_penalty: float = 1.08
@@ -55,7 +55,7 @@ class NativeGeneratorStatus:
     tokenizer_exists: bool
     checkpoint_meta_exists: bool
     checkpoint_state_exists: bool
-    generator: str = "sf_10m_v0_2"
+    generator: str = "sf_10m_phase27_33"
 
 
 def extract_dialogue_reply(decoded: str, model_prompt: str) -> str:

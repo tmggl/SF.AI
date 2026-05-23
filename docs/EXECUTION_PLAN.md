@@ -103,6 +103,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.31 | Natural Intent/Topic Dataset | مكتملة جزئيًا؛ natural shadow `20/20` وruntime محظور |
 | Phase 27.32 | Balanced Natural Calibration | مكتملة جزئيًا؛ calibration `12/12` وruntime محظور |
 | Phase 27.33 | Advice + Micro Stabilization | مكتملة؛ كل بوابات التوليد المحلية مرّت، جاهزة لتصميم guarded trial |
+| Phase 27.34 | Guarded Runtime Trial | مكتملة؛ request-scoped UI generator trial مرّ `9/9` |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2537,6 +2538,36 @@ Phase 27.33 = heldout 16/16, shadow 16/16, definition 6/6,
 - `artifacts/reports/phase27_31_natural_intent_topic_dataset_report.json`
 - `artifacts/reports/phase27_32_balanced_natural_calibration_report.json`
 - `artifacts/reports/phase27_33_advice_micro_stabilization_report.json`
+
+---
+
+## Phase 27.34 — Guarded Runtime Trial
+
+### الهدف
+
+تجربة `SF-10M Phase 27.33` من مسار الواجهة/API نفسه، مع بقاء التفعيل request-scoped وليس افتراضيًا مخفيًا.
+
+### نتيجة التنفيذ
+
+```text
+generator_trial=true
+candidate_generator = sf_10m_phase27_33
+guarded_runtime_trial = 9/9
+```
+
+### القرار
+
+- تجربة الواجهة مسموحة الآن عبر زر `مولّد تجريبي`.
+- fallback إلى القالب يبقى حاضرًا.
+- الهوية والمجالات الحساسة تبقى template/composer.
+- لا `SF-50M` ولا Phase 28 قبل ملاحظات واجهة ناجحة.
+- التالي Phase 27.35: live UI trial observations.
+
+### artifacts
+
+- [PHASE27_34_GUARDED_RUNTIME_TRIAL_REPORT.md](./PHASE27_34_GUARDED_RUNTIME_TRIAL_REPORT.md)
+- `artifacts/reports/phase27_34_guarded_runtime_trial_report.json`
+- `artifacts/samples/phase27_34_guarded_runtime_trial_generations.md`
 
 ---
 

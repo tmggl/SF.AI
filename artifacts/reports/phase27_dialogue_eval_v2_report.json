@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "اكتملت Phase 27.33: مرّت بوابات التوليد المحلية كلها (fresh mixed 18/18، shadow طبيعي 20/20، micro 32/32) بلا تسريب. التالي Phase 27.34 لتصميم تجربة واجهة محروسة؛ لم يُفتح runtime "
+      "response_preview": "اكتملت Phase 27.34: مسار المولّد المحروس مرّ 9/9. تقدر الآن تفعّل زر «مولّد تجريبي» في الواجهة لاختبار SF-10M Phase 27.33، والنظام يرجع للقالب إذا فشل الحارس."
     },
     {
       "scenario_id": "clarification_repair_flow",

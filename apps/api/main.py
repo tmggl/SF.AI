@@ -31,7 +31,7 @@ app = FastAPI(
     version="0.1.0",
     description=(
         "SF.AI — Sovereign AI platform. Phase 9 chat UI mounted at /ui/chat. "
-        "Phase 27.33 passed generation gates and is ready for guarded runtime trial design. "
+        "Phase 27.34 exposes a guarded local generator trial via generator_trial=true. "
         "No pretrained models, no external AI APIs."
     ),
 )
@@ -46,7 +46,7 @@ app.include_router(ui.router)
 def root() -> dict[str, str]:
     return {
         "project": "SF.AI",
-        "phase": "Phase 27.33 — Advice + Micro Stabilization",
+        "phase": "Phase 27.34 — Guarded Runtime Trial",
         "ui": "/ui/chat",
         "docs": "/docs",
     }

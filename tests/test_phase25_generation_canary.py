@@ -117,4 +117,4 @@ def test_phase25_policy_requires_all_three_flags() -> None:
         canary=True,
     ).decide(**base)
     assert allowed.allowed is True
-    assert allowed.generator == "sf_10m_v0_2"
+    assert allowed.generator == "sf_10m_phase27_33"

@@ -39,12 +39,12 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.33 / 30 — Advice + Micro Stabilization مرّت كل بوابات التوليد المحلية؛ runtime لم يُفتح افتراضيًا بعد.
-- **الأولوية الحالية:** Phase 27.34 guarded runtime trial design؛ لا تدريب `SF-50M` ولا Phase 28 حتى تنجح تجربة الواجهة المحروسة.
-- **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
+- **الرحلة الحالية:** Phase 27.34 / 30 — Guarded Runtime Trial مرّ `9/9`.
+- **الأولوية الحالية:** Phase 27.35 live UI trial observations؛ لا تدريب `SF-50M` ولا Phase 28 حتى تنجح ملاحظات الواجهة الحية.
+- **الشات الحالي:** runtime الافتراضي قالب/router، ومع زر `مولّد تجريبي` يستخدم `SF-10M Phase 27.33` خلف guard/fallback.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
-- **المولّد:** آخر checkpoint معملي هو Phase 27.33 `sf-10m-step9800`: مرّ `fresh mixed 18/18`, `natural shadow 20/20`, `calibration 12/12`, `advice 4/4`, و`micro 32/32` بلا prompt leakage. الواجهة لا تفتحه افتراضيًا قبل Phase 27.34.
+- **المولّد:** آخر checkpoint هو Phase 27.33 `sf-10m-step9800`; Phase 27.34 ربطه بالواجهة كتجربة محروسة عبر `generator_trial=true` ومرّ `9/9`.
 - **التقييم:** Phase 27 مرّر `19/19` turn في حوار متعدد الأدوار، لكنه أكد أن الردود ما زالت `template` وأن المولد غير جاهز.
 - **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.
 - **دورة البيانات:** Phase 18 أضاف تصدير مراجعة من الواجهة و`prepare_dialogue_batch.py`; وPhase 22 يعتمد الآن أيضًا دفعات مباشرة يؤلفها/يراجعها الوكيل بتفويض موثق، بدون انتظار حفظ أو تصدير من سامي.
@@ -82,6 +82,7 @@
 - **نتيجة Phase 27.25:** شُغّل held-out generation canary على `16` سؤالًا جديدًا فصيحًا/سعوديًا دون تدريب جديد. النتيجة `8/16`: التعريفات القريبة نجحت، لكن التحية الفصيحة والنصيحة والتخطيط والدعم فشلت دلاليًا. القرار: `FAILED_HELDOUT_GENERATION_CANARY_BLOCK_RUNTIME`; الواجهة تبقى على القوالب حتى Phase 27.26. التقرير: [docs/PHASE27_25_HELDOUT_GENERATION_CANARY_REPORT.md](./docs/PHASE27_25_HELDOUT_GENERATION_CANARY_REPORT.md).
 - **نتيجة Phase 27.26–27.30:** تحسن المولد من `8/16` إلى `16/18` على fresh mixed shadow بعد intent/topic conditioning، لكنه بقي محجوبًا بسبب فشلين في الشكر وسؤال الحال السعودي. التقرير: [docs/PHASE27_26_TO_30_REPAIR_SERIES_REPORT.md](./docs/PHASE27_26_TO_30_REPAIR_SERIES_REPORT.md).
 - **نتيجة Phase 27.31–27.33:** أضيفت natural intent/topic data ثم balanced calibration ثم advice/micro stabilization. النتيجة النهائية في Phase 27.33: كل بوابات التوليد المحلية مرّت بلا تسريب، والحالة صارت `ready for guarded runtime trial design`. التقرير: [docs/PHASE27_31_TO_33_GENERATION_GATE_REPORT.md](./docs/PHASE27_31_TO_33_GENERATION_GATE_REPORT.md).
+- **نتيجة Phase 27.34:** أضيف زر `مولّد تجريبي` وحقل `generator_trial=true` في `/chat/message`. بوابة runtime المحروس مرّت `9/9`، والهوية/الطب بقيت على القوالب الآمنة. التقرير: [docs/PHASE27_34_GUARDED_RUNTIME_TRIAL_REPORT.md](./docs/PHASE27_34_GUARDED_RUNTIME_TRIAL_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
@@ -153,6 +154,7 @@
 | Phase 27.31 | Natural Intent/Topic Dataset — natural shadow 20/20, runtime blocked |
 | Phase 27.32 | Balanced Natural Calibration — calibration 12/12, runtime blocked |
 | Phase 27.33 | Advice + Micro Stabilization — all local generation gates passed; guarded trial design ready |
+| Phase 27.34 | Guarded Runtime Trial — request-scoped UI generator trial passed 9/9 |
 | Phase 28 | SF-120M v0.1 Candidate — planned |
 | Phase 29 | Runtime Hybrid Assistant v1 — planned |
 | Phase 30 | Continuous Improvement Loop — planned |

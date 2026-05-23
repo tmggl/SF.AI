@@ -68,6 +68,25 @@
     font-weight: 800;
   }
   .icon-btn:hover { color: #ffffff; background: var(--accent); border-color: var(--accent); }
+  .trial-toggle {
+    display: inline-flex; align-items: center; gap: 7px;
+    min-height: 32px;
+    padding: 5px 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    user-select: none;
+  }
+  .trial-toggle input { accent-color: var(--accent); inline-size: 16px; block-size: 16px; }
+  .trial-toggle.on {
+    background: #eefaf4;
+    border-color: #9fd0b9;
+    color: var(--ok);
+  }
   main {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 360px;
@@ -247,6 +266,10 @@
       <span class="badge" id="session-badge">جلسة: —</span>
       <span class="badge" id="user-badge">مستخدم: —</span>
       <span class="badge" id="sov-badge">سيادي ✓</span>
+      <label class="trial-toggle" id="trial-toggle">
+        <input type="checkbox" id="generator-trial" />
+        <span>مولّد تجريبي</span>
+      </label>
       <button class="icon-btn" id="clear-btn" title="مسح المحادثة">مسح</button>
     </div>
   </header>
@@ -326,6 +349,14 @@
   const correctionsEl = document.getElementById("corrections");
   const safetyEl = document.getElementById("safety-flags");
   const phaseEl = document.getElementById("phase-line");
+  const generatorTrialEl = document.getElementById("generator-trial");
+  const trialToggleEl = document.getElementById("trial-toggle");
+  generatorTrialEl.checked = localStorage.getItem("sf_generator_trial") === "true";
+  trialToggleEl.classList.toggle("on", generatorTrialEl.checked);
+  generatorTrialEl.addEventListener("change", () => {
+    localStorage.setItem("sf_generator_trial", generatorTrialEl.checked ? "true" : "false");
+    trialToggleEl.classList.toggle("on", generatorTrialEl.checked);
+  });
 
   // Fetch phase info.
   fetch("/system/status").then(r => r.json()).then(data => {
@@ -400,6 +431,7 @@
       if (v === "template") return "قالب ثابت - ليس مولدًا";
       if (v === "sf_10m_v0_1") return "نموذج SF-10M خام غير جاهز";
       if (v === "sf_10m_v0_2") return "Canary SF-10M v0.2";
+      if (v === "sf_10m_phase27_33") return "مولّد SF-10M Phase 27.33";
     }
     if (key === "rag") {
       if (v === "used") return "مستخدمة";
@@ -478,7 +510,12 @@
       const r = await fetch("/chat/message", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text, session_id: SESSION_ID, user_id: USER_ID }),
+        body: JSON.stringify({
+          message: text,
+          session_id: SESSION_ID,
+          user_id: USER_ID,
+          generator_trial: !!generatorTrialEl.checked
+        }),
       });
       if (!r.ok) {
         setMessageText(placeholder, "خطأ: HTTP " + r.status);

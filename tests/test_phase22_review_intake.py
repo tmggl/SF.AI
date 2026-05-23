@@ -39,11 +39,13 @@ def _write_review_record(
             "contains_raw_generator_output": assistant_generator in {
                 "sf_10m_v0_1",
                 "sf_10m_v0_2",
+                "sf_10m_phase27_33",
             },
             "assistant_generator_counts": {
                 "template": turns if assistant_generator == "template" else 0,
                 "sf_10m_v0_1": turns if assistant_generator == "sf_10m_v0_1" else 0,
                 "sf_10m_v0_2": turns if assistant_generator == "sf_10m_v0_2" else 0,
+                "sf_10m_phase27_33": turns if assistant_generator == "sf_10m_phase27_33" else 0,
             },
         },
         "provenance": {

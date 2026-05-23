@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import re
 from datetime import UTC, datetime
+from functools import lru_cache
 from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, status
@@ -16,8 +17,10 @@ from apps.api.schemas.chat import (
     ReviewExportSaveResponse,
 )
 from sf_ai.core.config import PROJECT_DIR
-from sf_ai.core.orchestrator import UserMessage, get_default_orchestrator
+from sf_ai.core.index import load_default_registry
+from sf_ai.core.orchestrator import Orchestrator, UserMessage, get_default_orchestrator
 from sf_ai.datasets.corpus_governance import detect_training_forbidden_operational_terms
+from sf_ai.modules.chat import ChatModule, GenerationPolicy
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 REVIEW_EXPORT_DIR = PROJECT_DIR / "data/corpus/chat/review"
@@ -29,7 +32,11 @@ REVIEW_EXPORT_DIR = PROJECT_DIR / "data/corpus/chat/review"
     status_code=status.HTTP_200_OK,
 )
 def chat_message(payload: ChatRequest) -> ChatResponse:
-    orchestrator = get_default_orchestrator()
+    orchestrator = (
+        _get_guarded_trial_orchestrator()
+        if payload.generator_trial
+        else get_default_orchestrator()
+    )
     result = orchestrator.process(
         UserMessage(text=payload.message, session_id=payload.session_id)
     )
@@ -48,6 +55,31 @@ def chat_message(payload: ChatRequest) -> ChatResponse:
         rag=result.debug.get("rag", "not_used"),
         debug=result.debug,
         echo=payload.message,
+    )
+
+
+@lru_cache(maxsize=1)
+def _get_guarded_trial_orchestrator() -> Orchestrator:
+    """Build the explicit Phase 27.34 local generator trial path.
+
+    This is not the default runtime brain. The UI/API must opt in per request
+    via `generator_trial=true`; sensitive/non-chat domains still route through
+    the normal composer because only the chat module can call the generator.
+    """
+    policy = GenerationPolicy(
+        enabled=True,
+        experimental_runtime=True,
+        canary=True,
+        guarded_runtime_trial=True,
+        min_confidence=0.0,
+        max_new_tokens=24,
+        temperature=1.0,
+        top_k=0,
+    )
+    chat_module = ChatModule(generation_policy=policy)
+    return Orchestrator(
+        registry=load_default_registry(),
+        modules={"chat": chat_module},
     )
 
 
