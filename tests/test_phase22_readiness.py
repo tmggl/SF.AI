@@ -26,10 +26,10 @@ def test_phase22_readiness_reports_current_gap() -> None:
     assert decision.phase.startswith("Phase 22")
     assert decision.status == "READY_FOR_PHASE23_TOKENIZER_V2"
     assert decision.can_start_phase23 is True
-    assert decision.training_records == 500
+    assert decision.training_records == 550
     assert decision.target_records == 500
     assert decision.remaining_records == 0
-    assert decision.dialect_counts == {"msa": 250, "saudi": 250}
+    assert decision.dialect_counts == {"msa": 275, "saudi": 275}
     assert decision.missing_required_dialects == ()
     assert decision.synthetic_llm_data_allowed is False
     assert decision.blockers == ()
@@ -51,7 +51,7 @@ def test_phase22_endpoint() -> None:
     assert body["phase"].startswith("Phase 22")
     assert body["status"] == "READY_FOR_PHASE23_TOKENIZER_V2"
     assert body["can_start_phase23"] is True
-    assert body["training_records"] == 500
+    assert body["training_records"] == 550
     assert body["target_records"] == 500
     assert body["allowed_dialects"] == ["msa", "saudi"]
     assert body["synthetic_llm_data_allowed"] is False
@@ -60,7 +60,7 @@ def test_phase22_endpoint() -> None:
 def test_phase22_collection_plan_calculates_real_quotas() -> None:
     plan = build_phase22_collection_plan()
     assert plan.status == "COLLECTION_COMPLETE_READY_FOR_PHASE23_RECHECK"
-    assert plan.current_records == 500
+    assert plan.current_records == 550
     assert plan.remaining_records == 0
     assert plan.batch_size == 25
     assert plan.estimated_batches == 0
@@ -122,7 +122,7 @@ def test_phase22_completion_gate_blocks_advancement_until_complete() -> None:
     assert gate.status == "PHASE22_COMPLETE_READY_FOR_PHASE23"
     assert gate.can_advance_phase23 is True
     assert gate.readiness_status == "READY_FOR_PHASE23_TOKENIZER_V2"
-    assert gate.training_records == 500
+    assert gate.training_records == 550
     assert gate.target_records == 500
     assert gate.remaining_records == 0
     assert gate.current_next_batch is None

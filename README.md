@@ -38,9 +38,9 @@
 ## الهدف الحالي
 
 - **الرحلة الحالية:** Phase 27 / 30 — Dialogue Evaluation v2 + Corpus Expansion Plan اكتملت كاختبار baseline وخطة بيانات.
-- **الأولوية الحالية:** تنفيذ توسعة corpus من `500` إلى `5000` داخل `msa + saudi`; لا تدريب `SF-50M` ولا Phase 28 الآن.
+- **الأولوية الحالية:** تنفيذ توسعة corpus من `550` إلى `5000` داخل `msa + saudi`; لا تدريب `SF-50M` ولا Phase 28 الآن.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
-- **البيانات الحالية:** corpus موثق `500/500` يمر `corpus-audit`: `250` سعودي + `250` فصحى؛ استُخدم في Phase 23 لتدريب tokenizer v2.
+- **البيانات الحالية:** corpus موثق `550` سجلًا يمر `corpus-audit`: `275` سعودي + `275` فصحى. آخر tokenizer v2 وSF-10M v0.2 استُخدما corpus Phase 22 عند `500` سجل، والتوسعة الجديدة بدأت بعد Phase 27.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
 - **المولّد:** `SF-10M v0.2` تحسّن رقميًا لكنه غير جاهز كحوار مقنع؛ Phase 25 أضاف canary guard يمنع الرد الضعيف ويرجع للقالب.
 - **التقييم:** Phase 27 مرّر `19/19` turn في حوار متعدد الأدوار، لكنه أكد أن الردود ما زالت `template` وأن المولد غير جاهز.
@@ -53,8 +53,9 @@
 - **Tokenizer v2:** Phase 23 أضاف `artifacts/tokenizers/sf_bpe/v2/` و`make phase23-tokenizer-audit`; الحالة `COMPLETED_READY_FOR_PHASE24`, `vocab=4493`, `merges=4386`, وprotected Saudi terms تحسنت من متوسط 4.0 tokens في v1 إلى 2.3 في v2.
 - **SF-10M v0.2:** Phase 24 درّب النموذج 2000 خطوة على tokenizer v2 وcorpus المتوازن: loss `8.4751 → 2.8256`, eval loss `2.5779`, perplexity `13.17`. القرار: `COMPLETED_WITH_LIMITS_RUNTIME_BLOCKED` لأن التوليد لا يزال غير متماسك.
 - **Canary v1:** Phase 25 أضاف `GenerationGuard` و`SF_GENERATOR_CANARY`; التجربة الحقيقية على v0.2 حُجبت بـ `generation_guard:malformed_token` وبقي الرد من القالب.
-- **قرار Phase 26:** `SF-50M` غير جاهز: corpus الحالي `500` فقط والحد العملي `5000`، وruntime quality/hallucination/repetition gates لم تنجح بعد. التقرير: [docs/PHASE26_SF50M_READINESS_REPORT.md](./docs/PHASE26_SF50M_READINESS_REPORT.md).
-- **نتيجة Phase 27:** `make phase27-dialogue-eval` مرّر `19/19` turn في suite متعدد الأدوار، لكن كل الردود `template`، و`open_generator_ready=false`. خطة التوسعة: `4500` سجل إضافي، `180` batch، بالتساوي `msa=2250` و`saudi=2250`. التقرير: [docs/PHASE27_DIALOGUE_EVAL_V2_REPORT.md](./docs/PHASE27_DIALOGUE_EVAL_V2_REPORT.md).
+- **قرار Phase 26:** `SF-50M` غير جاهز: corpus الحالي `550` فقط والحد العملي `5000`، وruntime quality/hallucination/repetition gates لم تنجح بعد. التقرير: [docs/PHASE26_SF50M_READINESS_REPORT.md](./docs/PHASE26_SF50M_READINESS_REPORT.md).
+- **نتيجة Phase 27:** `make phase27-dialogue-eval` مرّر `19/19` turn في suite متعدد الأدوار، لكن كل الردود `template`، و`open_generator_ready=false`. بعد Batch 001 صارت خطة التوسعة: `4450` سجلًا إضافيًا، `178` batch، بالتساوي `msa=2225` و`saudi=2225`. التقرير: [docs/PHASE27_DIALOGUE_EVAL_V2_REPORT.md](./docs/PHASE27_DIALOGUE_EVAL_V2_REPORT.md).
+- **أول دفعة توسعة:** أضيفت `dialogue_batch_v3_msa_001.jsonl` و`dialogue_batch_v3_saudi_001.jsonl` بإجمالي 50 سجلًا. التقرير: [docs/PHASE27_CORPUS_EXPANSION_BATCH_001_REPORT.md](./docs/PHASE27_CORPUS_EXPANSION_BATCH_001_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 

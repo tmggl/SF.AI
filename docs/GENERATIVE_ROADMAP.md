@@ -118,7 +118,7 @@ SF.AI يملك الآن:
 - رفض حساس.
 - كشف تكرار.
 
-**النتيجة:** baseline pass `19/19`، لكن `generator=template`، وخطة توسعة `4500` سجل قبل إعادة SF-50M gate.
+**النتيجة:** baseline pass `19/19`، لكن `generator=template`. بعد أول دفعة توسعة بقي `4450` سجلًا قبل إعادة SF-50M gate.
 
 ### Phase 28 — SF-120M v0.1 Candidate
 

@@ -49,12 +49,12 @@ def test_phase27_dialogue_eval_passes_baseline_but_blocks_scaling() -> None:
     assert report.can_start_phase28 is False
     assert report.generator_modes == {"template": 19}
     assert report.phase26_status == "NOT_READY_EXPAND_CORPUS_AND_IMPROVE_SF10M"
-    assert report.corpus_expansion_plan["current_records"] == 500
+    assert report.corpus_expansion_plan["current_records"] == 550
     assert report.corpus_expansion_plan["target_records"] == 5000
-    assert report.corpus_expansion_plan["remaining_records"] == 4500
+    assert report.corpus_expansion_plan["remaining_records"] == 4450
     assert report.corpus_expansion_plan["needed_by_dialect"] == {
-        "msa": 2250,
-        "saudi": 2250,
+        "msa": 2225,
+        "saudi": 2225,
     }
     assert "corpus_expansion_required" in report.blockers
     assert "sf50m_not_trained_or_validated" in report.blockers
@@ -72,7 +72,7 @@ def test_phase27_cli_writes_eval_and_artifact_reports() -> None:
     report = json.loads(REPORT.read_text(encoding="utf-8"))
     assert report["status"] == "COMPLETED_DIALOGUE_EVAL_V2_BASELINE_PASS_EXPANSION_REQUIRED"
     assert report["can_start_phase28"] is False
-    assert report["corpus_expansion_plan"]["remaining_records"] == 4500
+    assert report["corpus_expansion_plan"]["remaining_records"] == 4450
 
 
 def test_phase27_dialogue_eval_endpoint() -> None:

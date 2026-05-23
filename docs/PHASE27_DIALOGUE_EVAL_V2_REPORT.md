@@ -36,15 +36,16 @@ can_start_phase28    : false
 ## خطة توسيع corpus
 
 ```text
-current_records   : 500
+current_records   : 550
 target_records    : 5000
-remaining_records : 4500
-needed_msa        : 2250
-needed_saudi      : 2250
+remaining_records : 4450
+needed_msa        : 2225
+needed_saudi      : 2225
 batch_size        : 25
-batches_total     : 180
+batches_total     : 178
 gold_target       : 1000
 needed_gold       : 948
+needed_silver     : 3502
 ```
 
 فئات البيانات المطلوبة:
@@ -73,7 +74,7 @@ needed_gold       : 948
 
 لا نبدأ `SF-50M` الآن، ولا نبدأ Phase 28. المسار الصحيح:
 
-1. توسيع corpus إلى `5000` سجل داخل `msa + saudi`.
+1. توسيع corpus إلى `5000` سجل داخل `msa + saudi`؛ الحالة الحالية بعد Batch 001 هي `550`.
 2. إعادة `corpus-audit`.
 3. إعادة تدريب `SF-10M` بعد التوسيع.
 4. إعادة canary.
