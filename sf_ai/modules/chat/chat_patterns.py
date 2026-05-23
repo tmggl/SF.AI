@@ -84,9 +84,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.8: درّبنا SF-10M v0.6 على train split وقسناه على "
-    "held-out eval. تحسن رقميًا، لكن canary حجب عينات التوليد لأنها ما زالت "
-    "مشوهة. الخطوة التالية إصلاح جودة التوليد القصير قبل أي SF-50M.",
+    "اكتملت Phase 27.9: ثبتنا generation quality harness يقيس المولد الخام "
+    "على 10 prompts فصحى/سعودية. النتيجة حجب SF-10M v0.6 بنسبة 10/10 بسبب "
+    "fragments مشوهة. الخطوة التالية إصلاح مصدر هذه fragments قبل أي SF-50M.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

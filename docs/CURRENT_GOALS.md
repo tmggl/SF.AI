@@ -16,7 +16,8 @@
 واكتمال corpus gate. Phase 27.5 أثبتت أن التدريب بصيغة الحوار أفضل من
 تسطيح الرسائل، وPhase 27.6 أثبتت أن assistant-target يحسن تصميم الهدف،
 ثم Phase 27.7 ثبتت split ثابتًا وcanary أقوى، وPhase 27.8 درّبت
-`SF-10M v0.6` ووجدت تحسنًا رقميًا دون جاهزية runtime.
+`SF-10M v0.6` ووجدت تحسنًا رقميًا دون جاهزية runtime، وPhase 27.9 ثبتت
+بوابة توليد آلية تحجب v0.6 بنسبة 10/10.
 
 الخطوة العملية الحالية:
 
@@ -61,6 +62,8 @@
 - Phase 27.8 اكتمل: دُرّب `SF-10M v0.6` على train split فقط، وأفضل eval كان
   `loss=5.0227`, `perplexity=151.82`. canary حجب `10/10` عينات، لذلك
   runtime محظور ولا يبدأ `SF-50M`.
+- Phase 27.9 اكتمل: أضيف generation quality harness وprompt suite قصير؛
+  نتيجة v0.6: `0/10` passed، والسبب `model_artifact_fragment`.
 
 الجرد الحالي يرى:
 
@@ -118,6 +121,7 @@ SF.AI حاليًا:
 - **Phase 27.6:** تدريب assistant-target على رد المساعد فقط — مكتمل بحدود، runtime محظور.
 - **Phase 27.7:** split ثابت + gold social + canary أقوى — مكتمل كبوابة جودة، runtime محظور.
 - **Phase 27.8:** تدريب `SF-10M v0.6` على split ثابت — مكتمل بتحسن رقمي، runtime محظور.
+- **Phase 27.9:** harness جودة توليد آلي — مكتمل ويحجب v0.6، runtime محظور.
 - **Phase 28:** تدريب `SF-120M v0.1`؛ أول قفزة بعد نجاح `SF-50M`.
 - **Phase 29:** Runtime Hybrid Assistant v1.
 - **Phase 30:** Continuous Improvement Loop.

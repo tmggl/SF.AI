@@ -46,7 +46,8 @@ SF.AI يملك الآن:
 | Phase 27.6 | `SF-10M v0.5` | assistant-target training على رد المساعد فقط |
 | Phase 27.7 | لا تدريب | fixed train/eval split + gold social + canary prompt-aware |
 | Phase 27.8 | `SF-10M v0.6` | تحسن رقمي على eval؛ runtime blocked |
-| بعد Phase 27.8 | إصلاح SF-10M | جودة توليد قصير + canary آلي |
+| Phase 27.9 | لا تدريب | Generation Quality Harness يحجب v0.6 |
+| بعد Phase 27.9 | إصلاح SF-10M | معالجة fragments + تدريب إصلاحي صغير |
 | بعد نجاح SF-10M | `SF-50M v0.1` | نجاح جودة SF-10M/canary + إعادة Phase 26 readiness |
 | Phase 28 | `SF-120M v0.1` | نجاح SF-50M + scaling gate |
 
@@ -64,6 +65,7 @@ SF.AI يملك الآن:
 - **Phase 27.6:** `SF-10M v0.5` جرّب assistant-target، لكنه بقي مكررًا وغير جاهز للواجهة.
 - **Phase 27.7:** ثبت split/canary قبل التدريب التالي، وأصبح القياس على eval held-out إلزاميًا.
 - **Phase 27.8:** `SF-10M v0.6` تحسن رقميًا، لكن canary حجب 10/10 عينات بسبب fragments.
+- **Phase 27.9:** صار لدينا harness آلي يقيس هذه المشكلة كشرط قبل runtime.
 - **Phase 28:** أول قفزة بعد SF-50M إذا أثبت 50M قيمة واضحة.
 - **Phase 29:** إدخاله في الواجهة كتجربة يومية مع router/safety/memory.
 

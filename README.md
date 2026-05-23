@@ -37,8 +37,8 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.8 / 30 — SF-10M v0.6 Split Training اكتملت بتحسن رقمي.
-- **الأولوية الحالية:** إصلاح جودة التوليد القصير على `SF-10M`; لا تدريب `SF-50M` ولا Phase 28 حتى تمر بوابات الجودة.
+- **الرحلة الحالية:** Phase 27.9 / 30 — Generation Quality Harness اكتملت وتحجب v0.6 آليًا.
+- **الأولوية الحالية:** إصلاح fragments في توليد `SF-10M`; لا تدريب `SF-50M` ولا Phase 28 حتى تمر بوابات الجودة.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
 - **البيانات الحالية:** corpus موثق `5243` سجلًا يمر `corpus-audit`: `2644` سعودي + `2599` فصحى. Phase 27.7 أضاف split ثابتًا: `train=4703`, `eval=540`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -61,6 +61,7 @@
 - **نتيجة Phase 27.6:** دُرّب `SF-10M v0.5` بخسارة على رد المساعد فقط: training loss `8.4643 → 2.3513`; أفضل eval مقاس step2000: loss `6.5718`, perplexity `714.65`. الردود ما زالت مكررة، لذلك runtime blocked. التقرير: [docs/PHASE27_6_SF10M_ASSISTANT_TARGET_REPORT.md](./docs/PHASE27_6_SF10M_ASSISTANT_TARGET_REPORT.md).
 - **نتيجة Phase 27.7:** أضيف split ثابت `train=4703/eval=540`، و100 سجل gold social، وcanary prompt-aware. لا تدريب جديد في هذه المرحلة؛ runtime المولد لا يزال blocked. التقرير: [docs/PHASE27_7_FIXED_SPLIT_GOLD_SOCIAL_CANARY_REPORT.md](./docs/PHASE27_7_FIXED_SPLIT_GOLD_SOCIAL_CANARY_REPORT.md).
 - **نتيجة Phase 27.8:** دُرّب `SF-10M v0.6` على train split فقط، وأفضل eval كان step4000: loss `5.0227`, perplexity `151.82`. canary حجب `10/10` عينات بسبب fragments مشوهة، لذلك runtime blocked. التقرير: [docs/PHASE27_8_SF10M_V0_6_SPLIT_TRAINING_REPORT.md](./docs/PHASE27_8_SF10M_V0_6_SPLIT_TRAINING_REPORT.md).
+- **نتيجة Phase 27.9:** أضيف `make phase27-generation-quality` وprompt suite قصير؛ `SF-10M v0.6` فشل `0/10` بسبب `model_artifact_fragment`. التقرير: [docs/PHASE27_9_GENERATION_QUALITY_HARNESS_REPORT.md](./docs/PHASE27_9_GENERATION_QUALITY_HARNESS_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
@@ -107,6 +108,7 @@
 | Phase 27.6 | SF-10M Assistant-Target Training — completed with limits; runtime blocked |
 | Phase 27.7 | Fixed Split + Gold Social Canary — completed quality gate; runtime blocked |
 | Phase 27.8 | SF-10M v0.6 Split Training — numeric improvement; runtime blocked |
+| Phase 27.9 | Generation Quality Harness — completed; v0.6 blocked |
 | Phase 28 | SF-120M v0.1 Candidate — planned |
 | Phase 29 | Runtime Hybrid Assistant v1 — planned |
 | Phase 30 | Continuous Improvement Loop — planned |

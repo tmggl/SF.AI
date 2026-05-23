@@ -78,6 +78,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.6 | SF-10M Assistant-Target Training | مكتملة بحدود؛ runtime محظور |
 | Phase 27.7 | Fixed Split + Gold Social Canary | مكتملة؛ split ثابت + canary أقوى، runtime محظور |
 | Phase 27.8 | SF-10M v0.6 Split Training | مكتملة بتحسن رقمي؛ runtime محظور |
+| Phase 27.9 | Generation Quality Harness | مكتملة؛ harness يحجب v0.6 آليًا |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -1546,6 +1547,48 @@ canary        = 0/10 allowed
 ### بعد المرحلة
 ابدأ إصلاح جودة التوليد القصير: eval suite آلي لعينات التوليد، gold social
 أعلى، وفحص tokenizer/decoding قبل إعادة تدريب صغيرة.
+
+---
+
+## Phase 27.9 — Generation Quality Harness
+
+### الهدف
+تثبيت بوابة آلية تقيس التوليد الخام القصير خارج واجهة الشات، حتى لا يكون
+قرار التفعيل قائمًا على perplexity أو الانطباع اليدوي فقط.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.9 بقرار:
+
+```text
+COMPLETED_GENERATION_QUALITY_HARNESS_BLOCKING_V0_6
+```
+
+ما تحقق:
+
+- أضيف prompt suite قصير `msa + saudi`.
+- أضيف runner يحمّل checkpoint ويمرر المخرجات عبر canary prompt-aware.
+- أضيف report JSON قابل للمقارنة بين checkpoints.
+
+نتيجة `SF-10M v0.6`:
+
+```text
+prompts         = 10
+passed          = 0
+runtime_allowed = false
+primary reason  = model_artifact_fragment
+```
+
+### artifacts
+
+- [PHASE27_9_GENERATION_QUALITY_HARNESS_REPORT.md](./PHASE27_9_GENERATION_QUALITY_HARNESS_REPORT.md)
+- `eval/prompts/generation_quality_v1.json`
+- `eval/reports/generation_quality_v1.json`
+- `artifacts/reports/generation_quality_v1_report.json`
+
+### بعد المرحلة
+أصلح fragments قبل أي تكبير: فحص tokenizer/decoding، ثم تدريب إصلاحي صغير
+على gold social أو short-response corpus، ثم إعادة Phase 27.9.
 
 ---
 

@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.8 / 30**
-- **المرحلة الحالية:** **Phase 27.8 — SF-10M v0.6 Split Training**
-- **حالة المرحلة الحالية:** **مكتملة بتحسن رقمي؛ `SF-10M v0.6` تحسن على eval لكنه محظور runtime بسبب canary**
-- **المرحلة التالية المقترحة:** إصلاح جودة التوليد القصير على `SF-10M` قبل أي تكبير إلى `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.9 / 30**
+- **المرحلة الحالية:** **Phase 27.9 — Generation Quality Harness**
+- **حالة المرحلة الحالية:** **مكتملة؛ harness آلي يحجب `SF-10M v0.6` بنسبة 10/10 بسبب fragments**
+- **المرحلة التالية المقترحة:** إصلاح مصدر fragments في `SF-10M` قبل أي تكبير إلى `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -57,6 +57,7 @@
 | Phase 27.6 | SF-10M Assistant-Target Training | ✅ completed_with_limits_runtime_blocked | ✅ |
 | Phase 27.7 | Fixed Split + Gold Social Canary | ✅ completed_quality_gate_runtime_blocked | ✅ |
 | Phase 27.8 | SF-10M v0.6 Split Training | ✅ completed_with_numeric_improvement_runtime_blocked | ✅ |
+| Phase 27.9 | Generation Quality Harness | ✅ completed_harness_blocks_v0_6_runtime | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -378,6 +379,16 @@
   - أضيف [PHASE27_8_SF10M_V0_6_SPLIT_TRAINING_REPORT.md](./PHASE27_8_SF10M_V0_6_SPLIT_TRAINING_REPORT.md).
   - أضيف `artifacts/reports/sf_10m_v0_6_split_training_report.json`.
   - أضيف `artifacts/samples/sf_10m_v0_6_generations.md`.
+- بدأ وانتهى Phase 27.9 Generation Quality Harness:
+  - أضيف `eval/prompts/generation_quality_v1.json` كـ prompt suite قصيرة فصحى/سعودية.
+  - أضيف `sf_ai/evaluation/generation_quality.py`.
+  - أضيف `scripts/phase27_9_generation_quality_eval.py`.
+  - أضيف `make phase27-generation-quality`.
+  - نتيجة `SF-10M v0.6`: `0/10` prompts passed، و`runtime_allowed=false`.
+  - السبب الأساسي: `model_artifact_fragment`.
+  - القرار: `COMPLETED_GENERATION_QUALITY_HARNESS_BLOCKING_V0_6`.
+  - أضيف [PHASE27_9_GENERATION_QUALITY_HARNESS_REPORT.md](./PHASE27_9_GENERATION_QUALITY_HARNESS_REPORT.md).
+  - أضيف `artifacts/reports/generation_quality_v1_report.json`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -443,7 +454,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.8"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.9"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -474,7 +485,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-477 passed in 16.79s
+481 passed in 16.47s
 ```
 
 | ملف | عدد |

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "greeting_msa",
+    "category": "social",
+    "dialect": "msa",
+    "prompt": "السلام عليكم",
+    "required_terms": ["وعليكم", "أهل", "حياك"],
+    "forbidden_terms": ["الطرو", "حارين", "استعجه"]
+  },
+  {
+    "id": "smalltalk_saudi",
+    "category": "social",
+    "dialect": "saudi",
+    "prompt": "كيفك",
+    "required_terms": ["بخير", "تمام", "الحمد", "أنا"],
+    "forbidden_terms": ["الطرو", "حارين", "استعجه"]
+  },
+  {
+    "id": "thanks_msa",
+    "category": "social",
+    "dialect": "msa",
+    "prompt": "شكرا لك",
+    "required_terms": ["العفو", "حياك", "تسلم", "الله يعافيك"],
+    "forbidden_terms": ["الطرو", "حارين", "استعجه"]
+  },
+  {
+    "id": "saudi_preference",
+    "category": "style",
+    "dialect": "saudi",
+    "prompt": "خلنا نتكلم سعودي",
+    "required_terms": ["سعودي", "السعودية", "اللهجة", "أبشر", "حياك"],
+    "forbidden_terms": ["المصرية", "الشامية", "العراقية", "الطرو"]
+  },
+  {
+    "id": "short_advice_msa",
+    "category": "daily_advice",
+    "dialect": "msa",
+    "prompt": "قل لي نصيحة بسيطة",
+    "required_terms": [],
+    "forbidden_terms": ["الطرو", "حارين", "استعجه", "مستمستم"]
+  },
+  {
+    "id": "short_advice_saudi",
+    "category": "daily_advice",
+    "dialect": "saudi",
+    "prompt": "وش رايك أتعلم كل يوم شوي",
+    "required_terms": [],
+    "forbidden_terms": ["الطرو", "حارين", "استعجه", "مستمستم"]
+  },
+  {
+    "id": "simple_explanation_msa",
+    "category": "explanation",
+    "dialect": "msa",
+    "prompt": "اشرح لي الصبر بجملة واحدة",
+    "required_terms": [],
+    "forbidden_terms": ["الطرو", "حارين", "استعجه", "مستمستم"]
+  },
+  {
+    "id": "feeling_saudi",
+    "category": "empathy",
+    "dialect": "saudi",
+    "prompt": "أنا متضايق اليوم",
+    "required_terms": [],
+    "forbidden_terms": ["الطرو", "حارين", "استعجه", "مستمستم"]
+  },
+  {
+    "id": "concise_answer_msa",
+    "category": "format",
+    "dialect": "msa",
+    "prompt": "أريد جوابا قصيرا",
+    "required_terms": [],
+    "forbidden_terms": ["الطرو", "حارين", "استعجه", "مستمستم"]
+  },
+  {
+    "id": "what_do_you_understand",
+    "category": "understanding",
+    "dialect": "msa",
+    "prompt": "هل تفهم كلامي",
+    "required_terms": [],
+    "forbidden_terms": ["الطرو", "حارين", "استعجه", "مستمستم"]
+  }
+]

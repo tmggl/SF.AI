@@ -10,10 +10,10 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.8 / 30**
-- **المرحلة الحالية:** **Phase 27.8 — SF-10M v0.6 Split Training** (اكتملت بتحسن رقمي؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **الرحلة الحالية:** **Phase 27.9 / 30**
+- **المرحلة الحالية:** **Phase 27.9 — Generation Quality Harness** (اكتملت وتحجب v0.6 آليًا؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** إصلاح جودة التوليد القصير على `SF-10M`; Phase 28 محظورة حتى ينجح `SF-50M`.
+- **المرحلة التالية المقترحة:** إصلاح fragments في توليد `SF-10M`; Phase 28 محظورة حتى ينجح `SF-50M`.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
@@ -49,6 +49,8 @@
 - **تقرير Phase 27.7:** `docs/PHASE27_7_FIXED_SPLIT_GOLD_SOCIAL_CANARY_REPORT.md`, `artifacts/reports/phase27_7_fixed_split_gold_social_canary_report.json`.
 - **نتيجة Phase 27.8:** دُرّب `SF-10M v0.6` على `train split=4703` وقيس على `eval split=540`. أفضل eval: `step4000 loss=5.0227`, `perplexity=151.82`. canary حجب `10/10` عينات بسبب fragments مشوهة، لذلك runtime المولّد لا يزال blocked ولا يبدأ `SF-50M`.
 - **تقرير Phase 27.8:** `docs/PHASE27_8_SF10M_V0_6_SPLIT_TRAINING_REPORT.md`, `artifacts/reports/sf_10m_v0_6_split_training_report.json`, `artifacts/samples/sf_10m_v0_6_generations.md`.
+- **نتيجة Phase 27.9:** أضيف `make phase27-generation-quality` وprompt suite `eval/prompts/generation_quality_v1.json`. نتيجة v0.6: `0/10` prompts passed، و`runtime_allowed=false` بسبب `model_artifact_fragment`.
+- **تقرير Phase 27.9:** `docs/PHASE27_9_GENERATION_QUALITY_HARNESS_REPORT.md`, `eval/reports/generation_quality_v1.json`, `artifacts/reports/generation_quality_v1_report.json`.
 - **مقارنة tokenizer v1/v2:** v1 كان `vocab=261`, `merges=218`, `words_seen=723`, سعودي فقط. v2 تدرب على `500` سجل متوازن: `msa=250`, `saudi=250`.
 - **تحسن protected Saudi terms:** `average_tokens` انخفض من `4.0` في v1 إلى `2.3` في v2، ولا توجد `roundtrip_failures` أو `aggressive_split_terms`.
 - **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches=[]` لأن الجمع اكتمل.
@@ -270,7 +272,7 @@ make server-start
 
 آخر تحقق حي بعد restart:
 - السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`، PID `7733`.
-- الكود الحالي بعد Phase 27.8 يعرض `Phase 27.8` في `/system/status` و`/health`، ويعرض `GET /system/phase27-dialogue-eval` تقييم الحوار وخطة corpus.
+- الكود الحالي بعد Phase 27.9 يعرض `Phase 27.9` في `/system/status` و`/health`، ويعرض `GET /system/phase27-dialogue-eval` تقييم الحوار وخطة corpus.
 - `GET /system/phase26-readiness` يرجع `can_start_sf50m_training=false`.
 - `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - `make server-status` read-only ولا يوقف السيرفر.
@@ -279,10 +281,10 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى إكمال Phase 27.8)
+## نتائج الاختبارات (حتى إكمال Phase 27.9)
 
 ```
-477 passed in 16.79s
+481 passed in 16.47s
 ```
 
 التغطية الحالية:
