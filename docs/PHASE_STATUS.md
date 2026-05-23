@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.18 / 30**
-- **المرحلة الحالية:** **Phase 27.18 — Tokenization/Decoding Hygiene Repair**
-- **حالة المرحلة الحالية:** **مكتملة؛ hygiene blockers محددة وruntime بقي محجوبًا**
-- **المرحلة التالية المقترحة:** Phase 27.19 hygiene repair corpus/probe قبل أي تكبير إلى `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.19 / 30**
+- **المرحلة الحالية:** **Phase 27.19 — Hygiene Repair Corpus/Probe**
+- **حالة المرحلة الحالية:** **مكتملة؛ repair examples وحدها لم ترفع النتيجة وruntime بقي محجوبًا**
+- **المرحلة التالية المقترحة:** Phase 27.20 tokenizer/protected-phrase strategy قبل أي تكبير إلى `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -67,6 +67,7 @@
 | Phase 27.16 | Prompt-to-Answer Objective Repair | ✅ completed_objective_repair_runtime_blocked | ✅ |
 | Phase 27.17 | Prompt-to-Answer Micro-Probe | ✅ completed_micro_probe_breakthrough_runtime_blocked | ✅ |
 | Phase 27.18 | Tokenization/Decoding Hygiene Repair | ✅ completed_hygiene_audit_with_blockers | ✅ |
+| Phase 27.19 | Hygiene Repair Corpus/Probe | ✅ completed_repair_probe_still_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -499,6 +500,17 @@
   - لا تفعيل runtime ولا تدريب `SF-50M`.
   - أضيف [PHASE27_18_TOKENIZATION_DECODING_HYGIENE_REPORT.md](./PHASE27_18_TOKENIZATION_DECODING_HYGIENE_REPORT.md).
   - أضيف `artifacts/reports/phase27_18_tokenization_hygiene_report.json`.
+- بدأ وانتهى Phase 27.19 Hygiene Repair Corpus/Probe:
+  - أضيف `scripts/phase27_19_hygiene_repair_probe.py`.
+  - أضيف `make phase27-hygiene-repair-probe`.
+  - شُغّل repair probe داخلي على `52` مثالًا (`32` أساس + `20` repair).
+  - التدريب: `SF-10M`, `steps=3200`, `loss_scope=assistant`, `packing_mode=sample_isolated`.
+  - النتيجة بقيت: `passed=27/32`, `exact_clean=28/32`, `semantic_match=28/32`, `guard_passed=29/32`.
+  - التشخيص: أمثلة repair وحدها لا تكفي؛ نحتاج استراتيجية tokenizer/protected-phrase.
+  - القرار: `FAILED_HYGIENE_REPAIR_PROBE_BLOCK_RUNTIME`.
+  - لا تفعيل runtime ولا تدريب `SF-50M`.
+  - أضيف [PHASE27_19_HYGIENE_REPAIR_PROBE_REPORT.md](./PHASE27_19_HYGIENE_REPAIR_PROBE_REPORT.md).
+  - أضيف `artifacts/reports/phase27_19_hygiene_repair_probe_report.json`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -564,7 +576,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.18"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.19"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,
@@ -595,7 +607,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-504 passed in 16.95s
+506 passed in 16.76s
 ```
 
 | ملف | عدد |

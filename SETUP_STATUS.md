@@ -10,10 +10,10 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.18 / 30**
-- **المرحلة الحالية:** **Phase 27.18 — Tokenization/Decoding Hygiene Repair** (اكتملت: hygiene blockers محددة وruntime بقي محجوبًا؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
+- **الرحلة الحالية:** **Phase 27.19 / 30**
+- **المرحلة الحالية:** **Phase 27.19 — Hygiene Repair Corpus/Probe** (اكتملت: repair examples وحدها لم ترفع النتيجة؛ الشاشة شغّالة على http://127.0.0.1:8123/ui/chat)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** Phase 27.19 hygiene repair corpus/probe؛ Phase 28 و`SF-50M` محظوران حتى تنجح البوابات.
+- **المرحلة التالية المقترحة:** Phase 27.20 tokenizer/protected-phrase strategy؛ Phase 28 و`SF-50M` محظوران حتى تنجح البوابات.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
@@ -69,6 +69,8 @@
 - **تقرير Phase 27.17:** `docs/PHASE27_17_PROMPT_ANSWER_MICRO_PROBE_REPORT.md`, `artifacts/reports/phase27_17_prompt_answer_micro_probe_report.json`, `artifacts/samples/phase27_17_prompt_answer_micro_probe_generations.md`.
 - **نتيجة Phase 27.18:** أضيف hygiene audit لمصطلحات فشل 27.17 وحجب الكسور المرصودة. النتيجة: `terms_total=26`, `average_pieces=3.5385`, `aggressive_split_terms=5`, `roundtrip_failures=0`, `uncovered_bad_fragments=0`. القرار: runtime و`SF-50M` محظوران.
 - **تقرير Phase 27.18:** `docs/PHASE27_18_TOKENIZATION_DECODING_HYGIENE_REPORT.md`, `artifacts/reports/phase27_18_tokenization_hygiene_report.json`.
+- **نتيجة Phase 27.19:** أضيف repair probe مركز حول العبارات الخمس ودُرّب على `52` مثالًا داخليًا (`32` أساس + `20` repair). النتيجة بقيت `passed=27/32`, `exact_clean=28/32`, `semantic=28/32`, `guard_passed=29/32`. القرار: runtime و`SF-50M` محظوران.
+- **تقرير Phase 27.19:** `docs/PHASE27_19_HYGIENE_REPAIR_PROBE_REPORT.md`, `artifacts/reports/phase27_19_hygiene_repair_probe_report.json`, `artifacts/samples/phase27_19_hygiene_repair_probe_generations.md`.
 - **مقارنة tokenizer v1/v2:** v1 كان `vocab=261`, `merges=218`, `words_seen=723`, سعودي فقط. v2 تدرب على `500` سجل متوازن: `msa=250`, `saudi=250`.
 - **تحسن protected Saudi terms:** `average_tokens` انخفض من `4.0` في v1 إلى `2.3` في v2، ولا توجد `roundtrip_failures` أو `aggressive_split_terms`.
 - **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches=[]` لأن الجمع اكتمل.
@@ -289,7 +291,7 @@ make server-start
 
 آخر تحقق حي بعد restart:
 - السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`، PID `7733`.
-- الكود الحالي بعد Phase 27.18 يعرض `Phase 27.18` في `/system/status` و`/health`، ويعرض `GET /system/phase27-dialogue-eval` تقييم الحوار وخطة corpus.
+- الكود الحالي بعد Phase 27.19 يعرض `Phase 27.19` في `/system/status` و`/health`، ويعرض `GET /system/phase27-dialogue-eval` تقييم الحوار وخطة corpus.
 - `GET /system/phase26-readiness` يرجع `can_start_sf50m_training=false`.
 - `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - `make server-status` read-only ولا يوقف السيرفر.
@@ -298,10 +300,10 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى إكمال Phase 27.18)
+## نتائج الاختبارات (حتى إكمال Phase 27.19)
 
 ```
-504 passed in 16.95s
+506 passed in 16.76s
 ```
 
 التغطية الحالية:

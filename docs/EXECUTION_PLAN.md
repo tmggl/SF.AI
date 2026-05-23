@@ -88,6 +88,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.16 | Prompt-to-Answer Objective Repair | مكتملة؛ sample isolation أضيف وruntime محظور |
 | Phase 27.17 | Prompt-to-Answer Micro-Probe | مكتملة؛ 27/32 breakthrough وruntime محظور |
 | Phase 27.18 | Tokenization/Decoding Hygiene Repair | مكتملة؛ blockers محددة وruntime محظور |
+| Phase 27.19 | Hygiene Repair Corpus/Probe | مكتملة؛ أمثلة repair وحدها لم تكف |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2098,6 +2099,57 @@ uncovered_bad_fragments = 0
 
 - [PHASE27_18_TOKENIZATION_DECODING_HYGIENE_REPORT.md](./PHASE27_18_TOKENIZATION_DECODING_HYGIENE_REPORT.md)
 - `artifacts/reports/phase27_18_tokenization_hygiene_report.json`
+
+---
+
+## Phase 27.19 — Hygiene Repair Corpus/Probe
+
+### الهدف
+اختبار هل تكفي أمثلة repair مركزة حول عبارات Phase 27.18 الخمس لعلاج
+كسور micro-probe بدون تغيير tokenizer أو decoding.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.19 بقرار:
+
+```text
+FAILED_HYGIENE_REPAIR_PROBE_BLOCK_RUNTIME
+```
+
+ما تحقق:
+
+- أضيف `scripts/phase27_19_hygiene_repair_probe.py`.
+- أضيف `make phase27-hygiene-repair-probe`.
+- شُغّل تدريب داخلي:
+  - `32` زوجًا أساسيًا.
+  - `20` زوج repair.
+  - `52` مثال تدريب إجمالًا.
+
+النتيجة:
+
+```text
+passed       = 27/32
+exact_clean  = 28/32
+semantic     = 28/32
+guard_passed = 29/32
+```
+
+### التشخيص
+
+الفرضية التي اختبرناها فشلت: زيادة أمثلة repair وحدها لا تكفي. بعض الردود
+ما زالت تخلط بين عبارات أو تكسر كلمات عالية التجزئة.
+
+### القرار
+
+- لا runtime.
+- لا `SF-50M`.
+- التالي Phase 27.20: tokenizer/protected-phrase strategy.
+
+### artifacts
+
+- [PHASE27_19_HYGIENE_REPAIR_PROBE_REPORT.md](./PHASE27_19_HYGIENE_REPAIR_PROBE_REPORT.md)
+- `artifacts/reports/phase27_19_hygiene_repair_probe_report.json`
+- `artifacts/samples/phase27_19_hygiene_repair_probe_generations.md`
 
 ---
 

@@ -84,10 +84,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.18: فحصنا tokenization/decoding hygiene بعد نجاح 27/32 "
-    "في micro-probe على SF-10M. وجدنا 5 عبارات تتجزأ بقوة مثل «وعليكم السلام» و«نشتغل سوا»، "
-    "وحجبنا الكسور المرصودة في GenerationGuard. التالي Phase 27.19 لبناء repair "
-    "probe مركز قبل أي تكبير.",
+    "اكتملت Phase 27.19: بنينا repair probe مركزًا لـ SF-10M حول العبارات الخمس ودربناه على "
+    "52 مثالًا داخليًا، لكن النتيجة بقيت 27/32. هذا يعني أن زيادة أمثلة repair وحدها "
+    "لا تكفي. التالي Phase 27.20 لوضع استراتيجية tokenizer/protected-phrase قبل أي تكبير.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

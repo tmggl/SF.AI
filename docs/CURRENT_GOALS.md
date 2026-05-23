@@ -34,6 +34,8 @@ Phase 27.17 شغّلت prompt-answer micro-probe من 32 زوجًا، وحققت
 ردًا صحيحًا؛ الفشل المتبقي كسور لفظية/حروفية لا تسمح بتفعيل الواجهة.
 Phase 27.18 حولت هذه الكسور إلى hygiene audit: `5` عبارات تتجزأ بقوة،
 وكل الكسور المرصودة أصبحت محجوبة في الحارس.
+Phase 27.19 اختبرت repair examples حول العبارات الخمس، لكن النتيجة بقيت
+`27/32`، ما يعني أن الأمثلة وحدها لا تكفي.
 
 الخطوة العملية الحالية:
 
@@ -91,6 +93,7 @@ Phase 27.18 حولت هذه الكسور إلى hygiene audit: `5` عبارات 
 - Phase 27.16 اكتمل: sample-isolated objective؛ runtime وSF-50M محظوران.
 - Phase 27.17 اكتمل: prompt-answer micro-probe؛ `27/32` مع runtime محظور.
 - Phase 27.18 اكتمل: tokenization/decoding hygiene audit؛ blockers محددة.
+- Phase 27.19 اكتمل: hygiene repair probe؛ النتيجة بقيت `27/32`.
 
 الجرد الحالي يرى:
 
@@ -158,7 +161,8 @@ SF.AI حاليًا:
 - **Phase 27.16:** Prompt-to-Answer Objective Repair — مكتمل، runtime محظور.
 - **Phase 27.17:** Targeted micro-probe لأزواج سؤال/جواب — مكتمل جزئيًا، runtime محظور.
 - **Phase 27.18:** Tokenization/Decoding Hygiene Repair — مكتمل، runtime محظور.
-- **Phase 27.19:** Hygiene Repair Corpus/Probe — التالي.
+- **Phase 27.19:** Hygiene Repair Corpus/Probe — مكتمل، runtime محظور.
+- **Phase 27.20:** Tokenizer/Protected-Phrase Strategy — التالي.
 - **Phase 28:** تدريب `SF-120M v0.1`؛ أول قفزة بعد نجاح `SF-50M`.
 - **Phase 29:** Runtime Hybrid Assistant v1.
 - **Phase 30:** Continuous Improvement Loop.
