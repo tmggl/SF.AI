@@ -50,6 +50,18 @@ def test_pipeline_safety_flag_medical() -> None:
     assert any(flag.startswith("medical:") for flag in a.safety_flags)
 
 
+def test_pipeline_safety_does_not_match_substrings() -> None:
+    p = NLPPipeline()
+    a = p.analyze_user_text("وش المرحلة الحالية؟")
+    assert not any(flag.startswith("medical:") for flag in a.safety_flags)
+
+
+def test_pipeline_safety_matches_multiword_terms() -> None:
+    p = NLPPipeline()
+    a = p.analyze_user_text("كيف أغيّر كلمة مرور الحساب؟")
+    assert "security:كلمة مرور" in a.safety_flags
+
+
 def test_pipeline_intent_hints_emitted() -> None:
     p = NLPPipeline()
     a = p.analyze_user_text("مرحبا")

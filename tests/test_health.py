@@ -23,7 +23,7 @@ def test_health_ok() -> None:
     body = r.json()
     assert body["status"] == "ok"
     assert body["project"] == "SF.AI"
-    assert body["phase"] == "Phase 27.24"
+    assert body["phase"] == "Phase 27.25"
 
 
 def test_system_status_sovereign_flags() -> None:
@@ -31,9 +31,9 @@ def test_system_status_sovereign_flags() -> None:
     assert r.status_code == 200
     body = r.json()
     assert body["project"] == "SF.AI"
-    assert body["current_phase"].startswith("Phase 27.24")
-    assert body["current_phase_status"] == "completed_micro_probe_passed_runtime_blocked"
-    assert "held-out" in body["next_phase"]
+    assert body["current_phase"].startswith("Phase 27.25")
+    assert body["current_phase_status"] == "completed_heldout_canary_failed_runtime_blocked"
+    assert "generalization" in body["next_phase"]
     assert body["sovereign"] is True
     assert body["uses_external_llm"] is False
     assert body["uses_pretrained_weights"] is False
@@ -150,6 +150,11 @@ def test_system_status_sovereign_flags() -> None:
     assert any(
         c["name"] == "phase27_24_minimal_lexical_stabilization"
         and c["status"] == "completed_micro_probe_passed_runtime_blocked"
+        for c in body["components"]
+    )
+    assert any(
+        c["name"] == "phase27_25_heldout_generation_canary"
+        and c["status"] == "completed_failed_runtime_blocked"
         for c in body["components"]
     )
 

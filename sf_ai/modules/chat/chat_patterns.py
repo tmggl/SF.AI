@@ -84,9 +84,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.24: وصل micro-probe إلى 32/32 بعد تثبيت «التعاون» "
-    "و«الاحترام». لم أفتح المولد للواجهة بعد؛ التالي Phase 27.25 لاختبار "
-    "held-out generation-quality canary قبل أي تفعيل.",
+    "اكتملت Phase 27.25: اختبار held-out كشف أن المولد ينجح 8/16 فقط "
+    "خارج أسئلة micro-probe. لذلك لم أفتح المولد للواجهة؛ التالي Phase 27.26 "
+    "لإصلاح generalization/objective coverage.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

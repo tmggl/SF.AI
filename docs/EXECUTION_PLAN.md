@@ -94,6 +94,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.22 | Spacing/Boundary Loss Repair | مكتملة جزئيًا؛ micro-probe تحسن إلى 29/32 |
 | Phase 27.23 | Semantic/Lexical Confusion Repair | مكتملة جزئيًا؛ micro-probe تحسن إلى 30/32 |
 | Phase 27.24 | Minimal Lexical Stabilization | مكتملة؛ micro-probe وصل إلى 32/32 |
+| Phase 27.25 | Held-out Generation Quality Canary | مكتملة؛ فشل held-out `8/16` وruntime محظور |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2414,6 +2415,49 @@ guard_passed = 32/32
 - `artifacts/reports/phase27_24_minimal_lexical_stabilization_report.json`
 - `artifacts/samples/phase27_24_minimal_lexical_stabilization_generations.md`
 - `artifacts/tokenizers/sf_bpe/v4_min_lexical/`
+
+---
+
+## Phase 27.25 — Held-out Generation Quality Canary
+
+### الهدف
+
+اختبار checkpoint Phase 27.24 على أسئلة جديدة غير موجودة في micro-probe
+الأصلي، للتأكد من أن نجاح `32/32` ليس حفظًا ضيقًا فقط.
+
+لا تدريب جديد في هذه المرحلة.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.25 بقرار:
+
+```text
+FAILED_HELDOUT_GENERATION_CANARY_BLOCK_RUNTIME
+```
+
+النتيجة:
+
+```text
+passed       = 8/16
+semantic     = 8/16
+guard_passed = 15/16
+```
+
+نجح المولد في عائلة التعريفات القريبة مثل `التعاون` و`الاحترام`
+و`القراءة`، وفشل في تعميم التحية الفصيحة والنصيحة والتخطيط والدعم.
+
+### القرار
+
+- لا runtime.
+- لا تجربة محدودة في الواجهة.
+- لا `SF-50M`.
+- التالي Phase 27.26: held-out objective repair and generalization training.
+
+### artifacts
+
+- [PHASE27_25_HELDOUT_GENERATION_CANARY_REPORT.md](./PHASE27_25_HELDOUT_GENERATION_CANARY_REPORT.md)
+- `artifacts/reports/phase27_25_heldout_generation_canary_report.json`
+- `artifacts/samples/phase27_25_heldout_generation_canary_generations.md`
 
 ---
 

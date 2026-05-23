@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.24 — Minimal Lexical Stabilization",
-        current_phase_status="completed_micro_probe_passed_runtime_blocked",
+        current_phase="Phase 27.25 — Held-out Generation Quality Canary",
+        current_phase_status="completed_heldout_canary_failed_runtime_blocked",
         next_phase=(
-            "Phase 27.25 held-out generation-quality canary before runtime"
+            "Phase 27.26 held-out objective repair and generalization training"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -234,6 +234,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_24_minimal_lexical_stabilization",
                 status="completed_micro_probe_passed_runtime_blocked",
                 phase="Phase 27.24",
+            ),
+            ComponentStatus(
+                name="phase27_25_heldout_generation_canary",
+                status="completed_failed_runtime_blocked",
+                phase="Phase 27.25",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

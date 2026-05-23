@@ -2,7 +2,27 @@
 
 from __future__ import annotations
 
+import re
+
 from sf_ai.core.nlp._lexicons import load_lexicon
+
+
+_TOKEN_RE = re.compile(r"[\w\u0600-\u06FF]+", re.UNICODE)
+
+
+def _tokenize_for_safety(text: str) -> tuple[str, ...]:
+    return tuple(match.group(0) for match in _TOKEN_RE.finditer(text))
+
+
+def _contains_safety_term(variant: str, term: str) -> bool:
+    term_lower = term.lower()
+    tokens = {token for token in _tokenize_for_safety(variant)}
+    tokens_lower = {token.lower() for token in tokens}
+    if " " not in term_lower:
+        return term in tokens or term_lower in tokens_lower
+
+    padded_variant = " ".join(_tokenize_for_safety(variant.lower()))
+    return f" {term_lower} " in f" {padded_variant} "
 
 
 class SafetyScanner:
@@ -20,11 +40,9 @@ class SafetyScanner:
         for variant in text_variants:
             if not variant:
                 continue
-            lowered = variant.lower()
-            tokens = set(variant.split()) | set(lowered.split())
             for domain, terms in self._flags.items():
                 for term in terms:
-                    if term in tokens or term.lower() in tokens or term in variant:
+                    if _contains_safety_term(variant, term):
                         flag = f"{domain}:{term}"
                         if flag not in hits:
                             hits.append(flag)

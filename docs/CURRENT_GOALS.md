@@ -46,7 +46,9 @@ Phase 27.22 أصلحت decode boundary وfalse-positive في الحارس؛ ال
 Phase 27.23 أضافت repair متوازنًا على tokenizer v3؛ النتيجة صارت `30/32`
 وبقي خللان lexical في `التعاون` و`الاحترام`.
 Phase 27.24 أضافت tokenizer minimal لحماية الكلمتين المتبقيتين؛ النتيجة
-صارت `32/32`، لكن runtime ينتظر canary أوسع.
+صارت `32/32`.
+Phase 27.25 اختبرت checkpoint نفسه على أسئلة held-out جديدة؛ النتيجة
+`8/16` فقط، لذلك runtime ما زال محجوبًا حتى Phase 27.26.
 
 الخطوة العملية الحالية:
 
@@ -178,7 +180,8 @@ SF.AI حاليًا:
 - **Phase 27.22:** Spacing/Boundary Loss Repair — مكتمل جزئيًا، runtime محظور.
 - **Phase 27.23:** Semantic/Lexical Confusion Repair — مكتمل جزئيًا، runtime محظور.
 - **Phase 27.24:** Minimal Lexical Stabilization — مكتمل معمليًا، runtime محظور.
-- **Phase 27.25:** Held-out Generation Quality Canary — التالي.
+- **Phase 27.25:** Held-out Generation Quality Canary — مكتمل؛ فشل `8/16` وruntime محظور.
+- **Phase 27.26:** Held-out Objective Repair and Generalization Training — التالي.
 - **Phase 28:** تدريب `SF-120M v0.1`؛ أول قفزة بعد نجاح `SF-50M`.
 - **Phase 29:** Runtime Hybrid Assistant v1.
 - **Phase 30:** Continuous Improvement Loop.
