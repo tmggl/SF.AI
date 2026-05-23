@@ -39,8 +39,8 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.20 / 30 — Tokenizer/Protected-Phrase Strategy اكتملت؛ runtime محظور.
-- **الأولوية الحالية:** Phase 27.21 tokenizer v3 protected-phrase retrain + micro-probe؛ لا تدريب `SF-50M` ولا Phase 28 حتى تمر بوابات الجودة.
+- **الرحلة الحالية:** Phase 27.21 / 30 — Tokenizer v3 Protected-Phrase Micro-Probe اكتملت؛ runtime محظور.
+- **الأولوية الحالية:** Phase 27.22 spacing/boundary loss repair؛ لا تدريب `SF-50M` ولا Phase 28 حتى تمر بوابات الجودة.
 - **الشات الحالي:** runtime rule-based + routing، وليس LLM مولّدًا بعد.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -75,6 +75,7 @@
 - **نتيجة Phase 27.18:** أضيف hygiene audit بعد micro-probe. النتيجة: `terms_total=26`, `average_pieces=3.5385`, `aggressive_split_terms=5`, `roundtrip_failures=0`, و`uncovered_bad_fragments=0`. القرار: runtime و`SF-50M` محظوران. التقرير: [docs/PHASE27_18_TOKENIZATION_DECODING_HYGIENE_REPORT.md](./docs/PHASE27_18_TOKENIZATION_DECODING_HYGIENE_REPORT.md).
 - **نتيجة Phase 27.19:** أضيف repair probe مركز حول العبارات الخمس، ودُرّب على `52` مثالًا داخليًا. النتيجة بقيت `passed=27/32`, `exact_clean=28/32`, `semantic=28/32`; لذلك runtime و`SF-50M` محظوران. التقرير: [docs/PHASE27_19_HYGIENE_REPAIR_PROBE_REPORT.md](./docs/PHASE27_19_HYGIENE_REPAIR_PROBE_REPORT.md).
 - **نتيجة Phase 27.20:** أضيف دعم protected phrases داخل `BPETokenizer` وملف `protected_phrases_phase27_20.txt`. العبارات الخمس التي وصلت إلى `max_pieces=8` في v2 صارت قابلة للحفظ كقطعة واحدة في استراتيجية v3 (`max_pieces=1`, `all_roundtrip_ok=true`). runtime و`SF-50M` محظوران حتى تدريب tokenizer v3 وmicro-probe. التقرير: [docs/PHASE27_20_TOKENIZER_PROTECTED_PHRASE_STRATEGY_REPORT.md](./docs/PHASE27_20_TOKENIZER_PROTECTED_PHRASE_STRATEGY_REPORT.md).
+- **نتيجة Phase 27.21:** دُرّب tokenizer v3 في `artifacts/tokenizers/sf_bpe/v3` (`vocab=4706`, `merges=4648`) ثم شُغّل micro-probe. protected phrases نجحت، لكن probe فشل `25/32` بسبب لصق spacing/boundary مثل `سواونخفف` و`تفيدوتوسع`; لذلك runtime و`SF-50M` محظوران. التقرير: [docs/PHASE27_21_TOKENIZER_V3_MICRO_PROBE_REPORT.md](./docs/PHASE27_21_TOKENIZER_V3_MICRO_PROBE_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 
@@ -133,6 +134,7 @@
 | Phase 27.18 | Tokenization/Decoding Hygiene Repair — blockers identified; runtime blocked |
 | Phase 27.19 | Hygiene Repair Corpus/Probe — examples alone did not improve; runtime blocked |
 | Phase 27.20 | Tokenizer/Protected-Phrase Strategy — protected phrase support ready for tokenizer v3; runtime blocked |
+| Phase 27.21 | Tokenizer v3 Protected-Phrase Micro-Probe — tokenizer succeeded; probe failed 25/32; runtime blocked |
 | Phase 28 | SF-120M v0.1 Candidate — planned |
 | Phase 29 | Runtime Hybrid Assistant v1 — planned |
 | Phase 30 | Continuous Improvement Loop — planned |

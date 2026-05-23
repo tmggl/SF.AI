@@ -39,6 +39,8 @@ Phase 27.19 اختبرت repair examples حول العبارات الخمس، ل
 Phase 27.20 أضافت دعم protected phrases داخل tokenizer نفسه؛ العبارات الخمس
 صارت قابلة للحفظ كقطعة واحدة في tokenizer v3 القادم، لكن runtime ما زال
 محجوبًا حتى micro-probe جديد.
+Phase 27.21 درّبت tokenizer v3 وشغلت micro-probe. tokenizer نجح، لكن
+المولد فشل `25/32` بسبب لصق spacing/boundary مثل `سواونخفف`.
 
 الخطوة العملية الحالية:
 
@@ -166,7 +168,8 @@ SF.AI حاليًا:
 - **Phase 27.18:** Tokenization/Decoding Hygiene Repair — مكتمل، runtime محظور.
 - **Phase 27.19:** Hygiene Repair Corpus/Probe — مكتمل، runtime محظور.
 - **Phase 27.20:** Tokenizer/Protected-Phrase Strategy — مكتمل، runtime محظور.
-- **Phase 27.21:** Tokenizer v3 protected-phrase retrain + micro-probe — التالي.
+- **Phase 27.21:** Tokenizer v3 protected-phrase retrain + micro-probe — مكتمل، runtime محظور.
+- **Phase 27.22:** Spacing/Boundary Loss Repair — التالي.
 - **Phase 28:** تدريب `SF-120M v0.1`؛ أول قفزة بعد نجاح `SF-50M`.
 - **Phase 29:** Runtime Hybrid Assistant v1.
 - **Phase 30:** Continuous Improvement Loop.

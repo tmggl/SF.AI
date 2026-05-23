@@ -32,6 +32,7 @@ from sf_ai.models.tokenizer import (  # noqa: E402
     TokenizerConfig,
     train_bpe_from_corpus,
 )
+from sf_ai.models.tokenizer.policy_audit import load_plain_terms  # noqa: E402
 from sf_ai.training.train_tokenizer import TOKENIZER_PERMISSION_ERROR  # noqa: E402
 
 
@@ -44,6 +45,12 @@ def main(argv: list[str]) -> int:
     p.add_argument("--byte-level", action="store_true", help="Use byte-level base alphabet")
     p.add_argument("--lowercase", action="store_true", help="Lowercase pre-tokenized words")
     p.add_argument("--name", default="sf_bpe", help="Logical name for meta.json")
+    p.add_argument(
+        "--protected-terms",
+        type=Path,
+        default=None,
+        help="Optional SF.AI-owned protected terms/phrases file; not pretrained vocab.",
+    )
     p.add_argument(
         "--confirm-phase12-permission",
         action="store_true",
@@ -65,6 +72,9 @@ def main(argv: list[str]) -> int:
         min_frequency=args.min_frequency,
         byte_level=args.byte_level,
         lowercase=args.lowercase,
+        protected_terms=tuple(load_plain_terms(args.protected_terms))
+        if args.protected_terms
+        else (),
     )
 
     print(f"SF.AI — training BPE tokenizer")
@@ -72,6 +82,7 @@ def main(argv: list[str]) -> int:
     print(f"  output     : {args.out}")
     print(f"  vocab_size : {args.vocab_size}")
     print(f"  byte_level : {args.byte_level}")
+    print(f"  protected  : {args.protected_terms or '-'}")
 
     try:
         tok = train_bpe_from_corpus(

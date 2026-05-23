@@ -84,9 +84,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "اكتملت Phase 27.20: أضفنا دعم protected phrases داخل tokenizer نفسه. "
-    "العبارات الخمس التي كانت تتكسر في v2 صارت قابلة للحفظ كقطعة واحدة في v3. "
-    "التالي Phase 27.21: تدريب tokenizer v3 ثم micro-probe قبل أي تفعيل للواجهة.",
+    "اكتملت Phase 27.21: درّبنا tokenizer v3 مع protected phrases وشغلنا micro-probe. "
+    "التمثيل نجح، لكن المولد حقق 25/32 فقط وظهرت مشكلة لصق كلمات مثل سواونخفف. "
+    "التالي Phase 27.22 لإصلاح spacing/boundary قبل أي تفعيل للواجهة.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

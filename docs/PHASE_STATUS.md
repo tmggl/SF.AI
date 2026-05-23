@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.20 / 30**
-- **المرحلة الحالية:** **Phase 27.20 — Tokenizer/Protected-Phrase Strategy**
-- **حالة المرحلة الحالية:** **مكتملة؛ دعم protected phrases جاهز لـ tokenizer v3 وruntime بقي محجوبًا**
-- **المرحلة التالية المقترحة:** Phase 27.21 tokenizer v3 protected-phrase retrain + micro-probe قبل أي runtime أو `SF-50M`.
+- **الرحلة الحالية:** **Phase 27.21 / 30**
+- **المرحلة الحالية:** **Phase 27.21 — Tokenizer v3 Protected-Phrase Micro-Probe**
+- **حالة المرحلة الحالية:** **مكتملة؛ tokenizer v3 نجح في protected phrases لكن micro-probe فشل 25/32 وruntime بقي محجوبًا**
+- **المرحلة التالية المقترحة:** Phase 27.22 spacing/boundary loss repair قبل أي runtime أو `SF-50M`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-23
 
@@ -69,6 +69,7 @@
 | Phase 27.18 | Tokenization/Decoding Hygiene Repair | ✅ completed_hygiene_audit_with_blockers | ✅ |
 | Phase 27.19 | Hygiene Repair Corpus/Probe | ✅ completed_repair_probe_still_runtime_blocked | ✅ |
 | Phase 27.20 | Tokenizer/Protected-Phrase Strategy | ✅ completed_ready_for_tokenizer_v3_runtime_blocked | ✅ |
+| Phase 27.21 | Tokenizer v3 Protected-Phrase Micro-Probe | ✅ completed_micro_probe_failed_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -525,6 +526,18 @@
   - لا تفعيل runtime ولا تدريب `SF-50M`.
   - أضيف [PHASE27_20_TOKENIZER_PROTECTED_PHRASE_STRATEGY_REPORT.md](./PHASE27_20_TOKENIZER_PROTECTED_PHRASE_STRATEGY_REPORT.md).
   - أضيف `artifacts/reports/phase27_20_tokenizer_strategy_report.json`.
+- بدأ وانتهى Phase 27.21 Tokenizer v3 Protected-Phrase Micro-Probe:
+  - دُرّب tokenizer v3 سيادي في `artifacts/tokenizers/sf_bpe/v3`.
+  - `vocab_size=4706`, `merges=4648`, `sf_origin=true`.
+  - protected phrases بقيت `max_pieces=1` و`all_roundtrip_ok=true`.
+  - دُرّب probe داخلي `SF-10M` على tokenizer v3: `steps=3200`, `packing_mode=sample_isolated`.
+  - النتيجة: `passed=25/32`, `exact_clean=26/32`, `semantic=30/32`, `guard_passed=31/32`.
+  - أسباب الفشل: `not_exact_clean=4`, `missing_semantic_terms=2`, `guard:model_artifact_fragment=1`.
+  - التشخيص: المشكلة انتقلت إلى لصق spacing/boundary مثل `سواونخفف`, `تفيدوتوسع`, `هادئًاوابدأ`.
+  - القرار: `FAILED_TOKENIZER_V3_MICRO_PROBE_BLOCK_RUNTIME`.
+  - لا تفعيل runtime ولا تدريب `SF-50M`.
+  - أضيف [PHASE27_21_TOKENIZER_V3_MICRO_PROBE_REPORT.md](./PHASE27_21_TOKENIZER_V3_MICRO_PROBE_REPORT.md).
+  - أضيف `artifacts/reports/phase27_21_tokenizer_v3_micro_probe_report.json`.
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
@@ -590,7 +603,7 @@
 
 **اختبار حي تم:**
 ```
-GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.20"}
+GET  /health        → {"status":"ok","project":"SF.AI","phase":"Phase 27.21"}
 GET  /ui/chat       → HTML chat UI (RTL Arabic)
 GET  /system/corpus-audit → READY_FOR_PHASE_12_TOKENIZER_TRAINING, 30/30
 POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.smalltalk,

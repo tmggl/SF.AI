@@ -187,10 +187,11 @@ def _evaluate(
     checkpoints_root: Path,
     checkpoint_name: str,
     device: str,
+    tokenizer_path: Path | None = None,
 ) -> tuple[list[dict[str, Any]], Counter[str]]:
     generator = NativeGenerator(
         NativeGeneratorConfig(
-            tokenizer_path=ROOT / "artifacts/tokenizers/sf_bpe/v2",
+            tokenizer_path=tokenizer_path or ROOT / "artifacts/tokenizers/sf_bpe/v2",
             checkpoints_root=checkpoints_root,
             checkpoint_name=checkpoint_name,
             generator_name="sf_10m_phase27_17_micro_probe",

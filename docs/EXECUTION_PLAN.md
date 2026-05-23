@@ -90,6 +90,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.18 | Tokenization/Decoding Hygiene Repair | مكتملة؛ blockers محددة وruntime محظور |
 | Phase 27.19 | Hygiene Repair Corpus/Probe | مكتملة؛ أمثلة repair وحدها لم تكف |
 | Phase 27.20 | Tokenizer/Protected-Phrase Strategy | مكتملة؛ دعم protected phrases جاهز لـ tokenizer v3 |
+| Phase 27.21 | Tokenizer v3 Protected-Phrase Micro-Probe | مكتملة؛ tokenizer نجح وmicro-probe فشل 25/32 |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -2210,6 +2211,53 @@ all_roundtrip_ok = true
 
 - [PHASE27_20_TOKENIZER_PROTECTED_PHRASE_STRATEGY_REPORT.md](./PHASE27_20_TOKENIZER_PROTECTED_PHRASE_STRATEGY_REPORT.md)
 - `artifacts/reports/phase27_20_tokenizer_strategy_report.json`
+
+---
+
+## Phase 27.21 — Tokenizer v3 Protected-Phrase Micro-Probe
+
+### الهدف
+
+تدريب tokenizer v3 بالعبارات المحمية، ثم إعادة micro-probe لمعرفة هل
+تحسن تمثيل العبارات يكفي لفتح طريق المولد.
+
+### نتيجة التنفيذ
+
+اكتملت Phase 27.21 بقرار:
+
+```text
+FAILED_TOKENIZER_V3_MICRO_PROBE_BLOCK_RUNTIME
+```
+
+ما تحقق:
+
+- tokenizer v3 سيادي: `artifacts/tokenizers/sf_bpe/v3`.
+- `vocab_size=4706`, `merges=4648`, `sf_origin=true`.
+- protected phrases: `max_pieces=1`, `all_roundtrip_ok=true`.
+- micro-probe: `passed=25/32`, `exact_clean=26/32`, `semantic=30/32`.
+
+### التشخيص
+
+المشكلة لم تعد فقط protected phrases. الفشل الحالي spacing/boundary:
+
+```text
+سواونخفف
+تفيدوتوسع
+هادئًاوابدأ
+```
+
+### القرار
+
+- لا runtime.
+- لا `SF-50M`.
+- التالي Phase 27.22: spacing/boundary loss repair.
+
+### artifacts
+
+- [PHASE27_21_TOKENIZER_V3_MICRO_PROBE_REPORT.md](./PHASE27_21_TOKENIZER_V3_MICRO_PROBE_REPORT.md)
+- `artifacts/tokenizers/sf_bpe/v3/`
+- `artifacts/reports/phase27_21_tokenizer_v3_micro_probe_report.json`
+- `artifacts/samples/phase27_21_tokenizer_v3_micro_probe_generations.md`
 
 ---
 

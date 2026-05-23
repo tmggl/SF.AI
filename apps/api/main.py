@@ -31,7 +31,7 @@ app = FastAPI(
     version="0.1.0",
     description=(
         "SF.AI — Sovereign AI platform. Phase 9 chat UI mounted at /ui/chat. "
-        "Phase 27.20 adds protected-phrase tokenizer strategy; runtime remains blocked. "
+        "Phase 27.21 trains tokenizer v3 and runs a micro-probe; runtime remains blocked. "
         "No pretrained models, no external AI APIs."
     ),
 )
@@ -46,7 +46,7 @@ app.include_router(ui.router)
 def root() -> dict[str, str]:
     return {
         "project": "SF.AI",
-        "phase": "Phase 27.20 — Tokenizer/Protected-Phrase Strategy",
+        "phase": "Phase 27.21 — Tokenizer v3 Micro-Probe",
         "ui": "/ui/chat",
         "docs": "/docs",
     }
