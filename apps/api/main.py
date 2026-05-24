@@ -31,7 +31,7 @@ app = FastAPI(
     version="0.1.0",
     description=(
         "SF.AI — Sovereign AI platform. Phase 9 chat UI mounted at /ui/chat. "
-        "Phase 27.64 confirmed tokenizer v8 is required for topic lexical protection; runtime remains blocked. "
+        "Phase 27.65 trained tokenizer v8 and passed topic protection; runtime remains blocked. "
         "No pretrained models, no external AI APIs."
     ),
 )
@@ -46,7 +46,7 @@ app.include_router(ui.router)
 def root() -> dict[str, str]:
     return {
         "project": "SF.AI",
-        "phase": "Phase 27.64 — Topic Lexical/Tokenizer Inspection",
+        "phase": "Phase 27.65 — Tokenizer v8 Topic Probe",
         "ui": "/ui/chat",
         "docs": "/docs",
     }

@@ -328,3 +328,20 @@ Phase 27.64 فحصت فشل `topic` المتبقي دون تدريب:
 - لا فتح واجهة.
 - لا `SF-50M` ولا Phase 28.
 - التالي Phase 27.65 لتدريب tokenizer v8 فقط ثم bounded topic probe.
+
+## قرار Phase 27.65
+
+Phase 27.65 دربت tokenizer v8 فقط:
+
+- critical terms: `2/2`.
+- topic terms: `8/8`.
+- boundary roundtrip: `6/6`.
+- لا LM training.
+
+قرار scaling:
+
+- لا رفع حجم.
+- لا runtime switch.
+- لا فتح واجهة.
+- لا `SF-50M` ولا Phase 28.
+- التالي Phase 27.66 bounded LM topic repair على tokenizer v8، ثم broader canary.

@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.64: فحصنا فشل topic بعد نتيجة 26/30، وثبت أن tokenizer v8 "
-    "مطلوب لأن التعاون والاحترام تراجعا من single-piece في v6 إلى قطع متعددة في v7. "
-    "الواجهة لا تُفتح. التالي Phase 27.65 لتدريب tokenizer v8 واختبار topic probe.",
+    "وصلنا إلى Phase 27.65: درّبنا tokenizer v8 ونجح topic probe بالكامل؛ "
+    "التعاون والاحترام صارتا single-piece ومحميتين، وموضوعات الاختبار 8/8. "
+    "الواجهة لا تُفتح. التالي Phase 27.66 لتدريب LM topic repair محدود على v8.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

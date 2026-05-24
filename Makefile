@@ -346,6 +346,9 @@ phase27-interleaved-family-curriculum:
 phase27-topic-lexical-tokenizer-inspection:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_64_topic_lexical_tokenizer_inspection.py $(ARGS)
 
+phase27-tokenizer-v8-topic-probe:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_65_tokenizer_v8_topic_probe.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 

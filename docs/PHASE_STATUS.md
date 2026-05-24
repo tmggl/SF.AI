@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.64 / 30**
-- **المرحلة الحالية:** **Phase 27.64 — Topic Lexical/Tokenizer Inspection**
-- **حالة المرحلة الحالية:** **اكتملت كفحص؛ tokenizer v8 مطلوب قبل أي LM repair جديد**
-- **المرحلة التالية المقترحة:** Phase 27.65 train tokenizer v8 with Phase 27.64 protected topic pack and rerun bounded topic probe.
+- **الرحلة الحالية:** **Phase 27.65 / 30**
+- **المرحلة الحالية:** **Phase 27.65 — Tokenizer v8 Topic Probe**
+- **حالة المرحلة الحالية:** **اكتملت كتدريب tokenizer فقط؛ topic probe نجح `8/8` والـ runtime محجوب**
+- **المرحلة التالية المقترحة:** Phase 27.66 bounded LM topic repair on tokenizer v8, then broader canary.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -113,6 +113,7 @@
 | Phase 27.62 | Family Balance Repair | ✅ failed_family_balance_repair_runtime_blocked | ✅ |
 | Phase 27.63 | Interleaved Family Curriculum | ✅ improved_interleaved_family_curriculum_runtime_blocked | ✅ |
 | Phase 27.64 | Topic Lexical/Tokenizer Inspection | ✅ completed_topic_lexical_inspection_tokenizer_v8_required_runtime_blocked | ✅ |
+| Phase 27.65 | Tokenizer v8 Topic Probe | ✅ passed_tokenizer_v8_topic_probe_ready_for_bounded_lm_topic_repair_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -901,6 +902,14 @@
   - كلا المصطلحين كانا single-piece في tokenizer v6، لذلك v7 أحدث regression في موضوعات حرجة.
   - القرار: tokenizer v8 مطلوب قبل أي LM repair جديد؛ لا runtime switch ولا UI ولا `SF-50M`.
   - أضيف [PHASE27_64_TOPIC_LEXICAL_TOKENIZER_INSPECTION_REPORT.md](./PHASE27_64_TOPIC_LEXICAL_TOKENIZER_INSPECTION_REPORT.md).
+- بدأ وانتهى Phase 27.65 Tokenizer v8 Topic Probe:
+  - أضيف `make phase27-tokenizer-v8-topic-probe`.
+  - دُرّب tokenizer v8 فقط في `artifacts/tokenizers/sf_bpe/v8_phase27_65`.
+  - لا تدريب LM في هذه المرحلة.
+  - النتيجة: critical terms `2/2`, topic terms `8/8`, boundary roundtrip `6/6`.
+  - `التعاون` و`الاحترام` صارتا single-piece ومحميتين.
+  - القرار: يسمح فقط بـ Phase 27.66 bounded LM topic repair على tokenizer v8؛ لا runtime switch ولا UI ولا `SF-50M`.
+  - أضيف [PHASE27_65_TOKENIZER_V8_TOPIC_PROBE_REPORT.md](./PHASE27_65_TOKENIZER_V8_TOPIC_PROBE_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 

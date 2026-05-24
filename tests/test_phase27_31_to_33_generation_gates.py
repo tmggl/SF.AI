@@ -597,3 +597,26 @@ def test_phase27_64_topic_lexical_inspection_requires_tokenizer_v8() -> None:
     assert report["critical_latest_rows"]["الاحترام"]["protected_in_meta"] is False
     assert report["v7_regressed_from_v6"]["التعاون"] is True
     assert report["v7_regressed_from_v6"]["الاحترام"] is True
+
+
+def test_phase27_65_tokenizer_v8_topic_probe_passes_without_lm_training() -> None:
+    report = _report("phase27_65_tokenizer_v8_topic_probe_report.json")
+    assert report["phase"] == "Phase 27.65"
+    assert report["status"] == "PASSED_TOKENIZER_V8_TOPIC_PROBE_READY_FOR_BOUNDED_LM_TOPIC_REPAIR_RUNTIME_BLOCKED"
+    assert report["training_started"] is True
+    assert report["training_scope"].startswith("tokenizer-only")
+    assert report["lm_training_started"] is False
+    assert report["tokenizer"] == "artifacts/tokenizers/sf_bpe/v8_phase27_65"
+    assert report["summary"]["critical_terms_single_piece"] == 2
+    assert report["summary"]["critical_terms_total"] == 2
+    assert report["summary"]["topic_terms_single_piece"] == 8
+    assert report["summary"]["topic_terms_total"] == 8
+    assert report["summary"]["boundary_roundtrip_passed"] == 6
+    assert report["summary"]["boundary_roundtrip_total"] == 6
+    assert report["critical_rows"]["التعاون"]["piece_count"] == 1
+    assert report["critical_rows"]["التعاون"]["protected_in_config"] is True
+    assert report["critical_rows"]["الاحترام"]["piece_count"] == 1
+    assert report["critical_rows"]["الاحترام"]["protected_in_config"] is True
+    assert report["decisions"]["bounded_lm_topic_repair_allowed_next"] is True
+    assert report["decisions"]["runtime_switch_allowed"] is False
+    assert report["decisions"]["sf50m_allowed"] is False

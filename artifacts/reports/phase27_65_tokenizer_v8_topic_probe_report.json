@@ -1,0 +1,224 @@
+{
+  "phase": "Phase 27.65",
+  "status": "PASSED_TOKENIZER_V8_TOPIC_PROBE_READY_FOR_BOUNDED_LM_TOPIC_REPAIR_RUNTIME_BLOCKED",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": true,
+  "training_scope": "tokenizer-only v8 training; no LM training; no runtime switch",
+  "lm_training_started": false,
+  "tokenizer": "artifacts/tokenizers/sf_bpe/v8_phase27_65",
+  "tokenizer_vocab_size": 4965,
+  "tokenizer_merges": 4857,
+  "protected_terms_total": 65,
+  "phase27_64_status": "COMPLETED_TOPIC_LEXICAL_INSPECTION_TOKENIZER_V8_REQUIRED_RUNTIME_BLOCKED",
+  "topic_rows": [
+    {
+      "term": "التعاون",
+      "piece_count": 1,
+      "ids": [
+        60
+      ],
+      "decoded": "التعاون",
+      "roundtrip_ok": true,
+      "protected_in_config": true,
+      "single_piece": true
+    },
+    {
+      "term": "الاحترام",
+      "piece_count": 1,
+      "ids": [
+        57
+      ],
+      "decoded": "الاحترام",
+      "roundtrip_ok": true,
+      "protected_in_config": true,
+      "single_piece": true
+    },
+    {
+      "term": "الصبر",
+      "piece_count": 1,
+      "ids": [
+        3016
+      ],
+      "decoded": "الصبر",
+      "roundtrip_ok": true,
+      "protected_in_config": false,
+      "single_piece": true
+    },
+    {
+      "term": "الوفاء",
+      "piece_count": 1,
+      "ids": [
+        4900
+      ],
+      "decoded": "الوفاء",
+      "roundtrip_ok": true,
+      "protected_in_config": false,
+      "single_piece": true
+    },
+    {
+      "term": "الصداقة",
+      "piece_count": 1,
+      "ids": [
+        4913
+      ],
+      "decoded": "الصداقة",
+      "roundtrip_ok": true,
+      "protected_in_config": false,
+      "single_piece": true
+    },
+    {
+      "term": "الشجاعة",
+      "piece_count": 1,
+      "ids": [
+        4935
+      ],
+      "decoded": "الشجاعة",
+      "roundtrip_ok": true,
+      "protected_in_config": false,
+      "single_piece": true
+    },
+    {
+      "term": "الصدق",
+      "piece_count": 1,
+      "ids": [
+        4351
+      ],
+      "decoded": "الصدق",
+      "roundtrip_ok": true,
+      "protected_in_config": false,
+      "single_piece": true
+    },
+    {
+      "term": "الهدوء",
+      "piece_count": 1,
+      "ids": [
+        4928
+      ],
+      "decoded": "الهدوء",
+      "roundtrip_ok": true,
+      "protected_in_config": false,
+      "single_piece": true
+    }
+  ],
+  "critical_rows": {
+    "التعاون": {
+      "term": "التعاون",
+      "piece_count": 1,
+      "ids": [
+        60
+      ],
+      "decoded": "التعاون",
+      "roundtrip_ok": true,
+      "protected_in_config": true,
+      "single_piece": true
+    },
+    "الاحترام": {
+      "term": "الاحترام",
+      "piece_count": 1,
+      "ids": [
+        57
+      ],
+      "decoded": "الاحترام",
+      "roundtrip_ok": true,
+      "protected_in_config": true,
+      "single_piece": true
+    }
+  },
+  "boundary_rows": [
+    {
+      "text": "وش معنى التعاون",
+      "piece_count": 1,
+      "decoded": "وش معنى التعاون",
+      "roundtrip_ok": true,
+      "critical_terms": [
+        "التعاون"
+      ],
+      "critical_piece_counts": {
+        "التعاون": 1
+      }
+    },
+    {
+      "text": "التعاون يعني نساعد بعض وننجز سوا.",
+      "piece_count": 5,
+      "decoded": "التعاون يعني نساعد بعض وننجز سوا.",
+      "roundtrip_ok": true,
+      "critical_terms": [
+        "التعاون"
+      ],
+      "critical_piece_counts": {
+        "التعاون": 1
+      }
+    },
+    {
+      "text": "ما معنى الاحترام",
+      "piece_count": 1,
+      "decoded": "ما معنى الاحترام",
+      "roundtrip_ok": true,
+      "critical_terms": [
+        "الاحترام"
+      ],
+      "critical_piece_counts": {
+        "الاحترام": 1
+      }
+    },
+    {
+      "text": "الاحترام يعني تقدير الناس بالكلام والتصرف.",
+      "piece_count": 5,
+      "decoded": "الاحترام يعني تقدير الناس بالكلام والتصرف.",
+      "roundtrip_ok": true,
+      "critical_terms": [
+        "الاحترام"
+      ],
+      "critical_piece_counts": {
+        "الاحترام": 1
+      }
+    },
+    {
+      "text": "الاحترام وش هو",
+      "piece_count": 1,
+      "decoded": "الاحترام وش هو",
+      "roundtrip_ok": true,
+      "critical_terms": [
+        "الاحترام"
+      ],
+      "critical_piece_counts": {
+        "الاحترام": 1
+      }
+    },
+    {
+      "text": "ما المقصود بالتعاون",
+      "piece_count": 1,
+      "decoded": "ما المقصود بالتعاون",
+      "roundtrip_ok": true,
+      "critical_terms": [
+        "التعاون"
+      ],
+      "critical_piece_counts": {
+        "التعاون": 1
+      }
+    }
+  ],
+  "summary": {
+    "topic_terms_single_piece": 8,
+    "topic_terms_total": 8,
+    "critical_terms_single_piece": 2,
+    "critical_terms_total": 2,
+    "boundary_roundtrip_passed": 6,
+    "boundary_roundtrip_total": 6,
+    "avg_topic_piece_count": 1
+  },
+  "decisions": {
+    "tokenizer_v8_passed": true,
+    "bounded_lm_topic_repair_allowed_next": true,
+    "runtime_switch_allowed": false,
+    "ui_open_allowed": false,
+    "sf50m_allowed": false,
+    "phase28_allowed": false
+  },
+  "decision": "Tokenizer v8 passed bounded topic protection. Next phase may train a bounded LM topic repair only.",
+  "next_phase": "Phase 27.66 — bounded LM topic repair on tokenizer v8, then broader canary"
+}

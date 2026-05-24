@@ -134,6 +134,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.62 | Family Balance Repair | مكتملة كتجربة فاشلة؛ تراجع إلى `10/30` بسبب ترتيب curriculum الكتلي |
 | Phase 27.63 | Interleaved Family Curriculum | مكتملة بتحسن قوي؛ canary `26/30`, runtime محجوب |
 | Phase 27.64 | Topic Lexical/Tokenizer Inspection | مكتملة كفحص؛ tokenizer v8 مطلوب لحماية `التعاون/الاحترام` |
+| Phase 27.65 | Tokenizer v8 Topic Probe | مكتملة؛ tokenizer v8 نجح `8/8` topic terms, لا LM training |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3517,6 +3518,38 @@ tokenizer v8 مطلوب قبل أي LM repair جديد. لا runtime switch، ل
 - [PHASE27_64_TOPIC_LEXICAL_TOKENIZER_INSPECTION_REPORT.md](./PHASE27_64_TOPIC_LEXICAL_TOKENIZER_INSPECTION_REPORT.md)
 - `artifacts/reports/phase27_64_topic_lexical_tokenizer_inspection_report.json`
 - `resources/tokenization/protected_phrases_phase27_64.txt`
+
+---
+
+## Phase 27.65 — Tokenizer v8 Topic Probe
+
+### الهدف
+تدريب tokenizer v8 فقط بحماية Phase 27.64، ثم التأكد من سلامة مصطلحات topic قبل أي LM repair.
+
+### ما تم
+- أضيف `scripts/phase27_65_tokenizer_v8_topic_probe.py`.
+- أضيف `make phase27-tokenizer-v8-topic-probe`.
+- دُرّب tokenizer v8 في `artifacts/tokenizers/sf_bpe/v8_phase27_65`.
+- لم يبدأ أي تدريب LM.
+
+### النتيجة
+- critical terms: `2/2`.
+- topic terms: `8/8`.
+- boundary roundtrip: `6/6`.
+- `التعاون` و`الاحترام` صارتا single-piece ومحميتين.
+- vocab: `4965`.
+
+### القرار
+نجح tokenizer v8. المسموح التالي فقط: bounded LM topic repair على v8، ثم broader canary. لا runtime switch، لا UI، لا `SF-50M`، ولا Phase 28.
+
+التالي:
+
+**Phase 27.66 — bounded LM topic repair on tokenizer v8, then broader canary**
+
+### artifacts
+- [PHASE27_65_TOKENIZER_V8_TOPIC_PROBE_REPORT.md](./PHASE27_65_TOKENIZER_V8_TOPIC_PROBE_REPORT.md)
+- `artifacts/reports/phase27_65_tokenizer_v8_topic_probe_report.json`
+- `artifacts/tokenizers/sf_bpe/v8_phase27_65/`
 
 ---
 
