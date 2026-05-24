@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.87 ضمن مسار SF-native فقط: درّبنا SF-10M المقيّد بإشارة «عائلة الحوار»، لكن أفضل نتيجة كانت 10/50 فقط، لذلك لا يوجد runtime جديد. التالي Phase 27.88 لتشخيص سبب ا"
+      "response_preview": "وصلنا إلى Phase 27.88 ضمن مسار SF-native فقط: شخّصنا أن الفشل سببه ترتيب تدريب متسلسل حسب عائلة الحوار؛ عائلة «موضوع» ظهرت 5 مرات فقط في أول 1800 عينة. لا تدريب ولا runtime الآن؛ ا"
     },
     {
       "scenario_id": "clarification_repair_flow",

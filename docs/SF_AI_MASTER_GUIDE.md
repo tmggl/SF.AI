@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.87
-الاسم: Bounded Family-conditioned SF-10M Repair Training
+المرحلة الحالية: Phase 27.88
+الاسم: Family-conditioned Training Result Diagnosis
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_87_BOUNDED_FAMILY_CONDITIONED_REPAIR_DECISION
+القرار الرسمي: PHASE27_88_FAMILY_CONDITIONED_TRAINING_RESULT_DIAGNOSIS_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -102,8 +102,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - نتيجة 27.85: صُممت صيغة `عائلة الحوار: سوالف/متابعة/تنظيم/دعم/موضوع` كسياق masked.
 - نتيجة 27.86: renderer gate نجحت؛ `render_dialogue_text` يطبع العائلة في no-split وsplit-manifest، وassistant-only loss يخفي السياق عن الهدف.
 - نتيجة 27.87: تدريب SF-10M المقيّد اكتمل، لكن أفضل fresh shadow = `10/50`; runtime وSF-50M محجوبان.
+- نتيجة 27.88: شُخّص الفشل كـ sequential curriculum collapse؛ `موضوع` ظهر 5 مرات فقط في أول 1800 عينة.
 - corpus الحالي: `8443` (`msa=4199`, `saudi=4244`, `gold=3331`, `silver=5112`).
-- التالي: `Phase 27.88 — Family-conditioned Training Result Diagnosis`.
+- التالي: `Phase 27.89 — Stratified Round-Robin Curriculum Sampler Gate`.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -319,17 +320,17 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.88 — Family-conditioned Training Result Diagnosis
+Phase 27.89 — Stratified Round-Robin Curriculum Sampler Gate
 ```
 
 مطلوب منها:
 
-- تشخيص سبب بقاء الانحياز العائلي رغم إظهار `عائلة الحوار`.
-- تحديد هل السبب objective أو curriculum ordering أو decoding أو capacity أو prompt conditioning.
-- إصدار قرار هندسي قبل أي تدريب جديد.
+- تنفيذ sampler أو stream mode يخلط العائلات round-robin بدل ترتيب الملفات.
+- dry-run يثبت توازن كل نافذة save، لا توازن corpus العام فقط.
+- منع التدريب حتى تثبت gate أن كل عائلة تظهر في كل نافذة تدريبية.
 - منع SF-50M/runtime حتى ينجح canary لاحق.
 
-ممنوع في 27.88 قبل القرار:
+ممنوع في 27.89 قبل gate:
 
 - تدريب جديد.
 - runtime release.

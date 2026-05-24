@@ -1,0 +1,139 @@
+{
+  "phase": "Phase 27.88",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "status": "PHASE27_88_DIAGNOSED_SEQUENTIAL_CURRICULUM_COLLAPSE_NO_TRAINING",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_changed": false,
+  "source_report": "artifacts/reports/phase27_87_bounded_family_conditioned_repair_report.json",
+  "corpus": "data/corpus/chat/jsonl",
+  "split_manifest": "data/corpus/chat/splits/dialogue_split_v1.json",
+  "first_1800_family_counts": {
+    "متابعة": 451,
+    "سوالف": 444,
+    "تنظيم": 452,
+    "دعم": 448,
+    "موضوع": 5
+  },
+  "checkpoint_training_windows": {
+    "sf-10m-step600": {
+      "range": [
+        1,
+        600
+      ],
+      "total": 600,
+      "counts": {
+        "متابعة": 451,
+        "سوالف": 149
+      },
+      "dominant_family": "متابعة",
+      "dominant_count": 451,
+      "dominant_share": 0.7517
+    },
+    "sf-10m-step1200": {
+      "range": [
+        601,
+        1200
+      ],
+      "total": 600,
+      "counts": {
+        "سوالف": 295,
+        "تنظيم": 305
+      },
+      "dominant_family": "تنظيم",
+      "dominant_count": 305,
+      "dominant_share": 0.5083
+    },
+    "sf-10m-step1800": {
+      "range": [
+        1201,
+        1800
+      ],
+      "total": 600,
+      "counts": {
+        "تنظيم": 147,
+        "دعم": 448,
+        "موضوع": 5
+      },
+      "dominant_family": "دعم",
+      "dominant_count": 448,
+      "dominant_share": 0.7467
+    }
+  },
+  "checkpoint_alignment": [
+    {
+      "checkpoint": "sf-10m-step600",
+      "train_window_dominant_family_label": "متابعة",
+      "train_window_dominant_family": "followup",
+      "train_window_dominant_share": 0.7517,
+      "pass_dominant_family": "open_social",
+      "pass_dominant_count": 9,
+      "aligned": false
+    },
+    {
+      "checkpoint": "sf-10m-step1200",
+      "train_window_dominant_family_label": "تنظيم",
+      "train_window_dominant_family": "planning",
+      "train_window_dominant_share": 0.5083,
+      "pass_dominant_family": "planning",
+      "pass_dominant_count": 10,
+      "aligned": true
+    },
+    {
+      "checkpoint": "sf-10m-step1800",
+      "train_window_dominant_family_label": "دعم",
+      "train_window_dominant_family": "support",
+      "train_window_dominant_share": 0.7467,
+      "pass_dominant_family": "support",
+      "pass_dominant_count": 7,
+      "aligned": true
+    }
+  ],
+  "evidence": {
+    "topic_underexposed_before_step1800": true,
+    "later_checkpoints_align_with_recent_family_block": true,
+    "step600_likely_inherited_open_social_from_init": true,
+    "best_phase27_87_score": 10,
+    "best_phase27_87_total": 50
+  },
+  "root_cause_weights": {
+    "sequential_curriculum_ordering": 38,
+    "checkpoint_recency_bias": 22,
+    "topic_underexposure_before_step1800": 16,
+    "family_condition_signal_not_interleaved": 12,
+    "decoding": 4,
+    "model_capacity": 4,
+    "tokenizer": 2,
+    "semantic_routing": 2
+  },
+  "blocked_actions": [
+    "new LM training",
+    "runtime release",
+    "UI generator release",
+    "SF-50M transition",
+    "tokenizer retrain",
+    "pretrained/open-weight usage"
+  ],
+  "allowed_next_actions": [
+    "implement stratified round-robin split streaming",
+    "dry-run sampler balance before training",
+    "define per-save-window family balance gate"
+  ],
+  "decision": {
+    "decision_id": "PHASE27_88_FAMILY_CONDITIONED_TRAINING_RESULT_DIAGNOSIS_DECISION",
+    "engineering_decision": "DESIGN_STRATIFIED_ROUND_ROBIN_CURRICULUM_BEFORE_ANY_TRAINING",
+    "new_training_allowed": false,
+    "runtime_release_allowed": false,
+    "ui_release_allowed": false,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "sampler_implementation_allowed": true,
+    "why": "ترتيب stream التدريب متسلسل حسب عائلة الحوار: عائلة الموضوع تظهر 5 مرات فقط في أول 1800 عينة، والـ checkpoints اللاحقة تتبع آخر كتلة عائلية رآها النموذج. هذا خلل curriculum/sampling وليس مبررًا للقفز في الحجم.",
+    "next_phase": "Phase 27.89 — Stratified Round-Robin Curriculum Sampler Gate"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "decision_id": "PHASE27_88_FAMILY_CONDITIONED_TRAINING_RESULT_DIAGNOSIS_DECISION",
+  "engineering_decision": "DESIGN_STRATIFIED_ROUND_ROBIN_CURRICULUM_BEFORE_ANY_TRAINING",
+  "new_training_allowed": false,
+  "runtime_release_allowed": false,
+  "ui_release_allowed": false,
+  "sf50m_justified_transition": false,
+  "tokenizer_retrain_allowed": false,
+  "sampler_implementation_allowed": true,
+  "why": "ترتيب stream التدريب متسلسل حسب عائلة الحوار: عائلة الموضوع تظهر 5 مرات فقط في أول 1800 عينة، والـ checkpoints اللاحقة تتبع آخر كتلة عائلية رآها النموذج. هذا خلل curriculum/sampling وليس مبررًا للقفز في الحجم.",
+  "next_phase": "Phase 27.89 — Stratified Round-Robin Curriculum Sampler Gate"
+}

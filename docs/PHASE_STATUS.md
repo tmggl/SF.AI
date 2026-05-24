@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.87 / 30**
-- **المرحلة الحالية:** **Phase 27.87 — Bounded Family-conditioned SF-10M Repair Training**
-- **حالة المرحلة الحالية:** **اكتملت؛ أفضل fresh shadow `10/50`; runtime محجوب؛ يلزم تشخيص نتيجة التدريب**
-- **المرحلة التالية المقترحة:** Phase 27.88 — Family-conditioned Training Result Diagnosis.
+- **الرحلة الحالية:** **Phase 27.88 / 30**
+- **المرحلة الحالية:** **Phase 27.88 — Family-conditioned Training Result Diagnosis**
+- **حالة المرحلة الحالية:** **اكتملت؛ شُخّص الفشل كـ sequential curriculum collapse؛ لا تدريب ولا runtime**
+- **المرحلة التالية المقترحة:** Phase 27.89 — Stratified Round-Robin Curriculum Sampler Gate.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -143,6 +143,7 @@
 | Phase 27.85 | Explicit Family Conditioning Objective Design | ✅ renderer_gate_allowed_no_training | ✅ |
 | Phase 27.86 | Family Conditioning Renderer Gate | ✅ renderer_gate_passed_training_allowed_next_no_runtime | ✅ |
 | Phase 27.87 | Bounded Family-conditioned SF-10M Repair Training | ✅ trained_runtime_blocked_diagnosis_required | ✅ |
+| Phase 27.88 | Family-conditioned Training Result Diagnosis | ✅ diagnosed_sequential_curriculum_collapse_no_training | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1108,6 +1109,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_phase27_85_explicit_family_conditioning_objective_design.py | 3 |
 | test_phase27_86_family_conditioning_renderer_gate.py | 6 |
 | test_phase27_87_bounded_family_conditioned_repair.py | 4 |
+| test_phase27_88_family_conditioned_training_result_diagnosis.py | 4 |
 | test_rag_sparse_retrieval.py | 14 (Phase 8) |
 | test_research_summarizer.py | 20 |
 | test_response_composer.py | 6 |
@@ -1291,6 +1293,36 @@ make api
   - `artifacts/reports/phase27_87_bounded_family_conditioned_repair_report.json`
   - `artifacts/reports/PHASE27_87_BOUNDED_FAMILY_CONDITIONED_REPAIR_DECISION.json`
   - `artifacts/samples/phase27_87_bounded_family_conditioned_repair.md`
+
+---
+
+## Phase 27.88 — Family-conditioned Training Result Diagnosis
+
+- لم يبدأ تدريب جديد.
+- لم يتغير runtime.
+- شُخّص سبب فشل Phase 27.87 كخلل curriculum/sampling لا كخلل سعة.
+- الدليل من أول 1800 عينة تدريب:
+  - `متابعة=451`
+  - `سوالف=444`
+  - `تنظيم=452`
+  - `دعم=448`
+  - `موضوع=5`
+- نوافذ checkpoints:
+  - step600: يغلب عليها `متابعة` بنسبة `0.7517`.
+  - step1200: يغلب عليها `تنظيم` بنسبة `0.5083` ونتيجة التوليد انحازت إلى planning.
+  - step1800: يغلب عليها `دعم` بنسبة `0.7467` ونتيجة التوليد انحازت إلى support.
+- أوزان السبب:
+  - sequential curriculum ordering: `38%`
+  - checkpoint recency bias: `22%`
+  - topic underexposure before step1800: `16%`
+  - family condition signal not interleaved: `12%`
+  - capacity: `4%`
+- القرار: لا SF-50M، لا runtime، لا tokenizer retrain، ولا تدريب جديد قبل بناء sampler round-robin متوازن و dry-run gate.
+- التالي: Phase 27.89 — Stratified Round-Robin Curriculum Sampler Gate.
+- التقارير:
+  - [PHASE27_88_FAMILY_CONDITIONED_TRAINING_RESULT_DIAGNOSIS_REPORT.md](./PHASE27_88_FAMILY_CONDITIONED_TRAINING_RESULT_DIAGNOSIS_REPORT.md)
+  - `artifacts/reports/phase27_88_family_conditioned_training_result_diagnosis_report.json`
+  - `artifacts/reports/PHASE27_88_FAMILY_CONDITIONED_TRAINING_RESULT_DIAGNOSIS_DECISION.json`
 
 ---
 
