@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.93 — Topic Objective Gate Encoding and Dry-Run Validation",
-        current_phase_status="phase27_93_topic_objective_gate_passed_data_pack_required_no_training",
+        current_phase="Phase 27.94 — Topic Objective Data Pack Authoring",
+        current_phase_status="phase27_94_topic_objective_data_pack_ready_for_bounded_training",
         next_phase=(
-            "Phase 27.94 — Topic Objective Data Pack Authoring"
+            "Phase 27.95 — Bounded Topic Objective Repair Training"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -577,8 +577,13 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
             ),
             ComponentStatus(
                 name="phase27_93_topic_objective_gate_encoding",
-                status="gate_passed_data_pack_required_no_training",
+                status="gate_passed_training_allowed_next_after_data_pack",
                 phase="Phase 27.93",
+            ),
+            ComponentStatus(
+                name="phase27_94_topic_objective_data_pack",
+                status="data_pack_ready_for_bounded_training_no_runtime",
+                phase="Phase 27.94",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

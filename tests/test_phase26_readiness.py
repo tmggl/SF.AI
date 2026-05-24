@@ -12,7 +12,6 @@ from fastapi.testclient import TestClient
 from apps.api.main import app
 from sf_ai.training.phase26_readiness import build_phase26_scaling_decision
 
-
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "artifacts/reports/phase26_sf50m_readiness_report.json"
 client = TestClient(app)
@@ -25,9 +24,9 @@ def test_phase26_scaling_gate_blocks_sf50m_training_now() -> None:
     assert decision.status == "NOT_READY_IMPROVE_SF10M_AND_CANARY"
     assert decision.target_model == "sf-50m"
     assert decision.can_start_sf50m_training is False
-    assert decision.corpus["training_records"] == 8443
+    assert decision.corpus["training_records"] == 8453
     assert decision.corpus["min_training_records"] == 5000
-    assert decision.corpus["dialects"] == {"msa": 4199, "saudi": 4244}
+    assert decision.corpus["dialects"] == {"msa": 4199, "saudi": 4254}
     assert decision.tokenizer["ready"] is True
     assert decision.phase24["training_passed"] is True
     assert decision.phase24["runtime_allowed"] is False
@@ -65,7 +64,7 @@ def test_phase26_readiness_endpoint() -> None:
     assert body["status"] == "NOT_READY_IMPROVE_SF10M_AND_CANARY"
     assert body["language_track"] == ["msa", "saudi"]
     assert body["can_start_sf50m_training"] is False
-    assert body["corpus"]["training_records"] == 8443
+    assert body["corpus"]["training_records"] == 8453
     assert body["phase25"]["real_model_guard_reason"] == "malformed_token"
     assert body["scaling_gates"]["tokenization_audit"] is True
     assert body["scaling_gates"]["runtime_quality"] is False

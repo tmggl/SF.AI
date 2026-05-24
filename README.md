@@ -113,12 +113,12 @@ PHASE27_79_REPAIR_DESIGN_DECISION
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.79 / 30 — Objective/Curriculum/Decoding Repair Design.
-- **الأولوية الحالية:** Phase 27.80 Repair Gate Encoding and Dry-Run Validation؛ لا تدريب قبل تشفير gates، ولا runtime قبل held-out success.
+- **الرحلة الحالية:** Phase 27.94 / 30 — Topic Objective Data Pack Authoring.
+- **الأولوية الحالية:** Phase 27.95 Bounded Topic Objective Repair Training؛ تدريب SF-10M مقيّد فقط بعد أن سدت 27.94 فجوة `الوفاء` السعودية.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
-- **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
-- **التدريب:** محجوب حاليًا بقرار `PHASE27_79_REPAIR_DESIGN_DECISION`. Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
-- **المولّد:** `/chat/message` والواجهة يستخدمان Phase 27.47 `sf-10m-step4600` مباشرة في المختبر المحلي؛ لا زر ولا مفتاح تبديل، وغير المدعوم يرجع `generator_blocked` مع رد فارغ بدل أي قالب. Phase 27.52 و27.53 دربتا مرشحين جديدين، لكنهما لم يمرا بوابة الحوار المفتوح، لذلك لم يُفتحا في runtime.
+- **البيانات الحالية:** corpus موثق `8453` سجلًا يمر `corpus-audit`: `4254` سعودي + `4199` فصحى، `gold=3341`, `silver=5112`. split الحالي `train=7603`, `eval=850`.
+- **التدريب:** المسموح التالي فقط Phase 27.95 كتدريب إصلاح topic-objective محدود؛ لا runtime ولا SF-50M ولا tokenizer retrain قبل gates. Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
+- **المولّد:** runtime العام محجوب كمولد حواري حتى نجاح held-out/canary. لا تعرض أي قالب على أنه مولّد، ولا تفتح واجهة مولّد إلا بعد قرار runtime صريح.
 - **التقييم:** Phase 27 مرّر `19/19` turn في حوار متعدد الأدوار، لكنه أكد أن الردود ما زالت `template` وأن المولد غير جاهز.
 - **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.
 - **دورة البيانات:** Phase 18 أضاف تصدير مراجعة من الواجهة و`prepare_dialogue_batch.py`; وPhase 22 يعتمد الآن أيضًا دفعات مباشرة يؤلفها/يراجعها الوكيل بتفويض موثق، بدون انتظار حفظ أو تصدير من سامي.

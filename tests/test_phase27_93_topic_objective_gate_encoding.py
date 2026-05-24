@@ -53,7 +53,9 @@ def test_non_topic_family_does_not_emit_requested_topic_line() -> None:
     assert "الموضوع المطلوب:" not in text
 
 
-def test_phase27_93_gate_passes_dry_run_but_blocks_training_for_data_gap(tmp_path: Path) -> None:
+def test_phase27_93_gate_passes_after_data_pack_and_allows_bounded_training(
+    tmp_path: Path,
+) -> None:
     args = parse_args(
         [
             "--report",
@@ -71,17 +73,18 @@ def test_phase27_93_gate_passes_dry_run_but_blocks_training_for_data_gap(tmp_pat
 
     assert report["phase"] == "Phase 27.93"
     assert report["dry_run_passed"] is True
-    assert report["training_data_ready"] is False
-    assert report["status"] == "PHASE27_93_TOPIC_OBJECTIVE_GATE_PASSED_DATA_PACK_REQUIRED_NO_TRAINING"
+    assert report["training_data_ready"] is True
+    assert report["status"] == "PHASE27_93_TOPIC_OBJECTIVE_GATE_PASSED_TRAINING_ALLOWED_NEXT"
     assert decision["engineering_decision"] == (
-        "ALLOW_PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_AUTHORING_NO_TRAINING"
+        "ALLOW_PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_TRAINING"
     )
-    assert decision["new_training_allowed"] is False
-    assert decision["data_pack_authoring_allowed"] is True
+    assert decision["new_training_allowed"] is True
+    assert decision["data_pack_authoring_allowed"] is False
     assert decision["runtime_release_allowed"] is False
     assert decision["sf50m_justified_transition"] is False
     assert decision["tokenizer_retrain_allowed"] is False
-    assert "الوفاء" in report["corpus_topic_coverage"]["shortfalls"]
+    assert report["corpus_topic_coverage"]["shortfalls"] == {}
+    assert report["corpus_topic_coverage"]["terms"]["الوفاء"]["dialect_counts"]["saudi"] == 10
     assert canary["coverage"]["prompt_count"] == 16
     assert canary["coverage"]["all_terms_covered"] is True
     assert canary["coverage"]["all_dialects_covered"] is True
@@ -104,5 +107,5 @@ def test_phase27_93_artifacts_match_decision_and_canary() -> None:
     assert report["decision"] == decision
     assert report["canary_manifest_path"] == "eval/prompts/phase27_93_topic_objective_canary.json"
     assert canary["suite_id"] == "phase27_93_topic_objective_canary"
-    assert decision["new_training_allowed"] is False
-    assert decision["next_phase"].startswith("Phase 27.94")
+    assert decision["new_training_allowed"] is True
+    assert decision["next_phase"].startswith("Phase 27.95")

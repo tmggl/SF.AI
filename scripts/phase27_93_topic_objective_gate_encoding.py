@@ -255,8 +255,9 @@ def _corpus_topic_coverage(corpus: Path) -> dict[str, Any]:
             messages = sample.messages if isinstance(sample, StructuredSample) else sample.to_messages()
             user_text = " ".join(msg.content for msg in messages if msg.role == "user")
             dialect = (getattr(provenance, "dialect", "") or "").strip().lower()
+            explicit_topic = (getattr(provenance, "topic_term", "") or "").strip()
             for term in TOPIC_CONDITION_TERMS:
-                if term in user_text:
+                if explicit_topic == term or term in user_text:
                     counts[term][dialect] += 1
                     if len(examples[term]) < 3:
                         examples[term].append(user_text)
@@ -319,7 +320,7 @@ def build_report(args: argparse.Namespace) -> tuple[dict[str, Any], dict[str, An
     decision = {
         "decision_id": "PHASE27_93_TOPIC_OBJECTIVE_GATE_ENCODING_DECISION",
         "engineering_decision": (
-            "ALLOW_PHASE27_94_BOUNDED_TOPIC_OBJECTIVE_REPAIR_TRAINING"
+            "ALLOW_PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_TRAINING"
             if dry_run_passed and training_data_ready
             else "ALLOW_PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_AUTHORING_NO_TRAINING"
         ),
@@ -338,7 +339,7 @@ def build_report(args: argparse.Namespace) -> tuple[dict[str, Any], dict[str, An
         "next_phase": (
             "Phase 27.94 — Topic Objective Data Pack Authoring"
             if dry_run_passed and not training_data_ready
-            else "Phase 27.94 — Bounded Topic Objective Repair Training"
+            else "Phase 27.95 — Bounded Topic Objective Repair Training"
         ),
     }
     report = {

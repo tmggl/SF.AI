@@ -2,7 +2,7 @@
   "phase": "Phase 27.93",
   "strategy": "Sovereign Practical Acceleration Strategy v2",
   "sovereignty_mode": "SF-native only",
-  "status": "PHASE27_93_TOPIC_OBJECTIVE_GATE_PASSED_DATA_PACK_REQUIRED_NO_TRAINING",
+  "status": "PHASE27_93_TOPIC_OBJECTIVE_GATE_PASSED_TRAINING_ALLOWED_NEXT",
   "language_track": [
     "msa",
     "saudi"
@@ -220,18 +220,18 @@
     },
     "terms": {
       "الوفاء": {
-        "total": 12,
+        "total": 22,
         "dialect_counts": {
           "msa": 12,
-          "saudi": 0
+          "saudi": 10
         },
         "examples": [
           "ما معنى الوفاء؟",
           "اشرح لي الوفاء ببساطة.",
           "أريد فهم الوفاء بكلام سهل."
         ],
-        "meets_total_min": false,
-        "meets_dialect_min": false
+        "meets_total_min": true,
+        "meets_dialect_min": true
       },
       "التعاون": {
         "total": 29,
@@ -332,17 +332,11 @@
         "meets_dialect_min": true
       }
     },
-    "shortfalls": {
-      "الوفاء": {
-        "total_shortfall": 8,
-        "msa_shortfall": 0,
-        "saudi_shortfall": 10
-      }
-    },
-    "training_data_ready": false
+    "shortfalls": {},
+    "training_data_ready": true
   },
   "dry_run_passed": true,
-  "training_data_ready": false,
+  "training_data_ready": true,
   "blocked_actions": [
     "runtime release",
     "UI generator release",
@@ -353,14 +347,14 @@
   ],
   "decision": {
     "decision_id": "PHASE27_93_TOPIC_OBJECTIVE_GATE_ENCODING_DECISION",
-    "engineering_decision": "ALLOW_PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_AUTHORING_NO_TRAINING",
-    "new_training_allowed": false,
-    "data_pack_authoring_allowed": true,
+    "engineering_decision": "ALLOW_PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_TRAINING",
+    "new_training_allowed": true,
+    "data_pack_authoring_allowed": false,
     "runtime_release_allowed": false,
     "ui_release_allowed": false,
     "sf50m_justified_transition": false,
     "tokenizer_retrain_allowed": false,
-    "why": "Topic-objective dry-run passed, but current topic corpus does not meet the per-topic/per-dialect minimums from Phase 27.92.",
-    "next_phase": "Phase 27.94 — Topic Objective Data Pack Authoring"
+    "why": "Topic-objective dry-run and data readiness both passed.",
+    "next_phase": "Phase 27.95 — Bounded Topic Objective Repair Training"
   }
 }

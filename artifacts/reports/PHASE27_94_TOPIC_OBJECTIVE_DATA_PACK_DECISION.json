@@ -1,12 +1,12 @@
 {
-  "decision_id": "PHASE27_93_TOPIC_OBJECTIVE_GATE_ENCODING_DECISION",
+  "decision_id": "PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_DECISION",
   "engineering_decision": "ALLOW_PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_TRAINING",
-  "new_training_allowed": true,
-  "data_pack_authoring_allowed": false,
+  "new_training_started": false,
+  "phase27_95_training_allowed": true,
   "runtime_release_allowed": false,
   "ui_release_allowed": false,
   "sf50m_justified_transition": false,
   "tokenizer_retrain_allowed": false,
-  "why": "Topic-objective dry-run and data readiness both passed.",
+  "why": "The Saudi الوفاء gap is closed and the topic-objective dry-run is ready for one bounded SF-10M repair.",
   "next_phase": "Phase 27.95 — Bounded Topic Objective Repair Training"
 }

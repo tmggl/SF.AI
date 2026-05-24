@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.93
-الاسم: Topic Objective Gate Encoding and Dry-Run Validation
+المرحلة الحالية: Phase 27.94
+الاسم: Topic Objective Data Pack Authoring
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_93_TOPIC_OBJECTIVE_GATE_ENCODING_DECISION
+القرار الرسمي: PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -107,9 +107,11 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - نتيجة 27.90: تدريب SF-10M محدود بالـ round-robin رفع fresh shadow إلى `35/50`، لكن topic بقي `1/10` والبوابة `45/50` لم تمر.
 - نتيجة 27.91: التشخيص أثبت أن `9/15` من الإخفاقات من عائلة topic، وأكبر سبب `topic_semantic_collapse=48%`.
 - نتيجة 27.92: صُمم objective مخصص لعائلة `topic` باسم `topic_anchor_prompt_to_answer_objective_v1`، مع شرط `الموضوع المطلوب: <topic_term>` وبوابات canary قبل أي تدريب.
-- نتيجة 27.93: أضيف سطر `الموضوع المطلوب: <topic_term>` إلى renderer لعائلة topic، ومرّ dry-run للـ renderer/masking/canary، لكن التدريب حُجب لأن `الوفاء` ناقص سعوديًا.
-- corpus الحالي: `8443` (`msa=4199`, `saudi=4244`, `gold=3331`, `silver=5112`).
-- التالي: `Phase 27.94 — Topic Objective Data Pack Authoring`.
+- نتيجة 27.93: أضيف سطر `الموضوع المطلوب: <topic_term>` إلى renderer لعائلة topic، ومرّ dry-run للـ renderer/masking/canary.
+- نتيجة 27.94: أضيفت `10` سجلات سعودية gold لموضوع `الوفاء`، وأُغلقت فجوة البيانات المحددة دون تدريب ودون runtime.
+- corpus الحالي: `8453` (`msa=4199`, `saudi=4254`, `gold=3341`, `silver=5112`).
+- إعادة بوابة 27.93 بعد 27.94: `training_data_ready=true`, `shortfalls={}`, و`الوفاء` صار `total=22`, `msa=12`, `saudi=10`.
+- التالي: `Phase 27.95 — Bounded Topic Objective Repair Training`.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -325,20 +327,18 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.94 — Topic Objective Data Pack Authoring
+Phase 27.95 — Bounded Topic Objective Repair Training
 ```
 
 مطلوب منها:
 
-- تأليف سجلات topic gold من داخل المشروع فقط لسد فجوة `الوفاء`.
-- الحد الأدنى: `20` سجلًا للوفاء، منها `10` سعودي و`10` فصيح، مع anti-collapse pairs.
-- عدم إدخال أي حوار تشغيلي أو هندسي.
-- تحديث provenance لكل سجل: source/license/quality/training_allowed/dialect/dialogue_family/topic_term.
-- تشغيل corpus audit وبوابة 27.93 بعد التأليف، ثم إصدار قرار 27.95.
+- تدريب إصلاح محدود على SF-10M فقط، مستند إلى objective `topic_anchor_prompt_to_answer_objective_v1`.
+- استخدام split الحالي بعد حزمة Phase 27.94.
+- اختبار known topic وfresh shadow وall-family regression قبل أي runtime.
+- منع أي runtime release إذا لم تمر held-out/canary بوضوح.
 
-ممنوع في 27.94 قبل نجاح data pack gate:
+ممنوع في 27.95 قبل نجاح gates:
 
-- تدريب جديد.
 - runtime release.
 - tokenizer retrain.
 - SF-50M.

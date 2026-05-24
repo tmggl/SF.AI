@@ -32,7 +32,7 @@
   "can_start_phase28": false,
   "phase26_status": "NOT_READY_IMPROVE_SF10M_AND_CANARY",
   "corpus_expansion_plan": {
-    "current_records": 8443,
+    "current_records": 8453,
     "target_records": 5000,
     "remaining_records": 0,
     "batch_size": 1500,
@@ -40,7 +40,7 @@
     "target_per_dialect": 2500,
     "dialect_counts": {
       "msa": 4199,
-      "saudi": 4244
+      "saudi": 4254
     },
     "needed_by_dialect": {
       "msa": 0,
@@ -53,7 +53,7 @@
     "quality_targets": {
       "gold_total_target": 1000,
       "silver_total_target": 4000,
-      "current_gold": 3331,
+      "current_gold": 3341,
       "current_silver": 5112,
       "needed_gold": 0,
       "needed_silver": 0
@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.93 ضمن مسار SF-native فقط: بوابة topic-objective الجافة مرّت، لكن بيانات الوفاء السعودية ناقصة. لا تدريب ولا runtime الآن؛ التالي Phase 27.94 تأليف data pack موض"
+      "response_preview": "وصلنا إلى Phase 27.94 ضمن مسار SF-native فقط: أضفنا حزمة الوفاء السعودية وأغلقنا فجوة بيانات topic-objective. لا runtime الآن؛ التالي Phase 27.95 تدريب إصلاح محدود ومراقب."
     },
     {
       "scenario_id": "clarification_repair_flow",

@@ -1,0 +1,101 @@
+{
+  "phase": "Phase 27.94",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "status": "PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_READY_FOR_BOUNDED_TRAINING",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_changed": false,
+  "authored_file": "data/corpus/chat/jsonl/dialogue_batch_v11_topic_objective_wafa_saudi_011.jsonl",
+  "records_authored": 10,
+  "topic_term": "الوفاء",
+  "dialect": "saudi",
+  "quality": "gold",
+  "file_audit": {
+    "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v11_topic_objective_wafa_saudi_011.jsonl",
+    "total_records": 10,
+    "training_ready": 10,
+    "error_count": 0,
+    "dialect_counts": {
+      "saudi": 10
+    },
+    "quality_counts": {
+      "gold": 10
+    },
+    "source_counts": {
+      "sf-ai-topic-objective-wafa-saudi-pack-v1": 10
+    },
+    "issues": []
+  },
+  "split_manifest": {
+    "path": "data/corpus/chat/splits/dialogue_split_v1.json",
+    "total_records": 8453,
+    "counts": {
+      "train": 7603,
+      "eval": 850
+    },
+    "dialects": {
+      "train": {
+        "msa": 3784,
+        "saudi": 3819
+      },
+      "eval": {
+        "msa": 415,
+        "saudi": 435
+      }
+    },
+    "qualities": {
+      "train": {
+        "gold": 3021,
+        "silver": 4582
+      },
+      "eval": {
+        "gold": 320,
+        "silver": 530
+      }
+    }
+  },
+  "post_pack_phase27_93_gate": {
+    "dry_run_passed": true,
+    "training_data_ready": true,
+    "status": "PHASE27_93_TOPIC_OBJECTIVE_GATE_PASSED_TRAINING_ALLOWED_NEXT",
+    "shortfalls": {},
+    "wafa_counts": {
+      "total": 22,
+      "dialect_counts": {
+        "msa": 12,
+        "saudi": 10
+      },
+      "examples": [
+        "ما معنى الوفاء؟",
+        "اشرح لي الوفاء ببساطة.",
+        "أريد فهم الوفاء بكلام سهل."
+      ],
+      "meets_total_min": true,
+      "meets_dialect_min": true
+    }
+  },
+  "blocked_actions": [
+    "runtime release",
+    "UI generator release",
+    "SF-50M transition",
+    "tokenizer retrain",
+    "pretrained/open-weight usage"
+  ],
+  "decision": {
+    "decision_id": "PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_DECISION",
+    "engineering_decision": "ALLOW_PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_TRAINING",
+    "new_training_started": false,
+    "phase27_95_training_allowed": true,
+    "runtime_release_allowed": false,
+    "ui_release_allowed": false,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "why": "The Saudi الوفاء gap is closed and the topic-objective dry-run is ready for one bounded SF-10M repair.",
+    "next_phase": "Phase 27.95 — Bounded Topic Objective Repair Training"
+  }
+}

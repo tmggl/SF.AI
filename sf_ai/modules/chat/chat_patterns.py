@@ -82,9 +82,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.93 ضمن مسار SF-native فقط: بوابة topic-objective الجافة مرّت، "
-    "لكن بيانات الوفاء السعودية ناقصة. لا تدريب ولا runtime الآن؛ التالي Phase 27.94 "
-    "تأليف data pack موضوعي قبل أي تدريب.",
+    "وصلنا إلى Phase 27.94 ضمن مسار SF-native فقط: أضفنا حزمة الوفاء السعودية "
+    "وأغلقنا فجوة بيانات topic-objective. لا runtime الآن؛ التالي Phase 27.95 "
+    "تدريب إصلاح محدود ومراقب.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

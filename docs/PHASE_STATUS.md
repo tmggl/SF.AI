@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.93 / 30**
-- **المرحلة الحالية:** **Phase 27.93 — Topic Objective Gate Encoding and Dry-Run Validation**
-- **حالة المرحلة الحالية:** **اكتملت؛ بوابة topic-objective مرّت جافًا؛ بيانات الوفاء السعودية ناقصة؛ لا تدريب ولا runtime**
-- **المرحلة التالية المقترحة:** Phase 27.94 — Topic Objective Data Pack Authoring.
+- **الرحلة الحالية:** **Phase 27.94 / 30**
+- **المرحلة الحالية:** **Phase 27.94 — Topic Objective Data Pack Authoring**
+- **حالة المرحلة الحالية:** **اكتملت؛ سُدّت فجوة الوفاء السعودية؛ Phase 27.95 مسموحة كتدريب مقيّد فقط**
+- **المرحلة التالية المقترحة:** Phase 27.95 — Bounded Topic Objective Repair Training.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -149,6 +149,7 @@
 | Phase 27.91 | Round-Robin Training Result Diagnosis | ✅ diagnosed_topic_collapse_no_training | ✅ |
 | Phase 27.92 | Topic Objective Repair Design Gate | ✅ topic_objective_repair_design_ready_no_training | ✅ |
 | Phase 27.93 | Topic Objective Gate Encoding and Dry-Run Validation | ✅ gate_passed_data_pack_required_no_training | ✅ |
+| Phase 27.94 | Topic Objective Data Pack Authoring | ✅ wafa_saudi_gap_closed_training_allowed_next_no_runtime | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1074,7 +1075,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-649 passed in 94.62s (0:01:34)
+652 passed in 72.96s (0:01:12)
 ```
 
 | ملف | عدد |
@@ -1466,18 +1467,49 @@ make api
 - يغطي canary الموضوعات الثمانية بالفصحى والسعودي:
   - `الوفاء`, `التعاون`, `الصبر`, `الاحترام`, `الهدوء`, `الصدق`, `الصداقة`, `الشجاعة`
 - dry-run passed: `true`.
-- training data ready: `false`.
-- سبب الحجب: موضوع `الوفاء` لا يحقق معيار Phase 27.92:
-  - total shortfall: `8`
-  - saudi shortfall: `10`
-- القرار: `ALLOW_PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_AUTHORING_NO_TRAINING`.
-- المحظور الآن: training, runtime release, SF-50M, tokenizer retrain, pretrained/open-weight usage.
-- التالي: Phase 27.94 — Topic Objective Data Pack Authoring.
+- بعد Phase 27.94 أصبح training data ready: `true`.
+- قبل Phase 27.94 كان سبب الحجب: نقص `الوفاء` سعوديًا؛ أُغلق الآن.
+- القرار الحالي بعد إعادة تشغيل البوابة: `ALLOW_PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_TRAINING`.
+- المحظور الآن: runtime release, SF-50M, tokenizer retrain, pretrained/open-weight usage.
+- التالي: Phase 27.95 — Bounded Topic Objective Repair Training.
 - التقارير:
   - [PHASE27_93_TOPIC_OBJECTIVE_GATE_ENCODING_REPORT.md](./PHASE27_93_TOPIC_OBJECTIVE_GATE_ENCODING_REPORT.md)
   - `artifacts/reports/phase27_93_topic_objective_gate_encoding_report.json`
   - `artifacts/reports/PHASE27_93_TOPIC_OBJECTIVE_GATE_ENCODING_DECISION.json`
   - `eval/prompts/phase27_93_topic_objective_canary.json`
+
+---
+
+## Phase 27.94 — Topic Objective Data Pack Authoring
+
+- لم يبدأ تدريب جديد.
+- لم يتغير runtime.
+- لم يدرّب tokenizer جديد.
+- أضيفت حزمة سيادية صغيرة لسد فجوة `الوفاء` السعودية:
+  - `data/corpus/chat/jsonl/dialogue_batch_v11_topic_objective_wafa_saudi_011.jsonl`
+  - `10` سجلات `gold`
+  - dialect: `saudi`
+  - dialogue_family/topic_term: `topic` / `الوفاء`
+- corpus الحالي بعد الحزمة:
+  - total: `8453`
+  - dialects: `msa=4199`, `saudi=4254`
+  - quality: `gold=3341`, `silver=5112`
+  - split: `train=7603`, `eval=850`
+- أعيد بناء split manifest:
+  - `data/corpus/chat/splits/dialogue_split_v1.json`
+- أعيد تشغيل Phase 27.93 gate بعد الحزمة:
+  - dry-run passed: `true`
+  - training data ready: `true`
+  - shortfalls: `{}`
+  - `الوفاء`: total=`22`, `msa=12`, `saudi=10`
+- القرار الرسمي: `PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_DECISION`.
+- القرار الهندسي: `ALLOW_PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_TRAINING`.
+- المحظور في 27.94: runtime release, UI generator release, SF-50M transition,
+  tokenizer retrain, pretrained/open-weight usage.
+- التقرير:
+  - [PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_REPORT.md](./PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_REPORT.md)
+  - `artifacts/reports/phase27_94_topic_objective_data_pack_report.json`
+  - `artifacts/reports/PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_DECISION.json`
 
 ---
 
