@@ -1,0 +1,131 @@
+{
+  "phase": "Phase 27.73",
+  "name": "Open-Social Failure Inspection",
+  "status": "COMPLETED_OPEN_SOCIAL_FAILURE_INSPECTION_RUNTIME_BLOCKED",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "training_scope": "no training; guard and diagnosis only",
+  "tokenizer": "artifacts/tokenizers/sf_bpe/v8_phase27_65",
+  "source_report": "artifacts/reports/phase27_72_stability_first_repair_report.json",
+  "source_phase": "Phase 27.72",
+  "source_status": "IMPROVED_STABILITY_FIRST_REPAIR_RUNTIME_BLOCKED",
+  "source_total_passed": 138,
+  "source_total": 140,
+  "remaining_failures_count": 2,
+  "failure_diagnoses": [
+    {
+      "id": "open_social_09",
+      "dialect": "saudi",
+      "prompt": "ودي بموضوع سوالف",
+      "family": "open_social",
+      "expected_any": [
+        "موضوع",
+        "سوالف",
+        "نسولف"
+      ],
+      "response": "خلنا نبدأ بمها ببساطة: نوضح الفكرة خطوة بعدها.",
+      "previous_reason": "expected_terms_missing",
+      "guard_before": {
+        "allowed": true,
+        "reason": "passed"
+      },
+      "guard_after_phase27_73": {
+        "allowed": false,
+        "reason": "model_artifact_fragment",
+        "arabic_ratio": 1.0,
+        "repetition_ratio": 0.0
+      },
+      "diagnosis": "model_artifact_fragment plus open_social family mismatch; guard gap fixed in Phase 27.73",
+      "repair_kind": "guard_gap_and_targeted_training"
+    },
+    {
+      "id": "open_social_12",
+      "dialect": "msa",
+      "prompt": "لنختر موضوعًا صغيرًا",
+      "family": "open_social",
+      "expected_any": [
+        "موضوع",
+        "صغير",
+        "نبدأ"
+      ],
+      "response": "التعاون مشاركة الجهد بين الناس.",
+      "previous_reason": "expected_terms_missing",
+      "guard_before": {
+        "allowed": true,
+        "reason": "passed"
+      },
+      "guard_after_phase27_73": {
+        "allowed": true,
+        "reason": "passed",
+        "arabic_ratio": 1.0,
+        "repetition_ratio": 0.0
+      },
+      "diagnosis": "semantic family collapse: open_social prompt drifted into a topic definition response; needs targeted semantic-collapse repair",
+      "repair_kind": "targeted_semantic_collapse_training"
+    }
+  ],
+  "artifact_probe_results": [
+    {
+      "text": "خلنا نبدأ بمها ببساطة: نوضح الفكرة خطوة بعدها.",
+      "allowed": false,
+      "reason": "model_artifact_fragment"
+    },
+    {
+      "text": "خلنا نبدأ بمالنبوضوح.",
+      "allowed": false,
+      "reason": "model_artifact_fragment"
+    },
+    {
+      "text": "نبدأ بمالحقيقة بوضوح.",
+      "allowed": false,
+      "reason": "model_artifact_fragment"
+    },
+    {
+      "text": "خلنا نبدأ بس الفة قصيرة وخفيفة.",
+      "allowed": false,
+      "reason": "model_artifact_fragment"
+    },
+    {
+      "text": "نختار موضوععن شيء خفيف.",
+      "allowed": false,
+      "reason": "model_artifact_fragment"
+    },
+    {
+      "text": "التعاون بمإنك تساعد غيرك.",
+      "allowed": false,
+      "reason": "model_artifact_fragment"
+    }
+  ],
+  "guard_updates": {
+    "malformed_open_social_fragments_blocked": true,
+    "reason": "model_artifact_fragment",
+    "fragments": [
+      "بمها",
+      "بمالنبوضوح",
+      "بمالحقيقة",
+      "بس الفة",
+      "موضوععن",
+      "بمإنك"
+    ]
+  },
+  "diagnosis_summary": {
+    "open_social_09": "previously passed guard despite malformed fragment; now blocked",
+    "open_social_12": "semantic collapse to topic definition remains; guard cannot solve this alone without overblocking valid definitions",
+    "remaining_semantic_failures_count": 1
+  },
+  "decisions": {
+    "runtime_switch_allowed": false,
+    "ui_open_allowed": false,
+    "sf50m_allowed": false,
+    "phase28_allowed": false,
+    "training_allowed_next": true,
+    "repair_required_before_runtime": true,
+    "guard_gap_fixed": true
+  },
+  "decision": "Keep runtime blocked. The guard now blocks observed malformed open_social fragments, but semantic collapse remains and requires a targeted Phase 27.74 repair.",
+  "next_phase": "Phase 27.74 — targeted open_social semantic-collapse repair before any runtime switch"
+}

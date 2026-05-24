@@ -55,6 +55,21 @@ def test_phase27_13_generation_guard_blocks_v08_fragment() -> None:
     assert verdict.reason == "model_artifact_fragment"
 
 
+def test_phase27_73_generation_guard_blocks_open_social_artifacts() -> None:
+    fragments = (
+        "خلنا نبدأ بمها ببساطة: نوضح الفكرة خطوة بعدها.",
+        "خلنا نبدأ بمالنبوضوح.",
+        "نبدأ بمالحقيقة بوضوح.",
+        "خلنا نبدأ بس الفة قصيرة وخفيفة.",
+        "نختار موضوععن شيء خفيف.",
+        "التعاون بمإنك تساعد غيرك.",
+    )
+    for text in fragments:
+        verdict = GenerationGuard().inspect(text)
+        assert verdict.allowed is False, text
+        assert verdict.reason == "model_artifact_fragment"
+
+
 def test_phase25_generation_guard_blocks_repetition() -> None:
     verdict = GenerationGuard().inspect(
         "تمام تمام تمام تمام تمام تمام تمام تمام تمام"

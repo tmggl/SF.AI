@@ -87,6 +87,14 @@ _MODEL_ARTIFACT_FRAGMENTS = (
     "تحتاججج",
     "ججبعيادة",
     "هوش تحتاجججبعيادة",
+    # Observed in Phase 27.68/27.70/27.72 open_social repairs. These are
+    # artifact fragments around "بـ..." and topic words, not valid replies.
+    "بمها",
+    "بمالنبوضوح",
+    "بمالحقيقة",
+    "بس الفة",
+    "موضوععن",
+    "بمإنك",
 )
 _BROKEN_PREFIX_RE = re.compile(r"^\s*[\u0600-\u06FF]\s*[؟?]")
 _REPEATED_ARABIC_BIGRAM_RE = re.compile(r"([\u0600-\u06FF]{2})\1")

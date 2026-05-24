@@ -757,3 +757,21 @@ def test_phase27_72_stability_first_repair_improves_but_blocks_runtime() -> None
     assert report["decisions"]["runtime_switch_allowed"] is False
     assert report["decisions"]["ui_open_allowed"] is False
     assert report["decisions"]["live_runtime_review_allowed"] is False
+
+
+def test_phase27_73_open_social_failure_inspection_blocks_runtime() -> None:
+    report = _report("phase27_73_open_social_failure_inspection_report.json")
+    assert report["phase"] == "Phase 27.73"
+    assert report["status"] == "COMPLETED_OPEN_SOCIAL_FAILURE_INSPECTION_RUNTIME_BLOCKED"
+    assert report["training_started"] is False
+    assert report["tokenizer"] == "artifacts/tokenizers/sf_bpe/v8_phase27_65"
+    assert report["source_report"] == "artifacts/reports/phase27_72_stability_first_repair_report.json"
+    assert report["source_total_passed"] == 138
+    assert report["source_total"] == 140
+    assert report["remaining_failures_count"] == 2
+    assert report["decisions"]["runtime_switch_allowed"] is False
+    assert report["decisions"]["ui_open_allowed"] is False
+    assert report["decisions"]["sf50m_allowed"] is False
+    assert report["decisions"]["phase28_allowed"] is False
+    assert report["decisions"]["guard_gap_fixed"] is True
+    assert report["diagnosis_summary"]["remaining_semantic_failures_count"] == 1

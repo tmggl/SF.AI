@@ -83,9 +83,10 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.72: نفذنا micro-repair من أفضل مرشح سابق. تحسّن "
-    "المجموع إلى 138/140 مع known 50/50 وregression 30/30، لكن بقي فشلان "
-    "في open_social. التالي Phase 27.73 لفحصهما قبل أي runtime.",
+    "وصلنا إلى Phase 27.73: فحصنا فشلَي open_social المتبقيين من نتيجة "
+    "138/140. الحارس صار يمنع الشظايا المشوهة مثل «بمها»، لكن بقي انهيار "
+    "دلالي إلى تعريف موضوع بدل فتح سالفة. التالي Phase 27.74 إصلاح "
+    "semantic-collapse قبل أي runtime.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.72 / 30**
-- **المرحلة الحالية:** **Phase 27.72 — Stability-First Micro Repair**
-- **حالة المرحلة الحالية:** **اكتملت كتحسن غير كاف؛ `58/60` fresh و`50/50` known و`30/30` regression؛ الـ runtime محجوب**
-- **المرحلة التالية المقترحة:** Phase 27.73 inspect remaining open_social failures before any runtime switch.
+- **الرحلة الحالية:** **Phase 27.73 / 30**
+- **المرحلة الحالية:** **Phase 27.73 — Open-Social Failure Inspection**
+- **حالة المرحلة الحالية:** **اكتملت كفحص وحارس؛ فشل `open_social_09` صار محجوبًا كـ model_artifact_fragment وبقي semantic collapse واحد؛ الـ runtime محجوب**
+- **المرحلة التالية المقترحة:** Phase 27.74 targeted open_social semantic-collapse repair before any runtime switch.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -121,6 +121,7 @@
 | Phase 27.70 | Open-Social Repair | ✅ failed_open_social_repair_runtime_blocked | ✅ |
 | Phase 27.71 | Candidate Selection and Stability Strategy | ✅ no_stable_candidate_runtime_blocked | ✅ |
 | Phase 27.72 | Stability-First Micro Repair | ✅ improved_stability_first_repair_runtime_blocked | ✅ |
+| Phase 27.73 | Open-Social Failure Inspection | ✅ completed_open_social_failure_inspection_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |

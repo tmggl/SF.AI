@@ -11,4 +11,4 @@ router = APIRouter(tags=["health"])
 
 @router.get("/health", response_model=HealthResponse)
 def health() -> HealthResponse:
-    return HealthResponse(status="ok", project="SF.AI", phase="Phase 27.72")
+    return HealthResponse(status="ok", project="SF.AI", phase="Phase 27.73")

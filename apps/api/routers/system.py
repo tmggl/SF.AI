@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.72 — Stability-First Micro Repair",
-        current_phase_status="improved_stability_first_repair_runtime_blocked",
+        current_phase="Phase 27.73 — Open-Social Failure Inspection",
+        current_phase_status="completed_open_social_failure_inspection_runtime_blocked",
         next_phase=(
-            "Phase 27.73 inspect remaining open_social failures before any runtime switch"
+            "Phase 27.74 targeted open_social semantic-collapse repair before any runtime switch"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -474,6 +474,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_72_stability_first_repair",
                 status="improved_stability_first_repair_runtime_blocked",
                 phase="Phase 27.72",
+            ),
+            ComponentStatus(
+                name="phase27_73_open_social_failure_inspection",
+                status="completed_open_social_failure_inspection_runtime_blocked",
+                phase="Phase 27.73",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),
