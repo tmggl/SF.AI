@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.75 — Open-Social Strategy Inspection",
-        current_phase_status="completed_open_social_strategy_inspection_runtime_blocked",
+        current_phase="Phase 27.76 — Tokenizer v9 Open-Social Boundary Probe",
+        current_phase_status="passed_tokenizer_v9_open_social_boundary_probe_runtime_blocked",
         next_phase=(
-            "Phase 27.76 tokenizer v9 open_social boundary probe before LM repair"
+            "Phase 27.77 bounded LM open_social repair on tokenizer v9"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -489,6 +489,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_75_open_social_strategy_inspection",
                 status="completed_open_social_strategy_inspection_runtime_blocked",
                 phase="Phase 27.75",
+            ),
+            ComponentStatus(
+                name="phase27_76_tokenizer_v9_open_social_boundary_probe",
+                status="passed_tokenizer_v9_open_social_boundary_probe_runtime_blocked",
+                phase="Phase 27.76",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

@@ -145,6 +145,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.73 | Open-Social Failure Inspection | مكتملة كفحص وحارس؛ بقي semantic collapse، runtime محجوب |
 | Phase 27.74 | Open-Social Semantic-Collapse Repair | فشلت كتدريب تشغيل؛ `56/60`, `49/50`, `30/30`, runtime محجوب |
 | Phase 27.75 | Open-Social Strategy Inspection | مكتملة كفحص tokenizer/strategy؛ tokenizer v9 مطلوب |
+| Phase 27.76 | Tokenizer v9 Open-Social Boundary Probe | مكتملة بنجاح tokenizer-only؛ LM repair مسموح تاليًا |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3669,11 +3670,11 @@ tokenizer v8 مطلوب قبل أي LM repair جديد. لا runtime switch، ل
 
 التالي:
 
-**Phase 27.70 — inspect Phase 27.69 open_social failures and repair before runtime** — اكتملت كتجربة فاشلة، ثم **Phase 27.71 — Candidate Selection and Stability Strategy** اختارت `phase27_68` كأفضل مرشح `136/140` مع بقاء runtime محجوبًا، ثم **Phase 27.72 — Stability-First Micro Repair** حسّنت النتيجة إلى `138/140` مع بقاء فشلين open_social، ثم **Phase 27.73 — Open-Social Failure Inspection** سدّت فجوة حارس الشظايا وشخّصت semantic collapse المتبقي، ثم **Phase 27.74 — Open-Social Semantic-Collapse Repair** جرّبت ثلاثة مرشحين من checkpoint 27.72 لكنها تراجعت إلى `56/60` fresh و`49/50` known، ثم **Phase 27.75 — Open-Social Strategy Inspection** أثبتت أن tokenizer v8 يفك `بسالفة` إلى `بس الفة` وأن tokenizer v9 مطلوب قبل LM repair جديد.
+**Phase 27.70 — inspect Phase 27.69 open_social failures and repair before runtime** — اكتملت كتجربة فاشلة، ثم **Phase 27.71 — Candidate Selection and Stability Strategy** اختارت `phase27_68` كأفضل مرشح `136/140` مع بقاء runtime محجوبًا، ثم **Phase 27.72 — Stability-First Micro Repair** حسّنت النتيجة إلى `138/140` مع بقاء فشلين open_social، ثم **Phase 27.73 — Open-Social Failure Inspection** سدّت فجوة حارس الشظايا وشخّصت semantic collapse المتبقي، ثم **Phase 27.74 — Open-Social Semantic-Collapse Repair** جرّبت ثلاثة مرشحين من checkpoint 27.72 لكنها تراجعت إلى `56/60` fresh و`49/50` known، ثم **Phase 27.75 — Open-Social Strategy Inspection** أثبتت أن tokenizer v8 يفك `بسالفة` إلى `بس الفة` وأن tokenizer v9 مطلوب قبل LM repair جديد، ثم **Phase 27.76 — Tokenizer v9 Open-Social Boundary Probe** مرّت tokenizer-only (`17/17`, `15/15`).
 
 التالي الرسمي الآن:
 
-**Phase 27.76 — tokenizer v9 open_social boundary probe before LM repair**
+**Phase 27.77 — bounded LM open_social repair on tokenizer v9**
 
 ### نتيجة Phase 27.73
 - لم يبدأ تدريب جديد.
@@ -3696,6 +3697,14 @@ tokenizer v8 مطلوب قبل أي LM repair جديد. لا runtime switch، ل
 - أضيفت حزمة `resources/tokenization/protected_phrases_phase27_75.txt` إلى قواعد tokenization.
 - القرار: لا LM-only repair جديد على tokenizer v8؛ التالي tokenizer v9 boundary probe.
 
+### نتيجة Phase 27.76
+- درّبنا tokenizer v9 فقط من corpus السيادي المحلي مع protected pack 27.75.
+- لا LM training ولا runtime switch.
+- `open_social` roundtrip: `17/17`.
+- protected pack single-piece: `15/15`.
+- topic terms single-piece: `8/8`، والحرجة `التعاون/الاحترام` protected `2/2`.
+- القرار: Phase 27.77 مسموح كتدريب LM محدود على tokenizer v9 فقط، مع بقاء runtime محجوبًا حتى تمر بوابات التوليد.
+
 ### artifacts
 - [PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md](./PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md)
 - `artifacts/reports/phase27_69_new_fresh_shadow_canary_report.json`
@@ -3709,6 +3718,9 @@ tokenizer v8 مطلوب قبل أي LM repair جديد. لا runtime switch، ل
 - [PHASE27_75_OPEN_SOCIAL_STRATEGY_INSPECTION_REPORT.md](./PHASE27_75_OPEN_SOCIAL_STRATEGY_INSPECTION_REPORT.md)
 - `artifacts/reports/phase27_75_open_social_strategy_inspection_report.json`
 - `artifacts/samples/phase27_75_open_social_strategy_inspection.md`
+- [PHASE27_76_TOKENIZER_V9_OPEN_SOCIAL_BOUNDARY_PROBE_REPORT.md](./PHASE27_76_TOKENIZER_V9_OPEN_SOCIAL_BOUNDARY_PROBE_REPORT.md)
+- `artifacts/reports/phase27_76_tokenizer_v9_open_social_boundary_probe_report.json`
+- `artifacts/samples/phase27_76_tokenizer_v9_open_social_boundary_probe.md`
 
 ---
 

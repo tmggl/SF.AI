@@ -1,0 +1,680 @@
+{
+  "phase": "Phase 27.76",
+  "status": "PASSED_TOKENIZER_V9_OPEN_SOCIAL_BOUNDARY_PROBE_READY_FOR_BOUNDED_LM_REPAIR_RUNTIME_BLOCKED",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": true,
+  "training_scope": "tokenizer-only v9 training; no LM training; no runtime switch",
+  "lm_training_started": false,
+  "source_report": "artifacts/reports/phase27_75_open_social_strategy_inspection_report.json",
+  "source_status": "COMPLETED_OPEN_SOCIAL_STRATEGY_INSPECTION_RUNTIME_BLOCKED",
+  "tokenizer": "artifacts/tokenizers/sf_bpe/v9_phase27_76",
+  "tokenizer_vocab_size": 5023,
+  "tokenizer_merges": 4901,
+  "protected_terms_total": 80,
+  "protected_pack": "resources/tokenization/protected_phrases_phase27_75.txt",
+  "open_social_rows": [
+    {
+      "text": "سالفة",
+      "piece_count": 1,
+      "ids": [
+        86
+      ],
+      "tokens": [
+        "سالفة"
+      ],
+      "decoded": "سالفة",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "بسالفة",
+      "piece_count": 1,
+      "ids": [
+        70
+      ],
+      "tokens": [
+        "بسالفة"
+      ],
+      "decoded": "بسالفة",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "السالفة",
+      "piece_count": 1,
+      "ids": [
+        63
+      ],
+      "tokens": [
+        "السالفة"
+      ],
+      "decoded": "السالفة",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "سوالف",
+      "piece_count": 1,
+      "ids": [
+        89
+      ],
+      "tokens": [
+        "سوالف"
+      ],
+      "decoded": "سوالف",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "سوالف بسيطة",
+      "piece_count": 1,
+      "ids": [
+        90
+      ],
+      "tokens": [
+        "سوالف▁بسيطة"
+      ],
+      "decoded": "سوالف بسيطة",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "موضوع سوالف",
+      "piece_count": 1,
+      "ids": [
+        111
+      ],
+      "tokens": [
+        "موضوع▁سوالف"
+      ],
+      "decoded": "موضوع سوالف",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "موضوعًا عن",
+      "piece_count": 1,
+      "ids": [
+        110
+      ],
+      "tokens": [
+        "موضوعًا▁عن"
+      ],
+      "decoded": "موضوعًا عن",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "موضوع عن",
+      "piece_count": 1,
+      "ids": [
+        112
+      ],
+      "tokens": [
+        "موضوع▁عن"
+      ],
+      "decoded": "موضوع عن",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "نختار موضوعًا",
+      "piece_count": 1,
+      "ids": [
+        114
+      ],
+      "tokens": [
+        "نختار▁موضوعًا"
+      ],
+      "decoded": "نختار موضوعًا",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "نفتح موضوعًا",
+      "piece_count": 1,
+      "ids": [
+        117
+      ],
+      "tokens": [
+        "نفتح▁موضوعًا"
+      ],
+      "decoded": "نفتح موضوعًا",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "كلام خفيف",
+      "piece_count": 1,
+      "ids": [
+        99
+      ],
+      "tokens": [
+        "كلام▁خفيف"
+      ],
+      "decoded": "كلام خفيف",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "حديث خفيف",
+      "piece_count": 1,
+      "ids": [
+        80
+      ],
+      "tokens": [
+        "حديث▁خفيف"
+      ],
+      "decoded": "حديث خفيف",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "سالفة خفيفة",
+      "piece_count": 1,
+      "ids": [
+        87
+      ],
+      "tokens": [
+        "سالفة▁خفيفة"
+      ],
+      "decoded": "سالفة خفيفة",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "خلنا نبدأ بسالفة",
+      "piece_count": 1,
+      "ids": [
+        84
+      ],
+      "tokens": [
+        "خلنا▁نبدأ▁بسالفة"
+      ],
+      "decoded": "خلنا نبدأ بسالفة",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "خلنا نبدأ بسالفة قصيرة وخفيفة",
+      "piece_count": 4,
+      "ids": [
+        84,
+        428,
+        45,
+        4124
+      ],
+      "tokens": [
+        "خلنا▁نبدأ▁بسالفة",
+        "قصيرة</w>",
+        "و",
+        "خفيفة</w>"
+      ],
+      "decoded": "خلنا نبدأ بسالفة قصيرة وخفيفة",
+      "roundtrip_ok": true,
+      "single_piece": false,
+      "protected_in_config": false
+    },
+    {
+      "text": "نختار موضوعًا عن شيء خفيف",
+      "piece_count": 4,
+      "ids": [
+        114,
+        243,
+        1098,
+        1942
+      ],
+      "tokens": [
+        "نختار▁موضوعًا",
+        "عن</w>",
+        "شيء</w>",
+        "خفيف</w>"
+      ],
+      "decoded": "نختار موضوعًا عن شيء خفيف",
+      "roundtrip_ok": true,
+      "single_piece": false,
+      "protected_in_config": false
+    },
+    {
+      "text": "وش نقدر نسولف عنه",
+      "piece_count": 1,
+      "ids": [
+        126
+      ],
+      "tokens": [
+        "وش▁نقدر▁نسولف▁عنه"
+      ],
+      "decoded": "وش نقدر نسولف عنه",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    }
+  ],
+  "protected_pack_rows": [
+    {
+      "text": "سالفة",
+      "piece_count": 1,
+      "ids": [
+        86
+      ],
+      "tokens": [
+        "سالفة"
+      ],
+      "decoded": "سالفة",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "بسالفة",
+      "piece_count": 1,
+      "ids": [
+        70
+      ],
+      "tokens": [
+        "بسالفة"
+      ],
+      "decoded": "بسالفة",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "السالفة",
+      "piece_count": 1,
+      "ids": [
+        63
+      ],
+      "tokens": [
+        "السالفة"
+      ],
+      "decoded": "السالفة",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "سوالف",
+      "piece_count": 1,
+      "ids": [
+        89
+      ],
+      "tokens": [
+        "سوالف"
+      ],
+      "decoded": "سوالف",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "سوالف بسيطة",
+      "piece_count": 1,
+      "ids": [
+        90
+      ],
+      "tokens": [
+        "سوالف▁بسيطة"
+      ],
+      "decoded": "سوالف بسيطة",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "موضوع سوالف",
+      "piece_count": 1,
+      "ids": [
+        111
+      ],
+      "tokens": [
+        "موضوع▁سوالف"
+      ],
+      "decoded": "موضوع سوالف",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "موضوعًا عن",
+      "piece_count": 1,
+      "ids": [
+        110
+      ],
+      "tokens": [
+        "موضوعًا▁عن"
+      ],
+      "decoded": "موضوعًا عن",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "موضوع عن",
+      "piece_count": 1,
+      "ids": [
+        112
+      ],
+      "tokens": [
+        "موضوع▁عن"
+      ],
+      "decoded": "موضوع عن",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "نختار موضوعًا",
+      "piece_count": 1,
+      "ids": [
+        114
+      ],
+      "tokens": [
+        "نختار▁موضوعًا"
+      ],
+      "decoded": "نختار موضوعًا",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "نفتح موضوعًا",
+      "piece_count": 1,
+      "ids": [
+        117
+      ],
+      "tokens": [
+        "نفتح▁موضوعًا"
+      ],
+      "decoded": "نفتح موضوعًا",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "كلام خفيف",
+      "piece_count": 1,
+      "ids": [
+        99
+      ],
+      "tokens": [
+        "كلام▁خفيف"
+      ],
+      "decoded": "كلام خفيف",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "حديث خفيف",
+      "piece_count": 1,
+      "ids": [
+        80
+      ],
+      "tokens": [
+        "حديث▁خفيف"
+      ],
+      "decoded": "حديث خفيف",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "سالفة خفيفة",
+      "piece_count": 1,
+      "ids": [
+        87
+      ],
+      "tokens": [
+        "سالفة▁خفيفة"
+      ],
+      "decoded": "سالفة خفيفة",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "خلنا نبدأ بسالفة",
+      "piece_count": 1,
+      "ids": [
+        84
+      ],
+      "tokens": [
+        "خلنا▁نبدأ▁بسالفة"
+      ],
+      "decoded": "خلنا نبدأ بسالفة",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "وش نقدر نسولف عنه",
+      "piece_count": 1,
+      "ids": [
+        126
+      ],
+      "tokens": [
+        "وش▁نقدر▁نسولف▁عنه"
+      ],
+      "decoded": "وش نقدر نسولف عنه",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    }
+  ],
+  "topic_rows": [
+    {
+      "text": "التعاون",
+      "piece_count": 1,
+      "ids": [
+        60
+      ],
+      "tokens": [
+        "التعاون"
+      ],
+      "decoded": "التعاون",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "الاحترام",
+      "piece_count": 1,
+      "ids": [
+        57
+      ],
+      "tokens": [
+        "الاحترام"
+      ],
+      "decoded": "الاحترام",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": true
+    },
+    {
+      "text": "الصبر",
+      "piece_count": 1,
+      "ids": [
+        3033
+      ],
+      "tokens": [
+        "الصبر</w>"
+      ],
+      "decoded": "الصبر",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": false
+    },
+    {
+      "text": "الوفاء",
+      "piece_count": 1,
+      "ids": [
+        4957
+      ],
+      "tokens": [
+        "الوفاء</w>"
+      ],
+      "decoded": "الوفاء",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": false
+    },
+    {
+      "text": "الصداقة",
+      "piece_count": 1,
+      "ids": [
+        4971
+      ],
+      "tokens": [
+        "الصداقة</w>"
+      ],
+      "decoded": "الصداقة",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": false
+    },
+    {
+      "text": "الشجاعة",
+      "piece_count": 1,
+      "ids": [
+        4993
+      ],
+      "tokens": [
+        "الشجاعة</w>"
+      ],
+      "decoded": "الشجاعة",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": false
+    },
+    {
+      "text": "الصدق",
+      "piece_count": 1,
+      "ids": [
+        4395
+      ],
+      "tokens": [
+        "الصدق</w>"
+      ],
+      "decoded": "الصدق",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": false
+    },
+    {
+      "text": "الهدوء",
+      "piece_count": 1,
+      "ids": [
+        4986
+      ],
+      "tokens": [
+        "الهدوء</w>"
+      ],
+      "decoded": "الهدوء",
+      "roundtrip_ok": true,
+      "single_piece": true,
+      "protected_in_config": false
+    }
+  ],
+  "artifact_rows": [
+    {
+      "text": "بس الفة",
+      "piece_count": 2,
+      "ids": [
+        69,
+        3303
+      ],
+      "tokens": [
+        "بس",
+        "الفة</w>"
+      ],
+      "decoded": "بس الفة",
+      "roundtrip_ok": true,
+      "single_piece": false,
+      "protected_in_config": false
+    },
+    {
+      "text": "موضوعاموضوععن",
+      "piece_count": 5,
+      "ids": [
+        42,
+        341,
+        193,
+        2989,
+        243
+      ],
+      "tokens": [
+        "م",
+        "وضو",
+        "عا",
+        "موضوع",
+        "عن</w>"
+      ],
+      "decoded": "موضوعاموضوععن",
+      "roundtrip_ok": true,
+      "single_piece": false,
+      "protected_in_config": false
+    },
+    {
+      "text": "أكموضوع",
+      "piece_count": 3,
+      "ids": [
+        347,
+        42,
+        752
+      ],
+      "tokens": [
+        "أك",
+        "م",
+        "وضوع</w>"
+      ],
+      "decoded": "أكموضوع",
+      "roundtrip_ok": true,
+      "single_piece": false,
+      "protected_in_config": false
+    }
+  ],
+  "summary": {
+    "open_social_roundtrip_passed": 17,
+    "open_social_roundtrip_total": 17,
+    "protected_pack_single_piece": 15,
+    "protected_pack_total": 15,
+    "topic_single_piece": 8,
+    "topic_total": 8,
+    "critical_topic_protected": 2,
+    "critical_topic_total": 2,
+    "artifact_not_protected": 3,
+    "artifact_total": 3,
+    "avg_open_social_piece_count": 1.3529
+  },
+  "decisions": {
+    "tokenizer_v9_passed": true,
+    "bounded_lm_open_social_repair_allowed_next": true,
+    "lm_training_started": false,
+    "runtime_switch_allowed": false,
+    "ui_open_allowed": false,
+    "sf50m_allowed": false,
+    "phase28_allowed": false,
+    "repair_required_before_runtime": true
+  },
+  "decision": "Tokenizer v9 passed open_social boundary protection. Next phase may run a bounded LM repair on tokenizer v9.",
+  "next_phase": "Phase 27.77 — bounded LM open_social repair on tokenizer v9"
+}

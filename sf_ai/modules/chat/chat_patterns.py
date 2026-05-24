@@ -83,10 +83,10 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.75: فحصنا فشل open_social ووجدنا أن tokenizer v8 "
-    "يفك «بسالفة» إلى «بس الفة»، وهذا يفسر شظايا 27.74. أضفنا protected "
-    "pack لـ open_social، والـ runtime ما زال محجوبًا. التالي Phase 27.76 "
-    "tokenizer v9 boundary probe قبل أي LM repair.",
+    "وصلنا إلى Phase 27.76: درّبنا tokenizer v9 فقط ونجح في open_social "
+    "boundary probe: 17/17 roundtrip و15/15 protected pack single-piece. "
+    "لم ندرّب LM ولم نفتح runtime. التالي Phase 27.77 bounded LM repair "
+    "على tokenizer v9.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

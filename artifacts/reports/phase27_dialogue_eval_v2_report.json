@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.75: فحصنا فشل open_social ووجدنا أن tokenizer v8 يفك «بسالفة» إلى «بس الفة»، وهذا يفسر شظايا 27.74. أضفنا protected pack لـ open_social، والـ runtime ما زال محجو"
+      "response_preview": "وصلنا إلى Phase 27.76: درّبنا tokenizer v9 فقط ونجح في open_social boundary probe: 17/17 roundtrip و15/15 protected pack single-piece. لم ندرّب LM ولم نفتح runtime. التالي Phase 27"
     },
     {
       "scenario_id": "clarification_repair_flow",

@@ -811,3 +811,23 @@ def test_phase27_75_open_social_strategy_inspection_requires_tokenizer_v9() -> N
     assert report["decisions"]["tokenizer_v9_required_next"] is True
     assert report["decisions"]["lm_repair_allowed_before_tokenizer_v9"] is False
     assert report["decisions"]["runtime_switch_allowed"] is False
+
+
+def test_phase27_76_tokenizer_v9_open_social_boundary_probe_passes() -> None:
+    report = _report("phase27_76_tokenizer_v9_open_social_boundary_probe_report.json")
+    assert report["phase"] == "Phase 27.76"
+    assert report["status"] == (
+        "PASSED_TOKENIZER_V9_OPEN_SOCIAL_BOUNDARY_PROBE_READY_FOR_BOUNDED_LM_REPAIR_RUNTIME_BLOCKED"
+    )
+    assert report["training_started"] is True
+    assert report["lm_training_started"] is False
+    assert report["tokenizer"] == "artifacts/tokenizers/sf_bpe/v9_phase27_76"
+    assert report["summary"]["open_social_roundtrip_passed"] == 17
+    assert report["summary"]["open_social_roundtrip_total"] == 17
+    assert report["summary"]["protected_pack_single_piece"] == 15
+    assert report["summary"]["protected_pack_total"] == 15
+    assert report["summary"]["topic_single_piece"] == 8
+    assert report["summary"]["critical_topic_protected"] == 2
+    assert report["decisions"]["tokenizer_v9_passed"] is True
+    assert report["decisions"]["bounded_lm_open_social_repair_allowed_next"] is True
+    assert report["decisions"]["runtime_switch_allowed"] is False
