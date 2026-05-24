@@ -678,3 +678,24 @@ def test_phase27_68_shadow_failure_repair_passes_known_shadow_and_blocks_runtime
     assert report["decisions"]["runtime_switch_allowed"] is False
     assert report["decisions"]["ui_open_allowed"] is False
     assert report["decisions"]["sf50m_allowed"] is False
+
+
+def test_phase27_69_new_fresh_shadow_canary_is_strong_but_blocks_runtime() -> None:
+    report = _report("phase27_69_new_fresh_shadow_canary_report.json")
+    assert report["phase"] == "Phase 27.69"
+    assert report["status"] == "STRONG_NEW_FRESH_SHADOW_CANARY_RUNTIME_BLOCKED"
+    assert report["training_started"] is False
+    assert report["tokenizer"] == "artifacts/tokenizers/sf_bpe/v8_phase27_65"
+    assert report["checkpoint_name"] == "sf-10m-step5600"
+    assert report["novelty_summary"]["novel"] == 60
+    assert report["novelty_summary"]["total"] == 60
+    assert report["summary"]["passed"] == 56
+    assert report["summary"]["total"] == 60
+    assert report["summary"]["family_summary"]["open_social"]["passed"] == 8
+    assert report["summary"]["family_summary"]["open_social"]["total"] == 12
+    assert report["summary"]["family_summary"]["planning"]["passed"] == 12
+    assert report["summary"]["family_summary"]["support"]["passed"] == 12
+    assert report["summary"]["family_summary"]["topic"]["passed"] == 12
+    assert report["decisions"]["guarded_live_api_review_allowed"] is False
+    assert report["decisions"]["runtime_switch_allowed"] is False
+    assert report["decisions"]["ui_open_allowed"] is False

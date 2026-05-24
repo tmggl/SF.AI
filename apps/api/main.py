@@ -31,7 +31,7 @@ app = FastAPI(
     version="0.1.0",
     description=(
         "SF.AI — Sovereign AI platform. Phase 9 chat UI mounted at /ui/chat. "
-        "Phase 27.68 repaired known shadow failures; runtime remains blocked pending new fresh shadow. "
+        "Phase 27.69 reached a strong new fresh shadow result but runtime remains blocked. "
         "No pretrained models, no external AI APIs."
     ),
 )
@@ -46,7 +46,7 @@ app.include_router(ui.router)
 def root() -> dict[str, str]:
     return {
         "project": "SF.AI",
-        "phase": "Phase 27.68 — Shadow Failure Repair",
+        "phase": "Phase 27.69 — New Fresh Shadow Canary",
         "ui": "/ui/chat",
         "docs": "/docs",
     }

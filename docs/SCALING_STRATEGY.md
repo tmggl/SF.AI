@@ -398,3 +398,20 @@ Phase 27.68 دربت إصلاحًا محدودًا على فشل Phase 27.67:
 - لا فتح واجهة على checkpoint الجديد.
 - لا `SF-50M` ولا Phase 28.
 - التالي Phase 27.69 fresh shadow جديد بأسئلة غير مرئية؛ لأن Phase 27.68 رأى فشل 27.67 أثناء التدريب.
+
+## قرار Phase 27.69
+
+Phase 27.69 اختبرت checkpoint Phase 27.68 بدون تدريب جديد:
+
+- prompts: `60`.
+- novelty: `60/60`.
+- new fresh shadow: `56/60`.
+- family summary: followup `12/12`, open_social `8/12`, planning `12/12`, support `12/12`, topic `12/12`.
+
+قرار scaling:
+
+- لا رفع حجم.
+- لا runtime switch.
+- لا فتح واجهة على checkpoint الجديد.
+- لا `SF-50M` ولا Phase 28.
+- التالي Phase 27.70 إصلاح ضيق لـ open_social؛ النجاح الجزئي لا يكفي لتجاوز بوابة runtime.

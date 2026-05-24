@@ -55,13 +55,14 @@
 - [docs/PHASE27_66_V8_BOUNDED_TOPIC_REPAIR_REPORT.md](./docs/PHASE27_66_V8_BOUNDED_TOPIC_REPAIR_REPORT.md) — LM repair محدود على tokenizer v8 نجح broader canary `30/30` مع بقاء runtime محجوبًا.
 - [docs/PHASE27_67_FRESH_SHADOW_CANARY_REPORT.md](./docs/PHASE27_67_FRESH_SHADOW_CANARY_REPORT.md) — fresh shadow canary بأسئلة غير مرئية فشل `30/50`، لذلك runtime محجوب.
 - [docs/PHASE27_68_SHADOW_FAILURE_REPAIR_REPORT.md](./docs/PHASE27_68_SHADOW_FAILURE_REPAIR_REPORT.md) — إصلاح فشل 27.67 مرّر known shadow `50/50` وregression `30/30` مع بقاء runtime محجوبًا.
+- [docs/PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md](./docs/PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md) — fresh shadow جديد بعد الإصلاح وصل `56/60` لكن بقي open_social، لذلك runtime محجوب.
 
 ---
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.68 / 30 — Shadow Failure Repair نجح على known shadow `50/50` وregression `30/30`.
-- **الأولوية الحالية:** Phase 27.69 fresh shadow جديد بأسئلة غير مرئية بعد الإصلاح، قبل أي runtime switch.
+- **الرحلة الحالية:** Phase 27.69 / 30 — New Fresh Shadow Canary وصل `56/60` مع novelty `60/60`.
+- **الأولوية الحالية:** Phase 27.70 إصلاح open_social فقط قبل أي runtime switch.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -134,6 +135,7 @@
 - **نتيجة Phase 27.66:** LM repair محدود على tokenizer v8 نجح broader canary كاملًا `30/30` على followup/open_social/planning/support/topic، لكن checkpoint بقي محجوبًا عن الواجهة حتى fresh shadow canary. التقرير: [docs/PHASE27_66_V8_BOUNDED_TOPIC_REPAIR_REPORT.md](./docs/PHASE27_66_V8_BOUNDED_TOPIC_REPAIR_REPORT.md).
 - **نتيجة Phase 27.67:** fresh shadow canary من `50` سؤالًا جديدًا فشل `30/50`: open_social `4/10`, followup `4/10`, planning `7/10`, support `6/10`, topic `9/10`. القرار: لا واجهة ولا runtime؛ نصلح التعميم أولًا. التقرير: [docs/PHASE27_67_FRESH_SHADOW_CANARY_REPORT.md](./docs/PHASE27_67_FRESH_SHADOW_CANARY_REPORT.md).
 - **نتيجة Phase 27.68:** إصلاح موجّه لفشل 27.67 نجح على known shadow `50/50` وحافظ على regression `30/30`. القرار: لا واجهة بعد؛ نحتاج Phase 27.69 بأسئلة fresh جديدة لا يراها التدريب. التقرير: [docs/PHASE27_68_SHADOW_FAILURE_REPAIR_REPORT.md](./docs/PHASE27_68_SHADOW_FAILURE_REPAIR_REPORT.md).
+- **نتيجة Phase 27.69:** fresh shadow جديد `60` سؤالًا، novelty `60/60`، النتيجة `56/60`: planning/support/topic `12/12`، followup `12/12`، open_social `8/12`. القرار: لا واجهة؛ Phase 27.70 يركز على open_social. التقرير: [docs/PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md](./docs/PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 

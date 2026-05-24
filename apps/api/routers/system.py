@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.68 — Shadow Failure Repair",
-        current_phase_status="passed_shadow_failure_repair_runtime_blocked",
+        current_phase="Phase 27.69 — New Fresh Shadow Canary",
+        current_phase_status="strong_new_fresh_shadow_canary_runtime_blocked",
         next_phase=(
-            "Phase 27.69 new fresh shadow canary with unseen prompts after repair"
+            "Phase 27.70 inspect Phase 27.69 open_social failures and repair before runtime"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -454,6 +454,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_68_shadow_failure_repair",
                 status="passed_shadow_failure_repair_ready_for_new_fresh_shadow_runtime_blocked",
                 phase="Phase 27.68",
+            ),
+            ComponentStatus(
+                name="phase27_69_new_fresh_shadow_canary",
+                status="strong_new_fresh_shadow_canary_runtime_blocked",
+                phase="Phase 27.69",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

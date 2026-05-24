@@ -138,6 +138,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.66 | V8 Bounded Topic Repair | مكتملة؛ LM repair محدود على tokenizer v8 نجح broader canary `30/30`, runtime محجوب |
 | Phase 27.67 | Fresh Shadow Canary | مكتملة كتقييم؛ فشل `30/50`, runtime محجوب |
 | Phase 27.68 | Shadow Failure Repair | مكتملة؛ known shadow `50/50` وregression `30/30`, runtime محجوب |
+| Phase 27.69 | New Fresh Shadow Canary | مكتملة كتقييم؛ strong `56/60`, runtime محجوب |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3639,6 +3640,35 @@ tokenizer v8 مطلوب قبل أي LM repair جديد. لا runtime switch، ل
 - [PHASE27_68_SHADOW_FAILURE_REPAIR_REPORT.md](./PHASE27_68_SHADOW_FAILURE_REPAIR_REPORT.md)
 - `artifacts/reports/phase27_68_shadow_failure_repair_report.json`
 - `artifacts/samples/phase27_68_shadow_failure_repair.md`
+
+## Phase 27.69 — New Fresh Shadow Canary
+
+### الهدف
+اختبار checkpoint Phase 27.68 على prompts جديدة لم تظهر في Phase 27.60 أو Phase 27.67 أو curriculum الإصلاح. هذه مرحلة تقييم فقط، لا تدريب ولا runtime.
+
+### ما نُفّذ
+- أضيف `scripts/phase27_69_new_fresh_shadow_canary.py`.
+- أضيف `make phase27-new-fresh-shadow-canary`.
+- أُنشئ canary جديد من `60` prompt، `12` لكل عائلة: open_social, followup, planning, support, topic.
+- أضيف فحص novelty ضد canary وrepair prompts السابقة.
+
+### النتيجة
+- novelty: `60/60`.
+- new fresh shadow: `56/60`.
+- family summary: followup `12/12`, open_social `8/12`, planning `12/12`, support `12/12`, topic `12/12`.
+- الفشل المتبقي محصور في open_social: انجراف إلى تعريف `التعاون` أو fragment في `موضوع/سوالف`.
+
+### القرار
+النتيجة قوية لكنها ليست كاملة. لا runtime switch ولا UI. Phase 27.70 يجب أن يكون إصلاحًا ضيقًا لـ open_social فقط، مع regression على 27.60/27.67/27.69.
+
+التالي:
+
+**Phase 27.70 — inspect Phase 27.69 open_social failures and repair before runtime**
+
+### artifacts
+- [PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md](./PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md)
+- `artifacts/reports/phase27_69_new_fresh_shadow_canary_report.json`
+- `artifacts/samples/phase27_69_new_fresh_shadow_canary.md`
 
 ---
 

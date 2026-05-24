@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.68: أصلحنا فشل shadow السابق، فصار known shadow 50/50 "
-    "وregression 30/30. الواجهة لا تُفتح بعد لأن الاختبار التالي يجب أن يكون "
-    "Phase 27.69 fresh shadow جديد بأسئلة غير مرئية.",
+    "وصلنا إلى Phase 27.69: اختبرنا fresh shadow جديدًا بعد الإصلاح، والنتيجة "
+    "56/60 مع novelty 60/60. هذا قوي لكنه ليس كافيًا للواجهة؛ بقي فشل open_social. "
+    "التالي Phase 27.70 لإصلاح open_social فقط قبل أي runtime.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (
