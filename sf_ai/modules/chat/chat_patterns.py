@@ -82,9 +82,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.101 ضمن مسار SF-native فقط: شخّصنا نتيجة ربط الموضوع "
-    "ووجدنا فجوة metric وcopy-anchor؛ لا runtime الآن. التالي Phase 27.102 "
-    "بوابة topic prototype contrastive copy-anchor.",
+    "وصلنا إلى Phase 27.102 ضمن مسار SF-native فقط: ثبّتنا بوابة observed "
+    "wrong-topic وcopy-anchor لرصد prototype substitutions. لا runtime الآن؛ "
+    "التالي Phase 27.103 حزمة curriculum بلا تدريب.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.101
-الاسم: Topic Binding Repair Result Diagnosis
+المرحلة الحالية: Phase 27.102
+الاسم: Topic Prototype Contrastive Copy-Anchor Gate
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_101_TOPIC_BINDING_RESULT_DIAGNOSIS_DECISION
+القرار الرسمي: PHASE27_102_TOPIC_PROTOTYPE_CONTRASTIVE_GATE_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -121,7 +121,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   topic-family `6/10`, all-family `37/50`.
 - نتيجة 27.101: التشخيص كشف blind spot في metric؛ observed wrong-topic `8`
   (`الصداقة=7`, `الامتنان=1`) رغم أن التقرير السابق سجّل `0`.
-- التالي: `Phase 27.102 — Topic Prototype Contrastive Copy-Anchor Gate`.
+- نتيجة 27.102: ثُبّتت بوابة observed wrong-topic/copy-anchor وcanary من
+  `16` prompt. القرار يسمح فقط بحزمة curriculum بلا تدريب في 27.103.
+- التالي: `Phase 27.103 — Topic Prototype Contrastive Curriculum Pack`.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -337,17 +339,17 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.102 — Topic Prototype Contrastive Copy-Anchor Gate
+Phase 27.103 — Topic Prototype Contrastive Curriculum Pack
 ```
 
 مطلوب منها:
 
-- إصلاح/ترميز blind spot في wrong-topic metric قبل أي تدريب.
-- تصميم gate يفرض observed wrong-topic `0` لا reported فقط.
-- تصميم canary لتمييز topic prototype attraction مثل `الصداقة`.
-- تحديد شروط تدريب لاحق إن مرّت البوابة فقط.
+- تأليف حزمة curriculum/data بلا تدريب.
+- إضافة صفوف topic تجبر نسخ الموضوع المطلوب قبل prototype terms.
+- استخدام canary 27.102 كشرط لاحق.
+- لا يبدأ تدريب حتى تمر بوابة pack/readiness التالية.
 
-ممنوع في 27.102 قبل القرار:
+ممنوع في 27.103 قبل القرار:
 
 - تدريب جديد.
 - runtime release.

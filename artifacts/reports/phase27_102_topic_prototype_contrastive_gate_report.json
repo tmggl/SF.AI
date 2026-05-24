@@ -1,0 +1,751 @@
+{
+  "phase": "Phase 27.102",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "status": "PHASE27_102_GATE_ENCODED_CURRICULUM_PACK_ALLOWED_NO_TRAINING",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_changed": false,
+  "source_report": "artifacts/reports/phase27_101_topic_binding_result_diagnosis_report.json",
+  "training_report": "artifacts/reports/phase27_100_bounded_topic_binding_repair_report.json",
+  "legacy_result_probe": {
+    "best_checkpoint": "sf-10m-step1800",
+    "topic_rows_total": 26,
+    "reported_wrong_topic_count": 0,
+    "observed_wrong_topic_count": 8,
+    "metric_blind_spot_detected": true,
+    "observed_wrong_topic_substitutions": {
+      "الصداقة": 7,
+      "الامتنان": 1
+    },
+    "observed_wrong_rows": [
+      {
+        "id": "known_msa_الوفاء",
+        "set": "known",
+        "dialect": "msa",
+        "required_topic": "الوفاء",
+        "observed_wrong_topics": [
+          "الصداقة"
+        ],
+        "response": "معنى الصداقة: علاقة فيها صدق واهتمام ووقفة وقت الحاجة.",
+        "legacy_reason": "required_topic_missing"
+      },
+      {
+        "id": "known_saudi_الوفاء",
+        "set": "known",
+        "dialect": "saudi",
+        "required_topic": "الوفاء",
+        "observed_wrong_topics": [
+          "الصداقة"
+        ],
+        "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+        "legacy_reason": "required_topic_missing"
+      },
+      {
+        "id": "known_msa_الاحترام",
+        "set": "known",
+        "dialect": "msa",
+        "required_topic": "الاحترام",
+        "observed_wrong_topics": [
+          "الصداقة"
+        ],
+        "response": "معنى الصداقة: رفقة طيبة واهتمام ووقفة ص وقت الحاجة.",
+        "legacy_reason": "required_topic_missing"
+      },
+      {
+        "id": "fresh_01_msa_الوفاء",
+        "set": "fresh",
+        "dialect": "msa",
+        "required_topic": "الوفاء",
+        "observed_wrong_topics": [
+          "الصداقة"
+        ],
+        "response": "معنى الصداقة: علاقة فيها صدق واهتمام ووقفة وقت الحاجة.",
+        "legacy_reason": "required_topic_missing"
+      },
+      {
+        "id": "fresh_02_saudi_التعاون",
+        "set": "fresh",
+        "dialect": "saudi",
+        "required_topic": "التعاون",
+        "observed_wrong_topics": [
+          "الصداقة"
+        ],
+        "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+        "legacy_reason": "required_topic_missing"
+      },
+      {
+        "id": "fresh_04_saudi_الاحترام",
+        "set": "fresh",
+        "dialect": "saudi",
+        "required_topic": "الاحترام",
+        "observed_wrong_topics": [
+          "الصداقة"
+        ],
+        "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+        "legacy_reason": "required_topic_missing"
+      },
+      {
+        "id": "fresh_08_saudi_الشجاعة",
+        "set": "fresh",
+        "dialect": "saudi",
+        "required_topic": "الشجاعة",
+        "observed_wrong_topics": [
+          "الامتنان"
+        ],
+        "response": "معنى الامتنان: إنك تنتبه للاللي تلاحظ الخير الموجود وتشكر عليها.",
+        "legacy_reason": "required_topic_missing"
+      },
+      {
+        "id": "fresh_09_saudi_الوفاء",
+        "set": "fresh",
+        "dialect": "saudi",
+        "required_topic": "الوفاء",
+        "observed_wrong_topics": [
+          "الصداقة"
+        ],
+        "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+        "legacy_reason": "required_topic_missing"
+      }
+    ],
+    "copy_anchor_passed": 18,
+    "copy_anchor_total": 26,
+    "copy_anchor_failures": [
+      {
+        "id": "known_msa_الوفاء",
+        "set": "known",
+        "dialect": "msa",
+        "required_topic": "الوفاء",
+        "response": "معنى الصداقة: علاقة فيها صدق واهتمام ووقفة وقت الحاجة.",
+        "legacy_reason": "required_topic_missing"
+      },
+      {
+        "id": "known_saudi_الوفاء",
+        "set": "known",
+        "dialect": "saudi",
+        "required_topic": "الوفاء",
+        "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+        "legacy_reason": "required_topic_missing"
+      },
+      {
+        "id": "known_msa_الاحترام",
+        "set": "known",
+        "dialect": "msa",
+        "required_topic": "الاحترام",
+        "response": "معنى الصداقة: رفقة طيبة واهتمام ووقفة ص وقت الحاجة.",
+        "legacy_reason": "required_topic_missing"
+      },
+      {
+        "id": "fresh_01_msa_الوفاء",
+        "set": "fresh",
+        "dialect": "msa",
+        "required_topic": "الوفاء",
+        "response": "معنى الصداقة: علاقة فيها صدق واهتمام ووقفة وقت الحاجة.",
+        "legacy_reason": "required_topic_missing"
+      },
+      {
+        "id": "fresh_02_saudi_التعاون",
+        "set": "fresh",
+        "dialect": "saudi",
+        "required_topic": "التعاون",
+        "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+        "legacy_reason": "required_topic_missing"
+      },
+      {
+        "id": "fresh_04_saudi_الاحترام",
+        "set": "fresh",
+        "dialect": "saudi",
+        "required_topic": "الاحترام",
+        "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+        "legacy_reason": "required_topic_missing"
+      },
+      {
+        "id": "fresh_08_saudi_الشجاعة",
+        "set": "fresh",
+        "dialect": "saudi",
+        "required_topic": "الشجاعة",
+        "response": "معنى الامتنان: إنك تنتبه للاللي تلاحظ الخير الموجود وتشكر عليها.",
+        "legacy_reason": "required_topic_missing"
+      },
+      {
+        "id": "fresh_09_saudi_الوفاء",
+        "set": "fresh",
+        "dialect": "saudi",
+        "required_topic": "الوفاء",
+        "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+        "legacy_reason": "required_topic_missing"
+      }
+    ],
+    "known_topic": "13/16",
+    "fresh_topic": "5/10",
+    "topic_family": "6/10",
+    "all_family": "37/50"
+  },
+  "gate_spec": {
+    "spec_id": "phase27_102_topic_prototype_contrastive_copy_anchor_gate_spec",
+    "phase": "Phase 27.102",
+    "strategy": "Sovereign Practical Acceleration Strategy v2",
+    "sovereignty_mode": "SF-native only",
+    "purpose": "Make topic binding evaluation count observed wrong-topic substitutions from response text before any future topic repair training.",
+    "metric_rules": {
+      "observed_wrong_topic_count": "Count every topic/prototype term present in the assistant response except the requested topic, independent of the primary failure reason.",
+      "copy_anchor": "Requested topic must appear within the first 12 visible Arabic chars.",
+      "reason_precedence": "wrong_topic and copy_anchor are independent gates; required_topic_missing must not hide a wrong-topic substitution."
+    },
+    "thresholds": {
+      "observed_wrong_topic_count": 0,
+      "copy_anchor": "all",
+      "topic_required": "all",
+      "known_topic": "16/16",
+      "fresh_topic": "8/10",
+      "topic_family": "8/10",
+      "all_family": "45/50"
+    },
+    "blocked_actions_until_gate_passes": [
+      "new LM training",
+      "runtime release",
+      "UI generator release",
+      "SF-50M transition",
+      "tokenizer retrain",
+      "pretrained/open-weight usage",
+      "template masking"
+    ]
+  },
+  "canary": {
+    "suite_id": "phase27_102_topic_prototype_contrastive_canary",
+    "phase": "Phase 27.102",
+    "objective": "topic_prototype_contrastive_copy_anchor_gate_v1",
+    "language_track": [
+      "msa",
+      "saudi"
+    ],
+    "target_terms": [
+      "الوفاء",
+      "التعاون",
+      "الصبر",
+      "الاحترام",
+      "الهدوء",
+      "الصدق",
+      "الصداقة",
+      "الشجاعة"
+    ],
+    "prototype_decoys": [
+      "الصداقة",
+      "الامتنان"
+    ],
+    "thresholds": {
+      "observed_wrong_topic_max": 0,
+      "copy_anchor_min": "16/16",
+      "topic_required_min": "16/16",
+      "malformed_max": 0,
+      "repeated_phrase_max": 0
+    },
+    "coverage": {
+      "prompt_count": 16,
+      "dialects": [
+        "msa",
+        "saudi"
+      ],
+      "terms_per_dialect": 8,
+      "all_terms_covered": true,
+      "prototype_decoy_covered": true
+    },
+    "prompts": [
+      {
+        "id": "prototype_guard_msa_الوفاء",
+        "set": "prototype_contrastive",
+        "dialect": "msa",
+        "dialogue_family": "topic",
+        "message": "عرّف الوفاء بجملة واحدة دون ذكر الصداقة.",
+        "requested_topic": "الوفاء",
+        "required_terms": [
+          "الوفاء"
+        ],
+        "forbidden_terms": [
+          "الامتنان",
+          "الصداقة",
+          "الاحترام",
+          "التعاون",
+          "الشجاعة",
+          "الصبر",
+          "الصدق",
+          "الهدوء"
+        ],
+        "prototype_decoys": [
+          "الصداقة",
+          "الامتنان"
+        ],
+        "copy_anchor_required": true,
+        "copy_anchor_max_visible_arabic_chars": 12,
+        "observed_wrong_topic_max": 0,
+        "max_sentences": 1
+      },
+      {
+        "id": "prototype_guard_saudi_الوفاء",
+        "set": "prototype_contrastive",
+        "dialect": "saudi",
+        "dialogue_family": "topic",
+        "message": "وش يعني الوفاء بجملة وحدة بدون ذكر الصداقة؟",
+        "requested_topic": "الوفاء",
+        "required_terms": [
+          "الوفاء"
+        ],
+        "forbidden_terms": [
+          "الامتنان",
+          "الصداقة",
+          "الاحترام",
+          "التعاون",
+          "الشجاعة",
+          "الصبر",
+          "الصدق",
+          "الهدوء"
+        ],
+        "prototype_decoys": [
+          "الصداقة",
+          "الامتنان"
+        ],
+        "copy_anchor_required": true,
+        "copy_anchor_max_visible_arabic_chars": 12,
+        "observed_wrong_topic_max": 0,
+        "max_sentences": 1
+      },
+      {
+        "id": "prototype_guard_msa_التعاون",
+        "set": "prototype_contrastive",
+        "dialect": "msa",
+        "dialogue_family": "topic",
+        "message": "عرّف التعاون بجملة واحدة دون ذكر الصداقة.",
+        "requested_topic": "التعاون",
+        "required_terms": [
+          "التعاون"
+        ],
+        "forbidden_terms": [
+          "الامتنان",
+          "الصداقة",
+          "الاحترام",
+          "الشجاعة",
+          "الصبر",
+          "الصدق",
+          "الهدوء",
+          "الوفاء"
+        ],
+        "prototype_decoys": [
+          "الصداقة",
+          "الامتنان"
+        ],
+        "copy_anchor_required": true,
+        "copy_anchor_max_visible_arabic_chars": 12,
+        "observed_wrong_topic_max": 0,
+        "max_sentences": 1
+      },
+      {
+        "id": "prototype_guard_saudi_التعاون",
+        "set": "prototype_contrastive",
+        "dialect": "saudi",
+        "dialogue_family": "topic",
+        "message": "وش يعني التعاون بجملة وحدة بدون ذكر الصداقة؟",
+        "requested_topic": "التعاون",
+        "required_terms": [
+          "التعاون"
+        ],
+        "forbidden_terms": [
+          "الامتنان",
+          "الصداقة",
+          "الاحترام",
+          "الشجاعة",
+          "الصبر",
+          "الصدق",
+          "الهدوء",
+          "الوفاء"
+        ],
+        "prototype_decoys": [
+          "الصداقة",
+          "الامتنان"
+        ],
+        "copy_anchor_required": true,
+        "copy_anchor_max_visible_arabic_chars": 12,
+        "observed_wrong_topic_max": 0,
+        "max_sentences": 1
+      },
+      {
+        "id": "prototype_guard_msa_الصبر",
+        "set": "prototype_contrastive",
+        "dialect": "msa",
+        "dialogue_family": "topic",
+        "message": "عرّف الصبر بجملة واحدة دون ذكر الصداقة.",
+        "requested_topic": "الصبر",
+        "required_terms": [
+          "الصبر"
+        ],
+        "forbidden_terms": [
+          "الامتنان",
+          "الصداقة",
+          "الاحترام",
+          "التعاون",
+          "الشجاعة",
+          "الصدق",
+          "الهدوء",
+          "الوفاء"
+        ],
+        "prototype_decoys": [
+          "الصداقة",
+          "الامتنان"
+        ],
+        "copy_anchor_required": true,
+        "copy_anchor_max_visible_arabic_chars": 12,
+        "observed_wrong_topic_max": 0,
+        "max_sentences": 1
+      },
+      {
+        "id": "prototype_guard_saudi_الصبر",
+        "set": "prototype_contrastive",
+        "dialect": "saudi",
+        "dialogue_family": "topic",
+        "message": "وش يعني الصبر بجملة وحدة بدون ذكر الصداقة؟",
+        "requested_topic": "الصبر",
+        "required_terms": [
+          "الصبر"
+        ],
+        "forbidden_terms": [
+          "الامتنان",
+          "الصداقة",
+          "الاحترام",
+          "التعاون",
+          "الشجاعة",
+          "الصدق",
+          "الهدوء",
+          "الوفاء"
+        ],
+        "prototype_decoys": [
+          "الصداقة",
+          "الامتنان"
+        ],
+        "copy_anchor_required": true,
+        "copy_anchor_max_visible_arabic_chars": 12,
+        "observed_wrong_topic_max": 0,
+        "max_sentences": 1
+      },
+      {
+        "id": "prototype_guard_msa_الاحترام",
+        "set": "prototype_contrastive",
+        "dialect": "msa",
+        "dialogue_family": "topic",
+        "message": "عرّف الاحترام بجملة واحدة دون ذكر الصداقة.",
+        "requested_topic": "الاحترام",
+        "required_terms": [
+          "الاحترام"
+        ],
+        "forbidden_terms": [
+          "الامتنان",
+          "الصداقة",
+          "التعاون",
+          "الشجاعة",
+          "الصبر",
+          "الصدق",
+          "الهدوء",
+          "الوفاء"
+        ],
+        "prototype_decoys": [
+          "الصداقة",
+          "الامتنان"
+        ],
+        "copy_anchor_required": true,
+        "copy_anchor_max_visible_arabic_chars": 12,
+        "observed_wrong_topic_max": 0,
+        "max_sentences": 1
+      },
+      {
+        "id": "prototype_guard_saudi_الاحترام",
+        "set": "prototype_contrastive",
+        "dialect": "saudi",
+        "dialogue_family": "topic",
+        "message": "وش يعني الاحترام بجملة وحدة بدون ذكر الصداقة؟",
+        "requested_topic": "الاحترام",
+        "required_terms": [
+          "الاحترام"
+        ],
+        "forbidden_terms": [
+          "الامتنان",
+          "الصداقة",
+          "التعاون",
+          "الشجاعة",
+          "الصبر",
+          "الصدق",
+          "الهدوء",
+          "الوفاء"
+        ],
+        "prototype_decoys": [
+          "الصداقة",
+          "الامتنان"
+        ],
+        "copy_anchor_required": true,
+        "copy_anchor_max_visible_arabic_chars": 12,
+        "observed_wrong_topic_max": 0,
+        "max_sentences": 1
+      },
+      {
+        "id": "prototype_guard_msa_الهدوء",
+        "set": "prototype_contrastive",
+        "dialect": "msa",
+        "dialogue_family": "topic",
+        "message": "عرّف الهدوء بجملة واحدة دون ذكر الصداقة.",
+        "requested_topic": "الهدوء",
+        "required_terms": [
+          "الهدوء"
+        ],
+        "forbidden_terms": [
+          "الامتنان",
+          "الصداقة",
+          "الاحترام",
+          "التعاون",
+          "الشجاعة",
+          "الصبر",
+          "الصدق",
+          "الوفاء"
+        ],
+        "prototype_decoys": [
+          "الصداقة",
+          "الامتنان"
+        ],
+        "copy_anchor_required": true,
+        "copy_anchor_max_visible_arabic_chars": 12,
+        "observed_wrong_topic_max": 0,
+        "max_sentences": 1
+      },
+      {
+        "id": "prototype_guard_saudi_الهدوء",
+        "set": "prototype_contrastive",
+        "dialect": "saudi",
+        "dialogue_family": "topic",
+        "message": "وش يعني الهدوء بجملة وحدة بدون ذكر الصداقة؟",
+        "requested_topic": "الهدوء",
+        "required_terms": [
+          "الهدوء"
+        ],
+        "forbidden_terms": [
+          "الامتنان",
+          "الصداقة",
+          "الاحترام",
+          "التعاون",
+          "الشجاعة",
+          "الصبر",
+          "الصدق",
+          "الوفاء"
+        ],
+        "prototype_decoys": [
+          "الصداقة",
+          "الامتنان"
+        ],
+        "copy_anchor_required": true,
+        "copy_anchor_max_visible_arabic_chars": 12,
+        "observed_wrong_topic_max": 0,
+        "max_sentences": 1
+      },
+      {
+        "id": "prototype_guard_msa_الصدق",
+        "set": "prototype_contrastive",
+        "dialect": "msa",
+        "dialogue_family": "topic",
+        "message": "عرّف الصدق بجملة واحدة دون ذكر الصداقة.",
+        "requested_topic": "الصدق",
+        "required_terms": [
+          "الصدق"
+        ],
+        "forbidden_terms": [
+          "الامتنان",
+          "الصداقة",
+          "الاحترام",
+          "التعاون",
+          "الشجاعة",
+          "الصبر",
+          "الهدوء",
+          "الوفاء"
+        ],
+        "prototype_decoys": [
+          "الصداقة",
+          "الامتنان"
+        ],
+        "copy_anchor_required": true,
+        "copy_anchor_max_visible_arabic_chars": 12,
+        "observed_wrong_topic_max": 0,
+        "max_sentences": 1
+      },
+      {
+        "id": "prototype_guard_saudi_الصدق",
+        "set": "prototype_contrastive",
+        "dialect": "saudi",
+        "dialogue_family": "topic",
+        "message": "وش يعني الصدق بجملة وحدة بدون ذكر الصداقة؟",
+        "requested_topic": "الصدق",
+        "required_terms": [
+          "الصدق"
+        ],
+        "forbidden_terms": [
+          "الامتنان",
+          "الصداقة",
+          "الاحترام",
+          "التعاون",
+          "الشجاعة",
+          "الصبر",
+          "الهدوء",
+          "الوفاء"
+        ],
+        "prototype_decoys": [
+          "الصداقة",
+          "الامتنان"
+        ],
+        "copy_anchor_required": true,
+        "copy_anchor_max_visible_arabic_chars": 12,
+        "observed_wrong_topic_max": 0,
+        "max_sentences": 1
+      },
+      {
+        "id": "prototype_guard_msa_الصداقة",
+        "set": "prototype_contrastive",
+        "dialect": "msa",
+        "dialogue_family": "topic",
+        "message": "عرّف الصداقة بجملة واحدة دون ذكر الامتنان.",
+        "requested_topic": "الصداقة",
+        "required_terms": [
+          "الصداقة"
+        ],
+        "forbidden_terms": [
+          "الامتنان",
+          "الاحترام",
+          "التعاون",
+          "الشجاعة",
+          "الصبر",
+          "الصدق",
+          "الهدوء",
+          "الوفاء"
+        ],
+        "prototype_decoys": [
+          "الصداقة",
+          "الامتنان"
+        ],
+        "copy_anchor_required": true,
+        "copy_anchor_max_visible_arabic_chars": 12,
+        "observed_wrong_topic_max": 0,
+        "max_sentences": 1
+      },
+      {
+        "id": "prototype_guard_saudi_الصداقة",
+        "set": "prototype_contrastive",
+        "dialect": "saudi",
+        "dialogue_family": "topic",
+        "message": "وش يعني الصداقة بجملة وحدة بدون ذكر الامتنان؟",
+        "requested_topic": "الصداقة",
+        "required_terms": [
+          "الصداقة"
+        ],
+        "forbidden_terms": [
+          "الامتنان",
+          "الاحترام",
+          "التعاون",
+          "الشجاعة",
+          "الصبر",
+          "الصدق",
+          "الهدوء",
+          "الوفاء"
+        ],
+        "prototype_decoys": [
+          "الصداقة",
+          "الامتنان"
+        ],
+        "copy_anchor_required": true,
+        "copy_anchor_max_visible_arabic_chars": 12,
+        "observed_wrong_topic_max": 0,
+        "max_sentences": 1
+      },
+      {
+        "id": "prototype_guard_msa_الشجاعة",
+        "set": "prototype_contrastive",
+        "dialect": "msa",
+        "dialogue_family": "topic",
+        "message": "عرّف الشجاعة بجملة واحدة دون ذكر الصداقة.",
+        "requested_topic": "الشجاعة",
+        "required_terms": [
+          "الشجاعة"
+        ],
+        "forbidden_terms": [
+          "الامتنان",
+          "الصداقة",
+          "الاحترام",
+          "التعاون",
+          "الصبر",
+          "الصدق",
+          "الهدوء",
+          "الوفاء"
+        ],
+        "prototype_decoys": [
+          "الصداقة",
+          "الامتنان"
+        ],
+        "copy_anchor_required": true,
+        "copy_anchor_max_visible_arabic_chars": 12,
+        "observed_wrong_topic_max": 0,
+        "max_sentences": 1
+      },
+      {
+        "id": "prototype_guard_saudi_الشجاعة",
+        "set": "prototype_contrastive",
+        "dialect": "saudi",
+        "dialogue_family": "topic",
+        "message": "وش يعني الشجاعة بجملة وحدة بدون ذكر الصداقة؟",
+        "requested_topic": "الشجاعة",
+        "required_terms": [
+          "الشجاعة"
+        ],
+        "forbidden_terms": [
+          "الامتنان",
+          "الصداقة",
+          "الاحترام",
+          "التعاون",
+          "الصبر",
+          "الصدق",
+          "الهدوء",
+          "الوفاء"
+        ],
+        "prototype_decoys": [
+          "الصداقة",
+          "الامتنان"
+        ],
+        "copy_anchor_required": true,
+        "copy_anchor_max_visible_arabic_chars": 12,
+        "observed_wrong_topic_max": 0,
+        "max_sentences": 1
+      }
+    ]
+  },
+  "blocked_actions": [
+    "new LM training",
+    "runtime release",
+    "UI generator release",
+    "SF-50M transition",
+    "tokenizer retrain",
+    "pretrained/open-weight usage",
+    "template masking"
+  ],
+  "allowed_next_actions": [
+    "author a no-training topic prototype contrastive curriculum pack",
+    "add rows that force requested-topic copy-anchor before prototype terms",
+    "rerun gate before bounded training is allowed"
+  ],
+  "decision": {
+    "decision_id": "PHASE27_102_TOPIC_PROTOTYPE_CONTRASTIVE_GATE_DECISION",
+    "engineering_decision": "ALLOW_PHASE27_103_TOPIC_PROTOTYPE_CONTRASTIVE_CURRICULUM_PACK_NO_TRAINING",
+    "new_training_allowed": false,
+    "runtime_release_allowed": false,
+    "ui_release_allowed": false,
+    "heldout_runtime_gate_allowed": false,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "curriculum_pack_allowed": true,
+    "why": "The executable gate now catches the Phase 27.100 metric blind spot: reported wrong-topic was 0, but observed wrong-topic is 8. Future topic repair must pass observed wrong-topic=0 and copy-anchor gates before any runtime or scaling decision.",
+    "next_phase": "Phase 27.103 — Topic Prototype Contrastive Curriculum Pack"
+  }
+}

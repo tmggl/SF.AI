@@ -91,13 +91,13 @@ Sovereign Practical Acceleration != open-weight/pretrained model lane
 PHASE27_78_ENGINEERING_DECISION
 ```
 
-### Current Scaling Decision — Phase 27.101
+### Current Scaling Decision — Phase 27.102
 
-Phase 27.101 لا يفتح حجمًا أكبر. القرار الحالي هو:
+Phase 27.102 لا يفتح حجمًا أكبر. القرار الحالي هو:
 
 ```text
-PHASE27_101_TOPIC_BINDING_RESULT_DIAGNOSIS_DECISION
-DESIGN_TOPIC_PROTOTYPE_CONTRASTIVE_COPY_ANCHOR_GATE_BEFORE_ANY_TRAINING
+PHASE27_102_TOPIC_PROTOTYPE_CONTRASTIVE_GATE_DECISION
+ALLOW_PHASE27_103_TOPIC_PROTOTYPE_CONTRASTIVE_CURRICULUM_PACK_NO_TRAINING
 ```
 
 السبب: Phase 27.96 شخّصت فشل 27.95 كخلل ربط متغير الموضوع لا كحد سعة.
@@ -113,8 +113,9 @@ DESIGN_TOPIC_PROTOTYPE_CONTRASTIVE_COPY_ANCHOR_GATE_BEFORE_ANY_TRAINING
 known `13/16`, fresh `5/10`, copy-anchor `18/26`, reported wrong-topic `0`,
 topic-family `6/10`, all-family `37/50`. Phase 27.101 شخّصت أن
 wrong-topic metric فيه blind spot: الفحص المباشر وجد observed wrong-topic `8`
-(`الصداقة=7`, `الامتنان=1`). يبقى `SF-50M` محجوبًا، والمسموح فقط
-Phase 27.102 كبوابة تصميم/ترميز قبل أي تدريب جديد.
+(`الصداقة=7`, `الامتنان=1`). Phase 27.102 ثبّتت بوابة تنفيذية تقيس
+observed wrong-topic من نص الرد وتفرض `0` قبل أي تدريب أو runtime. يبقى
+`SF-50M` محجوبًا، والمسموح فقط Phase 27.103 كحزمة curriculum بلا تدريب.
 
 ويجب أن يحدد أوزان الأسباب التالية:
 

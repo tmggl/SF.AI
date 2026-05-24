@@ -70,6 +70,9 @@ topic-family `6/10`, all-family `37/50`. لذلك لا runtime ولا `SF-50M`
 spot لا دلالة نجاح؛ الفحص المباشر وجد observed wrong-topic `8`. لذلك لا
 runtime ولا `SF-50M` ولا tokenizer retrain ولا تدريب جديد قبل Phase 27.102
 كبوابة تصميم/ترميز.
+بعد Phase 27.102، أصبحت بوابة observed wrong-topic/copy-anchor مرمّزة
+وتلتقط فشل 27.100. لذلك لا runtime ولا `SF-50M` ولا tokenizer retrain ولا
+تدريب جديد قبل Phase 27.103 كحزمة curriculum بلا تدريب.
 
 استثناء موثق: يجوز إدخال حوارات **owner-delegated agent-authored** في
 corpus إذا كان سامي قد فوّض الوكيل صراحة بتأليفها واعتمادها، وكانت كل

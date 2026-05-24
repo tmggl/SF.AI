@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.101 / 30**
-- **المرحلة الحالية:** **Phase 27.101 — Topic Binding Repair Result Diagnosis**
-- **حالة المرحلة الحالية:** **اكتمل تشخيص بلا تدريب؛ كشف blind spot في wrong-topic metric**
-- **المرحلة التالية المقترحة:** Phase 27.102 — Topic Prototype Contrastive Copy-Anchor Gate.
+- **الرحلة الحالية:** **Phase 27.102 / 30**
+- **المرحلة الحالية:** **Phase 27.102 — Topic Prototype Contrastive Copy-Anchor Gate**
+- **حالة المرحلة الحالية:** **اكتملت بوابة بلا تدريب؛ canary/spec جاهزة لمرحلة curriculum**
+- **المرحلة التالية المقترحة:** Phase 27.103 — Topic Prototype Contrastive Curriculum Pack.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -157,6 +157,7 @@
 | Phase 27.99 | Topic Metadata and Copy-Anchor Data Repair | ✅ metadata_copy_anchor_repaired_training_allowed_next | ✅ |
 | Phase 27.100 | Bounded Topic Binding Repair Training | ✅ trained_runtime_blocked_diagnosis_required | ✅ |
 | Phase 27.101 | Topic Binding Repair Result Diagnosis | ✅ diagnosed_metric_blind_spot_no_training | ✅ |
+| Phase 27.102 | Topic Prototype Contrastive Copy-Anchor Gate | ✅ gate_encoded_curriculum_pack_allowed_no_training | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1082,13 +1083,13 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-672 passed in 78.01s (0:01:18)
+675 passed in 78.67s (0:01:18)
 ```
 
 | التحقق | النتيجة |
 |------|------|
-| full pytest suite | `672 passed in 78.01s` |
-| focused Phase 27.101/API/UI tests | `78 passed in 8.77s` |
+| full pytest suite | `675 passed in 78.67s` |
+| focused Phase 27.102/API/UI tests | `78 passed in 8.72s` |
 | `make corpus-audit` | `8453` records, `issues=0` |
 | `make phase27-dialogue-eval` | `19/19`, `open_generator_ready=false` |
 
@@ -1680,6 +1681,37 @@ make api
   - [PHASE27_101_TOPIC_BINDING_RESULT_DIAGNOSIS_REPORT.md](./PHASE27_101_TOPIC_BINDING_RESULT_DIAGNOSIS_REPORT.md)
   - `artifacts/reports/phase27_101_topic_binding_result_diagnosis_report.json`
   - `artifacts/reports/PHASE27_101_TOPIC_BINDING_RESULT_DIAGNOSIS_DECISION.json`
+
+---
+
+## Phase 27.102 — Topic Prototype Contrastive Copy-Anchor Gate
+
+الحالة: **مكتملة كبوابة تصميم/ترميز فقط؛ لا تدريب ولا runtime.**
+
+- المسار: `Sovereign Practical Acceleration Strategy v2`.
+- السيادة: `SF-native only`; لا pretrained/open-weight/Qwen.
+- القاموس/المسار: `Saudi Seed v1`, `msa + saudi`.
+- الهدف: تثبيت metric لا يسمح لـ `required_topic_missing` بإخفاء
+  wrong-topic substitution.
+- البوابة الجديدة:
+  - counted metric: `observed_wrong_topic_count`
+  - threshold: `observed_wrong_topic_count == 0`
+  - copy-anchor: الموضوع المطلوب داخل أول 12 حرفًا عربيًا ظاهرًا
+  - canary prompts: `16`
+- أعادت البوابة قراءة 27.100:
+  - reported wrong-topic: `0`
+  - observed wrong-topic: `8`
+  - copy-anchor: `18/26`
+  - substitutions: `الصداقة=7`, `الامتنان=1`
+- القرار: `ALLOW_PHASE27_103_TOPIC_PROTOTYPE_CONTRASTIVE_CURRICULUM_PACK_NO_TRAINING`.
+- التالي: Phase 27.103 — Topic Prototype Contrastive Curriculum Pack.
+- المحظور الآن: runtime release, UI generator release, SF-50M,
+  tokenizer retrain, pretrained/open-weight usage, وأي تدريب جديد قبل 27.103.
+- التقارير:
+  - [PHASE27_102_TOPIC_PROTOTYPE_CONTRASTIVE_GATE_REPORT.md](./PHASE27_102_TOPIC_PROTOTYPE_CONTRASTIVE_GATE_REPORT.md)
+  - `artifacts/reports/phase27_102_topic_prototype_contrastive_gate_report.json`
+  - `artifacts/reports/PHASE27_102_TOPIC_PROTOTYPE_CONTRASTIVE_GATE_DECISION.json`
+  - `eval/prompts/phase27_102_topic_prototype_contrastive_canary.json`
 
 ---
 

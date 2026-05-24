@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.101 ضمن مسار SF-native فقط: شخّصنا نتيجة ربط الموضوع ووجدنا فجوة metric وcopy-anchor؛ لا runtime الآن. التالي Phase 27.102 بوابة topic prototype contrastive copy"
+      "response_preview": "وصلنا إلى Phase 27.102 ضمن مسار SF-native فقط: ثبّتنا بوابة observed wrong-topic وcopy-anchor لرصد prototype substitutions. لا runtime الآن؛ التالي Phase 27.103 حزمة curriculum بلا"
     },
     {
       "scenario_id": "clarification_repair_flow",

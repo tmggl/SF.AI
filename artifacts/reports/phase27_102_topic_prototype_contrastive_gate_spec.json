@@ -1,0 +1,30 @@
+{
+  "spec_id": "phase27_102_topic_prototype_contrastive_copy_anchor_gate_spec",
+  "phase": "Phase 27.102",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "purpose": "Make topic binding evaluation count observed wrong-topic substitutions from response text before any future topic repair training.",
+  "metric_rules": {
+    "observed_wrong_topic_count": "Count every topic/prototype term present in the assistant response except the requested topic, independent of the primary failure reason.",
+    "copy_anchor": "Requested topic must appear within the first 12 visible Arabic chars.",
+    "reason_precedence": "wrong_topic and copy_anchor are independent gates; required_topic_missing must not hide a wrong-topic substitution."
+  },
+  "thresholds": {
+    "observed_wrong_topic_count": 0,
+    "copy_anchor": "all",
+    "topic_required": "all",
+    "known_topic": "16/16",
+    "fresh_topic": "8/10",
+    "topic_family": "8/10",
+    "all_family": "45/50"
+  },
+  "blocked_actions_until_gate_passes": [
+    "new LM training",
+    "runtime release",
+    "UI generator release",
+    "SF-50M transition",
+    "tokenizer retrain",
+    "pretrained/open-weight usage",
+    "template masking"
+  ]
+}

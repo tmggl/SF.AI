@@ -1,0 +1,13 @@
+{
+  "decision_id": "PHASE27_102_TOPIC_PROTOTYPE_CONTRASTIVE_GATE_DECISION",
+  "engineering_decision": "ALLOW_PHASE27_103_TOPIC_PROTOTYPE_CONTRASTIVE_CURRICULUM_PACK_NO_TRAINING",
+  "new_training_allowed": false,
+  "runtime_release_allowed": false,
+  "ui_release_allowed": false,
+  "heldout_runtime_gate_allowed": false,
+  "sf50m_justified_transition": false,
+  "tokenizer_retrain_allowed": false,
+  "curriculum_pack_allowed": true,
+  "why": "The executable gate now catches the Phase 27.100 metric blind spot: reported wrong-topic was 0, but observed wrong-topic is 8. Future topic repair must pass observed wrong-topic=0 and copy-anchor gates before any runtime or scaling decision.",
+  "next_phase": "Phase 27.103 — Topic Prototype Contrastive Curriculum Pack"
+}

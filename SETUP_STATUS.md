@@ -10,11 +10,11 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.101 / 30**
-- **المرحلة الحالية:** **Phase 27.101 — Topic Binding Repair Result Diagnosis** (`PHASE27_101_TOPIC_BINDING_RESULT_DIAGNOSIS_DECISION`; تشخيص فقط؛ runtime محجوب)
+- **الرحلة الحالية:** **Phase 27.102 / 30**
+- **المرحلة الحالية:** **Phase 27.102 — Topic Prototype Contrastive Copy-Anchor Gate** (`PHASE27_102_TOPIC_PROTOTYPE_CONTRASTIVE_GATE_DECISION`; بوابة فقط؛ runtime محجوب)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
 - **ملف القيادة الواحد:** `docs/SF_AI_MASTER_GUIDE.md` هو نقطة الدخول الأولى لأي Agent أو مهندس؛ بقية الملفات مراجع تفصيلية.
-- **المرحلة التالية المقترحة:** Phase 27.102 — Topic Prototype Contrastive Copy-Anchor Gate؛ بوابة تصميم/ترميز بلا تدريب جديد.
+- **المرحلة التالية المقترحة:** Phase 27.103 — Topic Prototype Contrastive Curriculum Pack؛ حزمة curriculum بلا تدريب جديد.
 - **استراتيجية العمل الملزمة:** Sovereign Practical Acceleration Strategy v2؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب، و`NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS` قبل أي runtime.
 - **تصحيح السيادة:** لا يوجد Open-Weight Lane؛ Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي = أدوات هندسية فقط داخل SF-native.
@@ -142,6 +142,8 @@
 - **تقرير Phase 27.100:** `docs/PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_REPORT.md`, `artifacts/reports/phase27_100_bounded_topic_binding_repair_report.json`, `artifacts/reports/PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_DECISION.json`.
 - **نتيجة Phase 27.101:** شُخّصت نتيجة 27.100 بلا تدريب. ظهر blind spot: reported wrong-topic `0` لكن observed wrong-topic `8` (`الصداقة=7`, `الامتنان=1`). القرار يسمح فقط ببوابة 27.102 لتصميم/ترميز topic prototype contrastive copy-anchor قبل أي تدريب.
 - **تقرير Phase 27.101:** `docs/PHASE27_101_TOPIC_BINDING_RESULT_DIAGNOSIS_REPORT.md`, `artifacts/reports/phase27_101_topic_binding_result_diagnosis_report.json`, `artifacts/reports/PHASE27_101_TOPIC_BINDING_RESULT_DIAGNOSIS_DECISION.json`.
+- **نتيجة Phase 27.102:** رُمزت بوابة observed wrong-topic/copy-anchor. البوابة التقطت فشل 27.100: reported wrong-topic `0` مقابل observed wrong-topic `8`, وcopy-anchor `18/26`. أُنشئ canary من `16` prompt. القرار يسمح فقط بحزمة curriculum في 27.103 بلا تدريب.
+- **تقرير Phase 27.102:** `docs/PHASE27_102_TOPIC_PROTOTYPE_CONTRASTIVE_GATE_REPORT.md`, `artifacts/reports/phase27_102_topic_prototype_contrastive_gate_report.json`, `artifacts/reports/PHASE27_102_TOPIC_PROTOTYPE_CONTRASTIVE_GATE_DECISION.json`, `eval/prompts/phase27_102_topic_prototype_contrastive_canary.json`.
 - **مقارنة tokenizer v1/v2:** v1 كان `vocab=261`, `merges=218`, `words_seen=723`, سعودي فقط. v2 تدرب على `500` سجل متوازن: `msa=250`, `saudi=250`.
 - **تحسن protected Saudi terms:** `average_tokens` انخفض من `4.0` في v1 إلى `2.3` في v2، ولا توجد `roundtrip_failures` أو `aggressive_split_terms`.
 - **خطة batches الدقيقة:** `make phase22-plan` يعرض الآن `planned_batches=[]` لأن الجمع اكتمل.
@@ -286,7 +288,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs,reports}/   Phase 5.5+ outputs/reports
 │
-├── tests/                                 pytest suite — 672 تست / 96 ملف
+├── tests/                                 pytest suite — 675 تست / 97 ملف
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -362,7 +364,7 @@ make server-start
 
 آخر تحقق حي بعد restart:
 - السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`.
-- الكود الحالي يعرض `Phase 27.101` في `/system/status` و`/health`; runtime المولّد العام لا يزال محجوبًا حتى نجاح gates.
+- الكود الحالي يعرض `Phase 27.102` في `/system/status` و`/health`; runtime المولّد العام لا يزال محجوبًا حتى نجاح gates.
 - `GET /system/phase26-readiness` يرجع `can_start_sf50m_training=false`.
 - `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - `make server-status` read-only ولا يوقف السيرفر.
@@ -374,7 +376,7 @@ make server-start
 ## نتائج الاختبارات (حتى إكمال Phase 27.98)
 
 ```
-672 passed in 78.01s (0:01:18)
+675 passed in 78.67s (0:01:18)
 ```
 
 التغطية الحالية:
@@ -423,6 +425,7 @@ make server-start
 - `test_phase27_99_topic_metadata_copy_anchor_repair.py` — 2 tests (Phase 27.99 metadata repair)
 - `test_phase27_100_bounded_topic_binding_repair.py` — 3 tests (Phase 27.100 training result)
 - `test_phase27_101_topic_binding_result_diagnosis.py` — 3 tests (Phase 27.101 diagnosis)
+- `test_phase27_102_topic_prototype_contrastive_gate.py` — 3 tests (Phase 27.102 gate)
 - `test_orchestrator.py` — 7 tests
 - `test_response_composer.py` — 6 tests
 - `test_router.py` — 8 tests
@@ -471,8 +474,9 @@ make server-start
 - **Phase 27.99:** إصلاح metadata وcopy-anchor — مكتمل؛ `missing_topic_term_records=0` وبوابة 27.98 صارت تسمح بـ Phase 27.100 كتدريب مقيّد.
 - **Phase 27.100:** تدريب إصلاح ربط الموضوع المقيّد — مكتمل؛ لم يمر gates (`13/16`, `5/10`, `18/26`, `37/50`)؛ runtime محجوب والتالي diagnosis.
 - **Phase 27.101:** تشخيص نتيجة ربط الموضوع — مكتمل؛ كشف blind spot في wrong-topic metric، والتالي 27.102 gate بلا تدريب.
+- **Phase 27.102:** بوابة topic prototype contrastive copy-anchor — مكتملة؛ canary/spec جاهزة والتالي 27.103 حزمة curriculum بلا تدريب.
 
-أول توليد خام حدث في Phase 13. Phase 15 جهّز الباب داخل الشات، وPhase 16 أثبت أن التوليد مكرر. Phase 27.78 غيّرت المنهج: لا مزيد من التدريب المتكرر قبل تشخيص root-cause. Phase 27.79 صممت إصلاح objective/curriculum/decoding/family balance. Phase 27.80 شفّرت البوابات، Phase 27.81 عالجت توازن family ببيانات gold، Phase 27.82 سمحت بتدريب مقيّد، Phase 27.83 أثبتت أن الإصلاح الحالي لا يكفي، Phase 27.84 حددت السبب، Phase 27.85 صممت الإشارة الصريحة، Phase 27.86 أثبتت أن الإشارة تظهر فعليًا داخل نص التدريب ومخفية عن loss، Phase 27.87 أثبتت أن التدريب المقيّد ما زال غير كافٍ للحوار العام، Phase 27.88 حددت أن ترتيب stream هو الخلل الأكبر، Phase 27.89 أصلحت بوابة الترتيب قبل أي تدريب جديد، Phase 27.90 رفعت النتيجة إلى `35/50`، Phase 27.91 أثبتت أن الضعف المتبقي topic-specific لا capacity عام، Phase 27.92 صممت إصلاح topic-objective، Phase 27.93 أثبتت الترميز الجاف، Phase 27.94 سدّت فجوة `الوفاء` السعودية، Phase 27.95 أثبتت أن التدريب المحدود لم يكفِ، Phase 27.96 شخّصت السبب: خلل ربط متغير الموضوع لا نقص حجم، Phase 27.97 صممت objective copy/contrastive، Phase 27.98 منعت التدريب حتى إصلاح metadata، Phase 27.99 أصلحت metadata، Phase 27.100 درّبت إصلاح ربط الموضوع، وPhase 27.101 كشف أن metric لم يلتقط prototype substitution.
+أول توليد خام حدث في Phase 13. Phase 15 جهّز الباب داخل الشات، وPhase 16 أثبت أن التوليد مكرر. Phase 27.78 غيّرت المنهج: لا مزيد من التدريب المتكرر قبل تشخيص root-cause. Phase 27.79 صممت إصلاح objective/curriculum/decoding/family balance. Phase 27.80 شفّرت البوابات، Phase 27.81 عالجت توازن family ببيانات gold، Phase 27.82 سمحت بتدريب مقيّد، Phase 27.83 أثبتت أن الإصلاح الحالي لا يكفي، Phase 27.84 حددت السبب، Phase 27.85 صممت الإشارة الصريحة، Phase 27.86 أثبتت أن الإشارة تظهر فعليًا داخل نص التدريب ومخفية عن loss، Phase 27.87 أثبتت أن التدريب المقيّد ما زال غير كافٍ للحوار العام، Phase 27.88 حددت أن ترتيب stream هو الخلل الأكبر، Phase 27.89 أصلحت بوابة الترتيب قبل أي تدريب جديد، Phase 27.90 رفعت النتيجة إلى `35/50`، Phase 27.91 أثبتت أن الضعف المتبقي topic-specific لا capacity عام، Phase 27.92 صممت إصلاح topic-objective، Phase 27.93 أثبتت الترميز الجاف، Phase 27.94 سدّت فجوة `الوفاء` السعودية، Phase 27.95 أثبتت أن التدريب المحدود لم يكفِ، Phase 27.96 شخّصت السبب: خلل ربط متغير الموضوع لا نقص حجم، Phase 27.97 صممت objective copy/contrastive، Phase 27.98 منعت التدريب حتى إصلاح metadata، Phase 27.99 أصلحت metadata، Phase 27.100 درّبت إصلاح ربط الموضوع، Phase 27.101 كشف أن metric لم يلتقط prototype substitution، وPhase 27.102 ثبّت بوابة observed wrong-topic.
 
 ---
 
@@ -518,4 +522,4 @@ make server-start
 
 ## بروتوكول الانتقال
 
-التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، ومع نجاح بوابة التكبير انتقل تلقائيًا للحجم التالي حتى `SF-1B+`. ارفع الناجح فقط، افحص الحساسية، ووثّق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. بعد Phase 27.101 لا يوجد runtime release ولا SF-50M ولا tokenizer retrain؛ المسموح Phase 27.102 كبوابة تصميم/ترميز فقط قبل أي تدريب جديد.
+التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، ومع نجاح بوابة التكبير انتقل تلقائيًا للحجم التالي حتى `SF-1B+`. ارفع الناجح فقط، افحص الحساسية، ووثّق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. بعد Phase 27.102 لا يوجد runtime release ولا SF-50M ولا tokenizer retrain؛ المسموح Phase 27.103 كحزمة curriculum بلا تدريب.
