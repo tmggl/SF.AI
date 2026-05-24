@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.67 / 30**
-- **المرحلة الحالية:** **Phase 27.67 — Fresh Shadow Canary**
-- **حالة المرحلة الحالية:** **اكتملت كتقييم فقط؛ fresh shadow canary فشل `30/50` والـ runtime محجوب**
-- **المرحلة التالية المقترحة:** Phase 27.68 inspect Phase 27.67 failures and repair before runtime.
+- **الرحلة الحالية:** **Phase 27.68 / 30**
+- **المرحلة الحالية:** **Phase 27.68 — Shadow Failure Repair**
+- **حالة المرحلة الحالية:** **اكتملت؛ known shadow `50/50` وregression `30/30` والـ runtime محجوب**
+- **المرحلة التالية المقترحة:** Phase 27.69 new fresh shadow canary with unseen prompts after repair.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -116,6 +116,7 @@
 | Phase 27.65 | Tokenizer v8 Topic Probe | ✅ passed_tokenizer_v8_topic_probe_ready_for_bounded_lm_topic_repair_runtime_blocked | ✅ |
 | Phase 27.66 | V8 Bounded Topic Repair | ✅ passed_v8_bounded_topic_repair_ready_for_fresh_shadow_canary_runtime_blocked | ✅ |
 | Phase 27.67 | Fresh Shadow Canary | ✅ failed_fresh_shadow_canary_runtime_blocked | ✅ |
+| Phase 27.68 | Shadow Failure Repair | ✅ passed_shadow_failure_repair_ready_for_new_fresh_shadow_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -928,6 +929,14 @@
   - family summary: open_social `4/10`, followup `4/10`, planning `7/10`, support `6/10`, topic `9/10`.
   - القرار: لا runtime switch ولا UI؛ Phase 27.68 يجب أن يصلح انجراف العائلات قبل أي فتح واجهة.
   - أضيف [PHASE27_67_FRESH_SHADOW_CANARY_REPORT.md](./PHASE27_67_FRESH_SHADOW_CANARY_REPORT.md).
+- بدأ وانتهى Phase 27.68 Shadow Failure Repair:
+  - أضيف `make phase27-shadow-failure-repair`.
+  - دُرّب `SF-10M` إصلاحًا محدودًا على tokenizer v8 لمدة `5600` خطوة.
+  - أضيف إصلاح للحارس حتى لا يطابق أجزاء الكلمات مثل `مرتبك` ← `رتب`.
+  - النتيجة: known shadow Phase 27.67 صار `50/50`.
+  - regression Phase 27.60 بقي `30/30`.
+  - القرار: لا runtime switch ولا UI؛ المسموح التالي Phase 27.69 fresh shadow جديد بأسئلة غير مرئية بعد الإصلاح.
+  - أضيف [PHASE27_68_SHADOW_FAILURE_REPAIR_REPORT.md](./PHASE27_68_SHADOW_FAILURE_REPAIR_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 

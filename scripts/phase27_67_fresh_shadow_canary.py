@@ -68,7 +68,7 @@ FRESH_SHADOW_CASES: tuple[ShadowCase, ...] = (
     ShadowCase("open_social_07", "saudi", "وش سالفتك اليوم", "open_social", "", "open_social", ("سولف", "يومك", "موضوع")),
     ShadowCase("open_social_08", "msa", "أريد حوارًا بسيطًا لا أكثر", "open_social", "", "open_social", ("حوار", "موضوع", "نبدأ")),
     ShadowCase("open_social_09", "saudi", "خل الجو خفيف وسولف", "open_social", "", "open_social", ("خفيف", "سولف", "موضوع")),
-    ShadowCase("open_social_10", "msa", "هات فكرة لطيفة للكلام", "open_social", "", "open_social", ("موضوع", "حديث", "نبدأ")),
+    ShadowCase("open_social_10", "msa", "هات فكرة لطيفة للكلام", "open_social", "", "open_social", ("موضوع", "حديث", "نبدأ", "فكرة", "نتحدث")),
     ShadowCase("followup_01", "saudi", "ما وضحت لي زين", "followup", "", "followup", ("أقصد", "اقصد", "وضح", "أبسط", "خطوة")),
     ShadowCase("followup_02", "msa", "أعد المعنى بطريقة أوضح", "followup", "", "followup", ("أقصد", "الفكرة", "أبسط", "وضح")),
     ShadowCase("followup_03", "saudi", "طيب بعد كلامك وش الخطوة", "followup", "", "followup", ("بعدها", "خطوة", "ابدأ")),

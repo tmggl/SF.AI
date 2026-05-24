@@ -132,7 +132,7 @@ _TASK_PROMPT_RULES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
     ),
     (
         ("توتر", "قلق", "متوتر", "قلقان", "اهدأ", "اهدا", "تهدئه", "تهدئة"),
-        ("اهدأ", "اهدا", "نفس", "هون", "يهوّن", "يهون", "هدوء", "خطوة", "شوي"),
+        ("اهدأ", "اهدا", "نفس", "تنفس", "راحة", "هون", "يهوّن", "يهون", "هدوء", "خطوة", "شوي"),
         "support_mismatch",
     ),
 )
@@ -199,9 +199,9 @@ class GenerationGuard:
         for triggers, expected_terms, reason in _SOCIAL_PROMPT_RULES:
             if reason == "saudi_preference_mismatch" and "بالسعودي" in p:
                 continue
-            if any(trigger in p for trigger in triggers) and not any(
-                _normalize_surface(term) in t for term in expected_terms
-            ):
+            if any(_contains_prompt_trigger(p, trigger) for trigger in triggers):
+                if any(_normalize_surface(term) in t for term in expected_terms):
+                    return verdict
                 return GenerationGuardVerdict(
                     allowed=False,
                     reason=reason,
@@ -209,9 +209,9 @@ class GenerationGuard:
                     arabic_ratio=verdict.arabic_ratio,
                 )
         for triggers, expected_terms, reason in _TASK_PROMPT_RULES:
-            if any(trigger in p for trigger in triggers) and not any(
-                _normalize_surface(term) in t for term in expected_terms
-            ):
+            if any(_contains_prompt_trigger(p, trigger) for trigger in triggers):
+                if any(_normalize_surface(term) in t for term in expected_terms):
+                    return verdict
                 return GenerationGuardVerdict(
                     allowed=False,
                     reason=reason,
@@ -267,3 +267,12 @@ def _normalize_surface(text: str) -> str:
         .strip()
         .lower()
     )
+
+
+def _contains_prompt_trigger(normalized_prompt: str, trigger: str) -> bool:
+    normalized_trigger = _normalize_surface(trigger)
+    if not normalized_trigger:
+        return False
+    if " " in normalized_trigger:
+        return normalized_trigger in normalized_prompt
+    return normalized_trigger in normalized_prompt.split()

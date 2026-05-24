@@ -99,6 +99,7 @@ SF.AI يملك الآن:
 | Phase 27.65 | `Tokenizer v8 topic probe` | tokenizer فقط؛ topic terms `8/8` وcritical `2/2` |
 | Phase 27.66 | `V8 bounded topic repair` | LM repair محدود على tokenizer v8؛ broader canary `30/30`, runtime محجوب |
 | Phase 27.67 | `Fresh shadow canary` | تقييم فقط؛ أسئلة غير مرئية `50/50` novelty لكنها فشلت `30/50`, runtime محجوب |
+| Phase 27.68 | `Shadow failure repair` | إصلاح محدود؛ known shadow `50/50` وregression `30/30`, runtime محجوب |
 | بعد نجاح SF-10M | `SF-50M v0.1` | نجاح جودة SF-10M/canary + إعادة Phase 26 readiness |
 | Phase 28 | `SF-120M v0.1` | نجاح SF-50M + scaling gate |
 
@@ -165,6 +166,7 @@ SF.AI يملك الآن:
 - **Phase 27.65:** درّب tokenizer v8 فقط ومرّر topic probe: `التعاون/الاحترام=2/2`, topic terms `8/8`.
 - **Phase 27.66:** درّب LM repair محدودًا على tokenizer v8 ومرّر broader canary `30/30`; التالي fresh shadow canary قبل أي runtime switch.
 - **Phase 27.67:** fresh shadow canary فشل `30/50` رغم novelty `50/50`; التالي إصلاح موجّه للعائلات قبل أي runtime switch.
+- **Phase 27.68:** أصلح الفشل المعروف إلى `50/50` وحافظ على regression `30/30`; التالي fresh shadow جديد قبل أي runtime switch.
 - **Phase 28:** أول قفزة بعد SF-50M إذا أثبت 50M قيمة واضحة.
 - **Phase 29:** إدخاله في الواجهة كتجربة يومية مع router/safety/memory.
 

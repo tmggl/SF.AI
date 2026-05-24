@@ -137,6 +137,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.65 | Tokenizer v8 Topic Probe | مكتملة؛ tokenizer v8 نجح `8/8` topic terms, لا LM training |
 | Phase 27.66 | V8 Bounded Topic Repair | مكتملة؛ LM repair محدود على tokenizer v8 نجح broader canary `30/30`, runtime محجوب |
 | Phase 27.67 | Fresh Shadow Canary | مكتملة كتقييم؛ فشل `30/50`, runtime محجوب |
+| Phase 27.68 | Shadow Failure Repair | مكتملة؛ known shadow `50/50` وregression `30/30`, runtime محجوب |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3609,6 +3610,35 @@ tokenizer v8 مطلوب قبل أي LM repair جديد. لا runtime switch، ل
 - [PHASE27_67_FRESH_SHADOW_CANARY_REPORT.md](./PHASE27_67_FRESH_SHADOW_CANARY_REPORT.md)
 - `artifacts/reports/phase27_67_fresh_shadow_canary_report.json`
 - `artifacts/samples/phase27_67_fresh_shadow_canary.md`
+
+## Phase 27.68 — Shadow Failure Repair
+
+### الهدف
+إصلاح فشل Phase 27.67 في عائلات open_social/followup/support/topic مع الحفاظ على canary Phase 27.60. هذه مرحلة تدريب محدودة، وليست فتح runtime.
+
+### ما نُفّذ
+- أضيف `scripts/phase27_68_shadow_failure_repair.py`.
+- أضيف `make phase27-shadow-failure-repair`.
+- دُرّب `SF-10M` على tokenizer v8 لمدة `5600` خطوة.
+- أضيفت أمثلة طبيعية مؤلفة محليًا فقط لإزالة انجراف open_social/followup/support/topic.
+- عُدّل `GenerationGuard` ليطابق prompt triggers على مستوى الكلمات حتى لا يخلط `مرتبك` مع `رتب`.
+
+### النتيجة
+- Phase 27.67 known shadow: `50/50`.
+- Phase 27.60 regression: `30/30`.
+- checkpoint: `artifacts/eval/phase27_68_shadow_failure_repair/checkpoints/sf-10m-step5600`.
+
+### القرار
+نجح إصلاح الفشل المعروف، لكن لا يسمح بفتح الواجهة؛ لأن Phase 27.68 رأى فشل 27.67 أثناء التدريب. المسموح التالي فقط: fresh shadow canary جديد بأسئلة غير مرئية بعد الإصلاح.
+
+التالي:
+
+**Phase 27.69 — new fresh shadow canary with unseen prompts after repair**
+
+### artifacts
+- [PHASE27_68_SHADOW_FAILURE_REPAIR_REPORT.md](./PHASE27_68_SHADOW_FAILURE_REPAIR_REPORT.md)
+- `artifacts/reports/phase27_68_shadow_failure_repair_report.json`
+- `artifacts/samples/phase27_68_shadow_failure_repair.md`
 
 ---
 

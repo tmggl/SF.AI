@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.67: اختبرنا checkpoint 27.66 على fresh shadow canary "
-    "بأسئلة غير مرئية، والنتيجة 30/50 فقط. هذا يعني أن الواجهة لا تُفتح. "
-    "التالي Phase 27.68 لإصلاح انجراف open_social/followup/support قبل أي runtime.",
+    "وصلنا إلى Phase 27.68: أصلحنا فشل shadow السابق، فصار known shadow 50/50 "
+    "وregression 30/30. الواجهة لا تُفتح بعد لأن الاختبار التالي يجب أن يكون "
+    "Phase 27.69 fresh shadow جديد بأسئلة غير مرئية.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

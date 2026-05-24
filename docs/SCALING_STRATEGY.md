@@ -380,3 +380,21 @@ Phase 27.67 اختبرت checkpoint Phase 27.66 بدون تدريب جديد:
 - لا فتح واجهة على checkpoint الجديد.
 - لا `SF-50M` ولا Phase 28.
 - التالي Phase 27.68 إصلاح موجّه للفشل؛ فشل fresh prompts يعني أن البيانات/الهدف أهم من الحجم الآن.
+
+## قرار Phase 27.68
+
+Phase 27.68 دربت إصلاحًا محدودًا على فشل Phase 27.67:
+
+- model size: `SF-10M`.
+- tokenizer: `artifacts/tokenizers/sf_bpe/v8_phase27_65`.
+- steps: `5600`.
+- known shadow Phase 27.67: `50/50`.
+- regression Phase 27.60: `30/30`.
+
+قرار scaling:
+
+- لا رفع حجم.
+- لا runtime switch.
+- لا فتح واجهة على checkpoint الجديد.
+- لا `SF-50M` ولا Phase 28.
+- التالي Phase 27.69 fresh shadow جديد بأسئلة غير مرئية؛ لأن Phase 27.68 رأى فشل 27.67 أثناء التدريب.
