@@ -82,9 +82,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.96 ضمن مسار SF-native فقط: شخّصنا فشل 27.95 "
-    "كخلل ربط متغير الموضوع داخل الرد. لا runtime ولا تدريب الآن؛ التالي "
-    "Phase 27.97 تصميم objective يثبت الموضوع المطلوب.",
+    "وصلنا إلى Phase 27.97 ضمن مسار SF-native فقط: صممنا objective ينسخ "
+    "الموضوع المطلوب في بداية رد topic ويمنع الموضوعات المجاورة. لا runtime "
+    "ولا تدريب الآن؛ التالي Phase 27.98 ترميز البوابة وتدقيق metadata.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

@@ -28,9 +28,9 @@
 المسار الحالي الرسمي:
 
 ```text
-Phase 27.96 — Topic Objective Repair Result Diagnosis
+Phase 27.97 — Topic Variable Binding Objective Design
 Sovereign Practical Acceleration Strategy v2
-PHASE27_96_TOPIC_OBJECTIVE_RESULT_DIAGNOSIS_DECISION
+PHASE27_97_TOPIC_VARIABLE_BINDING_OBJECTIVE_DESIGN_DECISION
 ```
 
 القرار الحالي:
@@ -42,7 +42,8 @@ PHASE27_96_TOPIC_OBJECTIVE_RESULT_DIAGNOSIS_DECISION
 - Phase 27.95 دُرّبت كتجربة مقيّدة على `SF-10M` فقط، لكنها لم تمر البوابات:
   known topic `10/16`, fresh topic `4/10`, all-family `33/50`.
 - Phase 27.96 شخّصت السبب كخلل ربط متغير الموضوع: `wrong_topic_substitution_count=11`.
-- التالي: `Phase 27.97 — Topic Variable Binding Objective Design`.
+- Phase 27.97 صممت objective ينسخ الموضوع المطلوب في بداية رد topic ويمنع الموضوعات المجاورة.
+- التالي: `Phase 27.98 — Topic Binding Gate Encoding and Metadata Audit`.
 - عند نجاح بوابة أي حجم لاحقًا، ينتقل الوكيل تلقائيًا للحجم التالي حتى
   `SF-1B+` دون انتظار موافقة جديدة.
 
@@ -113,16 +114,17 @@ PHASE27_96_TOPIC_OBJECTIVE_RESULT_DIAGNOSIS_DECISION
 - [docs/PHASE27_72_STABILITY_FIRST_REPAIR_REPORT.md](./docs/PHASE27_72_STABILITY_FIRST_REPAIR_REPORT.md) — micro-repair من أفضل مرشح رفع النتيجة إلى `138/140` مع بقاء runtime محجوبًا.
 - [docs/PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_REPORT.md](./docs/PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_REPORT.md) — تدريب topic-objective محدود اكتمل وفشل البوابات، لذلك runtime محجوب والتشخيص التالي إلزامي.
 - [docs/PHASE27_96_TOPIC_OBJECTIVE_RESULT_DIAGNOSIS_REPORT.md](./docs/PHASE27_96_TOPIC_OBJECTIVE_RESULT_DIAGNOSIS_REPORT.md) — تشخيص يثبت أن الفشل الحالي هو ربط متغير الموضوع، لا حجم النموذج.
+- [docs/PHASE27_97_TOPIC_VARIABLE_BINDING_OBJECTIVE_DESIGN_REPORT.md](./docs/PHASE27_97_TOPIC_VARIABLE_BINDING_OBJECTIVE_DESIGN_REPORT.md) — تصميم objective copy/contrastive لتثبيت الموضوع المطلوب قبل أي تدريب.
 
 ---
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.96 / 30 — Topic Objective Repair Result Diagnosis.
-- **الأولوية الحالية:** Phase 27.97 Topic Variable Binding Objective Design؛ لا تدريب جديد قبل تصميم objective يثبت الموضوع المطلوب.
+- **الرحلة الحالية:** Phase 27.97 / 30 — Topic Variable Binding Objective Design.
+- **الأولوية الحالية:** Phase 27.98 Topic Binding Gate Encoding and Metadata Audit؛ لا تدريب قبل ترميز البوابة وتدقيق `topic_term`.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
 - **البيانات الحالية:** corpus موثق `8453` سجلًا يمر `corpus-audit`: `4254` سعودي + `4199` فصحى، `gold=3341`, `silver=5112`. split الحالي `train=7603`, `eval=850`.
-- **التدريب:** Phase 27.95 دُرّب بالفعل كتدريب إصلاح topic-objective محدود وفشل gates، وPhase 27.96 شخّص السبب كـ topic variable binding failure. لا runtime ولا SF-50M ولا tokenizer retrain ولا تدريب جديد قبل Phase 27.97. Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
+- **التدريب:** Phase 27.95 دُرّب بالفعل كتدريب إصلاح topic-objective محدود وفشل gates، وPhase 27.96 شخّص السبب كـ topic variable binding failure، وPhase 27.97 صمم objective جديدًا. لا runtime ولا SF-50M ولا tokenizer retrain ولا تدريب جديد قبل Phase 27.98. Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
 - **المولّد:** runtime العام محجوب كمولد حواري حتى نجاح held-out/canary. لا تعرض أي قالب على أنه مولّد، ولا تفتح واجهة مولّد إلا بعد قرار runtime صريح.
 - **التقييم:** Phase 27 مرّر `19/19` turn في حوار متعدد الأدوار، لكنه أكد أن الردود ما زالت `template` وأن المولد غير جاهز.
 - **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.

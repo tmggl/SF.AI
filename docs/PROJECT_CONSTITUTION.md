@@ -53,6 +53,10 @@ SF.AI يملك مسار ذكائه:
 `topic_variable_binding_failure`، حيث يرد النموذج بجواب topic لكنه يبدل
 الموضوع المطلوب بموضوعات مجاورة. لذلك لا تدريب جديد قبل تصميم objective
 copy/contrastive في Phase 27.97.
+بعد Phase 27.97، صُمم objective `topic_copy_contrastive_binding_objective_v1`
+ليجعل نسخ الموضوع المطلوب شرطًا صريحًا في بداية رد topic. هذا لا يفتح
+تدريبًا ولا runtime ولا `SF-50M`؛ المسموح فقط Phase 27.98 لترميز البوابة
+وتدقيق metadata.
 
 استثناء موثق: يجوز إدخال حوارات **owner-delegated agent-authored** في
 corpus إذا كان سامي قد فوّض الوكيل صراحة بتأليفها واعتمادها، وكانت كل

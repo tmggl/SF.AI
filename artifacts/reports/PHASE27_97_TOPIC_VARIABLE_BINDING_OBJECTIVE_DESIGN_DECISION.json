@@ -1,0 +1,13 @@
+{
+  "decision_id": "PHASE27_97_TOPIC_VARIABLE_BINDING_OBJECTIVE_DESIGN_DECISION",
+  "engineering_decision": "ALLOW_PHASE27_98_TOPIC_BINDING_GATE_ENCODING_NO_TRAINING",
+  "new_training_allowed": false,
+  "topic_binding_gate_encoding_allowed": true,
+  "runtime_release_allowed": false,
+  "ui_release_allowed": false,
+  "heldout_runtime_gate_allowed": false,
+  "sf50m_justified_transition": false,
+  "tokenizer_retrain_allowed": false,
+  "why": "The next step must encode a copy-anchored, contrastive topic objective and metadata/sampler gates. Capacity and tokenizer remain minor causes.",
+  "next_phase": "Phase 27.98 — Topic Binding Gate Encoding and Metadata Audit"
+}

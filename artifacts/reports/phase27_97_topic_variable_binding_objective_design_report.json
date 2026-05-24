@@ -1,0 +1,280 @@
+{
+  "phase": "Phase 27.97",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "status": "PHASE27_97_TOPIC_BINDING_OBJECTIVE_DESIGN_READY_NO_TRAINING",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_changed": false,
+  "source_report": "artifacts/reports/phase27_96_topic_objective_result_diagnosis_report.json",
+  "source_diagnosis_signals": {
+    "topic_gate_failed": true,
+    "all_family_regressed": true,
+    "guard_blocked_topic_failures": 0,
+    "wrong_topic_substitution_count": 11,
+    "support_followup_still_weak": true,
+    "topic_variable_binding_failure": true
+  },
+  "source_root_cause_weights": {
+    "topic_variable_binding_failure": 34,
+    "assistant_target_copy_objective_weak": 22,
+    "topic_family_balance_residual": 14,
+    "support_followup_eval_alias_or_semantic_gap": 9,
+    "decoding_surface_artifacts": 8,
+    "corpus_topic_metadata_inference_gap": 6,
+    "tokenizer": 3,
+    "model_capacity": 3,
+    "semantic_routing": 1
+  },
+  "design_ready": true,
+  "objective_spec": {
+    "spec_id": "PHASE27_97_TOPIC_VARIABLE_BINDING_OBJECTIVE_SPEC",
+    "version": "v1",
+    "language_track": [
+      "msa",
+      "saudi"
+    ],
+    "target_family": "topic",
+    "target_terms": [
+      "الوفاء",
+      "التعاون",
+      "الصبر",
+      "الاحترام",
+      "الهدوء",
+      "الصدق",
+      "الصداقة",
+      "الشجاعة"
+    ],
+    "problem_statement": "Phase 27.95 generated topic-shaped answers, but substituted the requested topic variable with neighboring topic prototypes such as الصداقة or الشجاعة.",
+    "objective_name": "topic_copy_contrastive_binding_objective_v1",
+    "conditioning_lines": [
+      "النطاق: <فصحى|سعودي>",
+      "عائلة الحوار: موضوع",
+      "الموضوع المطلوب: <topic_term>"
+    ],
+    "assistant_target_contract": {
+      "copy_anchor": "The assistant answer must copy the exact requested topic term inside the first 12 visible Arabic characters after the assistant role marker.",
+      "prefix_templates": [
+        "معنى <topic_term>: <short explanation>",
+        "<topic_term> يعني <short explanation>",
+        "<topic_term> هو <short explanation>"
+      ],
+      "single_topic_rule": "For one-sentence topic answers, no other protected topic term may appear unless the requested topic also appears first.",
+      "short_answer_rule": "One compact sentence, 8-18 Arabic words, then EOS.",
+      "assistant_loss_rule": "Conditioning/user lines stay masked. The supervised assistant target begins at the prefix containing <topic_term>, so the model learns copy binding."
+    },
+    "contrastive_controls": [
+      {
+        "requested_topic": "الوفاء",
+        "must_include": [
+          "الوفاء"
+        ],
+        "must_not_include": [
+          "التعاون",
+          "الصبر",
+          "الاحترام",
+          "الهدوء",
+          "الصدق",
+          "الصداقة",
+          "الشجاعة"
+        ],
+        "target_prefixes": [
+          "معنى الوفاء:",
+          "الوفاء يعني",
+          "الوفاء هو"
+        ]
+      },
+      {
+        "requested_topic": "التعاون",
+        "must_include": [
+          "التعاون"
+        ],
+        "must_not_include": [
+          "الوفاء",
+          "الصبر",
+          "الاحترام",
+          "الهدوء",
+          "الصدق",
+          "الصداقة",
+          "الشجاعة"
+        ],
+        "target_prefixes": [
+          "معنى التعاون:",
+          "التعاون يعني",
+          "التعاون هو"
+        ]
+      },
+      {
+        "requested_topic": "الصبر",
+        "must_include": [
+          "الصبر"
+        ],
+        "must_not_include": [
+          "الوفاء",
+          "التعاون",
+          "الاحترام",
+          "الهدوء",
+          "الصدق",
+          "الصداقة",
+          "الشجاعة"
+        ],
+        "target_prefixes": [
+          "معنى الصبر:",
+          "الصبر يعني",
+          "الصبر هو"
+        ]
+      },
+      {
+        "requested_topic": "الاحترام",
+        "must_include": [
+          "الاحترام"
+        ],
+        "must_not_include": [
+          "الوفاء",
+          "التعاون",
+          "الصبر",
+          "الهدوء",
+          "الصدق",
+          "الصداقة",
+          "الشجاعة"
+        ],
+        "target_prefixes": [
+          "معنى الاحترام:",
+          "الاحترام يعني",
+          "الاحترام هو"
+        ]
+      },
+      {
+        "requested_topic": "الهدوء",
+        "must_include": [
+          "الهدوء"
+        ],
+        "must_not_include": [
+          "الوفاء",
+          "التعاون",
+          "الصبر",
+          "الاحترام",
+          "الصدق",
+          "الصداقة",
+          "الشجاعة"
+        ],
+        "target_prefixes": [
+          "معنى الهدوء:",
+          "الهدوء يعني",
+          "الهدوء هو"
+        ]
+      },
+      {
+        "requested_topic": "الصدق",
+        "must_include": [
+          "الصدق"
+        ],
+        "must_not_include": [
+          "الوفاء",
+          "التعاون",
+          "الصبر",
+          "الاحترام",
+          "الهدوء",
+          "الصداقة",
+          "الشجاعة"
+        ],
+        "target_prefixes": [
+          "معنى الصدق:",
+          "الصدق يعني",
+          "الصدق هو"
+        ]
+      },
+      {
+        "requested_topic": "الصداقة",
+        "must_include": [
+          "الصداقة"
+        ],
+        "must_not_include": [
+          "الوفاء",
+          "التعاون",
+          "الصبر",
+          "الاحترام",
+          "الهدوء",
+          "الصدق",
+          "الشجاعة"
+        ],
+        "target_prefixes": [
+          "معنى الصداقة:",
+          "الصداقة يعني",
+          "الصداقة هو"
+        ]
+      },
+      {
+        "requested_topic": "الشجاعة",
+        "must_include": [
+          "الشجاعة"
+        ],
+        "must_not_include": [
+          "الوفاء",
+          "التعاون",
+          "الصبر",
+          "الاحترام",
+          "الهدوء",
+          "الصدق",
+          "الصداقة"
+        ],
+        "target_prefixes": [
+          "معنى الشجاعة:",
+          "الشجاعة يعني",
+          "الشجاعة هو"
+        ]
+      }
+    ],
+    "metadata_rule": "Every topic-family training sample must have explicit provenance.topic_term. Inference from user text is allowed only in audits, not in training gates.",
+    "curriculum_rule": {
+      "sampler": "topic_term_round_robin_within_family_round_robin",
+      "window_size": 800,
+      "min_per_topic_per_window": 20,
+      "dialect_balance": "each topic alternates msa/saudi when both are available",
+      "no_adjacent_same_topic": true
+    },
+    "canary_design": {
+      "known_topic_min": "16/16",
+      "fresh_topic_min": "8/10",
+      "contrastive_wrong_topic_max": 0,
+      "copy_anchor_min": "26/26",
+      "all_family_regression_min": "45/50",
+      "topic_family_min": "8/10",
+      "malformed_max": 0,
+      "repeated_phrase_max": 0
+    },
+    "phase27_98_required_gates": [
+      "topic metadata audit proves explicit topic_term for every topic sample",
+      "renderer can emit copy-anchor targets without unmasking condition lines",
+      "contrastive canary covers all topic terms and wrong-topic substitutions",
+      "sampler dry-run proves per-topic round-robin exposure",
+      "no training is started in the gate-encoding phase"
+    ],
+    "blocked": [
+      "LM training before Phase 27.98 gates",
+      "runtime release",
+      "UI generator release",
+      "SF-50M transition",
+      "tokenizer retrain",
+      "pretrained/open-weight usage",
+      "keyword/template masking"
+    ]
+  },
+  "decision": {
+    "decision_id": "PHASE27_97_TOPIC_VARIABLE_BINDING_OBJECTIVE_DESIGN_DECISION",
+    "engineering_decision": "ALLOW_PHASE27_98_TOPIC_BINDING_GATE_ENCODING_NO_TRAINING",
+    "new_training_allowed": false,
+    "topic_binding_gate_encoding_allowed": true,
+    "runtime_release_allowed": false,
+    "ui_release_allowed": false,
+    "heldout_runtime_gate_allowed": false,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "why": "The next step must encode a copy-anchored, contrastive topic objective and metadata/sampler gates. Capacity and tokenizer remain minor causes.",
+    "next_phase": "Phase 27.98 — Topic Binding Gate Encoding and Metadata Audit"
+  }
+}

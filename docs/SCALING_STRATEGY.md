@@ -5,7 +5,7 @@
 **Status:** governance rule, no training started
 **Language track:** Arabic MSA + Saudi only
 **Lexicon track:** Saudi Seed v1 + governed MSA/Saudi corpus
-**Current gate:** Phase 27.96 diagnosed topic variable-binding failure; Phase 27.97 design next; SF-50M remains blocked.
+**Current gate:** Phase 27.97 designed the topic variable-binding objective; Phase 27.98 gate encoding next; SF-50M remains blocked.
 
 ---
 
@@ -91,20 +91,23 @@ Sovereign Practical Acceleration != open-weight/pretrained model lane
 PHASE27_78_ENGINEERING_DECISION
 ```
 
-### Current Scaling Decision — Phase 27.96
+### Current Scaling Decision — Phase 27.97
 
-Phase 27.96 لا يفتح حجمًا أكبر. القرار الحالي هو:
+Phase 27.97 لا يفتح حجمًا أكبر. القرار الحالي هو:
 
 ```text
-PHASE27_96_TOPIC_OBJECTIVE_RESULT_DIAGNOSIS_DECISION
-DESIGN_TOPIC_COPY_CONTRASTIVE_OBJECTIVE_BEFORE_ANY_TRAINING
+PHASE27_97_TOPIC_VARIABLE_BINDING_OBJECTIVE_DESIGN_DECISION
+ALLOW_PHASE27_98_TOPIC_BINDING_GATE_ENCODING_NO_TRAINING
 ```
 
 السبب: Phase 27.96 شخّصت فشل 27.95 كخلل ربط متغير الموضوع لا كحد سعة.
 كل إخفاقات topic تقريبًا تمر من الحارس، لكن النموذج يستبدل الموضوع المطلوب
 بموضوعات مجاورة: `wrong_topic_substitution_count=11`، وأكثر بديل خاطئ
-`الصداقة=6`. لذلك يبقى `SF-50M` محجوبًا، ولا يسمح بتدريب جديد قبل
-Phase 27.97 كتصميم objective copy/contrastive.
+`الصداقة=6`. لذلك صممت Phase 27.97 objective
+`topic_copy_contrastive_binding_objective_v1`: يجب أن ينسخ الرد الموضوع
+المطلوب داخل أول 12 حرفًا عربيًا ظاهرًا، ويُسقط أي رد يذكر موضوعًا مجاورًا
+قبل المطلوب. يبقى `SF-50M` محجوبًا، ولا يسمح بتدريب جديد قبل Phase 27.98
+كترميز بوابة وتدقيق metadata.
 
 ويجب أن يحدد أوزان الأسباب التالية:
 

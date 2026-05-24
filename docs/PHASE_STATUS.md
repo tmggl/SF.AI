@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.96 / 30**
-- **المرحلة الحالية:** **Phase 27.96 — Topic Objective Repair Result Diagnosis**
-- **حالة المرحلة الحالية:** **اكتملت كتشخيص؛ runtime محجوب؛ لا تدريب جديد**
-- **المرحلة التالية المقترحة:** Phase 27.97 — Topic Variable Binding Objective Design.
+- **الرحلة الحالية:** **Phase 27.97 / 30**
+- **المرحلة الحالية:** **Phase 27.97 — Topic Variable Binding Objective Design**
+- **حالة المرحلة الحالية:** **اكتملت كتصميم؛ runtime محجوب؛ لا تدريب جديد**
+- **المرحلة التالية المقترحة:** Phase 27.98 — Topic Binding Gate Encoding and Metadata Audit.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -152,6 +152,7 @@
 | Phase 27.94 | Topic Objective Data Pack Authoring | ✅ wafa_saudi_gap_closed_training_allowed_next_no_runtime | ✅ |
 | Phase 27.95 | Bounded Topic Objective Repair Training | ✅ trained_runtime_blocked_diagnosis_required | ✅ |
 | Phase 27.96 | Topic Objective Repair Result Diagnosis | ✅ diagnosed_topic_variable_binding_failure_no_training | ✅ |
+| Phase 27.97 | Topic Variable Binding Objective Design | ✅ topic_binding_objective_design_ready_no_training | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1077,13 +1078,13 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-658 passed in 73.51s (0:01:13)
+661 passed in 71.87s (0:01:11)
 ```
 
 | التحقق | النتيجة |
 |------|------|
-| full pytest suite | `658 passed in 73.51s` |
-| focused Phase 27.96/API/UI tests | `78 passed in 8.99s` |
+| full pytest suite | `661 passed in 71.87s` |
+| focused Phase 27.97/API/UI tests | `78 passed in 8.59s` |
 | `make corpus-audit` | `8453` records, `issues=0` |
 | `make phase27-dialogue-eval` | `19/19`, `open_generator_ready=false` |
 
@@ -1525,6 +1526,34 @@ make api
   - [PHASE27_96_TOPIC_OBJECTIVE_RESULT_DIAGNOSIS_REPORT.md](./PHASE27_96_TOPIC_OBJECTIVE_RESULT_DIAGNOSIS_REPORT.md)
   - `artifacts/reports/phase27_96_topic_objective_result_diagnosis_report.json`
   - `artifacts/reports/PHASE27_96_TOPIC_OBJECTIVE_RESULT_DIAGNOSIS_DECISION.json`
+
+---
+
+## Phase 27.97 — Topic Variable Binding Objective Design
+
+- لم يبدأ تدريب جديد.
+- لم يتغير runtime.
+- صُمم objective جديد باسم:
+  - `topic_copy_contrastive_binding_objective_v1`
+- قاعدة الرد الجديدة:
+  - يجب أن ينسخ رد المساعد الموضوع المطلوب داخل أول 12 حرفًا عربيًا ظاهرًا.
+  - قوالب الهدف المسموحة: `معنى <topic_term>:`, `<topic_term> يعني`, `<topic_term> هو`.
+  - أي موضوع محمي آخر داخل رد topic يصبح فشلًا إذا لم يظهر الموضوع المطلوب أولًا.
+- canary المطلوب:
+  - `known_topic_min=16/16`
+  - `fresh_topic_min=8/10`
+  - `contrastive_wrong_topic_max=0`
+  - `copy_anchor_min=26/26`
+  - `all_family_regression_min=45/50`
+- القرار: `ALLOW_PHASE27_98_TOPIC_BINDING_GATE_ENCODING_NO_TRAINING`.
+- التالي: Phase 27.98 — Topic Binding Gate Encoding and Metadata Audit.
+- المحظور الآن: training, runtime release, UI generator release, SF-50M,
+  tokenizer retrain, pretrained/open-weight usage, keyword/template masking.
+- التقارير:
+  - [PHASE27_97_TOPIC_VARIABLE_BINDING_OBJECTIVE_DESIGN_REPORT.md](./PHASE27_97_TOPIC_VARIABLE_BINDING_OBJECTIVE_DESIGN_REPORT.md)
+  - `artifacts/reports/phase27_97_topic_variable_binding_objective_design_report.json`
+  - `artifacts/reports/PHASE27_97_TOPIC_VARIABLE_BINDING_OBJECTIVE_DESIGN_DECISION.json`
+  - `artifacts/reports/phase27_97_topic_variable_binding_objective_spec.json`
 
 ---
 

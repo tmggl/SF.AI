@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.96
-الاسم: Topic Objective Repair Result Diagnosis
+المرحلة الحالية: Phase 27.97
+الاسم: Topic Variable Binding Objective Design
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_96_TOPIC_OBJECTIVE_RESULT_DIAGNOSIS_DECISION
+القرار الرسمي: PHASE27_97_TOPIC_VARIABLE_BINDING_OBJECTIVE_DESIGN_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -90,7 +90,7 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 
 القرار الحالي:
 
-- تم تدريب Phase 27.95 bounded topic-objective SF-10M repair training.
+- تم تدريب Phase 27.95 bounded topic-objective SF-10M repair training، ثم شُخص فشله في Phase 27.96.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
@@ -113,7 +113,8 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - إعادة بوابة 27.93 بعد 27.94: `training_data_ready=true`, `shortfalls={}`, و`الوفاء` صار `total=22`, `msa=12`, `saudi=10`.
 - نتيجة 27.95: تدريب SF-10M محدود اكتمل، لكن البوابات فشلت: known topic `10/16`, fresh topic `4/10`, all-family `33/50`.
 - نتيجة 27.96: التشخيص أثبت `topic_variable_binding_failure`: لا حارس يحجب الإخفاقات، بل النموذج يستبدل الموضوع المطلوب بموضوعات مجاورة. `wrong_topic_substitution_count=11`, وأكثر بديل خاطئ `الصداقة=6`.
-- التالي: `Phase 27.97 — Topic Variable Binding Objective Design`.
+- نتيجة 27.97: صُمم objective جديد `topic_copy_contrastive_binding_objective_v1` يفرض نسخ الموضوع المطلوب داخل أول 12 حرفًا عربيًا ظاهرًا من رد المساعد، ويمنع نجاح الرد إذا ذكر موضوعًا مجاورًا قبل الموضوع المطلوب. القرار يسمح فقط بـ Phase 27.98 لترميز البوابة وتدقيق metadata، بلا تدريب.
+- التالي: `Phase 27.98 — Topic Binding Gate Encoding and Metadata Audit`.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -313,7 +314,7 @@ SF-10M
 | Phase 25-26 | canary حجب runtime، وSF-50M not ready |
 | Phase 27-27.77 | سلسلة طويلة لتحسين الحوار، tokenizer، objective، family balance، canaries |
 | Phase 27.78 | root-cause gate أوقف التدريب الأعمى والتكبير |
-| Phase 27.79 | تصميم إصلاح objective/curriculum/decoding، بدون تدريب |
+| Phase 27.79-27.97 | إصلاحات objective/curriculum/family/topic حتى تصميم objective ربط الموضوع، بلا runtime |
 
 الدرس الأساسي من Phase 27:
 
@@ -329,17 +330,18 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.97 — Topic Variable Binding Objective Design
+Phase 27.98 — Topic Binding Gate Encoding and Metadata Audit
 ```
 
 مطلوب منها:
 
-- تصميم objective يفرض نسخ/تثبيت الموضوع المطلوب داخل بداية رد المساعد.
-- تصميم contrastive wrong-topic canary يمنع نجاح رد يذكر موضوعًا مجاورًا.
-- تصميم per-topic round-robin curriculum gate قبل أي تدريب.
-- جعل `topic_term` صريحًا لكل سجلات topic بدل الاعتماد على inference وحده.
+- ترميز بوابات 27.97 دون تدريب.
+- التأكد أن كل عينة topic تحمل `topic_term` صريحًا.
+- إثبات أن renderer ينتج أهداف copy-anchor دون كشف شرط الموضوع داخل loss.
+- بناء canary contrastive يغطي كل مصطلحات topic والبدائل الخاطئة.
+- dry-run يثبت per-topic round-robin exposure قبل أي تدريب.
 
-ممنوع في 27.97 قبل التصميم والبوابات:
+ممنوع في 27.98 قبل نجاح البوابة:
 
 - تدريب جديد.
 - runtime release.
