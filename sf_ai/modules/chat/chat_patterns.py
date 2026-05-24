@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.83 ضمن مسار SF-native فقط: دُرّب إصلاح مقيّد لـ SF-10M "
-    "لكن أفضل checkpoint نجح 11/60 فقط في fresh shadow. لذلك لا runtime ولا "
-    "واجهة مولّدة الآن؛ التالي Phase 27.84 لتشخيص فشل objective/curriculum.",
+    "وصلنا إلى Phase 27.84 ضمن مسار SF-native فقط: شخّصنا أن family metadata "
+    "كانت متوازنة لكنها لم تظهر داخل نص التدريب كإشارة يراها النموذج. لا تدريب "
+    "ولا runtime الآن؛ التالي Phase 27.85 لتصميم family conditioning صريح.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

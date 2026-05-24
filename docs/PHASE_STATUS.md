@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.83 / 30**
-- **المرحلة الحالية:** **Phase 27.83 — Family-conditioned SF-10M Bounded Repair Training**
-- **حالة المرحلة الحالية:** **اكتملت؛ `PHASE27_83_FAMILY_CONDITIONED_REPAIR_TRAINING_DECISION`; التدريب تم لكن runtime محجوب؛ أفضل checkpoint `11/60` فقط**
-- **المرحلة التالية المقترحة:** Phase 27.84 — Objective/Curriculum Failure Diagnosis.
+- **الرحلة الحالية:** **Phase 27.84 / 30**
+- **المرحلة الحالية:** **Phase 27.84 — Objective/Curriculum Failure Diagnosis**
+- **حالة المرحلة الحالية:** **اكتملت؛ `PHASE27_84_OBJECTIVE_CURRICULUM_FAILURE_DIAGNOSIS_DECISION`; السبب الأكبر: family metadata لم تكن ظاهرة في نص التدريب؛ لا تدريب جديد**
+- **المرحلة التالية المقترحة:** Phase 27.85 — Explicit Family Conditioning Objective Design.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -139,6 +139,7 @@
 | Phase 27.81 | Balanced Family Pack Authoring | ✅ authored_2500_records_gates_passed_no_training | ✅ |
 | Phase 27.82 | Family-conditioned SF-10M Repair Training Decision | ✅ allows_phase27_83_bounded_training_no_runtime | ✅ |
 | Phase 27.83 | Family-conditioned SF-10M Bounded Repair Training | ✅ trained_runtime_blocked_diagnosis_required | ✅ |
+| Phase 27.84 | Objective/Curriculum Failure Diagnosis | ✅ diagnosed_family_signal_missing_no_training | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1064,7 +1065,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-614 passed in 20.84s
+617 passed in 20.56s
 ```
 
 | ملف | عدد |
@@ -1100,6 +1101,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_phase25_generation_canary.py | 6 (Phase 25 + Phase 27.39 guard refinement) |
 | test_phase27_82_family_conditioned_training_decision.py | 3 |
 | test_phase27_83_family_conditioned_repair_training.py | 3 |
+| test_phase27_84_objective_curriculum_failure_diagnosis.py | 3 |
 | test_rag_sparse_retrieval.py | 14 (Phase 8) |
 | test_research_summarizer.py | 20 |
 | test_response_composer.py | 6 |
@@ -1187,6 +1189,27 @@ make api
   - [PHASE27_83_FAMILY_CONDITIONED_REPAIR_TRAINING_REPORT.md](./PHASE27_83_FAMILY_CONDITIONED_REPAIR_TRAINING_REPORT.md)
   - `artifacts/reports/phase27_83_family_conditioned_repair_training_report.json`
   - `artifacts/samples/phase27_83_family_conditioned_repair_training.md`
+
+---
+
+## Phase 27.84 — Objective/Curriculum Failure Diagnosis
+
+- لم يبدأ تدريب جديد.
+- لم يتغير runtime.
+- شُخّص فشل Phase 27.83 من تقارير fresh shadow وبيانات corpus.
+- السبب الأكبر: `dialogue_family` موجودة في metadata، لكنها لا تظهر داخل نص التدريب.
+- النص الذي يراه النموذج حاليًا يحتوي `النطاق: سعودي/فصحى` فقط، ولا يحتوي مثلًا `العائلة: planning`.
+- أوزان السبب:
+  - `objective_family_signal_missing=30%`
+  - `curriculum_sampling_not_family_conditioned_in_text=24%`
+  - `weak_generalization_after_bounded_repair=17%`
+  - `decoding_and_repetition_fragility=10%`
+  - `model_capacity=4%`
+- القرار: لا SF-50M، لا runtime، لا tokenizer retrain، ولا تدريب جديد قبل تصميم family conditioning صريح.
+- التالي: Phase 27.85 — Explicit Family Conditioning Objective Design.
+- التقارير:
+  - [PHASE27_84_OBJECTIVE_CURRICULUM_FAILURE_DIAGNOSIS_REPORT.md](./PHASE27_84_OBJECTIVE_CURRICULUM_FAILURE_DIAGNOSIS_REPORT.md)
+  - `artifacts/reports/phase27_84_objective_curriculum_failure_diagnosis_report.json`
 
 ---
 

@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.83 — Family-conditioned SF-10M Bounded Repair Training",
-        current_phase_status="phase27_83_trained_runtime_blocked_diagnosis_required",
+        current_phase="Phase 27.84 — Objective/Curriculum Failure Diagnosis",
+        current_phase_status="phase27_84_diagnosed_objective_curriculum_failure_no_training",
         next_phase=(
-            "Phase 27.84 — Objective/Curriculum Failure Diagnosis"
+            "Phase 27.85 — Explicit Family Conditioning Objective Design"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -529,6 +529,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_83_family_conditioned_repair_training",
                 status="trained_runtime_blocked_diagnosis_required",
                 phase="Phase 27.83",
+            ),
+            ComponentStatus(
+                name="phase27_84_objective_curriculum_failure_diagnosis",
+                status="diagnosed_family_signal_missing_no_training",
+                phase="Phase 27.84",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

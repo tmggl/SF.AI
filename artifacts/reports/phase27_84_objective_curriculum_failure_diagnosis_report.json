@@ -1,0 +1,184 @@
+{
+  "phase": "Phase 27.84",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "status": "PHASE27_84_DIAGNOSED_OBJECTIVE_CURRICULUM_FAILURE_NO_TRAINING",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_changed": false,
+  "source_reports": {
+    "phase27_83": "artifacts/reports/phase27_83_family_conditioned_repair_training_report.json",
+    "phase27_81_pack": "artifacts/reports/phase27_81_balanced_family_pack_report.json"
+  },
+  "evidence": {
+    "pack_balanced": true,
+    "best_checkpoint": {
+      "checkpoint": "sf-10m-step1200",
+      "fresh_shadow_passed": 11,
+      "fresh_shadow_total": 60,
+      "pass_rate": 0.1833,
+      "eval_loss": 5.9248,
+      "perplexity": 374.19,
+      "passed_by_family": {
+        "followup": 0,
+        "open_social": 1,
+        "planning": 10,
+        "support": 0,
+        "topic": 0
+      },
+      "dominant_family": "planning",
+      "dominant_pass_share": 0.9091,
+      "reason_counts": {
+        "expected_terms_missing": 44,
+        "passed": 11,
+        "response_family_mismatch": 2,
+        "guard:malformed_token": 1,
+        "guard:support_mismatch": 2
+      },
+      "sample_generation": "اكتب ثلاث وابدأ بالأهم وقت لاحقم، وابدأ بالأهم لمعشدقيقة."
+    },
+    "conditioning_probe": {
+      "sample": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_planning_saudi_010.jsonl",
+      "metadata_dialogue_family": "planning",
+      "metadata_prompt_family": "planning",
+      "metadata_answer_family": "planning",
+      "rendered_training_text_preview": "النطاق: سعودي\nالمستخدم: كيف أنظم دراستي اليوم؟\nالمساعد: اكتب ثلاث مهام واضحة، وابدأ بالأهم لمدة قصيرة.\n",
+      "dialect_condition_visible_to_model": true,
+      "family_condition_visible_to_model": false,
+      "diagnosis": "family metadata exists, but no family conditioning token/line is visible inside the text seen by the model"
+    },
+    "aggregate_reason_counts": {
+      "expected_terms_missing": 123,
+      "passed": 21,
+      "guard:malformed_token": 12,
+      "response_family_mismatch": 7,
+      "guard:repeated_phrase": 7,
+      "guard:support_mismatch": 6,
+      "guard:planning_mismatch": 2,
+      "guard:advice_mismatch": 2
+    },
+    "family_signal_missing": true,
+    "collapse_after_balanced_data": true,
+    "loss_quality_mismatch": true,
+    "malformed_or_repetitive_count": 19
+  },
+  "checkpoint_summaries": [
+    {
+      "checkpoint": "sf-10m-step600",
+      "fresh_shadow_passed": 7,
+      "fresh_shadow_total": 60,
+      "pass_rate": 0.1167,
+      "eval_loss": 3.7397,
+      "perplexity": 42.08,
+      "passed_by_family": {
+        "followup": 0,
+        "open_social": 5,
+        "planning": 1,
+        "support": 1,
+        "topic": 0
+      },
+      "dominant_family": "open_social",
+      "dominant_pass_share": 0.7143,
+      "reason_counts": {
+        "expected_terms_missing": 47,
+        "passed": 7,
+        "response_family_mismatch": 1,
+        "guard:planning_mismatch": 2,
+        "guard:advice_mismatch": 1,
+        "guard:support_mismatch": 2
+      },
+      "sample_generation": "عندما تريد الهدوءخفيف عن يومك."
+    },
+    {
+      "checkpoint": "sf-10m-step1200",
+      "fresh_shadow_passed": 11,
+      "fresh_shadow_total": 60,
+      "pass_rate": 0.1833,
+      "eval_loss": 5.9248,
+      "perplexity": 374.19,
+      "passed_by_family": {
+        "followup": 0,
+        "open_social": 1,
+        "planning": 10,
+        "support": 0,
+        "topic": 0
+      },
+      "dominant_family": "planning",
+      "dominant_pass_share": 0.9091,
+      "reason_counts": {
+        "expected_terms_missing": 44,
+        "passed": 11,
+        "response_family_mismatch": 2,
+        "guard:malformed_token": 1,
+        "guard:support_mismatch": 2
+      },
+      "sample_generation": "اكتب ثلاث وابدأ بالأهم وقت لاحقم، وابدأ بالأهم لمعشدقيقة."
+    },
+    {
+      "checkpoint": "sf-10m-step1800",
+      "fresh_shadow_passed": 3,
+      "fresh_shadow_total": 60,
+      "pass_rate": 0.05,
+      "eval_loss": 5.9722,
+      "perplexity": 392.39,
+      "passed_by_family": {
+        "followup": 0,
+        "open_social": 0,
+        "planning": 0,
+        "support": 3,
+        "topic": 0
+      },
+      "dominant_family": "support",
+      "dominant_pass_share": 1.0,
+      "reason_counts": {
+        "guard:malformed_token": 11,
+        "expected_terms_missing": 32,
+        "guard:repeated_phrase": 7,
+        "response_family_mismatch": 4,
+        "guard:advice_mismatch": 1,
+        "guard:support_mismatch": 2,
+        "passed": 3
+      },
+      "sample_generation": "بعد ه. ه. ه. شيء أأأن تجيرة، وابدأ بشي بشي بشي عل عل عل إذا تجلوقت ثتجلس فيه واضح."
+    }
+  ],
+  "root_cause_weights": {
+    "objective_family_signal_missing": 30,
+    "curriculum_sampling_not_family_conditioned_in_text": 24,
+    "weak_generalization_after_bounded_repair": 17,
+    "decoding_and_repetition_fragility": 10,
+    "tokenizer_boundary_residual": 7,
+    "semantic_routing": 4,
+    "data_quality": 4,
+    "model_capacity": 4
+  },
+  "blocked_actions": [
+    "new LM training",
+    "runtime release",
+    "UI generator release",
+    "SF-50M transition",
+    "tokenizer retrain",
+    "pretrained/open-weight usage"
+  ],
+  "allowed_next_actions": [
+    "design explicit family conditioning line/token",
+    "design stratified/interleaved family curriculum sampler",
+    "define held-out canary thresholds for each family",
+    "define decoding-only regression checks"
+  ],
+  "decision": {
+    "decision_id": "PHASE27_84_OBJECTIVE_CURRICULUM_FAILURE_DIAGNOSIS_DECISION",
+    "engineering_decision": "DESIGN_EXPLICIT_FAMILY_CONDITIONING_OBJECTIVE_BEFORE_ANY_TRAINING",
+    "new_training_allowed": false,
+    "runtime_release_allowed": false,
+    "ui_release_allowed": false,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "why": "Phase 27.83 failed because family metadata was balanced but not visible as a conditioning signal in training text; loss and canary also disagree.",
+    "next_phase": "Phase 27.85 — Explicit Family Conditioning Objective Design"
+  }
+}

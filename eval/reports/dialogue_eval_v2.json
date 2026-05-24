@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.83 ضمن مسار SF-native فقط: دُرّب إصلاح مقيّد لـ SF-10M لكن أفضل checkpoint نجح 11/60 فقط في fresh shadow. لذلك لا runtime ولا واجهة مولّدة الآن؛ التالي Phase 27."
+      "response_preview": "وصلنا إلى Phase 27.84 ضمن مسار SF-native فقط: شخّصنا أن family metadata كانت متوازنة لكنها لم تظهر داخل نص التدريب كإشارة يراها النموذج. لا تدريب ولا runtime الآن؛ التالي Phase 27."
     },
     {
       "scenario_id": "clarification_repair_flow",
