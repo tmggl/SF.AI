@@ -10,11 +10,11 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.81 / 30**
-- **المرحلة الحالية:** **Phase 27.81 — Balanced Family Pack Authoring** (`PHASE27_81_BALANCED_FAMILY_PACK_DECISION`; أضيف 2500 سجل gold ومرّت gates؛ لا تدريب بعد)
+- **الرحلة الحالية:** **Phase 27.82 / 30**
+- **المرحلة الحالية:** **Phase 27.82 — Family-conditioned SF-10M Repair Training Decision** (`PHASE27_82_FAMILY_CONDITIONED_TRAINING_DECISION`; يسمح فقط بـ Phase 27.83 bounded SF-10M repair training؛ لا runtime ولا SF-50M)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
 - **ملف القيادة الواحد:** `docs/SF_AI_MASTER_GUIDE.md` هو نقطة الدخول الأولى لأي Agent أو مهندس؛ بقية الملفات مراجع تفصيلية.
-- **المرحلة التالية المقترحة:** Phase 27.82 — Family-conditioned SF-10M repair training decision؛ لا تدريب إلا بقرار gate صريح.
+- **المرحلة التالية المقترحة:** Phase 27.83 — Family-conditioned SF-10M bounded repair training وفق خطة 27.82.
 - **استراتيجية العمل الملزمة:** Sovereign Practical Acceleration Strategy v2؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب، و`NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS` قبل أي runtime.
 - **تصحيح السيادة:** لا يوجد Open-Weight Lane؛ Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي = أدوات هندسية فقط داخل SF-native.
@@ -413,8 +413,11 @@ make server-start
 - **Phase 20:** بوابات تفعيل المجالات skeleton عبر gates مستقلة — تعمل، ولا تفعّل شيئًا تلقائيًا.
 - **Phase 27.78:** بوابة `ENGINEERING_ROOT_CAUSE_GATE` — مكتملة، وأصدرت `PHASE27_78_ENGINEERING_DECISION`.
 - **Phase 27.79:** تصميم إصلاح objective/curriculum/decoding — مكتمل، وأصدر `PHASE27_79_REPAIR_DESIGN_DECISION` بدون تدريب.
+- **Phase 27.80:** تشفير بوابات الإصلاح + remediation — مكتملة؛ مرّت gates بعد balanced family view.
+- **Phase 27.81:** تأليف حزمة عائلات الحوار المتوازنة — مكتملة؛ أضيف `2500` سجل gold وأصبح corpus `8443`.
+- **Phase 27.82:** قرار تدريب الإصلاح العائلي — مكتمل؛ يسمح فقط بـ Phase 27.83 bounded SF-10M repair training، ولا يسمح بـ runtime أو SF-50M.
 
-أول توليد خام حدث في Phase 13. Phase 15 جهّز الباب داخل الشات، وPhase 16 أثبت أن التوليد مكرر. Phase 27.78 غيّرت المنهج: لا مزيد من التدريب المتكرر قبل تشخيص root-cause. Phase 27.79 صممت إصلاح objective/curriculum/decoding/family balance. التالي Phase 27.80 لتشفير البوابات وتشغيل dry-run بلا تدريب.
+أول توليد خام حدث في Phase 13. Phase 15 جهّز الباب داخل الشات، وPhase 16 أثبت أن التوليد مكرر. Phase 27.78 غيّرت المنهج: لا مزيد من التدريب المتكرر قبل تشخيص root-cause. Phase 27.79 صممت إصلاح objective/curriculum/decoding/family balance. Phase 27.80 شفّرت البوابات، Phase 27.81 عالجت توازن family ببيانات gold، وPhase 27.82 سمحت بالانتقال إلى تدريب إصلاح محدود في Phase 27.83.
 
 ---
 
@@ -460,4 +463,4 @@ make server-start
 
 ## بروتوكول الانتقال
 
-التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، ومع نجاح بوابة التكبير انتقل تلقائيًا للحجم التالي حتى `SF-1B+`. ارفع الناجح فقط، افحص الحساسية، ووثّق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. وبعد Phase 27.79 لا تبدأ أي تدريب جديد إلا إذا كانت بوابات Phase 27.80 مشفرة وتسمح بذلك صراحة.
+التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، ومع نجاح بوابة التكبير انتقل تلقائيًا للحجم التالي حتى `SF-1B+`. ارفع الناجح فقط، افحص الحساسية، ووثّق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. بعد Phase 27.82 التدريب الوحيد المسموح هو Phase 27.83 bounded SF-10M repair training وفق خطة القرار؛ لا runtime release ولا SF-50M قبل canary لاحق ناجح.

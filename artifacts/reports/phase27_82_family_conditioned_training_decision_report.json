@@ -1,0 +1,107 @@
+{
+  "phase": "Phase 27.82",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "status": "PHASE27_82_ALLOW_PHASE27_83_BOUNDED_TRAINING",
+  "training_started": false,
+  "tokenizer_training_started": false,
+  "runtime_changed": false,
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "prerequisites": {
+    "phase27_80_gates_passed": true,
+    "phase27_81_pack_ready": true,
+    "corpus_ready": true,
+    "tokenizer_ready": true,
+    "init_checkpoint_ready": true
+  },
+  "corpus": {
+    "training_ready": 8443,
+    "issues": 0,
+    "dialects": {
+      "msa": 4199,
+      "saudi": 4244
+    },
+    "quality": {
+      "gold": 3331,
+      "silver": 5112
+    }
+  },
+  "tokenizer": {
+    "path": "artifacts/tokenizers/sf_bpe/v9_phase27_76",
+    "present": [
+      "vocab.json",
+      "merges.txt",
+      "meta.json"
+    ],
+    "sf_origin": true,
+    "vocab_size": 5023,
+    "ready": true
+  },
+  "init_checkpoint": {
+    "root": "artifacts/eval/phase27_77_v9_bounded_open_social_lm_repair/checkpoints",
+    "name": "sf-10m-step6200",
+    "state_exists": true,
+    "sf_origin": true,
+    "model_name": "sf-10m",
+    "ready": true
+  },
+  "training_plan": {
+    "phase": "Phase 27.83",
+    "name": "Family-conditioned SF-10M bounded repair training",
+    "allowed_by": "PHASE27_82_FAMILY_CONDITIONED_TRAINING_DECISION",
+    "training_command": [
+      "make",
+      "train-lm",
+      "ARGS=\"--tokenizer artifacts/tokenizers/sf_bpe/v9_phase27_76 --corpus data/corpus/chat/jsonl --size sf-10m --seq-len 96 --batch-size 1 --steps 1800 --epochs 24 --lr 2e-4 --warmup 120 --save-every 600 --stream-format dialogue --loss-scope assistant --packing-mode sample_isolated --split-manifest data/corpus/chat/splits/dialogue_split_v1.json --split-name train --init-checkpoints artifacts/eval/phase27_77_v9_bounded_open_social_lm_repair/checkpoints --init-checkpoint-name sf-10m-step6200 --checkpoints artifacts/eval/phase27_83_family_conditioned_repair/checkpoints --checkpoint-name sf-10m-step0 --seed 20260706\""
+    ],
+    "tokenizer": "artifacts/tokenizers/sf_bpe/v9_phase27_76",
+    "init_checkpoint": "artifacts/eval/phase27_77_v9_bounded_open_social_lm_repair/checkpoints/sf-10m-step6200",
+    "output_checkpoints": "artifacts/eval/phase27_83_family_conditioned_repair/checkpoints",
+    "objective": "assistant_answer_only_with_family_conditioned_records",
+    "curriculum": {
+      "view": "explicit_balanced_family_view",
+      "families": {
+        "open_social": 500,
+        "followup": 500,
+        "planning": 500,
+        "support": 500,
+        "topic": 500
+      },
+      "dialect_per_family": {
+        "msa": 250,
+        "saudi": 250
+      }
+    },
+    "decoding_required_after_training": "semantic_guarded_decoding_v1",
+    "release_rules": {
+      "runtime_release_allowed_by_training": false,
+      "must_pass_after_training": [
+        "held-out dialogue quality",
+        "fresh shadow canary",
+        "family stability",
+        "clean-stop",
+        "open_social naturalness",
+        "followup continuity",
+        "no template masking"
+      ]
+    }
+  },
+  "artifacts": {
+    "training_plan": "artifacts/reports/phase27_82_family_conditioned_training_decision/phase27_83_training_plan.json"
+  },
+  "decision": {
+    "decision_id": "PHASE27_82_FAMILY_CONDITIONED_TRAINING_DECISION",
+    "engineering_decision": "ALLOW_PHASE27_83_BOUNDED_SF10M_REPAIR_TRAINING",
+    "new_training_allowed": true,
+    "training_allowed_phase": "Phase 27.83",
+    "tokenizer_retrain_allowed": false,
+    "runtime_release_allowed": false,
+    "sf50m_justified_transition": false,
+    "why": "Phase 27.80 gates passed after Phase 27.81 balanced family pack; next training is bounded SF-10M repair only, not runtime release.",
+    "next_phase": "Phase 27.83 — Family-conditioned SF-10M bounded repair training"
+  }
+}

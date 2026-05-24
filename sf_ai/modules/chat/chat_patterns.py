@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.81 ضمن مسار SF-native فقط: ألّفنا 2500 سجلًا متوازنًا "
-    "لعائلات الحوار لمعالجة family balance، ومرّت بوابات Phase 27.80. "
-    "لا تدريب جديد ولا runtime ولا SF-50M الآن؛ التالي قرار تدريب إصلاح مقيّد لـ SF-10M.",
+    "وصلنا إلى Phase 27.82 ضمن مسار SF-native فقط: صدر قرار هندسي يسمح "
+    "فقط بتدريب إصلاح مقيّد لـ SF-10M في Phase 27.83. لا runtime release، "
+    "لا tokenizer جديد، ولا SF-50M حتى ينجح تقييم لاحق.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

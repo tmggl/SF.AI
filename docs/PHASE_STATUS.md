@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.81 / 30**
-- **المرحلة الحالية:** **Phase 27.81 — Balanced Family Pack Authoring**
-- **حالة المرحلة الحالية:** **اكتملت؛ `PHASE27_81_BALANCED_FAMILY_PACK_DECISION`; corpus=8443؛ Phase 27.80 gates passed؛ لا تدريب بعد**
-- **المرحلة التالية المقترحة:** Phase 27.82 — Family-conditioned SF-10M repair training decision.
+- **الرحلة الحالية:** **Phase 27.82 / 30**
+- **المرحلة الحالية:** **Phase 27.82 — Family-conditioned SF-10M Repair Training Decision**
+- **حالة المرحلة الحالية:** **اكتملت؛ `PHASE27_82_FAMILY_CONDITIONED_TRAINING_DECISION`; يسمح فقط بـ Phase 27.83 bounded SF-10M repair training؛ لا runtime ولا SF-50M ولا tokenizer retrain**
+- **المرحلة التالية المقترحة:** Phase 27.83 — Family-conditioned SF-10M bounded repair training.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -137,6 +137,7 @@
 | Phase 27.79 | Objective/Curriculum/Decoding Repair Design | ✅ phase27_79_repair_design_ready_next_gate_encoding_no_training | ✅ |
 | Phase 27.80 | Repair Gate Encoding + Family Balance Remediation | ✅ remediation_ready_639_records_needed_no_training | ✅ |
 | Phase 27.81 | Balanced Family Pack Authoring | ✅ authored_2500_records_gates_passed_no_training | ✅ |
+| Phase 27.82 | Family-conditioned SF-10M Repair Training Decision | ✅ allows_phase27_83_bounded_training_no_runtime | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1062,7 +1063,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-559 passed in 16.81s
+611 passed in 20.86s
 ```
 
 | ملف | عدد |
@@ -1145,6 +1146,22 @@ make api
 ```
 
 > ملاحظة: المنفذ 8000/8765 مشغول بمشروع آخر للمستخدم، لذلك نستخدم 8123.
+
+---
+
+## Phase 27.82 — Family-conditioned SF-10M Repair Training Decision
+
+- أضيف `make phase27-family-conditioned-training-decision`.
+- لم يبدأ تدريب جديد، ولم يتغير runtime، ولم يدرّب tokenizer جديد.
+- القرار الرسمي: `PHASE27_82_FAMILY_CONDITIONED_TRAINING_DECISION`.
+- النتيجة: يسمح فقط بـ `Phase 27.83 — Family-conditioned SF-10M bounded repair training`.
+- المسموح في 27.83: تدريب إصلاح محدود لـ `SF-10M` باستخدام tokenizer v9 وcheckpoint
+  `sf-10m-step6200` من Phase 27.77، objective مساعد فقط، وfamily-conditioned curriculum.
+- المحظور: runtime release، `SF-50M`, tokenizer retrain، pretrained/open-weight.
+- التقارير:
+  - [PHASE27_82_FAMILY_CONDITIONED_TRAINING_DECISION.md](./PHASE27_82_FAMILY_CONDITIONED_TRAINING_DECISION.md)
+  - `artifacts/reports/phase27_82_family_conditioned_training_decision_report.json`
+  - `artifacts/reports/phase27_82_family_conditioned_training_decision/phase27_83_training_plan.json`
 
 ---
 

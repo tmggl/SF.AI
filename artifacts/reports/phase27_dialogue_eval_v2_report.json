@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.81 ضمن مسار SF-native فقط: ألّفنا 2500 سجلًا متوازنًا لعائلات الحوار لمعالجة family balance، ومرّت بوابات Phase 27.80. لا تدريب جديد ولا runtime ولا SF-50M الآن؛"
+      "response_preview": "وصلنا إلى Phase 27.82 ضمن مسار SF-native فقط: صدر قرار هندسي يسمح فقط بتدريب إصلاح مقيّد لـ SF-10M في Phase 27.83. لا runtime release، لا tokenizer جديد، ولا SF-50M حتى ينجح تقييم "
     },
     {
       "scenario_id": "clarification_repair_flow",

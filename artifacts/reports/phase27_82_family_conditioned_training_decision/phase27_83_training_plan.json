@@ -1,0 +1,41 @@
+{
+  "phase": "Phase 27.83",
+  "name": "Family-conditioned SF-10M bounded repair training",
+  "allowed_by": "PHASE27_82_FAMILY_CONDITIONED_TRAINING_DECISION",
+  "training_command": [
+    "make",
+    "train-lm",
+    "ARGS=\"--tokenizer artifacts/tokenizers/sf_bpe/v9_phase27_76 --corpus data/corpus/chat/jsonl --size sf-10m --seq-len 96 --batch-size 1 --steps 1800 --epochs 24 --lr 2e-4 --warmup 120 --save-every 600 --stream-format dialogue --loss-scope assistant --packing-mode sample_isolated --split-manifest data/corpus/chat/splits/dialogue_split_v1.json --split-name train --init-checkpoints artifacts/eval/phase27_77_v9_bounded_open_social_lm_repair/checkpoints --init-checkpoint-name sf-10m-step6200 --checkpoints artifacts/eval/phase27_83_family_conditioned_repair/checkpoints --checkpoint-name sf-10m-step0 --seed 20260706\""
+  ],
+  "tokenizer": "artifacts/tokenizers/sf_bpe/v9_phase27_76",
+  "init_checkpoint": "artifacts/eval/phase27_77_v9_bounded_open_social_lm_repair/checkpoints/sf-10m-step6200",
+  "output_checkpoints": "artifacts/eval/phase27_83_family_conditioned_repair/checkpoints",
+  "objective": "assistant_answer_only_with_family_conditioned_records",
+  "curriculum": {
+    "view": "explicit_balanced_family_view",
+    "families": {
+      "open_social": 500,
+      "followup": 500,
+      "planning": 500,
+      "support": 500,
+      "topic": 500
+    },
+    "dialect_per_family": {
+      "msa": 250,
+      "saudi": 250
+    }
+  },
+  "decoding_required_after_training": "semantic_guarded_decoding_v1",
+  "release_rules": {
+    "runtime_release_allowed_by_training": false,
+    "must_pass_after_training": [
+      "held-out dialogue quality",
+      "fresh shadow canary",
+      "family stability",
+      "clean-stop",
+      "open_social naturalness",
+      "followup continuity",
+      "no template masking"
+    ]
+  }
+}

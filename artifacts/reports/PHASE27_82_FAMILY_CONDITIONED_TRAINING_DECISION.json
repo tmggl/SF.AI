@@ -1,0 +1,11 @@
+{
+  "decision_id": "PHASE27_82_FAMILY_CONDITIONED_TRAINING_DECISION",
+  "engineering_decision": "ALLOW_PHASE27_83_BOUNDED_SF10M_REPAIR_TRAINING",
+  "new_training_allowed": true,
+  "training_allowed_phase": "Phase 27.83",
+  "tokenizer_retrain_allowed": false,
+  "runtime_release_allowed": false,
+  "sf50m_justified_transition": false,
+  "why": "Phase 27.80 gates passed after Phase 27.81 balanced family pack; next training is bounded SF-10M repair only, not runtime release.",
+  "next_phase": "Phase 27.83 — Family-conditioned SF-10M bounded repair training"
+}

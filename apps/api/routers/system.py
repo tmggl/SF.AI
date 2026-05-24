@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.81 — Balanced Family Pack Authoring",
-        current_phase_status="phase27_81_balanced_family_pack_authored_gates_passed_no_training",
+        current_phase="Phase 27.82 — Family-conditioned SF-10M Repair Training Decision",
+        current_phase_status="phase27_82_allows_phase27_83_bounded_training_no_runtime",
         next_phase=(
-            "Phase 27.82 — Family-conditioned SF-10M repair training decision"
+            "Phase 27.83 — Family-conditioned SF-10M bounded repair training"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -509,6 +509,21 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_79_objective_curriculum_decoding_design",
                 status="phase27_79_repair_design_ready_next_gate_encoding_no_training",
                 phase="Phase 27.79",
+            ),
+            ComponentStatus(
+                name="phase27_80_repair_gate_validation",
+                status="gates_passed_after_family_balance_remediation",
+                phase="Phase 27.80",
+            ),
+            ComponentStatus(
+                name="phase27_81_balanced_family_pack",
+                status="authored_2500_gold_records_gates_passed",
+                phase="Phase 27.81",
+            ),
+            ComponentStatus(
+                name="phase27_82_family_conditioned_training_decision",
+                status="allows_phase27_83_bounded_training_no_runtime",
+                phase="Phase 27.82",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

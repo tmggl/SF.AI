@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.81
-الاسم: Balanced Family Pack Authoring
+المرحلة الحالية: Phase 27.82
+الاسم: Family-conditioned SF-10M Repair Training Decision
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_81_BALANCED_FAMILY_PACK_DECISION
+القرار الرسمي: PHASE27_82_FAMILY_CONDITIONED_TRAINING_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -90,14 +90,15 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 
 القرار الحالي:
 
-- لا تدريب جديد الآن.
+- يسمح فقط بتدريب Phase 27.83 bounded SF-10M repair training.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
 - نتيجة 27.81: أضيف 2500 سجل gold متوازن (`500` لكل family، `250/250`
   فصحى/سعودي)، وأعيد بناء split، ومرّت Phase 27.80 gates.
+- نتيجة 27.82: فُحصت prerequisites السيادية وصدرت خطة تدريب 27.83 دون بدء التدريب.
 - corpus الحالي: `8443` (`msa=4199`, `saudi=4244`, `gold=3331`, `silver=5112`).
-- التالي: `Phase 27.82 — Family-conditioned SF-10M repair training decision`.
+- التالي: `Phase 27.83 — Family-conditioned SF-10M bounded repair training`.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -313,21 +314,24 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.82 — Family-conditioned SF-10M repair training decision
+Phase 27.83 — Family-conditioned SF-10M bounded repair training
 ```
 
 مطلوب منها:
 
-- Decision Report.
-- Allowed/Blocked Actions.
-- قراءة قرار Phase 27.80 gates بعد نجاحها.
-- تحديد هل يسمح بتدريب إصلاح SF-10M مقيّد.
-- تحديد checkpoint/tokenizer/config قبل أي تشغيل.
+- استخدام قرار Phase 27.82 وخطة التدريب الصادرة عنه.
+- تدريب إصلاح محدود فقط على `SF-10M`.
+- tokenizer: `artifacts/tokenizers/sf_bpe/v9_phase27_76`.
+- init checkpoint: `sf-10m-step6200`.
+- objective: assistant-only مع family-conditioned records.
 - منع SF-50M/runtime حتى ينجح canary بعد التدريب.
 
-ممنوع حتى تصدر gates ناجحة وقرار لاحق:
+ممنوع في 27.83:
 
-- تدريب جديد.
+- runtime release تلقائي.
+- tokenizer retrain.
+- SF-50M.
+- pretrained/open-weight.
 - tokenizer جديد.
 - runtime switch.
 - SF-50M full training.
