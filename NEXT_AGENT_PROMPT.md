@@ -23,6 +23,8 @@
 **القواعد الذهبية (لا تكسرها):**
 
 1. لا تستورد أي LLM خارجي ولا أي pretrained weights/embeddings/tokenizer.
+   لا Qwen ولا Llama ولا Mistral ولا Gemma ولا أي open-weight pretrained
+   model داخل runtime أو التدريب الأساسي.
 2. لا تشغّل crawler أو مصدر خارجي بدون provenance واضح واحترام بوابة permission.
 3. لا تنتقل خارج المراحل المسجلة في الخطة بدون توثيق السبب.
 4. كل قاموس مستورد له إذن موثَّق (انظر `docs/SOURCE_DISCOVERY_*.md`).
@@ -40,8 +42,11 @@
   أوزان SF.AI فقط، retrieval memory tooling، local vector retrieval، dialogue
   family balancing، EOS boundary tooling، checkpoint selector، tokenizer boundary audit.
 - ممنوع: pretrained weights، pretrained vocab، pretrained tokenizer merges،
-  external dialogue datasets، hidden hosted APIs، external reasoning services،
+  open-weight pretrained models، Qwen/Llama/Mistral/Gemma runtime، external
+  dialogue datasets، hidden hosted APIs، external reasoning services،
   project-workflow dialogue contamination، fake benchmark inflation، template masking.
+- تفسير ملزم: التسريع السيادي يعني أدوات هندسية وتشخيصية وتدريبية، وليس
+  Open-Weight Lane أو fine-tune فوق عقل جاهز.
 - السيادة تبقى على corpus/tokenizer/behavior/runtime/alignment/evaluation
   وسلوك الحوار الفصيح والسعودي.
 - قبل أي تدريب جديد يجب وجود `ENGINEERING_ROOT_CAUSE_GATE` وقرار

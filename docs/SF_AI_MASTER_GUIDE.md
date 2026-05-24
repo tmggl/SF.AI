@@ -38,6 +38,23 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - لا نستخدم datasets حوارية خارجية.
 - لا نُدخل محادثات إدارة المشروع أو أسلوب سامي التشغيلي في corpus الحوار.
 
+### 1.1 تصحيح ملزم: لا Open-Weight Lane
+
+تم إلغاء أي تفسير سابق يفتح مسار `open-weight acceleration` أو Qwen أو
+أي pretrained runtime. المقصود بـ **Sovereign Practical Acceleration** هو
+تسريع الهندسة والتشخيص والتدريب فقط، لا استيراد عقل جاهز.
+
+ممنوع رسميًا:
+
+- Qwen / Llama / Mistral / Gemma أو أي open-weight pretrained model.
+- أي runtime فوق نموذج جاهز.
+- أي tokenizer/vocab/merges جاهزة.
+- أي fine-tune أو LoRA فوق نموذج خارجي.
+
+المسموح: أدوات هندسية عامة فقط، مثل PyTorch وTensorBoard وAMP وschedulers
+وdecoding/curriculum/eval tooling، بشرط أن تكون أوزان SF.AI نفسها من
+تدريب SF-native.
+
 ---
 
 ## 2. الهدف الأعلى

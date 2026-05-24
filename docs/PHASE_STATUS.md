@@ -12,6 +12,9 @@
 - **حالة المرحلة الحالية:** **اكتملت كتصميم إصلاح؛ `PHASE27_79_REPAIR_DESIGN_DECISION`; التدريب والruntime وSF-50M محجوبة**
 - **المرحلة التالية المقترحة:** Phase 27.80 — Repair Gate Encoding and Dry-Run Validation, no training.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
+- **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
+  runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
+  ضمن مسار `SF-native`.
 - **تفويض التكبير المعتمد:** **Auto-Advance Scaling Mandate** — عند نجاح gate الحجم التالي ينتقل الوكيل تلقائيًا عبر `SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24

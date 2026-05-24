@@ -31,6 +31,17 @@ SF.AI لا يكبر بالقفزات. يكبر فقط عندما تثبت الم
 المشروع لا يعيد اختراع الأدوات الرياضية والهندسية العامة، لكنه لا يستورد
 ذكاءً جاهزًا.
 
+تفسير ملزم بعد تصحيح 2026-05-24:
+
+```text
+Sovereign Practical Acceleration = engineering/training/eval acceleration only
+Sovereign Practical Acceleration != open-weight/pretrained model lane
+```
+
+أي مسار Qwen أو Open-Weight Acceleration أو pretrained runtime ملغى وغير
+معتمد. التكبير الرسمي يبقى داخل `SF-native` فقط: أوزان SF.AI تبدأ من
+تدريب المشروع، وLoRA/QLoRA إن استُخدمت لاحقًا تكون فوق أوزان SF.AI نفسها.
+
 ### ما يبقى سياديًا بالكامل
 
 - corpus: لا بيانات حوار خارجية ولا project-workflow contamination.
@@ -63,6 +74,7 @@ SF.AI لا يكبر بالقفزات. يكبر فقط عندما تثبت الم
 ### الاختصارات الممنوعة
 
 - pretrained weights أو embeddings.
+- open-weight pretrained models مثل Qwen/Llama/Mistral/Gemma.
 - pretrained vocab أو pretrained tokenizer merges.
 - external dialogue datasets أو synthetic LLM data خارجي.
 - hidden hosted APIs أو external reasoning services.
