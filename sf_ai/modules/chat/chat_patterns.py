@@ -8,7 +8,6 @@ SF.AI's current capability ceiling without burying the user in meta-talk.
 
 from __future__ import annotations
 
-
 GREETING = (
     "أهلًا. أنا SF.AI. تفضّل، كيف أقدر أساعدك؟",
     "أهلًا مرة ثانية. سلام عليك. بإمكاننا نكمل الحديث.",
@@ -83,9 +82,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.88 ضمن مسار SF-native فقط: شخّصنا أن الفشل سببه ترتيب "
-    "تدريب متسلسل حسب عائلة الحوار؛ عائلة «موضوع» ظهرت 5 مرات فقط في أول 1800 "
-    "عينة. لا تدريب ولا runtime الآن؛ التالي Phase 27.89 لبناء sampler متوازن.",
+    "وصلنا إلى Phase 27.89 ضمن مسار SF-native فقط: أضفنا ترتيب "
+    "family_round_robin ومرّت بوابة التوازن. أول 1800 عينة أصبحت 360 لكل عائلة "
+    "حوار، ولا runtime الآن. التالي Phase 27.90 تدريب SF-10M محدود بهذا الترتيب.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

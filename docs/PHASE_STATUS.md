@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.88 / 30**
-- **المرحلة الحالية:** **Phase 27.88 — Family-conditioned Training Result Diagnosis**
-- **حالة المرحلة الحالية:** **اكتملت؛ شُخّص الفشل كـ sequential curriculum collapse؛ لا تدريب ولا runtime**
-- **المرحلة التالية المقترحة:** Phase 27.89 — Stratified Round-Robin Curriculum Sampler Gate.
+- **الرحلة الحالية:** **Phase 27.89 / 30**
+- **المرحلة الحالية:** **Phase 27.89 — Stratified Round-Robin Curriculum Sampler Gate**
+- **حالة المرحلة الحالية:** **اكتملت؛ sampler `family_round_robin` مرّ؛ التدريب المقيّد مسموح في 27.90 فقط؛ runtime محجوب**
+- **المرحلة التالية المقترحة:** Phase 27.90 — Bounded SF-10M Round-Robin Curriculum Repair Training.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -144,6 +144,7 @@
 | Phase 27.86 | Family Conditioning Renderer Gate | ✅ renderer_gate_passed_training_allowed_next_no_runtime | ✅ |
 | Phase 27.87 | Bounded Family-conditioned SF-10M Repair Training | ✅ trained_runtime_blocked_diagnosis_required | ✅ |
 | Phase 27.88 | Family-conditioned Training Result Diagnosis | ✅ diagnosed_sequential_curriculum_collapse_no_training | ✅ |
+| Phase 27.89 | Stratified Round-Robin Curriculum Sampler Gate | ✅ sampler_gate_passed_training_allowed_next_no_runtime | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1069,7 +1070,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-620 passed in 20.81s
+639 passed in 22.92s
 ```
 
 | ملف | عدد |
@@ -1323,6 +1324,32 @@ make api
   - [PHASE27_88_FAMILY_CONDITIONED_TRAINING_RESULT_DIAGNOSIS_REPORT.md](./PHASE27_88_FAMILY_CONDITIONED_TRAINING_RESULT_DIAGNOSIS_REPORT.md)
   - `artifacts/reports/phase27_88_family_conditioned_training_result_diagnosis_report.json`
   - `artifacts/reports/PHASE27_88_FAMILY_CONDITIONED_TRAINING_RESULT_DIAGNOSIS_DECISION.json`
+
+---
+
+## Phase 27.89 — Stratified Round-Robin Curriculum Sampler Gate
+
+- لم يبدأ تدريب جديد.
+- لم يتغير runtime.
+- أضيف ترتيب تدريب جديد داخل `train_tiny_lm`: `--split-order family_round_robin`.
+- `iter_split_samples_round_robin_by_family` يوزع العائلات الخمس المعلّمة أولًا بالتناوب، ثم يترك العينات غير الموسومة إلى آخر stream.
+- نتيجة dry-run لأول 1800 عينة:
+  - `open_social=360`
+  - `followup=360`
+  - `planning=360`
+  - `support=360`
+  - `topic=360`
+- كل نافذة 600 عينة تحتوي:
+  - `120` من كل عائلة.
+  - dominant share = `0.20`.
+  - missing families = `[]`.
+- القرار: `ALLOW_PHASE27_90_BOUNDED_SF10M_TRAINING_WITH_ROUND_ROBIN_SPLIT_ORDER`.
+- المسموح التالي: تدريب SF-10M محدود فقط باستخدام `--split-order family_round_robin`.
+- المحظور الآن: runtime release، UI generator release، SF-50M، tokenizer retrain، pretrained/open-weight usage.
+- التقارير:
+  - [PHASE27_89_STRATIFIED_ROUND_ROBIN_CURRICULUM_SAMPLER_GATE_REPORT.md](./PHASE27_89_STRATIFIED_ROUND_ROBIN_CURRICULUM_SAMPLER_GATE_REPORT.md)
+  - `artifacts/reports/phase27_89_stratified_round_robin_curriculum_sampler_gate_report.json`
+  - `artifacts/reports/PHASE27_89_STRATIFIED_ROUND_ROBIN_CURRICULUM_SAMPLER_GATE_DECISION.json`
 
 ---
 

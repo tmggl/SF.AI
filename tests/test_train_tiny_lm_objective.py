@@ -165,3 +165,17 @@ def test_parse_args_accepts_sovereign_init_checkpoint_options(tmp_path: Path) ->
     )
     assert args.init_checkpoints == tmp_path / "checkpoints"
     assert args.init_checkpoint_name == "sf-10m-step5600"
+
+
+def test_parse_args_accepts_family_round_robin_split_order(tmp_path: Path) -> None:
+    args = parse_args(
+        [
+            "--tokenizer",
+            str(tmp_path / "tok"),
+            "--corpus",
+            str(tmp_path / "corpus"),
+            "--split-order",
+            "family_round_robin",
+        ]
+    )
+    assert args.split_order == "family_round_robin"

@@ -1,0 +1,12 @@
+{
+  "decision_id": "PHASE27_89_STRATIFIED_ROUND_ROBIN_CURRICULUM_SAMPLER_GATE_DECISION",
+  "engineering_decision": "ALLOW_PHASE27_90_BOUNDED_SF10M_TRAINING_WITH_ROUND_ROBIN_SPLIT_ORDER",
+  "new_training_allowed": true,
+  "runtime_release_allowed": false,
+  "ui_release_allowed": false,
+  "sf50m_justified_transition": false,
+  "tokenizer_retrain_allowed": false,
+  "required_training_flag": "--split-order family_round_robin",
+  "why": "الترتيب الجديد يوزع عائلات الحوار داخل كل نافذة تدريبية بدل الكتل المتتابعة، لذلك يسمح فقط بتدريب SF-10M محدود في المرحلة التالية، مع استمرار حجب runtime.",
+  "next_phase": "Phase 27.90 — Bounded SF-10M Round-Robin Curriculum Repair Training"
+}

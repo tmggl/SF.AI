@@ -5,12 +5,14 @@ from __future__ import annotations
 import hashlib
 import json
 from collections.abc import Iterator
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
 from sf_ai.datasets.cleaners import SampleCleaner
 from sf_ai.datasets.schemas import SimpleSample, StructuredSample, parse_record
+
+FAMILY_ORDER = ("open_social", "followup", "planning", "support", "topic")
 
 
 @dataclass(frozen=True)
@@ -21,6 +23,7 @@ class SplitEntry:
     sha256: str
     dialect: str = ""
     quality: str = ""
+    dialogue_family: str = ""
 
 
 def assign_split(raw_line: str, *, eval_ratio: float = 0.10, salt: str = "sf-ai-v1") -> str:
@@ -58,6 +61,7 @@ def build_split_entries(
                         sha256=digest,
                         dialect=str(provenance.get("dialect", "")),
                         quality=str(provenance.get("quality", "")),
+                        dialogue_family=str(_family_from_provenance(provenance)),
                     )
                 )
     return tuple(entries)
@@ -136,3 +140,70 @@ def iter_split_samples(
                     sample = sample_cleaner.clean(sample)
                 yield sample
                 break
+
+
+def iter_split_samples_round_robin_by_family(
+    corpus_root: str | Path,
+    manifest_path: str | Path,
+    *,
+    split_name: str,
+    clean: bool = True,
+    cleaner: SampleCleaner | None = None,
+) -> Iterator[SimpleSample | StructuredSample]:
+    """Yield split samples using a stratified round-robin family order.
+
+    Phase 27.88 showed that sorted file/line order can unintentionally train
+    on one dialogue family for hundreds of steps, then switch to another. This
+    iterator keeps the same deterministic split membership, but interleaves
+    dialogue families so each training window sees open_social/followup/
+    planning/support/topic together.
+    """
+    buckets: dict[str, list[SimpleSample | StructuredSample]] = {
+        family: [] for family in FAMILY_ORDER
+    }
+    buckets["unknown"] = []
+
+    for sample in iter_split_samples(
+        corpus_root,
+        manifest_path,
+        split_name=split_name,
+        clean=clean,
+        cleaner=cleaner,
+    ):
+        family = _family_for_sample(sample)
+        if family not in buckets:
+            family = "unknown"
+        buckets[family].append(sample)
+
+    ordered_families = [*FAMILY_ORDER]
+    index = 0
+    while True:
+        emitted = False
+        for family in ordered_families:
+            bucket = buckets[family]
+            if index < len(bucket):
+                yield bucket[index]
+                emitted = True
+        if not emitted:
+            break
+        index += 1
+
+    for sample in buckets["unknown"]:
+        yield sample
+
+
+def _family_from_provenance(provenance: dict[str, Any]) -> str:
+    for key in ("dialogue_family", "answer_family", "prompt_family"):
+        value = str(provenance.get(key, "") or "").strip().lower()
+        if value:
+            return value
+    return ""
+
+
+def _family_for_sample(sample: SimpleSample | StructuredSample) -> str:
+    provenance = getattr(sample, "provenance", None)
+    for attr in ("dialogue_family", "answer_family", "prompt_family"):
+        value = (getattr(provenance, attr, "") or "").strip().lower()
+        if value:
+            return value
+    return "unknown"

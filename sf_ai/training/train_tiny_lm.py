@@ -28,7 +28,10 @@ import torch.nn as nn
 
 from sf_ai.datasets import ChatDataset
 from sf_ai.datasets.chat_dataset import render_dialogue_text
-from sf_ai.datasets.splits import iter_split_samples
+from sf_ai.datasets.splits import (
+    iter_split_samples,
+    iter_split_samples_round_robin_by_family,
+)
 from sf_ai.models.tokenizer import BPETokenizer, CharTokenizer
 from sf_ai.models.transformer import (
     TinyTransformer,
@@ -69,17 +72,21 @@ def iter_token_batches(
     loss_scope: str = "full",
     split_manifest: str | Path | None = None,
     split_name: str = "train",
+    split_order: str = "sequential",
     packing_mode: str = "packed",
 ) -> Iterator[tuple[torch.Tensor, torch.Tensor]]:
     """Stream (input_ids, targets) batches from a chat corpus."""
     if packing_mode not in {"packed", "sample_isolated"}:
         raise ValueError(f"unsupported packing_mode: {packing_mode}")
+    if split_order not in {"sequential", "family_round_robin"}:
+        raise ValueError(f"unsupported split_order: {split_order}")
 
     texts = _iter_training_texts(
         dataset,
         stream_format=stream_format,
         split_manifest=split_manifest,
         split_name=split_name,
+        split_order=split_order,
     )
 
     if packing_mode == "sample_isolated":
@@ -208,7 +215,10 @@ def _iter_training_texts(
     stream_format: str,
     split_manifest: str | Path | None = None,
     split_name: str = "train",
+    split_order: str = "sequential",
 ) -> Iterator[str]:
+    if split_order not in {"sequential", "family_round_robin"}:
+        raise ValueError(f"unsupported split_order: {split_order}")
     if split_manifest is None:
         if stream_format == "dialogue":
             yield from dataset.iter_dialogue_texts()
@@ -216,7 +226,12 @@ def _iter_training_texts(
             yield from (msg.content for msg in dataset.iter_messages())
         return
 
-    for sample in iter_split_samples(dataset.root, split_manifest, split_name=split_name):
+    sample_iter = (
+        iter_split_samples_round_robin_by_family(dataset.root, split_manifest, split_name=split_name)
+        if split_order == "family_round_robin"
+        else iter_split_samples(dataset.root, split_manifest, split_name=split_name)
+    )
+    for sample in sample_iter:
         if stream_format == "dialogue":
             text = render_dialogue_text(sample)
             if text:
@@ -330,6 +345,8 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
                    help="Optional deterministic split manifest produced by build_dialogue_split")
     p.add_argument("--split-name", choices=["train", "eval"], default="train",
                    help="Split to stream when --split-manifest is provided")
+    p.add_argument("--split-order", choices=["sequential", "family_round_robin"], default="sequential",
+                   help="Sample order within a split; family_round_robin interleaves dialogue families")
     p.add_argument("--dry-run", action="store_true",
                    help="Build everything but skip the training loop")
     return p.parse_args(argv)
@@ -404,6 +421,7 @@ def run(argv: list[str]) -> int:
             loss_scope=args.loss_scope,
             split_manifest=args.split_manifest,
             split_name=args.split_name,
+            split_order=args.split_order,
             packing_mode=args.packing_mode,
         ):
             produced_in_epoch += 1
@@ -456,6 +474,7 @@ def _save(ckpt_mgr: CheckpointManager, model: TinyTransformer, args, step: int, 
             f"epochs={args.epochs} stream_format={args.stream_format} "
             f"loss_scope={args.loss_scope} packing_mode={args.packing_mode} "
             f"split={args.split_name if args.split_manifest else 'none'} "
+            f"split_order={args.split_order} "
             f"init={args.init_checkpoints / args.init_checkpoint_name if args.init_checkpoints and args.init_checkpoint_name else 'none'}"
         ),
     )

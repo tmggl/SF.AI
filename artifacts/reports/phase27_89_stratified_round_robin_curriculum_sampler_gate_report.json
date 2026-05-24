@@ -1,0 +1,206 @@
+{
+  "phase": "Phase 27.89",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "status": "PHASE27_89_STRATIFIED_ROUND_ROBIN_SAMPLER_GATE_PASSED_TRAINING_ALLOWED_NEXT",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_changed": false,
+  "source_phase27_88_status": "PHASE27_88_DIAGNOSED_SEQUENTIAL_CURRICULUM_COLLAPSE_NO_TRAINING",
+  "corpus": "data/corpus/chat/jsonl",
+  "split_manifest": "data/corpus/chat/splits/dialogue_split_v1.json",
+  "split_orders_compared": [
+    "sequential",
+    "family_round_robin"
+  ],
+  "sequential_first_1800_counts": {
+    "followup": 451,
+    "open_social": 444,
+    "planning": 452,
+    "support": 448,
+    "topic": 5
+  },
+  "round_robin_first_1800_counts": {
+    "open_social": 360,
+    "followup": 360,
+    "planning": 360,
+    "support": 360,
+    "topic": 360
+  },
+  "sequential_windows": {
+    "window_1": {
+      "range": [
+        1,
+        600
+      ],
+      "total": 600,
+      "counts": {
+        "open_social": 149,
+        "followup": 451,
+        "planning": 0,
+        "support": 0,
+        "topic": 0
+      },
+      "missing_families": [
+        "planning",
+        "support",
+        "topic"
+      ],
+      "dominant_family": "followup",
+      "dominant_count": 451,
+      "dominant_share": 0.7517,
+      "min_family_count": 0
+    },
+    "window_2": {
+      "range": [
+        601,
+        1200
+      ],
+      "total": 600,
+      "counts": {
+        "open_social": 295,
+        "followup": 0,
+        "planning": 305,
+        "support": 0,
+        "topic": 0
+      },
+      "missing_families": [
+        "followup",
+        "support",
+        "topic"
+      ],
+      "dominant_family": "planning",
+      "dominant_count": 305,
+      "dominant_share": 0.5083,
+      "min_family_count": 0
+    },
+    "window_3": {
+      "range": [
+        1201,
+        1800
+      ],
+      "total": 600,
+      "counts": {
+        "open_social": 0,
+        "followup": 0,
+        "planning": 147,
+        "support": 448,
+        "topic": 5
+      },
+      "missing_families": [
+        "open_social",
+        "followup"
+      ],
+      "dominant_family": "support",
+      "dominant_count": 448,
+      "dominant_share": 0.7467,
+      "min_family_count": 0
+    }
+  },
+  "round_robin_windows": {
+    "window_1": {
+      "range": [
+        1,
+        600
+      ],
+      "total": 600,
+      "counts": {
+        "open_social": 120,
+        "followup": 120,
+        "planning": 120,
+        "support": 120,
+        "topic": 120
+      },
+      "missing_families": [],
+      "dominant_family": "open_social",
+      "dominant_count": 120,
+      "dominant_share": 0.2,
+      "min_family_count": 120
+    },
+    "window_2": {
+      "range": [
+        601,
+        1200
+      ],
+      "total": 600,
+      "counts": {
+        "open_social": 120,
+        "followup": 120,
+        "planning": 120,
+        "support": 120,
+        "topic": 120
+      },
+      "missing_families": [],
+      "dominant_family": "open_social",
+      "dominant_count": 120,
+      "dominant_share": 0.2,
+      "min_family_count": 120
+    },
+    "window_3": {
+      "range": [
+        1201,
+        1800
+      ],
+      "total": 600,
+      "counts": {
+        "open_social": 120,
+        "followup": 120,
+        "planning": 120,
+        "support": 120,
+        "topic": 120
+      },
+      "missing_families": [],
+      "dominant_family": "open_social",
+      "dominant_count": 120,
+      "dominant_share": 0.2,
+      "min_family_count": 120
+    }
+  },
+  "gate": {
+    "passed": true,
+    "criteria": {
+      "window_size": 600,
+      "required_families": [
+        "open_social",
+        "followup",
+        "planning",
+        "support",
+        "topic"
+      ],
+      "min_per_family_per_window": 80,
+      "max_dominant_share_per_window": 0.25
+    },
+    "failures": [],
+    "topic_first_1800_min": 300,
+    "topic_first_1800_count": 360,
+    "topic_gate_passed": true
+  },
+  "blocked_actions": [
+    "runtime release",
+    "UI generator release",
+    "SF-50M transition",
+    "tokenizer retrain",
+    "pretrained/open-weight usage"
+  ],
+  "allowed_next_actions": [
+    "one bounded SF-10M repair using --split-order family_round_robin",
+    "save-window family-balance tracking",
+    "held-out canary after training"
+  ],
+  "decision": {
+    "decision_id": "PHASE27_89_STRATIFIED_ROUND_ROBIN_CURRICULUM_SAMPLER_GATE_DECISION",
+    "engineering_decision": "ALLOW_PHASE27_90_BOUNDED_SF10M_TRAINING_WITH_ROUND_ROBIN_SPLIT_ORDER",
+    "new_training_allowed": true,
+    "runtime_release_allowed": false,
+    "ui_release_allowed": false,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "required_training_flag": "--split-order family_round_robin",
+    "why": "الترتيب الجديد يوزع عائلات الحوار داخل كل نافذة تدريبية بدل الكتل المتتابعة، لذلك يسمح فقط بتدريب SF-10M محدود في المرحلة التالية، مع استمرار حجب runtime.",
+    "next_phase": "Phase 27.90 — Bounded SF-10M Round-Robin Curriculum Repair Training"
+  }
+}

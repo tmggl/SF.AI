@@ -21,29 +21,18 @@ from sf_ai.datasets.corpus_governance import (
     audit_record_for_training,
     detect_training_forbidden_operational_terms,
 )
+from sf_ai.datasets.loaders import iter_chat_samples, iter_jsonl
 from sf_ai.datasets.saudi_seed import (
     SaudiSeedEntry,
     SaudiSeedSafety,
     SaudiSeedStats,
-    attribution_block as saudi_seed_attribution,
     iter_saudi_seed_entries,
     load_saudi_seed,
     saudi_seed_stats,
 )
-from sf_ai.datasets.source_inventory import (
-    SourceInventoryItem,
-    SourceInventoryReport,
-    build_source_inventory,
+from sf_ai.datasets.saudi_seed import (
+    attribution_block as saudi_seed_attribution,
 )
-from sf_ai.datasets.splits import (
-    SplitEntry,
-    assign_split,
-    build_split_entries,
-    iter_split_samples,
-    load_split_entries,
-    write_split_manifest,
-)
-from sf_ai.datasets.loaders import iter_chat_samples, iter_jsonl
 from sf_ai.datasets.schemas import (
     ChatMessage,
     Provenance,
@@ -51,6 +40,21 @@ from sf_ai.datasets.schemas import (
     SimpleSample,
     StructuredSample,
     parse_record,
+)
+from sf_ai.datasets.source_inventory import (
+    SourceInventoryItem,
+    SourceInventoryReport,
+    build_source_inventory,
+)
+from sf_ai.datasets.splits import (
+    FAMILY_ORDER,
+    SplitEntry,
+    assign_split,
+    build_split_entries,
+    iter_split_samples,
+    iter_split_samples_round_robin_by_family,
+    load_split_entries,
+    write_split_manifest,
 )
 from sf_ai.datasets.validators import (
     SampleIssue,
@@ -75,6 +79,7 @@ __all__ = [
     "SaudiSeedStats",
     "SourceInventoryItem",
     "SourceInventoryReport",
+    "FAMILY_ORDER",
     "SplitEntry",
     "ValidationReport",
     "assign_split",
@@ -83,6 +88,7 @@ __all__ = [
     "iter_jsonl",
     "iter_saudi_seed_entries",
     "iter_split_samples",
+    "iter_split_samples_round_robin_by_family",
     "load_split_entries",
     "load_saudi_seed",
     "parse_record",
