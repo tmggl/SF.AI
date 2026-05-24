@@ -133,5 +133,6 @@ Phase 27.104 fixed topic binding on the narrow prototype gate, but all-family qu
 
 ## Next
 
-- التالي عند نجاح البوابات: `Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Training`
+- بوابات التنفيذ مرّت لاحقًا في Phase 27.80.
+- التالي عند نجاح البوابات: `Phase 27.81 — Execute bounded SF-10M family-conditioned repair training`
 - لا تفتح الواجهة إلا عند `RUNTIME_RELEASE_ALLOWED=true`.

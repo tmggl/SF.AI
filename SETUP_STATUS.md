@@ -10,11 +10,11 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.79 / 30**
-- **المرحلة الحالية:** **Phase 27.79 — Objective/Curriculum/Decoding Repair Plan** (`PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN`; خطة وبوابة؛ لا تدريب ولا runtime)
+- **الرحلة الحالية:** **Phase 27.80 / 30**
+- **المرحلة الحالية:** **Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Gate** (`PHASE27_80_BOUNDED_FAMILY_CONDITIONED_REPAIR_GATE_DECISION`; بوابات التنفيذ مرّت؛ لا تدريب بدأ ولا runtime)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
 - **ملف القيادة الواحد:** `docs/SF_AI_MASTER_GUIDE.md` هو نقطة الدخول الأولى لأي Agent أو مهندس؛ بقية الملفات مراجع تفصيلية.
-- **المرحلة التالية المقترحة:** Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Training؛ مشروطة بمرور البوابات فقط.
+- **المرحلة التالية المقترحة:** Phase 27.81 — Execute bounded SF-10M family-conditioned repair training.
 - **استراتيجية العمل الملزمة:** SF-native Objective/Curriculum/Decoding Acceleration Track؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب، و`NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS` قبل أي runtime.
 - **تصحيح السيادة:** لا يوجد Open-Weight Lane؛ Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي = أدوات هندسية فقط داخل SF-native.
@@ -292,7 +292,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs,reports}/   Phase 5.5+ outputs/reports
 │
-├── tests/                                 pytest suite — 675 تست / 97 ملف
+├── tests/                                 pytest suite — 692 تست / 106 ملف
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -377,10 +377,10 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى re-anchor Phase 27.79)
+## نتائج الاختبارات (حتى Phase 27.80 gate)
 
 ```
-687 passed in 84.41s (0:01:24)
+692 passed in 73.19s (0:01:13)
 ```
 
 التغطية الحالية:

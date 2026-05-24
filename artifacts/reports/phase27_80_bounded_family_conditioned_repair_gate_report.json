@@ -1,0 +1,94 @@
+{
+  "phase": "Phase 27.80",
+  "phase_title": "Bounded SF-10M Family-Conditioned Repair Gate",
+  "active_track": "SF-native Objective/Curriculum/Decoding Acceleration Track",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "source_plan": "artifacts/reports/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.json",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_changed": false,
+  "gates": [
+    {
+      "gate": "objective_renderer_assistant_loss_mask",
+      "passed": true,
+      "rendered_preview": "النطاق: سعودي\nعائلة الحوار: تنظيم\nالمستخدم: كيف أنظم يومي؟\nالمساعد: اكتب ثلاث مهام، وابدأ بالأهم لمدة قصيرة. <eos>\n",
+      "required_lines_present": true,
+      "context_masked": true,
+      "assistant_supervised": true,
+      "non_masked_label_count": 9
+    },
+    {
+      "gate": "stratified_round_robin_window_balance",
+      "passed": true,
+      "window_size": 500,
+      "family_counts": {
+        "open_social": 100,
+        "followup": 100,
+        "planning": 100,
+        "support": 100,
+        "topic": 100
+      },
+      "family_shares": {
+        "open_social": 0.2,
+        "followup": 0.2,
+        "planning": 0.2,
+        "support": 0.2,
+        "topic": 0.2
+      },
+      "missing_families": [],
+      "preview": "artifacts/eval/phase27_80_family_conditioned_gate/round_robin_window_preview.json"
+    },
+    {
+      "gate": "decoding_eval_selector_logging_artifacts",
+      "passed": true,
+      "decoding_policy": "artifacts/eval/phase27_80_family_conditioned_gate/decoding_policy_v2.json",
+      "checkpoint_selector": "artifacts/eval/phase27_80_family_conditioned_gate/checkpoint_selector_v2.json",
+      "logging_schema": "artifacts/eval/phase27_80_family_conditioned_gate/local_csv_logging_schema.json",
+      "metrics_template": "artifacts/eval/phase27_80_family_conditioned_gate/metrics_template.csv"
+    },
+    {
+      "gate": "heldout_contrastive_canary_inventory",
+      "passed": true,
+      "present": [
+        "artifacts/reports/phase27_30_fresh_mixed_shadow_canary_report.json",
+        "artifacts/reports/phase27_60_broader_natural_dialogue_canary_report.json",
+        "artifacts/reports/phase27_102_topic_prototype_contrastive_gate_report.json",
+        "artifacts/reports/phase27_dialogue_eval_v2_report.json"
+      ],
+      "missing": []
+    },
+    {
+      "gate": "mps_amp_smoke",
+      "selected_device": "mps",
+      "device_notes": "Apple Silicon GPU",
+      "mps_checked": true,
+      "amp_enabled_for_training": false,
+      "mps_available": true,
+      "mps_smoke_value": 2.0,
+      "amp_smoke_status": "not_enabled_until_training_smoke",
+      "passed": true
+    }
+  ],
+  "blocked_actions": [
+    "runtime release",
+    "SF-50M transition",
+    "tokenizer retrain",
+    "pretrained/open-weight usage",
+    "template masking"
+  ],
+  "decision": {
+    "decision_id": "PHASE27_80_BOUNDED_FAMILY_CONDITIONED_REPAIR_GATE_DECISION",
+    "engineering_decision": "GATES_PASSED_BOUNDED_TRAINING_CAN_BE_SCHEDULED",
+    "all_gates_passed": true,
+    "new_training_started": false,
+    "bounded_training_allowed_next": true,
+    "runtime_release_allowed": false,
+    "sf50m_allowed": false,
+    "tokenizer_retrain_allowed": false,
+    "next_phase": "Phase 27.81 — Execute bounded SF-10M family-conditioned repair training"
+  }
+}

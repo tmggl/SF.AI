@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.79
-الاسم: Objective/Curriculum/Decoding Repair Plan
+المرحلة الحالية: Phase 27.80
+الاسم: Bounded SF-10M Family-Conditioned Repair Gate
 المسار الملزم: SF-native Objective/Curriculum/Decoding Acceleration Track
-القرار الرسمي: PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN
+القرار الرسمي: PHASE27_80_BOUNDED_FAMILY_CONDITIONED_REPAIR_GATE_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -92,15 +92,13 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 
 - هذا re-anchor رسمي بعد نتيجة 27.104: لا نواصل تدريبًا متكررًا ولا
   tokenizer جزئيًا ولا نكبر النموذج قبل إصلاح objective/curriculum/decoding.
-- لا تدريب جديد الآن.
+- بوابات التنفيذ مرّت، لكن التدريب لم يبدأ بعد.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
 - التقرير الملزم: `docs/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md`.
-- التالي المشروط: `Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Training`
-  فقط إذا مرت بوابات objective renderer, round-robin sampler, decoding,
-  contrastive eval, checkpoint selector, held-out canary, corpus-audit,
-  sensitive scan, full tests, وMPS/AMP smoke.
+- التالي: `Phase 27.81 — Execute bounded SF-10M family-conditioned repair training`
+  باستخدام البوابات التي مرّت في Phase 27.80.
 
 الدليل السابق الذي سبب هذا re-anchor:
 
@@ -341,7 +339,8 @@ SF-10M
 | Phase 27-27.77 | سلسلة طويلة لتحسين الحوار، tokenizer، objective، family balance، canaries |
 | Phase 27.78 | root-cause gate أوقف التدريب الأعمى والتكبير |
 | Phase 27.79 re-anchor | الخطة الحالية: Objective/Curriculum/Decoding Repair Plan، بلا تدريب |
-| Phase 27.80 conditional | تدريب SF-10M محدود فقط إذا مرت البوابات |
+| Phase 27.80 gate | بوابات التدريب العائلي المحدود مرّت؛ لا تدريب ولا runtime |
+| Phase 27.81 conditional | تدريب SF-10M محدود فقط بعد نجاح بوابات 27.80 |
 
 الدرس الأساسي من Phase 27:
 
@@ -357,12 +356,12 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Training
+Phase 27.81 — Execute bounded SF-10M family-conditioned repair training
 ```
 
 مطلوب منها:
 
-- لا تبدأ إلا بعد نجاح بوابات `PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN`.
+- لا تبدأ إلا بعد نجاح بوابات `PHASE27_80_BOUNDED_FAMILY_CONDITIONED_REPAIR_GATE_DECISION`.
 - استخدام objective بصيغة `النطاق` + `عائلة الحوار` + `المستخدم` + `المساعد ... <eos>`.
 - حساب loss على رد المساعد و`<eos>` فقط.
 - استخدام stratified round-robin بين open_social/followup/planning/support/topic.

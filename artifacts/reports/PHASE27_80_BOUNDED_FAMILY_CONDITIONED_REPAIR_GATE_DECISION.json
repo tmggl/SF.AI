@@ -1,0 +1,11 @@
+{
+  "decision_id": "PHASE27_80_BOUNDED_FAMILY_CONDITIONED_REPAIR_GATE_DECISION",
+  "engineering_decision": "GATES_PASSED_BOUNDED_TRAINING_CAN_BE_SCHEDULED",
+  "all_gates_passed": true,
+  "new_training_started": false,
+  "bounded_training_allowed_next": true,
+  "runtime_release_allowed": false,
+  "sf50m_allowed": false,
+  "tokenizer_retrain_allowed": false,
+  "next_phase": "Phase 27.81 — Execute bounded SF-10M family-conditioned repair training"
+}

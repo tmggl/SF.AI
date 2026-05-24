@@ -259,6 +259,9 @@ def _encode_assistant_target_dialogue(tokenizer, text: str) -> tuple[list[int], 
         if line.startswith("المساعد:"):
             prefix = "المساعد:"
             content = line[len(prefix):].strip()
+            content_has_visible_eos = content.endswith(ASSISTANT_EOS_TOKEN)
+            if content_has_visible_eos:
+                content = content[: -len(ASSISTANT_EOS_TOKEN)].strip()
             prefix_ids = tokenizer.encode(prefix)
             content_ids = tokenizer.encode(content)
             ids.extend(prefix_ids)
@@ -269,6 +272,10 @@ def _encode_assistant_target_dialogue(tokenizer, text: str) -> tuple[list[int], 
             if eos_id is not None:
                 ids.append(eos_id)
                 labels.append(eos_id)
+            elif content_has_visible_eos:
+                eos_ids = tokenizer.encode(ASSISTANT_EOS_TOKEN)
+                ids.extend(eos_ids)
+                labels.extend(eos_ids)
         else:
             line_ids = tokenizer.encode(line)
             ids.extend(line_ids)

@@ -74,5 +74,5 @@ def test_phase27_plan_defers_amp_lora_and_preference_optimization() -> None:
 def test_phase27_plan_doc_exists_and_names_next_bounded_training_gate() -> None:
     text = DOC.read_text(encoding="utf-8")
     assert "PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN" in text
-    assert "Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Training" in text
+    assert "Phase 27.81 — Execute bounded SF-10M family-conditioned repair training" in text
     assert "RUNTIME_RELEASE_ALLOWED=true" in text

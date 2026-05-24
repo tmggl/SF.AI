@@ -34,7 +34,7 @@ def test_topic_family_renderer_emits_requested_topic_line() -> None:
         "الموضوع المطلوب: الوفاء\n"
     )
     assert "المستخدم: وش يعني الوفاء؟" in text
-    assert "المساعد: الوفاء ثبات وصدق في العلاقة." in text
+    assert "المساعد: الوفاء ثبات وصدق في العلاقة. <eos>" in text
 
 
 def test_non_topic_family_does_not_emit_requested_topic_line() -> None:

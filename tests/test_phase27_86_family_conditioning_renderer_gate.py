@@ -13,7 +13,6 @@ from sf_ai.datasets.schemas import StructuredSample
 from sf_ai.models.tokenizer import BPETokenizer
 from sf_ai.training.train_tiny_lm import _encode_training_text
 
-
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -82,7 +81,7 @@ def test_phase27_86_render_dialogue_text_emits_arabic_family_line() -> None:
     text = render_dialogue_text(sample)
     assert text.startswith("النطاق: سعودي\nعائلة الحوار: تنظيم\n")
     assert "المستخدم: كيف أرتب يومي؟" in text
-    assert "المساعد: ابدأ بثلاث مهام واضحة." in text
+    assert "المساعد: ابدأ بثلاث مهام واضحة. <eos>" in text
 
 
 def test_phase27_86_all_family_labels_render_distinctly() -> None:
@@ -112,7 +111,7 @@ def test_phase27_86_conditioning_lines_are_masked_from_assistant_loss() -> None:
         "النطاق: سعودي\n"
         "عائلة الحوار: تنظيم\n"
         "المستخدم: كيف أرتب يومي؟\n"
-        "المساعد: ابدأ بثلاث مهام واضحة.\n"
+        "المساعد: ابدأ بثلاث مهام واضحة. <eos>\n"
     )
     _ids, labels = _encode_training_text(
         tokenizer,

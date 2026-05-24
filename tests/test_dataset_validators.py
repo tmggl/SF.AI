@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 import pytest
@@ -20,7 +19,6 @@ from sf_ai.datasets import (
     validate_jsonl_file,
     validate_record,
 )
-
 
 # ---------- schemas ----------
 
@@ -283,7 +281,7 @@ def test_chat_dataset_iter_dialogue_texts_keeps_role_context(tmp_path: Path) -> 
     )
     ds = ChatDataset(root=tmp_path)
     texts = list(ds.iter_dialogue_texts())
-    assert texts == ["المستخدم: مرحبا\nالمساعد: أهلا\n"]
+    assert texts == ["المستخدم: مرحبا\nالمساعد: أهلا <eos>\n"]
 
 
 def test_real_corpus_dir_contains_only_explicit_reviewed_seeds() -> None:

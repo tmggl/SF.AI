@@ -82,9 +82,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "المسار الحالي أُعيد تثبيته عند Phase 27.79: خطة إصلاح "
-    "objective/curriculum/decoding السيادية. لا تدريب ولا runtime الآن؛ "
-    "التدريب المحدود لا يبدأ إلا إذا مرّت بوابات Phase 27.80.",
+    "وصلنا إلى Phase 27.80: بوابات objective/curriculum/decoding مرّت. "
+    "لا runtime الآن؛ التالي Phase 27.81 تدريب SF-10M محدود مشروط بهذه "
+    "البوابات.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

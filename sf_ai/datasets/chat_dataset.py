@@ -25,6 +25,8 @@ from sf_ai.datasets.schemas import (
 )
 from sf_ai.datasets.validators import ValidationReport, validate_jsonl_file
 
+ASSISTANT_EOS_TOKEN = "<eos>"
+
 
 @dataclass
 class DatasetStats:
@@ -226,6 +228,8 @@ def render_dialogue_text(sample: SimpleSample | StructuredSample) -> str:
         if msg.role == "user":
             lines.append(f"المستخدم: {content}")
         elif msg.role == "assistant":
+            if not content.endswith(ASSISTANT_EOS_TOKEN):
+                content = f"{content} {ASSISTANT_EOS_TOKEN}"
             lines.append(f"المساعد: {content}")
         elif msg.role == "system":
             lines.append(f"النظام: {content}")

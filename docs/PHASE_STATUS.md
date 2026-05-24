@@ -7,17 +7,17 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.79 / 30** كـ active strategy re-anchor بعد دليل Phase 27.104.
-- **المرحلة الحالية:** **Phase 27.79 — Objective/Curriculum/Decoding Repair Plan**
-- **حالة المرحلة الحالية:** **خطة وبوابة تصميم؛ لا تدريب ولا runtime ولا tokenizer جديد**
-- **المرحلة التالية المقترحة:** Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Training، مشروطة بمرور البوابات فقط.
+- **الرحلة الحالية:** **Phase 27.80 / 30**
+- **المرحلة الحالية:** **Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Gate**
+- **حالة المرحلة الحالية:** **بوابات التنفيذ مرّت؛ لا تدريب بدأ ولا runtime ولا tokenizer جديد**
+- **المرحلة التالية المقترحة:** Phase 27.81 — Execute bounded SF-10M family-conditioned repair training.
 - **التحول الاستراتيجي المعتمد:** **SF-native Objective/Curriculum/Decoding Acceleration Track** — تسريع هندسي فقط؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
   ضمن مسار `SF-native`.
 - **تفويض التكبير المعتمد:** **Auto-Advance Scaling Mandate** — عند نجاح gate الحجم التالي ينتقل الوكيل تلقائيًا عبر `SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
-- **تاريخ آخر تحديث:** 2026-05-24
+- **تاريخ آخر تحديث:** 2026-05-25
 
 ---
 
@@ -1085,13 +1085,13 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-687 passed in 84.41s (0:01:24)
+692 passed in 73.19s (0:01:13)
 ```
 
 | التحقق | النتيجة |
 |------|------|
-| full pytest suite | `687 passed in 84.41s (0:01:24)` |
-| focused Phase 27.79 plan/API/UI tests | `80 passed in 9.61s` |
+| full pytest suite | `692 passed in 73.19s (0:01:13)` |
+| focused Phase 27.80 gate/API/UI tests | `130 passed in 11.14s` |
 | `make corpus-audit` | `8645` records, `issues=0` |
 | `make phase27-dialogue-eval` | `19/19`, `open_generator_ready=false` |
 
@@ -1796,8 +1796,10 @@ make api
 - tokenizer retrain: محجوب.
 - `SF-50M`: محجوب.
 - runtime release: محجوب.
-- التالي المشروط: Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Training.
-- شروط 27.80: objective renderer، assistant-only loss mask،
+- نتيجة البوابات: مرّت في Phase 27.80 عبر
+  `PHASE27_80_BOUNDED_FAMILY_CONDITIONED_REPAIR_GATE_DECISION`.
+- التالي المشروط: Phase 27.81 — Execute bounded SF-10M family-conditioned repair training.
+- شروط 27.81: objective renderer، assistant-only loss mask،
   stratified round-robin sampler، decoding policy، contrastive eval،
   checkpoint selector، held-out canary، corpus-audit، sensitive scan،
   full tests، وMPS/AMP smoke log.
