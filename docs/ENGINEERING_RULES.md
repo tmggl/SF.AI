@@ -206,6 +206,77 @@ SF-10M
 
 إذا فشل شرط واحد، الخطوة الصحيحة هي تحسين البيانات/التوكنزر/التقييم أو إعادة تدريب الحجم نفسه، لا تكبير النموذج.
 
+## 14. Sovereign Practical Acceleration Strategy v2
+
+هذا القسم يعلو أي نمط تجريبي سابق داخل Phase 27 وما بعدها.
+
+ممنوع نهائيًا:
+
+- التدريب الأعمى المتكرر.
+- إعادة تدريب كاملة لكل مشكلة صغيرة.
+- إصلاح كلمة/عبارة منفردة بدون root-cause diagnosis.
+- تدوير tokenizer versions بدون قرار هندسي واضح.
+- تحسين benchmark مع تجاهل runtime behavior.
+- template masking لإخفاء ضعف المولد.
+
+قبل أي تدريب جديد يجب تنفيذ:
+
+```text
+ENGINEERING_ROOT_CAUSE_GATE
+```
+
+والقرار الحالي الملزم هو:
+
+```text
+PHASE27_78_ENGINEERING_DECISION
+```
+
+نتيجة Phase 27.78 الحالية:
+
+- family mixing: `22%`.
+- objective: `18%`.
+- curriculum: `16%`.
+- weak generalization: `14%`.
+- semantic routing: `10%`.
+- decoding: `7%`.
+- tokenizer: `4%`.
+- EOS: `4%`.
+- memorization: `2%`.
+- repetition: `2%`.
+- capacity: `1%`.
+
+بناءً عليه:
+
+- استمر على `SF-10M`.
+- امنع `SF-50M` الآن.
+- امنع tokenizer جديدًا الآن.
+- امنع runtime release الآن.
+- التالي هو Phase 27.79 لتصميم إصلاح objective/curriculum/decoding/family balance.
+
+قاعدة runtime:
+
+```text
+NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS
+```
+
+مقاييس النجاح الرسمية:
+
+- held-out dialogue quality.
+- runtime usability.
+- clean-stop.
+- semantic correctness.
+- family stability.
+- open_social naturalness.
+- followup continuity.
+- canary pass rate.
+- human conversation realism.
+
+ليست كافية وحدها:
+
+- loss.
+- perplexity.
+- micro-probe.
+
 ## Naming Conventions
 
 ### الملفات والمجلدات

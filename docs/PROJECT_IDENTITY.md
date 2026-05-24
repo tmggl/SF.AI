@@ -40,15 +40,26 @@ runtime rules + routing
 
 ## ما هو المشروع الآن؟
 
-حاليًا SF.AI ليس LLM حر التوليد. هو:
+حاليًا SF.AI ليس LLM حر التوليد جاهزًا للواجهة. هو:
 
 - FastAPI runtime.
 - Orchestrator.
 - NLP عربي rule-based.
 - Router/Intent detector.
-- ChatModule بقوالب.
+- ChatModule ومسارات محروسة.
 - Composer للردود والسafety.
-- Corpus governance وpreflight لمرحلة التدريب.
+- Corpus governance وpreflight.
+- Phase 27.78 root-cause gate يمنع التدريب الأعمى والتكبير.
+
+الحالة الحالية الملزمة:
+
+```text
+Phase 27.78 — Engineering Root Cause Gate
+PHASE27_78_ENGINEERING_DECISION
+```
+
+القرار الحالي: لا training، لا tokenizer جديد، لا runtime release، لا
+`SF-50M`. التالي Phase 27.79 لتصميم إصلاح objective/curriculum/decoding.
 
 ## ما الذي نريد الوصول إليه؟
 
@@ -81,3 +92,6 @@ SF.AI لا يدّعي القدرة قبل وجودها.
 - المجالات الحساسة تبقى safety-first.
 - التدريب لا يبدأ لمجرد وجود corpus جاهز.
 - جاهزية `corpus-audit` تعني “يمكن البدء بإذن”، لا “بدأ التدريب”.
+- بعد Phase 27.78 لا يبدأ التدريب حتى لو طلب المستخدم “التالي” إلا إذا
+  وُجد gate صريح يسمح به.
+- لا runtime release بدون `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.

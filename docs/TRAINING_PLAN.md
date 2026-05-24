@@ -5,6 +5,35 @@
 > **القاعدة الأولى:** كل وزن يتعلمه SF.AI يبدأ من **random init**، يتعلم من **corpus SF.AI**، ويُحفَظ في **artifacts/checkpoints/** بـ `sf_origin: true`.
 > لا `from_pretrained`، لا تحميل من HuggingFace، لا LoRA فوق نموذج خارجي.
 
+## القاعدة الحالية الأعلى — Strategy v2
+
+ابتداءً من Phase 27.78:
+
+```text
+ENGINEERING_ROOT_CAUSE_GATE
+PHASE27_78_ENGINEERING_DECISION
+```
+
+هما شرط قبل أي تدريب جديد. القرار الحالي:
+
+- `new_training_allowed=false`.
+- `runtime_release_allowed=false`.
+- `sf50m_justified_transition=false`.
+- `tokenizer_retrain_allowed=false`.
+- `continue_sf10m=true`.
+
+أوزان السبب الحالية تقول إن المشكلة ليست capacity:
+
+- family mixing `22%`.
+- objective `18%`.
+- curriculum `16%`.
+- weak generalization `14%`.
+- semantic routing `10%`.
+- capacity `1%`.
+
+إذن Phase 27.79 يجب أن يصمم objective/curriculum/decoding gates أولًا، ولا
+يبدأ تدريبًا إلا بعد تشفير هذه البوابات.
+
 ---
 
 ## 1. لماذا نبدأ صغيرًا؟
@@ -20,7 +49,8 @@
 | Arabic quality (تشكيل، ة/ه) | واضحة في 10M | يضمنها 1B تلقائيًا |
 | Device/precision issues (MPS NaN) | NaN يظهر مبكرًا | قد يخفى تحت scale |
 
-**القاعدة:** لا توسعة قبل تحقق SF-10M.
+**القاعدة:** لا توسعة قبل تحقق SF-10M، ولا تدريب جديد بعد Phase 27.78 قبل
+قرار root-cause يسمح به.
 
 ---
 
@@ -65,6 +95,10 @@
 
 عدم تحقق أي شرط → ابقَ في الحجم الحالي حتى يُحل.
 
+بعد Phase 27.78، لا يكفي أن نرى ضعفًا في الردود لنكبر النموذج. يجب أن يثبت
+gate رسمي أن capacity هي السبب الأكبر. الوزن الحالي لـ capacity هو `1%`،
+لذلك `SF-50M` محجوب حتى إشعار هندسي معاكس.
+
 ---
 
 ## 5. قياس الجودة (Evaluation)
@@ -78,6 +112,18 @@
 - **Repetition rate:** كم من الـ generations تحوي تكرارًا؟
 
 نضيف evaluations رسمية (TyDi-style benchmarks، Arabic LM benchmarks) **بعد** أن يصبح SF-50M على الأقل مستقرًا. قبل ذلك، benchmark على نموذج 10M = هدر.
+
+المقاييس الرسمية الآن ليست loss/perplexity فقط. النجاح يحتاج:
+
+- held-out dialogue quality.
+- runtime usability.
+- clean-stop.
+- semantic correctness.
+- family stability.
+- open_social naturalness.
+- followup continuity.
+- canary pass rate.
+- human conversation realism.
 
 ---
 

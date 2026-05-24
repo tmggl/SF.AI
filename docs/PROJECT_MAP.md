@@ -23,6 +23,7 @@ docker-compose.yml
 - أوامر التشغيل.
 - إعداد البيئة.
 - سياسة التجاهل والحماية.
+- `NEXT_AGENT_PROMPT.md` يجب أن يوجّه أي Agent إلى Phase 27.78 وStrategy v2.
 
 ## apps/
 
@@ -36,6 +37,7 @@ apps/web/
 - runtime applications فقط.
 - `apps/api` يحتوي FastAPI والـ routers والـ schemas والـ static chat UI.
 - `apps/web` placeholder للواجهة المستقبلية.
+- `/health` و`/system/status` يعكسان الحالة الحالية: `Phase 27.78`.
 
 ممنوع:
 
@@ -156,7 +158,11 @@ device.py
 - checkpoint metadata.
 - device management.
 
-لا تُشغّل إلا بإذن.
+لا تُشغّل إلا بإذن وبعد Phase 27.78:
+
+- لا training جديد قبل `ENGINEERING_ROOT_CAUSE_GATE`.
+- القرار الحالي `PHASE27_78_ENGINEERING_DECISION.new_training_allowed=false`.
+- أي script تدريب يجب أن يبقى محجوبًا حتى يكتب Phase 27.79 gates واضحة.
 
 ## sf_ai/memory/
 
@@ -212,6 +218,12 @@ resources/tokenization/
 - tokenization policy rules.
 
 هذه ليست corpus مباشرًا. تحويلها إلى samples يتم عبر scripts موثقة وprovenance.
+
+بعد Phase 27.78:
+
+- لا tokenizer version جديد من `resources/tokenization/` إلا إذا أثبت gate
+  جديد أن tokenizer هو السبب الأكبر.
+- الوزن الحالي للتوكنزر في root cause هو `4%` فقط.
 
 ## data/
 

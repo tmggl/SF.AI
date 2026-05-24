@@ -56,6 +56,11 @@ intent/topic + balanced calibration + advice/micro stabilization، ووصلت إ
 
 الخطوة العملية الحالية:
 
+- Phase 27.79 هو التالي: تصميم إصلاح objective/curriculum/decoding/family balance.
+- لا تبدأ تدريبًا في Phase 27.79 حتى تُشفّر gates وتثبت allowed actions.
+- لا tokenizer جديد الآن؛ tokenizer وزنها `4%` فقط في 27.78.
+- لا `SF-50M` الآن؛ capacity وزنها `1%` فقط.
+- لا runtime release قبل `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - `make source-inventory` يعرض كل مصادر البيانات والمراجع المحلية، ويفرق بين corpus حواري وملفات مرجعية.
 - `make corpus-audit` يفحص بيانات `data/corpus/chat/jsonl/`.
 - Phase 12 tokenizer v1 اكتمل بإذن صريح من سامي، مع توثيق أنه Saudi-only ويحتاج `msa` قبل أي تشغيل جودة متوازن.

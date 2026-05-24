@@ -10,6 +10,7 @@ corpus
 → training
 → checkpoint
 → eval
+→ engineering root-cause gate
 → scaling gate
 → runtime
 ```
@@ -115,6 +116,16 @@ sf_ai/training/
 - لا تحميل models من الإنترنت.
 - logs إلى `artifacts/logs/`.
 - checkpoints إلى `artifacts/checkpoints/`.
+- بعد Phase 27.78: لا يبدأ training جديد قبل `ENGINEERING_ROOT_CAUSE_GATE`
+  وقرار يسمح به.
+
+الحالة الحالية:
+
+```text
+PHASE27_78_ENGINEERING_DECISION.new_training_allowed = false
+```
+
+إذن أي عمل بعده يجب أن يكون design/gates/diagnostics أولًا، لا تدريب.
 
 ## 4. Checkpoint
 
@@ -157,6 +168,50 @@ docs/
 
 eval لا يساوي قبول runtime. هو شرط قبل القبول.
 
+بعد Phase 27.78، eval لا يكتفي بـ loss/perplexity/micro-probe. يجب أن
+يتضمن:
+
+- held-out dialogue quality.
+- runtime usability.
+- clean-stop.
+- semantic correctness.
+- family stability.
+- open_social naturalness.
+- followup continuity.
+- canary pass rate.
+- human conversation realism.
+
+## 5.5 Engineering Root-Cause Gate
+
+هذه خطوة إلزامية بين eval وأي تدريب/تكبير/runtime جديد.
+
+مدخلاتها:
+
+- held-out/shadow canary reports.
+- family confusion analysis.
+- decoding/repetition/EOS inspection.
+- tokenizer boundary audit.
+- semantic routing diagnostics.
+- objective tracing.
+- regression summary.
+
+مخرجاتها:
+
+- Decision Report.
+- Root Cause Report.
+- Allowed/Blocked Actions.
+- Runtime Decision.
+- Regression Summary.
+
+الحالة الحالية:
+
+```text
+Phase 27.78 — Engineering Root Cause Gate
+PHASE27_78_ENGINEERING_DECISION
+```
+
+القرار الحالي يمنع training وruntime و`SF-50M`.
+
 ## 6. Runtime
 
 المكان:
@@ -172,6 +227,7 @@ runtime يستخدم checkpoint فقط بعد:
 - training ناجح.
 - eval ناجح.
 - safety gate.
+- `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - توثيق.
 - إذن تفعيل.
 
@@ -206,6 +262,8 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 - hallucination checks.
 - repetition checks.
 - resource readiness.
+- `ENGINEERING_ROOT_CAUSE_GATE` يثبت أن capacity هي السبب الأكبر أو أن
+  `SF-50M JUSTIFIED TRANSITION` صدر رسميًا.
 
 إذا فشل gate، يعود المشروع إلى:
 
@@ -214,6 +272,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 - تعديل eval.
 - إعادة تدريب الحجم نفسه.
 - تحسين runtime canary/fallback.
+- إصلاح objective/curriculum/decoding/family balance إذا كانت هي السبب الأكبر.
 
 ## نقاط الفصل
 
@@ -239,8 +298,11 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 
 ## الحالة الحالية
 
-- corpus seed صغير موجود: `first_dialogue_seed.jsonl`.
-- `corpus-audit` جاهز بنيويًا: 30/30، لكن `phase12-readiness` يطلب إضافة `msa`.
-- Phase 12 tokenizer v1 اكتملت مع قيود موثقة.
-- Phase 13 smoke training اكتملت مع قيود موثقة.
-- Phase 14 SF-10M v0.1 اكتملت مع قيود موثقة.
+- المرحلة الحالية: `Phase 27.78 — Engineering Root Cause Gate`.
+- القرار الحالي: `PHASE27_78_ENGINEERING_DECISION`.
+- corpus الحالي: `5943` سجلًا (`msa=2949`, `saudi=2994`).
+- التدريب الجديد: محجوب.
+- tokenizer الجديد: محجوب.
+- runtime release: محجوب.
+- `SF-50M`: محجوب لأن capacity وزنها الحالي `1%`.
+- التالي: `Phase 27.79 — Objective/Curriculum/Decoding Repair Design`.

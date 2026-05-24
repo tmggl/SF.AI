@@ -17,6 +17,47 @@
 11. [PROJECT_LIFECYCLE.md](./PROJECT_LIFECYCLE.md)
 12. [AGENT_HANDOFF.md](./AGENT_HANDOFF.md)
 
+## أمر أعلى حاكم — Sovereign Practical Acceleration Strategy v2
+
+ابتداءً من Phase 27.78 وما بعدها، هذا الأمر أعلى من أي نمط تجريبي سابق:
+
+- لا تدريب أعمى متكرر.
+- لا إعادة تدريب كاملة لكل مشكلة صغيرة.
+- لا إصلاح كلمة/عبارة منفردة قبل root-cause diagnosis.
+- لا تدوير tokenizer versions بدون قرار هندسي واضح.
+- لا benchmark inflation مع تجاهل runtime behavior.
+- لا template masking لإخفاء ضعف المولد.
+
+قبل أي تدريب جديد يجب وجود:
+
+```text
+ENGINEERING_ROOT_CAUSE_GATE
+PHASE27_78_ENGINEERING_DECISION
+```
+
+الحالة الحالية:
+
+- المرحلة الحالية: `Phase 27.78 — Engineering Root Cause Gate`.
+- القرار الحالي: `PHASE27_78_ENGINEERING_DECISION`.
+- التالي: `Phase 27.79 — Objective/Curriculum/Decoding Repair Design`.
+- التدريب: محجوب حتى تُشفّر gates.
+- runtime: محجوب تحت `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
+- `SF-50M`: محجوب؛ لا يفتح إلا عبر `SF-50M JUSTIFIED TRANSITION`.
+
+أوزان التشخيص الرسمية الحالية:
+
+- family mixing: `22%`.
+- objective: `18%`.
+- curriculum: `16%`.
+- weak generalization: `14%`.
+- semantic routing: `10%`.
+- decoding: `7%`.
+- tokenizer: `4%`.
+- EOS: `4%`.
+- memorization: `2%`.
+- repetition: `2%`.
+- capacity: `1%`.
+
 ## بروتوكول التشغيل بالنيابة عن سامي
 
 سامي لا يريد أن يتحول إلى منفّذ خطوات يدوية. لذلك:
@@ -45,20 +86,23 @@
 - هل الطلب تدريب، crawling، نقل بيانات، أم runtime؟
 - هل توجد تغييرات محلية غير مرفوعة؟
 - هل توجد ملفات خاصة مستثناة؟
+- هل توجد `PHASE27_78_ENGINEERING_DECISION` وهل طلبك يقع ضمن المسموح بعده؟
 
 ## Workflow إلزامي
 
 1. اقرأ الخطة والحالة.
 2. افحص git status.
-3. افحص السيرفر قراءة فقط عبر `make server-status` إذا كان العمل يتعلق بالتشغيل.
-4. افهم الفرق بين runtime وtraining.
-5. نفّذ التعديل الأصغر الذي يخدم الطلب.
-6. حدّث docs إذا غيّرت بنية أو مسارًا أو phase status.
-7. أضف أو حدّث tests.
-8. شغّل الاختبارات.
-9. افحص الحساسية قبل commit.
-10. ارفع فقط إذا نجح العمل.
-11. أعط سامي ملخصًا عربيًا واضحًا.
+3. اقرأ `docs/PHASE27_78_ENGINEERING_ROOT_CAUSE_GATE_REPORT.md`.
+4. افحص السيرفر قراءة فقط عبر `make server-status` إذا كان العمل يتعلق بالتشغيل.
+5. افهم الفرق بين runtime وtraining.
+6. لا تبدأ تدريبًا إلا إذا كان هناك gate صريح بعد 27.78 يسمح به.
+7. نفّذ التعديل الأصغر الذي يخدم الطلب.
+8. حدّث docs إذا غيّرت بنية أو مسارًا أو phase status.
+9. أضف أو حدّث tests.
+10. شغّل الاختبارات.
+11. افحص الحساسية قبل commit.
+12. ارفع فقط إذا نجح العمل.
+13. أعط سامي ملخصًا عربيًا واضحًا.
 
 ## ممنوعات الوكيل
 
@@ -72,6 +116,8 @@
 - لا تخلط lexicons مع datasets.
 - لا تغير `.gitignore` لرفع ملفات خاصة إلا بإذن صريح.
 - لا تستخدم نماذج أو tokenizers جاهزة.
+- لا تفتح `SF-50M` لأن الردود ضعيفة فقط؛ capacity وزنها الحالي `1%`.
+- لا تبدأ tokenizer جديدًا لأن tokenizer وزنها الحالي `4%` فقط، إلا إذا أثبت gate جديد عكس ذلك.
 
 ## التعامل مع كلمة “التالي”
 

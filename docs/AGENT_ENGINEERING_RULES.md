@@ -4,6 +4,43 @@
 
 هذه نسخة عملية مختصرة لأي Agent قبل العمل.
 
+## الأمر الأعلى الحالي
+
+**Sovereign Practical Acceleration Strategy v2** يحكم Phase 27 وما بعدها.
+
+المرحلة الحالية:
+
+```text
+Phase 27.78 — Engineering Root Cause Gate
+PHASE27_78_ENGINEERING_DECISION
+```
+
+لا تدريب جديد قبل أن يسمح gate مكتوب بعد 27.78 بذلك. لا `SF-50M` الآن.
+لا runtime release قبل:
+
+```text
+NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS
+```
+
+الأسباب الحالية حسب 27.78:
+
+| العامل | الوزن |
+|--------|-------|
+| family mixing | 22% |
+| objective | 18% |
+| curriculum | 16% |
+| weak generalization | 14% |
+| semantic routing | 10% |
+| decoding | 7% |
+| tokenizer | 4% |
+| EOS | 4% |
+| memorization | 2% |
+| repetition | 2% |
+| capacity | 1% |
+
+إذن المسار الصحيح التالي هو Phase 27.79: تصميم إصلاح objective/curriculum/
+decoding/family balance، وليس تدريبًا مباشرًا ولا tokenizer جديدًا.
+
 ## اقرأ أولًا
 
 1. [EXECUTION_PLAN.md](./EXECUTION_PLAN.md)
@@ -19,6 +56,11 @@
 ## لا تفعل
 
 - لا تنفذ مرحلة غير مصرح بها.
+- لا تبدأ أي training قبل `ENGINEERING_ROOT_CAUSE_GATE` وقرار يسمح به.
+- لا تعالج فشلًا حواريًا بإعادة تدريب كاملة تلقائيًا.
+- لا تعالج فشلًا حواريًا بإصلاح كلمة/عبارة منفردة قبل root-cause.
+- لا تدوّر tokenizer versions قبل إثبات tokenizer كسبب أكبر.
+- لا تحسن benchmark إذا لم يتحسن runtime behavior.
 - لا تبدأ Phase 12 إلا بإذن صريح.
 - لا تشغّل tokenizer training من كلمة “التالي”.
 - لا تمرر `--confirm-phase12-permission` إلا بعد إذن صريح من سامي ببدء Phase 12.
@@ -29,6 +71,7 @@
 - لا تنقل lexicon إلى corpus بدون conversion وprovenance.
 - لا تضف لهجات runtime/training غير `msa` و`saudi` بلا قرار صريح.
 - لا تستخدم pretrained بأي شكل.
+- لا تستخدم templates لإخفاء ضعف المولد عند تقييم نجاحه.
 
 ## عند تعديل tokenization
 

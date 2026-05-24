@@ -10,10 +10,11 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.77 / 30**
-- **المرحلة الحالية:** **Phase 27.77 — V9 Bounded Open-Social LM Repair** (فشلت كتوليد: `54/60` fresh و`45/50` known و`30/30` regression؛ runtime محجوب)
+- **الرحلة الحالية:** **Phase 27.78 / 30**
+- **المرحلة الحالية:** **Phase 27.78 — Engineering Root Cause Gate** (`PHASE27_78_ENGINEERING_DECISION`; training/runtime/SF-50M محجوبة)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** Phase 27.78 inspect Phase 27.77 failures and revise v9 LM strategy؛ Phase 28 و`SF-50M` محظوران حتى تنجح بوابات جودة أوسع.
+- **المرحلة التالية المقترحة:** Phase 27.79 Objective/Curriculum/Decoding Repair Design؛ لا تدريب حتى تُشفّر gates، وPhase 28 و`SF-50M` محظوران.
+- **استراتيجية العمل الملزمة:** Sovereign Practical Acceleration Strategy v2؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب، و`NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS` قبل أي runtime.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
@@ -405,8 +406,9 @@ make server-start
 - **Phase 18:** دورة توسيع بيانات من اختبار سامي المباشر — مكتملة كتصدير مراجعة + batch preparation محكوم.
 - **Phase 19:** بوابة جاهزية تدريب مرشح `SF-50M` — تعمل، وقرارها الحالي: وسّع corpus أولًا.
 - **Phase 20:** بوابات تفعيل المجالات skeleton عبر gates مستقلة — تعمل، ولا تفعّل شيئًا تلقائيًا.
+- **Phase 27.78:** بوابة `ENGINEERING_ROOT_CAUSE_GATE` — مكتملة، وأصدرت `PHASE27_78_ENGINEERING_DECISION`.
 
-أول توليد خام حدث في Phase 13. Phase 15 جهّز الباب داخل الشات، وPhase 16 أثبت أن التوليد مكرر. مختبر سامي المحلي يعمل الآن، والجودة الاجتماعية الموثوقة تحتاج بيانات/تدريب أفضل.
+أول توليد خام حدث في Phase 13. Phase 15 جهّز الباب داخل الشات، وPhase 16 أثبت أن التوليد مكرر. Phase 27.78 غيّرت المنهج: لا مزيد من التدريب المتكرر قبل تشخيص root-cause. التالي Phase 27.79 لتصميم إصلاح objective/curriculum/decoding/family balance.
 
 ---
 
@@ -424,6 +426,10 @@ make server-start
 - ❌ لا تدريب خارج الخطة أو بدون provenance؛ التفويض الحالي يغطي المراحل المسجلة فقط.
 - ❌ لا crawling تلقائي. CrawlerBase يرفع `CrawlerPermissionError` بدون `permission_granted=True`.
 - ❌ لا انتقال خارج الخطة المسجلة بدون توثيق وإذن واضح.
+- ❌ لا تدريب جديد قبل gate يسمح به بعد `PHASE27_78_ENGINEERING_DECISION`.
+- ❌ لا tokenizer جديد قبل إثبات tokenizer كسبب أكبر.
+- ❌ لا `SF-50M` قبل `SF-50M JUSTIFIED TRANSITION`.
+- ❌ لا template masking لإخفاء ضعف المولد.
 
 ---
 
@@ -441,9 +447,10 @@ make server-start
 - ✅ BPE tokenizer مدرَّب من الصفر على بيانات SF.AI فقط.
 - ✅ Random initialization، AdamW، schedulers، gradient accumulation/checkpointing، mixed precision.
 - ✅ Architectures معروفة (Decoder-only Transformer, RoPE, RMSNorm, SwiGLU, weight tying) بدون أوزانها.
+- ✅ أدوات Strategy v2 السيادية: TensorBoard المحلي، experiment tracking، advanced decoding، repetition control، held-out/shadow canaries، contrastive evaluation، objective tracing، anti-collapse diagnostics، local preference optimization على أوزان SF.AI فقط.
 
 ---
 
 ## بروتوكول الانتقال
 
-التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، مع رفع الناجح فقط، وفحص الحساسية، وتوثيق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا.
+التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، مع رفع الناجح فقط، وفحص الحساسية، وتوثيق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. وبعد Phase 27.78 لا تبدأ أي تدريب جديد إلا إذا كانت بوابات Phase 27.79 مشفرة وتسمح بذلك صراحة.

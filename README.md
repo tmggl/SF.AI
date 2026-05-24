@@ -15,6 +15,42 @@
 
 اقرأ المبادئ الكاملة في [PROJECT_PRINCIPLES.md](./PROJECT_PRINCIPLES.md).
 
+## الحالة الحالية الملزمة
+
+المسار الحالي الرسمي:
+
+```text
+Phase 27.78 — Engineering Root Cause Gate
+Sovereign Practical Acceleration Strategy v2
+PHASE27_78_ENGINEERING_DECISION
+```
+
+القرار الحالي:
+
+- لا تدريب جديد.
+- لا tokenizer جديد.
+- لا runtime release.
+- لا انتقال إلى `SF-50M`.
+- التالي: `Phase 27.79 — Objective/Curriculum/Decoding Repair Design`.
+
+سبب القرار:
+
+- family mixing: `22%`.
+- objective: `18%`.
+- curriculum: `16%`.
+- weak generalization: `14%`.
+- semantic routing: `10%`.
+- capacity: `1%`.
+
+أي Agent جديد يجب أن يقرأ:
+
+- [docs/PHASE_STATUS.md](./docs/PHASE_STATUS.md)
+- [docs/PHASE27_78_ENGINEERING_ROOT_CAUSE_GATE_REPORT.md](./docs/PHASE27_78_ENGINEERING_ROOT_CAUSE_GATE_REPORT.md)
+- [artifacts/reports/PHASE27_78_ENGINEERING_DECISION.json](./artifacts/reports/PHASE27_78_ENGINEERING_DECISION.json)
+
+قبل أي تدريب جديد يجب وجود `ENGINEERING_ROOT_CAUSE_GATE` وقرار يسمح به.
+قبل أي runtime release يجب نجاح `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
+
 ### وثائق الحوكمة قبل التدريب
 
 قبل أي Phase جديدة، خصوصًا Phase 12 وما بعدها، اقرأ:
@@ -32,6 +68,7 @@
 - [docs/PROJECT_LIFECYCLE.md](./docs/PROJECT_LIFECYCLE.md) — دورة الحياة من corpus إلى runtime.
 - [docs/GENERATIVE_ROADMAP.md](./docs/GENERATIVE_ROADMAP.md) — خارطة الوصول إلى حوار مولّد مقنع بعد Phase 20.
 - [docs/SCALING_STRATEGY.md](./docs/SCALING_STRATEGY.md) — استراتيجية التكبير التدريجي من SF-10M إلى SF-1B+.
+- [docs/PHASE27_78_ENGINEERING_ROOT_CAUSE_GATE_REPORT.md](./docs/PHASE27_78_ENGINEERING_ROOT_CAUSE_GATE_REPORT.md) — قرار root-cause الحالي الذي يمنع التدريب الأعمى والتكبير.
 - [docs/SOVEREIGN_TRAINING_QUALITY_TOOLING.md](./docs/SOVEREIGN_TRAINING_QUALITY_TOOLING.md) — قرار أدوات جودة التدريب المحلية.
 - [docs/SF_AI_ENGINEER_STATUS_REPORT.md](./docs/SF_AI_ENGINEER_STATUS_REPORT.md) — تقرير شامل يمكن تقديمه لمهندس خارجي لفهم الهدف والحالة والخطة.
 - [docs/PHASE27_44_TO_48_RUNTIME_SWITCH_REPORT.md](./docs/PHASE27_44_TO_48_RUNTIME_SWITCH_REPORT.md) — تقرير فتح `sf_10m_phase27_47` في المسار التجريبي المحروس.
@@ -64,16 +101,16 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.77 / 30 — V9 Bounded Open-Social LM Repair فشل كتوليد: `54/60` fresh و`45/50` known و`30/30` regression.
-- **الأولوية الحالية:** Phase 27.78 inspect Phase 27.77 failures and revise v9 LM strategy؛ لا runtime قبل بوابات التوليد.
+- **الرحلة الحالية:** Phase 27.78 / 30 — Engineering Root Cause Gate.
+- **الأولوية الحالية:** Phase 27.79 Objective/Curriculum/Decoding Repair Design؛ لا تدريب قبل تشفير gates، ولا runtime قبل held-out success.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
-- **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
+- **التدريب:** محجوب حاليًا بقرار `PHASE27_78_ENGINEERING_DECISION`. Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
 - **المولّد:** `/chat/message` والواجهة يستخدمان Phase 27.47 `sf-10m-step4600` مباشرة في المختبر المحلي؛ لا زر ولا مفتاح تبديل، وغير المدعوم يرجع `generator_blocked` مع رد فارغ بدل أي قالب. Phase 27.52 و27.53 دربتا مرشحين جديدين، لكنهما لم يمرا بوابة الحوار المفتوح، لذلك لم يُفتحا في runtime.
 - **التقييم:** Phase 27 مرّر `19/19` turn في حوار متعدد الأدوار، لكنه أكد أن الردود ما زالت `template` وأن المولد غير جاهز.
 - **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.
 - **دورة البيانات:** Phase 18 أضاف تصدير مراجعة من الواجهة و`prepare_dialogue_batch.py`; وPhase 22 يعتمد الآن أيضًا دفعات مباشرة يؤلفها/يراجعها الوكيل بتفويض موثق، بدون انتظار حفظ أو تصدير من سامي.
-- **جاهزية SF-50M:** Phase 26 أضاف `make phase26-readiness` و`GET /system/phase26-readiness`; Phase 27.55 جرّب micro-probe محدودًا وفشل في إثبات أثر كافٍ للسعة (`4/20` فقط).
+- **جاهزية SF-50M:** محجوبة الآن. Phase 27.78 وزن capacity بـ `1%` فقط؛ لا يفتح `SF-50M` إلا عبر `SF-50M JUSTIFIED TRANSITION`.
 - **بوابات المجالات:** Phase 20 أضاف `make phase20-gates` و`GET /system/phase20-gates`; المجال النشط الوحيد هو `chat`.
 - **طريق التوليد المقنع:** لا تعرض `SF-10M v0.2` أو `SF-10M v0.4` أو `SF-10M v0.5` أو `SF-10M v0.6` كنجاح حواري. v0.6 تحسن رقميًا لكن canary حجبه.
 - **Corpus v2:** Phase 22 أضاف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-completion-gate` و`make phase22-review-intake`; الوضع الحالي 500/500، وفيه ثمان دفعات فصيحة `dialogue_batch_v2_msa_001.jsonl` إلى `dialogue_batch_v2_msa_008.jsonl` وسبع دفعات سعودية `dialogue_batch_v2_saudi_001.jsonl` إلى `dialogue_batch_v2_saudi_007.jsonl` وأربع دفعات مرنة `dialogue_batch_v2_flex_001.jsonl` إلى `dialogue_batch_v2_flex_004.jsonl` إضافة إلى seed فصيح للمصطلحات `protected_terms_msa_seed_v1.jsonl`. التوازن النهائي مكتمل (`msa=250`, `saudi=250`) ولا توجد دفعة تالية في Phase 22. الواجهة الآن للاختبار فقط ولا تعرض حفظ/تصدير يدوي؛ بناء corpus يتم عبر الوكيل والتقارير الداخلية. `phase22-completion-gate` يرجع الآن `PHASE22_COMPLETE_READY_FOR_PHASE23`.
