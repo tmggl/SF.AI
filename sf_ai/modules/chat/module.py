@@ -224,6 +224,11 @@ class ChatModule:
             ),
         )
         generation_topic = _generation_topic_for_prompt(analysis.original_text)
+        generation_prompt = _generation_prompt_for_model(
+            analysis.original_text,
+            generation_intent=generation_intent,
+            generation_topic=generation_topic,
+        )
         trial_floor = _guarded_trial_quality_floor(
             generation_intent=generation_intent,
             generation_topic=generation_topic,
@@ -234,7 +239,7 @@ class ChatModule:
 
         generator = self.native_generator or NativeGenerator()
         result = generator.generate(
-            analysis.original_text,
+            generation_prompt,
             dialect=_generation_dialect_for_prompt(
                 analysis.original_text,
                 detected_dialect=analysis.detected_dialect,
@@ -279,18 +284,21 @@ class ChatModule:
                     f"generation_guard:{topic_mismatch}",
                     f"native_generator:intent:{generation_intent}",
                 )
+        generation_notes = [
+            f"generator:{result.generator}",
+            "native_generator:generated",
+            (
+                "native_generator:raw_lab_unguarded"
+                if self.generation_policy.raw_lab_mode
+                else "native_generator:canary_passed"
+            ),
+            f"native_generator:intent:{generation_intent}",
+        ]
+        if generation_prompt != analysis.original_text:
+            generation_notes.append("native_generator:prompt_normalized")
         return (
             result.text,
-            (
-                f"generator:{result.generator}",
-                "native_generator:generated",
-                (
-                    "native_generator:raw_lab_unguarded"
-                    if self.generation_policy.raw_lab_mode
-                    else "native_generator:canary_passed"
-                ),
-                f"native_generator:intent:{generation_intent}",
-            ),
+            tuple(generation_notes),
         )
 
 
@@ -311,7 +319,18 @@ def _generation_intent_for_prompt(
     text = _surface(prompt)
     if any(term in text for term in ("شكرا", "مشكور", "يعطيك العافيه", "تسلم", "ممتن")):
         return "thanks"
-    if any(term in text for term in ("كيفك", "كيف حالك", "وش اخبارك", "وش الاخبار", "علومك", "طمني عنك")):
+    if any(
+        term in text
+        for term in (
+            "كيفك",
+            "كيف حالك",
+            "كيف الحال",
+            "وش اخبارك",
+            "وش الاخبار",
+            "علومك",
+            "طمني عنك",
+        )
+    ):
         return "smalltalk"
     if any(
         term in text
@@ -336,6 +355,9 @@ def _generation_intent_for_prompt(
         return "planning"
     if any(term in text for term in ("توتر", "قلق", "اهدأ", "اهدا", "تهدئه", "متوتر")):
         return "support"
+    topic = _generation_topic_for_prompt(prompt)
+    if topic and _looks_like_bare_topic_request(text):
+        return "definition"
     return routed_intent
 
 
@@ -362,6 +384,28 @@ def _generation_topic_for_prompt(prompt: str) -> str:
     if "شجاع" in text:
         return "الشجاعة"
     return ""
+
+
+def _looks_like_bare_topic_request(surface_text: str) -> bool:
+    words = [w for w in surface_text.replace("؟", " ").replace("?", " ").split() if w]
+    if len(words) <= 2:
+        return True
+    return any(term in surface_text for term in ("وش عنه", "تكلم عنه", "حدثني عنه"))
+
+
+def _generation_prompt_for_model(
+    prompt: str,
+    *,
+    generation_intent: str,
+    generation_topic: str,
+) -> str:
+    if (
+        generation_intent == "definition"
+        and generation_topic
+        and _looks_like_bare_topic_request(_surface(prompt))
+    ):
+        return generation_topic
+    return prompt
 
 
 def _guarded_trial_quality_floor(

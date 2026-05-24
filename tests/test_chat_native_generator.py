@@ -446,6 +446,30 @@ def test_guarded_runtime_trial_blocks_raw_general_before_generator() -> None:
     assert "native_generator:trial_unsupported_general" in out.notes
 
 
+def test_raw_lab_routes_bare_known_topic_to_definition_condition() -> None:
+    pipe = get_default_pipeline()
+    gen = _CapturingGenerator()
+    mod = ChatModule(
+        generation_policy=GenerationPolicy(
+            enabled=True,
+            experimental_runtime=True,
+            canary=True,
+            guarded_runtime_trial=True,
+            raw_lab_mode=True,
+        ),
+        native_generator=gen,  # type: ignore[arg-type]
+    )
+    analysis = pipe.analyze_user_text("الصداقه")
+    out = mod.handle(analysis, intent="chat.general", session_id="phase27105-topic")
+    assert out.text == "ابدأ بخطوة صغيرة وواضحة."
+    assert gen.calls[-1]["prompt"] == "الصداقة"
+    assert gen.calls[-1]["intent"] == "definition"
+    assert gen.calls[-1]["topic"] == "الصداقة"
+    assert "native_generator:raw_lab_unguarded" in out.notes
+    assert "native_generator:intent:definition" in out.notes
+    assert "native_generator:prompt_normalized" in out.notes
+
+
 def test_guarded_runtime_trial_blocks_unstable_definition_topic_before_generator() -> None:
     pipe = get_default_pipeline()
     gen = _CapturingGenerator()

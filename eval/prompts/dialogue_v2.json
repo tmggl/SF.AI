@@ -83,7 +83,7 @@
         "expected_status": "active",
         "expected_generator": "template",
         "expected_requires_safety": false,
-        "required_response_terms": ["sf_10m_phase27_47", "لا يظهر له رد"],
+        "required_response_terms": ["sf_10m_phase27_81", "قوالب", "بصراحة"],
         "forbidden_response_terms": ["جاهز كمحادثة مفتوحة"]
       },
       {
@@ -103,7 +103,7 @@
         "expected_status": "active",
         "expected_generator": "template",
         "expected_requires_safety": false,
-        "required_response_terms": ["Phase 27.81", "runtime", "Phase 27.82"],
+        "required_response_terms": ["Phase 27.105", "social subfamilies", "Phase 27.106"],
         "forbidden_response_terms": ["نفتح الواجهة الآن", "نبدأ SF-50M كامل الآن"]
       }
     ]

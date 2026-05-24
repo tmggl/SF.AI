@@ -61,11 +61,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.81 — Execute bounded SF-10M family-conditioned repair training",
+        current_phase="Phase 27.105 — Raw UI Lab Result Diagnosis",
         current_phase_status=(
-            "phase27_81_trained_runtime_blocked_diagnosis_required"
+            "phase27_105_diagnosed_raw_ui_lab_failures_no_training"
         ),
-        next_phase="Phase 27.82 — Phase 27.81 Result Diagnosis",
+        next_phase="Phase 27.106 — Social Subfamily + Topic Variant Objective Design",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -644,6 +644,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_104_bounded_topic_prototype_contrastive_repair",
                 status="trained_topic_clean_all_family_regressed_runtime_blocked",
                 phase="Phase 27.104",
+            ),
+            ComponentStatus(
+                name="phase27_105_raw_ui_lab_result_diagnosis",
+                status="diagnosed_raw_ui_lab_failures_no_training",
+                phase="Phase 27.105",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

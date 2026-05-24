@@ -161,13 +161,13 @@ def test_phase_guidance_prompts_are_current_generator_lab_guidance() -> None:
     diff = orch.process(UserMessage(text="ما الفرق بين تدريب النموذج وتفعيل النموذج؟", session_id="p22-diff"))
 
     assert dialogue.intent == "chat.dialogue_test"
-    assert "sf_10m_phase27_47" in dialogue.response
-    assert "القوالب" in dialogue.response
-    assert "لا يظهر له رد" in dialogue.response
+    assert "sf_10m_phase27_81" in dialogue.response
+    assert "قوالب" in dialogue.response
+    assert "بصراحة" in dialogue.response
     assert next_step.intent == "chat.next_step"
-    assert "Phase 27.81" in next_step.response
-    assert "runtime" in next_step.response
-    assert "Phase 27.82" in next_step.response
+    assert "Phase 27.105" in next_step.response
+    assert "social subfamilies" in next_step.response
+    assert "Phase 27.106" in next_step.response
     assert diff.intent == "chat.training_activation_difference"
     assert "التدريب" in diff.response
     assert "التفعيل" in diff.response

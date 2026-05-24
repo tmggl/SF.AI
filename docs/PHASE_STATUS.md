@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.81 / 30**
-- **المرحلة الحالية:** **Phase 27.81 — Execute bounded SF-10M family-conditioned repair training**
-- **حالة المرحلة الحالية:** **تدريب محدود اكتمل؛ all-family=42/50؛ runtime محجوب؛ لا tokenizer جديد ولا SF-50M**
-- **المرحلة التالية المقترحة:** Phase 27.82 — Phase 27.81 Result Diagnosis.
+- **الرحلة الحالية:** **Phase 27.105 / 30**
+- **المرحلة الحالية:** **Phase 27.105 — Raw UI Lab Result Diagnosis**
+- **حالة المرحلة الحالية:** **تشخيص واجهة خام اكتمل؛ المولد الحقيقي يعمل في lab فقط؛ الجودة غير كافية للإطلاق الرسمي؛ لا تدريب جديد ولا SF-50M**
+- **المرحلة التالية المقترحة:** Phase 27.106 — Social Subfamily + Topic Variant Objective Design.
 - **التحول الاستراتيجي المعتمد:** **SF-native Objective/Curriculum/Decoding Acceleration Track** — تسريع هندسي فقط؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -160,6 +160,7 @@
 | Phase 27.102 | Topic Prototype Contrastive Copy-Anchor Gate | ✅ gate_encoded_curriculum_pack_allowed_no_training | ✅ |
 | Phase 27.103 | Topic Prototype Contrastive Curriculum Pack | ✅ ready_for_bounded_training_no_runtime | ✅ |
 | Phase 27.104 | Bounded Topic Prototype Contrastive Repair Training | ✅ trained_topic_clean_all_family_regressed_runtime_blocked | ✅ |
+| Phase 27.105 | Raw UI Lab Result Diagnosis | ✅ diagnosed_raw_ui_lab_failures_no_training | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1800,9 +1801,39 @@ make api
   `PHASE27_80_BOUNDED_FAMILY_CONDITIONED_REPAIR_GATE_DECISION`.
 - نتيجة التدريب: اكتملت في Phase 27.81 عبر
   `PHASE27_81_BOUNDED_FAMILY_CONDITIONED_REPAIR_TRAINING_DECISION`.
-- التالي: Phase 27.82 — Phase 27.81 Result Diagnosis.
-- سبب الحجب: all-family `42/50` أقل من gate `45/50`؛ الإخفاقات المتبقية
-  `followup=7/10`, `support=6/10`, و`expected_terms_missing=8`.
+- أضيف raw lab single-user لاختبار المولد مباشرة من الواجهة بدون قوالب.
+- نتيجة Phase 27.105: المولد مؤكد أنه يجيب من `sf_10m_phase27_81`،
+  لكنه يخلط social subfamilies ويفشل في بعض bare-topic/unknown-topic prompts.
+- التالي: Phase 27.106 — Social Subfamily + Topic Variant Objective Design.
+- سبب الحجب: لا يزال `السلام عليكم` يعود كسالفة عامة، و`الاخوه` غير مغطاة،
+  ولا يوجد family/subfamily objective كافٍ لتحية/هوية/قدرات/فتح سالفة.
+
+---
+
+## Phase 27.105 — Raw UI Lab Result Diagnosis
+
+**الحالة:** مكتملة كتقييم حي غير تدريبي. raw lab يعمل للمستخدم المحلي فقط،
+ولا يمثل إطلاقًا رسميًا.
+
+- المولد المستخدم: `sf_10m_phase27_81`.
+- checkpoint: `sf-10m-step2000`.
+- نتيجة مباشرة:
+  - `الصداقه` بعد normalization → رد صحيح عن الصداقة.
+  - `نظم وقتي` → رد تنظيم بسيط.
+  - `السلام عليكم` → فشل social subfamily، يرد بسالفة عامة.
+  - `الاخوه` → غير مغطاة كموضوع، تنهار إلى general.
+- إصلاح غير تدريبي:
+  - bare known topics تُحوّل إلى `intent=definition`.
+  - bare known topics تُمرّر للمولد بصيغة canonical مثل `الصداقة`.
+  - `كيف الحال` تُعامل كـ smalltalk.
+  - planning/support/advice لها أولوية قبل bare-topic detection.
+- القرار: `PHASE27_105_RAW_UI_LAB_RESULT_DIAGNOSIS_DECISION`.
+- المحظور: training جديد، runtime release رسمي، SF-50M، tokenizer retrain،
+  pretrained/open-weight، أو template masking.
+- التقارير:
+  - [PHASE27_105_RAW_UI_LAB_RESULT_DIAGNOSIS_REPORT.md](./PHASE27_105_RAW_UI_LAB_RESULT_DIAGNOSIS_REPORT.md)
+  - `artifacts/reports/phase27_105_raw_ui_lab_result_diagnosis_report.json`
+  - `artifacts/reports/PHASE27_105_RAW_UI_LAB_RESULT_DIAGNOSIS_DECISION.json`
 
 ---
 

@@ -4577,6 +4577,39 @@ Final Response
 
 ---
 
+## الحالة العملية الحالية — Phase 27.105
+
+المسار الحاكم هو:
+
+```text
+SF-native Objective/Curriculum/Decoding Acceleration Track
+```
+
+آخر قرار:
+
+```text
+PHASE27_105_RAW_UI_LAB_RESULT_DIAGNOSIS_DECISION
+```
+
+الخلاصة:
+
+- الواجهة في raw lab تستدعي المولد الحقيقي `sf_10m_phase27_81`.
+- raw lab ليس إطلاقًا رسميًا ولا يجوز استخدامه لإخفاء ضعف المولد.
+- إصلاح غير تدريبي طُبق: bare known topics مثل `الصداقه` تُطبّع إلى
+  `الصداقة` وتدخل كـ `definition`.
+- التخطيط والدعم البسيط يعملان جزئيًا.
+- التحية/الهوية/القدرات وtopic variants ما زالت ضعيفة.
+- لا تدريب جديد قبل Phase 27.106.
+- لا SF-50M قبل gate يثبت أن capacity هي السبب الأكبر.
+
+التالي:
+
+```text
+Phase 27.106 — Social Subfamily + Topic Variant Objective Design
+```
+
+---
+
 ## أسلوب العمل داخل كل مرحلة
 
 1. اقرأ `docs/EXECUTION_PLAN.md`.

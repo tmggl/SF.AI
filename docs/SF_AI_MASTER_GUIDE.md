@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.81
-الاسم: Execute bounded SF-10M family-conditioned repair training
+المرحلة الحالية: Phase 27.105
+الاسم: Raw UI Lab Result Diagnosis
 المسار الملزم: SF-native Objective/Curriculum/Decoding Acceleration Track
-القرار الرسمي: PHASE27_81_BOUNDED_FAMILY_CONDITIONED_REPAIR_TRAINING_DECISION
+القرار الرسمي: PHASE27_105_RAW_UI_LAB_RESULT_DIAGNOSIS_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -95,11 +95,16 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - بوابات Phase 27.80 مرّت، وتدريب Phase 27.81 المحدود اكتمل.
 - أفضل checkpoint: `sf-10m-step2000`; all-family `42/50`; topic family `10/10`;
   prototype `16/16`; fresh topic `9/10`.
+- Phase 27.105 فتح raw lab للمستخدم المحلي فقط وأثبت أن الواجهة تتلقى من
+  المولد الحقيقي `sf_10m_phase27_81`، لكن التحية/الهوية/القدرات وبعض
+  bare-topic prompts لا تزال غير صالحة لإطلاق رسمي.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
 - التقرير الملزم: `docs/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md`.
-- التالي: `Phase 27.82 — Phase 27.81 Result Diagnosis`.
+- التقرير التشخيصي الحالي:
+  `docs/PHASE27_105_RAW_UI_LAB_RESULT_DIAGNOSIS_REPORT.md`.
+- التالي: `Phase 27.106 — Social Subfamily + Topic Variant Objective Design`.
 
 الدليل السابق الذي سبب هذا re-anchor:
 
@@ -138,8 +143,13 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - نتيجة 27.104: تدريب محدود من checkpoint 27.100 نجح في topic gates
   (`prototype=16/16`, wrong-topic=`0`, known=`16/16`, fresh=`9/10`) لكنه
   فشل all-family (`30/50`). runtime محجوب.
-- القرار: لا runtime ولا UI generator release ولا `SF-50M` ولا tokenizer
-  retrain ولا تدريب جديد قبل خطة 27.79 وبوابات 27.80.
+- نتيجة 27.81 بعد re-anchor: all-family وصل `42/50`، لكنه بقي دون gate
+  `45/50`.
+- نتيجة 27.105: raw UI lab أثبت أن الواجهة تستدعي المولد الحقيقي، لكنه
+  كشف فشل social subfamilies وtopic variants. أضيف prompt conditioning
+  محدود لـ bare known topics، ولا يوجد تدريب جديد.
+- القرار: لا official runtime release ولا `SF-50M` ولا tokenizer retrain
+  ولا تدريب جديد قبل Phase 27.106 وتصميم بواباته.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -342,6 +352,7 @@ SF-10M
 | Phase 27.79 re-anchor | الخطة الحالية: Objective/Curriculum/Decoding Repair Plan، بلا تدريب |
 | Phase 27.80 gate | بوابات التدريب العائلي المحدود مرّت؛ لا تدريب ولا runtime |
 | Phase 27.81 bounded training | اكتمل؛ all-family 42/50؛ runtime محجوب |
+| Phase 27.105 raw UI lab diagnosis | المولد الحقيقي يعمل في lab؛ فشل social subfamilies وtopic variants؛ لا تدريب |
 
 الدرس الأساسي من Phase 27:
 
@@ -357,16 +368,16 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.82 — Phase 27.81 Result Diagnosis
+Phase 27.106 — Social Subfamily + Topic Variant Objective Design
 ```
 
 مطلوب منها:
 
-- تشخيص إخفاقات Phase 27.81 المتبقية: followup `7/10`, support `6/10`,
-  و`expected_terms_missing=8`.
-- ممنوع runtime/SF-50M/tokenizer retrain حتى يصدر تشخيص root-cause جديد.
-- استخدام stratified round-robin بين open_social/followup/planning/support/topic.
-- تطبيق guarded decoding وcontrastive eval وcheckpoint selector قبل أي حكم.
+- تقسيم عائلة `سوالف` إلى subfamilies واضحة: تحية، سؤال حال، فتح سالفة،
+  شكر، هوية، قدرات.
+- إضافة topic variants محكومة مثل `الصداقة/الصداقه` و`الأخوة/الاخوه`.
+- بناء held-out probes من أسلوب اختبار الواجهة الحي.
+- ممنوع training/SF-50M/tokenizer retrain قبل gate صريح.
 
 ممنوع قبل نجاح البوابات:
 

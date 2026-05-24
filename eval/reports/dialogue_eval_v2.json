@@ -215,7 +215,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "الواجهة الآن لا تختبر القوالب. أي رد ظاهر يجب أن يأتي من المولّد `sf_10m_phase27_47` داخل نطاقاته المثبتة، وما لا يعرفه لا يظهر له رد."
+      "response_preview": "الواجهة الآن في raw lab محلي: أي رد ظاهر يأتي من المولّد `sf_10m_phase27_81`. الجودة ليست إطلاقًا رسميًا بعد، لكنها تكشف ضعفه بصراحة دون قوالب تخفيه."
     },
     {
       "scenario_id": "project_meta_flow",
@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.81: التدريب المحدود اكتمل ورفع all-family إلى 42/50. لا runtime الآن؛ التالي Phase 27.82 تشخيص الإخفاقات المتبقية قبل أي إطلاق."
+      "response_preview": "وصلنا إلى Phase 27.105: raw UI lab أثبت أن الواجهة تستدعي المولد، لكن social subfamilies وtopic variants ضعيفة. التالي Phase 27.106 تصميم إصلاحها قبل أي تدريب جديد."
     },
     {
       "scenario_id": "clarification_repair_flow",
