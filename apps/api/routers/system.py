@@ -61,11 +61,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.103 — Topic Prototype Contrastive Curriculum Pack",
+        current_phase="Phase 27.104 — Bounded Topic Prototype Contrastive Repair Training",
         current_phase_status=(
-            "phase27_103_topic_prototype_curriculum_pack_ready_for_bounded_training"
+            "phase27_104_trained_topic_clean_all_family_regressed_runtime_blocked"
         ),
-        next_phase="Phase 27.104 — Bounded Topic Prototype Contrastive Repair Training",
+        next_phase="Phase 27.105 — Topic Prototype Repair Result Diagnosis",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -629,6 +629,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_103_topic_prototype_contrastive_curriculum_pack",
                 status="ready_for_bounded_training_no_runtime",
                 phase="Phase 27.103",
+            ),
+            ComponentStatus(
+                name="phase27_104_bounded_topic_prototype_contrastive_repair",
+                status="trained_topic_clean_all_family_regressed_runtime_blocked",
+                phase="Phase 27.104",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

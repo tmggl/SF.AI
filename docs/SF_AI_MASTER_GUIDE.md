@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.103
-الاسم: Topic Prototype Contrastive Curriculum Pack
+المرحلة الحالية: Phase 27.104
+الاسم: Bounded Topic Prototype Contrastive Repair Training
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_103_TOPIC_PROTOTYPE_CONTRASTIVE_CURRICULUM_PACK_DECISION
+القرار الرسمي: PHASE27_104_BOUNDED_TOPIC_PROTOTYPE_CONTRASTIVE_REPAIR_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -125,7 +125,12 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   `16` prompt. القرار يسمح فقط بحزمة curriculum بلا تدريب في 27.103.
 - نتيجة 27.103: أضيفت حزمة `192` سجلًا `gold` متوازنًا تمنع prototype
   substitution: copy-anchor bad=`0`, wrong-topic leak=`0`, duplicate=`0`.
-- التالي: `Phase 27.104 — Bounded Topic Prototype Contrastive Repair Training`.
+- نتيجة 27.104: تدريب محدود من checkpoint 27.100 نجح في topic gates
+  (`prototype=16/16`, wrong-topic=`0`, known=`16/16`, fresh=`9/10`) لكنه
+  فشل all-family (`30/50`). runtime محجوب.
+- التالي: `Phase 27.105 — Topic Prototype Repair Result Diagnosis`.
+- القرار الحالي: لا runtime ولا UI generator release ولا `SF-50M` ولا tokenizer
+  retrain ولا تدريب جديد قبل تشخيص سبب تراجع all-family.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -341,22 +346,25 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.104 — Bounded Topic Prototype Contrastive Repair Training
+Phase 27.105 — Topic Prototype Repair Result Diagnosis
 ```
 
 مطلوب منها:
 
-- تدريب `SF-10M` محدود فقط على الحزمة الجديدة.
-- استخدام schedule topic/dialect round-robin من 27.103.
-- تقييم canary 27.102 بعد التدريب.
-- لا runtime حتى observed wrong-topic=`0` وcopy-anchor يمر كاملًا.
+- تشخيص لماذا أصلح 27.104 topic gates وخسر all-family.
+- تحديد هل السبب curriculum narrowing أو catastrophic forgetting أو decoding
+  أو family balance أو objective side-effect.
+- إصدار decision report قبل أي تدريب جديد.
+- اقتراح إصلاح محدد يحفظ topic binding ولا يكسر عائلات الحوار الأخرى.
 
-ممنوع في 27.104 قبل نتيجة canary:
+ممنوع في 27.105 قبل القرار:
 
 - runtime release.
 - tokenizer retrain.
 - SF-50M.
 - tokenizer جديد.
+- runtime switch.
+- أي تدريب جديد.
 - runtime switch.
 - SF-50M full training.
 

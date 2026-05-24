@@ -23,7 +23,7 @@ def test_health_ok() -> None:
     body = r.json()
     assert body["status"] == "ok"
     assert body["project"] == "SF.AI"
-    assert body["phase"] == "Phase 27.103"
+    assert body["phase"] == "Phase 27.104"
 
 
 def test_system_status_sovereign_flags() -> None:
@@ -31,11 +31,11 @@ def test_system_status_sovereign_flags() -> None:
     assert r.status_code == 200
     body = r.json()
     assert body["project"] == "SF.AI"
-    assert body["current_phase"].startswith("Phase 27.103")
+    assert body["current_phase"].startswith("Phase 27.104")
     assert body["current_phase_status"] == (
-        "phase27_103_topic_prototype_curriculum_pack_ready_for_bounded_training"
+        "phase27_104_trained_topic_clean_all_family_regressed_runtime_blocked"
     )
-    assert "Phase 27.104" in body["next_phase"]
+    assert "Phase 27.105" in body["next_phase"]
     assert body["sovereign"] is True
     assert body["uses_external_llm"] is False
     assert body["uses_pretrained_weights"] is False
@@ -172,6 +172,11 @@ def test_system_status_sovereign_flags() -> None:
     assert any(
         c["name"] == "phase27_103_topic_prototype_contrastive_curriculum_pack"
         and c["status"] == "ready_for_bounded_training_no_runtime"
+        for c in body["components"]
+    )
+    assert any(
+        c["name"] == "phase27_104_bounded_topic_prototype_contrastive_repair"
+        and c["status"] == "trained_topic_clean_all_family_regressed_runtime_blocked"
         for c in body["components"]
     )
     assert any(

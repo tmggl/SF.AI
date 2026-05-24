@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.103 / 30**
-- **المرحلة الحالية:** **Phase 27.103 — Topic Prototype Contrastive Curriculum Pack**
-- **حالة المرحلة الحالية:** **اكتملت حزمة curriculum؛ تدريب 27.104 المحدود مسموح تاليًا**
-- **المرحلة التالية المقترحة:** Phase 27.104 — Bounded Topic Prototype Contrastive Repair Training.
+- **الرحلة الحالية:** **Phase 27.104 / 30**
+- **المرحلة الحالية:** **Phase 27.104 — Bounded Topic Prototype Contrastive Repair Training**
+- **حالة المرحلة الحالية:** **اكتمل تدريب محدود؛ topic gates نجحت لكن all-family فشلت**
+- **المرحلة التالية المقترحة:** Phase 27.105 — Topic Prototype Repair Result Diagnosis.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -159,6 +159,7 @@
 | Phase 27.101 | Topic Binding Repair Result Diagnosis | ✅ diagnosed_metric_blind_spot_no_training | ✅ |
 | Phase 27.102 | Topic Prototype Contrastive Copy-Anchor Gate | ✅ gate_encoded_curriculum_pack_allowed_no_training | ✅ |
 | Phase 27.103 | Topic Prototype Contrastive Curriculum Pack | ✅ ready_for_bounded_training_no_runtime | ✅ |
+| Phase 27.104 | Bounded Topic Prototype Contrastive Repair Training | ✅ trained_topic_clean_all_family_regressed_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1084,13 +1085,13 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-675 passed in 78.67s (0:01:18)
+682 passed in 39.20s
 ```
 
 | التحقق | النتيجة |
 |------|------|
-| full pytest suite | `678 passed in 77.97s` |
-| focused Phase 27.103/API/UI tests | `90 passed in 14.50s` |
+| full pytest suite | `682 passed in 39.20s` |
+| focused Phase 27.104/API/UI tests | `79 passed in 8.85s` |
 | `make corpus-audit` | `8645` records, `issues=0` |
 | `make phase27-dialogue-eval` | `19/19`, `open_generator_ready=false` |
 
@@ -1745,6 +1746,38 @@ make api
   - `artifacts/reports/PHASE27_103_TOPIC_PROTOTYPE_CONTRASTIVE_CURRICULUM_PACK_DECISION.json`
   - `artifacts/reports/phase27_103_topic_prototype_contrastive_curriculum_manifest.json`
   - `artifacts/reports/phase27_103_topic_prototype_contrastive_curriculum_schedule.json`
+
+---
+
+## Phase 27.104 — Bounded Topic Prototype Contrastive Repair Training
+
+**الحالة:** مكتملة كتدريب محدود. لا runtime ولا UI generator release.
+
+- التدريب بدأ من:
+  `artifacts/eval/phase27_100_topic_binding_repair/checkpoints/sf-10m-step1800`
+- استخدم view مؤقتًا مرتبًا من حزمة 27.103:
+  `artifacts/eval/phase27_104_topic_prototype_contrastive_repair/curriculum_view/jsonl/phase27_103_schedule_view.jsonl`
+- training config:
+  - steps: `1200`
+  - lr: `8e-05`
+  - loss_scope: `assistant`
+  - packing_mode: `sample_isolated`
+- أفضل checkpoint: `sf-10m-step1200`
+- النتيجة:
+  - prototype canary: `16/16`
+  - observed wrong-topic: `0`
+  - known topic: `16/16`
+  - fresh topic: `9/10`
+  - topic family: `9/10`
+  - all family: `30/50`
+- القرار: `BLOCK_RUNTIME_DIAGNOSE_TOPIC_PROTOTYPE_REPAIR_RESULT`.
+- السبب: إصلاح topic نجح، لكنه لم يمر all-family gate المطلوبة `45/50`.
+- التالي: Phase 27.105 — Topic Prototype Repair Result Diagnosis.
+- التقارير:
+  - [PHASE27_104_BOUNDED_TOPIC_PROTOTYPE_CONTRASTIVE_REPAIR_REPORT.md](./PHASE27_104_BOUNDED_TOPIC_PROTOTYPE_CONTRASTIVE_REPAIR_REPORT.md)
+  - `artifacts/reports/phase27_104_bounded_topic_prototype_contrastive_repair_report.json`
+  - `artifacts/reports/PHASE27_104_BOUNDED_TOPIC_PROTOTYPE_CONTRASTIVE_REPAIR_DECISION.json`
+  - `artifacts/samples/phase27_104_bounded_topic_prototype_contrastive_repair.md`
 
 ---
 

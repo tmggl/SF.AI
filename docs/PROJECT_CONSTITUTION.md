@@ -77,6 +77,9 @@ runtime ولا `SF-50M` ولا tokenizer retrain ولا تدريب جديد قب
 (`192` سجلًا، wrong-topic leak=`0`). لذلك لا runtime ولا `SF-50M` ولا
 tokenizer retrain؛ المسموح فقط Phase 27.104 كتدريب `SF-10M` محدود يعاد
 بعده canary قبل أي تفعيل.
+بعد Phase 27.104، نجح التدريب المحدود في topic gates لكنه فشل في
+all-family (`30/50`). لذلك لا runtime ولا `SF-50M` ولا tokenizer retrain؛
+المسموح فقط Phase 27.105 كتشخيص نتيجة بلا تدريب.
 
 استثناء موثق: يجوز إدخال حوارات **owner-delegated agent-authored** في
 corpus إذا كان سامي قد فوّض الوكيل صراحة بتأليفها واعتمادها، وكانت كل

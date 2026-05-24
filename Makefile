@@ -503,6 +503,9 @@ phase27-topic-prototype-contrastive-gate:
 phase27-topic-prototype-contrastive-curriculum-pack:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_103_topic_prototype_contrastive_curriculum_pack.py $(ARGS)
 
+phase27-bounded-topic-prototype-contrastive-repair:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_104_bounded_topic_prototype_contrastive_repair.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 

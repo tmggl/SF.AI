@@ -91,13 +91,13 @@ Sovereign Practical Acceleration != open-weight/pretrained model lane
 PHASE27_78_ENGINEERING_DECISION
 ```
 
-### Current Scaling Decision — Phase 27.103
+### Current Scaling Decision — Phase 27.104
 
-Phase 27.103 لا يفتح حجمًا أكبر. القرار الحالي هو:
+Phase 27.104 لا يفتح حجمًا أكبر. القرار الحالي هو:
 
 ```text
-PHASE27_103_TOPIC_PROTOTYPE_CONTRASTIVE_CURRICULUM_PACK_DECISION
-ALLOW_PHASE27_104_BOUNDED_TOPIC_PROTOTYPE_CONTRASTIVE_REPAIR_TRAINING
+PHASE27_104_BOUNDED_TOPIC_PROTOTYPE_CONTRASTIVE_REPAIR_DECISION
+BLOCK_RUNTIME_DIAGNOSE_TOPIC_PROTOTYPE_REPAIR_RESULT
 ```
 
 السبب: Phase 27.96 شخّصت فشل 27.95 كخلل ربط متغير الموضوع لا كحد سعة.
@@ -118,7 +118,11 @@ observed wrong-topic من نص الرد وتفرض `0` قبل أي تدريب أ
 `SF-50M` محجوبًا. Phase 27.103 أضافت حزمة curriculum من `192` سجلًا
 `gold` متوازنًا (`8` موضوعات × `2` لهجات × `12`)، وكل رد يبدأ بالموضوع
 المطلوب، مع wrong-topic leak=`0`. المسموح الآن هو تدريب 27.104 المحدود
-على `SF-10M` فقط، ثم إعادة canary قبل أي runtime أو scaling.
+على `SF-10M` فقط، ثم إعادة canary قبل أي runtime أو scaling. Phase 27.104
+درّبت هذا الإصلاح ونجحت في topic gates: prototype `16/16`,
+observed wrong-topic `0`, known `16/16`, fresh `9/10`, لكنها فشلت في
+all-family regression (`30/50` مقابل gate `45/50`). لذلك يبقى `SF-50M`
+محجوبًا، والمسموح فقط Phase 27.105 كتشخيص نتيجة بلا تدريب.
 
 ويجب أن يحدد أوزان الأسباب التالية:
 

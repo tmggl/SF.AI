@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.103 ضمن مسار SF-native فقط: جهّزنا حزمة curriculum متوازنة تمنع خلط موضوعات مثل الصداقة والامتنان. لا runtime الآن؛ التالي Phase 27.104 تدريب محدود ثم canary صار"
+      "response_preview": "وصلنا إلى Phase 27.104 ضمن مسار SF-native فقط: التدريب المحدود نظّف ربط الموضوعات، لكنه لم يحافظ على كل عائلات الحوار. لا runtime الآن؛ التالي Phase 27.105 تشخيص النتيجة."
     },
     {
       "scenario_id": "clarification_repair_flow",

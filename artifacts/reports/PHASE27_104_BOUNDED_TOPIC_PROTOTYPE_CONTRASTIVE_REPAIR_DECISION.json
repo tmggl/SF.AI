@@ -1,0 +1,27 @@
+{
+  "decision_id": "PHASE27_104_BOUNDED_TOPIC_PROTOTYPE_CONTRASTIVE_REPAIR_DECISION",
+  "engineering_decision": "BLOCK_RUNTIME_DIAGNOSE_TOPIC_PROTOTYPE_REPAIR_RESULT",
+  "training_completed": true,
+  "runtime_release_allowed": false,
+  "ui_release_allowed": false,
+  "heldout_runtime_gate_allowed": false,
+  "sf50m_justified_transition": false,
+  "tokenizer_retrain_allowed": false,
+  "best_checkpoint": "sf-10m-step1200",
+  "prototype_canary": "16/16",
+  "prototype_observed_wrong_topic_count": 0,
+  "known_topic": "16/16",
+  "fresh_topic": "9/10",
+  "topic_family": "9/10",
+  "all_family": "30/50",
+  "required_gates": {
+    "prototype_canary": "16/16",
+    "prototype_observed_wrong_topic_count": 0,
+    "known_topic": "16/16",
+    "fresh_topic": "8/10",
+    "topic_family": "8/10",
+    "all_family": "45/50"
+  },
+  "why": "Best checkpoint sf-10m-step1200 scored prototype=16/16 with observed_wrong_topic=0, known=16/16, fresh=9/10, topic_family=9/10, all_family=30/50. Runtime remains blocked.",
+  "next_phase": "Phase 27.105 — Topic Prototype Repair Result Diagnosis"
+}
