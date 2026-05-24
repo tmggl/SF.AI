@@ -1,0 +1,403 @@
+{
+  "phase": "Phase 27.98",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "status": "PHASE27_98_TOPIC_BINDING_GATE_ENCODED_DATA_REPAIR_REQUIRED_NO_TRAINING",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_changed": false,
+  "source_report": "artifacts/reports/phase27_97_topic_variable_binding_objective_design_report.json",
+  "spec": "artifacts/reports/phase27_97_topic_variable_binding_objective_spec.json",
+  "renderer_probe": {
+    "passed": true,
+    "rows": [
+      {
+        "term": "الوفاء",
+        "dialect": "msa",
+        "has_topic_line": true,
+        "topic_line_before_user": true,
+        "assistant_copy_anchor": true,
+        "preview": "النطاق: فصحى\nعائلة الحوار: موضوع\nالموضوع المطلوب: الوفاء\nالمستخدم: ما معنى الوفاء؟\nالمساعد: معنى الوفاء: خلق يظهر في المواقف اليومية بوضوح.\n"
+      },
+      {
+        "term": "الوفاء",
+        "dialect": "saudi",
+        "has_topic_line": true,
+        "topic_line_before_user": true,
+        "assistant_copy_anchor": true,
+        "preview": "النطاق: سعودي\nعائلة الحوار: موضوع\nالموضوع المطلوب: الوفاء\nالمستخدم: وش يعني الوفاء؟\nالمساعد: الوفاء يعني خلق يبان في المواقف اليومية.\n"
+      },
+      {
+        "term": "التعاون",
+        "dialect": "msa",
+        "has_topic_line": true,
+        "topic_line_before_user": true,
+        "assistant_copy_anchor": true,
+        "preview": "النطاق: فصحى\nعائلة الحوار: موضوع\nالموضوع المطلوب: التعاون\nالمستخدم: ما معنى التعاون؟\nالمساعد: معنى التعاون: خلق يظهر في المواقف اليومية بوضوح.\n"
+      },
+      {
+        "term": "التعاون",
+        "dialect": "saudi",
+        "has_topic_line": true,
+        "topic_line_before_user": true,
+        "assistant_copy_anchor": true,
+        "preview": "النطاق: سعودي\nعائلة الحوار: موضوع\nالموضوع المطلوب: التعاون\nالمستخدم: وش يعني التعاون؟\nالمساعد: التعاون يعني خلق يبان في المواقف اليومية.\n"
+      },
+      {
+        "term": "الصبر",
+        "dialect": "msa",
+        "has_topic_line": true,
+        "topic_line_before_user": true,
+        "assistant_copy_anchor": true,
+        "preview": "النطاق: فصحى\nعائلة الحوار: موضوع\nالموضوع المطلوب: الصبر\nالمستخدم: ما معنى الصبر؟\nالمساعد: معنى الصبر: خلق يظهر في المواقف اليومية بوضوح.\n"
+      },
+      {
+        "term": "الصبر",
+        "dialect": "saudi",
+        "has_topic_line": true,
+        "topic_line_before_user": true,
+        "assistant_copy_anchor": true,
+        "preview": "النطاق: سعودي\nعائلة الحوار: موضوع\nالموضوع المطلوب: الصبر\nالمستخدم: وش يعني الصبر؟\nالمساعد: الصبر يعني خلق يبان في المواقف اليومية.\n"
+      },
+      {
+        "term": "الاحترام",
+        "dialect": "msa",
+        "has_topic_line": true,
+        "topic_line_before_user": true,
+        "assistant_copy_anchor": true,
+        "preview": "النطاق: فصحى\nعائلة الحوار: موضوع\nالموضوع المطلوب: الاحترام\nالمستخدم: ما معنى الاحترام؟\nالمساعد: معنى الاحترام: خلق يظهر في المواقف اليومية بوضوح.\n"
+      },
+      {
+        "term": "الاحترام",
+        "dialect": "saudi",
+        "has_topic_line": true,
+        "topic_line_before_user": true,
+        "assistant_copy_anchor": true,
+        "preview": "النطاق: سعودي\nعائلة الحوار: موضوع\nالموضوع المطلوب: الاحترام\nالمستخدم: وش يعني الاحترام؟\nالمساعد: الاحترام يعني خلق يبان في المواقف اليومية.\n"
+      },
+      {
+        "term": "الهدوء",
+        "dialect": "msa",
+        "has_topic_line": true,
+        "topic_line_before_user": true,
+        "assistant_copy_anchor": true,
+        "preview": "النطاق: فصحى\nعائلة الحوار: موضوع\nالموضوع المطلوب: الهدوء\nالمستخدم: ما معنى الهدوء؟\nالمساعد: معنى الهدوء: خلق يظهر في المواقف اليومية بوضوح.\n"
+      },
+      {
+        "term": "الهدوء",
+        "dialect": "saudi",
+        "has_topic_line": true,
+        "topic_line_before_user": true,
+        "assistant_copy_anchor": true,
+        "preview": "النطاق: سعودي\nعائلة الحوار: موضوع\nالموضوع المطلوب: الهدوء\nالمستخدم: وش يعني الهدوء؟\nالمساعد: الهدوء يعني خلق يبان في المواقف اليومية.\n"
+      },
+      {
+        "term": "الصدق",
+        "dialect": "msa",
+        "has_topic_line": true,
+        "topic_line_before_user": true,
+        "assistant_copy_anchor": true,
+        "preview": "النطاق: فصحى\nعائلة الحوار: موضوع\nالموضوع المطلوب: الصدق\nالمستخدم: ما معنى الصدق؟\nالمساعد: معنى الصدق: خلق يظهر في المواقف اليومية بوضوح.\n"
+      },
+      {
+        "term": "الصدق",
+        "dialect": "saudi",
+        "has_topic_line": true,
+        "topic_line_before_user": true,
+        "assistant_copy_anchor": true,
+        "preview": "النطاق: سعودي\nعائلة الحوار: موضوع\nالموضوع المطلوب: الصدق\nالمستخدم: وش يعني الصدق؟\nالمساعد: الصدق يعني خلق يبان في المواقف اليومية.\n"
+      },
+      {
+        "term": "الصداقة",
+        "dialect": "msa",
+        "has_topic_line": true,
+        "topic_line_before_user": true,
+        "assistant_copy_anchor": true,
+        "preview": "النطاق: فصحى\nعائلة الحوار: موضوع\nالموضوع المطلوب: الصداقة\nالمستخدم: ما معنى الصداقة؟\nالمساعد: معنى الصداقة: خلق يظهر في المواقف اليومية بوضوح.\n"
+      },
+      {
+        "term": "الصداقة",
+        "dialect": "saudi",
+        "has_topic_line": true,
+        "topic_line_before_user": true,
+        "assistant_copy_anchor": true,
+        "preview": "النطاق: سعودي\nعائلة الحوار: موضوع\nالموضوع المطلوب: الصداقة\nالمستخدم: وش يعني الصداقة؟\nالمساعد: الصداقة يعني خلق يبان في المواقف اليومية.\n"
+      },
+      {
+        "term": "الشجاعة",
+        "dialect": "msa",
+        "has_topic_line": true,
+        "topic_line_before_user": true,
+        "assistant_copy_anchor": true,
+        "preview": "النطاق: فصحى\nعائلة الحوار: موضوع\nالموضوع المطلوب: الشجاعة\nالمستخدم: ما معنى الشجاعة؟\nالمساعد: معنى الشجاعة: خلق يظهر في المواقف اليومية بوضوح.\n"
+      },
+      {
+        "term": "الشجاعة",
+        "dialect": "saudi",
+        "has_topic_line": true,
+        "topic_line_before_user": true,
+        "assistant_copy_anchor": true,
+        "preview": "النطاق: سعودي\nعائلة الحوار: موضوع\nالموضوع المطلوب: الشجاعة\nالمستخدم: وش يعني الشجاعة؟\nالمساعد: الشجاعة يعني خلق يبان في المواقف اليومية.\n"
+      }
+    ]
+  },
+  "mask_probe": {
+    "tokenizer": "artifacts/tokenizers/sf_bpe/v9_phase27_76",
+    "total_tokens": 33,
+    "masked_tokens": 26,
+    "supervised_tokens": 7,
+    "conditioning_and_user_masked": true,
+    "assistant_content_supervised": true,
+    "passed": true
+  },
+  "stream_probe": {
+    "split_order": "family_round_robin",
+    "has_topic_sample_in_training_stream": true,
+    "has_topic_anchor_in_first_topic_sample": true,
+    "preview": "النطاق: فصحى\nعائلة الحوار: موضوع\nالموضوع المطلوب: الشجاعة\nالمستخدم: ما معنى الشجاعة؟\nالمساعد: معنى الشجاعة: أن تفعل الصواب رغم الخوف، لا أن تختفي منك المخاوف.\n"
+  },
+  "canary_manifest_path": "eval/prompts/phase27_98_topic_binding_contrastive_canary.json",
+  "canary_ready": true,
+  "metadata_audit": {
+    "total_topic_records": 510,
+    "explicit_topic_term_records": 10,
+    "missing_topic_term_records": 500,
+    "all_topic_records_have_explicit_topic_term": false,
+    "dialect_counts": {
+      "msa": 250,
+      "saudi": 260
+    },
+    "explicit_by_term": {
+      "الوفاء": 10
+    },
+    "inferred_by_target_term": {
+      "الشجاعة": 29,
+      "الصداقة": 29,
+      "الصبر": 29,
+      "الصدق": 29,
+      "الاحترام": 41,
+      "التعاون": 29,
+      "الهدوء": 29,
+      "الوفاء": 22
+    },
+    "missing_by_file_top": {
+      "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl": 250,
+      "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_saudi_010.jsonl": 250
+    },
+    "missing_examples": [
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى الشجاعة؟",
+        "assistant": "معنى الشجاعة: أن تفعل الصواب رغم الخوف، لا أن تختفي منك المخاوف.",
+        "inferred_target_term": "الشجاعة"
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى الصداقة؟",
+        "assistant": "معنى الصداقة: علاقة فيها صدق واهتمام ووقفة وقت الحاجة.",
+        "inferred_target_term": "الصداقة"
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى الصبر؟",
+        "assistant": "معنى الصبر: قدرة على احتمال التأخير أو التعب دون فقدان الاتزان.",
+        "inferred_target_term": "الصبر"
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى الصدق؟",
+        "assistant": "معنى الصدق: وضوح في القول والعمل بلا خداع.",
+        "inferred_target_term": "الصدق"
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى الاحترام؟",
+        "assistant": "معنى الاحترام: أن تراعي قيمة الشخص وحدوده حتى عند الاختلاف.",
+        "inferred_target_term": "الاحترام"
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى التعاون؟",
+        "assistant": "معنى التعاون: أن يعمل أكثر من شخص لهدف مشترك بتفاهم.",
+        "inferred_target_term": "التعاون"
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى الهدوء؟",
+        "assistant": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+        "inferred_target_term": "الهدوء"
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى المسؤولية؟",
+        "assistant": "معنى المسؤولية: أن تعرف ما عليك وتقوم به بقدر استطاعتك.",
+        "inferred_target_term": ""
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى الامتنان؟",
+        "assistant": "معنى الامتنان: أن تلاحظ الخير الموجود وتشكر عليه.",
+        "inferred_target_term": ""
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى الثقة؟",
+        "assistant": "معنى الثقة: اطمئنان مبني على تجربة ووضوح لا على كلام فقط.",
+        "inferred_target_term": ""
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى الكرم؟",
+        "assistant": "معنى الكرم: عطاء مناسب بلا منّ ولا مبالغة.",
+        "inferred_target_term": ""
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى الاعتذار؟",
+        "assistant": "معنى الاعتذار: اعتراف بالخطأ ومحاولة إصلاح أثره.",
+        "inferred_target_term": ""
+      }
+    ],
+    "off_spec_topic_examples": [
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى المسؤولية؟",
+        "assistant": "معنى المسؤولية: أن تعرف ما عليك وتقوم به بقدر استطاعتك."
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى الامتنان؟",
+        "assistant": "معنى الامتنان: أن تلاحظ الخير الموجود وتشكر عليه."
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى الثقة؟",
+        "assistant": "معنى الثقة: اطمئنان مبني على تجربة ووضوح لا على كلام فقط."
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى الكرم؟",
+        "assistant": "معنى الكرم: عطاء مناسب بلا منّ ولا مبالغة."
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى الاعتذار؟",
+        "assistant": "معنى الاعتذار: اعتراف بالخطأ ومحاولة إصلاح أثره."
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى الإنصات؟",
+        "assistant": "معنى الإنصات: أن تسمع لتفهم لا لترد بسرعة."
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى المرونة؟",
+        "assistant": "معنى المرونة: قدرة على تغيير الطريقة دون ترك الهدف."
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى العدل؟",
+        "assistant": "معنى العدل: أن تعطي كل ذي حق حقه بإنصاف."
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى الطموح؟",
+        "assistant": "معنى الطموح: رغبة واعية في التحسن والعمل لما هو أفضل."
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى التواضع؟",
+        "assistant": "معنى التواضع: أن تعرف قيمتك دون أن تتكبر على غيرك."
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "ما معنى الحكمة؟",
+        "assistant": "معنى الحكمة: اختيار التصرف الأنسب في الوقت الأنسب."
+      },
+      {
+        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialect": "msa",
+        "user": "اشرح لي المسؤولية ببساطة.",
+        "assistant": "معنى المسؤولية: أن تعرف ما عليك وتقوم به بقدر استطاعتك."
+      }
+    ],
+    "copy_anchor": {
+      "target_term_records": 237,
+      "ok": 225,
+      "bad": 12,
+      "unknown_topic": 273,
+      "target_term_copy_anchor_ready": false,
+      "all_topic_copy_anchor_ready": false
+    }
+  },
+  "topic_round_robin_probe": {
+    "proposed_sampler": "topic_term_round_robin_within_family_round_robin",
+    "dry_run_possible_from_inferred_terms": true,
+    "blocked_for_training": true,
+    "reason": "training sampler cannot rely on inferred topic terms; explicit provenance.topic_term is required",
+    "preview_first_80_counts": {
+      "الاحترام": 10,
+      "التعاون": 10,
+      "الشجاعة": 10,
+      "الصبر": 10,
+      "الصداقة": 10,
+      "الصدق": 10,
+      "الهدوء": 10,
+      "الوفاء": 10
+    },
+    "all_target_terms_present_in_preview": true
+  },
+  "encoded_gate_passed": true,
+  "metadata_ready": false,
+  "copy_anchor_ready": false,
+  "sampler_ready": false,
+  "training_ready": false,
+  "blocked_actions": [
+    "LM training before data repair",
+    "runtime release",
+    "UI generator release",
+    "SF-50M transition",
+    "tokenizer retrain",
+    "pretrained/open-weight usage",
+    "keyword/template masking"
+  ],
+  "decision": {
+    "decision_id": "PHASE27_98_TOPIC_BINDING_GATE_ENCODING_DECISION",
+    "engineering_decision": "ALLOW_PHASE27_99_TOPIC_METADATA_COPY_ANCHOR_DATA_REPAIR_NO_TRAINING",
+    "new_training_allowed": false,
+    "data_repair_allowed": true,
+    "runtime_release_allowed": false,
+    "ui_release_allowed": false,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "why": "Gate encoding works, but corpus metadata/copy-anchor readiness is not strict enough for the Phase 27.97 objective.",
+    "next_phase": "Phase 27.99 — Topic Metadata and Copy-Anchor Data Repair"
+  }
+}

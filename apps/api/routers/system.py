@@ -61,9 +61,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.97 — Topic Variable Binding Objective Design",
-        current_phase_status="phase27_97_topic_binding_objective_design_ready_no_training",
-        next_phase="Phase 27.98 — Topic Binding Gate Encoding and Metadata Audit",
+        current_phase="Phase 27.98 — Topic Binding Gate Encoding and Metadata Audit",
+        current_phase_status=(
+            "phase27_98_topic_binding_gate_encoded_data_repair_required_no_training"
+        ),
+        next_phase="Phase 27.99 — Topic Metadata and Copy-Anchor Data Repair",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -597,6 +599,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_97_topic_variable_binding_objective_design",
                 status="topic_binding_objective_design_ready_no_training",
                 phase="Phase 27.97",
+            ),
+            ComponentStatus(
+                name="phase27_98_topic_binding_gate_encoding",
+                status="data_repair_required_no_training",
+                phase="Phase 27.98",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

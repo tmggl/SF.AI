@@ -5,7 +5,7 @@
 **Status:** governance rule, no training started
 **Language track:** Arabic MSA + Saudi only
 **Lexicon track:** Saudi Seed v1 + governed MSA/Saudi corpus
-**Current gate:** Phase 27.97 designed the topic variable-binding objective; Phase 27.98 gate encoding next; SF-50M remains blocked.
+**Current gate:** Phase 27.98 encoded the topic-binding gate and blocked training until topic metadata/copy-anchor repair; SF-50M remains blocked.
 
 ---
 
@@ -91,13 +91,13 @@ Sovereign Practical Acceleration != open-weight/pretrained model lane
 PHASE27_78_ENGINEERING_DECISION
 ```
 
-### Current Scaling Decision — Phase 27.97
+### Current Scaling Decision — Phase 27.98
 
-Phase 27.97 لا يفتح حجمًا أكبر. القرار الحالي هو:
+Phase 27.98 لا يفتح حجمًا أكبر. القرار الحالي هو:
 
 ```text
-PHASE27_97_TOPIC_VARIABLE_BINDING_OBJECTIVE_DESIGN_DECISION
-ALLOW_PHASE27_98_TOPIC_BINDING_GATE_ENCODING_NO_TRAINING
+PHASE27_98_TOPIC_BINDING_GATE_ENCODING_DECISION
+ALLOW_PHASE27_99_TOPIC_METADATA_COPY_ANCHOR_DATA_REPAIR_NO_TRAINING
 ```
 
 السبب: Phase 27.96 شخّصت فشل 27.95 كخلل ربط متغير الموضوع لا كحد سعة.
@@ -106,8 +106,9 @@ ALLOW_PHASE27_98_TOPIC_BINDING_GATE_ENCODING_NO_TRAINING
 `الصداقة=6`. لذلك صممت Phase 27.97 objective
 `topic_copy_contrastive_binding_objective_v1`: يجب أن ينسخ الرد الموضوع
 المطلوب داخل أول 12 حرفًا عربيًا ظاهرًا، ويُسقط أي رد يذكر موضوعًا مجاورًا
-قبل المطلوب. يبقى `SF-50M` محجوبًا، ولا يسمح بتدريب جديد قبل Phase 27.98
-كترميز بوابة وتدقيق metadata.
+قبل المطلوب. Phase 27.98 أثبتت أن ترميز البوابة يعمل، لكنها منعت التدريب
+لأن `500` سجل topic لا تحمل `topic_term` صريحًا. يبقى `SF-50M` محجوبًا،
+ولا يسمح بتدريب جديد قبل Phase 27.99 كإصلاح metadata وcopy-anchor.
 
 ويجب أن يحدد أوزان الأسباب التالية:
 

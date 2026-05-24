@@ -1,0 +1,766 @@
+{
+  "suite_id": "phase27_98_topic_binding_contrastive_canary",
+  "phase": "Phase 27.98",
+  "objective": "topic_copy_contrastive_binding_objective_v1",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "target_terms": [
+    "الوفاء",
+    "التعاون",
+    "الصبر",
+    "الاحترام",
+    "الهدوء",
+    "الصدق",
+    "الصداقة",
+    "الشجاعة"
+  ],
+  "thresholds": {
+    "known_topic_min": "16/16",
+    "fresh_topic_min": "8/10",
+    "contrastive_wrong_topic_max": 0,
+    "copy_anchor_min": "26/26",
+    "all_family_regression_min": "45/50",
+    "topic_family_min": "8/10",
+    "malformed_max": 0,
+    "repeated_phrase_max": 0
+  },
+  "coverage": {
+    "prompt_count": 26,
+    "known_count": 16,
+    "fresh_count": 10,
+    "all_terms_covered": true,
+    "all_dialects_covered": true
+  },
+  "prompts": [
+    {
+      "id": "known_msa_الوفاء",
+      "set": "known",
+      "dialect": "msa",
+      "dialogue_family": "topic",
+      "message": "اشرح لي الوفاء بجملة قصيرة.",
+      "requested_topic": "الوفاء",
+      "required_terms": [
+        "الوفاء"
+      ],
+      "forbidden_terms": [
+        "التعاون",
+        "الصبر",
+        "الاحترام",
+        "الهدوء",
+        "الصدق",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الوفاء:",
+        "الوفاء يعني",
+        "الوفاء هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "known_saudi_الوفاء",
+      "set": "known",
+      "dialect": "saudi",
+      "dialogue_family": "topic",
+      "message": "وش يعني الوفاء باختصار؟",
+      "requested_topic": "الوفاء",
+      "required_terms": [
+        "الوفاء"
+      ],
+      "forbidden_terms": [
+        "التعاون",
+        "الصبر",
+        "الاحترام",
+        "الهدوء",
+        "الصدق",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الوفاء:",
+        "الوفاء يعني",
+        "الوفاء هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "known_msa_التعاون",
+      "set": "known",
+      "dialect": "msa",
+      "dialogue_family": "topic",
+      "message": "اشرح لي التعاون بجملة قصيرة.",
+      "requested_topic": "التعاون",
+      "required_terms": [
+        "التعاون"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "الصبر",
+        "الاحترام",
+        "الهدوء",
+        "الصدق",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى التعاون:",
+        "التعاون يعني",
+        "التعاون هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "known_saudi_التعاون",
+      "set": "known",
+      "dialect": "saudi",
+      "dialogue_family": "topic",
+      "message": "وش يعني التعاون باختصار؟",
+      "requested_topic": "التعاون",
+      "required_terms": [
+        "التعاون"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "الصبر",
+        "الاحترام",
+        "الهدوء",
+        "الصدق",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى التعاون:",
+        "التعاون يعني",
+        "التعاون هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "known_msa_الصبر",
+      "set": "known",
+      "dialect": "msa",
+      "dialogue_family": "topic",
+      "message": "اشرح لي الصبر بجملة قصيرة.",
+      "requested_topic": "الصبر",
+      "required_terms": [
+        "الصبر"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "التعاون",
+        "الاحترام",
+        "الهدوء",
+        "الصدق",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الصبر:",
+        "الصبر يعني",
+        "الصبر هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "known_saudi_الصبر",
+      "set": "known",
+      "dialect": "saudi",
+      "dialogue_family": "topic",
+      "message": "وش يعني الصبر باختصار؟",
+      "requested_topic": "الصبر",
+      "required_terms": [
+        "الصبر"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "التعاون",
+        "الاحترام",
+        "الهدوء",
+        "الصدق",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الصبر:",
+        "الصبر يعني",
+        "الصبر هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "known_msa_الاحترام",
+      "set": "known",
+      "dialect": "msa",
+      "dialogue_family": "topic",
+      "message": "اشرح لي الاحترام بجملة قصيرة.",
+      "requested_topic": "الاحترام",
+      "required_terms": [
+        "الاحترام"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "التعاون",
+        "الصبر",
+        "الهدوء",
+        "الصدق",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الاحترام:",
+        "الاحترام يعني",
+        "الاحترام هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "known_saudi_الاحترام",
+      "set": "known",
+      "dialect": "saudi",
+      "dialogue_family": "topic",
+      "message": "وش يعني الاحترام باختصار؟",
+      "requested_topic": "الاحترام",
+      "required_terms": [
+        "الاحترام"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "التعاون",
+        "الصبر",
+        "الهدوء",
+        "الصدق",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الاحترام:",
+        "الاحترام يعني",
+        "الاحترام هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "known_msa_الهدوء",
+      "set": "known",
+      "dialect": "msa",
+      "dialogue_family": "topic",
+      "message": "اشرح لي الهدوء بجملة قصيرة.",
+      "requested_topic": "الهدوء",
+      "required_terms": [
+        "الهدوء"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "التعاون",
+        "الصبر",
+        "الاحترام",
+        "الصدق",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الهدوء:",
+        "الهدوء يعني",
+        "الهدوء هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "known_saudi_الهدوء",
+      "set": "known",
+      "dialect": "saudi",
+      "dialogue_family": "topic",
+      "message": "وش يعني الهدوء باختصار؟",
+      "requested_topic": "الهدوء",
+      "required_terms": [
+        "الهدوء"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "التعاون",
+        "الصبر",
+        "الاحترام",
+        "الصدق",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الهدوء:",
+        "الهدوء يعني",
+        "الهدوء هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "known_msa_الصدق",
+      "set": "known",
+      "dialect": "msa",
+      "dialogue_family": "topic",
+      "message": "اشرح لي الصدق بجملة قصيرة.",
+      "requested_topic": "الصدق",
+      "required_terms": [
+        "الصدق"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "التعاون",
+        "الصبر",
+        "الاحترام",
+        "الهدوء",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الصدق:",
+        "الصدق يعني",
+        "الصدق هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "known_saudi_الصدق",
+      "set": "known",
+      "dialect": "saudi",
+      "dialogue_family": "topic",
+      "message": "وش يعني الصدق باختصار؟",
+      "requested_topic": "الصدق",
+      "required_terms": [
+        "الصدق"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "التعاون",
+        "الصبر",
+        "الاحترام",
+        "الهدوء",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الصدق:",
+        "الصدق يعني",
+        "الصدق هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "known_msa_الصداقة",
+      "set": "known",
+      "dialect": "msa",
+      "dialogue_family": "topic",
+      "message": "اشرح لي الصداقة بجملة قصيرة.",
+      "requested_topic": "الصداقة",
+      "required_terms": [
+        "الصداقة"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "التعاون",
+        "الصبر",
+        "الاحترام",
+        "الهدوء",
+        "الصدق",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الصداقة:",
+        "الصداقة يعني",
+        "الصداقة هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "known_saudi_الصداقة",
+      "set": "known",
+      "dialect": "saudi",
+      "dialogue_family": "topic",
+      "message": "وش يعني الصداقة باختصار؟",
+      "requested_topic": "الصداقة",
+      "required_terms": [
+        "الصداقة"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "التعاون",
+        "الصبر",
+        "الاحترام",
+        "الهدوء",
+        "الصدق",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الصداقة:",
+        "الصداقة يعني",
+        "الصداقة هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "known_msa_الشجاعة",
+      "set": "known",
+      "dialect": "msa",
+      "dialogue_family": "topic",
+      "message": "اشرح لي الشجاعة بجملة قصيرة.",
+      "requested_topic": "الشجاعة",
+      "required_terms": [
+        "الشجاعة"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "التعاون",
+        "الصبر",
+        "الاحترام",
+        "الهدوء",
+        "الصدق",
+        "الصداقة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الشجاعة:",
+        "الشجاعة يعني",
+        "الشجاعة هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "known_saudi_الشجاعة",
+      "set": "known",
+      "dialect": "saudi",
+      "dialogue_family": "topic",
+      "message": "وش يعني الشجاعة باختصار؟",
+      "requested_topic": "الشجاعة",
+      "required_terms": [
+        "الشجاعة"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "التعاون",
+        "الصبر",
+        "الاحترام",
+        "الهدوء",
+        "الصدق",
+        "الصداقة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الشجاعة:",
+        "الشجاعة يعني",
+        "الشجاعة هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "fresh_01_msa_الوفاء",
+      "set": "fresh",
+      "dialect": "msa",
+      "dialogue_family": "topic",
+      "message": "عرّف الوفاء بكلام بسيط.",
+      "requested_topic": "الوفاء",
+      "required_terms": [
+        "الوفاء"
+      ],
+      "forbidden_terms": [
+        "التعاون",
+        "الصبر",
+        "الاحترام",
+        "الهدوء",
+        "الصدق",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الوفاء:",
+        "الوفاء يعني",
+        "الوفاء هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "fresh_02_saudi_التعاون",
+      "set": "fresh",
+      "dialect": "saudi",
+      "dialogue_family": "topic",
+      "message": "وش معنى التعاون في الحياة اليومية؟",
+      "requested_topic": "التعاون",
+      "required_terms": [
+        "التعاون"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "الصبر",
+        "الاحترام",
+        "الهدوء",
+        "الصدق",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى التعاون:",
+        "التعاون يعني",
+        "التعاون هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "fresh_03_msa_الصبر",
+      "set": "fresh",
+      "dialect": "msa",
+      "dialogue_family": "topic",
+      "message": "اشرح الصبر بجملة قصيرة.",
+      "requested_topic": "الصبر",
+      "required_terms": [
+        "الصبر"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "التعاون",
+        "الاحترام",
+        "الهدوء",
+        "الصدق",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الصبر:",
+        "الصبر يعني",
+        "الصبر هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "fresh_04_saudi_الاحترام",
+      "set": "fresh",
+      "dialect": "saudi",
+      "dialogue_family": "topic",
+      "message": "وش يعني الاحترام؟",
+      "requested_topic": "الاحترام",
+      "required_terms": [
+        "الاحترام"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "التعاون",
+        "الصبر",
+        "الهدوء",
+        "الصدق",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الاحترام:",
+        "الاحترام يعني",
+        "الاحترام هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "fresh_05_msa_الهدوء",
+      "set": "fresh",
+      "dialect": "msa",
+      "dialogue_family": "topic",
+      "message": "ما المقصود بالهدوء؟",
+      "requested_topic": "الهدوء",
+      "required_terms": [
+        "الهدوء"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "التعاون",
+        "الصبر",
+        "الاحترام",
+        "الصدق",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الهدوء:",
+        "الهدوء يعني",
+        "الهدوء هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "fresh_06_saudi_الصدق",
+      "set": "fresh",
+      "dialect": "saudi",
+      "dialogue_family": "topic",
+      "message": "وش يعني الصدق باختصار؟",
+      "requested_topic": "الصدق",
+      "required_terms": [
+        "الصدق"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "التعاون",
+        "الصبر",
+        "الاحترام",
+        "الهدوء",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الصدق:",
+        "الصدق يعني",
+        "الصدق هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "fresh_07_msa_الصداقة",
+      "set": "fresh",
+      "dialect": "msa",
+      "dialogue_family": "topic",
+      "message": "عرّف الصداقة دون إطالة.",
+      "requested_topic": "الصداقة",
+      "required_terms": [
+        "الصداقة"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "التعاون",
+        "الصبر",
+        "الاحترام",
+        "الهدوء",
+        "الصدق",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الصداقة:",
+        "الصداقة يعني",
+        "الصداقة هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "fresh_08_saudi_الشجاعة",
+      "set": "fresh",
+      "dialect": "saudi",
+      "dialogue_family": "topic",
+      "message": "وش معنى الشجاعة؟",
+      "requested_topic": "الشجاعة",
+      "required_terms": [
+        "الشجاعة"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "التعاون",
+        "الصبر",
+        "الاحترام",
+        "الهدوء",
+        "الصدق",
+        "الصداقة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الشجاعة:",
+        "الشجاعة يعني",
+        "الشجاعة هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "fresh_09_saudi_الوفاء",
+      "set": "fresh",
+      "dialect": "saudi",
+      "dialogue_family": "topic",
+      "message": "علمني عن الوفاء بجملة وحدة.",
+      "requested_topic": "الوفاء",
+      "required_terms": [
+        "الوفاء"
+      ],
+      "forbidden_terms": [
+        "التعاون",
+        "الصبر",
+        "الاحترام",
+        "الهدوء",
+        "الصدق",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الوفاء:",
+        "الوفاء يعني",
+        "الوفاء هو"
+      ],
+      "max_sentences": 1
+    },
+    {
+      "id": "fresh_10_saudi_الصبر",
+      "set": "fresh",
+      "dialect": "saudi",
+      "dialogue_family": "topic",
+      "message": "الصبر وش معناه؟",
+      "requested_topic": "الصبر",
+      "required_terms": [
+        "الصبر"
+      ],
+      "forbidden_terms": [
+        "الوفاء",
+        "التعاون",
+        "الاحترام",
+        "الهدوء",
+        "الصدق",
+        "الصداقة",
+        "الشجاعة"
+      ],
+      "copy_anchor_required": true,
+      "copy_anchor_max_visible_arabic_chars": 12,
+      "accepted_prefixes": [
+        "معنى الصبر:",
+        "الصبر يعني",
+        "الصبر هو"
+      ],
+      "max_sentences": 1
+    }
+  ]
+}

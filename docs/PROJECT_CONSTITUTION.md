@@ -57,6 +57,9 @@ copy/contrastive في Phase 27.97.
 ليجعل نسخ الموضوع المطلوب شرطًا صريحًا في بداية رد topic. هذا لا يفتح
 تدريبًا ولا runtime ولا `SF-50M`؛ المسموح فقط Phase 27.98 لترميز البوابة
 وتدقيق metadata.
+بعد Phase 27.98، ثبت أن gate encoding ناجح لكن corpus غير جاهز: `500`
+سجل topic لا تحمل `topic_term` صريحًا. لا تدريب قبل Phase 27.99 لإصلاح
+metadata وcopy-anchor داخل corpus السيادي المحلي.
 
 استثناء موثق: يجوز إدخال حوارات **owner-delegated agent-authored** في
 corpus إذا كان سامي قد فوّض الوكيل صراحة بتأليفها واعتمادها، وكانت كل

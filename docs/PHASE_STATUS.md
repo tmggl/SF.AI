@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.97 / 30**
-- **المرحلة الحالية:** **Phase 27.97 — Topic Variable Binding Objective Design**
-- **حالة المرحلة الحالية:** **اكتملت كتصميم؛ runtime محجوب؛ لا تدريب جديد**
-- **المرحلة التالية المقترحة:** Phase 27.98 — Topic Binding Gate Encoding and Metadata Audit.
+- **الرحلة الحالية:** **Phase 27.98 / 30**
+- **المرحلة الحالية:** **Phase 27.98 — Topic Binding Gate Encoding and Metadata Audit**
+- **حالة المرحلة الحالية:** **اكتملت كبوابة؛ ترميز ناجح؛ إصلاح بيانات مطلوب؛ لا تدريب جديد**
+- **المرحلة التالية المقترحة:** Phase 27.99 — Topic Metadata and Copy-Anchor Data Repair.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -153,6 +153,7 @@
 | Phase 27.95 | Bounded Topic Objective Repair Training | ✅ trained_runtime_blocked_diagnosis_required | ✅ |
 | Phase 27.96 | Topic Objective Repair Result Diagnosis | ✅ diagnosed_topic_variable_binding_failure_no_training | ✅ |
 | Phase 27.97 | Topic Variable Binding Objective Design | ✅ topic_binding_objective_design_ready_no_training | ✅ |
+| Phase 27.98 | Topic Binding Gate Encoding and Metadata Audit | ✅ gate_encoded_data_repair_required_no_training | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1078,13 +1079,13 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-661 passed in 71.87s (0:01:11)
+664 passed in 70.43s (0:01:10)
 ```
 
 | التحقق | النتيجة |
 |------|------|
-| full pytest suite | `661 passed in 71.87s` |
-| focused Phase 27.97/API/UI tests | `78 passed in 8.59s` |
+| full pytest suite | `664 passed in 70.43s` |
+| focused Phase 27.98/API/UI tests | `78 passed in 12.47s` |
 | `make corpus-audit` | `8453` records, `issues=0` |
 | `make phase27-dialogue-eval` | `19/19`, `open_generator_ready=false` |
 
@@ -1554,6 +1555,32 @@ make api
   - `artifacts/reports/phase27_97_topic_variable_binding_objective_design_report.json`
   - `artifacts/reports/PHASE27_97_TOPIC_VARIABLE_BINDING_OBJECTIVE_DESIGN_DECISION.json`
   - `artifacts/reports/phase27_97_topic_variable_binding_objective_spec.json`
+
+---
+
+## Phase 27.98 — Topic Binding Gate Encoding and Metadata Audit
+
+- لم يبدأ تدريب جديد.
+- لم يتغير runtime.
+- لم يتغير tokenizer.
+- رُمزت بوابة 27.97:
+  - renderer يستطيع إنتاج target يبدأ بالموضوع المطلوب.
+  - assistant-only loss يبقي سطور السياق والطلب masked.
+  - canary contrastive جديد يغطي `26` حالة (`16` known + `10` fresh).
+- نتيجة metadata:
+  - total topic records: `510`
+  - explicit `topic_term`: `10`
+  - missing `topic_term`: `500`
+  - لذلك التدريب محجوب؛ لا يجوز الاعتماد على inference داخل training gate.
+- القرار: `ALLOW_PHASE27_99_TOPIC_METADATA_COPY_ANCHOR_DATA_REPAIR_NO_TRAINING`.
+- التالي: Phase 27.99 — Topic Metadata and Copy-Anchor Data Repair.
+- المحظور الآن: training, runtime release, UI generator release, SF-50M,
+  tokenizer retrain, pretrained/open-weight usage, keyword/template masking.
+- التقارير:
+  - [PHASE27_98_TOPIC_BINDING_GATE_ENCODING_REPORT.md](./PHASE27_98_TOPIC_BINDING_GATE_ENCODING_REPORT.md)
+  - `artifacts/reports/phase27_98_topic_binding_gate_encoding_report.json`
+  - `artifacts/reports/PHASE27_98_TOPIC_BINDING_GATE_ENCODING_DECISION.json`
+  - `eval/prompts/phase27_98_topic_binding_contrastive_canary.json`
 
 ---
 
