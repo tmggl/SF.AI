@@ -82,9 +82,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.92 ضمن مسار SF-native فقط: صممنا إصلاح topic-objective "
-    "بعد تشخيص انهيار عائلة topic. لا تدريب ولا runtime الآن؛ التالي Phase 27.93 "
-    "ترميز البوابة والتحقق الجاف قبل أي تدريب.",
+    "وصلنا إلى Phase 27.93 ضمن مسار SF-native فقط: بوابة topic-objective الجافة مرّت، "
+    "لكن بيانات الوفاء السعودية ناقصة. لا تدريب ولا runtime الآن؛ التالي Phase 27.94 "
+    "تأليف data pack موضوعي قبل أي تدريب.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

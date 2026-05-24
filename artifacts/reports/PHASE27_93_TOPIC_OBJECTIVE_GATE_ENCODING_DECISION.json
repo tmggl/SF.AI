@@ -1,0 +1,12 @@
+{
+  "decision_id": "PHASE27_93_TOPIC_OBJECTIVE_GATE_ENCODING_DECISION",
+  "engineering_decision": "ALLOW_PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_AUTHORING_NO_TRAINING",
+  "new_training_allowed": false,
+  "data_pack_authoring_allowed": true,
+  "runtime_release_allowed": false,
+  "ui_release_allowed": false,
+  "sf50m_justified_transition": false,
+  "tokenizer_retrain_allowed": false,
+  "why": "Topic-objective dry-run passed, but current topic corpus does not meet the per-topic/per-dialect minimums from Phase 27.92.",
+  "next_phase": "Phase 27.94 — Topic Objective Data Pack Authoring"
+}

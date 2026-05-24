@@ -68,6 +68,7 @@ class Provenance(BaseModel):
     dialogue_family: str | None = None     # open_social / followup / planning / support / topic
     prompt_family: str | None = None       # user-side dialogue family hint
     answer_family: str | None = None       # assistant-side dialogue family hint
+    topic_term: str | None = None          # requested topic anchor for topic-family dialogue
     owner_user_id: str | None = None       # canonical owner of this dialogue data
     created_by_user_id: str | None = None  # author/exporter/reviewer who created it
     target_user_id: str | None = None      # user/account this data may personalize

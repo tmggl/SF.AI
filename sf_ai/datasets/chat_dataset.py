@@ -147,6 +147,17 @@ FAMILY_CONDITION_LABELS: dict[str, str] = {
     "topic": "موضوع",
 }
 
+TOPIC_CONDITION_TERMS: tuple[str, ...] = (
+    "الوفاء",
+    "التعاون",
+    "الصبر",
+    "الاحترام",
+    "الهدوء",
+    "الصدق",
+    "الصداقة",
+    "الشجاعة",
+)
+
 
 def _family_condition_line(sample: SimpleSample | StructuredSample) -> str | None:
     """Return the Arabic family conditioning line introduced in Phase 27.86."""
@@ -158,12 +169,45 @@ def _family_condition_line(sample: SimpleSample | StructuredSample) -> str | Non
     return None
 
 
+def _family_key(sample: SimpleSample | StructuredSample) -> str:
+    provenance = getattr(sample, "provenance", None)
+    for attr in ("dialogue_family", "answer_family", "prompt_family"):
+        raw = (getattr(provenance, attr, "") or "").strip().lower()
+        if raw in FAMILY_CONDITION_LABELS:
+            return raw
+    return ""
+
+
+def _topic_condition_line(sample: SimpleSample | StructuredSample) -> str | None:
+    """Return the Phase 27.93 requested-topic line for topic-family samples."""
+    if _family_key(sample) != "topic":
+        return None
+    provenance = getattr(sample, "provenance", None)
+    explicit = (getattr(provenance, "topic_term", "") or "").strip()
+    if explicit:
+        return f"الموضوع المطلوب: {explicit}"
+
+    messages = (
+        sample.messages
+        if isinstance(sample, StructuredSample)
+        else sample.to_messages()
+    )
+    user_text = "\n".join(msg.content for msg in messages if msg.role == "user")
+    for term in TOPIC_CONDITION_TERMS:
+        if term in user_text:
+            return f"الموضوع المطلوب: {term}"
+    return None
+
+
 def _dialogue_condition_lines(sample: SimpleSample | StructuredSample) -> list[str]:
     """Return all context-only conditioning lines for dialogue training."""
     lines = _dialect_condition_lines(sample)
     family = _family_condition_line(sample)
     if family:
         lines.append(family)
+    topic = _topic_condition_line(sample)
+    if topic:
+        lines.append(topic)
     return lines
 
 

@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.92 ضمن مسار SF-native فقط: صممنا إصلاح topic-objective بعد تشخيص انهيار عائلة topic. لا تدريب ولا runtime الآن؛ التالي Phase 27.93 ترميز البوابة والتحقق الجاف قب"
+      "response_preview": "وصلنا إلى Phase 27.93 ضمن مسار SF-native فقط: بوابة topic-objective الجافة مرّت، لكن بيانات الوفاء السعودية ناقصة. لا تدريب ولا runtime الآن؛ التالي Phase 27.94 تأليف data pack موض"
     },
     {
       "scenario_id": "clarification_repair_flow",

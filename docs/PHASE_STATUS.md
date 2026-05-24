@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.92 / 30**
-- **المرحلة الحالية:** **Phase 27.92 — Topic Objective Repair Design Gate**
-- **حالة المرحلة الحالية:** **اكتملت؛ صُمم إصلاح topic-objective؛ لا تدريب ولا runtime**
-- **المرحلة التالية المقترحة:** Phase 27.93 — Topic Objective Gate Encoding and Dry-Run Validation.
+- **الرحلة الحالية:** **Phase 27.93 / 30**
+- **المرحلة الحالية:** **Phase 27.93 — Topic Objective Gate Encoding and Dry-Run Validation**
+- **حالة المرحلة الحالية:** **اكتملت؛ بوابة topic-objective مرّت جافًا؛ بيانات الوفاء السعودية ناقصة؛ لا تدريب ولا runtime**
+- **المرحلة التالية المقترحة:** Phase 27.94 — Topic Objective Data Pack Authoring.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -148,6 +148,7 @@
 | Phase 27.90 | Bounded SF-10M Round-Robin Curriculum Repair Training | ✅ trained_runtime_blocked_diagnosis_required | ✅ |
 | Phase 27.91 | Round-Robin Training Result Diagnosis | ✅ diagnosed_topic_collapse_no_training | ✅ |
 | Phase 27.92 | Topic Objective Repair Design Gate | ✅ topic_objective_repair_design_ready_no_training | ✅ |
+| Phase 27.93 | Topic Objective Gate Encoding and Dry-Run Validation | ✅ gate_passed_data_pack_required_no_training | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1073,7 +1074,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-645 passed in 72.18s (0:01:12)
+649 passed in 94.62s (0:01:34)
 ```
 
 | ملف | عدد |
@@ -1449,6 +1450,34 @@ make api
   - `artifacts/reports/phase27_92_topic_objective_repair_design_gate_report.json`
   - `artifacts/reports/PHASE27_92_TOPIC_OBJECTIVE_REPAIR_DESIGN_DECISION.json`
   - `artifacts/reports/phase27_92_topic_objective_repair_spec.json`
+
+---
+
+## Phase 27.93 — Topic Objective Gate Encoding and Dry-Run Validation
+
+- لم يبدأ تدريب جديد.
+- لم يتغير runtime.
+- أضيف إلى renderer سطر سياقي لعائلة `topic` فقط:
+  - `الموضوع المطلوب: <topic_term>`
+- السطر الجديد يضاف بعد `عائلة الحوار: موضوع` وقبل `المستخدم:`.
+- أثبتت البوابة أن assistant-only loss يخفي سطر النطاق والعائلة والموضوع والمستخدم عن الهدف، ويبقي رد المساعد فقط supervised.
+- أضيف canary manifest في:
+  - `eval/prompts/phase27_93_topic_objective_canary.json`
+- يغطي canary الموضوعات الثمانية بالفصحى والسعودي:
+  - `الوفاء`, `التعاون`, `الصبر`, `الاحترام`, `الهدوء`, `الصدق`, `الصداقة`, `الشجاعة`
+- dry-run passed: `true`.
+- training data ready: `false`.
+- سبب الحجب: موضوع `الوفاء` لا يحقق معيار Phase 27.92:
+  - total shortfall: `8`
+  - saudi shortfall: `10`
+- القرار: `ALLOW_PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_AUTHORING_NO_TRAINING`.
+- المحظور الآن: training, runtime release, SF-50M, tokenizer retrain, pretrained/open-weight usage.
+- التالي: Phase 27.94 — Topic Objective Data Pack Authoring.
+- التقارير:
+  - [PHASE27_93_TOPIC_OBJECTIVE_GATE_ENCODING_REPORT.md](./PHASE27_93_TOPIC_OBJECTIVE_GATE_ENCODING_REPORT.md)
+  - `artifacts/reports/phase27_93_topic_objective_gate_encoding_report.json`
+  - `artifacts/reports/PHASE27_93_TOPIC_OBJECTIVE_GATE_ENCODING_DECISION.json`
+  - `eval/prompts/phase27_93_topic_objective_canary.json`
 
 ---
 

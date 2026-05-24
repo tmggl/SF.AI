@@ -5,7 +5,7 @@
 **Status:** governance rule, no training started
 **Language track:** Arabic MSA + Saudi only
 **Lexicon track:** Saudi Seed v1 + governed MSA/Saudi corpus
-**Current gate:** Phase 27.92 completed; Phase 27.93 gate encoding next; SF-50M remains blocked.
+**Current gate:** Phase 27.93 completed; Phase 27.94 data pack authoring next; SF-50M remains blocked.
 
 ---
 
@@ -91,18 +91,18 @@ Sovereign Practical Acceleration != open-weight/pretrained model lane
 PHASE27_78_ENGINEERING_DECISION
 ```
 
-### Current Scaling Decision — Phase 27.92
+### Current Scaling Decision — Phase 27.93
 
-Phase 27.92 لا يفتح حجمًا أكبر. القرار الحالي هو:
+Phase 27.93 لا يفتح حجمًا أكبر. القرار الحالي هو:
 
 ```text
-PHASE27_92_TOPIC_OBJECTIVE_REPAIR_DESIGN_DECISION
-ALLOW_PHASE27_93_TOPIC_OBJECTIVE_GATE_ENCODING_NO_TRAINING
+PHASE27_93_TOPIC_OBJECTIVE_GATE_ENCODING_DECISION
+ALLOW_PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_AUTHORING_NO_TRAINING
 ```
 
-السبب: Phase 27.91 أثبتت أن الفشل الحالي محصور غالبًا في عائلة `topic`
-وتثبيت anchor الموضوع، لا في capacity. لذلك يبقى `SF-50M` محجوبًا حتى
-تنجح بوابة topic-objective ثم canary/held-out لاحق.
+السبب: بوابة renderer/masking/canary مرّت جافًا، لكن بيانات `الوفاء`
+السعودية ناقصة. لذلك يبقى `SF-50M` محجوبًا حتى تُسد فجوة البيانات ثم
+تنجح canary/held-out لاحق.
 
 ويجب أن يحدد أوزان الأسباب التالية:
 
