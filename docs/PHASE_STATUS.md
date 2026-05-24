@@ -7,11 +7,11 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.77 / 30**
-- **المرحلة الحالية:** **Phase 27.77 — V9 Bounded Open-Social LM Repair**
-- **حالة المرحلة الحالية:** **فشلت كتوليد؛ `54/60` fresh و`45/50` known و`30/30` regression؛ الـ runtime محجوب**
-- **المرحلة التالية المقترحة:** Phase 27.78 inspect Phase 27.77 failures and revise v9 LM strategy.
-- **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy** — تسريع هندسي عملي بلا pretrained ولا datasets خارجية؛ لا تكبير قبل فهم limit الحالي.
+- **الرحلة الحالية:** **Phase 27.78 / 30**
+- **المرحلة الحالية:** **Phase 27.78 — Engineering Root Cause Gate**
+- **حالة المرحلة الحالية:** **اكتملت كقرار هندسي؛ `PHASE27_78_ENGINEERING_DECISION`; التدريب والruntime وSF-50M محجوبة**
+- **المرحلة التالية المقترحة:** Phase 27.79 — Objective/Curriculum/Decoding Repair Design, no training until gates are encoded.
+- **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -38,7 +38,7 @@
 | Phase 11 | Sovereign Corpus Governance & Saudi/MSA Dialogue Pack | ✅ | ✅ |
 | Governance Layer | Engineering Standards قبل Phase 12 | ✅ | ✅ |
 | Constitution Layer | Engineering & Linguistic Constitution قبل Phase 12 | ✅ | ✅ |
-| Strategy Overlay | Sovereign Practical Acceleration Strategy | ✅ adopted_no_training | ✅ |
+| Strategy Overlay | Sovereign Practical Acceleration Strategy v2 | ✅ adopted_engineering_root_cause_gate_required | ✅ |
 | Phase 12 | SF-BPE Tokenizer v1 Training & Audit | ✅ completed_with_limits | ✅ |
 | Phase 13 | Tiny LM Smoke Training | ✅ completed_with_limits | ✅ |
 | Phase 14 | SF-10M v0.1 Training Run | ✅ completed_with_limits | ✅ |
@@ -128,6 +128,8 @@
 | Phase 27.75 | Open-Social Strategy Inspection | ✅ completed_open_social_strategy_inspection_runtime_blocked | ✅ |
 | Phase 27.76 | Tokenizer v9 Open-Social Boundary Probe | ✅ passed_tokenizer_v9_open_social_boundary_probe_runtime_blocked | ✅ |
 | Phase 27.77 | V9 Bounded Open-Social LM Repair | ✅ failed_v9_bounded_open_social_lm_repair_runtime_blocked | ✅ |
+| Phase 27.78 | Engineering Root Cause Gate | ✅ phase27_78_engineering_decision_training_blocked | ✅ |
+| Phase 27.79 | Objective/Curriculum/Decoding Repair Design | مخططة | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |

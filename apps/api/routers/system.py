@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.77 — V9 Bounded Open-Social LM Repair",
-        current_phase_status="failed_v9_bounded_open_social_lm_repair_runtime_blocked",
+        current_phase="Phase 27.78 — Engineering Root Cause Gate",
+        current_phase_status="phase27_78_engineering_decision_training_blocked_runtime_blocked",
         next_phase=(
-            "Phase 27.78 inspect Phase 27.77 failures and revise v9 LM strategy"
+            "Phase 27.79 — Objective/Curriculum/Decoding Repair Design"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -499,6 +499,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_77_v9_bounded_open_social_lm_repair",
                 status="failed_v9_bounded_open_social_lm_repair_runtime_blocked",
                 phase="Phase 27.77",
+            ),
+            ComponentStatus(
+                name="phase27_78_engineering_root_cause_gate",
+                status="phase27_78_engineering_decision_training_blocked",
+                phase="Phase 27.78",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

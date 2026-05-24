@@ -850,3 +850,24 @@ def test_phase27_77_v9_bounded_open_social_lm_repair_blocks_runtime() -> None:
     assert report["decisions"]["ui_open_allowed"] is False
     assert report["decisions"]["live_runtime_review_allowed"] is False
     assert report["decisions"]["repair_required_before_runtime"] is True
+
+
+def test_phase27_78_engineering_root_cause_gate_blocks_training_runtime_and_scaling() -> None:
+    report = _report("phase27_78_engineering_root_cause_gate_report.json")
+    assert report["phase"] == "Phase 27.78"
+    assert report["strategy"] == "Sovereign Practical Acceleration Strategy v2"
+    assert report["gate"] == "ENGINEERING_ROOT_CAUSE_GATE"
+    assert report["status"] == "PHASE27_78_ENGINEERING_DECISION_READY_TRAINING_BLOCKED_RUNTIME_BLOCKED"
+    assert report["training_started"] is False
+    assert report["tokenizer_training_started"] is False
+    assert report["runtime_changed"] is False
+    assert report["summary"]["failure_count"] == 11
+    assert report["summary"]["failure_by_diagnosis"]["topic_semantic_substitution"] == 4
+    assert report["summary"]["failure_by_diagnosis"]["followup_flow_instability"] == 3
+    assert report["summary"]["failure_by_diagnosis"]["guard_false_positive_tanween"] == 2
+    assert report["decision"]["decision_id"] == "PHASE27_78_ENGINEERING_DECISION"
+    assert report["decision"]["new_training_allowed"] is False
+    assert report["decision"]["runtime_release_allowed"] is False
+    assert report["decision"]["sf50m_justified_transition"] is False
+    assert report["decision"]["root_cause_weights_percent"]["family_mixing"] == 22
+    assert report["decision"]["root_cause_weights_percent"]["capacity"] == 1

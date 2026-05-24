@@ -26,27 +26,37 @@
 3. لا تنتقل خارج المراحل المسجلة في الخطة بدون توثيق السبب.
 4. كل قاموس مستورد له إذن موثَّق (انظر `docs/SOURCE_DISCOVERY_*.md`).
 5. الرد بالعربية الواضحة. حازم في التنفيذ، شفاف في النتائج.
-6. اتبع **Sovereign Practical Acceleration Strategy**: استخدم أدوات هندسية
+6. اتبع **Sovereign Practical Acceleration Strategy v2**: استخدم أدوات هندسية
    عامة مسموحة لتسريع العمل، ولا تدخل عقلًا جاهزًا أو بيانات خارجية.
 
-**Sovereign Practical Acceleration Strategy:**
+**Sovereign Practical Acceleration Strategy v2:**
 
 - مسموح: PyTorch، TensorBoard/logs محلية، schedulers، AMP/mixed precision،
-  standard Transformer engineering، decoding algorithms، curriculum tooling،
-  experiment tracking، وoptimization tooling.
+  experiment tracking، advanced decoding، repetition control، curriculum tooling،
+  held-out canary، shadow canary، family-conditioned dialogue، contrastive
+  evaluation، semantic routing diagnostics، objective tracing، anti-collapse
+  diagnostics، local RLHF-lite/DPO/ORPO/preference optimization، LoRA/QLoRA على
+  أوزان SF.AI فقط، retrieval memory tooling، local vector retrieval، dialogue
+  family balancing، EOS boundary tooling، checkpoint selector، tokenizer boundary audit.
 - ممنوع: pretrained weights، pretrained vocab، pretrained tokenizer merges،
   external dialogue datasets، hidden hosted APIs، external reasoning services،
-  وأي project-workflow dialogue contamination.
+  project-workflow dialogue contamination، fake benchmark inflation، template masking.
 - السيادة تبقى على corpus/tokenizer/behavior/runtime/alignment/evaluation
   وسلوك الحوار الفصيح والسعودي.
-- لا تفتح `SF-50M` رسميًا قبل فهم limit `SF-10M` بعد إصلاح tokenizer/EOS/
-  generalization/dialogue-family balance/decoding.
-- لا تعتمد loss وحدها؛ النجاح يعني held-out dialogue quality,
-  open_social stability, semantic correctness, clean-stop, وruntime usability.
+- قبل أي تدريب جديد يجب وجود `ENGINEERING_ROOT_CAUSE_GATE` وقرار
+  `PHASE27_78_ENGINEERING_DECISION`.
+- لا runtime release بدون `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
+- لا تعتمد loss/perplexity/micro-probe وحدها؛ النجاح يعني held-out dialogue
+  quality, runtime usability, clean-stop, semantic correctness, family
+  stability, open_social naturalness, followup continuity, canary pass rate,
+  وhuman conversation realism.
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 27 منتهية. Phase 22 Gold Dialogue Corpus v2 وصلت إلى `500/500` (`msa=250`, `saudi=250`)، وPhase 23 درّب tokenizer v2، وPhase 24 درّب `SF-10M v0.2`، وPhase 25 أضاف canary guard حجب النموذج الحقيقي ورجع للقالب، وPhase 26 رفض تدريب `SF-50M` الآن عبر بوابة readiness، وPhase 27 مرّر eval v2 baseline `19/19` ووضع خطة corpus إلى `5000`. بدأ تنفيذ التوسعة بإضافة Batch 001 ثم Batch 002 ثم Batch 003، ثم نُظّفت الحوارات التشغيلية، ثم أضيف Batch 004 وBatch 005 الطبيعيان بحجم `1500` لكل دفعة. corpus الحالي `5143` (`msa=2549`, `saudi=2594`).
+- المراحل من Phase 0 حتى Phase 27.77 موثقة تاريخيًا. الحالة الحالية:
+  `Phase 27.78 — Engineering Root Cause Gate` مكتملة بقرار
+  `PHASE27_78_ENGINEERING_DECISION`. لا runtime switch ولا `SF-50M` ولا تدريب
+  جديد حتى تُشفّر gates. corpus الحالي `5943` (`msa=2949`, `saudi=2994`).
 - استخدم `make phase22-review-intake` أو `GET /system/phase22-review-intake` قبل أي تحويل من `data/corpus/chat/review/` إلى corpus تدريبي.
 - `phase22-review-intake` يحتوي بوابة جودة: راقب `quality_score/quality_label/quality_blockers`، ولا تحوّل جلسات قصيرة جدًا أو فيها ردود خام من `sf_10m_v0_1/sf_10m_v0_2` إلى corpus جودة.
 - `/ui/chat` يحتوي مؤشر جودة تصدير محلي ويضيف `ui_quality_*` إلى metadata.
@@ -61,7 +71,7 @@
 - اقرأ ملفات الحوكمة والدستور قبل أي تدريب: `PROJECT_CONSTITUTION`, `LANGUAGE_SEGMENTATION`, `TOKENIZATION_POLICY`, `DATASET_GOVERNANCE`, `AGENT_ENGINEERING_RULES`, ثم `PROJECT_IDENTITY`, `ENGINEERING_RULES`, `AGENT_INSTRUCTIONS`, `PROJECT_MAP`, `PROJECT_LIFECYCLE`.
 - اقرأ `docs/PHASE12_TOKENIZER_V1_REPORT.md`, `docs/PHASE13_SMOKE_TRAINING_REPORT.md`, و`docs/PHASE14_SF10M_V0_1_REPORT.md`: artifacts موجودة، لكنها غير صالحة للشات أو الجودة اللغوية بعد.
 - إذا كان السيرفر الحي لم يُعد تشغيله بعد، استخدم `make phase12-readiness` لنفس القرار بدون لمس السيرفر.
-- الهدف العام: الوصول إلى نموذج لغوي سيادي مولّد. أول توليد خام في Phase 13، وباب التوليد داخل الشات جُهّز في Phase 15. Phase 27 أنهى eval v2 وخطة corpus، ثم تجاوز corpus حد `5000`. الخطوة التالية ليست تكبيرًا جديدًا، بل إصلاح جودة `SF-10M` وإعادة canary قبل أي `SF-50M`.
+- الهدف العام: الوصول إلى نموذج لغوي سيادي مولّد. أول توليد خام في Phase 13، وباب التوليد داخل الشات جُهّز في Phase 15. Phase 27.77 فشلت كتوليد على tokenizer v9 (`54/60`, `45/50`, `30/30`). Phase 27.78 شخّصت root cause: family mixing `22%`, objective `18%`, curriculum `16%`, weak generalization `14%`, semantic routing `10%`, capacity `1%`. الخطوة التالية هي Phase 27.79 لإصلاح objective/curriculum/decoding design، لا تكبير.
 - تفويض سامي الأخير يعني أن حوار الوكيل المؤلف لخدمة corpus يمكن اعتماده كـ `owner-delegated agent-authored` مع `training_allowed=true` إذا حمل source/license/quality/notes كاملة، وبقي ضمن `msa + saudi` ودون أي مصدر خارجي أو pretrained data.
 - كل export أو corpus record يجب أن يحمل user ownership. المسار الحالي: `owner_user_id=created_by_user_id=target_user_id=sami-local` و`user_scope=single_user`.
 
@@ -76,7 +86,7 @@
    cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests
    ```
 
-2. تحقق من القسم 4 في AGENT_HANDOFF.md. مهمة "محادثة مريحة + توجيه دقيق" مكتملة، لكن اقرأ نتائج الـ audit قبل أي توسيع.
+2. تحقق من القسم 4 في AGENT_HANDOFF.md. مهمة "محادثة مريحة + توجيه دقيق" مكتملة، لكن مسار العمل الحالي هو Phase 27.79 بعد قرار 27.78 الهندسي.
 
 3. Phase 11 مكتملة كحوكمة وأداة فحص. شغّل:
    ```
@@ -90,7 +100,7 @@
    ```
    يوجد الآن seed سعودي صغير، وجرى تدريب tokenizer v1 وLM runs منه بإذن سامي. لا تعامله كجودة لغوية متوازنة ولا تربطه بالشات.
 
-5. التفويض الحالي: سامي أعطى إذنًا صريحًا لمتابعة المراحل المسجلة والتدريب والاختبارات. لا تنتظر إذنًا جديدًا للمراحل المخططة، لكن لا تكسر قواعد السيادة أو فحص الحساسية أو provenance.
+5. التفويض الحالي: سامي أعطى إذنًا صريحًا لمتابعة التنفيذ والاختبارات. لا تنتظر إذنًا جديدًا، لكن اتبع SPA v2: لا تضف تدريبًا إلا بعد gate واضح، ولا تكبر النموذج إلا إذا صدر `SF-50M JUSTIFIED TRANSITION`.
 
 **أسلوب التواصل المتفق عليه:**
 

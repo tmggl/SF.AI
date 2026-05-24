@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.77: درّبنا LM محدودًا على tokenizer v9، لكنه فشل كمرشح تشغيل: 54/60 fresh و45/50 known و30/30 regression. المشكلة انتقلت من tokenizer fragments إلى خلط عائلات ال"
+      "response_preview": "وصلنا إلى Phase 27.78 ضمن Sovereign Practical Acceleration Strategy v2: أصدرنا PHASE27_78_ENGINEERING_DECISION. القرار: لا تدريب جديد ولا runtime ولا SF-50M الآن. السبب الأكبر fami"
     },
     {
       "scenario_id": "clarification_repair_flow",

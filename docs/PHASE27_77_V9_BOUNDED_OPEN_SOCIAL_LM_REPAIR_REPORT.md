@@ -18,4 +18,4 @@ The v9 bounded LM repair did not pass all gates. Keep runtime blocked and inspec
 
 ## التالي
 
-Phase 27.78 — inspect Phase 27.77 failures and revise v9 LM strategy
+Superseded by Phase 27.78 — Engineering Root Cause Gate under Sovereign Practical Acceleration Strategy v2.

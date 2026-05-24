@@ -1,0 +1,370 @@
+{
+  "phase": "Phase 27.78",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "gate": "ENGINEERING_ROOT_CAUSE_GATE",
+  "status": "PHASE27_78_ENGINEERING_DECISION_READY_TRAINING_BLOCKED_RUNTIME_BLOCKED",
+  "source_report": "artifacts/reports/phase27_77_v9_bounded_open_social_lm_repair_report.json",
+  "training_started": false,
+  "tokenizer_training_started": false,
+  "runtime_changed": false,
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "allowed_tools": [
+    "PyTorch",
+    "AMP / mixed precision",
+    "TensorBoard المحلي",
+    "schedulers",
+    "experiment tracking",
+    "advanced decoding",
+    "repetition control",
+    "curriculum tooling",
+    "held-out canary",
+    "shadow canary",
+    "family-conditioned dialogue",
+    "contrastive evaluation",
+    "semantic routing diagnostics",
+    "objective tracing",
+    "anti-collapse diagnostics",
+    "local RLHF-lite / DPO / ORPO / preference optimization",
+    "LoRA / QLoRA على أوزان SF.AI فقط",
+    "retrieval memory tooling",
+    "local vector retrieval",
+    "dialogue family balancing",
+    "EOS boundary tooling",
+    "checkpoint selector",
+    "tokenizer boundary audit"
+  ],
+  "forbidden": [
+    "pretrained weights",
+    "pretrained vocab",
+    "pretrained tokenizer merges",
+    "hidden hosted APIs",
+    "external reasoning services",
+    "external dialogue datasets",
+    "project workflow/operator dialogue contamination",
+    "fake benchmark inflation",
+    "template masking لإخفاء ضعف المولد"
+  ],
+  "success_metrics": [
+    "held-out dialogue quality",
+    "runtime usability",
+    "clean-stop",
+    "semantic correctness",
+    "family stability",
+    "open_social naturalness",
+    "followup continuity",
+    "canary pass rate",
+    "human conversation realism"
+  ],
+  "summary": {
+    "failure_count": 11,
+    "by_eval": {
+      "phase27_69": {
+        "name": "Phase 27.69 fresh held-out",
+        "passed": 54,
+        "total": 60,
+        "failed": 6,
+        "families": {
+          "open_social": 1,
+          "followup": 2,
+          "support": 1,
+          "topic": 2
+        },
+        "reasons": {
+          "response_family_mismatch": 1,
+          "expected_terms_missing": 5
+        },
+        "diagnoses": {
+          "residual_artifact_fragment": 1,
+          "followup_flow_instability": 2,
+          "support_semantic_weakness": 1,
+          "topic_semantic_substitution": 2
+        }
+      },
+      "phase27_67": {
+        "name": "Phase 27.67 known held-out",
+        "passed": 45,
+        "total": 50,
+        "failed": 5,
+        "families": {
+          "followup": 1,
+          "support": 2,
+          "topic": 2
+        },
+        "reasons": {
+          "expected_terms_missing": 3,
+          "guard:malformed_token": 2
+        },
+        "diagnoses": {
+          "followup_flow_instability": 1,
+          "guard_false_positive_tanween": 2,
+          "topic_semantic_substitution": 2
+        }
+      },
+      "phase27_60": {
+        "name": "Phase 27.60 regression",
+        "passed": 30,
+        "total": 30,
+        "failed": 0,
+        "families": {},
+        "reasons": {},
+        "diagnoses": {}
+      }
+    },
+    "failure_by_family": {
+      "followup": {
+        "failed": 3
+      },
+      "open_social": {
+        "failed": 1
+      },
+      "support": {
+        "failed": 3
+      },
+      "topic": {
+        "failed": 4
+      }
+    },
+    "failure_by_reason": {
+      "response_family_mismatch": 1,
+      "expected_terms_missing": 8,
+      "guard:malformed_token": 2
+    },
+    "failure_by_diagnosis": {
+      "residual_artifact_fragment": 1,
+      "followup_flow_instability": 3,
+      "support_semantic_weakness": 1,
+      "topic_semantic_substitution": 4,
+      "guard_false_positive_tanween": 2
+    }
+  },
+  "failures": [
+    {
+      "eval_id": "phase27_69",
+      "eval_name": "Phase 27.69 fresh held-out",
+      "id": "open_social_10",
+      "family": "open_social",
+      "dialect": "msa",
+      "prompt": "ابدأ محادثة سهلة",
+      "response": "نبدأ محام: لحظة راحة قصيرة.",
+      "reason": "response_family_mismatch",
+      "guard_reason": "passed",
+      "expected_any": [
+        "محادثة",
+        "نبدأ",
+        "موضوع",
+        "بسيط"
+      ],
+      "diagnosis": "residual_artifact_fragment"
+    },
+    {
+      "eval_id": "phase27_69",
+      "eval_name": "Phase 27.69 fresh held-out",
+      "id": "followup_02",
+      "family": "followup",
+      "dialect": "msa",
+      "prompt": "أعد شرح النقطة ببساطة",
+      "response": "نعم، نتحدث قليلًا في موضوع بسيط.",
+      "reason": "expected_terms_missing",
+      "guard_reason": "passed",
+      "expected_any": [
+        "أقصد",
+        "الفكرة",
+        "أبسط",
+        "خطوة"
+      ],
+      "diagnosis": "followup_flow_instability"
+    },
+    {
+      "eval_id": "phase27_69",
+      "eval_name": "Phase 27.69 fresh held-out",
+      "id": "followup_03",
+      "family": "followup",
+      "dialect": "saudi",
+      "prompt": "ما فهمت وش تبي تقول",
+      "response": "بعدها خذ خطوة صغيرة وكمل عليها.",
+      "reason": "expected_terms_missing",
+      "guard_reason": "passed",
+      "expected_any": [
+        "أقصد",
+        "يعني",
+        "الفكرة"
+      ],
+      "diagnosis": "followup_flow_instability"
+    },
+    {
+      "eval_id": "phase27_69",
+      "eval_name": "Phase 27.69 fresh held-out",
+      "id": "support_02",
+      "family": "support",
+      "dialect": "msa",
+      "prompt": "أشعر بتوتر وأريد طمأنينة",
+      "response": "خذ نفس وخفف الضغط خطوة خطوة.",
+      "reason": "expected_terms_missing",
+      "guard_reason": "passed",
+      "expected_any": [
+        "تنفس",
+        "راحة",
+        "طمأنينة",
+        "اهدأ"
+      ],
+      "diagnosis": "support_semantic_weakness"
+    },
+    {
+      "eval_id": "phase27_69",
+      "eval_name": "Phase 27.69 fresh held-out",
+      "id": "topic_08",
+      "family": "topic",
+      "dialect": "saudi",
+      "prompt": "الشجاعة كيف تكون",
+      "response": "الصدق يعني تقول الحقيقة وتلتزم بها.",
+      "reason": "expected_terms_missing",
+      "guard_reason": "passed",
+      "expected_any": [
+        "الشجاعة"
+      ],
+      "diagnosis": "topic_semantic_substitution"
+    },
+    {
+      "eval_id": "phase27_69",
+      "eval_name": "Phase 27.69 fresh held-out",
+      "id": "topic_10",
+      "family": "topic",
+      "dialect": "saudi",
+      "prompt": "وش يعني الوفاء مع الاصحاب",
+      "response": "الهدوء يعني تخفف توترك وتفكر بروية.",
+      "reason": "expected_terms_missing",
+      "guard_reason": "passed",
+      "expected_any": [
+        "الوفاء"
+      ],
+      "diagnosis": "topic_semantic_substitution"
+    },
+    {
+      "eval_id": "phase27_67",
+      "eval_name": "Phase 27.67 known held-out",
+      "id": "followup_06",
+      "family": "followup",
+      "dialect": "msa",
+      "prompt": "بسّطها لي أكثر",
+      "response": "أقصد أن تبدأ بالسهل ثم تنتقل بعده.",
+      "reason": "expected_terms_missing",
+      "guard_reason": "passed",
+      "expected_any": [
+        "أبسط",
+        "ابدأ",
+        "خطوة"
+      ],
+      "diagnosis": "followup_flow_instability"
+    },
+    {
+      "eval_id": "phase27_67",
+      "eval_name": "Phase 27.67 known held-out",
+      "id": "support_02",
+      "family": "support",
+      "dialect": "msa",
+      "prompt": "أحتاج جملة تهدئني",
+      "response": "خذ نفسًا هادئًا، وستستعيد راحتك خطوة خطوة.",
+      "reason": "guard:malformed_token",
+      "guard_reason": "malformed_token",
+      "expected_any": [
+        "تنفس",
+        "بهدوء",
+        "راحة"
+      ],
+      "diagnosis": "guard_false_positive_tanween"
+    },
+    {
+      "eval_id": "phase27_67",
+      "eval_name": "Phase 27.67 known held-out",
+      "id": "support_08",
+      "family": "support",
+      "dialect": "msa",
+      "prompt": "طمئني بكلام قصير",
+      "response": "خذ نفسًا هادئًا، وستستعيد راحتك خطوة خطوة.",
+      "reason": "guard:malformed_token",
+      "guard_reason": "malformed_token",
+      "expected_any": [
+        "تستطيع",
+        "تنفس",
+        "راحة",
+        "نفس",
+        "هون"
+      ],
+      "diagnosis": "guard_false_positive_tanween"
+    },
+    {
+      "eval_id": "phase27_67",
+      "eval_name": "Phase 27.67 known held-out",
+      "id": "topic_07",
+      "family": "topic",
+      "dialect": "msa",
+      "prompt": "اشرح الصداقة دون إطالة",
+      "response": "الصدق أن يعمل الناس معًا عن شيء لطيف من يومك.",
+      "reason": "expected_terms_missing",
+      "guard_reason": "passed",
+      "expected_any": [
+        "الصداقة"
+      ],
+      "diagnosis": "topic_semantic_substitution"
+    },
+    {
+      "eval_id": "phase27_67",
+      "eval_name": "Phase 27.67 known held-out",
+      "id": "topic_08",
+      "family": "topic",
+      "dialect": "saudi",
+      "prompt": "الشجاعة متى تظهر",
+      "response": "الصدق يعني تقول الحقيقة بوضوح.",
+      "reason": "expected_terms_missing",
+      "guard_reason": "passed",
+      "expected_any": [
+        "الشجاعة"
+      ],
+      "diagnosis": "topic_semantic_substitution"
+    }
+  ],
+  "decision": {
+    "decision_id": "PHASE27_78_ENGINEERING_DECISION",
+    "engineering_decision": "BLOCK_TRAINING_UNTIL_OBJECTIVE_CURRICULUM_FAMILY_DECODING_PLAN",
+    "continue_sf10m": true,
+    "sf50m_justified_transition": false,
+    "change_objective_required": true,
+    "reorganize_dialogue_families_required": true,
+    "curriculum_change_required": true,
+    "tokenizer_retrain_allowed": false,
+    "new_training_allowed": false,
+    "runtime_release_allowed": false,
+    "no_runtime_release_without_heldout_success": true,
+    "sf50m_gate_rule": "Only open SF-50M JUSTIFIED TRANSITION if family mixing, weak generalization, and semantic collapse remain after the objective/curriculum/decoding repair is implemented and held-out canaries still fail.",
+    "why_sf50m_blocked": "The latest capacity probe showed only +1/20 for SF-50M over SF-10M, while Phase 27.77 failures point to family/objective/curriculum/semantic issues.",
+    "root_cause_weights_percent": {
+      "capacity": 1,
+      "objective": 18,
+      "curriculum": 16,
+      "tokenizer": 4,
+      "decoding": 7,
+      "family_mixing": 22,
+      "memorization": 2,
+      "weak_generalization": 14,
+      "EOS": 4,
+      "repetition": 2,
+      "semantic_routing": 10
+    },
+    "current_scores": {
+      "fresh_heldout": "54/60",
+      "known_heldout": "45/50",
+      "regression": "30/30"
+    },
+    "next_phase": "Phase 27.79 — Objective/Curriculum/Decoding Repair Design, no training until gates are encoded"
+  },
+  "artifacts": {
+    "report": "artifacts/reports/phase27_78_engineering_root_cause_gate_report.json",
+    "decision": "artifacts/reports/PHASE27_78_ENGINEERING_DECISION.json",
+    "doc": "docs/PHASE27_78_ENGINEERING_ROOT_CAUSE_GATE_REPORT.md",
+    "samples": "artifacts/samples/phase27_78_engineering_root_cause_gate_failures.md"
+  }
+}

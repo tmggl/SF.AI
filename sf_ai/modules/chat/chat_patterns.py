@@ -83,10 +83,10 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.77: درّبنا LM محدودًا على tokenizer v9، لكنه فشل "
-    "كمرشح تشغيل: 54/60 fresh و45/50 known و30/30 regression. المشكلة "
-    "انتقلت من tokenizer fragments إلى خلط عائلات الردود. التالي Phase 27.78 "
-    "لفحص فشل v9 LM قبل أي runtime.",
+    "وصلنا إلى Phase 27.78 ضمن Sovereign Practical Acceleration Strategy v2: "
+    "أصدرنا PHASE27_78_ENGINEERING_DECISION. القرار: لا تدريب جديد ولا runtime "
+    "ولا SF-50M الآن. السبب الأكبر family mixing 22% ثم objective 18% وcurriculum "
+    "16%. التالي Phase 27.79 لتصميم إصلاح objective/curriculum/decoding قبل أي تدريب.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

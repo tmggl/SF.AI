@@ -25,9 +25,9 @@ SF.AI لا يكبر بالقفزات. يكبر فقط عندما تثبت الم
 
 ---
 
-## Sovereign Practical Acceleration Strategy
+## Sovereign Practical Acceleration Strategy v2
 
-هذا التحول هو المسار الرسمي بعد Phase 27.77: **تسريع سيادي عملي**.
+هذا التحول هو المسار الرسمي الأعلى بعد Phase 27.77: **تسريع سيادي عملي v2**.
 المشروع لا يعيد اختراع الأدوات الرياضية والهندسية العامة، لكنه لا يستورد
 ذكاءً جاهزًا.
 
@@ -44,9 +44,20 @@ SF.AI لا يكبر بالقفزات. يكبر فقط عندما تثبت الم
 - PyTorch وstandard Transformer engineering.
 - TensorBoard محلي أو CSV/JSON logs محلية.
 - schedulers وAMP/mixed precision.
-- decoding algorithms مثل no-repeat/repetition penalty/temperature/top-k.
+- advanced decoding مثل no-repeat/repetition penalty/temperature/top-k.
+- repetition control.
 - curriculum tooling وdialogue-family balancing.
+- held-out canary وshadow canary.
+- family-conditioned dialogue.
+- contrastive evaluation.
+- semantic routing diagnostics.
+- objective tracing وanti-collapse diagnostics.
+- local RLHF-lite / DPO / ORPO / preference optimization.
+- LoRA / QLoRA فوق أوزان SF.AI فقط.
+- retrieval memory tooling وlocal vector retrieval.
+- EOS boundary tooling.
 - experiment tracking وcheckpoint selection محليًا.
+- tokenizer boundary audit.
 - optimization tooling لا يستورد أوزانًا أو vocab أو corpus.
 
 ### الاختصارات الممنوعة
@@ -56,6 +67,38 @@ SF.AI لا يكبر بالقفزات. يكبر فقط عندما تثبت الم
 - external dialogue datasets أو synthetic LLM data خارجي.
 - hidden hosted APIs أو external reasoning services.
 - إدخال حوارات إدارة المشروع أو أوامر الوكيل داخل corpus الحوار العام.
+- fake benchmark inflation.
+- template masking لإخفاء ضعف المولد.
+
+### ENGINEERING_ROOT_CAUSE_GATE
+
+قبل أي تدريب جديد يجب أن يصدر:
+
+```text
+PHASE27_78_ENGINEERING_DECISION
+```
+
+ويجب أن يحدد أوزان الأسباب التالية:
+
+- capacity.
+- objective.
+- curriculum.
+- tokenizer.
+- decoding.
+- family mixing.
+- memorization.
+- weak generalization.
+- EOS.
+- repetition.
+- semantic routing.
+
+إذا كان السبب الأكبر objective/training/decoding/family balance، يمنع
+التكبير ويُنفذ إصلاح بنيوي. إذا بقي family mixing أو weak generalization
+أو semantic collapse بعد التشخيص والإصلاح الصحيح، تُفتح بوابة:
+
+```text
+SF-50M JUSTIFIED TRANSITION
+```
 
 ### القرار العملي قبل أي تكبير
 
@@ -71,6 +114,22 @@ SF.AI لا يكبر بالقفزات. يكبر فقط عندما تثبت الم
 إذا فشل `SF-10M` بعد هذه الإصلاحات وبوابات held-out، يُفتح Gate رسمي
 لـ `SF-50M`. إذا لم تُفهم العلة بعد، فالخطوة الصحيحة inspection أو
 curriculum/eval repair، لا تكبير الحجم.
+
+### NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS
+
+لا تفعيل runtime ولا واجهة مولّدة قبل نجاح held-out/shadow canaries في:
+
+- held-out dialogue quality.
+- runtime usability.
+- clean-stop.
+- semantic correctness.
+- family stability.
+- open_social naturalness.
+- followup continuity.
+- canary pass rate.
+- human conversation realism.
+
+لا تُقبل `loss` أو `perplexity` أو micro-probe وحدها كدليل نجاح.
 
 ---
 
@@ -268,6 +327,36 @@ Phase 27.56 شخّصت سبب فشل Phase 27.55 بدون تدريب جديد:
 - لا محاولة سعة جديدة قبل إصلاح tokenizer/eval/format.
 
 سبب القرار: هناك فشل في أدوات القياس والتمثيل نفسها. معيار overlap يرفض ردودًا طبيعية، tokenizer يكسر عبارات سعودية/حواريّة، والنموذج يخلط عائلات الردود. أي تدريب قبل إصلاح هذه الطبقات سيقيس الخطأ أو يكرره.
+
+## قرار Phase 27.78 — ENGINEERING_ROOT_CAUSE_GATE
+
+Phase 27.78 أوقفت التدريب الأعمى رسميًا وأصدرت:
+
+```text
+PHASE27_78_ENGINEERING_DECISION
+```
+
+الأوزان التقريبية للأسباب:
+
+- family mixing: `22%`.
+- objective: `18%`.
+- curriculum: `16%`.
+- weak generalization: `14%`.
+- semantic routing: `10%`.
+- decoding: `7%`.
+- tokenizer: `4%`.
+- EOS: `4%`.
+- memorization: `2%`.
+- repetition: `2%`.
+- capacity: `1%`.
+
+القرار الرسمي:
+
+- الاستمرار على `SF-10M`.
+- منع `SF-50M` الآن.
+- منع أي تدريب جديد حتى تُشفّر gates لإصلاح objective/curriculum/decoding.
+- منع tokenizer جزئي جديد لأن tokenizer ليس السبب الأكبر حاليًا.
+- منع runtime release تحت `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 
 ---
 
