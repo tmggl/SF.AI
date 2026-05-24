@@ -1,0 +1,15 @@
+{
+  "decision_id": "PHASE27_80_FAMILY_BALANCE_REMEDIATION_DECISION",
+  "engineering_decision": "REMEDIATION_PLAN_READY_AUTHOR_BALANCED_FAMILY_PACK_NO_TRAINING",
+  "new_training_allowed": false,
+  "tokenizer_retrain_allowed": false,
+  "runtime_release_allowed": false,
+  "sf50m_justified_transition": false,
+  "next_phase": "Phase 27.81 — Balanced Family Pack Authoring, no training",
+  "required_before_training": [
+    "author missing family records",
+    "rebuild dialogue split",
+    "rerun phase27-repair-gate-validation",
+    "pass family balance and family confusion gates"
+  ]
+}

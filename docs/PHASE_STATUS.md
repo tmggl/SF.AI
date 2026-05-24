@@ -9,8 +9,8 @@
 - **اسم المشروع:** SF.AI
 - **الرحلة الحالية:** **Phase 27.80 / 30**
 - **المرحلة الحالية:** **Phase 27.80 — Repair Gate Encoding and Dry-Run Validation**
-- **حالة المرحلة الحالية:** **dry-run gates فشلت؛ `PHASE27_80_REPAIR_GATE_VALIDATION_DECISION`; التدريب والruntime وSF-50M محجوبة**
-- **المرحلة التالية المقترحة:** Phase 27.80 remediation — Family Balance and Family-Confusion Repair Plan, no training.
+- **حالة المرحلة الحالية:** **remediation plan ready؛ `PHASE27_80_FAMILY_BALANCE_REMEDIATION_DECISION`; يلزم 639 سجلًا متوازنًا قبل أي تدريب**
+- **المرحلة التالية المقترحة:** Phase 27.81 — Balanced Family Pack Authoring, no training.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -135,7 +135,7 @@
 | Phase 27.77 | V9 Bounded Open-Social LM Repair | ✅ failed_v9_bounded_open_social_lm_repair_runtime_blocked | ✅ |
 | Phase 27.78 | Engineering Root Cause Gate | ✅ phase27_78_engineering_decision_training_blocked | ✅ |
 | Phase 27.79 | Objective/Curriculum/Decoding Repair Design | ✅ phase27_79_repair_design_ready_next_gate_encoding_no_training | ✅ |
-| Phase 27.80 | Repair Gate Encoding and Dry-Run Validation | ❌ gates_failed_family_balance_no_training | ✅ |
+| Phase 27.80 | Repair Gate Encoding + Family Balance Remediation | ✅ remediation_ready_639_records_needed_no_training | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |

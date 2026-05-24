@@ -1,0 +1,161 @@
+{
+  "phase": "Phase 27.80 remediation",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "source_report": "artifacts/reports/phase27_80_repair_gate_validation_report.json",
+  "training_started": false,
+  "tokenizer_training_started": false,
+  "runtime_changed": false,
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "status": "PHASE27_80_FAMILY_BALANCE_REMEDIATION_READY_NO_TRAINING",
+  "failed_gate_context": {
+    "all_gates_passed": false,
+    "blocked_training": true
+  },
+  "quota_plan": {
+    "family_counts": {
+      "open_social": 3208,
+      "followup": 1795,
+      "planning": 424,
+      "support": 364,
+      "topic": 152
+    },
+    "family_dialect_counts": {
+      "open_social": {
+        "saudi": 1581,
+        "msa": 1627
+      },
+      "followup": {
+        "saudi": 795,
+        "msa": 1000
+      },
+      "planning": {
+        "saudi": 329,
+        "msa": 95
+      },
+      "support": {
+        "msa": 165,
+        "saudi": 199
+      },
+      "topic": {
+        "saudi": 90,
+        "msa": 62
+      }
+    },
+    "official_min_per_family": 500,
+    "needed_records": {
+      "open_social": {
+        "total": 0,
+        "msa": 0,
+        "saudi": 0
+      },
+      "followup": {
+        "total": 0,
+        "msa": 0,
+        "saudi": 0
+      },
+      "planning": {
+        "total": 155,
+        "msa": 155,
+        "saudi": 0
+      },
+      "support": {
+        "total": 136,
+        "msa": 85,
+        "saudi": 51
+      },
+      "topic": {
+        "total": 348,
+        "msa": 188,
+        "saudi": 160
+      }
+    },
+    "total_needed": 639,
+    "curriculum_config": {
+      "mode": "balanced_family_curriculum_view",
+      "families": [
+        "open_social",
+        "followup",
+        "planning",
+        "support",
+        "topic"
+      ],
+      "min_records_per_family_before_training": 500,
+      "dialect_target_per_family": {
+        "msa": 250,
+        "saudi": 250
+      },
+      "overrepresented_family_policy": "cap_per_epoch_then_rotate_remaining",
+      "underrepresented_family_policy": "author_more_gold_records_before_training; no blind oversampling",
+      "epoch_family_units_after_remediation": 500,
+      "packing": "no_cross_sample_packing",
+      "loss_scope": "assistant_answer_only_with_eos",
+      "training_allowed_now": false
+    }
+  },
+  "confusion_summary": {
+    "matrix": {
+      "open_social": {
+        "open_social": 2678,
+        "followup": 245,
+        "planning": 150,
+        "support": 93,
+        "topic": 42
+      },
+      "followup": {
+        "open_social": 1331,
+        "followup": 338,
+        "planning": 101,
+        "support": 16,
+        "topic": 9
+      },
+      "planning": {
+        "open_social": 194,
+        "followup": 79,
+        "planning": 97,
+        "support": 49,
+        "topic": 5
+      },
+      "support": {
+        "open_social": 70,
+        "followup": 150,
+        "planning": 87,
+        "support": 57,
+        "topic": 0
+      },
+      "topic": {
+        "open_social": 87,
+        "followup": 55,
+        "planning": 0,
+        "support": 0,
+        "topic": 10
+      }
+    },
+    "diagonal_rate": 0.5351,
+    "repair_rule": "new records must carry explicit intended_family metadata in the future authoring plan before training conversion"
+  },
+  "artifacts": {
+    "family_manifest": "artifacts/reports/phase27_80_family_balance_remediation/family_manifest.jsonl",
+    "balanced_curriculum_config": "artifacts/reports/phase27_80_family_balance_remediation/balanced_curriculum_config.json",
+    "authoring_quota_plan": "artifacts/reports/phase27_80_family_balance_remediation/authoring_quota_plan.json"
+  },
+  "decision": {
+    "decision_id": "PHASE27_80_FAMILY_BALANCE_REMEDIATION_DECISION",
+    "engineering_decision": "REMEDIATION_PLAN_READY_AUTHOR_BALANCED_FAMILY_PACK_NO_TRAINING",
+    "new_training_allowed": false,
+    "tokenizer_retrain_allowed": false,
+    "runtime_release_allowed": false,
+    "sf50m_justified_transition": false,
+    "next_phase": "Phase 27.81 — Balanced Family Pack Authoring, no training",
+    "required_before_training": [
+      "author missing family records",
+      "rebuild dialogue split",
+      "rerun phase27-repair-gate-validation",
+      "pass family balance and family confusion gates"
+    ]
+  }
+}

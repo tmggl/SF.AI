@@ -11,10 +11,10 @@
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
 - **الرحلة الحالية:** **Phase 27.80 / 30**
-- **المرحلة الحالية:** **Phase 27.80 — Repair Gate Encoding and Dry-Run Validation** (`PHASE27_80_REPAIR_GATE_VALIDATION_DECISION`; family balance failed; training/runtime/SF-50M محجوبة)
+- **المرحلة الحالية:** **Phase 27.80 — Repair Gate Encoding + Family Balance Remediation** (`PHASE27_80_FAMILY_BALANCE_REMEDIATION_DECISION`; يلزم 639 سجلًا قبل أي تدريب)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
 - **ملف القيادة الواحد:** `docs/SF_AI_MASTER_GUIDE.md` هو نقطة الدخول الأولى لأي Agent أو مهندس؛ بقية الملفات مراجع تفصيلية.
-- **المرحلة التالية المقترحة:** Phase 27.80 remediation — Family Balance and Family-Confusion Repair Plan؛ لا تدريب حتى ينجح dry-run جديد، وPhase 28 و`SF-50M` محظوران.
+- **المرحلة التالية المقترحة:** Phase 27.81 — Balanced Family Pack Authoring؛ لا تدريب حتى تكتمل سجلات العائلات الناقصة ويُعاد dry-run بنجاح.
 - **استراتيجية العمل الملزمة:** Sovereign Practical Acceleration Strategy v2؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب، و`NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS` قبل أي runtime.
 - **تصحيح السيادة:** لا يوجد Open-Weight Lane؛ Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي = أدوات هندسية فقط داخل SF-native.

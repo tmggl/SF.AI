@@ -80,7 +80,7 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 
 ```text
 المرحلة الحالية: Phase 27.80
-الاسم: Repair Gate Encoding and Dry-Run Validation
+الاسم: Repair Gate Encoding + Family Balance Remediation
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
 القرار الرسمي: PHASE27_80_REPAIR_GATE_VALIDATION_DECISION
 المسار اللغوي: msa + saudi فقط
@@ -95,8 +95,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
 - نتيجة 27.80: gates فشلت في `curriculum_family_balance_dry_run`
-  و`family_confusion_matrix_builder`.
-- التالي: remediation داخل Phase 27.80 لتوازن عائلات الحوار، بلا تدريب.
+  و`family_confusion_matrix_builder`، ثم صدرت remediation plan.
+- المطلوب قبل أي تدريب: 639 سجلًا متوازنًا للعائلات الناقصة.
+- التالي: `Phase 27.81 — Balanced Family Pack Authoring`, بلا تدريب.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -312,17 +313,18 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.80 remediation — Family Balance and Family-Confusion Repair Plan
+Phase 27.81 — Balanced Family Pack Authoring
 ```
 
 مطلوب منها:
 
 - Decision Report.
 - Allowed/Blocked Actions.
-- خطة إعادة توازن عائلات الحوار.
-- تحديد الحد الأدنى لكل family قبل أي تدريب.
-- فصل open_social/followup/planning/support/topic في curriculum.
-- منع أي تدريب حتى يمر dry-run جديد.
+- تأليف سجلات طبيعية عالية الجودة للعائلات الناقصة فقط.
+- planning: 155 فصحى.
+- support: 85 فصحى + 51 سعودي.
+- topic: 188 فصحى + 160 سعودي.
+- منع أي تدريب حتى يعاد dry-run وينجح.
 
 ممنوع حتى تصدر gates ناجحة وقرار لاحق:
 

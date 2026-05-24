@@ -32,8 +32,8 @@ def test_system_status_sovereign_flags() -> None:
     body = r.json()
     assert body["project"] == "SF.AI"
     assert body["current_phase"].startswith("Phase 27.80")
-    assert body["current_phase_status"] == "phase27_80_gates_failed_family_balance_no_training"
-    assert "family-balance" in body["next_phase"]
+    assert body["current_phase_status"] == "phase27_80_family_balance_remediation_ready_no_training"
+    assert "Phase 27.81" in body["next_phase"]
     assert body["sovereign"] is True
     assert body["uses_external_llm"] is False
     assert body["uses_pretrained_weights"] is False

@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.80 ضمن مسار SF-native فقط: شفّرنا بوابات الإصلاح "
-    "وشغلنا dry-run بلا تدريب. النتيجة: family balance فشل، لذلك لا تدريب "
-    "ولا runtime ولا SF-50M حتى نصلح توازن عائلات الحوار.",
+    "وصلنا إلى Phase 27.80 ضمن مسار SF-native فقط: بوابات الإصلاح كشفت خلل "
+    "family balance، ثم جهزنا remediation plan. نحتاج 639 سجلًا متوازنًا "
+    "لـ planning/support/topic. لا تدريب ولا runtime ولا SF-50M قبل ذلك.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

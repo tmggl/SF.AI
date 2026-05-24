@@ -1,0 +1,21 @@
+{
+  "mode": "balanced_family_curriculum_view",
+  "families": [
+    "open_social",
+    "followup",
+    "planning",
+    "support",
+    "topic"
+  ],
+  "min_records_per_family_before_training": 500,
+  "dialect_target_per_family": {
+    "msa": 250,
+    "saudi": 250
+  },
+  "overrepresented_family_policy": "cap_per_epoch_then_rotate_remaining",
+  "underrepresented_family_policy": "author_more_gold_records_before_training; no blind oversampling",
+  "epoch_family_units_after_remediation": 500,
+  "packing": "no_cross_sample_packing",
+  "loss_scope": "assistant_answer_only_with_eos",
+  "training_allowed_now": false
+}
