@@ -325,10 +325,10 @@ def test_chat_greeting_routes_through_module() -> None:
     assert body["status"] == "active"
     assert body["requires_safety"] is False
     assert body["fallback_used"] is False
-    assert body["dispatch"] == "module:chat_lab"
+    assert body["dispatch"] == "module:chat"
     assert body["echo"] == "مرحبا"
-    assert body["generator"] == "generator_blocked"
-    assert body["response"] == ""
+    assert body["generator"] == "sf_10m_phase27_81"
+    assert body["response"]
 
 
 def test_chat_unknown_falls_back_to_general() -> None:
@@ -338,9 +338,9 @@ def test_chat_unknown_falls_back_to_general() -> None:
     assert body["domain"] == "chat"
     assert body["intent"] == "chat.general"
     assert body["fallback_used"] is True
-    assert body["dispatch"] == "module:chat_lab"
-    assert body["generator"] == "generator_blocked"
-    assert body["response"] == ""
+    assert body["dispatch"] == "module:chat"
+    assert body["generator"] == "sf_10m_phase27_81"
+    assert body["response"]
 
 
 def test_chat_medical_triggers_safety_flag_and_uses_composer() -> None:

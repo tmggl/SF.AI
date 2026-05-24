@@ -6,7 +6,6 @@ import json
 import re
 from datetime import UTC, datetime
 from functools import lru_cache
-from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, status
 
@@ -18,7 +17,7 @@ from apps.api.schemas.chat import (
 )
 from sf_ai.core.config import PROJECT_DIR
 from sf_ai.core.index import load_default_registry
-from sf_ai.core.orchestrator import Orchestrator, UserMessage, get_default_orchestrator
+from sf_ai.core.orchestrator import Orchestrator, UserMessage
 from sf_ai.datasets.corpus_governance import detect_training_forbidden_operational_terms
 from sf_ai.modules.chat import ChatModule, GenerationPolicy, NativeGenerator, NativeGeneratorConfig
 
@@ -76,7 +75,7 @@ def chat_message(payload: ChatRequest) -> ChatResponse:
 
 @lru_cache(maxsize=1)
 def _get_guarded_trial_orchestrator() -> Orchestrator:
-    """Build the Phase 27.47 local generator path for the lab chat API.
+    """Build the Phase 27.81 local generator path for the lab chat API.
 
     Phase 27.50 makes this the only visible /chat/message path. If the guarded
     generator cannot answer, the endpoint suppresses legacy template text and
@@ -91,23 +90,25 @@ def _get_guarded_trial_orchestrator() -> Orchestrator:
         max_new_tokens=24,
         temperature=1.0,
         top_k=0,
-        candidate_generator="sf_10m_phase27_47",
+        candidate_generator="sf_10m_phase27_81",
+        raw_lab_mode=True,
     )
     generator = NativeGenerator(
         NativeGeneratorConfig(
-            tokenizer_path=PROJECT_DIR / "artifacts/tokenizers/sf_bpe/v6_weak_lane_terms",
+            tokenizer_path=PROJECT_DIR / "artifacts/tokenizers/sf_bpe/v9_phase27_76",
             checkpoints_root=PROJECT_DIR
-            / "artifacts/eval/phase27_47_new_topic_conditioning_repair/checkpoints",
-            checkpoint_name="sf-10m-step4600",
-            generator_name="sf_10m_phase27_47",
+            / "artifacts/eval/phase27_81_bounded_family_conditioned_repair_training/checkpoints",
+            checkpoint_name="sf-10m-step2000",
+            generator_name="sf_10m_phase27_81",
             model_size="sf-10m",
-            seq_len=64,
-            max_new_tokens=24,
+            seq_len=96,
+            max_new_tokens=32,
             temperature=1.0,
             top_k=0,
             no_repeat_ngram_size=3,
-            repetition_penalty=1.1,
+            repetition_penalty=1.08,
             dialogue_prompt=True,
+            family_conditioning=True,
         )
     )
     chat_module = ChatModule(generation_policy=policy, native_generator=generator)

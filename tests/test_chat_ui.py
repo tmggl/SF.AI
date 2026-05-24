@@ -53,7 +53,7 @@ def test_post_chat_message_still_works_after_ui_mount() -> None:
     body = r.json()
     assert body["domain"] == "chat"
     assert body["intent"] == "chat.smalltalk"
-    assert body["generator"] == "sf_10m_phase27_47"
+    assert body["generator"] == "sf_10m_phase27_81"
 
 
 def test_save_review_export_writes_review_only_jsonl(

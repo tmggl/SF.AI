@@ -218,7 +218,10 @@ class ChatModule:
         generation_intent = _generation_intent_for_prompt(
             analysis.original_text,
             routed_intent=intent,
-            guarded_trial=self.generation_policy.guarded_runtime_trial,
+            guarded_trial=(
+                self.generation_policy.guarded_runtime_trial
+                or self.generation_policy.raw_lab_mode
+            ),
         )
         generation_topic = _generation_topic_for_prompt(analysis.original_text)
         trial_floor = _guarded_trial_quality_floor(
@@ -226,7 +229,7 @@ class ChatModule:
             generation_topic=generation_topic,
             guarded_trial=self.generation_policy.guarded_runtime_trial,
         )
-        if trial_floor is not None:
+        if trial_floor is not None and not self.generation_policy.raw_lab_mode:
             return fallback_text, ("generator:template", f"native_generator:{trial_floor}")
 
         generator = self.native_generator or NativeGenerator()
@@ -235,7 +238,10 @@ class ChatModule:
             dialect=_generation_dialect_for_prompt(
                 analysis.original_text,
                 detected_dialect=analysis.detected_dialect,
-                guarded_trial=self.generation_policy.guarded_runtime_trial,
+                guarded_trial=(
+                    self.generation_policy.guarded_runtime_trial
+                    or self.generation_policy.raw_lab_mode
+                ),
             ),
             intent=generation_intent,
             topic=generation_topic,
@@ -248,36 +254,41 @@ class ChatModule:
                 "generator:template",
                 f"native_generator:{result.reason}",
             )
-        verdict = self.generation_guard.inspect_for_prompt(
-            analysis.original_text,
-            result.text,
-        )
-        if not verdict.allowed:
-            return fallback_text, (
-                "generator:template",
-                "native_generator:canary_blocked",
-                f"generation_guard:{verdict.reason}",
-                f"generation_repetition:{verdict.repetition_ratio:.2f}",
-                f"generation_arabic:{verdict.arabic_ratio:.2f}",
+        if not self.generation_policy.raw_lab_mode:
+            verdict = self.generation_guard.inspect_for_prompt(
+                analysis.original_text,
+                result.text,
             )
-        topic_mismatch = _definition_topic_mismatch(
-            generated_text=result.text,
-            generation_intent=generation_intent,
-            generation_topic=generation_topic,
-        )
-        if topic_mismatch is not None:
-            return fallback_text, (
-                "generator:template",
-                "native_generator:canary_blocked",
-                f"generation_guard:{topic_mismatch}",
-                f"native_generator:intent:{generation_intent}",
+            if not verdict.allowed:
+                return fallback_text, (
+                    "generator:template",
+                    "native_generator:canary_blocked",
+                    f"generation_guard:{verdict.reason}",
+                    f"generation_repetition:{verdict.repetition_ratio:.2f}",
+                    f"generation_arabic:{verdict.arabic_ratio:.2f}",
+                )
+            topic_mismatch = _definition_topic_mismatch(
+                generated_text=result.text,
+                generation_intent=generation_intent,
+                generation_topic=generation_topic,
             )
+            if topic_mismatch is not None:
+                return fallback_text, (
+                    "generator:template",
+                    "native_generator:canary_blocked",
+                    f"generation_guard:{topic_mismatch}",
+                    f"native_generator:intent:{generation_intent}",
+                )
         return (
             result.text,
             (
                 f"generator:{result.generator}",
                 "native_generator:generated",
-                "native_generator:canary_passed",
+                (
+                    "native_generator:raw_lab_unguarded"
+                    if self.generation_policy.raw_lab_mode
+                    else "native_generator:canary_passed"
+                ),
                 f"native_generator:intent:{generation_intent}",
             ),
         )

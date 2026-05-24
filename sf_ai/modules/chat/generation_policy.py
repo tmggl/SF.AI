@@ -58,6 +58,7 @@ class GenerationPolicy:
     temperature: float = 1.0
     top_k: int = 0
     candidate_generator: str = "sf_10m_phase27_33"
+    raw_lab_mode: bool = False
 
     @classmethod
     def from_env(cls) -> GenerationPolicy:
@@ -66,6 +67,7 @@ class GenerationPolicy:
             experimental_runtime=_env_true("SF_NATIVE_GENERATOR_EXPERIMENTAL"),
             canary=_env_true("SF_GENERATOR_CANARY"),
             guarded_runtime_trial=_env_true("SF_GUARDED_RUNTIME_TRIAL"),
+            raw_lab_mode=_env_true("SF_RAW_GENERATOR_LAB"),
         )
 
     def decide(
@@ -86,6 +88,8 @@ class GenerationPolicy:
             return GenerationDecision(False, "domain_not_active")
         if requires_safety:
             return GenerationDecision(False, "safety_blocked")
+        if self.raw_lab_mode:
+            return GenerationDecision(True, "raw_lab_allowed", generator=self.candidate_generator)
         if fallback_used:
             return GenerationDecision(False, "fallback_route")
         if confidence < self.min_confidence:

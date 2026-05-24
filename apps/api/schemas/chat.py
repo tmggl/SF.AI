@@ -26,7 +26,7 @@ class ChatResponse(BaseModel):
     dispatch: str = Field(default="composer", description="composer | module:<name> | composer_no_module")
     generator: str = Field(
         default="generator_blocked",
-        description="sf_10m_phase27_47 | generator_blocked",
+        description="sf_10m_phase27_81 | generator_blocked",
     )
     rag: str = Field(default="not_used", description="used | not_used")
     debug: dict[str, str] = Field(default_factory=dict)
