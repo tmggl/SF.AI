@@ -82,9 +82,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.80: بوابات objective/curriculum/decoding مرّت. "
-    "لا runtime الآن؛ التالي Phase 27.81 تدريب SF-10M محدود مشروط بهذه "
-    "البوابات.",
+    "وصلنا إلى Phase 27.81: التدريب المحدود اكتمل ورفع all-family إلى 42/50. "
+    "لا runtime الآن؛ التالي Phase 27.82 تشخيص الإخفاقات المتبقية قبل أي "
+    "إطلاق.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

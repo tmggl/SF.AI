@@ -28,15 +28,17 @@
 المسار الحالي الرسمي:
 
 ```text
-Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Gate
+Phase 27.81 — Execute bounded SF-10M family-conditioned repair training
 SF-native Objective/Curriculum/Decoding Acceleration Track
-PHASE27_80_BOUNDED_FAMILY_CONDITIONED_REPAIR_GATE_DECISION
+PHASE27_81_BOUNDED_FAMILY_CONDITIONED_REPAIR_TRAINING_DECISION
 ```
 
 القرار الحالي:
 
 - Phase 27.104 درّبت إصلاحًا محدودًا على حزمة 27.103 كدليل سابق.
 - Phase 27.80 حوّلت الخطة إلى بوابات تنفيذية قابلة للقياس ومرّت كلها.
+- Phase 27.81 درّبت SF-10M تدريبًا محدودًا من checkpoint 27.104:
+  all-family `42/50`, prototype `16/16`, known `16/16`, fresh `9/10`.
 - لا tokenizer جديد.
 - لا runtime release.
 - لا انتقال إلى `SF-50M`.
@@ -51,7 +53,7 @@ PHASE27_80_BOUNDED_FAMILY_CONDITIONED_REPAIR_GATE_DECISION
 - Phase 27.102 ثبّت بوابة تنفيذية تلتقط هذا الفشل وتكتب canary من 16 prompt.
 - Phase 27.103 أضافت `192` سجلًا `gold` متوازنًا (`8` موضوعات × فصحى/سعودي × `12`) مع copy-anchor وwrong-topic leak = `0`.
 - Phase 27.104 حققت prototype `16/16`, wrong-topic `0`, known `16/16`, fresh `9/10`, لكنها لم تحفظ كل عائلات الحوار: all-family `30/50`.
-- التالي: `Phase 27.81 — Execute bounded SF-10M family-conditioned repair training`.
+- التالي: `Phase 27.82 — Phase 27.81 Result Diagnosis`.
 - عند نجاح بوابة أي حجم لاحقًا، ينتقل الوكيل تلقائيًا للحجم التالي حتى
   `SF-1B+` دون انتظار موافقة جديدة.
 
@@ -128,11 +130,11 @@ PHASE27_80_BOUNDED_FAMILY_CONDITIONED_REPAIR_GATE_DECISION
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.80 / 30 — Bounded SF-10M Family-Conditioned Repair Gate.
-- **الأولوية الحالية:** تنفيذ تدريب SF-10M محدود في Phase 27.81 بعد مرور بوابات 27.80.
+- **الرحلة الحالية:** Phase 27.81 / 30 — Execute bounded SF-10M family-conditioned repair training.
+- **الأولوية الحالية:** تشخيص نتيجة Phase 27.81 في Phase 27.82؛ لا runtime لأن all-family بقي `42/50` والحد `45/50`.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
 - **البيانات الحالية:** corpus موثق `8645` سجلًا يمر `corpus-audit`: `4350` سعودي + `4295` فصحى، `gold=3533`, `silver=5112`. split الحالي `train=7777`, `eval=868`.
-- **التدريب:** Phase 27.104 نجحت topic gates لكنها فشلت all-family gate. القرار الحالي يمنع التدريب الجديد حتى تمر بوابات Phase 27.80: objective renderer، assistant-only loss، round-robin curriculum، guarded decoding، contrastive eval، checkpoint selector، held-out canary، corpus-audit، sensitive scan، full tests، وMPS/AMP smoke. لا runtime ولا SF-50M ولا tokenizer retrain.
+- **التدريب:** Phase 27.81 اكتملت كتدريب bounded على SF-10M: أفضل checkpoint `sf-10m-step2000`, all-family `42/50`, topic family `10/10`, prototype `16/16`, fresh topic `9/10`. القرار: `BLOCK_RUNTIME_DIAGNOSE_PHASE27_81_RESULT`. لا runtime ولا SF-50M ولا tokenizer retrain.
 - **المولّد:** runtime العام محجوب كمولد حواري حتى نجاح held-out/canary. لا تعرض أي قالب على أنه مولّد، ولا تفتح واجهة مولّد إلا بعد قرار runtime صريح.
 - **التقييم:** Phase 27 مرّر `19/19` turn في حوار متعدد الأدوار، لكنه أكد أن الردود ما زالت `template` وأن المولد غير جاهز.
 - **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.

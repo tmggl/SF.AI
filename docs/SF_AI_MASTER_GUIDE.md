@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.80
-الاسم: Bounded SF-10M Family-Conditioned Repair Gate
+المرحلة الحالية: Phase 27.81
+الاسم: Execute bounded SF-10M family-conditioned repair training
 المسار الملزم: SF-native Objective/Curriculum/Decoding Acceleration Track
-القرار الرسمي: PHASE27_80_BOUNDED_FAMILY_CONDITIONED_REPAIR_GATE_DECISION
+القرار الرسمي: PHASE27_81_BOUNDED_FAMILY_CONDITIONED_REPAIR_TRAINING_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -92,13 +92,14 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 
 - هذا re-anchor رسمي بعد نتيجة 27.104: لا نواصل تدريبًا متكررًا ولا
   tokenizer جزئيًا ولا نكبر النموذج قبل إصلاح objective/curriculum/decoding.
-- بوابات التنفيذ مرّت، لكن التدريب لم يبدأ بعد.
+- بوابات Phase 27.80 مرّت، وتدريب Phase 27.81 المحدود اكتمل.
+- أفضل checkpoint: `sf-10m-step2000`; all-family `42/50`; topic family `10/10`;
+  prototype `16/16`; fresh topic `9/10`.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
 - التقرير الملزم: `docs/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md`.
-- التالي: `Phase 27.81 — Execute bounded SF-10M family-conditioned repair training`
-  باستخدام البوابات التي مرّت في Phase 27.80.
+- التالي: `Phase 27.82 — Phase 27.81 Result Diagnosis`.
 
 الدليل السابق الذي سبب هذا re-anchor:
 
@@ -340,7 +341,7 @@ SF-10M
 | Phase 27.78 | root-cause gate أوقف التدريب الأعمى والتكبير |
 | Phase 27.79 re-anchor | الخطة الحالية: Objective/Curriculum/Decoding Repair Plan، بلا تدريب |
 | Phase 27.80 gate | بوابات التدريب العائلي المحدود مرّت؛ لا تدريب ولا runtime |
-| Phase 27.81 conditional | تدريب SF-10M محدود فقط بعد نجاح بوابات 27.80 |
+| Phase 27.81 bounded training | اكتمل؛ all-family 42/50؛ runtime محجوب |
 
 الدرس الأساسي من Phase 27:
 
@@ -356,14 +357,14 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.81 — Execute bounded SF-10M family-conditioned repair training
+Phase 27.82 — Phase 27.81 Result Diagnosis
 ```
 
 مطلوب منها:
 
-- لا تبدأ إلا بعد نجاح بوابات `PHASE27_80_BOUNDED_FAMILY_CONDITIONED_REPAIR_GATE_DECISION`.
-- استخدام objective بصيغة `النطاق` + `عائلة الحوار` + `المستخدم` + `المساعد ... <eos>`.
-- حساب loss على رد المساعد و`<eos>` فقط.
+- تشخيص إخفاقات Phase 27.81 المتبقية: followup `7/10`, support `6/10`,
+  و`expected_terms_missing=8`.
+- ممنوع runtime/SF-50M/tokenizer retrain حتى يصدر تشخيص root-cause جديد.
 - استخدام stratified round-robin بين open_social/followup/planning/support/topic.
 - تطبيق guarded decoding وcontrastive eval وcheckpoint selector قبل أي حكم.
 

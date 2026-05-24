@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.80 / 30**
-- **المرحلة الحالية:** **Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Gate**
-- **حالة المرحلة الحالية:** **بوابات التنفيذ مرّت؛ لا تدريب بدأ ولا runtime ولا tokenizer جديد**
-- **المرحلة التالية المقترحة:** Phase 27.81 — Execute bounded SF-10M family-conditioned repair training.
+- **الرحلة الحالية:** **Phase 27.81 / 30**
+- **المرحلة الحالية:** **Phase 27.81 — Execute bounded SF-10M family-conditioned repair training**
+- **حالة المرحلة الحالية:** **تدريب محدود اكتمل؛ all-family=42/50؛ runtime محجوب؛ لا tokenizer جديد ولا SF-50M**
+- **المرحلة التالية المقترحة:** Phase 27.82 — Phase 27.81 Result Diagnosis.
 - **التحول الاستراتيجي المعتمد:** **SF-native Objective/Curriculum/Decoding Acceleration Track** — تسريع هندسي فقط؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -135,8 +135,8 @@
 | Phase 27.77 | V9 Bounded Open-Social LM Repair | ✅ failed_v9_bounded_open_social_lm_repair_runtime_blocked | ✅ |
 | Phase 27.78 | Engineering Root Cause Gate | ✅ phase27_78_engineering_decision_training_blocked | ✅ |
 | Phase 27.79 | Objective/Curriculum/Decoding Repair Plan | ✅ active_plan_training_blocked_until_gates | ✅ |
-| Phase 27.80 | Repair Gate Encoding + Family Balance Remediation | ✅ remediation_ready_639_records_needed_no_training | ✅ |
-| Phase 27.81 | Balanced Family Pack Authoring | ✅ authored_2500_records_gates_passed_no_training | ✅ |
+| Phase 27.80 | Bounded Family-conditioned Repair Gate | ✅ gates_passed_bounded_training_allowed_next | ✅ |
+| Phase 27.81 | Execute Bounded SF-10M Family-conditioned Repair Training | ✅ trained_runtime_blocked_diagnosis_required | ✅ |
 | Phase 27.82 | Family-conditioned SF-10M Repair Training Decision | ✅ allows_phase27_83_bounded_training_no_runtime | ✅ |
 | Phase 27.83 | Family-conditioned SF-10M Bounded Repair Training | ✅ trained_runtime_blocked_diagnosis_required | ✅ |
 | Phase 27.84 | Objective/Curriculum Failure Diagnosis | ✅ diagnosed_family_signal_missing_no_training | ✅ |
@@ -1085,13 +1085,13 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-692 passed in 73.19s (0:01:13)
+696 passed in 84.74s (0:01:24)
 ```
 
 | التحقق | النتيجة |
 |------|------|
-| full pytest suite | `692 passed in 73.19s (0:01:13)` |
-| focused Phase 27.80 gate/API/UI tests | `130 passed in 11.14s` |
+| full pytest suite | `696 passed in 84.74s (0:01:24)` |
+| focused Phase 27.81/API/UI tests | `79 passed in 18.40s` |
 | `make corpus-audit` | `8645` records, `issues=0` |
 | `make phase27-dialogue-eval` | `19/19`, `open_generator_ready=false` |
 
@@ -1791,18 +1791,18 @@ make api
 - JSON: `artifacts/reports/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.json`
 - المسار: `SF-native Objective/Curriculum/Decoding Acceleration Track`.
 - المصدر: نتيجة 27.104، حيث نجح topic binding لكن فشل all-family `30/50`.
-- القرار: `PLAN_READY_TRAINING_BLOCKED_UNTIL_GATES_PASS`.
-- التدريب الجديد: محجوب.
+- القرار التاريخي: `PLAN_READY_TRAINING_BLOCKED_UNTIL_GATES_PASS`.
+- التدريب الجديد: اكتمل في Phase 27.81 بعد مرور بوابات 27.80.
 - tokenizer retrain: محجوب.
 - `SF-50M`: محجوب.
 - runtime release: محجوب.
 - نتيجة البوابات: مرّت في Phase 27.80 عبر
   `PHASE27_80_BOUNDED_FAMILY_CONDITIONED_REPAIR_GATE_DECISION`.
-- التالي المشروط: Phase 27.81 — Execute bounded SF-10M family-conditioned repair training.
-- شروط 27.81: objective renderer، assistant-only loss mask،
-  stratified round-robin sampler، decoding policy، contrastive eval،
-  checkpoint selector، held-out canary، corpus-audit، sensitive scan،
-  full tests، وMPS/AMP smoke log.
+- نتيجة التدريب: اكتملت في Phase 27.81 عبر
+  `PHASE27_81_BOUNDED_FAMILY_CONDITIONED_REPAIR_TRAINING_DECISION`.
+- التالي: Phase 27.82 — Phase 27.81 Result Diagnosis.
+- سبب الحجب: all-family `42/50` أقل من gate `45/50`؛ الإخفاقات المتبقية
+  `followup=7/10`, `support=6/10`, و`expected_terms_missing=8`.
 
 ---
 

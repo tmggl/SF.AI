@@ -146,7 +146,7 @@
 | Phase 27.78 | Engineering Root Cause Gate | ✅ phase27_78_engineering_decision_training_blocked |
 | Phase 27.79 | Objective/Curriculum/Decoding Repair Plan | ✅ active_plan_training_blocked_until_gates |
 | Phase 27.80 | Bounded Family-conditioned Repair Gate | ✅ gates_passed_bounded_training_allowed_next |
-| Phase 27.81 | Balanced Family Pack Authoring | ✅ authored_2500_gold_records_gates_passed |
+| Phase 27.81 | Execute Bounded SF-10M Family-conditioned Repair Training | ✅ trained_runtime_blocked_diagnosis_required |
 | Phase 27.82 | Family-conditioned SF-10M Repair Training Decision | ✅ allows_phase27_83_bounded_training_no_runtime |
 | Phase 27.83 | Family-conditioned SF-10M Bounded Repair Training | ✅ trained_runtime_blocked_diagnosis_required |
 | Phase 27.84 | Objective/Curriculum Failure Diagnosis | ✅ diagnosed_family_signal_missing_no_training |
@@ -281,8 +281,9 @@ bash scripts/run_chat_server.sh
 Phase 27.80: objective renderer, assistant-only loss mask,
 stratified round-robin curriculum, guarded decoding, contrastive eval,
 checkpoint selector, held-out canary, corpus-audit, sensitive scan,
-full tests, وMPS/AMP smoke. التدريب الوحيد المسموح تاليًا هو Phase 27.81
-bounded SF-10M repair. لا تعتمد loss/perplexity/micro-probe وحدها؛
+full tests, وMPS/AMP smoke. Phase 27.81 نفذ التدريب المحدود ورفع all-family
+إلى `42/50` مع topic family `10/10`، لكنه لم يفتح runtime. التالي Phase 27.82
+diagnosis. لا تعتمد loss/perplexity/micro-probe وحدها؛
 القرار يعتمد على held-out dialogue quality, runtime usability, clean-stop,
 semantic correctness, family stability, open_social naturalness, followup
 continuity, canary pass rate, وhuman conversation realism.
@@ -318,7 +319,7 @@ SF-10M → SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+
 - `sf_ai/datasets/corpus_governance.py`
 - `tests/test_corpus_governance.py`
 
-تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر وغير جاهز لاختبار سامي كمولد حواري. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`، لكنه لم يجعل المولد مقنعًا. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17–27.104 موثقة تاريخيًا، وآخر دليل مهم أن Phase 27.104 نجحت في topic gates (`16/16`, wrong-topic `0`, fresh `9/10`) لكنها فشلت all-family `30/50`. الوضع الحالي `8645` (`msa=4295`, `saudi=4350`, `gold=3533`, `silver=5112`). المسار الحالي أُعيد تثبيته عند Phase 27.79 عبر `PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN`، ومرّت بوابات Phase 27.80 عبر `PHASE27_80_BOUNDED_FAMILY_CONDITIONED_REPAIR_GATE_DECISION`: لا runtime ولا SF-50M ولا tokenizer retrain؛ التالي فقط Phase 27.81 bounded training.
+تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر وغير جاهز لاختبار سامي كمولد حواري. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`، لكنه لم يجعل المولد مقنعًا. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17–27.104 موثقة تاريخيًا، وآخر دليل مهم أن Phase 27.104 نجحت في topic gates (`16/16`, wrong-topic `0`, fresh `9/10`) لكنها فشلت all-family `30/50`. الوضع الحالي `8645` (`msa=4295`, `saudi=4350`, `gold=3533`, `silver=5112`). المسار الحالي أُعيد تثبيته عند Phase 27.79 عبر `PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN`، ومرّت بوابات Phase 27.80، ثم اكتمل Phase 27.81 عبر `PHASE27_81_BOUNDED_FAMILY_CONDITIONED_REPAIR_TRAINING_DECISION`: all-family `42/50`; لا runtime ولا SF-50M ولا tokenizer retrain؛ التالي Phase 27.82 diagnosis.
 
 ### Phase 12 — preflight جاهز فقط
 

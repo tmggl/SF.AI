@@ -10,11 +10,11 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.80 / 30**
-- **المرحلة الحالية:** **Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Gate** (`PHASE27_80_BOUNDED_FAMILY_CONDITIONED_REPAIR_GATE_DECISION`; بوابات التنفيذ مرّت؛ لا تدريب بدأ ولا runtime)
+- **الرحلة الحالية:** **Phase 27.81 / 30**
+- **المرحلة الحالية:** **Phase 27.81 — Execute bounded SF-10M family-conditioned repair training** (`PHASE27_81_BOUNDED_FAMILY_CONDITIONED_REPAIR_TRAINING_DECISION`; تدريب محدود اكتمل؛ runtime محجوب)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
 - **ملف القيادة الواحد:** `docs/SF_AI_MASTER_GUIDE.md` هو نقطة الدخول الأولى لأي Agent أو مهندس؛ بقية الملفات مراجع تفصيلية.
-- **المرحلة التالية المقترحة:** Phase 27.81 — Execute bounded SF-10M family-conditioned repair training.
+- **المرحلة التالية المقترحة:** Phase 27.82 — Phase 27.81 Result Diagnosis.
 - **استراتيجية العمل الملزمة:** SF-native Objective/Curriculum/Decoding Acceleration Track؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب، و`NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS` قبل أي runtime.
 - **تصحيح السيادة:** لا يوجد Open-Weight Lane؛ Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي = أدوات هندسية فقط داخل SF-native.
@@ -292,7 +292,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs,reports}/   Phase 5.5+ outputs/reports
 │
-├── tests/                                 pytest suite — 692 تست / 106 ملف
+├── tests/                                 pytest suite — 696 تست / 107 ملف
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -377,10 +377,10 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى Phase 27.80 gate)
+## نتائج الاختبارات (حتى Phase 27.81 bounded training)
 
 ```
-692 passed in 73.19s (0:01:13)
+696 passed in 84.74s (0:01:24)
 ```
 
 التغطية الحالية:
@@ -458,7 +458,7 @@ make server-start
 - **Phase 27.78:** بوابة `ENGINEERING_ROOT_CAUSE_GATE` — مكتملة، وأصدرت `PHASE27_78_ENGINEERING_DECISION`.
 - **Phase 27.79:** تصميم إصلاح objective/curriculum/decoding — مكتمل، وأصدر `PHASE27_79_REPAIR_DESIGN_DECISION` بدون تدريب.
 - **Phase 27.80:** تشفير بوابات الإصلاح + remediation — مكتملة؛ مرّت gates بعد balanced family view.
-- **Phase 27.81:** تأليف حزمة عائلات الحوار المتوازنة — مكتملة؛ أضيف `2500` سجل gold وأصبح corpus `8443`.
+- **Phase 27.81:** تدريب محدود جديد على SF-10M — مكتمل؛ أفضل checkpoint `sf-10m-step2000`، all-family `42/50`, topic family `10/10`, prototype `16/16`, fresh topic `9/10`; runtime محجوب لأن الحد `45/50`.
 - **Phase 27.82:** قرار تدريب الإصلاح العائلي — مكتمل؛ يسمح فقط بـ Phase 27.83 bounded SF-10M repair training، ولا يسمح بـ runtime أو SF-50M.
 - **Phase 27.83:** تدريب إصلاح محدود لـ SF-10M — مكتمل كتشغيل، لكنه فشل حواريًا (`best=11/60`)؛ runtime وSF-50M محجوبان.
 - **Phase 27.84:** تشخيص فشل objective/curriculum — مكتمل؛ family metadata لم تظهر داخل نص التدريب، ولذلك التوازن لم يصبح conditioning فعليًا.
@@ -529,4 +529,4 @@ make server-start
 
 ## بروتوكول الانتقال
 
-التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، ومع نجاح بوابة التكبير انتقل تلقائيًا للحجم التالي حتى `SF-1B+`. ارفع الناجح فقط، افحص الحساسية، ووثّق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. بعد re-anchor Phase 27.79 لا يوجد runtime release ولا SF-50M ولا tokenizer retrain؛ المسموح Phase 27.80 كتدريب محدود فقط إذا مرت البوابات.
+التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، ومع نجاح بوابة التكبير انتقل تلقائيًا للحجم التالي حتى `SF-1B+`. ارفع الناجح فقط، افحص الحساسية، ووثّق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. بعد Phase 27.81 لا يوجد runtime release ولا SF-50M ولا tokenizer retrain؛ التالي Phase 27.82 diagnosis لأن all-family بقي `42/50`.

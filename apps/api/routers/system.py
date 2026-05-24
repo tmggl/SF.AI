@@ -61,11 +61,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Gate",
+        current_phase="Phase 27.81 — Execute bounded SF-10M family-conditioned repair training",
         current_phase_status=(
-            "phase27_80_gates_passed_bounded_training_allowed_next"
+            "phase27_81_trained_runtime_blocked_diagnosis_required"
         ),
-        next_phase="Phase 27.81 — Execute bounded SF-10M family-conditioned repair training",
+        next_phase="Phase 27.82 — Phase 27.81 Result Diagnosis",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -519,6 +519,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_80_bounded_family_conditioned_repair_gate",
                 status="gates_passed_bounded_training_allowed_next",
                 phase="Phase 27.80",
+            ),
+            ComponentStatus(
+                name="phase27_81_bounded_family_conditioned_repair_training",
+                status="trained_runtime_blocked_diagnosis_required",
+                phase="Phase 27.81",
             ),
             ComponentStatus(
                 name="phase27_81_balanced_family_pack",
