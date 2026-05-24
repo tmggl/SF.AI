@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.109: صنفنا مصادر لغوية مجانية مثل Masader وQabas "
-    "وTashkeela كمسار تسريع سيادي. التالي Phase 27.110 تصميم إدخال مرخص "
-    "بلا تدريب عشوائي.",
+    "وصلنا إلى Phase 27.110: صممنا بوابة إدخال مرخصة للمصادر المجانية. "
+    "Qabas مسموح الآن كتصميم lexicon/topic فقط، وTashkeela محجوبة للتدريب "
+    "حتى حل تضارب الترخيص. التالي Phase 27.111 Qabas Lexicon Bootstrap بلا تدريب.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

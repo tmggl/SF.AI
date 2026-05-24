@@ -50,13 +50,14 @@
 - السيادة تبقى على corpus/tokenizer/behavior/runtime/alignment/evaluation
   وسلوك الحوار الفصيح والسعودي.
 - قبل أي تدريب جديد يجب وجود root-cause/decision gate حديث يسمح به صراحة.
-  القرار الحالي هو `PHASE27_109_FREE_LINGUISTIC_RESOURCE_INTAKE_GATE_DECISION`:
+  القرار الحالي هو `PHASE27_110_LICENSED_INGESTION_DESIGN_DECISION`:
   المسار أُعيد تثبيته عند Phase 27.79، ومرّت بوابات Phase 27.80، ثم اكتمل
   تدريب Phase 27.81. Phase 27.105 أثبت أن الواجهة تستدعي المولد الحقيقي
   في raw lab، لكنه شخّص فشل social subfamilies وtopic variants؛ التالي
   Phase 27.106 design أضاف renderer signals، وPhase 27.107 مرّر gate؛
   Phase 27.108 كتب `480` سجل gold ومرّ corpus-audit؛ Phase 27.109 صنّف
-  مصادر مجانية مثل Masader/Qabas/Tashkeela وسحب Masader metadata summary فقط.
+  مصادر مجانية مثل Masader/Qabas/Tashkeela وسحب Masader metadata summary فقط؛
+  Phase 27.110 صمم license matrix وحدد Qabas كمسار lexicon/topic فقط.
 - لا runtime release بدون `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - لا تعتمد loss/perplexity/micro-probe وحدها؛ النجاح يعني held-out dialogue
   quality, runtime usability, clean-stop, semantic correctness, family
@@ -69,13 +70,13 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 27.109 موثقة تاريخيًا، لكن الحالة العملية
+- المراحل من Phase 0 حتى Phase 27.110 موثقة تاريخيًا، لكن الحالة العملية
   الحالية هي:
-  `Phase 27.109 — Free Linguistic Resource Intake Gate`
+  `Phase 27.110 — Licensed Ingestion Design`
   ضمن `SF-native Objective/Curriculum/Decoding Acceleration Track`.
   التقرير الملزم: `docs/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md`.
   القرار التنفيذي:
-  `PHASE27_109_FREE_LINGUISTIC_RESOURCE_INTAKE_GATE_DECISION`.
+  `PHASE27_110_LICENSED_INGESTION_DESIGN_DECISION`.
   Phase 27.104 تبقى الدليل السابق: تدريب محدود نجح topic-wise وفشل
   all-family، وليست إذن runtime.
   تاريخيًا أضيفت دفعة `sf-ai-balanced-family-pack-v1`: `2500` سجل gold
@@ -127,8 +128,9 @@
   (`msa=4535`, `saudi=4590`, `gold=4013`, `silver=5112`)، ومرّ
   `make corpus-audit` بلا مشاكل. Phase 27.109 صنّف مصادر مجانية جاهزة:
   Masader metadata، Qabas، Tashkeela، OSIAN، Arabic Learner Corpus، fr3on،
-  ArSyra؛ ولم يدخل أي نص خارجي إلى corpus.
-- أول خطوة تالية: Phase 27.110 — Qabas/Masader/Tashkeela Licensed Ingestion Design.
+  ArSyra؛ ولم يدخل أي نص خارجي إلى corpus. Phase 27.110 صمم مصفوفة ترخيص:
+  Qabas مسموح كـ lexicon/topic/protected-terms فقط، وتدريب Tashkeela محجوب.
+- أول خطوة تالية: Phase 27.111 — Qabas Lexicon Bootstrap Design, no training.
   لا تبدأ training ولا SF-50M ولا tokenizer retrain قبل هذه البوابة.
 - تفويض التكبير التلقائي معتمد، لكن مفعوله يبدأ فقط عندما تنجح gates؛
   حاليًا `SF-50M` ما زال محجوبًا لأن capacity وزنها `1%`.

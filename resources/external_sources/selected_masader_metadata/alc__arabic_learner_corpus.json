@@ -1,0 +1,46 @@
+{
+  "Name": "ALC: Arabic Learner Corpus",
+  "Subsets": [],
+  "HF Link": "",
+  "Link": "https://catalog.ldc.upenn.edu/LDC2015S10",
+  "License": "custom",
+  "Year": 2013,
+  "Language": "ar",
+  "Dialect": "Modern Standard Arabic",
+  "Domain": [
+    "other"
+  ],
+  "Form": "audio",
+  "Collection Style": [
+    "manual curation"
+  ],
+  "Description": "comprises a\r\ncollection of texts written by learners of Arabic in\r\nSaudi Arabia",
+  "Volume": 1.0,
+  "Unit": "hours",
+  "Ethical Risks": "Low",
+  "Provider": [
+    "Leeds University"
+  ],
+  "Derived From": [],
+  "Paper Title": "Arabic Learner Corpus v1:\r\nA New Resource for\r\nArabic Language Research",
+  "Paper Link": "https://eprints.whiterose.ac.uk/75470/22/AtwellVer2.13.pdf",
+  "Script": "Arab",
+  "Tokenized": false,
+  "Host": "LDC",
+  "Access": "With-Fee",
+  "Cost": "25 $",
+  "Test Split": false,
+  "Tasks": [
+    "speech recognition"
+  ],
+  "Venue Title": "other",
+  "Venue Type": "preprint",
+  "Venue Name": "",
+  "Authors": [
+    "Ayg Alfaifi",
+    "Eric Atwell"
+  ],
+  "Affiliations": [],
+  "Abstract": "",
+  "Added By": "Zaid Alyafeai"
+}

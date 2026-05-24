@@ -1,0 +1,11 @@
+{
+  "decision_id": "PHASE27_110_LICENSED_INGESTION_DESIGN_DECISION",
+  "engineering_decision": "ALLOW_PHASE27_111_QABAS_LEXICON_BOOTSTRAP_NO_TRAINING",
+  "external_training_text_import_allowed": false,
+  "external_tokenizer_vocab_import_allowed": false,
+  "qabas_lexicon_bootstrap_design_allowed": true,
+  "tashkeela_training_allowed": false,
+  "runtime_release_allowed": false,
+  "new_training_allowed": false,
+  "next_phase": "Phase 27.111 — Qabas Lexicon Bootstrap Design, no training"
+}

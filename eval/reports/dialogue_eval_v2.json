@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.109: صنفنا مصادر لغوية مجانية مثل Masader وQabas وTashkeela كمسار تسريع سيادي. التالي Phase 27.110 تصميم إدخال مرخص بلا تدريب عشوائي."
+      "response_preview": "وصلنا إلى Phase 27.110: صممنا بوابة إدخال مرخصة للمصادر المجانية. Qabas مسموح الآن كتصميم lexicon/topic فقط، وTashkeela محجوبة للتدريب حتى حل تضارب الترخيص. التالي Phase 27.111 Qab"
     },
     {
       "scenario_id": "clarification_repair_flow",

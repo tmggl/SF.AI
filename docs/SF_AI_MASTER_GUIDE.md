@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.109
-الاسم: Free Linguistic Resource Intake Gate
+المرحلة الحالية: Phase 27.110
+الاسم: Licensed Ingestion Design
 المسار الملزم: SF-native Objective/Curriculum/Decoding Acceleration Track
-القرار الرسمي: PHASE27_109_FREE_LINGUISTIC_RESOURCE_INTAKE_GATE_DECISION
+القرار الرسمي: PHASE27_110_LICENSED_INGESTION_DESIGN_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -107,6 +107,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - Phase 27.109 اعتمد الطريق المختصر المجاني: `Masader` للmetadata،
   `Qabas` للمعجم والموضوعات، و`Tashkeela` للفصحى المشكولة بعد gate ترخيص.
   تم سحب summary من Masader، ولم يدخل أي نص خارجي إلى corpus.
+- Phase 27.110 صمم license matrix للمصادر المختارة: `Qabas` مسموح للمرحلة
+  التالية كتصميم lexicon/topic/protected-terms فقط، و`Tashkeela` محجوبة
+  للتدريب حتى حل تعارض الترخيص.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
@@ -121,7 +124,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   `docs/PHASE27_108_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DATA_PACK_REPORT.md`.
 - تقرير المصادر الحالي:
   `docs/PHASE27_109_FREE_LINGUISTIC_RESOURCE_INTAKE_GATE_REPORT.md`.
-- التالي: `Phase 27.110 — Qabas/Masader/Tashkeela Licensed Ingestion Design`.
+- تقرير الإدخال المرخص الحالي:
+  `docs/PHASE27_110_LICENSED_INGESTION_DESIGN_REPORT.md`.
+- التالي: `Phase 27.111 — Qabas Lexicon Bootstrap Design, no training`.
 
 الدليل السابق الذي سبب هذا re-anchor:
 
@@ -393,16 +398,15 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.110 — Qabas/Masader/Tashkeela Licensed Ingestion Design
+Phase 27.111 — Qabas Lexicon Bootstrap Design, no training
 ```
 
 مطلوب منها:
 
-- تصميم إدخال مرخص للمصادر المجانية المرشحة.
-- تحديد هل يستخدم Qabas كـ vocabulary/topic bootstrap فقط أم يدخل طبقة
-  lexicon مستقلة.
-- تحديد هل Tashkeela تدخل كـ MSA text lane بعد التنظيف أم تبقى eval-only.
-- فلترة Masader إلى shortlist مصادر تدريب/تقييم/مفردات مع license gates.
+- تحويل Qabas إلى bootstrap منضبط للـ lexicon/topics/protected terms فقط.
+- عدم إدخال Qabas كـ pretrained tokenizer vocab أو merges.
+- deduplicate ضد Saudi Seed v1 والقواميس الحالية.
+- إنتاج source card وfield mapping وquality/provenance gates قبل أي استخدام.
 - ممنوع training/SF-50M/tokenizer retrain/runtime release قبل هذه البوابة.
 
 ممنوع قبل نجاح البوابات:

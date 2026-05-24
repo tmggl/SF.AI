@@ -524,6 +524,9 @@ phase27-social-subfamily-topic-variant-data-pack:
 phase27-free-linguistic-resource-intake:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_109_free_linguistic_resource_intake_gate.py $(ARGS)
 
+phase27-licensed-ingestion-design:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_110_licensed_ingestion_design.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 

@@ -1,0 +1,43 @@
+{
+  "Name": "SaudiNewsNet",
+  "Subsets": [],
+  "HF Link": "https://hf.co/datasets/inparallel/saudinewsnet",
+  "Link": "https://github.com/inparallel/SaudiNewsNet",
+  "License": "CC BY-NC-SA 4.0",
+  "Year": 2015,
+  "Language": "ar",
+  "Dialect": "Modern Standard Arabic",
+  "Domain": [
+    "news articles"
+  ],
+  "Form": "text",
+  "Collection Style": [
+    "crawling"
+  ],
+  "Description": "a set of 31,030 Arabic newspaper articles alongwith metadata, extracted from various online Saudi newspapers.",
+  "Volume": 31030.0,
+  "Unit": "documents",
+  "Ethical Risks": "Low",
+  "Provider": [
+    "-"
+  ],
+  "Derived From": [],
+  "Paper Title": "",
+  "Paper Link": "",
+  "Script": "Arab",
+  "Tokenized": false,
+  "Host": "GitHub",
+  "Access": "Free",
+  "Cost": "",
+  "Test Split": false,
+  "Tasks": [
+    "language modeling"
+  ],
+  "Venue Title": "",
+  "Venue Type": "",
+  "Venue Name": "",
+  "Authors": [],
+  "Affiliations": [],
+  "Abstract": "",
+  "Added By": "Zaid Alyafeai"
+}

@@ -1,0 +1,275 @@
+[
+  {
+    "source_id": "qabas",
+    "masader_file": "qabas.json",
+    "name": "Qabas",
+    "license": "Apache-1.0",
+    "access": "Free",
+    "cost": "",
+    "language": "ar",
+    "dialect": "Modern Standard Arabic",
+    "domain": [
+      "other"
+    ],
+    "volume": 60000.0,
+    "unit": "tokens",
+    "link": "https://sina.birzeit.edu/qabas",
+    "lane": "lexicon_bootstrap",
+    "decision": "allow_vocabulary_topic_design_no_tokenizer_vocab",
+    "training_text_allowed_next": false,
+    "vocabulary_terms_allowed_next": true,
+    "eval_allowed_next": true,
+    "why": "Masader metadata lists Qabas as a free Apache-1.0 lexicon. Use it for topics/protected terms only; never as pretrained tokenizer vocab.",
+    "required_gates": [
+      "capture_primary_qabas_license",
+      "field_mapping_audit",
+      "deduplicate_against_saudi_seed_v1",
+      "protected_terms_only_no_bpe_vocab_import"
+    ]
+  },
+  {
+    "source_id": "tashkeela",
+    "masader_file": "tashkeela.json",
+    "name": "Tashkeela",
+    "license": "GPL-2.0",
+    "access": "Free",
+    "cost": "",
+    "language": "ar",
+    "dialect": "mixed",
+    "domain": [
+      "books"
+    ],
+    "volume": 75629921.0,
+    "unit": "tokens",
+    "link": "https://sourceforge.net/projects/tashkeela/",
+    "lane": "msa_text_candidate",
+    "decision": "block_training_until_license_conflict_resolved",
+    "training_text_allowed_next": false,
+    "vocabulary_terms_allowed_next": false,
+    "eval_allowed_next": true,
+    "why": "Tashkeela is attractive for MSA, but Masader lists GPL-2.0 while the paper says CC BY 4.0. Training import waits for primary package license proof.",
+    "required_gates": [
+      "resolve_tashkeela_license_conflict",
+      "download_checksum",
+      "source_cleaning_sample_audit",
+      "deduplicate",
+      "separate_text_lane_from_dialogue_lane"
+    ]
+  },
+  {
+    "source_id": "sadeed_tashkeela_arabic_diacritization_dataset",
+    "masader_file": "sadeed_tashkeela_arabic_diacritization_dataset.json",
+    "name": "Sadeed Tashkeela Arabic Diacritization Dataset",
+    "license": "custom",
+    "access": "Free",
+    "cost": "",
+    "language": "ar",
+    "dialect": "mixed",
+    "domain": [
+      "public datasets"
+    ],
+    "volume": 1045183.0,
+    "unit": "documents",
+    "link": "https://huggingface.co/datasets/Misraj/Sadeed_Tashkeela",
+    "lane": "diacritization_eval_candidate",
+    "decision": "eval_only_until_derivative_license_review",
+    "training_text_allowed_next": false,
+    "vocabulary_terms_allowed_next": false,
+    "eval_allowed_next": true,
+    "why": "Derivative diacritization resource; useful for eval, but not training until license chain is clear.",
+    "required_gates": [
+      "capture_source_card",
+      "verify_license_from_primary_source",
+      "no_pretrained_vocab_or_merges"
+    ]
+  },
+  {
+    "source_id": "saudi_novel_corpus",
+    "masader_file": "saudi_novel_corpus.json",
+    "name": "Saudi Novel Corpus",
+    "license": "unknown",
+    "access": "Free",
+    "cost": "",
+    "language": "ar",
+    "dialect": "Modern Standard Arabic",
+    "domain": [
+      "books"
+    ],
+    "volume": 3134074.0,
+    "unit": "tokens",
+    "link": "http://sncorpus.com/home",
+    "lane": "blocked_unknown_license",
+    "decision": "reject_training_until_license_known",
+    "training_text_allowed_next": false,
+    "vocabulary_terms_allowed_next": false,
+    "eval_allowed_next": false,
+    "why": "Saudi content is useful, but unknown license blocks ingestion.",
+    "required_gates": [
+      "capture_source_card",
+      "verify_license_from_primary_source",
+      "no_pretrained_vocab_or_merges"
+    ]
+  },
+  {
+    "source_id": "saudinewsnet",
+    "masader_file": "saudinewsnet.json",
+    "name": "SaudiNewsNet",
+    "license": "CC BY-NC-SA 4.0",
+    "access": "Free",
+    "cost": "",
+    "language": "ar",
+    "dialect": "Modern Standard Arabic",
+    "domain": [
+      "news articles"
+    ],
+    "volume": 31030.0,
+    "unit": "documents",
+    "link": "https://github.com/inparallel/SaudiNewsNet",
+    "lane": "restricted_noncommercial",
+    "decision": "eval_or_vocabulary_only_noncommercial_restricted",
+    "training_text_allowed_next": false,
+    "vocabulary_terms_allowed_next": true,
+    "eval_allowed_next": true,
+    "why": "Non-commercial/share-alike restrictions block unrestricted training use.",
+    "required_gates": [
+      "noncommercial_policy_decision",
+      "license_compatibility_review",
+      "no_runtime_training_import"
+    ]
+  },
+  {
+    "source_id": "osian",
+    "masader_file": "osian.json",
+    "name": "OSIAN",
+    "license": "CC BY-NC 4.0",
+    "access": "Free",
+    "cost": "",
+    "language": "ar",
+    "dialect": "mixed",
+    "domain": [
+      "news articles"
+    ],
+    "volume": 3500000.0,
+    "unit": "documents",
+    "link": "http://oujda-nlp-team.net/en/corpora/osian-corpus/",
+    "lane": "restricted_noncommercial",
+    "decision": "eval_or_vocabulary_only_noncommercial_restricted",
+    "training_text_allowed_next": false,
+    "vocabulary_terms_allowed_next": true,
+    "eval_allowed_next": true,
+    "why": "Non-commercial/share-alike restrictions block unrestricted training use.",
+    "required_gates": [
+      "noncommercial_policy_decision",
+      "license_compatibility_review",
+      "no_runtime_training_import"
+    ]
+  },
+  {
+    "source_id": "alc__arabic_learner_corpus",
+    "masader_file": "alc__arabic_learner_corpus.json",
+    "name": "ALC: Arabic Learner Corpus",
+    "license": "custom",
+    "access": "With-Fee",
+    "cost": "25 $",
+    "language": "ar",
+    "dialect": "Modern Standard Arabic",
+    "domain": [
+      "other"
+    ],
+    "volume": 1.0,
+    "unit": "hours",
+    "link": "https://catalog.ldc.upenn.edu/LDC2015S10",
+    "lane": "blocked_paid_or_custom",
+    "decision": "reject_free_lane_with_fee_or_custom_license",
+    "training_text_allowed_next": false,
+    "vocabulary_terms_allowed_next": false,
+    "eval_allowed_next": false,
+    "why": "Not part of the free lane; can be reconsidered only if a paid/custom license is accepted.",
+    "required_gates": [
+      "capture_source_card",
+      "verify_license_from_primary_source",
+      "no_pretrained_vocab_or_merges"
+    ]
+  },
+  {
+    "source_id": "corpora_for_egyptian_arabic_and_gulf_arabic_from_twitter",
+    "masader_file": "corpora_for_egyptian_arabic_and_gulf_arabic_from_twitter.json",
+    "name": "Corpora for Egyptian Arabic and Gulf Arabic from Twitter",
+    "license": "unknown",
+    "access": "Free",
+    "cost": "",
+    "language": "ar",
+    "dialect": "mixed",
+    "domain": [
+      "social media"
+    ],
+    "volume": 300000.0,
+    "unit": "sentences",
+    "link": "https://github.com/telsahy/capstone-34",
+    "lane": "blocked_unknown_license",
+    "decision": "reject_training_until_license_known",
+    "training_text_allowed_next": false,
+    "vocabulary_terms_allowed_next": false,
+    "eval_allowed_next": false,
+    "why": "Saudi content is useful, but unknown license blocks ingestion.",
+    "required_gates": [
+      "capture_source_card",
+      "verify_license_from_primary_source",
+      "no_pretrained_vocab_or_merges"
+    ]
+  },
+  {
+    "source_id": "gulf_arabic_conversational_telephone_speech_transcripts",
+    "masader_file": "gulf_arabic_conversational_telephone_speech,_transcripts.json",
+    "name": "Gulf Arabic Conversational Telephone Speech, Transcripts",
+    "license": "LDC User Agreement",
+    "access": "With-Fee",
+    "cost": "400.00 $",
+    "language": "ar",
+    "dialect": "Gulf",
+    "domain": [
+      "telephone conversations"
+    ],
+    "volume": 976.0,
+    "unit": "sentences",
+    "link": "https://catalog.ldc.upenn.edu/LDC2006T15",
+    "lane": "blocked_paid_or_custom",
+    "decision": "reject_free_lane_with_fee_or_custom_license",
+    "training_text_allowed_next": false,
+    "vocabulary_terms_allowed_next": false,
+    "eval_allowed_next": false,
+    "why": "Not part of the free lane; can be reconsidered only if a paid/custom license is accepted.",
+    "required_gates": [
+      "capture_source_card",
+      "verify_license_from_primary_source",
+      "no_pretrained_vocab_or_merges"
+    ]
+  },
+  {
+    "source_id": "open_domain_response_generation_in_arabic_dialects",
+    "masader_file": "open-domain_response_generation_in_arabic_dialects.json",
+    "name": "Open-Domain Response Generation in Arabic Dialects",
+    "license": "unknown",
+    "access": "Free",
+    "cost": "",
+    "language": "ar",
+    "dialect": "mixed",
+    "domain": [
+      "other"
+    ],
+    "volume": 1000.0,
+    "unit": "sentences",
+    "link": "https://github.com/tareknaous/dialogue-arabic-dialects",
+    "lane": "blocked_unknown_license",
+    "decision": "reject_training_until_license_known",
+    "training_text_allowed_next": false,
+    "vocabulary_terms_allowed_next": false,
+    "eval_allowed_next": false,
+    "why": "Saudi content is useful, but unknown license blocks ingestion.",
+    "required_gates": [
+      "capture_source_card",
+      "verify_license_from_primary_source",
+      "no_pretrained_vocab_or_merges"
+    ]
+  }
+]

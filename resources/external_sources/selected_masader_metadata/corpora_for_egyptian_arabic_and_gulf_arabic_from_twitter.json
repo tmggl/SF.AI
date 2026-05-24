@@ -1,0 +1,56 @@
+{
+  "Name": "Corpora for Egyptian Arabic and Gulf Arabic from Twitter",
+  "Subsets": [
+    {
+      "Name": "GLF",
+      "Dialect": "Gulf",
+      "Volume": 150000.0,
+      "Unit": "sentences"
+    },
+    {
+      "Name": "EGY",
+      "Dialect": "Egypt",
+      "Volume": 150000.0,
+      "Unit": "sentences"
+    }
+  ],
+  "HF Link": "https://hf.co/datasets/arbml/Egyptial_Gulf_Twitter_Dataset",
+  "Link": "https://github.com/telsahy/capstone-34",
+  "License": "unknown",
+  "Year": 2018,
+  "Language": "ar",
+  "Dialect": "mixed",
+  "Domain": [
+    "social media"
+  ],
+  "Form": "text",
+  "Collection Style": [
+    "crawling"
+  ],
+  "Description": "An evenly balanced dataset of Arabic dialects, Egyptian and Gulf using a variety of dialectal terms.",
+  "Volume": 300000.0,
+  "Unit": "sentences",
+  "Ethical Risks": "Medium",
+  "Provider": [],
+  "Derived From": [],
+  "Paper Title": "Building Datasets for Dialect Classifiers using Twitter",
+  "Paper Link": "https://github.com/telsahy/capstone-34/blob/master/Building%20Datasets%20for%20Arabic%20Dialect%20Classifiers%20using%20Twitter.pdf",
+  "Script": "Arab",
+  "Tokenized": false,
+  "Host": "GitHub",
+  "Access": "Free",
+  "Cost": "",
+  "Test Split": false,
+  "Tasks": [
+    "dialect identification"
+  ],
+  "Venue Title": "",
+  "Venue Type": "preprint",
+  "Venue Name": "",
+  "Authors": [
+    "Tamir ElSahy"
+  ],
+  "Affiliations": [],
+  "Abstract": "",
+  "Added By": "Zaid Alyafeai"
+}

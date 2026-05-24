@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.109 / 30**
-- **المرحلة الحالية:** **Phase 27.109 — Free Linguistic Resource Intake Gate**
-- **حالة المرحلة الحالية:** **اكتمل تصنيف المصادر المجانية: Masader metadata مسحوبة؛ 7 مصادر مرشحة؛ لا تدريب خارجي الآن**
-- **المرحلة التالية المقترحة:** Phase 27.110 — Qabas/Masader/Tashkeela Licensed Ingestion Design.
+- **الرحلة الحالية:** **Phase 27.110 / 30**
+- **المرحلة الحالية:** **Phase 27.110 — Licensed Ingestion Design**
+- **حالة المرحلة الحالية:** **اكتمل تصميم إدخال مرخص: Qabas مسموح كـ lexicon/topic فقط؛ Tashkeela محجوبة للتدريب حتى حل الترخيص؛ لا تدريب الآن**
+- **المرحلة التالية المقترحة:** Phase 27.111 — Qabas Lexicon Bootstrap Design, no training.
 - **التحول الاستراتيجي المعتمد:** **SF-native Objective/Curriculum/Decoding Acceleration Track** — تسريع هندسي فقط؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -165,6 +165,7 @@
 | Phase 27.107 | Social Subfamily + Topic Variant Gate Encoding | ✅ gate_passed_data_pack_allowed_no_training | ✅ |
 | Phase 27.108 | Social Subfamily + Topic Variant Data Pack | ✅ data_pack_ready_for_audit_no_training | ✅ |
 | Phase 27.109 | Free Linguistic Resource Intake Gate | ✅ free_resource_intake_ready_no_training | ✅ |
+| Phase 27.110 | Licensed Ingestion Design | ✅ licensed_ingestion_design_ready_no_training | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1927,7 +1928,7 @@ make api
   - `issues=0`
   - `gold=4013`
   - `silver=5112`
-- التالي المسموح بعد اكتمال مرحلة المصادر: Phase 27.110 licensed ingestion design.
+- التالي المسموح بعد اكتمال تصميم الإدخال المرخص: Phase 27.111 Qabas lexicon bootstrap design، بلا تدريب.
 - المحظور: training، runtime release رسمي، SF-50M، tokenizer retrain،
   pretrained/open-weight.
 - التقارير:
@@ -1964,6 +1965,35 @@ make api
 - التالي: Phase 27.110 — Qabas/Masader/Tashkeela Licensed Ingestion Design.
 - المحظور: external training text import، pretrained vocab، tokenizer merges،
   runtime release، SF-50M.
+
+## Phase 27.110 — Licensed Ingestion Design
+
+**الحالة:** مكتملة كبوابة تصميم. لا تدريب ولا إدخال نصوص خارجية في corpus.
+
+- status: `PHASE27_110_LICENSED_INGESTION_DESIGN_READY_NO_TRAINING`.
+- القرار: `PHASE27_110_LICENSED_INGESTION_DESIGN_DECISION`.
+- القرار الهندسي: `ALLOW_PHASE27_111_QABAS_LEXICON_BOOTSTRAP_NO_TRAINING`.
+- الهدف: تحويل قائمة المصادر المجانية إلى lanes مرخّصة واضحة قبل أي سحب/تنظيف/تدريب.
+- تم سحب metadata محلية مختارة من Masader لعشرة مصادر إلى:
+  - `resources/external_sources/selected_masader_metadata/`
+- نتيجة مصفوفة الترخيص:
+  - `Qabas`: مسموح للمرحلة التالية كتصميم lexicon/topic/protected-terms فقط، وليس tokenizer vocab.
+  - `Tashkeela`: محجوبة للتدريب حتى حل تعارض الترخيص بين metadata والورقة/المصدر الأساسي.
+  - `Sadeed Tashkeela`: eval-only حتى مراجعة سلسلة الترخيص.
+  - `SaudiNewsNet` و`OSIAN`: non-commercial، vocabulary/eval-only.
+  - `Saudi Novel Corpus`: محجوب حتى معرفة الترخيص.
+  - `Arabic Learner Corpus`: custom/with-fee، خارج free lane.
+  - مصادر Twitter/telephone/open-domain dialect: محجوبة حتى privacy/provenance/license gates.
+- الملفات:
+  - `resources/external_sources/phase27_110_licensed_ingestion_design.json`
+  - `resources/external_sources/phase27_110_license_matrix.json`
+  - `resources/external_sources/selected_masader_metadata/`
+  - `artifacts/reports/phase27_110_licensed_ingestion_design_report.json`
+  - `artifacts/reports/PHASE27_110_LICENSED_INGESTION_DESIGN_DECISION.json`
+  - [PHASE27_110_LICENSED_INGESTION_DESIGN_REPORT.md](./PHASE27_110_LICENSED_INGESTION_DESIGN_REPORT.md)
+- التالي: Phase 27.111 — Qabas Lexicon Bootstrap Design, no training.
+- المحظور: external training text import، pretrained vocab، tokenizer merges،
+  runtime release، SF-50M، وإدخال أي مصدر غير مرخص في corpus.
 
 ---
 
