@@ -1,7 +1,7 @@
 # SF.AI — Makefile
 # Phase 1 set of operational commands.
 
-.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit build-dialogue-split phase12-readiness phase19-readiness phase20-gates phase22-readiness phase22-plan phase22-next-batch phase22-completion-gate phase22-review-intake phase23-tokenizer-audit phase26-readiness phase27-dialogue-eval phase27-generation-quality phase27-objective-probe phase27-eos-probe phase27-quality-tooling phase27-social-lexical-curriculum phase27-prompt-answer-probe phase27-hygiene-audit phase27-hygiene-repair-probe phase27-tokenizer-strategy phase27-tokenizer-v3-probe phase27-spacing-boundary-repair phase27-semantic-lexical-repair phase27-minimal-lexical-stabilization phase27-heldout-generation-canary phase27-heldout-objective-repair phase27-broader-heldout-repair phase27-intent-conditioned-repair phase27-topic-definition-repair phase27-fresh-mixed-shadow phase27-natural-intent-topic-dataset phase27-balanced-natural-calibration phase27-advice-micro-stabilization phase27-guarded-runtime-trial phase27-live-ui-trial phase27-live-ui-triage phase27-supported-topic-expansion phase27-targeted-topic-curriculum phase27-topic-isolation-repair phase27-tokenizer-context-repair phase27-guarded-runtime-switch phase27-live-ui-broader-probes phase27-guarded-data-backed-expansion phase27-tokenizer-curriculum-repair phase27-semantic-topic-balance-repair phase27-core-dialogue-stabilization phase27-new-topic-conditioning-repair phase27-guarded-runtime-switch-47 phase27-broader-live-ui-probes-47 phase27-generator-only-ui-gate phase27-open-dialogue-generalization-audit phase27-natural-dialogue-objective-repair phase27-natural-dialogue-diversity-expansion phase27-tokenizer-bounded-alignment-probe phase27-bounded-alignment-repair prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
+.PHONY: help check-env install test lint type api web docker-up docker-down phase-status server-status server-start import-mo3jam-saudi source-inventory corpus-audit tokenization-audit build-dialogue-split phase12-readiness phase19-readiness phase20-gates phase22-readiness phase22-plan phase22-next-batch phase22-completion-gate phase22-review-intake phase23-tokenizer-audit phase26-readiness phase27-dialogue-eval phase27-generation-quality phase27-objective-probe phase27-eos-probe phase27-quality-tooling phase27-social-lexical-curriculum phase27-prompt-answer-probe phase27-hygiene-audit phase27-hygiene-repair-probe phase27-tokenizer-strategy phase27-tokenizer-v3-probe phase27-spacing-boundary-repair phase27-semantic-lexical-repair phase27-minimal-lexical-stabilization phase27-heldout-generation-canary phase27-heldout-objective-repair phase27-broader-heldout-repair phase27-intent-conditioned-repair phase27-topic-definition-repair phase27-fresh-mixed-shadow phase27-natural-intent-topic-dataset phase27-balanced-natural-calibration phase27-advice-micro-stabilization phase27-guarded-runtime-trial phase27-live-ui-trial phase27-live-ui-triage phase27-supported-topic-expansion phase27-targeted-topic-curriculum phase27-topic-isolation-repair phase27-tokenizer-context-repair phase27-guarded-runtime-switch phase27-live-ui-broader-probes phase27-guarded-data-backed-expansion phase27-tokenizer-curriculum-repair phase27-semantic-topic-balance-repair phase27-core-dialogue-stabilization phase27-new-topic-conditioning-repair phase27-guarded-runtime-switch-47 phase27-broader-live-ui-probes-47 phase27-generator-only-ui-gate phase27-open-dialogue-generalization-audit phase27-natural-dialogue-objective-repair phase27-natural-dialogue-diversity-expansion phase27-tokenizer-bounded-alignment-probe phase27-bounded-alignment-repair phase27-broader-natural-dialogue-canary prepare-dialogue-batch train-bpe train-lm eval-lm eval-phase16
 
 PY ?= .venv/bin/python
 UVICORN ?= uvicorn
@@ -81,6 +81,7 @@ help:
 	@echo "  make phase27-natural-dialogue-diversity-expansion Run Phase 27.53 large natural dialogue diversity training"
 	@echo "  make phase27-tokenizer-bounded-alignment-probe Run Phase 27.58 tokenizer v7 + bounded alignment probe"
 	@echo "  make phase27-bounded-alignment-repair Run Phase 27.59 bounded family-alignment repair"
+	@echo "  make phase27-broader-natural-dialogue-canary Run Phase 27.60 broader natural-dialogue canary"
 	@echo "  make prepare-dialogue-batch ARGS=...  Prepare reviewed chat exports (Phase 18)"
 	@echo "  make train-bpe ARGS=...   Train SF-BPE tokenizer (requires phase confirmation flag)"
 	@echo "  make train-lm ARGS=...    Train SF native LM (Phase 6)"
@@ -328,6 +329,9 @@ phase27-tokenizer-bounded-alignment-probe:
 
 phase27-bounded-alignment-repair:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_59_bounded_alignment_repair.py $(ARGS)
+
+phase27-broader-natural-dialogue-canary:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_60_broader_natural_dialogue_canary.py $(ARGS)
 
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)

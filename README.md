@@ -46,13 +46,14 @@
 - [docs/PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md](./docs/PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md) — حزمة إصلاح tokenizer/eval/format قبل إعادة التدريب.
 - [docs/PHASE27_58_TOKENIZER_BOUNDED_ALIGNMENT_PROBE_REPORT.md](./docs/PHASE27_58_TOKENIZER_BOUNDED_ALIGNMENT_PROBE_REPORT.md) — tokenizer v7 نجح في الحماية، لكن bounded alignment probe فشل `4/15`.
 - [docs/PHASE27_59_BOUNDED_ALIGNMENT_REPAIR_REPORT.md](./docs/PHASE27_59_BOUNDED_ALIGNMENT_REPAIR_REPORT.md) — إصلاح alignment محدود نجح `15/15` والواجهة بقيت محجوبة.
+- [docs/PHASE27_60_BROADER_NATURAL_DIALOGUE_CANARY_REPORT.md](./docs/PHASE27_60_BROADER_NATURAL_DIALOGUE_CANARY_REPORT.md) — canary طبيعي أوسع فشل `12/30` وكشف ضعف التعميم.
 
 ---
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.59 / 30 — Bounded Alignment Repair اكتملت ونجحت معمليًا.
-- **الأولوية الحالية:** Phase 27.60 canary أوسع للحوار الطبيعي قبل أي فتح واجهة.
+- **الرحلة الحالية:** Phase 27.60 / 30 — Broader Natural-Dialogue Canary اكتملت كتقييم فاشل.
+- **الأولوية الحالية:** Phase 27.61 إصلاح تعميم الحوار الطبيعي، خصوصًا `support/topic/planning`.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -116,6 +117,7 @@
 - **نتيجة Phase 27.57:** أضيفت حزمة إصلاح قبل التدريب: `18` عبارة محمية، تغطية `9/9` للعبارات الحرجة، semantic alignment بلا overlap، و5 قواعد لمنع خلط عائلات الردود. التقرير: [docs/PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md](./docs/PHASE27_57_TOKENIZER_EVAL_FORMAT_REPAIR_PACK_REPORT.md).
 - **نتيجة Phase 27.58:** دُرّب tokenizer v7 مع `53` مصطلحًا/عبارة محمية ونجحت عبارات 27.57 كقطعة واحدة، لكن probe المولّد فشل `4/15`; لا runtime ولا UI. التقرير: [docs/PHASE27_58_TOKENIZER_BOUNDED_ALIGNMENT_PROBE_REPORT.md](./docs/PHASE27_58_TOKENIZER_BOUNDED_ALIGNMENT_PROBE_REPORT.md).
 - **نتيجة Phase 27.59:** دُرّب repair محدود لعائلات الردود على tokenizer v7 ونجح `15/15`; لا runtime ولا UI حتى يمر canary أوسع. التقرير: [docs/PHASE27_59_BOUNDED_ALIGNMENT_REPAIR_REPORT.md](./docs/PHASE27_59_BOUNDED_ALIGNMENT_REPAIR_REPORT.md).
+- **نتيجة Phase 27.60:** اختبرنا checkpoint 27.59 بدون تدريب جديد على canary أوسع؛ النتيجة `12/30` فقط، لذلك لا runtime ولا UI. التقرير: [docs/PHASE27_60_BROADER_NATURAL_DIALOGUE_CANARY_REPORT.md](./docs/PHASE27_60_BROADER_NATURAL_DIALOGUE_CANARY_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 

@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.59 — Bounded Alignment Repair",
-        current_phase_status="passed_bounded_alignment_repair_runtime_blocked",
+        current_phase="Phase 27.60 — Broader Natural-Dialogue Canary",
+        current_phase_status="failed_broader_natural_dialogue_canary_runtime_blocked",
         next_phase=(
-            "Phase 27.60 broader natural-dialogue canary using tokenizer v7 and Phase 27.59 repair"
+            "Phase 27.61 inspect Phase 27.60 failures and repair broader natural-dialogue generalization"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -409,6 +409,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_59_bounded_alignment_repair",
                 status="passed_bounded_alignment_repair_runtime_blocked",
                 phase="Phase 27.59",
+            ),
+            ComponentStatus(
+                name="phase27_60_broader_natural_dialogue_canary",
+                status="failed_broader_natural_dialogue_canary_runtime_blocked",
+                phase="Phase 27.60",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.59: أصلحنا عائلات الردود داخل اختبار محدود ومرّ "
-    "probe المحاذاة 15/15 على tokenizer v7. الواجهة لا تُفتح بعد؛ التالي "
-    "Phase 27.60 canary أوسع للحوار الطبيعي قبل أي runtime switch.",
+    "وصلنا إلى Phase 27.60: اختبرنا checkpoint 27.59 على canary طبيعي أوسع "
+    "وفشل 12/30. الواجهة لا تُفتح. الفشل الأكبر في support/topic/planning، "
+    "والتالي Phase 27.61 لإصلاح التعميم الطبيعي قبل أي runtime switch.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

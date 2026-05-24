@@ -129,6 +129,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.57 | Tokenizer/Eval/Format Repair Pack | مكتملة؛ `18` عبارة محمية، تغطية `9/9`, semantic alignment جاهز |
 | Phase 27.58 | Tokenizer v7 Bounded Alignment Probe | مكتملة كتجربة؛ tokenizer نجح، probe فشل `4/15`, runtime محجوب |
 | Phase 27.59 | Bounded Alignment Repair | مكتملة؛ repair محدود نجح `15/15`, runtime محجوب بانتظار canary أوسع |
+| Phase 27.60 | Broader Natural-Dialogue Canary | مكتملة كتقييم؛ canary أوسع فشل `12/30`, runtime محجوب |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3332,6 +3333,46 @@ cases = 7/7
 - [PHASE27_59_BOUNDED_ALIGNMENT_REPAIR_REPORT.md](./PHASE27_59_BOUNDED_ALIGNMENT_REPAIR_REPORT.md)
 - `artifacts/reports/phase27_59_bounded_alignment_repair_report.json`
 - `artifacts/samples/phase27_59_bounded_alignment_repair.md`
+
+---
+
+## Phase 27.60 — Broader Natural-Dialogue Canary
+
+### الهدف
+اختبار checkpoint Phase 27.59 على أسئلة طبيعية أوسع من بوابة `15/15` لمعرفة هل الإصلاح يعمم أم لا.
+
+### ما تم
+- أضيف `scripts/phase27_60_broader_natural_dialogue_canary.py`.
+- أضيف `make phase27-broader-natural-dialogue-canary`.
+- لا تدريب جديد.
+- قُيّم checkpoint:
+  - `artifacts/eval/phase27_59_bounded_alignment_repair/checkpoints/sf-10m-step6400`
+- استخدم canary من `30` حالة موزعة على:
+  - `open_social`
+  - `followup`
+  - `planning`
+  - `support`
+  - `topic`
+
+### النتيجة
+- pass: `12/30`.
+- `open_social`: `5/6`.
+- `followup`: `3/6`.
+- `planning`: `2/6`.
+- `support`: `0/6`.
+- `topic`: `2/6`.
+
+### القرار
+Phase 27.59 نجحت معمليًا لكنها لم تعمم بما يكفي. لا runtime switch، لا UI، لا `SF-50M`، ولا Phase 28.
+
+التالي:
+
+**Phase 27.61 — inspect Phase 27.60 failures and repair broader natural-dialogue generalization**
+
+### artifacts
+- [PHASE27_60_BROADER_NATURAL_DIALOGUE_CANARY_REPORT.md](./PHASE27_60_BROADER_NATURAL_DIALOGUE_CANARY_REPORT.md)
+- `artifacts/reports/phase27_60_broader_natural_dialogue_canary_report.json`
+- `artifacts/samples/phase27_60_broader_natural_dialogue_canary.md`
 
 ---
 

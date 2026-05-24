@@ -1,0 +1,680 @@
+{
+  "phase": "Phase 27.60",
+  "status": "FAILED_BROADER_NATURAL_DIALOGUE_CANARY_RUNTIME_BLOCKED",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "evaluation_only": true,
+  "tokenizer": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+  "checkpoint_root": "artifacts/eval/phase27_59_bounded_alignment_repair/checkpoints",
+  "checkpoint_name": "sf-10m-step6400",
+  "candidate_generator": "sf_10m_phase27_59_alignment_repair",
+  "canary_cases": 30,
+  "summary": {
+    "passed": 12,
+    "total": 30,
+    "pass_rate": 0.4,
+    "family_summary": {
+      "followup": {
+        "passed": 3,
+        "total": 6
+      },
+      "open_social": {
+        "passed": 5,
+        "total": 6
+      },
+      "planning": {
+        "passed": 2,
+        "total": 6
+      },
+      "support": {
+        "passed": 0,
+        "total": 6
+      },
+      "topic": {
+        "passed": 2,
+        "total": 6
+      }
+    },
+    "reason_counts": {
+      "expected_terms_missing": 13,
+      "passed": 12,
+      "response_family_mismatch": 1,
+      "guard:advice_mismatch": 2,
+      "guard:planning_mismatch": 1,
+      "guard:support_mismatch": 1
+    }
+  },
+  "rows": [
+    {
+      "id": "open_social_01",
+      "dialect": "saudi",
+      "prompt": "ابي اسولف شوي",
+      "intent": "open_social",
+      "topic": "",
+      "family": "open_social",
+      "expected_any": [
+        "نسولف",
+        "موضوع",
+        "يومك"
+      ],
+      "response": "ابدأ بشي واحد واضح، ثم انتقل للخطوة التالية.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "open_social_02",
+      "dialect": "saudi",
+      "prompt": "خلنا نفتح موضوع بسيط",
+      "intent": "open_social",
+      "topic": "",
+      "family": "open_social",
+      "expected_any": [
+        "موضوع",
+        "نبدأ",
+        "نسولف"
+      ],
+      "response": "نبدأ بحديث خفيف عن شيء لطيف في يومك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "family_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "open_social_03",
+      "dialect": "msa",
+      "prompt": "حدثني حديثًا لطيفًا",
+      "intent": "open_social",
+      "topic": "",
+      "family": "open_social",
+      "expected_any": [
+        "حديث",
+        "موضوع",
+        "نبدأ"
+      ],
+      "response": "نبدأ بموضوع بسيط وخفيف عن يومك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "family_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "open_social_04",
+      "dialect": "saudi",
+      "prompt": "وش عندك كلام خفيف",
+      "intent": "open_social",
+      "topic": "",
+      "family": "open_social",
+      "expected_any": [
+        "خفيف",
+        "موضوع",
+        "يومك"
+      ],
+      "response": "عندي موضوع خفيف: وش أفضل شي صار في يومك؟",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "family_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "open_social_05",
+      "dialect": "msa",
+      "prompt": "افتح معي حوارًا قصيرًا",
+      "intent": "open_social",
+      "topic": "",
+      "family": "open_social",
+      "expected_any": [
+        "حوار",
+        "موضوع",
+        "نبدأ"
+      ],
+      "response": "نبدأ بحديث خفيف عن شيء لطيف في يومك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "family_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "open_social_06",
+      "dialect": "saudi",
+      "prompt": "ما عندي موضوع سولف انت",
+      "intent": "open_social",
+      "topic": "",
+      "family": "open_social",
+      "expected_any": [
+        "سولف",
+        "موضوع",
+        "يومك"
+      ],
+      "response": "خفيف عن يومك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "family_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "followup_01",
+      "dialect": "saudi",
+      "prompt": "ما فهمت قصدك",
+      "intent": "followup",
+      "topic": "",
+      "family": "followup",
+      "expected_any": [
+        "أقصد",
+        "اقصد",
+        "الفكرة"
+      ],
+      "response": "أقصد لا تستعجل؛ خذ الجزء الأول وافهمه ثم كمل.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "family_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "followup_02",
+      "dialect": "msa",
+      "prompt": "هل توضح لي الفكرة",
+      "intent": "followup",
+      "topic": "",
+      "family": "followup",
+      "expected_any": [
+        "أقصد",
+        "الفكرة",
+        "ابدأ"
+      ],
+      "response": "أقصد أن تبدأ بالواضح ثم تنتقل لما بعده.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "family_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "followup_03",
+      "dialect": "saudi",
+      "prompt": "وبعدين وش اسوي",
+      "intent": "followup",
+      "topic": "",
+      "family": "followup",
+      "expected_any": [
+        "بعدها",
+        "كمل",
+        "خطوة"
+      ],
+      "response": "خذ نفسًا هادئًا وخفيف عن يومك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "followup_04",
+      "dialect": "msa",
+      "prompt": "أكمل شرحك",
+      "intent": "followup",
+      "topic": "",
+      "family": "followup",
+      "expected_any": [
+        "نكمل",
+        "الفكرة",
+        "بعده"
+      ],
+      "response": "أقصد أن الفكرة أبسط: ابدأ بالجزء الواضح ثم أكمل.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "family_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "followup_05",
+      "dialect": "saudi",
+      "prompt": "طيب وش تقصد بالضبط",
+      "intent": "followup",
+      "topic": "",
+      "family": "followup",
+      "expected_any": [
+        "أقصد",
+        "اقصد",
+        "الفكرة"
+      ],
+      "response": "خفيف عن يومك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "followup_06",
+      "dialect": "msa",
+      "prompt": "فسرها بطريقة أبسط",
+      "intent": "followup",
+      "topic": "",
+      "family": "followup",
+      "expected_any": [
+        "أقصد",
+        "أبسط",
+        "ابدأ"
+      ],
+      "response": "ابدأ بالجزء الواضح ثم أكمل.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "family_ok": false,
+      "passed": false,
+      "reason": "response_family_mismatch"
+    },
+    {
+      "id": "planning_01",
+      "dialect": "saudi",
+      "prompt": "ابي اخلي يومي مرتب",
+      "intent": "planning",
+      "topic": "",
+      "family": "planning",
+      "expected_any": [
+        "ابدأ",
+        "مهام",
+        "خطوة"
+      ],
+      "response": "ابدأ بشي واحد واضح، ثم انتقل للخطوة التالية.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "family_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "planning_02",
+      "dialect": "msa",
+      "prompt": "ساعدني أبدأ عملي اليوم",
+      "intent": "planning",
+      "topic": "",
+      "family": "planning",
+      "expected_any": [
+        "مهمة",
+        "ابدأ",
+        "مهام"
+      ],
+      "response": "خفيف عن يومك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "planning_03",
+      "dialect": "saudi",
+      "prompt": "عندي اشياء كثيره وش ابدا فيه",
+      "intent": "planning",
+      "topic": "",
+      "family": "planning",
+      "expected_any": [
+        "ابدأ",
+        "الأهم",
+        "اهم"
+      ],
+      "response": "خفيف عن يومك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "planning_04",
+      "dialect": "msa",
+      "prompt": "أريد خطة صغيرة لبداية اليوم",
+      "intent": "planning",
+      "topic": "",
+      "family": "planning",
+      "expected_any": [
+        "خطة",
+        "ابدأ",
+        "مهمة"
+      ],
+      "response": "خفيف عن يومك.",
+      "generator_used": true,
+      "guard_allowed": false,
+      "guard_reason": "advice_mismatch",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "guard:advice_mismatch"
+    },
+    {
+      "id": "planning_05",
+      "dialect": "saudi",
+      "prompt": "رتب لي اول خطوه",
+      "intent": "planning",
+      "topic": "",
+      "family": "planning",
+      "expected_any": [
+        "خطوة",
+        "ابدأ",
+        "واضح"
+      ],
+      "response": "خفيف عن يومك.",
+      "generator_used": true,
+      "guard_allowed": false,
+      "guard_reason": "planning_mismatch",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "guard:planning_mismatch"
+    },
+    {
+      "id": "planning_06",
+      "dialect": "msa",
+      "prompt": "كيف أختار أول مهمة",
+      "intent": "planning",
+      "topic": "",
+      "family": "planning",
+      "expected_any": [
+        "مهمة",
+        "الأهم",
+        "ابدأ"
+      ],
+      "response": "اكتب ثلاث مهام وابدأ بها الآن.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "family_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "support_01",
+      "dialect": "saudi",
+      "prompt": "ضايق صدري شوي",
+      "intent": "support",
+      "topic": "",
+      "family": "support",
+      "expected_any": [
+        "نفس",
+        "تهدأ",
+        "هون"
+      ],
+      "response": "خفيف من يومك ونسولف عنه.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "support_02",
+      "dialect": "msa",
+      "prompt": "أشعر بضغط وأحتاج هدوءًا",
+      "intent": "support",
+      "topic": "",
+      "family": "support",
+      "expected_any": [
+        "تنفس",
+        "بهدوء",
+        "راحة"
+      ],
+      "response": "خفيف من يومك ونسولف عنه.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "support_03",
+      "dialect": "saudi",
+      "prompt": "ابي كلام يطمني",
+      "intent": "support",
+      "topic": "",
+      "family": "support",
+      "expected_any": [
+        "تهدأ",
+        "تقدر",
+        "نفس"
+      ],
+      "response": "ابدأ بشي واحد واضح، ثم انتقل للخطوة التالية.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "support_04",
+      "dialect": "msa",
+      "prompt": "أنا قلق من البداية",
+      "intent": "support",
+      "topic": "",
+      "family": "support",
+      "expected_any": [
+        "تنفس",
+        "خطوة",
+        "يقلقك"
+      ],
+      "response": "خفيف من يومك ونسولف عنه.",
+      "generator_used": true,
+      "guard_allowed": false,
+      "guard_reason": "advice_mismatch",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "guard:advice_mismatch"
+    },
+    {
+      "id": "support_05",
+      "dialect": "saudi",
+      "prompt": "حاس اني مشتت",
+      "intent": "support",
+      "topic": "",
+      "family": "support",
+      "expected_any": [
+        "نفس",
+        "خطوة",
+        "ركز"
+      ],
+      "response": "خفيف من يومك ونسولف عنه.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "support_06",
+      "dialect": "msa",
+      "prompt": "كيف أهدأ دون تعقيد",
+      "intent": "support",
+      "topic": "",
+      "family": "support",
+      "expected_any": [
+        "تنفس",
+        "بهدوء",
+        "لحظة"
+      ],
+      "response": "اكتب ثلاث مهام وابدأ بالأهم.",
+      "generator_used": true,
+      "guard_allowed": false,
+      "guard_reason": "support_mismatch",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "guard:support_mismatch"
+    },
+    {
+      "id": "topic_01",
+      "dialect": "msa",
+      "prompt": "عرّف لي الوفاء",
+      "intent": "topic",
+      "topic": "الوفاء",
+      "family": "topic",
+      "expected_any": [
+        "الوفاء"
+      ],
+      "response": "خفيف عن يومك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "topic_02",
+      "dialect": "saudi",
+      "prompt": "وش معنى التعاون",
+      "intent": "topic",
+      "topic": "التعاون",
+      "family": "topic",
+      "expected_any": [
+        "التعاون"
+      ],
+      "response": "خذ الجزء الأول وافهمه ثم كمل.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "topic_03",
+      "dialect": "msa",
+      "prompt": "ما المقصود بالصبر",
+      "intent": "topic",
+      "topic": "الصبر",
+      "family": "topic",
+      "expected_any": [
+        "الصبر"
+      ],
+      "response": "خفيف عن يومك.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "topic_04",
+      "dialect": "saudi",
+      "prompt": "الاحترام وش هو",
+      "intent": "topic",
+      "topic": "الاحترام",
+      "family": "topic",
+      "expected_any": [
+        "الاحترام"
+      ],
+      "response": "خفيف من يومك ونسولف عنه.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": false,
+      "family_ok": false,
+      "passed": false,
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "topic_05",
+      "dialect": "msa",
+      "prompt": "اشرح الهدوء بجملة",
+      "intent": "topic",
+      "topic": "الهدوء",
+      "family": "topic",
+      "expected_any": [
+        "الهدوء"
+      ],
+      "response": "الهدوء سكينة تخفف التوتر وتوضح التفكير.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "family_ok": true,
+      "passed": true,
+      "reason": "passed"
+    },
+    {
+      "id": "topic_06",
+      "dialect": "saudi",
+      "prompt": "وش يعني الصدق ببساطه",
+      "intent": "topic",
+      "topic": "الصدق",
+      "family": "topic",
+      "expected_any": [
+        "الصدق"
+      ],
+      "response": "الصدق إن كلامك يكون واضح وما فيه خداع.",
+      "generator_used": true,
+      "guard_allowed": true,
+      "guard_reason": "passed",
+      "expected_ok": true,
+      "family_ok": true,
+      "passed": true,
+      "reason": "passed"
+    }
+  ],
+  "decisions": {
+    "runtime_switch_allowed": false,
+    "ui_open_allowed": false,
+    "sf50m_allowed": false,
+    "phase28_allowed": false,
+    "guarded_runtime_review_allowed": false
+  },
+  "decision": "Broader canary failed. Keep runtime blocked and repair natural-dialogue generalization.",
+  "next_phase": "Phase 27.61 — inspect Phase 27.60 failures and repair broader natural dialogue"
+}

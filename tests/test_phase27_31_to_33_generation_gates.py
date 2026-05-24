@@ -511,3 +511,21 @@ def test_phase27_59_bounded_alignment_repair_passes_but_keeps_runtime_blocked() 
     assert report["decisions"]["ui_open_allowed"] is False
     assert report["decisions"]["sf50m_allowed"] is False
     assert report["decisions"]["broader_canary_allowed"] is True
+
+
+def test_phase27_60_broader_canary_blocks_runtime_on_generalization_failure() -> None:
+    report = _report("phase27_60_broader_natural_dialogue_canary_report.json")
+    assert report["phase"] == "Phase 27.60"
+    assert report["status"] == "FAILED_BROADER_NATURAL_DIALOGUE_CANARY_RUNTIME_BLOCKED"
+    assert report["training_started"] is False
+    assert report["evaluation_only"] is True
+    assert report["checkpoint_name"] == "sf-10m-step6400"
+    assert report["summary"]["passed"] == 12
+    assert report["summary"]["total"] == 30
+    assert report["summary"]["family_summary"]["open_social"]["passed"] == 5
+    assert report["summary"]["family_summary"]["support"]["passed"] == 0
+    assert report["summary"]["family_summary"]["topic"]["passed"] == 2
+    assert report["decisions"]["runtime_switch_allowed"] is False
+    assert report["decisions"]["ui_open_allowed"] is False
+    assert report["decisions"]["sf50m_allowed"] is False
+    assert report["decisions"]["guarded_runtime_review_allowed"] is False

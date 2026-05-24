@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.59 / 30**
-- **المرحلة الحالية:** **Phase 27.59 — Bounded Alignment Repair**
-- **حالة المرحلة الحالية:** **اكتملت؛ بوابة alignment المحدودة نجحت (`15/15`) والـ runtime ما زال محجوبًا**
-- **المرحلة التالية المقترحة:** Phase 27.60 broader natural-dialogue canary using tokenizer v7 and Phase 27.59 repair.
+- **الرحلة الحالية:** **Phase 27.60 / 30**
+- **المرحلة الحالية:** **Phase 27.60 — Broader Natural-Dialogue Canary**
+- **حالة المرحلة الحالية:** **اكتملت كتقييم؛ فشل canary الأوسع (`12/30`) والـ runtime محجوب**
+- **المرحلة التالية المقترحة:** Phase 27.61 inspect Phase 27.60 failures and repair broader natural-dialogue generalization.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -108,6 +108,7 @@
 | Phase 27.57 | Tokenizer/Eval/Format Repair Pack | ✅ completed_repair_pack_ready_for_bounded_retraining_gate | ✅ |
 | Phase 27.58 | Tokenizer v7 Bounded Alignment Probe | ✅ failed_bounded_alignment_probe_runtime_blocked | ✅ |
 | Phase 27.59 | Bounded Alignment Repair | ✅ passed_bounded_alignment_repair_runtime_blocked | ✅ |
+| Phase 27.60 | Broader Natural-Dialogue Canary | ✅ failed_broader_natural_dialogue_canary_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -854,6 +855,15 @@
   - نجحت العائلات: `open_social=3/3`, `followup=3/3`, `planning=3/3`, `support=3/3`, `topic=3/3`.
   - القرار: لا runtime switch ولا UI بعد؛ النجاح يسمح فقط بـ Phase 27.60 canary أوسع.
   - أضيف [PHASE27_59_BOUNDED_ALIGNMENT_REPAIR_REPORT.md](./PHASE27_59_BOUNDED_ALIGNMENT_REPAIR_REPORT.md).
+- بدأ وانتهى Phase 27.60 Broader Natural-Dialogue Canary:
+  - أضيف `make phase27-broader-natural-dialogue-canary`.
+  - لم يبدأ تدريب جديد؛ قيّم checkpoint Phase 27.59 فقط.
+  - النتيجة: `12/30`.
+  - التوزيع: `open_social=5/6`, `followup=3/6`, `planning=2/6`, `support=0/6`, `topic=2/6`.
+  - الفشل المتكرر: collapse إلى عبارات مثل `خفيف عن يومك` خارج سياقها، وفشل دعم/موضوعات/تخطيط.
+  - القرار: لا runtime switch، لا UI، لا `SF-50M`، ولا Phase 28.
+  - التالي: Phase 27.61 إصلاح generalization الطبيعي خصوصًا `support/topic/planning`.
+  - أضيف [PHASE27_60_BROADER_NATURAL_DIALOGUE_CANARY_REPORT.md](./PHASE27_60_BROADER_NATURAL_DIALOGUE_CANARY_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 

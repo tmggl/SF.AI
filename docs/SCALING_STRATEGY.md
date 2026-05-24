@@ -259,3 +259,18 @@ Phase 27.59 أصلحت alignment المحدود:
 - لا runtime switch بعد.
 - لا فتح واجهة للمرشح حتى يمر canary طبيعي أوسع.
 - التالي Phase 27.60 broader natural-dialogue canary.
+
+## قرار Phase 27.60
+
+Phase 27.60 اختبرت التعميم الطبيعي الأوسع:
+
+- broader canary: فشل `12/30`.
+- أقوى فشل في `support=0/6`, `topic=2/6`, `planning=2/6`.
+
+قرار scaling:
+
+- لا رفع حجم.
+- لا runtime switch.
+- لا فتح واجهة للمرشح.
+- لا `SF-50M` ولا Phase 28.
+- التالي Phase 27.61 إصلاح generalization الطبيعي قبل أي توسع.
