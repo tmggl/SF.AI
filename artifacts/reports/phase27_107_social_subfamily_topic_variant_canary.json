@@ -1,0 +1,63 @@
+{
+  "canary_id": "phase27_107_social_subfamily_topic_variant_canary",
+  "language_track": ["msa", "saudi"],
+  "generator_target": "sf_10m_phase27_81_or_next_bounded_checkpoint",
+  "prompts": [
+    {
+      "id": "greeting_saudi_01",
+      "prompt": "السلام عليكم",
+      "family": "open_social",
+      "subfamily": "greeting",
+      "required_terms": ["وعليكم", "السلام"],
+      "forbidden_terms": ["مهام", "الأهم", "معنى"]
+    },
+    {
+      "id": "smalltalk_msa_01",
+      "prompt": "كيف الحال",
+      "family": "open_social",
+      "subfamily": "smalltalk",
+      "required_terms": ["بخير"],
+      "forbidden_terms": ["مهام", "معنى"]
+    },
+    {
+      "id": "open_chat_saudi_01",
+      "prompt": "خلنا نسولف",
+      "family": "open_social",
+      "subfamily": "open_chat",
+      "required_terms": ["نسولف"],
+      "forbidden_terms": ["مهام", "معنى"]
+    },
+    {
+      "id": "identity_msa_01",
+      "prompt": "من أنت",
+      "family": "open_social",
+      "subfamily": "identity",
+      "required_terms": ["SF.AI"],
+      "forbidden_terms": ["مهام", "معنى"]
+    },
+    {
+      "id": "capability_saudi_01",
+      "prompt": "وش تقدر تسوي",
+      "family": "open_social",
+      "subfamily": "capability",
+      "required_terms": ["أقدر"],
+      "forbidden_terms": ["معنى الصداقة", "ثلاث مهام"]
+    },
+    {
+      "id": "topic_variant_friendship_01",
+      "prompt": "الصداقه",
+      "family": "topic",
+      "canonical_topic": "الصداقة",
+      "required_terms": ["الصداقة"],
+      "forbidden_terms": ["الصدام", "مهام"]
+    },
+    {
+      "id": "topic_variant_brotherhood_01",
+      "prompt": "الاخوه",
+      "family": "topic",
+      "canonical_topic": "الأخوة",
+      "required_terms": ["الأخوة"],
+      "forbidden_terms": ["مهام", "الصداقة"]
+    }
+  ]
+}

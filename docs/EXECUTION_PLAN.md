@@ -4577,7 +4577,7 @@ Final Response
 
 ---
 
-## الحالة العملية الحالية — Phase 27.105
+## الحالة العملية الحالية — Phase 27.107
 
 المسار الحاكم هو:
 
@@ -4588,7 +4588,7 @@ SF-native Objective/Curriculum/Decoding Acceleration Track
 آخر قرار:
 
 ```text
-PHASE27_105_RAW_UI_LAB_RESULT_DIAGNOSIS_DECISION
+PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_DECISION
 ```
 
 الخلاصة:
@@ -4599,13 +4599,19 @@ PHASE27_105_RAW_UI_LAB_RESULT_DIAGNOSIS_DECISION
   `الصداقة` وتدخل كـ `definition`.
 - التخطيط والدعم البسيط يعملان جزئيًا.
 - التحية/الهوية/القدرات وtopic variants ما زالت ضعيفة.
-- لا تدريب جديد قبل Phase 27.106.
+- أضيف تصميم renderer جديد:
+  - `dialogue_subfamily`
+  - `topic_canonical`
+  - `topic_variant`
+  - `نوع السوالف: تحية/سؤال حال/فتح سالفة/شكر/هوية/قدرات`
+- Phase 27.107 مرّر gate التنفيذية وأثبت canary من أسلوب اختبار الواجهة.
+- لا تدريب جديد قبل data pack audit لاحق.
 - لا SF-50M قبل gate يثبت أن capacity هي السبب الأكبر.
 
 التالي:
 
 ```text
-Phase 27.106 — Social Subfamily + Topic Variant Objective Design
+Phase 27.108 — Social Subfamily + Topic Variant Data Pack
 ```
 
 ---

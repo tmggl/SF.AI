@@ -61,11 +61,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.105 — Raw UI Lab Result Diagnosis",
+        current_phase="Phase 27.107 — Social Subfamily + Topic Variant Gate Encoding",
         current_phase_status=(
-            "phase27_105_diagnosed_raw_ui_lab_failures_no_training"
+            "phase27_107_gate_passed_data_pack_allowed_no_training"
         ),
-        next_phase="Phase 27.106 — Social Subfamily + Topic Variant Objective Design",
+        next_phase="Phase 27.108 — Social Subfamily + Topic Variant Data Pack",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -649,6 +649,16 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_105_raw_ui_lab_result_diagnosis",
                 status="diagnosed_raw_ui_lab_failures_no_training",
                 phase="Phase 27.105",
+            ),
+            ComponentStatus(
+                name="phase27_106_social_subfamily_topic_variant_design",
+                status="design_ready_gate_encoding_no_training",
+                phase="Phase 27.106",
+            ),
+            ComponentStatus(
+                name="phase27_107_social_subfamily_topic_variant_gate",
+                status="gate_passed_data_pack_allowed_no_training",
+                phase="Phase 27.107",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

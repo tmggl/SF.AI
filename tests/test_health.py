@@ -23,7 +23,7 @@ def test_health_ok() -> None:
     body = r.json()
     assert body["status"] == "ok"
     assert body["project"] == "SF.AI"
-    assert body["phase"] == "Phase 27.105"
+    assert body["phase"] == "Phase 27.107"
 
 
 def test_system_status_sovereign_flags() -> None:
@@ -31,11 +31,11 @@ def test_system_status_sovereign_flags() -> None:
     assert r.status_code == 200
     body = r.json()
     assert body["project"] == "SF.AI"
-    assert body["current_phase"].startswith("Phase 27.105")
+    assert body["current_phase"].startswith("Phase 27.107")
     assert body["current_phase_status"] == (
-        "phase27_105_diagnosed_raw_ui_lab_failures_no_training"
+        "phase27_107_gate_passed_data_pack_allowed_no_training"
     )
-    assert "Phase 27.106" in body["next_phase"]
+    assert "Phase 27.108" in body["next_phase"]
     assert body["sovereign"] is True
     assert body["uses_external_llm"] is False
     assert body["uses_pretrained_weights"] is False
@@ -192,6 +192,16 @@ def test_system_status_sovereign_flags() -> None:
     assert any(
         c["name"] == "phase27_105_raw_ui_lab_result_diagnosis"
         and c["status"] == "diagnosed_raw_ui_lab_failures_no_training"
+        for c in body["components"]
+    )
+    assert any(
+        c["name"] == "phase27_106_social_subfamily_topic_variant_design"
+        and c["status"] == "design_ready_gate_encoding_no_training"
+        for c in body["components"]
+    )
+    assert any(
+        c["name"] == "phase27_107_social_subfamily_topic_variant_gate"
+        and c["status"] == "gate_passed_data_pack_allowed_no_training"
         for c in body["components"]
     )
     assert any(

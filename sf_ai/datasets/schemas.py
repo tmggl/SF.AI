@@ -66,8 +66,11 @@ class Provenance(BaseModel):
     quality: str | None = None     # gold / silver / bronze (Phase 11 training gate)
     training_allowed: bool | None = None  # explicit owner permission for training
     dialogue_family: str | None = None     # open_social / followup / planning / support / topic
+    dialogue_subfamily: str | None = None  # greeting / smalltalk / open_chat / ...
     prompt_family: str | None = None       # user-side dialogue family hint
     answer_family: str | None = None       # assistant-side dialogue family hint
+    topic_canonical: str | None = None     # normalized topic anchor, e.g. الصداقة
+    topic_variant: str | None = None       # surface variant seen in prompt, e.g. الصداقه
     topic_term: str | None = None          # requested topic anchor for topic-family dialogue
     owner_user_id: str | None = None       # canonical owner of this dialogue data
     created_by_user_id: str | None = None  # author/exporter/reviewer who created it

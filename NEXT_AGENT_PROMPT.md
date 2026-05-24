@@ -50,11 +50,12 @@
 - السيادة تبقى على corpus/tokenizer/behavior/runtime/alignment/evaluation
   وسلوك الحوار الفصيح والسعودي.
 - قبل أي تدريب جديد يجب وجود root-cause/decision gate حديث يسمح به صراحة.
-  القرار الحالي هو `PHASE27_105_RAW_UI_LAB_RESULT_DIAGNOSIS_DECISION`:
+  القرار الحالي هو `PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_DECISION`:
   المسار أُعيد تثبيته عند Phase 27.79، ومرّت بوابات Phase 27.80، ثم اكتمل
   تدريب Phase 27.81. Phase 27.105 أثبت أن الواجهة تستدعي المولد الحقيقي
   في raw lab، لكنه شخّص فشل social subfamilies وtopic variants؛ التالي
-  Phase 27.106 design بلا تدريب.
+  Phase 27.106 design أضاف renderer signals، وPhase 27.107 مرّر gate؛
+  التالي Phase 27.108 data pack بلا تدريب.
 - لا runtime release بدون `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - لا تعتمد loss/perplexity/micro-probe وحدها؛ النجاح يعني held-out dialogue
   quality, runtime usability, clean-stop, semantic correctness, family
@@ -67,13 +68,13 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 27.105 موثقة تاريخيًا، لكن الحالة العملية
+- المراحل من Phase 0 حتى Phase 27.107 موثقة تاريخيًا، لكن الحالة العملية
   الحالية هي:
-  `Phase 27.105 — Raw UI Lab Result Diagnosis`
+  `Phase 27.107 — Social Subfamily + Topic Variant Gate Encoding`
   ضمن `SF-native Objective/Curriculum/Decoding Acceleration Track`.
   التقرير الملزم: `docs/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md`.
   القرار التنفيذي:
-  `PHASE27_105_RAW_UI_LAB_RESULT_DIAGNOSIS_DECISION`.
+  `PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_DECISION`.
   Phase 27.104 تبقى الدليل السابق: تدريب محدود نجح topic-wise وفشل
   all-family، وليست إذن runtime.
   تاريخيًا أضيفت دفعة `sf-ai-balanced-family-pack-v1`: `2500` سجل gold
@@ -118,8 +119,11 @@
   Phase 27.105 فتح raw UI lab محليًا فقط: `الصداقه` صارت تمر كموضوع
   normalized إلى المولد، لكن `السلام عليكم` و`الاخوه` تكشف أن social
   subfamilies وtopic variants تحتاج objective design.
-- أول خطوة تالية: Phase 27.106 — Social Subfamily + Topic Variant Objective
-  Design. لا تبدأ training ولا SF-50M ولا tokenizer retrain قبل gate.
+  Phase 27.106 أضاف `dialogue_subfamily`, `topic_canonical`, `topic_variant`
+  وrenderer line `نوع السوالف: ...`.
+  Phase 27.107 مرّر gate التنفيذية وأثبت canary الرسمي.
+- أول خطوة تالية: Phase 27.108 — Social Subfamily + Topic Variant Data Pack.
+  لا تبدأ training ولا SF-50M ولا tokenizer retrain قبل data pack audit.
 - تفويض التكبير التلقائي معتمد، لكن مفعوله يبدأ فقط عندما تنجح gates؛
   حاليًا `SF-50M` ما زال محجوبًا لأن capacity وزنها `1%`.
 - استخدم `make phase22-review-intake` أو `GET /system/phase22-review-intake` قبل أي تحويل من `data/corpus/chat/review/` إلى corpus تدريبي.

@@ -1,0 +1,14 @@
+{
+  "decision_id": "PHASE27_106_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DESIGN_DECISION",
+  "phase": "Phase 27.106",
+  "engineering_decision": "ALLOW_PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_NO_TRAINING",
+  "training_started": false,
+  "new_training_allowed": false,
+  "runtime_release_allowed": false,
+  "raw_lab_runtime_remains_available": true,
+  "sf50m_justified_transition": false,
+  "tokenizer_retrain_allowed": false,
+  "pretrained_allowed": false,
+  "next_phase": "Phase 27.107 — Social Subfamily + Topic Variant Gate Encoding",
+  "why": "The current SF-10M failure is dominated by missing social subfamily conditioning and topic variant handling, not model capacity. Encode gates before any new bounded training."
+}

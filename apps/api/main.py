@@ -31,8 +31,9 @@ app = FastAPI(
     version="0.1.0",
     description=(
         "SF.AI — Sovereign AI platform. Phase 9 chat UI mounted at /ui/chat. "
-        "Phase 27.105 completed raw UI lab diagnosis; SF-10M Phase 27.81 "
-        "is visible in lab mode, but official runtime remains blocked. "
+        "Phase 27.107 completed social-subfamily/topic-variant gate encoding; "
+        "SF-10M Phase 27.81 is visible in lab mode, but official runtime "
+        "remains blocked. "
         "No pretrained models, no external AI APIs."
     ),
 )
@@ -47,7 +48,7 @@ app.include_router(ui.router)
 def root() -> dict[str, str]:
     return {
         "project": "SF.AI",
-        "phase": "Phase 27.105 — Raw UI Lab Result Diagnosis",
+        "phase": "Phase 27.107 — Social Subfamily + Topic Variant Gate Encoding",
         "ui": "/ui/chat",
         "docs": "/docs",
     }

@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.105
-الاسم: Raw UI Lab Result Diagnosis
+المرحلة الحالية: Phase 27.107
+الاسم: Social Subfamily + Topic Variant Gate Encoding
 المسار الملزم: SF-native Objective/Curriculum/Decoding Acceleration Track
-القرار الرسمي: PHASE27_105_RAW_UI_LAB_RESULT_DIAGNOSIS_DECISION
+القرار الرسمي: PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -98,13 +98,21 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - Phase 27.105 فتح raw lab للمستخدم المحلي فقط وأثبت أن الواجهة تتلقى من
   المولد الحقيقي `sf_10m_phase27_81`، لكن التحية/الهوية/القدرات وبعض
   bare-topic prompts لا تزال غير صالحة لإطلاق رسمي.
+- Phase 27.106 صمم وفعّل renderer signals للمرحلة التالية: `نوع السوالف`
+  وtopic variant canonical mapping.
+- Phase 27.107 مرّر بوابة renderer/canary، وسمح فقط بـ data pack في
+  Phase 27.108 دون training.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
 - التقرير الملزم: `docs/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md`.
 - التقرير التشخيصي الحالي:
   `docs/PHASE27_105_RAW_UI_LAB_RESULT_DIAGNOSIS_REPORT.md`.
-- التالي: `Phase 27.106 — Social Subfamily + Topic Variant Objective Design`.
+- تقرير التصميم الحالي:
+  `docs/PHASE27_106_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DESIGN_REPORT.md`.
+- تقرير البوابة الحالي:
+  `docs/PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_REPORT.md`.
+- التالي: `Phase 27.108 — Social Subfamily + Topic Variant Data Pack`.
 
 الدليل السابق الذي سبب هذا re-anchor:
 
@@ -148,8 +156,13 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - نتيجة 27.105: raw UI lab أثبت أن الواجهة تستدعي المولد الحقيقي، لكنه
   كشف فشل social subfamilies وtopic variants. أضيف prompt conditioning
   محدود لـ bare known topics، ولا يوجد تدريب جديد.
+- نتيجة 27.106: أضيفت `dialogue_subfamily` إلى provenance، وصار renderer
+  يخرج `نوع السوالف: تحية/سؤال حال/فتح سالفة/شكر/هوية/قدرات`، وصارت
+  topic variants مثل `الصداقه` و`الاخوه` تُطبّع إلى canonical topics.
+- نتيجة 27.107: مرّت gate التنفيذية وأضيف canary رسمي من أسلوب اختبار
+  الواجهة الخام. القرار يسمح فقط بتأليف data pack في 27.108.
 - القرار: لا official runtime release ولا `SF-50M` ولا tokenizer retrain
-  ولا تدريب جديد قبل Phase 27.106 وتصميم بواباته.
+  ولا تدريب جديد قبل data pack + gate لاحق.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -353,6 +366,8 @@ SF-10M
 | Phase 27.80 gate | بوابات التدريب العائلي المحدود مرّت؛ لا تدريب ولا runtime |
 | Phase 27.81 bounded training | اكتمل؛ all-family 42/50؛ runtime محجوب |
 | Phase 27.105 raw UI lab diagnosis | المولد الحقيقي يعمل في lab؛ فشل social subfamilies وtopic variants؛ لا تدريب |
+| Phase 27.106 design | renderer صار يدعم social subfamily وtopic variants؛ لا تدريب |
+| Phase 27.107 gate | gate مرّت؛ data pack مسموح فقط؛ لا تدريب |
 
 الدرس الأساسي من Phase 27:
 
@@ -368,16 +383,16 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.106 — Social Subfamily + Topic Variant Objective Design
+Phase 27.108 — Social Subfamily + Topic Variant Data Pack
 ```
 
 مطلوب منها:
 
-- تقسيم عائلة `سوالف` إلى subfamilies واضحة: تحية، سؤال حال، فتح سالفة،
-  شكر، هوية، قدرات.
-- إضافة topic variants محكومة مثل `الصداقة/الصداقه` و`الأخوة/الاخوه`.
-- بناء held-out probes من أسلوب اختبار الواجهة الحي.
-- ممنوع training/SF-50M/tokenizer retrain قبل gate صريح.
+- تأليف data pack سيادي gold لتغطية social subfamilies وtopic variants.
+- فصحى + سعودي فقط.
+- لا project workflow dialogue.
+- لا external/pretrained data.
+- ممنوع training/SF-50M/tokenizer retrain قبل data pack audit.
 
 ممنوع قبل نجاح البوابات:
 

@@ -1,0 +1,123 @@
+{
+  "phase": "Phase 27.106",
+  "title": "Social Subfamily + Topic Variant Objective Design",
+  "status": "PHASE27_106_DESIGN_READY_GATE_ENCODING_NO_TRAINING",
+  "source_decision": "PHASE27_105_RAW_UI_LAB_RESULT_DIAGNOSIS_DECISION",
+  "training_started": false,
+  "runtime_changed": false,
+  "official_runtime_release_allowed": false,
+  "raw_lab_runtime_remains_available": true,
+  "decision": {
+    "decision_id": "PHASE27_106_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DESIGN_DECISION",
+    "phase": "Phase 27.106",
+    "engineering_decision": "ALLOW_PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_NO_TRAINING",
+    "training_started": false,
+    "new_training_allowed": false,
+    "runtime_release_allowed": false,
+    "raw_lab_runtime_remains_available": true,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "pretrained_allowed": false,
+    "next_phase": "Phase 27.107 — Social Subfamily + Topic Variant Gate Encoding",
+    "why": "The current SF-10M failure is dominated by missing social subfamily conditioning and topic variant handling, not model capacity. Encode gates before any new bounded training."
+  },
+  "objective_design": {
+    "name": "social_subfamily_topic_variant_assistant_only_objective_v1",
+    "base_objective": "family_conditioned_assistant_only_objective_v2",
+    "loss_scope": "assistant_only",
+    "context_lines_masked_from_loss": true,
+    "new_context_lines": [
+      "نوع السوالف: <تحية|سؤال حال|فتح سالفة|شكر|هوية|قدرات>",
+      "الموضوع المطلوب: <canonical_topic>"
+    ],
+    "example": "النطاق: سعودي\nعائلة الحوار: سوالف\nنوع السوالف: تحية\nالمستخدم: السلام عليكم\nالمساعد: وعليكم السلام، حيّاك الله. وش أخبارك؟ <eos>"
+  },
+  "social_subfamilies": {
+    "greeting": {
+      "label": "تحية",
+      "example_prompts": ["السلام عليكم", "هلا", "مرحبا", "يا هلا"],
+      "expected_behavior": "رد تحية مباشر ثم سؤال بسيط يفتح الحوار."
+    },
+    "smalltalk": {
+      "label": "سؤال حال",
+      "example_prompts": ["كيف الحال", "كيفك", "علومك", "وش الأخبار"],
+      "expected_behavior": "إجابة حال قصيرة ثم سؤال رجوع للمستخدم."
+    },
+    "open_chat": {
+      "label": "فتح سالفة",
+      "example_prompts": ["خلنا نسولف", "افتح لي سالفة", "سولف معي"],
+      "expected_behavior": "اقتراح موضوع خفيف وسؤال متابعة."
+    },
+    "thanks": {
+      "label": "شكر",
+      "example_prompts": ["شكرا", "يعطيك العافية", "تسلم"],
+      "expected_behavior": "رد شكر طبيعي دون تحويله إلى تنظيم أو تعريف."
+    },
+    "identity": {
+      "label": "هوية",
+      "example_prompts": ["من أنت", "عرفني عليك"],
+      "expected_behavior": "هوية SF.AI السيادية بجملة مختصرة."
+    },
+    "capability": {
+      "label": "قدرات",
+      "example_prompts": ["وش تقدر تسوي", "كيف تساعدني"],
+      "expected_behavior": "شرح القدرات الحالية بصدق دون مبالغة."
+    }
+  },
+  "topic_variant_policy": {
+    "canonical_topics": [
+      "الصداقة",
+      "الأخوة",
+      "الوفاء",
+      "الصبر",
+      "الاحترام",
+      "الهدوء",
+      "الصدق",
+      "الشجاعة",
+      "التعاون"
+    ],
+    "variant_examples": {
+      "الصداقة": ["الصداقة", "الصداقه", "صداقه"],
+      "الأخوة": ["الأخوة", "الاخوة", "الاخوه", "الأخوه"],
+      "الشجاعة": ["الشجاعة", "الشجاعه"]
+    },
+    "rule": "Runtime and training renderers should convert common variants to a canonical requested-topic line, while preserving assistant-only loss."
+  },
+  "canary_design": {
+    "heldout_raw_ui_prompts": [
+      "السلام عليكم",
+      "كيف الحال",
+      "خلنا نسولف",
+      "من أنت",
+      "وش تقدر تسوي",
+      "الصداقه",
+      "الاخوه",
+      "عرف الصداقة بجملة قصيرة",
+      "وش يعني الوفاء؟"
+    ],
+    "required_before_training": [
+      "renderer emits social subfamily line",
+      "renderer maps topic variants to canonical topic",
+      "assistant-only mask excludes all context lines",
+      "corpus audit passes",
+      "sensitive scan passes",
+      "full tests pass"
+    ],
+    "required_before_runtime_release": [
+      "greeting canary pass",
+      "smalltalk canary pass",
+      "open_chat canary pass",
+      "identity/capability canary pass",
+      "topic variant canary pass",
+      "followup continuity canary pass"
+    ]
+  },
+  "blocked_actions": [
+    "No new training in Phase 27.106.",
+    "No SF-50M transition.",
+    "No tokenizer retrain.",
+    "No official runtime release.",
+    "No pretrained/open-weight usage.",
+    "No template masking."
+  ]
+}

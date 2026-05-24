@@ -1,0 +1,14 @@
+{
+  "decision_id": "PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_DECISION",
+  "phase": "Phase 27.107",
+  "engineering_decision": "ALLOW_PHASE27_108_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DATA_PACK_NO_TRAINING",
+  "training_started": false,
+  "new_training_allowed": false,
+  "data_pack_authoring_allowed": true,
+  "runtime_release_allowed": false,
+  "sf50m_justified_transition": false,
+  "tokenizer_retrain_allowed": false,
+  "pretrained_allowed": false,
+  "next_phase": "Phase 27.108 — Social Subfamily + Topic Variant Data Pack",
+  "why": "Renderer, canonical topic variants, and canary design are ready. The next safe step is authoring governed gold data, not training yet."
+}

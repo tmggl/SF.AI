@@ -83,9 +83,8 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.105: raw UI lab أثبت أن الواجهة تستدعي المولد، "
-    "لكن social subfamilies وtopic variants ضعيفة. التالي Phase 27.106 "
-    "تصميم إصلاحها قبل أي تدريب جديد.",
+    "وصلنا إلى Phase 27.107: بوابة نوع السوالف وتنويعات الموضوعات مرّت. "
+    "التالي Phase 27.108 تأليف data pack ذهبي قبل أي تدريب جديد.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

@@ -1,0 +1,77 @@
+{
+  "phase": "Phase 27.107",
+  "title": "Social Subfamily + Topic Variant Gate Encoding",
+  "status": "PHASE27_107_GATE_PASSED_DATA_PACK_ALLOWED_NO_TRAINING",
+  "source_decision": "PHASE27_106_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DESIGN_DECISION",
+  "training_started": false,
+  "runtime_changed": false,
+  "official_runtime_release_allowed": false,
+  "gate_passed": true,
+  "decision": {
+    "decision_id": "PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_DECISION",
+    "phase": "Phase 27.107",
+    "engineering_decision": "ALLOW_PHASE27_108_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DATA_PACK_NO_TRAINING",
+    "training_started": false,
+    "new_training_allowed": false,
+    "data_pack_authoring_allowed": true,
+    "runtime_release_allowed": false,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "pretrained_allowed": false,
+    "next_phase": "Phase 27.108 — Social Subfamily + Topic Variant Data Pack",
+    "why": "Renderer, canonical topic variants, and canary design are ready. The next safe step is authoring governed gold data, not training yet."
+  },
+  "renderer_gate": {
+    "social_subfamily_line_ready": true,
+    "topic_variant_canonicalization_ready": true,
+    "assistant_only_mask_required": true,
+    "sample_isolated_required": true
+  },
+  "social_subfamily_labels": {
+    "greeting": "تحية",
+    "smalltalk": "سؤال حال",
+    "open_chat": "فتح سالفة",
+    "thanks": "شكر",
+    "identity": "هوية",
+    "capability": "قدرات"
+  },
+  "topic_variant_examples": {
+    "الصداقه": "الصداقة",
+    "الاخوه": "الأخوة",
+    "الشجاعه": "الشجاعة"
+  },
+  "canary": {
+    "path": "artifacts/reports/phase27_107_social_subfamily_topic_variant_canary.json",
+    "prompt_count": 7,
+    "subfamilies_covered": ["greeting", "smalltalk", "open_chat", "identity", "capability"],
+    "topic_variants_covered": ["الصداقة", "الأخوة"]
+  },
+  "blocked_actions": [
+    "No training in Phase 27.107.",
+    "No official runtime release.",
+    "No SF-50M transition.",
+    "No tokenizer retrain.",
+    "No pretrained/open-weight usage."
+  ],
+  "next_data_pack_requirements": {
+    "minimum_gold_records": 420,
+    "records_per_social_subfamily_per_dialect": 30,
+    "topic_variant_records_per_topic_per_dialect": 30,
+    "allowed_dialects": ["msa", "saudi"],
+    "required_provenance": [
+      "source",
+      "license",
+      "quality",
+      "training_allowed",
+      "dialect",
+      "dialogue_family",
+      "dialogue_subfamily_or_topic_canonical"
+    ],
+    "forbidden": [
+      "project workflow dialogue",
+      "external dialogue datasets",
+      "pretrained model outputs",
+      "operator commands"
+    ]
+  }
+}

@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.105 / 30**
-- **المرحلة الحالية:** **Phase 27.105 — Raw UI Lab Result Diagnosis**
-- **حالة المرحلة الحالية:** **تشخيص واجهة خام اكتمل؛ المولد الحقيقي يعمل في lab فقط؛ الجودة غير كافية للإطلاق الرسمي؛ لا تدريب جديد ولا SF-50M**
-- **المرحلة التالية المقترحة:** Phase 27.106 — Social Subfamily + Topic Variant Objective Design.
+- **الرحلة الحالية:** **Phase 27.107 / 30**
+- **المرحلة الحالية:** **Phase 27.107 — Social Subfamily + Topic Variant Gate Encoding**
+- **حالة المرحلة الحالية:** **البوابة مرّت؛ canary رسمي جاهز؛ التالي data pack محكوم؛ لا تدريب جديد ولا SF-50M**
+- **المرحلة التالية المقترحة:** Phase 27.108 — Social Subfamily + Topic Variant Data Pack.
 - **التحول الاستراتيجي المعتمد:** **SF-native Objective/Curriculum/Decoding Acceleration Track** — تسريع هندسي فقط؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -161,6 +161,8 @@
 | Phase 27.103 | Topic Prototype Contrastive Curriculum Pack | ✅ ready_for_bounded_training_no_runtime | ✅ |
 | Phase 27.104 | Bounded Topic Prototype Contrastive Repair Training | ✅ trained_topic_clean_all_family_regressed_runtime_blocked | ✅ |
 | Phase 27.105 | Raw UI Lab Result Diagnosis | ✅ diagnosed_raw_ui_lab_failures_no_training | ✅ |
+| Phase 27.106 | Social Subfamily + Topic Variant Objective Design | ✅ design_ready_gate_encoding_no_training | ✅ |
+| Phase 27.107 | Social Subfamily + Topic Variant Gate Encoding | ✅ gate_passed_data_pack_allowed_no_training | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1804,7 +1806,12 @@ make api
 - أضيف raw lab single-user لاختبار المولد مباشرة من الواجهة بدون قوالب.
 - نتيجة Phase 27.105: المولد مؤكد أنه يجيب من `sf_10m_phase27_81`،
   لكنه يخلط social subfamilies ويفشل في بعض bare-topic/unknown-topic prompts.
-- التالي: Phase 27.106 — Social Subfamily + Topic Variant Objective Design.
+- نتيجة Phase 27.106: أضيف renderer design لـ `نوع السوالف:
+  تحية/سؤال حال/فتح سالفة/شكر/هوية/قدرات`، وأضيف topic variant canonical
+  mapping مثل `الصداقه → الصداقة` و`الاخوه → الأخوة`.
+- نتيجة Phase 27.107: مرّت gate التنفيذية، وأضيف canary من أسلوب اختبار
+  الواجهة الخام، والتالي data pack لا training.
+- التالي: Phase 27.108 — Social Subfamily + Topic Variant Data Pack.
 - سبب الحجب: لا يزال `السلام عليكم` يعود كسالفة عامة، و`الاخوه` غير مغطاة،
   ولا يوجد family/subfamily objective كافٍ لتحية/هوية/قدرات/فتح سالفة.
 
@@ -1834,6 +1841,62 @@ make api
   - [PHASE27_105_RAW_UI_LAB_RESULT_DIAGNOSIS_REPORT.md](./PHASE27_105_RAW_UI_LAB_RESULT_DIAGNOSIS_REPORT.md)
   - `artifacts/reports/phase27_105_raw_ui_lab_result_diagnosis_report.json`
   - `artifacts/reports/PHASE27_105_RAW_UI_LAB_RESULT_DIAGNOSIS_DECISION.json`
+
+---
+
+## Phase 27.106 — Social Subfamily + Topic Variant Objective Design
+
+**الحالة:** مكتملة كتصميم وتنفيذ renderer. لا تدريب ولا runtime release رسمي.
+
+- أضيفت حقول provenance:
+  - `dialogue_subfamily`
+  - `topic_canonical`
+  - `topic_variant`
+- أضيف renderer line لعائلة السوالف:
+  - `نوع السوالف: تحية`
+  - `نوع السوالف: سؤال حال`
+  - `نوع السوالف: فتح سالفة`
+  - `نوع السوالف: شكر`
+  - `نوع السوالف: هوية`
+  - `نوع السوالف: قدرات`
+- أضيف canonical mapping للموضوعات اليومية:
+  - `الصداقه` → `الصداقة`
+  - `الاخوه` → `الأخوة`
+  - `الشجاعه` → `الشجاعة`
+- القرار: `PHASE27_106_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DESIGN_DECISION`.
+- التالي: Phase 27.107 — بوابة تتحقق من renderer/masking/canary قبل أي
+  تدريب محدود.
+- التقارير:
+  - [PHASE27_106_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DESIGN_REPORT.md](./PHASE27_106_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DESIGN_REPORT.md)
+  - `artifacts/reports/phase27_106_social_subfamily_topic_variant_design_report.json`
+  - `artifacts/reports/PHASE27_106_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DESIGN_DECISION.json`
+
+---
+
+## Phase 27.107 — Social Subfamily + Topic Variant Gate Encoding
+
+**الحالة:** مكتملة كبوابة تنفيذية. لا تدريب.
+
+- gate status: `PHASE27_107_GATE_PASSED_DATA_PACK_ALLOWED_NO_TRAINING`.
+- القرار: `PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_DECISION`.
+- canary:
+  `artifacts/reports/phase27_107_social_subfamily_topic_variant_canary.json`
+- يغطي canary:
+  - `السلام عليكم` → greeting.
+  - `كيف الحال` → smalltalk.
+  - `خلنا نسولف` → open_chat.
+  - `من أنت` → identity.
+  - `وش تقدر تسوي` → capability.
+  - `الصداقه` → الصداقة.
+  - `الاخوه` → الأخوة.
+- التالي المسموح: Phase 27.108 data pack فقط.
+- المحظور: training، runtime release رسمي، SF-50M، tokenizer retrain،
+  pretrained/open-weight.
+- التقارير:
+  - [PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_REPORT.md](./PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_REPORT.md)
+  - `artifacts/reports/phase27_107_social_subfamily_topic_variant_gate_report.json`
+  - `artifacts/reports/PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_DECISION.json`
+  - `artifacts/reports/phase27_107_social_subfamily_topic_variant_canary.json`
 
 ---
 

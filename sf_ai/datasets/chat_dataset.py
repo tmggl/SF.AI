@@ -149,6 +149,15 @@ FAMILY_CONDITION_LABELS: dict[str, str] = {
     "topic": "موضوع",
 }
 
+SOCIAL_SUBFAMILY_CONDITION_LABELS: dict[str, str] = {
+    "greeting": "تحية",
+    "smalltalk": "سؤال حال",
+    "open_chat": "فتح سالفة",
+    "thanks": "شكر",
+    "identity": "هوية",
+    "capability": "قدرات",
+}
+
 TOPIC_CONDITION_TERMS: tuple[str, ...] = (
     "الوفاء",
     "التعاون",
@@ -160,6 +169,30 @@ TOPIC_CONDITION_TERMS: tuple[str, ...] = (
     "الشجاعة",
 )
 
+TOPIC_VARIANT_CANONICALS: dict[str, str] = {
+    "الوفاء": "الوفاء",
+    "الوفا": "الوفاء",
+    "التعاون": "التعاون",
+    "التعاونن": "التعاون",
+    "الصبر": "الصبر",
+    "صبر": "الصبر",
+    "الاحترام": "الاحترام",
+    "احترام": "الاحترام",
+    "الهدوء": "الهدوء",
+    "الهدوءء": "الهدوء",
+    "الصدق": "الصدق",
+    "صدق": "الصدق",
+    "الصداقة": "الصداقة",
+    "الصداقه": "الصداقة",
+    "صداقه": "الصداقة",
+    "الأخوة": "الأخوة",
+    "الاخوة": "الأخوة",
+    "الاخوه": "الأخوة",
+    "الأخوه": "الأخوة",
+    "الشجاعة": "الشجاعة",
+    "الشجاعه": "الشجاعة",
+}
+
 
 def _family_condition_line(sample: SimpleSample | StructuredSample) -> str | None:
     """Return the Arabic family conditioning line introduced in Phase 27.86."""
@@ -168,6 +201,19 @@ def _family_condition_line(sample: SimpleSample | StructuredSample) -> str | Non
         raw = (getattr(provenance, attr, "") or "").strip().lower()
         if raw in FAMILY_CONDITION_LABELS:
             return f"عائلة الحوار: {FAMILY_CONDITION_LABELS[raw]}"
+    return None
+
+
+def _social_subfamily_condition_line(
+    sample: SimpleSample | StructuredSample,
+) -> str | None:
+    """Return the Phase 27.106 social-subfamily line for open-social samples."""
+    provenance = getattr(sample, "provenance", None)
+    if _family_key(sample) != "open_social":
+        return None
+    raw = (getattr(provenance, "dialogue_subfamily", "") or "").strip().lower()
+    if raw in SOCIAL_SUBFAMILY_CONDITION_LABELS:
+        return f"نوع السوالف: {SOCIAL_SUBFAMILY_CONDITION_LABELS[raw]}"
     return None
 
 
@@ -185,7 +231,10 @@ def _topic_condition_line(sample: SimpleSample | StructuredSample) -> str | None
     if _family_key(sample) != "topic":
         return None
     provenance = getattr(sample, "provenance", None)
-    explicit = (getattr(provenance, "topic_term", "") or "").strip()
+    explicit = (
+        (getattr(provenance, "topic_canonical", "") or "").strip()
+        or (getattr(provenance, "topic_term", "") or "").strip()
+    )
     if explicit:
         return f"الموضوع المطلوب: {explicit}"
 
@@ -195,9 +244,9 @@ def _topic_condition_line(sample: SimpleSample | StructuredSample) -> str | None
         else sample.to_messages()
     )
     user_text = "\n".join(msg.content for msg in messages if msg.role == "user")
-    for term in TOPIC_CONDITION_TERMS:
-        if term in user_text:
-            return f"الموضوع المطلوب: {term}"
+    canonical = canonical_topic_from_text(user_text)
+    if canonical:
+        return f"الموضوع المطلوب: {canonical}"
     return None
 
 
@@ -207,10 +256,38 @@ def _dialogue_condition_lines(sample: SimpleSample | StructuredSample) -> list[s
     family = _family_condition_line(sample)
     if family:
         lines.append(family)
+    subfamily = _social_subfamily_condition_line(sample)
+    if subfamily:
+        lines.append(subfamily)
     topic = _topic_condition_line(sample)
     if topic:
         lines.append(topic)
     return lines
+
+
+def canonical_topic_from_text(text: str) -> str:
+    """Map common Arabic/Saudi topic spellings to one canonical topic term."""
+    surface = _topic_surface(text)
+    for variant, canonical in TOPIC_VARIANT_CANONICALS.items():
+        if _topic_surface(variant) in surface:
+            return canonical
+    for term in TOPIC_CONDITION_TERMS:
+        if _topic_surface(term) in surface:
+            return term
+    return ""
+
+
+def _topic_surface(text: str) -> str:
+    return (
+        (text or "")
+        .replace("أ", "ا")
+        .replace("إ", "ا")
+        .replace("آ", "ا")
+        .replace("ى", "ي")
+        .replace("ة", "ه")
+        .strip()
+        .lower()
+    )
 
 
 def render_dialogue_text(sample: SimpleSample | StructuredSample) -> str:
