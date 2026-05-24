@@ -40,6 +40,7 @@ class NativeGeneratorConfig:
     repetition_penalty: float = 1.08
     device: str = "auto"
     dialogue_prompt: bool = True
+    family_conditioning: bool = False
 
 
 @dataclass(frozen=True)
@@ -161,8 +162,9 @@ class NativeGenerator:
             line
             for line in (
                 _dialect_condition_line(dialect),
-                _intent_condition_line(intent),
-                _topic_condition_line(topic),
+                _family_condition_line(intent) if self.config.family_conditioning else "",
+                "" if self.config.family_conditioning else _intent_condition_line(intent),
+                "" if self.config.family_conditioning else _topic_condition_line(topic),
             )
             if line
         ]
@@ -236,6 +238,38 @@ def _intent_label(intent: str | None) -> str:
         "chat.open_social": "سوالف",
         "topic": "تعريف",
         "chat.topic": "تعريف",
+    }
+    return mapping.get(i, "")
+
+
+def _family_condition_line(intent: str | None) -> str:
+    family_label = _family_label(intent)
+    if family_label:
+        return f"عائلة الحوار: {family_label}"
+    return ""
+
+
+def _family_label(intent: str | None) -> str:
+    i = (intent or "").strip().lower()
+    mapping = {
+        "open_social": "سوالف",
+        "chat.open_social": "سوالف",
+        "smalltalk": "سوالف",
+        "chat.smalltalk": "سوالف",
+        "greeting": "سوالف",
+        "chat.greeting": "سوالف",
+        "followup": "متابعة",
+        "chat.followup": "متابعة",
+        "planning": "تنظيم",
+        "chat.planning": "تنظيم",
+        "advice": "تنظيم",
+        "chat.advice": "تنظيم",
+        "support": "دعم",
+        "chat.support": "دعم",
+        "topic": "موضوع",
+        "chat.topic": "موضوع",
+        "definition": "موضوع",
+        "chat.definition": "موضوع",
     }
     return mapping.get(i, "")
 

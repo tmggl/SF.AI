@@ -275,6 +275,21 @@ def test_native_generator_formats_dialect_conditioned_prompt() -> None:
     )
 
 
+def test_native_generator_formats_family_conditioned_prompt() -> None:
+    gen = NativeGenerator(NativeGeneratorConfig(family_conditioning=True))
+    assert gen._format_prompt(
+        "كيف أرتب يومي؟",
+        dialect="saudi",
+        intent="planning",
+        topic="الوقت",
+    ) == (
+        "النطاق: سعودي\n"
+        "عائلة الحوار: تنظيم\n"
+        "المستخدم: كيف أرتب يومي؟\n"
+        "المساعد:"
+    )
+
+
 def test_extract_dialogue_reply_prefers_assistant_segment() -> None:
     prompt = "المستخدم: كيفك\nالمساعد:"
     decoded = "المستخدم: كيفك\nالمساعد: بخير الحمد لله.\nالمستخدم: ممتاز"

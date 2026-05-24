@@ -1,0 +1,15 @@
+{
+  "decision_id": "PHASE27_87_BOUNDED_FAMILY_CONDITIONED_REPAIR_DECISION",
+  "engineering_decision": "BLOCK_RUNTIME_DIAGNOSE_FAMILY_CONDITIONED_TRAINING_RESULT",
+  "training_completed": true,
+  "runtime_release_allowed": false,
+  "ui_release_allowed": false,
+  "sf50m_justified_transition": false,
+  "tokenizer_retrain_allowed": false,
+  "best_checkpoint_by_fresh_shadow": "sf-10m-step600",
+  "best_fresh_shadow_passed": 10,
+  "best_fresh_shadow_total": 50,
+  "runtime_threshold": 45,
+  "why": "Best checkpoint reached 10/50 fresh-shadow passes with explicit family conditioning.",
+  "next_phase": "Phase 27.88 — Family-conditioned Training Result Diagnosis"
+}

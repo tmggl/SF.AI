@@ -63,9 +63,9 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 27.86 موثقة تاريخيًا. الحالة الحالية:
-  `Phase 27.86 — Family Conditioning Renderer Gate` اكتملت بلا تدريب
-  وأصدرت `PHASE27_86_FAMILY_CONDITIONING_RENDERER_GATE_DECISION`.
+- المراحل من Phase 0 حتى Phase 27.87 موثقة تاريخيًا. الحالة الحالية:
+  `Phase 27.87 — Bounded Family-conditioned SF-10M Repair Training` اكتملت
+  وأصدرت `PHASE27_87_BOUNDED_FAMILY_CONDITIONED_REPAIR_DECISION`.
   Phase 27.81 أضافت دفعة `sf-ai-balanced-family-pack-v1`: `2500` سجل gold
   متوازن (`500` لكل family و`250/250` فصحى/سعودي). corpus الحالي `8443`
   (`msa=4199`, `saudi=4244`, `gold=3331`, `silver=5112`). Phase 27.83 درّبت
@@ -73,9 +73,10 @@
   Phase 27.84 شخّصت السبب: `dialogue_family` موجودة في metadata لكنها لا تظهر
   داخل نص التدريب. Phase 27.85 صممت الصيغة، وPhase 27.86 أثبتت أن
   `render_dialogue_text` يطبع `عائلة الحوار: سوالف/متابعة/تنظيم/دعم/موضوع`
-  في مساري no-split وsplit-manifest مع masking صحيح. runtime و`SF-50M`
-  وtokenizer retrain محجوبة.
-- أول خطوة تالية: Phase 27.87 Bounded Family-conditioned SF-10M Repair Training.
+  في مساري no-split وsplit-manifest مع masking صحيح. Phase 27.87 درّبت
+  SF-10M مقيّدًا بهذه الإشارة، لكن أفضل نتيجة fresh shadow = `10/50`.
+  runtime و`SF-50M` وtokenizer retrain محجوبة.
+- أول خطوة تالية: Phase 27.88 Family-conditioned Training Result Diagnosis.
 - تفويض التكبير التلقائي معتمد، لكن مفعوله يبدأ فقط عندما تنجح gates؛
   حاليًا `SF-50M` ما زال محجوبًا لأن capacity وزنها `1%`.
 - استخدم `make phase22-review-intake` أو `GET /system/phase22-review-intake` قبل أي تحويل من `data/corpus/chat/review/` إلى corpus تدريبي.
@@ -92,7 +93,7 @@
 - اقرأ ملفات الحوكمة والدستور قبل أي تدريب: `PROJECT_CONSTITUTION`, `LANGUAGE_SEGMENTATION`, `TOKENIZATION_POLICY`, `DATASET_GOVERNANCE`, `AGENT_ENGINEERING_RULES`, ثم `PROJECT_IDENTITY`, `ENGINEERING_RULES`, `AGENT_INSTRUCTIONS`, `PROJECT_MAP`, `PROJECT_LIFECYCLE`.
 - اقرأ `docs/PHASE12_TOKENIZER_V1_REPORT.md`, `docs/PHASE13_SMOKE_TRAINING_REPORT.md`, و`docs/PHASE14_SF10M_V0_1_REPORT.md`: artifacts موجودة، لكنها غير صالحة للشات أو الجودة اللغوية بعد.
 - إذا كان السيرفر الحي لم يُعد تشغيله بعد، استخدم `make phase12-readiness` لنفس القرار بدون لمس السيرفر.
-- الهدف العام: الوصول إلى نموذج لغوي سيادي مولّد. أول توليد خام في Phase 13، وباب التوليد داخل الشات جُهّز في Phase 15. Phase 27.77 فشلت كتوليد على tokenizer v9 (`54/60`, `45/50`, `30/30`). Phase 27.78 شخّصت root cause: family mixing `22%`, objective `18%`, curriculum `16%`, weak generalization `14%`, semantic routing `10%`, capacity `1%`. Phase 27.79 صممت إصلاح objective/curriculum/decoding، Phase 27.80 شفّرت gates، Phase 27.81 أصلحت توازن family ببيانات gold، Phase 27.82 سمحت بتدريب مقيّد، Phase 27.83 أثبتت أن الإصلاح لم ينجح حواريًا (`11/60` best)، Phase 27.84 حددت أن family signal غائب من النص، Phase 27.85 صممت الإشارة، وPhase 27.86 أثبتت renderer/masking.
+- الهدف العام: الوصول إلى نموذج لغوي سيادي مولّد. أول توليد خام في Phase 13، وباب التوليد داخل الشات جُهّز في Phase 15. Phase 27.77 فشلت كتوليد على tokenizer v9 (`54/60`, `45/50`, `30/30`). Phase 27.78 شخّصت root cause: family mixing `22%`, objective `18%`, curriculum `16%`, weak generalization `14%`, semantic routing `10%`, capacity `1%`. Phase 27.79 صممت إصلاح objective/curriculum/decoding، Phase 27.80 شفّرت gates، Phase 27.81 أصلحت توازن family ببيانات gold، Phase 27.82 سمحت بتدريب مقيّد، Phase 27.83 أثبتت أن الإصلاح لم ينجح حواريًا (`11/60` best)، Phase 27.84 حددت أن family signal غائب من النص، Phase 27.85 صممت الإشارة، Phase 27.86 أثبتت renderer/masking، وPhase 27.87 أثبتت أن التدريب ما زال منحازًا (`10/50` best).
 - تفويض سامي الأخير يعني أن حوار الوكيل المؤلف لخدمة corpus يمكن اعتماده كـ `owner-delegated agent-authored` مع `training_allowed=true` إذا حمل source/license/quality/notes كاملة، وبقي ضمن `msa + saudi` ودون أي مصدر خارجي أو pretrained data.
 - كل export أو corpus record يجب أن يحمل user ownership. المسار الحالي: `owner_user_id=created_by_user_id=target_user_id=sami-local` و`user_scope=single_user`.
 
@@ -107,7 +108,7 @@
    cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests
    ```
 
-2. تحقق من القسم 4 في AGENT_HANDOFF.md. مهمة "محادثة مريحة + توجيه دقيق" مكتملة، ومسار العمل الحالي هو Phase 27.87 بعد نجاح renderer gate في 27.86.
+2. تحقق من القسم 4 في AGENT_HANDOFF.md. مهمة "محادثة مريحة + توجيه دقيق" مكتملة، ومسار العمل الحالي هو Phase 27.88 بعد فشل 27.87 في الوصول لجودة runtime.
 
 3. Phase 11 مكتملة كحوكمة وأداة فحص. شغّل:
    ```

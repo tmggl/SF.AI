@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.86 — Family Conditioning Renderer Gate",
-        current_phase_status="phase27_86_renderer_gate_passed_training_allowed_next_no_runtime",
+        current_phase="Phase 27.87 — Bounded Family-conditioned SF-10M Repair Training",
+        current_phase_status="phase27_87_trained_runtime_blocked_diagnosis_required",
         next_phase=(
-            "Phase 27.87 — Bounded Family-conditioned SF-10M Repair Training"
+            "Phase 27.88 — Family-conditioned Training Result Diagnosis"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -544,6 +544,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_86_family_conditioning_renderer_gate",
                 status="renderer_gate_passed_training_allowed_next_no_runtime",
                 phase="Phase 27.86",
+            ),
+            ComponentStatus(
+                name="phase27_87_bounded_family_conditioned_repair",
+                status="trained_runtime_blocked_diagnosis_required",
+                phase="Phase 27.87",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

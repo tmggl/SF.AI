@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.86
-الاسم: Family Conditioning Renderer Gate
+المرحلة الحالية: Phase 27.87
+الاسم: Bounded Family-conditioned SF-10M Repair Training
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_86_FAMILY_CONDITIONING_RENDERER_GATE_DECISION
+القرار الرسمي: PHASE27_87_BOUNDED_FAMILY_CONDITIONED_REPAIR_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -101,8 +101,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - نتيجة 27.84: family metadata لم تكن ظاهرة داخل نص التدريب، لذلك لم يصبح التوازن conditioning فعليًا.
 - نتيجة 27.85: صُممت صيغة `عائلة الحوار: سوالف/متابعة/تنظيم/دعم/موضوع` كسياق masked.
 - نتيجة 27.86: renderer gate نجحت؛ `render_dialogue_text` يطبع العائلة في no-split وsplit-manifest، وassistant-only loss يخفي السياق عن الهدف.
+- نتيجة 27.87: تدريب SF-10M المقيّد اكتمل، لكن أفضل fresh shadow = `10/50`; runtime وSF-50M محجوبان.
 - corpus الحالي: `8443` (`msa=4199`, `saudi=4244`, `gold=3331`, `silver=5112`).
-- التالي: `Phase 27.87 — Bounded Family-conditioned SF-10M Repair Training`.
+- التالي: `Phase 27.88 — Family-conditioned Training Result Diagnosis`.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -318,19 +319,19 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.87 — Bounded Family-conditioned SF-10M Repair Training
+Phase 27.88 — Family-conditioned Training Result Diagnosis
 ```
 
 مطلوب منها:
 
-- تدريب مقيّد لـ SF-10M على renderer الجديد الذي يضم `عائلة الحوار`.
-- استخدام tokenizer v9 وsplit manifest الحالي.
-- تقييم fresh held-out family canary بعد التدريب.
-- اختيار checkpoint بالجودة الحية لا loss فقط.
+- تشخيص سبب بقاء الانحياز العائلي رغم إظهار `عائلة الحوار`.
+- تحديد هل السبب objective أو curriculum ordering أو decoding أو capacity أو prompt conditioning.
+- إصدار قرار هندسي قبل أي تدريب جديد.
 - منع SF-50M/runtime حتى ينجح canary لاحق.
 
-ممنوع في 27.87:
+ممنوع في 27.88 قبل القرار:
 
+- تدريب جديد.
 - runtime release.
 - tokenizer retrain.
 - SF-50M.
