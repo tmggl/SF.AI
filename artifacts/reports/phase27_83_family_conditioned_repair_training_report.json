@@ -1,0 +1,198 @@
+{
+  "phase": "Phase 27.83",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "status": "PHASE27_83_TRAINED_RUNTIME_BLOCKED_DIAGNOSIS_REQUIRED",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": true,
+  "training_completed": true,
+  "runtime_changed": false,
+  "training_scope": "bounded SF-10M repair training from Phase 27.82 plan",
+  "tokenizer": "artifacts/tokenizers/sf_bpe/v9_phase27_76",
+  "init_checkpoint": "artifacts/eval/phase27_77_v9_bounded_open_social_lm_repair/checkpoints/sf-10m-step6200",
+  "checkpoint_root": "artifacts/eval/phase27_83_family_conditioned_repair/checkpoints",
+  "checkpoints": [
+    {
+      "checkpoint": "sf-10m-step600",
+      "meta": {
+        "checkpoint": "sf-10m-step600",
+        "path": "artifacts/eval/phase27_83_family_conditioned_repair/checkpoints/sf-10m-step600",
+        "state_exists": true,
+        "sf_origin": true,
+        "step": 600,
+        "model_name": "sf-10m",
+        "notes": "seed=20260706 batch=1 seq=96 epochs=24 stream_format=dialogue loss_scope=assistant packing_mode=sample_isolated split=train init=artifacts/eval/phase27_77_v9_bounded_open_social_lm_repair/checkpoints/sf-10m-step6200"
+      },
+      "fresh_shadow_report": "artifacts/reports/phase27_83_family_conditioned_repair_training/fresh_shadow_step600.json",
+      "fresh_shadow": {
+        "passed": 7,
+        "total": 60,
+        "pass_rate": 0.1167,
+        "family_summary": {
+          "followup": {
+            "passed": 0,
+            "total": 12
+          },
+          "open_social": {
+            "passed": 5,
+            "total": 12
+          },
+          "planning": {
+            "passed": 1,
+            "total": 12
+          },
+          "support": {
+            "passed": 1,
+            "total": 12
+          },
+          "topic": {
+            "passed": 0,
+            "total": 12
+          }
+        },
+        "reason_counts": {
+          "expected_terms_missing": 47,
+          "passed": 7,
+          "response_family_mismatch": 1,
+          "guard:planning_mismatch": 2,
+          "guard:advice_mismatch": 1,
+          "guard:support_mismatch": 2
+        }
+      },
+      "eval_loss": {
+        "loss": 3.7397,
+        "perplexity": 42.08
+      },
+      "sample_generation": "عندما تريد الهدوءخفيف عن يومك."
+    },
+    {
+      "checkpoint": "sf-10m-step1200",
+      "meta": {
+        "checkpoint": "sf-10m-step1200",
+        "path": "artifacts/eval/phase27_83_family_conditioned_repair/checkpoints/sf-10m-step1200",
+        "state_exists": true,
+        "sf_origin": true,
+        "step": 1200,
+        "model_name": "sf-10m",
+        "notes": "seed=20260706 batch=1 seq=96 epochs=24 stream_format=dialogue loss_scope=assistant packing_mode=sample_isolated split=train init=artifacts/eval/phase27_77_v9_bounded_open_social_lm_repair/checkpoints/sf-10m-step6200"
+      },
+      "fresh_shadow_report": "artifacts/reports/phase27_83_family_conditioned_repair_training/fresh_shadow_step1200.json",
+      "fresh_shadow": {
+        "passed": 11,
+        "total": 60,
+        "pass_rate": 0.1833,
+        "family_summary": {
+          "followup": {
+            "passed": 0,
+            "total": 12
+          },
+          "open_social": {
+            "passed": 1,
+            "total": 12
+          },
+          "planning": {
+            "passed": 10,
+            "total": 12
+          },
+          "support": {
+            "passed": 0,
+            "total": 12
+          },
+          "topic": {
+            "passed": 0,
+            "total": 12
+          }
+        },
+        "reason_counts": {
+          "expected_terms_missing": 44,
+          "passed": 11,
+          "response_family_mismatch": 2,
+          "guard:malformed_token": 1,
+          "guard:support_mismatch": 2
+        }
+      },
+      "eval_loss": {
+        "loss": 5.9248,
+        "perplexity": 374.19
+      },
+      "sample_generation": "اكتب ثلاث وابدأ بالأهم وقت لاحقم، وابدأ بالأهم لمعشدقيقة."
+    },
+    {
+      "checkpoint": "sf-10m-step1800",
+      "meta": {
+        "checkpoint": "sf-10m-step1800",
+        "path": "artifacts/eval/phase27_83_family_conditioned_repair/checkpoints/sf-10m-step1800",
+        "state_exists": true,
+        "sf_origin": true,
+        "step": 1800,
+        "model_name": "sf-10m",
+        "notes": "seed=20260706 batch=1 seq=96 epochs=24 stream_format=dialogue loss_scope=assistant packing_mode=sample_isolated split=train init=artifacts/eval/phase27_77_v9_bounded_open_social_lm_repair/checkpoints/sf-10m-step6200"
+      },
+      "fresh_shadow_report": "artifacts/reports/phase27_83_family_conditioned_repair_training/fresh_shadow_step1800.json",
+      "fresh_shadow": {
+        "passed": 3,
+        "total": 60,
+        "pass_rate": 0.05,
+        "family_summary": {
+          "followup": {
+            "passed": 0,
+            "total": 12
+          },
+          "open_social": {
+            "passed": 0,
+            "total": 12
+          },
+          "planning": {
+            "passed": 0,
+            "total": 12
+          },
+          "support": {
+            "passed": 3,
+            "total": 12
+          },
+          "topic": {
+            "passed": 0,
+            "total": 12
+          }
+        },
+        "reason_counts": {
+          "guard:malformed_token": 11,
+          "expected_terms_missing": 32,
+          "guard:repeated_phrase": 7,
+          "response_family_mismatch": 4,
+          "guard:advice_mismatch": 1,
+          "guard:support_mismatch": 2,
+          "passed": 3
+        }
+      },
+      "eval_loss": {
+        "loss": 5.9722,
+        "perplexity": 392.39
+      },
+      "sample_generation": "بعد ه. ه. ه. شيء أأأن تجيرة، وابدأ بشي بشي بشي عل عل عل إذا تجلوقت ثتجلس فيه واضح."
+    }
+  ],
+  "observations": [
+    "step600 has the lowest eval loss but weak fresh-shadow pass rate.",
+    "step1200 has the best fresh-shadow count but is concentrated in planning.",
+    "step1800 regresses further and produces malformed repetition.",
+    "Loss alone is not reliable; runtime remains blocked by held-out behavior."
+  ],
+  "decision": {
+    "decision_id": "PHASE27_83_FAMILY_CONDITIONED_REPAIR_TRAINING_DECISION",
+    "engineering_decision": "BLOCK_RUNTIME_DIAGNOSE_OBJECTIVE_CURRICULUM_FAILURE",
+    "training_completed": true,
+    "runtime_release_allowed": false,
+    "ui_release_allowed": false,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "best_checkpoint_by_canary": "sf-10m-step1200",
+    "best_checkpoint_by_eval_loss": "sf-10m-step600",
+    "why": "The best fresh-shadow checkpoint reached only 11/60; training over-collapsed into one family and produced malformed/repetitive samples.",
+    "next_phase": "Phase 27.84 — Objective/Curriculum Failure Diagnosis"
+  }
+}

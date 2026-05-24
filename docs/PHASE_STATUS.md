@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.82 / 30**
-- **المرحلة الحالية:** **Phase 27.82 — Family-conditioned SF-10M Repair Training Decision**
-- **حالة المرحلة الحالية:** **اكتملت؛ `PHASE27_82_FAMILY_CONDITIONED_TRAINING_DECISION`; يسمح فقط بـ Phase 27.83 bounded SF-10M repair training؛ لا runtime ولا SF-50M ولا tokenizer retrain**
-- **المرحلة التالية المقترحة:** Phase 27.83 — Family-conditioned SF-10M bounded repair training.
+- **الرحلة الحالية:** **Phase 27.83 / 30**
+- **المرحلة الحالية:** **Phase 27.83 — Family-conditioned SF-10M Bounded Repair Training**
+- **حالة المرحلة الحالية:** **اكتملت؛ `PHASE27_83_FAMILY_CONDITIONED_REPAIR_TRAINING_DECISION`; التدريب تم لكن runtime محجوب؛ أفضل checkpoint `11/60` فقط**
+- **المرحلة التالية المقترحة:** Phase 27.84 — Objective/Curriculum Failure Diagnosis.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -138,6 +138,7 @@
 | Phase 27.80 | Repair Gate Encoding + Family Balance Remediation | ✅ remediation_ready_639_records_needed_no_training | ✅ |
 | Phase 27.81 | Balanced Family Pack Authoring | ✅ authored_2500_records_gates_passed_no_training | ✅ |
 | Phase 27.82 | Family-conditioned SF-10M Repair Training Decision | ✅ allows_phase27_83_bounded_training_no_runtime | ✅ |
+| Phase 27.83 | Family-conditioned SF-10M Bounded Repair Training | ✅ trained_runtime_blocked_diagnosis_required | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1063,7 +1064,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-611 passed in 20.86s
+614 passed in 20.84s
 ```
 
 | ملف | عدد |
@@ -1097,6 +1098,8 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_phase23_tokenizer_artifacts.py | 6 (Phase 23) |
 | test_phase24_sf10m_v0_2_report.py | 3 (Phase 24) |
 | test_phase25_generation_canary.py | 6 (Phase 25 + Phase 27.39 guard refinement) |
+| test_phase27_82_family_conditioned_training_decision.py | 3 |
+| test_phase27_83_family_conditioned_repair_training.py | 3 |
 | test_rag_sparse_retrieval.py | 14 (Phase 8) |
 | test_research_summarizer.py | 20 |
 | test_response_composer.py | 6 |
@@ -1109,7 +1112,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_training_device.py | 14 |
 | test_typo_corrector.py | 5 |
 | test_web_extractor.py | 18 |
-| **Total** | **423** |
+| **Total** | **614** |
 
 ---
 
@@ -1162,6 +1165,28 @@ make api
   - [PHASE27_82_FAMILY_CONDITIONED_TRAINING_DECISION.md](./PHASE27_82_FAMILY_CONDITIONED_TRAINING_DECISION.md)
   - `artifacts/reports/phase27_82_family_conditioned_training_decision_report.json`
   - `artifacts/reports/phase27_82_family_conditioned_training_decision/phase27_83_training_plan.json`
+
+---
+
+## Phase 27.83 — Family-conditioned SF-10M Bounded Repair Training
+
+- نُفّذ تدريب إصلاح محدود لـ `SF-10M` حسب خطة Phase 27.82.
+- الجهاز: Apple Silicon MPS؛ التدريب اكتمل في نحو `58.2s`.
+- checkpoints المحلية:
+  - `sf-10m-step600`
+  - `sf-10m-step1200`
+  - `sf-10m-step1800`
+- أفضل fresh shadow:
+  - `step600`: `7/60`, eval loss `3.7397`.
+  - `step1200`: `11/60`, eval loss `5.9248`.
+  - `step1800`: `3/60`, eval loss `5.9722`.
+- القرار: `BLOCK_RUNTIME_DIAGNOSE_OBJECTIVE_CURRICULUM_FAILURE`.
+- لا واجهة مولّدة، لا runtime release، لا SF-50M، لا tokenizer retrain.
+- التالي: Phase 27.84 لتشخيص سبب فشل objective/curriculum بدل تدريب جديد أعمى.
+- التقارير:
+  - [PHASE27_83_FAMILY_CONDITIONED_REPAIR_TRAINING_REPORT.md](./PHASE27_83_FAMILY_CONDITIONED_REPAIR_TRAINING_REPORT.md)
+  - `artifacts/reports/phase27_83_family_conditioned_repair_training_report.json`
+  - `artifacts/samples/phase27_83_family_conditioned_repair_training.md`
 
 ---
 

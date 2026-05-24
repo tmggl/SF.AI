@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.82 ضمن مسار SF-native فقط: صدر قرار هندسي يسمح "
-    "فقط بتدريب إصلاح مقيّد لـ SF-10M في Phase 27.83. لا runtime release، "
-    "لا tokenizer جديد، ولا SF-50M حتى ينجح تقييم لاحق.",
+    "وصلنا إلى Phase 27.83 ضمن مسار SF-native فقط: دُرّب إصلاح مقيّد لـ SF-10M "
+    "لكن أفضل checkpoint نجح 11/60 فقط في fresh shadow. لذلك لا runtime ولا "
+    "واجهة مولّدة الآن؛ التالي Phase 27.84 لتشخيص فشل objective/curriculum.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

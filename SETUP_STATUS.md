@@ -10,11 +10,11 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.82 / 30**
-- **المرحلة الحالية:** **Phase 27.82 — Family-conditioned SF-10M Repair Training Decision** (`PHASE27_82_FAMILY_CONDITIONED_TRAINING_DECISION`; يسمح فقط بـ Phase 27.83 bounded SF-10M repair training؛ لا runtime ولا SF-50M)
+- **الرحلة الحالية:** **Phase 27.83 / 30**
+- **المرحلة الحالية:** **Phase 27.83 — Family-conditioned SF-10M Bounded Repair Training** (`PHASE27_83_FAMILY_CONDITIONED_REPAIR_TRAINING_DECISION`; التدريب تم، runtime محجوب، أفضل checkpoint `11/60`)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
 - **ملف القيادة الواحد:** `docs/SF_AI_MASTER_GUIDE.md` هو نقطة الدخول الأولى لأي Agent أو مهندس؛ بقية الملفات مراجع تفصيلية.
-- **المرحلة التالية المقترحة:** Phase 27.83 — Family-conditioned SF-10M bounded repair training وفق خطة 27.82.
+- **المرحلة التالية المقترحة:** Phase 27.84 — Objective/Curriculum Failure Diagnosis؛ لا تدريب جديد قبل التشخيص.
 - **استراتيجية العمل الملزمة:** Sovereign Practical Acceleration Strategy v2؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب، و`NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS` قبل أي runtime.
 - **تصحيح السيادة:** لا يوجد Open-Weight Lane؛ Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي = أدوات هندسية فقط داخل SF-native.
@@ -416,8 +416,9 @@ make server-start
 - **Phase 27.80:** تشفير بوابات الإصلاح + remediation — مكتملة؛ مرّت gates بعد balanced family view.
 - **Phase 27.81:** تأليف حزمة عائلات الحوار المتوازنة — مكتملة؛ أضيف `2500` سجل gold وأصبح corpus `8443`.
 - **Phase 27.82:** قرار تدريب الإصلاح العائلي — مكتمل؛ يسمح فقط بـ Phase 27.83 bounded SF-10M repair training، ولا يسمح بـ runtime أو SF-50M.
+- **Phase 27.83:** تدريب إصلاح محدود لـ SF-10M — مكتمل كتشغيل، لكنه فشل حواريًا (`best=11/60`)؛ runtime وSF-50M محجوبان.
 
-أول توليد خام حدث في Phase 13. Phase 15 جهّز الباب داخل الشات، وPhase 16 أثبت أن التوليد مكرر. Phase 27.78 غيّرت المنهج: لا مزيد من التدريب المتكرر قبل تشخيص root-cause. Phase 27.79 صممت إصلاح objective/curriculum/decoding/family balance. Phase 27.80 شفّرت البوابات، Phase 27.81 عالجت توازن family ببيانات gold، وPhase 27.82 سمحت بالانتقال إلى تدريب إصلاح محدود في Phase 27.83.
+أول توليد خام حدث في Phase 13. Phase 15 جهّز الباب داخل الشات، وPhase 16 أثبت أن التوليد مكرر. Phase 27.78 غيّرت المنهج: لا مزيد من التدريب المتكرر قبل تشخيص root-cause. Phase 27.79 صممت إصلاح objective/curriculum/decoding/family balance. Phase 27.80 شفّرت البوابات، Phase 27.81 عالجت توازن family ببيانات gold، Phase 27.82 سمحت بتدريب مقيّد، وPhase 27.83 أثبتت أن الإصلاح الحالي لا يكفي ويحتاج تشخيص objective/curriculum في Phase 27.84.
 
 ---
 
@@ -463,4 +464,4 @@ make server-start
 
 ## بروتوكول الانتقال
 
-التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، ومع نجاح بوابة التكبير انتقل تلقائيًا للحجم التالي حتى `SF-1B+`. ارفع الناجح فقط، افحص الحساسية، ووثّق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. بعد Phase 27.82 التدريب الوحيد المسموح هو Phase 27.83 bounded SF-10M repair training وفق خطة القرار؛ لا runtime release ولا SF-50M قبل canary لاحق ناجح.
+التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، ومع نجاح بوابة التكبير انتقل تلقائيًا للحجم التالي حتى `SF-1B+`. ارفع الناجح فقط، افحص الحساسية، ووثّق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. بعد Phase 27.83 لا تبدأ تدريبًا جديدًا قبل Phase 27.84 diagnosis؛ لا runtime release ولا SF-50M قبل canary لاحق ناجح.

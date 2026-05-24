@@ -1,0 +1,13 @@
+{
+  "decision_id": "PHASE27_83_FAMILY_CONDITIONED_REPAIR_TRAINING_DECISION",
+  "engineering_decision": "BLOCK_RUNTIME_DIAGNOSE_OBJECTIVE_CURRICULUM_FAILURE",
+  "training_completed": true,
+  "runtime_release_allowed": false,
+  "ui_release_allowed": false,
+  "sf50m_justified_transition": false,
+  "tokenizer_retrain_allowed": false,
+  "best_checkpoint_by_canary": "sf-10m-step1200",
+  "best_checkpoint_by_eval_loss": "sf-10m-step600",
+  "why": "The best fresh-shadow checkpoint reached only 11/60; training over-collapsed into one family and produced malformed/repetitive samples.",
+  "next_phase": "Phase 27.84 — Objective/Curriculum Failure Diagnosis"
+}
