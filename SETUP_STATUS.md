@@ -10,11 +10,11 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.89 / 30**
-- **المرحلة الحالية:** **Phase 27.89 — Stratified Round-Robin Curriculum Sampler Gate** (`PHASE27_89_STRATIFIED_ROUND_ROBIN_CURRICULUM_SAMPLER_GATE_DECISION`; لا تدريب؛ runtime محجوب؛ تدريب 27.90 المقيّد مسموح)
+- **الرحلة الحالية:** **Phase 27.90 / 30**
+- **المرحلة الحالية:** **Phase 27.90 — Bounded SF-10M Round-Robin Curriculum Repair Training** (`PHASE27_90_BOUNDED_ROUND_ROBIN_REPAIR_DECISION`; تدريب اكتمل؛ runtime محجوب؛ التشخيص مطلوب)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
 - **ملف القيادة الواحد:** `docs/SF_AI_MASTER_GUIDE.md` هو نقطة الدخول الأولى لأي Agent أو مهندس؛ بقية الملفات مراجع تفصيلية.
-- **المرحلة التالية المقترحة:** Phase 27.90 — Bounded SF-10M Round-Robin Curriculum Repair Training؛ يستخدم `--split-order family_round_robin` فقط.
+- **المرحلة التالية المقترحة:** Phase 27.91 — Round-Robin Training Result Diagnosis؛ لا تدريب جديد قبل تشخيص إخفاقات `35/50`.
 - **استراتيجية العمل الملزمة:** Sovereign Practical Acceleration Strategy v2؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب، و`NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS` قبل أي runtime.
 - **تصحيح السيادة:** لا يوجد Open-Weight Lane؛ Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي = أدوات هندسية فقط داخل SF-native.
@@ -263,7 +263,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs,reports}/   Phase 5.5+ outputs/reports
 │
-├── tests/                                 pytest suite — 639 تست / 84 ملف
+├── tests/                                 pytest suite — 641 تست / 85 ملف
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -348,10 +348,10 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى إكمال Phase 27.89)
+## نتائج الاختبارات (حتى إكمال Phase 27.90)
 
 ```
-639 passed in 22.92s
+641 passed in 65.56s (0:01:05)
 ```
 
 التغطية الحالية:
@@ -388,6 +388,7 @@ make server-start
 - `test_phase24_sf10m_v0_2_report.py` — 3 tests (Phase 24 training report + runtime block)
 - `test_phase25_generation_canary.py` — 6 tests (Phase 25 canary guard)
 - `test_phase27_89_stratified_round_robin_curriculum_sampler_gate.py` — 2 tests (Phase 27.89 sampler gate)
+- `test_phase27_90_bounded_round_robin_repair.py` — 2 tests (Phase 27.90 training result)
 - `test_orchestrator.py` — 7 tests
 - `test_response_composer.py` — 6 tests
 - `test_router.py` — 8 tests
@@ -424,8 +425,9 @@ make server-start
 - **Phase 27.87:** تدريب SF-10M مقيّد بعد renderer — مكتمل؛ أفضل fresh shadow `10/50` فقط، runtime محجوب، والانحياز العائلي ما زال حاضرًا.
 - **Phase 27.88:** تشخيص نتيجة التدريب — مكتمل؛ السبب curriculum/sampling متسلسل؛ `موضوع` ظهر 5 مرات فقط في أول 1800 عينة.
 - **Phase 27.89:** بوابة sampler متوازن — مكتملة؛ `family_round_robin` يعطي `360` عينة لكل family في أول 1800، وكل نافذة 600 فيها `120` لكل family؛ runtime محجوب والتدريب المقيّد مسموح للمرحلة 27.90 فقط.
+- **Phase 27.90:** تدريب SF-10M محدود بالـ round-robin — مكتمل؛ best fresh shadow = `35/50` عند `sf-10m-step1800`، تحسن قوي لكنه دون بوابة `45/50`؛ runtime محجوب والتشخيص مطلوب.
 
-أول توليد خام حدث في Phase 13. Phase 15 جهّز الباب داخل الشات، وPhase 16 أثبت أن التوليد مكرر. Phase 27.78 غيّرت المنهج: لا مزيد من التدريب المتكرر قبل تشخيص root-cause. Phase 27.79 صممت إصلاح objective/curriculum/decoding/family balance. Phase 27.80 شفّرت البوابات، Phase 27.81 عالجت توازن family ببيانات gold، Phase 27.82 سمحت بتدريب مقيّد، Phase 27.83 أثبتت أن الإصلاح الحالي لا يكفي، Phase 27.84 حددت السبب، Phase 27.85 صممت الإشارة الصريحة، Phase 27.86 أثبتت أن الإشارة تظهر فعليًا داخل نص التدريب ومخفية عن loss، Phase 27.87 أثبتت أن التدريب المقيّد ما زال غير كافٍ للحوار العام، Phase 27.88 حددت أن ترتيب stream هو الخلل الأكبر، وPhase 27.89 أصلحت بوابة الترتيب قبل أي تدريب جديد.
+أول توليد خام حدث في Phase 13. Phase 15 جهّز الباب داخل الشات، وPhase 16 أثبت أن التوليد مكرر. Phase 27.78 غيّرت المنهج: لا مزيد من التدريب المتكرر قبل تشخيص root-cause. Phase 27.79 صممت إصلاح objective/curriculum/decoding/family balance. Phase 27.80 شفّرت البوابات، Phase 27.81 عالجت توازن family ببيانات gold، Phase 27.82 سمحت بتدريب مقيّد، Phase 27.83 أثبتت أن الإصلاح الحالي لا يكفي، Phase 27.84 حددت السبب، Phase 27.85 صممت الإشارة الصريحة، Phase 27.86 أثبتت أن الإشارة تظهر فعليًا داخل نص التدريب ومخفية عن loss، Phase 27.87 أثبتت أن التدريب المقيّد ما زال غير كافٍ للحوار العام، Phase 27.88 حددت أن ترتيب stream هو الخلل الأكبر، Phase 27.89 أصلحت بوابة الترتيب قبل أي تدريب جديد، وPhase 27.90 رفعت النتيجة إلى `35/50` لكن كشفت ضعف topic المتبقي.
 
 ---
 
@@ -471,4 +473,4 @@ make server-start
 
 ## بروتوكول الانتقال
 
-التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، ومع نجاح بوابة التكبير انتقل تلقائيًا للحجم التالي حتى `SF-1B+`. ارفع الناجح فقط، افحص الحساسية، ووثّق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. بعد Phase 27.89 لا يوجد runtime release ولا SF-50M ولا tokenizer retrain؛ المسموح فقط تدريب 27.90 المقيّد على SF-10M باستخدام `--split-order family_round_robin`.
+التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، ومع نجاح بوابة التكبير انتقل تلقائيًا للحجم التالي حتى `SF-1B+`. ارفع الناجح فقط، افحص الحساسية، ووثّق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. بعد Phase 27.90 لا يوجد runtime release ولا SF-50M ولا tokenizer retrain؛ المطلوب Phase 27.91 لتشخيص إخفاقات `topic=1/10` و`expected_terms_missing=13`.

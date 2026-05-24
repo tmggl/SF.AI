@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.89
-الاسم: Stratified Round-Robin Curriculum Sampler Gate
+المرحلة الحالية: Phase 27.90
+الاسم: Bounded SF-10M Round-Robin Curriculum Repair Training
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_89_STRATIFIED_ROUND_ROBIN_CURRICULUM_SAMPLER_GATE_DECISION
+القرار الرسمي: PHASE27_90_BOUNDED_ROUND_ROBIN_REPAIR_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -104,8 +104,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - نتيجة 27.87: تدريب SF-10M المقيّد اكتمل، لكن أفضل fresh shadow = `10/50`; runtime وSF-50M محجوبان.
 - نتيجة 27.88: شُخّص الفشل كـ sequential curriculum collapse؛ `موضوع` ظهر 5 مرات فقط في أول 1800 عينة.
 - نتيجة 27.89: أضيف `--split-order family_round_robin` ومرّت gate؛ أول 1800 عينة صارت `360` لكل family، وكل نافذة 600 فيها `120` لكل family.
+- نتيجة 27.90: تدريب SF-10M محدود بالـ round-robin رفع fresh shadow إلى `35/50`، لكن topic بقي `1/10` والبوابة `45/50` لم تمر.
 - corpus الحالي: `8443` (`msa=4199`, `saudi=4244`, `gold=3331`, `silver=5112`).
-- التالي: `Phase 27.90 — Bounded SF-10M Round-Robin Curriculum Repair Training`.
+- التالي: `Phase 27.91 — Round-Robin Training Result Diagnosis`.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -321,18 +322,19 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.90 — Bounded SF-10M Round-Robin Curriculum Repair Training
+Phase 27.91 — Round-Robin Training Result Diagnosis
 ```
 
 مطلوب منها:
 
-- تدريب SF-10M محدود باستخدام `--split-order family_round_robin`.
-- حفظ tracking واضح لكل window/checkpoint.
-- تشغيل held-out/shadow/family canary بعد التدريب.
+- تحليل إخفاقات `sf-10m-step1800` بعد نتيجة `35/50`.
+- فصل أسباب الفشل بين topic underlearning وexpected term mismatch وdecoding/repetition.
+- إصدار قرار: repair topic objective أم curriculum إضافي أم منع التدريب والعودة لتصميم آخر.
 - منع SF-50M/runtime حتى ينجح canary لاحق.
 
-ممنوع في 27.90:
+ممنوع في 27.91 قبل التشخيص:
 
+- تدريب جديد.
 - runtime release.
 - tokenizer retrain.
 - SF-50M.

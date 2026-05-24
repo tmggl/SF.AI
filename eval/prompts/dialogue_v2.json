@@ -103,7 +103,7 @@
         "expected_status": "active",
         "expected_generator": "template",
         "expected_requires_safety": false,
-        "required_response_terms": ["Phase 27.89", "360 لكل عائلة", "Phase 27.90"],
+        "required_response_terms": ["Phase 27.90", "35/50", "Phase 27.91"],
         "forbidden_response_terms": ["نفتح الواجهة الآن", "نبدأ SF-50M كامل الآن"]
       }
     ]

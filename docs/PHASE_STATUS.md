@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.89 / 30**
-- **المرحلة الحالية:** **Phase 27.89 — Stratified Round-Robin Curriculum Sampler Gate**
-- **حالة المرحلة الحالية:** **اكتملت؛ sampler `family_round_robin` مرّ؛ التدريب المقيّد مسموح في 27.90 فقط؛ runtime محجوب**
-- **المرحلة التالية المقترحة:** Phase 27.90 — Bounded SF-10M Round-Robin Curriculum Repair Training.
+- **الرحلة الحالية:** **Phase 27.90 / 30**
+- **المرحلة الحالية:** **Phase 27.90 — Bounded SF-10M Round-Robin Curriculum Repair Training**
+- **حالة المرحلة الحالية:** **اكتملت كتدريب؛ fresh shadow تحسن إلى `35/50` لكن runtime محجوب والتشخيص مطلوب**
+- **المرحلة التالية المقترحة:** Phase 27.91 — Round-Robin Training Result Diagnosis.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -145,6 +145,7 @@
 | Phase 27.87 | Bounded Family-conditioned SF-10M Repair Training | ✅ trained_runtime_blocked_diagnosis_required | ✅ |
 | Phase 27.88 | Family-conditioned Training Result Diagnosis | ✅ diagnosed_sequential_curriculum_collapse_no_training | ✅ |
 | Phase 27.89 | Stratified Round-Robin Curriculum Sampler Gate | ✅ sampler_gate_passed_training_allowed_next_no_runtime | ✅ |
+| Phase 27.90 | Bounded SF-10M Round-Robin Curriculum Repair Training | ✅ trained_runtime_blocked_diagnosis_required | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1350,6 +1351,40 @@ make api
   - [PHASE27_89_STRATIFIED_ROUND_ROBIN_CURRICULUM_SAMPLER_GATE_REPORT.md](./PHASE27_89_STRATIFIED_ROUND_ROBIN_CURRICULUM_SAMPLER_GATE_REPORT.md)
   - `artifacts/reports/phase27_89_stratified_round_robin_curriculum_sampler_gate_report.json`
   - `artifacts/reports/PHASE27_89_STRATIFIED_ROUND_ROBIN_CURRICULUM_SAMPLER_GATE_DECISION.json`
+
+---
+
+## Phase 27.90 — Bounded SF-10M Round-Robin Curriculum Repair Training
+
+- بدأ تدريب محدود مسموح فقط بعد gate 27.89.
+- الأمر استخدم `--split-order family_round_robin` مع tokenizer v9 وcheckpoint `sf-10m-step6200` من Phase 27.77.
+- التدريب:
+  - steps: `1800`
+  - save_every: `600`
+  - seq_len: `96`
+  - batch_size: `1`
+  - loss_scope: `assistant`
+  - packing_mode: `sample_isolated`
+- loss: `10.0272 → 1.0993`.
+- التقييم fresh shadow:
+  - `sf-10m-step600`: `26/50`
+  - `sf-10m-step1200`: `32/50`
+  - `sf-10m-step1800`: `35/50` best
+- ملخص أفضل checkpoint:
+  - open_social: `9/10`
+  - followup: `8/10`
+  - planning: `10/10`
+  - support: `7/10`
+  - topic: `1/10`
+- القرار: `BLOCK_RUNTIME_DIAGNOSE_ROUND_ROBIN_TRAINING_RESULT`.
+- سبب الحجب: النتيجة `35/50` أقل من بوابة held-out/runtime `45/50`، وtopic ما زال ضعيفًا جدًا.
+- المحظور الآن: runtime release، UI generator release، SF-50M، tokenizer retrain.
+- التالي: Phase 27.91 — Round-Robin Training Result Diagnosis.
+- التقارير:
+  - [PHASE27_90_BOUNDED_ROUND_ROBIN_REPAIR_REPORT.md](./PHASE27_90_BOUNDED_ROUND_ROBIN_REPAIR_REPORT.md)
+  - `artifacts/reports/phase27_90_bounded_round_robin_repair_report.json`
+  - `artifacts/reports/PHASE27_90_BOUNDED_ROUND_ROBIN_REPAIR_DECISION.json`
+  - `artifacts/samples/phase27_90_bounded_round_robin_repair.md`
 
 ---
 

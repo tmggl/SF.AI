@@ -82,9 +82,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.89 ضمن مسار SF-native فقط: أضفنا ترتيب "
-    "family_round_robin ومرّت بوابة التوازن. أول 1800 عينة أصبحت 360 لكل عائلة "
-    "حوار، ولا runtime الآن. التالي Phase 27.90 تدريب SF-10M محدود بهذا الترتيب.",
+    "وصلنا إلى Phase 27.90 ضمن مسار SF-native فقط: درّبنا SF-10M المحدود "
+    "بترتيب family_round_robin. تحسن fresh shadow إلى 35/50، لكنه دون بوابة "
+    "45/50، لذلك لا runtime الآن. التالي Phase 27.91 تشخيص سبب الفشل المتبقي.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (
