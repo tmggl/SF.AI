@@ -130,6 +130,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.58 | Tokenizer v7 Bounded Alignment Probe | مكتملة كتجربة؛ tokenizer نجح، probe فشل `4/15`, runtime محجوب |
 | Phase 27.59 | Bounded Alignment Repair | مكتملة؛ repair محدود نجح `15/15`, runtime محجوب بانتظار canary أوسع |
 | Phase 27.60 | Broader Natural-Dialogue Canary | مكتملة كتقييم؛ canary أوسع فشل `12/30`, runtime محجوب |
+| Phase 27.61 | Broader Generalization Repair | مكتملة كتدريب repair؛ تحسن إلى `18/30`, runtime محجوب |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3373,6 +3374,42 @@ Phase 27.59 نجحت معمليًا لكنها لم تعمم بما يكفي. ل
 - [PHASE27_60_BROADER_NATURAL_DIALOGUE_CANARY_REPORT.md](./PHASE27_60_BROADER_NATURAL_DIALOGUE_CANARY_REPORT.md)
 - `artifacts/reports/phase27_60_broader_natural_dialogue_canary_report.json`
 - `artifacts/samples/phase27_60_broader_natural_dialogue_canary.md`
+
+---
+
+## Phase 27.61 — Broader Generalization Repair
+
+### الهدف
+إصلاح الفشل الأكبر في Phase 27.60، خصوصًا `support/topic/planning`، مع الحفاظ على توازن `open_social/followup`.
+
+### ما تم
+- أضيف `scripts/phase27_61_broader_generalization_repair.py`.
+- أضيف `make phase27-broader-generalization-repair`.
+- دُرّب repair محدود `SF-10M` على tokenizer v7:
+  - `8200` خطوة.
+  - `36` زوج إصلاح.
+  - `3960` سجل تدريب مؤقت.
+- أُعيد canary Phase 27.60 نفسه.
+
+### النتيجة
+- pass: `18/30` بدل `12/30`.
+- `planning`: `6/6`.
+- `support`: `6/6`.
+- `followup`: `3/6`.
+- `open_social`: `2/6`.
+- `topic`: `1/6`.
+
+### القرار
+تحسن جزئي حقيقي، لكنه ليس نجاحًا. لا runtime switch، لا UI، لا `SF-50M`، ولا Phase 28.
+
+التالي:
+
+**Phase 27.62 — inspect Phase 27.61 family-balance failures and repair open_social/followup/topic**
+
+### artifacts
+- [PHASE27_61_BROADER_GENERALIZATION_REPAIR_REPORT.md](./PHASE27_61_BROADER_GENERALIZATION_REPAIR_REPORT.md)
+- `artifacts/reports/phase27_61_broader_generalization_repair_report.json`
+- `artifacts/samples/phase27_61_broader_generalization_repair.md`
 
 ---
 

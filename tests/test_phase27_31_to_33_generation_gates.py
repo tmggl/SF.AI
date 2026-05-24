@@ -529,3 +529,21 @@ def test_phase27_60_broader_canary_blocks_runtime_on_generalization_failure() ->
     assert report["decisions"]["ui_open_allowed"] is False
     assert report["decisions"]["sf50m_allowed"] is False
     assert report["decisions"]["guarded_runtime_review_allowed"] is False
+
+
+def test_phase27_61_broader_repair_improves_but_blocks_runtime() -> None:
+    report = _report("phase27_61_broader_generalization_repair_report.json")
+    assert report["phase"] == "Phase 27.61"
+    assert report["status"] == "FAILED_BROADER_GENERALIZATION_REPAIR_RUNTIME_BLOCKED"
+    assert report["training_started"] is True
+    assert report["tokenizer"] == "artifacts/tokenizers/sf_bpe/v7_phase27_58"
+    assert report["summary"]["passed"] == 18
+    assert report["summary"]["total"] == 30
+    assert report["summary"]["family_summary"]["planning"]["passed"] == 6
+    assert report["summary"]["family_summary"]["support"]["passed"] == 6
+    assert report["summary"]["family_summary"]["open_social"]["passed"] == 2
+    assert report["summary"]["family_summary"]["topic"]["passed"] == 1
+    assert report["decisions"]["runtime_switch_allowed"] is False
+    assert report["decisions"]["ui_open_allowed"] is False
+    assert report["decisions"]["sf50m_allowed"] is False
+    assert report["decisions"]["shadow_canary_allowed"] is False

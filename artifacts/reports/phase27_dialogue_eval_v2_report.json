@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.60: اختبرنا checkpoint 27.59 على canary طبيعي أوسع وفشل 12/30. الواجهة لا تُفتح. الفشل الأكبر في support/topic/planning، والتالي Phase 27.61 لإصلاح التعميم الطبي"
+      "response_preview": "وصلنا إلى Phase 27.61: حسّننا التعميم من 12/30 إلى 18/30، ونجحت planning/support كاملة، لكن open_social/followup/topic تراجعت. الواجهة لا تُفتح. التالي Phase 27.62 لإصلاح توازن عائ"
     },
     {
       "scenario_id": "clarification_repair_flow",

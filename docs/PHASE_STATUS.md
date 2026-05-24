@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.60 / 30**
-- **المرحلة الحالية:** **Phase 27.60 — Broader Natural-Dialogue Canary**
-- **حالة المرحلة الحالية:** **اكتملت كتقييم؛ فشل canary الأوسع (`12/30`) والـ runtime محجوب**
-- **المرحلة التالية المقترحة:** Phase 27.61 inspect Phase 27.60 failures and repair broader natural-dialogue generalization.
+- **الرحلة الحالية:** **Phase 27.61 / 30**
+- **المرحلة الحالية:** **Phase 27.61 — Broader Generalization Repair**
+- **حالة المرحلة الحالية:** **اكتملت كتدريب repair؛ تحسن canary إلى `18/30` لكنه فشل والـ runtime محجوب**
+- **المرحلة التالية المقترحة:** Phase 27.62 inspect Phase 27.61 family-balance failures and repair open_social/followup/topic.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -109,6 +109,7 @@
 | Phase 27.58 | Tokenizer v7 Bounded Alignment Probe | ✅ failed_bounded_alignment_probe_runtime_blocked | ✅ |
 | Phase 27.59 | Bounded Alignment Repair | ✅ passed_bounded_alignment_repair_runtime_blocked | ✅ |
 | Phase 27.60 | Broader Natural-Dialogue Canary | ✅ failed_broader_natural_dialogue_canary_runtime_blocked | ✅ |
+| Phase 27.61 | Broader Generalization Repair | ✅ failed_broader_generalization_repair_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -864,6 +865,15 @@
   - القرار: لا runtime switch، لا UI، لا `SF-50M`، ولا Phase 28.
   - التالي: Phase 27.61 إصلاح generalization الطبيعي خصوصًا `support/topic/planning`.
   - أضيف [PHASE27_60_BROADER_NATURAL_DIALOGUE_CANARY_REPORT.md](./PHASE27_60_BROADER_NATURAL_DIALOGUE_CANARY_REPORT.md).
+- بدأ وانتهى Phase 27.61 Broader Generalization Repair:
+  - أضيف `make phase27-broader-generalization-repair`.
+  - دُرّب repair محدود على tokenizer v7 لمدة `8200` خطوة.
+  - النتيجة تحسنت من `12/30` إلى `18/30`.
+  - نجحت `planning=6/6` و`support=6/6`.
+  - تراجعت/فشلت `open_social=2/6`, `followup=3/6`, `topic=1/6`.
+  - القرار: لا runtime switch، لا UI، لا `SF-50M`، ولا Phase 28.
+  - التالي: Phase 27.62 إصلاح توازن العائلات ومنع انجذاب الموضوعات/السوالف إلى `الوفاء` أو الدعم.
+  - أضيف [PHASE27_61_BROADER_GENERALIZATION_REPAIR_REPORT.md](./PHASE27_61_BROADER_GENERALIZATION_REPAIR_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 

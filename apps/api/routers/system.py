@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.60 — Broader Natural-Dialogue Canary",
-        current_phase_status="failed_broader_natural_dialogue_canary_runtime_blocked",
+        current_phase="Phase 27.61 — Broader Generalization Repair",
+        current_phase_status="failed_broader_generalization_repair_runtime_blocked",
         next_phase=(
-            "Phase 27.61 inspect Phase 27.60 failures and repair broader natural-dialogue generalization"
+            "Phase 27.62 inspect Phase 27.61 family-balance failures and repair open_social/followup/topic"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -414,6 +414,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_60_broader_natural_dialogue_canary",
                 status="failed_broader_natural_dialogue_canary_runtime_blocked",
                 phase="Phase 27.60",
+            ),
+            ComponentStatus(
+                name="phase27_61_broader_generalization_repair",
+                status="failed_broader_generalization_repair_runtime_blocked",
+                phase="Phase 27.61",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

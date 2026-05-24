@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.60: اختبرنا checkpoint 27.59 على canary طبيعي أوسع "
-    "وفشل 12/30. الواجهة لا تُفتح. الفشل الأكبر في support/topic/planning، "
-    "والتالي Phase 27.61 لإصلاح التعميم الطبيعي قبل أي runtime switch.",
+    "وصلنا إلى Phase 27.61: حسّننا التعميم من 12/30 إلى 18/30، ونجحت "
+    "planning/support كاملة، لكن open_social/followup/topic تراجعت. "
+    "الواجهة لا تُفتح. التالي Phase 27.62 لإصلاح توازن عائلات الردود.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (
