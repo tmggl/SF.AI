@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.84
-الاسم: Objective/Curriculum Failure Diagnosis
+المرحلة الحالية: Phase 27.85
+الاسم: Explicit Family Conditioning Objective Design
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_84_OBJECTIVE_CURRICULUM_FAILURE_DIAGNOSIS_DECISION
+القرار الرسمي: PHASE27_85_EXPLICIT_FAMILY_CONDITIONING_OBJECTIVE_DESIGN_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -99,8 +99,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - نتيجة 27.82: فُحصت prerequisites السيادية وصدرت خطة تدريب 27.83 دون بدء التدريب.
 - نتيجة 27.83: التدريب اكتمل، لكن best fresh shadow = `11/60`; runtime محجوب.
 - نتيجة 27.84: family metadata لم تكن ظاهرة داخل نص التدريب، لذلك لم يصبح التوازن conditioning فعليًا.
+- نتيجة 27.85: صُممت صيغة `عائلة الحوار: سوالف/متابعة/تنظيم/دعم/موضوع` كسياق masked.
 - corpus الحالي: `8443` (`msa=4199`, `saudi=4244`, `gold=3331`, `silver=5112`).
-- التالي: `Phase 27.85 — Explicit Family Conditioning Objective Design`.
+- التالي: `Phase 27.86 — Family Conditioning Renderer Gate`.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -316,18 +317,18 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.85 — Explicit Family Conditioning Objective Design
+Phase 27.86 — Family Conditioning Renderer Gate
 ```
 
 مطلوب منها:
 
-- تصميم سطر/رمز conditioning صريح لعائلة الحوار داخل نص التدريب.
-- تحديد أثره على tokenizer وassistant-only loss.
-- تصميم sampler يضمن تداخل العائلات دون collapse.
-- تحديد canary لكل family قبل أي تدريب.
+- تنفيذ renderer يضيف `عائلة الحوار: ...` داخل نص التدريب.
+- إثبات أن split/no-split paths يخرجان النص نفسه.
+- إثبات أن assistant-only loss يخفي conditioning lines عن الهدف.
+- منع التدريب حتى تمر gate.
 - منع SF-50M/runtime حتى ينجح canary لاحق.
 
-ممنوع في 27.85 قبل التصميم:
+ممنوع في 27.86 قبل gate:
 
 - تدريب جديد.
 - runtime release.

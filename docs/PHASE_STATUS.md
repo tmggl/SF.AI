@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.84 / 30**
-- **المرحلة الحالية:** **Phase 27.84 — Objective/Curriculum Failure Diagnosis**
-- **حالة المرحلة الحالية:** **اكتملت؛ `PHASE27_84_OBJECTIVE_CURRICULUM_FAILURE_DIAGNOSIS_DECISION`; السبب الأكبر: family metadata لم تكن ظاهرة في نص التدريب؛ لا تدريب جديد**
-- **المرحلة التالية المقترحة:** Phase 27.85 — Explicit Family Conditioning Objective Design.
+- **الرحلة الحالية:** **Phase 27.85 / 30**
+- **المرحلة الحالية:** **Phase 27.85 — Explicit Family Conditioning Objective Design**
+- **حالة المرحلة الحالية:** **اكتملت؛ `PHASE27_85_EXPLICIT_FAMILY_CONDITIONING_OBJECTIVE_DESIGN_DECISION`; صُممت صيغة family conditioning؛ لا تدريب جديد**
+- **المرحلة التالية المقترحة:** Phase 27.86 — Family Conditioning Renderer Gate.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -140,6 +140,7 @@
 | Phase 27.82 | Family-conditioned SF-10M Repair Training Decision | ✅ allows_phase27_83_bounded_training_no_runtime | ✅ |
 | Phase 27.83 | Family-conditioned SF-10M Bounded Repair Training | ✅ trained_runtime_blocked_diagnosis_required | ✅ |
 | Phase 27.84 | Objective/Curriculum Failure Diagnosis | ✅ diagnosed_family_signal_missing_no_training | ✅ |
+| Phase 27.85 | Explicit Family Conditioning Objective Design | ✅ renderer_gate_allowed_no_training | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1065,7 +1066,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-617 passed in 20.56s
+620 passed in 20.81s
 ```
 
 | ملف | عدد |
@@ -1102,6 +1103,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 | test_phase27_82_family_conditioned_training_decision.py | 3 |
 | test_phase27_83_family_conditioned_repair_training.py | 3 |
 | test_phase27_84_objective_curriculum_failure_diagnosis.py | 3 |
+| test_phase27_85_explicit_family_conditioning_objective_design.py | 3 |
 | test_rag_sparse_retrieval.py | 14 (Phase 8) |
 | test_research_summarizer.py | 20 |
 | test_response_composer.py | 6 |
@@ -1210,6 +1212,28 @@ make api
 - التقارير:
   - [PHASE27_84_OBJECTIVE_CURRICULUM_FAILURE_DIAGNOSIS_REPORT.md](./PHASE27_84_OBJECTIVE_CURRICULUM_FAILURE_DIAGNOSIS_REPORT.md)
   - `artifacts/reports/phase27_84_objective_curriculum_failure_diagnosis_report.json`
+
+---
+
+## Phase 27.85 — Explicit Family Conditioning Objective Design
+
+- لم يبدأ تدريب جديد.
+- لم يتغير runtime.
+- صُممت صيغة conditioning صريحة تظهر داخل نص التدريب:
+  - `النطاق: فصحى/سعودي`
+  - `عائلة الحوار: سوالف/متابعة/تنظيم/دعم/موضوع`
+- mapping العائلات:
+  - `open_social → سوالف`
+  - `followup → متابعة`
+  - `planning → تنظيم`
+  - `support → دعم`
+  - `topic → موضوع`
+- قاعدة objective: أسطر conditioning وسطر المستخدم تبقى masked مع `loss_scope=assistant`; الهدف فقط رد المساعد + EOS.
+- القرار: يسمح فقط بـ Phase 27.86 لتنفيذ renderer gate، ولا يسمح بتدريب جديد.
+- التقارير:
+  - [PHASE27_85_EXPLICIT_FAMILY_CONDITIONING_OBJECTIVE_DESIGN_REPORT.md](./PHASE27_85_EXPLICIT_FAMILY_CONDITIONING_OBJECTIVE_DESIGN_REPORT.md)
+  - `artifacts/reports/phase27_85_explicit_family_conditioning_objective_design_report.json`
+  - `artifacts/reports/phase27_85_family_conditioning_objective_spec.json`
 
 ---
 

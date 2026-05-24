@@ -1,0 +1,71 @@
+{
+  "spec_id": "PHASE27_85_FAMILY_CONDITIONING_OBJECTIVE_SPEC",
+  "version": "v1",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "conditioning_lines": [
+    "النطاق: <msa|saudi rendered as فصحى|سعودي>",
+    "عائلة الحوار: <سوالف|متابعة|تنظيم|دعم|موضوع>"
+  ],
+  "family_labels": {
+    "open_social": "سوالف",
+    "followup": "متابعة",
+    "planning": "تنظيم",
+    "support": "دعم",
+    "topic": "موضوع"
+  },
+  "family_descriptions": {
+    "open_social": "حديث اجتماعي طبيعي وسوالف خفيفة.",
+    "followup": "متابعة معنى سابق أو طلب توضيح.",
+    "planning": "تنظيم وقت أو مهام أو بداية عملية.",
+    "support": "طمأنة وتهدئة ودعم وجداني عام.",
+    "topic": "شرح معنى أو قيمة أو فكرة عامة."
+  },
+  "rendering_rule": "The family line appears before the user turn in every dialogue training sample. It is context only, not assistant target text.",
+  "assistant_loss_rule": "With loss_scope=assistant, both conditioning lines and user turns remain masked; only assistant content plus EOS are supervised.",
+  "runtime_prompt_rule": "Any future generator runtime must prepend the same family line selected by the router/semantic family classifier before calling the model.",
+  "curriculum_rule": "Training sampler must interleave families in a round-robin or stratified schedule; balanced counts alone are insufficient.",
+  "canary_thresholds": {
+    "per_family_min_pass": 10,
+    "overall_min_pass": 55,
+    "malformed_max": 0,
+    "repeated_phrase_max": 0,
+    "dominant_family_share_max": 0.35
+  },
+  "examples": {
+    "open_social": {
+      "label": "سوالف",
+      "description": "حديث اجتماعي طبيعي وسوالف خفيفة.",
+      "rendered_preview": "النطاق: سعودي\nعائلة الحوار: سوالف\nالمستخدم: وش رايك نسولف شوي؟\nالمساعد: نسولف عن يومك بشي خفيف: وش ألطف موقف صار لك؟\n"
+    },
+    "followup": {
+      "label": "متابعة",
+      "description": "متابعة معنى سابق أو طلب توضيح.",
+      "rendered_preview": "النطاق: سعودي\nعائلة الحوار: متابعة\nالمستخدم: وضح لي مقصدك اكثر.\nالمساعد: أقصد نبدأ من أبسط نقطة ثم نكمل عليها خطوة خطوة.\n"
+    },
+    "planning": {
+      "label": "تنظيم",
+      "description": "تنظيم وقت أو مهام أو بداية عملية.",
+      "rendered_preview": "النطاق: سعودي\nعائلة الحوار: تنظيم\nالمستخدم: كيف أنظم دراستي اليوم؟\nالمساعد: اكتب ثلاث مهام، واختر أهم واحدة وابدأ بها مدة قصيرة.\n"
+    },
+    "support": {
+      "label": "دعم",
+      "description": "طمأنة وتهدئة ودعم وجداني عام.",
+      "rendered_preview": "النطاق: سعودي\nعائلة الحوار: دعم\nالمستخدم: صدري ضايق وابغى اهدأ.\nالمساعد: خذ نفسًا هادئًا، وخلّك مع خطوة صغيرة الآن.\n"
+    },
+    "topic": {
+      "label": "موضوع",
+      "description": "شرح معنى أو قيمة أو فكرة عامة.",
+      "rendered_preview": "النطاق: سعودي\nعائلة الحوار: موضوع\nالمستخدم: ما معنى الشجاعة؟\nالمساعد: الشجاعة هي فعل الصواب رغم الخوف.\n"
+    }
+  },
+  "blocked": [
+    "training before renderer/gate implementation",
+    "runtime release",
+    "SF-50M transition",
+    "tokenizer retrain",
+    "pretrained/open-weight usage"
+  ]
+}

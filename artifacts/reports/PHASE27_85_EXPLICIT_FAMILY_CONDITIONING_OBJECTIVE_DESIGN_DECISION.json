@@ -1,0 +1,12 @@
+{
+  "decision_id": "PHASE27_85_EXPLICIT_FAMILY_CONDITIONING_OBJECTIVE_DESIGN_DECISION",
+  "engineering_decision": "ALLOW_PHASE27_86_RENDERER_GATE_IMPLEMENTATION_NO_TRAINING",
+  "new_training_allowed": false,
+  "renderer_implementation_allowed": true,
+  "runtime_release_allowed": false,
+  "ui_release_allowed": false,
+  "sf50m_justified_transition": false,
+  "tokenizer_retrain_allowed": false,
+  "why": "A visible Arabic family-conditioning line is specified as context-only input; training remains blocked until the renderer/gate proves it is actually emitted.",
+  "next_phase": "Phase 27.86 — Family Conditioning Renderer Gate"
+}

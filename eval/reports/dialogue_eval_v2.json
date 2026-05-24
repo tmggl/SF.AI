@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.84 ضمن مسار SF-native فقط: شخّصنا أن family metadata كانت متوازنة لكنها لم تظهر داخل نص التدريب كإشارة يراها النموذج. لا تدريب ولا runtime الآن؛ التالي Phase 27."
+      "response_preview": "وصلنا إلى Phase 27.85 ضمن مسار SF-native فقط: صممنا family conditioning صريحًا داخل نص التدريب بصيغة «عائلة الحوار: سوالف/متابعة/تنظيم/دعم/موضوع». لا تدريب ولا runtime الآن؛ التالي"
     },
     {
       "scenario_id": "clarification_repair_flow",

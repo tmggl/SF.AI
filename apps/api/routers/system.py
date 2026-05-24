@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.84 — Objective/Curriculum Failure Diagnosis",
-        current_phase_status="phase27_84_diagnosed_objective_curriculum_failure_no_training",
+        current_phase="Phase 27.85 — Explicit Family Conditioning Objective Design",
+        current_phase_status="phase27_85_explicit_family_conditioning_design_ready_no_training",
         next_phase=(
-            "Phase 27.85 — Explicit Family Conditioning Objective Design"
+            "Phase 27.86 — Family Conditioning Renderer Gate"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -534,6 +534,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_84_objective_curriculum_failure_diagnosis",
                 status="diagnosed_family_signal_missing_no_training",
                 phase="Phase 27.84",
+            ),
+            ComponentStatus(
+                name="phase27_85_explicit_family_conditioning_design",
+                status="renderer_gate_allowed_no_training",
+                phase="Phase 27.85",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

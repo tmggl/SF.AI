@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.84 ضمن مسار SF-native فقط: شخّصنا أن family metadata "
-    "كانت متوازنة لكنها لم تظهر داخل نص التدريب كإشارة يراها النموذج. لا تدريب "
-    "ولا runtime الآن؛ التالي Phase 27.85 لتصميم family conditioning صريح.",
+    "وصلنا إلى Phase 27.85 ضمن مسار SF-native فقط: صممنا family conditioning "
+    "صريحًا داخل نص التدريب بصيغة «عائلة الحوار: سوالف/متابعة/تنظيم/دعم/موضوع». "
+    "لا تدريب ولا runtime الآن؛ التالي Phase 27.86 لتنفيذ renderer gate.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (
