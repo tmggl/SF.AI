@@ -12,6 +12,7 @@
 - **حالة المرحلة الحالية:** **اكتملت كقرار هندسي؛ `PHASE27_78_ENGINEERING_DECISION`; التدريب والruntime وSF-50M محجوبة**
 - **المرحلة التالية المقترحة:** Phase 27.79 — Objective/Curriculum/Decoding Repair Design, no training until gates are encoded.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
+- **تفويض التكبير المعتمد:** **Auto-Advance Scaling Mandate** — عند نجاح gate الحجم التالي ينتقل الوكيل تلقائيًا عبر `SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+`.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -39,6 +40,7 @@
 | Governance Layer | Engineering Standards قبل Phase 12 | ✅ | ✅ |
 | Constitution Layer | Engineering & Linguistic Constitution قبل Phase 12 | ✅ | ✅ |
 | Strategy Overlay | Sovereign Practical Acceleration Strategy v2 | ✅ adopted_engineering_root_cause_gate_required | ✅ |
+| Scaling Mandate | Auto-Advance Scaling Mandate | ✅ adopted_gate_bound_auto_advance_to_1b | ✅ |
 | Phase 12 | SF-BPE Tokenizer v1 Training & Audit | ✅ completed_with_limits | ✅ |
 | Phase 13 | Tiny LM Smoke Training | ✅ completed_with_limits | ✅ |
 | Phase 14 | SF-10M v0.1 Training Run | ✅ completed_with_limits | ✅ |
@@ -275,7 +277,7 @@
   - تم تحديد أن الحوار المولّد المقنع يحتاج تدرجًا: Phase 24 أعطت تحسنًا معمليًا، Phase 26 منعت SF-50M، وPhase 27 وضعت خطة corpus قبل أي قفزة.
   - بقي المسار اللغوي `msa + saudi` فقط، وقاموس Saudi Seed v1 هو المرجع اللهجي الحالي.
   - أضيف مبدأ `Progressive Scaling Strategy`: لا يتم رفع حجم النموذج إلا بعد نجاح المرحلة الحالية.
-  - السلم الرسمي صار: `SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+`.
+  - السلم الرسمي صار: `SF-10M → SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+`.
   - أضيف تقرير [SCALING_STRATEGY.md](./SCALING_STRATEGY.md).
 - بدأ Phase 22 Gold Dialogue Corpus v2 كبوابة جاهزية:
   - أضيف `make phase22-readiness`.

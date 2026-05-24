@@ -15,6 +15,7 @@
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
 - **المرحلة التالية المقترحة:** Phase 27.79 Objective/Curriculum/Decoding Repair Design؛ لا تدريب حتى تُشفّر gates، وPhase 28 و`SF-50M` محظوران.
 - **استراتيجية العمل الملزمة:** Sovereign Practical Acceleration Strategy v2؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب، و`NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS` قبل أي runtime.
+- **تفويض التكبير:** Auto-Advance Scaling Mandate؛ عند نجاح gate الحجم التالي ينتقل الوكيل تلقائيًا عبر `SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+`.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
@@ -28,7 +29,7 @@
 - **نتيجة Phase 20:** أضيفت بوابة `make phase20-gates` و`GET /system/phase20-gates`; لا مجال يتفعل تلقائيًا، و`chat` هو المجال النشط الوحيد.
 - **تصحيح Phase 20:** أضيف `sf_ai/modules/productivity/` كسكيلتون كامل بعد أن كشفت البوابة وجوده في registry دون module/manifest.
 - **نتيجة Phase 21:** أضيف `docs/GENERATIVE_ROADMAP.md` ومُدّدت الخطة إلى Phase 30؛ أول تدريب جودة مفيد اكتمل في Phase 24 بحدود، وأول هدف حوار مولّد مقنع صار مشروطًا بتنفيذ خطة Phase 27 ثم نجاح `SF-50M`.
-- **مبدأ التكبير الرسمي:** `Progressive Scaling Strategy` — لا يتم رفع حجم النموذج إلا بعد نجاح المرحلة الحالية، والسلم الرسمي هو `SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+`.
+- **مبدأ التكبير الرسمي:** `Progressive Scaling Strategy` — لا يتم رفع حجم النموذج إلا بعد نجاح المرحلة الحالية، والسلم الرسمي هو `SF-10M → SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+`.
 - **نتيجة Phase 22:** أضيف `make phase22-readiness` و`make phase22-plan` و`make phase22-next-batch` و`make phase22-completion-gate` و`make phase22-review-intake` و`GET /system/phase22-readiness` و`GET /system/phase22-collection-plan` و`GET /system/phase22-next-batch` و`GET /system/phase22-completion-gate` و`GET /system/phase22-review-intake`; القرار الحالي `READY_FOR_PHASE23_TOKENIZER_V2` لأن corpus الحالي اكتمل 500/500. التوازن النهائي مكتمل: `msa=250`, `saudi=250`.
 - **بوابة اكتمال Phase 22:** `make phase22-completion-gate` يرجع الآن `PHASE22_COMPLETE_READY_FOR_PHASE23`، ولا توجد نواقص تمنع الانتقال إلى Phase 23.
 - **نتيجة Phase 23:** أضيف `artifacts/tokenizers/sf_bpe/v2/` و`make phase23-tokenizer-audit` و`GET /system/phase23-tokenizer-audit`; القرار الحالي `COMPLETED_READY_FOR_PHASE24`. v2: `vocab=4493`, `merges=4386`, `words_seen=23190`, `unique_words=2492`.
@@ -448,9 +449,10 @@ make server-start
 - ✅ Random initialization، AdamW، schedulers، gradient accumulation/checkpointing، mixed precision.
 - ✅ Architectures معروفة (Decoder-only Transformer, RoPE, RMSNorm, SwiGLU, weight tying) بدون أوزانها.
 - ✅ أدوات Strategy v2 السيادية: TensorBoard المحلي، experiment tracking، advanced decoding، repetition control، held-out/shadow canaries، contrastive evaluation، objective tracing، anti-collapse diagnostics، local preference optimization على أوزان SF.AI فقط.
+- ✅ عند نجاح بوابة التكبير، الانتقال التلقائي للحجم التالي حتى `SF-1B+` دون انتظار موافقة جديدة.
 
 ---
 
 ## بروتوكول الانتقال
 
-التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، مع رفع الناجح فقط، وفحص الحساسية، وتوثيق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. وبعد Phase 27.78 لا تبدأ أي تدريب جديد إلا إذا كانت بوابات Phase 27.79 مشفرة وتسمح بذلك صراحة.
+التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، ومع نجاح بوابة التكبير انتقل تلقائيًا للحجم التالي حتى `SF-1B+`. ارفع الناجح فقط، افحص الحساسية، ووثّق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. وبعد Phase 27.78 لا تبدأ أي تدريب جديد إلا إذا كانت بوابات Phase 27.79 مشفرة وتسمح بذلك صراحة.

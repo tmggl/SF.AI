@@ -253,6 +253,28 @@ bash scripts/run_chat_server.sh
 semantic correctness, family stability, open_social naturalness, followup
 continuity, canary pass rate, وhuman conversation realism.
 
+### Auto-Advance Scaling Mandate — معتمد رسميًا
+
+سامي فوّض الوكيل: إذا نجحت بوابة الحجم التالي، ينتقل الوكيل تلقائيًا إلى
+الحجم التالي دون انتظار موافقة جديدة، حتى الوصول إلى `SF-1B+`.
+
+السلم الرسمي:
+
+```text
+SF-10M → SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+
+```
+
+هذا التفويض مقيد:
+
+- لا تكبير إذا لم ينجح `ENGINEERING_ROOT_CAUSE_GATE`.
+- لا تكبير إذا كان السبب objective/curriculum/decoding/family mixing.
+- لا runtime بدون `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
+- لا pretrained ولا vocab جاهز ولا datasets خارجية.
+- لا قفز فوق حجم في السلم.
+
+`M100` في كلام سامي يعني `SF-100M-class`; التنفيذ المسجل حاليًا هو
+`SF-120M` ما لم يعتمد تقرير معماري لاحق `SF-100M`.
+
 ### Phase 11 — اكتملت كحوكمة
 
 أُضيفت وثائق وأدوات فحص corpus:

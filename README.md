@@ -32,6 +32,8 @@ PHASE27_78_ENGINEERING_DECISION
 - لا runtime release.
 - لا انتقال إلى `SF-50M`.
 - التالي: `Phase 27.79 — Objective/Curriculum/Decoding Repair Design`.
+- عند نجاح بوابة أي حجم لاحقًا، ينتقل الوكيل تلقائيًا للحجم التالي حتى
+  `SF-1B+` دون انتظار موافقة جديدة.
 
 سبب القرار:
 
@@ -50,6 +52,8 @@ PHASE27_78_ENGINEERING_DECISION
 
 قبل أي تدريب جديد يجب وجود `ENGINEERING_ROOT_CAUSE_GATE` وقرار يسمح به.
 قبل أي runtime release يجب نجاح `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
+وقبل أي تكبير يجب نجاح scaling gate؛ عند نجاحها يتم الانتقال تلقائيًا:
+`SF-10M → SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+`.
 
 ### وثائق الحوكمة قبل التدريب
 

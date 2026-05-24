@@ -43,6 +43,8 @@ PHASE27_78_ENGINEERING_DECISION
 - التدريب: محجوب حتى تُشفّر gates.
 - runtime: محجوب تحت `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - `SF-50M`: محجوب؛ لا يفتح إلا عبر `SF-50M JUSTIFIED TRANSITION`.
+- Auto-Advance Scaling Mandate: إذا نجحت بوابة الحجم التالي مستقبلًا،
+  ينتقل الوكيل تلقائيًا حتى `SF-1B+` دون انتظار موافقة جديدة.
 
 أوزان التشخيص الرسمية الحالية:
 
@@ -118,6 +120,7 @@ PHASE27_78_ENGINEERING_DECISION
 - لا تستخدم نماذج أو tokenizers جاهزة.
 - لا تفتح `SF-50M` لأن الردود ضعيفة فقط؛ capacity وزنها الحالي `1%`.
 - لا تبدأ tokenizer جديدًا لأن tokenizer وزنها الحالي `4%` فقط، إلا إذا أثبت gate جديد عكس ذلك.
+- لا توقف عند حجم نجح gate الخاص به؛ انتقل للحجم التالي تلقائيًا حسب السلم.
 
 ## التعامل مع كلمة “التالي”
 

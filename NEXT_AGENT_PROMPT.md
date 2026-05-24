@@ -50,6 +50,10 @@
   quality, runtime usability, clean-stop, semantic correctness, family
   stability, open_social naturalness, followup continuity, canary pass rate,
   وhuman conversation realism.
+- **Auto-Advance Scaling Mandate:** إذا نجحت بوابة الحجم التالي، انتقل
+  تلقائيًا دون انتظار موافقة جديدة عبر:
+  `SF-10M → SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+`.
+  لا تكبر عند فشل gate، ولا تقفز فوق السلم.
 
 **الحالة الراهنة باختصار:**
 
@@ -57,6 +61,8 @@
   `Phase 27.78 — Engineering Root Cause Gate` مكتملة بقرار
   `PHASE27_78_ENGINEERING_DECISION`. لا runtime switch ولا `SF-50M` ولا تدريب
   جديد حتى تُشفّر gates. corpus الحالي `5943` (`msa=2949`, `saudi=2994`).
+- تفويض التكبير التلقائي معتمد، لكن مفعوله يبدأ فقط عندما تنجح gates؛
+  حاليًا `SF-50M` ما زال محجوبًا لأن capacity وزنها `1%`.
 - استخدم `make phase22-review-intake` أو `GET /system/phase22-review-intake` قبل أي تحويل من `data/corpus/chat/review/` إلى corpus تدريبي.
 - `phase22-review-intake` يحتوي بوابة جودة: راقب `quality_score/quality_label/quality_blockers`، ولا تحوّل جلسات قصيرة جدًا أو فيها ردود خام من `sf_10m_v0_1/sf_10m_v0_2` إلى corpus جودة.
 - `/ui/chat` يحتوي مؤشر جودة تصدير محلي ويضيف `ui_quality_*` إلى metadata.

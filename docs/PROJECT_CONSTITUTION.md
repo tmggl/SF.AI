@@ -156,7 +156,7 @@ user_scope = single_user
 السلم الرسمي:
 
 ```text
-SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
+SF-10M → SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+
 ```
 
 أي انتقال إلى حجم أكبر يحتاج passing scaling gate:
@@ -171,6 +171,23 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 - resource readiness.
 
 ممنوع على أي Agent القفز إلى حجم كبير لأن المستخدم متحمس أو لأن الجهاز يسمح. الحجم التالي يُفتح فقط إذا أثبت الحجم الحالي قيمة واضحة.
+
+### 10.1 Auto-Advance Scaling Mandate
+
+عندما تنجح بوابة الحجم التالي، ينتقل الوكيل تلقائيًا إلى الحجم التالي
+دون انتظار موافقة جديدة من سامي، حتى نصل تدريجيًا إلى `SF-1B+`.
+
+هذا التفويض لا يلغي القيود:
+
+- لا تدريب أكبر قبل `ENGINEERING_ROOT_CAUSE_GATE`.
+- لا تكبير إذا كان السبب الأكبر objective/curriculum/decoding/family mixing.
+- لا runtime release بدون `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
+- لا pretrained ولا vocab جاهز ولا datasets خارجية.
+- لا قفز فوق سلم الأحجام.
+
+المقصود بـ `M100` في أوامر سامي هو مستوى `SF-100M-class`، والمستوى
+المعماري المسجل حاليًا هو `SF-120M` ما لم يعتمد تقرير معماري لاحق حجمًا
+دقيقًا باسم `SF-100M`.
 
 ### 11. Sovereign Practical Acceleration Strategy v2
 

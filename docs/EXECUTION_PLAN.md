@@ -23,7 +23,7 @@
 السلم الرسمي:
 
 ```text
-SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
+SF-10M → SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+
 ```
 
 قبل أي انتقال إلى حجم أكبر، يجب أن تمر Scaling Gates:
@@ -148,6 +148,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.76 | Tokenizer v9 Open-Social Boundary Probe | مكتملة بنجاح tokenizer-only؛ LM repair مسموح تاليًا |
 | Phase 27.77 | V9 Bounded Open-Social LM Repair | فشلت كتوليد؛ `54/60`, `45/50`, `30/30`, runtime محجوب |
 | Phase 27.78 | Engineering Root Cause Gate | مكتملة؛ `PHASE27_78_ENGINEERING_DECISION`, لا تدريب ولا runtime ولا SF-50M |
+| Scaling Mandate | Auto-Advance Scaling Mandate | معتمد؛ عند نجاح gate ننتقل للحجم التالي تلقائيًا حتى `SF-1B+` |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -645,7 +646,7 @@ sf_ai/training/
 - model config واضح. save/load. generation/evaluation مبدئي. loss tracking. device selection من Phase 5.5.
 
 ### أحجام التدرج
-- SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+.
+- SF-10M → SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+.
 - **لا تبدأ بـ 1B أو 3B مباشرة.**
 
 ### `docs/TRAINING_PLAN.md` يجب أن يوضح
@@ -864,6 +865,29 @@ usability.
 ```text
 NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS
 ```
+
+### Auto-Advance Scaling Mandate
+
+سامي فوّض الوكيل رسميًا: عندما تنجح بوابة الحجم التالي، لا ينتظر الوكيل
+موافقة جديدة، بل ينتقل إلى الحجم التالي في السلم حتى الوصول إلى `SF-1B+`.
+
+السلم:
+
+```text
+SF-10M → SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+
+```
+
+هذا التفويض لا يسمح بالتكبير الأعمى:
+
+- إذا فشل root-cause gate، لا تدريب أكبر.
+- إذا كان السبب objective/curriculum/decoding/family balance، لا تكبير.
+- إذا لم تنجح held-out/shadow canaries، لا runtime ولا تكبير.
+- إذا لم تكن الموارد جاهزة، لا تكبير.
+- إذا احتاجت الخطوة pretrained أو data خارجية، تُرفض.
+
+`M100` في أمر سامي يعني مستوى `SF-100M-class`; التنفيذ الحالي يستخدم
+`SF-120M` كمستوى معماري مسجل ما لم يصدر تقرير معماري يعتمد `SF-100M`
+حرفيًا.
 
 ### متى يظهر أول توليد فعلي؟
 

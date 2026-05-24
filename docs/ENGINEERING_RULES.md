@@ -180,7 +180,7 @@ docs/
 ```text
 SF-10M
 → SF-50M
-→ SF-120M
+→ SF-100M-class / SF-120M
 → SF-350M
 → SF-700M
 → SF-1B+
@@ -276,6 +276,26 @@ NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS
 - loss.
 - perplexity.
 - micro-probe.
+
+## 15. Auto-Advance Scaling Mandate
+
+عند نجاح بوابة الحجم التالي، ينتقل الوكيل تلقائيًا إلى الحجم التالي دون
+انتظار موافقة جديدة، حتى الوصول إلى `SF-1B+`.
+
+السلم:
+
+```text
+SF-10M → SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+
+```
+
+القيود:
+
+- لا انتقال إذا فشل `ENGINEERING_ROOT_CAUSE_GATE`.
+- لا انتقال إذا كان السبب الأكبر objective/curriculum/decoding/family mixing.
+- لا انتقال إذا فشل held-out/shadow canary.
+- لا transition إلى `SF-50M` إلا عبر `SF-50M JUSTIFIED TRANSITION`.
+- لا pretrained ولا بيانات خارجية.
+- لا قفز فوق حجم في السلم.
 
 ## Naming Conventions
 

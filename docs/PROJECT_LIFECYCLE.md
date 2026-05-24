@@ -249,7 +249,7 @@ Progressive Scaling Strategy هو المبدأ الحاكم للتكبير. وSc
 السلم الرسمي:
 
 ```text
-SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
+SF-10M → SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+
 ```
 
 قبل الانتقال يجب أن تنجح:
@@ -273,6 +273,18 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 - إعادة تدريب الحجم نفسه.
 - تحسين runtime canary/fallback.
 - إصلاح objective/curriculum/decoding/family balance إذا كانت هي السبب الأكبر.
+
+## 7.1 Auto-Advance Scaling Mandate
+
+إذا نجحت بوابة الحجم التالي، فدورة الحياة تنتقل تلقائيًا للحجم التالي دون
+انتظار موافقة جديدة:
+
+```text
+SF-10M → SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+
+```
+
+هذا لا يختصر gates. هو يختصر الانتظار الإداري فقط. عند فشل أي gate، تعود
+الدورة إلى التشخيص/الإصلاح بدل التكبير.
 
 ## نقاط الفصل
 

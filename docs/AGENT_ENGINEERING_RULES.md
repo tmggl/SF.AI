@@ -41,6 +41,15 @@ NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS
 إذن المسار الصحيح التالي هو Phase 27.79: تصميم إصلاح objective/curriculum/
 decoding/family balance، وليس تدريبًا مباشرًا ولا tokenizer جديدًا.
 
+إذا نجحت بوابة حجم لاحقة، فالتفويض المعتمد هو الانتقال التلقائي للحجم
+التالي حتى `SF-1B+`:
+
+```text
+SF-10M → SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+
+```
+
+لا تنتظر إذنًا جديدًا عند نجاح gate، ولا تكبر عند فشلها.
+
 ## اقرأ أولًا
 
 1. [EXECUTION_PLAN.md](./EXECUTION_PLAN.md)
