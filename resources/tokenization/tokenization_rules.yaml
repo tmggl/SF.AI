@@ -45,10 +45,11 @@ protected_phrases:
   active_paths:
     - resources/tokenization/protected_phrases_phase27_20.txt
     - resources/tokenization/protected_phrases_phase27_57.txt
+    - resources/tokenization/protected_phrases_phase27_64.txt
   policy: preserve_as_single_policy_unit_when_training_tokenizer_v3
-  provenance: phase27_17_to_phase27_19_diagnostics_and_phase27_56_open_dialogue_diagnosis
+  provenance: phase27_17_to_phase27_19_diagnostics_phase27_56_open_dialogue_diagnosis_and_phase27_63_topic_lexical_failures
   requires_audit: true
-  runtime_activation_policy: tokenizer_v3_retrain_then_micro_probe
+  runtime_activation_policy: tokenizer_v8_retrain_then_bounded_and_broader_canary
 
 preferred_merges:
   active_paths:

@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.63: أصلحنا ترتيب curriculum وارتفع canary إلى 26/30. "
-    "نجحت open_social/planning/support، وبقيت مشاكل topic محددة في التعاون والاحترام. "
-    "الواجهة لا تُفتح. التالي Phase 27.64 لفحص حماية التوكنة للمصطلحات.",
+    "وصلنا إلى Phase 27.64: فحصنا فشل topic بعد نتيجة 26/30، وثبت أن tokenizer v8 "
+    "مطلوب لأن التعاون والاحترام تراجعا من single-piece في v6 إلى قطع متعددة في v7. "
+    "الواجهة لا تُفتح. التالي Phase 27.65 لتدريب tokenizer v8 واختبار topic probe.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

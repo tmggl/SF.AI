@@ -311,3 +311,20 @@ Phase 27.63 أصلحت ترتيب curriculum إلى interleaved:
 - لا فتح واجهة.
 - لا `SF-50M` ولا Phase 28.
 - التالي Phase 27.64 لفحص حماية tokenizer v8 للمصطلحات الموضوعية قبل أي توسع.
+
+## قرار Phase 27.64
+
+Phase 27.64 فحصت فشل `topic` المتبقي دون تدريب:
+
+- `التعاون` في tokenizer v7: `3` قطع وغير محمية.
+- `الاحترام` في tokenizer v7: `4` قطع وغير محمية.
+- كلاهما كان single-piece في tokenizer v6.
+
+قرار scaling:
+
+- لا رفع حجم.
+- لا LM training الآن.
+- لا runtime switch.
+- لا فتح واجهة.
+- لا `SF-50M` ولا Phase 28.
+- التالي Phase 27.65 لتدريب tokenizer v8 فقط ثم bounded topic probe.

@@ -50,13 +50,14 @@
 - [docs/PHASE27_61_BROADER_GENERALIZATION_REPAIR_REPORT.md](./docs/PHASE27_61_BROADER_GENERALIZATION_REPAIR_REPORT.md) — repair أوسع حسّن النتيجة إلى `18/30` لكنه فشل توازن العائلات.
 - [docs/PHASE27_62_FAMILY_BALANCE_REPAIR_REPORT.md](./docs/PHASE27_62_FAMILY_BALANCE_REPAIR_REPORT.md) — تجربة توازن عائلات تراجعت إلى `10/30` وكشفت أثر ترتيب curriculum.
 - [docs/PHASE27_63_INTERLEAVED_FAMILY_CURRICULUM_REPORT.md](./docs/PHASE27_63_INTERLEAVED_FAMILY_CURRICULUM_REPORT.md) — interleaved curriculum رفع canary إلى `26/30` مع بقاء runtime محجوبًا.
+- [docs/PHASE27_64_TOPIC_LEXICAL_TOKENIZER_INSPECTION_REPORT.md](./docs/PHASE27_64_TOPIC_LEXICAL_TOKENIZER_INSPECTION_REPORT.md) — فحص يثبت أن tokenizer v8 مطلوب لحماية `التعاون/الاحترام`.
 
 ---
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.63 / 30 — Interleaved Family Curriculum اكتملت بتحسن قوي غير كافٍ للتفعيل.
-- **الأولوية الحالية:** Phase 27.64 فحص فشل `التعاون/الاحترام` كحماية توكنة/lexical قبل أي تدريب جديد.
+- **الرحلة الحالية:** Phase 27.64 / 30 — Topic Lexical/Tokenizer Inspection اكتملت كفحص بلا تدريب.
+- **الأولوية الحالية:** Phase 27.65 تدريب tokenizer v8 بحماية `التعاون/الاحترام` ثم bounded topic probe، بلا LM training مباشر.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -124,6 +125,7 @@
 - **نتيجة Phase 27.61:** repair أوسع رفع canary من `12/30` إلى `18/30`; نجحت `planning/support`، لكن `open_social/followup/topic` فشلت. التقرير: [docs/PHASE27_61_BROADER_GENERALIZATION_REPAIR_REPORT.md](./docs/PHASE27_61_BROADER_GENERALIZATION_REPAIR_REPORT.md).
 - **نتيجة Phase 27.62:** توازن العائلات بالعدد فقط تراجع إلى `10/30` لأن ترتيب corpus الكتلي سحب النموذج إلى open-social. التقرير: [docs/PHASE27_62_FAMILY_BALANCE_REPAIR_REPORT.md](./docs/PHASE27_62_FAMILY_BALANCE_REPAIR_REPORT.md).
 - **نتيجة Phase 27.63:** interleaved curriculum رفع canary إلى `26/30`; نجحت `open_social/planning/support` كاملة وبقيت مشاكل `topic` في `التعاون/الاحترام`. التقرير: [docs/PHASE27_63_INTERLEAVED_FAMILY_CURRICULUM_REPORT.md](./docs/PHASE27_63_INTERLEAVED_FAMILY_CURRICULUM_REPORT.md).
+- **نتيجة Phase 27.64:** فحص tokenizer أثبت أن `التعاون` صارت `3` قطع و`الاحترام` صارت `4` قطع في v7 بعدما كانتا single-piece في v6؛ القرار tokenizer v8 قبل أي LM repair. التقرير: [docs/PHASE27_64_TOPIC_LEXICAL_TOKENIZER_INSPECTION_REPORT.md](./docs/PHASE27_64_TOPIC_LEXICAL_TOKENIZER_INSPECTION_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 

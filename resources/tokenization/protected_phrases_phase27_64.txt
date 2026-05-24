@@ -1,0 +1,16 @@
+# Phase 27.64 topic lexical protection pack.
+# Policy resource only; not a pretrained vocabulary.
+# Source: Phase 27.63 failed topic rows and tokenizer history across SF.AI-owned artifacts.
+
+التعاون
+الاحترام
+ما معنى التعاون
+وش معنى التعاون
+التعاون يعني
+التعاون وش يعني
+ما المقصود بالتعاون
+الاحترام وش هو
+ما معنى الاحترام
+وش معنى الاحترام
+الاحترام يعني
+ما المقصود بالاحترام

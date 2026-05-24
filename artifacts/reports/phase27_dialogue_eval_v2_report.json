@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.63: أصلحنا ترتيب curriculum وارتفع canary إلى 26/30. نجحت open_social/planning/support، وبقيت مشاكل topic محددة في التعاون والاحترام. الواجهة لا تُفتح. التالي Ph"
+      "response_preview": "وصلنا إلى Phase 27.64: فحصنا فشل topic بعد نتيجة 26/30، وثبت أن tokenizer v8 مطلوب لأن التعاون والاحترام تراجعا من single-piece في v6 إلى قطع متعددة في v7. الواجهة لا تُفتح. التالي"
     },
     {
       "scenario_id": "clarification_repair_flow",

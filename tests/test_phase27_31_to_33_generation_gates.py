@@ -579,3 +579,21 @@ def test_phase27_63_interleaved_curriculum_improves_and_blocks_runtime() -> None
     assert report["decisions"]["runtime_switch_allowed"] is False
     assert report["decisions"]["ui_open_allowed"] is False
     assert report["decisions"]["fresh_shadow_canary_allowed"] is False
+
+
+def test_phase27_64_topic_lexical_inspection_requires_tokenizer_v8() -> None:
+    report = _report("phase27_64_topic_lexical_tokenizer_inspection_report.json")
+    assert report["phase"] == "Phase 27.64"
+    assert report["status"] == "COMPLETED_TOPIC_LEXICAL_INSPECTION_TOKENIZER_V8_REQUIRED_RUNTIME_BLOCKED"
+    assert report["training_started"] is False
+    assert report["phase27_63_summary"]["passed"] == 26
+    assert report["decisions"]["tokenizer_v8_required"] is True
+    assert report["decisions"]["tokenizer_v8_probe_allowed_next"] is True
+    assert report["decisions"]["lm_training_allowed_now"] is False
+    assert report["decisions"]["runtime_switch_allowed"] is False
+    assert report["critical_latest_rows"]["التعاون"]["piece_count"] == 3
+    assert report["critical_latest_rows"]["التعاون"]["protected_in_meta"] is False
+    assert report["critical_latest_rows"]["الاحترام"]["piece_count"] == 4
+    assert report["critical_latest_rows"]["الاحترام"]["protected_in_meta"] is False
+    assert report["v7_regressed_from_v6"]["التعاون"] is True
+    assert report["v7_regressed_from_v6"]["الاحترام"] is True

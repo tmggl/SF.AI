@@ -1,0 +1,1092 @@
+{
+  "phase": "Phase 27.64",
+  "status": "COMPLETED_TOPIC_LEXICAL_INSPECTION_TOKENIZER_V8_REQUIRED_RUNTIME_BLOCKED",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_switch_allowed": false,
+  "inputs": {
+    "phase27_63_report": "artifacts/reports/phase27_63_interleaved_family_curriculum_report.json",
+    "protected_pack": "resources/tokenization/protected_phrases_phase27_64.txt",
+    "response_families": "resources/dialogue_format/response_families_phase27_57.json",
+    "semantic_rules": "resources/evaluation/semantic_alignment_phase27_57.json"
+  },
+  "phase27_63_summary": {
+    "passed": 26,
+    "total": 30,
+    "pass_rate": 0.8667,
+    "family_summary": {
+      "followup": {
+        "passed": 5,
+        "total": 6
+      },
+      "open_social": {
+        "passed": 6,
+        "total": 6
+      },
+      "planning": {
+        "passed": 6,
+        "total": 6
+      },
+      "support": {
+        "passed": 6,
+        "total": 6
+      },
+      "topic": {
+        "passed": 3,
+        "total": 6
+      }
+    },
+    "reason_counts": {
+      "passed": 26,
+      "response_family_mismatch": 2,
+      "expected_terms_missing": 2
+    }
+  },
+  "phase27_63_failed_rows": [
+    {
+      "id": "followup_06",
+      "family": "followup",
+      "prompt": "فسرها بطريقة أبسط",
+      "expected_any": [
+        "أقصد",
+        "أبسط",
+        "ابدأ"
+      ],
+      "response": "أبسطها لك: ابدأ بالجزء السهل ثم أكمل.",
+      "reason": "response_family_mismatch"
+    },
+    {
+      "id": "topic_01",
+      "family": "topic",
+      "prompt": "عرّف لي الوفاء",
+      "expected_any": [
+        "الوفاء"
+      ],
+      "response": "الوفاء حفظ للعهد وثبات في الوثبات وثبات للعنسولف عن وثبات قليلًا في ال: تنفس بهدوء ود.",
+      "reason": "response_family_mismatch"
+    },
+    {
+      "id": "topic_02",
+      "family": "topic",
+      "prompt": "وش معنى التعاون",
+      "expected_any": [
+        "التعاون"
+      ],
+      "response": "التعاتتحمل وتكمل بدون استعجال.",
+      "reason": "expected_terms_missing"
+    },
+    {
+      "id": "topic_04",
+      "family": "topic",
+      "prompt": "الاحترام وش هو",
+      "expected_any": [
+        "الاحترام"
+      ],
+      "response": "الاحتاحتراسوالف عاد ية بهدوء.",
+      "reason": "expected_terms_missing"
+    }
+  ],
+  "topic_piece_history": {
+    "التعاون": [
+      {
+        "tokenizer": "v1",
+        "path": "artifacts/tokenizers/sf_bpe/v1",
+        "term": "التعاون",
+        "piece_count": 4,
+        "ids": [
+          70,
+          63,
+          39,
+          53
+        ],
+        "decoded": "التعاون",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v2",
+        "path": "artifacts/tokenizers/sf_bpe/v2",
+        "term": "التعاون",
+        "piece_count": 3,
+        "ids": [
+          128,
+          299,
+          176
+        ],
+        "decoded": "التعاون",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v3",
+        "path": "artifacts/tokenizers/sf_bpe/v3",
+        "term": "التعاون",
+        "piece_count": 3,
+        "ids": [
+          93,
+          121,
+          233
+        ],
+        "decoded": "التعاون",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v4_min_lexical",
+        "path": "artifacts/tokenizers/sf_bpe/v4_min_lexical",
+        "term": "التعاون",
+        "piece_count": 1,
+        "ids": [
+          54
+        ],
+        "decoded": "التعاون",
+        "roundtrip_ok": true,
+        "protected_in_meta": true
+      },
+      {
+        "tokenizer": "v5_topic_terms",
+        "path": "artifacts/tokenizers/sf_bpe/v5_topic_terms",
+        "term": "التعاون",
+        "piece_count": 1,
+        "ids": [
+          54
+        ],
+        "decoded": "التعاون",
+        "roundtrip_ok": true,
+        "protected_in_meta": true
+      },
+      {
+        "tokenizer": "v6_weak_lane_terms",
+        "path": "artifacts/tokenizers/sf_bpe/v6_weak_lane_terms",
+        "term": "التعاون",
+        "piece_count": 1,
+        "ids": [
+          55
+        ],
+        "decoded": "التعاون",
+        "roundtrip_ok": true,
+        "protected_in_meta": true
+      },
+      {
+        "tokenizer": "v7_phase27_58",
+        "path": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+        "term": "التعاون",
+        "piece_count": 3,
+        "ids": [
+          140,
+          167,
+          278
+        ],
+        "decoded": "التعاون",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      }
+    ],
+    "الاحترام": [
+      {
+        "tokenizer": "v1",
+        "path": "artifacts/tokenizers/sf_bpe/v1",
+        "term": "الاحترام",
+        "piece_count": 6,
+        "ids": [
+          99,
+          20,
+          18,
+          24,
+          15,
+          56
+        ],
+        "decoded": "الاحترام",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v2",
+        "path": "artifacts/tokenizers/sf_bpe/v2",
+        "term": "الاحترام",
+        "piece_count": 2,
+        "ids": [
+          4249,
+          3898
+        ],
+        "decoded": "الاحترام",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v3",
+        "path": "artifacts/tokenizers/sf_bpe/v3",
+        "term": "الاحترام",
+        "piece_count": 4,
+        "ids": [
+          58,
+          503,
+          154,
+          70
+        ],
+        "decoded": "الاحترام",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v4_min_lexical",
+        "path": "artifacts/tokenizers/sf_bpe/v4_min_lexical",
+        "term": "الاحترام",
+        "piece_count": 1,
+        "ids": [
+          53
+        ],
+        "decoded": "الاحترام",
+        "roundtrip_ok": true,
+        "protected_in_meta": true
+      },
+      {
+        "tokenizer": "v5_topic_terms",
+        "path": "artifacts/tokenizers/sf_bpe/v5_topic_terms",
+        "term": "الاحترام",
+        "piece_count": 1,
+        "ids": [
+          53
+        ],
+        "decoded": "الاحترام",
+        "roundtrip_ok": true,
+        "protected_in_meta": true
+      },
+      {
+        "tokenizer": "v6_weak_lane_terms",
+        "path": "artifacts/tokenizers/sf_bpe/v6_weak_lane_terms",
+        "term": "الاحترام",
+        "piece_count": 1,
+        "ids": [
+          54
+        ],
+        "decoded": "الاحترام",
+        "roundtrip_ok": true,
+        "protected_in_meta": true
+      },
+      {
+        "tokenizer": "v7_phase27_58",
+        "path": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+        "term": "الاحترام",
+        "piece_count": 4,
+        "ids": [
+          106,
+          548,
+          201,
+          118
+        ],
+        "decoded": "الاحترام",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      }
+    ],
+    "الصبر": [
+      {
+        "tokenizer": "v1",
+        "path": "artifacts/tokenizers/sf_bpe/v1",
+        "term": "الصبر",
+        "piece_count": 5,
+        "ids": [
+          43,
+          28,
+          16,
+          24,
+          7
+        ],
+        "decoded": "الصبر",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v2",
+        "path": "artifacts/tokenizers/sf_bpe/v2",
+        "term": "الصبر",
+        "piece_count": 2,
+        "ids": [
+          1874,
+          393
+        ],
+        "decoded": "الصبر",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v3",
+        "path": "artifacts/tokenizers/sf_bpe/v3",
+        "term": "الصبر",
+        "piece_count": 1,
+        "ids": [
+          3045
+        ],
+        "decoded": "الصبر",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v4_min_lexical",
+        "path": "artifacts/tokenizers/sf_bpe/v4_min_lexical",
+        "term": "الصبر",
+        "piece_count": 1,
+        "ids": [
+          3047
+        ],
+        "decoded": "الصبر",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v5_topic_terms",
+        "path": "artifacts/tokenizers/sf_bpe/v5_topic_terms",
+        "term": "الصبر",
+        "piece_count": 1,
+        "ids": [
+          56
+        ],
+        "decoded": "الصبر",
+        "roundtrip_ok": true,
+        "protected_in_meta": true
+      },
+      {
+        "tokenizer": "v6_weak_lane_terms",
+        "path": "artifacts/tokenizers/sf_bpe/v6_weak_lane_terms",
+        "term": "الصبر",
+        "piece_count": 1,
+        "ids": [
+          58
+        ],
+        "decoded": "الصبر",
+        "roundtrip_ok": true,
+        "protected_in_meta": true
+      },
+      {
+        "tokenizer": "v7_phase27_58",
+        "path": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+        "term": "الصبر",
+        "piece_count": 1,
+        "ids": [
+          3093
+        ],
+        "decoded": "الصبر",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      }
+    ],
+    "الوفاء": [
+      {
+        "tokenizer": "v1",
+        "path": "artifacts/tokenizers/sf_bpe/v1",
+        "term": "الوفاء",
+        "piece_count": 6,
+        "ids": [
+          43,
+          39,
+          32,
+          15,
+          11,
+          7
+        ],
+        "decoded": "الوفاء",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v2",
+        "path": "artifacts/tokenizers/sf_bpe/v2",
+        "term": "الوفاء",
+        "piece_count": 3,
+        "ids": [
+          431,
+          1034,
+          279
+        ],
+        "decoded": "الوفاء",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v3",
+        "path": "artifacts/tokenizers/sf_bpe/v3",
+        "term": "الوفاء",
+        "piece_count": 4,
+        "ids": [
+          58,
+          45,
+          1675,
+          282
+        ],
+        "decoded": "الوفاء",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v4_min_lexical",
+        "path": "artifacts/tokenizers/sf_bpe/v4_min_lexical",
+        "term": "الوفاء",
+        "piece_count": 4,
+        "ids": [
+          60,
+          45,
+          1677,
+          284
+        ],
+        "decoded": "الوفاء",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v5_topic_terms",
+        "path": "artifacts/tokenizers/sf_bpe/v5_topic_terms",
+        "term": "الوفاء",
+        "piece_count": 4,
+        "ids": [
+          67,
+          45,
+          1684,
+          291
+        ],
+        "decoded": "الوفاء",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v6_weak_lane_terms",
+        "path": "artifacts/tokenizers/sf_bpe/v6_weak_lane_terms",
+        "term": "الوفاء",
+        "piece_count": 1,
+        "ids": [
+          65
+        ],
+        "decoded": "الوفاء",
+        "roundtrip_ok": true,
+        "protected_in_meta": true
+      },
+      {
+        "tokenizer": "v7_phase27_58",
+        "path": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+        "term": "الوفاء",
+        "piece_count": 1,
+        "ids": [
+          4924
+        ],
+        "decoded": "الوفاء",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      }
+    ],
+    "الصداقة": [
+      {
+        "tokenizer": "v1",
+        "path": "artifacts/tokenizers/sf_bpe/v1",
+        "term": "الصداقة",
+        "piece_count": 5,
+        "ids": [
+          43,
+          28,
+          117,
+          33,
+          149
+        ],
+        "decoded": "الصداقة",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v2",
+        "path": "artifacts/tokenizers/sf_bpe/v2",
+        "term": "الصداقة",
+        "piece_count": 4,
+        "ids": [
+          107,
+          364,
+          421,
+          111
+        ],
+        "decoded": "الصداقة",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v3",
+        "path": "artifacts/tokenizers/sf_bpe/v3",
+        "term": "الصداقة",
+        "piece_count": 3,
+        "ids": [
+          315,
+          369,
+          230
+        ],
+        "decoded": "الصداقة",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v4_min_lexical",
+        "path": "artifacts/tokenizers/sf_bpe/v4_min_lexical",
+        "term": "الصداقة",
+        "piece_count": 3,
+        "ids": [
+          317,
+          371,
+          232
+        ],
+        "decoded": "الصداقة",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v5_topic_terms",
+        "path": "artifacts/tokenizers/sf_bpe/v5_topic_terms",
+        "term": "الصداقة",
+        "piece_count": 1,
+        "ids": [
+          57
+        ],
+        "decoded": "الصداقة",
+        "roundtrip_ok": true,
+        "protected_in_meta": true
+      },
+      {
+        "tokenizer": "v6_weak_lane_terms",
+        "path": "artifacts/tokenizers/sf_bpe/v6_weak_lane_terms",
+        "term": "الصداقة",
+        "piece_count": 1,
+        "ids": [
+          59
+        ],
+        "decoded": "الصداقة",
+        "roundtrip_ok": true,
+        "protected_in_meta": true
+      },
+      {
+        "tokenizer": "v7_phase27_58",
+        "path": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+        "term": "الصداقة",
+        "piece_count": 1,
+        "ids": [
+          4461
+        ],
+        "decoded": "الصداقة",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      }
+    ],
+    "الشجاعة": [
+      {
+        "tokenizer": "v1",
+        "path": "artifacts/tokenizers/sf_bpe/v1",
+        "term": "الشجاعة",
+        "piece_count": 5,
+        "ids": [
+          43,
+          27,
+          147,
+          31,
+          149
+        ],
+        "decoded": "الشجاعة",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v2",
+        "path": "artifacts/tokenizers/sf_bpe/v2",
+        "term": "الشجاعة",
+        "piece_count": 4,
+        "ids": [
+          107,
+          87,
+          236,
+          596
+        ],
+        "decoded": "الشجاعة",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v3",
+        "path": "artifacts/tokenizers/sf_bpe/v3",
+        "term": "الشجاعة",
+        "piece_count": 3,
+        "ids": [
+          58,
+          1450,
+          65
+        ],
+        "decoded": "الشجاعة",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v4_min_lexical",
+        "path": "artifacts/tokenizers/sf_bpe/v4_min_lexical",
+        "term": "الشجاعة",
+        "piece_count": 3,
+        "ids": [
+          60,
+          1452,
+          67
+        ],
+        "decoded": "الشجاعة",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v5_topic_terms",
+        "path": "artifacts/tokenizers/sf_bpe/v5_topic_terms",
+        "term": "الشجاعة",
+        "piece_count": 3,
+        "ids": [
+          67,
+          1460,
+          74
+        ],
+        "decoded": "الشجاعة",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v6_weak_lane_terms",
+        "path": "artifacts/tokenizers/sf_bpe/v6_weak_lane_terms",
+        "term": "الشجاعة",
+        "piece_count": 1,
+        "ids": [
+          57
+        ],
+        "decoded": "الشجاعة",
+        "roundtrip_ok": true,
+        "protected_in_meta": true
+      },
+      {
+        "tokenizer": "v7_phase27_58",
+        "path": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+        "term": "الشجاعة",
+        "piece_count": 1,
+        "ids": [
+          4469
+        ],
+        "decoded": "الشجاعة",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      }
+    ],
+    "الصدق": [
+      {
+        "tokenizer": "v1",
+        "path": "artifacts/tokenizers/sf_bpe/v1",
+        "term": "الصدق",
+        "piece_count": 5,
+        "ids": [
+          43,
+          28,
+          22,
+          33,
+          7
+        ],
+        "decoded": "الصدق",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v2",
+        "path": "artifacts/tokenizers/sf_bpe/v2",
+        "term": "الصدق",
+        "piece_count": 1,
+        "ids": [
+          1407
+        ],
+        "decoded": "الصدق",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v3",
+        "path": "artifacts/tokenizers/sf_bpe/v3",
+        "term": "الصدق",
+        "piece_count": 3,
+        "ids": [
+          315,
+          26,
+          228
+        ],
+        "decoded": "الصدق",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v4_min_lexical",
+        "path": "artifacts/tokenizers/sf_bpe/v4_min_lexical",
+        "term": "الصدق",
+        "piece_count": 3,
+        "ids": [
+          317,
+          26,
+          230
+        ],
+        "decoded": "الصدق",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v5_topic_terms",
+        "path": "artifacts/tokenizers/sf_bpe/v5_topic_terms",
+        "term": "الصدق",
+        "piece_count": 1,
+        "ids": [
+          58
+        ],
+        "decoded": "الصدق",
+        "roundtrip_ok": true,
+        "protected_in_meta": true
+      },
+      {
+        "tokenizer": "v6_weak_lane_terms",
+        "path": "artifacts/tokenizers/sf_bpe/v6_weak_lane_terms",
+        "term": "الصدق",
+        "piece_count": 1,
+        "ids": [
+          60
+        ],
+        "decoded": "الصدق",
+        "roundtrip_ok": true,
+        "protected_in_meta": true
+      },
+      {
+        "tokenizer": "v7_phase27_58",
+        "path": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+        "term": "الصدق",
+        "piece_count": 1,
+        "ids": [
+          4277
+        ],
+        "decoded": "الصدق",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      }
+    ],
+    "الهدوء": [
+      {
+        "tokenizer": "v1",
+        "path": "artifacts/tokenizers/sf_bpe/v1",
+        "term": "الهدوء",
+        "piece_count": 6,
+        "ids": [
+          43,
+          38,
+          22,
+          39,
+          11,
+          7
+        ],
+        "decoded": "الهدوء",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v2",
+        "path": "artifacts/tokenizers/sf_bpe/v2",
+        "term": "الهدوء",
+        "piece_count": 3,
+        "ids": [
+          107,
+          402,
+          3352
+        ],
+        "decoded": "الهدوء",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v3",
+        "path": "artifacts/tokenizers/sf_bpe/v3",
+        "term": "الهدوء",
+        "piece_count": 3,
+        "ids": [
+          58,
+          888,
+          7
+        ],
+        "decoded": "الهدوء",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v4_min_lexical",
+        "path": "artifacts/tokenizers/sf_bpe/v4_min_lexical",
+        "term": "الهدوء",
+        "piece_count": 3,
+        "ids": [
+          60,
+          890,
+          7
+        ],
+        "decoded": "الهدوء",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      },
+      {
+        "tokenizer": "v5_topic_terms",
+        "path": "artifacts/tokenizers/sf_bpe/v5_topic_terms",
+        "term": "الهدوء",
+        "piece_count": 1,
+        "ids": [
+          62
+        ],
+        "decoded": "الهدوء",
+        "roundtrip_ok": true,
+        "protected_in_meta": true
+      },
+      {
+        "tokenizer": "v6_weak_lane_terms",
+        "path": "artifacts/tokenizers/sf_bpe/v6_weak_lane_terms",
+        "term": "الهدوء",
+        "piece_count": 1,
+        "ids": [
+          64
+        ],
+        "decoded": "الهدوء",
+        "roundtrip_ok": true,
+        "protected_in_meta": true
+      },
+      {
+        "tokenizer": "v7_phase27_58",
+        "path": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+        "term": "الهدوء",
+        "piece_count": 1,
+        "ids": [
+          4466
+        ],
+        "decoded": "الهدوء",
+        "roundtrip_ok": true,
+        "protected_in_meta": false
+      }
+    ]
+  },
+  "latest_v7_topic_rows": {
+    "التعاون": {
+      "tokenizer": "v7_phase27_58",
+      "path": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+      "term": "التعاون",
+      "piece_count": 3,
+      "ids": [
+        140,
+        167,
+        278
+      ],
+      "decoded": "التعاون",
+      "roundtrip_ok": true,
+      "protected_in_meta": false
+    },
+    "الاحترام": {
+      "tokenizer": "v7_phase27_58",
+      "path": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+      "term": "الاحترام",
+      "piece_count": 4,
+      "ids": [
+        106,
+        548,
+        201,
+        118
+      ],
+      "decoded": "الاحترام",
+      "roundtrip_ok": true,
+      "protected_in_meta": false
+    },
+    "الصبر": {
+      "tokenizer": "v7_phase27_58",
+      "path": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+      "term": "الصبر",
+      "piece_count": 1,
+      "ids": [
+        3093
+      ],
+      "decoded": "الصبر",
+      "roundtrip_ok": true,
+      "protected_in_meta": false
+    },
+    "الوفاء": {
+      "tokenizer": "v7_phase27_58",
+      "path": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+      "term": "الوفاء",
+      "piece_count": 1,
+      "ids": [
+        4924
+      ],
+      "decoded": "الوفاء",
+      "roundtrip_ok": true,
+      "protected_in_meta": false
+    },
+    "الصداقة": {
+      "tokenizer": "v7_phase27_58",
+      "path": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+      "term": "الصداقة",
+      "piece_count": 1,
+      "ids": [
+        4461
+      ],
+      "decoded": "الصداقة",
+      "roundtrip_ok": true,
+      "protected_in_meta": false
+    },
+    "الشجاعة": {
+      "tokenizer": "v7_phase27_58",
+      "path": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+      "term": "الشجاعة",
+      "piece_count": 1,
+      "ids": [
+        4469
+      ],
+      "decoded": "الشجاعة",
+      "roundtrip_ok": true,
+      "protected_in_meta": false
+    },
+    "الصدق": {
+      "tokenizer": "v7_phase27_58",
+      "path": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+      "term": "الصدق",
+      "piece_count": 1,
+      "ids": [
+        4277
+      ],
+      "decoded": "الصدق",
+      "roundtrip_ok": true,
+      "protected_in_meta": false
+    },
+    "الهدوء": {
+      "tokenizer": "v7_phase27_58",
+      "path": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+      "term": "الهدوء",
+      "piece_count": 1,
+      "ids": [
+        4466
+      ],
+      "decoded": "الهدوء",
+      "roundtrip_ok": true,
+      "protected_in_meta": false
+    }
+  },
+  "critical_terms": [
+    "التعاون",
+    "الاحترام"
+  ],
+  "critical_latest_rows": {
+    "التعاون": {
+      "tokenizer": "v7_phase27_58",
+      "path": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+      "term": "التعاون",
+      "piece_count": 3,
+      "ids": [
+        140,
+        167,
+        278
+      ],
+      "decoded": "التعاون",
+      "roundtrip_ok": true,
+      "protected_in_meta": false
+    },
+    "الاحترام": {
+      "tokenizer": "v7_phase27_58",
+      "path": "artifacts/tokenizers/sf_bpe/v7_phase27_58",
+      "term": "الاحترام",
+      "piece_count": 4,
+      "ids": [
+        106,
+        548,
+        201,
+        118
+      ],
+      "decoded": "الاحترام",
+      "roundtrip_ok": true,
+      "protected_in_meta": false
+    }
+  },
+  "critical_split_or_unprotected": {
+    "التعاون": true,
+    "الاحترام": true
+  },
+  "v7_regressed_from_v6": {
+    "التعاون": true,
+    "الاحترام": true
+  },
+  "protected_pack_terms": [
+    "التعاون",
+    "الاحترام",
+    "ما معنى التعاون",
+    "وش معنى التعاون",
+    "التعاون يعني",
+    "التعاون وش يعني",
+    "ما المقصود بالتعاون",
+    "الاحترام وش هو",
+    "ما معنى الاحترام",
+    "وش معنى الاحترام",
+    "الاحترام يعني",
+    "ما المقصود بالاحترام"
+  ],
+  "protected_pack_ready_for_v8": true,
+  "response_family_marker_coverage": {
+    "topic_markers": [
+      "الاحترام",
+      "التعاون",
+      "الشجاعة",
+      "الصبر",
+      "الصداقة",
+      "الصدق",
+      "الهدوء",
+      "الوفاء",
+      "مثال",
+      "يعني"
+    ],
+    "critical_terms_covered": {
+      "التعاون": true,
+      "الاحترام": true
+    },
+    "all_topic_terms_covered": {
+      "التعاون": true,
+      "الاحترام": true,
+      "الصبر": true,
+      "الوفاء": true,
+      "الصداقة": true,
+      "الشجاعة": true,
+      "الصدق": true,
+      "الهدوء": true
+    }
+  },
+  "semantic_rule_coverage": {
+    "topic_required_any": [
+      "الاحترام",
+      "التعاون",
+      "الشجاعة",
+      "الصبر",
+      "الصداقة",
+      "الصدق",
+      "الهدوء",
+      "الوفاء",
+      "تعني",
+      "مثال",
+      "معنى",
+      "يعني"
+    ],
+    "critical_terms_covered": {
+      "التعاون": true,
+      "الاحترام": true
+    },
+    "followup_abst_covered": {
+      "أبسط": true,
+      "ابسط": true
+    }
+  },
+  "decisions": {
+    "tokenizer_v8_required": true,
+    "tokenizer_v8_probe_allowed_next": true,
+    "lm_training_allowed_now": false,
+    "runtime_switch_allowed": false,
+    "ui_open_allowed": false,
+    "sf50m_allowed": false,
+    "phase28_allowed": false
+  },
+  "decision": "Tokenizer v8 is required before another LM repair: v7 regressed critical topic terms that v6 protected as single pieces.",
+  "next_phase": "Phase 27.65 — train tokenizer v8 with Phase 27.64 protected topic pack and rerun bounded topic probe"
+}

@@ -133,6 +133,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.61 | Broader Generalization Repair | مكتملة كتدريب repair؛ تحسن إلى `18/30`, runtime محجوب |
 | Phase 27.62 | Family Balance Repair | مكتملة كتجربة فاشلة؛ تراجع إلى `10/30` بسبب ترتيب curriculum الكتلي |
 | Phase 27.63 | Interleaved Family Curriculum | مكتملة بتحسن قوي؛ canary `26/30`, runtime محجوب |
+| Phase 27.64 | Topic Lexical/Tokenizer Inspection | مكتملة كفحص؛ tokenizer v8 مطلوب لحماية `التعاون/الاحترام` |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3483,6 +3484,39 @@ Phase 27.59 نجحت معمليًا لكنها لم تعمم بما يكفي. ل
 - [PHASE27_63_INTERLEAVED_FAMILY_CURRICULUM_REPORT.md](./PHASE27_63_INTERLEAVED_FAMILY_CURRICULUM_REPORT.md)
 - `artifacts/reports/phase27_63_interleaved_family_curriculum_report.json`
 - `artifacts/samples/phase27_63_interleaved_family_curriculum.md`
+
+---
+
+## Phase 27.64 — Topic Lexical/Tokenizer Inspection
+
+### الهدف
+فحص فشل `topic` المتبقي بعد Phase 27.63 وتحديد هل السبب يحتاج tokenizer v8 قبل أي تدريب LM جديد.
+
+### ما تم
+- أضيف `resources/tokenization/protected_phrases_phase27_64.txt`.
+- أضيف `scripts/phase27_64_topic_lexical_tokenizer_inspection.py`.
+- أضيف `make phase27-topic-lexical-tokenizer-inspection`.
+- حُدّث `tokenization_rules.yaml` ليضيف protected pack الجديد ضمن active paths للـ tokenizer القادم.
+- حُدّث topic markers في response families لتشمل `التعاون/الصبر/الاحترام`.
+
+### النتيجة
+- لا تدريب جديد.
+- Phase 27.63 بقي `26/30`.
+- `التعاون` في tokenizer v7: `3` pieces, protected=false.
+- `الاحترام` في tokenizer v7: `4` pieces, protected=false.
+- كلاهما كان single-piece ومحميًا في tokenizer v6.
+
+### القرار
+tokenizer v8 مطلوب قبل أي LM repair جديد. لا runtime switch، لا UI، لا `SF-50M`، ولا Phase 28.
+
+التالي:
+
+**Phase 27.65 — train tokenizer v8 with Phase 27.64 protected topic pack and rerun bounded topic probe**
+
+### artifacts
+- [PHASE27_64_TOPIC_LEXICAL_TOKENIZER_INSPECTION_REPORT.md](./PHASE27_64_TOPIC_LEXICAL_TOKENIZER_INSPECTION_REPORT.md)
+- `artifacts/reports/phase27_64_topic_lexical_tokenizer_inspection_report.json`
+- `resources/tokenization/protected_phrases_phase27_64.txt`
 
 ---
 

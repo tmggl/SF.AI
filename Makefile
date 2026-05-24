@@ -343,6 +343,9 @@ phase27-family-balance-repair:
 phase27-interleaved-family-curriculum:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_63_interleaved_family_curriculum.py $(ARGS)
 
+phase27-topic-lexical-tokenizer-inspection:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_64_topic_lexical_tokenizer_inspection.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 

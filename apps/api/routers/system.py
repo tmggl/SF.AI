@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.63 — Interleaved Family Curriculum",
-        current_phase_status="improved_interleaved_family_curriculum_runtime_blocked",
+        current_phase="Phase 27.64 — Topic Lexical/Tokenizer Inspection",
+        current_phase_status="completed_topic_lexical_inspection_tokenizer_v8_required_runtime_blocked",
         next_phase=(
-            "Phase 27.64 inspect Phase 27.63 topic lexical failures and plan tokenizer v8 protection"
+            "Phase 27.65 train tokenizer v8 with Phase 27.64 protected topic pack and rerun bounded topic probe"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -429,6 +429,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_63_interleaved_family_curriculum",
                 status="improved_interleaved_family_curriculum_runtime_blocked",
                 phase="Phase 27.63",
+            ),
+            ComponentStatus(
+                name="phase27_64_topic_lexical_tokenizer_inspection",
+                status="completed_topic_lexical_inspection_tokenizer_v8_required_runtime_blocked",
+                phase="Phase 27.64",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

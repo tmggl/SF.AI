@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.63 / 30**
-- **المرحلة الحالية:** **Phase 27.63 — Interleaved Family Curriculum**
-- **حالة المرحلة الحالية:** **اكتملت كتدريب repair؛ تحسن canary إلى `26/30` لكنه لم يصل لفتح runtime**
-- **المرحلة التالية المقترحة:** Phase 27.64 inspect Phase 27.63 topic lexical failures and plan tokenizer v8 protection.
+- **الرحلة الحالية:** **Phase 27.64 / 30**
+- **المرحلة الحالية:** **Phase 27.64 — Topic Lexical/Tokenizer Inspection**
+- **حالة المرحلة الحالية:** **اكتملت كفحص؛ tokenizer v8 مطلوب قبل أي LM repair جديد**
+- **المرحلة التالية المقترحة:** Phase 27.65 train tokenizer v8 with Phase 27.64 protected topic pack and rerun bounded topic probe.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -112,6 +112,7 @@
 | Phase 27.61 | Broader Generalization Repair | ✅ failed_broader_generalization_repair_runtime_blocked | ✅ |
 | Phase 27.62 | Family Balance Repair | ✅ failed_family_balance_repair_runtime_blocked | ✅ |
 | Phase 27.63 | Interleaved Family Curriculum | ✅ improved_interleaved_family_curriculum_runtime_blocked | ✅ |
+| Phase 27.64 | Topic Lexical/Tokenizer Inspection | ✅ completed_topic_lexical_inspection_tokenizer_v8_required_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -892,6 +893,14 @@
   - بقيت مشاكل `topic` في `التعاون` و`الاحترام` مع مؤشرات lexical/tokenization collapse.
   - القرار: لا runtime switch ولا فتح واجهة؛ التالي Phase 27.64 لفحص حماية التوكنة للمصطلحات الموضوعية قبل تدريب جديد.
   - أضيف [PHASE27_63_INTERLEAVED_FAMILY_CURRICULUM_REPORT.md](./PHASE27_63_INTERLEAVED_FAMILY_CURRICULUM_REPORT.md).
+- بدأ وانتهى Phase 27.64 Topic Lexical/Tokenizer Inspection:
+  - أضيف `resources/tokenization/protected_phrases_phase27_64.txt`.
+  - أضيف `make phase27-topic-lexical-tokenizer-inspection`.
+  - لم يبدأ أي تدريب.
+  - أثبت الفحص أن `التعاون` في tokenizer v7 = `3` قطع وغير محمية، و`الاحترام` = `4` قطع وغير محمية.
+  - كلا المصطلحين كانا single-piece في tokenizer v6، لذلك v7 أحدث regression في موضوعات حرجة.
+  - القرار: tokenizer v8 مطلوب قبل أي LM repair جديد؛ لا runtime switch ولا UI ولا `SF-50M`.
+  - أضيف [PHASE27_64_TOPIC_LEXICAL_TOKENIZER_INSPECTION_REPORT.md](./PHASE27_64_TOPIC_LEXICAL_TOKENIZER_INSPECTION_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 
