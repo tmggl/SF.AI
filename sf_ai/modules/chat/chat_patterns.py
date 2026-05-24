@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.85 ضمن مسار SF-native فقط: صممنا family conditioning "
-    "صريحًا داخل نص التدريب بصيغة «عائلة الحوار: سوالف/متابعة/تنظيم/دعم/موضوع». "
-    "لا تدريب ولا runtime الآن؛ التالي Phase 27.86 لتنفيذ renderer gate.",
+    "وصلنا إلى Phase 27.86 ضمن مسار SF-native فقط: نجحت بوابة renderer وأصبح نص "
+    "التدريب يطبع «عائلة الحوار» كسياق masked. لا يوجد runtime جديد الآن؛ التالي "
+    "Phase 27.87 لتدريب SF-10M المقيّد بهذه الإشارة.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

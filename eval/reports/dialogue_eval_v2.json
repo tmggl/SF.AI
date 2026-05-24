@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.85 ضمن مسار SF-native فقط: صممنا family conditioning صريحًا داخل نص التدريب بصيغة «عائلة الحوار: سوالف/متابعة/تنظيم/دعم/موضوع». لا تدريب ولا runtime الآن؛ التالي"
+      "response_preview": "وصلنا إلى Phase 27.86 ضمن مسار SF-native فقط: نجحت بوابة renderer وأصبح نص التدريب يطبع «عائلة الحوار» كسياق masked. لا يوجد runtime جديد الآن؛ التالي Phase 27.87 لتدريب SF-10M الم"
     },
     {
       "scenario_id": "clarification_repair_flow",

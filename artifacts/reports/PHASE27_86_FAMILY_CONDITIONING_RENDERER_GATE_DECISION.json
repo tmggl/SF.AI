@@ -1,0 +1,11 @@
+{
+  "decision_id": "PHASE27_86_FAMILY_CONDITIONING_RENDERER_GATE_DECISION",
+  "engineering_decision": "ALLOW_PHASE27_87_BOUNDED_FAMILY_CONDITIONED_SF10M_REPAIR_TRAINING",
+  "new_training_allowed": true,
+  "runtime_release_allowed": false,
+  "ui_release_allowed": false,
+  "sf50m_justified_transition": false,
+  "tokenizer_retrain_allowed": false,
+  "why": "الرندر الآن يضيف سطر عائلة الحوار العربي في مساري التدريب، وassistant-only loss يخفي سطور السياق عن الهدف.",
+  "next_phase": "Phase 27.87 — Bounded Family-conditioned SF-10M Repair Training"
+}

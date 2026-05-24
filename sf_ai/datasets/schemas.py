@@ -65,6 +65,9 @@ class Provenance(BaseModel):
     dialect: str | None = None     # msa / saudi / ...
     quality: str | None = None     # gold / silver / bronze (Phase 11 training gate)
     training_allowed: bool | None = None  # explicit owner permission for training
+    dialogue_family: str | None = None     # open_social / followup / planning / support / topic
+    prompt_family: str | None = None       # user-side dialogue family hint
+    answer_family: str | None = None       # assistant-side dialogue family hint
     owner_user_id: str | None = None       # canonical owner of this dialogue data
     created_by_user_id: str | None = None  # author/exporter/reviewer who created it
     target_user_id: str | None = None      # user/account this data may personalize

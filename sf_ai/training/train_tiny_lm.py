@@ -27,7 +27,7 @@ import torch
 import torch.nn as nn
 
 from sf_ai.datasets import ChatDataset
-from sf_ai.datasets.chat_dataset import _dialect_condition_lines
+from sf_ai.datasets.chat_dataset import render_dialogue_text
 from sf_ai.datasets.splits import iter_split_samples
 from sf_ai.models.tokenizer import BPETokenizer, CharTokenizer
 from sf_ai.models.transformer import (
@@ -217,23 +217,12 @@ def _iter_training_texts(
         return
 
     for sample in iter_split_samples(dataset.root, split_manifest, split_name=split_name):
-        messages = sample.messages if hasattr(sample, "messages") else sample.to_messages()
         if stream_format == "dialogue":
-            lines: list[str] = []
-            lines.extend(_dialect_condition_lines(sample))
-            for msg in messages:
-                content = msg.content.strip()
-                if not content:
-                    continue
-                if msg.role == "user":
-                    lines.append(f"المستخدم: {content}")
-                elif msg.role == "assistant":
-                    lines.append(f"المساعد: {content}")
-                elif msg.role == "system":
-                    lines.append(f"النظام: {content}")
-            if lines:
-                yield "\n".join(lines) + "\n"
+            text = render_dialogue_text(sample)
+            if text:
+                yield text
         else:
+            messages = sample.messages if hasattr(sample, "messages") else sample.to_messages()
             for msg in messages:
                 if msg.content.strip():
                     yield msg.content

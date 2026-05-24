@@ -1,0 +1,134 @@
+{
+  "phase": "Phase 27.86",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "status": "PHASE27_86_RENDERER_GATE_PASSED_TRAINING_ALLOWED_NEXT_NO_RUNTIME",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_changed": false,
+  "source_report": "artifacts/reports/phase27_85_explicit_family_conditioning_objective_design_report.json",
+  "corpus": "data/corpus/chat/jsonl",
+  "split_manifest": "data/corpus/chat/splits/dialogue_split_v1.json",
+  "family_labels": {
+    "open_social": "سوالف",
+    "followup": "متابعة",
+    "planning": "تنظيم",
+    "support": "دعم",
+    "topic": "موضوع"
+  },
+  "family_labels_complete": true,
+  "render_probes": {
+    "open_social": {
+      "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_open_social_saudi_010.jsonl",
+      "expected_family_line": "عائلة الحوار: سوالف",
+      "rendered_preview": "النطاق: سعودي\nعائلة الحوار: سوالف\nالمستخدم: سولف معي شوي.\nالمساعد: أبشر، خلنا نسولف عن يومك: وش ألطف شي صار لك؟\n",
+      "has_dialect_line": true,
+      "has_family_line": true,
+      "has_user_line": true,
+      "has_assistant_line": true
+    },
+    "followup": {
+      "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_followup_saudi_010.jsonl",
+      "expected_family_line": "عائلة الحوار: متابعة",
+      "rendered_preview": "النطاق: سعودي\nعائلة الحوار: متابعة\nالمستخدم: يعني كيف؟\nالمساعد: أقصد خل الموضوع أصغر، وابدأ بالجزء الواضح قدامك.\n",
+      "has_dialect_line": true,
+      "has_family_line": true,
+      "has_user_line": true,
+      "has_assistant_line": true
+    },
+    "planning": {
+      "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_planning_saudi_010.jsonl",
+      "expected_family_line": "عائلة الحوار: تنظيم",
+      "rendered_preview": "النطاق: سعودي\nعائلة الحوار: تنظيم\nالمستخدم: كيف أنظم دراستي اليوم؟\nالمساعد: اكتب ثلاث مهام واضحة، وابدأ بالأهم لمدة قصيرة.\n",
+      "has_dialect_line": true,
+      "has_family_line": true,
+      "has_user_line": true,
+      "has_assistant_line": true
+    },
+    "support": {
+      "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_support_saudi_010.jsonl",
+      "expected_family_line": "عائلة الحوار: دعم",
+      "rendered_preview": "النطاق: سعودي\nعائلة الحوار: دعم\nالمستخدم: توترت قبل الموعد وش أسوي؟\nالمساعد: خذ نفس شوي واهدأ، بعدها ابدأ بشي واحد بسيط.\n",
+      "has_dialect_line": true,
+      "has_family_line": true,
+      "has_user_line": true,
+      "has_assistant_line": true
+    },
+    "topic": {
+      "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_saudi_010.jsonl",
+      "expected_family_line": "عائلة الحوار: موضوع",
+      "rendered_preview": "النطاق: سعودي\nعائلة الحوار: موضوع\nالمستخدم: الشجاعة وش تعني؟\nالمساعد: معنى الشجاعة: إنك تسوي الصح حتى لو كنت خايف.\n",
+      "has_dialect_line": true,
+      "has_family_line": true,
+      "has_user_line": true,
+      "has_assistant_line": true
+    }
+  },
+  "stream_probe": {
+    "no_split_has_family_line": true,
+    "split_train_has_family_line": true,
+    "no_split_preview": "النطاق: فصحى\nعائلة الحوار: متابعة\nالمستخدم: ماذا تقصد؟\nالمساعد: أقصد أن تجعل الأمر أصغر وأسهل، ثم تبدأ بالجزء الواضح.\n",
+    "split_train_preview": "النطاق: فصحى\nعائلة الحوار: متابعة\nالمستخدم: ماذا تقصد؟\nالمساعد: أقصد أن تجعل الأمر أصغر وأسهل، ثم تبدأ بالجزء الواضح.\n"
+  },
+  "assistant_loss_mask_probe": {
+    "tokenizer": "artifacts/tokenizers/sf_bpe/v9_phase27_76",
+    "text": "النطاق: سعودي\nعائلة الحوار: تنظيم\nالمستخدم: كيف أرتب يومي؟\nالمساعد: ابدأ بثلاث مهام واضحة.\n",
+    "total_tokens": 24,
+    "masked_tokens": 19,
+    "supervised_tokens": 5,
+    "line_results": [
+      {
+        "line": "النطاق: سعودي",
+        "masked": true,
+        "assistant_content_supervised": false
+      },
+      {
+        "line": "عائلة الحوار: تنظيم",
+        "masked": true,
+        "assistant_content_supervised": false
+      },
+      {
+        "line": "المستخدم: كيف أرتب يومي؟",
+        "masked": true,
+        "assistant_content_supervised": false
+      },
+      {
+        "line": "المساعد:",
+        "masked": true,
+        "assistant_content_supervised": true,
+        "eos_supervised": true
+      }
+    ],
+    "conditioning_lines_masked": true,
+    "user_line_masked": true,
+    "assistant_content_supervised": true
+  },
+  "gate_passed": true,
+  "blocked_actions": [
+    "runtime release",
+    "UI generator release",
+    "SF-50M transition",
+    "tokenizer retrain",
+    "pretrained/open-weight usage"
+  ],
+  "allowed_next_actions": [
+    "bounded SF-10M repair training with family-conditioned rendered text",
+    "fresh held-out family canary after training",
+    "checkpoint selection by runtime-quality metrics, not loss alone"
+  ],
+  "decision": {
+    "decision_id": "PHASE27_86_FAMILY_CONDITIONING_RENDERER_GATE_DECISION",
+    "engineering_decision": "ALLOW_PHASE27_87_BOUNDED_FAMILY_CONDITIONED_SF10M_REPAIR_TRAINING",
+    "new_training_allowed": true,
+    "runtime_release_allowed": false,
+    "ui_release_allowed": false,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "why": "الرندر الآن يضيف سطر عائلة الحوار العربي في مساري التدريب، وassistant-only loss يخفي سطور السياق عن الهدف.",
+    "next_phase": "Phase 27.87 — Bounded Family-conditioned SF-10M Repair Training"
+  }
+}

@@ -10,11 +10,11 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.85 / 30**
-- **المرحلة الحالية:** **Phase 27.85 — Explicit Family Conditioning Objective Design** (`PHASE27_85_EXPLICIT_FAMILY_CONDITIONING_OBJECTIVE_DESIGN_DECISION`; لا تدريب؛ يسمح فقط بتنفيذ renderer gate)
+- **الرحلة الحالية:** **Phase 27.86 / 30**
+- **المرحلة الحالية:** **Phase 27.86 — Family Conditioning Renderer Gate** (`PHASE27_86_FAMILY_CONDITIONING_RENDERER_GATE_DECISION`; لا تدريب في هذه المرحلة؛ يسمح فقط بتدريب مقيّد في Phase 27.87)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
 - **ملف القيادة الواحد:** `docs/SF_AI_MASTER_GUIDE.md` هو نقطة الدخول الأولى لأي Agent أو مهندس؛ بقية الملفات مراجع تفصيلية.
-- **المرحلة التالية المقترحة:** Phase 27.86 — Family Conditioning Renderer Gate؛ لا تدريب جديد قبل إثبات renderer.
+- **المرحلة التالية المقترحة:** Phase 27.87 — Bounded Family-conditioned SF-10M Repair Training؛ لا runtime جديد قبل canary ناجح.
 - **استراتيجية العمل الملزمة:** Sovereign Practical Acceleration Strategy v2؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب، و`NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS` قبل أي runtime.
 - **تصحيح السيادة:** لا يوجد Open-Weight Lane؛ Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي = أدوات هندسية فقط داخل SF-native.
@@ -263,7 +263,7 @@ SF.AI/
 │
 ├── artifacts/{tokenizers,checkpoints,logs,reports}/   Phase 5.5+ outputs/reports
 │
-├── tests/                                 pytest suite — 549 تست / 65 ملف
+├── tests/                                 pytest suite — 626 تست / 81 ملف
 │   ├── fixtures/
 │   │   ├── mo3jam_listing_sample.html, mo3jam_term_sample.html
 │   │   └── article_sample.html
@@ -348,10 +348,10 @@ make server-start
 
 ---
 
-## نتائج الاختبارات (حتى إكمال Phase 27.50)
+## نتائج الاختبارات (حتى إكمال Phase 27.86)
 
 ```
-559 passed in 16.81s
+626 passed in 20.97s
 ```
 
 التغطية الحالية:
@@ -419,8 +419,9 @@ make server-start
 - **Phase 27.83:** تدريب إصلاح محدود لـ SF-10M — مكتمل كتشغيل، لكنه فشل حواريًا (`best=11/60`)؛ runtime وSF-50M محجوبان.
 - **Phase 27.84:** تشخيص فشل objective/curriculum — مكتمل؛ family metadata لم تظهر داخل نص التدريب، ولذلك التوازن لم يصبح conditioning فعليًا.
 - **Phase 27.85:** تصميم family conditioning الصريح — مكتمل؛ `عائلة الحوار: سوالف/متابعة/تنظيم/دعم/موضوع` كسياق masked عن loss.
+- **Phase 27.86:** بوابة renderer — مكتملة؛ `render_dialogue_text` يطبع `عائلة الحوار` في مساري split/no-split، وassistant-only loss يخفي conditioning/user lines.
 
-أول توليد خام حدث في Phase 13. Phase 15 جهّز الباب داخل الشات، وPhase 16 أثبت أن التوليد مكرر. Phase 27.78 غيّرت المنهج: لا مزيد من التدريب المتكرر قبل تشخيص root-cause. Phase 27.79 صممت إصلاح objective/curriculum/decoding/family balance. Phase 27.80 شفّرت البوابات، Phase 27.81 عالجت توازن family ببيانات gold، Phase 27.82 سمحت بتدريب مقيّد، Phase 27.83 أثبتت أن الإصلاح الحالي لا يكفي، Phase 27.84 حددت السبب، وPhase 27.85 صممت الإشارة الصريحة.
+أول توليد خام حدث في Phase 13. Phase 15 جهّز الباب داخل الشات، وPhase 16 أثبت أن التوليد مكرر. Phase 27.78 غيّرت المنهج: لا مزيد من التدريب المتكرر قبل تشخيص root-cause. Phase 27.79 صممت إصلاح objective/curriculum/decoding/family balance. Phase 27.80 شفّرت البوابات، Phase 27.81 عالجت توازن family ببيانات gold، Phase 27.82 سمحت بتدريب مقيّد، Phase 27.83 أثبتت أن الإصلاح الحالي لا يكفي، Phase 27.84 حددت السبب، Phase 27.85 صممت الإشارة الصريحة، وPhase 27.86 أثبتت أن الإشارة تظهر فعليًا داخل نص التدريب ومخفية عن loss.
 
 ---
 
@@ -466,4 +467,4 @@ make server-start
 
 ## بروتوكول الانتقال
 
-التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، ومع نجاح بوابة التكبير انتقل تلقائيًا للحجم التالي حتى `SF-1B+`. ارفع الناجح فقط، افحص الحساسية، ووثّق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. بعد Phase 27.85 لا تبدأ تدريبًا جديدًا قبل Phase 27.86 renderer gate؛ لا runtime release ولا SF-50M قبل canary لاحق ناجح.
+التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، ومع نجاح بوابة التكبير انتقل تلقائيًا للحجم التالي حتى `SF-1B+`. ارفع الناجح فقط، افحص الحساسية، ووثّق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. بعد Phase 27.86 المسموح هو Phase 27.87 bounded SF-10M repair training فقط؛ لا runtime release ولا SF-50M قبل canary لاحق ناجح.

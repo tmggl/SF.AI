@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.85
-الاسم: Explicit Family Conditioning Objective Design
+المرحلة الحالية: Phase 27.86
+الاسم: Family Conditioning Renderer Gate
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_85_EXPLICIT_FAMILY_CONDITIONING_OBJECTIVE_DESIGN_DECISION
+القرار الرسمي: PHASE27_86_FAMILY_CONDITIONING_RENDERER_GATE_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -100,8 +100,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - نتيجة 27.83: التدريب اكتمل، لكن best fresh shadow = `11/60`; runtime محجوب.
 - نتيجة 27.84: family metadata لم تكن ظاهرة داخل نص التدريب، لذلك لم يصبح التوازن conditioning فعليًا.
 - نتيجة 27.85: صُممت صيغة `عائلة الحوار: سوالف/متابعة/تنظيم/دعم/موضوع` كسياق masked.
+- نتيجة 27.86: renderer gate نجحت؛ `render_dialogue_text` يطبع العائلة في no-split وsplit-manifest، وassistant-only loss يخفي السياق عن الهدف.
 - corpus الحالي: `8443` (`msa=4199`, `saudi=4244`, `gold=3331`, `silver=5112`).
-- التالي: `Phase 27.86 — Family Conditioning Renderer Gate`.
+- التالي: `Phase 27.87 — Bounded Family-conditioned SF-10M Repair Training`.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -317,20 +318,19 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.86 — Family Conditioning Renderer Gate
+Phase 27.87 — Bounded Family-conditioned SF-10M Repair Training
 ```
 
 مطلوب منها:
 
-- تنفيذ renderer يضيف `عائلة الحوار: ...` داخل نص التدريب.
-- إثبات أن split/no-split paths يخرجان النص نفسه.
-- إثبات أن assistant-only loss يخفي conditioning lines عن الهدف.
-- منع التدريب حتى تمر gate.
+- تدريب مقيّد لـ SF-10M على renderer الجديد الذي يضم `عائلة الحوار`.
+- استخدام tokenizer v9 وsplit manifest الحالي.
+- تقييم fresh held-out family canary بعد التدريب.
+- اختيار checkpoint بالجودة الحية لا loss فقط.
 - منع SF-50M/runtime حتى ينجح canary لاحق.
 
-ممنوع في 27.86 قبل gate:
+ممنوع في 27.87:
 
-- تدريب جديد.
 - runtime release.
 - tokenizer retrain.
 - SF-50M.

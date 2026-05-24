@@ -101,24 +101,9 @@ class ChatDataset:
         staying plain UTF-8 text for the sovereign tokenizer/model stack.
         """
         for sample in self.iter_samples(clean=clean):
-            messages = (
-                sample.messages
-                if isinstance(sample, StructuredSample)
-                else sample.to_messages()
-            )
-            lines: list[str] = _dialect_condition_lines(sample)
-            for msg in messages:
-                content = msg.content.strip()
-                if not content:
-                    continue
-                if msg.role == "user":
-                    lines.append(f"المستخدم: {content}")
-                elif msg.role == "assistant":
-                    lines.append(f"المساعد: {content}")
-                elif msg.role == "system":
-                    lines.append(f"النظام: {content}")
-            if lines:
-                yield "\n".join(lines) + "\n"
+            text = render_dialogue_text(sample)
+            if text:
+                yield text
 
     # ----- stats -----
 
@@ -152,3 +137,54 @@ def _dialect_condition_lines(sample: SimpleSample | StructuredSample) -> list[st
     if dialect == "saudi":
         return ["النطاق: سعودي"]
     return []
+
+
+FAMILY_CONDITION_LABELS: dict[str, str] = {
+    "open_social": "سوالف",
+    "followup": "متابعة",
+    "planning": "تنظيم",
+    "support": "دعم",
+    "topic": "موضوع",
+}
+
+
+def _family_condition_line(sample: SimpleSample | StructuredSample) -> str | None:
+    """Return the Arabic family conditioning line introduced in Phase 27.86."""
+    provenance = getattr(sample, "provenance", None)
+    for attr in ("dialogue_family", "answer_family", "prompt_family"):
+        raw = (getattr(provenance, attr, "") or "").strip().lower()
+        if raw in FAMILY_CONDITION_LABELS:
+            return f"عائلة الحوار: {FAMILY_CONDITION_LABELS[raw]}"
+    return None
+
+
+def _dialogue_condition_lines(sample: SimpleSample | StructuredSample) -> list[str]:
+    """Return all context-only conditioning lines for dialogue training."""
+    lines = _dialect_condition_lines(sample)
+    family = _family_condition_line(sample)
+    if family:
+        lines.append(family)
+    return lines
+
+
+def render_dialogue_text(sample: SimpleSample | StructuredSample) -> str:
+    """Render one sample as the exact dialogue text consumed by LM training."""
+    messages = (
+        sample.messages
+        if isinstance(sample, StructuredSample)
+        else sample.to_messages()
+    )
+    lines: list[str] = _dialogue_condition_lines(sample)
+    for msg in messages:
+        content = msg.content.strip()
+        if not content:
+            continue
+        if msg.role == "user":
+            lines.append(f"المستخدم: {content}")
+        elif msg.role == "assistant":
+            lines.append(f"المساعد: {content}")
+        elif msg.role == "system":
+            lines.append(f"النظام: {content}")
+    if not lines:
+        return ""
+    return "\n".join(lines) + "\n"
