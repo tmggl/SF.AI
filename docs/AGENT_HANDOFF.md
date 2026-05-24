@@ -177,6 +177,7 @@
 | Phase 27.109 | Free Linguistic Resource Intake Gate | ✅ free_resource_intake_ready_no_training |
 | Phase 27.110 | Licensed Ingestion Design | ✅ licensed_ingestion_design_ready_no_training |
 | Phase 27.111 | Qabas Lexicon Bootstrap Design | ✅ qabas_bootstrap_design_ready_import_blocked |
+| Phase 27.112 | Qabas Primary License Resolution Gate | ✅ qabas_reference_only_import_blocked |
 | Active Track | SF-native Objective/Curriculum/Decoding Acceleration Track | ✅ reanchored_at_phase27_79_no_training |
 
 اقرأ التفاصيل في [PHASE_STATUS.md](./PHASE_STATUS.md) و [EXECUTION_PLAN.md](./EXECUTION_PLAN.md).
@@ -284,7 +285,7 @@ bash scripts/run_chat_server.sh
 - template masking لإخفاء ضعف المولد.
 
 قبل أي تدريب جديد: القرار الحالي هو
-`PHASE27_111_QABAS_LEXICON_BOOTSTRAP_DESIGN_DECISION`. مرّت بوابات
+`PHASE27_112_QABAS_PRIMARY_LICENSE_RESOLUTION_GATE_DECISION`. مرّت بوابات
 Phase 27.80: objective renderer, assistant-only loss mask,
 stratified round-robin curriculum, guarded decoding, contrastive eval,
 checkpoint selector, held-out canary, corpus-audit, sensitive scan,
@@ -300,7 +301,8 @@ Tashkeela. Phase 27.110 صمم license matrix: Qabas مسموح كـ
 lexicon/topic/protected-terms فقط، وTashkeela محجوبة للتدريب حتى حل
 تضارب الترخيص. Phase 27.111 صمم Qabas bootstrap لكنه حجب import الفعلي
 بسبب تضارب ترخيص Qabas بين Masader (`Apache-1.0`) وSinaLab (`CC-BY-ND-4.0`).
-لا يدخل أي نص خارجي أو مدخلات Qabas إلى corpus قبل gate لاحق صريح.
+Phase 27.112 حسم Qabas كـ reference-only بسبب `CC-BY-ND-4.0`. لا يدخل أي
+نص خارجي أو مدخلات Qabas إلى corpus قبل gate لاحق صريح.
 لا تعتمد loss/perplexity/micro-probe وحدها؛
 القرار يعتمد على held-out dialogue quality, runtime usability, clean-stop,
 semantic correctness, family stability, open_social naturalness, followup
@@ -337,7 +339,7 @@ SF-10M → SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+
 - `sf_ai/datasets/corpus_governance.py`
 - `tests/test_corpus_governance.py`
 
-تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر وغير جاهز لاختبار سامي كمولد حواري. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`، لكنه لم يجعل المولد مقنعًا. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17–27.104 موثقة تاريخيًا، وآخر دليل مهم أن Phase 27.104 نجحت في topic gates (`16/16`, wrong-topic `0`, fresh `9/10`) لكنها فشلت all-family `30/50`. الوضع الحالي `9125` (`msa=4535`, `saudi=4590`, `gold=4013`, `silver=5112`). المسار الحالي أُعيد تثبيته عند Phase 27.79 عبر `PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN`، ومرّت بوابات Phase 27.80، ثم اكتمل Phase 27.81 عبر `PHASE27_81_BOUNDED_FAMILY_CONDITIONED_REPAIR_TRAINING_DECISION`: all-family `42/50`. Phase 27.105 شخّص raw UI lab: المولد الحقيقي يعمل في الواجهة، لكن social subfamilies وtopic variants ضعيفة. Phase 27.106 أضاف `dialogue_subfamily` وrenderer line `نوع السوالف` وtopic canonical mapping مثل `الصداقه → الصداقة` و`الاخوه → الأخوة`. Phase 27.107 مرّر gate التنفيذية. Phase 27.108 كتب data pack ذهبيًا 480 سجلًا. Phase 27.109 صنّف مصادر مجانية جاهزة وسحب Masader metadata summary فقط. Phase 27.110 صمم إدخالًا مرخصًا: Qabas للـ lexicon/topic فقط، وتدريب Tashkeela محجوب. Phase 27.111 حجب import Qabas الفعلي بسبب تضارب الترخيص. لا official runtime ولا SF-50M ولا tokenizer retrain؛ التالي Phase 27.112 Qabas Primary License Resolution Gate.
+تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر وغير جاهز لاختبار سامي كمولد حواري. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`، لكنه لم يجعل المولد مقنعًا. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17–27.104 موثقة تاريخيًا، وآخر دليل مهم أن Phase 27.104 نجحت في topic gates (`16/16`, wrong-topic `0`, fresh `9/10`) لكنها فشلت all-family `30/50`. الوضع الحالي `9125` (`msa=4535`, `saudi=4590`, `gold=4013`, `silver=5112`). المسار الحالي أُعيد تثبيته عند Phase 27.79 عبر `PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN`، ومرّت بوابات Phase 27.80، ثم اكتمل Phase 27.81 عبر `PHASE27_81_BOUNDED_FAMILY_CONDITIONED_REPAIR_TRAINING_DECISION`: all-family `42/50`. Phase 27.105 شخّص raw UI lab: المولد الحقيقي يعمل في الواجهة، لكن social subfamilies وtopic variants ضعيفة. Phase 27.106 أضاف `dialogue_subfamily` وrenderer line `نوع السوالف` وtopic canonical mapping مثل `الصداقه → الصداقة` و`الاخوه → الأخوة`. Phase 27.107 مرّر gate التنفيذية. Phase 27.108 كتب data pack ذهبيًا 480 سجلًا. Phase 27.109 صنّف مصادر مجانية جاهزة وسحب Masader metadata summary فقط. Phase 27.110 صمم إدخالًا مرخصًا: Qabas للـ lexicon/topic فقط، وتدريب Tashkeela محجوب. Phase 27.111 حجب import Qabas الفعلي بسبب تضارب الترخيص. Phase 27.112 أبقى Qabas reference-only. لا official runtime ولا SF-50M ولا tokenizer retrain؛ التالي Phase 27.113 Permissive Lexical Alternatives Intake Gate.
 
 ### Phase 12 — preflight جاهز فقط
 

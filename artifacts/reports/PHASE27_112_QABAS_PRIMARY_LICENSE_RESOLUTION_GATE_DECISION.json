@@ -1,0 +1,18 @@
+{
+  "decision_id": "PHASE27_112_QABAS_PRIMARY_LICENSE_RESOLUTION_GATE_DECISION",
+  "engineering_decision": "BLOCK_QABAS_IMPORT_REFERENCE_ONLY_OPEN_PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES",
+  "masader_license": "Apache-1.0",
+  "primary_license": "CC-BY-ND-4.0",
+  "license_conflict_unresolved": true,
+  "no_derivatives_detected": true,
+  "qabas_downloadable_artifact_license_captured": false,
+  "qabas_raw_entry_import_allowed": false,
+  "qabas_reference_only_allowed": true,
+  "external_training_text_import_allowed": false,
+  "external_tokenizer_vocab_import_allowed": false,
+  "new_training_allowed": false,
+  "runtime_release_allowed": false,
+  "metadata_volume": 60000.0,
+  "metadata_unit": "tokens",
+  "next_phase": "Phase 27.113 — Permissive Lexical Alternatives Intake Gate, no training"
+}

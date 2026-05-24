@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.111: صممنا مسار Qabas كـ lexicon/topic bootstrap، "
-    "لكن الاستيراد الفعلي محجوب لأن ترخيص Masader يختلف عن صفحة SinaLab. "
-    "التالي Phase 27.112 لحسم ترخيص Qabas الأساسي، بلا تدريب.",
+    "وصلنا إلى Phase 27.112: حسمنا Qabas كمرجع فقط لأن المصدر الأساسي يعرض "
+    "ترخيص CC-BY-ND-4.0، فلا ندخله كمداخل مشتقة أو tokenizer vocab. "
+    "التالي Phase 27.113 للبحث عن بدائل lexical permissive بلا تدريب.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

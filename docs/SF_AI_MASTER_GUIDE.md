@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.111
-الاسم: Qabas Lexicon Bootstrap Design
+المرحلة الحالية: Phase 27.112
+الاسم: Qabas Primary License Resolution Gate
 المسار الملزم: SF-native Objective/Curriculum/Decoding Acceleration Track
-القرار الرسمي: PHASE27_111_QABAS_LEXICON_BOOTSTRAP_DESIGN_DECISION
+القرار الرسمي: PHASE27_112_QABAS_PRIMARY_LICENSE_RESOLUTION_GATE_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -112,6 +112,8 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   للتدريب حتى حل تعارض الترخيص.
 - Phase 27.111 صمم مسار Qabas bootstrap، لكنه حجب import الفعلي لأن
   Masader تعرض `Apache-1.0` بينما صفحة SinaLab resources تعرض `CC-BY-ND-4.0`.
+- Phase 27.112 حسم Qabas كـ reference-only لأن إشارة الترخيص الأساسية
+  `CC-BY-ND-4.0` تمنع المشتقات ولا توجد رخصة artifact أوضح.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
@@ -130,7 +132,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   `docs/PHASE27_110_LICENSED_INGESTION_DESIGN_REPORT.md`.
 - تقرير Qabas الحالي:
   `docs/PHASE27_111_QABAS_LEXICON_BOOTSTRAP_DESIGN_REPORT.md`.
-- التالي: `Phase 27.112 — Qabas Primary License Resolution Gate, no training`.
+- تقرير حسم الترخيص الحالي:
+  `docs/PHASE27_112_QABAS_PRIMARY_LICENSE_RESOLUTION_GATE_REPORT.md`.
+- التالي: `Phase 27.113 — Permissive Lexical Alternatives Intake Gate, no training`.
 
 الدليل السابق الذي سبب هذا re-anchor:
 
@@ -402,16 +406,15 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.112 — Qabas Primary License Resolution Gate, no training
+Phase 27.113 — Permissive Lexical Alternatives Intake Gate, no training
 ```
 
 مطلوب منها:
 
-- حسم تضارب ترخيص Qabas بين Masader وSinaLab.
-- التقاط رخصة artifact القابل للتحميل أو توثيق سبب الحجب.
-- منع أي raw-entry import قبل القرار.
-- إذا بقي الترخيص `CC-BY-ND`، استخدم Qabas metadata كمرجع/source discovery فقط
-  ولا تنتج lexicon مشتقًا.
+- البحث عن مصادر lexical بديلة بترخيص permissive واضح مثل `CC-BY-4.0` أو
+  Apache/MIT، دون pretrained vocab.
+- إدخال metadata فقط أولًا، ثم source cards وlicense matrix.
+- Qabas يبقى reference-only ولا يدخل في candidates الفعلية.
 - ممنوع training/SF-50M/tokenizer retrain/runtime release قبل هذه البوابة.
 
 ممنوع قبل نجاح البوابات:

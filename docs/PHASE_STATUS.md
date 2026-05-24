@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.111 / 30**
-- **المرحلة الحالية:** **Phase 27.111 — Qabas Lexicon Bootstrap Design**
-- **حالة المرحلة الحالية:** **اكتمل تصميم Qabas bootstrap؛ الاستيراد الفعلي محجوب بسبب تضارب الترخيص بين Masader وSinaLab؛ لا تدريب الآن**
-- **المرحلة التالية المقترحة:** Phase 27.112 — Qabas Primary License Resolution Gate, no training.
+- **الرحلة الحالية:** **Phase 27.112 / 30**
+- **المرحلة الحالية:** **Phase 27.112 — Qabas Primary License Resolution Gate**
+- **حالة المرحلة الحالية:** **حُسم Qabas كـ reference-only؛ لا import فعلي بسبب ترخيص CC-BY-ND-4.0 وتضارب Masader؛ لا تدريب الآن**
+- **المرحلة التالية المقترحة:** Phase 27.113 — Permissive Lexical Alternatives Intake Gate, no training.
 - **التحول الاستراتيجي المعتمد:** **SF-native Objective/Curriculum/Decoding Acceleration Track** — تسريع هندسي فقط؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -167,6 +167,7 @@
 | Phase 27.109 | Free Linguistic Resource Intake Gate | ✅ free_resource_intake_ready_no_training | ✅ |
 | Phase 27.110 | Licensed Ingestion Design | ✅ licensed_ingestion_design_ready_no_training | ✅ |
 | Phase 27.111 | Qabas Lexicon Bootstrap Design | ✅ qabas_bootstrap_design_ready_import_blocked | ✅ |
+| Phase 27.112 | Qabas Primary License Resolution Gate | ✅ qabas_reference_only_import_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1929,7 +1930,7 @@ make api
   - `issues=0`
   - `gold=4013`
   - `silver=5112`
-- التالي المسموح بعد اكتمال تصميم Qabas bootstrap: Phase 27.112 Qabas primary license resolution gate، بلا تدريب.
+- التالي المسموح بعد حجب Qabas كـ reference-only: Phase 27.113 permissive lexical alternatives intake gate، بلا تدريب.
 - المحظور: training، runtime release رسمي، SF-50M، tokenizer retrain،
   pretrained/open-weight.
 - التقارير:
@@ -2027,6 +2028,37 @@ make api
   - `artifacts/reports/PHASE27_111_QABAS_LEXICON_BOOTSTRAP_DESIGN_DECISION.json`
   - [PHASE27_111_QABAS_LEXICON_BOOTSTRAP_DESIGN_REPORT.md](./PHASE27_111_QABAS_LEXICON_BOOTSTRAP_DESIGN_REPORT.md)
 - التالي: Phase 27.112 — Qabas Primary License Resolution Gate, no training.
+
+## Phase 27.112 — Qabas Primary License Resolution Gate
+
+**الحالة:** مكتملة كبوابة ترخيص. Qabas reference-only؛ لا import ولا تدريب.
+
+- status: `PHASE27_112_QABAS_REFERENCE_ONLY_IMPORT_BLOCKED`.
+- القرار: `PHASE27_112_QABAS_PRIMARY_LICENSE_RESOLUTION_GATE_DECISION`.
+- القرار الهندسي: `BLOCK_QABAS_IMPORT_REFERENCE_ONLY_OPEN_PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES`.
+- الأدلة:
+  - Masader metadata تعرض `Apache-1.0`.
+  - صفحة SinaLab resources الأساسية تعرض Qabas بترخيص `CC-BY-ND-4.0`.
+  - صفحة Qabas/About لا تعرض رخصة artifact قابلة للحسم.
+- نتيجة الحسم:
+  - `no_derivatives_detected=true`.
+  - `license_conflict_unresolved=true`.
+  - `qabas_raw_entry_import_allowed=false`.
+  - `qabas_reference_only_allowed=true`.
+- المسموح:
+  - استخدام Qabas كمرجع metadata/source-discovery فقط.
+  - الاستفادة من معرفة وجوده لاختيار بدائل مرخصة بوضوح.
+- الممنوع:
+  - raw Qabas entries.
+  - أي `qabas*.jsonl` داخل `data/corpus`.
+  - Qabas كـ tokenizer vocab أو merges.
+  - training/runtime release/SF-50M.
+- الملفات:
+  - `resources/external_sources/phase27_112_qabas_license_evidence.json`
+  - `artifacts/reports/phase27_112_qabas_primary_license_resolution_gate_report.json`
+  - `artifacts/reports/PHASE27_112_QABAS_PRIMARY_LICENSE_RESOLUTION_GATE_DECISION.json`
+  - [PHASE27_112_QABAS_PRIMARY_LICENSE_RESOLUTION_GATE_REPORT.md](./PHASE27_112_QABAS_PRIMARY_LICENSE_RESOLUTION_GATE_REPORT.md)
+- التالي: Phase 27.113 — Permissive Lexical Alternatives Intake Gate, no training.
 
 ---
 

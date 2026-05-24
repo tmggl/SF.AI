@@ -1,0 +1,34 @@
+{
+  "sources": [
+    {
+      "id": "sinalab_resources",
+      "url": "https://sina.birzeit.edu/resources/",
+      "role": "primary_resources_listing",
+      "observed_license": "CC-BY-ND-4.0",
+      "qabas_snippets": [
+        "tent. (CC-BY-4.0) Lexicographic DB 150 lexicons digitized and integrated in a database, with lexicographic search engine. (special licence) Qabas Lexicon Innovative lexicon - 58K lemmas linked with 110 lexicons and corpora 2M tokens. (CC-BY-ND-4.0) Salma WSD Arabic sense-annotated corpus (34k tokens). Multilevels: single-word, mult",
+        "xicographic search engine. (special licence) Qabas Lexicon Innovative lexicon - 58K lemmas linked with 110 lexicons and corpora 2M tokens. (CC-BY-ND-4.0) Salma WSD Arabic sense-annotated corpus (34k tokens). Multilevels: single-word, multi-word senses, and NER. (CC-BY-4.0) Synonyms Synonyms dataset, parallelly annotated by 4 lingu"
+      ]
+    },
+    {
+      "id": "qabas_page",
+      "url": "https://sina.birzeit.edu/qabas",
+      "role": "primary_qabas_page",
+      "observed_license": "not_explicit_in_page",
+      "qabas_snippets": [
+        "Qabas Arabic Lexicon - معجم قبس الحاسوبي English | عربي About Most Commonly Used Words: .كلمة .معجم .قبس Browse: Ontology Tree Copyright © 2024 Birzeit University",
+        "Qabas Arabic Lexicon - معجم قبس الحاسوبي English | عربي About Most Commonly Used Words: .كلمة .معجم .قبس Browse: Ontology Tree Copyright © 2024 Birzeit University"
+      ]
+    },
+    {
+      "id": "qabas_about",
+      "url": "https://sina.birzeit.edu/qabas/about",
+      "role": "primary_qabas_about_page",
+      "observed_license": "not_explicit_in_page",
+      "qabas_snippets": [
+        "About Qabas Lexicon - مقدمة معجم قبس En | ع Translations Synonyms Definitions Ontology Dictionaries Qabas lexicon About ◂ عن المعجم ◂ أخبار ◂ إحصائيات ◂ مقدمة المعجم ◂ شمولية معجم قبس ◂ مبررا",
+        "معجم قبس En | ع Translations Synonyms Definitions Ontology Dictionaries Qabas lexicon About ◂ عن المعجم ◂ أخبار ◂ إحصائيات ◂ مقدمة المعجم ◂ شمولية معجم قبس ◂ مبررات تطوير المعجم ◂ فلسفة المعجم ◂ المصادر اللغوية ◂ الدليل المعياري ◂ تصنيف المدخلات ◂ أسئلة شائعة ◂ حقوق الملكية ◂ تنزيل قبس معجم قبس الحاسوبي معجم قبس يتكون من 58,000 مدخلة"
+      ]
+    }
+  ]
+}

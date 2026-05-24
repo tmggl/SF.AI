@@ -4577,7 +4577,7 @@ Final Response
 
 ---
 
-## الحالة العملية الحالية — Phase 27.111
+## الحالة العملية الحالية — Phase 27.112
 
 المسار الحاكم هو:
 
@@ -4588,7 +4588,7 @@ SF-native Objective/Curriculum/Decoding Acceleration Track
 آخر قرار:
 
 ```text
-PHASE27_111_QABAS_LEXICON_BOOTSTRAP_DESIGN_DECISION
+PHASE27_112_QABAS_PRIMARY_LICENSE_RESOLUTION_GATE_DECISION
 ```
 
 الخلاصة:
@@ -4617,14 +4617,16 @@ PHASE27_111_QABAS_LEXICON_BOOTSTRAP_DESIGN_DECISION
 - Phase 27.111 صمم مسار Qabas bootstrap لكنه حجب الاستيراد الفعلي بسبب
   تضارب ترخيص Qabas بين Masader (`Apache-1.0`) وصفحة SinaLab resources
   (`CC-BY-ND-4.0`).
-- لا تدريب جديد قبل Phase 27.112 Qabas primary license resolution gate ولا
-  قبل بوابات corpus/license اللاحقة.
+- Phase 27.112 حسم Qabas كـ reference-only: لا raw entries ولا corpus ولا
+  tokenizer vocab بسبب `CC-BY-ND-4.0` وتضارب الترخيص.
+- لا تدريب جديد قبل Phase 27.113 permissive lexical alternatives intake gate
+  ولا قبل بوابات corpus/license اللاحقة.
 - لا SF-50M قبل gate يثبت أن capacity هي السبب الأكبر.
 
 التالي:
 
 ```text
-Phase 27.112 — Qabas Primary License Resolution Gate, no training
+Phase 27.113 — Permissive Lexical Alternatives Intake Gate, no training
 ```
 
 ---

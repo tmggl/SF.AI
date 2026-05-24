@@ -530,6 +530,9 @@ phase27-licensed-ingestion-design:
 phase27-qabas-lexicon-bootstrap-design:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_111_qabas_lexicon_bootstrap_design.py $(ARGS)
 
+phase27-qabas-primary-license-resolution-gate:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_112_qabas_primary_license_resolution_gate.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 
