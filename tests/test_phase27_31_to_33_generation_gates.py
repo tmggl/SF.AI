@@ -831,3 +831,22 @@ def test_phase27_76_tokenizer_v9_open_social_boundary_probe_passes() -> None:
     assert report["decisions"]["tokenizer_v9_passed"] is True
     assert report["decisions"]["bounded_lm_open_social_repair_allowed_next"] is True
     assert report["decisions"]["runtime_switch_allowed"] is False
+
+
+def test_phase27_77_v9_bounded_open_social_lm_repair_blocks_runtime() -> None:
+    report = _report("phase27_77_v9_bounded_open_social_lm_repair_report.json")
+    assert report["phase"] == "Phase 27.77"
+    assert report["status"] == "FAILED_V9_BOUNDED_OPEN_SOCIAL_LM_REPAIR_RUNTIME_BLOCKED"
+    assert report["training_started"] is True
+    assert report["tokenizer"] == "artifacts/tokenizers/sf_bpe/v9_phase27_76"
+    assert report["checkpoint_name"] == "sf-10m-step6200"
+    assert report["phase27_69_summary"]["passed"] == 54
+    assert report["phase27_69_summary"]["total"] == 60
+    assert report["phase27_67_summary"]["passed"] == 45
+    assert report["phase27_67_summary"]["total"] == 50
+    assert report["phase27_60_summary"]["passed"] == 30
+    assert report["phase27_60_summary"]["total"] == 30
+    assert report["decisions"]["runtime_switch_allowed"] is False
+    assert report["decisions"]["ui_open_allowed"] is False
+    assert report["decisions"]["live_runtime_review_allowed"] is False
+    assert report["decisions"]["repair_required_before_runtime"] is True

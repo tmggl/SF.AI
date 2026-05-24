@@ -83,10 +83,10 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.76: درّبنا tokenizer v9 فقط ونجح في open_social "
-    "boundary probe: 17/17 roundtrip و15/15 protected pack single-piece. "
-    "لم ندرّب LM ولم نفتح runtime. التالي Phase 27.77 bounded LM repair "
-    "على tokenizer v9.",
+    "وصلنا إلى Phase 27.77: درّبنا LM محدودًا على tokenizer v9، لكنه فشل "
+    "كمرشح تشغيل: 54/60 fresh و45/50 known و30/30 regression. المشكلة "
+    "انتقلت من tokenizer fragments إلى خلط عائلات الردود. التالي Phase 27.78 "
+    "لفحص فشل v9 LM قبل أي runtime.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

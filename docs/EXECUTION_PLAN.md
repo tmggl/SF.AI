@@ -146,6 +146,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.74 | Open-Social Semantic-Collapse Repair | فشلت كتدريب تشغيل؛ `56/60`, `49/50`, `30/30`, runtime محجوب |
 | Phase 27.75 | Open-Social Strategy Inspection | مكتملة كفحص tokenizer/strategy؛ tokenizer v9 مطلوب |
 | Phase 27.76 | Tokenizer v9 Open-Social Boundary Probe | مكتملة بنجاح tokenizer-only؛ LM repair مسموح تاليًا |
+| Phase 27.77 | V9 Bounded Open-Social LM Repair | فشلت كتوليد؛ `54/60`, `45/50`, `30/30`, runtime محجوب |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3670,11 +3671,11 @@ tokenizer v8 مطلوب قبل أي LM repair جديد. لا runtime switch، ل
 
 التالي:
 
-**Phase 27.70 — inspect Phase 27.69 open_social failures and repair before runtime** — اكتملت كتجربة فاشلة، ثم **Phase 27.71 — Candidate Selection and Stability Strategy** اختارت `phase27_68` كأفضل مرشح `136/140` مع بقاء runtime محجوبًا، ثم **Phase 27.72 — Stability-First Micro Repair** حسّنت النتيجة إلى `138/140` مع بقاء فشلين open_social، ثم **Phase 27.73 — Open-Social Failure Inspection** سدّت فجوة حارس الشظايا وشخّصت semantic collapse المتبقي، ثم **Phase 27.74 — Open-Social Semantic-Collapse Repair** جرّبت ثلاثة مرشحين من checkpoint 27.72 لكنها تراجعت إلى `56/60` fresh و`49/50` known، ثم **Phase 27.75 — Open-Social Strategy Inspection** أثبتت أن tokenizer v8 يفك `بسالفة` إلى `بس الفة` وأن tokenizer v9 مطلوب قبل LM repair جديد، ثم **Phase 27.76 — Tokenizer v9 Open-Social Boundary Probe** مرّت tokenizer-only (`17/17`, `15/15`).
+**Phase 27.70 — inspect Phase 27.69 open_social failures and repair before runtime** — اكتملت كتجربة فاشلة، ثم **Phase 27.71 — Candidate Selection and Stability Strategy** اختارت `phase27_68` كأفضل مرشح `136/140` مع بقاء runtime محجوبًا، ثم **Phase 27.72 — Stability-First Micro Repair** حسّنت النتيجة إلى `138/140` مع بقاء فشلين open_social، ثم **Phase 27.73 — Open-Social Failure Inspection** سدّت فجوة حارس الشظايا وشخّصت semantic collapse المتبقي، ثم **Phase 27.74 — Open-Social Semantic-Collapse Repair** جرّبت ثلاثة مرشحين من checkpoint 27.72 لكنها تراجعت إلى `56/60` fresh و`49/50` known، ثم **Phase 27.75 — Open-Social Strategy Inspection** أثبتت أن tokenizer v8 يفك `بسالفة` إلى `بس الفة` وأن tokenizer v9 مطلوب قبل LM repair جديد، ثم **Phase 27.76 — Tokenizer v9 Open-Social Boundary Probe** مرّت tokenizer-only (`17/17`, `15/15`)، ثم **Phase 27.77 — V9 Bounded Open-Social LM Repair** فشلت كتوليد بسبب خلط العائلات (`54/60`, `45/50`, `30/30`).
 
 التالي الرسمي الآن:
 
-**Phase 27.77 — bounded LM open_social repair on tokenizer v9**
+**Phase 27.78 — inspect Phase 27.77 failures and revise v9 LM strategy**
 
 ### نتيجة Phase 27.73
 - لم يبدأ تدريب جديد.
@@ -3705,6 +3706,12 @@ tokenizer v8 مطلوب قبل أي LM repair جديد. لا runtime switch، ل
 - topic terms single-piece: `8/8`، والحرجة `التعاون/الاحترام` protected `2/2`.
 - القرار: Phase 27.77 مسموح كتدريب LM محدود على tokenizer v9 فقط، مع بقاء runtime محجوبًا حتى تمر بوابات التوليد.
 
+### نتيجة Phase 27.77
+- بدأ تدريب LM محدود على tokenizer v9 من الصفر، لأن vocab v9 لا يطابق checkpoints v8.
+- النتيجة: Phase 27.69 fresh `54/60`, Phase 27.67 known `45/50`, Phase 27.60 regression `30/30`.
+- tokenizer fragments اختفت كسبب رئيسي، لكن ظهر خلط عائلات: topic يجيب بموضوع آخر، followup ينجرف إلى open_social، وبعض support تعثر في guard.
+- القرار: لا runtime ولا UI؛ Phase 27.78 يجب أن يكون inspection/strategy قبل تدريب جديد.
+
 ### artifacts
 - [PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md](./PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md)
 - `artifacts/reports/phase27_69_new_fresh_shadow_canary_report.json`
@@ -3721,6 +3728,9 @@ tokenizer v8 مطلوب قبل أي LM repair جديد. لا runtime switch، ل
 - [PHASE27_76_TOKENIZER_V9_OPEN_SOCIAL_BOUNDARY_PROBE_REPORT.md](./PHASE27_76_TOKENIZER_V9_OPEN_SOCIAL_BOUNDARY_PROBE_REPORT.md)
 - `artifacts/reports/phase27_76_tokenizer_v9_open_social_boundary_probe_report.json`
 - `artifacts/samples/phase27_76_tokenizer_v9_open_social_boundary_probe.md`
+- [PHASE27_77_V9_BOUNDED_OPEN_SOCIAL_LM_REPAIR_REPORT.md](./PHASE27_77_V9_BOUNDED_OPEN_SOCIAL_LM_REPAIR_REPORT.md)
+- `artifacts/reports/phase27_77_v9_bounded_open_social_lm_repair_report.json`
+- `artifacts/samples/phase27_77_v9_bounded_open_social_lm_repair.md`
 
 ---
 

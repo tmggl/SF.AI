@@ -89,6 +89,7 @@ help:
 	@echo "  make phase27-open-social-semantic-collapse-repair Run Phase 27.74 semantic-collapse repair"
 	@echo "  make phase27-open-social-strategy-inspection Run Phase 27.75 open_social tokenizer strategy inspection"
 	@echo "  make phase27-tokenizer-v9-open-social-boundary-probe Run Phase 27.76 tokenizer v9 boundary probe"
+	@echo "  make phase27-v9-bounded-open-social-lm-repair Run Phase 27.77 bounded LM repair on tokenizer v9"
 	@echo "  make prepare-dialogue-batch ARGS=...  Prepare reviewed chat exports (Phase 18)"
 	@echo "  make train-bpe ARGS=...   Train SF-BPE tokenizer (requires phase confirmation flag)"
 	@echo "  make train-lm ARGS=...    Train SF native LM (Phase 6)"
@@ -387,6 +388,9 @@ phase27-open-social-strategy-inspection:
 
 phase27-tokenizer-v9-open-social-boundary-probe:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_76_tokenizer_v9_open_social_boundary_probe.py $(ARGS)
+
+phase27-v9-bounded-open-social-lm-repair:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_77_v9_bounded_open_social_lm_repair.py $(ARGS)
 
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)

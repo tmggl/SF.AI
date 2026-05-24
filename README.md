@@ -64,8 +64,8 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.76 / 30 — Tokenizer v9 Open-Social Boundary Probe نجح tokenizer-only: `17/17` open_social roundtrip و`15/15` protected pack single-piece.
-- **الأولوية الحالية:** Phase 27.77 bounded LM open_social repair على tokenizer v9؛ لا runtime قبل بوابات التوليد.
+- **الرحلة الحالية:** Phase 27.77 / 30 — V9 Bounded Open-Social LM Repair فشل كتوليد: `54/60` fresh و`45/50` known و`30/30` regression.
+- **الأولوية الحالية:** Phase 27.78 inspect Phase 27.77 failures and revise v9 LM strategy؛ لا runtime قبل بوابات التوليد.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -146,6 +146,7 @@
 - **نتيجة Phase 27.74:** جرّبنا ثلاثة مرشحين إصلاحيين من checkpoint 27.72. أفضل مرشح `gentle_48` حقق `56/60` fresh و`49/50` known و`30/30` regression، أي تراجع عن baseline؛ لا runtime ولا UI. التقرير: [docs/PHASE27_74_OPEN_SOCIAL_SEMANTIC_COLLAPSE_REPAIR_REPORT.md](./docs/PHASE27_74_OPEN_SOCIAL_SEMANTIC_COLLAPSE_REPAIR_REPORT.md).
 - **نتيجة Phase 27.75:** فحصنا فشل 27.74 ووجدنا 5 إخفاقات كلها `open_social` بسبب `model_artifact_fragment`. tokenizer v8 يعيد `بسالفة` كـ `بس الفة`، وأضيفت حزمة حماية `protected_phrases_phase27_75.txt`. التالي tokenizer v9 probe. التقرير: [docs/PHASE27_75_OPEN_SOCIAL_STRATEGY_INSPECTION_REPORT.md](./docs/PHASE27_75_OPEN_SOCIAL_STRATEGY_INSPECTION_REPORT.md).
 - **نتيجة Phase 27.76:** درّبنا tokenizer v9 فقط، بدون LM. مرّ `open_social` roundtrip `17/17`، وحزمة 27.75 كقطعة واحدة `15/15`، وبقي runtime محجوبًا. التالي Phase 27.77 تدريب LM محدود على tokenizer v9. التقرير: [docs/PHASE27_76_TOKENIZER_V9_OPEN_SOCIAL_BOUNDARY_PROBE_REPORT.md](./docs/PHASE27_76_TOKENIZER_V9_OPEN_SOCIAL_BOUNDARY_PROBE_REPORT.md).
+- **نتيجة Phase 27.77:** درّبنا SF-10M محدودًا من الصفر على tokenizer v9. أزال tokenizer fragments لكنه خلط عائلات الردود؛ fresh `54/60`, known `45/50`, regression `30/30`. لا runtime ولا UI. التقرير: [docs/PHASE27_77_V9_BOUNDED_OPEN_SOCIAL_LM_REPAIR_REPORT.md](./docs/PHASE27_77_V9_BOUNDED_OPEN_SOCIAL_LM_REPAIR_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 

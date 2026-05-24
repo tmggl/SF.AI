@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.76 / 30**
-- **المرحلة الحالية:** **Phase 27.76 — Tokenizer v9 Open-Social Boundary Probe**
-- **حالة المرحلة الحالية:** **اكتملت بنجاح tokenizer-only؛ `17/17` open_social roundtrip و`15/15` protected pack؛ الـ runtime محجوب**
-- **المرحلة التالية المقترحة:** Phase 27.77 bounded LM open_social repair on tokenizer v9.
+- **الرحلة الحالية:** **Phase 27.77 / 30**
+- **المرحلة الحالية:** **Phase 27.77 — V9 Bounded Open-Social LM Repair**
+- **حالة المرحلة الحالية:** **فشلت كتوليد؛ `54/60` fresh و`45/50` known و`30/30` regression؛ الـ runtime محجوب**
+- **المرحلة التالية المقترحة:** Phase 27.78 inspect Phase 27.77 failures and revise v9 LM strategy.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -125,6 +125,7 @@
 | Phase 27.74 | Open-Social Semantic-Collapse Repair | ✅ failed_open_social_semantic_collapse_repair_runtime_blocked | ✅ |
 | Phase 27.75 | Open-Social Strategy Inspection | ✅ completed_open_social_strategy_inspection_runtime_blocked | ✅ |
 | Phase 27.76 | Tokenizer v9 Open-Social Boundary Probe | ✅ passed_tokenizer_v9_open_social_boundary_probe_runtime_blocked | ✅ |
+| Phase 27.77 | V9 Bounded Open-Social LM Repair | ✅ failed_v9_bounded_open_social_lm_repair_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
