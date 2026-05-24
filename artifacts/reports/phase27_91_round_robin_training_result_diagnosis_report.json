@@ -1,0 +1,286 @@
+{
+  "phase": "Phase 27.91",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "status": "PHASE27_91_DIAGNOSED_TOPIC_COLLAPSE_NO_TRAINING",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_changed": false,
+  "source_report": "artifacts/reports/phase27_90_bounded_round_robin_repair_report.json",
+  "best_checkpoint": "sf-10m-step1800",
+  "best_summary": {
+    "passed": 35,
+    "total": 50,
+    "pass_rate": 0.7,
+    "family_summary": {
+      "followup": {
+        "passed": 8,
+        "total": 10
+      },
+      "open_social": {
+        "passed": 9,
+        "total": 10
+      },
+      "planning": {
+        "passed": 10,
+        "total": 10
+      },
+      "support": {
+        "passed": 7,
+        "total": 10
+      },
+      "topic": {
+        "passed": 1,
+        "total": 10
+      }
+    },
+    "reason_counts": {
+      "passed": 35,
+      "expected_terms_missing": 13,
+      "guard:repeated_phrase": 2
+    }
+  },
+  "failure_count": 15,
+  "failure_family_counts": {
+    "open_social": 1,
+    "followup": 2,
+    "support": 3,
+    "topic": 9
+  },
+  "failure_reason_counts": {
+    "expected_terms_missing": 13,
+    "guard:repeated_phrase": 2
+  },
+  "failure_bucket_counts": {
+    "open_social_eval_alias_gap": 1,
+    "followup_surface_artifact": 2,
+    "support_eval_alias_gap": 3,
+    "topic_semantic_collapse": 7,
+    "topic_repetition_collapse": 2
+  },
+  "diagnosis_signals": {
+    "topic_dominates_failure": true,
+    "topic_failures": 9,
+    "support_alias_gap": true,
+    "surface_artifacts_present": true,
+    "genuine_model_failure_count": 11
+  },
+  "root_cause_weights": {
+    "topic_semantic_collapse": 48,
+    "topic_underlearning_after_round_robin": 18,
+    "evaluation_alias_gap_support_open_social": 12,
+    "surface_artifacts_followup": 8,
+    "decoding_repetition": 6,
+    "model_capacity": 4,
+    "tokenizer": 2,
+    "semantic_routing": 2
+  },
+  "representative_failures": [
+    {
+      "id": "open_social_05",
+      "family": "open_social",
+      "bucket": "open_social_eval_alias_gap",
+      "reason": "expected_terms_missing",
+      "prompt": "ابي كلام عادي بدون موضوع كبير",
+      "response": "وش المكان الذي تحب تجلس فيه إذا تبي تهدأ؟",
+      "expected_any": [
+        "نسولف",
+        "موضوع",
+        "خفيف"
+      ]
+    },
+    {
+      "id": "followup_08",
+      "family": "followup",
+      "bucket": "followup_surface_artifact",
+      "reason": "expected_terms_missing",
+      "prompt": "تابع الشرح من النقطة الأخيرة",
+      "response": "أقصد أن تجعل الأمر أصغيرة، وابدأ بالأهم قبل الأشياء الجانبية.",
+      "expected_any": [
+        "نكمل",
+        "بعدها",
+        "الفكرة"
+      ]
+    },
+    {
+      "id": "followup_10",
+      "family": "followup",
+      "bucket": "followup_surface_artifact",
+      "reason": "expected_terms_missing",
+      "prompt": "أريد صياغة أبسط للفكرة",
+      "response": "أقصد أن تجعل الأمر أصغيرة، وابدأ بالأهم قبل الأشياء شيء قصيرة.",
+      "expected_any": [
+        "أبسط",
+        "الفكرة",
+        "خطوة"
+      ]
+    },
+    {
+      "id": "support_02",
+      "family": "support",
+      "bucket": "support_eval_alias_gap",
+      "reason": "expected_terms_missing",
+      "prompt": "أحتاج جملة تهدئني",
+      "response": "خذ نفس شوي واهدأ، بعدها ابدأ بشي واحد بسيط.",
+      "expected_any": [
+        "تنفس",
+        "بهدوء",
+        "راحة"
+      ]
+    },
+    {
+      "id": "support_04",
+      "family": "support",
+      "bucket": "support_eval_alias_gap",
+      "reason": "expected_terms_missing",
+      "prompt": "أنا مرتبك وأريد هدوءًا",
+      "response": "خذ نفس شوي واهدأ، بعدها ابدأ بشي واحد بسيط.",
+      "expected_any": [
+        "تنفس",
+        "هدوء",
+        "راحة"
+      ]
+    },
+    {
+      "id": "support_06",
+      "family": "support",
+      "bucket": "support_eval_alias_gap",
+      "reason": "expected_terms_missing",
+      "prompt": "كيف أستعيد تركيزي بهدوء",
+      "response": "خذ نفس شوي واهدأ، بعدها ابدأ بشي واحد بسيط.",
+      "expected_any": [
+        "تنفس",
+        "خطوة",
+        "راحة"
+      ]
+    },
+    {
+      "id": "topic_01",
+      "family": "topic",
+      "bucket": "topic_semantic_collapse",
+      "reason": "expected_terms_missing",
+      "prompt": "فسر الوفاء بجملة قصيرة",
+      "response": "معنى الامتة؛ : إنك تلاحظ ح حتى لو كنت خداع.",
+      "expected_any": [
+        "الوفاء"
+      ]
+    },
+    {
+      "id": "topic_02",
+      "family": "topic",
+      "bucket": "topic_semantic_collapse",
+      "reason": "expected_terms_missing",
+      "prompt": "وش هو التعاون بين الناس",
+      "response": "معنى الهدوء: إنك إن البداية هل، ل، نبدأ بالك واضح.",
+      "expected_any": [
+        "التعاون"
+      ]
+    },
+    {
+      "id": "topic_03",
+      "family": "topic",
+      "bucket": "topic_semantic_collapse",
+      "reason": "expected_terms_missing",
+      "prompt": "عرّف الصبر تعريفًا بسيطًا",
+      "response": "معنى الامتنان: إنك تنتواحدًا من ف.",
+      "expected_any": [
+        "الصبر"
+      ]
+    },
+    {
+      "id": "topic_04",
+      "family": "topic",
+      "bucket": "topic_repetition_collapse",
+      "reason": "guard:repeated_phrase",
+      "prompt": "الاحترام كيف تفهمه",
+      "response": "معنى الهدوء: إنك إن كلامك وتشكر شي شي شي صار الصواب خداع.",
+      "expected_any": [
+        "الاحترام"
+      ]
+    },
+    {
+      "id": "topic_06",
+      "family": "topic",
+      "bucket": "topic_semantic_collapse",
+      "reason": "expected_terms_missing",
+      "prompt": "الصدق وش فايدته",
+      "response": "معنى الهدوء: إنك إن البداية هل، وقت الحاجة.",
+      "expected_any": [
+        "الصدق"
+      ]
+    },
+    {
+      "id": "topic_07",
+      "family": "topic",
+      "bucket": "topic_semantic_collapse",
+      "reason": "expected_terms_missing",
+      "prompt": "اشرح الصداقة دون إطالة",
+      "response": "معنى الهدوء: إنك تعرف كان ة؛ تحب تجلس فيه إذا ان.",
+      "expected_any": [
+        "الصداقة"
+      ]
+    },
+    {
+      "id": "topic_08",
+      "family": "topic",
+      "bucket": "topic_repetition_collapse",
+      "reason": "guard:repeated_phrase",
+      "prompt": "الشجاعة متى تظهر",
+      "response": "معنى الهدوء: إنك إن كلامك وتشكر شي شي شي واضح وابدأ بالجزء وتشكر .",
+      "expected_any": [
+        "الشجاعة"
+      ]
+    },
+    {
+      "id": "topic_09",
+      "family": "topic",
+      "bucket": "topic_semantic_collapse",
+      "reason": "expected_terms_missing",
+      "prompt": "أعطني معنى التعاون ببساطة",
+      "response": "معنى الهدوء: إنك تعرف ووقفة وقت الحاجة.",
+      "expected_any": [
+        "التعاون"
+      ]
+    },
+    {
+      "id": "topic_10",
+      "family": "topic",
+      "bucket": "topic_semantic_collapse",
+      "reason": "expected_terms_missing",
+      "prompt": "وش معنى الوفاء باختصار",
+      "response": "معنى الهدوء: إنك تحب تجلهدف مشبدون إذا شي شي الهدوء؟",
+      "expected_any": [
+        "الوفاء"
+      ]
+    }
+  ],
+  "blocked_actions": [
+    "new LM training",
+    "runtime release",
+    "UI generator release",
+    "SF-50M transition",
+    "tokenizer retrain",
+    "pretrained/open-weight usage"
+  ],
+  "allowed_next_actions": [
+    "design topic-objective repair gate",
+    "separate genuine topic collapse from eval alias gaps",
+    "define topic canary before any repair training"
+  ],
+  "decision": {
+    "decision_id": "PHASE27_91_ROUND_ROBIN_TRAINING_RESULT_DIAGNOSIS_DECISION",
+    "engineering_decision": "DESIGN_TOPIC_OBJECTIVE_REPAIR_GATE_BEFORE_ANY_TRAINING",
+    "new_training_allowed": false,
+    "runtime_release_allowed": false,
+    "ui_release_allowed": false,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "topic_repair_design_allowed": true,
+    "why": "Phase 27.90 improved broad dialogue families, but the remaining failures are dominated by topic collapse: 9/15 failures are topic-family cases. This is not a capacity or tokenizer justification yet; the next step is a no-training topic-objective repair design gate.",
+    "next_phase": "Phase 27.92 — Topic Objective Repair Design Gate"
+  }
+}

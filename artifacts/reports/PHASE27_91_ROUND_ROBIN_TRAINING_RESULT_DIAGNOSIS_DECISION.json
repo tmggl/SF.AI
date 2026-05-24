@@ -1,0 +1,12 @@
+{
+  "decision_id": "PHASE27_91_ROUND_ROBIN_TRAINING_RESULT_DIAGNOSIS_DECISION",
+  "engineering_decision": "DESIGN_TOPIC_OBJECTIVE_REPAIR_GATE_BEFORE_ANY_TRAINING",
+  "new_training_allowed": false,
+  "runtime_release_allowed": false,
+  "ui_release_allowed": false,
+  "sf50m_justified_transition": false,
+  "tokenizer_retrain_allowed": false,
+  "topic_repair_design_allowed": true,
+  "why": "Phase 27.90 improved broad dialogue families, but the remaining failures are dominated by topic collapse: 9/15 failures are topic-family cases. This is not a capacity or tokenizer justification yet; the next step is a no-training topic-objective repair design gate.",
+  "next_phase": "Phase 27.92 — Topic Objective Repair Design Gate"
+}

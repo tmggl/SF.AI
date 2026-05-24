@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.90 — Bounded SF-10M Round-Robin Curriculum Repair Training",
-        current_phase_status="phase27_90_trained_runtime_blocked_diagnosis_required",
+        current_phase="Phase 27.91 — Round-Robin Training Result Diagnosis",
+        current_phase_status="phase27_91_diagnosed_topic_collapse_no_training",
         next_phase=(
-            "Phase 27.91 — Round-Robin Training Result Diagnosis"
+            "Phase 27.92 — Topic Objective Repair Design Gate"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -564,6 +564,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_90_bounded_round_robin_repair",
                 status="trained_runtime_blocked_diagnosis_required",
                 phase="Phase 27.90",
+            ),
+            ComponentStatus(
+                name="phase27_91_round_robin_result_diagnosis",
+                status="diagnosed_topic_collapse_no_training",
+                phase="Phase 27.91",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

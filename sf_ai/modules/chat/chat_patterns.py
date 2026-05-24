@@ -82,9 +82,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.90 ضمن مسار SF-native فقط: درّبنا SF-10M المحدود "
-    "بترتيب family_round_robin. تحسن fresh shadow إلى 35/50، لكنه دون بوابة "
-    "45/50، لذلك لا runtime الآن. التالي Phase 27.91 تشخيص سبب الفشل المتبقي.",
+    "وصلنا إلى Phase 27.91 ضمن مسار SF-native فقط: شخّصنا نتيجة 35/50، وظهر أن "
+    "9 من 15 إخفاقًا من عائلة topic. لا تدريب ولا runtime الآن؛ التالي Phase 27.92 "
+    "تصميم إصلاح topic-objective قبل أي تدريب.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

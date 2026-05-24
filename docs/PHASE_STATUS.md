@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.90 / 30**
-- **المرحلة الحالية:** **Phase 27.90 — Bounded SF-10M Round-Robin Curriculum Repair Training**
-- **حالة المرحلة الحالية:** **اكتملت كتدريب؛ fresh shadow تحسن إلى `35/50` لكن runtime محجوب والتشخيص مطلوب**
-- **المرحلة التالية المقترحة:** Phase 27.91 — Round-Robin Training Result Diagnosis.
+- **الرحلة الحالية:** **Phase 27.91 / 30**
+- **المرحلة الحالية:** **Phase 27.91 — Round-Robin Training Result Diagnosis**
+- **حالة المرحلة الحالية:** **اكتملت؛ شُخّص الفشل المتبقي كـ topic semantic collapse؛ لا تدريب ولا runtime**
+- **المرحلة التالية المقترحة:** Phase 27.92 — Topic Objective Repair Design Gate.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -146,6 +146,7 @@
 | Phase 27.88 | Family-conditioned Training Result Diagnosis | ✅ diagnosed_sequential_curriculum_collapse_no_training | ✅ |
 | Phase 27.89 | Stratified Round-Robin Curriculum Sampler Gate | ✅ sampler_gate_passed_training_allowed_next_no_runtime | ✅ |
 | Phase 27.90 | Bounded SF-10M Round-Robin Curriculum Repair Training | ✅ trained_runtime_blocked_diagnosis_required | ✅ |
+| Phase 27.91 | Round-Robin Training Result Diagnosis | ✅ diagnosed_topic_collapse_no_training | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1385,6 +1386,39 @@ make api
   - `artifacts/reports/phase27_90_bounded_round_robin_repair_report.json`
   - `artifacts/reports/PHASE27_90_BOUNDED_ROUND_ROBIN_REPAIR_DECISION.json`
   - `artifacts/samples/phase27_90_bounded_round_robin_repair.md`
+
+---
+
+## Phase 27.91 — Round-Robin Training Result Diagnosis
+
+- لم يبدأ تدريب جديد.
+- لم يتغير runtime.
+- شُخّص best checkpoint من Phase 27.90: `sf-10m-step1800`.
+- إخفاقات `15/50` توزعت كالتالي:
+  - topic: `9`
+  - support: `3`
+  - followup: `2`
+  - open_social: `1`
+- buckets:
+  - `topic_semantic_collapse=7`
+  - `topic_repetition_collapse=2`
+  - `support_eval_alias_gap=3`
+  - `followup_surface_artifact=2`
+  - `open_social_eval_alias_gap=1`
+- أوزان السبب:
+  - topic semantic collapse: `48%`
+  - topic underlearning after round-robin: `18%`
+  - evaluation alias gap: `12%`
+  - followup surface artifacts: `8%`
+  - decoding repetition: `6%`
+  - capacity: `4%`
+- القرار: `DESIGN_TOPIC_OBJECTIVE_REPAIR_GATE_BEFORE_ANY_TRAINING`.
+- المحظور الآن: training, runtime release, SF-50M, tokenizer retrain.
+- التالي: Phase 27.92 — Topic Objective Repair Design Gate.
+- التقارير:
+  - [PHASE27_91_ROUND_ROBIN_TRAINING_RESULT_DIAGNOSIS_REPORT.md](./PHASE27_91_ROUND_ROBIN_TRAINING_RESULT_DIAGNOSIS_REPORT.md)
+  - `artifacts/reports/phase27_91_round_robin_training_result_diagnosis_report.json`
+  - `artifacts/reports/PHASE27_91_ROUND_ROBIN_TRAINING_RESULT_DIAGNOSIS_DECISION.json`
 
 ---
 
