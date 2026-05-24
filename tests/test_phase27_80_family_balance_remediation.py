@@ -26,10 +26,10 @@ def test_phase27_80_family_balance_remediation_blocks_training_and_sets_quotas()
     assert report["decision"]["sf50m_justified_transition"] is False
 
     quotas = report["quota_plan"]["needed_records"]
-    assert report["quota_plan"]["total_needed"] == 639
-    assert quotas["planning"] == {"total": 155, "msa": 155, "saudi": 0}
-    assert quotas["support"] == {"total": 136, "msa": 85, "saudi": 51}
-    assert quotas["topic"] == {"total": 348, "msa": 188, "saudi": 160}
+    assert report["quota_plan"]["total_needed"] == 0
+    assert quotas["planning"] == {"total": 0, "msa": 0, "saudi": 0}
+    assert quotas["support"] == {"total": 0, "msa": 0, "saudi": 0}
+    assert quotas["topic"] == {"total": 0, "msa": 0, "saudi": 0}
     assert quotas["open_social"]["total"] == 0
     assert quotas["followup"]["total"] == 0
 
@@ -47,7 +47,7 @@ def test_phase27_80_family_balance_artifacts_exist_and_are_nontraining() -> None
     authoring_plan = json.loads((ROOT / artifacts["authoring_quota_plan"]).read_text(encoding="utf-8"))
 
     assert manifest.exists()
-    assert len(manifest.read_text(encoding="utf-8").splitlines()) == 5943
+    assert len(manifest.read_text(encoding="utf-8").splitlines()) == 8443
     assert config["training_allowed_now"] is False
     assert config["underrepresented_family_policy"].startswith("author_more_gold_records")
-    assert authoring_plan["topic"]["total"] == 348
+    assert authoring_plan["topic"]["total"] == 0

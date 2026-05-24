@@ -293,6 +293,16 @@ def test_real_corpus_dir_contains_only_explicit_reviewed_seeds() -> None:
     jsonl_files = sorted((corpus / "jsonl").glob("*.jsonl"))
     raw_files = list((corpus / "raw").glob("*.jsonl"))
     assert [p.name for p in jsonl_files] == [
+        "dialogue_batch_v10_balanced_followup_msa_010.jsonl",
+        "dialogue_batch_v10_balanced_followup_saudi_010.jsonl",
+        "dialogue_batch_v10_balanced_open_social_msa_010.jsonl",
+        "dialogue_batch_v10_balanced_open_social_saudi_010.jsonl",
+        "dialogue_batch_v10_balanced_planning_msa_010.jsonl",
+        "dialogue_batch_v10_balanced_planning_saudi_010.jsonl",
+        "dialogue_batch_v10_balanced_support_msa_010.jsonl",
+        "dialogue_batch_v10_balanced_support_saudi_010.jsonl",
+        "dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+        "dialogue_batch_v10_balanced_topic_saudi_010.jsonl",
         "dialogue_batch_v2_flex_001.jsonl",
         "dialogue_batch_v2_flex_002.jsonl",
         "dialogue_batch_v2_flex_003.jsonl",

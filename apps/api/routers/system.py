@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.80 — Repair Gate Encoding + Family Balance Remediation",
-        current_phase_status="phase27_80_family_balance_remediation_ready_no_training",
+        current_phase="Phase 27.81 — Balanced Family Pack Authoring",
+        current_phase_status="phase27_81_balanced_family_pack_authored_gates_passed_no_training",
         next_phase=(
-            "Phase 27.81 — Balanced Family Pack Authoring, no training"
+            "Phase 27.82 — Family-conditioned SF-10M repair training decision"
         ),
         sovereign=True,
         uses_external_llm=False,

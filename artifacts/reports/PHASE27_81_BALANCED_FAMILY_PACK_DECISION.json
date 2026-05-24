@@ -1,0 +1,9 @@
+{
+  "decision_id": "PHASE27_81_BALANCED_FAMILY_PACK_DECISION",
+  "engineering_decision": "BALANCED_FAMILY_PACK_AUTHORED_RERUN_AUDITS_AND_GATES",
+  "new_training_allowed": false,
+  "tokenizer_retrain_allowed": false,
+  "runtime_release_allowed": false,
+  "sf50m_justified_transition": false,
+  "next_step": "run corpus audit, rebuild split, rerun Phase 27.80 repair gate validation"
+}

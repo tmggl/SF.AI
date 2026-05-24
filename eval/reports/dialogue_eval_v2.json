@@ -32,15 +32,15 @@
   "can_start_phase28": false,
   "phase26_status": "NOT_READY_IMPROVE_SF10M_AND_CANARY",
   "corpus_expansion_plan": {
-    "current_records": 5943,
+    "current_records": 8443,
     "target_records": 5000,
     "remaining_records": 0,
     "batch_size": 1500,
     "batches_needed_total": 0,
     "target_per_dialect": 2500,
     "dialect_counts": {
-      "saudi": 2994,
-      "msa": 2949
+      "msa": 4199,
+      "saudi": 4244
     },
     "needed_by_dialect": {
       "msa": 0,
@@ -53,9 +53,9 @@
     "quality_targets": {
       "gold_total_target": 1000,
       "silver_total_target": 4000,
-      "current_gold": 831,
+      "current_gold": 3331,
       "current_silver": 5112,
-      "needed_gold": 169,
+      "needed_gold": 0,
       "needed_silver": 0
     },
     "category_targets_remaining": {
@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.80 ضمن مسار SF-native فقط: بوابات الإصلاح كشفت خلل family balance، ثم جهزنا remediation plan. نحتاج 639 سجلًا متوازنًا لـ planning/support/topic. لا تدريب ولا ru"
+      "response_preview": "وصلنا إلى Phase 27.81 ضمن مسار SF-native فقط: ألّفنا 2500 سجلًا متوازنًا لعائلات الحوار لمعالجة family balance، ومرّت بوابات Phase 27.80. لا تدريب جديد ولا runtime ولا SF-50M الآن؛"
     },
     {
       "scenario_id": "clarification_repair_flow",

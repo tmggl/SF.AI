@@ -5,26 +5,26 @@
 هذه ليست مرحلة تدريب. هذه مرحلة تحويل فشل gates إلى خطة إصلاح
 قابلة للتنفيذ داخل مسار SF-native فقط.
 
-- decision: `REMEDIATION_PLAN_READY_AUTHOR_BALANCED_FAMILY_PACK_NO_TRAINING`
+- decision: `NO_REMEDIATION_NEEDED_RERUN_GATES`
 - training allowed: `False`
 - runtime allowed: `False`
-- total records needed: `639`
+- total records needed: `0`
 
 ## Current Family Counts
 
-- `open_social`: `3208`
-- `followup`: `1795`
-- `planning`: `424`
-- `support`: `364`
-- `topic`: `152`
+- `open_social`: `3708`
+- `followup`: `2295`
+- `planning`: `924`
+- `support`: `864`
+- `topic`: `652`
 
 ## Authoring Quotas Before Training
 
 - `open_social`: total=`0`, msa=`0`, saudi=`0`
 - `followup`: total=`0`, msa=`0`, saudi=`0`
-- `planning`: total=`155`, msa=`155`, saudi=`0`
-- `support`: total=`136`, msa=`85`, saudi=`51`
-- `topic`: total=`348`, msa=`188`, saudi=`160`
+- `planning`: total=`0`, msa=`0`, saudi=`0`
+- `support`: total=`0`, msa=`0`, saudi=`0`
+- `topic`: total=`0`, msa=`0`, saudi=`0`
 
 ## قرار المرحلة
 

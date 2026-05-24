@@ -54,8 +54,8 @@ def test_phase23_provenance_records_no_pretrained_or_external_data() -> None:
 def test_phase23_audit_marks_v2_ready_for_phase24() -> None:
     report = json.loads((TOKENIZER_DIR / "audit_report.json").read_text(encoding="utf-8"))
     assert report["status"] == "COMPLETED_READY_FOR_PHASE24"
-    assert report["corpus"]["training_ready"] == 5943
-    assert report["corpus"]["dialects"] == {"msa": 2949, "saudi": 2994}
+    assert report["corpus"]["training_ready"] == 8443
+    assert report["corpus"]["dialects"] == {"msa": 4199, "saudi": 4244}
     assert report["tokenization_policy"]["protected_terms_covered"] == 30
     assert report["tokenization_policy"]["coverage_ratio"] == 1.0
     assert report["protected_terms_behavior"]["v2_roundtrip_failures"] == []

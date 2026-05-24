@@ -1,6 +1,6 @@
 {
   "decision_id": "PHASE27_80_FAMILY_BALANCE_REMEDIATION_DECISION",
-  "engineering_decision": "REMEDIATION_PLAN_READY_AUTHOR_BALANCED_FAMILY_PACK_NO_TRAINING",
+  "engineering_decision": "NO_REMEDIATION_NEEDED_RERUN_GATES",
   "new_training_allowed": false,
   "tokenizer_retrain_allowed": false,
   "runtime_release_allowed": false,

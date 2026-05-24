@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.80
-الاسم: Repair Gate Encoding + Family Balance Remediation
+المرحلة الحالية: Phase 27.81
+الاسم: Balanced Family Pack Authoring
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_80_REPAIR_GATE_VALIDATION_DECISION
+القرار الرسمي: PHASE27_81_BALANCED_FAMILY_PACK_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -94,10 +94,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
-- نتيجة 27.80: gates فشلت في `curriculum_family_balance_dry_run`
-  و`family_confusion_matrix_builder`، ثم صدرت remediation plan.
-- المطلوب قبل أي تدريب: 639 سجلًا متوازنًا للعائلات الناقصة.
-- التالي: `Phase 27.81 — Balanced Family Pack Authoring`, بلا تدريب.
+- نتيجة 27.81: أضيف 2500 سجل gold متوازن (`500` لكل family، `250/250`
+  فصحى/سعودي)، وأعيد بناء split، ومرّت Phase 27.80 gates.
+- corpus الحالي: `8443` (`msa=4199`, `saudi=4244`, `gold=3331`, `silver=5112`).
+- التالي: `Phase 27.82 — Family-conditioned SF-10M repair training decision`.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -313,18 +313,17 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.81 — Balanced Family Pack Authoring
+Phase 27.82 — Family-conditioned SF-10M repair training decision
 ```
 
 مطلوب منها:
 
 - Decision Report.
 - Allowed/Blocked Actions.
-- تأليف سجلات طبيعية عالية الجودة للعائلات الناقصة فقط.
-- planning: 155 فصحى.
-- support: 85 فصحى + 51 سعودي.
-- topic: 188 فصحى + 160 سعودي.
-- منع أي تدريب حتى يعاد dry-run وينجح.
+- قراءة قرار Phase 27.80 gates بعد نجاحها.
+- تحديد هل يسمح بتدريب إصلاح SF-10M مقيّد.
+- تحديد checkpoint/tokenizer/config قبل أي تشغيل.
+- منع SF-50M/runtime حتى ينجح canary بعد التدريب.
 
 ممنوع حتى تصدر gates ناجحة وقرار لاحق:
 

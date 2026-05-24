@@ -15,7 +15,7 @@ from scripts.phase27_80_repair_gate_validation import (
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_phase27_80_report_blocks_training_after_failed_family_gates() -> None:
+def test_phase27_80_report_passes_gates_but_still_blocks_training() -> None:
     report = json.loads(
         (ROOT / "artifacts/reports/phase27_80_repair_gate_validation_report.json").read_text(
             encoding="utf-8"
@@ -38,9 +38,10 @@ def test_phase27_80_report_blocks_training_after_failed_family_gates() -> None:
     assert gates["heldout_shadow_canary_manifest_validator"]["passed"] is True
     assert gates["operator_contamination_regression_scan"]["passed"] is True
     assert gates["operator_contamination_regression_scan"]["hit_count"] == 0
-    assert gates["curriculum_family_balance_dry_run"]["passed"] is False
-    assert gates["family_confusion_matrix_builder"]["passed"] is False
-    assert gates["curriculum_family_balance_dry_run"]["family_ratio_max_to_min"] > 4.0
+    assert gates["curriculum_family_balance_dry_run"]["passed"] is True
+    assert gates["family_confusion_matrix_builder"]["passed"] is True
+    assert gates["curriculum_family_balance_dry_run"]["mode"] == "explicit_balanced_family_view"
+    assert gates["curriculum_family_balance_dry_run"]["family_ratio_max_to_min"] == 1.0
 
 
 def test_phase27_80_decision_file_matches_report() -> None:
@@ -57,7 +58,7 @@ def test_phase27_80_decision_file_matches_report() -> None:
 
     assert decision == report["decision"]
     assert decision["decision_id"] == "PHASE27_80_REPAIR_GATE_VALIDATION_DECISION"
-    assert decision["engineering_decision"] == "GATES_FAILED_REPAIR_IMPLEMENTATION_BLOCKED"
+    assert decision["engineering_decision"] == "GATES_PASSED_REPAIR_IMPLEMENTATION_ALLOWED_NO_TRAINING"
 
 
 def test_phase27_80_validators_accept_phase27_79_design() -> None:

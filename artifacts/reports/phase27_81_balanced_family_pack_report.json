@@ -1,0 +1,96 @@
+{
+  "phase": "Phase 27.81",
+  "status": "PHASE27_81_BALANCED_FAMILY_PACK_AUTHORED_NO_TRAINING",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "tokenizer_training_started": false,
+  "runtime_changed": false,
+  "source": "sf-ai-balanced-family-pack-v1",
+  "license": "owner-approved-for-sf-ai-training",
+  "total_records": 2500,
+  "generated": [
+    {
+      "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_open_social_msa_010.jsonl",
+      "card": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_open_social_msa_010.CARD.md",
+      "family": "open_social",
+      "dialect": "msa",
+      "records": 250
+    },
+    {
+      "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_open_social_saudi_010.jsonl",
+      "card": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_open_social_saudi_010.CARD.md",
+      "family": "open_social",
+      "dialect": "saudi",
+      "records": 250
+    },
+    {
+      "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_followup_msa_010.jsonl",
+      "card": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_followup_msa_010.CARD.md",
+      "family": "followup",
+      "dialect": "msa",
+      "records": 250
+    },
+    {
+      "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_followup_saudi_010.jsonl",
+      "card": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_followup_saudi_010.CARD.md",
+      "family": "followup",
+      "dialect": "saudi",
+      "records": 250
+    },
+    {
+      "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_planning_msa_010.jsonl",
+      "card": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_planning_msa_010.CARD.md",
+      "family": "planning",
+      "dialect": "msa",
+      "records": 250
+    },
+    {
+      "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_planning_saudi_010.jsonl",
+      "card": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_planning_saudi_010.CARD.md",
+      "family": "planning",
+      "dialect": "saudi",
+      "records": 250
+    },
+    {
+      "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_support_msa_010.jsonl",
+      "card": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_support_msa_010.CARD.md",
+      "family": "support",
+      "dialect": "msa",
+      "records": 250
+    },
+    {
+      "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_support_saudi_010.jsonl",
+      "card": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_support_saudi_010.CARD.md",
+      "family": "support",
+      "dialect": "saudi",
+      "records": 250
+    },
+    {
+      "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+      "card": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.CARD.md",
+      "family": "topic",
+      "dialect": "msa",
+      "records": 250
+    },
+    {
+      "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_saudi_010.jsonl",
+      "card": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_saudi_010.CARD.md",
+      "family": "topic",
+      "dialect": "saudi",
+      "records": 250
+    }
+  ],
+  "decision": {
+    "decision_id": "PHASE27_81_BALANCED_FAMILY_PACK_DECISION",
+    "engineering_decision": "BALANCED_FAMILY_PACK_AUTHORED_RERUN_AUDITS_AND_GATES",
+    "new_training_allowed": false,
+    "tokenizer_retrain_allowed": false,
+    "runtime_release_allowed": false,
+    "sf50m_justified_transition": false,
+    "next_step": "run corpus audit, rebuild split, rerun Phase 27.80 repair gate validation"
+  }
+}

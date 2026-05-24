@@ -13,37 +13,37 @@
   "lexicon_track": "Saudi Seed v1",
   "status": "PHASE27_80_FAMILY_BALANCE_REMEDIATION_READY_NO_TRAINING",
   "failed_gate_context": {
-    "all_gates_passed": false,
+    "all_gates_passed": true,
     "blocked_training": true
   },
   "quota_plan": {
     "family_counts": {
-      "open_social": 3208,
-      "followup": 1795,
-      "planning": 424,
-      "support": 364,
-      "topic": 152
+      "open_social": 3708,
+      "followup": 2295,
+      "planning": 924,
+      "support": 864,
+      "topic": 652
     },
     "family_dialect_counts": {
       "open_social": {
-        "saudi": 1581,
-        "msa": 1627
+        "msa": 1877,
+        "saudi": 1831
       },
       "followup": {
-        "saudi": 795,
-        "msa": 1000
+        "msa": 1250,
+        "saudi": 1045
       },
       "planning": {
-        "saudi": 329,
-        "msa": 95
+        "msa": 345,
+        "saudi": 579
       },
       "support": {
-        "msa": 165,
-        "saudi": 199
+        "msa": 415,
+        "saudi": 449
       },
       "topic": {
-        "saudi": 90,
-        "msa": 62
+        "msa": 312,
+        "saudi": 340
       }
     },
     "official_min_per_family": 500,
@@ -59,22 +59,22 @@
         "saudi": 0
       },
       "planning": {
-        "total": 155,
-        "msa": 155,
+        "total": 0,
+        "msa": 0,
         "saudi": 0
       },
       "support": {
-        "total": 136,
-        "msa": 85,
-        "saudi": 51
+        "total": 0,
+        "msa": 0,
+        "saudi": 0
       },
       "topic": {
-        "total": 348,
-        "msa": 188,
-        "saudi": 160
+        "total": 0,
+        "msa": 0,
+        "saudi": 0
       }
     },
-    "total_needed": 639,
+    "total_needed": 0,
     "curriculum_config": {
       "mode": "balanced_family_curriculum_view",
       "families": [
@@ -100,7 +100,7 @@
   "confusion_summary": {
     "matrix": {
       "open_social": {
-        "open_social": 2678,
+        "open_social": 3178,
         "followup": 245,
         "planning": 150,
         "support": 93,
@@ -108,7 +108,7 @@
       },
       "followup": {
         "open_social": 1331,
-        "followup": 338,
+        "followup": 838,
         "planning": 101,
         "support": 16,
         "topic": 9
@@ -116,7 +116,7 @@
       "planning": {
         "open_social": 194,
         "followup": 79,
-        "planning": 97,
+        "planning": 597,
         "support": 49,
         "topic": 5
       },
@@ -124,7 +124,7 @@
         "open_social": 70,
         "followup": 150,
         "planning": 87,
-        "support": 57,
+        "support": 557,
         "topic": 0
       },
       "topic": {
@@ -132,10 +132,10 @@
         "followup": 55,
         "planning": 0,
         "support": 0,
-        "topic": 10
+        "topic": 510
       }
     },
-    "diagonal_rate": 0.5351,
+    "diagonal_rate": 0.6727,
     "repair_rule": "new records must carry explicit intended_family metadata in the future authoring plan before training conversion"
   },
   "artifacts": {
@@ -145,7 +145,7 @@
   },
   "decision": {
     "decision_id": "PHASE27_80_FAMILY_BALANCE_REMEDIATION_DECISION",
-    "engineering_decision": "REMEDIATION_PLAN_READY_AUTHOR_BALANCED_FAMILY_PACK_NO_TRAINING",
+    "engineering_decision": "NO_REMEDIATION_NEEDED_RERUN_GATES",
     "new_training_allowed": false,
     "tokenizer_retrain_allowed": false,
     "runtime_release_allowed": false,

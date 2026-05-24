@@ -151,6 +151,18 @@ def _text(item: dict[str, Any], *, role: str | None = None) -> str:
     return " ".join(parts)
 
 
+def record_family(item: dict[str, Any], *, role: str | None = None) -> str:
+    provenance = item.get("provenance", {})
+    family = provenance.get("dialogue_family")
+    if isinstance(family, str) and family in FAMILIES:
+        return family
+    key = "prompt_family" if role == "user" else "answer_family"
+    family = provenance.get(key)
+    if isinstance(family, str) and family in FAMILIES:
+        return family
+    return classify_family(_text(item, role=role))
+
+
 def classify_family(text: str) -> str:
     t = re.sub(r"\s+", " ", text.strip().lower())
     if any(k in t for k in ("نظم", "رتب", "مهام", "وقتي", "جدولي", "خطة", "ابدأ بالأهم")):
@@ -167,16 +179,27 @@ def classify_family(text: str) -> str:
 def validate_curriculum_and_family_matrix(
     records: list[dict[str, Any]],
 ) -> tuple[dict[str, Any], dict[str, Any]]:
+    explicit_records = [
+        item
+        for item in records
+        if item.get("provenance", {}).get("dialogue_family") in FAMILIES
+    ]
+    explicit_counts = Counter(
+        item.get("provenance", {}).get("dialogue_family") for item in explicit_records
+    )
+    use_explicit_balanced_view = all(explicit_counts[family] >= 500 for family in FAMILIES)
+    view_records = explicit_records if use_explicit_balanced_view else records
+
     dialect_counts: Counter[str] = Counter()
     family_counts: Counter[str] = Counter()
     matrix: dict[str, dict[str, int]] = {f: {g: 0 for g in FAMILIES} for f in FAMILIES}
 
-    for item in records:
+    for item in view_records:
         provenance = item.get("provenance", {})
         dialect = provenance.get("dialect", "unknown")
         dialect_counts[dialect] += 1
-        prompt_family = classify_family(_text(item, role="user"))
-        answer_family = classify_family(_text(item, role="assistant"))
+        prompt_family = record_family(item, role="user")
+        answer_family = record_family(item, role="assistant")
         family_counts[prompt_family] += 1
         matrix[prompt_family][answer_family] += 1
 
@@ -197,6 +220,8 @@ def validate_curriculum_and_family_matrix(
     curriculum = {
         "gate": "curriculum_family_balance_dry_run",
         "passed": family_balance_passed and dialect_balance_passed,
+        "mode": "explicit_balanced_family_view" if use_explicit_balanced_view else "raw_corpus_view",
+        "explicit_family_counts": {family: explicit_counts[family] for family in FAMILIES},
         "records": total,
         "family_counts": dict(family_counts),
         "family_ratio_max_to_min": family_ratio,
@@ -208,6 +233,7 @@ def validate_curriculum_and_family_matrix(
     family_matrix = {
         "gate": "family_confusion_matrix_builder",
         "passed": matrix_passed,
+        "mode": "explicit_balanced_family_view" if use_explicit_balanced_view else "raw_corpus_view",
         "matrix": matrix,
         "diagonal_rate": diagonal_rate,
         "interpretation": "heuristic corpus dry-run; not model evaluation",

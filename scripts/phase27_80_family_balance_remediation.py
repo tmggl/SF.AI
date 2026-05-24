@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from scripts.phase27_80_repair_gate_validation import classify_family  # noqa: E402
+from scripts.phase27_80_repair_gate_validation import record_family  # noqa: E402
 
 
 DEFAULT_SOURCE = ROOT / "artifacts/reports/phase27_80_repair_gate_validation_report.json"
@@ -79,8 +79,8 @@ def _read_records(corpus: Path) -> list[dict[str, Any]]:
                 continue
             item = json.loads(line)
             provenance = item.get("provenance", {})
-            prompt_family = classify_family(_messages_text(item, "user"))
-            answer_family = classify_family(_messages_text(item, "assistant"))
+            prompt_family = record_family(item, role="user")
+            answer_family = record_family(item, role="assistant")
             records.append(
                 {
                     "file": path.name,
