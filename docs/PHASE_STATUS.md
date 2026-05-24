@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.94 / 30**
-- **المرحلة الحالية:** **Phase 27.94 — Topic Objective Data Pack Authoring**
-- **حالة المرحلة الحالية:** **اكتملت؛ سُدّت فجوة الوفاء السعودية؛ Phase 27.95 مسموحة كتدريب مقيّد فقط**
-- **المرحلة التالية المقترحة:** Phase 27.95 — Bounded Topic Objective Repair Training.
+- **الرحلة الحالية:** **Phase 27.95 / 30**
+- **المرحلة الحالية:** **Phase 27.95 — Bounded Topic Objective Repair Training**
+- **حالة المرحلة الحالية:** **اكتملت كتدريب مقيّد؛ runtime محجوب؛ التشخيص مطلوب**
+- **المرحلة التالية المقترحة:** Phase 27.96 — Topic Objective Repair Result Diagnosis.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -150,6 +150,7 @@
 | Phase 27.92 | Topic Objective Repair Design Gate | ✅ topic_objective_repair_design_ready_no_training | ✅ |
 | Phase 27.93 | Topic Objective Gate Encoding and Dry-Run Validation | ✅ gate_passed_data_pack_required_no_training | ✅ |
 | Phase 27.94 | Topic Objective Data Pack Authoring | ✅ wafa_saudi_gap_closed_training_allowed_next_no_runtime | ✅ |
+| Phase 27.95 | Bounded Topic Objective Repair Training | ✅ trained_runtime_blocked_diagnosis_required | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1075,60 +1076,15 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-652 passed in 72.96s (0:01:12)
+655 passed in 76.62s (0:01:16)
 ```
 
-| ملف | عدد |
+| التحقق | النتيجة |
 |------|------|
-| test_arabic_normalizer.py | 16 |
-| test_bpe_tokenizer.py | 13 |
-| test_capability_registry.py | 5 |
-| test_chat_module.py | 12 |
-| test_chat_native_generator.py | 26 (Phase 15 + Phase 25 canary + Phase 27.37 semantic topic guard) |
-| test_chat_rag_bridge.py | 7 (Phase 17) |
-| test_chat_ui.py | 7 (Phase 9/19 status + export quality indicator) |
-| test_checkpoints.py | 7 |
-| test_conversation_state.py | 8 |
-| test_corpus_governance.py | 10 (Phase 11) |
-| test_dataset_validators.py | 28 |
-| test_dialogue_batch_preparation.py | 3 (Phase 18) |
-| test_dialect_mapper.py | 7 |
-| test_generative_roadmap.py | 4 (Phase 21 + scaling strategy) |
-| test_health.py | 12 |
-| test_intent_detector.py | 7 |
-| test_mo3jam_importer.py | 13 |
-| test_new_chat_intents.py | 40 (Phase 9/19 social polish + phase guidance) |
-| test_nlp_pipeline.py | 9 |
-| test_orchestrator.py | 7 |
-| test_phase10_skeleton_domains.py | 4 (Phase 10) |
-| test_phase16_eval_harness.py | 3 (Phase 16) |
-| test_phase19_readiness.py | 2 (Phase 19) |
-| test_phase20_domain_activation_gates.py | 6 (Phase 20) |
-| test_phase22_readiness.py | 15 (Phase 22) |
-| test_phase22_review_intake.py | 8 (Phase 22 + raw generator gate) |
-| test_phase23_tokenizer_artifacts.py | 6 (Phase 23) |
-| test_phase24_sf10m_v0_2_report.py | 3 (Phase 24) |
-| test_phase25_generation_canary.py | 6 (Phase 25 + Phase 27.39 guard refinement) |
-| test_phase27_82_family_conditioned_training_decision.py | 3 |
-| test_phase27_83_family_conditioned_repair_training.py | 3 |
-| test_phase27_84_objective_curriculum_failure_diagnosis.py | 3 |
-| test_phase27_85_explicit_family_conditioning_objective_design.py | 3 |
-| test_phase27_86_family_conditioning_renderer_gate.py | 6 |
-| test_phase27_87_bounded_family_conditioned_repair.py | 4 |
-| test_phase27_88_family_conditioned_training_result_diagnosis.py | 4 |
-| test_rag_sparse_retrieval.py | 14 (Phase 8) |
-| test_research_summarizer.py | 20 |
-| test_response_composer.py | 6 |
-| test_router.py | 8 |
-| test_router_with_nlp.py | 5 |
-| test_saudi_seed.py | 15 (Phase 3.6) |
-| test_semantic_explorer.py | 10 |
-| test_tiny_transformer.py | 26 |
-| test_training_config.py | 8 |
-| test_training_device.py | 14 |
-| test_typo_corrector.py | 5 |
-| test_web_extractor.py | 18 |
-| **Total** | **614** |
+| full pytest suite | `655 passed in 76.62s` |
+| focused Phase 27.95/API/UI tests | `107 passed in 8.87s` |
+| `make corpus-audit` | `8453` records, `issues=0` |
+| `make phase27-dialogue-eval` | `19/19`, `open_generator_ready=false` |
 
 ---
 
@@ -1510,6 +1466,38 @@ make api
   - [PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_REPORT.md](./PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_REPORT.md)
   - `artifacts/reports/phase27_94_topic_objective_data_pack_report.json`
   - `artifacts/reports/PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_DECISION.json`
+
+---
+
+## Phase 27.95 — Bounded Topic Objective Repair Training
+
+- بدأ وانتهى تدريب SF-10M مقيّد.
+- لا runtime release.
+- لا UI generator release.
+- لا SF-50M.
+- لا tokenizer retrain.
+- أضيف تطابق prompt بين التدريب والتقييم:
+  - `NativeGenerator(family_conditioning=True)` يضيف الآن `الموضوع المطلوب: <topic>` لعائلة `topic` فقط.
+- إعداد التدريب:
+  - tokenizer: `artifacts/tokenizers/sf_bpe/v9_phase27_76`
+  - init checkpoint: `artifacts/eval/phase27_90_round_robin_curriculum_repair/checkpoints/sf-10m-step1800`
+  - steps: `1800`
+  - seq_len: `96`
+  - loss_scope: `assistant`
+  - packing_mode: `sample_isolated`
+  - split_order: `family_round_robin`
+- النتيجة:
+  - best checkpoint: `sf-10m-step1800`
+  - known topic: `10/16`، والبوابة المطلوبة `16/16`
+  - fresh topic: `4/10`، والبوابة المطلوبة `8/10`
+  - all-family regression: `33/50`، والبوابة المطلوبة `45/50`
+- القرار: `BLOCK_RUNTIME_DIAGNOSE_TOPIC_OBJECTIVE_REPAIR_RESULT`.
+- التالي: Phase 27.96 — Topic Objective Repair Result Diagnosis.
+- التقارير:
+  - [PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_REPORT.md](./PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_REPORT.md)
+  - `artifacts/reports/phase27_95_bounded_topic_objective_repair_report.json`
+  - `artifacts/reports/PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_DECISION.json`
+  - `artifacts/samples/phase27_95_bounded_topic_objective_repair.md`
 
 ---
 

@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.94
-الاسم: Topic Objective Data Pack Authoring
+المرحلة الحالية: Phase 27.95
+الاسم: Bounded Topic Objective Repair Training
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_DECISION
+القرار الرسمي: PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -90,7 +90,7 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 
 القرار الحالي:
 
-- تم تدريب Phase 27.83 bounded SF-10M repair training.
+- تم تدريب Phase 27.95 bounded topic-objective SF-10M repair training.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
@@ -111,7 +111,8 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - نتيجة 27.94: أضيفت `10` سجلات سعودية gold لموضوع `الوفاء`، وأُغلقت فجوة البيانات المحددة دون تدريب ودون runtime.
 - corpus الحالي: `8453` (`msa=4199`, `saudi=4254`, `gold=3341`, `silver=5112`).
 - إعادة بوابة 27.93 بعد 27.94: `training_data_ready=true`, `shortfalls={}`, و`الوفاء` صار `total=22`, `msa=12`, `saudi=10`.
-- التالي: `Phase 27.95 — Bounded Topic Objective Repair Training`.
+- نتيجة 27.95: تدريب SF-10M محدود اكتمل، لكن البوابات فشلت: known topic `10/16`, fresh topic `4/10`, all-family `33/50`.
+- التالي: `Phase 27.96 — Topic Objective Repair Result Diagnosis`.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -327,18 +328,19 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.95 — Bounded Topic Objective Repair Training
+Phase 27.96 — Topic Objective Repair Result Diagnosis
 ```
 
 مطلوب منها:
 
-- تدريب إصلاح محدود على SF-10M فقط، مستند إلى objective `topic_anchor_prompt_to_answer_objective_v1`.
-- استخدام split الحالي بعد حزمة Phase 27.94.
-- اختبار known topic وfresh shadow وall-family regression قبل أي runtime.
-- منع أي runtime release إذا لم تمر held-out/canary بوضوح.
+- تشخيص لماذا فشل تدريب 27.95 رغم إضافة `الموضوع المطلوب`.
+- فصل الأسباب بين: objective، sampling، topic anchor strength، decoding، tokenizer، capacity.
+- عدم بدء تدريب جديد قبل قرار تشخيصي واضح.
+- منع أي runtime release لأن 27.95 لم يمر gates.
 
-ممنوع في 27.95 قبل نجاح gates:
+ممنوع في 27.96 قبل التشخيص:
 
+- تدريب جديد.
 - runtime release.
 - tokenizer retrain.
 - SF-50M.

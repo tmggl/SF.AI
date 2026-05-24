@@ -163,6 +163,7 @@ class NativeGenerator:
             for line in (
                 _dialect_condition_line(dialect),
                 _family_condition_line(intent) if self.config.family_conditioning else "",
+                _requested_topic_condition_line(topic, intent) if self.config.family_conditioning else "",
                 "" if self.config.family_conditioning else _intent_condition_line(intent),
                 "" if self.config.family_conditioning else _topic_condition_line(topic),
             )
@@ -278,4 +279,11 @@ def _topic_condition_line(topic: str | None) -> str:
     t = (topic or "").strip()
     if t:
         return f"النظام: المصطلح: {t}"
+    return ""
+
+
+def _requested_topic_condition_line(topic: str | None, intent: str | None) -> str:
+    t = (topic or "").strip()
+    if t and _family_label(intent) == "موضوع":
+        return f"الموضوع المطلوب: {t}"
     return ""

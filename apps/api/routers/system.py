@@ -61,11 +61,9 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.94 — Topic Objective Data Pack Authoring",
-        current_phase_status="phase27_94_topic_objective_data_pack_ready_for_bounded_training",
-        next_phase=(
-            "Phase 27.95 — Bounded Topic Objective Repair Training"
-        ),
+        current_phase="Phase 27.95 — Bounded Topic Objective Repair Training",
+        current_phase_status="phase27_95_trained_runtime_blocked_diagnosis_required",
+        next_phase="Phase 27.96 — Topic Objective Repair Result Diagnosis",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -584,6 +582,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_94_topic_objective_data_pack",
                 status="data_pack_ready_for_bounded_training_no_runtime",
                 phase="Phase 27.94",
+            ),
+            ComponentStatus(
+                name="phase27_95_bounded_topic_objective_repair",
+                status="trained_runtime_blocked_diagnosis_required",
+                phase="Phase 27.95",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

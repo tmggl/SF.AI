@@ -5,7 +5,7 @@
 **Status:** governance rule, no training started
 **Language track:** Arabic MSA + Saudi only
 **Lexicon track:** Saudi Seed v1 + governed MSA/Saudi corpus
-**Current gate:** Phase 27.94 completed; Phase 27.95 bounded topic-objective repair training next; SF-50M remains blocked.
+**Current gate:** Phase 27.95 trained bounded topic-objective repair; gates failed; Phase 27.96 diagnosis next; SF-50M remains blocked.
 
 ---
 
@@ -91,18 +91,20 @@ Sovereign Practical Acceleration != open-weight/pretrained model lane
 PHASE27_78_ENGINEERING_DECISION
 ```
 
-### Current Scaling Decision — Phase 27.94
+### Current Scaling Decision — Phase 27.95
 
-Phase 27.94 لا يفتح حجمًا أكبر. القرار الحالي هو:
+Phase 27.95 لا يفتح حجمًا أكبر. القرار الحالي هو:
 
 ```text
-PHASE27_94_TOPIC_OBJECTIVE_DATA_PACK_DECISION
-ALLOW_PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_TRAINING
+PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_DECISION
+BLOCK_RUNTIME_DIAGNOSE_TOPIC_OBJECTIVE_REPAIR_RESULT
 ```
 
-السبب: فجوة `الوفاء` السعودية أُغلقت ببيانات gold سيادية، لكن هذا يسمح
-فقط بتدريب إصلاح محدود على SF-10M. يبقى `SF-50M` محجوبًا حتى يثبت
-الإصلاح جودة held-out/canary/runtime لاحقًا.
+السبب: التدريب المحدود على SF-10M اكتمل، لكنه لم يمر البوابات:
+known topic `10/16` مقابل المطلوب `16/16`، fresh topic `4/10` مقابل
+المطلوب `8/10`، وall-family `33/50` مقابل المطلوب `45/50`. لذلك يبقى
+`SF-50M` محجوبًا، ولا يسمح بتدريب جديد قبل Phase 27.96 كتشخيص لنتيجة
+الإصلاح.
 
 ويجب أن يحدد أوزان الأسباب التالية:
 

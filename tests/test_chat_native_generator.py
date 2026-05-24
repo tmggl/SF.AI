@@ -289,6 +289,19 @@ def test_native_generator_formats_family_conditioned_prompt() -> None:
         "المساعد:"
     )
 
+    assert gen._format_prompt(
+        "وش معنى الوفاء؟",
+        dialect="saudi",
+        intent="topic",
+        topic="الوفاء",
+    ) == (
+        "النطاق: سعودي\n"
+        "عائلة الحوار: موضوع\n"
+        "الموضوع المطلوب: الوفاء\n"
+        "المستخدم: وش معنى الوفاء؟\n"
+        "المساعد:"
+    )
+
 
 def test_extract_dialogue_reply_prefers_assistant_segment() -> None:
     prompt = "المستخدم: كيفك\nالمساعد:"

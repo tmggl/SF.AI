@@ -1,0 +1,21 @@
+{
+  "decision_id": "PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_DECISION",
+  "engineering_decision": "BLOCK_RUNTIME_DIAGNOSE_TOPIC_OBJECTIVE_REPAIR_RESULT",
+  "training_completed": true,
+  "runtime_release_allowed": false,
+  "ui_release_allowed": false,
+  "heldout_runtime_gate_allowed": false,
+  "sf50m_justified_transition": false,
+  "tokenizer_retrain_allowed": false,
+  "best_checkpoint": "sf-10m-step1800",
+  "known_topic": "10/16",
+  "fresh_topic": "4/10",
+  "all_family": "33/50",
+  "required_gates": {
+    "known_topic": "16/16",
+    "fresh_topic": "8/10",
+    "all_family": "45/50"
+  },
+  "why": "Best checkpoint sf-10m-step1800 scored known=10/16, fresh_topic=4/10, all_family=33/50. Runtime remains blocked; a separate held-out gate is required if all gates pass.",
+  "next_phase": "Phase 27.96 — Topic Objective Repair Result Diagnosis"
+}

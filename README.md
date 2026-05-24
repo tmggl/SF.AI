@@ -28,9 +28,9 @@
 المسار الحالي الرسمي:
 
 ```text
-Phase 27.79 — Objective/Curriculum/Decoding Repair Design
+Phase 27.95 — Bounded Topic Objective Repair Training
 Sovereign Practical Acceleration Strategy v2
-PHASE27_79_REPAIR_DESIGN_DECISION
+PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_DECISION
 ```
 
 القرار الحالي:
@@ -39,7 +39,9 @@ PHASE27_79_REPAIR_DESIGN_DECISION
 - لا tokenizer جديد.
 - لا runtime release.
 - لا انتقال إلى `SF-50M`.
-- التالي: `Phase 27.80 — Repair Gate Encoding and Dry-Run Validation`.
+- Phase 27.95 دُرّبت كتجربة مقيّدة على `SF-10M` فقط، لكنها لم تمر البوابات:
+  known topic `10/16`, fresh topic `4/10`, all-family `33/50`.
+- التالي: `Phase 27.96 — Topic Objective Repair Result Diagnosis`.
 - عند نجاح بوابة أي حجم لاحقًا، ينتقل الوكيل تلقائيًا للحجم التالي حتى
   `SF-1B+` دون انتظار موافقة جديدة.
 
@@ -108,16 +110,17 @@ PHASE27_79_REPAIR_DESIGN_DECISION
 - [docs/PHASE27_70_OPEN_SOCIAL_REPAIR_REPORT.md](./docs/PHASE27_70_OPEN_SOCIAL_REPAIR_REPORT.md) — إصلاح open_social/fine-tune لم يتجاوز baseline، لذلك runtime محجوب.
 - [docs/PHASE27_71_CANDIDATE_SELECTION_REPORT.md](./docs/PHASE27_71_CANDIDATE_SELECTION_REPORT.md) — اختيار مرشح: `phase27_68` هو الأفضل `136/140` لكنه ليس مستقرًا كفاية للواجهة.
 - [docs/PHASE27_72_STABILITY_FIRST_REPAIR_REPORT.md](./docs/PHASE27_72_STABILITY_FIRST_REPAIR_REPORT.md) — micro-repair من أفضل مرشح رفع النتيجة إلى `138/140` مع بقاء runtime محجوبًا.
+- [docs/PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_REPORT.md](./docs/PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_REPORT.md) — تدريب topic-objective محدود اكتمل وفشل البوابات، لذلك runtime محجوب والتشخيص التالي إلزامي.
 
 ---
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.94 / 30 — Topic Objective Data Pack Authoring.
-- **الأولوية الحالية:** Phase 27.95 Bounded Topic Objective Repair Training؛ تدريب SF-10M مقيّد فقط بعد أن سدت 27.94 فجوة `الوفاء` السعودية.
+- **الرحلة الحالية:** Phase 27.95 / 30 — Bounded Topic Objective Repair Training.
+- **الأولوية الحالية:** Phase 27.96 Topic Objective Repair Result Diagnosis؛ لا تدريب جديد قبل فهم سبب فشل 27.95.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
 - **البيانات الحالية:** corpus موثق `8453` سجلًا يمر `corpus-audit`: `4254` سعودي + `4199` فصحى، `gold=3341`, `silver=5112`. split الحالي `train=7603`, `eval=850`.
-- **التدريب:** المسموح التالي فقط Phase 27.95 كتدريب إصلاح topic-objective محدود؛ لا runtime ولا SF-50M ولا tokenizer retrain قبل gates. Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
+- **التدريب:** Phase 27.95 دُرّب بالفعل كتدريب إصلاح topic-objective محدود وفشل gates؛ لا runtime ولا SF-50M ولا tokenizer retrain قبل تشخيص Phase 27.96. Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
 - **المولّد:** runtime العام محجوب كمولد حواري حتى نجاح held-out/canary. لا تعرض أي قالب على أنه مولّد، ولا تفتح واجهة مولّد إلا بعد قرار runtime صريح.
 - **التقييم:** Phase 27 مرّر `19/19` turn في حوار متعدد الأدوار، لكنه أكد أن الردود ما زالت `template` وأن المولد غير جاهز.
 - **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.
