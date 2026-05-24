@@ -157,6 +157,16 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - checkpoint selector.
 - tokenizer boundary audit.
 
+تم تحميل حزمة الأدوات المحلية المسرّعة في البيئة:
+
+- `tensorboard` للتتبع المحلي.
+- `tqdm` لعرض تقدم التشغيل.
+- `psutil` لمراقبة موارد الجهاز.
+- `safetensors` لحفظ tensors بأمان لاحقًا.
+- `rich` لتقارير CLI أوضح.
+
+تقرير الفحص: `docs/SOVEREIGN_ACCELERATION_TOOLKIT_LOADED.md`.
+
 المنع لا يزال مطلقًا على:
 
 - pretrained weights.

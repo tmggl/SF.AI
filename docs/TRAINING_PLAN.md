@@ -35,6 +35,17 @@ PHASE27_79_REPAIR_DESIGN_DECISION
 Phase 27.79 صممت objective/curriculum/decoding gates. إذن Phase 27.80 يجب
 أن يشفّر هذه البوابات ويشغّل dry-run، ولا يبدأ تدريبًا إلا بعد نجاحها.
 
+حزمة التسريع الهندسي المحملة:
+
+- `torch` و`numpy` للحساب.
+- `tensorboard` لتتبع التجارب محليًا.
+- `tqdm` لقياس تقدم التدريب/الفحوصات.
+- `psutil` لمراقبة الموارد.
+- `safetensors` لحفظ tensors بأمان لاحقًا.
+- `rich` لتقارير CLI.
+
+هذه أدوات فقط وليست pretrained weights أو vocab أو datasets.
+
 ---
 
 ## 1. لماذا نبدأ صغيرًا؟

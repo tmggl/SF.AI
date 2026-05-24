@@ -1,0 +1,90 @@
+{
+  "status": "READY",
+  "phase_context": "Phase 27.80 prerequisite — toolkit loadout, no training",
+  "python": "3.14.5",
+  "platform": "macOS-15.6-arm64-arm-64bit-Mach-O",
+  "training_allowed": false,
+  "pretrained_weights_loaded": false,
+  "external_ai_api_used": false,
+  "external_dialogue_data_used": false,
+  "tools": {
+    "torch": {
+      "purpose": "PyTorch compute engine",
+      "installed": true,
+      "version": "2.12.0"
+    },
+    "numpy": {
+      "purpose": "numeric arrays",
+      "installed": true,
+      "version": "2.4.6"
+    },
+    "tensorboard": {
+      "purpose": "local experiment visualization",
+      "installed": true,
+      "version": "2.20.0"
+    },
+    "tqdm": {
+      "purpose": "progress bars",
+      "installed": true,
+      "version": "4.67.3"
+    },
+    "psutil": {
+      "purpose": "local resource monitoring",
+      "installed": true,
+      "version": "7.2.2"
+    },
+    "safetensors": {
+      "purpose": "safe tensor serialization",
+      "installed": true,
+      "version": "0.7.0"
+    },
+    "rich": {
+      "purpose": "local CLI reports",
+      "installed": true,
+      "version": "15.0.0"
+    }
+  },
+  "missing_tools": [],
+  "forbidden_shortcuts": {
+    "transformers": {
+      "reason": "common pretrained model loading path",
+      "importable": false
+    },
+    "sentence_transformers": {
+      "reason": "pretrained embedding path",
+      "importable": false
+    },
+    "openai": {
+      "reason": "hosted external AI API",
+      "importable": false
+    },
+    "anthropic": {
+      "reason": "hosted external AI API",
+      "importable": false
+    },
+    "google.generativeai": {
+      "reason": "hosted external AI API",
+      "importable": false
+    },
+    "datasets": {
+      "reason": "external dataset hub path unless strictly isolated",
+      "importable": false
+    }
+  },
+  "risky_importable_shortcuts": [],
+  "torch": {
+    "available": true,
+    "version": "2.12.0",
+    "mps_available": true,
+    "cuda_available": false,
+    "amp_available": true
+  },
+  "resources": {
+    "available": true,
+    "cpu_count_logical": 10,
+    "cpu_count_physical": 10,
+    "memory_total_gb": 24.0,
+    "memory_available_gb": 7.77
+  },
+  "next_step": "Phase 27.80 — encode repair gates and run dry-run validation"
+}

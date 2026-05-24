@@ -67,6 +67,8 @@ intent/topic + balanced calibration + advice/micro stabilization، ووصلت إ
 - إذا نجحت بوابة الحجم التالي لاحقًا، ينتقل الوكيل تلقائيًا عبر
   `SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+`
   دون انتظار موافقة جديدة.
+- حزمة أدوات التسريع السيادي محملة ومفحوصة: `tensorboard`, `tqdm`,
+  `psutil`, `safetensors`, `rich`، وكلها أدوات هندسية بلا أوزان جاهزة.
 - `make source-inventory` يعرض كل مصادر البيانات والمراجع المحلية، ويفرق بين corpus حواري وملفات مرجعية.
 - `make corpus-audit` يفحص بيانات `data/corpus/chat/jsonl/`.
 - Phase 12 tokenizer v1 اكتمل بإذن صريح من سامي، مع توثيق أنه Saudi-only ويحتاج `msa` قبل أي تشغيل جودة متوازن.

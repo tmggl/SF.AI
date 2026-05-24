@@ -36,6 +36,12 @@ dev = [
 # See docs/SOVEREIGN_ACCELERATION.md for the sovereignty rationale.
 training = [
     "torch>=2.4",
+    "numpy>=2.0",
+    "tensorboard>=2.18",
+    "tqdm>=4.66",
+    "psutil>=6.0",
+    "safetensors>=0.4",
+    "rich>=13.9",
 ]
 
 [tool.setuptools.packages.find]
