@@ -7,11 +7,11 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.104 / 30**
-- **المرحلة الحالية:** **Phase 27.104 — Bounded Topic Prototype Contrastive Repair Training**
-- **حالة المرحلة الحالية:** **اكتمل تدريب محدود؛ topic gates نجحت لكن all-family فشلت**
-- **المرحلة التالية المقترحة:** Phase 27.105 — Topic Prototype Repair Result Diagnosis.
-- **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
+- **الرحلة الحالية:** **Phase 27.79 / 30** كـ active strategy re-anchor بعد دليل Phase 27.104.
+- **المرحلة الحالية:** **Phase 27.79 — Objective/Curriculum/Decoding Repair Plan**
+- **حالة المرحلة الحالية:** **خطة وبوابة تصميم؛ لا تدريب ولا runtime ولا tokenizer جديد**
+- **المرحلة التالية المقترحة:** Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Training، مشروطة بمرور البوابات فقط.
+- **التحول الاستراتيجي المعتمد:** **SF-native Objective/Curriculum/Decoding Acceleration Track** — تسريع هندسي فقط؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
   ضمن مسار `SF-native`.
@@ -134,7 +134,7 @@
 | Phase 27.76 | Tokenizer v9 Open-Social Boundary Probe | ✅ passed_tokenizer_v9_open_social_boundary_probe_runtime_blocked | ✅ |
 | Phase 27.77 | V9 Bounded Open-Social LM Repair | ✅ failed_v9_bounded_open_social_lm_repair_runtime_blocked | ✅ |
 | Phase 27.78 | Engineering Root Cause Gate | ✅ phase27_78_engineering_decision_training_blocked | ✅ |
-| Phase 27.79 | Objective/Curriculum/Decoding Repair Design | ✅ phase27_79_repair_design_ready_next_gate_encoding_no_training | ✅ |
+| Phase 27.79 | Objective/Curriculum/Decoding Repair Plan | ✅ active_plan_training_blocked_until_gates | ✅ |
 | Phase 27.80 | Repair Gate Encoding + Family Balance Remediation | ✅ remediation_ready_639_records_needed_no_training | ✅ |
 | Phase 27.81 | Balanced Family Pack Authoring | ✅ authored_2500_records_gates_passed_no_training | ✅ |
 | Phase 27.82 | Family-conditioned SF-10M Repair Training Decision | ✅ allows_phase27_83_bounded_training_no_runtime | ✅ |
@@ -1085,13 +1085,13 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-682 passed in 70.58s
+687 passed in 84.41s (0:01:24)
 ```
 
 | التحقق | النتيجة |
 |------|------|
-| full pytest suite | `682 passed in 70.58s` |
-| focused Phase 27.104/API/UI tests | `79 passed in 9.35s` |
+| full pytest suite | `687 passed in 84.41s (0:01:24)` |
+| focused Phase 27.79 plan/API/UI tests | `80 passed in 9.61s` |
 | `make corpus-audit` | `8645` records, `issues=0` |
 | `make phase27-dialogue-eval` | `19/19`, `open_generator_ready=false` |
 
@@ -1772,12 +1772,35 @@ make api
   - all family: `30/50`
 - القرار: `BLOCK_RUNTIME_DIAGNOSE_TOPIC_PROTOTYPE_REPAIR_RESULT`.
 - السبب: إصلاح topic نجح، لكنه لم يمر all-family gate المطلوبة `45/50`.
-- التالي: Phase 27.105 — Topic Prototype Repair Result Diagnosis.
+- التالي التاريخي كان Phase 27.105، لكن أمر re-anchor الحالي يجعل التالي
+  العملي Phase 27.80 المشروط ببوابات objective/curriculum/decoding.
 - التقارير:
   - [PHASE27_104_BOUNDED_TOPIC_PROTOTYPE_CONTRASTIVE_REPAIR_REPORT.md](./PHASE27_104_BOUNDED_TOPIC_PROTOTYPE_CONTRASTIVE_REPAIR_REPORT.md)
   - `artifacts/reports/phase27_104_bounded_topic_prototype_contrastive_repair_report.json`
   - `artifacts/reports/PHASE27_104_BOUNDED_TOPIC_PROTOTYPE_CONTRASTIVE_REPAIR_DECISION.json`
   - `artifacts/samples/phase27_104_bounded_topic_prototype_contrastive_repair.md`
+
+---
+
+## Active Re-Anchor — Phase 27.79 Objective/Curriculum/Decoding Repair Plan
+
+**الحالة:** المسار الحالي الحاكم بعد أمر سامي الصريح. لا يبدأ أي تدريب جديد
+حتى تمر بوابات objective/curriculum/decoding.
+
+- التقرير الملزم: [PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md](./PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md)
+- JSON: `artifacts/reports/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.json`
+- المسار: `SF-native Objective/Curriculum/Decoding Acceleration Track`.
+- المصدر: نتيجة 27.104، حيث نجح topic binding لكن فشل all-family `30/50`.
+- القرار: `PLAN_READY_TRAINING_BLOCKED_UNTIL_GATES_PASS`.
+- التدريب الجديد: محجوب.
+- tokenizer retrain: محجوب.
+- `SF-50M`: محجوب.
+- runtime release: محجوب.
+- التالي المشروط: Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Training.
+- شروط 27.80: objective renderer، assistant-only loss mask،
+  stratified round-robin sampler، decoding policy، contrastive eval،
+  checkpoint selector، held-out canary، corpus-audit، sensitive scan،
+  full tests، وMPS/AMP smoke log.
 
 ---
 

@@ -1,0 +1,246 @@
+{
+  "report_id": "PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN",
+  "phase": "Phase 27.79",
+  "phase_title": "Objective/Curriculum/Decoding Repair Plan",
+  "active_track": "SF-native Objective/Curriculum/Decoding Acceleration Track",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "source_report": "artifacts/reports/phase27_104_bounded_topic_prototype_contrastive_repair_report.json",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "tokenizer_training_started": false,
+  "runtime_changed": false,
+  "root_cause": {
+    "current_failure": "Phase 27.104 fixed topic binding on the narrow prototype gate, but all-family quality regressed to 30/50. The model can follow the narrow topic objective, yet still loses stable dialogue-family behavior.",
+    "objective": {
+      "is_problem": true,
+      "weight_percent": 24,
+      "evidence": "Previous objectives over-focus on topic copy/binding and do not teach family selection as a first-class behavior."
+    },
+    "family_mixing": {
+      "is_problem": true,
+      "weight_percent": 22,
+      "evidence": "All-family gate failed despite topic gates passing; family stability is not preserved."
+    },
+    "curriculum_order": {
+      "is_problem": true,
+      "weight_percent": 18,
+      "evidence": "Narrow scheduled views can improve one family while degrading broader dialogue behavior."
+    },
+    "decoding": {
+      "is_problem": true,
+      "weight_percent": 14,
+      "evidence": "Checkpoint judgment must use guarded decoding consistently before runtime decisions."
+    },
+    "semantic_routing": {
+      "is_problem": true,
+      "weight_percent": 10,
+      "evidence": "Fallback/general routing can hide family ambiguity and must be inspected in canaries."
+    },
+    "capacity": {
+      "is_problem": false,
+      "weight_percent": 1,
+      "evidence": "No evidence justifies SF-50M; errors track objective/curriculum/family behavior, not raw size."
+    },
+    "other": {
+      "is_problem": true,
+      "weight_percent": 11,
+      "evidence": "EOS, repetition, held-out separation, and runtime masking remain gate concerns."
+    }
+  },
+  "objective_plan": {
+    "name": "family_conditioned_assistant_only_objective_v2",
+    "training_format": [
+      "النطاق: {msa|saudi}",
+      "عائلة الحوار: {open_social|followup|planning|support|topic}",
+      "المستخدم: {user_text}",
+      "المساعد: {assistant_text} <eos>"
+    ],
+    "example": [
+      "النطاق: سعودي",
+      "عائلة الحوار: تنظيم",
+      "المستخدم: كيف أنظم يومي؟",
+      "المساعد: اكتب ثلاث مهام، وابدأ بالأهم لمدة قصيرة. <eos>"
+    ],
+    "context_lines_enter_model": true,
+    "loss_scope": "assistant_text_and_eos_only",
+    "loss_excludes": [
+      "scope_line",
+      "family_line",
+      "user_line"
+    ],
+    "eos_required": true,
+    "no_long_family_blocks": true,
+    "changes": [
+      "Treat dialogue family as explicit conditioning text.",
+      "Train answer boundaries with mandatory <eos>.",
+      "Keep user/context visible as input while masking them out of target loss.",
+      "Reject project/operator dialogue contamination."
+    ]
+  },
+  "curriculum_plan": {
+    "name": "stratified_round_robin_family_curriculum_v2",
+    "required_families": [
+      "open_social",
+      "followup",
+      "planning",
+      "support",
+      "topic"
+    ],
+    "ordering": "family -> dialect -> novelty round-robin",
+    "window_balance_gate": {
+      "window_size": 500,
+      "max_family_share": 0.24,
+      "min_family_share": 0.16,
+      "fail_if_missing_any_family": true
+    },
+    "rules": [
+      "No long contiguous blocks from a single family.",
+      "Every training window must cover all five required families.",
+      "MSA/Saudi balance must stay close to 50/50.",
+      "Held-out canaries must never enter training.",
+      "Topic repair data must not drown open_social/followup/planning/support."
+    ]
+  },
+  "decoding_policy": {
+    "name": "guarded_decoding_policy_v2",
+    "must_apply_before_checkpoint_judgment": true,
+    "controls": [
+      "stop_at_eos",
+      "no_repeat_ngram",
+      "repetition_penalty",
+      "known_fragment_blocklist",
+      "topic_substitution_guard",
+      "family_drift_guard",
+      "template_masking_forbidden"
+    ],
+    "blocked_response_rule": "If guarded generation fails, return blocked metadata, not a fixed template."
+  },
+  "contrastive_evaluation": {
+    "name": "contrastive_checkpoint_evaluation_v2",
+    "compare_against": "last_trusted_checkpoint_and_current_baseline",
+    "required_suites": [
+      "known_canary",
+      "fresh_heldout_canary",
+      "family_confusion_matrix",
+      "topic_binding_canary",
+      "open_social_canary",
+      "followup_canary",
+      "clean_stop_canary",
+      "runtime_dry_run"
+    ],
+    "checkpoint_selector": [
+      "held_out_dialogue_quality",
+      "family_stability",
+      "semantic_correctness",
+      "clean_stop",
+      "open_social_naturalness",
+      "followup_continuity",
+      "runtime_usability"
+    ],
+    "loss_only_is_never_enough": true
+  },
+  "acceleration_tooling": {
+    "mps_amp_plan": {
+      "check_mps_support": true,
+      "amp_allowed_after_smoke_test_only": true,
+      "disable_amp_if_unstable": true,
+      "purpose": "reduce heat and speed training without changing behavioral goals"
+    },
+    "logging": {
+      "local_only": true,
+      "allowed_backends": [
+        "csv",
+        "tensorboard_local"
+      ],
+      "required_metrics": [
+        "train_loss",
+        "eval_loss",
+        "perplexity",
+        "family_accuracy",
+        "clean_stop_rate",
+        "topic_binding_pass_rate",
+        "canary_pass_rate",
+        "blocked_reasons",
+        "checkpoint_selected_or_rejected_reason"
+      ]
+    },
+    "lora_gate": {
+      "status": "deferred",
+      "allowed_only_on_sf_native_models": true,
+      "forbidden_on_external_models": true,
+      "activate_after_base_run_success_only": true
+    },
+    "preference_optimization_gate": {
+      "status": "deferred",
+      "methods": [
+        "DPO",
+        "ORPO",
+        "SimPO"
+      ],
+      "requires_local_sovereign_preference_pairs": true,
+      "required_fields": [
+        "chosen",
+        "rejected",
+        "source",
+        "license",
+        "training_allowed"
+      ],
+      "external_model_preferences_forbidden": true
+    }
+  },
+  "gates": {
+    "blocked_now": [
+      "new_training",
+      "tokenizer_retrain",
+      "sf50m_transition",
+      "runtime_release",
+      "template_masking",
+      "pretrained_or_open_weight_usage"
+    ],
+    "allow_bounded_training_only_if": [
+      "objective_renderer_ready",
+      "assistant_only_loss_mask_verified",
+      "round_robin_sampler_ready",
+      "decoding_policy_ready",
+      "contrastive_eval_ready",
+      "checkpoint_selector_ready",
+      "heldout_canary_ready",
+      "corpus_audit_passed",
+      "sensitive_scan_passed",
+      "all_tests_passed",
+      "mps_amp_smoke_logged"
+    ],
+    "stop_criteria": [
+      "family_balance_gate_failed",
+      "heldout_leakage_detected",
+      "operator_contamination_detected",
+      "semantic_routing_regression",
+      "clean_stop_regression",
+      "topic_substitution_regression",
+      "amp_instability_detected"
+    ],
+    "next_phase_if_plan_passes": "Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Training",
+    "runtime_release_requires": "RUNTIME_RELEASE_ALLOWED=true",
+    "sf50m_requires": "SF-50M_JUSTIFIED_TRANSITION_GATE with capacity as the dominant proven cause"
+  },
+  "decision": {
+    "decision_id": "PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN",
+    "active_track": "SF-native Objective/Curriculum/Decoding Acceleration Track",
+    "phase": "Phase 27.79 — Objective/Curriculum/Decoding Repair Plan",
+    "engineering_decision": "PLAN_READY_TRAINING_BLOCKED_UNTIL_GATES_PASS",
+    "new_training_allowed": false,
+    "tokenizer_retrain_allowed": false,
+    "sf50m_allowed": false,
+    "runtime_release_allowed": false,
+    "bounded_training_candidate": "Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Training"
+  },
+  "artifacts": {
+    "report": "artifacts/reports/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.json",
+    "doc": "docs/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md"
+  }
+}

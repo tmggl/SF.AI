@@ -28,14 +28,15 @@
 المسار الحالي الرسمي:
 
 ```text
-Phase 27.104 — Bounded Topic Prototype Contrastive Repair Training
-Sovereign Practical Acceleration Strategy v2
-PHASE27_104_BOUNDED_TOPIC_PROTOTYPE_CONTRASTIVE_REPAIR_DECISION
+Phase 27.79 — Objective/Curriculum/Decoding Repair Plan
+SF-native Objective/Curriculum/Decoding Acceleration Track
+PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN
 ```
 
 القرار الحالي:
 
-- Phase 27.104 درّبت إصلاحًا محدودًا على حزمة 27.103.
+- Phase 27.104 درّبت إصلاحًا محدودًا على حزمة 27.103 كدليل سابق.
+- المسار الحالي أُعيد تثبيته عند Phase 27.79 لمنع التدريب العشوائي.
 - لا tokenizer جديد.
 - لا runtime release.
 - لا انتقال إلى `SF-50M`.
@@ -50,7 +51,8 @@ PHASE27_104_BOUNDED_TOPIC_PROTOTYPE_CONTRASTIVE_REPAIR_DECISION
 - Phase 27.102 ثبّت بوابة تنفيذية تلتقط هذا الفشل وتكتب canary من 16 prompt.
 - Phase 27.103 أضافت `192` سجلًا `gold` متوازنًا (`8` موضوعات × فصحى/سعودي × `12`) مع copy-anchor وwrong-topic leak = `0`.
 - Phase 27.104 حققت prototype `16/16`, wrong-topic `0`, known `16/16`, fresh `9/10`, لكنها لم تحفظ كل عائلات الحوار: all-family `30/50`.
-- التالي: `Phase 27.105 — Topic Prototype Repair Result Diagnosis`.
+- التالي المشروط: `Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Training`
+  فقط إذا مرّت بوابات objective/curriculum/decoding.
 - عند نجاح بوابة أي حجم لاحقًا، ينتقل الوكيل تلقائيًا للحجم التالي حتى
   `SF-1B+` دون انتظار موافقة جديدة.
 
@@ -127,11 +129,11 @@ PHASE27_104_BOUNDED_TOPIC_PROTOTYPE_CONTRASTIVE_REPAIR_DECISION
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.104 / 30 — Bounded Topic Prototype Contrastive Repair Training.
-- **الأولوية الحالية:** Phase 27.105 Topic Prototype Repair Result Diagnosis؛ تشخيص نتيجة التدريب المحدود قبل أي تدريب جديد.
+- **الرحلة الحالية:** Phase 27.79 / 30 — Objective/Curriculum/Decoding Repair Plan.
+- **الأولوية الحالية:** تشفير بوابات objective/curriculum/decoding ومنع أي تدريب قبل مرورها.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
 - **البيانات الحالية:** corpus موثق `8645` سجلًا يمر `corpus-audit`: `4350` سعودي + `4295` فصحى، `gold=3533`, `silver=5112`. split الحالي `train=7777`, `eval=868`.
-- **التدريب:** Phase 27.95 دُرّب بالفعل كتدريب إصلاح topic-objective محدود وفشل gates، وPhase 27.96 شخّص السبب كـ topic variable binding failure، وPhase 27.97 صمم objective جديدًا، وPhase 27.98 منع التدريب بسبب نقص metadata، وPhase 27.99 أصلح metadata، وPhase 27.100 درّب إصلاح ربط الموضوع لكنه لم يمر gates، وPhase 27.101 شخّص blind spot في metric وprototype attraction، وPhase 27.102 رمّز gate جديدًا، وPhase 27.103 أعدّت حزمة contrastive، وPhase 27.104 درّبتها ونجحت topic gates لكنها فشلت all-family gate. لا runtime ولا SF-50M ولا tokenizer retrain. Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
+- **التدريب:** Phase 27.104 نجحت topic gates لكنها فشلت all-family gate. القرار الحالي يمنع التدريب الجديد حتى تمر بوابات Phase 27.80: objective renderer، assistant-only loss، round-robin curriculum، guarded decoding، contrastive eval، checkpoint selector، held-out canary، corpus-audit، sensitive scan، full tests، وMPS/AMP smoke. لا runtime ولا SF-50M ولا tokenizer retrain.
 - **المولّد:** runtime العام محجوب كمولد حواري حتى نجاح held-out/canary. لا تعرض أي قالب على أنه مولّد، ولا تفتح واجهة مولّد إلا بعد قرار runtime صريح.
 - **التقييم:** Phase 27 مرّر `19/19` turn في حوار متعدد الأدوار، لكنه أكد أن الردود ما زالت `template` وأن المولد غير جاهز.
 - **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.

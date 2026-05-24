@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.104
-الاسم: Bounded Topic Prototype Contrastive Repair Training
-الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_104_BOUNDED_TOPIC_PROTOTYPE_CONTRASTIVE_REPAIR_DECISION
+المرحلة الحالية: Phase 27.79
+الاسم: Objective/Curriculum/Decoding Repair Plan
+المسار الملزم: SF-native Objective/Curriculum/Decoding Acceleration Track
+القرار الرسمي: PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -90,10 +90,21 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 
 القرار الحالي:
 
-- تم تدريب Phase 27.95 bounded topic-objective SF-10M repair training، ثم شُخص فشله في Phase 27.96.
+- هذا re-anchor رسمي بعد نتيجة 27.104: لا نواصل تدريبًا متكررًا ولا
+  tokenizer جزئيًا ولا نكبر النموذج قبل إصلاح objective/curriculum/decoding.
+- لا تدريب جديد الآن.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
+- التقرير الملزم: `docs/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md`.
+- التالي المشروط: `Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Training`
+  فقط إذا مرت بوابات objective renderer, round-robin sampler, decoding,
+  contrastive eval, checkpoint selector, held-out canary, corpus-audit,
+  sensitive scan, full tests, وMPS/AMP smoke.
+
+الدليل السابق الذي سبب هذا re-anchor:
+
+- تم تدريب Phase 27.95 bounded topic-objective SF-10M repair training، ثم شُخص فشله في Phase 27.96.
 - نتيجة 27.81: أضيف 2500 سجل gold متوازن (`500` لكل family، `250/250`
   فصحى/سعودي)، وأعيد بناء split، ومرّت Phase 27.80 gates.
 - نتيجة 27.82: فُحصت prerequisites السيادية وصدرت خطة تدريب 27.83 دون بدء التدريب.
@@ -128,9 +139,8 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - نتيجة 27.104: تدريب محدود من checkpoint 27.100 نجح في topic gates
   (`prototype=16/16`, wrong-topic=`0`, known=`16/16`, fresh=`9/10`) لكنه
   فشل all-family (`30/50`). runtime محجوب.
-- التالي: `Phase 27.105 — Topic Prototype Repair Result Diagnosis`.
-- القرار الحالي: لا runtime ولا UI generator release ولا `SF-50M` ولا tokenizer
-  retrain ولا تدريب جديد قبل تشخيص سبب تراجع all-family.
+- القرار: لا runtime ولا UI generator release ولا `SF-50M` ولا tokenizer
+  retrain ولا تدريب جديد قبل خطة 27.79 وبوابات 27.80.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -330,7 +340,8 @@ SF-10M
 | Phase 25-26 | canary حجب runtime، وSF-50M not ready |
 | Phase 27-27.77 | سلسلة طويلة لتحسين الحوار، tokenizer، objective، family balance، canaries |
 | Phase 27.78 | root-cause gate أوقف التدريب الأعمى والتكبير |
-| Phase 27.79-27.99 | إصلاحات objective/curriculum/family/topic حتى إصلاح metadata، بلا runtime |
+| Phase 27.79 re-anchor | الخطة الحالية: Objective/Curriculum/Decoding Repair Plan، بلا تدريب |
+| Phase 27.80 conditional | تدريب SF-10M محدود فقط إذا مرت البوابات |
 
 الدرس الأساسي من Phase 27:
 
@@ -346,19 +357,20 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.105 — Topic Prototype Repair Result Diagnosis
+Phase 27.80 — Bounded SF-10M Family-Conditioned Repair Training
 ```
 
 مطلوب منها:
 
-- تشخيص لماذا أصلح 27.104 topic gates وخسر all-family.
-- تحديد هل السبب curriculum narrowing أو catastrophic forgetting أو decoding
-  أو family balance أو objective side-effect.
-- إصدار decision report قبل أي تدريب جديد.
-- اقتراح إصلاح محدد يحفظ topic binding ولا يكسر عائلات الحوار الأخرى.
+- لا تبدأ إلا بعد نجاح بوابات `PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN`.
+- استخدام objective بصيغة `النطاق` + `عائلة الحوار` + `المستخدم` + `المساعد ... <eos>`.
+- حساب loss على رد المساعد و`<eos>` فقط.
+- استخدام stratified round-robin بين open_social/followup/planning/support/topic.
+- تطبيق guarded decoding وcontrastive eval وcheckpoint selector قبل أي حكم.
 
-ممنوع في 27.105 قبل القرار:
+ممنوع قبل نجاح البوابات:
 
+- أي تدريب جديد.
 - runtime release.
 - tokenizer retrain.
 - SF-50M.

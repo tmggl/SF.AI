@@ -50,8 +50,9 @@
 - السيادة تبقى على corpus/tokenizer/behavior/runtime/alignment/evaluation
   وسلوك الحوار الفصيح والسعودي.
 - قبل أي تدريب جديد يجب وجود root-cause/decision gate حديث يسمح به صراحة.
-  القرار الحالي من Phase 27.104 يمنع runtime وSF-50M وtokenizer retrain وأي
-  تدريب جديد حتى Phase 27.105 كتشخيص نتيجة.
+  القرار الحالي هو `PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN`: المسار
+  أُعيد تثبيته عند Phase 27.79، ويمنع runtime وSF-50M وtokenizer retrain
+  وأي تدريب جديد حتى تمر بوابات Phase 27.80.
 - لا runtime release بدون `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - لا تعتمد loss/perplexity/micro-probe وحدها؛ النجاح يعني held-out dialogue
   quality, runtime usability, clean-stop, semantic correctness, family
@@ -64,9 +65,13 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 27.104 موثقة تاريخيًا. الحالة الحالية:
-  `Phase 27.104 — Bounded Topic Prototype Contrastive Repair Training`
-  اكتملت كتدريب محدود وأصدرت `PHASE27_104_BOUNDED_TOPIC_PROTOTYPE_CONTRASTIVE_REPAIR_DECISION`.
+- المراحل من Phase 0 حتى Phase 27.104 موثقة تاريخيًا، لكن الحالة العملية
+  الحالية هي re-anchor عند:
+  `Phase 27.79 — Objective/Curriculum/Decoding Repair Plan`
+  ضمن `SF-native Objective/Curriculum/Decoding Acceleration Track`.
+  التقرير الملزم: `docs/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md`.
+  Phase 27.104 تبقى الدليل السابق: تدريب محدود نجح topic-wise وفشل
+  all-family، وليست إذن runtime.
   Phase 27.81 أضافت دفعة `sf-ai-balanced-family-pack-v1`: `2500` سجل gold
   متوازن (`500` لكل family و`250/250` فصحى/سعودي). corpus الحالي `8645`
   (`msa=4295`, `saudi=4350`, `gold=3533`, `silver=5112`). Phase 27.83 درّبت
@@ -104,7 +109,9 @@
   الحزمة تدريبًا محدودًا: prototype `16/16`, observed wrong-topic `0`,
   known `16/16`, fresh `9/10`, topic-family `9/10`, all-family `30/50`.
   runtime و`SF-50M` وtokenizer retrain وأي تدريب جديد محجوبة.
-- أول خطوة تالية: Phase 27.105 Topic Prototype Repair Result Diagnosis.
+- أول خطوة تالية: Phase 27.80 — Bounded SF-10M Family-Conditioned Repair
+  Training، لكن فقط إذا مرت بوابات objective/curriculum/decoding. لا تبدأ
+  التدريب إذا فشل أي gate.
 - تفويض التكبير التلقائي معتمد، لكن مفعوله يبدأ فقط عندما تنجح gates؛
   حاليًا `SF-50M` ما زال محجوبًا لأن capacity وزنها `1%`.
 - استخدم `make phase22-review-intake` أو `GET /system/phase22-review-intake` قبل أي تحويل من `data/corpus/chat/review/` إلى corpus تدريبي.
@@ -121,7 +128,7 @@
 - اقرأ ملفات الحوكمة والدستور قبل أي تدريب: `PROJECT_CONSTITUTION`, `LANGUAGE_SEGMENTATION`, `TOKENIZATION_POLICY`, `DATASET_GOVERNANCE`, `AGENT_ENGINEERING_RULES`, ثم `PROJECT_IDENTITY`, `ENGINEERING_RULES`, `AGENT_INSTRUCTIONS`, `PROJECT_MAP`, `PROJECT_LIFECYCLE`.
 - اقرأ `docs/PHASE12_TOKENIZER_V1_REPORT.md`, `docs/PHASE13_SMOKE_TRAINING_REPORT.md`, و`docs/PHASE14_SF10M_V0_1_REPORT.md`: artifacts موجودة، لكنها غير صالحة للشات أو الجودة اللغوية بعد.
 - إذا كان السيرفر الحي لم يُعد تشغيله بعد، استخدم `make phase12-readiness` لنفس القرار بدون لمس السيرفر.
-- الهدف العام: الوصول إلى نموذج لغوي سيادي مولّد. أول توليد خام في Phase 13، وباب التوليد داخل الشات جُهّز في Phase 15. Phase 27.77 فشلت كتوليد على tokenizer v9 (`54/60`, `45/50`, `30/30`). Phase 27.78 شخّصت root cause: family mixing `22%`, objective `18%`, curriculum `16%`, weak generalization `14%`, semantic routing `10%`, capacity `1%`. Phase 27.79 صممت إصلاح objective/curriculum/decoding، Phase 27.80 شفّرت gates، Phase 27.81 أصلحت توازن family ببيانات gold، Phase 27.82 سمحت بتدريب مقيّد، Phase 27.83 أثبتت أن الإصلاح لم ينجح حواريًا (`11/60` best)، Phase 27.84 حددت أن family signal غائب من النص، Phase 27.85 صممت الإشارة، Phase 27.86 أثبتت renderer/masking، Phase 27.87 أثبتت أن التدريب ما زال منحازًا (`10/50` best)، Phase 27.88 حددت السبب: ترتيب stream متسلسل لا round-robin، Phase 27.89 ثبّتت sampler متوازنًا، Phase 27.90 حسّنت النتيجة إلى `35/50`، Phase 27.91 حددت أن المشكلة topic-specific، Phase 27.92 صممت إصلاح topic-objective، Phase 27.93 رمزت البوابة، Phase 27.94 سدّت فجوة `الوفاء` السعودية، Phase 27.95 أثبتت أن التدريب المحدود لم يكفِ، Phase 27.96 شخّصت السبب كخلل binding للموضوع، Phase 27.97 صممت objective copy/contrastive، Phase 27.98 منعت التدريب حتى إصلاح metadata، Phase 27.99 أصلحت metadata، وPhase 27.100 درّبت إصلاح ربط الموضوع لكنها لم تمر gates (`13/16`, `5/10`, `18/26`, `37/50`). Phase 27.101 كشف blind spot في wrong-topic metric: observed `8`. Phase 27.102 ثبّت البوابة وcanary. Phase 27.103 جهّزت curriculum pack من `192` سجلًا. Phase 27.104 درّبتها ونجحت topic gates لكنها فشلت all-family `30/50`. التالي Phase 27.105 تشخيص بلا تدريب.
+- الهدف العام: الوصول إلى نموذج لغوي سيادي مولّد. أول توليد خام في Phase 13، وباب التوليد داخل الشات جُهّز في Phase 15. Phase 27.78 شخّصت root cause: family mixing `22%`, objective `18%`, curriculum `16%`, weak generalization `14%`, semantic routing `10%`, capacity `1%`. بعد سلسلة إصلاحات حتى Phase 27.104، نجحت topic gates لكنها فشلت all-family `30/50`. المسار الحالي أُعيد تثبيته عند Phase 27.79 بخطة `PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN`; التالي Phase 27.80 المشروطة فقط بعد بوابات objective/curriculum/decoding.
 - تفويض سامي الأخير يعني أن حوار الوكيل المؤلف لخدمة corpus يمكن اعتماده كـ `owner-delegated agent-authored` مع `training_allowed=true` إذا حمل source/license/quality/notes كاملة، وبقي ضمن `msa + saudi` ودون أي مصدر خارجي أو pretrained data.
 - كل export أو corpus record يجب أن يحمل user ownership. المسار الحالي: `owner_user_id=created_by_user_id=target_user_id=sami-local` و`user_scope=single_user`.
 
@@ -136,7 +143,7 @@
    cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests
    ```
 
-2. تحقق من القسم 4 في AGENT_HANDOFF.md. مهمة "محادثة مريحة + توجيه دقيق" مكتملة، ومسار العمل الحالي هو Phase 27.105 كتشخيص نتيجة 27.104 قبل أي تدريب جديد.
+2. تحقق من القسم 4 في AGENT_HANDOFF.md. مهمة "محادثة مريحة + توجيه دقيق" مكتملة، ومسار العمل الحالي هو Phase 27.79 كخطة Objective/Curriculum/Decoding، والتدريب 27.80 مشروط ببوابات قبل أي تشغيل.
 
 3. Phase 11 مكتملة كحوكمة وأداة فحص. شغّل:
    ```

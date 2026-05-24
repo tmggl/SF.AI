@@ -144,7 +144,7 @@
 | Phase 27.76 | Tokenizer v9 Open-Social Boundary Probe | ✅ passed_tokenizer_v9_open_social_boundary_probe_runtime_blocked |
 | Phase 27.77 | V9 Bounded Open-Social LM Repair | ✅ failed_v9_bounded_open_social_lm_repair_runtime_blocked |
 | Phase 27.78 | Engineering Root Cause Gate | ✅ phase27_78_engineering_decision_training_blocked |
-| Phase 27.79 | Objective/Curriculum/Decoding Repair Design | ✅ phase27_79_repair_design_ready_next_gate_encoding_no_training |
+| Phase 27.79 | Objective/Curriculum/Decoding Repair Plan | ✅ active_plan_training_blocked_until_gates |
 | Phase 27.80 | Repair Gate Encoding and Dry-Run Validation | ✅ gates_passed_after_family_balance_remediation |
 | Phase 27.81 | Balanced Family Pack Authoring | ✅ authored_2500_gold_records_gates_passed |
 | Phase 27.82 | Family-conditioned SF-10M Repair Training Decision | ✅ allows_phase27_83_bounded_training_no_runtime |
@@ -170,7 +170,7 @@
 | Phase 27.102 | Topic Prototype Contrastive Copy-Anchor Gate | ✅ gate_encoded_curriculum_pack_allowed_no_training |
 | Phase 27.103 | Topic Prototype Contrastive Curriculum Pack | ✅ ready_for_bounded_training_no_runtime |
 | Phase 27.104 | Bounded Topic Prototype Contrastive Repair Training | ✅ trained_topic_clean_all_family_regressed_runtime_blocked |
-| Phase 27.104 | Bounded Topic Prototype Contrastive Repair Training | ✅ trained_topic_clean_all_family_regressed_runtime_blocked |
+| Active Track | SF-native Objective/Curriculum/Decoding Acceleration Track | ✅ reanchored_at_phase27_79_no_training |
 
 اقرأ التفاصيل في [PHASE_STATUS.md](./PHASE_STATUS.md) و [EXECUTION_PLAN.md](./EXECUTION_PLAN.md).
 
@@ -276,8 +276,12 @@ bash scripts/run_chat_server.sh
 - fake benchmark inflation.
 - template masking لإخفاء ضعف المولد.
 
-قبل أي تدريب جديد: شغّل `ENGINEERING_ROOT_CAUSE_GATE` وأصدر
-`PHASE27_78_ENGINEERING_DECISION`. لا تعتمد loss/perplexity/micro-probe وحدها؛
+قبل أي تدريب جديد: القرار الحالي هو
+`PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN`. لا يبدأ التدريب إلا بعد
+نجاح بوابات Phase 27.80: objective renderer, assistant-only loss mask,
+stratified round-robin curriculum, guarded decoding, contrastive eval,
+checkpoint selector, held-out canary, corpus-audit, sensitive scan,
+full tests, وMPS/AMP smoke. لا تعتمد loss/perplexity/micro-probe وحدها؛
 القرار يعتمد على held-out dialogue quality, runtime usability, clean-stop,
 semantic correctness, family stability, open_social naturalness, followup
 continuity, canary pass rate, وhuman conversation realism.
@@ -313,7 +317,7 @@ SF-10M → SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+
 - `sf_ai/datasets/corpus_governance.py`
 - `tests/test_corpus_governance.py`
 
-تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر وغير جاهز لاختبار سامي كمولد حواري. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`، لكنه لم يجعل المولد مقنعًا. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17 أضاف `ChatRagBridge` و`ContextBuilder` كربط محلي اختياري مع `HybridRetriever`. Phase 18 أضاف دورة تحسين بيانات محكومة من واجهة الشات. Phase 19 أضاف بوابة جاهزية SF-50M. Phase 20 أضاف بوابات تفعيل المجالات، ولا يفعّل أي skeleton تلقائيًا. Phase 21 ثبت خارطة Phase 22–30 للوصول إلى حوار مولّد مقنع. Phase 22 أضاف وأكمل بوابة Gold Dialogue Corpus v2: اكتمل عند 500/500 (`msa=250`, `saudi=250`). Phase 23 درّب tokenizer v2: `vocab=4493`, `merges=4386`. Phase 24–27.77 نقلت المولد عبر تجارب training/canary/repair حتى tokenizer v9، لكن Phase 27.77 فشلت كتوليد (`54/60` fresh، `45/50` known، `30/30` regression) بسبب خلط عائلات الردود. Phase 27.78 نفذت `ENGINEERING_ROOT_CAUSE_GATE` وأصدرت `PHASE27_78_ENGINEERING_DECISION`: السبب الأكبر family mixing `22%`, objective `18%`, curriculum `16%`, weak generalization `14%`, semantic routing `10%`; capacity فقط `1%`. Phase 27.79 صممت objective/curriculum/decoding repair وأصدرت `PHASE27_79_REPAIR_DESIGN_DECISION` بلا تدريب. Phase 27.80 شفّرت gates، Phase 27.81 أضافت `2500` سجل gold متوازنًا، وPhase 27.82 أصدرت قرار التدريب المقيّد. Phase 27.83 درّبت `SF-10M` لكن best fresh shadow كان `11/60` فقط. Phase 27.84 شخّصت السبب: family metadata لم تكن ظاهرة داخل نص التدريب كإشارة يتعلمها النموذج. Phase 27.85 صممت `عائلة الحوار: سوالف/متابعة/تنظيم/دعم/موضوع` كسياق masked. Phase 27.86 أثبتت أن renderer يطبع العائلة في split/no-split وأن loss يخفي سياق العائلة عن الهدف. Phase 27.87 درّبت SF-10M مقيّدًا بالإشارة، لكن best fresh shadow بقي `10/50` فقط مع انحياز عائلي. Phase 27.88 شخّصت السبب: stream التدريب متسلسل، و`موضوع` ظهر 5 مرات فقط في أول 1800 عينة. Phase 27.89 أضاف `--split-order family_round_robin` ومرّ dry-run: أول 1800 عينة = `360` لكل family وكل نافذة 600 = `120` لكل family. Phase 27.90 درّب SF-10M بهذا الترتيب ورفع best fresh shadow إلى `35/50`. Phase 27.91 شخّص المتبقي: `topic=9/15` من الإخفاقات و`topic_semantic_collapse=48%`. Phase 27.92 صممت إصلاح `topic_anchor_prompt_to_answer_objective_v1` مع شرط `الموضوع المطلوب: <topic_term>` وبوابات `18/20`, `16/20`, `45/50`. Phase 27.93 أضافت سطر `الموضوع المطلوب` إلى renderer وأثبتت masking/canary. Phase 27.94 أضافت `10` سجلات سعودية gold لموضوع `الوفاء`، وأعادت بوابة 27.93 بنجاح: `training_data_ready=true`, `shortfalls={}`. Phase 27.95 درّبت إصلاح topic-objective محدودًا من checkpoint 27.90، لكن best checkpoint حقق known topic `10/16`, fresh topic `4/10`, all-family `33/50` فقط. Phase 27.96 شخّصت السبب كـ `topic_variable_binding_failure`: `wrong_topic_substitution_count=11` وأكثر بديل خاطئ `الصداقة=6`. Phase 27.97 صممت objective `topic_copy_contrastive_binding_objective_v1` لنسخ الموضوع المطلوب في بداية رد topic ومنع الموضوعات المجاورة قبل المطلوب. Phase 27.98 رمّزت البوابة وأثبتت أن التدريب محجوب بسبب `500` سجل topic بلا `topic_term` صريح. Phase 27.99 أصلحت metadata وcopy-anchor وأعادت البوابة إلى `training_ready=true`. Phase 27.100 درّبت إصلاح ربط الموضوع مقيّدًا، لكن best checkpoint بقي دون gates: known `13/16`, fresh `5/10`, copy-anchor `18/26`, reported wrong-topic `0`, topic-family `6/10`, all-family `37/50`. Phase 27.101 شخّصت blind spot: observed wrong-topic `8` (`الصداقة=7`, `الامتنان=1`). Phase 27.102 ثبّتت gate observed wrong-topic/copy-anchor، وPhase 27.103 أضافت حزمة `192` سجلًا `gold` متوازنًا (`copy-anchor=clean`, `wrong-topic leak=0`). Phase 27.104 درّبت إصلاحًا محدودًا: topic gates نجحت (`16/16`, wrong-topic `0`, fresh `9/10`) لكن all-family فشلت `30/50`. الوضع الحالي `8645` (`msa=4295`, `saudi=4350`, `gold=3533`, `silver=5112`)؛ التالي Phase 27.105 تشخيص نتيجة بلا تدريب. لا runtime ولا SF-50M ولا tokenizer retrain.
+تدريب tokenizer v1 اكتمل في Phase 12. Smoke LM training اكتمل في Phase 13، وSF-10M v0.1 المحدود اكتمل في Phase 14، لكنه خام ومكرر وغير جاهز لاختبار سامي كمولد حواري. Phase 15 أضاف `NativeGenerator` و`GenerationPolicy` وmetadata يوضح هل الرد `template` أو `sf_10m_v0_1`، لكنه لم يجعل المولد مقنعًا. Phase 16 أضاف prompt suites وeval report، ثم فُتح مختبر سامي المحلي للقياس والتطوير. Phase 17–27.104 موثقة تاريخيًا، وآخر دليل مهم أن Phase 27.104 نجحت في topic gates (`16/16`, wrong-topic `0`, fresh `9/10`) لكنها فشلت all-family `30/50`. الوضع الحالي `8645` (`msa=4295`, `saudi=4350`, `gold=3533`, `silver=5112`). المسار الحالي أُعيد تثبيته عند Phase 27.79 عبر `PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN`: لا runtime ولا SF-50M ولا tokenizer retrain ولا تدريب جديد قبل بوابات 27.80.
 
 ### Phase 12 — preflight جاهز فقط
 

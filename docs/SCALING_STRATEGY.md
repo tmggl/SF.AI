@@ -5,7 +5,8 @@
 **Status:** governance rule, no training started
 **Language track:** Arabic MSA + Saudi only
 **Lexicon track:** Saudi Seed v1 + governed MSA/Saudi corpus
-**Current gate:** Phase 27.101 diagnosed a topic metric blind spot; SF-50M remains blocked.
+**Current gate:** Phase 27.79 active re-anchor —
+`PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN`; SF-50M remains blocked.
 
 ---
 
@@ -64,8 +65,10 @@ Sovereign Practical Acceleration != open-weight/pretrained model lane
 - contrastive evaluation.
 - semantic routing diagnostics.
 - objective tracing وanti-collapse diagnostics.
-- local RLHF-lite / DPO / ORPO / preference optimization.
-- LoRA / QLoRA فوق أوزان SF.AI فقط.
+- local RLHF-lite / DPO / ORPO / preference optimization لاحقًا فقط إذا
+  وُجدت preference pairs محلية سيادية (`chosen/rejected/source/license/training_allowed`).
+- LoRA / QLoRA لاحقًا فقط فوق أوزان SF.AI نفسها وبعد نجاح base run؛ ممنوعة
+  تمامًا فوق أي نموذج خارجي.
 - retrieval memory tooling وlocal vector retrieval.
 - EOS boundary tooling.
 - experiment tracking وcheckpoint selection محليًا.
@@ -91,16 +94,21 @@ Sovereign Practical Acceleration != open-weight/pretrained model lane
 PHASE27_78_ENGINEERING_DECISION
 ```
 
-### Current Scaling Decision — Phase 27.104
+### Current Scaling Decision — Phase 27.79 Active Re-Anchor
 
-Phase 27.104 لا يفتح حجمًا أكبر. القرار الحالي هو:
+Phase 27.79 لا يفتح حجمًا أكبر. القرار الحالي هو:
 
 ```text
-PHASE27_104_BOUNDED_TOPIC_PROTOTYPE_CONTRASTIVE_REPAIR_DECISION
-BLOCK_RUNTIME_DIAGNOSE_TOPIC_PROTOTYPE_REPAIR_RESULT
+PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN
+PLAN_READY_TRAINING_BLOCKED_UNTIL_GATES_PASS
 ```
 
-السبب: Phase 27.96 شخّصت فشل 27.95 كخلل ربط متغير الموضوع لا كحد سعة.
+السبب: Phase 27.104 نجحت في topic gates لكنها فشلت في all-family
+regression (`30/50` مقابل gate `45/50`). هذا يثبت أن تضخيم الحجم الآن
+قفزة خاطئة؛ الخلل في objective/family mixing/curriculum/decoding/semantic
+routing قبل السعة.
+
+الدليل التاريخي: Phase 27.96 شخّصت فشل 27.95 كخلل ربط متغير الموضوع لا كحد سعة.
 كل إخفاقات topic تقريبًا تمر من الحارس، لكن النموذج يستبدل الموضوع المطلوب
 بموضوعات مجاورة: `wrong_topic_substitution_count=11`، وأكثر بديل خاطئ
 `الصداقة=6`. لذلك صممت Phase 27.97 objective
@@ -122,7 +130,8 @@ observed wrong-topic من نص الرد وتفرض `0` قبل أي تدريب أ
 درّبت هذا الإصلاح ونجحت في topic gates: prototype `16/16`,
 observed wrong-topic `0`, known `16/16`, fresh `9/10`, لكنها فشلت في
 all-family regression (`30/50` مقابل gate `45/50`). لذلك يبقى `SF-50M`
-محجوبًا، والمسموح فقط Phase 27.105 كتشخيص نتيجة بلا تدريب.
+محجوبًا، والمسموح فقط Phase 27.79 كخطة Objective/Curriculum/Decoding ثم
+Phase 27.80 كتدريب محدود مشروط إذا مرت البوابات.
 
 ويجب أن يحدد أوزان الأسباب التالية:
 
