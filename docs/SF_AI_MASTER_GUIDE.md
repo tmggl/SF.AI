@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.95
-الاسم: Bounded Topic Objective Repair Training
+المرحلة الحالية: Phase 27.96
+الاسم: Topic Objective Repair Result Diagnosis
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_DECISION
+القرار الرسمي: PHASE27_96_TOPIC_OBJECTIVE_RESULT_DIAGNOSIS_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -112,7 +112,8 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - corpus الحالي: `8453` (`msa=4199`, `saudi=4254`, `gold=3341`, `silver=5112`).
 - إعادة بوابة 27.93 بعد 27.94: `training_data_ready=true`, `shortfalls={}`, و`الوفاء` صار `total=22`, `msa=12`, `saudi=10`.
 - نتيجة 27.95: تدريب SF-10M محدود اكتمل، لكن البوابات فشلت: known topic `10/16`, fresh topic `4/10`, all-family `33/50`.
-- التالي: `Phase 27.96 — Topic Objective Repair Result Diagnosis`.
+- نتيجة 27.96: التشخيص أثبت `topic_variable_binding_failure`: لا حارس يحجب الإخفاقات، بل النموذج يستبدل الموضوع المطلوب بموضوعات مجاورة. `wrong_topic_substitution_count=11`, وأكثر بديل خاطئ `الصداقة=6`.
+- التالي: `Phase 27.97 — Topic Variable Binding Objective Design`.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -328,17 +329,17 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.96 — Topic Objective Repair Result Diagnosis
+Phase 27.97 — Topic Variable Binding Objective Design
 ```
 
 مطلوب منها:
 
-- تشخيص لماذا فشل تدريب 27.95 رغم إضافة `الموضوع المطلوب`.
-- فصل الأسباب بين: objective، sampling، topic anchor strength، decoding، tokenizer، capacity.
-- عدم بدء تدريب جديد قبل قرار تشخيصي واضح.
-- منع أي runtime release لأن 27.95 لم يمر gates.
+- تصميم objective يفرض نسخ/تثبيت الموضوع المطلوب داخل بداية رد المساعد.
+- تصميم contrastive wrong-topic canary يمنع نجاح رد يذكر موضوعًا مجاورًا.
+- تصميم per-topic round-robin curriculum gate قبل أي تدريب.
+- جعل `topic_term` صريحًا لكل سجلات topic بدل الاعتماد على inference وحده.
 
-ممنوع في 27.96 قبل التشخيص:
+ممنوع في 27.97 قبل التصميم والبوابات:
 
 - تدريب جديد.
 - runtime release.

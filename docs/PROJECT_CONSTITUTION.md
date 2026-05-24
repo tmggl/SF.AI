@@ -49,6 +49,10 @@ SF.AI يملك مسار ذكائه:
 وصل إلى known topic `10/16`, fresh topic `4/10`, all-family `33/50`،
 وفشل البوابات الرسمية. لذلك لا runtime ولا SF-50M ولا tokenizer retrain
 ولا تدريب جديد قبل Phase 27.96 كتشخيص سبب جذري لنتيجة الإصلاح.
+بعد Phase 27.96، ثبت أن السبب ليس السعة: الفشل الأساسي هو
+`topic_variable_binding_failure`، حيث يرد النموذج بجواب topic لكنه يبدل
+الموضوع المطلوب بموضوعات مجاورة. لذلك لا تدريب جديد قبل تصميم objective
+copy/contrastive في Phase 27.97.
 
 استثناء موثق: يجوز إدخال حوارات **owner-delegated agent-authored** في
 corpus إذا كان سامي قد فوّض الوكيل صراحة بتأليفها واعتمادها، وكانت كل

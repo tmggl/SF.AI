@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.95 ضمن مسار SF-native فقط: درّبنا إصلاحًا محدودًا لـ topic-objective، لكنه لم يمر البوابات. لا runtime الآن؛ التالي Phase 27.96 تشخيص نتيجة الإصلاح."
+      "response_preview": "وصلنا إلى Phase 27.96 ضمن مسار SF-native فقط: شخّصنا فشل 27.95 كخلل ربط متغير الموضوع داخل الرد. لا runtime ولا تدريب الآن؛ التالي Phase 27.97 تصميم objective يثبت الموضوع المطلوب."
     },
     {
       "scenario_id": "clarification_repair_flow",

@@ -1,0 +1,369 @@
+{
+  "phase": "Phase 27.96",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "status": "PHASE27_96_DIAGNOSED_TOPIC_VARIABLE_BINDING_FAILURE_NO_TRAINING",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_changed": false,
+  "source_report": "artifacts/reports/phase27_95_bounded_topic_objective_repair_report.json",
+  "best_checkpoint": "sf-10m-step1800",
+  "score_summary": {
+    "known_topic": "10/16",
+    "fresh_topic": "4/10",
+    "all_family": "33/50",
+    "required_gates": {
+      "known_topic": "16/16",
+      "fresh_topic": "8/10",
+      "all_family": "45/50"
+    }
+  },
+  "diagnosis_signals": {
+    "topic_gate_failed": true,
+    "all_family_regressed": true,
+    "guard_blocked_topic_failures": 0,
+    "wrong_topic_substitution_count": 11,
+    "support_followup_still_weak": true,
+    "topic_variable_binding_failure": true
+  },
+  "topic_failure_counts": {
+    "by_required_topic": {
+      "الوفاء": 4,
+      "التعاون": 3,
+      "الاحترام": 3,
+      "الهدوء": 1,
+      "الصدق": 1
+    },
+    "wrong_topic_substitutions": {
+      "الصبر": 2,
+      "الشجاعة": 3,
+      "الصداقة": 6
+    }
+  },
+  "topic_training_coverage": {
+    "topic_family_records": 510,
+    "explicit_topic_term_records": {
+      "الوفاء": 10
+    },
+    "inferred_topic_term_records": {
+      "الشجاعة": 29,
+      "الصداقة": 29,
+      "الصبر": 29,
+      "الصدق": 29,
+      "الاحترام": 41,
+      "التعاون": 29,
+      "الهدوء": 29,
+      "الوفاء": 12
+    },
+    "combined_topic_term_records": {
+      "الشجاعة": 29,
+      "الصداقة": 29,
+      "الصبر": 29,
+      "الصدق": 29,
+      "الاحترام": 41,
+      "التعاون": 29,
+      "الهدوء": 29,
+      "الوفاء": 22
+    },
+    "dialects_by_topic": {
+      "الشجاعة": {
+        "msa": 13,
+        "saudi": 16
+      },
+      "الصداقة": {
+        "msa": 13,
+        "saudi": 16
+      },
+      "الصبر": {
+        "msa": 13,
+        "saudi": 16
+      },
+      "الصدق": {
+        "msa": 13,
+        "saudi": 16
+      },
+      "الاحترام": {
+        "msa": 25,
+        "saudi": 16
+      },
+      "التعاون": {
+        "msa": 13,
+        "saudi": 16
+      },
+      "الهدوء": {
+        "msa": 13,
+        "saudi": 16
+      },
+      "الوفاء": {
+        "msa": 12,
+        "saudi": 10
+      }
+    }
+  },
+  "all_family_summary": {
+    "passed": 33,
+    "total": 50,
+    "family_summary": {
+      "followup": {
+        "passed": 6,
+        "total": 10
+      },
+      "open_social": {
+        "passed": 8,
+        "total": 10
+      },
+      "planning": {
+        "passed": 10,
+        "total": 10
+      },
+      "support": {
+        "passed": 5,
+        "total": 10
+      },
+      "topic": {
+        "passed": 4,
+        "total": 10
+      }
+    },
+    "reason_counts": {
+      "passed": 33,
+      "response_family_mismatch": 2,
+      "expected_terms_missing": 15
+    }
+  },
+  "representative_topic_failures": [
+    {
+      "section": "known_topic_rows",
+      "id": "topic_msa_الوفاء",
+      "dialect": "msa",
+      "prompt": "اشرح لي الوفاء بجملة قصيرة.",
+      "required_topic": "الوفاء",
+      "response": "معنى الصبر: قة: علاقة فيها صدق واهتمام ووقفة وقت الحاجة.",
+      "reason": "required_topic_missing",
+      "guard_allowed": true,
+      "topic_hits": [
+        "الصبر"
+      ],
+      "wrong_topic_hits": [
+        "الصبر"
+      ]
+    },
+    {
+      "section": "known_topic_rows",
+      "id": "topic_saudi_الوفاء",
+      "dialect": "saudi",
+      "prompt": "وش يعني الوفاء باختصار؟",
+      "required_topic": "الوفاء",
+      "response": "معنى الصبر: إنك تتحمل شوي بدون ما تفاللي هدوءك.",
+      "reason": "required_topic_missing",
+      "guard_allowed": true,
+      "topic_hits": [
+        "الصبر"
+      ],
+      "wrong_topic_hits": [
+        "الصبر"
+      ]
+    },
+    {
+      "section": "known_topic_rows",
+      "id": "topic_msa_التعاون",
+      "dialect": "msa",
+      "prompt": "اشرح لي التعاون بجملة قصيرة.",
+      "required_topic": "التعاون",
+      "response": "معنى الشجاعة: أن تفعل الصواب رغم الخوف، لا أن تختفي منك المخاوف.",
+      "reason": "required_topic_missing",
+      "guard_allowed": true,
+      "topic_hits": [
+        "الشجاعة"
+      ],
+      "wrong_topic_hits": [
+        "الشجاعة"
+      ]
+    },
+    {
+      "section": "known_topic_rows",
+      "id": "topic_saudi_التعاون",
+      "dialect": "saudi",
+      "prompt": "وش يعني التعاون باختصار؟",
+      "required_topic": "التعاون",
+      "response": "معنى الشجاعة: إنك تسوي الصح حتى لو كنت خايف.",
+      "reason": "required_topic_missing",
+      "guard_allowed": true,
+      "topic_hits": [
+        "الشجاعة"
+      ],
+      "wrong_topic_hits": [
+        "الشجاعة"
+      ]
+    },
+    {
+      "section": "known_topic_rows",
+      "id": "topic_msa_الاحترام",
+      "dialect": "msa",
+      "prompt": "اشرح لي الاحترام بجملة قصيرة.",
+      "required_topic": "الاحترام",
+      "response": "معنى الصداقة: رفقة طيبة واهتمام ووقفة ص وقت الحاجة.",
+      "reason": "required_topic_missing",
+      "guard_allowed": true,
+      "topic_hits": [
+        "الصداقة"
+      ],
+      "wrong_topic_hits": [
+        "الصداقة"
+      ]
+    },
+    {
+      "section": "known_topic_rows",
+      "id": "topic_saudi_الاحترام",
+      "dialect": "saudi",
+      "prompt": "وش يعني الاحترام باختصار؟",
+      "required_topic": "الاحترام",
+      "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+      "reason": "required_topic_missing",
+      "guard_allowed": true,
+      "topic_hits": [
+        "الصداقة"
+      ],
+      "wrong_topic_hits": [
+        "الصداقة"
+      ]
+    },
+    {
+      "section": "fresh_topic_rows",
+      "id": "topic_01",
+      "dialect": "msa",
+      "prompt": "فسر الوفاء بجملة قصيرة",
+      "required_topic": "الوفاء",
+      "response": "معنى الصداقة: علاقة فيها صدق واهتمام ووقفة وقت الحاجة.",
+      "reason": "expected_terms_missing",
+      "guard_allowed": true,
+      "topic_hits": [
+        "الصداقة"
+      ],
+      "wrong_topic_hits": [
+        "الصداقة"
+      ]
+    },
+    {
+      "section": "fresh_topic_rows",
+      "id": "topic_04",
+      "dialect": "saudi",
+      "prompt": "الاحترام كيف تفهمه",
+      "required_topic": "الاحترام",
+      "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+      "reason": "expected_terms_missing",
+      "guard_allowed": true,
+      "topic_hits": [
+        "الصداقة"
+      ],
+      "wrong_topic_hits": [
+        "الصداقة"
+      ]
+    },
+    {
+      "section": "fresh_topic_rows",
+      "id": "topic_05",
+      "dialect": "msa",
+      "prompt": "ما معنى الهدوء في الحياة",
+      "required_topic": "الهدوء",
+      "response": "معنى الهدوء: إنك راجع اللي نفسك أن تلاحظ الخير الموجود وتف؟",
+      "reason": "response_family_mismatch",
+      "guard_allowed": true,
+      "topic_hits": [
+        "الهدوء"
+      ],
+      "wrong_topic_hits": []
+    },
+    {
+      "section": "fresh_topic_rows",
+      "id": "topic_06",
+      "dialect": "saudi",
+      "prompt": "الصدق وش فايدته",
+      "required_topic": "الصدق",
+      "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+      "reason": "expected_terms_missing",
+      "guard_allowed": true,
+      "topic_hits": [
+        "الصداقة"
+      ],
+      "wrong_topic_hits": [
+        "الصداقة"
+      ]
+    },
+    {
+      "section": "fresh_topic_rows",
+      "id": "topic_09",
+      "dialect": "msa",
+      "prompt": "أعطني معنى التعاون ببساطة",
+      "required_topic": "التعاون",
+      "response": "معنى الشجاعة: أن تفعل الصواب رغم الخوف، لا أن تختفي منك المخاوف.",
+      "reason": "expected_terms_missing",
+      "guard_allowed": true,
+      "topic_hits": [
+        "الشجاعة"
+      ],
+      "wrong_topic_hits": [
+        "الشجاعة"
+      ]
+    },
+    {
+      "section": "fresh_topic_rows",
+      "id": "topic_10",
+      "dialect": "saudi",
+      "prompt": "وش معنى الوفاء باختصار",
+      "required_topic": "الوفاء",
+      "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+      "reason": "expected_terms_missing",
+      "guard_allowed": true,
+      "topic_hits": [
+        "الصداقة"
+      ],
+      "wrong_topic_hits": [
+        "الصداقة"
+      ]
+    }
+  ],
+  "root_cause_weights": {
+    "topic_variable_binding_failure": 34,
+    "assistant_target_copy_objective_weak": 22,
+    "topic_family_balance_residual": 14,
+    "support_followup_eval_alias_or_semantic_gap": 9,
+    "decoding_surface_artifacts": 8,
+    "corpus_topic_metadata_inference_gap": 6,
+    "tokenizer": 3,
+    "model_capacity": 3,
+    "semantic_routing": 1
+  },
+  "blocked_actions": [
+    "new LM training",
+    "runtime release",
+    "UI generator release",
+    "SF-50M transition",
+    "tokenizer retrain",
+    "pretrained/open-weight usage",
+    "keyword/template masking"
+  ],
+  "allowed_next_actions": [
+    "design copy-anchored assistant target objective",
+    "design contrastive wrong-topic canary",
+    "design per-topic round-robin curriculum gate",
+    "tighten topic metadata so topic_term is explicit for every topic sample"
+  ],
+  "decision": {
+    "decision_id": "PHASE27_96_TOPIC_OBJECTIVE_RESULT_DIAGNOSIS_DECISION",
+    "engineering_decision": "DESIGN_TOPIC_COPY_CONTRASTIVE_OBJECTIVE_BEFORE_ANY_TRAINING",
+    "new_training_allowed": false,
+    "runtime_release_allowed": false,
+    "ui_release_allowed": false,
+    "heldout_runtime_gate_allowed": false,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "topic_copy_objective_design_allowed": true,
+    "why": "Phase 27.95 aligned topic conditioning, but the model still substitutes the requested topic with learned neighboring topic prototypes. Topic failures passed the guard, so this is a semantic variable-binding/objective issue, not a runtime or capacity win.",
+    "next_phase": "Phase 27.97 — Topic Variable Binding Objective Design"
+  }
+}

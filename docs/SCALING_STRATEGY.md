@@ -5,7 +5,7 @@
 **Status:** governance rule, no training started
 **Language track:** Arabic MSA + Saudi only
 **Lexicon track:** Saudi Seed v1 + governed MSA/Saudi corpus
-**Current gate:** Phase 27.95 trained bounded topic-objective repair; gates failed; Phase 27.96 diagnosis next; SF-50M remains blocked.
+**Current gate:** Phase 27.96 diagnosed topic variable-binding failure; Phase 27.97 design next; SF-50M remains blocked.
 
 ---
 
@@ -91,20 +91,20 @@ Sovereign Practical Acceleration != open-weight/pretrained model lane
 PHASE27_78_ENGINEERING_DECISION
 ```
 
-### Current Scaling Decision — Phase 27.95
+### Current Scaling Decision — Phase 27.96
 
-Phase 27.95 لا يفتح حجمًا أكبر. القرار الحالي هو:
+Phase 27.96 لا يفتح حجمًا أكبر. القرار الحالي هو:
 
 ```text
-PHASE27_95_BOUNDED_TOPIC_OBJECTIVE_REPAIR_DECISION
-BLOCK_RUNTIME_DIAGNOSE_TOPIC_OBJECTIVE_REPAIR_RESULT
+PHASE27_96_TOPIC_OBJECTIVE_RESULT_DIAGNOSIS_DECISION
+DESIGN_TOPIC_COPY_CONTRASTIVE_OBJECTIVE_BEFORE_ANY_TRAINING
 ```
 
-السبب: التدريب المحدود على SF-10M اكتمل، لكنه لم يمر البوابات:
-known topic `10/16` مقابل المطلوب `16/16`، fresh topic `4/10` مقابل
-المطلوب `8/10`، وall-family `33/50` مقابل المطلوب `45/50`. لذلك يبقى
-`SF-50M` محجوبًا، ولا يسمح بتدريب جديد قبل Phase 27.96 كتشخيص لنتيجة
-الإصلاح.
+السبب: Phase 27.96 شخّصت فشل 27.95 كخلل ربط متغير الموضوع لا كحد سعة.
+كل إخفاقات topic تقريبًا تمر من الحارس، لكن النموذج يستبدل الموضوع المطلوب
+بموضوعات مجاورة: `wrong_topic_substitution_count=11`، وأكثر بديل خاطئ
+`الصداقة=6`. لذلك يبقى `SF-50M` محجوبًا، ولا يسمح بتدريب جديد قبل
+Phase 27.97 كتصميم objective copy/contrastive.
 
 ويجب أن يحدد أوزان الأسباب التالية:
 

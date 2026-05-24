@@ -1,0 +1,13 @@
+{
+  "decision_id": "PHASE27_96_TOPIC_OBJECTIVE_RESULT_DIAGNOSIS_DECISION",
+  "engineering_decision": "DESIGN_TOPIC_COPY_CONTRASTIVE_OBJECTIVE_BEFORE_ANY_TRAINING",
+  "new_training_allowed": false,
+  "runtime_release_allowed": false,
+  "ui_release_allowed": false,
+  "heldout_runtime_gate_allowed": false,
+  "sf50m_justified_transition": false,
+  "tokenizer_retrain_allowed": false,
+  "topic_copy_objective_design_allowed": true,
+  "why": "Phase 27.95 aligned topic conditioning, but the model still substitutes the requested topic with learned neighboring topic prototypes. Topic failures passed the guard, so this is a semantic variable-binding/objective issue, not a runtime or capacity win.",
+  "next_phase": "Phase 27.97 — Topic Variable Binding Objective Design"
+}
