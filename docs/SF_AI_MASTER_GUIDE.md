@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.79
-الاسم: Objective/Curriculum/Decoding Repair Design
+المرحلة الحالية: Phase 27.80
+الاسم: Repair Gate Encoding and Dry-Run Validation
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_79_REPAIR_DESIGN_DECISION
+القرار الرسمي: PHASE27_80_REPAIR_GATE_VALIDATION_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -94,7 +94,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
-- التالي: `Phase 27.80 — Repair Gate Encoding and Dry-Run Validation`.
+- نتيجة 27.80: gates فشلت في `curriculum_family_balance_dry_run`
+  و`family_confusion_matrix_builder`.
+- التالي: remediation داخل Phase 27.80 لتوازن عائلات الحوار، بلا تدريب.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -310,21 +312,19 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.80 — Repair Gate Encoding and Dry-Run Validation
+Phase 27.80 remediation — Family Balance and Family-Confusion Repair Plan
 ```
 
 مطلوب منها:
 
 - Decision Report.
 - Allowed/Blocked Actions.
-- objective spec validator.
-- curriculum family-balance dry-run.
-- decoding policy config validator.
-- held-out/shadow canary manifest validator.
-- family confusion matrix builder.
-- operator-contamination regression scan.
+- خطة إعادة توازن عائلات الحوار.
+- تحديد الحد الأدنى لكل family قبل أي تدريب.
+- فصل open_social/followup/planning/support/topic في curriculum.
+- منع أي تدريب حتى يمر dry-run جديد.
 
-ممنوع في 27.80 حتى تصدر gates ناجحة وقرار لاحق:
+ممنوع حتى تصدر gates ناجحة وقرار لاحق:
 
 - تدريب جديد.
 - tokenizer جديد.

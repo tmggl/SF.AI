@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.79 — Objective/Curriculum/Decoding Repair Design",
-        current_phase_status="phase27_79_repair_design_ready_next_gate_encoding_no_training",
+        current_phase="Phase 27.80 — Repair Gate Encoding and Dry-Run Validation",
+        current_phase_status="phase27_80_gates_failed_family_balance_no_training",
         next_phase=(
-            "Phase 27.80 — Repair Gate Encoding and Dry-Run Validation"
+            "Phase 27.80 remediation — family-balance and family-confusion repair plan, no training"
         ),
         sovereign=True,
         uses_external_llm=False,

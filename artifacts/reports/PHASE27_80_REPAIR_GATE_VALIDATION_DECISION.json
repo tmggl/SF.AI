@@ -1,0 +1,11 @@
+{
+  "decision_id": "PHASE27_80_REPAIR_GATE_VALIDATION_DECISION",
+  "engineering_decision": "GATES_FAILED_REPAIR_IMPLEMENTATION_BLOCKED",
+  "all_gates_passed": false,
+  "new_training_allowed": false,
+  "tokenizer_retrain_allowed": false,
+  "runtime_release_allowed": false,
+  "sf50m_justified_transition": false,
+  "next_phase": "Phase 27.80 remediation — fix failed gates",
+  "why_no_training_yet": "Phase 27.80 validates gates only. Training remains a separate decision after repair implementation artifacts are encoded."
+}

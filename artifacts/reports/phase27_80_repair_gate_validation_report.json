@@ -1,0 +1,155 @@
+{
+  "phase": "Phase 27.80",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "status": "PHASE27_80_GATES_FAILED_NO_TRAINING",
+  "source_report": "artifacts/reports/phase27_79_objective_curriculum_decoding_design_report.json",
+  "training_started": false,
+  "tokenizer_training_started": false,
+  "runtime_changed": false,
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "gates": [
+    {
+      "gate": "objective_spec_validator",
+      "passed": true,
+      "missing_controls": [],
+      "objective": "family_conditioned_prompt_to_answer_objective_v1",
+      "loss_scope": "assistant_answer_only_with_eos"
+    },
+    {
+      "gate": "curriculum_family_balance_dry_run",
+      "passed": false,
+      "records": 5943,
+      "family_counts": {
+        "followup": 1795,
+        "open_social": 3208,
+        "planning": 424,
+        "support": 364,
+        "topic": 152
+      },
+      "family_ratio_max_to_min": 21.1053,
+      "dialect_counts": {
+        "saudi": 2994,
+        "msa": 2949
+      },
+      "dialect_delta": 0.0076,
+      "family_balance_passed": false,
+      "dialect_balance_passed": true
+    },
+    {
+      "gate": "decoding_policy_config_validator",
+      "passed": true,
+      "policy": "semantic_guarded_decoding_v1",
+      "missing_controls": [],
+      "template_masking_blocked": true
+    },
+    {
+      "gate": "heldout_shadow_canary_manifest_validator",
+      "passed": true,
+      "split": "data/corpus/chat/splits/dialogue_split_v1.json",
+      "method": "sha256_bucket",
+      "counts": {
+        "train": 5343,
+        "eval": 600
+      },
+      "eval_dialects": {
+        "saudi": 312,
+        "msa": 288
+      },
+      "canary_reports_present": [
+        "artifacts/reports/phase27_25_heldout_generation_canary_report.json",
+        "artifacts/reports/phase27_30_fresh_mixed_shadow_canary_report.json",
+        "artifacts/reports/phase27_60_broader_natural_dialogue_canary_report.json"
+      ]
+    },
+    {
+      "gate": "family_confusion_matrix_builder",
+      "passed": false,
+      "matrix": {
+        "open_social": {
+          "open_social": 2678,
+          "followup": 245,
+          "planning": 150,
+          "support": 93,
+          "topic": 42
+        },
+        "followup": {
+          "open_social": 1331,
+          "followup": 338,
+          "planning": 101,
+          "support": 16,
+          "topic": 9
+        },
+        "planning": {
+          "open_social": 194,
+          "followup": 79,
+          "planning": 97,
+          "support": 49,
+          "topic": 5
+        },
+        "support": {
+          "open_social": 70,
+          "followup": 150,
+          "planning": 87,
+          "support": 57,
+          "topic": 0
+        },
+        "topic": {
+          "open_social": 87,
+          "followup": 55,
+          "planning": 0,
+          "support": 0,
+          "topic": 10
+        }
+      },
+      "diagonal_rate": 0.5351,
+      "interpretation": "heuristic corpus dry-run; not model evaluation"
+    },
+    {
+      "gate": "operator_contamination_regression_scan",
+      "passed": true,
+      "hit_count": 0,
+      "sample_hits": [],
+      "blocked_terms": [
+        "التالي",
+        "اكمل",
+        "ارفع",
+        "phase",
+        "gates",
+        "corpus",
+        "tokenizer",
+        "pytest",
+        "commit",
+        "readiness"
+      ]
+    }
+  ],
+  "allowed_actions": [
+    "write objective/curriculum/decoding config artifacts",
+    "prepare repair implementation plan",
+    "run additional dry-run validation"
+  ],
+  "blocked_actions": [
+    "LM training",
+    "tokenizer retraining",
+    "runtime release",
+    "SF-50M transition",
+    "pretrained/open-weight model usage",
+    "template masking"
+  ],
+  "decision": {
+    "decision_id": "PHASE27_80_REPAIR_GATE_VALIDATION_DECISION",
+    "engineering_decision": "GATES_FAILED_REPAIR_IMPLEMENTATION_BLOCKED",
+    "all_gates_passed": false,
+    "new_training_allowed": false,
+    "tokenizer_retrain_allowed": false,
+    "runtime_release_allowed": false,
+    "sf50m_justified_transition": false,
+    "next_phase": "Phase 27.80 remediation — fix failed gates",
+    "why_no_training_yet": "Phase 27.80 validates gates only. Training remains a separate decision after repair implementation artifacts are encoded."
+  }
+}

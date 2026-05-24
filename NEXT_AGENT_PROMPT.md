@@ -63,10 +63,13 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 27.77 موثقة تاريخيًا. الحالة الحالية:
-  `Phase 27.79 — Objective/Curriculum/Decoding Repair Design` مكتملة بقرار
-  `PHASE27_79_REPAIR_DESIGN_DECISION`. لا runtime switch ولا `SF-50M` ولا تدريب
-  جديد حتى تُشفّر gates في Phase 27.80. corpus الحالي `5943` (`msa=2949`, `saudi=2994`).
+- المراحل من Phase 0 حتى Phase 27.79 موثقة تاريخيًا. الحالة الحالية:
+  `Phase 27.80 — Repair Gate Encoding and Dry-Run Validation` شُغلت بلا تدريب
+  وأصدرت `PHASE27_80_REPAIR_GATE_VALIDATION_DECISION`. النتيجة: gates فشلت
+  بسبب family imbalance وfamily confusion، لذلك لا runtime switch ولا `SF-50M`
+  ولا تدريب جديد. corpus الحالي `5943` (`msa=2949`, `saudi=2994`).
+- أول خطوة تالية: Phase 27.80 remediation لتوازن
+  `open_social/followup/planning/support/topic` قبل أي تدريب.
 - تفويض التكبير التلقائي معتمد، لكن مفعوله يبدأ فقط عندما تنجح gates؛
   حاليًا `SF-50M` ما زال محجوبًا لأن capacity وزنها `1%`.
 - استخدم `make phase22-review-intake` أو `GET /system/phase22-review-intake` قبل أي تحويل من `data/corpus/chat/review/` إلى corpus تدريبي.

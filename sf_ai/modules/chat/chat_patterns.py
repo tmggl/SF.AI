@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.79 ضمن Sovereign Practical Acceleration Strategy v2: "
-    "صممنا إصلاح objective/curriculum/decoding بدون تدريب. القرار: لا تدريب جديد "
-    "ولا runtime ولا SF-50M الآن. التالي Phase 27.80 لتشفير البوابات وتشغيل dry-run.",
+    "وصلنا إلى Phase 27.80 ضمن مسار SF-native فقط: شفّرنا بوابات الإصلاح "
+    "وشغلنا dry-run بلا تدريب. النتيجة: family balance فشل، لذلك لا تدريب "
+    "ولا runtime ولا SF-50M حتى نصلح توازن عائلات الحوار.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (
