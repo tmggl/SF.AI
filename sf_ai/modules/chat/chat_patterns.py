@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.66: درّبنا LM repair محدودًا على tokenizer v8 "
-    "ونجح broader canary بالكامل 30/30. الواجهة لا تُفتح على هذا checkpoint بعد. "
-    "التالي Phase 27.67 لاختبار fresh shadow canary بأسئلة غير مرئية.",
+    "وصلنا إلى Phase 27.67: اختبرنا checkpoint 27.66 على fresh shadow canary "
+    "بأسئلة غير مرئية، والنتيجة 30/50 فقط. هذا يعني أن الواجهة لا تُفتح. "
+    "التالي Phase 27.68 لإصلاح انجراف open_social/followup/support قبل أي runtime.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

@@ -53,13 +53,14 @@
 - [docs/PHASE27_64_TOPIC_LEXICAL_TOKENIZER_INSPECTION_REPORT.md](./docs/PHASE27_64_TOPIC_LEXICAL_TOKENIZER_INSPECTION_REPORT.md) — فحص يثبت أن tokenizer v8 مطلوب لحماية `التعاون/الاحترام`.
 - [docs/PHASE27_65_TOKENIZER_V8_TOPIC_PROBE_REPORT.md](./docs/PHASE27_65_TOKENIZER_V8_TOPIC_PROBE_REPORT.md) — tokenizer v8 نجح: critical `2/2`, topic terms `8/8`.
 - [docs/PHASE27_66_V8_BOUNDED_TOPIC_REPAIR_REPORT.md](./docs/PHASE27_66_V8_BOUNDED_TOPIC_REPAIR_REPORT.md) — LM repair محدود على tokenizer v8 نجح broader canary `30/30` مع بقاء runtime محجوبًا.
+- [docs/PHASE27_67_FRESH_SHADOW_CANARY_REPORT.md](./docs/PHASE27_67_FRESH_SHADOW_CANARY_REPORT.md) — fresh shadow canary بأسئلة غير مرئية فشل `30/50`، لذلك runtime محجوب.
 
 ---
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.66 / 30 — V8 Bounded Topic Repair اكتملت بتدريب LM محدود وcanary `30/30`.
-- **الأولوية الحالية:** Phase 27.67 fresh shadow canary بأسئلة طبيعية غير مرئية قبل أي runtime switch.
+- **الرحلة الحالية:** Phase 27.67 / 30 — Fresh Shadow Canary فشل `30/50` رغم novelty `50/50`.
+- **الأولوية الحالية:** Phase 27.68 إصلاح انجراف open_social/followup/support قبل أي runtime switch.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -130,6 +131,7 @@
 - **نتيجة Phase 27.64:** فحص tokenizer أثبت أن `التعاون` صارت `3` قطع و`الاحترام` صارت `4` قطع في v7 بعدما كانتا single-piece في v6؛ القرار tokenizer v8 قبل أي LM repair. التقرير: [docs/PHASE27_64_TOPIC_LEXICAL_TOKENIZER_INSPECTION_REPORT.md](./docs/PHASE27_64_TOPIC_LEXICAL_TOKENIZER_INSPECTION_REPORT.md).
 - **نتيجة Phase 27.65:** tokenizer v8 نجح: `التعاون/الاحترام=2/2` single-piece ومحميتين، وكل topic terms `8/8` single-piece، وboundary probes `6/6`. التقرير: [docs/PHASE27_65_TOKENIZER_V8_TOPIC_PROBE_REPORT.md](./docs/PHASE27_65_TOKENIZER_V8_TOPIC_PROBE_REPORT.md).
 - **نتيجة Phase 27.66:** LM repair محدود على tokenizer v8 نجح broader canary كاملًا `30/30` على followup/open_social/planning/support/topic، لكن checkpoint بقي محجوبًا عن الواجهة حتى fresh shadow canary. التقرير: [docs/PHASE27_66_V8_BOUNDED_TOPIC_REPAIR_REPORT.md](./docs/PHASE27_66_V8_BOUNDED_TOPIC_REPAIR_REPORT.md).
+- **نتيجة Phase 27.67:** fresh shadow canary من `50` سؤالًا جديدًا فشل `30/50`: open_social `4/10`, followup `4/10`, planning `7/10`, support `6/10`, topic `9/10`. القرار: لا واجهة ولا runtime؛ نصلح التعميم أولًا. التقرير: [docs/PHASE27_67_FRESH_SHADOW_CANARY_REPORT.md](./docs/PHASE27_67_FRESH_SHADOW_CANARY_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 

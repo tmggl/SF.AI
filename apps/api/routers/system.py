@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.66 — V8 Bounded Topic Repair",
-        current_phase_status="passed_v8_bounded_topic_repair_runtime_blocked",
+        current_phase="Phase 27.67 — Fresh Shadow Canary",
+        current_phase_status="failed_fresh_shadow_canary_runtime_blocked",
         next_phase=(
-            "Phase 27.67 fresh shadow canary with unseen natural prompts"
+            "Phase 27.68 inspect Phase 27.67 failures and repair before runtime"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -444,6 +444,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_66_v8_bounded_topic_repair",
                 status="passed_v8_bounded_topic_repair_ready_for_fresh_shadow_canary_runtime_blocked",
                 phase="Phase 27.66",
+            ),
+            ComponentStatus(
+                name="phase27_67_fresh_shadow_canary",
+                status="failed_fresh_shadow_canary_runtime_blocked",
+                phase="Phase 27.67",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

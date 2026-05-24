@@ -352,6 +352,9 @@ phase27-tokenizer-v8-topic-probe:
 phase27-v8-bounded-topic-repair:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_66_v8_bounded_topic_repair.py $(ARGS)
 
+phase27-fresh-shadow-canary:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_67_fresh_shadow_canary.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 

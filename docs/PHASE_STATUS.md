@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.66 / 30**
-- **المرحلة الحالية:** **Phase 27.66 — V8 Bounded Topic Repair**
-- **حالة المرحلة الحالية:** **اكتملت؛ تدريب LM محدود على tokenizer v8 نجح broader canary `30/30` والـ runtime محجوب**
-- **المرحلة التالية المقترحة:** Phase 27.67 fresh shadow canary with unseen natural prompts.
+- **الرحلة الحالية:** **Phase 27.67 / 30**
+- **المرحلة الحالية:** **Phase 27.67 — Fresh Shadow Canary**
+- **حالة المرحلة الحالية:** **اكتملت كتقييم فقط؛ fresh shadow canary فشل `30/50` والـ runtime محجوب**
+- **المرحلة التالية المقترحة:** Phase 27.68 inspect Phase 27.67 failures and repair before runtime.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -115,6 +115,7 @@
 | Phase 27.64 | Topic Lexical/Tokenizer Inspection | ✅ completed_topic_lexical_inspection_tokenizer_v8_required_runtime_blocked | ✅ |
 | Phase 27.65 | Tokenizer v8 Topic Probe | ✅ passed_tokenizer_v8_topic_probe_ready_for_bounded_lm_topic_repair_runtime_blocked | ✅ |
 | Phase 27.66 | V8 Bounded Topic Repair | ✅ passed_v8_bounded_topic_repair_ready_for_fresh_shadow_canary_runtime_blocked | ✅ |
+| Phase 27.67 | Fresh Shadow Canary | ✅ failed_fresh_shadow_canary_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -918,6 +919,15 @@
   - النتيجة: broader canary `30/30`، وكل العائلات `6/6`.
   - القرار: يسمح فقط بـ Phase 27.67 fresh shadow canary؛ لا runtime switch ولا UI ولا `SF-50M`.
   - أضيف [PHASE27_66_V8_BOUNDED_TOPIC_REPAIR_REPORT.md](./PHASE27_66_V8_BOUNDED_TOPIC_REPAIR_REPORT.md).
+- بدأ وانتهى Phase 27.67 Fresh Shadow Canary:
+  - أضيف `make phase27-fresh-shadow-canary`.
+  - لا تدريب جديد في هذه المرحلة.
+  - اختُبر checkpoint Phase 27.66 على `50` سؤالًا جديدًا غير مطابق للتدريب/canary السابق.
+  - novelty: `50/50`.
+  - النتيجة: `30/50` فقط.
+  - family summary: open_social `4/10`, followup `4/10`, planning `7/10`, support `6/10`, topic `9/10`.
+  - القرار: لا runtime switch ولا UI؛ Phase 27.68 يجب أن يصلح انجراف العائلات قبل أي فتح واجهة.
+  - أضيف [PHASE27_67_FRESH_SHADOW_CANARY_REPORT.md](./PHASE27_67_FRESH_SHADOW_CANARY_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 

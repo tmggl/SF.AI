@@ -363,3 +363,20 @@ Phase 27.66 دربت LM repair محدودًا على tokenizer v8:
 - لا فتح واجهة على checkpoint الجديد.
 - لا `SF-50M` ولا Phase 28.
 - التالي Phase 27.67 fresh shadow canary بأسئلة طبيعية غير مرئية؛ فقط إذا نجح fresh canary نراجع runtime switch.
+
+## قرار Phase 27.67
+
+Phase 27.67 اختبرت checkpoint Phase 27.66 بدون تدريب جديد:
+
+- prompts: `50`.
+- novelty: `50/50`.
+- fresh shadow canary: `30/50`.
+- family summary: open_social `4/10`, followup `4/10`, planning `7/10`, support `6/10`, topic `9/10`.
+
+قرار scaling:
+
+- لا رفع حجم.
+- لا runtime switch.
+- لا فتح واجهة على checkpoint الجديد.
+- لا `SF-50M` ولا Phase 28.
+- التالي Phase 27.68 إصلاح موجّه للفشل؛ فشل fresh prompts يعني أن البيانات/الهدف أهم من الحجم الآن.
