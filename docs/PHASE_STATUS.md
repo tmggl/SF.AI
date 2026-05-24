@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.107 / 30**
-- **المرحلة الحالية:** **Phase 27.107 — Social Subfamily + Topic Variant Gate Encoding**
-- **حالة المرحلة الحالية:** **البوابة مرّت؛ canary رسمي جاهز؛ التالي data pack محكوم؛ لا تدريب جديد ولا SF-50M**
-- **المرحلة التالية المقترحة:** Phase 27.108 — Social Subfamily + Topic Variant Data Pack.
+- **الرحلة الحالية:** **Phase 27.109 / 30**
+- **المرحلة الحالية:** **Phase 27.109 — Free Linguistic Resource Intake Gate**
+- **حالة المرحلة الحالية:** **اكتمل تصنيف المصادر المجانية: Masader metadata مسحوبة؛ 7 مصادر مرشحة؛ لا تدريب خارجي الآن**
+- **المرحلة التالية المقترحة:** Phase 27.110 — Qabas/Masader/Tashkeela Licensed Ingestion Design.
 - **التحول الاستراتيجي المعتمد:** **SF-native Objective/Curriculum/Decoding Acceleration Track** — تسريع هندسي فقط؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -163,6 +163,8 @@
 | Phase 27.105 | Raw UI Lab Result Diagnosis | ✅ diagnosed_raw_ui_lab_failures_no_training | ✅ |
 | Phase 27.106 | Social Subfamily + Topic Variant Objective Design | ✅ design_ready_gate_encoding_no_training | ✅ |
 | Phase 27.107 | Social Subfamily + Topic Variant Gate Encoding | ✅ gate_passed_data_pack_allowed_no_training | ✅ |
+| Phase 27.108 | Social Subfamily + Topic Variant Data Pack | ✅ data_pack_ready_for_audit_no_training | ✅ |
+| Phase 27.109 | Free Linguistic Resource Intake Gate | ✅ free_resource_intake_ready_no_training | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1095,7 +1097,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 |------|------|
 | full pytest suite | `696 passed in 84.74s (0:01:24)` |
 | focused Phase 27.81/API/UI tests | `79 passed in 18.40s` |
-| `make corpus-audit` | `8645` records, `issues=0` |
+| `make corpus-audit` | `9125` records, `issues=0` |
 | `make phase27-dialogue-eval` | `19/19`, `open_generator_ready=false` |
 
 ---
@@ -1897,6 +1899,71 @@ make api
   - `artifacts/reports/phase27_107_social_subfamily_topic_variant_gate_report.json`
   - `artifacts/reports/PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_DECISION.json`
   - `artifacts/reports/phase27_107_social_subfamily_topic_variant_canary.json`
+
+---
+
+## Phase 27.108 — Social Subfamily + Topic Variant Data Pack
+
+**الحالة:** مكتملة كحزمة بيانات. لا تدريب.
+
+- status: `PHASE27_108_DATA_PACK_READY_FOR_AUDIT_NO_TRAINING`.
+- القرار: `PHASE27_108_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DATA_PACK_DECISION`.
+- أضيفت `480` سجلًا gold:
+  - `360` social subfamily records.
+  - `120` topic variant records.
+- التوازن:
+  - `msa=240`
+  - `saudi=240`
+  - `30` سجلًا لكل social subfamily في كل لهجة.
+  - `30` سجلًا لكل topic canonical في كل لهجة.
+- الملفات:
+  - `data/corpus/chat/jsonl/dialogue_batch_v14_social_subfamily_msa_014.jsonl`
+  - `data/corpus/chat/jsonl/dialogue_batch_v14_social_subfamily_saudi_014.jsonl`
+  - `data/corpus/chat/jsonl/dialogue_batch_v14_topic_variants_msa_014.jsonl`
+  - `data/corpus/chat/jsonl/dialogue_batch_v14_topic_variants_saudi_014.jsonl`
+- نتيجة `make corpus-audit`:
+  - `total_records=9125`
+  - `training_ready=9125`
+  - `issues=0`
+  - `gold=4013`
+  - `silver=5112`
+- التالي المسموح بعد اكتمال مرحلة المصادر: Phase 27.110 licensed ingestion design.
+- المحظور: training، runtime release رسمي، SF-50M، tokenizer retrain،
+  pretrained/open-weight.
+- التقارير:
+  - [PHASE27_108_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DATA_PACK_REPORT.md](./PHASE27_108_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DATA_PACK_REPORT.md)
+  - `artifacts/reports/phase27_108_social_subfamily_topic_variant_data_pack_report.json`
+  - `artifacts/reports/PHASE27_108_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DATA_PACK_DECISION.json`
+
+---
+
+## Phase 27.109 — Free Linguistic Resource Intake Gate
+
+**الحالة:** مكتملة كبوابة مصادر. لا تدريب ولا إدخال نصوص خارجية في corpus.
+
+- status: `PHASE27_109_FREE_RESOURCE_INTAKE_READY_NO_TRAINING`.
+- القرار: `PHASE27_109_FREE_LINGUISTIC_RESOURCE_INTAKE_GATE_DECISION`.
+- الهدف: اختصار الطريق بمصادر لغوية جاهزة ومجانية دون كسر السيادة.
+- المرشحون:
+  - `Masader`: فهرس metadata عربي، مسموح للاكتشاف والترخيص فقط.
+  - `Qabas`: معجم عربي ضخم مرشح للكلمات/الموضوعات/protected terms.
+  - `Tashkeela`: corpus فصيح مشكول مرشح بعد gate ترخيص وتنظيف.
+  - `OSIAN`: مقيّد non-commercial، eval/vocabulary-only حتى قرار ترخيص.
+  - `Arabic Learner Corpus`: مرشح لاستخراج أخطاء وتقييم robustness.
+  - `fr3on Arabic Dialect Corpus`: مرشح vocabulary/eval للهجة بعد privacy/provenance gate.
+  - `ArSyra`: محجوب حتى اختيار مسار ترخيص واضح.
+- تم سحب metadata من Masader:
+  - `resources/external_sources/masader_datasets_index_summary.json`
+  - `file_count=1000`
+  - لا نصوص تدريب خارجية دخلت `data/corpus`.
+- الملفات:
+  - `resources/external_sources/free_linguistic_resources_manifest.json`
+  - `artifacts/reports/phase27_109_free_linguistic_resource_intake_gate_report.json`
+  - `artifacts/reports/PHASE27_109_FREE_LINGUISTIC_RESOURCE_INTAKE_GATE_DECISION.json`
+  - [PHASE27_109_FREE_LINGUISTIC_RESOURCE_INTAKE_GATE_REPORT.md](./PHASE27_109_FREE_LINGUISTIC_RESOURCE_INTAKE_GATE_REPORT.md)
+- التالي: Phase 27.110 — Qabas/Masader/Tashkeela Licensed Ingestion Design.
+- المحظور: external training text import، pretrained vocab، tokenizer merges،
+  runtime release، SF-50M.
 
 ---
 

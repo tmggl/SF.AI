@@ -1,0 +1,10 @@
+{
+  "decision_id": "PHASE27_109_FREE_LINGUISTIC_RESOURCE_INTAKE_GATE_DECISION",
+  "engineering_decision": "ALLOW_PHASE27_110_QABAS_MASADER_TASHKEELA_LICENSED_INGESTION_DESIGN_NO_TRAINING",
+  "metadata_fetch_allowed": true,
+  "external_training_text_import_allowed": false,
+  "external_tokenizer_vocab_import_allowed": false,
+  "pretrained_weights_allowed": false,
+  "runtime_release_allowed": false,
+  "next_phase": "Phase 27.110 — Qabas/Masader/Tashkeela Licensed Ingestion Design"
+}

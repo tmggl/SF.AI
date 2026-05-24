@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.107
-الاسم: Social Subfamily + Topic Variant Gate Encoding
+المرحلة الحالية: Phase 27.109
+الاسم: Free Linguistic Resource Intake Gate
 المسار الملزم: SF-native Objective/Curriculum/Decoding Acceleration Track
-القرار الرسمي: PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_DECISION
+القرار الرسمي: PHASE27_109_FREE_LINGUISTIC_RESOURCE_INTAKE_GATE_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -102,6 +102,11 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   وtopic variant canonical mapping.
 - Phase 27.107 مرّر بوابة renderer/canary، وسمح فقط بـ data pack في
   Phase 27.108 دون training.
+- Phase 27.108 كتب `480` سجل gold جديدًا للسوالف الفرعية وتنويعات
+  الصداقة/الأخوة، ومرّ `make corpus-audit` على `9125/9125` سجلًا بلا مشاكل.
+- Phase 27.109 اعتمد الطريق المختصر المجاني: `Masader` للmetadata،
+  `Qabas` للمعجم والموضوعات، و`Tashkeela` للفصحى المشكولة بعد gate ترخيص.
+  تم سحب summary من Masader، ولم يدخل أي نص خارجي إلى corpus.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
@@ -112,7 +117,11 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   `docs/PHASE27_106_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DESIGN_REPORT.md`.
 - تقرير البوابة الحالي:
   `docs/PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_REPORT.md`.
-- التالي: `Phase 27.108 — Social Subfamily + Topic Variant Data Pack`.
+- تقرير الحزمة الحالي:
+  `docs/PHASE27_108_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DATA_PACK_REPORT.md`.
+- تقرير المصادر الحالي:
+  `docs/PHASE27_109_FREE_LINGUISTIC_RESOURCE_INTAKE_GATE_REPORT.md`.
+- التالي: `Phase 27.110 — Qabas/Masader/Tashkeela Licensed Ingestion Design`.
 
 الدليل السابق الذي سبب هذا re-anchor:
 
@@ -132,7 +141,7 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - نتيجة 27.92: صُمم objective مخصص لعائلة `topic` باسم `topic_anchor_prompt_to_answer_objective_v1`، مع شرط `الموضوع المطلوب: <topic_term>` وبوابات canary قبل أي تدريب.
 - نتيجة 27.93: أضيف سطر `الموضوع المطلوب: <topic_term>` إلى renderer لعائلة topic، ومرّ dry-run للـ renderer/masking/canary.
 - نتيجة 27.94: أضيفت `10` سجلات سعودية gold لموضوع `الوفاء`، وأُغلقت فجوة البيانات المحددة دون تدريب ودون runtime.
-- corpus الحالي: `8645` (`msa=4295`, `saudi=4350`, `gold=3533`, `silver=5112`).
+- corpus الحالي: `9125` (`msa=4535`, `saudi=4590`, `gold=4013`, `silver=5112`).
 - إعادة بوابة 27.93 بعد 27.94: `training_data_ready=true`, `shortfalls={}`, و`الوفاء` صار `total=22`, `msa=12`, `saudi=10`.
 - نتيجة 27.95: تدريب SF-10M محدود اكتمل، لكن البوابات فشلت: known topic `10/16`, fresh topic `4/10`, all-family `33/50`.
 - نتيجة 27.96: التشخيص أثبت `topic_variable_binding_failure`: لا حارس يحجب الإخفاقات، بل النموذج يستبدل الموضوع المطلوب بموضوعات مجاورة. `wrong_topic_substitution_count=11`, وأكثر بديل خاطئ `الصداقة=6`.
@@ -368,6 +377,7 @@ SF-10M
 | Phase 27.105 raw UI lab diagnosis | المولد الحقيقي يعمل في lab؛ فشل social subfamilies وtopic variants؛ لا تدريب |
 | Phase 27.106 design | renderer صار يدعم social subfamily وtopic variants؛ لا تدريب |
 | Phase 27.107 gate | gate مرّت؛ data pack مسموح فقط؛ لا تدريب |
+| Phase 27.108 data pack | 480 سجل gold؛ corpus-audit نظيف؛ audit/gate فقط تاليًا |
 
 الدرس الأساسي من Phase 27:
 
@@ -383,16 +393,17 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.108 — Social Subfamily + Topic Variant Data Pack
+Phase 27.110 — Qabas/Masader/Tashkeela Licensed Ingestion Design
 ```
 
 مطلوب منها:
 
-- تأليف data pack سيادي gold لتغطية social subfamilies وtopic variants.
-- فصحى + سعودي فقط.
-- لا project workflow dialogue.
-- لا external/pretrained data.
-- ممنوع training/SF-50M/tokenizer retrain قبل data pack audit.
+- تصميم إدخال مرخص للمصادر المجانية المرشحة.
+- تحديد هل يستخدم Qabas كـ vocabulary/topic bootstrap فقط أم يدخل طبقة
+  lexicon مستقلة.
+- تحديد هل Tashkeela تدخل كـ MSA text lane بعد التنظيف أم تبقى eval-only.
+- فلترة Masader إلى shortlist مصادر تدريب/تقييم/مفردات مع license gates.
+- ممنوع training/SF-50M/tokenizer retrain/runtime release قبل هذه البوابة.
 
 ممنوع قبل نجاح البوابات:
 

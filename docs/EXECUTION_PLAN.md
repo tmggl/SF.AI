@@ -4577,7 +4577,7 @@ Final Response
 
 ---
 
-## الحالة العملية الحالية — Phase 27.107
+## الحالة العملية الحالية — Phase 27.109
 
 المسار الحاكم هو:
 
@@ -4588,7 +4588,7 @@ SF-native Objective/Curriculum/Decoding Acceleration Track
 آخر قرار:
 
 ```text
-PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_DECISION
+PHASE27_109_FREE_LINGUISTIC_RESOURCE_INTAKE_GATE_DECISION
 ```
 
 الخلاصة:
@@ -4605,13 +4605,21 @@ PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_DECISION
   - `topic_variant`
   - `نوع السوالف: تحية/سؤال حال/فتح سالفة/شكر/هوية/قدرات`
 - Phase 27.107 مرّر gate التنفيذية وأثبت canary من أسلوب اختبار الواجهة.
-- لا تدريب جديد قبل data pack audit لاحق.
+- Phase 27.108 أضاف data pack سياديًا: `480` سجلًا gold لتغطية social
+  subfamilies وtopic variants.
+- `make corpus-audit` بعد Phase 27.108: `9125/9125` training-ready،
+  `issues=0`.
+- Phase 27.109 نقلنا إلى الطريق المختصر المجاني: تصنيف مصادر لغوية جاهزة
+  مثل `Masader`, `Qabas`, `Tashkeela` دون استيراد نصوص تدريبية بعد.
+- تم سحب metadata من Masader (`file_count=1000`) إلى
+  `resources/external_sources/masader_datasets_index_summary.json`.
+- لا تدريب جديد قبل Phase 27.110 licensed ingestion design.
 - لا SF-50M قبل gate يثبت أن capacity هي السبب الأكبر.
 
 التالي:
 
 ```text
-Phase 27.108 — Social Subfamily + Topic Variant Data Pack
+Phase 27.110 — Qabas/Masader/Tashkeela Licensed Ingestion Design
 ```
 
 ---

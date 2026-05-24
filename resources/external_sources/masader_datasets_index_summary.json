@@ -1,0 +1,569 @@
+{
+  "source": "https://api.github.com/repos/ARBML/masader/contents/datasets",
+  "fetched": true,
+  "file_count": 1000,
+  "candidate_preview_count": 80,
+  "candidate_preview": [
+    {
+      "name": "101_billion_arabic_words_dataset.json",
+      "path": "datasets/101_billion_arabic_words_dataset.json",
+      "size": 3320,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/101_billion_arabic_words_dataset.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/101_billion_arabic_words_dataset.json"
+    },
+    {
+      "name": "1997_hub5_arabic_evaluation.json",
+      "path": "datasets/1997_hub5_arabic_evaluation.json",
+      "size": 1345,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/1997_hub5_arabic_evaluation.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/1997_hub5_arabic_evaluation.json"
+    },
+    {
+      "name": "1997_hub5_arabic_transcripts.json",
+      "path": "datasets/1997_hub5_arabic_transcripts.json",
+      "size": 1052,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/1997_hub5_arabic_transcripts.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/1997_hub5_arabic_transcripts.json"
+    },
+    {
+      "name": "2006_conll_shared_task_-_arabic_&_czech.json",
+      "path": "datasets/2006_conll_shared_task_-_arabic_&_czech.json",
+      "size": 1186,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/2006_conll_shared_task_-_arabic_%26_czech.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/2006_conll_shared_task_-_arabic_&_czech.json"
+    },
+    {
+      "name": "2007_conll_shared_task_-_arabic_&_english.json",
+      "path": "datasets/2007_conll_shared_task_-_arabic_&_english.json",
+      "size": 1801,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/2007_conll_shared_task_-_arabic_%26_english.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/2007_conll_shared_task_-_arabic_&_english.json"
+    },
+    {
+      "name": "a_corpus_of_arabic_literature_(19-20th_centuries)_for_stylometric_tests.json",
+      "path": "datasets/a_corpus_of_arabic_literature_(19-20th_centuries)_for_stylometric_tests.json",
+      "size": 1560,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/a_corpus_of_arabic_literature_(19-20th_centuries)_for_stylometric_tests.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/a_corpus_of_arabic_literature_(19-20th_centuries)_for_stylometric_tests.json"
+    },
+    {
+      "name": "adult_content_detection_on_arabic_twitter__analysis_and_experiments.json",
+      "path": "datasets/adult_content_detection_on_arabic_twitter__analysis_and_experiments.json",
+      "size": 2031,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/adult_content_detection_on_arabic_twitter__analysis_and_experiments.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/adult_content_detection_on_arabic_twitter__analysis_and_experiments.json"
+    },
+    {
+      "name": "afrd__arabic_fake_reviews_detection.json",
+      "path": "datasets/afrd__arabic_fake_reviews_detection.json",
+      "size": 3391,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/afrd__arabic_fake_reviews_detection.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/afrd__arabic_fake_reviews_detection.json"
+    },
+    {
+      "name": "al-hayat_arabic_corpus.json",
+      "path": "datasets/al-hayat_arabic_corpus.json",
+      "size": 1611,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/al-hayat_arabic_corpus.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/al-hayat_arabic_corpus.json"
+    },
+    {
+      "name": "alc__arabic_learner_corpus.json",
+      "path": "datasets/alc__arabic_learner_corpus.json",
+      "size": 1204,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/alc__arabic_learner_corpus.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/alc__arabic_learner_corpus.json"
+    },
+    {
+      "name": "aljazeera-dialectal_speech.json",
+      "path": "datasets/aljazeera-dialectal_speech.json",
+      "size": 2607,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/aljazeera-dialectal_speech.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/aljazeera-dialectal_speech.json"
+    },
+    {
+      "name": "alr__arabic_laptop_reviews_dataset.json",
+      "path": "datasets/alr__arabic_laptop_reviews_dataset.json",
+      "size": 3059,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/alr__arabic_laptop_reviews_dataset.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/alr__arabic_laptop_reviews_dataset.json"
+    },
+    {
+      "name": "amazon_reviews_msa_bd.json",
+      "path": "datasets/amazon_reviews_msa_bd.json",
+      "size": 2828,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/amazon_reviews_msa_bd.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/amazon_reviews_msa_bd.json"
+    },
+    {
+      "name": "anad__arabic_natural_audio_dataset.json",
+      "path": "datasets/anad__arabic_natural_audio_dataset.json",
+      "size": 1529,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/anad__arabic_natural_audio_dataset.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/anad__arabic_natural_audio_dataset.json"
+    },
+    {
+      "name": "apgc_v1_0__arabic_parallel_gender_corpus_v1_0.json",
+      "path": "datasets/apgc_v1_0__arabic_parallel_gender_corpus_v1_0.json",
+      "size": 2474,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/apgc_v1_0__arabic_parallel_gender_corpus_v1_0.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/apgc_v1_0__arabic_parallel_gender_corpus_v1_0.json"
+    },
+    {
+      "name": "apgc_v2_0__arabic_parallel_gender_corpus_v2_0.json",
+      "path": "datasets/apgc_v2_0__arabic_parallel_gender_corpus_v2_0.json",
+      "size": 3137,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/apgc_v2_0__arabic_parallel_gender_corpus_v2_0.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/apgc_v2_0__arabic_parallel_gender_corpus_v2_0.json"
+    },
+    {
+      "name": "aqad__arabic_question-answer_dataset.json",
+      "path": "datasets/aqad__arabic_question-answer_dataset.json",
+      "size": 2323,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/aqad__arabic_question-answer_dataset.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/aqad__arabic_question-answer_dataset.json"
+    },
+    {
+      "name": "ar-embiddings__arabic_word_embeddings_for_sentiment_analysis.json",
+      "path": "datasets/ar-embiddings__arabic_word_embeddings_for_sentiment_analysis.json",
+      "size": 2338,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/ar-embiddings__arabic_word_embeddings_for_sentiment_analysis.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/ar-embiddings__arabic_word_embeddings_for_sentiment_analysis.json"
+    },
+    {
+      "name": "arabic-dataset-for-capt.json",
+      "path": "datasets/arabic-dataset-for-capt.json",
+      "size": 2612,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic-dataset-for-capt.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic-dataset-for-capt.json"
+    },
+    {
+      "name": "arabic-dialect_english_parallel_text.json",
+      "path": "datasets/arabic-dialect_english_parallel_text.json",
+      "size": 2707,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic-dialect_english_parallel_text.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic-dialect_english_parallel_text.json"
+    },
+    {
+      "name": "arabic-english_named_entities_dataset.json",
+      "path": "datasets/arabic-english_named_entities_dataset.json",
+      "size": 2993,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic-english_named_entities_dataset.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic-english_named_entities_dataset.json"
+    },
+    {
+      "name": "arabic-hebrew_ted_talks_parallel_corpus.json",
+      "path": "datasets/arabic-hebrew_ted_talks_parallel_corpus.json",
+      "size": 2016,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic-hebrew_ted_talks_parallel_corpus.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic-hebrew_ted_talks_parallel_corpus.json"
+    },
+    {
+      "name": "arabic-multi-classification-dataset-amcd.json",
+      "path": "datasets/arabic-multi-classification-dataset-amcd.json",
+      "size": 1343,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic-multi-classification-dataset-amcd.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic-multi-classification-dataset-amcd.json"
+    },
+    {
+      "name": "arabic-news.json",
+      "path": "datasets/arabic-news.json",
+      "size": 1049,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic-news.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic-news.json"
+    },
+    {
+      "name": "arabic-ocr.json",
+      "path": "datasets/arabic-ocr.json",
+      "size": 2071,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic-ocr.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic-ocr.json"
+    },
+    {
+      "name": "arabic-openhermes-2_5.json",
+      "path": "datasets/arabic-openhermes-2_5.json",
+      "size": 1112,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic-openhermes-2_5.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic-openhermes-2_5.json"
+    },
+    {
+      "name": "arabic-poem-emotion.json",
+      "path": "datasets/arabic-poem-emotion.json",
+      "size": 998,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic-poem-emotion.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic-poem-emotion.json"
+    },
+    {
+      "name": "arabic-stories-corpus.json",
+      "path": "datasets/arabic-stories-corpus.json",
+      "size": 1007,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic-stories-corpus.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic-stories-corpus.json"
+    },
+    {
+      "name": "arabic_-_egyptian_comparable_wikipedia_corpus.json",
+      "path": "datasets/arabic_-_egyptian_comparable_wikipedia_corpus.json",
+      "size": 2454,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_-_egyptian_comparable_wikipedia_corpus.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_-_egyptian_comparable_wikipedia_corpus.json"
+    },
+    {
+      "name": "arabic_100k_reviews.json",
+      "path": "datasets/arabic_100k_reviews.json",
+      "size": 1394,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_100k_reviews.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_100k_reviews.json"
+    },
+    {
+      "name": "arabic_ala_lc__romanization.json",
+      "path": "datasets/arabic_ala_lc__romanization.json",
+      "size": 2056,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_ala_lc__romanization.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_ala_lc__romanization.json"
+    },
+    {
+      "name": "arabic_analogy.json",
+      "path": "datasets/arabic_analogy.json",
+      "size": 2235,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_analogy.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_analogy.json"
+    },
+    {
+      "name": "arabic_billion_words.json",
+      "path": "datasets/arabic_billion_words.json",
+      "size": 1926,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_billion_words.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_billion_words.json"
+    },
+    {
+      "name": "arabic_broadcast_news_speech.json",
+      "path": "datasets/arabic_broadcast_news_speech.json",
+      "size": 1403,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_broadcast_news_speech.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_broadcast_news_speech.json"
+    },
+    {
+      "name": "arabic_broadcast_news_transcripts.json",
+      "path": "datasets/arabic_broadcast_news_transcripts.json",
+      "size": 1266,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_broadcast_news_transcripts.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_broadcast_news_transcripts.json"
+    },
+    {
+      "name": "arabic_business_corpora.json",
+      "path": "datasets/arabic_business_corpora.json",
+      "size": 1106,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_business_corpora.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_business_corpora.json"
+    },
+    {
+      "name": "arabic_common_voice.json",
+      "path": "datasets/arabic_common_voice.json",
+      "size": 2875,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_common_voice.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_common_voice.json"
+    },
+    {
+      "name": "arabic_cts_levantine_fisher_training_data_set_3,_speech.json",
+      "path": "datasets/arabic_cts_levantine_fisher_training_data_set_3,_speech.json",
+      "size": 1138,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_cts_levantine_fisher_training_data_set_3%2C_speech.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_cts_levantine_fisher_training_data_set_3,_speech.json"
+    },
+    {
+      "name": "arabic_cts_levantine_fisher_training_data_set_3,_transcripts.json",
+      "path": "datasets/arabic_cts_levantine_fisher_training_data_set_3,_transcripts.json",
+      "size": 1507,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_cts_levantine_fisher_training_data_set_3%2C_transcripts.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_cts_levantine_fisher_training_data_set_3,_transcripts.json"
+    },
+    {
+      "name": "arabic_cultural_mcq_dataset.json",
+      "path": "datasets/arabic_cultural_mcq_dataset.json",
+      "size": 1859,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_cultural_mcq_dataset.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_cultural_mcq_dataset.json"
+    },
+    {
+      "name": "arabic_dev2.json",
+      "path": "datasets/arabic_dev2.json",
+      "size": 2441,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_dev2.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_dev2.json"
+    },
+    {
+      "name": "arabic_dialects_dataset.json",
+      "path": "datasets/arabic_dialects_dataset.json",
+      "size": 3562,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_dialects_dataset.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_dialects_dataset.json"
+    },
+    {
+      "name": "arabic_dictionary_of_inflected_words.json",
+      "path": "datasets/arabic_dictionary_of_inflected_words.json",
+      "size": 1348,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_dictionary_of_inflected_words.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_dictionary_of_inflected_words.json"
+    },
+    {
+      "name": "arabic_document_classification_dataset.json",
+      "path": "datasets/arabic_document_classification_dataset.json",
+      "size": 2086,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_document_classification_dataset.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_document_classification_dataset.json"
+    },
+    {
+      "name": "arabic_empathetic_dialogues.json",
+      "path": "datasets/arabic_empathetic_dialogues.json",
+      "size": 2742,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_empathetic_dialogues.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_empathetic_dialogues.json"
+    },
+    {
+      "name": "arabic_english_parallel_news_part_1.json",
+      "path": "datasets/arabic_english_parallel_news_part_1.json",
+      "size": 1180,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_english_parallel_news_part_1.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_english_parallel_news_part_1.json"
+    },
+    {
+      "name": "arabic_fact_checking_corpus.json",
+      "path": "datasets/arabic_fact_checking_corpus.json",
+      "size": 2475,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_fact_checking_corpus.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_fact_checking_corpus.json"
+    },
+    {
+      "name": "arabic_flood_twitter_dataset.json",
+      "path": "datasets/arabic_flood_twitter_dataset.json",
+      "size": 2246,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_flood_twitter_dataset.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_flood_twitter_dataset.json"
+    },
+    {
+      "name": "arabic_gigaword.json",
+      "path": "datasets/arabic_gigaword.json",
+      "size": 1100,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_gigaword.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_gigaword.json"
+    },
+    {
+      "name": "arabic_gigaword_fifth_edition.json",
+      "path": "datasets/arabic_gigaword_fifth_edition.json",
+      "size": 1686,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_gigaword_fifth_edition.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_gigaword_fifth_edition.json"
+    },
+    {
+      "name": "arabic_gigaword_fourth_edition.json",
+      "path": "datasets/arabic_gigaword_fourth_edition.json",
+      "size": 1414,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_gigaword_fourth_edition.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_gigaword_fourth_edition.json"
+    },
+    {
+      "name": "arabic_gigaword_second_edition.json",
+      "path": "datasets/arabic_gigaword_second_edition.json",
+      "size": 1555,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_gigaword_second_edition.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_gigaword_second_edition.json"
+    },
+    {
+      "name": "arabic_gigaword_third_edition.json",
+      "path": "datasets/arabic_gigaword_third_edition.json",
+      "size": 1176,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_gigaword_third_edition.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_gigaword_third_edition.json"
+    },
+    {
+      "name": "arabic_hate_speech_2022_shared_task.json",
+      "path": "datasets/arabic_hate_speech_2022_shared_task.json",
+      "size": 2952,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_hate_speech_2022_shared_task.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_hate_speech_2022_shared_task.json"
+    },
+    {
+      "name": "arabic_humor.json",
+      "path": "datasets/arabic_humor.json",
+      "size": 2169,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_humor.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_humor.json"
+    },
+    {
+      "name": "arabic_img2md.json",
+      "path": "datasets/arabic_img2md.json",
+      "size": 2359,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_img2md.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_img2md.json"
+    },
+    {
+      "name": "arabic_infectious_disease_ontology.json",
+      "path": "datasets/arabic_infectious_disease_ontology.json",
+      "size": 2961,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_infectious_disease_ontology.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_infectious_disease_ontology.json"
+    },
+    {
+      "name": "arabic_keyphrase_dataset.json",
+      "path": "datasets/arabic_keyphrase_dataset.json",
+      "size": 1809,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_keyphrase_dataset.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_keyphrase_dataset.json"
+    },
+    {
+      "name": "arabic_machine_generated_text_dataset.json",
+      "path": "datasets/arabic_machine_generated_text_dataset.json",
+      "size": 3343,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_machine_generated_text_dataset.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_machine_generated_text_dataset.json"
+    },
+    {
+      "name": "arabic_morphological_dictionary.json",
+      "path": "datasets/arabic_morphological_dictionary.json",
+      "size": 1112,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_morphological_dictionary.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_morphological_dictionary.json"
+    },
+    {
+      "name": "arabic_named_entities.json",
+      "path": "datasets/arabic_named_entities.json",
+      "size": 2833,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_named_entities.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_named_entities.json"
+    },
+    {
+      "name": "arabic_named_entity_gazetteer.json",
+      "path": "datasets/arabic_named_entity_gazetteer.json",
+      "size": 2156,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_named_entity_gazetteer.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_named_entity_gazetteer.json"
+    },
+    {
+      "name": "arabic_natural_audio_dataset.json",
+      "path": "datasets/arabic_natural_audio_dataset.json",
+      "size": 2621,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_natural_audio_dataset.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_natural_audio_dataset.json"
+    },
+    {
+      "name": "arabic_news_articles.json",
+      "path": "datasets/arabic_news_articles.json",
+      "size": 1032,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_news_articles.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_news_articles.json"
+    },
+    {
+      "name": "arabic_news_articles_from_aljazeera_net.json",
+      "path": "datasets/arabic_news_articles_from_aljazeera_net.json",
+      "size": 1707,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_news_articles_from_aljazeera_net.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_news_articles_from_aljazeera_net.json"
+    },
+    {
+      "name": "arabic_news_dataset_about_hajj.json",
+      "path": "datasets/arabic_news_dataset_about_hajj.json",
+      "size": 1396,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_news_dataset_about_hajj.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_news_dataset_about_hajj.json"
+    },
+    {
+      "name": "arabic_news_translation_text_part_1.json",
+      "path": "datasets/arabic_news_translation_text_part_1.json",
+      "size": 1040,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_news_translation_text_part_1.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_news_translation_text_part_1.json"
+    },
+    {
+      "name": "arabic_news_tweets.json",
+      "path": "datasets/arabic_news_tweets.json",
+      "size": 1996,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_news_tweets.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_news_tweets.json"
+    },
+    {
+      "name": "arabic_newswire_english_translation_collection.json",
+      "path": "datasets/arabic_newswire_english_translation_collection.json",
+      "size": 1158,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_newswire_english_translation_collection.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_newswire_english_translation_collection.json"
+    },
+    {
+      "name": "arabic_newswire_part_1.json",
+      "path": "datasets/arabic_newswire_part_1.json",
+      "size": 1247,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_newswire_part_1.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_newswire_part_1.json"
+    },
+    {
+      "name": "arabic_nli_pair.json",
+      "path": "datasets/arabic_nli_pair.json",
+      "size": 2798,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_nli_pair.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_nli_pair.json"
+    },
+    {
+      "name": "arabic_nli_pair_class.json",
+      "path": "datasets/arabic_nli_pair_class.json",
+      "size": 2828,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_nli_pair_class.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_nli_pair_class.json"
+    },
+    {
+      "name": "arabic_nli_triplet.json",
+      "path": "datasets/arabic_nli_triplet.json",
+      "size": 2811,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_nli_triplet.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_nli_triplet.json"
+    },
+    {
+      "name": "arabic_ontology.json",
+      "path": "datasets/arabic_ontology.json",
+      "size": 2520,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_ontology.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_ontology.json"
+    },
+    {
+      "name": "arabic_osact4___offensive_language_detection.json",
+      "path": "datasets/arabic_osact4___offensive_language_detection.json",
+      "size": 2254,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_osact4___offensive_language_detection.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_osact4___offensive_language_detection.json"
+    },
+    {
+      "name": "arabic_osact5___arabic_hate_speech.json",
+      "path": "datasets/arabic_osact5___arabic_hate_speech.json",
+      "size": 2833,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_osact5___arabic_hate_speech.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_osact5___arabic_hate_speech.json"
+    },
+    {
+      "name": "arabic_oscar.json",
+      "path": "datasets/arabic_oscar.json",
+      "size": 2293,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_oscar.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_oscar.json"
+    },
+    {
+      "name": "arabic_paraphrased_dataset.json",
+      "path": "datasets/arabic_paraphrased_dataset.json",
+      "size": 2835,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_paraphrased_dataset.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_paraphrased_dataset.json"
+    },
+    {
+      "name": "arabic_pos_dialect.json",
+      "path": "datasets/arabic_pos_dialect.json",
+      "size": 2888,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_pos_dialect.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_pos_dialect.json"
+    },
+    {
+      "name": "arabic_punctuation_dataset.json",
+      "path": "datasets/arabic_punctuation_dataset.json",
+      "size": 3022,
+      "download_url": "https://raw.githubusercontent.com/ARBML/masader/main/datasets/arabic_punctuation_dataset.json",
+      "html_url": "https://github.com/ARBML/masader/blob/main/datasets/arabic_punctuation_dataset.json"
+    }
+  ],
+  "note": "Metadata only. No external training text was imported."
+}

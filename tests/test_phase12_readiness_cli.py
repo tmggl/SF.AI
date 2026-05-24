@@ -17,8 +17,8 @@ def test_phase12_readiness_decision_blocks_training_permission() -> None:
     assert decision.action == "PHASE12_V1_COMPLETED_CONTINUE_PHASE22_CORPUS_TARGET"
     assert decision.required_permission_phrase == "ابدأ Phase 12"
     assert decision.required_confirmation_flag == "--confirm-phase12-permission"
-    assert decision.corpus_training_ready == 8645
-    assert decision.corpus_dialect_counts == {"msa": 4295, "saudi": 4350}
+    assert decision.corpus_training_ready == 9125
+    assert decision.corpus_dialect_counts == {"msa": 4535, "saudi": 4590}
     assert decision.required_dialects == ("msa", "saudi")
     assert decision.missing_required_dialects == ()
     assert decision.language_balance_status == "READY_MSA_AND_SAUDI"

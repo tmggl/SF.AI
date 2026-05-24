@@ -518,6 +518,12 @@ phase27-topic-prototype-contrastive-curriculum-pack:
 phase27-bounded-topic-prototype-contrastive-repair:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_104_bounded_topic_prototype_contrastive_repair.py $(ARGS)
 
+phase27-social-subfamily-topic-variant-data-pack:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_108_write_social_subfamily_topic_variant_pack.py $(ARGS)
+
+phase27-free-linguistic-resource-intake:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_109_free_linguistic_resource_intake_gate.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 

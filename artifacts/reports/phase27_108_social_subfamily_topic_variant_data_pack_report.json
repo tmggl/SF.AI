@@ -1,0 +1,132 @@
+{
+  "phase": "Phase 27.108",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "status": "PHASE27_108_DATA_PACK_READY_FOR_AUDIT_NO_TRAINING",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_changed": false,
+  "files": {
+    "social_msa": "data/corpus/chat/jsonl/dialogue_batch_v14_social_subfamily_msa_014.jsonl",
+    "social_saudi": "data/corpus/chat/jsonl/dialogue_batch_v14_social_subfamily_saudi_014.jsonl",
+    "topic_msa": "data/corpus/chat/jsonl/dialogue_batch_v14_topic_variants_msa_014.jsonl",
+    "topic_saudi": "data/corpus/chat/jsonl/dialogue_batch_v14_topic_variants_saudi_014.jsonl"
+  },
+  "summary": {
+    "total_records": 480,
+    "dialect_counts": {
+      "msa": 240,
+      "saudi": 240
+    },
+    "social_subfamily_counts": {
+      "msa:greeting": 30,
+      "msa:smalltalk": 30,
+      "msa:open_chat": 30,
+      "msa:thanks": 30,
+      "msa:identity": 30,
+      "msa:capability": 30,
+      "saudi:greeting": 30,
+      "saudi:smalltalk": 30,
+      "saudi:open_chat": 30,
+      "saudi:thanks": 30,
+      "saudi:identity": 30,
+      "saudi:capability": 30
+    },
+    "topic_counts": {
+      "msa:الصداقة": 30,
+      "msa:الأخوة": 30,
+      "saudi:الصداقة": 30,
+      "saudi:الأخوة": 30
+    },
+    "quality": {
+      "gold": 480,
+      "silver": 0,
+      "bronze": 0
+    }
+  },
+  "new_file_audits": {
+    "social_msa": {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v14_social_subfamily_msa_014.jsonl",
+      "total_records": 180,
+      "training_ready": 180,
+      "error_count": 0,
+      "issues": [],
+      "dialects": {
+        "msa": 180
+      },
+      "qualities": {
+        "gold": 180
+      },
+      "sources": {
+        "sf-ai-local-social-subfamily-pack-v1": 180
+      }
+    },
+    "social_saudi": {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v14_social_subfamily_saudi_014.jsonl",
+      "total_records": 180,
+      "training_ready": 180,
+      "error_count": 0,
+      "issues": [],
+      "dialects": {
+        "saudi": 180
+      },
+      "qualities": {
+        "gold": 180
+      },
+      "sources": {
+        "sf-ai-local-social-subfamily-pack-v1": 180
+      }
+    },
+    "topic_msa": {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v14_topic_variants_msa_014.jsonl",
+      "total_records": 60,
+      "training_ready": 60,
+      "error_count": 0,
+      "issues": [],
+      "dialects": {
+        "msa": 60
+      },
+      "qualities": {
+        "gold": 60
+      },
+      "sources": {
+        "sf-ai-local-topic-variant-pack-v1": 60
+      }
+    },
+    "topic_saudi": {
+      "path": "data/corpus/chat/jsonl/dialogue_batch_v14_topic_variants_saudi_014.jsonl",
+      "total_records": 60,
+      "training_ready": 60,
+      "error_count": 0,
+      "issues": [],
+      "dialects": {
+        "saudi": 60
+      },
+      "qualities": {
+        "gold": 60
+      },
+      "sources": {
+        "sf-ai-local-topic-variant-pack-v1": 60
+      }
+    }
+  },
+  "decision": {
+    "decision_id": "PHASE27_108_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DATA_PACK_DECISION",
+    "engineering_decision": "ALLOW_PHASE27_109_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DATA_PACK_AUDIT_NO_TRAINING",
+    "data_pack_written": true,
+    "new_training_started": false,
+    "phase27_109_audit_allowed": true,
+    "bounded_training_allowed": false,
+    "runtime_release_allowed": false,
+    "ui_release_allowed": false,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "why": "The pack adds 480 governed gold records: 30 per social subfamily per dialect and 30 per topic/canonical per dialect. Governance audit is clean for all new files.",
+    "next_phase": "Phase 27.109 — Social Subfamily + Topic Variant Data Pack Audit"
+  },
+  "next_phase": "Phase 27.109 — Social Subfamily + Topic Variant Data Pack Audit"
+}

@@ -61,11 +61,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.107 — Social Subfamily + Topic Variant Gate Encoding",
+        current_phase="Phase 27.109 — Free Linguistic Resource Intake Gate",
         current_phase_status=(
-            "phase27_107_gate_passed_data_pack_allowed_no_training"
+            "phase27_109_free_resource_intake_ready_no_training"
         ),
-        next_phase="Phase 27.108 — Social Subfamily + Topic Variant Data Pack",
+        next_phase="Phase 27.110 — Qabas/Masader/Tashkeela Licensed Ingestion Design",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -659,6 +659,16 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_107_social_subfamily_topic_variant_gate",
                 status="gate_passed_data_pack_allowed_no_training",
                 phase="Phase 27.107",
+            ),
+            ComponentStatus(
+                name="phase27_108_social_subfamily_topic_variant_data_pack",
+                status="data_pack_ready_for_audit_no_training",
+                phase="Phase 27.108",
+            ),
+            ComponentStatus(
+                name="phase27_109_free_linguistic_resource_intake_gate",
+                status="free_resource_intake_ready_no_training",
+                phase="Phase 27.109",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

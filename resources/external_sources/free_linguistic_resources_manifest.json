@@ -1,0 +1,185 @@
+[
+  {
+    "id": "qabas",
+    "name": "Qabas Arabic Lexicographic Database",
+    "url": "https://sina.birzeit.edu/qabas",
+    "resource_type": "lexicon",
+    "language_scope": [
+      "msa"
+    ],
+    "dialect_scope": [
+      "msa"
+    ],
+    "license": "open-source; verify downloadable artifact license before import",
+    "cost": "free",
+    "access": "web/download",
+    "intended_use": "vocabulary/topics/protected-terms bootstrap, not pretrained tokenizer",
+    "intake_decision": "candidate_vocabulary_and_topic_bootstrap",
+    "training_text_allowed_now": false,
+    "tokenizer_vocab_allowed_now": false,
+    "why": "Large Arabic lexicon; useful for words and topic coverage, but direct import must preserve SF tokenizer sovereignty.",
+    "required_next_checks": [
+      "downloadable artifact license verification",
+      "field mapping audit",
+      "deduplicate against Saudi Seed v1",
+      "vocabulary-only import plan"
+    ]
+  },
+  {
+    "id": "masader",
+    "name": "Masader Arabic NLP Dataset Catalogue",
+    "url": "https://github.com/ARBML/masader",
+    "resource_type": "metadata_catalogue",
+    "language_scope": [
+      "ar"
+    ],
+    "dialect_scope": [
+      "msa",
+      "saudi",
+      "gulf",
+      "mixed"
+    ],
+    "license": "GPL-3.0 for catalogue code/metadata repository",
+    "cost": "free",
+    "access": "github_metadata",
+    "intended_use": "source discovery and licensing triage only",
+    "intake_decision": "approved_metadata_catalogue_only",
+    "training_text_allowed_now": false,
+    "tokenizer_vocab_allowed_now": false,
+    "why": "Catalogue metadata helps find licensed resources; it is not itself dialogue training text.",
+    "required_next_checks": [
+      "filter free/licensed text resources",
+      "exclude pretrained/model-derived datasets",
+      "exclude external dialogue unless license/provenance is clean"
+    ]
+  },
+  {
+    "id": "tashkeela",
+    "name": "Tashkeela Arabic Diacritized Corpus",
+    "url": "https://sourceforge.net/projects/tashkeela/",
+    "resource_type": "msa_diacritized_corpus",
+    "language_scope": [
+      "msa"
+    ],
+    "dialect_scope": [
+      "msa"
+    ],
+    "license": "CC BY 4.0 per paper; verify packaged files before import",
+    "cost": "free",
+    "access": "download",
+    "intended_use": "MSA orthography, diacritics, tokenizer boundary audit, possible LM pretraining after cleaning",
+    "intake_decision": "candidate_msa_text_after_license_and_cleaning_gate",
+    "training_text_allowed_now": false,
+    "tokenizer_vocab_allowed_now": false,
+    "why": "Large clean MSA text can improve Arabic form, but it is not conversational and must be balanced against Saudi dialogue.",
+    "required_next_checks": [
+      "download checksum and license capture",
+      "domain/source filtering",
+      "deduplicate",
+      "conversation-vs-text curriculum separation"
+    ]
+  },
+  {
+    "id": "osian",
+    "name": "OSIAN Arabic News Corpus",
+    "url": "https://demo.oujda-nlp-team.net/Osian.php",
+    "resource_type": "news_corpus",
+    "language_scope": [
+      "msa"
+    ],
+    "dialect_scope": [
+      "msa"
+    ],
+    "license": "CC BY-NC 4.0",
+    "cost": "free",
+    "access": "clarin/download",
+    "intended_use": "eval-only or non-commercial research lane unless project accepts NC restriction",
+    "intake_decision": "restricted_noncommercial_eval_or_vocabulary_only",
+    "training_text_allowed_now": false,
+    "tokenizer_vocab_allowed_now": false,
+    "why": "Huge MSA news corpus, but non-commercial license blocks unrestricted training use.",
+    "required_next_checks": [
+      "commercial-intent decision",
+      "license compatibility review"
+    ]
+  },
+  {
+    "id": "arabic_learner_corpus",
+    "name": "Arabic Learner Corpus",
+    "url": "https://www.arabiclearnercorpus.com/",
+    "resource_type": "learner_msa_corpus",
+    "language_scope": [
+      "msa"
+    ],
+    "dialect_scope": [
+      "msa"
+    ],
+    "license": "CC BY; verify download package terms",
+    "cost": "free",
+    "access": "download",
+    "intended_use": "error patterns, spelling/grammar robustness, eval probes",
+    "intake_decision": "candidate_eval_and_error_pattern_resource",
+    "training_text_allowed_now": false,
+    "tokenizer_vocab_allowed_now": false,
+    "why": "Useful for robustness to learner errors; not a general assistant dialogue source.",
+    "required_next_checks": [
+      "download terms verification",
+      "privacy scan",
+      "error-pattern extraction plan"
+    ]
+  },
+  {
+    "id": "fr3on_arabic_dialect_corpus",
+    "name": "fr3on Arabic Dialect Corpus",
+    "url": "https://huggingface.co/datasets/fr3on/arabic-dialect-corpus",
+    "resource_type": "dialect_corpus",
+    "language_scope": [
+      "ar"
+    ],
+    "dialect_scope": [
+      "saudi",
+      "gulf",
+      "mixed"
+    ],
+    "license": "MIT stated on dataset page; verify data provenance and platform terms",
+    "cost": "free",
+    "access": "huggingface_dataset",
+    "intended_use": "Saudi/Gulf vocabulary discovery and dialect eval after privacy/toxicity filtering",
+    "intake_decision": "candidate_dialect_vocab_eval_only_until_provenance_gate",
+    "training_text_allowed_now": false,
+    "tokenizer_vocab_allowed_now": false,
+    "why": "May contain Saudi dialect text, but social-media provenance requires strict privacy/toxicity/licensing checks.",
+    "required_next_checks": [
+      "provenance audit",
+      "PII/toxicity filter",
+      "dialect label audit",
+      "license compatibility"
+    ]
+  },
+  {
+    "id": "arsyra",
+    "name": "ArSyra Arabic Synthetic Review / Dialect Resources",
+    "url": "https://arsyra.com/datasets.html",
+    "resource_type": "dialect_dataset",
+    "language_scope": [
+      "ar"
+    ],
+    "dialect_scope": [
+      "saudi",
+      "gulf",
+      "mixed"
+    ],
+    "license": "mixed; CC-BY-NC-SA/free tiers and commercial options",
+    "cost": "mixed",
+    "access": "web",
+    "intended_use": "blocked until license lane is explicit",
+    "intake_decision": "blocked_until_license_lane_selected",
+    "training_text_allowed_now": false,
+    "tokenizer_vocab_allowed_now": false,
+    "why": "Potentially useful for Saudi/Gulf, but license/cost tiers are not yet compatible with unrestricted training.",
+    "required_next_checks": [
+      "license selection",
+      "commercial permission if needed"
+    ]
+  }
+]

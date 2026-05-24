@@ -1,0 +1,14 @@
+{
+  "decision_id": "PHASE27_108_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DATA_PACK_DECISION",
+  "engineering_decision": "ALLOW_PHASE27_109_SOCIAL_SUBFAMILY_TOPIC_VARIANT_DATA_PACK_AUDIT_NO_TRAINING",
+  "data_pack_written": true,
+  "new_training_started": false,
+  "phase27_109_audit_allowed": true,
+  "bounded_training_allowed": false,
+  "runtime_release_allowed": false,
+  "ui_release_allowed": false,
+  "sf50m_justified_transition": false,
+  "tokenizer_retrain_allowed": false,
+  "why": "The pack adds 480 governed gold records: 30 per social subfamily per dialect and 30 per topic/canonical per dialect. Governance audit is clean for all new files.",
+  "next_phase": "Phase 27.109 — Social Subfamily + Topic Variant Data Pack Audit"
+}

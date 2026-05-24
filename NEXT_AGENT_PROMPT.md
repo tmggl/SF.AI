@@ -50,12 +50,13 @@
 - السيادة تبقى على corpus/tokenizer/behavior/runtime/alignment/evaluation
   وسلوك الحوار الفصيح والسعودي.
 - قبل أي تدريب جديد يجب وجود root-cause/decision gate حديث يسمح به صراحة.
-  القرار الحالي هو `PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_DECISION`:
+  القرار الحالي هو `PHASE27_109_FREE_LINGUISTIC_RESOURCE_INTAKE_GATE_DECISION`:
   المسار أُعيد تثبيته عند Phase 27.79، ومرّت بوابات Phase 27.80، ثم اكتمل
   تدريب Phase 27.81. Phase 27.105 أثبت أن الواجهة تستدعي المولد الحقيقي
   في raw lab، لكنه شخّص فشل social subfamilies وtopic variants؛ التالي
   Phase 27.106 design أضاف renderer signals، وPhase 27.107 مرّر gate؛
-  التالي Phase 27.108 data pack بلا تدريب.
+  Phase 27.108 كتب `480` سجل gold ومرّ corpus-audit؛ Phase 27.109 صنّف
+  مصادر مجانية مثل Masader/Qabas/Tashkeela وسحب Masader metadata summary فقط.
 - لا runtime release بدون `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - لا تعتمد loss/perplexity/micro-probe وحدها؛ النجاح يعني held-out dialogue
   quality, runtime usability, clean-stop, semantic correctness, family
@@ -68,18 +69,18 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 27.107 موثقة تاريخيًا، لكن الحالة العملية
+- المراحل من Phase 0 حتى Phase 27.109 موثقة تاريخيًا، لكن الحالة العملية
   الحالية هي:
-  `Phase 27.107 — Social Subfamily + Topic Variant Gate Encoding`
+  `Phase 27.109 — Free Linguistic Resource Intake Gate`
   ضمن `SF-native Objective/Curriculum/Decoding Acceleration Track`.
   التقرير الملزم: `docs/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md`.
   القرار التنفيذي:
-  `PHASE27_107_SOCIAL_SUBFAMILY_TOPIC_VARIANT_GATE_DECISION`.
+  `PHASE27_109_FREE_LINGUISTIC_RESOURCE_INTAKE_GATE_DECISION`.
   Phase 27.104 تبقى الدليل السابق: تدريب محدود نجح topic-wise وفشل
   all-family، وليست إذن runtime.
   تاريخيًا أضيفت دفعة `sf-ai-balanced-family-pack-v1`: `2500` سجل gold
-  متوازن (`500` لكل family و`250/250` فصحى/سعودي). corpus الحالي `8645`
-  (`msa=4295`, `saudi=4350`, `gold=3533`, `silver=5112`). Phase 27.83 درّبت
+  متوازن (`500` لكل family و`250/250` فصحى/سعودي). corpus الحالي `9125`
+  (`msa=4535`, `saudi=4590`, `gold=4013`, `silver=5112`). Phase 27.83 درّبت
   checkpoints `step600/1200/1800`، لكن best fresh shadow = `11/60` فقط.
   Phase 27.84 شخّصت السبب: `dialogue_family` موجودة في metadata لكنها لا تظهر
   داخل نص التدريب. Phase 27.85 صممت الصيغة، وPhase 27.86 أثبتت أن
@@ -121,9 +122,14 @@
   subfamilies وtopic variants تحتاج objective design.
   Phase 27.106 أضاف `dialogue_subfamily`, `topic_canonical`, `topic_variant`
   وrenderer line `نوع السوالف: ...`.
-  Phase 27.107 مرّر gate التنفيذية وأثبت canary الرسمي.
-- أول خطوة تالية: Phase 27.108 — Social Subfamily + Topic Variant Data Pack.
-  لا تبدأ training ولا SF-50M ولا tokenizer retrain قبل data pack audit.
+  Phase 27.107 مرّر gate التنفيذية وأثبت canary الرسمي. Phase 27.108
+  أضاف `480` سجلًا gold، وصار corpus الحالي `9125` سجلًا
+  (`msa=4535`, `saudi=4590`, `gold=4013`, `silver=5112`)، ومرّ
+  `make corpus-audit` بلا مشاكل. Phase 27.109 صنّف مصادر مجانية جاهزة:
+  Masader metadata، Qabas، Tashkeela، OSIAN، Arabic Learner Corpus، fr3on،
+  ArSyra؛ ولم يدخل أي نص خارجي إلى corpus.
+- أول خطوة تالية: Phase 27.110 — Qabas/Masader/Tashkeela Licensed Ingestion Design.
+  لا تبدأ training ولا SF-50M ولا tokenizer retrain قبل هذه البوابة.
 - تفويض التكبير التلقائي معتمد، لكن مفعوله يبدأ فقط عندما تنجح gates؛
   حاليًا `SF-50M` ما زال محجوبًا لأن capacity وزنها `1%`.
 - استخدم `make phase22-review-intake` أو `GET /system/phase22-review-intake` قبل أي تحويل من `data/corpus/chat/review/` إلى corpus تدريبي.
