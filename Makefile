@@ -337,6 +337,12 @@ phase27-broader-natural-dialogue-canary:
 phase27-broader-generalization-repair:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_61_broader_generalization_repair.py $(ARGS)
 
+phase27-family-balance-repair:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_62_family_balance_repair.py $(ARGS)
+
+phase27-interleaved-family-curriculum:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_63_interleaved_family_curriculum.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 

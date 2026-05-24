@@ -547,3 +547,35 @@ def test_phase27_61_broader_repair_improves_but_blocks_runtime() -> None:
     assert report["decisions"]["ui_open_allowed"] is False
     assert report["decisions"]["sf50m_allowed"] is False
     assert report["decisions"]["shadow_canary_allowed"] is False
+
+
+def test_phase27_62_family_balance_regresses_and_blocks_runtime() -> None:
+    report = _report("phase27_62_family_balance_repair_report.json")
+    assert report["phase"] == "Phase 27.62"
+    assert report["status"] == "FAILED_FAMILY_BALANCE_REPAIR_RUNTIME_BLOCKED"
+    assert report["training_started"] is True
+    assert report["tokenizer"] == "artifacts/tokenizers/sf_bpe/v7_phase27_58"
+    assert report["summary"]["passed"] == 10
+    assert report["summary"]["total"] == 30
+    assert report["summary"]["family_summary"]["open_social"]["passed"] == 6
+    assert report["summary"]["family_summary"]["support"]["passed"] == 0
+    assert report["decisions"]["runtime_switch_allowed"] is False
+    assert report["decisions"]["ui_open_allowed"] is False
+    assert report["decisions"]["fresh_shadow_canary_allowed"] is False
+
+
+def test_phase27_63_interleaved_curriculum_improves_and_blocks_runtime() -> None:
+    report = _report("phase27_63_interleaved_family_curriculum_report.json")
+    assert report["phase"] == "Phase 27.63"
+    assert report["status"] == "IMPROVED_INTERLEAVED_FAMILY_CURRICULUM_RUNTIME_BLOCKED"
+    assert report["training_started"] is True
+    assert report["tokenizer"] == "artifacts/tokenizers/sf_bpe/v7_phase27_58"
+    assert report["summary"]["passed"] == 26
+    assert report["summary"]["total"] == 30
+    assert report["summary"]["family_summary"]["open_social"]["passed"] == 6
+    assert report["summary"]["family_summary"]["planning"]["passed"] == 6
+    assert report["summary"]["family_summary"]["support"]["passed"] == 6
+    assert report["summary"]["family_summary"]["topic"]["passed"] == 3
+    assert report["decisions"]["runtime_switch_allowed"] is False
+    assert report["decisions"]["ui_open_allowed"] is False
+    assert report["decisions"]["fresh_shadow_canary_allowed"] is False

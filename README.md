@@ -48,13 +48,15 @@
 - [docs/PHASE27_59_BOUNDED_ALIGNMENT_REPAIR_REPORT.md](./docs/PHASE27_59_BOUNDED_ALIGNMENT_REPAIR_REPORT.md) — إصلاح alignment محدود نجح `15/15` والواجهة بقيت محجوبة.
 - [docs/PHASE27_60_BROADER_NATURAL_DIALOGUE_CANARY_REPORT.md](./docs/PHASE27_60_BROADER_NATURAL_DIALOGUE_CANARY_REPORT.md) — canary طبيعي أوسع فشل `12/30` وكشف ضعف التعميم.
 - [docs/PHASE27_61_BROADER_GENERALIZATION_REPAIR_REPORT.md](./docs/PHASE27_61_BROADER_GENERALIZATION_REPAIR_REPORT.md) — repair أوسع حسّن النتيجة إلى `18/30` لكنه فشل توازن العائلات.
+- [docs/PHASE27_62_FAMILY_BALANCE_REPAIR_REPORT.md](./docs/PHASE27_62_FAMILY_BALANCE_REPAIR_REPORT.md) — تجربة توازن عائلات تراجعت إلى `10/30` وكشفت أثر ترتيب curriculum.
+- [docs/PHASE27_63_INTERLEAVED_FAMILY_CURRICULUM_REPORT.md](./docs/PHASE27_63_INTERLEAVED_FAMILY_CURRICULUM_REPORT.md) — interleaved curriculum رفع canary إلى `26/30` مع بقاء runtime محجوبًا.
 
 ---
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.61 / 30 — Broader Generalization Repair اكتملت بتحسن جزئي فاشل.
-- **الأولوية الحالية:** Phase 27.62 إصلاح توازن `open_social/followup/topic` بعد تحسن `planning/support`.
+- **الرحلة الحالية:** Phase 27.63 / 30 — Interleaved Family Curriculum اكتملت بتحسن قوي غير كافٍ للتفعيل.
+- **الأولوية الحالية:** Phase 27.64 فحص فشل `التعاون/الاحترام` كحماية توكنة/lexical قبل أي تدريب جديد.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -120,6 +122,8 @@
 - **نتيجة Phase 27.59:** دُرّب repair محدود لعائلات الردود على tokenizer v7 ونجح `15/15`; لا runtime ولا UI حتى يمر canary أوسع. التقرير: [docs/PHASE27_59_BOUNDED_ALIGNMENT_REPAIR_REPORT.md](./docs/PHASE27_59_BOUNDED_ALIGNMENT_REPAIR_REPORT.md).
 - **نتيجة Phase 27.60:** اختبرنا checkpoint 27.59 بدون تدريب جديد على canary أوسع؛ النتيجة `12/30` فقط، لذلك لا runtime ولا UI. التقرير: [docs/PHASE27_60_BROADER_NATURAL_DIALOGUE_CANARY_REPORT.md](./docs/PHASE27_60_BROADER_NATURAL_DIALOGUE_CANARY_REPORT.md).
 - **نتيجة Phase 27.61:** repair أوسع رفع canary من `12/30` إلى `18/30`; نجحت `planning/support`، لكن `open_social/followup/topic` فشلت. التقرير: [docs/PHASE27_61_BROADER_GENERALIZATION_REPAIR_REPORT.md](./docs/PHASE27_61_BROADER_GENERALIZATION_REPAIR_REPORT.md).
+- **نتيجة Phase 27.62:** توازن العائلات بالعدد فقط تراجع إلى `10/30` لأن ترتيب corpus الكتلي سحب النموذج إلى open-social. التقرير: [docs/PHASE27_62_FAMILY_BALANCE_REPAIR_REPORT.md](./docs/PHASE27_62_FAMILY_BALANCE_REPAIR_REPORT.md).
+- **نتيجة Phase 27.63:** interleaved curriculum رفع canary إلى `26/30`; نجحت `open_social/planning/support` كاملة وبقيت مشاكل `topic` في `التعاون/الاحترام`. التقرير: [docs/PHASE27_63_INTERLEAVED_FAMILY_CURRICULUM_REPORT.md](./docs/PHASE27_63_INTERLEAVED_FAMILY_CURRICULUM_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 

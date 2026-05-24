@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.61 — Broader Generalization Repair",
-        current_phase_status="failed_broader_generalization_repair_runtime_blocked",
+        current_phase="Phase 27.63 — Interleaved Family Curriculum",
+        current_phase_status="improved_interleaved_family_curriculum_runtime_blocked",
         next_phase=(
-            "Phase 27.62 inspect Phase 27.61 family-balance failures and repair open_social/followup/topic"
+            "Phase 27.64 inspect Phase 27.63 topic lexical failures and plan tokenizer v8 protection"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -419,6 +419,16 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_61_broader_generalization_repair",
                 status="failed_broader_generalization_repair_runtime_blocked",
                 phase="Phase 27.61",
+            ),
+            ComponentStatus(
+                name="phase27_62_family_balance_repair",
+                status="failed_family_balance_repair_runtime_blocked",
+                phase="Phase 27.62",
+            ),
+            ComponentStatus(
+                name="phase27_63_interleaved_family_curriculum",
+                status="improved_interleaved_family_curriculum_runtime_blocked",
+                phase="Phase 27.63",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

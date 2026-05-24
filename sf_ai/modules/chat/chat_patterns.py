@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.61: حسّننا التعميم من 12/30 إلى 18/30، ونجحت "
-    "planning/support كاملة، لكن open_social/followup/topic تراجعت. "
-    "الواجهة لا تُفتح. التالي Phase 27.62 لإصلاح توازن عائلات الردود.",
+    "وصلنا إلى Phase 27.63: أصلحنا ترتيب curriculum وارتفع canary إلى 26/30. "
+    "نجحت open_social/planning/support، وبقيت مشاكل topic محددة في التعاون والاحترام. "
+    "الواجهة لا تُفتح. التالي Phase 27.64 لفحص حماية التوكنة للمصطلحات.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

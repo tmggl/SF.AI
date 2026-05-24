@@ -290,3 +290,24 @@ Phase 27.61 حسّنت canary الأوسع:
 - لا فتح واجهة.
 - لا `SF-50M` ولا Phase 28.
 - التالي Phase 27.62 لإصلاح توازن العائلات قبل أي توسع.
+
+## قرار Phase 27.62–27.63
+
+Phase 27.62 اختبرت توازن العائلات بالعدد فقط:
+
+- broader canary: تراجع إلى `10/30`.
+- السبب: ترتيب corpus الكتلي سحب النموذج نحو `open_social` وأضعف support/planning/topic.
+
+Phase 27.63 أصلحت ترتيب curriculum إلى interleaved:
+
+- broader canary: تحسن إلى `26/30`.
+- `open_social=6/6`, `planning=6/6`, `support=6/6`, `followup=5/6`, `topic=3/6`.
+- الفشل المتبقي: lexical/tokenization collapse في `التعاون` و`الاحترام`.
+
+قرار scaling:
+
+- لا رفع حجم.
+- لا runtime switch.
+- لا فتح واجهة.
+- لا `SF-50M` ولا Phase 28.
+- التالي Phase 27.64 لفحص حماية tokenizer v8 للمصطلحات الموضوعية قبل أي توسع.

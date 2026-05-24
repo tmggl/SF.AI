@@ -131,6 +131,8 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.59 | Bounded Alignment Repair | مكتملة؛ repair محدود نجح `15/15`, runtime محجوب بانتظار canary أوسع |
 | Phase 27.60 | Broader Natural-Dialogue Canary | مكتملة كتقييم؛ canary أوسع فشل `12/30`, runtime محجوب |
 | Phase 27.61 | Broader Generalization Repair | مكتملة كتدريب repair؛ تحسن إلى `18/30`, runtime محجوب |
+| Phase 27.62 | Family Balance Repair | مكتملة كتجربة فاشلة؛ تراجع إلى `10/30` بسبب ترتيب curriculum الكتلي |
+| Phase 27.63 | Interleaved Family Curriculum | مكتملة بتحسن قوي؛ canary `26/30`, runtime محجوب |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3410,6 +3412,77 @@ Phase 27.59 نجحت معمليًا لكنها لم تعمم بما يكفي. ل
 - [PHASE27_61_BROADER_GENERALIZATION_REPAIR_REPORT.md](./PHASE27_61_BROADER_GENERALIZATION_REPAIR_REPORT.md)
 - `artifacts/reports/phase27_61_broader_generalization_repair_report.json`
 - `artifacts/samples/phase27_61_broader_generalization_repair.md`
+
+---
+
+## Phase 27.62 — Family Balance Repair
+
+### الهدف
+اختبار ما إذا كان توازن عائلات الرد بالعدد يكفي لإصلاح `open_social/followup/topic`.
+
+### ما تم
+- أضيف `scripts/phase27_62_family_balance_repair.py`.
+- أضيف `make phase27-family-balance-repair`.
+- صُحح معيار `topic` في `resources/evaluation/semantic_alignment_phase27_57.json` ليشمل `التعاون/الصبر/الاحترام`.
+- دُرّب repair محدود `SF-10M` على tokenizer v7:
+  - `7800` خطوة.
+  - `6000` سجل تدريب مؤقت.
+  - توازن عددي بين العائلات.
+
+### النتيجة
+- pass: `10/30`.
+- `open_social`: `6/6`.
+- `planning`: `1/6`.
+- `support`: `0/6`.
+- `topic`: `1/6`.
+
+### القرار
+فشل مفيد: ترتيب corpus الكتلي جعل النموذج ينجذب إلى عائلة واحدة. لا runtime switch ولا UI.
+
+التالي:
+
+**Phase 27.63 — interleaved family curriculum**
+
+### artifacts
+- [PHASE27_62_FAMILY_BALANCE_REPAIR_REPORT.md](./PHASE27_62_FAMILY_BALANCE_REPAIR_REPORT.md)
+- `artifacts/reports/phase27_62_family_balance_repair_report.json`
+- `artifacts/samples/phase27_62_family_balance_repair.md`
+
+---
+
+## Phase 27.63 — Interleaved Family Curriculum
+
+### الهدف
+إصلاح ترتيب curriculum بتداخل round-robin بين عائلات الرد، مع LR أخف وخطوات أقل.
+
+### ما تم
+- أضيف `scripts/phase27_63_interleaved_family_curriculum.py`.
+- أضيف `make phase27-interleaved-family-curriculum`.
+- دُرّب repair محدود `SF-10M` على tokenizer v7:
+  - `5600` خطوة.
+  - `4500` سجل تدريب مؤقت.
+  - ترتيب interleaved بين `followup/open_social/planning/support/topic`.
+- أجري decoding sweep لاحقًا وأظهر أن تقليل `max_new_tokens` لا يحل إلا حالة واحدة تقريبًا.
+
+### النتيجة
+- pass: `26/30`.
+- `open_social`: `6/6`.
+- `planning`: `6/6`.
+- `support`: `6/6`.
+- `followup`: `5/6`.
+- `topic`: `3/6`.
+
+### القرار
+تحسن قوي، لكنه لا يكفي لفتح الواجهة. الفشل المتبقي يتركز في lexical/tokenization collapse لكلمتي `التعاون` و`الاحترام`.
+
+التالي:
+
+**Phase 27.64 — inspect topic lexical failures and plan tokenizer v8 protection**
+
+### artifacts
+- [PHASE27_63_INTERLEAVED_FAMILY_CURRICULUM_REPORT.md](./PHASE27_63_INTERLEAVED_FAMILY_CURRICULUM_REPORT.md)
+- `artifacts/reports/phase27_63_interleaved_family_curriculum_report.json`
+- `artifacts/samples/phase27_63_interleaved_family_curriculum.md`
 
 ---
 

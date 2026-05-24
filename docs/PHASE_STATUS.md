@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.61 / 30**
-- **المرحلة الحالية:** **Phase 27.61 — Broader Generalization Repair**
-- **حالة المرحلة الحالية:** **اكتملت كتدريب repair؛ تحسن canary إلى `18/30` لكنه فشل والـ runtime محجوب**
-- **المرحلة التالية المقترحة:** Phase 27.62 inspect Phase 27.61 family-balance failures and repair open_social/followup/topic.
+- **الرحلة الحالية:** **Phase 27.63 / 30**
+- **المرحلة الحالية:** **Phase 27.63 — Interleaved Family Curriculum**
+- **حالة المرحلة الحالية:** **اكتملت كتدريب repair؛ تحسن canary إلى `26/30` لكنه لم يصل لفتح runtime**
+- **المرحلة التالية المقترحة:** Phase 27.64 inspect Phase 27.63 topic lexical failures and plan tokenizer v8 protection.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -110,6 +110,8 @@
 | Phase 27.59 | Bounded Alignment Repair | ✅ passed_bounded_alignment_repair_runtime_blocked | ✅ |
 | Phase 27.60 | Broader Natural-Dialogue Canary | ✅ failed_broader_natural_dialogue_canary_runtime_blocked | ✅ |
 | Phase 27.61 | Broader Generalization Repair | ✅ failed_broader_generalization_repair_runtime_blocked | ✅ |
+| Phase 27.62 | Family Balance Repair | ✅ failed_family_balance_repair_runtime_blocked | ✅ |
+| Phase 27.63 | Interleaved Family Curriculum | ✅ improved_interleaved_family_curriculum_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -874,6 +876,22 @@
   - القرار: لا runtime switch، لا UI، لا `SF-50M`، ولا Phase 28.
   - التالي: Phase 27.62 إصلاح توازن العائلات ومنع انجذاب الموضوعات/السوالف إلى `الوفاء` أو الدعم.
   - أضيف [PHASE27_61_BROADER_GENERALIZATION_REPAIR_REPORT.md](./PHASE27_61_BROADER_GENERALIZATION_REPAIR_REPORT.md).
+- بدأ وانتهى Phase 27.62 Family Balance Repair:
+  - أضيف `make phase27-family-balance-repair`.
+  - دُرّب repair محدود متوازن بالعدد على tokenizer v7 لمدة `7800` خطوة.
+  - النتيجة تراجعت إلى `10/30`.
+  - نجحت `open_social=6/6` لكن تضررت `support=0/6` و`planning=1/6`.
+  - التشخيص: توازن العدد وحده لا يكفي؛ ترتيب corpus الكتلي تسبب في انجذاب النموذج لعائلة واحدة.
+  - القرار: لا runtime switch، لا UI، لا `SF-50M`، ولا Phase 28.
+  - أضيف [PHASE27_62_FAMILY_BALANCE_REPAIR_REPORT.md](./PHASE27_62_FAMILY_BALANCE_REPAIR_REPORT.md).
+- بدأ وانتهى Phase 27.63 Interleaved Family Curriculum:
+  - أضيف `make phase27-interleaved-family-curriculum`.
+  - أعيدت كتابة curriculum بترتيب round-robin بين العائلات مع LR أخف وخطوات أقل (`5600`).
+  - النتيجة تحسنت إلى `26/30`.
+  - نجحت `open_social=6/6`, `planning=6/6`, `support=6/6`, و`followup=5/6`.
+  - بقيت مشاكل `topic` في `التعاون` و`الاحترام` مع مؤشرات lexical/tokenization collapse.
+  - القرار: لا runtime switch ولا فتح واجهة؛ التالي Phase 27.64 لفحص حماية التوكنة للمصطلحات الموضوعية قبل تدريب جديد.
+  - أضيف [PHASE27_63_INTERLEAVED_FAMILY_CURRICULUM_REPORT.md](./PHASE27_63_INTERLEAVED_FAMILY_CURRICULUM_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 

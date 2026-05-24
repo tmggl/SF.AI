@@ -93,6 +93,8 @@ SF.AI يملك الآن:
 | Phase 27.59 | `Bounded alignment repair` | repair محدود نجح `15/15`; runtime محجوب حتى canary أوسع |
 | Phase 27.60 | `Broader natural-dialogue canary` | تقييم أوسع فشل `12/30`; الدعم والموضوعات والتخطيط لا تعمم كفاية |
 | Phase 27.61 | `Broader generalization repair` | تحسن إلى `18/30`; planning/support نجحت، open_social/followup/topic فشلت |
+| Phase 27.62 | `Family balance repair` | تراجع إلى `10/30`; كشف أن ترتيب curriculum الكتلي يسبب انجذابًا لعائلة واحدة |
+| Phase 27.63 | `Interleaved family curriculum` | تحسن إلى `26/30`; بقيت مشاكل topic في التعاون/الاحترام |
 | بعد نجاح SF-10M | `SF-50M v0.1` | نجاح جودة SF-10M/canary + إعادة Phase 26 readiness |
 | Phase 28 | `SF-120M v0.1` | نجاح SF-50M + scaling gate |
 
@@ -153,6 +155,8 @@ SF.AI يملك الآن:
 - **Phase 27.59:** أصلح عائلات الردود داخل probe محدود ومرّ `15/15`; ما زال يحتاج canary طبيعي أوسع.
 - **Phase 27.60:** اختبر التعميم الأوسع بلا تدريب جديد؛ فشل `12/30` وكشف collapse إلى عبارات open-social خارج سياقها.
 - **Phase 27.61:** أصلح planning/support لكنه أحدث اختلالًا في open_social/followup/topic؛ لا runtime.
+- **Phase 27.62:** أثبت أن توازن العائلات بالعدد وحده لا يكفي؛ ترتيب corpus الكتلي تراجع إلى `10/30`.
+- **Phase 27.63:** أصلح ترتيب curriculum إلى interleaved ورفع canary إلى `26/30`; لا runtime حتى إصلاح topic lexical failures.
 - **Phase 28:** أول قفزة بعد SF-50M إذا أثبت 50M قيمة واضحة.
 - **Phase 29:** إدخاله في الواجهة كتجربة يومية مع router/safety/memory.
 
