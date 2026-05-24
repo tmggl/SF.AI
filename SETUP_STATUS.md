@@ -10,10 +10,10 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.74 / 30**
-- **المرحلة الحالية:** **Phase 27.74 — Open-Social Semantic-Collapse Repair** (فشلت كتدريب تشغيل؛ أفضل مرشح `56/60` fresh و`49/50` known و`30/30` regression؛ runtime محجوب)
+- **الرحلة الحالية:** **Phase 27.75 / 30**
+- **المرحلة الحالية:** **Phase 27.75 — Open-Social Strategy Inspection** (اكتملت: 5 إخفاقات `open_social` كلها fragments؛ tokenizer v8 يفك `بسالفة` إلى `بس الفة`؛ runtime محجوب)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
-- **المرحلة التالية المقترحة:** Phase 27.75 inspect Phase 27.74 failures and revise open_social strategy؛ Phase 28 و`SF-50M` محظوران حتى تنجح بوابات جودة أوسع.
+- **المرحلة التالية المقترحة:** Phase 27.76 tokenizer v9 open_social boundary probe؛ Phase 28 و`SF-50M` محظوران حتى تنجح بوابات جودة أوسع.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
 - **نتيجة Phase 12:** tokenizer v1 محفوظ في `artifacts/tokenizers/sf_bpe/v1/`، `vocab=261`, `merges=218`, `sf_origin=true`.
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.

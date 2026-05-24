@@ -31,7 +31,7 @@ app = FastAPI(
     version="0.1.0",
     description=(
         "SF.AI — Sovereign AI platform. Phase 9 chat UI mounted at /ui/chat. "
-        "Phase 27.74 tested semantic-collapse repair; runtime remains blocked. "
+        "Phase 27.75 inspected open_social tokenizer strategy; runtime remains blocked. "
         "No pretrained models, no external AI APIs."
     ),
 )
@@ -46,7 +46,7 @@ app.include_router(ui.router)
 def root() -> dict[str, str]:
     return {
         "project": "SF.AI",
-        "phase": "Phase 27.74 — Open-Social Semantic-Collapse Repair",
+        "phase": "Phase 27.75 — Open-Social Strategy Inspection",
         "ui": "/ui/chat",
         "docs": "/docs",
     }

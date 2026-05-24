@@ -794,3 +794,20 @@ def test_phase27_74_open_social_semantic_collapse_repair_blocks_runtime() -> Non
     assert report["decisions"]["sf50m_allowed"] is False
     assert report["decisions"]["phase28_allowed"] is False
     assert report["decisions"]["repair_required_before_runtime"] is True
+
+
+def test_phase27_75_open_social_strategy_inspection_requires_tokenizer_v9() -> None:
+    report = _report("phase27_75_open_social_strategy_inspection_report.json")
+    assert report["phase"] == "Phase 27.75"
+    assert report["status"] == "COMPLETED_OPEN_SOCIAL_STRATEGY_INSPECTION_RUNTIME_BLOCKED"
+    assert report["training_started"] is False
+    assert report["tokenizer"] == "artifacts/tokenizers/sf_bpe/v8_phase27_65"
+    assert report["protected_pack"] == "resources/tokenization/protected_phrases_phase27_75.txt"
+    assert report["protected_pack_active_in_rules"] is True
+    assert report["failure_summary"]["total"] == 5
+    assert report["failure_summary"]["by_family"] == {"open_social": 5}
+    assert report["diagnosis"]["primary"] == "tokenizer_v8_open_social_boundary_fragments"
+    assert report["diagnosis"]["bisalfah_decodes_as"] == "بس الفة"
+    assert report["decisions"]["tokenizer_v9_required_next"] is True
+    assert report["decisions"]["lm_repair_allowed_before_tokenizer_v9"] is False
+    assert report["decisions"]["runtime_switch_allowed"] is False

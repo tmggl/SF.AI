@@ -144,6 +144,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.72 | Stability-First Micro Repair | مكتملة بتحسن غير كاف؛ `138/140`, runtime محجوب |
 | Phase 27.73 | Open-Social Failure Inspection | مكتملة كفحص وحارس؛ بقي semantic collapse، runtime محجوب |
 | Phase 27.74 | Open-Social Semantic-Collapse Repair | فشلت كتدريب تشغيل؛ `56/60`, `49/50`, `30/30`, runtime محجوب |
+| Phase 27.75 | Open-Social Strategy Inspection | مكتملة كفحص tokenizer/strategy؛ tokenizer v9 مطلوب |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3668,11 +3669,11 @@ tokenizer v8 مطلوب قبل أي LM repair جديد. لا runtime switch، ل
 
 التالي:
 
-**Phase 27.70 — inspect Phase 27.69 open_social failures and repair before runtime** — اكتملت كتجربة فاشلة، ثم **Phase 27.71 — Candidate Selection and Stability Strategy** اختارت `phase27_68` كأفضل مرشح `136/140` مع بقاء runtime محجوبًا، ثم **Phase 27.72 — Stability-First Micro Repair** حسّنت النتيجة إلى `138/140` مع بقاء فشلين open_social، ثم **Phase 27.73 — Open-Social Failure Inspection** سدّت فجوة حارس الشظايا وشخّصت semantic collapse المتبقي، ثم **Phase 27.74 — Open-Social Semantic-Collapse Repair** جرّبت ثلاثة مرشحين من checkpoint 27.72 لكنها تراجعت إلى `56/60` fresh و`49/50` known.
+**Phase 27.70 — inspect Phase 27.69 open_social failures and repair before runtime** — اكتملت كتجربة فاشلة، ثم **Phase 27.71 — Candidate Selection and Stability Strategy** اختارت `phase27_68` كأفضل مرشح `136/140` مع بقاء runtime محجوبًا، ثم **Phase 27.72 — Stability-First Micro Repair** حسّنت النتيجة إلى `138/140` مع بقاء فشلين open_social، ثم **Phase 27.73 — Open-Social Failure Inspection** سدّت فجوة حارس الشظايا وشخّصت semantic collapse المتبقي، ثم **Phase 27.74 — Open-Social Semantic-Collapse Repair** جرّبت ثلاثة مرشحين من checkpoint 27.72 لكنها تراجعت إلى `56/60` fresh و`49/50` known، ثم **Phase 27.75 — Open-Social Strategy Inspection** أثبتت أن tokenizer v8 يفك `بسالفة` إلى `بس الفة` وأن tokenizer v9 مطلوب قبل LM repair جديد.
 
 التالي الرسمي الآن:
 
-**Phase 27.75 — inspect Phase 27.74 failures and revise open_social strategy**
+**Phase 27.76 — tokenizer v9 open_social boundary probe before LM repair**
 
 ### نتيجة Phase 27.73
 - لم يبدأ تدريب جديد.
@@ -3688,6 +3689,13 @@ tokenizer v8 مطلوب قبل أي LM repair جديد. لا runtime switch، ل
 - سبب الفشل الجديد: fragments في open_social مثل `بس الفة`, `موضوعاموضوععن`, `أكموضوع`.
 - القرار: Phase 27.75 يجب أن يكون inspection/strategy لا تدريب أعمى.
 
+### نتيجة Phase 27.75
+- لم يبدأ تدريب جديد.
+- فحصنا إخفاقات أفضل مرشح 27.74: 5/5 إخفاقات كلها `open_social` وكلها `model_artifact_fragment`.
+- tokenizer v8 يعيد `بسالفة` كـ `بس الفة`، وهذا يفسر شظية `خلنا نبدأ بس الفة`.
+- أضيفت حزمة `resources/tokenization/protected_phrases_phase27_75.txt` إلى قواعد tokenization.
+- القرار: لا LM-only repair جديد على tokenizer v8؛ التالي tokenizer v9 boundary probe.
+
 ### artifacts
 - [PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md](./PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md)
 - `artifacts/reports/phase27_69_new_fresh_shadow_canary_report.json`
@@ -3698,6 +3706,9 @@ tokenizer v8 مطلوب قبل أي LM repair جديد. لا runtime switch، ل
 - [PHASE27_74_OPEN_SOCIAL_SEMANTIC_COLLAPSE_REPAIR_REPORT.md](./PHASE27_74_OPEN_SOCIAL_SEMANTIC_COLLAPSE_REPAIR_REPORT.md)
 - `artifacts/reports/phase27_74_open_social_semantic_collapse_repair_report.json`
 - `artifacts/samples/phase27_74_open_social_semantic_collapse_repair.md`
+- [PHASE27_75_OPEN_SOCIAL_STRATEGY_INSPECTION_REPORT.md](./PHASE27_75_OPEN_SOCIAL_STRATEGY_INSPECTION_REPORT.md)
+- `artifacts/reports/phase27_75_open_social_strategy_inspection_report.json`
+- `artifacts/samples/phase27_75_open_social_strategy_inspection.md`
 
 ---
 

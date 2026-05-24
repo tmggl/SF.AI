@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.74: جرّبنا إصلاح semantic-collapse لـ open_social من checkpoint 27.72، لكنه تراجع إلى 56/60 fresh و49/50 known. الـ runtime ما زال محجوبًا. التالي Phase 27.75 لت"
+      "response_preview": "وصلنا إلى Phase 27.75: فحصنا فشل open_social ووجدنا أن tokenizer v8 يفك «بسالفة» إلى «بس الفة»، وهذا يفسر شظايا 27.74. أضفنا protected pack لـ open_social، والـ runtime ما زال محجو"
     },
     {
       "scenario_id": "clarification_repair_flow",

@@ -98,4 +98,7 @@ def test_tokenization_rules_preserve_sovereign_constraints() -> None:
     assert rules["preferred_merges"]["candidate_paths"] == [
         "resources/tokenization/preferred_merges_msa_candidate.txt"
     ]
+    assert "resources/tokenization/protected_phrases_phase27_75.txt" in (
+        rules["protected_phrases"]["active_paths"]
+    )
     assert rules["artifact_requirements"]["require_sf_origin"] is True

@@ -96,3 +96,7 @@ def test_real_tokenization_policy_audit_sees_current_seed() -> None:
     assert report.protected_terms_covered >= 10
     assert "وش" in {hit.term for hit in report.protected_hits}
     assert report.rules["sovereignty"]["no_pretrained_vocab"] is True
+    assert (
+        "resources/tokenization/protected_phrases_phase27_75.txt"
+        in report.rules["protected_phrases"]["active_paths"]
+    )

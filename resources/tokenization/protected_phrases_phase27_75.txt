@@ -1,0 +1,20 @@
+# Phase 27.75 protected open_social boundary phrases.
+# Policy resource only; not a pretrained vocabulary.
+# Source: SF.AI-owned Phase 27.74 failures where v8 decoded "بسالفة" as
+# "بس الفة" and allowed topic-boundary glue such as "موضوعاموضوععن".
+
+سالفة
+بسالفة
+السالفة
+سوالف
+سوالف بسيطة
+موضوع سوالف
+موضوعًا عن
+موضوع عن
+نختار موضوعًا
+نفتح موضوعًا
+كلام خفيف
+حديث خفيف
+سالفة خفيفة
+خلنا نبدأ بسالفة
+وش نقدر نسولف عنه

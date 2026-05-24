@@ -1,0 +1,380 @@
+{
+  "phase": "Phase 27.75",
+  "name": "Open-Social Strategy Inspection",
+  "status": "COMPLETED_OPEN_SOCIAL_STRATEGY_INSPECTION_RUNTIME_BLOCKED",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "training_scope": "no training; tokenizer and failure strategy inspection only",
+  "source_report": "artifacts/reports/phase27_74_open_social_semantic_collapse_repair_report.json",
+  "tokenizer": "artifacts/tokenizers/sf_bpe/v8_phase27_65",
+  "protected_pack": "resources/tokenization/protected_phrases_phase27_75.txt",
+  "protected_pack_active_in_rules": true,
+  "source_selected_candidate": {
+    "candidate": "gentle_48",
+    "phase27_69": 56,
+    "phase27_67": 49,
+    "phase27_60": 30
+  },
+  "failure_summary": {
+    "total": 5,
+    "by_family": {
+      "open_social": 5
+    },
+    "by_reason": {
+      "guard:model_artifact_fragment": 5
+    },
+    "by_guard_reason": {
+      "model_artifact_fragment": 5
+    },
+    "prompt_to_responses": {
+      "افتح موضوعًا هادئًا": [
+        "نختار موضوعاموضوععن موضوع بسيط وخفيفًا."
+      ],
+      "خل الجو خفيف وسولف": [
+        "أبشر، نسولف بس الفة خفيفة عن يومك."
+      ],
+      "خلنا ناخذ كلام خفيف": [
+        "خلنا نبدأ بس الفة قصيرة وخفيفة."
+      ],
+      "هات كلام يمشي الوقت": [
+        "خلنا نبدأ بس الفة قصيرة وخفيفة."
+      ],
+      "ودي بموضوع سوالف": [
+        "خلنا نبدأ بمها ببساطة: نوضح الفكرة خطوة بعدها."
+      ]
+    }
+  },
+  "tokenization_probes": [
+    {
+      "id": "word_salfah",
+      "text": "سالفة",
+      "piece_count": 3,
+      "tokens": [
+        "س",
+        "الف",
+        "ة</w>"
+      ],
+      "decoded": "سالفة",
+      "roundtrip_ok": true
+    },
+    {
+      "id": "word_bisalfah",
+      "text": "بسالفة",
+      "piece_count": 3,
+      "tokens": [
+        "بس",
+        "الف",
+        "ة</w>"
+      ],
+      "decoded": "بس الفة",
+      "roundtrip_ok": false
+    },
+    {
+      "id": "artifact_bis_alfah",
+      "text": "بس الفة",
+      "piece_count": 3,
+      "tokens": [
+        "بس",
+        "الف",
+        "ة</w>"
+      ],
+      "decoded": "بس الفة",
+      "roundtrip_ok": true
+    },
+    {
+      "id": "word_sawalif",
+      "text": "سوالف",
+      "piece_count": 1,
+      "tokens": [
+        "سوالف</w>"
+      ],
+      "decoded": "سوالف",
+      "roundtrip_ok": true
+    },
+    {
+      "id": "phrase_topic_an",
+      "text": "موضوعًا عن",
+      "piece_count": 4,
+      "tokens": [
+        "م",
+        "وضوع",
+        "ًا</w>",
+        "عن</w>"
+      ],
+      "decoded": "موضوعًا عن",
+      "roundtrip_ok": true
+    },
+    {
+      "id": "phrase_topic_an_plain",
+      "text": "موضوع عن",
+      "piece_count": 3,
+      "tokens": [
+        "م",
+        "وضوع</w>",
+        "عن</w>"
+      ],
+      "decoded": "موضوع عن",
+      "roundtrip_ok": true
+    },
+    {
+      "id": "artifact_topic_glue",
+      "text": "موضوعاموضوععن",
+      "piece_count": 5,
+      "tokens": [
+        "م",
+        "وضو",
+        "عام",
+        "وضوع",
+        "عن</w>"
+      ],
+      "decoded": "موضوعاموضوععن",
+      "roundtrip_ok": true
+    },
+    {
+      "id": "phrase_light_talk",
+      "text": "كلام خفيف",
+      "piece_count": 2,
+      "tokens": [
+        "كلام</w>",
+        "خفيف</w>"
+      ],
+      "decoded": "كلام خفيف",
+      "roundtrip_ok": true
+    },
+    {
+      "id": "sentence_salfah",
+      "text": "خلنا نبدأ بسالفة قصيرة وخفيفة",
+      "piece_count": 9,
+      "tokens": [
+        "خلنا</w>",
+        "نبدأ</w>",
+        "بس",
+        "الف",
+        "ة</w>",
+        "قصيرة</w>",
+        "و",
+        "خفي",
+        "فة</w>"
+      ],
+      "decoded": "خلنا نبدأ بس الفة قصيرة وخفيفة",
+      "roundtrip_ok": false
+    },
+    {
+      "id": "sentence_topic",
+      "text": "نختار موضوعًا عن شيء خفيف",
+      "piece_count": 9,
+      "tokens": [
+        "ن",
+        "خت",
+        "ار</w>",
+        "م",
+        "وضوع",
+        "ًا</w>",
+        "عن</w>",
+        "شيء</w>",
+        "خفيف</w>"
+      ],
+      "decoded": "نختار موضوعًا عن شيء خفيف",
+      "roundtrip_ok": true
+    }
+  ],
+  "protected_pack_v8_rows": [
+    {
+      "phrase": "سالفة",
+      "piece_count_v8": 3,
+      "tokens_v8": [
+        "س",
+        "الف",
+        "ة</w>"
+      ],
+      "decoded_v8": "سالفة",
+      "roundtrip_ok_v8": true
+    },
+    {
+      "phrase": "بسالفة",
+      "piece_count_v8": 3,
+      "tokens_v8": [
+        "بس",
+        "الف",
+        "ة</w>"
+      ],
+      "decoded_v8": "بس الفة",
+      "roundtrip_ok_v8": false
+    },
+    {
+      "phrase": "السالفة",
+      "piece_count_v8": 3,
+      "tokens_v8": [
+        "الس",
+        "الف",
+        "ة</w>"
+      ],
+      "decoded_v8": "السالفة",
+      "roundtrip_ok_v8": true
+    },
+    {
+      "phrase": "سوالف",
+      "piece_count_v8": 1,
+      "tokens_v8": [
+        "سوالف</w>"
+      ],
+      "decoded_v8": "سوالف",
+      "roundtrip_ok_v8": true
+    },
+    {
+      "phrase": "سوالف بسيطة",
+      "piece_count_v8": 2,
+      "tokens_v8": [
+        "سوالف</w>",
+        "بسيطة</w>"
+      ],
+      "decoded_v8": "سوالف بسيطة",
+      "roundtrip_ok_v8": true
+    },
+    {
+      "phrase": "موضوع سوالف",
+      "piece_count_v8": 3,
+      "tokens_v8": [
+        "م",
+        "وضوع</w>",
+        "سوالف</w>"
+      ],
+      "decoded_v8": "موضوع سوالف",
+      "roundtrip_ok_v8": true
+    },
+    {
+      "phrase": "موضوعًا عن",
+      "piece_count_v8": 4,
+      "tokens_v8": [
+        "م",
+        "وضوع",
+        "ًا</w>",
+        "عن</w>"
+      ],
+      "decoded_v8": "موضوعًا عن",
+      "roundtrip_ok_v8": true
+    },
+    {
+      "phrase": "موضوع عن",
+      "piece_count_v8": 3,
+      "tokens_v8": [
+        "م",
+        "وضوع</w>",
+        "عن</w>"
+      ],
+      "decoded_v8": "موضوع عن",
+      "roundtrip_ok_v8": true
+    },
+    {
+      "phrase": "نختار موضوعًا",
+      "piece_count_v8": 6,
+      "tokens_v8": [
+        "ن",
+        "خت",
+        "ار</w>",
+        "م",
+        "وضوع",
+        "ًا</w>"
+      ],
+      "decoded_v8": "نختار موضوعًا",
+      "roundtrip_ok_v8": true
+    },
+    {
+      "phrase": "نفتح موضوعًا",
+      "piece_count_v8": 6,
+      "tokens_v8": [
+        "نف",
+        "ت",
+        "ح</w>",
+        "م",
+        "وضوع",
+        "ًا</w>"
+      ],
+      "decoded_v8": "نفتح موضوعًا",
+      "roundtrip_ok_v8": true
+    },
+    {
+      "phrase": "كلام خفيف",
+      "piece_count_v8": 2,
+      "tokens_v8": [
+        "كلام</w>",
+        "خفيف</w>"
+      ],
+      "decoded_v8": "كلام خفيف",
+      "roundtrip_ok_v8": true
+    },
+    {
+      "phrase": "حديث خفيف",
+      "piece_count_v8": 2,
+      "tokens_v8": [
+        "حديث</w>",
+        "خفيف</w>"
+      ],
+      "decoded_v8": "حديث خفيف",
+      "roundtrip_ok_v8": true
+    },
+    {
+      "phrase": "سالفة خفيفة",
+      "piece_count_v8": 5,
+      "tokens_v8": [
+        "س",
+        "الف",
+        "ة</w>",
+        "خفي",
+        "فة</w>"
+      ],
+      "decoded_v8": "سالفة خفيفة",
+      "roundtrip_ok_v8": true
+    },
+    {
+      "phrase": "خلنا نبدأ بسالفة",
+      "piece_count_v8": 5,
+      "tokens_v8": [
+        "خلنا</w>",
+        "نبدأ</w>",
+        "بس",
+        "الف",
+        "ة</w>"
+      ],
+      "decoded_v8": "خلنا نبدأ بس الفة",
+      "roundtrip_ok_v8": false
+    },
+    {
+      "phrase": "وش نقدر نسولف عنه",
+      "piece_count_v8": 6,
+      "tokens_v8": [
+        "وش",
+        "نق",
+        "در</w>",
+        "نسولف",
+        "عن",
+        "ه</w>"
+      ],
+      "decoded_v8": "وش نقدر نسولف عنه",
+      "roundtrip_ok_v8": true
+    }
+  ],
+  "diagnosis": {
+    "primary": "tokenizer_v8_open_social_boundary_fragments",
+    "bisalfah_decodes_as": "بس الفة",
+    "topic_glue_decodes_as": "موضوعاموضوععن",
+    "v8_roundtrip_failure_count": 2,
+    "why_no_more_lm_repair_now": "Phase 27.74 already showed that more LM pressure on the same tokenizer reproduces fragments; fix token boundaries first."
+  },
+  "decisions": {
+    "runtime_switch_allowed": false,
+    "ui_open_allowed": false,
+    "sf50m_allowed": false,
+    "phase28_allowed": false,
+    "training_allowed_next": true,
+    "tokenizer_v9_required_next": true,
+    "lm_repair_allowed_before_tokenizer_v9": false,
+    "repair_required_before_runtime": true
+  },
+  "decision": "Keep runtime blocked. Do not repeat LM-only open_social repair on tokenizer v8. Promote the Phase 27.75 protected open_social phrases into a tokenizer v9 boundary probe, then re-run bounded alignment.",
+  "next_phase": "Phase 27.76 — tokenizer v9 open_social boundary probe before LM repair"
+}

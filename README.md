@@ -64,8 +64,8 @@
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.74 / 30 — Open-Social Semantic-Collapse Repair فشلت كتدريب تشغيل؛ أفضل مرشح تراجع إلى `56/60` fresh و`49/50` known، والـ runtime محجوب.
-- **الأولوية الحالية:** Phase 27.75 inspect Phase 27.74 failures and revise open_social strategy قبل أي runtime switch.
+- **الرحلة الحالية:** Phase 27.75 / 30 — Open-Social Strategy Inspection أثبت أن tokenizer v8 يفك `بسالفة` إلى `بس الفة`، لذلك لا LM repair جديد قبل tokenizer v9.
+- **الأولوية الحالية:** Phase 27.76 tokenizer v9 open_social boundary probe قبل أي LM repair أو runtime switch.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -144,6 +144,7 @@
 - **نتيجة Phase 27.72:** micro-repair سيادي صغير من `phase27_68` حسّن fresh إلى `58/60` وحافظ على known `50/50` وregression `30/30`. بقي فشلان open_social، لذلك runtime محجوب. التالي Phase 27.73 لفحص الفشلين. التقرير: [docs/PHASE27_72_STABILITY_FIRST_REPAIR_REPORT.md](./docs/PHASE27_72_STABILITY_FIRST_REPAIR_REPORT.md).
 - **نتيجة Phase 27.73:** فحصنا فشلَي `open_social`: `open_social_09` كان شظية مولّد وجرى سد فجوة الحارس، و`open_social_12` بقي semantic collapse إلى تعريف موضوع. لا تدريب جديد ولا runtime. التالي Phase 27.74 إصلاح دلالي ضيق. التقرير: [docs/PHASE27_73_OPEN_SOCIAL_FAILURE_INSPECTION_REPORT.md](./docs/PHASE27_73_OPEN_SOCIAL_FAILURE_INSPECTION_REPORT.md).
 - **نتيجة Phase 27.74:** جرّبنا ثلاثة مرشحين إصلاحيين من checkpoint 27.72. أفضل مرشح `gentle_48` حقق `56/60` fresh و`49/50` known و`30/30` regression، أي تراجع عن baseline؛ لا runtime ولا UI. التقرير: [docs/PHASE27_74_OPEN_SOCIAL_SEMANTIC_COLLAPSE_REPAIR_REPORT.md](./docs/PHASE27_74_OPEN_SOCIAL_SEMANTIC_COLLAPSE_REPAIR_REPORT.md).
+- **نتيجة Phase 27.75:** فحصنا فشل 27.74 ووجدنا 5 إخفاقات كلها `open_social` بسبب `model_artifact_fragment`. tokenizer v8 يعيد `بسالفة` كـ `بس الفة`، وأضيفت حزمة حماية `protected_phrases_phase27_75.txt`. التالي tokenizer v9 probe. التقرير: [docs/PHASE27_75_OPEN_SOCIAL_STRATEGY_INSPECTION_REPORT.md](./docs/PHASE27_75_OPEN_SOCIAL_STRATEGY_INSPECTION_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 

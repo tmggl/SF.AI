@@ -83,10 +83,10 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.74: جرّبنا إصلاح semantic-collapse لـ open_social "
-    "من checkpoint 27.72، لكنه تراجع إلى 56/60 fresh و49/50 known. "
-    "الـ runtime ما زال محجوبًا. التالي Phase 27.75 لتحليل فشل "
-    "الشظايا مثل «بس الفة» وتعديل استراتيجية open_social.",
+    "وصلنا إلى Phase 27.75: فحصنا فشل open_social ووجدنا أن tokenizer v8 "
+    "يفك «بسالفة» إلى «بس الفة»، وهذا يفسر شظايا 27.74. أضفنا protected "
+    "pack لـ open_social، والـ runtime ما زال محجوبًا. التالي Phase 27.76 "
+    "tokenizer v9 boundary probe قبل أي LM repair.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (
