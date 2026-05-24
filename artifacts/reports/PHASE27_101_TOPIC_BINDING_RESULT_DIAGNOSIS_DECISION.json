@@ -1,0 +1,13 @@
+{
+  "decision_id": "PHASE27_101_TOPIC_BINDING_RESULT_DIAGNOSIS_DECISION",
+  "engineering_decision": "DESIGN_TOPIC_PROTOTYPE_CONTRASTIVE_COPY_ANCHOR_GATE_BEFORE_ANY_TRAINING",
+  "new_training_allowed": false,
+  "runtime_release_allowed": false,
+  "ui_release_allowed": false,
+  "heldout_runtime_gate_allowed": false,
+  "sf50m_justified_transition": false,
+  "tokenizer_retrain_allowed": false,
+  "topic_prototype_contrastive_design_allowed": true,
+  "why": "Phase 27.100 improved topic binding but did not truly eliminate wrong-topic behavior. The report counted wrong-topic as zero through reason precedence, while direct response inspection finds prototype substitutions, mostly الصداقة. The best checkpoint misses copy-anchor on 8/26 contrastive cases, fresh-topic generalization remains 5/10, and topic-family is 6/10. This is an objective/evaluation/curriculum binding weakness, not evidence for SF-50M yet.",
+  "next_phase": "Phase 27.102 — Topic Prototype Contrastive Copy-Anchor Gate"
+}

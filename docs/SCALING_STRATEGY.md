@@ -5,7 +5,7 @@
 **Status:** governance rule, no training started
 **Language track:** Arabic MSA + Saudi only
 **Lexicon track:** Saudi Seed v1 + governed MSA/Saudi corpus
-**Current gate:** Phase 27.100 completed bounded SF-10M topic-binding training but failed runtime gates; SF-50M remains blocked.
+**Current gate:** Phase 27.101 diagnosed a topic metric blind spot; SF-50M remains blocked.
 
 ---
 
@@ -91,13 +91,13 @@ Sovereign Practical Acceleration != open-weight/pretrained model lane
 PHASE27_78_ENGINEERING_DECISION
 ```
 
-### Current Scaling Decision — Phase 27.100
+### Current Scaling Decision — Phase 27.101
 
-Phase 27.100 لا يفتح حجمًا أكبر. القرار الحالي هو:
+Phase 27.101 لا يفتح حجمًا أكبر. القرار الحالي هو:
 
 ```text
-PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_DECISION
-BLOCK_RUNTIME_DIAGNOSE_TOPIC_BINDING_REPAIR_RESULT
+PHASE27_101_TOPIC_BINDING_RESULT_DIAGNOSIS_DECISION
+DESIGN_TOPIC_PROTOTYPE_CONTRASTIVE_COPY_ANCHOR_GATE_BEFORE_ANY_TRAINING
 ```
 
 السبب: Phase 27.96 شخّصت فشل 27.95 كخلل ربط متغير الموضوع لا كحد سعة.
@@ -110,9 +110,11 @@ BLOCK_RUNTIME_DIAGNOSE_TOPIC_BINDING_REPAIR_RESULT
 لأن `500` سجل topic لا تحمل `topic_term` صريحًا. Phase 27.99 أصلحت هذه
 الفجوة، فأصبحت بوابة 27.98 `training_ready=true`. Phase 27.100 درّبت
 إصلاح ربط الموضوع بشكل مقيّد على `SF-10M`، لكنها لم تمر gates:
-known `13/16`, fresh `5/10`, copy-anchor `18/26`, wrong-topic `0`,
-topic-family `6/10`, all-family `37/50`. يبقى `SF-50M` محجوبًا،
-والمسموح فقط Phase 27.101 كتشخيص نتيجة قبل أي تدريب جديد.
+known `13/16`, fresh `5/10`, copy-anchor `18/26`, reported wrong-topic `0`,
+topic-family `6/10`, all-family `37/50`. Phase 27.101 شخّصت أن
+wrong-topic metric فيه blind spot: الفحص المباشر وجد observed wrong-topic `8`
+(`الصداقة=7`, `الامتنان=1`). يبقى `SF-50M` محجوبًا، والمسموح فقط
+Phase 27.102 كبوابة تصميم/ترميز قبل أي تدريب جديد.
 
 ويجب أن يحدد أوزان الأسباب التالية:
 

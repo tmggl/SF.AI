@@ -66,6 +66,10 @@ metadata وcopy-anchor داخل corpus السيادي المحلي.
 بوابات runtime: known `13/16`, fresh `5/10`, copy-anchor `18/26`,
 topic-family `6/10`, all-family `37/50`. لذلك لا runtime ولا `SF-50M`
 ولا tokenizer retrain ولا تدريب جديد قبل Phase 27.101 كتشخيص نتيجة.
+بعد Phase 27.101، ثبت أن `wrong_topic_count=0` من 27.100 كان metric blind
+spot لا دلالة نجاح؛ الفحص المباشر وجد observed wrong-topic `8`. لذلك لا
+runtime ولا `SF-50M` ولا tokenizer retrain ولا تدريب جديد قبل Phase 27.102
+كبوابة تصميم/ترميز.
 
 استثناء موثق: يجوز إدخال حوارات **owner-delegated agent-authored** في
 corpus إذا كان سامي قد فوّض الوكيل صراحة بتأليفها واعتمادها، وكانت كل

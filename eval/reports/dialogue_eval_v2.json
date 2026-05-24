@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.100 ضمن مسار SF-native فقط: دُرّب إصلاح ربط الموضوع بشكل مقيّد، لكنه لم يمر بوابات runtime. لا runtime الآن؛ التالي Phase 27.101 تشخيص نتيجة إصلاح ربط الموضوع."
+      "response_preview": "وصلنا إلى Phase 27.101 ضمن مسار SF-native فقط: شخّصنا نتيجة ربط الموضوع ووجدنا فجوة metric وcopy-anchor؛ لا runtime الآن. التالي Phase 27.102 بوابة topic prototype contrastive copy"
     },
     {
       "scenario_id": "clarification_repair_flow",

@@ -1,0 +1,569 @@
+{
+  "phase": "Phase 27.101",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "status": "PHASE27_101_DIAGNOSED_COPY_ANCHOR_CURRICULUM_GAP_NO_TRAINING",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_changed": false,
+  "source_report": "artifacts/reports/phase27_100_bounded_topic_binding_repair_report.json",
+  "best_checkpoint": "sf-10m-step1800",
+  "score_summary": {
+    "known_topic": "13/16",
+    "fresh_topic": "5/10",
+    "copy_anchor": "18/26",
+    "reported_wrong_topic_count": 0,
+    "observed_wrong_topic_count": 8,
+    "topic_family": "6/10",
+    "all_family": "37/50",
+    "required_gates": {
+      "known_topic": "16/16",
+      "fresh_topic": "8/10",
+      "copy_anchor": "26/26",
+      "contrastive_wrong_topic_max": 0,
+      "topic_family": "8/10",
+      "all_family": "45/50"
+    }
+  },
+  "diagnosis_signals": {
+    "known_gate_failed": true,
+    "fresh_gate_failed": true,
+    "copy_anchor_gate_failed": true,
+    "wrong_topic_metric_blind_spot": true,
+    "reported_wrong_topic_count": 0,
+    "observed_wrong_topic_count": 8,
+    "topic_prototype_attraction": true,
+    "fresh_generalization_gap": true,
+    "topic_family_gap": true,
+    "all_family_gate_failed": true,
+    "support_surface_gap": true,
+    "open_social_surface_gap": true,
+    "guard_blocked_topic_failures": 0
+  },
+  "topic_failure_counts": {
+    "by_required_topic": {
+      "الوفاء": 4,
+      "الاحترام": 2,
+      "التعاون": 1,
+      "الشجاعة": 1
+    },
+    "response_topic_hits": {
+      "الصداقة": 7,
+      "الامتنان": 1
+    },
+    "wrong_topic_substitutions": {
+      "الصداقة": 7,
+      "الامتنان": 1
+    },
+    "by_reason": {
+      "required_topic_missing": 8
+    },
+    "by_section": {
+      "known_topic_rows": 3,
+      "fresh_topic_rows": 5
+    },
+    "by_dialect": {
+      "msa": 3,
+      "saudi": 5
+    }
+  },
+  "topic_training_coverage": {
+    "topic_family_records": 510,
+    "explicit_topic_term_records": {
+      "الشجاعة": 29,
+      "الصداقة": 29,
+      "الصبر": 29,
+      "الصدق": 29,
+      "الاحترام": 29,
+      "التعاون": 29,
+      "الهدوء": 29,
+      "المسؤولية": 29,
+      "الامتنان": 29,
+      "الثقة": 29,
+      "الكرم": 27,
+      "الاعتذار": 27,
+      "الإنصات": 27,
+      "المرونة": 27,
+      "العدل": 27,
+      "الحياء": 12,
+      "الطموح": 27,
+      "التواضع": 12,
+      "الحكمة": 12,
+      "الوفاء": 22
+    },
+    "dialects_by_topic": {
+      "الشجاعة": {
+        "msa": 13,
+        "saudi": 16
+      },
+      "الصداقة": {
+        "msa": 13,
+        "saudi": 16
+      },
+      "الصبر": {
+        "msa": 13,
+        "saudi": 16
+      },
+      "الصدق": {
+        "msa": 13,
+        "saudi": 16
+      },
+      "الاحترام": {
+        "msa": 13,
+        "saudi": 16
+      },
+      "التعاون": {
+        "msa": 13,
+        "saudi": 16
+      },
+      "الهدوء": {
+        "msa": 13,
+        "saudi": 16
+      },
+      "المسؤولية": {
+        "msa": 13,
+        "saudi": 16
+      },
+      "الامتنان": {
+        "msa": 13,
+        "saudi": 16
+      },
+      "الثقة": {
+        "msa": 13,
+        "saudi": 16
+      },
+      "الكرم": {
+        "msa": 12,
+        "saudi": 15
+      },
+      "الاعتذار": {
+        "msa": 12,
+        "saudi": 15
+      },
+      "الإنصات": {
+        "msa": 12,
+        "saudi": 15
+      },
+      "المرونة": {
+        "msa": 12,
+        "saudi": 15
+      },
+      "العدل": {
+        "msa": 12,
+        "saudi": 15
+      },
+      "الحياء": {
+        "msa": 12
+      },
+      "الطموح": {
+        "msa": 12,
+        "saudi": 15
+      },
+      "التواضع": {
+        "msa": 12
+      },
+      "الحكمة": {
+        "msa": 12
+      },
+      "الوفاء": {
+        "msa": 12,
+        "saudi": 10
+      }
+    }
+  },
+  "all_family_summary": {
+    "passed": 37,
+    "total": 50,
+    "family_summary": {
+      "followup": {
+        "passed": 8,
+        "total": 10
+      },
+      "open_social": {
+        "passed": 7,
+        "total": 10
+      },
+      "planning": {
+        "passed": 10,
+        "total": 10
+      },
+      "support": {
+        "passed": 6,
+        "total": 10
+      },
+      "topic": {
+        "passed": 6,
+        "total": 10
+      }
+    },
+    "reason_counts": {
+      "passed": 37,
+      "response_family_mismatch": 3,
+      "expected_terms_missing": 10
+    }
+  },
+  "all_family_failure_counts": {
+    "open_social": 3,
+    "followup": 2,
+    "support": 4,
+    "topic": 4
+  },
+  "representative_topic_failures": [
+    {
+      "section": "known_topic_rows",
+      "id": "known_msa_الوفاء",
+      "set": "known",
+      "dialect": "msa",
+      "prompt": "اشرح لي الوفاء بجملة قصيرة.",
+      "required_topic": "الوفاء",
+      "response": "معنى الصداقة: علاقة فيها صدق واهتمام ووقفة وقت الحاجة.",
+      "reason": "required_topic_missing",
+      "guard_allowed": true,
+      "topic_ok": false,
+      "copy_anchor_ok": false,
+      "topic_hits": [
+        "الصداقة"
+      ],
+      "wrong_topic_hits": [
+        "الصداقة"
+      ]
+    },
+    {
+      "section": "known_topic_rows",
+      "id": "known_saudi_الوفاء",
+      "set": "known",
+      "dialect": "saudi",
+      "prompt": "وش يعني الوفاء باختصار؟",
+      "required_topic": "الوفاء",
+      "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+      "reason": "required_topic_missing",
+      "guard_allowed": true,
+      "topic_ok": false,
+      "copy_anchor_ok": false,
+      "topic_hits": [
+        "الصداقة"
+      ],
+      "wrong_topic_hits": [
+        "الصداقة"
+      ]
+    },
+    {
+      "section": "known_topic_rows",
+      "id": "known_msa_الاحترام",
+      "set": "known",
+      "dialect": "msa",
+      "prompt": "اشرح لي الاحترام بجملة قصيرة.",
+      "required_topic": "الاحترام",
+      "response": "معنى الصداقة: رفقة طيبة واهتمام ووقفة ص وقت الحاجة.",
+      "reason": "required_topic_missing",
+      "guard_allowed": true,
+      "topic_ok": false,
+      "copy_anchor_ok": false,
+      "topic_hits": [
+        "الصداقة"
+      ],
+      "wrong_topic_hits": [
+        "الصداقة"
+      ]
+    },
+    {
+      "section": "fresh_topic_rows",
+      "id": "fresh_01_msa_الوفاء",
+      "set": "fresh",
+      "dialect": "msa",
+      "prompt": "عرّف الوفاء بكلام بسيط.",
+      "required_topic": "الوفاء",
+      "response": "معنى الصداقة: علاقة فيها صدق واهتمام ووقفة وقت الحاجة.",
+      "reason": "required_topic_missing",
+      "guard_allowed": true,
+      "topic_ok": false,
+      "copy_anchor_ok": false,
+      "topic_hits": [
+        "الصداقة"
+      ],
+      "wrong_topic_hits": [
+        "الصداقة"
+      ]
+    },
+    {
+      "section": "fresh_topic_rows",
+      "id": "fresh_02_saudi_التعاون",
+      "set": "fresh",
+      "dialect": "saudi",
+      "prompt": "وش معنى التعاون في الحياة اليومية؟",
+      "required_topic": "التعاون",
+      "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+      "reason": "required_topic_missing",
+      "guard_allowed": true,
+      "topic_ok": false,
+      "copy_anchor_ok": false,
+      "topic_hits": [
+        "الصداقة"
+      ],
+      "wrong_topic_hits": [
+        "الصداقة"
+      ]
+    },
+    {
+      "section": "fresh_topic_rows",
+      "id": "fresh_04_saudi_الاحترام",
+      "set": "fresh",
+      "dialect": "saudi",
+      "prompt": "وش يعني الاحترام؟",
+      "required_topic": "الاحترام",
+      "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+      "reason": "required_topic_missing",
+      "guard_allowed": true,
+      "topic_ok": false,
+      "copy_anchor_ok": false,
+      "topic_hits": [
+        "الصداقة"
+      ],
+      "wrong_topic_hits": [
+        "الصداقة"
+      ]
+    },
+    {
+      "section": "fresh_topic_rows",
+      "id": "fresh_08_saudi_الشجاعة",
+      "set": "fresh",
+      "dialect": "saudi",
+      "prompt": "وش معنى الشجاعة؟",
+      "required_topic": "الشجاعة",
+      "response": "معنى الامتنان: إنك تنتبه للاللي تلاحظ الخير الموجود وتشكر عليها.",
+      "reason": "required_topic_missing",
+      "guard_allowed": true,
+      "topic_ok": false,
+      "copy_anchor_ok": false,
+      "topic_hits": [
+        "الامتنان"
+      ],
+      "wrong_topic_hits": [
+        "الامتنان"
+      ]
+    },
+    {
+      "section": "fresh_topic_rows",
+      "id": "fresh_09_saudi_الوفاء",
+      "set": "fresh",
+      "dialect": "saudi",
+      "prompt": "علمني عن الوفاء بجملة وحدة.",
+      "required_topic": "الوفاء",
+      "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+      "reason": "required_topic_missing",
+      "guard_allowed": true,
+      "topic_ok": false,
+      "copy_anchor_ok": false,
+      "topic_hits": [
+        "الصداقة"
+      ],
+      "wrong_topic_hits": [
+        "الصداقة"
+      ]
+    }
+  ],
+  "representative_all_family_failures": [
+    {
+      "id": "open_social_04",
+      "family": "open_social",
+      "dialect": "msa",
+      "prompt": "لنبدأ حديثًا عاديًا",
+      "topic": "",
+      "response": "نبدأ بشي بسيط: وش أكثر شي واحد عدك اليوم؟",
+      "reason": "response_family_mismatch",
+      "guard_allowed": true,
+      "expected_ok": true,
+      "family_ok": false
+    },
+    {
+      "id": "open_social_06",
+      "family": "open_social",
+      "dialect": "msa",
+      "prompt": "اختر لي شيئًا نتحدث عنه",
+      "topic": "",
+      "response": "نبدأ بشي بسيط: وش أكثر شي واحد هدوء؟",
+      "reason": "response_family_mismatch",
+      "guard_allowed": true,
+      "expected_ok": true,
+      "family_ok": false
+    },
+    {
+      "id": "open_social_10",
+      "family": "open_social",
+      "dialect": "msa",
+      "prompt": "هات فكرة لطيفة للكلام",
+      "topic": "",
+      "response": "نبدأ بشي بسيط: وش أكثر شي شاغل ك اليوم؟",
+      "reason": "response_family_mismatch",
+      "guard_allowed": true,
+      "expected_ok": true,
+      "family_ok": false
+    },
+    {
+      "id": "followup_08",
+      "family": "followup",
+      "dialect": "msa",
+      "prompt": "تابع الشرح من النقطة الأخيرة",
+      "topic": "",
+      "response": "يعني لا تجمع كل شيء مرة وحدة؛ خذ جزء بسيط وابدأ فيه.",
+      "reason": "expected_terms_missing",
+      "guard_allowed": true,
+      "expected_ok": false,
+      "family_ok": true
+    },
+    {
+      "id": "followup_10",
+      "family": "followup",
+      "dialect": "msa",
+      "prompt": "أريد صياغة أبسط للفكرة",
+      "topic": "",
+      "response": "يعني لا تجمع كل شيء مرة وحدة؛ خذ جزء بسيط وابدأ فيه.",
+      "reason": "expected_terms_missing",
+      "guard_allowed": true,
+      "expected_ok": false,
+      "family_ok": true
+    },
+    {
+      "id": "support_02",
+      "family": "support",
+      "dialect": "msa",
+      "prompt": "أحتاج جملة تهدئني",
+      "topic": "",
+      "response": "خذ نفس شوي واهدأ، بعدها ابدأ بشي واحد بسيط.",
+      "reason": "expected_terms_missing",
+      "guard_allowed": true,
+      "expected_ok": false,
+      "family_ok": true
+    },
+    {
+      "id": "support_04",
+      "family": "support",
+      "dialect": "msa",
+      "prompt": "أنا مرتبك وأريد هدوءًا",
+      "topic": "",
+      "response": "خذ نفس شوي واهدأ، بعدها ابدأ بشي واحد بسيط.",
+      "reason": "expected_terms_missing",
+      "guard_allowed": true,
+      "expected_ok": false,
+      "family_ok": true
+    },
+    {
+      "id": "support_05",
+      "family": "support",
+      "dialect": "saudi",
+      "prompt": "ابي اروق بدون كلام كثير",
+      "topic": "",
+      "response": "لا تستعجل، اهدأ شوي واكتب اللي مضايقك بجملة قصيرة.",
+      "reason": "expected_terms_missing",
+      "guard_allowed": true,
+      "expected_ok": false,
+      "family_ok": true
+    },
+    {
+      "id": "support_06",
+      "family": "support",
+      "dialect": "msa",
+      "prompt": "كيف أستعيد تركيزي بهدوء",
+      "topic": "",
+      "response": "خذ نفس شوي واهدأ، بعدها ابدأ بشي واحد بسيط.",
+      "reason": "expected_terms_missing",
+      "guard_allowed": true,
+      "expected_ok": false,
+      "family_ok": true
+    },
+    {
+      "id": "topic_01",
+      "family": "topic",
+      "dialect": "msa",
+      "prompt": "فسر الوفاء بجملة قصيرة",
+      "topic": "الوفاء",
+      "response": "معنى الصداقة: علاقة فيها صدق واهتمام ووقفة وقت الحاجة.",
+      "reason": "expected_terms_missing",
+      "guard_allowed": true,
+      "expected_ok": false,
+      "family_ok": true
+    },
+    {
+      "id": "topic_03",
+      "family": "topic",
+      "dialect": "msa",
+      "prompt": "عرّف الصبر تعريفًا بسيطًا",
+      "topic": "الصبر",
+      "response": "معنى الهدوء: إنك المكان الذي تحمل بلا منّة.",
+      "reason": "expected_terms_missing",
+      "guard_allowed": true,
+      "expected_ok": false,
+      "family_ok": true
+    },
+    {
+      "id": "topic_04",
+      "family": "topic",
+      "dialect": "saudi",
+      "prompt": "الاحترام كيف تفهمه",
+      "topic": "الاحترام",
+      "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+      "reason": "expected_terms_missing",
+      "guard_allowed": true,
+      "expected_ok": false,
+      "family_ok": true
+    },
+    {
+      "id": "topic_10",
+      "family": "topic",
+      "dialect": "saudi",
+      "prompt": "وش معنى الوفاء باختصار",
+      "topic": "الوفاء",
+      "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+      "reason": "expected_terms_missing",
+      "guard_allowed": true,
+      "expected_ok": false,
+      "family_ok": true
+    }
+  ],
+  "root_cause_weights": {
+    "copy_anchor_objective_underpowered": 28,
+    "topic_prototype_attraction": 20,
+    "fresh_topic_generalization_gap": 16,
+    "topic_curriculum_term_balance": 12,
+    "assistant_target_prefix_format_weak": 9,
+    "decoding_surface_artifacts": 6,
+    "support_open_social_secondary_regression": 4,
+    "tokenizer": 2,
+    "model_capacity": 2,
+    "semantic_routing": 1
+  },
+  "blocked_actions": [
+    "new LM training",
+    "runtime release",
+    "UI generator release",
+    "SF-50M transition",
+    "tokenizer retrain",
+    "pretrained/open-weight usage",
+    "keyword/template masking"
+  ],
+  "allowed_next_actions": [
+    "design topic-prototype contrastive copy-anchor gate",
+    "fix wrong-topic metric precedence before any training",
+    "require per-topic forced copy-anchor rows before training",
+    "separate known/fresh topic curriculum thresholds",
+    "preserve observed wrong-topic zero-leak as a non-regression gate",
+    "add support/open_social secondary regression checks"
+  ],
+  "decision": {
+    "decision_id": "PHASE27_101_TOPIC_BINDING_RESULT_DIAGNOSIS_DECISION",
+    "engineering_decision": "DESIGN_TOPIC_PROTOTYPE_CONTRASTIVE_COPY_ANCHOR_GATE_BEFORE_ANY_TRAINING",
+    "new_training_allowed": false,
+    "runtime_release_allowed": false,
+    "ui_release_allowed": false,
+    "heldout_runtime_gate_allowed": false,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "topic_prototype_contrastive_design_allowed": true,
+    "why": "Phase 27.100 improved topic binding but did not truly eliminate wrong-topic behavior. The report counted wrong-topic as zero through reason precedence, while direct response inspection finds prototype substitutions, mostly الصداقة. The best checkpoint misses copy-anchor on 8/26 contrastive cases, fresh-topic generalization remains 5/10, and topic-family is 6/10. This is an objective/evaluation/curriculum binding weakness, not evidence for SF-50M yet.",
+    "next_phase": "Phase 27.102 — Topic Prototype Contrastive Copy-Anchor Gate"
+  }
+}

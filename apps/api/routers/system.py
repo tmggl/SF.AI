@@ -61,11 +61,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.100 — Bounded Topic Binding Repair Training",
+        current_phase="Phase 27.101 — Topic Binding Repair Result Diagnosis",
         current_phase_status=(
-            "phase27_100_bounded_topic_binding_repair_trained_runtime_blocked_diagnosis_required"
+            "phase27_101_topic_binding_result_diagnosed_no_training_runtime_blocked"
         ),
-        next_phase="Phase 27.101 — Topic Binding Repair Result Diagnosis",
+        next_phase="Phase 27.102 — Topic Prototype Contrastive Copy-Anchor Gate",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -614,6 +614,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_100_bounded_topic_binding_repair",
                 status="trained_runtime_blocked_diagnosis_required",
                 phase="Phase 27.100",
+            ),
+            ComponentStatus(
+                name="phase27_101_topic_binding_result_diagnosis",
+                status="diagnosed_metric_blind_spot_no_training",
+                phase="Phase 27.101",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

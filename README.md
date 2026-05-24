@@ -28,14 +28,14 @@
 المسار الحالي الرسمي:
 
 ```text
-Phase 27.100 — Bounded Topic Binding Repair Training
+Phase 27.101 — Topic Binding Repair Result Diagnosis
 Sovereign Practical Acceleration Strategy v2
-PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_DECISION
+PHASE27_101_TOPIC_BINDING_RESULT_DIAGNOSIS_DECISION
 ```
 
 القرار الحالي:
 
-- Phase 27.100 دُرّبت كتدريب إصلاح مقيّد على `SF-10M` فقط، وليس runtime.
+- Phase 27.101 شخّصت نتيجة 27.100 فقط، دون أي تدريب جديد.
 - لا tokenizer جديد.
 - لا runtime release.
 - لا انتقال إلى `SF-50M`.
@@ -45,8 +45,9 @@ PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_DECISION
 - Phase 27.97 صممت objective ينسخ الموضوع المطلوب في بداية رد topic ويمنع الموضوعات المجاورة.
 - Phase 27.98 رمّزت البوابة وأثبتت أن التدريب محجوب لأن `500` سجل topic لا تحمل `topic_term` صريحًا.
 - Phase 27.99 أصلحت `topic_term` وcopy-anchor؛ بوابة 27.98 أصبحت `training_ready=true`.
-- Phase 27.100 لم تمر بوابات runtime: known `13/16`, fresh `5/10`, copy-anchor `18/26`, wrong-topic `0`, topic-family `6/10`, all-family `37/50`.
-- التالي: `Phase 27.101 — Topic Binding Repair Result Diagnosis`.
+- Phase 27.100 لم تمر بوابات runtime: known `13/16`, fresh `5/10`, copy-anchor `18/26`, reported wrong-topic `0`, topic-family `6/10`, all-family `37/50`.
+- Phase 27.101 كشف blind spot: العدّاد المعلن wrong-topic `0`، لكن الفحص المباشر وجد observed wrong-topic `8` (`الصداقة=7`, `الامتنان=1`).
+- التالي: `Phase 27.102 — Topic Prototype Contrastive Copy-Anchor Gate`.
 - عند نجاح بوابة أي حجم لاحقًا، ينتقل الوكيل تلقائيًا للحجم التالي حتى
   `SF-1B+` دون انتظار موافقة جديدة.
 
@@ -123,11 +124,11 @@ PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_DECISION
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.100 / 30 — Bounded Topic Binding Repair Training.
-- **الأولوية الحالية:** Phase 27.101 Topic Binding Repair Result Diagnosis؛ تشخيص بلا تدريب جديد قبل معرفة السبب الجذري.
+- **الرحلة الحالية:** Phase 27.101 / 30 — Topic Binding Repair Result Diagnosis.
+- **الأولوية الحالية:** Phase 27.102 Topic Prototype Contrastive Copy-Anchor Gate؛ بوابة تصميم/ترميز بلا تدريب جديد قبل إصلاح metric.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
 - **البيانات الحالية:** corpus موثق `8453` سجلًا يمر `corpus-audit`: `4254` سعودي + `4199` فصحى، `gold=3341`, `silver=5112`. split الحالي `train=7603`, `eval=850`.
-- **التدريب:** Phase 27.95 دُرّب بالفعل كتدريب إصلاح topic-objective محدود وفشل gates، وPhase 27.96 شخّص السبب كـ topic variable binding failure، وPhase 27.97 صمم objective جديدًا، وPhase 27.98 منع التدريب بسبب نقص metadata، وPhase 27.99 أصلح metadata، وPhase 27.100 درّب إصلاح ربط الموضوع لكنه لم يمر gates. لا runtime ولا SF-50M ولا tokenizer retrain. Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
+- **التدريب:** Phase 27.95 دُرّب بالفعل كتدريب إصلاح topic-objective محدود وفشل gates، وPhase 27.96 شخّص السبب كـ topic variable binding failure، وPhase 27.97 صمم objective جديدًا، وPhase 27.98 منع التدريب بسبب نقص metadata، وPhase 27.99 أصلح metadata، وPhase 27.100 درّب إصلاح ربط الموضوع لكنه لم يمر gates، وPhase 27.101 شخّص blind spot في metric وprototype attraction. لا runtime ولا SF-50M ولا tokenizer retrain. Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
 - **المولّد:** runtime العام محجوب كمولد حواري حتى نجاح held-out/canary. لا تعرض أي قالب على أنه مولّد، ولا تفتح واجهة مولّد إلا بعد قرار runtime صريح.
 - **التقييم:** Phase 27 مرّر `19/19` turn في حوار متعدد الأدوار، لكنه أكد أن الردود ما زالت `template` وأن المولد غير جاهز.
 - **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.
