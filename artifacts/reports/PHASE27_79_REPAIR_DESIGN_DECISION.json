@@ -1,0 +1,26 @@
+{
+  "decision_id": "PHASE27_79_REPAIR_DESIGN_DECISION",
+  "engineering_decision": "DESIGN_READY_ENCODE_GATES_NEXT_NO_TRAINING",
+  "source_decision": "PHASE27_78_ENGINEERING_DECISION",
+  "continue_sf10m": true,
+  "new_training_allowed": false,
+  "tokenizer_retrain_allowed": false,
+  "runtime_release_allowed": false,
+  "sf50m_justified_transition": false,
+  "next_phase": "Phase 27.80 — Repair Gate Encoding and Dry-Run Validation",
+  "why_no_training_yet": "Phase 27.79 is a design gate. It defines the objective, curriculum, decoding, and evaluation gates that must be encoded before any new LM training.",
+  "why_sf50m_still_blocked": "Capacity remains only 1% in Phase 27.78 root-cause weights; the next fix targets family mixing, objective, curriculum, weak generalization, semantic routing, and decoding.",
+  "root_cause_weights_percent": {
+    "capacity": 1,
+    "objective": 18,
+    "curriculum": 16,
+    "tokenizer": 4,
+    "decoding": 7,
+    "family_mixing": 22,
+    "memorization": 2,
+    "weak_generalization": 14,
+    "EOS": 4,
+    "repetition": 2,
+    "semantic_routing": 10
+  }
+}

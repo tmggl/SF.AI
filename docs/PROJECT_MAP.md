@@ -37,7 +37,7 @@ apps/web/
 - runtime applications فقط.
 - `apps/api` يحتوي FastAPI والـ routers والـ schemas والـ static chat UI.
 - `apps/web` placeholder للواجهة المستقبلية.
-- `/health` و`/system/status` يعكسان الحالة الحالية: `Phase 27.78`.
+- `/health` و`/system/status` يعكسان الحالة الحالية: `Phase 27.79`.
 
 ممنوع:
 
@@ -161,8 +161,8 @@ device.py
 لا تُشغّل إلا بإذن وبعد Phase 27.78:
 
 - لا training جديد قبل `ENGINEERING_ROOT_CAUSE_GATE`.
-- القرار الحالي `PHASE27_78_ENGINEERING_DECISION.new_training_allowed=false`.
-- أي script تدريب يجب أن يبقى محجوبًا حتى يكتب Phase 27.79 gates واضحة.
+- القرار الحالي `PHASE27_79_REPAIR_DESIGN_DECISION.new_training_allowed=false`.
+- أي script تدريب يجب أن يبقى محجوبًا حتى تمر Phase 27.80 gates الواضحة.
 
 ## sf_ai/memory/
 

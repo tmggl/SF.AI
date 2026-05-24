@@ -55,12 +55,12 @@ Phase 27.25 اختبرت checkpoint نفسه على أسئلة held-out جديد
 `16/18` مع intent/topic conditioning. Phase 27.31–27.33 أكملت natural
 intent/topic + balanced calibration + advice/micro stabilization، ووصلت إلى
 كل البوابات المحلية كاملة: fresh mixed `18/18` وmicro `32/32` بلا تسريب.
-الخطوة الحالية ليست تكبير النموذج كاملًا. Phase 27.77 درّب LM محدودًا على tokenizer v9 لكنه فشل (`54/60`, `45/50`, `30/30`) بسبب خلط عائلات؛ runtime ما زال محجوبًا. Phase 27.78 اعتمدت `Sovereign Practical Acceleration Strategy v2` ونفذت `ENGINEERING_ROOT_CAUSE_GATE`. القرار الرسمي `PHASE27_78_ENGINEERING_DECISION`: السبب الأكبر family mixing `22%`, objective `18%`, curriculum `16%`, weak generalization `14%`, semantic routing `10%`, بينما capacity فقط `1%`. التالي Phase 27.79: تصميم إصلاح objective/curriculum/decoding قبل أي تدريب جديد، ولا `SF-50M` حتى يصدر `SF-50M JUSTIFIED TRANSITION` مدعوم بالأدلة.
+الخطوة الحالية ليست تكبير النموذج كاملًا. Phase 27.77 درّب LM محدودًا على tokenizer v9 لكنه فشل (`54/60`, `45/50`, `30/30`) بسبب خلط عائلات؛ runtime ما زال محجوبًا. Phase 27.78 اعتمدت `Sovereign Practical Acceleration Strategy v2` ونفذت `ENGINEERING_ROOT_CAUSE_GATE`. القرار الرسمي `PHASE27_78_ENGINEERING_DECISION`: السبب الأكبر family mixing `22%`, objective `18%`, curriculum `16%`, weak generalization `14%`, semantic routing `10%`, بينما capacity فقط `1%`. Phase 27.79 صممت إصلاح objective/curriculum/decoding وأصدرت `PHASE27_79_REPAIR_DESIGN_DECISION` بدون تدريب. التالي Phase 27.80: تشفير gates وتشغيل dry-run قبل أي تدريب جديد، ولا `SF-50M` حتى يصدر `SF-50M JUSTIFIED TRANSITION` مدعوم بالأدلة.
 
 الخطوة العملية الحالية:
 
-- Phase 27.79 هو التالي: تصميم إصلاح objective/curriculum/decoding/family balance.
-- لا تبدأ تدريبًا في Phase 27.79 حتى تُشفّر gates وتثبت allowed actions.
+- Phase 27.80 هو التالي: تشفير objective/curriculum/decoding gates وتشغيل dry-run.
+- لا تبدأ تدريبًا في Phase 27.80؛ هو مرحلة validation بلا تدريب.
 - لا tokenizer جديد الآن؛ tokenizer وزنها `4%` فقط في 27.78.
 - لا `SF-50M` الآن؛ capacity وزنها `1%` فقط.
 - لا runtime release قبل `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.

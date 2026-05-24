@@ -229,6 +229,7 @@ ENGINEERING_ROOT_CAUSE_GATE
 
 ```text
 PHASE27_78_ENGINEERING_DECISION
+PHASE27_79_REPAIR_DESIGN_DECISION
 ```
 
 نتيجة Phase 27.78 الحالية:
@@ -251,7 +252,7 @@ PHASE27_78_ENGINEERING_DECISION
 - امنع `SF-50M` الآن.
 - امنع tokenizer جديدًا الآن.
 - امنع runtime release الآن.
-- التالي هو Phase 27.79 لتصميم إصلاح objective/curriculum/decoding/family balance.
+- التالي هو Phase 27.80 لتشفير بوابات objective/curriculum/decoding/family balance وتشغيل dry-run بلا تدريب.
 
 قاعدة runtime:
 

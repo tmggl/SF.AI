@@ -12,6 +12,7 @@
 ```text
 ENGINEERING_ROOT_CAUSE_GATE
 PHASE27_78_ENGINEERING_DECISION
+PHASE27_79_REPAIR_DESIGN_DECISION
 ```
 
 هما شرط قبل أي تدريب جديد. القرار الحالي:
@@ -31,8 +32,8 @@ PHASE27_78_ENGINEERING_DECISION
 - semantic routing `10%`.
 - capacity `1%`.
 
-إذن Phase 27.79 يجب أن يصمم objective/curriculum/decoding gates أولًا، ولا
-يبدأ تدريبًا إلا بعد تشفير هذه البوابات.
+Phase 27.79 صممت objective/curriculum/decoding gates. إذن Phase 27.80 يجب
+أن يشفّر هذه البوابات ويشغّل dry-run، ولا يبدأ تدريبًا إلا بعد نجاحها.
 
 ---
 

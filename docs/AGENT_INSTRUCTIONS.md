@@ -36,14 +36,14 @@
 
 ```text
 ENGINEERING_ROOT_CAUSE_GATE
-PHASE27_78_ENGINEERING_DECISION
+PHASE27_79_REPAIR_DESIGN_DECISION
 ```
 
 الحالة الحالية:
 
-- المرحلة الحالية: `Phase 27.78 — Engineering Root Cause Gate`.
-- القرار الحالي: `PHASE27_78_ENGINEERING_DECISION`.
-- التالي: `Phase 27.79 — Objective/Curriculum/Decoding Repair Design`.
+- المرحلة الحالية: `Phase 27.79 — Objective/Curriculum/Decoding Repair Design`.
+- القرار الحالي: `PHASE27_79_REPAIR_DESIGN_DECISION`.
+- التالي: `Phase 27.80 — Repair Gate Encoding and Dry-Run Validation`.
 - التدريب: محجوب حتى تُشفّر gates.
 - runtime: محجوب تحت `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - `SF-50M`: محجوب؛ لا يفتح إلا عبر `SF-50M JUSTIFIED TRANSITION`.
@@ -92,7 +92,7 @@ PHASE27_78_ENGINEERING_DECISION
 - هل الطلب تدريب، crawling، نقل بيانات، أم runtime؟
 - هل توجد تغييرات محلية غير مرفوعة؟
 - هل توجد ملفات خاصة مستثناة؟
-- هل توجد `PHASE27_78_ENGINEERING_DECISION` وهل طلبك يقع ضمن المسموح بعده؟
+- هل توجد `PHASE27_79_REPAIR_DESIGN_DECISION` وهل طلبك يقع ضمن المسموح بعده؟
 
 ## Workflow إلزامي
 

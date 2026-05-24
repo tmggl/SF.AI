@@ -11,11 +11,11 @@
 المرحلة الحالية:
 
 ```text
-Phase 27.78 — Engineering Root Cause Gate
-PHASE27_78_ENGINEERING_DECISION
+Phase 27.79 — Objective/Curriculum/Decoding Repair Design
+PHASE27_79_REPAIR_DESIGN_DECISION
 ```
 
-لا تدريب جديد قبل أن يسمح gate مكتوب بعد 27.78 بذلك. لا `SF-50M` الآن.
+لا تدريب جديد قبل أن تسمح gates المكتوبة بعد Phase 27.80 بذلك. لا `SF-50M` الآن.
 لا runtime release قبل:
 
 ```text
@@ -38,8 +38,8 @@ NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS
 | repetition | 2% |
 | capacity | 1% |
 
-إذن المسار الصحيح التالي هو Phase 27.79: تصميم إصلاح objective/curriculum/
-decoding/family balance، وليس تدريبًا مباشرًا ولا tokenizer جديدًا.
+إذن المسار الصحيح التالي هو Phase 27.80: تشفير بوابات objective/curriculum/
+decoding/family balance وتشغيل dry-run، وليس تدريبًا مباشرًا ولا tokenizer جديدًا.
 
 إذا نجحت بوابة حجم لاحقة، فالتفويض المعتمد هو الانتقال التلقائي للحجم
 التالي حتى `SF-1B+`:

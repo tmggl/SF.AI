@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.78 ضمن Sovereign Practical Acceleration Strategy v2: أصدرنا PHASE27_78_ENGINEERING_DECISION. القرار: لا تدريب جديد ولا runtime ولا SF-50M الآن. السبب الأكبر fami"
+      "response_preview": "وصلنا إلى Phase 27.79 ضمن Sovereign Practical Acceleration Strategy v2: صممنا إصلاح objective/curriculum/decoding بدون تدريب. القرار: لا تدريب جديد ولا runtime ولا SF-50M الآن. الت"
     },
     {
       "scenario_id": "clarification_repair_flow",

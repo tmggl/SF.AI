@@ -62,10 +62,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.78
-الاسم: Engineering Root Cause Gate
+المرحلة الحالية: Phase 27.79
+الاسم: Objective/Curriculum/Decoding Repair Design
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_78_ENGINEERING_DECISION
+القرار الرسمي: PHASE27_79_REPAIR_DESIGN_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -77,7 +77,7 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
-- التالي: `Phase 27.79 — Objective/Curriculum/Decoding Repair Design`.
+- التالي: `Phase 27.80 — Repair Gate Encoding and Dry-Run Validation`.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -267,6 +267,7 @@ SF-10M
 | Phase 25-26 | canary حجب runtime، وSF-50M not ready |
 | Phase 27-27.77 | سلسلة طويلة لتحسين الحوار، tokenizer، objective، family balance، canaries |
 | Phase 27.78 | root-cause gate أوقف التدريب الأعمى والتكبير |
+| Phase 27.79 | تصميم إصلاح objective/curriculum/decoding، بدون تدريب |
 
 الدرس الأساسي من Phase 27:
 
@@ -282,23 +283,21 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.79 — Objective/Curriculum/Decoding Repair Design
+Phase 27.80 — Repair Gate Encoding and Dry-Run Validation
 ```
 
 مطلوب منها:
 
 - Decision Report.
-- Root Cause Report update.
 - Allowed/Blocked Actions.
-- Runtime Decision.
-- Regression Summary.
-- تصميم objective جديد أو معدل.
-- تصميم curriculum عائلي متوازن.
-- تصميم decoding controls.
-- family confusion analysis.
-- held-out/shadow canary definitions.
+- objective spec validator.
+- curriculum family-balance dry-run.
+- decoding policy config validator.
+- held-out/shadow canary manifest validator.
+- family confusion matrix builder.
+- operator-contamination regression scan.
 
-ممنوع في 27.79 حتى يصدر قرار:
+ممنوع في 27.80 حتى تصدر gates ناجحة وقرار لاحق:
 
 - تدريب جديد.
 - tokenizer جديد.

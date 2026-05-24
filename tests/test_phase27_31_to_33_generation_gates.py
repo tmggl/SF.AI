@@ -871,3 +871,23 @@ def test_phase27_78_engineering_root_cause_gate_blocks_training_runtime_and_scal
     assert report["decision"]["sf50m_justified_transition"] is False
     assert report["decision"]["root_cause_weights_percent"]["family_mixing"] == 22
     assert report["decision"]["root_cause_weights_percent"]["capacity"] == 1
+
+
+def test_phase27_79_repair_design_keeps_training_blocked_and_defines_next_gates() -> None:
+    report = _report("phase27_79_objective_curriculum_decoding_design_report.json")
+    assert report["phase"] == "Phase 27.79"
+    assert report["strategy"] == "Sovereign Practical Acceleration Strategy v2"
+    assert report["gate"] == "OBJECTIVE_CURRICULUM_DECODING_REPAIR_DESIGN"
+    assert report["status"] == "PHASE27_79_REPAIR_DESIGN_READY_NEXT_GATE_ENCODING_NO_TRAINING"
+    assert report["training_started"] is False
+    assert report["tokenizer_training_started"] is False
+    assert report["runtime_changed"] is False
+    assert report["objective_design"]["name"] == "family_conditioned_prompt_to_answer_objective_v1"
+    assert report["curriculum_design"]["name"] == "interleaved_family_curriculum_v2"
+    assert report["decoding_design"]["name"] == "semantic_guarded_decoding_v1"
+    assert "objective spec validator" in report["gate_design"]["must_implement"]
+    assert report["decision"]["decision_id"] == "PHASE27_79_REPAIR_DESIGN_DECISION"
+    assert report["decision"]["new_training_allowed"] is False
+    assert report["decision"]["runtime_release_allowed"] is False
+    assert report["decision"]["sf50m_justified_transition"] is False
+    assert "Phase 27.80" in report["decision"]["next_phase"]

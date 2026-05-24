@@ -54,12 +54,12 @@ runtime rules + routing
 الحالة الحالية الملزمة:
 
 ```text
-Phase 27.78 — Engineering Root Cause Gate
-PHASE27_78_ENGINEERING_DECISION
+Phase 27.79 — Objective/Curriculum/Decoding Repair Design
+PHASE27_79_REPAIR_DESIGN_DECISION
 ```
 
 القرار الحالي: لا training، لا tokenizer جديد، لا runtime release، لا
-`SF-50M`. التالي Phase 27.79 لتصميم إصلاح objective/curriculum/decoding.
+`SF-50M`. التالي Phase 27.80 لتشفير بوابات الإصلاح وتشغيل dry-run بلا تدريب.
 
 ## ما الذي نريد الوصول إليه؟
 

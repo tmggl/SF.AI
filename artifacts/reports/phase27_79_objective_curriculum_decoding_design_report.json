@@ -1,0 +1,161 @@
+{
+  "phase": "Phase 27.79",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "gate": "OBJECTIVE_CURRICULUM_DECODING_REPAIR_DESIGN",
+  "status": "PHASE27_79_REPAIR_DESIGN_READY_NEXT_GATE_ENCODING_NO_TRAINING",
+  "source_report": "artifacts/reports/phase27_78_engineering_root_cause_gate_report.json",
+  "training_started": false,
+  "tokenizer_training_started": false,
+  "runtime_changed": false,
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "objective_design": {
+    "name": "family_conditioned_prompt_to_answer_objective_v1",
+    "goal": "تعليم النموذج اختيار عائلة الرد الصحيحة قبل صياغة الرد، لا حفظ نصوص منفردة.",
+    "format": [
+      "<|dialogue_family:{family}|>",
+      "<|dialect:{msa|saudi}|>",
+      "<|intent:{intent}|>",
+      "<|topic:{topic_or_none}|>",
+      "<|user|>{prompt}<|assistant|>{answer}<eos>"
+    ],
+    "loss_scope": "assistant_answer_only_with_eos",
+    "required_controls": [
+      "single_answer_boundary",
+      "explicit_family_condition",
+      "explicit_dialect_condition",
+      "topic_or_none_condition",
+      "assistant_eos_required",
+      "no_cross_sample_packing"
+    ],
+    "rejected_patterns": [
+      "multi-answer continuation",
+      "topic-definition answer for open_social prompt",
+      "support answer for planning prompt",
+      "project/operator wording",
+      "template fallback in generator path"
+    ]
+  },
+  "curriculum_design": {
+    "name": "interleaved_family_curriculum_v2",
+    "goal": "منع انجذاب النموذج لعائلة واحدة، خصوصًا topic/open_social.",
+    "family_weights": {
+      "open_social": 1.0,
+      "followup": 1.0,
+      "planning": 1.0,
+      "support": 1.0,
+      "topic": 1.0
+    },
+    "ordering": "round_robin_interleaved_by_family_then_dialect",
+    "dialect_balance": {
+      "msa": 0.5,
+      "saudi": 0.5
+    },
+    "batch_rules": [
+      "لا دفعات كتلية من family واحدة.",
+      "كل نافذة تدريب صغيرة يجب أن تحتوي open_social/followup/planning/support/topic.",
+      "كل عائلة يجب أن تحتوي صيغًا مباشرة وغير مباشرة.",
+      "held-out prompts لا تدخل التدريب."
+    ],
+    "minimum_pre_training_diagnostics": [
+      "family distribution report",
+      "dialect distribution report",
+      "prompt novelty report",
+      "operator-contamination scan",
+      "family confusion dry-run matrix"
+    ]
+  },
+  "decoding_design": {
+    "name": "semantic_guarded_decoding_v1",
+    "goal": "تقليل الخلط والتكرار دون تغطية ضعف المولد بقوالب.",
+    "controls": [
+      "stop_at_eos",
+      "max_answer_tokens_by_family",
+      "no_repeat_ngram",
+      "repetition_penalty",
+      "family_allowed_terms_floor",
+      "family_blocked_terms_soft_guard",
+      "malformed_fragment_guard"
+    ],
+    "not_allowed": [
+      "template replacement",
+      "keyword-triggered canned answer",
+      "rewriting bad generation into good answer"
+    ],
+    "runtime_rule": "إذا حُجب المولد في generator-only lab mode فالرد يبقى فارغًا مع metadata، ولا نضع قالبًا يخدع المستخدم."
+  },
+  "gate_design": {
+    "name": "PHASE27_80_GATE_ENCODING_PLAN",
+    "next_phase": "Phase 27.80 — Repair Gate Encoding and Dry-Run Validation",
+    "training_allowed_in_next_phase": false,
+    "runtime_release_allowed_in_next_phase": false,
+    "sf50m_allowed_in_next_phase": false,
+    "must_implement": [
+      "objective spec validator",
+      "curriculum family-balance dry-run",
+      "decoding policy config validator",
+      "held-out/shadow canary manifest validator",
+      "family confusion matrix builder",
+      "operator-contamination regression scan"
+    ],
+    "must_pass_before_any_training_after_next_phase": [
+      "objective_format_valid",
+      "family_balance_valid",
+      "dialect_balance_valid",
+      "heldout_separation_valid",
+      "operator_contamination_zero",
+      "decoding_policy_valid",
+      "runtime_template_masking_absent"
+    ]
+  },
+  "allowed_actions": [
+    "encode gates and validators",
+    "dry-run curriculum diagnostics",
+    "dry-run objective format validation",
+    "dry-run decoding policy validation",
+    "build canary manifests",
+    "build family confusion diagnostics"
+  ],
+  "blocked_actions": [
+    "new LM training",
+    "tokenizer retraining",
+    "SF-50M full training",
+    "runtime release",
+    "template masking",
+    "external/pretrained data or weights"
+  ],
+  "decision": {
+    "decision_id": "PHASE27_79_REPAIR_DESIGN_DECISION",
+    "engineering_decision": "DESIGN_READY_ENCODE_GATES_NEXT_NO_TRAINING",
+    "source_decision": "PHASE27_78_ENGINEERING_DECISION",
+    "continue_sf10m": true,
+    "new_training_allowed": false,
+    "tokenizer_retrain_allowed": false,
+    "runtime_release_allowed": false,
+    "sf50m_justified_transition": false,
+    "next_phase": "Phase 27.80 — Repair Gate Encoding and Dry-Run Validation",
+    "why_no_training_yet": "Phase 27.79 is a design gate. It defines the objective, curriculum, decoding, and evaluation gates that must be encoded before any new LM training.",
+    "why_sf50m_still_blocked": "Capacity remains only 1% in Phase 27.78 root-cause weights; the next fix targets family mixing, objective, curriculum, weak generalization, semantic routing, and decoding.",
+    "root_cause_weights_percent": {
+      "capacity": 1,
+      "objective": 18,
+      "curriculum": 16,
+      "tokenizer": 4,
+      "decoding": 7,
+      "family_mixing": 22,
+      "memorization": 2,
+      "weak_generalization": 14,
+      "EOS": 4,
+      "repetition": 2,
+      "semantic_routing": 10
+    }
+  },
+  "artifacts": {
+    "report": "artifacts/reports/phase27_79_objective_curriculum_decoding_design_report.json",
+    "decision": "artifacts/reports/PHASE27_79_REPAIR_DESIGN_DECISION.json",
+    "doc": "docs/PHASE27_79_OBJECTIVE_CURRICULUM_DECODING_REPAIR_DESIGN.md"
+  }
+}

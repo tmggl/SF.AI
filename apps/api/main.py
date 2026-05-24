@@ -31,7 +31,7 @@ app = FastAPI(
     version="0.1.0",
     description=(
         "SF.AI — Sovereign AI platform. Phase 9 chat UI mounted at /ui/chat. "
-        "Phase 27.78 issued the engineering root-cause decision; runtime remains blocked. "
+        "Phase 27.79 designed the objective/curriculum/decoding repair; runtime remains blocked. "
         "No pretrained models, no external AI APIs."
     ),
 )
@@ -46,7 +46,7 @@ app.include_router(ui.router)
 def root() -> dict[str, str]:
     return {
         "project": "SF.AI",
-        "phase": "Phase 27.78 — Engineering Root Cause Gate",
+        "phase": "Phase 27.79 — Objective/Curriculum/Decoding Repair Design",
         "ui": "/ui/chat",
         "docs": "/docs",
     }

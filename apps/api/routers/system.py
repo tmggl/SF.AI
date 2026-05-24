@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.78 — Engineering Root Cause Gate",
-        current_phase_status="phase27_78_engineering_decision_training_blocked_runtime_blocked",
+        current_phase="Phase 27.79 — Objective/Curriculum/Decoding Repair Design",
+        current_phase_status="phase27_79_repair_design_ready_next_gate_encoding_no_training",
         next_phase=(
-            "Phase 27.79 — Objective/Curriculum/Decoding Repair Design"
+            "Phase 27.80 — Repair Gate Encoding and Dry-Run Validation"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -504,6 +504,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_78_engineering_root_cause_gate",
                 status="phase27_78_engineering_decision_training_blocked",
                 phase="Phase 27.78",
+            ),
+            ComponentStatus(
+                name="phase27_79_objective_curriculum_decoding_design",
+                status="phase27_79_repair_design_ready_next_gate_encoding_no_training",
+                phase="Phase 27.79",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

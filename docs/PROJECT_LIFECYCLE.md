@@ -310,11 +310,11 @@ SF-10M → SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+
 
 ## الحالة الحالية
 
-- المرحلة الحالية: `Phase 27.78 — Engineering Root Cause Gate`.
-- القرار الحالي: `PHASE27_78_ENGINEERING_DECISION`.
+- المرحلة الحالية: `Phase 27.79 — Objective/Curriculum/Decoding Repair Design`.
+- القرار الحالي: `PHASE27_79_REPAIR_DESIGN_DECISION`.
 - corpus الحالي: `5943` سجلًا (`msa=2949`, `saudi=2994`).
 - التدريب الجديد: محجوب.
 - tokenizer الجديد: محجوب.
 - runtime release: محجوب.
 - `SF-50M`: محجوب لأن capacity وزنها الحالي `1%`.
-- التالي: `Phase 27.79 — Objective/Curriculum/Decoding Repair Design`.
+- التالي: `Phase 27.80 — Repair Gate Encoding and Dry-Run Validation`.

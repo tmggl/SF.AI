@@ -10,11 +10,11 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.78 / 30**
-- **المرحلة الحالية:** **Phase 27.78 — Engineering Root Cause Gate** (`PHASE27_78_ENGINEERING_DECISION`; training/runtime/SF-50M محجوبة)
+- **الرحلة الحالية:** **Phase 27.79 / 30**
+- **المرحلة الحالية:** **Phase 27.79 — Objective/Curriculum/Decoding Repair Design** (`PHASE27_79_REPAIR_DESIGN_DECISION`; training/runtime/SF-50M محجوبة)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
 - **ملف القيادة الواحد:** `docs/SF_AI_MASTER_GUIDE.md` هو نقطة الدخول الأولى لأي Agent أو مهندس؛ بقية الملفات مراجع تفصيلية.
-- **المرحلة التالية المقترحة:** Phase 27.79 Objective/Curriculum/Decoding Repair Design؛ لا تدريب حتى تُشفّر gates، وPhase 28 و`SF-50M` محظوران.
+- **المرحلة التالية المقترحة:** Phase 27.80 Repair Gate Encoding and Dry-Run Validation؛ لا تدريب حتى تُشفّر gates، وPhase 28 و`SF-50M` محظوران.
 - **استراتيجية العمل الملزمة:** Sovereign Practical Acceleration Strategy v2؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب، و`NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS` قبل أي runtime.
 - **تفويض التكبير:** Auto-Advance Scaling Mandate؛ عند نجاح gate الحجم التالي ينتقل الوكيل تلقائيًا عبر `SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+`.
 - **القاموس/المسار اللغوي المتبع:** العربية الفصحى + اللهجة السعودية فقط؛ `Saudi Seed v1` مرجع خاص، و`safety_terms.yaml` محدث لفجوات المال/الدين/الأمن.
@@ -409,8 +409,9 @@ make server-start
 - **Phase 19:** بوابة جاهزية تدريب مرشح `SF-50M` — تعمل، وقرارها الحالي: وسّع corpus أولًا.
 - **Phase 20:** بوابات تفعيل المجالات skeleton عبر gates مستقلة — تعمل، ولا تفعّل شيئًا تلقائيًا.
 - **Phase 27.78:** بوابة `ENGINEERING_ROOT_CAUSE_GATE` — مكتملة، وأصدرت `PHASE27_78_ENGINEERING_DECISION`.
+- **Phase 27.79:** تصميم إصلاح objective/curriculum/decoding — مكتمل، وأصدر `PHASE27_79_REPAIR_DESIGN_DECISION` بدون تدريب.
 
-أول توليد خام حدث في Phase 13. Phase 15 جهّز الباب داخل الشات، وPhase 16 أثبت أن التوليد مكرر. Phase 27.78 غيّرت المنهج: لا مزيد من التدريب المتكرر قبل تشخيص root-cause. التالي Phase 27.79 لتصميم إصلاح objective/curriculum/decoding/family balance.
+أول توليد خام حدث في Phase 13. Phase 15 جهّز الباب داخل الشات، وPhase 16 أثبت أن التوليد مكرر. Phase 27.78 غيّرت المنهج: لا مزيد من التدريب المتكرر قبل تشخيص root-cause. Phase 27.79 صممت إصلاح objective/curriculum/decoding/family balance. التالي Phase 27.80 لتشفير البوابات وتشغيل dry-run بلا تدريب.
 
 ---
 
@@ -428,7 +429,7 @@ make server-start
 - ❌ لا تدريب خارج الخطة أو بدون provenance؛ التفويض الحالي يغطي المراحل المسجلة فقط.
 - ❌ لا crawling تلقائي. CrawlerBase يرفع `CrawlerPermissionError` بدون `permission_granted=True`.
 - ❌ لا انتقال خارج الخطة المسجلة بدون توثيق وإذن واضح.
-- ❌ لا تدريب جديد قبل gate يسمح به بعد `PHASE27_78_ENGINEERING_DECISION`.
+- ❌ لا تدريب جديد قبل gates ناجحة بعد `PHASE27_79_REPAIR_DESIGN_DECISION`.
 - ❌ لا tokenizer جديد قبل إثبات tokenizer كسبب أكبر.
 - ❌ لا `SF-50M` قبل `SF-50M JUSTIFIED TRANSITION`.
 - ❌ لا template masking لإخفاء ضعف المولد.
@@ -456,4 +457,4 @@ make server-start
 
 ## بروتوكول الانتقال
 
-التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، ومع نجاح بوابة التكبير انتقل تلقائيًا للحجم التالي حتى `SF-1B+`. ارفع الناجح فقط، افحص الحساسية، ووثّق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. وبعد Phase 27.78 لا تبدأ أي تدريب جديد إلا إذا كانت بوابات Phase 27.79 مشفرة وتسمح بذلك صراحة.
+التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، ومع نجاح بوابة التكبير انتقل تلقائيًا للحجم التالي حتى `SF-1B+`. ارفع الناجح فقط، افحص الحساسية، ووثّق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. وبعد Phase 27.79 لا تبدأ أي تدريب جديد إلا إذا كانت بوابات Phase 27.80 مشفرة وتسمح بذلك صراحة.

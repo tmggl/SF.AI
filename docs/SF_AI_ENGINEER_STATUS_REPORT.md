@@ -1,11 +1,11 @@
 # SF.AI — تقرير شامل للمهندس
 
 **تاريخ التقرير:** 2026-05-24
-**الحالة الحالية:** Phase 27.78 / 30 — Engineering Root Cause Gate
+**الحالة الحالية:** Phase 27.79 / 30 — Objective/Curriculum/Decoding Repair Design
 **المسار اللغوي:** العربية الفصحى + اللهجة السعودية فقط
 **القاموس المرجعي:** Saudi Seed v1 + `safety_terms.yaml`
 **قرار runtime الحالي:** المولد السيادي غير مفعّل للمحادثة الحرة؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS` فعّالة.
-**القرار الهندسي الحالي:** `PHASE27_78_ENGINEERING_DECISION`.
+**القرار الهندسي الحالي:** `PHASE27_79_REPAIR_DESIGN_DECISION`.
 
 > تحديث ملزم: هذا التقرير يُقرأ الآن تحت **Sovereign Practical Acceleration Strategy v2**.
 > أي تفاصيل تاريخية أقدم من Phase 27.78 تُعامل كسجل رحلة، لا كتعليمات حالية.
@@ -20,7 +20,9 @@ SF.AI مشروع لبناء نظام ذكاء اصطناعي لغوي سيادي
 
 وصل المشروع إلى مرحلة متقدمة من البنية، الحوكمة، جمع corpus سيادي، تدريب tokenizer من الصفر، تدريب عدة نسخ صغيرة من نموذج `SF-10M`، بناء واجهة محادثة، بناء canary/eval/guards، وتثبيت استراتيجية تكبير تدريجي. لكنه لم يصل بعد إلى حوار مولّد مقنع داخل الواجهة.
 
-Phase 27.78 أوقفت التجريب الأعمى وأصدرت root-cause gate رسميًا. السبب الأكبر الحالي ليس capacity، بل:
+Phase 27.78 أوقفت التجريب الأعمى وأصدرت root-cause gate رسميًا. Phase 27.79
+حوّلت ذلك إلى تصميم objective/curriculum/decoding بلا تدريب. السبب الأكبر
+الحالي ليس capacity، بل:
 
 - family mixing: `22%`.
 - objective: `18%`.
@@ -35,7 +37,7 @@ Phase 27.78 أوقفت التجريب الأعمى وأصدرت root-cause gate 
 - لا ننتقل إلى `SF-50M` أو `SF-120M`.
 - لا نفتح Phase 28.
 - لا نبدأ أي تدريب جديد قبل تشفير gates.
-- نكمل Phase 27.79: Objective/Curriculum/Decoding Repair Design.
+- نكمل Phase 27.80: Repair Gate Encoding and Dry-Run Validation.
 
 ---
 
@@ -52,8 +54,8 @@ Phase 27.78 أوقفت التجريب الأعمى وأصدرت root-cause gate 
 
 الهدف العملي الأقرب:
 
-1. تصميم إصلاح objective/curriculum/decoding/family balance في Phase 27.79.
-2. تشفير gates قبل أي تدريب جديد.
+1. تشفير gates في Phase 27.80 حسب تصميم Phase 27.79.
+2. تشغيل dry-run قبل أي تدريب جديد.
 3. إثبات held-out dialogue quality وfamily stability وclean-stop وsemantic correctness.
 4. بعد ذلك فقط إعادة النظر في runtime.
 5. لا تفتح `SF-50M` إلا إذا صدر `SF-50M JUSTIFIED TRANSITION` مدعوم بالأدلة.

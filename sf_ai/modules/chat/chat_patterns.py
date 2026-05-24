@@ -83,10 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.78 ضمن Sovereign Practical Acceleration Strategy v2: "
-    "أصدرنا PHASE27_78_ENGINEERING_DECISION. القرار: لا تدريب جديد ولا runtime "
-    "ولا SF-50M الآن. السبب الأكبر family mixing 22% ثم objective 18% وcurriculum "
-    "16%. التالي Phase 27.79 لتصميم إصلاح objective/curriculum/decoding قبل أي تدريب.",
+    "وصلنا إلى Phase 27.79 ضمن Sovereign Practical Acceleration Strategy v2: "
+    "صممنا إصلاح objective/curriculum/decoding بدون تدريب. القرار: لا تدريب جديد "
+    "ولا runtime ولا SF-50M الآن. التالي Phase 27.80 لتشفير البوابات وتشغيل dry-run.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

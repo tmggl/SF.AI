@@ -2,11 +2,11 @@
 
 ## SF.AI — Phase 16 Evaluation, Safety, and Saudi/MSA Style Harness
 
-**Status:** superseded by Phase 27.78 root-cause gate for current generator decisions
-**Journey:** Phase 27.78 / 30
+**Status:** superseded by Phase 27.79 repair design for current generator decisions
+**Journey:** Phase 27.79 / 30
 **Runtime language focus:** Arabic MSA + Saudi only
 **Current generator decision:** runtime blocked
-**Current decision:** `PHASE27_78_ENGINEERING_DECISION`
+**Current decision:** `PHASE27_79_REPAIR_DESIGN_DECISION`
 **Runtime activation:** blocked by `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`
 
 ---
@@ -48,7 +48,7 @@ NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS
 - لا runtime release.
 - لا تدريب جديد.
 - لا `SF-50M`.
-- التالي Phase 27.79 لتصميم إصلاح objective/curriculum/decoding.
+- التالي Phase 27.80 لتشفير بوابات objective/curriculum/decoding وتشغيل dry-run بلا تدريب.
 
 ---
 
