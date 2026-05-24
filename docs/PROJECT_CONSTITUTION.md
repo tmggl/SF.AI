@@ -172,6 +172,58 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 
 ممنوع على أي Agent القفز إلى حجم كبير لأن المستخدم متحمس أو لأن الجهاز يسمح. الحجم التالي يُفتح فقط إذا أثبت الحجم الحالي قيمة واضحة.
 
+### 11. Sovereign Practical Acceleration Strategy
+
+SF.AI لا يعيد اختراع الأدوات الرياضية والهندسية العامة من الصفر. التسريع
+المسموح هو تسريع هندسي سيادي: نستخدم أدوات التدريب والقياس والتحسين
+العامة، ونحافظ على ملكية الذكاء نفسه.
+
+السيادة الكاملة تبقى على:
+
+- `corpus`.
+- `tokenizer`.
+- `behavior`.
+- `runtime`.
+- `alignment`.
+- `evaluation`.
+- سلوك الحوار العربي الفصيح والسعودي.
+
+المسموح لأنه أدوات هندسية لا عقول جاهزة:
+
+- PyTorch.
+- TensorBoard محلي.
+- schedulers.
+- AMP/mixed precision.
+- standard Transformer engineering.
+- decoding algorithms.
+- curriculum tooling.
+- experiment tracking محلي.
+- optimization tooling.
+
+الممنوع لأنه يكسر السيادة أو يلوث السلوك:
+
+- pretrained weights.
+- pretrained vocab.
+- pretrained tokenizer merges.
+- external dialogue datasets.
+- hidden hosted APIs.
+- external reasoning services.
+- project-workflow dialogue contamination داخل أي corpus تدريبية.
+
+لا يتم تكبير النموذج قبل فهم limit الحالي. التركيز الرسمي قبل أي `SF-50M`
+هو:
+
+- behavior.
+- generalization.
+- dialogue flow.
+- clean-stop.
+- open_social stability.
+
+تُعد `tokenizer`, `EOS`, `dialogue-family balance`, و`decoding` أجزاء
+أساسية من الذكاء، وليست تحسينات ثانوية. ولا يعتمد المشروع `loss` وحدها
+كمؤشر نجاح؛ معيار النجاح الحقيقي هو held-out dialogue quality,
+open_social stability, semantic correctness, clean-stop, وruntime usability.
+
 ## صلاحية الدستور
 
 هذا الدستور يحكم:

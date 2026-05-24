@@ -11,6 +11,7 @@
 - **المرحلة الحالية:** **Phase 27.77 — V9 Bounded Open-Social LM Repair**
 - **حالة المرحلة الحالية:** **فشلت كتوليد؛ `54/60` fresh و`45/50` known و`30/30` regression؛ الـ runtime محجوب**
 - **المرحلة التالية المقترحة:** Phase 27.78 inspect Phase 27.77 failures and revise v9 LM strategy.
+- **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy** — تسريع هندسي عملي بلا pretrained ولا datasets خارجية؛ لا تكبير قبل فهم limit الحالي.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -37,6 +38,7 @@
 | Phase 11 | Sovereign Corpus Governance & Saudi/MSA Dialogue Pack | ✅ | ✅ |
 | Governance Layer | Engineering Standards قبل Phase 12 | ✅ | ✅ |
 | Constitution Layer | Engineering & Linguistic Constitution قبل Phase 12 | ✅ | ✅ |
+| Strategy Overlay | Sovereign Practical Acceleration Strategy | ✅ adopted_no_training | ✅ |
 | Phase 12 | SF-BPE Tokenizer v1 Training & Audit | ✅ completed_with_limits | ✅ |
 | Phase 13 | Tiny LM Smoke Training | ✅ completed_with_limits | ✅ |
 | Phase 14 | SF-10M v0.1 Training Run | ✅ completed_with_limits | ✅ |

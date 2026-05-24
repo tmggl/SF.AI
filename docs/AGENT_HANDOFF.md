@@ -211,6 +211,34 @@ bash scripts/run_chat_server.sh
 
 سامي أكد أن الهدف ليس بوت قواعد فقط، بل **نموذج لغوي سيادي مولّد**. لذلك أُضيفت Phase 11–20 في [EXECUTION_PLAN.md](./EXECUTION_PLAN.md). التفويض الحالي يسمح بمتابعة المراحل المسجلة دون انتظار موافقة جديدة، مع بقاء قواعد السيادة وفحص الحساسية.
 
+### Sovereign Practical Acceleration Strategy — معتمدة رسميًا
+
+التحول الحالي لا يغيّر السيادة؛ يغيّر طريقة الاختصار الهندسي. لا نعيد
+اختراع الأدوات الرياضية والهندسية العامة من الصفر، ونستخدم ما يسرّع
+التشخيص والتدريب بشرط ألا يدخل عقل خارجي إلى المشروع.
+
+المسموح:
+
+- PyTorch وstandard Transformer engineering.
+- TensorBoard أو CSV/JSON logs محلية.
+- schedulers وAMP/mixed precision.
+- decoding algorithms مثل no-repeat/repetition controls.
+- curriculum tooling وdialogue-family balancing.
+- experiment tracking وoptimization tooling محليًا.
+
+الممنوع:
+
+- pretrained weights/embeddings.
+- pretrained vocab أو tokenizer merges.
+- external dialogue datasets.
+- hidden hosted APIs أو external reasoning services.
+- أي contamination من حوارات إدارة المشروع أو أوامر الوكيل داخل corpus الحوار العام.
+
+قبل أي `SF-50M`: افهم limit `SF-10M` بعد إصلاح tokenizer/EOS/generalization/
+dialogue-family balance/decoding. لا تعتمد loss وحدها؛ القرار يعتمد على
+held-out dialogue quality, open_social stability, semantic correctness,
+clean-stop, وruntime usability.
+
 ### Phase 11 — اكتملت كحوكمة
 
 أُضيفت وثائق وأدوات فحص corpus:
@@ -396,6 +424,9 @@ missing language balance: msa
 5. **أي مصدر بيانات خارجي جديد يحتاج توثيق provenance**. سامي أعطى تفويضًا عامًا للتأليف المحلي بالنيابة عنه، لكن لا تستخدم مصادر مجهولة أو LLM synthetic data خارجي.
 6. **شفافية User-Agent** على أي crawl: `SF.AI Research Crawler - permission-gated`.
 7. **rate-limit أدنى 2 ثوانٍ** بين الطلبات على نفس الـ domain.
+8. **Sovereign Practical Acceleration Strategy** معتمدة: استخدم أدوات
+   هندسية عامة لتقليل الوقت، لكن لا تستخدم pretrained أو datasets خارجية
+   أو hosted reasoning، ولا تكبر النموذج قبل فهم limit الحالي.
 
 ### مع المستخدم
 

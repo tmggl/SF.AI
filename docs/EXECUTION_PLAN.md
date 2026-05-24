@@ -792,6 +792,51 @@ coding, data, files, legal, medical, finance, education, religion, social, writi
 
 بدون أي LLM خارجي، وبدون أي pretrained weights/tokenizer/embeddings.
 
+### Sovereign Practical Acceleration Strategy
+
+من هذه النقطة فصاعدًا، يعتمد SF.AI مسار **تسريع سيادي عملي**: لا نعيد
+اختراع الأدوات الرياضية والهندسية العامة من الصفر، لكن لا نستخدم أي عقل
+جاهز أو corpus خارجي أو tokenizer جاهز.
+
+السيادة تبقى كاملة على:
+
+- `corpus`.
+- `tokenizer`.
+- `behavior`.
+- `runtime`.
+- `alignment`.
+- `evaluation`.
+- سلوك الحوار الفصيح والسعودي.
+
+المسموح لتسريع الهندسة:
+
+- PyTorch.
+- TensorBoard محلي أو logs محلية.
+- schedulers.
+- AMP/mixed precision.
+- standard Transformer engineering.
+- decoding algorithms.
+- curriculum tooling.
+- experiment tracking محلي.
+- optimization tooling.
+
+الممنوع:
+
+- pretrained weights.
+- pretrained vocab.
+- pretrained tokenizer merges.
+- external dialogue datasets.
+- hidden hosted APIs.
+- external reasoning services.
+- project-workflow dialogue contamination.
+
+القاعدة التنفيذية: لا تكبير نموذج قبل فهم limit الحالي. قبل أي Gate إلى
+`SF-50M` يجب إصلاح وفهم: tokenizer, EOS, generalization,
+dialogue-family balance, decoding, clean-stop, وopen_social stability.
+ولا يعتمد القرار على `loss` وحدها؛ معيار النجاح هو held-out dialogue
+quality, open_social stability, semantic correctness, clean-stop, وruntime
+usability.
+
 ### متى يظهر أول توليد فعلي؟
 
 - **أول توليد خام للتجربة:** Phase 13، بعد تدريب smoke صغير جدًا للتأكد أن pipeline يتعلم.
@@ -3676,6 +3721,23 @@ tokenizer v8 مطلوب قبل أي LM repair جديد. لا runtime switch، ل
 التالي الرسمي الآن:
 
 **Phase 27.78 — inspect Phase 27.77 failures and revise v9 LM strategy**
+
+### حوكمة Phase 27.78 بعد Sovereign Practical Acceleration Strategy
+
+Phase 27.78 ليست تكبيرًا ولا تدريبًا أعمى. هدفها فهم limit الحالي بدقة
+قبل أي انتقال:
+
+- فحص خلط عائلات الردود في Phase 27.77.
+- فصل `open_social`, `followup`, `planning`, `support`, و`topic` في
+  التقييم والتدريب.
+- تثبيت curriculum training بدل التدريب العريض العشوائي.
+- اعتماد no-repeat/repetition controls رسميًا داخل runtime المرشح.
+- إبقاء held-out canary دائمًا قبل أي runtime release.
+- فصل general assistant dialogue عن operator/workflow dialogue.
+
+الأدوات الهندسية المسموحة هنا تشمل TensorBoard/logs محلية، schedulers،
+AMP عند الحاجة، وتحسينات decoding/optimization، بشرط عدم استخدام pretrained
+weights/vocab/merges أو datasets خارجية.
 
 ### نتيجة Phase 27.73
 - لم يبدأ تدريب جديد.

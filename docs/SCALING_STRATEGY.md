@@ -25,6 +25,55 @@ SF.AI لا يكبر بالقفزات. يكبر فقط عندما تثبت الم
 
 ---
 
+## Sovereign Practical Acceleration Strategy
+
+هذا التحول هو المسار الرسمي بعد Phase 27.77: **تسريع سيادي عملي**.
+المشروع لا يعيد اختراع الأدوات الرياضية والهندسية العامة، لكنه لا يستورد
+ذكاءً جاهزًا.
+
+### ما يبقى سياديًا بالكامل
+
+- corpus: لا بيانات حوار خارجية ولا project-workflow contamination.
+- tokenizer: لا vocab جاهز ولا merges جاهزة.
+- behavior/alignment/runtime: سلوك SF.AI يُبنى من بياناته وحراسه وتقييمه.
+- evaluation: held-out canary محلي، مع novelty وsemantic correctness.
+- Saudi/MSA dialogue behavior: فصحى + سعودي فقط في هذا المسار.
+
+### الأدوات المسموحة للتسريع
+
+- PyTorch وstandard Transformer engineering.
+- TensorBoard محلي أو CSV/JSON logs محلية.
+- schedulers وAMP/mixed precision.
+- decoding algorithms مثل no-repeat/repetition penalty/temperature/top-k.
+- curriculum tooling وdialogue-family balancing.
+- experiment tracking وcheckpoint selection محليًا.
+- optimization tooling لا يستورد أوزانًا أو vocab أو corpus.
+
+### الاختصارات الممنوعة
+
+- pretrained weights أو embeddings.
+- pretrained vocab أو pretrained tokenizer merges.
+- external dialogue datasets أو synthetic LLM data خارجي.
+- hidden hosted APIs أو external reasoning services.
+- إدخال حوارات إدارة المشروع أو أوامر الوكيل داخل corpus الحوار العام.
+
+### القرار العملي قبل أي تكبير
+
+لا فتح `SF-50M` رسمي قبل إثبات limit حقيقي لـ `SF-10M` بعد إصلاح:
+
+- tokenizer.
+- EOS/clean-stop.
+- generalization.
+- dialogue-family balance.
+- decoding/no-repeat runtime controls.
+- open_social stability.
+
+إذا فشل `SF-10M` بعد هذه الإصلاحات وبوابات held-out، يُفتح Gate رسمي
+لـ `SF-50M`. إذا لم تُفهم العلة بعد، فالخطوة الصحيحة inspection أو
+curriculum/eval repair، لا تكبير الحجم.
+
+---
+
 ## السلم الرسمي للأحجام
 
 | الترتيب | الحجم | متى يُنظر فيه؟ |
@@ -67,6 +116,14 @@ SF.AI لا يكبر بالقفزات. يكبر فقط عندما تثبت الم
 
 8. **resource readiness**
    الجهاز، الوقت، التخزين، checkpoint policy، وresume plan جاهزة.
+
+9. **dialogue-family balance**
+   لا تنهار عائلة إلى أخرى: `open_social`, `followup`, `planning`,
+   `support`, و`topic` تُقاس منفصلة ومجتمعة.
+
+10. **clean-stop and decoding checks**
+    EOS يعمل، ولا تكرار مرضي، وno-repeat/repetition controls مفعلة في
+    runtime المرشح.
 
 إذا فشل gate واحد، يبقى النموذج عند الحجم الحالي ويتم تحسين البيانات أو التدريب بدل التكبير.
 
@@ -138,6 +195,9 @@ resources_ready = true
 - repetition checks تنجح ضد عينة `المعنى/وأين`.
 - hallucination checks تنجح.
 - runtime canary لا يخدع المستخدم بردود رديئة.
+- held-out canary دائم وغير مرئي للتدريب يثبت جودة الحوار، خصوصًا
+  `open_social` وsemantic correctness.
+- no-repeat/repetition controls موثقة ومفعلة في runtime المرشح.
 - الجهاز والتخزين والوقت كافية، مع checkpoint/resume plan.
 
 حتى تتحقق هذه الشروط، يبقى المشروع في تحسين البيانات أو إعادة تدريب `SF-10M`.

@@ -26,6 +26,23 @@
 3. لا تنتقل خارج المراحل المسجلة في الخطة بدون توثيق السبب.
 4. كل قاموس مستورد له إذن موثَّق (انظر `docs/SOURCE_DISCOVERY_*.md`).
 5. الرد بالعربية الواضحة. حازم في التنفيذ، شفاف في النتائج.
+6. اتبع **Sovereign Practical Acceleration Strategy**: استخدم أدوات هندسية
+   عامة مسموحة لتسريع العمل، ولا تدخل عقلًا جاهزًا أو بيانات خارجية.
+
+**Sovereign Practical Acceleration Strategy:**
+
+- مسموح: PyTorch، TensorBoard/logs محلية، schedulers، AMP/mixed precision،
+  standard Transformer engineering، decoding algorithms، curriculum tooling،
+  experiment tracking، وoptimization tooling.
+- ممنوع: pretrained weights، pretrained vocab، pretrained tokenizer merges،
+  external dialogue datasets، hidden hosted APIs، external reasoning services،
+  وأي project-workflow dialogue contamination.
+- السيادة تبقى على corpus/tokenizer/behavior/runtime/alignment/evaluation
+  وسلوك الحوار الفصيح والسعودي.
+- لا تفتح `SF-50M` رسميًا قبل فهم limit `SF-10M` بعد إصلاح tokenizer/EOS/
+  generalization/dialogue-family balance/decoding.
+- لا تعتمد loss وحدها؛ النجاح يعني held-out dialogue quality,
+  open_social stability, semantic correctness, clean-stop, وruntime usability.
 
 **الحالة الراهنة باختصار:**
 
