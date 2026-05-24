@@ -61,11 +61,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.102 — Topic Prototype Contrastive Copy-Anchor Gate",
+        current_phase="Phase 27.103 — Topic Prototype Contrastive Curriculum Pack",
         current_phase_status=(
-            "phase27_102_topic_prototype_contrastive_gate_encoded_curriculum_pack_allowed_no_training"
+            "phase27_103_topic_prototype_curriculum_pack_ready_for_bounded_training"
         ),
-        next_phase="Phase 27.103 — Topic Prototype Contrastive Curriculum Pack",
+        next_phase="Phase 27.104 — Bounded Topic Prototype Contrastive Repair Training",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -624,6 +624,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_102_topic_prototype_contrastive_gate",
                 status="gate_encoded_curriculum_pack_allowed_no_training",
                 phase="Phase 27.102",
+            ),
+            ComponentStatus(
+                name="phase27_103_topic_prototype_contrastive_curriculum_pack",
+                status="ready_for_bounded_training_no_runtime",
+                phase="Phase 27.103",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

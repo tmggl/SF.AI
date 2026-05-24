@@ -304,6 +304,7 @@ def test_real_corpus_dir_contains_only_explicit_reviewed_seeds() -> None:
         "dialogue_batch_v10_balanced_topic_msa_010.jsonl",
         "dialogue_batch_v10_balanced_topic_saudi_010.jsonl",
         "dialogue_batch_v11_topic_objective_wafa_saudi_011.jsonl",
+        "dialogue_batch_v12_topic_prototype_contrastive_012.jsonl",
         "dialogue_batch_v2_flex_001.jsonl",
         "dialogue_batch_v2_flex_002.jsonl",
         "dialogue_batch_v2_flex_003.jsonl",

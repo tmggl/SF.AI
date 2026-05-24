@@ -1,0 +1,12 @@
+{
+  "decision_id": "PHASE27_103_TOPIC_PROTOTYPE_CONTRASTIVE_CURRICULUM_PACK_DECISION",
+  "engineering_decision": "ALLOW_PHASE27_104_BOUNDED_TOPIC_PROTOTYPE_CONTRASTIVE_REPAIR_TRAINING",
+  "new_training_started": false,
+  "phase27_104_training_allowed": true,
+  "runtime_release_allowed": false,
+  "ui_release_allowed": false,
+  "sf50m_justified_transition": false,
+  "tokenizer_retrain_allowed": false,
+  "why": "The pack is balanced across 8 topics and 2 dialects, every assistant answer copy-anchors the requested topic first, and no assistant answer leaks a different topic/prototype term. One bounded SF-10M repair may be planned next; runtime remains blocked.",
+  "next_phase": "Phase 27.104 — Bounded Topic Prototype Contrastive Repair Training"
+}

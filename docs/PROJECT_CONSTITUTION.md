@@ -73,6 +73,10 @@ runtime ولا `SF-50M` ولا tokenizer retrain ولا تدريب جديد قب
 بعد Phase 27.102، أصبحت بوابة observed wrong-topic/copy-anchor مرمّزة
 وتلتقط فشل 27.100. لذلك لا runtime ولا `SF-50M` ولا tokenizer retrain ولا
 تدريب جديد قبل Phase 27.103 كحزمة curriculum بلا تدريب.
+بعد Phase 27.103، أصبحت حزمة topic prototype contrastive جاهزة ومنضبطة
+(`192` سجلًا، wrong-topic leak=`0`). لذلك لا runtime ولا `SF-50M` ولا
+tokenizer retrain؛ المسموح فقط Phase 27.104 كتدريب `SF-10M` محدود يعاد
+بعده canary قبل أي تفعيل.
 
 استثناء موثق: يجوز إدخال حوارات **owner-delegated agent-authored** في
 corpus إذا كان سامي قد فوّض الوكيل صراحة بتأليفها واعتمادها، وكانت كل

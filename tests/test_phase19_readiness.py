@@ -13,7 +13,7 @@ def test_phase19_readiness_reports_current_corpus_passes_size_gate() -> None:
 
     assert decision.phase.startswith("Phase 19")
     assert decision.target_model == "sf-50m"
-    assert decision.training_records == 8453
+    assert decision.training_records == 8645
     assert decision.min_training_records == 5000
     assert decision.status == "READY_FOR_SF50M_TRAINING"
     assert decision.can_start_training is True

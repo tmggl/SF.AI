@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.102
-الاسم: Topic Prototype Contrastive Copy-Anchor Gate
+المرحلة الحالية: Phase 27.103
+الاسم: Topic Prototype Contrastive Curriculum Pack
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_102_TOPIC_PROTOTYPE_CONTRASTIVE_GATE_DECISION
+القرار الرسمي: PHASE27_103_TOPIC_PROTOTYPE_CONTRASTIVE_CURRICULUM_PACK_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -109,7 +109,7 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - نتيجة 27.92: صُمم objective مخصص لعائلة `topic` باسم `topic_anchor_prompt_to_answer_objective_v1`، مع شرط `الموضوع المطلوب: <topic_term>` وبوابات canary قبل أي تدريب.
 - نتيجة 27.93: أضيف سطر `الموضوع المطلوب: <topic_term>` إلى renderer لعائلة topic، ومرّ dry-run للـ renderer/masking/canary.
 - نتيجة 27.94: أضيفت `10` سجلات سعودية gold لموضوع `الوفاء`، وأُغلقت فجوة البيانات المحددة دون تدريب ودون runtime.
-- corpus الحالي: `8453` (`msa=4199`, `saudi=4254`, `gold=3341`, `silver=5112`).
+- corpus الحالي: `8645` (`msa=4295`, `saudi=4350`, `gold=3533`, `silver=5112`).
 - إعادة بوابة 27.93 بعد 27.94: `training_data_ready=true`, `shortfalls={}`, و`الوفاء` صار `total=22`, `msa=12`, `saudi=10`.
 - نتيجة 27.95: تدريب SF-10M محدود اكتمل، لكن البوابات فشلت: known topic `10/16`, fresh topic `4/10`, all-family `33/50`.
 - نتيجة 27.96: التشخيص أثبت `topic_variable_binding_failure`: لا حارس يحجب الإخفاقات، بل النموذج يستبدل الموضوع المطلوب بموضوعات مجاورة. `wrong_topic_substitution_count=11`, وأكثر بديل خاطئ `الصداقة=6`.
@@ -123,7 +123,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   (`الصداقة=7`, `الامتنان=1`) رغم أن التقرير السابق سجّل `0`.
 - نتيجة 27.102: ثُبّتت بوابة observed wrong-topic/copy-anchor وcanary من
   `16` prompt. القرار يسمح فقط بحزمة curriculum بلا تدريب في 27.103.
-- التالي: `Phase 27.103 — Topic Prototype Contrastive Curriculum Pack`.
+- نتيجة 27.103: أضيفت حزمة `192` سجلًا `gold` متوازنًا تمنع prototype
+  substitution: copy-anchor bad=`0`, wrong-topic leak=`0`, duplicate=`0`.
+- التالي: `Phase 27.104 — Bounded Topic Prototype Contrastive Repair Training`.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -339,19 +341,18 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.103 — Topic Prototype Contrastive Curriculum Pack
+Phase 27.104 — Bounded Topic Prototype Contrastive Repair Training
 ```
 
 مطلوب منها:
 
-- تأليف حزمة curriculum/data بلا تدريب.
-- إضافة صفوف topic تجبر نسخ الموضوع المطلوب قبل prototype terms.
-- استخدام canary 27.102 كشرط لاحق.
-- لا يبدأ تدريب حتى تمر بوابة pack/readiness التالية.
+- تدريب `SF-10M` محدود فقط على الحزمة الجديدة.
+- استخدام schedule topic/dialect round-robin من 27.103.
+- تقييم canary 27.102 بعد التدريب.
+- لا runtime حتى observed wrong-topic=`0` وcopy-anchor يمر كاملًا.
 
-ممنوع في 27.103 قبل القرار:
+ممنوع في 27.104 قبل نتيجة canary:
 
-- تدريب جديد.
 - runtime release.
 - tokenizer retrain.
 - SF-50M.

@@ -56,7 +56,7 @@ def test_phase27_94_split_manifest_includes_new_pack() -> None:
         row for row in manifest["records"] if row["file"] == "dialogue_batch_v11_topic_objective_wafa_saudi_011.jsonl"
     ]
 
-    assert manifest["total_records"] == 8453
+    assert manifest["total_records"] == 8645
     assert len(pack_entries) == 10
     assert {row["dialect"] for row in pack_entries} == {"saudi"}
     assert {row["quality"] for row in pack_entries} == {"gold"}

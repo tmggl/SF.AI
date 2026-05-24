@@ -32,15 +32,15 @@
   "can_start_phase28": false,
   "phase26_status": "NOT_READY_IMPROVE_SF10M_AND_CANARY",
   "corpus_expansion_plan": {
-    "current_records": 8453,
+    "current_records": 8645,
     "target_records": 5000,
     "remaining_records": 0,
     "batch_size": 1500,
     "batches_needed_total": 0,
     "target_per_dialect": 2500,
     "dialect_counts": {
-      "msa": 4199,
-      "saudi": 4254
+      "msa": 4295,
+      "saudi": 4350
     },
     "needed_by_dialect": {
       "msa": 0,
@@ -53,7 +53,7 @@
     "quality_targets": {
       "gold_total_target": 1000,
       "silver_total_target": 4000,
-      "current_gold": 3341,
+      "current_gold": 3533,
       "current_silver": 5112,
       "needed_gold": 0,
       "needed_silver": 0
@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.102 ضمن مسار SF-native فقط: ثبّتنا بوابة observed wrong-topic وcopy-anchor لرصد prototype substitutions. لا runtime الآن؛ التالي Phase 27.103 حزمة curriculum بلا"
+      "response_preview": "وصلنا إلى Phase 27.103 ضمن مسار SF-native فقط: جهّزنا حزمة curriculum متوازنة تمنع خلط موضوعات مثل الصداقة والامتنان. لا runtime الآن؛ التالي Phase 27.104 تدريب محدود ثم canary صار"
     },
     {
       "scenario_id": "clarification_repair_flow",

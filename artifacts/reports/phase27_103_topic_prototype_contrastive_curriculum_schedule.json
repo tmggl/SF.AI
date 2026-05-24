@@ -1,0 +1,183 @@
+{
+  "schedule_id": "phase27_103_topic_dialect_round_robin_schedule_v1",
+  "strategy": "topic_then_dialect_round_robin",
+  "total_records": 192,
+  "first_64_topic_counts": {
+    "الوفاء": 8,
+    "التعاون": 8,
+    "الصبر": 8,
+    "الاحترام": 8,
+    "الهدوء": 8,
+    "الصدق": 8,
+    "الصداقة": 8,
+    "الشجاعة": 8
+  },
+  "first_64_dialect_counts": {
+    "msa": 32,
+    "saudi": 32
+  },
+  "adjacent_same_topic_count": 0,
+  "first_32": [
+    {
+      "record_line": 1,
+      "topic": "الوفاء",
+      "dialect": "msa"
+    },
+    {
+      "record_line": 25,
+      "topic": "التعاون",
+      "dialect": "msa"
+    },
+    {
+      "record_line": 49,
+      "topic": "الصبر",
+      "dialect": "msa"
+    },
+    {
+      "record_line": 73,
+      "topic": "الاحترام",
+      "dialect": "msa"
+    },
+    {
+      "record_line": 97,
+      "topic": "الهدوء",
+      "dialect": "msa"
+    },
+    {
+      "record_line": 121,
+      "topic": "الصدق",
+      "dialect": "msa"
+    },
+    {
+      "record_line": 145,
+      "topic": "الصداقة",
+      "dialect": "msa"
+    },
+    {
+      "record_line": 169,
+      "topic": "الشجاعة",
+      "dialect": "msa"
+    },
+    {
+      "record_line": 13,
+      "topic": "الوفاء",
+      "dialect": "saudi"
+    },
+    {
+      "record_line": 37,
+      "topic": "التعاون",
+      "dialect": "saudi"
+    },
+    {
+      "record_line": 61,
+      "topic": "الصبر",
+      "dialect": "saudi"
+    },
+    {
+      "record_line": 85,
+      "topic": "الاحترام",
+      "dialect": "saudi"
+    },
+    {
+      "record_line": 109,
+      "topic": "الهدوء",
+      "dialect": "saudi"
+    },
+    {
+      "record_line": 133,
+      "topic": "الصدق",
+      "dialect": "saudi"
+    },
+    {
+      "record_line": 157,
+      "topic": "الصداقة",
+      "dialect": "saudi"
+    },
+    {
+      "record_line": 181,
+      "topic": "الشجاعة",
+      "dialect": "saudi"
+    },
+    {
+      "record_line": 2,
+      "topic": "الوفاء",
+      "dialect": "msa"
+    },
+    {
+      "record_line": 26,
+      "topic": "التعاون",
+      "dialect": "msa"
+    },
+    {
+      "record_line": 50,
+      "topic": "الصبر",
+      "dialect": "msa"
+    },
+    {
+      "record_line": 74,
+      "topic": "الاحترام",
+      "dialect": "msa"
+    },
+    {
+      "record_line": 98,
+      "topic": "الهدوء",
+      "dialect": "msa"
+    },
+    {
+      "record_line": 122,
+      "topic": "الصدق",
+      "dialect": "msa"
+    },
+    {
+      "record_line": 146,
+      "topic": "الصداقة",
+      "dialect": "msa"
+    },
+    {
+      "record_line": 170,
+      "topic": "الشجاعة",
+      "dialect": "msa"
+    },
+    {
+      "record_line": 14,
+      "topic": "الوفاء",
+      "dialect": "saudi"
+    },
+    {
+      "record_line": 38,
+      "topic": "التعاون",
+      "dialect": "saudi"
+    },
+    {
+      "record_line": 62,
+      "topic": "الصبر",
+      "dialect": "saudi"
+    },
+    {
+      "record_line": 86,
+      "topic": "الاحترام",
+      "dialect": "saudi"
+    },
+    {
+      "record_line": 110,
+      "topic": "الهدوء",
+      "dialect": "saudi"
+    },
+    {
+      "record_line": 134,
+      "topic": "الصدق",
+      "dialect": "saudi"
+    },
+    {
+      "record_line": 158,
+      "topic": "الصداقة",
+      "dialect": "saudi"
+    },
+    {
+      "record_line": 182,
+      "topic": "الشجاعة",
+      "dialect": "saudi"
+    }
+  ],
+  "training_usage_note": "Next bounded training must consume this pack through a topic/dialect round-robin view, not a contiguous topic block. The schedule intentionally avoids adjacent records for the same topic."
+}

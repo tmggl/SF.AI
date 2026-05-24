@@ -1,0 +1,33 @@
+{
+  "manifest_id": "phase27_103_topic_prototype_contrastive_curriculum_manifest",
+  "phase": "Phase 27.103",
+  "pack_file": "data/corpus/chat/jsonl/dialogue_batch_v12_topic_prototype_contrastive_012.jsonl",
+  "records": 192,
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "target_terms": [
+    "الوفاء",
+    "التعاون",
+    "الصبر",
+    "الاحترام",
+    "الهدوء",
+    "الصدق",
+    "الصداقة",
+    "الشجاعة"
+  ],
+  "prototype_decoys_guarded": [
+    "الصداقة",
+    "الامتنان"
+  ],
+  "quality_rules": {
+    "assistant_copy_anchor_required": true,
+    "assistant_wrong_topic_leak_max": 0,
+    "records_per_topic": 24,
+    "records_per_topic_dialect": 12,
+    "duplicate_pair_max": 0
+  },
+  "curriculum_order": "topic_then_dialect_round_robin",
+  "next_training_flag_requirement": "topic/dialect round-robin pack view"
+}

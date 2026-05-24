@@ -84,7 +84,7 @@ def test_phase27_93_gate_passes_after_data_pack_and_allows_bounded_training(
     assert decision["sf50m_justified_transition"] is False
     assert decision["tokenizer_retrain_allowed"] is False
     assert report["corpus_topic_coverage"]["shortfalls"] == {}
-    assert report["corpus_topic_coverage"]["terms"]["الوفاء"]["dialect_counts"]["saudi"] == 10
+    assert report["corpus_topic_coverage"]["terms"]["الوفاء"]["dialect_counts"]["saudi"] == 22
     assert canary["coverage"]["prompt_count"] == 16
     assert canary["coverage"]["all_terms_covered"] is True
     assert canary["coverage"]["all_dialects_covered"] is True

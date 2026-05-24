@@ -1,0 +1,143 @@
+{
+  "phase": "Phase 27.103",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "status": "PHASE27_103_TOPIC_PROTOTYPE_CURRICULUM_PACK_READY_FOR_BOUNDED_TRAINING",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_changed": false,
+  "source_report": "artifacts/reports/phase27_102_topic_prototype_contrastive_gate_report.json",
+  "authored_file": "data/corpus/chat/jsonl/dialogue_batch_v12_topic_prototype_contrastive_012.jsonl",
+  "manifest": "artifacts/reports/phase27_103_topic_prototype_contrastive_curriculum_manifest.json",
+  "schedule": "artifacts/reports/phase27_103_topic_prototype_contrastive_curriculum_schedule.json",
+  "records_authored": 192,
+  "quality": {
+    "records": 192,
+    "target_terms": [
+      "الوفاء",
+      "التعاون",
+      "الصبر",
+      "الاحترام",
+      "الهدوء",
+      "الصدق",
+      "الصداقة",
+      "الشجاعة"
+    ],
+    "records_per_topic": {
+      "الوفاء": 24,
+      "التعاون": 24,
+      "الصبر": 24,
+      "الاحترام": 24,
+      "الهدوء": 24,
+      "الصدق": 24,
+      "الصداقة": 24,
+      "الشجاعة": 24
+    },
+    "records_per_dialect": {
+      "msa": 96,
+      "saudi": 96
+    },
+    "records_per_topic_dialect": {
+      "الوفاء/msa": 12,
+      "الوفاء/saudi": 12,
+      "التعاون/msa": 12,
+      "التعاون/saudi": 12,
+      "الصبر/msa": 12,
+      "الصبر/saudi": 12,
+      "الاحترام/msa": 12,
+      "الاحترام/saudi": 12,
+      "الهدوء/msa": 12,
+      "الهدوء/saudi": 12,
+      "الصدق/msa": 12,
+      "الصدق/saudi": 12,
+      "الصداقة/msa": 12,
+      "الصداقة/saudi": 12,
+      "الشجاعة/msa": 12,
+      "الشجاعة/saudi": 12
+    },
+    "min_per_topic": 24,
+    "max_per_topic": 24,
+    "min_per_topic_dialect": 12,
+    "max_per_topic_dialect": 12,
+    "copy_anchor_bad_count": 0,
+    "copy_anchor_bad_examples": [],
+    "wrong_topic_leak_count": 0,
+    "wrong_topic_leak_examples": [],
+    "duplicate_pair_count": 0,
+    "balanced": true
+  },
+  "file_audit": {
+    "path": "/Users/sami/workSF/SF.AI/data/corpus/chat/jsonl/dialogue_batch_v12_topic_prototype_contrastive_012.jsonl",
+    "total_records": 192,
+    "training_ready": 192,
+    "error_count": 0,
+    "dialect_counts": {
+      "msa": 96,
+      "saudi": 96
+    },
+    "quality_counts": {
+      "gold": 192
+    },
+    "source_counts": {
+      "sf-ai-topic-prototype-contrastive-curriculum-v1": 192
+    },
+    "issues": []
+  },
+  "split_manifest": {
+    "path": "data/corpus/chat/splits/dialogue_split_v1.json",
+    "total_records": 8645,
+    "counts": {
+      "train": 7777,
+      "eval": 868
+    },
+    "dialects": {
+      "train": {
+        "msa": 3866,
+        "saudi": 3911
+      },
+      "eval": {
+        "msa": 429,
+        "saudi": 439
+      }
+    },
+    "qualities": {
+      "train": {
+        "gold": 3195,
+        "silver": 4582
+      },
+      "eval": {
+        "gold": 338,
+        "silver": 530
+      }
+    }
+  },
+  "blocked_actions": [
+    "runtime release",
+    "UI generator release",
+    "SF-50M transition",
+    "tokenizer retrain",
+    "pretrained/open-weight usage",
+    "template masking"
+  ],
+  "allowed_next_actions": [
+    "one bounded SF-10M topic-prototype contrastive repair training",
+    "must evaluate Phase 27.102 canary before any runtime decision",
+    "must keep observed wrong-topic at 0 and copy-anchor at 16/16"
+  ],
+  "decision": {
+    "decision_id": "PHASE27_103_TOPIC_PROTOTYPE_CONTRASTIVE_CURRICULUM_PACK_DECISION",
+    "engineering_decision": "ALLOW_PHASE27_104_BOUNDED_TOPIC_PROTOTYPE_CONTRASTIVE_REPAIR_TRAINING",
+    "new_training_started": false,
+    "phase27_104_training_allowed": true,
+    "runtime_release_allowed": false,
+    "ui_release_allowed": false,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "why": "The pack is balanced across 8 topics and 2 dialects, every assistant answer copy-anchors the requested topic first, and no assistant answer leaks a different topic/prototype term. One bounded SF-10M repair may be planned next; runtime remains blocked.",
+    "next_phase": "Phase 27.104 — Bounded Topic Prototype Contrastive Repair Training"
+  }
+}

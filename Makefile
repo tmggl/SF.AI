@@ -500,6 +500,9 @@ phase27-topic-binding-result-diagnosis:
 phase27-topic-prototype-contrastive-gate:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_102_topic_prototype_contrastive_gate.py $(ARGS)
 
+phase27-topic-prototype-contrastive-curriculum-pack:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_103_topic_prototype_contrastive_curriculum_pack.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 
