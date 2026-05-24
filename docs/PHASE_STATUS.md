@@ -1085,13 +1085,13 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-682 passed in 39.20s
+682 passed in 70.58s
 ```
 
 | التحقق | النتيجة |
 |------|------|
-| full pytest suite | `682 passed in 39.20s` |
-| focused Phase 27.104/API/UI tests | `79 passed in 8.85s` |
+| full pytest suite | `682 passed in 70.58s` |
+| focused Phase 27.104/API/UI tests | `79 passed in 9.35s` |
 | `make corpus-audit` | `8645` records, `issues=0` |
 | `make phase27-dialogue-eval` | `19/19`, `open_generator_ready=false` |
 
