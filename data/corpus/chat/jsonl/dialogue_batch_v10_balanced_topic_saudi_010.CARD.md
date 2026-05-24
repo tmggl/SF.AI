@@ -10,3 +10,4 @@
 - training_allowed: true
 - external_dataset_used: false
 - pretrained_output_used: false
+- phase27_99_repair: topic_term metadata + copy-anchor verified

@@ -61,11 +61,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.98 — Topic Binding Gate Encoding and Metadata Audit",
+        current_phase="Phase 27.99 — Topic Metadata and Copy-Anchor Data Repair",
         current_phase_status=(
-            "phase27_98_topic_binding_gate_encoded_data_repair_required_no_training"
+            "phase27_99_topic_metadata_copy_anchor_repair_done_training_allowed_next"
         ),
-        next_phase="Phase 27.99 — Topic Metadata and Copy-Anchor Data Repair",
+        next_phase="Phase 27.100 — Bounded Topic Binding Repair Training",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -602,8 +602,13 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
             ),
             ComponentStatus(
                 name="phase27_98_topic_binding_gate_encoding",
-                status="data_repair_required_no_training",
+                status="passed_training_allowed_next_no_runtime",
                 phase="Phase 27.98",
+            ),
+            ComponentStatus(
+                name="phase27_99_topic_metadata_copy_anchor_repair",
+                status="done_training_allowed_next_no_runtime",
+                phase="Phase 27.99",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

@@ -1,0 +1,63 @@
+{
+  "phase": "Phase 27.99",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "status": "PHASE27_99_TOPIC_METADATA_COPY_ANCHOR_REPAIR_DONE_TRAINING_ALLOWED_NEXT",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_changed": false,
+  "source_decision": "artifacts/reports/PHASE27_98_TOPIC_BINDING_GATE_ENCODING_DECISION.json",
+  "repaired_files": [
+    {
+      "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
+      "written": true,
+      "stats": {
+        "topic_records": 250,
+        "topic_term_already_present": 250
+      },
+      "unresolved_examples": []
+    },
+    {
+      "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_saudi_010.jsonl",
+      "written": true,
+      "stats": {
+        "topic_records": 250,
+        "topic_term_already_present": 250
+      },
+      "unresolved_examples": []
+    }
+  ],
+  "card_updates": [],
+  "post_repair_phase27_98_gate": {
+    "training_ready": true,
+    "metadata_ready": true,
+    "copy_anchor_ready": true,
+    "missing_topic_term_records": 0,
+    "copy_anchor_bad": 0,
+    "copy_anchor_unknown_topic": 0,
+    "decision": "ALLOW_PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_TRAINING",
+    "next_phase": "Phase 27.100 — Bounded Topic Binding Repair Training"
+  },
+  "blocked_actions": [
+    "runtime release",
+    "UI generator release",
+    "SF-50M transition",
+    "tokenizer retrain",
+    "pretrained/open-weight usage"
+  ],
+  "decision": {
+    "decision_id": "PHASE27_99_TOPIC_METADATA_COPY_ANCHOR_REPAIR_DECISION",
+    "engineering_decision": "ALLOW_PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_TRAINING",
+    "new_training_allowed": true,
+    "runtime_release_allowed": false,
+    "ui_release_allowed": false,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "why": "All topic records now have explicit topic_term and pass copy-anchor readiness.",
+    "next_phase": "Phase 27.100 — Bounded Topic Binding Repair Training"
+  }
+}

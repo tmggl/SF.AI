@@ -433,7 +433,7 @@ def build_report(args: argparse.Namespace) -> tuple[dict[str, Any], dict[str, An
     decision = {
         "decision_id": "PHASE27_98_TOPIC_BINDING_GATE_ENCODING_DECISION",
         "engineering_decision": (
-            "ALLOW_PHASE27_99_BOUNDED_TOPIC_BINDING_REPAIR_TRAINING"
+            "ALLOW_PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_TRAINING"
             if training_ready
             else "ALLOW_PHASE27_99_TOPIC_METADATA_COPY_ANCHOR_DATA_REPAIR_NO_TRAINING"
         ),
@@ -452,7 +452,7 @@ def build_report(args: argparse.Namespace) -> tuple[dict[str, Any], dict[str, An
         "next_phase": (
             "Phase 27.99 — Topic Metadata and Copy-Anchor Data Repair"
             if not training_ready
-            else "Phase 27.99 — Bounded Topic Binding Repair Training"
+            else "Phase 27.100 — Bounded Topic Binding Repair Training"
         ),
     }
     report = {

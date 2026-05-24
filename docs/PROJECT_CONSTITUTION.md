@@ -60,6 +60,8 @@ copy/contrastive في Phase 27.97.
 بعد Phase 27.98، ثبت أن gate encoding ناجح لكن corpus غير جاهز: `500`
 سجل topic لا تحمل `topic_term` صريحًا. لا تدريب قبل Phase 27.99 لإصلاح
 metadata وcopy-anchor داخل corpus السيادي المحلي.
+بعد Phase 27.99، أُصلحت فجوة metadata داخل corpus السيادي المحلي، وأصبحت
+بوابة 27.98 جاهزة للتدريب المقيّد التالي. هذا لا يفتح runtime ولا `SF-50M`.
 
 استثناء موثق: يجوز إدخال حوارات **owner-delegated agent-authored** في
 corpus إذا كان سامي قد فوّض الوكيل صراحة بتأليفها واعتمادها، وكانت كل

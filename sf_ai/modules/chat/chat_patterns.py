@@ -82,9 +82,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.98 ضمن مسار SF-native فقط: رمّزنا بوابة ربط الموضوع "
-    "وأثبتنا أن التدريب محجوب لأن 500 سجل topic لا تحمل topic_term صريحًا. "
-    "لا runtime ولا تدريب الآن؛ التالي Phase 27.99 إصلاح metadata وcopy-anchor.",
+    "وصلنا إلى Phase 27.99 ضمن مسار SF-native فقط: أصلحنا metadata وcopy-anchor "
+    "لسجلات topic، وصارت بوابة 27.98 جاهزة للتدريب المقيّد التالي. لا runtime "
+    "الآن؛ التالي Phase 27.100 تدريب ربط الموضوع بشكل محدود.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

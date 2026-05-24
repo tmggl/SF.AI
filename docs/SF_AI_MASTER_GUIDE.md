@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.98
-الاسم: Topic Binding Gate Encoding and Metadata Audit
+المرحلة الحالية: Phase 27.99
+الاسم: Topic Metadata and Copy-Anchor Data Repair
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_98_TOPIC_BINDING_GATE_ENCODING_DECISION
+القرار الرسمي: PHASE27_99_TOPIC_METADATA_COPY_ANCHOR_REPAIR_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -115,7 +115,8 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - نتيجة 27.96: التشخيص أثبت `topic_variable_binding_failure`: لا حارس يحجب الإخفاقات، بل النموذج يستبدل الموضوع المطلوب بموضوعات مجاورة. `wrong_topic_substitution_count=11`, وأكثر بديل خاطئ `الصداقة=6`.
 - نتيجة 27.97: صُمم objective جديد `topic_copy_contrastive_binding_objective_v1` يفرض نسخ الموضوع المطلوب داخل أول 12 حرفًا عربيًا ظاهرًا من رد المساعد، ويمنع نجاح الرد إذا ذكر موضوعًا مجاورًا قبل الموضوع المطلوب. القرار يسمح فقط بـ Phase 27.98 لترميز البوابة وتدقيق metadata، بلا تدريب.
 - نتيجة 27.98: رُمزت بوابة الموضوع ونجحت آلية renderer/masking/canary، لكنها منعت التدريب لأن `500` سجل topic لا تحمل `topic_term` صريحًا. القرار يسمح فقط بإصلاح metadata وcopy-anchor في Phase 27.99، بلا تدريب.
-- التالي: `Phase 27.99 — Topic Metadata and Copy-Anchor Data Repair`.
+- نتيجة 27.99: أضيف `topic_term` الصريح إلى `500` سجل topic وتأكدت copy-anchor؛ إعادة بوابة 27.98 صارت `training_ready=true` بلا runtime.
+- التالي: `Phase 27.100 — Bounded Topic Binding Repair Training`.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -315,7 +316,7 @@ SF-10M
 | Phase 25-26 | canary حجب runtime، وSF-50M not ready |
 | Phase 27-27.77 | سلسلة طويلة لتحسين الحوار، tokenizer، objective، family balance، canaries |
 | Phase 27.78 | root-cause gate أوقف التدريب الأعمى والتكبير |
-| Phase 27.79-27.98 | إصلاحات objective/curriculum/family/topic حتى بوابة metadata، بلا runtime |
+| Phase 27.79-27.99 | إصلاحات objective/curriculum/family/topic حتى إصلاح metadata، بلا runtime |
 
 الدرس الأساسي من Phase 27:
 
@@ -331,17 +332,17 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.99 — Topic Metadata and Copy-Anchor Data Repair
+Phase 27.100 — Bounded Topic Binding Repair Training
 ```
 
 مطلوب منها:
 
-- إصلاح سجلات topic التي لا تحمل `topic_term` صريحًا.
-- تحويل/تطبيع أهداف topic المهمة إلى copy-anchor واضح.
-- إبقاء الإصلاح داخل corpus السيادي المحلي، بلا مصادر خارجية.
-- عدم بدء تدريب حتى تعود بوابة 27.98 ناجحة.
+- تدريب إصلاح محدود على SF-10M فقط.
+- استخدام objective ربط الموضوع وmetadata المصححة.
+- قياس known/fresh/all-family قبل أي runtime.
+- عدم فتح الواجهة بالمولد إذا لم تمر canaries.
 
-ممنوع في 27.99 قبل إصلاح البيانات وإعادة البوابة:
+ممنوع في 27.100 قبل نجاح التدريب والبوابات:
 
 - تدريب جديد.
 - runtime release.

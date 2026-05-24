@@ -1,12 +1,11 @@
 {
-  "decision_id": "PHASE27_98_TOPIC_BINDING_GATE_ENCODING_DECISION",
+  "decision_id": "PHASE27_99_TOPIC_METADATA_COPY_ANCHOR_REPAIR_DECISION",
   "engineering_decision": "ALLOW_PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_TRAINING",
   "new_training_allowed": true,
-  "data_repair_allowed": false,
   "runtime_release_allowed": false,
   "ui_release_allowed": false,
   "sf50m_justified_transition": false,
   "tokenizer_retrain_allowed": false,
-  "why": "Gate encoding, metadata, copy-anchor, and sampler readiness all passed.",
+  "why": "All topic records now have explicit topic_term and pass copy-anchor readiness.",
   "next_phase": "Phase 27.100 — Bounded Topic Binding Repair Training"
 }

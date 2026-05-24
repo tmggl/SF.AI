@@ -2,7 +2,7 @@
   "phase": "Phase 27.98",
   "strategy": "Sovereign Practical Acceleration Strategy v2",
   "sovereignty_mode": "SF-native only",
-  "status": "PHASE27_98_TOPIC_BINDING_GATE_ENCODED_DATA_REPAIR_REQUIRED_NO_TRAINING",
+  "status": "PHASE27_98_TOPIC_BINDING_GATE_PASSED_TRAINING_ALLOWED_NEXT",
   "language_track": [
     "msa",
     "saudi"
@@ -164,221 +164,103 @@
   "canary_ready": true,
   "metadata_audit": {
     "total_topic_records": 510,
-    "explicit_topic_term_records": 10,
-    "missing_topic_term_records": 500,
-    "all_topic_records_have_explicit_topic_term": false,
+    "explicit_topic_term_records": 510,
+    "missing_topic_term_records": 0,
+    "all_topic_records_have_explicit_topic_term": true,
     "dialect_counts": {
       "msa": 250,
       "saudi": 260
     },
     "explicit_by_term": {
-      "الوفاء": 10
+      "الشجاعة": 29,
+      "الصداقة": 29,
+      "الصبر": 29,
+      "الصدق": 29,
+      "الاحترام": 29,
+      "التعاون": 29,
+      "الهدوء": 29,
+      "المسؤولية": 29,
+      "الامتنان": 29,
+      "الثقة": 29,
+      "الكرم": 27,
+      "الاعتذار": 27,
+      "الإنصات": 27,
+      "المرونة": 27,
+      "العدل": 27,
+      "الحياء": 12,
+      "الطموح": 27,
+      "التواضع": 12,
+      "الحكمة": 12,
+      "الوفاء": 22
     },
     "inferred_by_target_term": {
       "الشجاعة": 29,
       "الصداقة": 29,
       "الصبر": 29,
       "الصدق": 29,
-      "الاحترام": 41,
+      "الاحترام": 29,
       "التعاون": 29,
       "الهدوء": 29,
+      "المسؤولية": 29,
+      "الامتنان": 29,
+      "الثقة": 29,
+      "الكرم": 27,
+      "الاعتذار": 27,
+      "الإنصات": 27,
+      "المرونة": 27,
+      "العدل": 27,
+      "الحياء": 12,
+      "الطموح": 27,
+      "التواضع": 12,
+      "الحكمة": 12,
       "الوفاء": 22
     },
-    "missing_by_file_top": {
-      "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl": 250,
-      "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_saudi_010.jsonl": 250
-    },
-    "missing_examples": [
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى الشجاعة؟",
-        "assistant": "معنى الشجاعة: أن تفعل الصواب رغم الخوف، لا أن تختفي منك المخاوف.",
-        "inferred_target_term": "الشجاعة"
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى الصداقة؟",
-        "assistant": "معنى الصداقة: علاقة فيها صدق واهتمام ووقفة وقت الحاجة.",
-        "inferred_target_term": "الصداقة"
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى الصبر؟",
-        "assistant": "معنى الصبر: قدرة على احتمال التأخير أو التعب دون فقدان الاتزان.",
-        "inferred_target_term": "الصبر"
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى الصدق؟",
-        "assistant": "معنى الصدق: وضوح في القول والعمل بلا خداع.",
-        "inferred_target_term": "الصدق"
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى الاحترام؟",
-        "assistant": "معنى الاحترام: أن تراعي قيمة الشخص وحدوده حتى عند الاختلاف.",
-        "inferred_target_term": "الاحترام"
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى التعاون؟",
-        "assistant": "معنى التعاون: أن يعمل أكثر من شخص لهدف مشترك بتفاهم.",
-        "inferred_target_term": "التعاون"
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى الهدوء؟",
-        "assistant": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
-        "inferred_target_term": "الهدوء"
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى المسؤولية؟",
-        "assistant": "معنى المسؤولية: أن تعرف ما عليك وتقوم به بقدر استطاعتك.",
-        "inferred_target_term": ""
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى الامتنان؟",
-        "assistant": "معنى الامتنان: أن تلاحظ الخير الموجود وتشكر عليه.",
-        "inferred_target_term": ""
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى الثقة؟",
-        "assistant": "معنى الثقة: اطمئنان مبني على تجربة ووضوح لا على كلام فقط.",
-        "inferred_target_term": ""
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى الكرم؟",
-        "assistant": "معنى الكرم: عطاء مناسب بلا منّ ولا مبالغة.",
-        "inferred_target_term": ""
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى الاعتذار؟",
-        "assistant": "معنى الاعتذار: اعتراف بالخطأ ومحاولة إصلاح أثره.",
-        "inferred_target_term": ""
-      }
-    ],
-    "off_spec_topic_examples": [
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى المسؤولية؟",
-        "assistant": "معنى المسؤولية: أن تعرف ما عليك وتقوم به بقدر استطاعتك."
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى الامتنان؟",
-        "assistant": "معنى الامتنان: أن تلاحظ الخير الموجود وتشكر عليه."
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى الثقة؟",
-        "assistant": "معنى الثقة: اطمئنان مبني على تجربة ووضوح لا على كلام فقط."
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى الكرم؟",
-        "assistant": "معنى الكرم: عطاء مناسب بلا منّ ولا مبالغة."
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى الاعتذار؟",
-        "assistant": "معنى الاعتذار: اعتراف بالخطأ ومحاولة إصلاح أثره."
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى الإنصات؟",
-        "assistant": "معنى الإنصات: أن تسمع لتفهم لا لترد بسرعة."
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى المرونة؟",
-        "assistant": "معنى المرونة: قدرة على تغيير الطريقة دون ترك الهدف."
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى العدل؟",
-        "assistant": "معنى العدل: أن تعطي كل ذي حق حقه بإنصاف."
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى الطموح؟",
-        "assistant": "معنى الطموح: رغبة واعية في التحسن والعمل لما هو أفضل."
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى التواضع؟",
-        "assistant": "معنى التواضع: أن تعرف قيمتك دون أن تتكبر على غيرك."
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "ما معنى الحكمة؟",
-        "assistant": "معنى الحكمة: اختيار التصرف الأنسب في الوقت الأنسب."
-      },
-      {
-        "file": "data/corpus/chat/jsonl/dialogue_batch_v10_balanced_topic_msa_010.jsonl",
-        "dialect": "msa",
-        "user": "اشرح لي المسؤولية ببساطة.",
-        "assistant": "معنى المسؤولية: أن تعرف ما عليك وتقوم به بقدر استطاعتك."
-      }
-    ],
+    "missing_by_file_top": {},
+    "missing_examples": [],
+    "off_spec_topic_examples": [],
     "copy_anchor": {
-      "target_term_records": 237,
-      "ok": 225,
-      "bad": 12,
-      "unknown_topic": 273,
-      "target_term_copy_anchor_ready": false,
-      "all_topic_copy_anchor_ready": false
+      "target_term_records": 510,
+      "ok": 510,
+      "bad": 0,
+      "unknown_topic": 0,
+      "target_term_copy_anchor_ready": true,
+      "all_topic_copy_anchor_ready": true
     }
   },
   "topic_round_robin_probe": {
     "proposed_sampler": "topic_term_round_robin_within_family_round_robin",
     "dry_run_possible_from_inferred_terms": true,
-    "blocked_for_training": true,
-    "reason": "training sampler cannot rely on inferred topic terms; explicit provenance.topic_term is required",
+    "blocked_for_training": false,
+    "reason": "explicit metadata is available",
     "preview_first_80_counts": {
-      "الاحترام": 10,
-      "التعاون": 10,
-      "الشجاعة": 10,
-      "الصبر": 10,
-      "الصداقة": 10,
-      "الصدق": 10,
-      "الهدوء": 10,
-      "الوفاء": 10
+      "الإنصات": 4,
+      "الاحترام": 4,
+      "الاعتذار": 4,
+      "الامتنان": 4,
+      "التعاون": 4,
+      "التواضع": 4,
+      "الثقة": 4,
+      "الحكمة": 4,
+      "الحياء": 4,
+      "الشجاعة": 4,
+      "الصبر": 4,
+      "الصداقة": 4,
+      "الصدق": 4,
+      "الطموح": 4,
+      "العدل": 4,
+      "الكرم": 4,
+      "المرونة": 4,
+      "المسؤولية": 4,
+      "الهدوء": 4,
+      "الوفاء": 4
     },
     "all_target_terms_present_in_preview": true
   },
   "encoded_gate_passed": true,
-  "metadata_ready": false,
-  "copy_anchor_ready": false,
-  "sampler_ready": false,
-  "training_ready": false,
+  "metadata_ready": true,
+  "copy_anchor_ready": true,
+  "sampler_ready": true,
+  "training_ready": true,
   "blocked_actions": [
     "LM training before data repair",
     "runtime release",
@@ -390,14 +272,14 @@
   ],
   "decision": {
     "decision_id": "PHASE27_98_TOPIC_BINDING_GATE_ENCODING_DECISION",
-    "engineering_decision": "ALLOW_PHASE27_99_TOPIC_METADATA_COPY_ANCHOR_DATA_REPAIR_NO_TRAINING",
-    "new_training_allowed": false,
-    "data_repair_allowed": true,
+    "engineering_decision": "ALLOW_PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_TRAINING",
+    "new_training_allowed": true,
+    "data_repair_allowed": false,
     "runtime_release_allowed": false,
     "ui_release_allowed": false,
     "sf50m_justified_transition": false,
     "tokenizer_retrain_allowed": false,
-    "why": "Gate encoding works, but corpus metadata/copy-anchor readiness is not strict enough for the Phase 27.97 objective.",
-    "next_phase": "Phase 27.99 — Topic Metadata and Copy-Anchor Data Repair"
+    "why": "Gate encoding, metadata, copy-anchor, and sampler readiness all passed.",
+    "next_phase": "Phase 27.100 — Bounded Topic Binding Repair Training"
   }
 }
