@@ -1,0 +1,5520 @@
+{
+  "phase": "Phase 27.100",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "status": "PHASE27_100_TRAINED_RUNTIME_BLOCKED_DIAGNOSIS_REQUIRED",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": true,
+  "training_completed": true,
+  "runtime_changed": false,
+  "source_decision": {
+    "decision_id": "PHASE27_99_TOPIC_METADATA_COPY_ANCHOR_REPAIR_DECISION",
+    "engineering_decision": "ALLOW_PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_TRAINING",
+    "new_training_allowed": true,
+    "runtime_release_allowed": false,
+    "ui_release_allowed": false,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "why": "All topic records now have explicit topic_term and pass copy-anchor readiness.",
+    "next_phase": "Phase 27.100 — Bounded Topic Binding Repair Training"
+  },
+  "training_scope": "bounded SF-10M topic-binding repair; no runtime; no SF-50M",
+  "objective": "topic_copy_contrastive_binding_objective_v1",
+  "tokenizer": "artifacts/tokenizers/sf_bpe/v9_phase27_76",
+  "corpus": "data/corpus/chat/jsonl",
+  "split_manifest": "data/corpus/chat/splits/dialogue_split_v1.json",
+  "init_checkpoint": "artifacts/eval/phase27_90_round_robin_curriculum_repair/checkpoints/sf-10m-step1800",
+  "checkpoint_root": "artifacts/eval/phase27_100_topic_binding_repair/checkpoints",
+  "train_config": {
+    "steps": 1800,
+    "epochs": 1,
+    "batch_size": 1,
+    "seq_len": 96,
+    "lr": 0.0002,
+    "warmup": 120,
+    "split_order": "family_round_robin",
+    "loss_scope": "assistant",
+    "packing_mode": "sample_isolated"
+  },
+  "prompt_alignment_fix": "Topic prompts require copy-anchor topic binding plus contrastive wrong-topic rejection.",
+  "checkpoints": [
+    {
+      "checkpoint": "sf-10m-step600",
+      "known_topic_rows": [
+        {
+          "id": "known_msa_الوفاء",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الوفاء بجملة قصيرة.",
+          "topic": "الوفاء",
+          "required_terms": [
+            "الوفاء"
+          ],
+          "forbidden_terms": [
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_saudi_الوفاء",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الوفاء باختصار؟",
+          "topic": "الوفاء",
+          "required_terms": [
+            "الوفاء"
+          ],
+          "forbidden_terms": [
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_msa_التعاون",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي التعاون بجملة قصيرة.",
+          "topic": "التعاون",
+          "required_terms": [
+            "التعاون"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_saudi_التعاون",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني التعاون باختصار؟",
+          "topic": "التعاون",
+          "required_terms": [
+            "التعاون"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_msa_الصبر",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الصبر بجملة قصيرة.",
+          "topic": "الصبر",
+          "required_terms": [
+            "الصبر"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_saudi_الصبر",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الصبر باختصار؟",
+          "topic": "الصبر",
+          "required_terms": [
+            "الصبر"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_msa_الاحترام",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الاحترام بجملة قصيرة.",
+          "topic": "الاحترام",
+          "required_terms": [
+            "الاحترام"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_saudi_الاحترام",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الاحترام باختصار؟",
+          "topic": "الاحترام",
+          "required_terms": [
+            "الاحترام"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_msa_الهدوء",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الهدوء بجملة قصيرة.",
+          "topic": "الهدوء",
+          "required_terms": [
+            "الهدوء"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_saudi_الهدوء",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الهدوء باختصار؟",
+          "topic": "الهدوء",
+          "required_terms": [
+            "الهدوء"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_msa_الصدق",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الصدق بجملة قصيرة.",
+          "topic": "الصدق",
+          "required_terms": [
+            "الصدق"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_saudi_الصدق",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الصدق باختصار؟",
+          "topic": "الصدق",
+          "required_terms": [
+            "الصدق"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_msa_الصداقة",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الصداقة بجملة قصيرة.",
+          "topic": "الصداقة",
+          "required_terms": [
+            "الصداقة"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_saudi_الصداقة",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الصداقة باختصار؟",
+          "topic": "الصداقة",
+          "required_terms": [
+            "الصداقة"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_msa_الشجاعة",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الشجاعة بجملة قصيرة.",
+          "topic": "الشجاعة",
+          "required_terms": [
+            "الشجاعة"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_saudi_الشجاعة",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الشجاعة باختصار؟",
+          "topic": "الشجاعة",
+          "required_terms": [
+            "الشجاعة"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        }
+      ],
+      "known_topic_summary": {
+        "passed": 2,
+        "total": 16,
+        "pass_rate": 0.125,
+        "reason_counts": {
+          "required_topic_missing": 14,
+          "passed": 2
+        }
+      },
+      "fresh_topic_rows": [
+        {
+          "id": "fresh_01_msa_الوفاء",
+          "set": "fresh",
+          "dialect": "msa",
+          "prompt": "عرّف الوفاء بكلام بسيط.",
+          "topic": "الوفاء",
+          "required_terms": [
+            "الوفاء"
+          ],
+          "forbidden_terms": [
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "fresh_02_saudi_التعاون",
+          "set": "fresh",
+          "dialect": "saudi",
+          "prompt": "وش معنى التعاون في الحياة اليومية؟",
+          "topic": "التعاون",
+          "required_terms": [
+            "التعاون"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "fresh_03_msa_الصبر",
+          "set": "fresh",
+          "dialect": "msa",
+          "prompt": "اشرح الصبر بجملة قصيرة.",
+          "topic": "الصبر",
+          "required_terms": [
+            "الصبر"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "fresh_04_saudi_الاحترام",
+          "set": "fresh",
+          "dialect": "saudi",
+          "prompt": "وش يعني الاحترام؟",
+          "topic": "الاحترام",
+          "required_terms": [
+            "الاحترام"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "fresh_05_msa_الهدوء",
+          "set": "fresh",
+          "dialect": "msa",
+          "prompt": "ما المقصود بالهدوء؟",
+          "topic": "الهدوء",
+          "required_terms": [
+            "الهدوء"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "fresh_06_saudi_الصدق",
+          "set": "fresh",
+          "dialect": "saudi",
+          "prompt": "وش يعني الصدق باختصار؟",
+          "topic": "الصدق",
+          "required_terms": [
+            "الصدق"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "fresh_07_msa_الصداقة",
+          "set": "fresh",
+          "dialect": "msa",
+          "prompt": "عرّف الصداقة دون إطالة.",
+          "topic": "الصداقة",
+          "required_terms": [
+            "الصداقة"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "fresh_08_saudi_الشجاعة",
+          "set": "fresh",
+          "dialect": "saudi",
+          "prompt": "وش معنى الشجاعة؟",
+          "topic": "الشجاعة",
+          "required_terms": [
+            "الشجاعة"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "fresh_09_saudi_الوفاء",
+          "set": "fresh",
+          "dialect": "saudi",
+          "prompt": "علمني عن الوفاء بجملة وحدة.",
+          "topic": "الوفاء",
+          "required_terms": [
+            "الوفاء"
+          ],
+          "forbidden_terms": [
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "fresh_10_saudi_الصبر",
+          "set": "fresh",
+          "dialect": "saudi",
+          "prompt": "الصبر وش معناه؟",
+          "topic": "الصبر",
+          "required_terms": [
+            "الصبر"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        }
+      ],
+      "fresh_topic_summary": {
+        "passed": 1,
+        "total": 10,
+        "pass_rate": 0.1,
+        "reason_counts": {
+          "required_topic_missing": 9,
+          "passed": 1
+        }
+      },
+      "all_family": {
+        "checkpoint": "sf-10m-step600",
+        "meta": {
+          "checkpoint": "sf-10m-step600",
+          "path": "artifacts/eval/phase27_100_topic_binding_repair/checkpoints/sf-10m-step600",
+          "state_exists": true,
+          "sf_origin": true,
+          "step": 600,
+          "model_name": "sf-10m",
+          "notes": "seed=20267100 batch=1 seq=96 epochs=1 stream_format=dialogue loss_scope=assistant packing_mode=sample_isolated split=train split_order=family_round_robin init=/Users/sami/workSF/SF.AI/artifacts/eval/phase27_90_round_robin_curriculum_repair/checkpoints/sf-10m-step1800"
+        },
+        "rows": [
+          {
+            "id": "open_social_01",
+            "dialect": "saudi",
+            "prompt": "ودي اسمع منك سوالف خفيفة",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "نسولف",
+              "سولف",
+              "موضوع",
+              "خفيف"
+            ],
+            "response": "نستطيع أن نتحدث عن شيء صغير أسعدك أو خفف عنك اليوم.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": false,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "open_social_02",
+            "dialect": "msa",
+            "prompt": "ابدأ معي كلامًا لطيفًا",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "حديث",
+              "موضوع",
+              "نبدأ",
+              "خفيف"
+            ],
+            "response": "نستطيع أن نتحدث عن شيء صغير أسعدك أو خفف عنك اليوم.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": false,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "open_social_03",
+            "dialect": "saudi",
+            "prompt": "افتح لي سالفة بسيطة",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "سولف",
+              "موضوع",
+              "يومك",
+              "نبدأ"
+            ],
+            "response": "نبدأ بحديث خفيف عن يومك، ما الشيء اللطيف الذي حدث لك؟",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "open_social_04",
+            "dialect": "msa",
+            "prompt": "لنبدأ حديثًا عاديًا",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "حديث",
+              "موضوع",
+              "نبدأ"
+            ],
+            "response": "نستطيع أن نتحدث عن شيء صغير أسعدك أو خفف عنك اليوم.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": false,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "open_social_05",
+            "dialect": "saudi",
+            "prompt": "ابي كلام عادي بدون موضوع كبير",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "نسولف",
+              "موضوع",
+              "خفيف"
+            ],
+            "response": "نستطيع أن نتحدث عن شيء صغير أسعدك أو خفف عنك اليوم.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": false,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "open_social_06",
+            "dialect": "msa",
+            "prompt": "اختر لي شيئًا نتحدث عنه",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "موضوع",
+              "حديث",
+              "نبدأ"
+            ],
+            "response": "نستطيع أن نتحدث عن شيء صغير أسعدك أو خفف عنك اليوم.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": false,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "open_social_07",
+            "dialect": "saudi",
+            "prompt": "وش سالفتك اليوم",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "سولف",
+              "يومك",
+              "موضوع"
+            ],
+            "response": "نستطيع أن نتحدث عن شيء صغير أسعدك أو خفف عنك اليوم.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": false,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "open_social_08",
+            "dialect": "msa",
+            "prompt": "أريد حوارًا بسيطًا لا أكثر",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "حوار",
+              "موضوع",
+              "نبدأ"
+            ],
+            "response": "نستطيع أن نتحدث عن شيء صغير أسعدك أو خفف عنك اليوم.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": false,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "open_social_09",
+            "dialect": "saudi",
+            "prompt": "خل الجو خفيف وسولف",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "خفيف",
+              "سولف",
+              "موضوع"
+            ],
+            "response": "نستطيع أن نتحدث عن شيء صغير أسعدك أو خفف عنك اليوم.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": false,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "open_social_10",
+            "dialect": "msa",
+            "prompt": "هات فكرة لطيفة للكلام",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "موضوع",
+              "حديث",
+              "نبدأ",
+              "فكرة",
+              "نتحدث"
+            ],
+            "response": "نستطيع أن نتحدث عن شيء صغير أسعدك أو خفف عنك اليوم.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": false,
+            "passed": false,
+            "reason": "response_family_mismatch"
+          },
+          {
+            "id": "followup_01",
+            "dialect": "saudi",
+            "prompt": "ما وضحت لي زين",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أقصد",
+              "اقصد",
+              "وضح",
+              "أبسط",
+              "خطوة"
+            ],
+            "response": "أقصد الفكرة ببساطة: خذ جزءًا واحدًا من الموضوع وتعامل معه أولًا.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "followup_02",
+            "dialect": "msa",
+            "prompt": "أعد المعنى بطريقة أوضح",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أقصد",
+              "الفكرة",
+              "أبسط",
+              "وضح"
+            ],
+            "response": "أقصد أن تجعل الأمر أصغر وأسهل، ثم تبدأ بالجزء الواضح.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "followup_03",
+            "dialect": "saudi",
+            "prompt": "طيب بعد كلامك وش الخطوة",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "بعدها",
+              "خطوة",
+              "ابدأ"
+            ],
+            "response": "أقصد أن تجعل الأمر أصغر وأسهل، ثم تبدأ بالجزء الواضح.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "followup_04",
+            "dialect": "msa",
+            "prompt": "ما الفكرة التي تريدها بالضبط",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أقصد",
+              "الفكرة",
+              "يعني"
+            ],
+            "response": "أقصد أن تجعل الأمر أصغر وأسهل، ثم تبدأ بالجزء الواضح.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "followup_05",
+            "dialect": "saudi",
+            "prompt": "يعني وش المطلوب مني",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "يعني",
+              "خطوة",
+              "ابدأ"
+            ],
+            "response": "أقصد أن تجعل الأمر أصغر وأسهل، ثم تبدأ بالجزء الواضح.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "followup_06",
+            "dialect": "msa",
+            "prompt": "بسّطها لي أكثر",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أبسط",
+              "ابدأ",
+              "خطوة"
+            ],
+            "response": "أقصد أن تجعل الأمر أصغر وأسهل، ثم تبدأ بالجزء الواضح.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "followup_07",
+            "dialect": "saudi",
+            "prompt": "ما دخلت مخي اشرحها",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أقصد",
+              "الفكرة",
+              "وضح"
+            ],
+            "response": "أقصد الفكرة ببساطة: خذ جزءًا واحدًا من الموضوع وتعامل معه أولًا.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "followup_08",
+            "dialect": "msa",
+            "prompt": "تابع الشرح من النقطة الأخيرة",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "نكمل",
+              "بعدها",
+              "الفكرة"
+            ],
+            "response": "أقصد أن تجعل الأمر أصغر وأسهل، ثم تبدأ بالجزء الواضح.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "followup_09",
+            "dialect": "saudi",
+            "prompt": "وش تقصد بهالكلام",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أقصد",
+              "اقصد",
+              "يعني"
+            ],
+            "response": "أقصد أن تجعل الأمر أصغر وأسهل، ثم تبدأ بالجزء الواضح.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "followup_10",
+            "dialect": "msa",
+            "prompt": "أريد صياغة أبسط للفكرة",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أبسط",
+              "الفكرة",
+              "خطوة"
+            ],
+            "response": "أقصد أن تجعل الأمر أصغر وأسهل، ثم تبدأ بالجزء الواضح.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "planning_01",
+            "dialect": "saudi",
+            "prompt": "ابي ابدأ يومي صح",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "ابدأ",
+              "مهمة",
+              "مهام",
+              "خطوة"
+            ],
+            "response": "اختر ثلاث مهام فقط الآن، ثم ابدأ بالأهم واترك الباقي لوقت لاحق.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_02",
+            "dialect": "msa",
+            "prompt": "رتب لي بداية عملية",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "رتب",
+              "ابدأ",
+              "مهمة",
+              "خطوة"
+            ],
+            "response": "اختر ثلاث مهام فقط الآن، ثم ابدأ بالأهم واترك الباقي لوقت لاحق.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_03",
+            "dialect": "saudi",
+            "prompt": "عندي لخبطة بالمهام",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "مهام",
+              "الأهم",
+              "خطوة"
+            ],
+            "response": "اختر ثلاث مهام فقط الآن، ثم ابدأ بالأهم واترك الباقي لوقت لاحق.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_04",
+            "dialect": "msa",
+            "prompt": "كيف أضع أولوية لعملي",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "أولويات",
+              "مهمة",
+              "ابدأ"
+            ],
+            "response": "اختر ثلاث مهام فقط الآن، ثم ابدأ بالأهم واترك الباقي لوقت لاحق.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_05",
+            "dialect": "saudi",
+            "prompt": "وش اول شي اسويه اليوم",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "ابدأ",
+              "الأهم",
+              "خطوة"
+            ],
+            "response": "اختر ثلاث مهام فقط الآن، ثم ابدأ بالأهم واترك الباقي لوقت لاحق.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_06",
+            "dialect": "msa",
+            "prompt": "ساعدني أختار مهمة واحدة",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "مهمة",
+              "ابدأ",
+              "الأهم"
+            ],
+            "response": "اختر ثلاث مهام فقط الآن، ثم ابدأ بالأهم واترك الباقي لوقت لاحق.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_07",
+            "dialect": "saudi",
+            "prompt": "ابي طريقة سهلة للترتيب",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "رتب",
+              "مهام",
+              "خطوة"
+            ],
+            "response": "اختر ثلاث مهام فقط الآن، ثم ابدأ بالأهم واترك الباقي لوقت لاحق.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_08",
+            "dialect": "msa",
+            "prompt": "دلني على خطة قصيرة",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "خطة",
+              "مهمة",
+              "ابدأ"
+            ],
+            "response": "اختر ثلاث مهام فقط الآن، ثم ابدأ بالأهم واترك الباقي لوقت لاحق.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_09",
+            "dialect": "saudi",
+            "prompt": "مهامي كثيره ومادري من وين",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "مهام",
+              "ابدأ",
+              "الأهم"
+            ],
+            "response": "اختر ثلاث مهام فقط الآن، ثم ابدأ بالأهم واترك الباقي لوقت لاحق.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_10",
+            "dialect": "msa",
+            "prompt": "كيف أبدأ بلا تشتت",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "ابدأ",
+              "مهمة",
+              "خطوة"
+            ],
+            "response": "اختر ثلاث مهام فقط الآن، ثم ابدأ بالأهم واترك الباقي لوقت لاحق.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "support_01",
+            "dialect": "saudi",
+            "prompt": "احس بضيق بسيط",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "نفس",
+              "تهدأ",
+              "هون",
+              "خفف"
+            ],
+            "response": "اهدأ لحظة، واكتب ما يزعجك في جملة قصيرة حتى يتضح أمامك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "support_02",
+            "dialect": "msa",
+            "prompt": "أحتاج جملة تهدئني",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "تنفس",
+              "بهدوء",
+              "راحة"
+            ],
+            "response": "اهدأ لحظة، واكتب ما يزعجك في جملة قصيرة حتى يتضح أمامك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "support_03",
+            "dialect": "saudi",
+            "prompt": "مضغوط شوي وش اسوي",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "نفس",
+              "اهدأ",
+              "خطوة"
+            ],
+            "response": "اهدأ لحظة، واكتب ما يزعجك في جملة قصيرة حتى يتضح أمامك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "support_04",
+            "dialect": "msa",
+            "prompt": "أنا مرتبك وأريد هدوءًا",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "تنفس",
+              "هدوء",
+              "راحة"
+            ],
+            "response": "اهدأ لحظة، واكتب ما يزعجك في جملة قصيرة حتى يتضح أمامك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "support_05",
+            "dialect": "saudi",
+            "prompt": "ابي اروق بدون كلام كثير",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "نفس",
+              "خفف",
+              "تهدأ"
+            ],
+            "response": "اهدأ لحظة، واكتب ما يزعجك في جملة قصيرة حتى يتضح أمامك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "support_06",
+            "dialect": "msa",
+            "prompt": "كيف أستعيد تركيزي بهدوء",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "تنفس",
+              "خطوة",
+              "راحة"
+            ],
+            "response": "اهدأ لحظة، واكتب ما يزعجك في جملة قصيرة حتى يتضح أمامك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "support_07",
+            "dialect": "saudi",
+            "prompt": "توترت من البداية",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "نفس",
+              "اهدأ",
+              "خطوة"
+            ],
+            "response": "حدد ة، واكتب ما يزعجك في جملة قصيرة حتى يتضح أمامك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": false,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "support_08",
+            "dialect": "msa",
+            "prompt": "طمئني بكلام قصير",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "تستطيع",
+              "تنفس",
+              "راحة",
+              "نفس",
+              "هون"
+            ],
+            "response": "اهدأ لحظة، واكتب ما يزعجك في جملة قصيرة حتى يتضح أمامك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "support_09",
+            "dialect": "saudi",
+            "prompt": "احس اني مشتت ومتوتر",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "نفس",
+              "ركز",
+              "خطوة"
+            ],
+            "response": "اهدأ لحظة، واكتب ما يزعجك في يومك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "support_10",
+            "dialect": "msa",
+            "prompt": "أريد أن أهدأ قليلًا",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "اهدأ",
+              "تنفس",
+              "بهدوء"
+            ],
+            "response": "اهدأ لحظة، واكتب ما يزعجك في جملة قصيرة حتى يتضح أمامك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "topic_01",
+            "dialect": "msa",
+            "prompt": "فسر الوفاء بجملة قصيرة",
+            "intent": "topic",
+            "topic": "الوفاء",
+            "family": "topic",
+            "expected_any": [
+              "الوفاء"
+            ],
+            "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "topic_02",
+            "dialect": "saudi",
+            "prompt": "وش هو التعاون بين الناس",
+            "intent": "topic",
+            "topic": "التعاون",
+            "family": "topic",
+            "expected_any": [
+              "التعاون"
+            ],
+            "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "topic_03",
+            "dialect": "msa",
+            "prompt": "عرّف الصبر تعريفًا بسيطًا",
+            "intent": "topic",
+            "topic": "الصبر",
+            "family": "topic",
+            "expected_any": [
+              "الصبر"
+            ],
+            "response": "معنى الهدوء: إذا ة تساعدك على التفكير بصفاء قبل التصرف.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "topic_04",
+            "dialect": "saudi",
+            "prompt": "الاحترام كيف تفهمه",
+            "intent": "topic",
+            "topic": "الاحترام",
+            "family": "topic",
+            "expected_any": [
+              "الاحترام"
+            ],
+            "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "topic_05",
+            "dialect": "msa",
+            "prompt": "ما معنى الهدوء في الحياة",
+            "intent": "topic",
+            "topic": "الهدوء",
+            "family": "topic",
+            "expected_any": [
+              "الهدوء"
+            ],
+            "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "topic_06",
+            "dialect": "saudi",
+            "prompt": "الصدق وش فايدته",
+            "intent": "topic",
+            "topic": "الصدق",
+            "family": "topic",
+            "expected_any": [
+              "الصدق"
+            ],
+            "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "topic_07",
+            "dialect": "msa",
+            "prompt": "اشرح الصداقة دون إطالة",
+            "intent": "topic",
+            "topic": "الصداقة",
+            "family": "topic",
+            "expected_any": [
+              "الصداقة"
+            ],
+            "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "topic_08",
+            "dialect": "saudi",
+            "prompt": "الشجاعة متى تظهر",
+            "intent": "topic",
+            "topic": "الشجاعة",
+            "family": "topic",
+            "expected_any": [
+              "الشجاعة"
+            ],
+            "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "topic_09",
+            "dialect": "msa",
+            "prompt": "أعطني معنى التعاون ببساطة",
+            "intent": "topic",
+            "topic": "التعاون",
+            "family": "topic",
+            "expected_any": [
+              "التعاون"
+            ],
+            "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "topic_10",
+            "dialect": "saudi",
+            "prompt": "وش معنى الوفاء باختصار",
+            "intent": "topic",
+            "topic": "الوفاء",
+            "family": "topic",
+            "expected_any": [
+              "الوفاء"
+            ],
+            "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          }
+        ],
+        "summary": {
+          "passed": 19,
+          "total": 50,
+          "pass_rate": 0.38,
+          "family_summary": {
+            "followup": {
+              "passed": 5,
+              "total": 10
+            },
+            "open_social": {
+              "passed": 1,
+              "total": 10
+            },
+            "planning": {
+              "passed": 10,
+              "total": 10
+            },
+            "support": {
+              "passed": 2,
+              "total": 10
+            },
+            "topic": {
+              "passed": 1,
+              "total": 10
+            }
+          },
+          "reason_counts": {
+            "expected_terms_missing": 30,
+            "passed": 19,
+            "response_family_mismatch": 1
+          }
+        }
+      }
+    },
+    {
+      "checkpoint": "sf-10m-step1200",
+      "known_topic_rows": [
+        {
+          "id": "known_msa_الوفاء",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الوفاء بجملة قصيرة.",
+          "topic": "الوفاء",
+          "required_terms": [
+            "الوفاء"
+          ],
+          "forbidden_terms": [
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصبر: قدرة على احتمال التأخير أو التعب دون فقدان الاتزان",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_saudi_الوفاء",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الوفاء باختصار؟",
+          "topic": "الوفاء",
+          "required_terms": [
+            "الوفاء"
+          ],
+          "forbidden_terms": [
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصبر: قدرة على احتمال التأخير أو التعب دون فقدان الاتزان",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_msa_التعاون",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي التعاون بجملة قصيرة.",
+          "topic": "التعاون",
+          "required_terms": [
+            "التعاون"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الاعتذار: وضوح بالخطأ ومحاولة إصلاح أثره.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_saudi_التعاون",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني التعاون باختصار؟",
+          "topic": "التعاون",
+          "required_terms": [
+            "التعاون"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الاعتذار: اعتراف بالجزء الواضح.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_msa_الصبر",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الصبر بجملة قصيرة.",
+          "topic": "الصبر",
+          "required_terms": [
+            "الصبر"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصبر: قدرة على احتمال التأخير أو التعب دون فقدان الاتزان",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_saudi_الصبر",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الصبر باختصار؟",
+          "topic": "الصبر",
+          "required_terms": [
+            "الصبر"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصبر: قدرة على احتمال التأخير أو التعب دون فقدان الاتزان",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_msa_الاحترام",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الاحترام بجملة قصيرة.",
+          "topic": "الاحترام",
+          "required_terms": [
+            "الاحترام"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصدق: وضوح في القول والعمل بلا خداع.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_saudi_الاحترام",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الاحترام باختصار؟",
+          "topic": "الاحترام",
+          "required_terms": [
+            "الاحترام"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصدق: وضوح في القول والعمل بلا خداع.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_msa_الهدوء",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الهدوء بجملة قصيرة.",
+          "topic": "الهدوء",
+          "required_terms": [
+            "الهدوء"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_saudi_الهدوء",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الهدوء باختصار؟",
+          "topic": "الهدوء",
+          "required_terms": [
+            "الهدوء"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: إنك الشي اللي بأقرب وتفكر أوضح.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_msa_الصدق",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الصدق بجملة قصيرة.",
+          "topic": "الصدق",
+          "required_terms": [
+            "الصدق"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصدق: وضوح في القول والعمل بلا خداع.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_saudi_الصدق",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الصدق باختصار؟",
+          "topic": "الصدق",
+          "required_terms": [
+            "الصدق"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصدق: وضوح في القول والعمل بلا خداع.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_msa_الصداقة",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الصداقة بجملة قصيرة.",
+          "topic": "الصداقة",
+          "required_terms": [
+            "الصداقة"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الشجاعة"
+          ],
+          "response": "معنى الصدق: وضوح في القول والعمل بلا خداع.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_saudi_الصداقة",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الصداقة باختصار؟",
+          "topic": "الصداقة",
+          "required_terms": [
+            "الصداقة"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الشجاعة"
+          ],
+          "response": "معنى الصدق: وضوح في القول والعمل بلا خداع.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_msa_الشجاعة",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الشجاعة بجملة قصيرة.",
+          "topic": "الشجاعة",
+          "required_terms": [
+            "الشجاعة"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة"
+          ],
+          "response": "معنى الشجاعة: أن تفعل الصواب رغم الخوف، لا أن تختفي منك المخاوف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_saudi_الشجاعة",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الشجاعة باختصار؟",
+          "topic": "الشجاعة",
+          "required_terms": [
+            "الشجاعة"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة"
+          ],
+          "response": "معنى الشجاعة: أن تفعل الصواب رغم الخوف، لا أن تختفي منك المخاوف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        }
+      ],
+      "known_topic_summary": {
+        "passed": 8,
+        "total": 16,
+        "pass_rate": 0.5,
+        "reason_counts": {
+          "required_topic_missing": 8,
+          "passed": 8
+        }
+      },
+      "fresh_topic_rows": [
+        {
+          "id": "fresh_01_msa_الوفاء",
+          "set": "fresh",
+          "dialect": "msa",
+          "prompt": "عرّف الوفاء بكلام بسيط.",
+          "topic": "الوفاء",
+          "required_terms": [
+            "الوفاء"
+          ],
+          "forbidden_terms": [
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصدق: وضوح في القول والعمل بلا خداع.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "fresh_02_saudi_التعاون",
+          "set": "fresh",
+          "dialect": "saudi",
+          "prompt": "وش معنى التعاون في الحياة اليومية؟",
+          "topic": "التعاون",
+          "required_terms": [
+            "التعاون"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصدق: وضوح في القول والعمل بلا خداع.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "fresh_03_msa_الصبر",
+          "set": "fresh",
+          "dialect": "msa",
+          "prompt": "اشرح الصبر بجملة قصيرة.",
+          "topic": "الصبر",
+          "required_terms": [
+            "الصبر"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصبر: قدرة على احتمال التأخير أو التعب دون فقدان الاتزان",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "fresh_04_saudi_الاحترام",
+          "set": "fresh",
+          "dialect": "saudi",
+          "prompt": "وش يعني الاحترام؟",
+          "topic": "الاحترام",
+          "required_terms": [
+            "الاحترام"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصدق: وضوح في القول والعمل بلا خداع.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "fresh_05_msa_الهدوء",
+          "set": "fresh",
+          "dialect": "msa",
+          "prompt": "ما المقصود بالهدوء؟",
+          "topic": "الهدوء",
+          "required_terms": [
+            "الهدوء"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "fresh_06_saudi_الصدق",
+          "set": "fresh",
+          "dialect": "saudi",
+          "prompt": "وش يعني الصدق باختصار؟",
+          "topic": "الصدق",
+          "required_terms": [
+            "الصدق"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصدق: وضوح في القول والعمل بلا خداع.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "fresh_07_msa_الصداقة",
+          "set": "fresh",
+          "dialect": "msa",
+          "prompt": "عرّف الصداقة دون إطالة.",
+          "topic": "الصداقة",
+          "required_terms": [
+            "الصداقة"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الشجاعة"
+          ],
+          "response": "معنى الصدق: وضوح في القول والعمل بلا خداع.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "fresh_08_saudi_الشجاعة",
+          "set": "fresh",
+          "dialect": "saudi",
+          "prompt": "وش معنى الشجاعة؟",
+          "topic": "الشجاعة",
+          "required_terms": [
+            "الشجاعة"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة"
+          ],
+          "response": "معنى الامتنان: أن تلاحظ الخير الموجود وتشكر عليه.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "fresh_09_saudi_الوفاء",
+          "set": "fresh",
+          "dialect": "saudi",
+          "prompt": "علمني عن الوفاء بجملة وحدة.",
+          "topic": "الوفاء",
+          "required_terms": [
+            "الوفاء"
+          ],
+          "forbidden_terms": [
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصدق: وضوح في القول والعمل بلا خداع.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "fresh_10_saudi_الصبر",
+          "set": "fresh",
+          "dialect": "saudi",
+          "prompt": "الصبر وش معناه؟",
+          "topic": "الصبر",
+          "required_terms": [
+            "الصبر"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصبر: قدرة على احتمال التأخير أو التعب دون فقدان الاتزان",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        }
+      ],
+      "fresh_topic_summary": {
+        "passed": 4,
+        "total": 10,
+        "pass_rate": 0.4,
+        "reason_counts": {
+          "required_topic_missing": 6,
+          "passed": 4
+        }
+      },
+      "all_family": {
+        "checkpoint": "sf-10m-step1200",
+        "meta": {
+          "checkpoint": "sf-10m-step1200",
+          "path": "artifacts/eval/phase27_100_topic_binding_repair/checkpoints/sf-10m-step1200",
+          "state_exists": true,
+          "sf_origin": true,
+          "step": 1200,
+          "model_name": "sf-10m",
+          "notes": "seed=20267100 batch=1 seq=96 epochs=1 stream_format=dialogue loss_scope=assistant packing_mode=sample_isolated split=train split_order=family_round_robin init=/Users/sami/workSF/SF.AI/artifacts/eval/phase27_90_round_robin_curriculum_repair/checkpoints/sf-10m-step1800"
+        },
+        "rows": [
+          {
+            "id": "open_social_01",
+            "dialect": "saudi",
+            "prompt": "ودي اسمع منك سوالف خفيفة",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "نسولف",
+              "سولف",
+              "موضوع",
+              "خفيف"
+            ],
+            "response": "نقدر نفتح سالفة خفيفة عن عادة تحبها في يومك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "open_social_02",
+            "dialect": "msa",
+            "prompt": "ابدأ معي كلامًا لطيفًا",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "حديث",
+              "موضوع",
+              "نبدأ",
+              "خفيف"
+            ],
+            "response": "نبدأ بحديث خفيف عن يومك، ما الشيء اللطيف الذي حدث لك؟",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "open_social_03",
+            "dialect": "saudi",
+            "prompt": "افتح لي سالفة بسيطة",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "سولف",
+              "موضوع",
+              "يومك",
+              "نبدأ"
+            ],
+            "response": "موضوع خفيف: وش المكان اللي تحب تجلس فيه إذا تبي تهدأ؟",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "open_social_04",
+            "dialect": "msa",
+            "prompt": "لنبدأ حديثًا عاديًا",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "حديث",
+              "موضوع",
+              "نبدأ"
+            ],
+            "response": "لنجعل الحديث هادئًا: ما أكثر شيء أراحك اليوم؟",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "open_social_05",
+            "dialect": "saudi",
+            "prompt": "ابي كلام عادي بدون موضوع كبير",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "نسولف",
+              "موضوع",
+              "خفيف"
+            ],
+            "response": "وش ألطف شي صار لك؟",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": false,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "open_social_06",
+            "dialect": "msa",
+            "prompt": "اختر لي شيئًا نتحدث عنه",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "موضوع",
+              "حديث",
+              "نبدأ"
+            ],
+            "response": "لنجعل الحديث هادئة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "open_social_07",
+            "dialect": "saudi",
+            "prompt": "وش سالفتك اليوم",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "سولف",
+              "يومك",
+              "موضوع"
+            ],
+            "response": "نقدر نفتح سالفة خفيفة عن عادة تحبها في يومك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "open_social_08",
+            "dialect": "msa",
+            "prompt": "أريد حوارًا بسيطًا لا أكثر",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "حوار",
+              "موضوع",
+              "نبدأ"
+            ],
+            "response": "لنجعل الحديث هادئًا: ما أكثر شيء أراحك اليوم؟",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "open_social_09",
+            "dialect": "saudi",
+            "prompt": "خل الجو خفيف وسولف",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "خفيف",
+              "سولف",
+              "موضوع"
+            ],
+            "response": "أبشر، خلنا نسولف عن يومك: وش ألطف شي صار لك؟",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "open_social_10",
+            "dialect": "msa",
+            "prompt": "هات فكرة لطيفة للكلام",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "موضوع",
+              "حديث",
+              "نبدأ",
+              "فكرة",
+              "نتحدث"
+            ],
+            "response": "لنجعل الحديث هادئًا: ما أكثر شيء أراحك اليوم؟",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "followup_01",
+            "dialect": "saudi",
+            "prompt": "ما وضحت لي زين",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أقصد",
+              "اقصد",
+              "وضح",
+              "أبسط",
+              "خطوة"
+            ],
+            "response": "يعني لا تجمع كل شيء مرة وحدة؛ خذ جزء بسيط وابدأ فيه.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "followup_02",
+            "dialect": "msa",
+            "prompt": "أعد المعنى بطريقة أوضح",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أقصد",
+              "الفكرة",
+              "أبسط",
+              "وضح"
+            ],
+            "response": "أقصد أن تجعل الأمر أصغر وأسهل، ثم تبدأ بالجزء الواضح.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "followup_03",
+            "dialect": "saudi",
+            "prompt": "طيب بعد كلامك وش الخطوة",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "بعدها",
+              "خطوة",
+              "ابدأ"
+            ],
+            "response": "يعني لا تجمع كل شيء مرة وحدة؛ خذ جزء بسيط وابدأ فيه.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "followup_04",
+            "dialect": "msa",
+            "prompt": "ما الفكرة التي تريدها بالضبط",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أقصد",
+              "الفكرة",
+              "يعني"
+            ],
+            "response": "أقصد أن تجعل الأمر أصغر وأسهل، ثم تبدأ بالجزء الواضح.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "followup_05",
+            "dialect": "saudi",
+            "prompt": "يعني وش المطلوب مني",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "يعني",
+              "خطوة",
+              "ابدأ"
+            ],
+            "response": "أقصد خل الموضوع أصغر، وابدأ بالجزء الواضح قدامك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "followup_06",
+            "dialect": "msa",
+            "prompt": "بسّطها لي أكثر",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أبسط",
+              "ابدأ",
+              "خطوة"
+            ],
+            "response": "أقصد أن تجعل الأمر أصغر وأسهل، ثم تبدأ بالجزء الواضح.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "followup_07",
+            "dialect": "saudi",
+            "prompt": "ما دخلت مخي اشرحها",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أقصد",
+              "الفكرة",
+              "وضح"
+            ],
+            "response": "يعني لا تجمع كل شيء مرة وحدة؛ خذ نفس وابدأ بالأهم لمدة",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": false,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "followup_08",
+            "dialect": "msa",
+            "prompt": "تابع الشرح من النقطة الأخيرة",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "نكمل",
+              "بعدها",
+              "الفكرة"
+            ],
+            "response": "أقصد أن تجعل الأمر أصغر وأسهل، ثم تبدأ بالجزء الواضح.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "followup_09",
+            "dialect": "saudi",
+            "prompt": "وش تقصد بهالكلام",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أقصد",
+              "اقصد",
+              "يعني"
+            ],
+            "response": "يعني لا تجمع كل شيء مرة وحدة؛ خذ جزء بسيط وابدأ فيه.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "followup_10",
+            "dialect": "msa",
+            "prompt": "أريد صياغة أبسط للفكرة",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أبسط",
+              "الفكرة",
+              "خطوة"
+            ],
+            "response": "أقصد أن تجعل الأمر أصغر وأسهل، ثم تبدأ بالجزء الواضح.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "planning_01",
+            "dialect": "saudi",
+            "prompt": "ابي ابدأ يومي صح",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "ابدأ",
+              "مهمة",
+              "مهام",
+              "خطوة"
+            ],
+            "response": "حدد المطلوب، اكتب المهام، وابدأ بالأهم عشرين دقيقة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_02",
+            "dialect": "msa",
+            "prompt": "رتب لي بداية عملية",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "رتب",
+              "ابدأ",
+              "مهمة",
+              "خطوة"
+            ],
+            "response": "اختر ثلاث مهام بس ، وابدأ بالأهم ثم شوف انبية. بعده.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_03",
+            "dialect": "saudi",
+            "prompt": "عندي لخبطة بالمهام",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "مهام",
+              "الأهم",
+              "خطوة"
+            ],
+            "response": "حدد المطلوب، اكتب المهام، وابدأ بالأهم عشرين دقيقة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_04",
+            "dialect": "msa",
+            "prompt": "كيف أضع أولوية لعملي",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "أولويات",
+              "مهمة",
+              "ابدأ"
+            ],
+            "response": "حدد الهدف، اكتب المهام، وابدأ بالأهم عشرين دقيقة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_05",
+            "dialect": "saudi",
+            "prompt": "وش اول شي اسويه اليوم",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "ابدأ",
+              "الأهم",
+              "خطوة"
+            ],
+            "response": "حدد المطلوب، اكتب المهام، وابدأ بالأهم عشرين دقيقة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_06",
+            "dialect": "msa",
+            "prompt": "ساعدني أختار مهمة واحدة",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "مهمة",
+              "ابدأ",
+              "الأهم"
+            ],
+            "response": "اختر ثلاث مهام بس ، وابدأ بالأهم ثم شوف اللي بعده.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_07",
+            "dialect": "saudi",
+            "prompt": "ابي طريقة سهلة للترتيب",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "رتب",
+              "مهام",
+              "خطوة"
+            ],
+            "response": "حدد المطلوب، اكتب المهام، وابدأ بالأهم عشرين دقيقة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_08",
+            "dialect": "msa",
+            "prompt": "دلني على خطة قصيرة",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "خطة",
+              "مهمة",
+              "ابدأ"
+            ],
+            "response": "حدد الهدف، اكتب المهام، وابدأ بالأهم عشرين دقيقة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_09",
+            "dialect": "saudi",
+            "prompt": "مهامي كثيره ومادري من وين",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "مهام",
+              "ابدأ",
+              "الأهم"
+            ],
+            "response": "حدد المطلوب، اكتب المهام، وابدأ بالأهم عشرين دقيقة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_10",
+            "dialect": "msa",
+            "prompt": "كيف أبدأ بلا تشتت",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "ابدأ",
+              "مهمة",
+              "خطوة"
+            ],
+            "response": "حدد الهدف، اكتب المهام، وابدأ بالأهم عشرين دقيقة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "support_01",
+            "dialect": "saudi",
+            "prompt": "احس بضيق بسيط",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "نفس",
+              "تهدأ",
+              "هون",
+              "خفف"
+            ],
+            "response": "خذ نفس شوي واهدأ، بعدها ابدأ بشي واحد بسيط.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "support_02",
+            "dialect": "msa",
+            "prompt": "أحتاج جملة تهدئني",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "تنفس",
+              "بهدوء",
+              "راحة"
+            ],
+            "response": "خذ نفسًا هادئًا، واهدأ قليلًا قبل أن تقرر ما ستفعله.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "support_03",
+            "dialect": "saudi",
+            "prompt": "مضغوط شوي وش اسوي",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "نفس",
+              "اهدأ",
+              "خطوة"
+            ],
+            "response": "خذ نفس شوي واهدأ، بعدها ابدأ بشي واحد بسيط.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "support_04",
+            "dialect": "msa",
+            "prompt": "أنا مرتبك وأريد هدوءًا",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "تنفس",
+              "هدوء",
+              "راحة"
+            ],
+            "response": "خذ نفس شوي واهدأ، بعدها ابدأ بشي واحد بسيط.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "support_05",
+            "dialect": "saudi",
+            "prompt": "ابي اروق بدون كلام كثير",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "نفس",
+              "خفف",
+              "تهدأ"
+            ],
+            "response": "خذ نفس شوي واهدأ، بعدها ابدأ بشي واحد بسيط.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "support_06",
+            "dialect": "msa",
+            "prompt": "كيف أستعيد تركيزي بهدوء",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "تنفس",
+              "خطوة",
+              "راحة"
+            ],
+            "response": "خذ نفسًا هادئًا، واهدأ قليلًا قبل أن تقرر ما ستفعله.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "support_07",
+            "dialect": "saudi",
+            "prompt": "توترت من البداية",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "نفس",
+              "اهدأ",
+              "خطوة"
+            ],
+            "response": "خففها على نفسك، خذ نفس وابدأ بأقرب شيء واضح.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "support_08",
+            "dialect": "msa",
+            "prompt": "طمئني بكلام قصير",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "تستطيع",
+              "تنفس",
+              "راحة",
+              "نفس",
+              "هون"
+            ],
+            "response": "خذ نفسًا هادئًا، واهدأ قليلًا قبل أن تقرر ما ستفعله.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "support_09",
+            "dialect": "saudi",
+            "prompt": "احس اني مشتت ومتوتر",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "نفس",
+              "ركز",
+              "خطوة"
+            ],
+            "response": "خذ نفسًا هادئًا، واهدأ قليلًا قبل قصيرة وابدأ بالأهم",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "support_10",
+            "dialect": "msa",
+            "prompt": "أريد أن أهدأ قليلًا",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "اهدأ",
+              "تنفس",
+              "بهدوء"
+            ],
+            "response": "خذ نفس شوي واهدأ، بعدها ابدأ بشي واحد بسيط.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "topic_01",
+            "dialect": "msa",
+            "prompt": "فسر الوفاء بجملة قصيرة",
+            "intent": "topic",
+            "topic": "الوفاء",
+            "family": "topic",
+            "expected_any": [
+              "الوفاء"
+            ],
+            "response": "معنى الصدق: وضوح في القول والعمل بلا خداع.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "topic_02",
+            "dialect": "saudi",
+            "prompt": "وش هو التعاون بين الناس",
+            "intent": "topic",
+            "topic": "التعاون",
+            "family": "topic",
+            "expected_any": [
+              "التعاون"
+            ],
+            "response": "معنى الاعتذار: اعتراف بالجزء الواضح.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "topic_03",
+            "dialect": "msa",
+            "prompt": "عرّف الصبر تعريفًا بسيطًا",
+            "intent": "topic",
+            "topic": "الصبر",
+            "family": "topic",
+            "expected_any": [
+              "الصبر"
+            ],
+            "response": "معنى الصبر: قدرة على احتمال التأخير أو التعب دون فقدان الاتزان.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "topic_04",
+            "dialect": "saudi",
+            "prompt": "الاحترام كيف تفهمه",
+            "intent": "topic",
+            "topic": "الاحترام",
+            "family": "topic",
+            "expected_any": [
+              "الاحترام"
+            ],
+            "response": "معنى الصدق: وضوح في القول والعمل بلا خداع.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "topic_05",
+            "dialect": "msa",
+            "prompt": "ما معنى الهدوء في الحياة",
+            "intent": "topic",
+            "topic": "الهدوء",
+            "family": "topic",
+            "expected_any": [
+              "الهدوء"
+            ],
+            "response": "معنى الهدوء: حالة تساعدك على التفكير بصفاء قبل التصرف.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "topic_06",
+            "dialect": "saudi",
+            "prompt": "الصدق وش فايدته",
+            "intent": "topic",
+            "topic": "الصدق",
+            "family": "topic",
+            "expected_any": [
+              "الصدق"
+            ],
+            "response": "معنى الصدق: الصبر إنك واضح واضح تكبر على غيرك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "topic_07",
+            "dialect": "msa",
+            "prompt": "اشرح الصداقة دون إطالة",
+            "intent": "topic",
+            "topic": "الصداقة",
+            "family": "topic",
+            "expected_any": [
+              "الصداقة"
+            ],
+            "response": "معنى الصدق: وضوح في القول والعمل بلا خداع.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "topic_08",
+            "dialect": "saudi",
+            "prompt": "الشجاعة متى تظهر",
+            "intent": "topic",
+            "topic": "الشجاعة",
+            "family": "topic",
+            "expected_any": [
+              "الشجاعة"
+            ],
+            "response": "معنى الشجاعة: أن تفعل الصواب رغم الخوف، لا أن تختفي منك المخاوف.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "topic_09",
+            "dialect": "msa",
+            "prompt": "أعطني معنى التعاون ببساطة",
+            "intent": "topic",
+            "topic": "التعاون",
+            "family": "topic",
+            "expected_any": [
+              "التعاون"
+            ],
+            "response": "معنى الاعتذار: وضوح بالجزء الواضح.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "topic_10",
+            "dialect": "saudi",
+            "prompt": "وش معنى الوفاء باختصار",
+            "intent": "topic",
+            "topic": "الوفاء",
+            "family": "topic",
+            "expected_any": [
+              "الوفاء"
+            ],
+            "response": "معنى الصبر: قدرة على احتمال التأخير أو التعب دون فقدان الاتزان.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          }
+        ],
+        "summary": {
+          "passed": 34,
+          "total": 50,
+          "pass_rate": 0.68,
+          "family_summary": {
+            "followup": {
+              "passed": 5,
+              "total": 10
+            },
+            "open_social": {
+              "passed": 8,
+              "total": 10
+            },
+            "planning": {
+              "passed": 10,
+              "total": 10
+            },
+            "support": {
+              "passed": 7,
+              "total": 10
+            },
+            "topic": {
+              "passed": 4,
+              "total": 10
+            }
+          },
+          "reason_counts": {
+            "passed": 34,
+            "expected_terms_missing": 16
+          }
+        }
+      }
+    },
+    {
+      "checkpoint": "sf-10m-step1800",
+      "known_topic_rows": [
+        {
+          "id": "known_msa_الوفاء",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الوفاء بجملة قصيرة.",
+          "topic": "الوفاء",
+          "required_terms": [
+            "الوفاء"
+          ],
+          "forbidden_terms": [
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصداقة: علاقة فيها صدق واهتمام ووقفة وقت الحاجة.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_saudi_الوفاء",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الوفاء باختصار؟",
+          "topic": "الوفاء",
+          "required_terms": [
+            "الوفاء"
+          ],
+          "forbidden_terms": [
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_msa_التعاون",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي التعاون بجملة قصيرة.",
+          "topic": "التعاون",
+          "required_terms": [
+            "التعاون"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى التعاون: إناللي تمشون مع بعض لهدف مشترك بتفاهم.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_saudi_التعاون",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني التعاون باختصار؟",
+          "topic": "التعاون",
+          "required_terms": [
+            "التعاون"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى التعاون: إناللي تمشون مع بعض لهدف مرة",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_msa_الصبر",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الصبر بجملة قصيرة.",
+          "topic": "الصبر",
+          "required_terms": [
+            "الصبر"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصبر: إنك تتحمل شوي بدون ما تفعله.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_saudi_الصبر",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الصبر باختصار؟",
+          "topic": "الصبر",
+          "required_terms": [
+            "الصبر"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصبر: إنك تتحمل شوي بدون ما تفاللي هدوءك.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_msa_الاحترام",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الاحترام بجملة قصيرة.",
+          "topic": "الاحترام",
+          "required_terms": [
+            "الاحترام"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصداقة: رفقة طيبة واهتمام ووقفة ص وقت الحاجة.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "known_saudi_الاحترام",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الاحترام باختصار؟",
+          "topic": "الاحترام",
+          "required_terms": [
+            "الاحترام"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الاحترام: إنك تقدر الناس وحدودهم حتى لو اختلاف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_msa_الهدوء",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الهدوء بجملة قصيرة.",
+          "topic": "الهدوء",
+          "required_terms": [
+            "الهدوء"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: إنك إذا ة تساعدك على التفكير بصفاء قبل التصرف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_saudi_الهدوء",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الهدوء باختصار؟",
+          "topic": "الهدوء",
+          "required_terms": [
+            "الهدوء"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: إنك اللي اللي نفسك نفسك، تفكر أوضح.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_msa_الصدق",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الصدق بجملة قصيرة.",
+          "topic": "الصدق",
+          "required_terms": [
+            "الصدق"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصدق: إن كلامك يكون واضح بأقرب فيه خداع.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_saudi_الصدق",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الصدق باختصار؟",
+          "topic": "الصدق",
+          "required_terms": [
+            "الصدق"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصدق: إن كلامك يكون واضح بأقرب فيه خداع.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_msa_الصداقة",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الصداقة بجملة قصيرة.",
+          "topic": "الصداقة",
+          "required_terms": [
+            "الصداقة"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الشجاعة"
+          ],
+          "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_saudi_الصداقة",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الصداقة باختصار؟",
+          "topic": "الصداقة",
+          "required_terms": [
+            "الصداقة"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الشجاعة"
+          ],
+          "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_msa_الشجاعة",
+          "set": "known",
+          "dialect": "msa",
+          "prompt": "اشرح لي الشجاعة بجملة قصيرة.",
+          "topic": "الشجاعة",
+          "required_terms": [
+            "الشجاعة"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة"
+          ],
+          "response": "معنى الشجاعة: أن تفعل الصواب رغم الخوف، لا أن تختفي منك المخاوف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "known_saudi_الشجاعة",
+          "set": "known",
+          "dialect": "saudi",
+          "prompt": "وش يعني الشجاعة باختصار؟",
+          "topic": "الشجاعة",
+          "required_terms": [
+            "الشجاعة"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة"
+          ],
+          "response": "معنى الشجاعة: إنك تسوي الصح حتى لو كنت خايف.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        }
+      ],
+      "known_topic_summary": {
+        "passed": 13,
+        "total": 16,
+        "pass_rate": 0.8125,
+        "reason_counts": {
+          "required_topic_missing": 3,
+          "passed": 13
+        }
+      },
+      "fresh_topic_rows": [
+        {
+          "id": "fresh_01_msa_الوفاء",
+          "set": "fresh",
+          "dialect": "msa",
+          "prompt": "عرّف الوفاء بكلام بسيط.",
+          "topic": "الوفاء",
+          "required_terms": [
+            "الوفاء"
+          ],
+          "forbidden_terms": [
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصداقة: علاقة فيها صدق واهتمام ووقفة وقت الحاجة.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "fresh_02_saudi_التعاون",
+          "set": "fresh",
+          "dialect": "saudi",
+          "prompt": "وش معنى التعاون في الحياة اليومية؟",
+          "topic": "التعاون",
+          "required_terms": [
+            "التعاون"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "fresh_03_msa_الصبر",
+          "set": "fresh",
+          "dialect": "msa",
+          "prompt": "اشرح الصبر بجملة قصيرة.",
+          "topic": "الصبر",
+          "required_terms": [
+            "الصبر"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصبر: إنك تتحمل شوي بدون ما تفعله.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "fresh_04_saudi_الاحترام",
+          "set": "fresh",
+          "dialect": "saudi",
+          "prompt": "وش يعني الاحترام؟",
+          "topic": "الاحترام",
+          "required_terms": [
+            "الاحترام"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "fresh_05_msa_الهدوء",
+          "set": "fresh",
+          "dialect": "msa",
+          "prompt": "ما المقصود بالهدوء؟",
+          "topic": "الهدوء",
+          "required_terms": [
+            "الهدوء"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الهدوء: إنك إذا اللي نفسك أن تختفي منك الموجود وتشكر عليها.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "fresh_06_saudi_الصدق",
+          "set": "fresh",
+          "dialect": "saudi",
+          "prompt": "وش يعني الصدق باختصار؟",
+          "topic": "الصدق",
+          "required_terms": [
+            "الصدق"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصدق: إن كلامك يكون واضح بأقرب فيه خداع.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "fresh_07_msa_الصداقة",
+          "set": "fresh",
+          "dialect": "msa",
+          "prompt": "عرّف الصداقة دون إطالة.",
+          "topic": "الصداقة",
+          "required_terms": [
+            "الصداقة"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الشجاعة"
+          ],
+          "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        },
+        {
+          "id": "fresh_08_saudi_الشجاعة",
+          "set": "fresh",
+          "dialect": "saudi",
+          "prompt": "وش معنى الشجاعة؟",
+          "topic": "الشجاعة",
+          "required_terms": [
+            "الشجاعة"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة"
+          ],
+          "response": "معنى الامتنان: إنك تنتبه للاللي تلاحظ الخير الموجود وتشكر عليها.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "fresh_09_saudi_الوفاء",
+          "set": "fresh",
+          "dialect": "saudi",
+          "prompt": "علمني عن الوفاء بجملة وحدة.",
+          "topic": "الوفاء",
+          "required_terms": [
+            "الوفاء"
+          ],
+          "forbidden_terms": [
+            "التعاون",
+            "الصبر",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": false,
+          "copy_anchor_ok": false,
+          "passed": false,
+          "reason": "required_topic_missing"
+        },
+        {
+          "id": "fresh_10_saudi_الصبر",
+          "set": "fresh",
+          "dialect": "saudi",
+          "prompt": "الصبر وش معناه؟",
+          "topic": "الصبر",
+          "required_terms": [
+            "الصبر"
+          ],
+          "forbidden_terms": [
+            "الوفاء",
+            "التعاون",
+            "الاحترام",
+            "الهدوء",
+            "الصدق",
+            "الصداقة",
+            "الشجاعة"
+          ],
+          "response": "معنى الصبر: إنك تتحمل شوي بدون ما تفاللي هدوءك.",
+          "generator_used": true,
+          "guard_allowed": true,
+          "guard_reason": "passed",
+          "topic_ok": true,
+          "copy_anchor_ok": true,
+          "passed": true,
+          "reason": "passed"
+        }
+      ],
+      "fresh_topic_summary": {
+        "passed": 5,
+        "total": 10,
+        "pass_rate": 0.5,
+        "reason_counts": {
+          "required_topic_missing": 5,
+          "passed": 5
+        }
+      },
+      "all_family": {
+        "checkpoint": "sf-10m-step1800",
+        "meta": {
+          "checkpoint": "sf-10m-step1800",
+          "path": "artifacts/eval/phase27_100_topic_binding_repair/checkpoints/sf-10m-step1800",
+          "state_exists": true,
+          "sf_origin": true,
+          "step": 1800,
+          "model_name": "sf-10m",
+          "notes": "seed=20267100 batch=1 seq=96 epochs=1 stream_format=dialogue loss_scope=assistant packing_mode=sample_isolated split=train split_order=family_round_robin init=/Users/sami/workSF/SF.AI/artifacts/eval/phase27_90_round_robin_curriculum_repair/checkpoints/sf-10m-step1800"
+        },
+        "rows": [
+          {
+            "id": "open_social_01",
+            "dialect": "saudi",
+            "prompt": "ودي اسمع منك سوالف خفيفة",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "نسولف",
+              "سولف",
+              "موضوع",
+              "خفيف"
+            ],
+            "response": "نقدر نفتح سالفة خفيفة عن عادة تحبها في يومك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "open_social_02",
+            "dialect": "msa",
+            "prompt": "ابدأ معي كلامًا لطيفًا",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "حديث",
+              "موضوع",
+              "نبدأ",
+              "خفيف"
+            ],
+            "response": "نبدأ بشي نفتح سالفة خفيفة عن عادة تحبها في يومك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "open_social_03",
+            "dialect": "saudi",
+            "prompt": "افتح لي سالفة بسيطة",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "سولف",
+              "موضوع",
+              "يومك",
+              "نبدأ"
+            ],
+            "response": "نقدر نفتح سالفة خفيفة عن عادة تحبها في يومك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "open_social_04",
+            "dialect": "msa",
+            "prompt": "لنبدأ حديثًا عاديًا",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "حديث",
+              "موضوع",
+              "نبدأ"
+            ],
+            "response": "نبدأ بشي بسيط: وش أكثر شي واحد عدك اليوم؟",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": false,
+            "passed": false,
+            "reason": "response_family_mismatch"
+          },
+          {
+            "id": "open_social_05",
+            "dialect": "saudi",
+            "prompt": "ابي كلام عادي بدون موضوع كبير",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "نسولف",
+              "موضوع",
+              "خفيف"
+            ],
+            "response": "وش ألطف تح سالفة خفيفة عن عادة تحبها في يومك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "open_social_06",
+            "dialect": "msa",
+            "prompt": "اختر لي شيئًا نتحدث عنه",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "موضوع",
+              "حديث",
+              "نبدأ"
+            ],
+            "response": "نبدأ بشي بسيط: وش أكثر شي واحد هدوء؟",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": false,
+            "passed": false,
+            "reason": "response_family_mismatch"
+          },
+          {
+            "id": "open_social_07",
+            "dialect": "saudi",
+            "prompt": "وش سالفتك اليوم",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "سولف",
+              "يومك",
+              "موضوع"
+            ],
+            "response": "نقدر نفتح سالفة خفيفة عن عادة تحبها في يومك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "open_social_08",
+            "dialect": "msa",
+            "prompt": "أريد حوارًا بسيطًا لا أكثر",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "حوار",
+              "موضوع",
+              "نبدأ"
+            ],
+            "response": "نبدأ بحديث خفيف عن يومك، ما الشيء اللطيف الذي حدث لك؟",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "open_social_09",
+            "dialect": "saudi",
+            "prompt": "خل الجو خفيف وسولف",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "خفيف",
+              "سولف",
+              "موضوع"
+            ],
+            "response": "أبشر، خلنا نسولف عن يومك: وش ألطف شي صار لك؟",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "open_social_10",
+            "dialect": "msa",
+            "prompt": "هات فكرة لطيفة للكلام",
+            "intent": "open_social",
+            "topic": "",
+            "family": "open_social",
+            "expected_any": [
+              "موضوع",
+              "حديث",
+              "نبدأ",
+              "فكرة",
+              "نتحدث"
+            ],
+            "response": "نبدأ بشي بسيط: وش أكثر شي شاغل ك اليوم؟",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": false,
+            "passed": false,
+            "reason": "response_family_mismatch"
+          },
+          {
+            "id": "followup_01",
+            "dialect": "saudi",
+            "prompt": "ما وضحت لي زين",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أقصد",
+              "اقصد",
+              "وضح",
+              "أبسط",
+              "خطوة"
+            ],
+            "response": "أقصد خل الموضوع أصغر، وابدأ بالجزء الواضح قدامك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "followup_02",
+            "dialect": "msa",
+            "prompt": "أعد المعنى بطريقة أوضح",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أقصد",
+              "الفكرة",
+              "أبسط",
+              "وضح"
+            ],
+            "response": "أقصد خل الموضوع أصغر، وابدأ بالجزء الواضح قدامك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "followup_03",
+            "dialect": "saudi",
+            "prompt": "طيب بعد كلامك وش الخطوة",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "بعدها",
+              "خطوة",
+              "ابدأ"
+            ],
+            "response": "يعني لا تجمع كل شيء مرة وحدة؛ خذ جزء بسيط وابدأ فيه.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "followup_04",
+            "dialect": "msa",
+            "prompt": "ما الفكرة التي تريدها بالضبط",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أقصد",
+              "الفكرة",
+              "يعني"
+            ],
+            "response": "أقصد أن تجعل الأمر أصغر وأسهل، ثم تبدأ بالجزء الواضح.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "followup_05",
+            "dialect": "saudi",
+            "prompt": "يعني وش المطلوب مني",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "يعني",
+              "خطوة",
+              "ابدأ"
+            ],
+            "response": "أقصد خل الموضوع أصغر، وابدأ بالجزء الواضح قدامك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "followup_06",
+            "dialect": "msa",
+            "prompt": "بسّطها لي أكثر",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أبسط",
+              "ابدأ",
+              "خطوة"
+            ],
+            "response": "يعني لا تجمع كل شيء مرة وحدة؛ خذ جزء بسيط وابدأ فيه.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "followup_07",
+            "dialect": "saudi",
+            "prompt": "ما دخلت مخي اشرحها",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أقصد",
+              "الفكرة",
+              "وضح"
+            ],
+            "response": "أقصد خل الموضوع أصغر، وابدأ بالجزء الواضح قدامك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "followup_08",
+            "dialect": "msa",
+            "prompt": "تابع الشرح من النقطة الأخيرة",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "نكمل",
+              "بعدها",
+              "الفكرة"
+            ],
+            "response": "يعني لا تجمع كل شيء مرة وحدة؛ خذ جزء بسيط وابدأ فيه.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "followup_09",
+            "dialect": "saudi",
+            "prompt": "وش تقصد بهالكلام",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أقصد",
+              "اقصد",
+              "يعني"
+            ],
+            "response": "أقصد خل الموضوع أصغر، وابدأ بالجزء الواضح قدامك.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "followup_10",
+            "dialect": "msa",
+            "prompt": "أريد صياغة أبسط للفكرة",
+            "intent": "followup",
+            "topic": "",
+            "family": "followup",
+            "expected_any": [
+              "أبسط",
+              "الفكرة",
+              "خطوة"
+            ],
+            "response": "يعني لا تجمع كل شيء مرة وحدة؛ خذ جزء بسيط وابدأ فيه.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "planning_01",
+            "dialect": "saudi",
+            "prompt": "ابي ابدأ يومي صح",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "ابدأ",
+              "مهمة",
+              "مهام",
+              "خطوة"
+            ],
+            "response": "حدد المطلوب، اكتب المهام، وابدأ بالأهم عشرين دقيقة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_02",
+            "dialect": "msa",
+            "prompt": "رتب لي بداية عملية",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "رتب",
+              "ابدأ",
+              "مهمة",
+              "خطوة"
+            ],
+            "response": "اكتب ثلاث مهام واضحة، وابدأ بالأهم لمدة قصيرة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_03",
+            "dialect": "saudi",
+            "prompt": "عندي لخبطة بالمهام",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "مهام",
+              "الأهم",
+              "خطوة"
+            ],
+            "response": "اكتب ثلاث مهام واضحة، وابدأ بالأهم لمدة قصيرة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_04",
+            "dialect": "msa",
+            "prompt": "كيف أضع أولوية لعملي",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "أولويات",
+              "مهمة",
+              "ابدأ"
+            ],
+            "response": "اكتب ثلاث مهام واضحة، وابدأ بالأهم لمدة قصيرة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_05",
+            "dialect": "saudi",
+            "prompt": "وش اول شي اسويه اليوم",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "ابدأ",
+              "الأهم",
+              "خطوة"
+            ],
+            "response": "اكتب ثلاث مهام واضحة، وابدأ بالأهم لمدة قصيرة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_06",
+            "dialect": "msa",
+            "prompt": "ساعدني أختار مهمة واحدة",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "مهمة",
+              "ابدأ",
+              "الأهم"
+            ],
+            "response": "اختر ثلاث مهام بس ، وابدأ بالأهم ثم شوف اللي بعده.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_07",
+            "dialect": "saudi",
+            "prompt": "ابي طريقة سهلة للترتيب",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "رتب",
+              "مهام",
+              "خطوة"
+            ],
+            "response": "اكتب ثلاث مهام واضحة، وابدأ بالأهم لمدة قصيرة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_08",
+            "dialect": "msa",
+            "prompt": "دلني على خطة قصيرة",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "خطة",
+              "مهمة",
+              "ابدأ"
+            ],
+            "response": "اكتب ثلاث مهام واضحة، وابدأ بالأهم لمدة قصيرة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_09",
+            "dialect": "saudi",
+            "prompt": "مهامي كثيره ومادري من وين",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "مهام",
+              "ابدأ",
+              "الأهم"
+            ],
+            "response": "حدد المطلوب، اكتب المهام، وابدأ بالأهم عشرين دقيقة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "planning_10",
+            "dialect": "msa",
+            "prompt": "كيف أبدأ بلا تشتت",
+            "intent": "planning",
+            "topic": "",
+            "family": "planning",
+            "expected_any": [
+              "ابدأ",
+              "مهمة",
+              "خطوة"
+            ],
+            "response": "حدد المطلوب، اكتب المهام، وابدأ بالأهم عشرين دقيقة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "support_01",
+            "dialect": "saudi",
+            "prompt": "احس بضيق بسيط",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "نفس",
+              "تهدأ",
+              "هون",
+              "خفف"
+            ],
+            "response": "اهدأ دقيقة، تنفس بهدوء، ولا تحمل نفسك كل شيء مرة وحدة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "support_02",
+            "dialect": "msa",
+            "prompt": "أحتاج جملة تهدئني",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "تنفس",
+              "بهدوء",
+              "راحة"
+            ],
+            "response": "خذ نفس شوي واهدأ، بعدها ابدأ بشي واحد بسيط.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "support_03",
+            "dialect": "saudi",
+            "prompt": "مضغوط شوي وش اسوي",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "نفس",
+              "اهدأ",
+              "خطوة"
+            ],
+            "response": "خففها على نفسك، خذ نفس وابدأ بأقرب شيء واضح.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "support_04",
+            "dialect": "msa",
+            "prompt": "أنا مرتبك وأريد هدوءًا",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "تنفس",
+              "هدوء",
+              "راحة"
+            ],
+            "response": "خذ نفس شوي واهدأ، بعدها ابدأ بشي واحد بسيط.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "support_05",
+            "dialect": "saudi",
+            "prompt": "ابي اروق بدون كلام كثير",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "نفس",
+              "خفف",
+              "تهدأ"
+            ],
+            "response": "لا تستعجل، اهدأ شوي واكتب اللي مضايقك بجملة قصيرة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "support_06",
+            "dialect": "msa",
+            "prompt": "كيف أستعيد تركيزي بهدوء",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "تنفس",
+              "خطوة",
+              "راحة"
+            ],
+            "response": "خذ نفس شوي واهدأ، بعدها ابدأ بشي واحد بسيط.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "support_07",
+            "dialect": "saudi",
+            "prompt": "توترت من البداية",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "نفس",
+              "اهدأ",
+              "خطوة"
+            ],
+            "response": "خففها على نفسك، خذ نفس وابدأ بأقرب شيء واضح.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "support_08",
+            "dialect": "msa",
+            "prompt": "طمئني بكلام قصير",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "تستطيع",
+              "تنفس",
+              "راحة",
+              "نفس",
+              "هون"
+            ],
+            "response": "خذ نفس شوي واهدأ، بعدها ابدأ بشي واحد بسيط.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "support_09",
+            "dialect": "saudi",
+            "prompt": "احس اني مشتت ومتوتر",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "نفس",
+              "ركز",
+              "خطوة"
+            ],
+            "response": "خذ نفسًا هادئًا، واهدأ قليلًا قبل الأشياء واحد بسيط.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "support_10",
+            "dialect": "msa",
+            "prompt": "أريد أن أهدأ قليلًا",
+            "intent": "support",
+            "topic": "",
+            "family": "support",
+            "expected_any": [
+              "اهدأ",
+              "تنفس",
+              "بهدوء"
+            ],
+            "response": "خذ نفس شوي واهدأ، بعدها ابدأ بشي واحد بسيط.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "topic_01",
+            "dialect": "msa",
+            "prompt": "فسر الوفاء بجملة قصيرة",
+            "intent": "topic",
+            "topic": "الوفاء",
+            "family": "topic",
+            "expected_any": [
+              "الوفاء"
+            ],
+            "response": "معنى الصداقة: علاقة فيها صدق واهتمام ووقفة وقت الحاجة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "topic_02",
+            "dialect": "saudi",
+            "prompt": "وش هو التعاون بين الناس",
+            "intent": "topic",
+            "topic": "التعاون",
+            "family": "topic",
+            "expected_any": [
+              "التعاون"
+            ],
+            "response": "معنى التعاون: إناللي تمشون مع بعض لهدف مرة",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "topic_03",
+            "dialect": "msa",
+            "prompt": "عرّف الصبر تعريفًا بسيطًا",
+            "intent": "topic",
+            "topic": "الصبر",
+            "family": "topic",
+            "expected_any": [
+              "الصبر"
+            ],
+            "response": "معنى الهدوء: إنك المكان الذي تحمل بلا منّة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "topic_04",
+            "dialect": "saudi",
+            "prompt": "الاحترام كيف تفهمه",
+            "intent": "topic",
+            "topic": "الاحترام",
+            "family": "topic",
+            "expected_any": [
+              "الاحترام"
+            ],
+            "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          },
+          {
+            "id": "topic_05",
+            "dialect": "msa",
+            "prompt": "ما معنى الهدوء في الحياة",
+            "intent": "topic",
+            "topic": "الهدوء",
+            "family": "topic",
+            "expected_any": [
+              "الهدوء"
+            ],
+            "response": "معنى الهدوء: إنك إذا ة تساعدك على التفكير بصفاء قبل التصرف.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "topic_06",
+            "dialect": "saudi",
+            "prompt": "الصدق وش فايدته",
+            "intent": "topic",
+            "topic": "الصدق",
+            "family": "topic",
+            "expected_any": [
+              "الصدق"
+            ],
+            "response": "معنى الصدق: إن كلامك يكون واضح اللي فيه خداع.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "topic_07",
+            "dialect": "msa",
+            "prompt": "اشرح الصداقة دون إطالة",
+            "intent": "topic",
+            "topic": "الصداقة",
+            "family": "topic",
+            "expected_any": [
+              "الصداقة"
+            ],
+            "response": "معنى الصداقة: علاقة فيها صدق واهتمام ووقفة وقت الحاجة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "topic_08",
+            "dialect": "saudi",
+            "prompt": "الشجاعة متى تظهر",
+            "intent": "topic",
+            "topic": "الشجاعة",
+            "family": "topic",
+            "expected_any": [
+              "الشجاعة"
+            ],
+            "response": "معنى الشجاعة: إنك تسوي الصح حتى لو كنت خايف.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "topic_09",
+            "dialect": "msa",
+            "prompt": "أعطني معنى التعاون ببساطة",
+            "intent": "topic",
+            "topic": "التعاون",
+            "family": "topic",
+            "expected_any": [
+              "التعاون"
+            ],
+            "response": "معنى التعاون: إناللي تمشون مع بعض لهدف مشترك بتفاهم.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": true,
+            "family_ok": true,
+            "passed": true,
+            "reason": "passed"
+          },
+          {
+            "id": "topic_10",
+            "dialect": "saudi",
+            "prompt": "وش معنى الوفاء باختصار",
+            "intent": "topic",
+            "topic": "الوفاء",
+            "family": "topic",
+            "expected_any": [
+              "الوفاء"
+            ],
+            "response": "معنى الصداقة: رفقة طيبة ووقفة ألطف وقت الحاجة.",
+            "generator_used": true,
+            "guard_allowed": true,
+            "guard_reason": "passed",
+            "expected_ok": false,
+            "family_ok": true,
+            "passed": false,
+            "reason": "expected_terms_missing"
+          }
+        ],
+        "summary": {
+          "passed": 37,
+          "total": 50,
+          "pass_rate": 0.74,
+          "family_summary": {
+            "followup": {
+              "passed": 8,
+              "total": 10
+            },
+            "open_social": {
+              "passed": 7,
+              "total": 10
+            },
+            "planning": {
+              "passed": 10,
+              "total": 10
+            },
+            "support": {
+              "passed": 6,
+              "total": 10
+            },
+            "topic": {
+              "passed": 6,
+              "total": 10
+            }
+          },
+          "reason_counts": {
+            "passed": 37,
+            "response_family_mismatch": 3,
+            "expected_terms_missing": 10
+          }
+        }
+      }
+    }
+  ],
+  "decision": {
+    "decision_id": "PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_DECISION",
+    "engineering_decision": "BLOCK_RUNTIME_DIAGNOSE_TOPIC_BINDING_REPAIR_RESULT",
+    "training_completed": true,
+    "runtime_release_allowed": false,
+    "ui_release_allowed": false,
+    "heldout_runtime_gate_allowed": false,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "best_checkpoint": "sf-10m-step1800",
+    "known_topic": "13/16",
+    "fresh_topic": "5/10",
+    "copy_anchor": "18/26",
+    "wrong_topic_count": 0,
+    "topic_family": "6/10",
+    "all_family": "37/50",
+    "required_gates": {
+      "known_topic": "16/16",
+      "fresh_topic": "8/10",
+      "copy_anchor": "26/26",
+      "contrastive_wrong_topic_max": 0,
+      "topic_family": "8/10",
+      "all_family": "45/50"
+    },
+    "why": "Best checkpoint sf-10m-step1800 scored known=13/16, fresh_topic=5/10, copy_anchor=18/26, wrong_topic=0, topic_family=6/10, all_family=37/50. Runtime remains blocked; a separate held-out gate is required if all gates pass.",
+    "next_phase": "Phase 27.101 — Topic Binding Repair Result Diagnosis"
+  }
+}

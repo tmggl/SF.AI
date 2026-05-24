@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.99 / 30**
-- **المرحلة الحالية:** **Phase 27.99 — Topic Metadata and Copy-Anchor Data Repair**
-- **حالة المرحلة الحالية:** **اكتملت كإصلاح بيانات؛ بوابة 27.98 أصبحت training-ready؛ لا runtime**
-- **المرحلة التالية المقترحة:** Phase 27.100 — Bounded Topic Binding Repair Training.
+- **الرحلة الحالية:** **Phase 27.100 / 30**
+- **المرحلة الحالية:** **Phase 27.100 — Bounded Topic Binding Repair Training**
+- **حالة المرحلة الحالية:** **اكتمل تدريب مقيّد؛ runtime محجوب لأن البوابات لم تمر**
+- **المرحلة التالية المقترحة:** Phase 27.101 — Topic Binding Repair Result Diagnosis.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -155,6 +155,7 @@
 | Phase 27.97 | Topic Variable Binding Objective Design | ✅ topic_binding_objective_design_ready_no_training | ✅ |
 | Phase 27.98 | Topic Binding Gate Encoding and Metadata Audit | ✅ gate_encoded_data_repair_required_no_training | ✅ |
 | Phase 27.99 | Topic Metadata and Copy-Anchor Data Repair | ✅ metadata_copy_anchor_repaired_training_allowed_next | ✅ |
+| Phase 27.100 | Bounded Topic Binding Repair Training | ✅ trained_runtime_blocked_diagnosis_required | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1080,13 +1081,13 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-666 passed in 72.05s (0:01:12)
+669 passed in 78.80s (0:01:18)
 ```
 
 | التحقق | النتيجة |
 |------|------|
-| full pytest suite | `666 passed in 72.05s` |
-| focused Phase 27.99/API/UI tests | `80 passed in 12.56s` |
+| full pytest suite | `669 passed in 78.80s` |
+| focused Phase 27.100/API/UI tests | `78 passed in 8.90s` |
 | `make corpus-audit` | `8453` records, `issues=0` |
 | `make phase27-dialogue-eval` | `19/19`, `open_generator_ready=false` |
 
@@ -1612,6 +1613,37 @@ make api
   - [PHASE27_99_TOPIC_METADATA_COPY_ANCHOR_REPAIR_REPORT.md](./PHASE27_99_TOPIC_METADATA_COPY_ANCHOR_REPAIR_REPORT.md)
   - `artifacts/reports/phase27_99_topic_metadata_copy_anchor_repair_report.json`
   - `artifacts/reports/PHASE27_99_TOPIC_METADATA_COPY_ANCHOR_REPAIR_DECISION.json`
+
+---
+
+## Phase 27.100 — Bounded Topic Binding Repair Training
+
+الحالة: **مكتملة كتدريب مقيّد؛ runtime محجوب والتشخيص مطلوب.**
+
+- المسار: `Sovereign Practical Acceleration Strategy v2`.
+- السيادة: `SF-native only`; لا pretrained/open-weight/Qwen.
+- القاموس/المسار: `Saudi Seed v1`, `msa + saudi`.
+- الهدف: تدريب إصلاح محدود على `SF-10M` لربط الموضوع المطلوب بالرد.
+- objective: `topic_copy_contrastive_binding_objective_v1`.
+- init checkpoint:
+  `artifacts/eval/phase27_90_round_robin_curriculum_repair/checkpoints/sf-10m-step1800`.
+- tokenizer: `artifacts/tokenizers/sf_bpe/v9_phase27_76`.
+- أفضل checkpoint: `sf-10m-step1800`.
+- النتائج:
+  - known topic: `13/16`
+  - fresh topic: `5/10`
+  - copy-anchor: `18/26`
+  - wrong-topic count: `0`
+  - topic family: `6/10`
+  - all-family: `37/50`
+- القرار: `BLOCK_RUNTIME_DIAGNOSE_TOPIC_BINDING_REPAIR_RESULT`.
+- التالي: Phase 27.101 — Topic Binding Repair Result Diagnosis.
+- المحظور الآن: runtime release, UI generator release, SF-50M,
+  tokenizer retrain, pretrained/open-weight usage.
+- التقارير:
+  - [PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_REPORT.md](./PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_REPORT.md)
+  - `artifacts/reports/phase27_100_bounded_topic_binding_repair_report.json`
+  - `artifacts/reports/PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_DECISION.json`
 
 ---
 

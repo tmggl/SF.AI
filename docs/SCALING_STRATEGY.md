@@ -5,7 +5,7 @@
 **Status:** governance rule, no training started
 **Language track:** Arabic MSA + Saudi only
 **Lexicon track:** Saudi Seed v1 + governed MSA/Saudi corpus
-**Current gate:** Phase 27.99 repaired topic metadata/copy-anchor and allows only bounded SF-10M topic-binding training next; SF-50M remains blocked.
+**Current gate:** Phase 27.100 completed bounded SF-10M topic-binding training but failed runtime gates; SF-50M remains blocked.
 
 ---
 
@@ -91,13 +91,13 @@ Sovereign Practical Acceleration != open-weight/pretrained model lane
 PHASE27_78_ENGINEERING_DECISION
 ```
 
-### Current Scaling Decision — Phase 27.99
+### Current Scaling Decision — Phase 27.100
 
-Phase 27.99 لا يفتح حجمًا أكبر. القرار الحالي هو:
+Phase 27.100 لا يفتح حجمًا أكبر. القرار الحالي هو:
 
 ```text
-PHASE27_99_TOPIC_METADATA_COPY_ANCHOR_REPAIR_DECISION
-ALLOW_PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_TRAINING
+PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_DECISION
+BLOCK_RUNTIME_DIAGNOSE_TOPIC_BINDING_REPAIR_RESULT
 ```
 
 السبب: Phase 27.96 شخّصت فشل 27.95 كخلل ربط متغير الموضوع لا كحد سعة.
@@ -108,8 +108,11 @@ ALLOW_PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_TRAINING
 المطلوب داخل أول 12 حرفًا عربيًا ظاهرًا، ويُسقط أي رد يذكر موضوعًا مجاورًا
 قبل المطلوب. Phase 27.98 أثبتت أن ترميز البوابة يعمل، لكنها منعت التدريب
 لأن `500` سجل topic لا تحمل `topic_term` صريحًا. Phase 27.99 أصلحت هذه
-الفجوة، فأصبحت بوابة 27.98 `training_ready=true`. يبقى `SF-50M` محجوبًا،
-والمسموح فقط Phase 27.100 كتدريب إصلاح مقيّد على `SF-10M`.
+الفجوة، فأصبحت بوابة 27.98 `training_ready=true`. Phase 27.100 درّبت
+إصلاح ربط الموضوع بشكل مقيّد على `SF-10M`، لكنها لم تمر gates:
+known `13/16`, fresh `5/10`, copy-anchor `18/26`, wrong-topic `0`,
+topic-family `6/10`, all-family `37/50`. يبقى `SF-50M` محجوبًا،
+والمسموح فقط Phase 27.101 كتشخيص نتيجة قبل أي تدريب جديد.
 
 ويجب أن يحدد أوزان الأسباب التالية:
 

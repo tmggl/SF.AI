@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.99
-الاسم: Topic Metadata and Copy-Anchor Data Repair
+المرحلة الحالية: Phase 27.100
+الاسم: Bounded Topic Binding Repair Training
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_99_TOPIC_METADATA_COPY_ANCHOR_REPAIR_DECISION
+القرار الرسمي: PHASE27_100_BOUNDED_TOPIC_BINDING_REPAIR_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -116,7 +116,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - نتيجة 27.97: صُمم objective جديد `topic_copy_contrastive_binding_objective_v1` يفرض نسخ الموضوع المطلوب داخل أول 12 حرفًا عربيًا ظاهرًا من رد المساعد، ويمنع نجاح الرد إذا ذكر موضوعًا مجاورًا قبل الموضوع المطلوب. القرار يسمح فقط بـ Phase 27.98 لترميز البوابة وتدقيق metadata، بلا تدريب.
 - نتيجة 27.98: رُمزت بوابة الموضوع ونجحت آلية renderer/masking/canary، لكنها منعت التدريب لأن `500` سجل topic لا تحمل `topic_term` صريحًا. القرار يسمح فقط بإصلاح metadata وcopy-anchor في Phase 27.99، بلا تدريب.
 - نتيجة 27.99: أضيف `topic_term` الصريح إلى `500` سجل topic وتأكدت copy-anchor؛ إعادة بوابة 27.98 صارت `training_ready=true` بلا runtime.
-- التالي: `Phase 27.100 — Bounded Topic Binding Repair Training`.
+- نتيجة 27.100: تدريب topic-binding المقيّد اكتمل، لكنه لم يمر بوابات runtime:
+  known `13/16`, fresh `5/10`, copy-anchor `18/26`, wrong-topic `0`,
+  topic-family `6/10`, all-family `37/50`.
+- التالي: `Phase 27.101 — Topic Binding Repair Result Diagnosis`.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -332,17 +335,17 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.100 — Bounded Topic Binding Repair Training
+Phase 27.101 — Topic Binding Repair Result Diagnosis
 ```
 
 مطلوب منها:
 
-- تدريب إصلاح محدود على SF-10M فقط.
-- استخدام objective ربط الموضوع وmetadata المصححة.
-- قياس known/fresh/all-family قبل أي runtime.
-- عدم فتح الواجهة بالمولد إذا لم تمر canaries.
+- تشخيص نتيجة Phase 27.100 قبل أي تدريب جديد.
+- تحديد سبب بقاء copy-anchor `18/26` وfresh `5/10`.
+- مقارنة: objective أم curriculum أم capacity أم decoding أم tokenizer.
+- إصدار قرار هندسي: إصلاح بنيوي جديد أو Gate مبرر لاحق.
 
-ممنوع في 27.100 قبل نجاح التدريب والبوابات:
+ممنوع في 27.101 قبل القرار:
 
 - تدريب جديد.
 - runtime release.

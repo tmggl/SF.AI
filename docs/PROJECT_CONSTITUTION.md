@@ -62,6 +62,10 @@ copy/contrastive في Phase 27.97.
 metadata وcopy-anchor داخل corpus السيادي المحلي.
 بعد Phase 27.99، أُصلحت فجوة metadata داخل corpus السيادي المحلي، وأصبحت
 بوابة 27.98 جاهزة للتدريب المقيّد التالي. هذا لا يفتح runtime ولا `SF-50M`.
+بعد Phase 27.100، اكتمل التدريب المقيّد لإصلاح ربط الموضوع، لكنه لم يمر
+بوابات runtime: known `13/16`, fresh `5/10`, copy-anchor `18/26`,
+topic-family `6/10`, all-family `37/50`. لذلك لا runtime ولا `SF-50M`
+ولا tokenizer retrain ولا تدريب جديد قبل Phase 27.101 كتشخيص نتيجة.
 
 استثناء موثق: يجوز إدخال حوارات **owner-delegated agent-authored** في
 corpus إذا كان سامي قد فوّض الوكيل صراحة بتأليفها واعتمادها، وكانت كل

@@ -61,11 +61,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.99 — Topic Metadata and Copy-Anchor Data Repair",
+        current_phase="Phase 27.100 — Bounded Topic Binding Repair Training",
         current_phase_status=(
-            "phase27_99_topic_metadata_copy_anchor_repair_done_training_allowed_next"
+            "phase27_100_bounded_topic_binding_repair_trained_runtime_blocked_diagnosis_required"
         ),
-        next_phase="Phase 27.100 — Bounded Topic Binding Repair Training",
+        next_phase="Phase 27.101 — Topic Binding Repair Result Diagnosis",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -609,6 +609,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_99_topic_metadata_copy_anchor_repair",
                 status="done_training_allowed_next_no_runtime",
                 phase="Phase 27.99",
+            ),
+            ComponentStatus(
+                name="phase27_100_bounded_topic_binding_repair",
+                status="trained_runtime_blocked_diagnosis_required",
+                phase="Phase 27.100",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

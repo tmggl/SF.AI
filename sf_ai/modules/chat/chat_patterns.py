@@ -82,9 +82,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.99 ضمن مسار SF-native فقط: أصلحنا metadata وcopy-anchor "
-    "لسجلات topic، وصارت بوابة 27.98 جاهزة للتدريب المقيّد التالي. لا runtime "
-    "الآن؛ التالي Phase 27.100 تدريب ربط الموضوع بشكل محدود.",
+    "وصلنا إلى Phase 27.100 ضمن مسار SF-native فقط: دُرّب إصلاح ربط الموضوع "
+    "بشكل مقيّد، لكنه لم يمر بوابات runtime. لا runtime الآن؛ التالي Phase "
+    "27.101 تشخيص نتيجة إصلاح ربط الموضوع.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

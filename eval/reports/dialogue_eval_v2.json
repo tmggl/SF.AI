@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.99 ضمن مسار SF-native فقط: أصلحنا metadata وcopy-anchor لسجلات topic، وصارت بوابة 27.98 جاهزة للتدريب المقيّد التالي. لا runtime الآن؛ التالي Phase 27.100 تدريب "
+      "response_preview": "وصلنا إلى Phase 27.100 ضمن مسار SF-native فقط: دُرّب إصلاح ربط الموضوع بشكل مقيّد، لكنه لم يمر بوابات runtime. لا runtime الآن؛ التالي Phase 27.101 تشخيص نتيجة إصلاح ربط الموضوع."
     },
     {
       "scenario_id": "clarification_repair_flow",
