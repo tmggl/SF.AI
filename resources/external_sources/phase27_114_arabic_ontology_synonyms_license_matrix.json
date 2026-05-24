@@ -1,0 +1,30 @@
+[
+  {
+    "source_id": "arabic_ontology",
+    "license": "CC-BY-4.0",
+    "license_is_permissive_candidate": true,
+    "artifact_license_captured": false,
+    "artifact_checksum_captured": false,
+    "source_card_complete": true,
+    "raw_entry_import_allowed_now": false,
+    "training_text_allowed_now": false,
+    "tokenizer_vocab_allowed_now": false,
+    "eval_allowed_after_artifact_gate": true,
+    "next_allowed_action": "artifact_gate_and_field_mapping_only",
+    "why": "Primary resources page is promising, but SF.AI requires downloadable artifact license/checksum and mapping review before import."
+  },
+  {
+    "source_id": "sinalab_synonyms",
+    "license": "CC-BY-4.0",
+    "license_is_permissive_candidate": true,
+    "artifact_license_captured": false,
+    "artifact_checksum_captured": false,
+    "source_card_complete": true,
+    "raw_entry_import_allowed_now": false,
+    "training_text_allowed_now": false,
+    "tokenizer_vocab_allowed_now": false,
+    "eval_allowed_after_artifact_gate": true,
+    "next_allowed_action": "artifact_gate_and_field_mapping_only",
+    "why": "Primary resources page is promising, but SF.AI requires downloadable artifact license/checksum and mapping review before import."
+  }
+]

@@ -61,6 +61,7 @@
   Phase 27.111 صمم Qabas bootstrap لكنه حجب الاستيراد بسبب تضارب الترخيص؛
   Phase 27.112 حسم Qabas كـ reference-only بسبب `CC-BY-ND-4.0`؛
   Phase 27.113 صنف البدائل وسمح فقط بـ source cards لـ Arabic Ontology وSynonyms.
+  Phase 27.114 أنشأ source cards وlicense matrix، بلا import.
 - لا runtime release بدون `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - لا تعتمد loss/perplexity/micro-probe وحدها؛ النجاح يعني held-out dialogue
   quality, runtime usability, clean-stop, semantic correctness, family
@@ -73,13 +74,13 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 27.113 موثقة تاريخيًا، لكن الحالة العملية
+- المراحل من Phase 0 حتى Phase 27.114 موثقة تاريخيًا، لكن الحالة العملية
   الحالية هي:
-  `Phase 27.113 — Permissive Lexical Alternatives Intake Gate`
+  `Phase 27.114 — Arabic Ontology/Synonyms Source Cards`
   ضمن `SF-native Objective/Curriculum/Decoding Acceleration Track`.
   التقرير الملزم: `docs/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md`.
   القرار التنفيذي:
-  `PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_INTAKE_GATE_DECISION`.
+  `PHASE27_114_ARABIC_ONTOLOGY_SYNONYMS_SOURCE_CARDS_DECISION`.
   Phase 27.104 تبقى الدليل السابق: تدريب محدود نجح topic-wise وفشل
   all-family، وليست إذن runtime.
   تاريخيًا أضيفت دفعة `sf-ai-balanced-family-pack-v1`: `2500` سجل gold
@@ -137,7 +138,8 @@
   Phase 27.112 أبقى Qabas reference-only وفتح طريق البدائل permissive.
   Phase 27.113 صنف Arabic Ontology/Synonyms كمرشحين source-card فقط، وحجب
   Arabic WordNet 4.0 لأنه model-derived.
-- أول خطوة تالية: Phase 27.114 — Arabic Ontology/Synonyms Source Cards and License Matrix, no training.
+  Phase 27.114 أنشأ source cards وlicense matrix للمرشحين، ولا يوجد import.
+- أول خطوة تالية: Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate and Field Mapping, no training.
   لا تبدأ training ولا SF-50M ولا tokenizer retrain قبل هذه البوابة.
 - تفويض التكبير التلقائي معتمد، لكن مفعوله يبدأ فقط عندما تنجح gates؛
   حاليًا `SF-50M` ما زال محجوبًا لأن capacity وزنها `1%`.

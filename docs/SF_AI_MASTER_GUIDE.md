@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.113
-الاسم: Permissive Lexical Alternatives Intake Gate
+المرحلة الحالية: Phase 27.114
+الاسم: Arabic Ontology/Synonyms Source Cards
 المسار الملزم: SF-native Objective/Curriculum/Decoding Acceleration Track
-القرار الرسمي: PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_INTAKE_GATE_DECISION
+القرار الرسمي: PHASE27_114_ARABIC_ONTOLOGY_SYNONYMS_SOURCE_CARDS_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -116,6 +116,8 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   `CC-BY-ND-4.0` تمنع المشتقات ولا توجد رخصة artifact أوضح.
 - Phase 27.113 صنف بدائل lexical: `Arabic Ontology` و`SinaLab Synonyms`
   للـ source cards فقط، وحجب `Arabic WordNet 4.0` لأنه model-derived عبر Gemini.
+- Phase 27.114 أنشأ source cards وlicense matrix للمرشحين، مع منع artifact
+  download/import/training حتى Phase 27.115.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
@@ -138,7 +140,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   `docs/PHASE27_112_QABAS_PRIMARY_LICENSE_RESOLUTION_GATE_REPORT.md`.
 - تقرير البدائل الحالي:
   `docs/PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_INTAKE_GATE_REPORT.md`.
-- التالي: `Phase 27.114 — Arabic Ontology/Synonyms Source Cards and License Matrix, no training`.
+- تقرير source cards الحالي:
+  `docs/PHASE27_114_ARABIC_ONTOLOGY_SYNONYMS_SOURCE_CARDS_REPORT.md`.
+- التالي: `Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate and Field Mapping, no training`.
 
 الدليل السابق الذي سبب هذا re-anchor:
 
@@ -410,14 +414,15 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.114 — Arabic Ontology/Synonyms Source Cards and License Matrix, no training
+Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate and Field Mapping, no training
 ```
 
 مطلوب منها:
 
-- إنشاء source cards لـ `Arabic Ontology` و`SinaLab Synonyms`.
-- إنشاء license matrix وartifact/download gates.
-- لا import فعلي حتى لو كانت الرخصة `CC-BY-4.0` قبل source-card gate.
+- التقاط artifact/download URL إن كان واضحًا.
+- التقاط checksum وlicense داخل artifact إن أمكن.
+- تصميم field mapping فقط، لا import entries.
+- لا import فعلي حتى لو كانت الرخصة `CC-BY-4.0` قبل artifact gate.
 - Qabas وArabic WordNet 4.0 يبقيان خارج candidates الفعلية.
 - ممنوع training/SF-50M/tokenizer retrain/runtime release قبل هذه البوابة.
 

@@ -1,0 +1,41 @@
+{
+  "source_id": "sinalab_synonyms",
+  "name": "SinaLab Arabic Synonyms Dataset",
+  "source_type": "synonym_dataset",
+  "primary_url": "https://sina.birzeit.edu/resources/",
+  "primary_license_signal": "CC-BY-4.0",
+  "primary_signal_summary": "SinaLab resources listing marks Synonyms dataset as CC-BY-4.0.",
+  "evidence_snippet": "110 lexicons and corpora 2M tokens. (CC-BY-ND-4.0) Salma WSD Arabic sense-annotated corpus (34k tokens). Multilevels: single-word, multi-word senses, and NER. (CC-BY-4.0) Synonyms Synonyms dataset, parallelly annotated by 4 linguists and fuzzy values. (CC-BY-4.0) ArabGlossBERT 167K context-gloss pairs labeled with True/False to train a TSV BERT model for WSD. (CC-BY-4.0) + ",
+  "language_scope": [
+    "msa"
+  ],
+  "dialect_scope": [
+    "msa"
+  ],
+  "intended_future_use": "semantic alternatives/eval probes after artifact gate",
+  "artifact_expectation": "Synonyms dataset artifact, exact artifact URL not captured yet.",
+  "allowed_now": {
+    "source_card": true,
+    "license_matrix": true,
+    "artifact_download": false,
+    "raw_entry_import": false,
+    "training_text_import": false,
+    "tokenizer_vocab_import": false,
+    "runtime_lookup": false
+  },
+  "required_before_import": [
+    "capture_primary_download_license",
+    "record_artifact_url",
+    "record_artifact_checksum",
+    "field_mapping_design",
+    "sample_quality_review",
+    "dedupe_against_saudi_seed_v1",
+    "no_tokenizer_vocab_import",
+    "no_dialogue_corpus_contamination"
+  ],
+  "blocked_outputs_now": [
+    "data/corpus/**/sinalab_synonyms*.jsonl",
+    "resources/lexicons/imported/sinalab_synonyms/*.jsonl",
+    "artifacts/tokenizers/**/sinalab_synonyms*"
+  ]
+}

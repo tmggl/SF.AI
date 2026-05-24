@@ -4577,7 +4577,7 @@ Final Response
 
 ---
 
-## الحالة العملية الحالية — Phase 27.113
+## الحالة العملية الحالية — Phase 27.114
 
 المسار الحاكم هو:
 
@@ -4588,7 +4588,7 @@ SF-native Objective/Curriculum/Decoding Acceleration Track
 آخر قرار:
 
 ```text
-PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_INTAKE_GATE_DECISION
+PHASE27_114_ARABIC_ONTOLOGY_SYNONYMS_SOURCE_CARDS_DECISION
 ```
 
 الخلاصة:
@@ -4622,14 +4622,16 @@ PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_INTAKE_GATE_DECISION
 - Phase 27.113 صنّف البدائل: `Arabic Ontology` و`SinaLab Synonyms` مسموحان
   للمرحلة التالية كـ source cards/license matrix فقط. `Arabic WordNet 4.0`
   محجوب لأنه model-derived عبر Gemini.
-- لا تدريب جديد قبل Phase 27.114 source cards/license matrix ولا قبل بوابات
+- Phase 27.114 أنشأ source cards وlicense matrix لـ `Arabic Ontology` و
+  `SinaLab Synonyms`، مع بقاء artifact download/import محجوبًا.
+- لا تدريب جديد قبل Phase 27.115 artifact gate/field mapping ولا قبل بوابات
   corpus/license اللاحقة.
 - لا SF-50M قبل gate يثبت أن capacity هي السبب الأكبر.
 
 التالي:
 
 ```text
-Phase 27.114 — Arabic Ontology/Synonyms Source Cards and License Matrix, no training
+Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate and Field Mapping, no training
 ```
 
 ---

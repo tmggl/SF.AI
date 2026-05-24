@@ -1,0 +1,41 @@
+{
+  "source_id": "arabic_ontology",
+  "name": "Arabic Ontology",
+  "source_type": "ontology_lexical_semantics",
+  "primary_url": "https://sina.birzeit.edu/resources/",
+  "primary_license_signal": "CC-BY-4.0",
+  "primary_signal_summary": "SinaLab resources listing marks Arabic Ontology as CC-BY-4.0.",
+  "evidence_snippet": "mpleKey” API token allows you to use all web services but with a limited number of requests (enough to try it!), if you need more requests, you need to Request API Token . --> + - Arabic Ontology الأنطولوجيا العربية An Arabic Wordnet with ontologically-clean content. Classification of the meanings of the Arabic terms, (see Article , see FAQ ). Web Service REST Search Ontol",
+  "language_scope": [
+    "msa"
+  ],
+  "dialect_scope": [
+    "msa"
+  ],
+  "intended_future_use": "concept/topic semantics and eval probes after artifact gate",
+  "artifact_expectation": "Arabic Ontology downloadable/API resource, exact artifact URL not captured yet.",
+  "allowed_now": {
+    "source_card": true,
+    "license_matrix": true,
+    "artifact_download": false,
+    "raw_entry_import": false,
+    "training_text_import": false,
+    "tokenizer_vocab_import": false,
+    "runtime_lookup": false
+  },
+  "required_before_import": [
+    "capture_primary_download_license",
+    "record_artifact_url",
+    "record_artifact_checksum",
+    "field_mapping_design",
+    "sample_quality_review",
+    "dedupe_against_saudi_seed_v1",
+    "no_tokenizer_vocab_import",
+    "no_dialogue_corpus_contamination"
+  ],
+  "blocked_outputs_now": [
+    "data/corpus/**/arabic_ontology*.jsonl",
+    "resources/lexicons/imported/arabic_ontology/*.jsonl",
+    "artifacts/tokenizers/**/arabic_ontology*"
+  ]
+}

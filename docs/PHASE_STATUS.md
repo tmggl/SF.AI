@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.113 / 30**
-- **المرحلة الحالية:** **Phase 27.113 — Permissive Lexical Alternatives Intake Gate**
-- **حالة المرحلة الحالية:** **صُنفت بدائل lexical: Arabic Ontology وSinaLab Synonyms مرشحان source-card فقط؛ Arabic WordNet 4.0 محجوب لأنه model-derived؛ لا تدريب الآن**
-- **المرحلة التالية المقترحة:** Phase 27.114 — Arabic Ontology/Synonyms Source Cards and License Matrix, no training.
+- **الرحلة الحالية:** **Phase 27.114 / 30**
+- **المرحلة الحالية:** **Phase 27.114 — Arabic Ontology/Synonyms Source Cards**
+- **حالة المرحلة الحالية:** **أُنشئت source cards وlicense matrix لـ Arabic Ontology وSinaLab Synonyms؛ لا artifact download ولا import ولا تدريب الآن**
+- **المرحلة التالية المقترحة:** Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate and Field Mapping, no training.
 - **التحول الاستراتيجي المعتمد:** **SF-native Objective/Curriculum/Decoding Acceleration Track** — تسريع هندسي فقط؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -169,6 +169,7 @@
 | Phase 27.111 | Qabas Lexicon Bootstrap Design | ✅ qabas_bootstrap_design_ready_import_blocked | ✅ |
 | Phase 27.112 | Qabas Primary License Resolution Gate | ✅ qabas_reference_only_import_blocked | ✅ |
 | Phase 27.113 | Permissive Lexical Alternatives Intake Gate | ✅ permissive_lexical_alternatives_ready_no_import | ✅ |
+| Phase 27.114 | Arabic Ontology/Synonyms Source Cards | ✅ source_cards_ready_no_import | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1931,7 +1932,7 @@ make api
   - `issues=0`
   - `gold=4013`
   - `silver=5112`
-- التالي المسموح بعد تصنيف البدائل: Phase 27.114 Arabic Ontology/Synonyms source cards and license matrix، بلا تدريب.
+- التالي المسموح بعد source cards: Phase 27.115 Arabic Ontology/Synonyms artifact gate and field mapping، بلا تدريب.
 - المحظور: training، runtime release رسمي، SF-50M، tokenizer retrain،
   pretrained/open-weight.
 - التقارير:
@@ -2088,6 +2089,37 @@ make api
   - `artifacts/reports/PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_INTAKE_GATE_DECISION.json`
   - [PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_INTAKE_GATE_REPORT.md](./PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_INTAKE_GATE_REPORT.md)
 - التالي: Phase 27.114 — Arabic Ontology/Synonyms Source Cards and License Matrix, no training.
+
+## Phase 27.114 — Arabic Ontology/Synonyms Source Cards
+
+**الحالة:** مكتملة. لا import ولا تدريب.
+
+- status: `PHASE27_114_SOURCE_CARDS_READY_NO_IMPORT`.
+- القرار: `PHASE27_114_ARABIC_ONTOLOGY_SYNONYMS_SOURCE_CARDS_DECISION`.
+- القرار الهندسي: `ALLOW_PHASE27_115_ARTIFACT_GATE_AND_FIELD_MAPPING_NO_IMPORT`.
+- أُنشئت source cards لـ:
+  - `arabic_ontology`
+  - `sinalab_synonyms`
+- أُنشئت license matrix:
+  - كلاهما `CC-BY-4.0` كإشارة أولية.
+  - `artifact_license_captured=false`.
+  - `artifact_checksum_captured=false`.
+  - `raw_entry_import_allowed_now=false`.
+  - `tokenizer_vocab_allowed_now=false`.
+- المسموح التالي: artifact gate وfield mapping فقط.
+- الممنوع:
+  - تنزيل raw entries.
+  - إدخال corpus.
+  - tokenizer vocab أو merges.
+  - training/runtime release/SF-50M.
+- الملفات:
+  - `resources/external_sources/source_cards/arabic_ontology_phase27_114.json`
+  - `resources/external_sources/source_cards/sinalab_synonyms_phase27_114.json`
+  - `resources/external_sources/phase27_114_arabic_ontology_synonyms_license_matrix.json`
+  - `artifacts/reports/phase27_114_arabic_ontology_synonyms_source_cards_report.json`
+  - `artifacts/reports/PHASE27_114_ARABIC_ONTOLOGY_SYNONYMS_SOURCE_CARDS_DECISION.json`
+  - [PHASE27_114_ARABIC_ONTOLOGY_SYNONYMS_SOURCE_CARDS_REPORT.md](./PHASE27_114_ARABIC_ONTOLOGY_SYNONYMS_SOURCE_CARDS_REPORT.md)
+- التالي: Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate and Field Mapping, no training.
 
 ---
 

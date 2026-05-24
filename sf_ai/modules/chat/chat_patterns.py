@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.113: صنفنا بدائل lexical مرخصة. المرشحان التاليان "
-    "هما Arabic Ontology وSinaLab Synonyms كـ source cards فقط. "
-    "Arabic WordNet 4.0 محجوب لأنه model-derived. التالي Phase 27.114 بلا تدريب.",
+    "وصلنا إلى Phase 27.114: أنشأنا source cards وlicense matrix لـ Arabic "
+    "Ontology وSinaLab Synonyms، لكن لا يوجد import أو تدريب. التالي "
+    "Phase 27.115: artifact gate وfield mapping بلا تدريب.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

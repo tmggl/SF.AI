@@ -1,0 +1,14 @@
+{
+  "decision_id": "PHASE27_114_ARABIC_ONTOLOGY_SYNONYMS_SOURCE_CARDS_DECISION",
+  "engineering_decision": "ALLOW_PHASE27_115_ARTIFACT_GATE_AND_FIELD_MAPPING_NO_IMPORT",
+  "source_cards_created": [
+    "arabic_ontology",
+    "sinalab_synonyms"
+  ],
+  "raw_entry_import_allowed": false,
+  "external_training_text_import_allowed": false,
+  "external_tokenizer_vocab_import_allowed": false,
+  "new_training_allowed": false,
+  "runtime_release_allowed": false,
+  "next_phase": "Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate and Field Mapping, no training"
+}

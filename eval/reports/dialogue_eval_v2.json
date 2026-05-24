@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.113: صنفنا بدائل lexical مرخصة. المرشحان التاليان هما Arabic Ontology وSinaLab Synonyms كـ source cards فقط. Arabic WordNet 4.0 محجوب لأنه model-derived. التالي "
+      "response_preview": "وصلنا إلى Phase 27.114: أنشأنا source cards وlicense matrix لـ Arabic Ontology وSinaLab Synonyms، لكن لا يوجد import أو تدريب. التالي Phase 27.115: artifact gate وfield mapping بلا"
     },
     {
       "scenario_id": "clarification_repair_flow",

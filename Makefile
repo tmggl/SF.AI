@@ -536,6 +536,9 @@ phase27-qabas-primary-license-resolution-gate:
 phase27-permissive-lexical-alternatives-intake:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_113_permissive_lexical_alternatives_intake_gate.py $(ARGS)
 
+phase27-arabic-ontology-synonyms-source-cards:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_114_arabic_ontology_synonyms_source_cards.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 
