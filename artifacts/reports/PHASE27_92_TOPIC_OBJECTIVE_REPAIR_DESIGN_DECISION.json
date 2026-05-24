@@ -1,0 +1,12 @@
+{
+  "decision_id": "PHASE27_92_TOPIC_OBJECTIVE_REPAIR_DESIGN_DECISION",
+  "engineering_decision": "ALLOW_PHASE27_93_TOPIC_OBJECTIVE_GATE_ENCODING_NO_TRAINING",
+  "new_training_allowed": false,
+  "topic_gate_encoding_allowed": true,
+  "runtime_release_allowed": false,
+  "ui_release_allowed": false,
+  "sf50m_justified_transition": false,
+  "tokenizer_retrain_allowed": false,
+  "why": "The next fix should target topic anchoring and anti-collapse objective design. Capacity remains a minor factor, so SF-50M is still blocked.",
+  "next_phase": "Phase 27.93 — Topic Objective Gate Encoding and Dry-Run Validation"
+}

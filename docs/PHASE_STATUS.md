@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.91 / 30**
-- **المرحلة الحالية:** **Phase 27.91 — Round-Robin Training Result Diagnosis**
-- **حالة المرحلة الحالية:** **اكتملت؛ شُخّص الفشل المتبقي كـ topic semantic collapse؛ لا تدريب ولا runtime**
-- **المرحلة التالية المقترحة:** Phase 27.92 — Topic Objective Repair Design Gate.
+- **الرحلة الحالية:** **Phase 27.92 / 30**
+- **المرحلة الحالية:** **Phase 27.92 — Topic Objective Repair Design Gate**
+- **حالة المرحلة الحالية:** **اكتملت؛ صُمم إصلاح topic-objective؛ لا تدريب ولا runtime**
+- **المرحلة التالية المقترحة:** Phase 27.93 — Topic Objective Gate Encoding and Dry-Run Validation.
 - **التحول الاستراتيجي المعتمد:** **Sovereign Practical Acceleration Strategy v2** — `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -147,6 +147,7 @@
 | Phase 27.89 | Stratified Round-Robin Curriculum Sampler Gate | ✅ sampler_gate_passed_training_allowed_next_no_runtime | ✅ |
 | Phase 27.90 | Bounded SF-10M Round-Robin Curriculum Repair Training | ✅ trained_runtime_blocked_diagnosis_required | ✅ |
 | Phase 27.91 | Round-Robin Training Result Diagnosis | ✅ diagnosed_topic_collapse_no_training | ✅ |
+| Phase 27.92 | Topic Objective Repair Design Gate | ✅ topic_objective_repair_design_ready_no_training | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1072,7 +1073,7 @@ POST /chat/message  ← {"message":"شلونك"} → domain=chat, intent=chat.sm
 ## نتائج الاختبارات
 
 ```
-639 passed in 22.92s
+645 passed in 72.18s (0:01:12)
 ```
 
 | ملف | عدد |
@@ -1419,6 +1420,35 @@ make api
   - [PHASE27_91_ROUND_ROBIN_TRAINING_RESULT_DIAGNOSIS_REPORT.md](./PHASE27_91_ROUND_ROBIN_TRAINING_RESULT_DIAGNOSIS_REPORT.md)
   - `artifacts/reports/phase27_91_round_robin_training_result_diagnosis_report.json`
   - `artifacts/reports/PHASE27_91_ROUND_ROBIN_TRAINING_RESULT_DIAGNOSIS_DECISION.json`
+
+---
+
+## Phase 27.92 — Topic Objective Repair Design Gate
+
+- لم يبدأ تدريب جديد.
+- لم يتغير runtime.
+- حُوّل تشخيص Phase 27.91 إلى تصميم objective محدد لعائلة `topic`.
+- الهدف المصمم: `topic_anchor_prompt_to_answer_objective_v1`.
+- صيغة conditioning المطلوبة في المرحلة التالية:
+  - `النطاق: <فصحى|سعودي>`
+  - `عائلة الحوار: موضوع`
+  - `الموضوع المطلوب: <topic_term>`
+- عقد رد المساعد: جملة قصيرة، تذكر الموضوع المطلوب داخل الجملة الأولى، ولا تستبدله بموضوع آخر، ولا تكرر أو تنتج كسورًا لفظية.
+- مصطلحات الموضوع المستهدفة: `الوفاء`, `التعاون`, `الصبر`, `الاحترام`, `الهدوء`, `الصدق`, `الصداقة`, `الشجاعة`.
+- بوابات canary المطلوبة قبل أي runtime:
+  - known topic: `18/20`
+  - fresh topic shadow: `16/20`
+  - all-family regression: `45/50`
+  - topic family minimum: `8/10`
+  - malformed/repetition: `0`
+- القرار: `ALLOW_PHASE27_93_TOPIC_OBJECTIVE_GATE_ENCODING_NO_TRAINING`.
+- المحظور الآن: training, runtime release, SF-50M, tokenizer retrain, pretrained/open-weight usage.
+- التالي: Phase 27.93 — Topic Objective Gate Encoding and Dry-Run Validation.
+- التقارير:
+  - [PHASE27_92_TOPIC_OBJECTIVE_REPAIR_DESIGN_GATE_REPORT.md](./PHASE27_92_TOPIC_OBJECTIVE_REPAIR_DESIGN_GATE_REPORT.md)
+  - `artifacts/reports/phase27_92_topic_objective_repair_design_gate_report.json`
+  - `artifacts/reports/PHASE27_92_TOPIC_OBJECTIVE_REPAIR_DESIGN_DECISION.json`
+  - `artifacts/reports/phase27_92_topic_objective_repair_spec.json`
 
 ---
 

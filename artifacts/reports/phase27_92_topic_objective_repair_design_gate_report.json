@@ -1,0 +1,139 @@
+{
+  "phase": "Phase 27.92",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "status": "PHASE27_92_TOPIC_OBJECTIVE_REPAIR_DESIGN_READY_NO_TRAINING",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1",
+  "training_started": false,
+  "runtime_changed": false,
+  "source_report": "artifacts/reports/phase27_91_round_robin_training_result_diagnosis_report.json",
+  "source_failure_bucket_counts": {
+    "open_social_eval_alias_gap": 1,
+    "followup_surface_artifact": 2,
+    "support_eval_alias_gap": 3,
+    "topic_semantic_collapse": 7,
+    "topic_repetition_collapse": 2
+  },
+  "source_root_cause_weights": {
+    "topic_semantic_collapse": 48,
+    "topic_underlearning_after_round_robin": 18,
+    "evaluation_alias_gap_support_open_social": 12,
+    "surface_artifacts_followup": 8,
+    "decoding_repetition": 6,
+    "model_capacity": 4,
+    "tokenizer": 2,
+    "semantic_routing": 2
+  },
+  "design_ready": true,
+  "objective_spec": {
+    "spec_id": "PHASE27_92_TOPIC_OBJECTIVE_REPAIR_SPEC",
+    "version": "v1",
+    "language_track": [
+      "msa",
+      "saudi"
+    ],
+    "target_family": "topic",
+    "target_terms": [
+      "الوفاء",
+      "التعاون",
+      "الصبر",
+      "الاحترام",
+      "الهدوء",
+      "الصدق",
+      "الصداقة",
+      "الشجاعة"
+    ],
+    "problem_statement": "After Phase 27.90, general families improved, but topic prompts collapsed into unrelated definitions such as الهدوء or malformed fragments.",
+    "objective_name": "topic_anchor_prompt_to_answer_objective_v1",
+    "conditioning_lines": [
+      "النطاق: <فصحى|سعودي>",
+      "عائلة الحوار: موضوع",
+      "الموضوع المطلوب: <topic_term>"
+    ],
+    "topic_anchor_rule": "For topic-family samples, the assistant answer must include the requested topic term exactly once within the first sentence.",
+    "assistant_loss_rule": "Conditioning lines and user text remain masked under loss_scope=assistant; assistant content plus EOS remain supervised.",
+    "answer_contract": [
+      "one short explanatory sentence",
+      "include the requested topic term",
+      "do not substitute another known topic term",
+      "avoid malformed fragments",
+      "avoid repeated words/phrases",
+      "no project/operator language"
+    ],
+    "negative_controls": [
+      "Prompt asks about الوفاء but answer starts with معنى الهدوء",
+      "Prompt asks about التعاون but answer answers الصداقة",
+      "Prompt asks about الشجاعة but answer repeats شي شي شي",
+      "Prompt asks about الصدق but answer omits الصدق"
+    ],
+    "data_design_for_next_phase": {
+      "no_external_data": true,
+      "authoring_mode": "owner-delegated SF.AI authored only",
+      "records_per_topic_min": 20,
+      "dialect_balance_per_topic": {
+        "msa": 10,
+        "saudi": 10
+      },
+      "prompt_variants_per_topic": [
+        "definition",
+        "benefit",
+        "when_it_appears",
+        "daily_example",
+        "short_explanation"
+      ],
+      "anti_collapse_pairs": "Each topic appears beside contrastive prompts for other topic terms so the model learns the requested anchor, not a dominant memorized topic."
+    },
+    "decoding_design": {
+      "max_new_tokens": 22,
+      "no_repeat_ngram_size": 3,
+      "repetition_penalty_min": 1.12,
+      "stop_at_eos": true,
+      "topic_term_required_in_guard": true,
+      "blocked_if_other_topic_term_without_requested_term": true
+    },
+    "canary_design": {
+      "known_topic_canary_min": "18/20",
+      "fresh_topic_shadow_min": "16/20",
+      "all_family_regression_min": "45/50",
+      "topic_family_min": "8/10",
+      "malformed_max": 0,
+      "repeated_phrase_max": 0
+    },
+    "non_topic_cleanup": {
+      "support_eval_alias_gap": "Update evaluation aliases for valid Saudi support wording like خذ نفس واهدأ; do not train just to satisfy one wording.",
+      "open_social_eval_alias_gap": "Update aliases if the response is natural but misses exact expected terms.",
+      "followup_surface_artifacts": "Track as guard/artifact issue in next diagnosis; do not mix with topic repair."
+    },
+    "blocked": [
+      "training before Phase 27.93 gate encoding",
+      "runtime release",
+      "SF-50M transition",
+      "tokenizer retrain",
+      "pretrained/open-weight usage"
+    ]
+  },
+  "phase27_93_required_gates": [
+    "renderer emits الموضوع المطلوب for topic-family samples",
+    "assistant loss masks the topic anchor line",
+    "topic canary manifest covers all target terms",
+    "anti-collapse pairs are present",
+    "non-topic alias updates are separated from training data",
+    "no runtime release is possible from gate encoding alone"
+  ],
+  "decision": {
+    "decision_id": "PHASE27_92_TOPIC_OBJECTIVE_REPAIR_DESIGN_DECISION",
+    "engineering_decision": "ALLOW_PHASE27_93_TOPIC_OBJECTIVE_GATE_ENCODING_NO_TRAINING",
+    "new_training_allowed": false,
+    "topic_gate_encoding_allowed": true,
+    "runtime_release_allowed": false,
+    "ui_release_allowed": false,
+    "sf50m_justified_transition": false,
+    "tokenizer_retrain_allowed": false,
+    "why": "The next fix should target topic anchoring and anti-collapse objective design. Capacity remains a minor factor, so SF-50M is still blocked.",
+    "next_phase": "Phase 27.93 — Topic Objective Gate Encoding and Dry-Run Validation"
+  }
+}

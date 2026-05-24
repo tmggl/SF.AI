@@ -63,9 +63,9 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 27.91 موثقة تاريخيًا. الحالة الحالية:
-  `Phase 27.91 — Round-Robin Training Result Diagnosis` اكتملت بلا تدريب
-  وأصدرت `PHASE27_91_ROUND_ROBIN_TRAINING_RESULT_DIAGNOSIS_DECISION`.
+- المراحل من Phase 0 حتى Phase 27.92 موثقة تاريخيًا. الحالة الحالية:
+  `Phase 27.92 — Topic Objective Repair Design Gate` اكتملت بلا تدريب
+  وأصدرت `PHASE27_92_TOPIC_OBJECTIVE_REPAIR_DESIGN_DECISION`.
   Phase 27.81 أضافت دفعة `sf-ai-balanced-family-pack-v1`: `2500` سجل gold
   متوازن (`500` لكل family و`250/250` فصحى/سعودي). corpus الحالي `8443`
   (`msa=4199`, `saudi=4244`, `gold=3331`, `silver=5112`). Phase 27.83 درّبت
@@ -81,8 +81,10 @@
   لكل family، وكل نافذة 600 = `120` لكل family. Phase 27.90 درّبت SF-10M
   بهذا الترتيب: best fresh shadow = `35/50` عند `sf-10m-step1800`. Phase 27.91
   شخّصت الفشل المتبقي: `9/15` إخفاقًا من عائلة topic، و`topic_semantic_collapse=48%`.
+  Phase 27.92 صممت objective مخصصًا: `topic_anchor_prompt_to_answer_objective_v1`
+  مع شرط `الموضوع المطلوب: <topic_term>` وبوابات canary واضحة.
   runtime و`SF-50M` وtokenizer retrain محجوبة.
-- أول خطوة تالية: Phase 27.92 Topic Objective Repair Design Gate.
+- أول خطوة تالية: Phase 27.93 Topic Objective Gate Encoding and Dry-Run Validation.
 - تفويض التكبير التلقائي معتمد، لكن مفعوله يبدأ فقط عندما تنجح gates؛
   حاليًا `SF-50M` ما زال محجوبًا لأن capacity وزنها `1%`.
 - استخدم `make phase22-review-intake` أو `GET /system/phase22-review-intake` قبل أي تحويل من `data/corpus/chat/review/` إلى corpus تدريبي.
@@ -99,7 +101,7 @@
 - اقرأ ملفات الحوكمة والدستور قبل أي تدريب: `PROJECT_CONSTITUTION`, `LANGUAGE_SEGMENTATION`, `TOKENIZATION_POLICY`, `DATASET_GOVERNANCE`, `AGENT_ENGINEERING_RULES`, ثم `PROJECT_IDENTITY`, `ENGINEERING_RULES`, `AGENT_INSTRUCTIONS`, `PROJECT_MAP`, `PROJECT_LIFECYCLE`.
 - اقرأ `docs/PHASE12_TOKENIZER_V1_REPORT.md`, `docs/PHASE13_SMOKE_TRAINING_REPORT.md`, و`docs/PHASE14_SF10M_V0_1_REPORT.md`: artifacts موجودة، لكنها غير صالحة للشات أو الجودة اللغوية بعد.
 - إذا كان السيرفر الحي لم يُعد تشغيله بعد، استخدم `make phase12-readiness` لنفس القرار بدون لمس السيرفر.
-- الهدف العام: الوصول إلى نموذج لغوي سيادي مولّد. أول توليد خام في Phase 13، وباب التوليد داخل الشات جُهّز في Phase 15. Phase 27.77 فشلت كتوليد على tokenizer v9 (`54/60`, `45/50`, `30/30`). Phase 27.78 شخّصت root cause: family mixing `22%`, objective `18%`, curriculum `16%`, weak generalization `14%`, semantic routing `10%`, capacity `1%`. Phase 27.79 صممت إصلاح objective/curriculum/decoding، Phase 27.80 شفّرت gates، Phase 27.81 أصلحت توازن family ببيانات gold، Phase 27.82 سمحت بتدريب مقيّد، Phase 27.83 أثبتت أن الإصلاح لم ينجح حواريًا (`11/60` best)، Phase 27.84 حددت أن family signal غائب من النص، Phase 27.85 صممت الإشارة، Phase 27.86 أثبتت renderer/masking، Phase 27.87 أثبتت أن التدريب ما زال منحازًا (`10/50` best)، Phase 27.88 حددت السبب: ترتيب stream متسلسل لا round-robin، Phase 27.89 ثبّتت sampler متوازنًا، Phase 27.90 حسّنت النتيجة إلى `35/50`، وPhase 27.91 حددت أن المشكلة الحالية topic-specific وليست مبررًا للتكبير.
+- الهدف العام: الوصول إلى نموذج لغوي سيادي مولّد. أول توليد خام في Phase 13، وباب التوليد داخل الشات جُهّز في Phase 15. Phase 27.77 فشلت كتوليد على tokenizer v9 (`54/60`, `45/50`, `30/30`). Phase 27.78 شخّصت root cause: family mixing `22%`, objective `18%`, curriculum `16%`, weak generalization `14%`, semantic routing `10%`, capacity `1%`. Phase 27.79 صممت إصلاح objective/curriculum/decoding، Phase 27.80 شفّرت gates، Phase 27.81 أصلحت توازن family ببيانات gold، Phase 27.82 سمحت بتدريب مقيّد، Phase 27.83 أثبتت أن الإصلاح لم ينجح حواريًا (`11/60` best)، Phase 27.84 حددت أن family signal غائب من النص، Phase 27.85 صممت الإشارة، Phase 27.86 أثبتت renderer/masking، Phase 27.87 أثبتت أن التدريب ما زال منحازًا (`10/50` best)، Phase 27.88 حددت السبب: ترتيب stream متسلسل لا round-robin، Phase 27.89 ثبّتت sampler متوازنًا، Phase 27.90 حسّنت النتيجة إلى `35/50`، Phase 27.91 حددت أن المشكلة topic-specific، وPhase 27.92 صممت إصلاح topic-objective دون تدريب.
 - تفويض سامي الأخير يعني أن حوار الوكيل المؤلف لخدمة corpus يمكن اعتماده كـ `owner-delegated agent-authored` مع `training_allowed=true` إذا حمل source/license/quality/notes كاملة، وبقي ضمن `msa + saudi` ودون أي مصدر خارجي أو pretrained data.
 - كل export أو corpus record يجب أن يحمل user ownership. المسار الحالي: `owner_user_id=created_by_user_id=target_user_id=sami-local` و`user_scope=single_user`.
 
@@ -114,7 +116,7 @@
    cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests
    ```
 
-2. تحقق من القسم 4 في AGENT_HANDOFF.md. مهمة "محادثة مريحة + توجيه دقيق" مكتملة، ومسار العمل الحالي هو Phase 27.92 بعد تشخيص topic collapse في 27.91.
+2. تحقق من القسم 4 في AGENT_HANDOFF.md. مهمة "محادثة مريحة + توجيه دقيق" مكتملة، ومسار العمل الحالي هو Phase 27.93 بعد تصميم topic-objective في 27.92.
 
 3. Phase 11 مكتملة كحوكمة وأداة فحص. شغّل:
    ```

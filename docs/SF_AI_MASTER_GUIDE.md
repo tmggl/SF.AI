@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.91
-الاسم: Round-Robin Training Result Diagnosis
+المرحلة الحالية: Phase 27.92
+الاسم: Topic Objective Repair Design Gate
 الاستراتيجية الملزمة: Sovereign Practical Acceleration Strategy v2
-القرار الرسمي: PHASE27_91_ROUND_ROBIN_TRAINING_RESULT_DIAGNOSIS_DECISION
+القرار الرسمي: PHASE27_92_TOPIC_OBJECTIVE_REPAIR_DESIGN_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -106,8 +106,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - نتيجة 27.89: أضيف `--split-order family_round_robin` ومرّت gate؛ أول 1800 عينة صارت `360` لكل family، وكل نافذة 600 فيها `120` لكل family.
 - نتيجة 27.90: تدريب SF-10M محدود بالـ round-robin رفع fresh shadow إلى `35/50`، لكن topic بقي `1/10` والبوابة `45/50` لم تمر.
 - نتيجة 27.91: التشخيص أثبت أن `9/15` من الإخفاقات من عائلة topic، وأكبر سبب `topic_semantic_collapse=48%`.
+- نتيجة 27.92: صُمم objective مخصص لعائلة `topic` باسم `topic_anchor_prompt_to_answer_objective_v1`، مع شرط `الموضوع المطلوب: <topic_term>` وبوابات canary قبل أي تدريب.
 - corpus الحالي: `8443` (`msa=4199`, `saudi=4244`, `gold=3331`, `silver=5112`).
-- التالي: `Phase 27.92 — Topic Objective Repair Design Gate`.
+- التالي: `Phase 27.93 — Topic Objective Gate Encoding and Dry-Run Validation`.
 
 أوزان السبب الجذري في Phase 27.78:
 
@@ -323,17 +324,19 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.91 — Round-Robin Training Result Diagnosis
+Phase 27.93 — Topic Objective Gate Encoding and Dry-Run Validation
 ```
 
 مطلوب منها:
 
-- تحليل إخفاقات `sf-10m-step1800` بعد نتيجة `35/50`.
-- فصل أسباب الفشل بين topic underlearning وexpected term mismatch وdecoding/repetition.
-- إصدار قرار: repair topic objective أم curriculum إضافي أم منع التدريب والعودة لتصميم آخر.
-- منع SF-50M/runtime حتى ينجح canary لاحق.
+- ترميز `الموضوع المطلوب: <topic_term>` داخل renderer لعائلة `topic`.
+- إثبات أن loss يخفي conditioning عن الهدف ويشرف فقط على رد المساعد وEOS.
+- بناء canary manifest يغطي موضوعات `الوفاء/التعاون/الصبر/الاحترام/الهدوء/الصدق/الصداقة/الشجاعة`.
+- إثبات anti-collapse pairs قبل السماح بأي تدريب.
+- فصل تحديثات alias غير الموضوعية عن بيانات التدريب.
+- إصدار قرار: هل يسمح Phase 27.94 بتدريب محدود أم تبقى البوابة محجوبة.
 
-ممنوع في 27.91 قبل التشخيص:
+ممنوع في 27.93 قبل نجاح البوابة الجافة:
 
 - تدريب جديد.
 - runtime release.

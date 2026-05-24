@@ -37,6 +37,10 @@ SF.AI يملك مسار ذكائه:
 الأوزان، tokenizer، corpus، behavior، runtime، alignment، وevaluation
 تبقى سيادية داخل مسار SF-native.
 
+تطبيق حالي: Phase 27.92 صممت إصلاح `topic-objective` بلا تدريب، وسمحت
+فقط ببوابة Phase 27.93 الجافة. هذا يثبت أن التسريع العملي لا يعني تكبير
+النموذج أو إدخال أوزان جاهزة قبل فهم السبب الجذري.
+
 استثناء موثق: يجوز إدخال حوارات **owner-delegated agent-authored** في
 corpus إذا كان سامي قد فوّض الوكيل صراحة بتأليفها واعتمادها، وكانت كل
 سجلاتها تحمل `source/license/quality/training_allowed/notes` يشرح أنها

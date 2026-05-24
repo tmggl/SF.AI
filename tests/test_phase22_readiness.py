@@ -16,7 +16,6 @@ from sf_ai.datasets.phase22_readiness import (
     build_phase22_readiness_decision,
 )
 
-
 client = TestClient(app)
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -206,7 +205,7 @@ def test_system_status_reports_phase22_component() -> None:
     r = client.get("/system/status")
     assert r.status_code == 200
     body = r.json()
-    assert "Phase 27.91" in body["current_phase"]
+    assert "Phase 27.92" in body["current_phase"]
     assert any(
         c["name"] == "phase22_readiness" and c["status"] == "active"
         for c in body["components"]
