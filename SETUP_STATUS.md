@@ -13,6 +13,7 @@
 - **الرحلة الحالية:** **Phase 27.78 / 30**
 - **المرحلة الحالية:** **Phase 27.78 — Engineering Root Cause Gate** (`PHASE27_78_ENGINEERING_DECISION`; training/runtime/SF-50M محجوبة)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
+- **ملف القيادة الواحد:** `docs/SF_AI_MASTER_GUIDE.md` هو نقطة الدخول الأولى لأي Agent أو مهندس؛ بقية الملفات مراجع تفصيلية.
 - **المرحلة التالية المقترحة:** Phase 27.79 Objective/Curriculum/Decoding Repair Design؛ لا تدريب حتى تُشفّر gates، وPhase 28 و`SF-50M` محظوران.
 - **استراتيجية العمل الملزمة:** Sovereign Practical Acceleration Strategy v2؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب، و`NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS` قبل أي runtime.
 - **تفويض التكبير:** Auto-Advance Scaling Mandate؛ عند نجاح gate الحجم التالي ينتقل الوكيل تلقائيًا عبر `SF-50M → SF-100M-class/SF-120M → SF-350M → SF-700M → SF-1B+`.

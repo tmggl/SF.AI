@@ -11,10 +11,11 @@
 **قبل أي شيء، اقرأ كاملاً:**
 
 ```
-/Users/sami/workSF/SF.AI/docs/AGENT_HANDOFF.md
+/Users/sami/workSF/SF.AI/docs/SF_AI_MASTER_GUIDE.md
 ```
 
 ثم استكشف:
+- `/Users/sami/workSF/SF.AI/docs/AGENT_HANDOFF.md` — سجل التسليم التاريخي التفصيلي.
 - `/Users/sami/workSF/SF.AI/PROJECT_PRINCIPLES.md` — المبادئ الحاكمة.
 - `/Users/sami/workSF/SF.AI/docs/PHASE_STATUS.md` — أين نحن الآن.
 - `/Users/sami/workSF/SF.AI/docs/EXECUTION_PLAN.md` — الخطة الكاملة على مراحل.
@@ -85,7 +86,7 @@
 
 > شاشة محادثة عربية مريحة، توجيه دقيق للأسئلة، بدون أي عقل أجنبي.
 
-**أول ما تفعل بعد قراءة AGENT_HANDOFF.md:**
+**أول ما تفعل بعد قراءة SF_AI_MASTER_GUIDE.md:**
 
 1. شغّل الاختبارات للتأكد من سلامة الحالة:
    ```
