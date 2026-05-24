@@ -68,7 +68,7 @@ NEW_FRESH_CASES: tuple[ShadowCase, ...] = (
     ShadowCase("open_social_05", "saudi", "عطني سوالف بسيطة", "open_social", "", "open_social", ("سوالف", "نسولف", "موضوع", "بسيط")),
     ShadowCase("open_social_06", "msa", "أريد كلامًا وديًا قصيرًا", "open_social", "", "open_social", ("كلام", "حديث", "موضوع", "قصير")),
     ShadowCase("open_social_07", "saudi", "تكلم معي عن شي لطيف", "open_social", "", "open_social", ("موضوع", "لطيف", "يومك")),
-    ShadowCase("open_social_08", "msa", "اختر حديثًا خفيفًا بيننا", "open_social", "", "open_social", ("حديث", "خفيف", "موضوع")),
+    ShadowCase("open_social_08", "msa", "اختر حديثًا خفيفًا بيننا", "open_social", "", "open_social", ("حديث", "خفيف", "موضوع", "نسولف")),
     ShadowCase("open_social_09", "saudi", "ودي بموضوع سوالف", "open_social", "", "open_social", ("موضوع", "سوالف", "نسولف")),
     ShadowCase("open_social_10", "msa", "ابدأ محادثة سهلة", "open_social", "", "open_social", ("محادثة", "نبدأ", "موضوع", "بسيط")),
     ShadowCase("open_social_11", "saudi", "هات كلام يمشي الوقت", "open_social", "", "open_social", ("كلام", "نسولف", "موضوع", "سالفة", "خفيفة")),

@@ -58,13 +58,14 @@
 - [docs/PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md](./docs/PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md) — fresh shadow جديد بعد الإصلاح وصل `56/60` لكن بقي open_social، لذلك runtime محجوب.
 - [docs/PHASE27_70_OPEN_SOCIAL_REPAIR_REPORT.md](./docs/PHASE27_70_OPEN_SOCIAL_REPAIR_REPORT.md) — إصلاح open_social/fine-tune لم يتجاوز baseline، لذلك runtime محجوب.
 - [docs/PHASE27_71_CANDIDATE_SELECTION_REPORT.md](./docs/PHASE27_71_CANDIDATE_SELECTION_REPORT.md) — اختيار مرشح: `phase27_68` هو الأفضل `136/140` لكنه ليس مستقرًا كفاية للواجهة.
+- [docs/PHASE27_72_STABILITY_FIRST_REPAIR_REPORT.md](./docs/PHASE27_72_STABILITY_FIRST_REPAIR_REPORT.md) — micro-repair من أفضل مرشح رفع النتيجة إلى `138/140` مع بقاء runtime محجوبًا.
 
 ---
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.71 / 30 — Candidate Selection اختار أفضل مرشح `phase27_68` بنتيجة `136/140` مع بقاء runtime محجوبًا.
-- **الأولوية الحالية:** Phase 27.72 stability-first curriculum/selection repair قبل أي runtime switch.
+- **الرحلة الحالية:** Phase 27.72 / 30 — Stability-First Micro Repair حسّن النتيجة إلى `138/140` مع بقاء runtime محجوبًا.
+- **الأولوية الحالية:** Phase 27.73 inspect remaining open_social failures قبل أي runtime switch.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
 - **البيانات الحالية:** corpus موثق `5943` سجلًا يمر `corpus-audit`: `2994` سعودي + `2949` فصحى. Phase 27.15 أضاف social/lexical curriculum، والـ split الحالي `train=5343`, `eval=600`.
 - **التدريب:** Phase 12 tokenizer v1 وPhase 13 smoke LM وPhase 14 SF-10M v0.1 وPhase 23 tokenizer v2 وPhase 24 SF-10M v0.2 اكتملت من بيانات SF.AI فقط.
@@ -140,6 +141,7 @@
 - **نتيجة Phase 27.69:** fresh shadow جديد `60` سؤالًا، novelty `60/60`، النتيجة `56/60`: planning/support/topic `12/12`، followup `12/12`، open_social `8/12`. القرار: لا واجهة؛ Phase 27.70 يركز على open_social. التقرير: [docs/PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md](./docs/PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md).
 - **نتيجة Phase 27.70:** جُرّب repair/fine-tune سيادي من checkpoint 27.68 مع open_social/stability، لكن لم يتجاوز baseline: fresh `55/60`, known `48/50`, regression `30/30`. القرار: لا واجهة ولا SF-50M؛ التالي Phase 27.71 لاختيار candidate واستراتيجية ثبات قبل أي runtime. التقرير: [docs/PHASE27_70_OPEN_SOCIAL_REPAIR_REPORT.md](./docs/PHASE27_70_OPEN_SOCIAL_REPAIR_REPORT.md).
 - **نتيجة Phase 27.71:** قورنت مرشحات tokenizer v8: `phase27_66=104/140`, `phase27_68=136/140`, `phase27_70=133/140`. أفضل مرشح هو `phase27_68` لكنه لا يمر كل gates، لذلك لا واجهة ولا runtime. التالي Phase 27.72 stability-first repair. التقرير: [docs/PHASE27_71_CANDIDATE_SELECTION_REPORT.md](./docs/PHASE27_71_CANDIDATE_SELECTION_REPORT.md).
+- **نتيجة Phase 27.72:** micro-repair سيادي صغير من `phase27_68` حسّن fresh إلى `58/60` وحافظ على known `50/50` وregression `30/30`. بقي فشلان open_social، لذلك runtime محجوب. التالي Phase 27.73 لفحص الفشلين. التقرير: [docs/PHASE27_72_STABILITY_FIRST_REPAIR_REPORT.md](./docs/PHASE27_72_STABILITY_FIRST_REPAIR_REPORT.md).
 - **فصل المستخدمين:** كل export وcorpus record يحمل الآن `owner_user_id/created_by_user_id/target_user_id/user_scope`; المسار الحالي `sami-local` و`single_user` لتجهيز التوسع لاحقًا بدون خلط بيانات.
 - **القاموس المتبع:** العربية الفصحى + السعودية فقط، مع `Saudi Seed v1` كمرجع خاص و`safety_terms.yaml` كبوابة حساسة.
 

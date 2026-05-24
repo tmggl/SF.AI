@@ -738,3 +738,22 @@ def test_phase27_71_candidate_selection_blocks_runtime_without_stable_candidate(
     assert report["decisions"]["ui_open_allowed"] is False
     assert report["decisions"]["sf50m_allowed"] is False
     assert report["decisions"]["phase27_72_training_allowed"] is True
+
+
+def test_phase27_72_stability_first_repair_improves_but_blocks_runtime() -> None:
+    report = _report("phase27_72_stability_first_repair_report.json")
+    assert report["phase"] == "Phase 27.72"
+    assert report["status"] == "IMPROVED_STABILITY_FIRST_REPAIR_RUNTIME_BLOCKED"
+    assert report["training_started"] is True
+    assert report["tokenizer"] == "artifacts/tokenizers/sf_bpe/v8_phase27_65"
+    assert report["init_checkpoint_name"] == "sf-10m-step5600"
+    assert report["checkpoint_name"] == "sf-10m-step64"
+    assert report["phase27_69_summary"]["passed"] == 58
+    assert report["phase27_69_summary"]["total"] == 60
+    assert report["phase27_67_summary"]["passed"] == 50
+    assert report["phase27_67_summary"]["total"] == 50
+    assert report["phase27_60_summary"]["passed"] == 30
+    assert report["phase27_60_summary"]["total"] == 30
+    assert report["decisions"]["runtime_switch_allowed"] is False
+    assert report["decisions"]["ui_open_allowed"] is False
+    assert report["decisions"]["live_runtime_review_allowed"] is False

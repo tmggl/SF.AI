@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.71: قارنا مرشحي tokenizer v8، وأفضل مرشح بقي "
-    "Phase 27.68 بنتيجة 136/140. لا يوجد مرشح مستقر يمر كل البوابات. "
-    "التالي Phase 27.72 لإصلاح ثبات العائلات قبل أي runtime.",
+    "وصلنا إلى Phase 27.72: نفذنا micro-repair من أفضل مرشح سابق. تحسّن "
+    "المجموع إلى 138/140 مع known 50/50 وregression 30/30، لكن بقي فشلان "
+    "في open_social. التالي Phase 27.73 لفحصهما قبل أي runtime.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

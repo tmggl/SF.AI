@@ -23,7 +23,7 @@ def test_health_ok() -> None:
     body = r.json()
     assert body["status"] == "ok"
     assert body["project"] == "SF.AI"
-    assert body["phase"] == "Phase 27.71"
+    assert body["phase"] == "Phase 27.72"
 
 
 def test_system_status_sovereign_flags() -> None:
@@ -31,9 +31,9 @@ def test_system_status_sovereign_flags() -> None:
     assert r.status_code == 200
     body = r.json()
     assert body["project"] == "SF.AI"
-    assert body["current_phase"].startswith("Phase 27.71")
-    assert body["current_phase_status"] == "no_stable_candidate_runtime_blocked"
-    assert "Phase 27.72" in body["next_phase"]
+    assert body["current_phase"].startswith("Phase 27.72")
+    assert body["current_phase_status"] == "improved_stability_first_repair_runtime_blocked"
+    assert "Phase 27.73" in body["next_phase"]
     assert body["sovereign"] is True
     assert body["uses_external_llm"] is False
     assert body["uses_pretrained_weights"] is False
@@ -125,6 +125,11 @@ def test_system_status_sovereign_flags() -> None:
     assert any(
         c["name"] == "phase27_71_candidate_selection"
         and c["status"] == "no_stable_candidate_runtime_blocked"
+        for c in body["components"]
+    )
+    assert any(
+        c["name"] == "phase27_72_stability_first_repair"
+        and c["status"] == "improved_stability_first_repair_runtime_blocked"
         for c in body["components"]
     )
     assert any(
