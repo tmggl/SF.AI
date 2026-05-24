@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.110
-الاسم: Licensed Ingestion Design
+المرحلة الحالية: Phase 27.111
+الاسم: Qabas Lexicon Bootstrap Design
 المسار الملزم: SF-native Objective/Curriculum/Decoding Acceleration Track
-القرار الرسمي: PHASE27_110_LICENSED_INGESTION_DESIGN_DECISION
+القرار الرسمي: PHASE27_111_QABAS_LEXICON_BOOTSTRAP_DESIGN_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -110,6 +110,8 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - Phase 27.110 صمم license matrix للمصادر المختارة: `Qabas` مسموح للمرحلة
   التالية كتصميم lexicon/topic/protected-terms فقط، و`Tashkeela` محجوبة
   للتدريب حتى حل تعارض الترخيص.
+- Phase 27.111 صمم مسار Qabas bootstrap، لكنه حجب import الفعلي لأن
+  Masader تعرض `Apache-1.0` بينما صفحة SinaLab resources تعرض `CC-BY-ND-4.0`.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
@@ -126,7 +128,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   `docs/PHASE27_109_FREE_LINGUISTIC_RESOURCE_INTAKE_GATE_REPORT.md`.
 - تقرير الإدخال المرخص الحالي:
   `docs/PHASE27_110_LICENSED_INGESTION_DESIGN_REPORT.md`.
-- التالي: `Phase 27.111 — Qabas Lexicon Bootstrap Design, no training`.
+- تقرير Qabas الحالي:
+  `docs/PHASE27_111_QABAS_LEXICON_BOOTSTRAP_DESIGN_REPORT.md`.
+- التالي: `Phase 27.112 — Qabas Primary License Resolution Gate, no training`.
 
 الدليل السابق الذي سبب هذا re-anchor:
 
@@ -398,15 +402,16 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.111 — Qabas Lexicon Bootstrap Design, no training
+Phase 27.112 — Qabas Primary License Resolution Gate, no training
 ```
 
 مطلوب منها:
 
-- تحويل Qabas إلى bootstrap منضبط للـ lexicon/topics/protected terms فقط.
-- عدم إدخال Qabas كـ pretrained tokenizer vocab أو merges.
-- deduplicate ضد Saudi Seed v1 والقواميس الحالية.
-- إنتاج source card وfield mapping وquality/provenance gates قبل أي استخدام.
+- حسم تضارب ترخيص Qabas بين Masader وSinaLab.
+- التقاط رخصة artifact القابل للتحميل أو توثيق سبب الحجب.
+- منع أي raw-entry import قبل القرار.
+- إذا بقي الترخيص `CC-BY-ND`، استخدم Qabas metadata كمرجع/source discovery فقط
+  ولا تنتج lexicon مشتقًا.
 - ممنوع training/SF-50M/tokenizer retrain/runtime release قبل هذه البوابة.
 
 ممنوع قبل نجاح البوابات:

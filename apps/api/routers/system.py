@@ -61,11 +61,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.110 — Licensed Ingestion Design",
+        current_phase="Phase 27.111 — Qabas Lexicon Bootstrap Design",
         current_phase_status=(
-            "phase27_110_licensed_ingestion_design_ready_no_training"
+            "phase27_111_qabas_bootstrap_design_ready_import_blocked"
         ),
-        next_phase="Phase 27.111 — Qabas Lexicon Bootstrap Design, no training",
+        next_phase="Phase 27.112 — Qabas Primary License Resolution Gate, no training",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -674,6 +674,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_110_licensed_ingestion_design",
                 status="licensed_ingestion_design_ready_no_training",
                 phase="Phase 27.110",
+            ),
+            ComponentStatus(
+                name="phase27_111_qabas_lexicon_bootstrap_design",
+                status="qabas_bootstrap_design_ready_import_blocked",
+                phase="Phase 27.111",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

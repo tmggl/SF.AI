@@ -527,6 +527,9 @@ phase27-free-linguistic-resource-intake:
 phase27-licensed-ingestion-design:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_110_licensed_ingestion_design.py $(ARGS)
 
+phase27-qabas-lexicon-bootstrap-design:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_111_qabas_lexicon_bootstrap_design.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 

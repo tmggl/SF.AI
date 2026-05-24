@@ -1,0 +1,140 @@
+{
+  "phase": "Phase 27.111",
+  "status": "PHASE27_111_QABAS_BOOTSTRAP_DESIGN_READY_IMPORT_BLOCKED",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "lexicon_track": "Saudi Seed v1 primary + Qabas candidate after license resolution",
+  "source_card": {
+    "source_id": "qabas",
+    "name": "Qabas",
+    "source_type": "lexicon",
+    "language_scope": [
+      "msa"
+    ],
+    "dialect_scope": [
+      "msa"
+    ],
+    "masader_metadata_file": "resources/external_sources/selected_masader_metadata/qabas.json",
+    "masader_license": "Apache-1.0",
+    "masader_link": "https://sina.birzeit.edu/qabas",
+    "primary_resource_page": "https://sina.birzeit.edu/resources/",
+    "primary_qabas_page": "https://sina.birzeit.edu/qabas",
+    "paper": "https://arxiv.org/pdf/2406.06598",
+    "observed_primary_license": "CC-BY-ND-4.0",
+    "license_conflict": true,
+    "license_conflict_summary": "Masader metadata lists Apache-1.0, while the SinaLab resources page lists Qabas under CC-BY-ND-4.0. Actual term import is blocked until the downloadable artifact license is captured and reviewed.",
+    "allowed_now": {
+      "metadata_reference": true,
+      "schema_design": true,
+      "field_mapping_design": true,
+      "raw_entry_import": false,
+      "training_text_import": false,
+      "tokenizer_vocab_import": false,
+      "runtime_lookup": false
+    },
+    "required_next_gates": [
+      "capture_downloadable_artifact_license",
+      "resolve_apache_vs_cc_by_nd_conflict",
+      "verify_no_no_derivatives_block_on_adapted_lexicon_use",
+      "deduplicate_against_saudi_seed_v1",
+      "quality_sample_review_before_any_import"
+    ]
+  },
+  "field_mapping": [
+    {
+      "qabas_field": "lemma",
+      "sf_field": "term",
+      "use": "candidate term after license resolution",
+      "allowed_now": false
+    },
+    {
+      "qabas_field": "root",
+      "sf_field": "root",
+      "use": "morphology hint, not model target",
+      "allowed_now": false
+    },
+    {
+      "qabas_field": "part_of_speech",
+      "sf_field": "pos",
+      "use": "filter nouns/verbs/function words for coverage analysis",
+      "allowed_now": false
+    },
+    {
+      "qabas_field": "definitions_or_senses",
+      "sf_field": "notes",
+      "use": "blocked from corpus; possible source-card reference only after license review",
+      "allowed_now": false
+    },
+    {
+      "qabas_field": "frequency_or_linked_corpora",
+      "sf_field": "priority_score",
+      "use": "ranking signal only, no corpus contexts imported",
+      "allowed_now": false
+    }
+  ],
+  "gates": [
+    {
+      "gate": "license_resolution",
+      "required": true,
+      "blocks": [
+        "raw_entry_import",
+        "protected_terms_activation",
+        "topic_bank_activation"
+      ]
+    },
+    {
+      "gate": "no_tokenizer_vocab_import",
+      "required": true,
+      "rule": "Qabas terms may never be imported as pretrained BPE vocab or merges."
+    },
+    {
+      "gate": "deduplicate_against_saudi_seed_v1",
+      "required": true,
+      "rule": "Saudi Seed v1 remains authoritative for Saudi dialect terms."
+    },
+    {
+      "gate": "msa_only_filter",
+      "required": true,
+      "rule": "Only MSA lemma metadata may be considered; linked dialect corpora contexts are blocked."
+    },
+    {
+      "gate": "quality_sample_review",
+      "required": true,
+      "rule": "Any later import starts as reviewed candidate resources, not training corpus."
+    }
+  ],
+  "future_outputs": {
+    "source_card": "resources/external_sources/qabas_source_card_phase27_111.json",
+    "candidate_terms_after_license_gate": "resources/lexicons/imported/qabas_bootstrap/qabas_candidate_terms.jsonl",
+    "candidate_topics_after_license_gate": "resources/lexicons/imported/qabas_bootstrap/qabas_topic_candidates.jsonl",
+    "candidate_protected_terms_after_license_gate": "resources/tokenization/qabas_protected_terms_candidates.txt",
+    "prohibited_outputs_now": [
+      "data/corpus/**/qabas*.jsonl",
+      "artifacts/tokenizers/**/qabas*",
+      "resources/lexicons/imported/qabas_bootstrap/*.jsonl"
+    ]
+  },
+  "actual_qabas_entries_imported": false,
+  "training_started": false,
+  "runtime_changed": false,
+  "external_training_text_import_allowed": false,
+  "external_tokenizer_vocab_import_allowed": false,
+  "qabas_term_import_allowed_now": false,
+  "qabas_design_allowed": true,
+  "decision": {
+    "decision_id": "PHASE27_111_QABAS_LEXICON_BOOTSTRAP_DESIGN_DECISION",
+    "engineering_decision": "BLOCK_QABAS_IMPORT_ALLOW_PHASE27_112_LICENSE_RESOLUTION_GATE",
+    "license_conflict_detected": true,
+    "qabas_design_allowed": true,
+    "qabas_term_import_allowed_now": false,
+    "external_training_text_import_allowed": false,
+    "external_tokenizer_vocab_import_allowed": false,
+    "new_training_allowed": false,
+    "runtime_release_allowed": false,
+    "next_phase": "Phase 27.112 — Qabas Primary License Resolution Gate, no training"
+  }
+}

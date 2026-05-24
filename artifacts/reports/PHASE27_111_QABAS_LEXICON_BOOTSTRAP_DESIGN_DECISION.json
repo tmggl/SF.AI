@@ -1,0 +1,12 @@
+{
+  "decision_id": "PHASE27_111_QABAS_LEXICON_BOOTSTRAP_DESIGN_DECISION",
+  "engineering_decision": "BLOCK_QABAS_IMPORT_ALLOW_PHASE27_112_LICENSE_RESOLUTION_GATE",
+  "license_conflict_detected": true,
+  "qabas_design_allowed": true,
+  "qabas_term_import_allowed_now": false,
+  "external_training_text_import_allowed": false,
+  "external_tokenizer_vocab_import_allowed": false,
+  "new_training_allowed": false,
+  "runtime_release_allowed": false,
+  "next_phase": "Phase 27.112 — Qabas Primary License Resolution Gate, no training"
+}

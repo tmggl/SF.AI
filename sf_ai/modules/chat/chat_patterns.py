@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.110: صممنا بوابة إدخال مرخصة للمصادر المجانية. "
-    "Qabas مسموح الآن كتصميم lexicon/topic فقط، وTashkeela محجوبة للتدريب "
-    "حتى حل تضارب الترخيص. التالي Phase 27.111 Qabas Lexicon Bootstrap بلا تدريب.",
+    "وصلنا إلى Phase 27.111: صممنا مسار Qabas كـ lexicon/topic bootstrap، "
+    "لكن الاستيراد الفعلي محجوب لأن ترخيص Masader يختلف عن صفحة SinaLab. "
+    "التالي Phase 27.112 لحسم ترخيص Qabas الأساسي، بلا تدريب.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

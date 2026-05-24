@@ -1,0 +1,36 @@
+{
+  "source_id": "qabas",
+  "name": "Qabas",
+  "source_type": "lexicon",
+  "language_scope": [
+    "msa"
+  ],
+  "dialect_scope": [
+    "msa"
+  ],
+  "masader_metadata_file": "resources/external_sources/selected_masader_metadata/qabas.json",
+  "masader_license": "Apache-1.0",
+  "masader_link": "https://sina.birzeit.edu/qabas",
+  "primary_resource_page": "https://sina.birzeit.edu/resources/",
+  "primary_qabas_page": "https://sina.birzeit.edu/qabas",
+  "paper": "https://arxiv.org/pdf/2406.06598",
+  "observed_primary_license": "CC-BY-ND-4.0",
+  "license_conflict": true,
+  "license_conflict_summary": "Masader metadata lists Apache-1.0, while the SinaLab resources page lists Qabas under CC-BY-ND-4.0. Actual term import is blocked until the downloadable artifact license is captured and reviewed.",
+  "allowed_now": {
+    "metadata_reference": true,
+    "schema_design": true,
+    "field_mapping_design": true,
+    "raw_entry_import": false,
+    "training_text_import": false,
+    "tokenizer_vocab_import": false,
+    "runtime_lookup": false
+  },
+  "required_next_gates": [
+    "capture_downloadable_artifact_license",
+    "resolve_apache_vs_cc_by_nd_conflict",
+    "verify_no_no_derivatives_block_on_adapted_lexicon_use",
+    "deduplicate_against_saudi_seed_v1",
+    "quality_sample_review_before_any_import"
+  ]
+}

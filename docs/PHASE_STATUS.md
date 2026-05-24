@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.110 / 30**
-- **المرحلة الحالية:** **Phase 27.110 — Licensed Ingestion Design**
-- **حالة المرحلة الحالية:** **اكتمل تصميم إدخال مرخص: Qabas مسموح كـ lexicon/topic فقط؛ Tashkeela محجوبة للتدريب حتى حل الترخيص؛ لا تدريب الآن**
-- **المرحلة التالية المقترحة:** Phase 27.111 — Qabas Lexicon Bootstrap Design, no training.
+- **الرحلة الحالية:** **Phase 27.111 / 30**
+- **المرحلة الحالية:** **Phase 27.111 — Qabas Lexicon Bootstrap Design**
+- **حالة المرحلة الحالية:** **اكتمل تصميم Qabas bootstrap؛ الاستيراد الفعلي محجوب بسبب تضارب الترخيص بين Masader وSinaLab؛ لا تدريب الآن**
+- **المرحلة التالية المقترحة:** Phase 27.112 — Qabas Primary License Resolution Gate, no training.
 - **التحول الاستراتيجي المعتمد:** **SF-native Objective/Curriculum/Decoding Acceleration Track** — تسريع هندسي فقط؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -166,6 +166,7 @@
 | Phase 27.108 | Social Subfamily + Topic Variant Data Pack | ✅ data_pack_ready_for_audit_no_training | ✅ |
 | Phase 27.109 | Free Linguistic Resource Intake Gate | ✅ free_resource_intake_ready_no_training | ✅ |
 | Phase 27.110 | Licensed Ingestion Design | ✅ licensed_ingestion_design_ready_no_training | ✅ |
+| Phase 27.111 | Qabas Lexicon Bootstrap Design | ✅ qabas_bootstrap_design_ready_import_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1928,7 +1929,7 @@ make api
   - `issues=0`
   - `gold=4013`
   - `silver=5112`
-- التالي المسموح بعد اكتمال تصميم الإدخال المرخص: Phase 27.111 Qabas lexicon bootstrap design، بلا تدريب.
+- التالي المسموح بعد اكتمال تصميم Qabas bootstrap: Phase 27.112 Qabas primary license resolution gate، بلا تدريب.
 - المحظور: training، runtime release رسمي، SF-50M، tokenizer retrain،
   pretrained/open-weight.
 - التقارير:
@@ -1994,6 +1995,38 @@ make api
 - التالي: Phase 27.111 — Qabas Lexicon Bootstrap Design, no training.
 - المحظور: external training text import، pretrained vocab، tokenizer merges،
   runtime release، SF-50M، وإدخال أي مصدر غير مرخص في corpus.
+
+## Phase 27.111 — Qabas Lexicon Bootstrap Design
+
+**الحالة:** مكتملة كتصميم. لا import فعلي من Qabas ولا تدريب.
+
+- status: `PHASE27_111_QABAS_BOOTSTRAP_DESIGN_READY_IMPORT_BLOCKED`.
+- القرار: `PHASE27_111_QABAS_LEXICON_BOOTSTRAP_DESIGN_DECISION`.
+- القرار الهندسي: `BLOCK_QABAS_IMPORT_ALLOW_PHASE27_112_LICENSE_RESOLUTION_GATE`.
+- الهدف: تصميم كيف نستفيد من Qabas لاحقًا كـ lexicon/topic/protected-terms
+  دون تحويله إلى tokenizer vocab جاهز أو corpus تدريبي.
+- نتيجة التحقق:
+  - Masader metadata تعرض Qabas بترخيص `Apache-1.0`.
+  - صفحة SinaLab resources تعرض Qabas بترخيص `CC-BY-ND-4.0`.
+  - لهذا السبب حُظر إدخال أي raw Qabas entries حتى Phase 27.112.
+- المسموح الآن:
+  - source card.
+  - field mapping design.
+  - dedupe/quality/license gates.
+  - placeholder فقط في `resources/lexicons/imported/qabas_bootstrap/README.md`.
+- الممنوع الآن:
+  - إدخال `qabas*.jsonl` في `data/corpus`.
+  - إدخال Qabas كـ tokenizer vocab أو merges.
+  - إنشاء candidate terms/topics فعلية قبل حل الترخيص.
+  - training/runtime release/SF-50M.
+- الملفات:
+  - `resources/external_sources/qabas_source_card_phase27_111.json`
+  - `resources/external_sources/phase27_111_qabas_lexicon_bootstrap_design.json`
+  - `resources/lexicons/imported/qabas_bootstrap/README.md`
+  - `artifacts/reports/phase27_111_qabas_lexicon_bootstrap_design_report.json`
+  - `artifacts/reports/PHASE27_111_QABAS_LEXICON_BOOTSTRAP_DESIGN_DECISION.json`
+  - [PHASE27_111_QABAS_LEXICON_BOOTSTRAP_DESIGN_REPORT.md](./PHASE27_111_QABAS_LEXICON_BOOTSTRAP_DESIGN_REPORT.md)
+- التالي: Phase 27.112 — Qabas Primary License Resolution Gate, no training.
 
 ---
 
