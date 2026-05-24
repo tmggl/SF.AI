@@ -720,3 +720,21 @@ def test_phase27_70_open_social_repair_fails_and_blocks_runtime() -> None:
     assert report["decisions"]["ui_open_allowed"] is False
     assert report["decisions"]["sf50m_allowed"] is False
     assert report["decisions"]["repair_required_before_runtime"] is True
+
+
+def test_phase27_71_candidate_selection_blocks_runtime_without_stable_candidate() -> None:
+    report = _report("phase27_71_candidate_selection_report.json")
+    assert report["phase"] == "Phase 27.71"
+    assert report["status"] == "NO_STABLE_CANDIDATE_RUNTIME_BLOCKED"
+    assert report["training_started"] is False
+    assert report["tokenizer"] == "artifacts/tokenizers/sf_bpe/v8_phase27_65"
+    assert report["selected_candidate"]["name"] == "phase27_68_shadow_failure_repair"
+    assert report["selected_candidate"]["score"] == 136
+    assert report["selected_candidate"]["total"] == 140
+    assert report["selected_candidate"]["phase27_69_summary"]["passed"] == 56
+    assert report["selected_candidate"]["phase27_67_summary"]["passed"] == 50
+    assert report["selected_candidate"]["phase27_60_summary"]["passed"] == 30
+    assert report["decisions"]["runtime_switch_allowed"] is False
+    assert report["decisions"]["ui_open_allowed"] is False
+    assert report["decisions"]["sf50m_allowed"] is False
+    assert report["decisions"]["phase27_72_training_allowed"] is True

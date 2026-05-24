@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.70: جرّبنا إصلاح open_social وfine-tune سياديًا من checkpoint 27.68، لكن النتيجة لم تتجاوز baseline: 55/60 fresh و48/50 known. التالي Phase 27.71 لاختيار candida"
+      "response_preview": "وصلنا إلى Phase 27.71: قارنا مرشحي tokenizer v8، وأفضل مرشح بقي Phase 27.68 بنتيجة 136/140. لا يوجد مرشح مستقر يمر كل البوابات. التالي Phase 27.72 لإصلاح ثبات العائلات قبل أي runti"
     },
     {
       "scenario_id": "clarification_repair_flow",

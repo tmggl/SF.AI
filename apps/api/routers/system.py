@@ -61,10 +61,10 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.70 — Open-Social Repair",
-        current_phase_status="failed_open_social_repair_runtime_blocked",
+        current_phase="Phase 27.71 — Candidate Selection and Stability Strategy",
+        current_phase_status="no_stable_candidate_runtime_blocked",
         next_phase=(
-            "Phase 27.71 candidate-selection and stability strategy before any runtime switch"
+            "Phase 27.72 stability-first curriculum/selection repair before any runtime switch"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -464,6 +464,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_70_open_social_repair",
                 status="failed_open_social_repair_runtime_blocked",
                 phase="Phase 27.70",
+            ),
+            ComponentStatus(
+                name="phase27_71_candidate_selection",
+                status="no_stable_candidate_runtime_blocked",
+                phase="Phase 27.71",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

@@ -140,6 +140,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.68 | Shadow Failure Repair | مكتملة؛ known shadow `50/50` وregression `30/30`, runtime محجوب |
 | Phase 27.69 | New Fresh Shadow Canary | مكتملة كتقييم؛ strong `56/60`, runtime محجوب |
 | Phase 27.70 | Open-Social Repair | مكتملة كتجربة فاشلة؛ patch/fine-tune لم يتجاوز baseline، runtime محجوب |
+| Phase 27.71 | Candidate Selection and Stability Strategy | مكتملة كتقييم؛ أفضل مرشح `phase27_68` بنتيجة `136/140`, runtime محجوب |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3664,7 +3665,11 @@ tokenizer v8 مطلوب قبل أي LM repair جديد. لا runtime switch، ل
 
 التالي:
 
-**Phase 27.70 — inspect Phase 27.69 open_social failures and repair before runtime**
+**Phase 27.70 — inspect Phase 27.69 open_social failures and repair before runtime** — اكتملت كتجربة فاشلة، ثم **Phase 27.71 — Candidate Selection and Stability Strategy** اختارت `phase27_68` كأفضل مرشح `136/140` مع بقاء runtime محجوبًا.
+
+التالي الرسمي الآن:
+
+**Phase 27.72 — stability-first curriculum/selection repair before runtime**
 
 ### artifacts
 - [PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md](./PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md)
