@@ -124,6 +124,15 @@ def test_phase27_42_generation_guard_allows_aligned_planning() -> None:
     assert verdict.reason == "passed"
 
 
+def test_phase27_70_generation_guard_allows_plan_step_planning() -> None:
+    verdict = GenerationGuard(min_chars=4).inspect_for_prompt(
+        "كيف أقسم وقتي اليوم",
+        "اكتب خطة قصيرة: مهمة واحدة الآن، ثم خطوة بعدها.",
+    )
+    assert verdict.allowed is True
+    assert verdict.reason == "passed"
+
+
 def test_generation_guard_does_not_treat_bilsaudi_definition_as_language_preference() -> None:
     verdict = GenerationGuard(min_chars=4).inspect_for_prompt(
         "فسر التعاون بالسعودي",

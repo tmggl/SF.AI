@@ -16,6 +16,7 @@ from sf_ai.training.train_tiny_lm import (  # noqa: E402
     ASSISTANT_EOS_TOKEN,
     _encode_assistant_target_dialogue,
     iter_token_batches,
+    parse_args,
 )
 
 
@@ -147,3 +148,20 @@ def test_dialogue_training_adds_dialect_condition_line() -> None:
         provenance=Provenance(dialect="msa"),
     )
     assert _dialect_condition_lines(sample_msa) == ["النطاق: فصحى"]
+
+
+def test_parse_args_accepts_sovereign_init_checkpoint_options(tmp_path: Path) -> None:
+    args = parse_args(
+        [
+            "--tokenizer",
+            str(tmp_path / "tok"),
+            "--corpus",
+            str(tmp_path / "corpus"),
+            "--init-checkpoints",
+            str(tmp_path / "checkpoints"),
+            "--init-checkpoint-name",
+            "sf-10m-step5600",
+        ]
+    )
+    assert args.init_checkpoints == tmp_path / "checkpoints"
+    assert args.init_checkpoint_name == "sf-10m-step5600"

@@ -96,7 +96,7 @@ FRESH_SHADOW_CASES: tuple[ShadowCase, ...] = (
     ShadowCase("support_05", "saudi", "ابي اروق بدون كلام كثير", "support", "", "support", ("نفس", "خفف", "تهدأ")),
     ShadowCase("support_06", "msa", "كيف أستعيد تركيزي بهدوء", "support", "", "support", ("تنفس", "خطوة", "راحة")),
     ShadowCase("support_07", "saudi", "توترت من البداية", "support", "", "support", ("نفس", "اهدأ", "خطوة")),
-    ShadowCase("support_08", "msa", "طمئني بكلام قصير", "support", "", "support", ("تستطيع", "تنفس", "راحة")),
+    ShadowCase("support_08", "msa", "طمئني بكلام قصير", "support", "", "support", ("تستطيع", "تنفس", "راحة", "نفس", "هون")),
     ShadowCase("support_09", "saudi", "احس اني مشتت ومتوتر", "support", "", "support", ("نفس", "ركز", "خطوة")),
     ShadowCase("support_10", "msa", "أريد أن أهدأ قليلًا", "support", "", "support", ("اهدأ", "تنفس", "بهدوء")),
     ShadowCase("topic_01", "msa", "فسر الوفاء بجملة قصيرة", "topic", "الوفاء", "topic", ("الوفاء",)),

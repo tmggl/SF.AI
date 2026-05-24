@@ -361,6 +361,9 @@ phase27-shadow-failure-repair:
 phase27-new-fresh-shadow-canary:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_69_new_fresh_shadow_canary.py $(ARGS)
 
+phase27-open-social-repair:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_70_open_social_repair.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 

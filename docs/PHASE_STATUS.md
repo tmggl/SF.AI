@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.69 / 30**
-- **المرحلة الحالية:** **Phase 27.69 — New Fresh Shadow Canary**
-- **حالة المرحلة الحالية:** **اكتملت كتقييم فقط؛ fresh shadow جديد قوي `56/60` والـ runtime محجوب**
-- **المرحلة التالية المقترحة:** Phase 27.70 inspect Phase 27.69 open_social failures and repair before runtime.
+- **الرحلة الحالية:** **Phase 27.70 / 30**
+- **المرحلة الحالية:** **Phase 27.70 — Open-Social Repair**
+- **حالة المرحلة الحالية:** **اكتملت كتجربة إصلاح فاشلة؛ `55/60` fresh و`48/50` known و`30/30` regression؛ الـ runtime محجوب**
+- **المرحلة التالية المقترحة:** Phase 27.71 candidate-selection and stability strategy before any runtime switch.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -118,6 +118,7 @@
 | Phase 27.67 | Fresh Shadow Canary | ✅ failed_fresh_shadow_canary_runtime_blocked | ✅ |
 | Phase 27.68 | Shadow Failure Repair | ✅ passed_shadow_failure_repair_ready_for_new_fresh_shadow_runtime_blocked | ✅ |
 | Phase 27.69 | New Fresh Shadow Canary | ✅ strong_new_fresh_shadow_canary_runtime_blocked | ✅ |
+| Phase 27.70 | Open-Social Repair | ✅ failed_open_social_repair_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |

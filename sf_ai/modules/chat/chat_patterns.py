@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.69: اختبرنا fresh shadow جديدًا بعد الإصلاح، والنتيجة "
-    "56/60 مع novelty 60/60. هذا قوي لكنه ليس كافيًا للواجهة؛ بقي فشل open_social. "
-    "التالي Phase 27.70 لإصلاح open_social فقط قبل أي runtime.",
+    "وصلنا إلى Phase 27.70: جرّبنا إصلاح open_social وfine-tune سياديًا من "
+    "checkpoint 27.68، لكن النتيجة لم تتجاوز baseline: 55/60 fresh و48/50 known. "
+    "التالي Phase 27.71 لاختيار candidate واستراتيجية ثبات قبل أي runtime.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

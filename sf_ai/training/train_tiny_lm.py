@@ -325,6 +325,10 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     p.add_argument("--checkpoints", type=Path,
                    default=Path("artifacts/checkpoints"))
     p.add_argument("--checkpoint-name", type=str, default="sf-10m-step0")
+    p.add_argument("--init-checkpoints", type=Path, default=None,
+                   help="Optional sovereign checkpoint root to initialize from before training")
+    p.add_argument("--init-checkpoint-name", type=str, default=None,
+                   help="Checkpoint name under --init-checkpoints; requires sf_origin metadata")
     p.add_argument("--save-every", type=int, default=50)
     p.add_argument("--seed", type=int, default=1337)
     p.add_argument("--stream-format", choices=["dialogue", "messages"], default="dialogue",
@@ -375,9 +379,21 @@ def run(argv: list[str]) -> int:
 
     torch_device = torch.device(device.name)
     model.to(torch_device)
-    optimizer = build_optimizer(model.parameters(), OptimizerSpec(lr=args.lr))
 
     ckpt_mgr = CheckpointManager(args.checkpoints)
+    if args.init_checkpoints or args.init_checkpoint_name:
+        if not args.init_checkpoints or not args.init_checkpoint_name:
+            print(
+                "error: --init-checkpoints and --init-checkpoint-name must be provided together",
+                file=sys.stderr,
+            )
+            return 2
+        init_mgr = CheckpointManager(args.init_checkpoints)
+        init_mgr.assert_sovereign(args.init_checkpoint_name)
+        model.load_state_dict(init_mgr.load_state(args.init_checkpoint_name))
+        print(f"initialized from sovereign checkpoint: {args.init_checkpoints}/{args.init_checkpoint_name}")
+
+    optimizer = build_optimizer(model.parameters(), OptimizerSpec(lr=args.lr))
 
     if args.epochs < 1:
         print("error: --epochs must be >= 1", file=sys.stderr)
@@ -450,7 +466,8 @@ def _save(ckpt_mgr: CheckpointManager, model: TinyTransformer, args, step: int, 
             f"seed={args.seed} batch={args.batch_size} seq={args.seq_len} "
             f"epochs={args.epochs} stream_format={args.stream_format} "
             f"loss_scope={args.loss_scope} packing_mode={args.packing_mode} "
-            f"split={args.split_name if args.split_manifest else 'none'}"
+            f"split={args.split_name if args.split_manifest else 'none'} "
+            f"init={args.init_checkpoints / args.init_checkpoint_name if args.init_checkpoints and args.init_checkpoint_name else 'none'}"
         ),
     )
     ckpt_mgr.save_metadata(name, meta)
