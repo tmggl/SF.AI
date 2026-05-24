@@ -86,6 +86,7 @@ help:
 	@echo "  make phase27-candidate-selection Run Phase 27.71 candidate selection/stability gate"
 	@echo "  make phase27-stability-first-repair Run Phase 27.72 stability-first micro repair"
 	@echo "  make phase27-open-social-failure-inspection Run Phase 27.73 open_social failure inspection"
+	@echo "  make phase27-open-social-semantic-collapse-repair Run Phase 27.74 semantic-collapse repair"
 	@echo "  make prepare-dialogue-batch ARGS=...  Prepare reviewed chat exports (Phase 18)"
 	@echo "  make train-bpe ARGS=...   Train SF-BPE tokenizer (requires phase confirmation flag)"
 	@echo "  make train-lm ARGS=...    Train SF native LM (Phase 6)"
@@ -375,6 +376,9 @@ phase27-stability-first-repair:
 
 phase27-open-social-failure-inspection:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_73_open_social_failure_inspection.py $(ARGS)
+
+phase27-open-social-semantic-collapse-repair:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_74_open_social_semantic_collapse_repair.py $(ARGS)
 
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)

@@ -83,10 +83,10 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.73: فحصنا فشلَي open_social المتبقيين من نتيجة "
-    "138/140. الحارس صار يمنع الشظايا المشوهة مثل «بمها»، لكن بقي انهيار "
-    "دلالي إلى تعريف موضوع بدل فتح سالفة. التالي Phase 27.74 إصلاح "
-    "semantic-collapse قبل أي runtime.",
+    "وصلنا إلى Phase 27.74: جرّبنا إصلاح semantic-collapse لـ open_social "
+    "من checkpoint 27.72، لكنه تراجع إلى 56/60 fresh و49/50 known. "
+    "الـ runtime ما زال محجوبًا. التالي Phase 27.75 لتحليل فشل "
+    "الشظايا مثل «بس الفة» وتعديل استراتيجية open_social.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

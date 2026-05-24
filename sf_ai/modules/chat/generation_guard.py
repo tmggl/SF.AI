@@ -94,6 +94,8 @@ _MODEL_ARTIFACT_FRAGMENTS = (
     "بمالحقيقة",
     "بس الفة",
     "موضوععن",
+    "موضوعاموضوععن",
+    "أكموضوع",
     "بمإنك",
 )
 _BROKEN_PREFIX_RE = re.compile(r"^\s*[\u0600-\u06FF]\s*[؟?]")

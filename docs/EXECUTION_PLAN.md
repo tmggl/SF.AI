@@ -143,6 +143,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.71 | Candidate Selection and Stability Strategy | مكتملة كتقييم؛ أفضل مرشح `phase27_68` بنتيجة `136/140`, runtime محجوب |
 | Phase 27.72 | Stability-First Micro Repair | مكتملة بتحسن غير كاف؛ `138/140`, runtime محجوب |
 | Phase 27.73 | Open-Social Failure Inspection | مكتملة كفحص وحارس؛ بقي semantic collapse، runtime محجوب |
+| Phase 27.74 | Open-Social Semantic-Collapse Repair | فشلت كتدريب تشغيل؛ `56/60`, `49/50`, `30/30`, runtime محجوب |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3667,17 +3668,25 @@ tokenizer v8 مطلوب قبل أي LM repair جديد. لا runtime switch، ل
 
 التالي:
 
-**Phase 27.70 — inspect Phase 27.69 open_social failures and repair before runtime** — اكتملت كتجربة فاشلة، ثم **Phase 27.71 — Candidate Selection and Stability Strategy** اختارت `phase27_68` كأفضل مرشح `136/140` مع بقاء runtime محجوبًا، ثم **Phase 27.72 — Stability-First Micro Repair** حسّنت النتيجة إلى `138/140` مع بقاء فشلين open_social، ثم **Phase 27.73 — Open-Social Failure Inspection** سدّت فجوة حارس الشظايا وشخّصت semantic collapse المتبقي.
+**Phase 27.70 — inspect Phase 27.69 open_social failures and repair before runtime** — اكتملت كتجربة فاشلة، ثم **Phase 27.71 — Candidate Selection and Stability Strategy** اختارت `phase27_68` كأفضل مرشح `136/140` مع بقاء runtime محجوبًا، ثم **Phase 27.72 — Stability-First Micro Repair** حسّنت النتيجة إلى `138/140` مع بقاء فشلين open_social، ثم **Phase 27.73 — Open-Social Failure Inspection** سدّت فجوة حارس الشظايا وشخّصت semantic collapse المتبقي، ثم **Phase 27.74 — Open-Social Semantic-Collapse Repair** جرّبت ثلاثة مرشحين من checkpoint 27.72 لكنها تراجعت إلى `56/60` fresh و`49/50` known.
 
 التالي الرسمي الآن:
 
-**Phase 27.74 — targeted open_social semantic-collapse repair before runtime**
+**Phase 27.75 — inspect Phase 27.74 failures and revise open_social strategy**
 
 ### نتيجة Phase 27.73
 - لم يبدأ تدريب جديد.
 - `open_social_09` كان يمر الحارس رغم fragment مثل `بمها`؛ أضيفت fragments إلى `GenerationGuard` وتُحجب الآن كـ `model_artifact_fragment`.
 - `open_social_12` ينهار دلاليًا إلى تعريف `التعاون` بدل فتح سالفة؛ هذا يحتاج repair تدريبي ضيق، لا مجرد حارس.
 - القرار: لا runtime switch ولا UI بالمولّد ولا SF-50M ولا Phase 28 قبل Phase 27.74.
+
+### نتيجة Phase 27.74
+- بدأ تدريب إصلاح ضيق على `open_social` من checkpoint 27.72.
+- جرّب ثلاثة مرشحين: `gentle_48`, `balanced_72`, `focused_96`.
+- أفضل مرشح كان `gentle_48`: `56/60` fresh، `49/50` known، `30/30` regression.
+- النتيجة أسوأ من baseline 27.72، لذلك لا runtime ولا UI.
+- سبب الفشل الجديد: fragments في open_social مثل `بس الفة`, `موضوعاموضوععن`, `أكموضوع`.
+- القرار: Phase 27.75 يجب أن يكون inspection/strategy لا تدريب أعمى.
 
 ### artifacts
 - [PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md](./PHASE27_69_NEW_FRESH_SHADOW_CANARY_REPORT.md)
@@ -3686,6 +3695,9 @@ tokenizer v8 مطلوب قبل أي LM repair جديد. لا runtime switch، ل
 - [PHASE27_73_OPEN_SOCIAL_FAILURE_INSPECTION_REPORT.md](./PHASE27_73_OPEN_SOCIAL_FAILURE_INSPECTION_REPORT.md)
 - `artifacts/reports/phase27_73_open_social_failure_inspection_report.json`
 - `artifacts/samples/phase27_73_open_social_failure_inspection.md`
+- [PHASE27_74_OPEN_SOCIAL_SEMANTIC_COLLAPSE_REPAIR_REPORT.md](./PHASE27_74_OPEN_SOCIAL_SEMANTIC_COLLAPSE_REPAIR_REPORT.md)
+- `artifacts/reports/phase27_74_open_social_semantic_collapse_repair_report.json`
+- `artifacts/samples/phase27_74_open_social_semantic_collapse_repair.md`
 
 ---
 

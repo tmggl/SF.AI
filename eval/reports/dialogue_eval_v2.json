@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.73: فحصنا فشلَي open_social المتبقيين من نتيجة 138/140. الحارس صار يمنع الشظايا المشوهة مثل «بمها»، لكن بقي انهيار دلالي إلى تعريف موضوع بدل فتح سالفة. التالي Ph"
+      "response_preview": "وصلنا إلى Phase 27.74: جرّبنا إصلاح semantic-collapse لـ open_social من checkpoint 27.72، لكنه تراجع إلى 56/60 fresh و49/50 known. الـ runtime ما زال محجوبًا. التالي Phase 27.75 لت"
     },
     {
       "scenario_id": "clarification_repair_flow",

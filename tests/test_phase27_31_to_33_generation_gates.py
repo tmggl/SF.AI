@@ -775,3 +775,22 @@ def test_phase27_73_open_social_failure_inspection_blocks_runtime() -> None:
     assert report["decisions"]["phase28_allowed"] is False
     assert report["decisions"]["guard_gap_fixed"] is True
     assert report["diagnosis_summary"]["remaining_semantic_failures_count"] == 1
+
+
+def test_phase27_74_open_social_semantic_collapse_repair_blocks_runtime() -> None:
+    report = _report("phase27_74_open_social_semantic_collapse_repair_report.json")
+    assert report["phase"] == "Phase 27.74"
+    assert report["status"] == "FAILED_OPEN_SOCIAL_SEMANTIC_COLLAPSE_REPAIR_RUNTIME_BLOCKED"
+    assert report["training_started"] is True
+    assert report["tokenizer"] == "artifacts/tokenizers/sf_bpe/v8_phase27_65"
+    assert report["init_checkpoint_name"] == "sf-10m-step64"
+    selected = report["selected_candidate"]
+    assert selected["candidate"] == "gentle_48"
+    assert selected["phase27_69_summary"]["passed"] == 56
+    assert selected["phase27_67_summary"]["passed"] == 49
+    assert selected["phase27_60_summary"]["passed"] == 30
+    assert report["decisions"]["runtime_switch_allowed"] is False
+    assert report["decisions"]["ui_open_allowed"] is False
+    assert report["decisions"]["sf50m_allowed"] is False
+    assert report["decisions"]["phase28_allowed"] is False
+    assert report["decisions"]["repair_required_before_runtime"] is True
