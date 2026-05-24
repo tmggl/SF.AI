@@ -1,0 +1,121 @@
+[
+  {
+    "source_id": "arabic_ontology",
+    "name": "Arabic Ontology",
+    "url": "https://sina.birzeit.edu/resources/",
+    "source_type": "ontology_lexical_semantics",
+    "observed_license": "CC-BY-4.0",
+    "primary_signal": "SinaLab resources listing marks Arabic Ontology as CC-BY-4.0.",
+    "lane": "permissive_candidate_metadata_only",
+    "decision": "allow_phase27_114_source_card_and_license_matrix_no_import",
+    "lexical_import_allowed_next": false,
+    "training_text_allowed_next": false,
+    "tokenizer_vocab_allowed_next": false,
+    "eval_allowed_next": true,
+    "why": "Potentially useful for concept/topic coverage, but needs a source card and artifact license capture first.",
+    "required_gates": [
+      "capture_primary_download_license",
+      "artifact_checksum",
+      "field_mapping_design",
+      "no_tokenizer_vocab_import",
+      "dedupe_against_saudi_seed_v1"
+    ]
+  },
+  {
+    "source_id": "sinalab_synonyms",
+    "name": "SinaLab Arabic Synonyms Dataset",
+    "url": "https://sina.birzeit.edu/resources/",
+    "source_type": "synonym_dataset",
+    "observed_license": "CC-BY-4.0",
+    "primary_signal": "SinaLab resources listing marks Synonyms dataset as CC-BY-4.0.",
+    "lane": "permissive_candidate_metadata_only",
+    "decision": "allow_phase27_114_source_card_and_license_matrix_no_import",
+    "lexical_import_allowed_next": false,
+    "training_text_allowed_next": false,
+    "tokenizer_vocab_allowed_next": false,
+    "eval_allowed_next": true,
+    "why": "Good candidate for semantic alternatives/eval; still not dialogue corpus and not tokenizer vocab.",
+    "required_gates": [
+      "capture_primary_download_license",
+      "artifact_checksum",
+      "separate_synonym_eval_from_training",
+      "no_template_masking"
+    ]
+  },
+  {
+    "source_id": "salma_wsd",
+    "name": "SALMA Arabic Sense Annotated Corpus",
+    "url": "https://huggingface.co/datasets/SinaLab/SALMA-Arabic_Sense_Annotated_Corpus/tree/main",
+    "source_type": "sense_annotated_corpus",
+    "observed_license": "CC-BY-4.0",
+    "primary_signal": "SinaLab/HuggingFace pages show CC-BY-4.0.",
+    "lane": "eval_candidate_not_lexicon",
+    "decision": "eval_only_until_text_lane_gate",
+    "lexical_import_allowed_next": false,
+    "training_text_allowed_next": false,
+    "tokenizer_vocab_allowed_next": false,
+    "eval_allowed_next": true,
+    "why": "Useful for WSD/eval, but it is text/corpus-like and must not enter dialogue training here.",
+    "required_gates": [
+      "text_lane_separation",
+      "privacy_and_quality_sample",
+      "no_dialogue_corpus_contamination"
+    ]
+  },
+  {
+    "source_id": "arabic_wordnet_v4",
+    "name": "Arabic WordNet 4.0",
+    "url": "https://linguistlist.org/issues/37/321/",
+    "source_type": "wordnet",
+    "observed_license": "CC-BY-4.0",
+    "primary_signal": "LINGUIST announcement says CC-BY-4.0, but methodology says Gemini 3 Pro Preview.",
+    "lane": "blocked_model_derived",
+    "decision": "block_import_due_to_external_model_derived_content",
+    "lexical_import_allowed_next": false,
+    "training_text_allowed_next": false,
+    "tokenizer_vocab_allowed_next": false,
+    "eval_allowed_next": false,
+    "why": "Large and permissively licensed, but generated through external AI, so it conflicts with SF-native data purity.",
+    "required_gates": [
+      "do_not_import_into_sf_native_brain",
+      "reference_only_if_needed"
+    ]
+  },
+  {
+    "source_id": "omw_arabic_wordnet_v2",
+    "name": "Open Multilingual Wordnet Arabic WordNet v2",
+    "url": "https://omwn.org/omw1.html",
+    "source_type": "wordnet",
+    "observed_license": "CC-BY-SA-3.0",
+    "primary_signal": "OMW lists Arabic WordNet v2 as CC BY SA 3.0.",
+    "lane": "restricted_sharealike",
+    "decision": "reference_or_eval_only_until_sharealike_policy",
+    "lexical_import_allowed_next": false,
+    "training_text_allowed_next": false,
+    "tokenizer_vocab_allowed_next": false,
+    "eval_allowed_next": true,
+    "why": "Redistributable, but share-alike is not clean enough for unrestricted SF lexicon import.",
+    "required_gates": [
+      "sharealike_policy_decision",
+      "license_compatibility_review"
+    ]
+  },
+  {
+    "source_id": "qabas",
+    "name": "Qabas Lexicon",
+    "url": "https://sina.birzeit.edu/qabas",
+    "source_type": "lexicon",
+    "observed_license": "CC-BY-ND-4.0 primary signal",
+    "primary_signal": "Phase 27.112 resolved Qabas as reference-only.",
+    "lane": "reference_only",
+    "decision": "blocked_from_import_use_only_for_discovery",
+    "lexical_import_allowed_next": false,
+    "training_text_allowed_next": false,
+    "tokenizer_vocab_allowed_next": false,
+    "eval_allowed_next": false,
+    "why": "No-derivatives and conflicting metadata block raw entries and derived candidate terms.",
+    "required_gates": [
+      "do_not_import"
+    ]
+  }
+]

@@ -61,11 +61,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.112 — Qabas Primary License Resolution Gate",
+        current_phase="Phase 27.113 — Permissive Lexical Alternatives Intake Gate",
         current_phase_status=(
-            "phase27_112_qabas_reference_only_import_blocked"
+            "phase27_113_permissive_lexical_alternatives_ready_no_import"
         ),
-        next_phase="Phase 27.113 — Permissive Lexical Alternatives Intake Gate, no training",
+        next_phase="Phase 27.114 — Arabic Ontology/Synonyms Source Cards and License Matrix, no training",
         sovereign=True,
         uses_external_llm=False,
         uses_pretrained_weights=False,
@@ -684,6 +684,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_112_qabas_primary_license_resolution_gate",
                 status="qabas_reference_only_import_blocked",
                 phase="Phase 27.112",
+            ),
+            ComponentStatus(
+                name="phase27_113_permissive_lexical_alternatives_intake_gate",
+                status="permissive_lexical_alternatives_ready_no_import",
+                phase="Phase 27.113",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.112: حسمنا Qabas كمرجع فقط لأن المصدر الأساسي يعرض "
-    "ترخيص CC-BY-ND-4.0، فلا ندخله كمداخل مشتقة أو tokenizer vocab. "
-    "التالي Phase 27.113 للبحث عن بدائل lexical permissive بلا تدريب.",
+    "وصلنا إلى Phase 27.113: صنفنا بدائل lexical مرخصة. المرشحان التاليان "
+    "هما Arabic Ontology وSinaLab Synonyms كـ source cards فقط. "
+    "Arabic WordNet 4.0 محجوب لأنه model-derived. التالي Phase 27.114 بلا تدريب.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

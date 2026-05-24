@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.112
-الاسم: Qabas Primary License Resolution Gate
+المرحلة الحالية: Phase 27.113
+الاسم: Permissive Lexical Alternatives Intake Gate
 المسار الملزم: SF-native Objective/Curriculum/Decoding Acceleration Track
-القرار الرسمي: PHASE27_112_QABAS_PRIMARY_LICENSE_RESOLUTION_GATE_DECISION
+القرار الرسمي: PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_INTAKE_GATE_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -114,6 +114,8 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   Masader تعرض `Apache-1.0` بينما صفحة SinaLab resources تعرض `CC-BY-ND-4.0`.
 - Phase 27.112 حسم Qabas كـ reference-only لأن إشارة الترخيص الأساسية
   `CC-BY-ND-4.0` تمنع المشتقات ولا توجد رخصة artifact أوضح.
+- Phase 27.113 صنف بدائل lexical: `Arabic Ontology` و`SinaLab Synonyms`
+  للـ source cards فقط، وحجب `Arabic WordNet 4.0` لأنه model-derived عبر Gemini.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
@@ -134,7 +136,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   `docs/PHASE27_111_QABAS_LEXICON_BOOTSTRAP_DESIGN_REPORT.md`.
 - تقرير حسم الترخيص الحالي:
   `docs/PHASE27_112_QABAS_PRIMARY_LICENSE_RESOLUTION_GATE_REPORT.md`.
-- التالي: `Phase 27.113 — Permissive Lexical Alternatives Intake Gate, no training`.
+- تقرير البدائل الحالي:
+  `docs/PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_INTAKE_GATE_REPORT.md`.
+- التالي: `Phase 27.114 — Arabic Ontology/Synonyms Source Cards and License Matrix, no training`.
 
 الدليل السابق الذي سبب هذا re-anchor:
 
@@ -406,15 +410,15 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.113 — Permissive Lexical Alternatives Intake Gate, no training
+Phase 27.114 — Arabic Ontology/Synonyms Source Cards and License Matrix, no training
 ```
 
 مطلوب منها:
 
-- البحث عن مصادر lexical بديلة بترخيص permissive واضح مثل `CC-BY-4.0` أو
-  Apache/MIT، دون pretrained vocab.
-- إدخال metadata فقط أولًا، ثم source cards وlicense matrix.
-- Qabas يبقى reference-only ولا يدخل في candidates الفعلية.
+- إنشاء source cards لـ `Arabic Ontology` و`SinaLab Synonyms`.
+- إنشاء license matrix وartifact/download gates.
+- لا import فعلي حتى لو كانت الرخصة `CC-BY-4.0` قبل source-card gate.
+- Qabas وArabic WordNet 4.0 يبقيان خارج candidates الفعلية.
 - ممنوع training/SF-50M/tokenizer retrain/runtime release قبل هذه البوابة.
 
 ممنوع قبل نجاح البوابات:

@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.112: حسمنا Qabas كمرجع فقط لأن المصدر الأساسي يعرض ترخيص CC-BY-ND-4.0، فلا ندخله كمداخل مشتقة أو tokenizer vocab. التالي Phase 27.113 للبحث عن بدائل lexical perm"
+      "response_preview": "وصلنا إلى Phase 27.113: صنفنا بدائل lexical مرخصة. المرشحان التاليان هما Arabic Ontology وSinaLab Synonyms كـ source cards فقط. Arabic WordNet 4.0 محجوب لأنه model-derived. التالي "
     },
     {
       "scenario_id": "clarification_repair_flow",

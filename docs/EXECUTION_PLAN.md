@@ -4577,7 +4577,7 @@ Final Response
 
 ---
 
-## الحالة العملية الحالية — Phase 27.112
+## الحالة العملية الحالية — Phase 27.113
 
 المسار الحاكم هو:
 
@@ -4588,7 +4588,7 @@ SF-native Objective/Curriculum/Decoding Acceleration Track
 آخر قرار:
 
 ```text
-PHASE27_112_QABAS_PRIMARY_LICENSE_RESOLUTION_GATE_DECISION
+PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_INTAKE_GATE_DECISION
 ```
 
 الخلاصة:
@@ -4619,14 +4619,17 @@ PHASE27_112_QABAS_PRIMARY_LICENSE_RESOLUTION_GATE_DECISION
   (`CC-BY-ND-4.0`).
 - Phase 27.112 حسم Qabas كـ reference-only: لا raw entries ولا corpus ولا
   tokenizer vocab بسبب `CC-BY-ND-4.0` وتضارب الترخيص.
-- لا تدريب جديد قبل Phase 27.113 permissive lexical alternatives intake gate
-  ولا قبل بوابات corpus/license اللاحقة.
+- Phase 27.113 صنّف البدائل: `Arabic Ontology` و`SinaLab Synonyms` مسموحان
+  للمرحلة التالية كـ source cards/license matrix فقط. `Arabic WordNet 4.0`
+  محجوب لأنه model-derived عبر Gemini.
+- لا تدريب جديد قبل Phase 27.114 source cards/license matrix ولا قبل بوابات
+  corpus/license اللاحقة.
 - لا SF-50M قبل gate يثبت أن capacity هي السبب الأكبر.
 
 التالي:
 
 ```text
-Phase 27.113 — Permissive Lexical Alternatives Intake Gate, no training
+Phase 27.114 — Arabic Ontology/Synonyms Source Cards and License Matrix, no training
 ```
 
 ---

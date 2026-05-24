@@ -59,7 +59,8 @@
   مصادر مجانية مثل Masader/Qabas/Tashkeela وسحب Masader metadata summary فقط؛
   Phase 27.110 صمم license matrix وحدد Qabas كمسار lexicon/topic فقط؛
   Phase 27.111 صمم Qabas bootstrap لكنه حجب الاستيراد بسبب تضارب الترخيص؛
-  Phase 27.112 حسم Qabas كـ reference-only بسبب `CC-BY-ND-4.0`.
+  Phase 27.112 حسم Qabas كـ reference-only بسبب `CC-BY-ND-4.0`؛
+  Phase 27.113 صنف البدائل وسمح فقط بـ source cards لـ Arabic Ontology وSynonyms.
 - لا runtime release بدون `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - لا تعتمد loss/perplexity/micro-probe وحدها؛ النجاح يعني held-out dialogue
   quality, runtime usability, clean-stop, semantic correctness, family
@@ -72,13 +73,13 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 27.112 موثقة تاريخيًا، لكن الحالة العملية
+- المراحل من Phase 0 حتى Phase 27.113 موثقة تاريخيًا، لكن الحالة العملية
   الحالية هي:
-  `Phase 27.112 — Qabas Primary License Resolution Gate`
+  `Phase 27.113 — Permissive Lexical Alternatives Intake Gate`
   ضمن `SF-native Objective/Curriculum/Decoding Acceleration Track`.
   التقرير الملزم: `docs/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md`.
   القرار التنفيذي:
-  `PHASE27_112_QABAS_PRIMARY_LICENSE_RESOLUTION_GATE_DECISION`.
+  `PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_INTAKE_GATE_DECISION`.
   Phase 27.104 تبقى الدليل السابق: تدريب محدود نجح topic-wise وفشل
   all-family، وليست إذن runtime.
   تاريخيًا أضيفت دفعة `sf-ai-balanced-family-pack-v1`: `2500` سجل gold
@@ -134,7 +135,9 @@
   Qabas مسموح كـ lexicon/topic/protected-terms فقط، وتدريب Tashkeela محجوب.
   Phase 27.111 حجب import Qabas الفعلي بسبب تضارب `Apache-1.0` و`CC-BY-ND-4.0`.
   Phase 27.112 أبقى Qabas reference-only وفتح طريق البدائل permissive.
-- أول خطوة تالية: Phase 27.113 — Permissive Lexical Alternatives Intake Gate, no training.
+  Phase 27.113 صنف Arabic Ontology/Synonyms كمرشحين source-card فقط، وحجب
+  Arabic WordNet 4.0 لأنه model-derived.
+- أول خطوة تالية: Phase 27.114 — Arabic Ontology/Synonyms Source Cards and License Matrix, no training.
   لا تبدأ training ولا SF-50M ولا tokenizer retrain قبل هذه البوابة.
 - تفويض التكبير التلقائي معتمد، لكن مفعوله يبدأ فقط عندما تنجح gates؛
   حاليًا `SF-50M` ما زال محجوبًا لأن capacity وزنها `1%`.

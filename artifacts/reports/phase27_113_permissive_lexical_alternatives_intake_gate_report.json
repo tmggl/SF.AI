@@ -1,0 +1,186 @@
+{
+  "phase": "Phase 27.113",
+  "status": "PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_READY_NO_IMPORT",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "evidence": {
+    "sources": [
+      {
+        "id": "sinalab_resources",
+        "url": "https://sina.birzeit.edu/resources/",
+        "snippets": {
+          "arabic_ontology": "mpleKey” API token allows you to use all web services but with a limited number of requests (enough to try it!), if you need more requests, you need to Request API Token . --> + - Arabic Ontology الأنطولوجيا العربية An Arabic Wordnet with ontologically-clean content. Classification of the meanings of the Arabic terms, (see Article , see FAQ ). Web Service REST Search Ontol",
+          "salma_wsd": "ted in a database, with lexicographic search engine. (special licence) Qabas Lexicon Innovative lexicon - 58K lemmas linked with 110 lexicons and corpora 2M tokens. (CC-BY-ND-4.0) Salma WSD Arabic sense-annotated corpus (34k tokens). Multilevels: single-word, multi-word senses, and NER. (CC-BY-4.0) Synonyms Synonyms dataset, parallelly annotated by 4 linguists and fu",
+          "synonyms": "110 lexicons and corpora 2M tokens. (CC-BY-ND-4.0) Salma WSD Arabic sense-annotated corpus (34k tokens). Multilevels: single-word, multi-word senses, and NER. (CC-BY-4.0) Synonyms Synonyms dataset, parallelly annotated by 4 linguists and fuzzy values. (CC-BY-4.0) ArabGlossBERT 167K context-gloss pairs labeled with True/False to train a TSV BERT model for WSD. (CC-BY-4.0) + ",
+          "qabas_reference_block": "bic Wordnet with ontologically clean content. (CC-BY-4.0) Lexicographic DB 150 lexicons digitized and integrated in a database, with lexicographic search engine. (special licence) Qabas Lexicon Innovative lexicon - 58K lemmas linked with 110 lexicons and corpora 2M tokens. (CC-BY-ND-4.0) Salma WSD Arabic sense-annotated corpus (34k tokens). Multilevels: single-word, mult"
+        }
+      },
+      {
+        "id": "arabic_wordnet_v4_linguist",
+        "url": "https://linguistlist.org/issues/37/321/",
+        "snippets": {
+          "license": " Database for Modern Standard Arabic E-mail this message to a friend Arabic WordNet 4.0 is now available - a large-scale lexical database for Modern Standard Arabic released under CC BY 4.0. RESOURCE STATISTICS =================== - Synsets: 109,823 (100% Open English WordNet coverage) - Lexical entries: 124,653 - Senses: 166,643 - Synset relations: 265,676 - ILI cov",
+          "methodology": ") synsets = wn.synsets(lang=&#x27;arb&#x27;) METHODOLOGY =========== Arabic WordNet 4.0 was created using the expand approach, machine translating Open English WordNet into Arabic using Gemini 3 Pro Preview. The resource is derived from Open English WordNet (CC BY 4.0), which is based on Princeton WordNet 3.0. ATTRIBUTION =========== Derived from Open English WordNet (CC BY 4.0), bas"
+        }
+      },
+      {
+        "id": "omw_v1",
+        "url": "https://omwn.org/omw1.html",
+        "snippets": {
+          "redistribution": "size and accuracy. This page has (i) extracted and normalized the data, (ii) linked it to Princeton WordNet 3.0 and (iii) put it in one place. This page only includes those with a license that allows redistribution (Bond and Paik, 2012) . Search in OMW 1.3 (human curated) We extended this with automatically extracted data for over 150 languages from Wiktionary and the ‎Unicode Common Locale ",
+          "arabic_awn_v2": " wiktionary data nltk.download(\"extended_omw\") Summary of Wordnets 28 Available Wordnets Wordnet Lang Synsets Words Senses Core Licence Albanet als 4,675 5,988 9,599 31% CC BY 3.0 Arabic WordNet (AWN v2) arb 9,916 17,785 37,335 47% CC BY SA 3.0 BulTreeBank Wordnet (BTB-WN) bul 4,959 6,720 8,936 99% CC BY 3.0 Chinese Open Wordnet cmn 42,312 61,533 79,809 100% wordnet Chinese Wordne"
+        }
+      },
+      {
+        "id": "salma_huggingface",
+        "url": "https://huggingface.co/datasets/SinaLab/SALMA-Arabic_Sense_Annotated_Corpus/tree/main",
+        "snippets": {
+          "license": "ets Log In Sign Up Datasets: SinaLab / SALMA-Arabic_Sense_Annotated_Corpus like 0 Follow Sina Lab - Birzeit University 16 Languages: Arabic English Size: 10K&lt;n&lt;100K License: cc-by-4.0 Dataset card Files Files and versions xet Community main SALMA-Arabic_Sense_Annotated_Corpus 2.54 kB 1 contributor History: 2 commits mjarrar Update README.md a8f076a verified 4 m"
+        }
+      }
+    ]
+  },
+  "candidates": [
+    {
+      "source_id": "arabic_ontology",
+      "name": "Arabic Ontology",
+      "url": "https://sina.birzeit.edu/resources/",
+      "source_type": "ontology_lexical_semantics",
+      "observed_license": "CC-BY-4.0",
+      "primary_signal": "SinaLab resources listing marks Arabic Ontology as CC-BY-4.0.",
+      "lane": "permissive_candidate_metadata_only",
+      "decision": "allow_phase27_114_source_card_and_license_matrix_no_import",
+      "lexical_import_allowed_next": false,
+      "training_text_allowed_next": false,
+      "tokenizer_vocab_allowed_next": false,
+      "eval_allowed_next": true,
+      "why": "Potentially useful for concept/topic coverage, but needs a source card and artifact license capture first.",
+      "required_gates": [
+        "capture_primary_download_license",
+        "artifact_checksum",
+        "field_mapping_design",
+        "no_tokenizer_vocab_import",
+        "dedupe_against_saudi_seed_v1"
+      ]
+    },
+    {
+      "source_id": "sinalab_synonyms",
+      "name": "SinaLab Arabic Synonyms Dataset",
+      "url": "https://sina.birzeit.edu/resources/",
+      "source_type": "synonym_dataset",
+      "observed_license": "CC-BY-4.0",
+      "primary_signal": "SinaLab resources listing marks Synonyms dataset as CC-BY-4.0.",
+      "lane": "permissive_candidate_metadata_only",
+      "decision": "allow_phase27_114_source_card_and_license_matrix_no_import",
+      "lexical_import_allowed_next": false,
+      "training_text_allowed_next": false,
+      "tokenizer_vocab_allowed_next": false,
+      "eval_allowed_next": true,
+      "why": "Good candidate for semantic alternatives/eval; still not dialogue corpus and not tokenizer vocab.",
+      "required_gates": [
+        "capture_primary_download_license",
+        "artifact_checksum",
+        "separate_synonym_eval_from_training",
+        "no_template_masking"
+      ]
+    },
+    {
+      "source_id": "salma_wsd",
+      "name": "SALMA Arabic Sense Annotated Corpus",
+      "url": "https://huggingface.co/datasets/SinaLab/SALMA-Arabic_Sense_Annotated_Corpus/tree/main",
+      "source_type": "sense_annotated_corpus",
+      "observed_license": "CC-BY-4.0",
+      "primary_signal": "SinaLab/HuggingFace pages show CC-BY-4.0.",
+      "lane": "eval_candidate_not_lexicon",
+      "decision": "eval_only_until_text_lane_gate",
+      "lexical_import_allowed_next": false,
+      "training_text_allowed_next": false,
+      "tokenizer_vocab_allowed_next": false,
+      "eval_allowed_next": true,
+      "why": "Useful for WSD/eval, but it is text/corpus-like and must not enter dialogue training here.",
+      "required_gates": [
+        "text_lane_separation",
+        "privacy_and_quality_sample",
+        "no_dialogue_corpus_contamination"
+      ]
+    },
+    {
+      "source_id": "arabic_wordnet_v4",
+      "name": "Arabic WordNet 4.0",
+      "url": "https://linguistlist.org/issues/37/321/",
+      "source_type": "wordnet",
+      "observed_license": "CC-BY-4.0",
+      "primary_signal": "LINGUIST announcement says CC-BY-4.0, but methodology says Gemini 3 Pro Preview.",
+      "lane": "blocked_model_derived",
+      "decision": "block_import_due_to_external_model_derived_content",
+      "lexical_import_allowed_next": false,
+      "training_text_allowed_next": false,
+      "tokenizer_vocab_allowed_next": false,
+      "eval_allowed_next": false,
+      "why": "Large and permissively licensed, but generated through external AI, so it conflicts with SF-native data purity.",
+      "required_gates": [
+        "do_not_import_into_sf_native_brain",
+        "reference_only_if_needed"
+      ]
+    },
+    {
+      "source_id": "omw_arabic_wordnet_v2",
+      "name": "Open Multilingual Wordnet Arabic WordNet v2",
+      "url": "https://omwn.org/omw1.html",
+      "source_type": "wordnet",
+      "observed_license": "CC-BY-SA-3.0",
+      "primary_signal": "OMW lists Arabic WordNet v2 as CC BY SA 3.0.",
+      "lane": "restricted_sharealike",
+      "decision": "reference_or_eval_only_until_sharealike_policy",
+      "lexical_import_allowed_next": false,
+      "training_text_allowed_next": false,
+      "tokenizer_vocab_allowed_next": false,
+      "eval_allowed_next": true,
+      "why": "Redistributable, but share-alike is not clean enough for unrestricted SF lexicon import.",
+      "required_gates": [
+        "sharealike_policy_decision",
+        "license_compatibility_review"
+      ]
+    },
+    {
+      "source_id": "qabas",
+      "name": "Qabas Lexicon",
+      "url": "https://sina.birzeit.edu/qabas",
+      "source_type": "lexicon",
+      "observed_license": "CC-BY-ND-4.0 primary signal",
+      "primary_signal": "Phase 27.112 resolved Qabas as reference-only.",
+      "lane": "reference_only",
+      "decision": "blocked_from_import_use_only_for_discovery",
+      "lexical_import_allowed_next": false,
+      "training_text_allowed_next": false,
+      "tokenizer_vocab_allowed_next": false,
+      "eval_allowed_next": false,
+      "why": "No-derivatives and conflicting metadata block raw entries and derived candidate terms.",
+      "required_gates": [
+        "do_not_import"
+      ]
+    }
+  ],
+  "decision": {
+    "decision_id": "PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_INTAKE_GATE_DECISION",
+    "engineering_decision": "ALLOW_PHASE27_114_SOURCE_CARDS_FOR_ARABIC_ONTOLOGY_AND_SYNONYMS_NO_IMPORT",
+    "allowed_source_card_candidates": [
+      "arabic_ontology",
+      "sinalab_synonyms"
+    ],
+    "qabas_import_allowed": false,
+    "arabic_wordnet_v4_import_allowed": false,
+    "external_training_text_import_allowed": false,
+    "external_tokenizer_vocab_import_allowed": false,
+    "new_training_allowed": false,
+    "runtime_release_allowed": false,
+    "next_phase": "Phase 27.114 — Arabic Ontology/Synonyms Source Cards and License Matrix, no training"
+  },
+  "training_started": false,
+  "runtime_changed": false,
+  "external_entries_imported": false
+}

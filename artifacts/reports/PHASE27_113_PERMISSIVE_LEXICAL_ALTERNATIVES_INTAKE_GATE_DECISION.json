@@ -1,0 +1,15 @@
+{
+  "decision_id": "PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_INTAKE_GATE_DECISION",
+  "engineering_decision": "ALLOW_PHASE27_114_SOURCE_CARDS_FOR_ARABIC_ONTOLOGY_AND_SYNONYMS_NO_IMPORT",
+  "allowed_source_card_candidates": [
+    "arabic_ontology",
+    "sinalab_synonyms"
+  ],
+  "qabas_import_allowed": false,
+  "arabic_wordnet_v4_import_allowed": false,
+  "external_training_text_import_allowed": false,
+  "external_tokenizer_vocab_import_allowed": false,
+  "new_training_allowed": false,
+  "runtime_release_allowed": false,
+  "next_phase": "Phase 27.114 — Arabic Ontology/Synonyms Source Cards and License Matrix, no training"
+}

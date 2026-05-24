@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.112 / 30**
-- **المرحلة الحالية:** **Phase 27.112 — Qabas Primary License Resolution Gate**
-- **حالة المرحلة الحالية:** **حُسم Qabas كـ reference-only؛ لا import فعلي بسبب ترخيص CC-BY-ND-4.0 وتضارب Masader؛ لا تدريب الآن**
-- **المرحلة التالية المقترحة:** Phase 27.113 — Permissive Lexical Alternatives Intake Gate, no training.
+- **الرحلة الحالية:** **Phase 27.113 / 30**
+- **المرحلة الحالية:** **Phase 27.113 — Permissive Lexical Alternatives Intake Gate**
+- **حالة المرحلة الحالية:** **صُنفت بدائل lexical: Arabic Ontology وSinaLab Synonyms مرشحان source-card فقط؛ Arabic WordNet 4.0 محجوب لأنه model-derived؛ لا تدريب الآن**
+- **المرحلة التالية المقترحة:** Phase 27.114 — Arabic Ontology/Synonyms Source Cards and License Matrix, no training.
 - **التحول الاستراتيجي المعتمد:** **SF-native Objective/Curriculum/Decoding Acceleration Track** — تسريع هندسي فقط؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -168,6 +168,7 @@
 | Phase 27.110 | Licensed Ingestion Design | ✅ licensed_ingestion_design_ready_no_training | ✅ |
 | Phase 27.111 | Qabas Lexicon Bootstrap Design | ✅ qabas_bootstrap_design_ready_import_blocked | ✅ |
 | Phase 27.112 | Qabas Primary License Resolution Gate | ✅ qabas_reference_only_import_blocked | ✅ |
+| Phase 27.113 | Permissive Lexical Alternatives Intake Gate | ✅ permissive_lexical_alternatives_ready_no_import | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -1930,7 +1931,7 @@ make api
   - `issues=0`
   - `gold=4013`
   - `silver=5112`
-- التالي المسموح بعد حجب Qabas كـ reference-only: Phase 27.113 permissive lexical alternatives intake gate، بلا تدريب.
+- التالي المسموح بعد تصنيف البدائل: Phase 27.114 Arabic Ontology/Synonyms source cards and license matrix، بلا تدريب.
 - المحظور: training، runtime release رسمي، SF-50M، tokenizer retrain،
   pretrained/open-weight.
 - التقارير:
@@ -2059,6 +2060,34 @@ make api
   - `artifacts/reports/PHASE27_112_QABAS_PRIMARY_LICENSE_RESOLUTION_GATE_DECISION.json`
   - [PHASE27_112_QABAS_PRIMARY_LICENSE_RESOLUTION_GATE_REPORT.md](./PHASE27_112_QABAS_PRIMARY_LICENSE_RESOLUTION_GATE_REPORT.md)
 - التالي: Phase 27.113 — Permissive Lexical Alternatives Intake Gate, no training.
+
+## Phase 27.113 — Permissive Lexical Alternatives Intake Gate
+
+**الحالة:** مكتملة كبوابة بدائل. لا import ولا تدريب.
+
+- status: `PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_READY_NO_IMPORT`.
+- القرار: `PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_INTAKE_GATE_DECISION`.
+- القرار الهندسي: `ALLOW_PHASE27_114_SOURCE_CARDS_FOR_ARABIC_ONTOLOGY_AND_SYNONYMS_NO_IMPORT`.
+- المرشحان المسموحان للمرحلة التالية فقط:
+  - `arabic_ontology`: source card/license matrix فقط.
+  - `sinalab_synonyms`: source card/license matrix فقط.
+- مصادر مفيدة لكنها ليست import الآن:
+  - `salma_wsd`: eval/text-lane فقط، لا يدخل lexicon.
+  - `omw_arabic_wordnet_v2`: مقيد ShareAlike.
+  - `qabas`: reference-only.
+- مصدر محجوب:
+  - `arabic_wordnet_v4`: رغم `CC-BY-4.0`، محجوب لأنه model-derived عبر Gemini 3 Pro Preview.
+- الممنوع:
+  - إدخال أي entries في `data/corpus`.
+  - إدخال tokenizer vocab أو merges.
+  - training/runtime release/SF-50M.
+- الملفات:
+  - `resources/external_sources/phase27_113_permissive_lexical_alternatives_manifest.json`
+  - `resources/external_sources/phase27_113_lexical_alternatives_evidence.json`
+  - `artifacts/reports/phase27_113_permissive_lexical_alternatives_intake_gate_report.json`
+  - `artifacts/reports/PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_INTAKE_GATE_DECISION.json`
+  - [PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_INTAKE_GATE_REPORT.md](./PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_INTAKE_GATE_REPORT.md)
+- التالي: Phase 27.114 — Arabic Ontology/Synonyms Source Cards and License Matrix, no training.
 
 ---
 

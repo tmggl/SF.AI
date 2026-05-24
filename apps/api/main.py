@@ -31,8 +31,8 @@ app = FastAPI(
     version="0.1.0",
     description=(
         "SF.AI — Sovereign AI platform. Phase 9 chat UI mounted at /ui/chat. "
-        "Phase 27.112 resolved Qabas conservatively as reference-only because "
-        "the primary license signal is CC-BY-ND-4.0; "
+        "Phase 27.113 classified permissive lexical alternatives after Qabas "
+        "became reference-only; "
         "SF-10M Phase 27.81 is visible in lab mode, but official runtime "
         "remains blocked. "
         "No pretrained models, no external AI APIs."
@@ -49,7 +49,7 @@ app.include_router(ui.router)
 def root() -> dict[str, str]:
     return {
         "project": "SF.AI",
-        "phase": "Phase 27.112 — Qabas Primary License Resolution Gate",
+        "phase": "Phase 27.113 — Permissive Lexical Alternatives Intake Gate",
         "ui": "/ui/chat",
         "docs": "/docs",
     }
