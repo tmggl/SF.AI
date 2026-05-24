@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.65 / 30**
-- **المرحلة الحالية:** **Phase 27.65 — Tokenizer v8 Topic Probe**
-- **حالة المرحلة الحالية:** **اكتملت كتدريب tokenizer فقط؛ topic probe نجح `8/8` والـ runtime محجوب**
-- **المرحلة التالية المقترحة:** Phase 27.66 bounded LM topic repair on tokenizer v8, then broader canary.
+- **الرحلة الحالية:** **Phase 27.66 / 30**
+- **المرحلة الحالية:** **Phase 27.66 — V8 Bounded Topic Repair**
+- **حالة المرحلة الحالية:** **اكتملت؛ تدريب LM محدود على tokenizer v8 نجح broader canary `30/30` والـ runtime محجوب**
+- **المرحلة التالية المقترحة:** Phase 27.67 fresh shadow canary with unseen natural prompts.
 - **القاموس/المسار اللغوي الحالي:** `msa + saudi` فقط؛ القاموس المتبع `Saudi Seed v1` مع `safety_terms.yaml`.
 - **تاريخ آخر تحديث:** 2026-05-24
 
@@ -114,6 +114,7 @@
 | Phase 27.63 | Interleaved Family Curriculum | ✅ improved_interleaved_family_curriculum_runtime_blocked | ✅ |
 | Phase 27.64 | Topic Lexical/Tokenizer Inspection | ✅ completed_topic_lexical_inspection_tokenizer_v8_required_runtime_blocked | ✅ |
 | Phase 27.65 | Tokenizer v8 Topic Probe | ✅ passed_tokenizer_v8_topic_probe_ready_for_bounded_lm_topic_repair_runtime_blocked | ✅ |
+| Phase 27.66 | V8 Bounded Topic Repair | ✅ passed_v8_bounded_topic_repair_ready_for_fresh_shadow_canary_runtime_blocked | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -910,6 +911,13 @@
   - `التعاون` و`الاحترام` صارتا single-piece ومحميتين.
   - القرار: يسمح فقط بـ Phase 27.66 bounded LM topic repair على tokenizer v8؛ لا runtime switch ولا UI ولا `SF-50M`.
   - أضيف [PHASE27_65_TOKENIZER_V8_TOPIC_PROBE_REPORT.md](./PHASE27_65_TOKENIZER_V8_TOPIC_PROBE_REPORT.md).
+- بدأ وانتهى Phase 27.66 V8 Bounded Topic Repair:
+  - أضيف `make phase27-v8-bounded-topic-repair`.
+  - استُخدم tokenizer v8 من `artifacts/tokenizers/sf_bpe/v8_phase27_65`.
+  - دُرّب `SF-10M` إصلاحًا محدودًا `6200` خطوة، وليس تكبير حجم.
+  - النتيجة: broader canary `30/30`، وكل العائلات `6/6`.
+  - القرار: يسمح فقط بـ Phase 27.67 fresh shadow canary؛ لا runtime switch ولا UI ولا `SF-50M`.
+  - أضيف [PHASE27_66_V8_BOUNDED_TOPIC_REPAIR_REPORT.md](./PHASE27_66_V8_BOUNDED_TOPIC_REPAIR_REPORT.md).
 
 ### Phase 3.6 — Saudi Seed v1 (تأليف المستخدم)
 

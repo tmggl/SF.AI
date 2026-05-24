@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.65: درّبنا tokenizer v8 ونجح topic probe بالكامل؛ "
-    "التعاون والاحترام صارتا single-piece ومحميتين، وموضوعات الاختبار 8/8. "
-    "الواجهة لا تُفتح. التالي Phase 27.66 لتدريب LM topic repair محدود على v8.",
+    "وصلنا إلى Phase 27.66: درّبنا LM repair محدودًا على tokenizer v8 "
+    "ونجح broader canary بالكامل 30/30. الواجهة لا تُفتح على هذا checkpoint بعد. "
+    "التالي Phase 27.67 لاختبار fresh shadow canary بأسئلة غير مرئية.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

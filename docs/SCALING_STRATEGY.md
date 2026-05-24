@@ -345,3 +345,21 @@ Phase 27.65 دربت tokenizer v8 فقط:
 - لا فتح واجهة.
 - لا `SF-50M` ولا Phase 28.
 - التالي Phase 27.66 bounded LM topic repair على tokenizer v8، ثم broader canary.
+
+## قرار Phase 27.66
+
+Phase 27.66 دربت LM repair محدودًا على tokenizer v8:
+
+- tokenizer: `artifacts/tokenizers/sf_bpe/v8_phase27_65`.
+- model size: `SF-10M` فقط.
+- steps: `6200`.
+- broader canary: `30/30`.
+- family summary: followup `6/6`, open_social `6/6`, planning `6/6`, support `6/6`, topic `6/6`.
+
+قرار scaling:
+
+- لا رفع حجم.
+- لا runtime switch.
+- لا فتح واجهة على checkpoint الجديد.
+- لا `SF-50M` ولا Phase 28.
+- التالي Phase 27.67 fresh shadow canary بأسئلة طبيعية غير مرئية؛ فقط إذا نجح fresh canary نراجع runtime switch.

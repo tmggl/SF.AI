@@ -349,6 +349,9 @@ phase27-topic-lexical-tokenizer-inspection:
 phase27-tokenizer-v8-topic-probe:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_65_tokenizer_v8_topic_probe.py $(ARGS)
 
+phase27-v8-bounded-topic-repair:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_66_v8_bounded_topic_repair.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 

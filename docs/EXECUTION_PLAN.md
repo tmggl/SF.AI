@@ -135,6 +135,7 @@ SF-10M → SF-50M → SF-120M → SF-350M → SF-700M → SF-1B+
 | Phase 27.63 | Interleaved Family Curriculum | مكتملة بتحسن قوي؛ canary `26/30`, runtime محجوب |
 | Phase 27.64 | Topic Lexical/Tokenizer Inspection | مكتملة كفحص؛ tokenizer v8 مطلوب لحماية `التعاون/الاحترام` |
 | Phase 27.65 | Tokenizer v8 Topic Probe | مكتملة؛ tokenizer v8 نجح `8/8` topic terms, لا LM training |
+| Phase 27.66 | V8 Bounded Topic Repair | مكتملة؛ LM repair محدود على tokenizer v8 نجح broader canary `30/30`, runtime محجوب |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة؛ أول قفزة بعد نجاح SF-50M |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة |
 | Phase 30 | Continuous Improvement Loop | مخططة |
@@ -3550,6 +3551,34 @@ tokenizer v8 مطلوب قبل أي LM repair جديد. لا runtime switch، ل
 - [PHASE27_65_TOKENIZER_V8_TOPIC_PROBE_REPORT.md](./PHASE27_65_TOKENIZER_V8_TOPIC_PROBE_REPORT.md)
 - `artifacts/reports/phase27_65_tokenizer_v8_topic_probe_report.json`
 - `artifacts/tokenizers/sf_bpe/v8_phase27_65/`
+
+## Phase 27.66 — V8 Bounded Topic Repair
+
+### الهدف
+تدريب إصلاح LM محدود على tokenizer v8 بعد نجاح حماية المصطلحات الموضوعية، ثم إعادة broader natural-dialogue canary. هذه ليست قفزة حجم ولا تفتح runtime.
+
+### ما نُفّذ
+- أضيف `scripts/phase27_66_v8_bounded_topic_repair.py`.
+- أضيف `make phase27-v8-bounded-topic-repair`.
+- استُخدم tokenizer v8 من `artifacts/tokenizers/sf_bpe/v8_phase27_65`.
+- دُرّب `SF-10M` لمدة `6200` خطوة على curriculum interleaved مع topic emphasis pack لـ `التعاون/الاحترام`.
+
+### النتيجة
+- broader canary: `30/30`.
+- family summary: followup `6/6`, open_social `6/6`, planning `6/6`, support `6/6`, topic `6/6`.
+- checkpoint: `artifacts/eval/phase27_66_v8_bounded_topic_repair/checkpoints/sf-10m-step6200`.
+
+### القرار
+نجح الإصلاح معمليًا، لكن runtime يبقى محجوبًا. المسموح التالي فقط: fresh shadow canary بأسئلة غير مرئية قبل أي فتح واجهة أو تغيير runtime.
+
+التالي:
+
+**Phase 27.67 — fresh shadow canary with unseen natural prompts**
+
+### artifacts
+- [PHASE27_66_V8_BOUNDED_TOPIC_REPAIR_REPORT.md](./PHASE27_66_V8_BOUNDED_TOPIC_REPAIR_REPORT.md)
+- `artifacts/reports/phase27_66_v8_bounded_topic_repair_report.json`
+- `artifacts/samples/phase27_66_v8_bounded_topic_repair.md`
 
 ---
 
