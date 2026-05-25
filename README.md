@@ -28,9 +28,9 @@
 المسار الحالي الرسمي:
 
 ```text
-Phase 27.122 — Synonyms Reference Query and Eval Gate
+Phase 27.123 — Synonyms Reference Adapter Design
 SF-native Objective/Curriculum/Decoding Acceleration Track
-PHASE27_122_SINALAB_SYNONYMS_REFERENCE_QUERY_EVAL_GATE_DECISION
+PHASE27_123_SINALAB_SYNONYMS_REFERENCE_ADAPTER_DESIGN_DECISION
 ```
 
 القرار الحالي:
@@ -72,7 +72,11 @@ PHASE27_122_SINALAB_SYNONYMS_REFERENCE_QUERY_EVAL_GATE_DECISION
   `1093` records و`685` eval candidates. المرفوع فقط counts/hashes بلا raw terms.
 - Phase 27.122 اختبرت query/eval محليًا في الذاكرة فقط:
   lookup `685/685`, unique keys `1093`, duplicate keys `0`. لا runtime activation.
-- التالي: `Phase 27.123 — Synonyms Reference Adapter Design`.
+- Phase 27.123 صممت عقد adapter مرجعيًا فقط:
+  `SinaLabSynonymsReferenceAdapter`، default `max_results=5`، cap `10`،
+  وredaction policy تمنع raw terms/query rows/log terms. لا runtime activation،
+  لا chat integration، لا corpus، لا tokenizer، لا training.
+- التالي: `Phase 27.124 — Synonyms Reference Adapter Skeleton, no runtime`.
 - عند نجاح بوابة أي حجم لاحقًا، ينتقل الوكيل تلقائيًا للحجم التالي حتى
   `SF-1B+` دون انتظار موافقة جديدة.
 
@@ -149,11 +153,11 @@ PHASE27_122_SINALAB_SYNONYMS_REFERENCE_QUERY_EVAL_GATE_DECISION
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.81 / 30 — Execute bounded SF-10M family-conditioned repair training.
-- **الأولوية الحالية:** تشخيص نتيجة Phase 27.81 في Phase 27.82؛ لا runtime لأن all-family بقي `42/50` والحد `45/50`.
-- **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر مولّد فقط؛ أي رد ظاهر يجب أن يكون من `SF-10M Phase 27.47`، وإذا حُجب المولد ترجع الاستجابة فارغة بدل قالب.
-- **البيانات الحالية:** corpus موثق `8645` سجلًا يمر `corpus-audit`: `4350` سعودي + `4295` فصحى، `gold=3533`, `silver=5112`. split الحالي `train=7777`, `eval=868`.
-- **التدريب:** Phase 27.81 اكتملت كتدريب bounded على SF-10M: أفضل checkpoint `sf-10m-step2000`, all-family `42/50`, topic family `10/10`, prototype `16/16`, fresh topic `9/10`. القرار: `BLOCK_RUNTIME_DIAGNOSE_PHASE27_81_RESULT`. لا runtime ولا SF-50M ولا tokenizer retrain.
+- **الرحلة الحالية:** Phase 27.123 / 30 — Synonyms Reference Adapter Design.
+- **الأولوية الحالية:** Phase 27.124 يبني skeleton adapter فقط، بلا runtime ولا ChatModule ولا corpus/tokenizer/training.
+- **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر محلي؛ لا يجوز إخفاء ضعف المولد بقوالب، ولا يوجد runtime release رسمي.
+- **البيانات الحالية:** corpus موثق `9125` سجلًا يمر `corpus-audit`: `4535` فصحى + `4590` سعودي، `gold=4013`, `silver=5112`.
+- **التدريب:** آخر تدريب حواري مهم هو Phase 27.104/27.81 تاريخيًا، لكن المسار الحالي متوقف عند reference/diagnostic gates. لا تدريب جديد، لا tokenizer retrain، لا SF-50M حتى تسمح البوابات.
 - **المولّد:** runtime العام محجوب كمولد حواري حتى نجاح held-out/canary. لا تعرض أي قالب على أنه مولّد، ولا تفتح واجهة مولّد إلا بعد قرار runtime صريح.
 - **التقييم:** Phase 27 مرّر `19/19` turn في حوار متعدد الأدوار، لكنه أكد أن الردود ما زالت `template` وأن المولد غير جاهز.
 - **الذاكرة المحلية:** Phase 17 أضاف ChatRagBridge اختياريًا؛ runtime الافتراضي لا يحمّل ذاكرة ولا يزحف ويب.

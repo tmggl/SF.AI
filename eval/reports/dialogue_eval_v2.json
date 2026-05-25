@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.122: اختبرنا query/eval للـ reference layer محليًا في الذاكرة فقط. lookup نجح بالأرقام دون raw terms ودون runtime activation أو corpus أو tokenizer أو تدريب. الت"
+      "response_preview": "وصلنا إلى Phase 27.123: صممنا عقد adapter للـ synonyms reference layer بلا runtime activation وبلا raw terms أو corpus أو tokenizer أو تدريب. التالي Phase 27.124: skeleton للـ adap"
     },
     {
       "scenario_id": "clarification_repair_flow",

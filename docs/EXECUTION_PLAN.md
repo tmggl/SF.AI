@@ -4577,7 +4577,7 @@ Final Response
 
 ---
 
-## الحالة العملية الحالية — Phase 27.122
+## الحالة العملية الحالية — Phase 27.123
 
 المسار الحاكم هو:
 
@@ -4588,7 +4588,7 @@ SF-native Objective/Curriculum/Decoding Acceleration Track
 آخر قرار:
 
 ```text
-PHASE27_122_SINALAB_SYNONYMS_REFERENCE_QUERY_EVAL_GATE_DECISION
+PHASE27_123_SINALAB_SYNONYMS_REFERENCE_ADAPTER_DESIGN_DECISION
 ```
 
 الخلاصة:
@@ -4644,14 +4644,16 @@ PHASE27_122_SINALAB_SYNONYMS_REFERENCE_QUERY_EVAL_GATE_DECISION
   eval candidates. المرفوع counts/hashes فقط، ولا raw terms في git.
 - Phase 27.122 اختبر query/eval محليًا في الذاكرة: exact lookup `685/685`,
   quality match `685/685`, unique keys `1093`, duplicates `0`.
-- لا تدريب جديد قبل Phase 27.123 adapter design ولا قبل بوابات
-  corpus/license اللاحقة.
+- Phase 27.123 صمم adapter contract فقط: `SinaLabSynonymsReferenceAdapter`
+  مع input/output contract، redaction policy، `max_results` default `5`
+  وcap `10`. لا runtime lookup ولا chat integration ولا corpus/tokenizer/training.
+- لا تدريب جديد قبل Phase 27.124 skeleton ولا قبل بوابات corpus/license اللاحقة.
 - لا SF-50M قبل gate يثبت أن capacity هي السبب الأكبر.
 
 التالي:
 
 ```text
-Phase 27.123 — Synonyms Reference Adapter Design, no runtime
+Phase 27.124 — Synonyms Reference Adapter Skeleton, no runtime
 ```
 
 ---

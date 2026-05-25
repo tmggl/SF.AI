@@ -1,0 +1,36 @@
+{
+  "phase": "Phase 27.123",
+  "spec_id": "PHASE27_123_SINALAB_SYNONYMS_REFERENCE_ADAPTER_SPEC",
+  "source_id": "sinalab_synonyms",
+  "adapter_name": "SinaLabSynonymsReferenceAdapter",
+  "design_scope": "contract_only_no_runtime_activation",
+  "input_contract": {
+    "query_text": "Arabic text supplied by caller; normalized internally",
+    "max_results": "positive integer, default 5, capped by policy",
+    "min_quality_band": "high|medium, default high",
+    "include_terms_in_runtime_response": false
+  },
+  "internal_lookup_contract": {
+    "reference_layer_required": true,
+    "reference_records_count": 1093,
+    "unique_normalized_index_keys": 1093,
+    "duplicate_normalized_index_keys": 0,
+    "exact_lookup_rate_observed": 1.0,
+    "quality_match_rate_observed": 1.0
+  },
+  "output_contract": {
+    "committed_reports": "counts, booleans, hashes, and aggregate metrics only",
+    "runtime_adapter_output_future": "redacted aggregate signals only until activation gate",
+    "raw_terms_in_committed_output": false,
+    "query_rows_in_committed_output": false,
+    "corpus_records_from_adapter": false,
+    "tokenizer_vocab_from_adapter": false
+  },
+  "failure_modes": [
+    "reference_layer_missing",
+    "query_not_arabic",
+    "quality_threshold_not_met",
+    "result_redaction_required",
+    "runtime_activation_blocked"
+  ]
+}

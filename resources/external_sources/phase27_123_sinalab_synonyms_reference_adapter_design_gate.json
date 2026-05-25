@@ -1,0 +1,28 @@
+{
+  "phase": "Phase 27.123",
+  "gate_id": "PHASE27_123_SINALAB_SYNONYMS_REFERENCE_ADAPTER_DESIGN_GATE",
+  "source_id": "sinalab_synonyms",
+  "gate_passed": true,
+  "preconditions": {
+    "phase27_122_allows_adapter_design": true,
+    "phase27_122_gate_passed": true,
+    "metrics_support_adapter_design": true,
+    "spec_blocks_raw_terms": true,
+    "spec_blocks_query_rows": true,
+    "spec_blocks_corpus_and_tokenizer": true,
+    "policy_blocks_runtime_activation": true,
+    "policy_blocks_chat_integration": true,
+    "policy_blocks_training": true,
+    "policy_redacts_terms_and_logs": true
+  },
+  "adapter_skeleton_allowed_next": true,
+  "runtime_lookup_activation_allowed": false,
+  "chat_integration_allowed": false,
+  "raw_terms_commit_allowed": false,
+  "query_rows_commit_allowed": false,
+  "dialogue_corpus_allowed": false,
+  "tokenizer_vocab_allowed": false,
+  "training_allowed": false,
+  "runtime_release_allowed": false,
+  "sf50m_transition_allowed": false
+}

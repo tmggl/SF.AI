@@ -50,7 +50,7 @@
 - السيادة تبقى على corpus/tokenizer/behavior/runtime/alignment/evaluation
   وسلوك الحوار الفصيح والسعودي.
 - قبل أي تدريب جديد يجب وجود root-cause/decision gate حديث يسمح به صراحة.
-  القرار الحالي هو `PHASE27_121_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_DECISION`:
+  القرار الحالي هو `PHASE27_123_SINALAB_SYNONYMS_REFERENCE_ADAPTER_DESIGN_DECISION`:
   المسار أُعيد تثبيته عند Phase 27.79، ومرّت بوابات Phase 27.80، ثم اكتمل
   تدريب Phase 27.81. Phase 27.105 أثبت أن الواجهة تستدعي المولد الحقيقي
   في raw lab، لكنه شخّص فشل social subfamilies وtopic variants؛ التالي
@@ -72,6 +72,7 @@
   Phase 27.120 ثبت بوابة build محلية: records مسموحة لاحقًا داخل gitignored فقط.
   Phase 27.121 بنى records محلية gitignored؛ المرفوع counts/hashes فقط بلا raw terms.
   Phase 27.122 اختبر query/eval محليًا في الذاكرة؛ lookup `685/685` ولا runtime activation.
+  Phase 27.123 صمم adapter contract فقط؛ لا runtime ولا chat integration ولا corpus/tokenizer/training.
 - لا runtime release بدون `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - لا تعتمد loss/perplexity/micro-probe وحدها؛ النجاح يعني held-out dialogue
   quality, runtime usability, clean-stop, semantic correctness, family
@@ -84,13 +85,13 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 27.122 موثقة تاريخيًا، لكن الحالة العملية
+- المراحل من Phase 0 حتى Phase 27.123 موثقة تاريخيًا، لكن الحالة العملية
   الحالية هي:
-  `Phase 27.122 — Synonyms Reference Query and Eval Gate`
+  `Phase 27.123 — Synonyms Reference Adapter Design`
   ضمن `SF-native Objective/Curriculum/Decoding Acceleration Track`.
   التقرير الملزم: `docs/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md`.
   القرار التنفيذي:
-  `PHASE27_122_SINALAB_SYNONYMS_REFERENCE_QUERY_EVAL_GATE_DECISION`.
+  `PHASE27_123_SINALAB_SYNONYMS_REFERENCE_ADAPTER_DESIGN_DECISION`.
   Phase 27.104 تبقى الدليل السابق: تدريب محدود نجح topic-wise وفشل
   all-family، وليست إذن runtime.
   تاريخيًا أضيفت دفعة `sf-ai-balanced-family-pack-v1`: `2500` سجل gold
@@ -162,7 +163,8 @@
 - Phase 27.120 حسم build gate: المسموح في التالي records محلية gitignored فقط.
 - Phase 27.121 بنى `1093` records محلية و`685` eval candidates داخل gitignored.
 - Phase 27.122 حسم query/eval gate: lookup `685/685`، بلا runtime activation.
-- أول خطوة تالية: Phase 27.123 — Synonyms Reference Adapter Design, no runtime.
+- Phase 27.123 حسم adapter design: contract/redaction فقط، بلا runtime أو تدريب.
+- أول خطوة تالية: Phase 27.124 — Synonyms Reference Adapter Skeleton, no runtime.
   لا تبدأ training ولا SF-50M ولا tokenizer retrain قبل هذه البوابة.
 - تفويض التكبير التلقائي معتمد، لكن مفعوله يبدأ فقط عندما تنجح gates؛
   حاليًا `SF-50M` ما زال محجوبًا لأن capacity وزنها `1%`.
@@ -195,7 +197,7 @@
    cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests
    ```
 
-2. تحقق من القسم 4 في AGENT_HANDOFF.md. مهمة "محادثة مريحة + توجيه دقيق" مكتملة، ومسار العمل الحالي هو Phase 27.81 تدريب محدود مكتمل، والتالي Phase 27.82 diagnosis، بلا runtime ولا SF-50M.
+2. تحقق من القسم 4 في AGENT_HANDOFF.md. مسار العمل الحالي هو Phase 27.123 مكتملة، والتالي Phase 27.124 adapter skeleton بلا runtime ولا SF-50M ولا tokenizer retrain.
 
 3. Phase 11 مكتملة كحوكمة وأداة فحص. شغّل:
    ```

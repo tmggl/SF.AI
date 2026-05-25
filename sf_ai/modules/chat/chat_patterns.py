@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.122: اختبرنا query/eval للـ reference layer محليًا "
-    "في الذاكرة فقط. lookup نجح بالأرقام دون raw terms ودون runtime activation "
-    "أو corpus أو tokenizer أو تدريب. التالي Phase 27.123: تصميم adapter بلا runtime.",
+    "وصلنا إلى Phase 27.123: صممنا عقد adapter للـ synonyms reference layer "
+    "بلا runtime activation وبلا raw terms أو corpus أو tokenizer أو تدريب. "
+    "التالي Phase 27.124: skeleton للـ adapter بلا ربط بالواجهة.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

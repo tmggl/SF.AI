@@ -1,0 +1,40 @@
+{
+  "phase": "Phase 27.123",
+  "policy_id": "PHASE27_123_SINALAB_SYNONYMS_REFERENCE_ADAPTER_POLICY",
+  "source_id": "sinalab_synonyms",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "max_results_default": 5,
+  "max_results_cap": 10,
+  "default_quality_band": "high",
+  "minimum_metrics_required": {
+    "reference_record_count": 1093,
+    "eval_query_count": 685,
+    "exact_lookup_rate": 1.0,
+    "quality_band_match_rate": 1.0,
+    "duplicate_normalized_index_keys": 0
+  },
+  "redaction_policy": {
+    "raw_terms_in_git": false,
+    "query_rows_in_git": false,
+    "raw_reference_rows_in_git": false,
+    "future_runtime_term_display": "blocked_until_explicit_runtime_lookup_gate",
+    "logs_may_contain_terms": false
+  },
+  "allowed_next": [
+    "adapter_skeleton_code_without_runtime_wiring",
+    "adapter_unit_tests_with_synthetic_non_source_terms",
+    "counts_only_eval_report"
+  ],
+  "blocked_now": [
+    "runtime_lookup_activation",
+    "chat_module_integration",
+    "data/corpus writes",
+    "tokenizer vocab or merges",
+    "training text import",
+    "checkpoint writes",
+    "SF-50M transition"
+  ]
+}
