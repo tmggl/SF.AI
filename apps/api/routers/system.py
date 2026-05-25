@@ -61,12 +61,12 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.117 — Synonyms Sample Quality/Dedupe Review",
+        current_phase="Phase 27.118 — Synonyms Reference Extraction Design",
         current_phase_status=(
-            "phase27_117_synonyms_sample_quality_dedupe_ready_no_import"
+            "phase27_118_synonyms_reference_extraction_design_ready_no_import"
         ),
         next_phase=(
-            "Phase 27.118 — Synonyms Reference Extraction Design, no training"
+            "Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts, no training"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -711,6 +711,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_117_sinalab_synonyms_sample_quality_dedupe",
                 status="synonyms_sample_quality_dedupe_ready_no_import",
                 phase="Phase 27.117",
+            ),
+            ComponentStatus(
+                name="phase27_118_sinalab_synonyms_reference_extraction_design",
+                status="synonyms_reference_extraction_design_ready_no_import",
+                phase="Phase 27.118",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

@@ -28,9 +28,9 @@
 المسار الحالي الرسمي:
 
 ```text
-Phase 27.117 — Synonyms Sample Quality/Dedupe Review
+Phase 27.118 — Synonyms Reference Extraction Design
 SF-native Objective/Curriculum/Decoding Acceleration Track
-PHASE27_117_SINALAB_SYNONYMS_SAMPLE_QUALITY_DEDUPE_DECISION
+PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_DECISION
 ```
 
 القرار الحالي:
@@ -61,7 +61,8 @@ PHASE27_117_SINALAB_SYNONYMS_SAMPLE_QUALITY_DEDUPE_DECISION
 - Phase 27.116 نزّلت Synonyms artifact في quarantine محلي git-ignored، وسجلت
   checksum/schema دون raw rows أو corpus أو training.
 - Phase 27.117 فحصت sample quality/dedupe بأرقام فقط دون نشر raw terms.
-- التالي: `Phase 27.118 — Synonyms Reference Extraction Design`.
+- Phase 27.118 صممت reference extraction كطبقة مرجعية فقط دون raw terms في git.
+- التالي: `Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts`.
 - عند نجاح بوابة أي حجم لاحقًا، ينتقل الوكيل تلقائيًا للحجم التالي حتى
   `SF-1B+` دون انتظار موافقة جديدة.
 

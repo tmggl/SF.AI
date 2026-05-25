@@ -548,6 +548,9 @@ phase27-sinalab-synonyms-quarantine-schema:
 phase27-sinalab-synonyms-sample-quality-dedupe:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_117_sinalab_synonyms_sample_quality_dedupe.py $(ARGS)
 
+phase27-sinalab-synonyms-reference-extraction-design:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_118_sinalab_synonyms_reference_extraction_design.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 

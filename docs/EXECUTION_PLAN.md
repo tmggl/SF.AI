@@ -4577,7 +4577,7 @@ Final Response
 
 ---
 
-## الحالة العملية الحالية — Phase 27.117
+## الحالة العملية الحالية — Phase 27.118
 
 المسار الحاكم هو:
 
@@ -4588,7 +4588,7 @@ SF-native Objective/Curriculum/Decoding Acceleration Track
 آخر قرار:
 
 ```text
-PHASE27_117_SINALAB_SYNONYMS_SAMPLE_QUALITY_DEDUPE_DECISION
+PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_DECISION
 ```
 
 الخلاصة:
@@ -4632,14 +4632,16 @@ PHASE27_117_SINALAB_SYNONYMS_SAMPLE_QUALITY_DEDUPE_DECISION
   artifact محلي git-ignored، checksum مسجل، schema مرصود، ولا raw rows محفوظة.
 - Phase 27.117 نفذ sample quality/dedupe review بأرقام فقط:
   `3010` candidate rows، جودة عربية كاملة، وتداخلات exact overlap محسوبة دون نشر terms.
-- لا تدريب جديد قبل Phase 27.118 reference extraction design ولا قبل بوابات
+- Phase 27.118 صمم reference extraction فقط: no raw terms in git، no corpus،
+  no tokenizer، no training، وdry-run counts كخطوة تالية.
+- لا تدريب جديد قبل Phase 27.119 reference extraction dry-run counts ولا قبل بوابات
   corpus/license اللاحقة.
 - لا SF-50M قبل gate يثبت أن capacity هي السبب الأكبر.
 
 التالي:
 
 ```text
-Phase 27.118 — Synonyms Reference Extraction Design, no training
+Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts, no training
 ```
 
 ---

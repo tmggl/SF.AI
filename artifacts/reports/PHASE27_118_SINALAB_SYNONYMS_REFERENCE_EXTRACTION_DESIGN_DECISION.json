@@ -1,0 +1,13 @@
+{
+  "decision_id": "PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_DECISION",
+  "engineering_decision": "ALLOW_PHASE27_119_SYNONYMS_REFERENCE_EXTRACTION_DRY_RUN_COUNTS_NO_TRAINING",
+  "reference_extraction_design_passed": true,
+  "raw_entry_import_allowed": false,
+  "external_training_text_import_allowed": false,
+  "external_tokenizer_vocab_import_allowed": false,
+  "raw_terms_publish_allowed": false,
+  "new_training_allowed": false,
+  "runtime_release_allowed": false,
+  "sf50m_transition_allowed": false,
+  "next_phase": "Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts, no training"
+}

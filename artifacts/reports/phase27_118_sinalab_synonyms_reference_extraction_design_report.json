@@ -1,0 +1,126 @@
+{
+  "phase": "Phase 27.118",
+  "status": "PHASE27_118_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_READY_NO_IMPORT",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "dictionary_track": "Saudi Seed v1",
+  "design": {
+    "phase": "Phase 27.118",
+    "design_id": "PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN",
+    "source_id": "sinalab_synonyms",
+    "artifact_sha256": "a8622546d057f60d2cee0db3b8fdc79cf30303db6ae83001be1634215bb00035",
+    "input_findings": {
+      "candidate_rows": 3010,
+      "unique_normalized_candidate_terms": 1697,
+      "internal_duplicate_terms": 1313,
+      "saudi_seed_exact_overlap_count": 40,
+      "protected_saudi_exact_overlap_count": 1,
+      "average_score_mean": 45.4635,
+      "average_score_median": 42.5
+    },
+    "target_lane": "reference_layer_only",
+    "explicitly_not": [
+      "dialogue_corpus",
+      "tokenizer_vocab",
+      "tokenizer_merges",
+      "training_text",
+      "runtime_release",
+      "sf50m_transition"
+    ],
+    "future_record_schema": {
+      "source_id": "constant:sinalab_synonyms",
+      "artifact_sha256": "sha256 from Phase 27.116 manifest",
+      "source_row_number": "local quarantine row number, never used as corpus id",
+      "synset_number": "source grouping id when present",
+      "row_id": "source row id when present",
+      "candidate_term": "Arabic candidate term; allowed only in local reference artifact, not corpus",
+      "candidate_normalized": "SF.AI normalization for dedupe/filtering",
+      "linguist_scores": "L1..L4 numeric scores",
+      "average_score": "source average score",
+      "quality_band": "high>=70, medium>=40, low<40",
+      "license": "CC-BY-4.0",
+      "attribution_required": true,
+      "training_allowed": false,
+      "dialogue_corpus_allowed": false,
+      "tokenizer_vocab_allowed": false,
+      "runtime_lookup_allowed": false
+    },
+    "filter_policy": {
+      "minimum_average_score_for_reference": 40.0,
+      "minimum_average_score_for_eval_candidate": 70.0,
+      "drop_empty_normalized": true,
+      "drop_non_arabic_terms": true,
+      "collapse_internal_duplicates": true,
+      "dedupe_key": "candidate_normalized",
+      "on_duplicate": "keep_highest_average_score_and_first_source_row_number",
+      "drop_exact_overlap_with_saudi_seed_v1": true,
+      "drop_exact_overlap_with_protected_saudi_terms": true,
+      "drop_operator_workflow_terms": true,
+      "publish_raw_terms_to_git": false
+    },
+    "storage_policy": {
+      "local_reference_dir": "resources/external_sources/reference_layers/sinalab_synonyms/",
+      "raw_reference_records_git_policy": "gitignored_or_not_created_until_explicit_gate",
+      "committed_outputs_allowed_next": [
+        "counts_summary",
+        "quality_band_counts",
+        "filter_drop_counts",
+        "schema_manifest",
+        "attribution_manifest"
+      ],
+      "committed_outputs_blocked": [
+        "candidate_term_values",
+        "raw_rows",
+        "jsonl_with_terms",
+        "tokenizer_vocab",
+        "training_corpus"
+      ]
+    },
+    "next_dry_run_requirements": [
+      "verify_artifact_sha256_matches_phase27_116",
+      "extract_counts_only",
+      "report_high_medium_low_counts",
+      "report_drop_counts_without_terms",
+      "prove_no_data_corpus_writes",
+      "prove_no_tokenizer_writes",
+      "prove_no_training_started",
+      "prove_no_raw_terms_published"
+    ]
+  },
+  "gate": {
+    "phase": "Phase 27.118",
+    "gate_id": "PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_GATE",
+    "design_ready": true,
+    "reference_layer_only": true,
+    "raw_terms_publish_allowed": false,
+    "training_allowed": false,
+    "tokenizer_vocab_allowed": false,
+    "dialogue_corpus_allowed": false,
+    "runtime_release_allowed": false,
+    "next_phase_allowed_if_passed": "Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts, no training",
+    "blocked_if_failed": "Phase 27.118b — Reference Extraction Design Repair"
+  },
+  "decision": {
+    "decision_id": "PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_DECISION",
+    "engineering_decision": "ALLOW_PHASE27_119_SYNONYMS_REFERENCE_EXTRACTION_DRY_RUN_COUNTS_NO_TRAINING",
+    "reference_extraction_design_passed": true,
+    "raw_entry_import_allowed": false,
+    "external_training_text_import_allowed": false,
+    "external_tokenizer_vocab_import_allowed": false,
+    "raw_terms_publish_allowed": false,
+    "new_training_allowed": false,
+    "runtime_release_allowed": false,
+    "sf50m_transition_allowed": false,
+    "next_phase": "Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts, no training"
+  },
+  "training_started": false,
+  "runtime_changed": false,
+  "external_entries_imported": false,
+  "corpus_changed": false,
+  "tokenizer_changed": false,
+  "raw_terms_published": false
+}

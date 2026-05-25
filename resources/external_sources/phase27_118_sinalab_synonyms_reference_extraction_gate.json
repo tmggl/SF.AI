@@ -1,0 +1,13 @@
+{
+  "phase": "Phase 27.118",
+  "gate_id": "PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_GATE",
+  "design_ready": true,
+  "reference_layer_only": true,
+  "raw_terms_publish_allowed": false,
+  "training_allowed": false,
+  "tokenizer_vocab_allowed": false,
+  "dialogue_corpus_allowed": false,
+  "runtime_release_allowed": false,
+  "next_phase_allowed_if_passed": "Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts, no training",
+  "blocked_if_failed": "Phase 27.118b — Reference Extraction Design Repair"
+}

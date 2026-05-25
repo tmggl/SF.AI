@@ -165,9 +165,9 @@ def test_phase_guidance_prompts_are_current_generator_lab_guidance() -> None:
     assert "قوالب" in dialogue.response
     assert "بصراحة" in dialogue.response
     assert next_step.intent == "chat.next_step"
-    assert "Phase 27.117" in next_step.response
-    assert "SinaLab Synonyms" in next_step.response
     assert "Phase 27.118" in next_step.response
+    assert "SinaLab Synonyms" in next_step.response
+    assert "Phase 27.119" in next_step.response
     assert diff.intent == "chat.training_activation_difference"
     assert "التدريب" in diff.response
     assert "التفعيل" in diff.response

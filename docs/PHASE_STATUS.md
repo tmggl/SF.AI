@@ -2230,7 +2230,48 @@ ALLOW_PHASE27_118_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_NO_TRAINING
 - `artifacts/reports/PHASE27_117_SINALAB_SYNONYMS_SAMPLE_QUALITY_DEDUPE_DECISION.json`
 - [PHASE27_117_SINALAB_SYNONYMS_SAMPLE_QUALITY_DEDUPE_REPORT.md](./PHASE27_117_SINALAB_SYNONYMS_SAMPLE_QUALITY_DEDUPE_REPORT.md)
 
-**التالي:** Phase 27.118 — Synonyms Reference Extraction Design, no training.
+**التالي كان:** Phase 27.118 — Synonyms Reference Extraction Design, no training.
+
+---
+
+## Phase 27.118 — Synonyms Reference Extraction Design
+
+**الحالة:** ✅ synonyms_reference_extraction_design_ready_no_import
+
+**القاموس/المسار اللغوي:** Saudi Seed v1، العربية الفصحى + السعودية فقط.
+
+**القرار الرسمي:**
+
+```text
+PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_DECISION
+ALLOW_PHASE27_119_SYNONYMS_REFERENCE_EXTRACTION_DRY_RUN_COUNTS_NO_TRAINING
+```
+
+**النتيجة:**
+
+- صُمم مسار reference layer فقط، لا corpus ولا tokenizer.
+- يعتمد التصميم على نتائج 27.117:
+  - candidate rows: `3010`
+  - unique normalized candidate terms: `1697`
+  - internal duplicates: `1313`
+  - Saudi Seed exact overlap: `40`
+- السياسة:
+  - minimum average score للreference: `40.0`
+  - eval candidate threshold: `70.0`
+  - dedupe by `candidate_normalized`
+  - drop exact overlap مع Saudi Seed v1 وprotected Saudi terms
+  - raw terms لا تُنشر في git
+- لا corpus، لا tokenizer، لا training، لا runtime release، لا SF-50M.
+
+**الملفات:**
+
+- `resources/external_sources/phase27_118_sinalab_synonyms_reference_extraction_design.json`
+- `resources/external_sources/phase27_118_sinalab_synonyms_reference_extraction_gate.json`
+- `artifacts/reports/phase27_118_sinalab_synonyms_reference_extraction_design_report.json`
+- `artifacts/reports/PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_DECISION.json`
+- [PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_REPORT.md](./PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_REPORT.md)
+
+**التالي:** Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts, no training.
 
 ---
 

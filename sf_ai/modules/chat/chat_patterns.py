@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.117: فحصنا جودة SinaLab Synonyms والتكرار بأرقام فقط، "
-    "بدون نشر raw terms وبدون corpus أو تدريب. التالي Phase 27.118: تصميم "
-    "reference extraction بلا تدريب.",
+    "وصلنا إلى Phase 27.118: صممنا مسار reference extraction لـ SinaLab "
+    "Synonyms كطبقة مرجعية فقط، بدون raw terms في git وبدون corpus أو تدريب. "
+    "التالي Phase 27.119: dry-run counts بلا تدريب.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

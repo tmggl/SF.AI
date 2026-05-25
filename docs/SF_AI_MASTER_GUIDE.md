@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.117
-الاسم: Synonyms Sample Quality/Dedupe Review
+المرحلة الحالية: Phase 27.118
+الاسم: Synonyms Reference Extraction Design
 المسار الملزم: SF-native Objective/Curriculum/Decoding Acceleration Track
-القرار الرسمي: PHASE27_117_SINALAB_SYNONYMS_SAMPLE_QUALITY_DEDUPE_DECISION
+القرار الرسمي: PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -125,6 +125,8 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   checksum، وفحص schema فقط دون raw rows/corpus/tokenizer/training.
 - Phase 27.117 فحص جودة العينة والتكرار بأرقام فقط: `3010` مرشح، `1697`
   unique normalized terms، ولا raw terms منشورة.
+- Phase 27.118 صمم reference extraction كطبقة مرجعية فقط، مع منع raw terms
+  في git ومنع corpus/tokenizer/training.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
@@ -155,7 +157,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   `docs/PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_REPORT.md`.
 - تقرير sample quality/dedupe الحالي:
   `docs/PHASE27_117_SINALAB_SYNONYMS_SAMPLE_QUALITY_DEDUPE_REPORT.md`.
-- التالي: `Phase 27.118 — Synonyms Reference Extraction Design, no training`.
+- تقرير reference extraction design الحالي:
+  `docs/PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_REPORT.md`.
+- التالي: `Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts, no training`.
 
 الدليل السابق الذي سبب هذا re-anchor:
 
@@ -427,14 +431,14 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.118 — Synonyms Reference Extraction Design, no training
+Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts, no training
 ```
 
 مطلوب منها:
 
-- تصميم reference extraction فقط، مع schema واضحة وفلترة overlaps.
-- لا كتابة إلى `data/corpus`.
-- لا tokenizer vocab/merges.
+- تنفيذ dry-run counts فقط حسب تصميم 27.118.
+- كتابة counts/filter-drop manifests فقط.
+- لا نشر raw terms.
 - لا training ولا tokenizer vocab ولا runtime release.
 - Qabas وArabic WordNet 4.0 يبقيان خارج candidates الفعلية.
 - ممنوع training/SF-50M/tokenizer retrain/runtime release قبل هذه البوابة.
