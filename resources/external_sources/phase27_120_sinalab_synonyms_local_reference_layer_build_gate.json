@@ -1,0 +1,51 @@
+{
+  "phase": "Phase 27.120",
+  "gate_id": "PHASE27_120_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GATE",
+  "source_id": "sinalab_synonyms",
+  "gate_passed": true,
+  "preconditions": {
+    "phase27_119_allows_reference_build_gate": true,
+    "artifact_sha256_verified": true,
+    "dry_run_counts_passed": true,
+    "reference_candidates_available": true,
+    "eval_candidates_available": true,
+    "raw_terms_not_published_in_phase27_119": true,
+    "reference_records_not_written_yet": true,
+    "training_not_started": true,
+    "dialogue_corpus_not_written": true,
+    "tokenizer_vocab_not_written": true,
+    "design_blocks_training_and_runtime": true,
+    "local_reference_dir_gitignored": true,
+    "schema_is_values_free": true
+  },
+  "reference_layer_path": "resources/external_sources/reference_layers/sinalab_synonyms",
+  "storage_mode": "local_gitignored_reference_layer_only",
+  "max_local_reference_records_next": 1093,
+  "max_local_eval_candidate_records_next": 685,
+  "committed_outputs_allowed_next": [
+    "local_build_manifest_counts_only",
+    "local_build_schema_manifest",
+    "local_build_attribution_manifest",
+    "local_build_validation_report_without_terms"
+  ],
+  "local_outputs_allowed_next_but_gitignored": [
+    "reference_records_jsonl_with_terms",
+    "reference_eval_candidates_jsonl_with_terms"
+  ],
+  "blocked_outputs": [
+    "data/corpus writes",
+    "tokenizer vocab or merges",
+    "training text import",
+    "checkpoint writes",
+    "runtime lookup activation",
+    "raw terms in committed files",
+    "SF-50M transition"
+  ],
+  "raw_terms_commit_allowed": false,
+  "local_reference_records_allowed_next": true,
+  "dialogue_corpus_allowed": false,
+  "tokenizer_vocab_allowed": false,
+  "training_allowed": false,
+  "runtime_release_allowed": false,
+  "sf50m_transition_allowed": false
+}

@@ -28,9 +28,9 @@
 المسار الحالي الرسمي:
 
 ```text
-Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts
+Phase 27.120 — Synonyms Local Reference Layer Build Gate
 SF-native Objective/Curriculum/Decoding Acceleration Track
-PHASE27_119_SINALAB_SYNONYMS_REFERENCE_DRY_RUN_COUNTS_DECISION
+PHASE27_120_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GATE_DECISION
 ```
 
 القرار الحالي:
@@ -65,7 +65,10 @@ PHASE27_119_SINALAB_SYNONYMS_REFERENCE_DRY_RUN_COUNTS_DECISION
 - Phase 27.119 نفذت dry-run counts فقط:
   `3010` صفًا، `1093` مرشحًا مرجعيًا بعد الفلاتر، و`685` مرشح eval عالي الجودة.
   لا raw terms، لا corpus، لا tokenizer، لا training.
-- التالي: `Phase 27.120 — Synonyms Local Reference Layer Build Gate`.
+- Phase 27.120 ثبتت بوابة build محلية: يسمح فقط ببناء reference records
+  محليًا داخل مسار gitignored في المرحلة التالية، مع استمرار منع raw terms
+  في git ومنع corpus/tokenizer/training/runtime.
+- التالي: `Phase 27.121 — Synonyms Local Reference Layer Build, gitignored`.
 - عند نجاح بوابة أي حجم لاحقًا، ينتقل الوكيل تلقائيًا للحجم التالي حتى
   `SF-1B+` دون انتظار موافقة جديدة.
 

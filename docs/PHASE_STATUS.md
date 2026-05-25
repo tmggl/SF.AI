@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.119 / 30**
-- **المرحلة الحالية:** **Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts**
-- **حالة المرحلة الحالية:** **اكتملت dry-run counts لـ SinaLab Synonyms بأرقام فقط؛ لا raw terms ولا corpus ولا tokenizer ولا تدريب**
-- **المرحلة التالية المقترحة:** Phase 27.120 — Synonyms Local Reference Layer Build Gate, no training.
+- **الرحلة الحالية:** **Phase 27.120 / 30**
+- **المرحلة الحالية:** **Phase 27.120 — Synonyms Local Reference Layer Build Gate**
+- **حالة المرحلة الحالية:** **اكتملت بوابة build للـ reference layer المحلي؛ لا records فعلية بعد، ولا raw terms في git، ولا corpus/tokenizer/training**
+- **المرحلة التالية المقترحة:** Phase 27.121 — Synonyms Local Reference Layer Build, gitignored, no training.
 - **التحول الاستراتيجي المعتمد:** **SF-native Objective/Curriculum/Decoding Acceleration Track** — تسريع هندسي فقط؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -175,6 +175,7 @@
 | Phase 27.117 | Synonyms Sample Quality/Dedupe Review | ✅ synonyms_sample_quality_dedupe_ready_no_import | ✅ |
 | Phase 27.118 | Synonyms Reference Extraction Design | ✅ synonyms_reference_extraction_design_ready_no_import | ✅ |
 | Phase 27.119 | Synonyms Reference Extraction Dry-Run Counts | ✅ synonyms_reference_dry_run_counts_ready_no_import | ✅ |
+| Phase 27.120 | Synonyms Local Reference Layer Build Gate | ✅ synonyms_local_reference_layer_build_gate_ready_no_import | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -2322,7 +2323,48 @@ ALLOW_PHASE27_120_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GATED_NO_TRAINING
 - `artifacts/reports/PHASE27_119_SINALAB_SYNONYMS_REFERENCE_DRY_RUN_COUNTS_DECISION.json`
 - [PHASE27_119_SINALAB_SYNONYMS_REFERENCE_DRY_RUN_COUNTS_REPORT.md](./PHASE27_119_SINALAB_SYNONYMS_REFERENCE_DRY_RUN_COUNTS_REPORT.md)
 
-**التالي:** Phase 27.120 — Synonyms Local Reference Layer Build Gate, no training.
+**التالي كان:** Phase 27.120 — Synonyms Local Reference Layer Build Gate, no training.
+
+---
+
+## Phase 27.120 — Synonyms Local Reference Layer Build Gate
+
+**الحالة:** ✅ synonyms_local_reference_layer_build_gate_ready_no_import
+
+**القاموس/المسار اللغوي:** Saudi Seed v1، العربية الفصحى + السعودية فقط.
+
+**القرار الرسمي:**
+
+```text
+PHASE27_120_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GATE_DECISION
+ALLOW_PHASE27_121_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GITIGNORED_NO_TRAINING
+```
+
+**النتيجة:**
+
+- ثُبتت بوابة بناء reference layer محلي فقط.
+- لا records فعلية بُنيت في هذه المرحلة.
+- مسار البناء التالي:
+  `resources/external_sources/reference_layers/sinalab_synonyms/`
+- المسار محمي بـ `.gitignore` محلي:
+  - records/terms تبقى غير مرفوعة.
+  - المرفوع المسموح: schema/manifests/reports بلا raw terms.
+- حد المرحلة التالية:
+  - max local reference records: `1093`
+  - max local eval candidates: `685`
+- لا raw terms في git، لا corpus، لا tokenizer، لا training، لا runtime release، لا SF-50M.
+
+**الملفات:**
+
+- `resources/external_sources/phase27_120_sinalab_synonyms_local_reference_layer_build_gate.json`
+- `resources/external_sources/phase27_120_sinalab_synonyms_local_reference_layer_schema.json`
+- `resources/external_sources/reference_layers/sinalab_synonyms/.gitignore`
+- `resources/external_sources/reference_layers/sinalab_synonyms/README.md`
+- `artifacts/reports/phase27_120_sinalab_synonyms_local_reference_layer_build_gate_report.json`
+- `artifacts/reports/PHASE27_120_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GATE_DECISION.json`
+- [PHASE27_120_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GATE_REPORT.md](./PHASE27_120_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GATE_REPORT.md)
+
+**التالي:** Phase 27.121 — Synonyms Local Reference Layer Build, gitignored, no training.
 
 ---
 

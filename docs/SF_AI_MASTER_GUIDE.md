@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.119
-الاسم: Synonyms Reference Extraction Dry-Run Counts
+المرحلة الحالية: Phase 27.120
+الاسم: Synonyms Local Reference Layer Build Gate
 المسار الملزم: SF-native Objective/Curriculum/Decoding Acceleration Track
-القرار الرسمي: PHASE27_119_SINALAB_SYNONYMS_REFERENCE_DRY_RUN_COUNTS_DECISION
+القرار الرسمي: PHASE27_120_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GATE_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -130,6 +130,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - Phase 27.119 نفذ dry-run counts فقط حسب التصميم: `3010` candidate rows،
   `1093` reference candidates بعد الفلاتر، و`685` eval candidates عالية الجودة.
   لا raw terms ولا reference records ولا corpus/tokenizer/training.
+- Phase 27.120 ثبت build gate: reference records مسموحة في المرحلة التالية
+  محليًا فقط داخل `resources/external_sources/reference_layers/sinalab_synonyms/`
+  المحمي بـ `.gitignore`. المرفوع يبقى counts/schema/reports بلا raw terms.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
@@ -164,7 +167,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   `docs/PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_REPORT.md`.
 - تقرير dry-run counts الحالي:
   `docs/PHASE27_119_SINALAB_SYNONYMS_REFERENCE_DRY_RUN_COUNTS_REPORT.md`.
-- التالي: `Phase 27.120 — Synonyms Local Reference Layer Build Gate, no training`.
+- تقرير build gate الحالي:
+  `docs/PHASE27_120_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GATE_REPORT.md`.
+- التالي: `Phase 27.121 — Synonyms Local Reference Layer Build, gitignored, no training`.
 
 الدليل السابق الذي سبب هذا re-anchor:
 
@@ -436,14 +441,14 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.120 — Synonyms Local Reference Layer Build Gate, no training
+Phase 27.121 — Synonyms Local Reference Layer Build, gitignored, no training
 ```
 
 مطلوب منها:
 
-- أخذ نتائج dry-run counts من Phase 27.119 وبناء gate واضح قبل أي artifact
-  مرجعي محلي.
-- تحديد هل يسمح بإنشاء reference layer محلي gitignored أو يستمر المنع.
+- بناء reference records محلية فقط من artifact المحجور، داخل مسار gitignored.
+- رفع manifests/reports committed تحتوي counts/schema/attribution فقط.
+- منع أي raw terms من git.
 - لا corpus ولا tokenizer vocab ولا training ولا runtime release.
 - Qabas وArabic WordNet 4.0 يبقيان خارج candidates الفعلية.
 - ممنوع training/SF-50M/tokenizer retrain/runtime release قبل هذه البوابة.

@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.119: نفذنا dry-run counts لـ SinaLab Synonyms فقط. "
-    "النتيجة counts/filter drops بلا raw terms وبلا corpus أو tokenizer أو تدريب. "
-    "التالي Phase 27.120: بوابة بناء reference layer محلي بلا تدريب.",
+    "وصلنا إلى Phase 27.120: ثبتنا بوابة بناء reference layer محلي لـ SinaLab "
+    "Synonyms. المسموح لاحقًا records محلية gitignored فقط، والمرفوع counts/schema "
+    "بلا raw terms وبلا corpus أو tokenizer أو تدريب. التالي Phase 27.121.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

@@ -1,0 +1,37 @@
+{
+  "phase": "Phase 27.120",
+  "schema_id": "PHASE27_120_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_SCHEMA",
+  "source_id": "sinalab_synonyms",
+  "storage_mode": "local_gitignored_reference_layer_only",
+  "record_fields_allowed_locally_next": [
+    "record_id",
+    "source_id",
+    "artifact_sha256",
+    "source_row_number",
+    "synset_number",
+    "row_id",
+    "candidate_term",
+    "candidate_normalized",
+    "linguist_scores",
+    "average_score",
+    "quality_band",
+    "license",
+    "attribution_required",
+    "training_allowed",
+    "dialogue_corpus_allowed",
+    "tokenizer_vocab_allowed",
+    "runtime_lookup_allowed"
+  ],
+  "field_policy": {
+    "candidate_term": "Arabic candidate term; allowed only in local reference artifact, not corpus",
+    "candidate_normalized": "SF.AI normalization for dedupe/filtering",
+    "quality_band": "high>=70, medium>=40, low<40",
+    "license": "CC-BY-4.0",
+    "training_allowed": false,
+    "dialogue_corpus_allowed": false,
+    "tokenizer_vocab_allowed": false,
+    "runtime_lookup_allowed": false
+  },
+  "committed_schema_contains_raw_terms": false,
+  "committed_schema_contains_record_values": false
+}
