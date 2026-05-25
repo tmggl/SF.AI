@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.114
-الاسم: Arabic Ontology/Synonyms Source Cards
+المرحلة الحالية: Phase 27.115
+الاسم: Arabic Ontology/Synonyms Artifact Gate
 المسار الملزم: SF-native Objective/Curriculum/Decoding Acceleration Track
-القرار الرسمي: PHASE27_114_ARABIC_ONTOLOGY_SYNONYMS_SOURCE_CARDS_DECISION
+القرار الرسمي: PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -118,6 +118,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   للـ source cards فقط، وحجب `Arabic WordNet 4.0` لأنه model-derived عبر Gemini.
 - Phase 27.114 أنشأ source cards وlicense matrix للمرشحين، مع منع artifact
   download/import/training حتى Phase 27.115.
+- Phase 27.115 حسم artifact gate: Arabic Ontology محجوب لأنه request-only
+  بلا artifact مباشر، وSinaLab Synonyms مرصود كـ artifact candidate لكن import
+  محجوب حتى quarantine checksum + schema dry-run.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
@@ -142,7 +145,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   `docs/PHASE27_113_PERMISSIVE_LEXICAL_ALTERNATIVES_INTAKE_GATE_REPORT.md`.
 - تقرير source cards الحالي:
   `docs/PHASE27_114_ARABIC_ONTOLOGY_SYNONYMS_SOURCE_CARDS_REPORT.md`.
-- التالي: `Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate and Field Mapping, no training`.
+- تقرير artifact gate الحالي:
+  `docs/PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_REPORT.md`.
+- التالي: `Phase 27.116 — Synonyms Artifact Quarantine Checksum and Schema Dry-Run, no import/training`.
 
 الدليل السابق الذي سبب هذا re-anchor:
 
@@ -414,15 +419,15 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate and Field Mapping, no training
+Phase 27.116 — Synonyms Artifact Quarantine Checksum and Schema Dry-Run, no import/training
 ```
 
 مطلوب منها:
 
-- التقاط artifact/download URL إن كان واضحًا.
-- التقاط checksum وlicense داخل artifact إن أمكن.
-- تصميم field mapping فقط، لا import entries.
-- لا import فعلي حتى لو كانت الرخصة `CC-BY-4.0` قبل artifact gate.
+- تنزيل artifact المرصود لـ SinaLab Synonyms في quarantine فقط.
+- تسجيل checksum وmetadata/schema بدون نسخ raw rows إلى `data/corpus`.
+- تثبيت attribution/license file قبل أي use لاحق.
+- لا training ولا tokenizer vocab ولا runtime release.
 - Qabas وArabic WordNet 4.0 يبقيان خارج candidates الفعلية.
 - ممنوع training/SF-50M/tokenizer retrain/runtime release قبل هذه البوابة.
 

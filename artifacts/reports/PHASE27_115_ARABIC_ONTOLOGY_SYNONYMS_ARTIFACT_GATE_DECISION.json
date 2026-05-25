@@ -1,0 +1,13 @@
+{
+  "decision_id": "PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_DECISION",
+  "engineering_decision": "ALLOW_PHASE27_116_SYNONYMS_ARTIFACT_QUARANTINE_SCHEMA_DRY_RUN_NO_IMPORT",
+  "arabic_ontology_decision": "BLOCK_IMPORT_REQUEST_ONLY_NO_DIRECT_ARTIFACT",
+  "sinalab_synonyms_decision": "ALLOW_QUARANTINE_CHECKSUM_SCHEMA_DRY_RUN_ONLY",
+  "raw_entry_import_allowed": false,
+  "external_training_text_import_allowed": false,
+  "external_tokenizer_vocab_import_allowed": false,
+  "new_training_allowed": false,
+  "runtime_release_allowed": false,
+  "sf50m_transition_allowed": false,
+  "next_phase": "Phase 27.116 — Synonyms Artifact Quarantine Checksum and Schema Dry-Run, no import/training"
+}

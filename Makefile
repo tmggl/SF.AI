@@ -539,6 +539,9 @@ phase27-permissive-lexical-alternatives-intake:
 phase27-arabic-ontology-synonyms-source-cards:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_114_arabic_ontology_synonyms_source_cards.py $(ARGS)
 
+phase27-arabic-ontology-synonyms-artifact-gate:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_115_arabic_ontology_synonyms_artifact_gate.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 

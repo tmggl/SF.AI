@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.114: أنشأنا source cards وlicense matrix لـ Arabic "
-    "Ontology وSinaLab Synonyms، لكن لا يوجد import أو تدريب. التالي "
-    "Phase 27.115: artifact gate وfield mapping بلا تدريب.",
+    "وصلنا إلى Phase 27.115: Arabic Ontology محجوب لأنه request-only بلا "
+    "artifact مباشر، وSinaLab Synonyms مرصود لكن import ما زال محجوبًا. "
+    "التالي Phase 27.116: quarantine checksum وschema dry-run فقط، بلا تدريب.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

@@ -50,7 +50,7 @@
 - السيادة تبقى على corpus/tokenizer/behavior/runtime/alignment/evaluation
   وسلوك الحوار الفصيح والسعودي.
 - قبل أي تدريب جديد يجب وجود root-cause/decision gate حديث يسمح به صراحة.
-  القرار الحالي هو `PHASE27_111_QABAS_LEXICON_BOOTSTRAP_DESIGN_DECISION`:
+  القرار الحالي هو `PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_DECISION`:
   المسار أُعيد تثبيته عند Phase 27.79، ومرّت بوابات Phase 27.80، ثم اكتمل
   تدريب Phase 27.81. Phase 27.105 أثبت أن الواجهة تستدعي المولد الحقيقي
   في raw lab، لكنه شخّص فشل social subfamilies وtopic variants؛ التالي
@@ -62,6 +62,8 @@
   Phase 27.112 حسم Qabas كـ reference-only بسبب `CC-BY-ND-4.0`؛
   Phase 27.113 صنف البدائل وسمح فقط بـ source cards لـ Arabic Ontology وSynonyms.
   Phase 27.114 أنشأ source cards وlicense matrix، بلا import.
+  Phase 27.115 حسم artifact gate: Arabic Ontology محجوب لأنه request-only،
+  وSinaLab Synonyms مرصود لكن import محجوب حتى quarantine checksum/schema dry-run.
 - لا runtime release بدون `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - لا تعتمد loss/perplexity/micro-probe وحدها؛ النجاح يعني held-out dialogue
   quality, runtime usability, clean-stop, semantic correctness, family
@@ -74,13 +76,13 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 27.114 موثقة تاريخيًا، لكن الحالة العملية
+- المراحل من Phase 0 حتى Phase 27.115 موثقة تاريخيًا، لكن الحالة العملية
   الحالية هي:
-  `Phase 27.114 — Arabic Ontology/Synonyms Source Cards`
+  `Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate`
   ضمن `SF-native Objective/Curriculum/Decoding Acceleration Track`.
   التقرير الملزم: `docs/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md`.
   القرار التنفيذي:
-  `PHASE27_114_ARABIC_ONTOLOGY_SYNONYMS_SOURCE_CARDS_DECISION`.
+  `PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_DECISION`.
   Phase 27.104 تبقى الدليل السابق: تدريب محدود نجح topic-wise وفشل
   all-family، وليست إذن runtime.
   تاريخيًا أضيفت دفعة `sf-ai-balanced-family-pack-v1`: `2500` سجل gold
@@ -139,7 +141,9 @@
   Phase 27.113 صنف Arabic Ontology/Synonyms كمرشحين source-card فقط، وحجب
   Arabic WordNet 4.0 لأنه model-derived.
   Phase 27.114 أنشأ source cards وlicense matrix للمرشحين، ولا يوجد import.
-- أول خطوة تالية: Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate and Field Mapping, no training.
+  Phase 27.115 حسم artifact gate وfield mapping: Arabic Ontology محجوب،
+  وSinaLab Synonyms مسموح فقط لـ quarantine checksum/schema dry-run.
+- أول خطوة تالية: Phase 27.116 — Synonyms Artifact Quarantine Checksum and Schema Dry-Run, no import/training.
   لا تبدأ training ولا SF-50M ولا tokenizer retrain قبل هذه البوابة.
 - تفويض التكبير التلقائي معتمد، لكن مفعوله يبدأ فقط عندما تنجح gates؛
   حاليًا `SF-50M` ما زال محجوبًا لأن capacity وزنها `1%`.

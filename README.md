@@ -28,9 +28,9 @@
 المسار الحالي الرسمي:
 
 ```text
-Phase 27.81 — Execute bounded SF-10M family-conditioned repair training
+Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate
 SF-native Objective/Curriculum/Decoding Acceleration Track
-PHASE27_81_BOUNDED_FAMILY_CONDITIONED_REPAIR_TRAINING_DECISION
+PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_DECISION
 ```
 
 القرار الحالي:
@@ -53,7 +53,12 @@ PHASE27_81_BOUNDED_FAMILY_CONDITIONED_REPAIR_TRAINING_DECISION
 - Phase 27.102 ثبّت بوابة تنفيذية تلتقط هذا الفشل وتكتب canary من 16 prompt.
 - Phase 27.103 أضافت `192` سجلًا `gold` متوازنًا (`8` موضوعات × فصحى/سعودي × `12`) مع copy-anchor وwrong-topic leak = `0`.
 - Phase 27.104 حققت prototype `16/16`, wrong-topic `0`, known `16/16`, fresh `9/10`, لكنها لم تحفظ كل عائلات الحوار: all-family `30/50`.
-- التالي: `Phase 27.82 — Phase 27.81 Result Diagnosis`.
+- Phase 27.105–27.108 شخّصت raw UI lab وأضافت social subfamily/topic variant data pack.
+- Phase 27.109–27.112 درست المصادر المجانية وحجبت Qabas كـ reference-only بسبب الترخيص.
+- Phase 27.113–27.114 فتحت source-card path لـ Arabic Ontology وSinaLab Synonyms بلا import.
+- Phase 27.115 حسمت artifact gate: Arabic Ontology محجوب، وSinaLab Synonyms مرصود
+  لكن import محجوب حتى quarantine checksum + schema dry-run.
+- التالي: `Phase 27.116 — Synonyms Artifact Quarantine Checksum and Schema Dry-Run`.
 - عند نجاح بوابة أي حجم لاحقًا، ينتقل الوكيل تلقائيًا للحجم التالي حتى
   `SF-1B+` دون انتظار موافقة جديدة.
 

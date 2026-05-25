@@ -2119,7 +2119,40 @@ make api
   - `artifacts/reports/phase27_114_arabic_ontology_synonyms_source_cards_report.json`
   - `artifacts/reports/PHASE27_114_ARABIC_ONTOLOGY_SYNONYMS_SOURCE_CARDS_DECISION.json`
   - [PHASE27_114_ARABIC_ONTOLOGY_SYNONYMS_SOURCE_CARDS_REPORT.md](./PHASE27_114_ARABIC_ONTOLOGY_SYNONYMS_SOURCE_CARDS_REPORT.md)
-- التالي: Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate and Field Mapping, no training.
+- التالي كان: Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate and Field Mapping, no training.
+
+---
+
+## Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate and Field Mapping
+
+**الحالة:** ✅ artifact_gate_ready_no_import
+
+**القاموس/المسار اللغوي:** Saudi Seed v1، العربية الفصحى + السعودية فقط.
+
+**القرار الرسمي:**
+
+```text
+PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_DECISION
+ALLOW_PHASE27_116_SYNONYMS_ARTIFACT_QUARANTINE_SCHEMA_DRY_RUN_NO_IMPORT
+```
+
+**النتيجة:**
+
+- `Arabic Ontology`: محجوب للاستيراد؛ الوصول الحالي request/API-token oriented ولا يوجد artifact مباشر مع checksum.
+- `SinaLab Synonyms`: artifact مرصود في GitHub (`README.md`, `LICENSE`, `Synonyms Dataset.xlsx`) مع إشارات `CC-BY-4.0`، لكن raw import ما زال محجوبًا.
+- صُمم field mapping للمصدرين كـ reference/eval/lexical-support فقط.
+- `training_allowed=false`, `tokenizer_vocab_allowed=false`, `dialogue_corpus_allowed=false`.
+- لا corpus، لا tokenizer، لا training، لا runtime release، لا SF-50M.
+
+**الملفات:**
+
+- `resources/external_sources/phase27_115_arabic_ontology_synonyms_artifact_gate.json`
+- `resources/external_sources/phase27_115_arabic_ontology_synonyms_field_mapping_design.json`
+- `artifacts/reports/phase27_115_arabic_ontology_synonyms_artifact_gate_report.json`
+- `artifacts/reports/PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_DECISION.json`
+- [PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_REPORT.md](./PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_REPORT.md)
+
+**التالي:** Phase 27.116 — Synonyms Artifact Quarantine Checksum and Schema Dry-Run, no import/training.
 
 ---
 

@@ -31,8 +31,8 @@ app = FastAPI(
     version="0.1.0",
     description=(
         "SF.AI — Sovereign AI platform. Phase 9 chat UI mounted at /ui/chat. "
-        "Phase 27.114 created Arabic Ontology/Synonyms source cards and license "
-        "matrix with import still blocked; "
+        "Phase 27.115 completed Arabic Ontology/Synonyms artifact gate and "
+        "field mapping with import still blocked; "
         "SF-10M Phase 27.81 is visible in lab mode, but official runtime "
         "remains blocked. "
         "No pretrained models, no external AI APIs."
@@ -49,7 +49,7 @@ app.include_router(ui.router)
 def root() -> dict[str, str]:
     return {
         "project": "SF.AI",
-        "phase": "Phase 27.114 — Arabic Ontology/Synonyms Source Cards",
+        "phase": "Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate",
         "ui": "/ui/chat",
         "docs": "/docs",
     }

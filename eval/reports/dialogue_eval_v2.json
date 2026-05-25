@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.114: أنشأنا source cards وlicense matrix لـ Arabic Ontology وSinaLab Synonyms، لكن لا يوجد import أو تدريب. التالي Phase 27.115: artifact gate وfield mapping بلا"
+      "response_preview": "وصلنا إلى Phase 27.115: Arabic Ontology محجوب لأنه request-only بلا artifact مباشر، وSinaLab Synonyms مرصود لكن import ما زال محجوبًا. التالي Phase 27.116: quarantine checksum وsch"
     },
     {
       "scenario_id": "clarification_repair_flow",

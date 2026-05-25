@@ -4577,7 +4577,7 @@ Final Response
 
 ---
 
-## الحالة العملية الحالية — Phase 27.114
+## الحالة العملية الحالية — Phase 27.115
 
 المسار الحاكم هو:
 
@@ -4588,7 +4588,7 @@ SF-native Objective/Curriculum/Decoding Acceleration Track
 آخر قرار:
 
 ```text
-PHASE27_114_ARABIC_ONTOLOGY_SYNONYMS_SOURCE_CARDS_DECISION
+PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_DECISION
 ```
 
 الخلاصة:
@@ -4624,14 +4624,18 @@ PHASE27_114_ARABIC_ONTOLOGY_SYNONYMS_SOURCE_CARDS_DECISION
   محجوب لأنه model-derived عبر Gemini.
 - Phase 27.114 أنشأ source cards وlicense matrix لـ `Arabic Ontology` و
   `SinaLab Synonyms`، مع بقاء artifact download/import محجوبًا.
-- لا تدريب جديد قبل Phase 27.115 artifact gate/field mapping ولا قبل بوابات
+- Phase 27.115 حسم artifact gate وfield mapping:
+  - `Arabic Ontology` محجوب؛ لا artifact مباشر، فقط request/API-token path.
+  - `SinaLab Synonyms` مرصود كـ GitHub artifact candidate، لكن import محجوب
+    حتى quarantine checksum + schema dry-run.
+- لا تدريب جديد قبل Phase 27.116 quarantine/schema dry-run ولا قبل بوابات
   corpus/license اللاحقة.
 - لا SF-50M قبل gate يثبت أن capacity هي السبب الأكبر.
 
 التالي:
 
 ```text
-Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate and Field Mapping, no training
+Phase 27.116 — Synonyms Artifact Quarantine Checksum and Schema Dry-Run, no import/training
 ```
 
 ---
