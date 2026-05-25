@@ -1,0 +1,28 @@
+{
+  "phase": "Phase 27.126",
+  "gate_id": "PHASE27_126_SINALAB_SYNONYMS_REFERENCE_RUNTIME_POLICY_DESIGN_GATE",
+  "source_id": "sinalab_synonyms",
+  "gate_passed": true,
+  "preconditions": {
+    "phase27_125_allows_runtime_policy_design": true,
+    "phase27_125_gate_passed": true,
+    "metrics_support_policy_design": true,
+    "policy_requires_separate_chat_gate": true,
+    "policy_keeps_default_runtime_disabled": true,
+    "policy_blocks_raw_term_display": true,
+    "policy_blocks_query_rows": true,
+    "policy_forbids_template_masking": true,
+    "policy_blocks_raw_logs": true,
+    "policy_blocks_training_and_scaling": true
+  },
+  "runtime_policy_enforcement_allowed_next": true,
+  "runtime_lookup_activation_allowed": false,
+  "chat_integration_allowed": false,
+  "raw_terms_commit_allowed": false,
+  "query_rows_commit_allowed": false,
+  "dialogue_corpus_allowed": false,
+  "tokenizer_vocab_allowed": false,
+  "training_allowed": false,
+  "runtime_release_allowed": false,
+  "sf50m_transition_allowed": false
+}

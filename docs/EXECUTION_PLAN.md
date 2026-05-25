@@ -4577,7 +4577,7 @@ Final Response
 
 ---
 
-## الحالة العملية الحالية — Phase 27.125
+## الحالة العملية الحالية — Phase 27.126
 
 المسار الحاكم هو:
 
@@ -4588,7 +4588,7 @@ SF-native Objective/Curriculum/Decoding Acceleration Track
 آخر قرار:
 
 ```text
-PHASE27_125_SINALAB_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_DECISION
+PHASE27_126_SINALAB_SYNONYMS_REFERENCE_RUNTIME_POLICY_DESIGN_DECISION
 ```
 
 الخلاصة:
@@ -4653,13 +4653,15 @@ PHASE27_125_SINALAB_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_DECISION
 - Phase 27.125 شغل adapter محليًا على reference layer gitignored كتجربة dry-run:
   exact lookup `685/685`, redaction `1.0`, term leak `0`, hash lengths `[64]`.
   لا raw terms ولا query rows في git، ولا runtime/chat/corpus/tokenizer/training.
-- لا تدريب جديد قبل Phase 27.126 runtime policy design ولا قبل بوابات corpus/license اللاحقة.
+- Phase 27.126 صمم سياسة runtime مستقبلية بلا تفعيل: default disabled،
+  aggregate-only output، منع raw terms/query rows/logs، ومنع template masking.
+- لا تدريب جديد قبل Phase 27.127 policy enforcement ولا قبل بوابات corpus/license اللاحقة.
 - لا SF-50M قبل gate يثبت أن capacity هي السبب الأكبر.
 
 التالي:
 
 ```text
-Phase 27.126 — Synonyms Reference Runtime Policy Design, no activation
+Phase 27.127 — Synonyms Reference Runtime Policy Enforcement, no activation
 ```
 
 ---

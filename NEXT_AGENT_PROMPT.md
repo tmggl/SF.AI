@@ -50,7 +50,7 @@
 - السيادة تبقى على corpus/tokenizer/behavior/runtime/alignment/evaluation
   وسلوك الحوار الفصيح والسعودي.
 - قبل أي تدريب جديد يجب وجود root-cause/decision gate حديث يسمح به صراحة.
-  القرار الحالي هو `PHASE27_125_SINALAB_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_DECISION`:
+  القرار الحالي هو `PHASE27_126_SINALAB_SYNONYMS_REFERENCE_RUNTIME_POLICY_DESIGN_DECISION`:
   المسار أُعيد تثبيته عند Phase 27.79، ومرّت بوابات Phase 27.80، ثم اكتمل
   تدريب Phase 27.81. Phase 27.105 أثبت أن الواجهة تستدعي المولد الحقيقي
   في raw lab، لكنه شخّص فشل social subfamilies وtopic variants؛ التالي
@@ -75,6 +75,7 @@
   Phase 27.123 صمم adapter contract فقط؛ لا runtime ولا chat integration ولا corpus/tokenizer/training.
   Phase 27.124 كتب skeleton adapter واختبره بسجلات synthetic فقط؛ لا runtime ولا تدريب.
   Phase 27.125 شغل adapter محليًا على reference layer gitignored؛ lookup `685/685` وterm leak `0`.
+  Phase 27.126 صمم runtime policy بلا تفعيل؛ default disabled ولا raw terms/logs.
 - لا runtime release بدون `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - لا تعتمد loss/perplexity/micro-probe وحدها؛ النجاح يعني held-out dialogue
   quality, runtime usability, clean-stop, semantic correctness, family
@@ -87,13 +88,13 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 27.125 موثقة تاريخيًا، لكن الحالة العملية
+- المراحل من Phase 0 حتى Phase 27.126 موثقة تاريخيًا، لكن الحالة العملية
   الحالية هي:
-  `Phase 27.125 — Synonyms Reference Adapter Local Dry-Run`
+  `Phase 27.126 — Synonyms Reference Runtime Policy Design`
   ضمن `SF-native Objective/Curriculum/Decoding Acceleration Track`.
   التقرير الملزم: `docs/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md`.
   القرار التنفيذي:
-  `PHASE27_125_SINALAB_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_DECISION`.
+  `PHASE27_126_SINALAB_SYNONYMS_REFERENCE_RUNTIME_POLICY_DESIGN_DECISION`.
   Phase 27.104 تبقى الدليل السابق: تدريب محدود نجح topic-wise وفشل
   all-family، وليست إذن runtime.
   تاريخيًا أضيفت دفعة `sf-ai-balanced-family-pack-v1`: `2500` سجل gold
@@ -168,7 +169,8 @@
 - Phase 27.123 حسم adapter design: contract/redaction فقط، بلا runtime أو تدريب.
 - Phase 27.124 حسم adapter skeleton: كود مستقل واختبارات synthetic فقط، بلا runtime أو تدريب.
 - Phase 27.125 حسم local dry-run: lookup `685/685`, redaction `1.0`, term leak `0`.
-- أول خطوة تالية: Phase 27.126 — Synonyms Reference Runtime Policy Design, no activation.
+- Phase 27.126 حسم runtime policy design: disabled by default, no raw terms/logs/template masking.
+- أول خطوة تالية: Phase 27.127 — Synonyms Reference Runtime Policy Enforcement, no activation.
   لا تبدأ training ولا SF-50M ولا tokenizer retrain قبل هذه البوابة.
 - تفويض التكبير التلقائي معتمد، لكن مفعوله يبدأ فقط عندما تنجح gates؛
   حاليًا `SF-50M` ما زال محجوبًا لأن capacity وزنها `1%`.
@@ -201,7 +203,7 @@
    cd /Users/sami/workSF/SF.AI && .venv/bin/python -m pytest tests
    ```
 
-2. تحقق من القسم 4 في AGENT_HANDOFF.md. مسار العمل الحالي هو Phase 27.125 مكتملة، والتالي Phase 27.126 runtime policy design بلا activation ولا SF-50M ولا tokenizer retrain.
+2. تحقق من القسم 4 في AGENT_HANDOFF.md. مسار العمل الحالي هو Phase 27.126 مكتملة، والتالي Phase 27.127 runtime policy enforcement بلا activation ولا SF-50M ولا tokenizer retrain.
 
 3. Phase 11 مكتملة كحوكمة وأداة فحص. شغّل:
    ```

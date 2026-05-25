@@ -1,0 +1,126 @@
+{
+  "phase": "Phase 27.126",
+  "status": "PHASE27_126_SYNONYMS_REFERENCE_RUNTIME_POLICY_DESIGN_READY_NO_ACTIVATION",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "dictionary_track": "Saudi Seed v1",
+  "policy": {
+    "phase": "Phase 27.126",
+    "policy_id": "PHASE27_126_SINALAB_SYNONYMS_REFERENCE_RUNTIME_POLICY",
+    "source_id": "sinalab_synonyms",
+    "policy_scope": "future_runtime_policy_design_no_activation",
+    "language_track": [
+      "msa",
+      "saudi"
+    ],
+    "source_license_mode": "reference_only_counts_hashes_until_activation_gate",
+    "minimum_activation_prerequisites": {
+      "local_dry_run_passed": true,
+      "reference_record_count": 1093,
+      "eval_query_count": 685,
+      "exact_lookup_rate": 1.0,
+      "redaction_rate": 1.0,
+      "term_leak_count": 0,
+      "observed_hash_lengths": [
+        64
+      ],
+      "heldout_runtime_policy_tests_required": true,
+      "chat_integration_gate_required": true,
+      "sensitive_log_scan_required": true
+    },
+    "runtime_response_policy": {
+      "default_mode": "disabled",
+      "allowed_future_output": "aggregate_signal_only",
+      "raw_term_display_allowed": false,
+      "query_row_display_allowed": false,
+      "result_hash_display_allowed": true,
+      "max_results_default": 5,
+      "max_results_cap": 10,
+      "min_quality_band_default": "high",
+      "fallback_to_template_allowed": false
+    },
+    "logging_policy": {
+      "logs_may_contain_raw_query": false,
+      "logs_may_contain_raw_terms": false,
+      "logs_may_contain_query_rows": false,
+      "logs_may_contain_hashes_and_counts": true,
+      "sensitive_scan_before_commit": true
+    },
+    "allowed_next": [
+      "runtime_policy_enforcement_tests_no_activation",
+      "adapter_disabled_runtime_guard",
+      "counts_only_policy_report"
+    ],
+    "blocked_until_separate_gate": [
+      "runtime_lookup_activation",
+      "chat_module_integration",
+      "ui_term_display",
+      "raw_terms_commit",
+      "query_rows_commit",
+      "data/corpus writes",
+      "tokenizer vocab or merges",
+      "training text import",
+      "checkpoint writes",
+      "SF-50M transition"
+    ]
+  },
+  "gate": {
+    "phase": "Phase 27.126",
+    "gate_id": "PHASE27_126_SINALAB_SYNONYMS_REFERENCE_RUNTIME_POLICY_DESIGN_GATE",
+    "source_id": "sinalab_synonyms",
+    "gate_passed": true,
+    "preconditions": {
+      "phase27_125_allows_runtime_policy_design": true,
+      "phase27_125_gate_passed": true,
+      "metrics_support_policy_design": true,
+      "policy_requires_separate_chat_gate": true,
+      "policy_keeps_default_runtime_disabled": true,
+      "policy_blocks_raw_term_display": true,
+      "policy_blocks_query_rows": true,
+      "policy_forbids_template_masking": true,
+      "policy_blocks_raw_logs": true,
+      "policy_blocks_training_and_scaling": true
+    },
+    "runtime_policy_enforcement_allowed_next": true,
+    "runtime_lookup_activation_allowed": false,
+    "chat_integration_allowed": false,
+    "raw_terms_commit_allowed": false,
+    "query_rows_commit_allowed": false,
+    "dialogue_corpus_allowed": false,
+    "tokenizer_vocab_allowed": false,
+    "training_allowed": false,
+    "runtime_release_allowed": false,
+    "sf50m_transition_allowed": false
+  },
+  "decision": {
+    "decision_id": "PHASE27_126_SINALAB_SYNONYMS_REFERENCE_RUNTIME_POLICY_DESIGN_DECISION",
+    "engineering_decision": "ALLOW_PHASE27_127_SYNONYMS_REFERENCE_RUNTIME_POLICY_ENFORCEMENT_NO_ACTIVATION",
+    "runtime_policy_design_passed": true,
+    "runtime_policy_enforcement_allowed_next": true,
+    "runtime_lookup_activation_allowed": false,
+    "chat_integration_allowed": false,
+    "raw_terms_commit_allowed": false,
+    "query_rows_commit_allowed": false,
+    "dialogue_corpus_allowed": false,
+    "tokenizer_vocab_allowed": false,
+    "new_training_allowed": false,
+    "runtime_release_allowed": false,
+    "sf50m_transition_allowed": false,
+    "next_phase": "Phase 27.127 — Synonyms Reference Runtime Policy Enforcement, no activation"
+  },
+  "adapter_code_changed": false,
+  "runtime_changed": false,
+  "runtime_lookup_enabled": false,
+  "chat_integration_enabled": false,
+  "raw_source_records_loaded": false,
+  "query_rows_committed": false,
+  "reference_records_committed": false,
+  "corpus_changed": false,
+  "tokenizer_changed": false,
+  "training_started": false,
+  "raw_terms_published": false
+}

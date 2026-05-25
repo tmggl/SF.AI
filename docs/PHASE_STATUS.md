@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.125 / 30**
-- **المرحلة الحالية:** **Phase 27.125 — Synonyms Reference Adapter Local Dry-Run**
-- **حالة المرحلة الحالية:** **dry-run محلي على reference layer gitignored؛ lookup 685/685 وredaction 100% بلا runtime**
-- **المرحلة التالية المقترحة:** Phase 27.126 — Synonyms Reference Runtime Policy Design, no activation.
+- **الرحلة الحالية:** **Phase 27.126 / 30**
+- **المرحلة الحالية:** **Phase 27.126 — Synonyms Reference Runtime Policy Design**
+- **حالة المرحلة الحالية:** **سياسة runtime مستقبلية بلا تفعيل؛ default disabled ومنع raw terms/query rows/logs**
+- **المرحلة التالية المقترحة:** Phase 27.127 — Synonyms Reference Runtime Policy Enforcement, no activation.
 - **التحول الاستراتيجي المعتمد:** **SF-native Objective/Curriculum/Decoding Acceleration Track** — تسريع هندسي فقط؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -181,6 +181,7 @@
 | Phase 27.123 | Synonyms Reference Adapter Design | ✅ synonyms_reference_adapter_design_ready_no_runtime | ✅ |
 | Phase 27.124 | Synonyms Reference Adapter Skeleton | ✅ synonyms_reference_adapter_skeleton_ready_no_runtime | ✅ |
 | Phase 27.125 | Synonyms Reference Adapter Local Dry-Run | ✅ synonyms_reference_adapter_local_dry_run_ready_no_runtime | ✅ |
+| Phase 27.126 | Synonyms Reference Runtime Policy Design | ✅ synonyms_reference_runtime_policy_design_ready_no_activation | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -2575,7 +2576,47 @@ ALLOW_PHASE27_126_SYNONYMS_REFERENCE_RUNTIME_POLICY_DESIGN_NO_ACTIVATION
 - `artifacts/reports/PHASE27_125_SINALAB_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_DECISION.json`
 - [PHASE27_125_SINALAB_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_REPORT.md](./PHASE27_125_SINALAB_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_REPORT.md)
 
-**التالي:** Phase 27.126 — Synonyms Reference Runtime Policy Design, no activation.
+**التالي كان:** Phase 27.126 — Synonyms Reference Runtime Policy Design, no activation.
+
+---
+
+## Phase 27.126 — Synonyms Reference Runtime Policy Design
+
+**الحالة:** ✅ synonyms_reference_runtime_policy_design_ready_no_activation
+
+**القاموس/المسار اللغوي:** Saudi Seed v1، العربية الفصحى + السعودية فقط.
+
+**القرار الرسمي:**
+
+```text
+PHASE27_126_SINALAB_SYNONYMS_REFERENCE_RUNTIME_POLICY_DESIGN_DECISION
+ALLOW_PHASE27_127_SYNONYMS_REFERENCE_RUNTIME_POLICY_ENFORCEMENT_NO_ACTIVATION
+```
+
+**النتيجة:**
+
+- صُممت سياسة runtime مستقبلية فقط، بلا تفعيل.
+- default mode: `disabled`.
+- allowed future output: `aggregate_signal_only`.
+- raw term display: `false`.
+- query row display: `false`.
+- logs may contain raw query/terms/query rows: `false`.
+- fallback template masking: `false`.
+- activation يتطلب gate مستقلًا لـ ChatModule، heldout runtime policy tests،
+  وsensitive log scan.
+- محجوب الآن: runtime lookup activation، chat module integration،
+  UI term display، raw terms/query rows، data/corpus writes، tokenizer vocab/merges،
+  training، وSF-50M transition.
+
+**الملفات:**
+
+- `resources/external_sources/phase27_126_sinalab_synonyms_reference_runtime_policy.json`
+- `resources/external_sources/phase27_126_sinalab_synonyms_reference_runtime_policy_design_gate.json`
+- `artifacts/reports/phase27_126_sinalab_synonyms_reference_runtime_policy_design_report.json`
+- `artifacts/reports/PHASE27_126_SINALAB_SYNONYMS_REFERENCE_RUNTIME_POLICY_DESIGN_DECISION.json`
+- [PHASE27_126_SINALAB_SYNONYMS_REFERENCE_RUNTIME_POLICY_DESIGN_REPORT.md](./PHASE27_126_SINALAB_SYNONYMS_REFERENCE_RUNTIME_POLICY_DESIGN_REPORT.md)
+
+**التالي:** Phase 27.127 — Synonyms Reference Runtime Policy Enforcement, no activation.
 
 ---
 

@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.125: شغلنا dry-run محليًا للـ synonyms reference adapter "
-    "على reference layer gitignored، والخرج counts/hashes فقط. لا runtime ولا ChatModule "
-    "ولا corpus أو tokenizer أو تدريب. التالي Phase 27.126: سياسة runtime بلا تفعيل.",
+    "وصلنا إلى Phase 27.126: صممنا سياسة runtime للـ synonyms reference adapter "
+    "بلا تفعيل. الوضع الافتراضي disabled، ولا raw terms ولا query rows ولا logs خام. "
+    "التالي Phase 27.127: اختبارات enforcement بلا activation.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

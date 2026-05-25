@@ -1,0 +1,60 @@
+{
+  "phase": "Phase 27.126",
+  "policy_id": "PHASE27_126_SINALAB_SYNONYMS_REFERENCE_RUNTIME_POLICY",
+  "source_id": "sinalab_synonyms",
+  "policy_scope": "future_runtime_policy_design_no_activation",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "source_license_mode": "reference_only_counts_hashes_until_activation_gate",
+  "minimum_activation_prerequisites": {
+    "local_dry_run_passed": true,
+    "reference_record_count": 1093,
+    "eval_query_count": 685,
+    "exact_lookup_rate": 1.0,
+    "redaction_rate": 1.0,
+    "term_leak_count": 0,
+    "observed_hash_lengths": [
+      64
+    ],
+    "heldout_runtime_policy_tests_required": true,
+    "chat_integration_gate_required": true,
+    "sensitive_log_scan_required": true
+  },
+  "runtime_response_policy": {
+    "default_mode": "disabled",
+    "allowed_future_output": "aggregate_signal_only",
+    "raw_term_display_allowed": false,
+    "query_row_display_allowed": false,
+    "result_hash_display_allowed": true,
+    "max_results_default": 5,
+    "max_results_cap": 10,
+    "min_quality_band_default": "high",
+    "fallback_to_template_allowed": false
+  },
+  "logging_policy": {
+    "logs_may_contain_raw_query": false,
+    "logs_may_contain_raw_terms": false,
+    "logs_may_contain_query_rows": false,
+    "logs_may_contain_hashes_and_counts": true,
+    "sensitive_scan_before_commit": true
+  },
+  "allowed_next": [
+    "runtime_policy_enforcement_tests_no_activation",
+    "adapter_disabled_runtime_guard",
+    "counts_only_policy_report"
+  ],
+  "blocked_until_separate_gate": [
+    "runtime_lookup_activation",
+    "chat_module_integration",
+    "ui_term_display",
+    "raw_terms_commit",
+    "query_rows_commit",
+    "data/corpus writes",
+    "tokenizer vocab or merges",
+    "training text import",
+    "checkpoint writes",
+    "SF-50M transition"
+  ]
+}
