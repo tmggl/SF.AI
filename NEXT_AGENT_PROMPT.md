@@ -71,6 +71,7 @@
   Phase 27.119 نفذ dry-run counts فقط دون raw terms أو corpus/tokenizer/training.
   Phase 27.120 ثبت بوابة build محلية: records مسموحة لاحقًا داخل gitignored فقط.
   Phase 27.121 بنى records محلية gitignored؛ المرفوع counts/hashes فقط بلا raw terms.
+  Phase 27.122 اختبر query/eval محليًا في الذاكرة؛ lookup `685/685` ولا runtime activation.
 - لا runtime release بدون `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - لا تعتمد loss/perplexity/micro-probe وحدها؛ النجاح يعني held-out dialogue
   quality, runtime usability, clean-stop, semantic correctness, family
@@ -83,13 +84,13 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 27.121 موثقة تاريخيًا، لكن الحالة العملية
+- المراحل من Phase 0 حتى Phase 27.122 موثقة تاريخيًا، لكن الحالة العملية
   الحالية هي:
-  `Phase 27.121 — Synonyms Local Reference Layer Build`
+  `Phase 27.122 — Synonyms Reference Query and Eval Gate`
   ضمن `SF-native Objective/Curriculum/Decoding Acceleration Track`.
   التقرير الملزم: `docs/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md`.
   القرار التنفيذي:
-  `PHASE27_121_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_DECISION`.
+  `PHASE27_122_SINALAB_SYNONYMS_REFERENCE_QUERY_EVAL_GATE_DECISION`.
   Phase 27.104 تبقى الدليل السابق: تدريب محدود نجح topic-wise وفشل
   all-family، وليست إذن runtime.
   تاريخيًا أضيفت دفعة `sf-ai-balanced-family-pack-v1`: `2500` سجل gold
@@ -160,7 +161,8 @@
   و`685` eval candidates، بلا raw terms ولا corpus/tokenizer/training.
 - Phase 27.120 حسم build gate: المسموح في التالي records محلية gitignored فقط.
 - Phase 27.121 بنى `1093` records محلية و`685` eval candidates داخل gitignored.
-- أول خطوة تالية: Phase 27.122 — Synonyms Reference Query and Eval Gate, no training.
+- Phase 27.122 حسم query/eval gate: lookup `685/685`، بلا runtime activation.
+- أول خطوة تالية: Phase 27.123 — Synonyms Reference Adapter Design, no runtime.
   لا تبدأ training ولا SF-50M ولا tokenizer retrain قبل هذه البوابة.
 - تفويض التكبير التلقائي معتمد، لكن مفعوله يبدأ فقط عندما تنجح gates؛
   حاليًا `SF-50M` ما زال محجوبًا لأن capacity وزنها `1%`.

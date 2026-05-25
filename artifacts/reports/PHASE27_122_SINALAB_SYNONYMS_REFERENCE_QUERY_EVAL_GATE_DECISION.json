@@ -1,0 +1,17 @@
+{
+  "decision_id": "PHASE27_122_SINALAB_SYNONYMS_REFERENCE_QUERY_EVAL_GATE_DECISION",
+  "engineering_decision": "ALLOW_PHASE27_123_SYNONYMS_REFERENCE_ADAPTER_DESIGN_NO_RUNTIME",
+  "query_eval_gate_passed": true,
+  "reference_adapter_design_allowed_next": true,
+  "raw_terms_commit_allowed": false,
+  "query_rows_commit_allowed": false,
+  "external_training_text_import_allowed": false,
+  "external_tokenizer_vocab_import_allowed": false,
+  "dialogue_corpus_allowed": false,
+  "tokenizer_vocab_allowed": false,
+  "new_training_allowed": false,
+  "runtime_release_allowed": false,
+  "runtime_lookup_activation_allowed": false,
+  "sf50m_transition_allowed": false,
+  "next_phase": "Phase 27.123 — Synonyms Reference Adapter Design, no runtime"
+}

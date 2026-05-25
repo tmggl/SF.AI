@@ -1,0 +1,113 @@
+{
+  "phase": "Phase 27.122",
+  "status": "PHASE27_122_SYNONYMS_REFERENCE_QUERY_EVAL_GATE_READY_NO_RUNTIME",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "dictionary_track": "Saudi Seed v1",
+  "metrics": {
+    "phase": "Phase 27.122",
+    "source_id": "sinalab_synonyms",
+    "query_scope": "local_in_memory_query_eval_terms_not_committed",
+    "reference_record_count": 1093,
+    "eval_query_count": 685,
+    "unique_normalized_index_keys": 1093,
+    "duplicate_normalized_index_keys": 0,
+    "exact_lookup_hits": 685,
+    "missing_lookup_count": 0,
+    "exact_lookup_rate": 1.0,
+    "quality_band_match_hits": 685,
+    "quality_band_match_rate": 1.0,
+    "reference_quality_band_counts": {
+      "high": 685,
+      "medium": 408,
+      "low": 0
+    },
+    "eval_quality_band_counts": {
+      "high": 685,
+      "medium": 0,
+      "low": 0
+    },
+    "local_reference_files_gitignored": true,
+    "raw_terms_published": false,
+    "query_rows_published": false,
+    "dialogue_corpus_written": false,
+    "tokenizer_vocab_written": false,
+    "training_started": false,
+    "runtime_lookup_enabled": false
+  },
+  "gate": {
+    "phase": "Phase 27.122",
+    "gate_id": "PHASE27_122_SINALAB_SYNONYMS_REFERENCE_QUERY_EVAL_GATE",
+    "source_id": "sinalab_synonyms",
+    "gate_passed": true,
+    "preconditions": {
+      "phase27_121_allows_query_eval_gate": true,
+      "phase27_121_validation_passed": true,
+      "manifest_counts_match_metrics": true,
+      "index_has_expected_unique_keys": true,
+      "no_duplicate_normalized_keys": true,
+      "all_eval_queries_hit": true,
+      "quality_band_matches_all_eval_queries": true,
+      "raw_terms_not_published": true,
+      "query_rows_not_published": true,
+      "no_corpus_write": true,
+      "no_tokenizer_write": true,
+      "no_training": true,
+      "no_runtime_lookup": true
+    },
+    "query_eval_ready_for_adapter_design": true,
+    "local_reference_records_required": true,
+    "committed_outputs_allowed_next": [
+      "adapter_design_spec_without_terms",
+      "query_policy_manifest_without_terms",
+      "eval_manifest_counts_only"
+    ],
+    "blocked_outputs": [
+      "raw terms in git",
+      "query result rows in git",
+      "data/corpus writes",
+      "tokenizer vocab or merges",
+      "training text import",
+      "checkpoint writes",
+      "runtime lookup activation",
+      "SF-50M transition"
+    ],
+    "raw_terms_commit_allowed": false,
+    "query_rows_commit_allowed": false,
+    "dialogue_corpus_allowed": false,
+    "tokenizer_vocab_allowed": false,
+    "training_allowed": false,
+    "runtime_release_allowed": false,
+    "runtime_lookup_activation_allowed": false,
+    "sf50m_transition_allowed": false
+  },
+  "decision": {
+    "decision_id": "PHASE27_122_SINALAB_SYNONYMS_REFERENCE_QUERY_EVAL_GATE_DECISION",
+    "engineering_decision": "ALLOW_PHASE27_123_SYNONYMS_REFERENCE_ADAPTER_DESIGN_NO_RUNTIME",
+    "query_eval_gate_passed": true,
+    "reference_adapter_design_allowed_next": true,
+    "raw_terms_commit_allowed": false,
+    "query_rows_commit_allowed": false,
+    "external_training_text_import_allowed": false,
+    "external_tokenizer_vocab_import_allowed": false,
+    "dialogue_corpus_allowed": false,
+    "tokenizer_vocab_allowed": false,
+    "new_training_allowed": false,
+    "runtime_release_allowed": false,
+    "runtime_lookup_activation_allowed": false,
+    "sf50m_transition_allowed": false,
+    "next_phase": "Phase 27.123 — Synonyms Reference Adapter Design, no runtime"
+  },
+  "training_started": false,
+  "runtime_changed": false,
+  "runtime_lookup_enabled": false,
+  "query_rows_committed": false,
+  "reference_records_committed": false,
+  "corpus_changed": false,
+  "tokenizer_changed": false,
+  "raw_terms_published": false
+}

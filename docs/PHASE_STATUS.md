@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.121 / 30**
-- **المرحلة الحالية:** **Phase 27.121 — Synonyms Local Reference Layer Build**
-- **حالة المرحلة الحالية:** **بُنيت records محلية gitignored لـ SinaLab Synonyms؛ المرفوع counts/hashes فقط بلا raw terms ولا corpus/tokenizer/training**
-- **المرحلة التالية المقترحة:** Phase 27.122 — Synonyms Reference Query and Eval Gate, no training.
+- **الرحلة الحالية:** **Phase 27.122 / 30**
+- **المرحلة الحالية:** **Phase 27.122 — Synonyms Reference Query and Eval Gate**
+- **حالة المرحلة الحالية:** **اختُبرت query/eval محليًا في الذاكرة فقط؛ lookup 685/685 دون raw terms أو runtime activation أو تدريب**
+- **المرحلة التالية المقترحة:** Phase 27.123 — Synonyms Reference Adapter Design, no runtime.
 - **التحول الاستراتيجي المعتمد:** **SF-native Objective/Curriculum/Decoding Acceleration Track** — تسريع هندسي فقط؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -177,6 +177,7 @@
 | Phase 27.119 | Synonyms Reference Extraction Dry-Run Counts | ✅ synonyms_reference_dry_run_counts_ready_no_import | ✅ |
 | Phase 27.120 | Synonyms Local Reference Layer Build Gate | ✅ synonyms_local_reference_layer_build_gate_ready_no_import | ✅ |
 | Phase 27.121 | Synonyms Local Reference Layer Build | ✅ synonyms_local_reference_layer_built_gitignored_no_training | ✅ |
+| Phase 27.122 | Synonyms Reference Query and Eval Gate | ✅ synonyms_reference_query_eval_gate_ready_no_runtime | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -2406,7 +2407,47 @@ ALLOW_PHASE27_122_SYNONYMS_REFERENCE_QUERY_AND_EVAL_GATE_NO_TRAINING
 - `artifacts/reports/PHASE27_121_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_DECISION.json`
 - [PHASE27_121_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_REPORT.md](./PHASE27_121_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_REPORT.md)
 
-**التالي:** Phase 27.122 — Synonyms Reference Query and Eval Gate, no training.
+**التالي كان:** Phase 27.122 — Synonyms Reference Query and Eval Gate, no training.
+
+---
+
+## Phase 27.122 — Synonyms Reference Query and Eval Gate
+
+**الحالة:** ✅ synonyms_reference_query_eval_gate_ready_no_runtime
+
+**القاموس/المسار اللغوي:** Saudi Seed v1، العربية الفصحى + السعودية فقط.
+
+**القرار الرسمي:**
+
+```text
+PHASE27_122_SINALAB_SYNONYMS_REFERENCE_QUERY_EVAL_GATE_DECISION
+ALLOW_PHASE27_123_SYNONYMS_REFERENCE_ADAPTER_DESIGN_NO_RUNTIME
+```
+
+**النتيجة:**
+
+- بُني query/eval index مؤقت في الذاكرة من reference layer المحلي.
+- لا query rows ولا raw terms في git.
+- metrics:
+  - reference records: `1093`
+  - eval queries: `685`
+  - unique normalized index keys: `1093`
+  - duplicate normalized index keys: `0`
+  - exact lookup hits: `685`
+  - missing lookup: `0`
+  - exact lookup rate: `1.0`
+  - quality band match rate: `1.0`
+- لا corpus، لا tokenizer، لا training، لا runtime lookup activation، لا SF-50M.
+
+**الملفات:**
+
+- `resources/external_sources/phase27_122_sinalab_synonyms_reference_query_eval_metrics.json`
+- `resources/external_sources/phase27_122_sinalab_synonyms_reference_query_eval_gate.json`
+- `artifacts/reports/phase27_122_sinalab_synonyms_reference_query_eval_gate_report.json`
+- `artifacts/reports/PHASE27_122_SINALAB_SYNONYMS_REFERENCE_QUERY_EVAL_GATE_DECISION.json`
+- [PHASE27_122_SINALAB_SYNONYMS_REFERENCE_QUERY_EVAL_GATE_REPORT.md](./PHASE27_122_SINALAB_SYNONYMS_REFERENCE_QUERY_EVAL_GATE_REPORT.md)
+
+**التالي:** Phase 27.123 — Synonyms Reference Adapter Design, no runtime.
 
 ---
 

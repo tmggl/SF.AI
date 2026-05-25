@@ -61,12 +61,12 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.121 — Synonyms Local Reference Layer Build",
+        current_phase="Phase 27.122 — Synonyms Reference Query and Eval Gate",
         current_phase_status=(
-            "phase27_121_synonyms_local_reference_layer_built_gitignored_no_training"
+            "phase27_122_synonyms_reference_query_eval_gate_ready_no_runtime"
         ),
         next_phase=(
-            "Phase 27.122 — Synonyms Reference Query and Eval Gate, no training"
+            "Phase 27.123 — Synonyms Reference Adapter Design, no runtime"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -731,6 +731,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_121_sinalab_synonyms_local_reference_layer_build",
                 status="synonyms_local_reference_layer_built_gitignored_no_training",
                 phase="Phase 27.121",
+            ),
+            ComponentStatus(
+                name="phase27_122_sinalab_synonyms_reference_query_eval_gate",
+                status="synonyms_reference_query_eval_gate_ready_no_runtime",
+                phase="Phase 27.122",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

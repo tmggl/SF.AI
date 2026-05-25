@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.121: بُنِيت reference records محلية لـ SinaLab Synonyms داخل مسار gitignored. المرفوع فقط counts/hashes بلا raw terms وبلا corpus أو tokenizer أو تدريب. التالي P"
+      "response_preview": "وصلنا إلى Phase 27.122: اختبرنا query/eval للـ reference layer محليًا في الذاكرة فقط. lookup نجح بالأرقام دون raw terms ودون runtime activation أو corpus أو tokenizer أو تدريب. الت"
     },
     {
       "scenario_id": "clarification_repair_flow",

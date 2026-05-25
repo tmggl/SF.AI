@@ -560,6 +560,9 @@ phase27-sinalab-synonyms-local-reference-build-gate:
 phase27-sinalab-synonyms-local-reference-build:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_121_sinalab_synonyms_local_reference_layer_build.py $(ARGS)
 
+phase27-sinalab-synonyms-reference-query-eval-gate:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_122_sinalab_synonyms_reference_query_eval_gate.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 

@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.121: بُنِيت reference records محلية لـ SinaLab Synonyms "
-    "داخل مسار gitignored. المرفوع فقط counts/hashes بلا raw terms وبلا corpus "
-    "أو tokenizer أو تدريب. التالي Phase 27.122: بوابة query/eval بلا تدريب.",
+    "وصلنا إلى Phase 27.122: اختبرنا query/eval للـ reference layer محليًا "
+    "في الذاكرة فقط. lookup نجح بالأرقام دون raw terms ودون runtime activation "
+    "أو corpus أو tokenizer أو تدريب. التالي Phase 27.123: تصميم adapter بلا runtime.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

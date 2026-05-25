@@ -31,8 +31,8 @@ app = FastAPI(
     version="0.1.0",
     description=(
         "SF.AI — Sovereign AI platform. Phase 9 chat UI mounted at /ui/chat. "
-        "Phase 27.121 built SinaLab Synonyms local reference records inside a "
-        "gitignored layer with raw terms and training still blocked; "
+        "Phase 27.122 completed SinaLab Synonyms in-memory query/eval gate "
+        "with raw terms, runtime activation, and training still blocked; "
         "SF-10M Phase 27.81 is visible in lab mode, but official runtime "
         "remains blocked. "
         "No pretrained models, no external AI APIs."
@@ -49,7 +49,7 @@ app.include_router(ui.router)
 def root() -> dict[str, str]:
     return {
         "project": "SF.AI",
-        "phase": "Phase 27.121 — Synonyms Local Reference Layer Build",
+        "phase": "Phase 27.122 — Synonyms Reference Query and Eval Gate",
         "ui": "/ui/chat",
         "docs": "/docs",
     }

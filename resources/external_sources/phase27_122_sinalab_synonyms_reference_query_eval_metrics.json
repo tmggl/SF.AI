@@ -1,0 +1,31 @@
+{
+  "phase": "Phase 27.122",
+  "source_id": "sinalab_synonyms",
+  "query_scope": "local_in_memory_query_eval_terms_not_committed",
+  "reference_record_count": 1093,
+  "eval_query_count": 685,
+  "unique_normalized_index_keys": 1093,
+  "duplicate_normalized_index_keys": 0,
+  "exact_lookup_hits": 685,
+  "missing_lookup_count": 0,
+  "exact_lookup_rate": 1.0,
+  "quality_band_match_hits": 685,
+  "quality_band_match_rate": 1.0,
+  "reference_quality_band_counts": {
+    "high": 685,
+    "medium": 408,
+    "low": 0
+  },
+  "eval_quality_band_counts": {
+    "high": 685,
+    "medium": 0,
+    "low": 0
+  },
+  "local_reference_files_gitignored": true,
+  "raw_terms_published": false,
+  "query_rows_published": false,
+  "dialogue_corpus_written": false,
+  "tokenizer_vocab_written": false,
+  "training_started": false,
+  "runtime_lookup_enabled": false
+}

@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.121
-الاسم: Synonyms Local Reference Layer Build
+المرحلة الحالية: Phase 27.122
+الاسم: Synonyms Reference Query and Eval Gate
 المسار الملزم: SF-native Objective/Curriculum/Decoding Acceleration Track
-القرار الرسمي: PHASE27_121_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_DECISION
+القرار الرسمي: PHASE27_122_SINALAB_SYNONYMS_REFERENCE_QUERY_EVAL_GATE_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -136,6 +136,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - Phase 27.121 بنى reference records محلية gitignored: `1093` records و`685`
   eval candidates. الملفات المحلية تحتوي terms لكنها غير مرفوعة؛ المرفوع
   counts/hashes/validation فقط.
+- Phase 27.122 اختبر query/eval محليًا في الذاكرة فقط: exact lookup `685/685`,
+  quality match `685/685`, unique normalized keys `1093`, duplicate keys `0`.
+  لا query rows ولا raw terms في git، ولا runtime activation.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
@@ -174,7 +177,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   `docs/PHASE27_120_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GATE_REPORT.md`.
 - تقرير local build الحالي:
   `docs/PHASE27_121_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_REPORT.md`.
-- التالي: `Phase 27.122 — Synonyms Reference Query and Eval Gate, no training`.
+- تقرير query/eval الحالي:
+  `docs/PHASE27_122_SINALAB_SYNONYMS_REFERENCE_QUERY_EVAL_GATE_REPORT.md`.
+- التالي: `Phase 27.123 — Synonyms Reference Adapter Design, no runtime`.
 
 الدليل السابق الذي سبب هذا re-anchor:
 
@@ -446,14 +451,15 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.122 — Synonyms Reference Query and Eval Gate, no training
+Phase 27.123 — Synonyms Reference Adapter Design, no runtime
 ```
 
 مطلوب منها:
 
-- تصميم query/eval gate يقرأ الطبقة المحلية عند وجودها دون تفعيل runtime.
-- اختبار lookup/eval محلي بلا نشر raw terms.
-- رفع reports تحتوي counts/metrics فقط.
+- تصميم adapter policy فقط: كيف يستدعي النظام reference layer لاحقًا دون
+  تفعيل runtime الآن.
+- تحديد input/output contract، redaction policy، وmetrics.
+- منع query rows/raw terms من git.
 - لا corpus ولا tokenizer vocab ولا training ولا runtime release.
 - Qabas وArabic WordNet 4.0 يبقيان خارج candidates الفعلية.
 - ممنوع training/SF-50M/tokenizer retrain/runtime release قبل هذه البوابة.

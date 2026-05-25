@@ -28,9 +28,9 @@
 المسار الحالي الرسمي:
 
 ```text
-Phase 27.121 — Synonyms Local Reference Layer Build
+Phase 27.122 — Synonyms Reference Query and Eval Gate
 SF-native Objective/Curriculum/Decoding Acceleration Track
-PHASE27_121_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_DECISION
+PHASE27_122_SINALAB_SYNONYMS_REFERENCE_QUERY_EVAL_GATE_DECISION
 ```
 
 القرار الحالي:
@@ -70,7 +70,9 @@ PHASE27_121_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_DECISION
   في git ومنع corpus/tokenizer/training/runtime.
 - Phase 27.121 بنت reference records محلية gitignored:
   `1093` records و`685` eval candidates. المرفوع فقط counts/hashes بلا raw terms.
-- التالي: `Phase 27.122 — Synonyms Reference Query and Eval Gate`.
+- Phase 27.122 اختبرت query/eval محليًا في الذاكرة فقط:
+  lookup `685/685`, unique keys `1093`, duplicate keys `0`. لا runtime activation.
+- التالي: `Phase 27.123 — Synonyms Reference Adapter Design`.
 - عند نجاح بوابة أي حجم لاحقًا، ينتقل الوكيل تلقائيًا للحجم التالي حتى
   `SF-1B+` دون انتظار موافقة جديدة.
 
