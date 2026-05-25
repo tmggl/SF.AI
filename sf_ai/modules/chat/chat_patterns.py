@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.116: نزلنا SinaLab Synonyms في quarantine محلي، "
-    "حسبنا checksum، وفحصنا schema فقط. لا import ولا تدريب. التالي "
-    "Phase 27.117: sample quality وdedupe review بلا تدريب.",
+    "وصلنا إلى Phase 27.117: فحصنا جودة SinaLab Synonyms والتكرار بأرقام فقط، "
+    "بدون نشر raw terms وبدون corpus أو تدريب. التالي Phase 27.118: تصميم "
+    "reference extraction بلا تدريب.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

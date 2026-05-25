@@ -1,0 +1,16 @@
+{
+  "phase": "Phase 27.117",
+  "source_id": "sinalab_synonyms",
+  "dedupe_scope": "counts_only_no_term_disclosure",
+  "normalized_candidate_terms": 3010,
+  "unique_normalized_candidate_terms": 1697,
+  "internal_duplicate_terms": 1313,
+  "internal_duplicate_ratio": 0.4362,
+  "protected_saudi_terms_checked": 29,
+  "protected_saudi_exact_overlap_count": 1,
+  "saudi_seed_terms_checked": 1471,
+  "saudi_seed_exact_overlap_count": 40,
+  "overlap_terms_published": false,
+  "raw_terms_published": false,
+  "dedupe_recommendation": "keep_reference_layer_separate_and_filter_exact_overlaps_before_any_future_use"
+}

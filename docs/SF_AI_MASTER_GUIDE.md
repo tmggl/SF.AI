@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.116
-الاسم: Synonyms Quarantine Schema Dry-Run
+المرحلة الحالية: Phase 27.117
+الاسم: Synonyms Sample Quality/Dedupe Review
 المسار الملزم: SF-native Objective/Curriculum/Decoding Acceleration Track
-القرار الرسمي: PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_DECISION
+القرار الرسمي: PHASE27_117_SINALAB_SYNONYMS_SAMPLE_QUALITY_DEDUPE_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -123,6 +123,8 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   محجوب حتى quarantine checksum + schema dry-run.
 - Phase 27.116 نزّل SinaLab Synonyms في quarantine محلي git-ignored، سجّل
   checksum، وفحص schema فقط دون raw rows/corpus/tokenizer/training.
+- Phase 27.117 فحص جودة العينة والتكرار بأرقام فقط: `3010` مرشح، `1697`
+  unique normalized terms، ولا raw terms منشورة.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
@@ -151,7 +153,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   `docs/PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_REPORT.md`.
 - تقرير quarantine/schema الحالي:
   `docs/PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_REPORT.md`.
-- التالي: `Phase 27.117 — Synonyms Sample Quality and Dedupe Review, no training`.
+- تقرير sample quality/dedupe الحالي:
+  `docs/PHASE27_117_SINALAB_SYNONYMS_SAMPLE_QUALITY_DEDUPE_REPORT.md`.
+- التالي: `Phase 27.118 — Synonyms Reference Extraction Design, no training`.
 
 الدليل السابق الذي سبب هذا re-anchor:
 
@@ -423,14 +427,14 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.117 — Synonyms Sample Quality and Dedupe Review, no training
+Phase 27.118 — Synonyms Reference Extraction Design, no training
 ```
 
 مطلوب منها:
 
-- فحص عينة محدودة من artifact داخل quarantine فقط لتقييم الجودة.
-- dedupe ضد Saudi Seed v1 والموارد السيادية.
-- تقرير جودة يحدد هل يُسمح بتحويل reference metadata لاحقًا.
+- تصميم reference extraction فقط، مع schema واضحة وفلترة overlaps.
+- لا كتابة إلى `data/corpus`.
+- لا tokenizer vocab/merges.
 - لا training ولا tokenizer vocab ولا runtime release.
 - Qabas وArabic WordNet 4.0 يبقيان خارج candidates الفعلية.
 - ممنوع training/SF-50M/tokenizer retrain/runtime release قبل هذه البوابة.

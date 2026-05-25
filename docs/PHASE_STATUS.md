@@ -2191,7 +2191,46 @@ ALLOW_PHASE27_117_SYNONYMS_SAMPLE_QUALITY_AND_DEDUPE_REVIEW_NO_TRAINING
 - `artifacts/reports/PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_DECISION.json`
 - [PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_REPORT.md](./PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_REPORT.md)
 
-**التالي:** Phase 27.117 — Synonyms Sample Quality and Dedupe Review, no training.
+**التالي كان:** Phase 27.117 — Synonyms Sample Quality and Dedupe Review, no training.
+
+---
+
+## Phase 27.117 — Synonyms Sample Quality and Dedupe Review
+
+**الحالة:** ✅ synonyms_sample_quality_dedupe_ready_no_import
+
+**القاموس/المسار اللغوي:** Saudi Seed v1، العربية الفصحى + السعودية فقط.
+
+**القرار الرسمي:**
+
+```text
+PHASE27_117_SINALAB_SYNONYMS_SAMPLE_QUALITY_DEDUPE_DECISION
+ALLOW_PHASE27_118_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_NO_TRAINING
+```
+
+**النتيجة:**
+
+- فُحصت جودة SinaLab Synonyms داخل quarantine فقط.
+- لم تُنشر raw terms أو raw rows في التقارير.
+- candidate rows: `3010`.
+- Arabic term ratio: `1.0`.
+- diacritized rows: `3001`.
+- score columns present: `5`.
+- average score range: `0.0..100.0`.
+- internal duplicate terms: `1313` من `3010`.
+- exact overlap مع protected Saudi terms: `1`.
+- exact overlap مع Saudi Seed v1: `40`.
+- لا corpus، لا tokenizer، لا training، لا runtime release، لا SF-50M.
+
+**الملفات:**
+
+- `resources/external_sources/phase27_117_sinalab_synonyms_sample_quality.json`
+- `resources/external_sources/phase27_117_sinalab_synonyms_dedupe_review.json`
+- `artifacts/reports/phase27_117_sinalab_synonyms_sample_quality_dedupe_report.json`
+- `artifacts/reports/PHASE27_117_SINALAB_SYNONYMS_SAMPLE_QUALITY_DEDUPE_DECISION.json`
+- [PHASE27_117_SINALAB_SYNONYMS_SAMPLE_QUALITY_DEDUPE_REPORT.md](./PHASE27_117_SINALAB_SYNONYMS_SAMPLE_QUALITY_DEDUPE_REPORT.md)
+
+**التالي:** Phase 27.118 — Synonyms Reference Extraction Design, no training.
 
 ---
 

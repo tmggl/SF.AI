@@ -4577,7 +4577,7 @@ Final Response
 
 ---
 
-## الحالة العملية الحالية — Phase 27.116
+## الحالة العملية الحالية — Phase 27.117
 
 المسار الحاكم هو:
 
@@ -4588,7 +4588,7 @@ SF-native Objective/Curriculum/Decoding Acceleration Track
 آخر قرار:
 
 ```text
-PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_DECISION
+PHASE27_117_SINALAB_SYNONYMS_SAMPLE_QUALITY_DEDUPE_DECISION
 ```
 
 الخلاصة:
@@ -4630,14 +4630,16 @@ PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_DECISION
     حتى quarantine checksum + schema dry-run.
 - Phase 27.116 نفذ quarantine checksum وschema dry-run لـ `SinaLab Synonyms`:
   artifact محلي git-ignored، checksum مسجل، schema مرصود، ولا raw rows محفوظة.
-- لا تدريب جديد قبل Phase 27.117 sample quality/dedupe review ولا قبل بوابات
+- Phase 27.117 نفذ sample quality/dedupe review بأرقام فقط:
+  `3010` candidate rows، جودة عربية كاملة، وتداخلات exact overlap محسوبة دون نشر terms.
+- لا تدريب جديد قبل Phase 27.118 reference extraction design ولا قبل بوابات
   corpus/license اللاحقة.
 - لا SF-50M قبل gate يثبت أن capacity هي السبب الأكبر.
 
 التالي:
 
 ```text
-Phase 27.117 — Synonyms Sample Quality and Dedupe Review, no training
+Phase 27.118 — Synonyms Reference Extraction Design, no training
 ```
 
 ---

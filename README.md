@@ -28,9 +28,9 @@
 المسار الحالي الرسمي:
 
 ```text
-Phase 27.116 — Synonyms Quarantine Schema Dry-Run
+Phase 27.117 — Synonyms Sample Quality/Dedupe Review
 SF-native Objective/Curriculum/Decoding Acceleration Track
-PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_DECISION
+PHASE27_117_SINALAB_SYNONYMS_SAMPLE_QUALITY_DEDUPE_DECISION
 ```
 
 القرار الحالي:
@@ -60,7 +60,8 @@ PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_DECISION
   لكن import محجوب حتى quarantine checksum + schema dry-run.
 - Phase 27.116 نزّلت Synonyms artifact في quarantine محلي git-ignored، وسجلت
   checksum/schema دون raw rows أو corpus أو training.
-- التالي: `Phase 27.117 — Synonyms Sample Quality and Dedupe Review`.
+- Phase 27.117 فحصت sample quality/dedupe بأرقام فقط دون نشر raw terms.
+- التالي: `Phase 27.118 — Synonyms Reference Extraction Design`.
 - عند نجاح بوابة أي حجم لاحقًا، ينتقل الوكيل تلقائيًا للحجم التالي حتى
   `SF-1B+` دون انتظار موافقة جديدة.
 

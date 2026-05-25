@@ -1,0 +1,22 @@
+{
+  "phase": "Phase 27.117",
+  "source_id": "sinalab_synonyms",
+  "review_scope": "aggregate_quality_no_raw_terms_published",
+  "total_candidate_rows": 3010,
+  "sample_window_rows": 200,
+  "arabic_term_rows": 3010,
+  "arabic_term_ratio": 1.0,
+  "diacritized_term_rows": 3001,
+  "empty_normalized_terms": 0,
+  "score_columns_present_min": 5,
+  "score_columns_present_max": 5,
+  "average_score_min": 0.0,
+  "average_score_max": 100.0,
+  "average_score_mean": 45.4635,
+  "average_score_median": 42.5,
+  "operator_vocabulary_exact_overlap_count": 1,
+  "operational_contamination_hits": 0,
+  "raw_terms_published": false,
+  "dialogue_corpus_written": false,
+  "tokenizer_vocab_written": false
+}
