@@ -1,0 +1,15 @@
+{
+  "phase": "Phase 27.119",
+  "source_id": "sinalab_synonyms",
+  "filter_scope": "drop_counts_only_no_terms",
+  "empty_normalized_drop_count": 0,
+  "non_arabic_drop_count": 0,
+  "score_below_reference_drop_count": 1391,
+  "protected_saudi_overlap_drop_count": 1,
+  "saudi_seed_overlap_drop_count": 81,
+  "operator_workflow_overlap_drop_count": 1,
+  "duplicate_dropped_after_filters": 316,
+  "duplicate_replaced_by_higher_score": 161,
+  "raw_terms_published": false,
+  "overlap_terms_published": false
+}

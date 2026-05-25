@@ -1,0 +1,72 @@
+{
+  "phase": "Phase 27.119",
+  "status": "PHASE27_119_SYNONYMS_REFERENCE_DRY_RUN_COUNTS_READY_NO_IMPORT",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "dictionary_track": "Saudi Seed v1",
+  "counts": {
+    "phase": "Phase 27.119",
+    "source_id": "sinalab_synonyms",
+    "artifact_sha256": "a8622546d057f60d2cee0db3b8fdc79cf30303db6ae83001be1634215bb00035",
+    "artifact_sha256_verified": true,
+    "dry_run_scope": "counts_only_no_raw_terms_published",
+    "input_candidate_rows": 3010,
+    "quality_band_counts_input": {
+      "high": 916,
+      "medium": 703,
+      "low": 1391
+    },
+    "eligible_before_duplicate_collapse": 1570,
+    "reference_candidate_count_after_filters": 1093,
+    "eval_candidate_count_after_filters": 685,
+    "quality_band_counts_after_filters": {
+      "high": 685,
+      "medium": 408,
+      "low": 0
+    },
+    "raw_terms_published": false,
+    "reference_records_written": false,
+    "dialogue_corpus_written": false,
+    "tokenizer_vocab_written": false,
+    "training_started": false
+  },
+  "filter_drop_counts": {
+    "phase": "Phase 27.119",
+    "source_id": "sinalab_synonyms",
+    "filter_scope": "drop_counts_only_no_terms",
+    "empty_normalized_drop_count": 0,
+    "non_arabic_drop_count": 0,
+    "score_below_reference_drop_count": 1391,
+    "protected_saudi_overlap_drop_count": 1,
+    "saudi_seed_overlap_drop_count": 81,
+    "operator_workflow_overlap_drop_count": 1,
+    "duplicate_dropped_after_filters": 316,
+    "duplicate_replaced_by_higher_score": 161,
+    "raw_terms_published": false,
+    "overlap_terms_published": false
+  },
+  "decision": {
+    "decision_id": "PHASE27_119_SINALAB_SYNONYMS_REFERENCE_DRY_RUN_COUNTS_DECISION",
+    "engineering_decision": "ALLOW_PHASE27_120_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GATED_NO_TRAINING",
+    "dry_run_counts_passed": true,
+    "raw_entry_import_allowed": false,
+    "reference_layer_build_allowed_next": true,
+    "external_training_text_import_allowed": false,
+    "external_tokenizer_vocab_import_allowed": false,
+    "raw_terms_publish_allowed": false,
+    "new_training_allowed": false,
+    "runtime_release_allowed": false,
+    "sf50m_transition_allowed": false,
+    "next_phase": "Phase 27.120 — Synonyms Local Reference Layer Build Gate, no training"
+  },
+  "training_started": false,
+  "runtime_changed": false,
+  "external_entries_imported": false,
+  "corpus_changed": false,
+  "tokenizer_changed": false,
+  "raw_terms_published": false
+}

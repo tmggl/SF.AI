@@ -1,0 +1,26 @@
+{
+  "phase": "Phase 27.119",
+  "source_id": "sinalab_synonyms",
+  "artifact_sha256": "a8622546d057f60d2cee0db3b8fdc79cf30303db6ae83001be1634215bb00035",
+  "artifact_sha256_verified": true,
+  "dry_run_scope": "counts_only_no_raw_terms_published",
+  "input_candidate_rows": 3010,
+  "quality_band_counts_input": {
+    "high": 916,
+    "medium": 703,
+    "low": 1391
+  },
+  "eligible_before_duplicate_collapse": 1570,
+  "reference_candidate_count_after_filters": 1093,
+  "eval_candidate_count_after_filters": 685,
+  "quality_band_counts_after_filters": {
+    "high": 685,
+    "medium": 408,
+    "low": 0
+  },
+  "raw_terms_published": false,
+  "reference_records_written": false,
+  "dialogue_corpus_written": false,
+  "tokenizer_vocab_written": false,
+  "training_started": false
+}

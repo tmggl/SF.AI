@@ -50,7 +50,7 @@
 - السيادة تبقى على corpus/tokenizer/behavior/runtime/alignment/evaluation
   وسلوك الحوار الفصيح والسعودي.
 - قبل أي تدريب جديد يجب وجود root-cause/decision gate حديث يسمح به صراحة.
-  القرار الحالي هو `PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_DECISION`:
+  القرار الحالي هو `PHASE27_119_SINALAB_SYNONYMS_REFERENCE_DRY_RUN_COUNTS_DECISION`:
   المسار أُعيد تثبيته عند Phase 27.79، ومرّت بوابات Phase 27.80، ثم اكتمل
   تدريب Phase 27.81. Phase 27.105 أثبت أن الواجهة تستدعي المولد الحقيقي
   في raw lab، لكنه شخّص فشل social subfamilies وtopic variants؛ التالي
@@ -68,6 +68,7 @@
   checksum/schema فقط دون import أو تدريب.
   Phase 27.117 فحص sample quality/dedupe بأرقام فقط دون raw terms أو corpus.
   Phase 27.118 صمم reference extraction كطبقة مرجعية فقط دون raw terms في git.
+  Phase 27.119 نفذ dry-run counts فقط دون raw terms أو corpus/tokenizer/training.
 - لا runtime release بدون `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - لا تعتمد loss/perplexity/micro-probe وحدها؛ النجاح يعني held-out dialogue
   quality, runtime usability, clean-stop, semantic correctness, family
@@ -80,13 +81,13 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 27.118 موثقة تاريخيًا، لكن الحالة العملية
+- المراحل من Phase 0 حتى Phase 27.119 موثقة تاريخيًا، لكن الحالة العملية
   الحالية هي:
-  `Phase 27.118 — Synonyms Reference Extraction Design`
+  `Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts`
   ضمن `SF-native Objective/Curriculum/Decoding Acceleration Track`.
   التقرير الملزم: `docs/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md`.
   القرار التنفيذي:
-  `PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_DECISION`.
+  `PHASE27_119_SINALAB_SYNONYMS_REFERENCE_DRY_RUN_COUNTS_DECISION`.
   Phase 27.104 تبقى الدليل السابق: تدريب محدود نجح topic-wise وفشل
   all-family، وليست إذن runtime.
   تاريخيًا أضيفت دفعة `sf-ai-balanced-family-pack-v1`: `2500` سجل gold
@@ -153,7 +154,9 @@
   unique normalized terms، بلا raw terms منشورة.
 - Phase 27.118 حسم design: reference layer فقط، no raw terms in git، no corpus،
   no tokenizer، no training.
-- أول خطوة تالية: Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts, no training.
+- Phase 27.119 حسم dry-run counts: `1093` reference candidates بعد الفلاتر
+  و`685` eval candidates، بلا raw terms ولا corpus/tokenizer/training.
+- أول خطوة تالية: Phase 27.120 — Synonyms Local Reference Layer Build Gate, no training.
   لا تبدأ training ولا SF-50M ولا tokenizer retrain قبل هذه البوابة.
 - تفويض التكبير التلقائي معتمد، لكن مفعوله يبدأ فقط عندما تنجح gates؛
   حاليًا `SF-50M` ما زال محجوبًا لأن capacity وزنها `1%`.

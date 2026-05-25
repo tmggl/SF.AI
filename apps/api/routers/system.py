@@ -61,12 +61,12 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.118 — Synonyms Reference Extraction Design",
+        current_phase="Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts",
         current_phase_status=(
-            "phase27_118_synonyms_reference_extraction_design_ready_no_import"
+            "phase27_119_synonyms_reference_dry_run_counts_ready_no_import"
         ),
         next_phase=(
-            "Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts, no training"
+            "Phase 27.120 — Synonyms Local Reference Layer Build Gate, no training"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -716,6 +716,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_118_sinalab_synonyms_reference_extraction_design",
                 status="synonyms_reference_extraction_design_ready_no_import",
                 phase="Phase 27.118",
+            ),
+            ComponentStatus(
+                name="phase27_119_sinalab_synonyms_reference_dry_run_counts",
+                status="synonyms_reference_dry_run_counts_ready_no_import",
+                phase="Phase 27.119",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

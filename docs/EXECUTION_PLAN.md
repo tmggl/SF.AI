@@ -4577,7 +4577,7 @@ Final Response
 
 ---
 
-## الحالة العملية الحالية — Phase 27.118
+## الحالة العملية الحالية — Phase 27.119
 
 المسار الحاكم هو:
 
@@ -4588,7 +4588,7 @@ SF-native Objective/Curriculum/Decoding Acceleration Track
 آخر قرار:
 
 ```text
-PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_DECISION
+PHASE27_119_SINALAB_SYNONYMS_REFERENCE_DRY_RUN_COUNTS_DECISION
 ```
 
 الخلاصة:
@@ -4634,14 +4634,18 @@ PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_DECISION
   `3010` candidate rows، جودة عربية كاملة، وتداخلات exact overlap محسوبة دون نشر terms.
 - Phase 27.118 صمم reference extraction فقط: no raw terms in git، no corpus،
   no tokenizer، no training، وdry-run counts كخطوة تالية.
-- لا تدريب جديد قبل Phase 27.119 reference extraction dry-run counts ولا قبل بوابات
+- Phase 27.119 نفذ reference extraction dry-run counts فقط:
+  `3010` candidate rows، quality bands input `916/703/1391`،
+  `1093` reference candidates بعد الفلاتر، و`685` eval candidates.
+  لا raw terms، لا reference records، لا corpus، لا tokenizer، لا training.
+- لا تدريب جديد قبل Phase 27.120 local reference layer build gate ولا قبل بوابات
   corpus/license اللاحقة.
 - لا SF-50M قبل gate يثبت أن capacity هي السبب الأكبر.
 
 التالي:
 
 ```text
-Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts, no training
+Phase 27.120 — Synonyms Local Reference Layer Build Gate, no training
 ```
 
 ---

@@ -28,9 +28,9 @@
 المسار الحالي الرسمي:
 
 ```text
-Phase 27.118 — Synonyms Reference Extraction Design
+Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts
 SF-native Objective/Curriculum/Decoding Acceleration Track
-PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_DECISION
+PHASE27_119_SINALAB_SYNONYMS_REFERENCE_DRY_RUN_COUNTS_DECISION
 ```
 
 القرار الحالي:
@@ -62,7 +62,10 @@ PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_DECISION
   checksum/schema دون raw rows أو corpus أو training.
 - Phase 27.117 فحصت sample quality/dedupe بأرقام فقط دون نشر raw terms.
 - Phase 27.118 صممت reference extraction كطبقة مرجعية فقط دون raw terms في git.
-- التالي: `Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts`.
+- Phase 27.119 نفذت dry-run counts فقط:
+  `3010` صفًا، `1093` مرشحًا مرجعيًا بعد الفلاتر، و`685` مرشح eval عالي الجودة.
+  لا raw terms، لا corpus، لا tokenizer، لا training.
+- التالي: `Phase 27.120 — Synonyms Local Reference Layer Build Gate`.
 - عند نجاح بوابة أي حجم لاحقًا، ينتقل الوكيل تلقائيًا للحجم التالي حتى
   `SF-1B+` دون انتظار موافقة جديدة.
 

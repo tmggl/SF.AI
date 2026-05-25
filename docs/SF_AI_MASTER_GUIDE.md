@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.118
-الاسم: Synonyms Reference Extraction Design
+المرحلة الحالية: Phase 27.119
+الاسم: Synonyms Reference Extraction Dry-Run Counts
 المسار الملزم: SF-native Objective/Curriculum/Decoding Acceleration Track
-القرار الرسمي: PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_DECISION
+القرار الرسمي: PHASE27_119_SINALAB_SYNONYMS_REFERENCE_DRY_RUN_COUNTS_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -127,6 +127,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   unique normalized terms، ولا raw terms منشورة.
 - Phase 27.118 صمم reference extraction كطبقة مرجعية فقط، مع منع raw terms
   في git ومنع corpus/tokenizer/training.
+- Phase 27.119 نفذ dry-run counts فقط حسب التصميم: `3010` candidate rows،
+  `1093` reference candidates بعد الفلاتر، و`685` eval candidates عالية الجودة.
+  لا raw terms ولا reference records ولا corpus/tokenizer/training.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
@@ -159,7 +162,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   `docs/PHASE27_117_SINALAB_SYNONYMS_SAMPLE_QUALITY_DEDUPE_REPORT.md`.
 - تقرير reference extraction design الحالي:
   `docs/PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_REPORT.md`.
-- التالي: `Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts, no training`.
+- تقرير dry-run counts الحالي:
+  `docs/PHASE27_119_SINALAB_SYNONYMS_REFERENCE_DRY_RUN_COUNTS_REPORT.md`.
+- التالي: `Phase 27.120 — Synonyms Local Reference Layer Build Gate, no training`.
 
 الدليل السابق الذي سبب هذا re-anchor:
 
@@ -431,15 +436,15 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts, no training
+Phase 27.120 — Synonyms Local Reference Layer Build Gate, no training
 ```
 
 مطلوب منها:
 
-- تنفيذ dry-run counts فقط حسب تصميم 27.118.
-- كتابة counts/filter-drop manifests فقط.
-- لا نشر raw terms.
-- لا training ولا tokenizer vocab ولا runtime release.
+- أخذ نتائج dry-run counts من Phase 27.119 وبناء gate واضح قبل أي artifact
+  مرجعي محلي.
+- تحديد هل يسمح بإنشاء reference layer محلي gitignored أو يستمر المنع.
+- لا corpus ولا tokenizer vocab ولا training ولا runtime release.
 - Qabas وArabic WordNet 4.0 يبقيان خارج candidates الفعلية.
 - ممنوع training/SF-50M/tokenizer retrain/runtime release قبل هذه البوابة.
 

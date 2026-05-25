@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.114 / 30**
-- **المرحلة الحالية:** **Phase 27.114 — Arabic Ontology/Synonyms Source Cards**
-- **حالة المرحلة الحالية:** **أُنشئت source cards وlicense matrix لـ Arabic Ontology وSinaLab Synonyms؛ لا artifact download ولا import ولا تدريب الآن**
-- **المرحلة التالية المقترحة:** Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate and Field Mapping, no training.
+- **الرحلة الحالية:** **Phase 27.119 / 30**
+- **المرحلة الحالية:** **Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts**
+- **حالة المرحلة الحالية:** **اكتملت dry-run counts لـ SinaLab Synonyms بأرقام فقط؛ لا raw terms ولا corpus ولا tokenizer ولا تدريب**
+- **المرحلة التالية المقترحة:** Phase 27.120 — Synonyms Local Reference Layer Build Gate, no training.
 - **التحول الاستراتيجي المعتمد:** **SF-native Objective/Curriculum/Decoding Acceleration Track** — تسريع هندسي فقط؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -170,6 +170,11 @@
 | Phase 27.112 | Qabas Primary License Resolution Gate | ✅ qabas_reference_only_import_blocked | ✅ |
 | Phase 27.113 | Permissive Lexical Alternatives Intake Gate | ✅ permissive_lexical_alternatives_ready_no_import | ✅ |
 | Phase 27.114 | Arabic Ontology/Synonyms Source Cards | ✅ source_cards_ready_no_import | ✅ |
+| Phase 27.115 | Arabic Ontology/Synonyms Artifact Gate | ✅ artifact_gate_ready_no_import | ✅ |
+| Phase 27.116 | Synonyms Quarantine Schema Dry-Run | ✅ synonyms_quarantine_schema_ready_no_import | ✅ |
+| Phase 27.117 | Synonyms Sample Quality/Dedupe Review | ✅ synonyms_sample_quality_dedupe_ready_no_import | ✅ |
+| Phase 27.118 | Synonyms Reference Extraction Design | ✅ synonyms_reference_extraction_design_ready_no_import | ✅ |
+| Phase 27.119 | Synonyms Reference Extraction Dry-Run Counts | ✅ synonyms_reference_dry_run_counts_ready_no_import | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -2271,7 +2276,53 @@ ALLOW_PHASE27_119_SYNONYMS_REFERENCE_EXTRACTION_DRY_RUN_COUNTS_NO_TRAINING
 - `artifacts/reports/PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_DECISION.json`
 - [PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_REPORT.md](./PHASE27_118_SINALAB_SYNONYMS_REFERENCE_EXTRACTION_DESIGN_REPORT.md)
 
-**التالي:** Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts, no training.
+**التالي كان:** Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts, no training.
+
+---
+
+## Phase 27.119 — Synonyms Reference Extraction Dry-Run Counts
+
+**الحالة:** ✅ synonyms_reference_dry_run_counts_ready_no_import
+
+**القاموس/المسار اللغوي:** Saudi Seed v1، العربية الفصحى + السعودية فقط.
+
+**القرار الرسمي:**
+
+```text
+PHASE27_119_SINALAB_SYNONYMS_REFERENCE_DRY_RUN_COUNTS_DECISION
+ALLOW_PHASE27_120_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GATED_NO_TRAINING
+```
+
+**النتيجة:**
+
+- نفذت dry-run counts فقط حسب تصميم Phase 27.118.
+- checksum للـ artifact مطابق: `artifact_sha256_verified=true`.
+- input candidate rows: `3010`.
+- quality bands input:
+  - high: `916`
+  - medium: `703`
+  - low: `1391`
+- eligible before duplicate collapse: `1570`.
+- reference candidates after filters: `1093`.
+- eval candidates after filters: `685`.
+- drop counts:
+  - score below reference: `1391`
+  - Saudi Seed overlap: `81`
+  - protected Saudi overlap: `1`
+  - operator workflow overlap: `1`
+  - duplicate dropped after filters: `316`
+  - duplicate replaced by higher score: `161`
+- لا raw terms، لا reference records، لا corpus، لا tokenizer، لا training، لا runtime release.
+
+**الملفات:**
+
+- `resources/external_sources/phase27_119_sinalab_synonyms_reference_dry_run_counts.json`
+- `resources/external_sources/phase27_119_sinalab_synonyms_filter_drop_counts.json`
+- `artifacts/reports/phase27_119_sinalab_synonyms_reference_dry_run_counts_report.json`
+- `artifacts/reports/PHASE27_119_SINALAB_SYNONYMS_REFERENCE_DRY_RUN_COUNTS_DECISION.json`
+- [PHASE27_119_SINALAB_SYNONYMS_REFERENCE_DRY_RUN_COUNTS_REPORT.md](./PHASE27_119_SINALAB_SYNONYMS_REFERENCE_DRY_RUN_COUNTS_REPORT.md)
+
+**التالي:** Phase 27.120 — Synonyms Local Reference Layer Build Gate, no training.
 
 ---
 
