@@ -4577,7 +4577,7 @@ Final Response
 
 ---
 
-## الحالة العملية الحالية — Phase 27.120
+## الحالة العملية الحالية — Phase 27.121
 
 المسار الحاكم هو:
 
@@ -4588,7 +4588,7 @@ SF-native Objective/Curriculum/Decoding Acceleration Track
 آخر قرار:
 
 ```text
-PHASE27_120_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GATE_DECISION
+PHASE27_121_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_DECISION
 ```
 
 الخلاصة:
@@ -4640,14 +4640,16 @@ PHASE27_120_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GATE_DECISION
   لا raw terms، لا reference records، لا corpus، لا tokenizer، لا training.
 - Phase 27.120 ثبت local reference layer build gate: يسمح فقط بإنشاء records
   محلية gitignored في Phase 27.121، ولا يسمح بنشر raw terms أو corpus أو tokenizer.
-- لا تدريب جديد قبل Phase 27.121 local reference layer build ولا قبل بوابات
+- Phase 27.121 بنى reference records محلية gitignored: `1093` records و`685`
+  eval candidates. المرفوع counts/hashes فقط، ولا raw terms في git.
+- لا تدريب جديد قبل Phase 27.122 query/eval gate ولا قبل بوابات
   corpus/license اللاحقة.
 - لا SF-50M قبل gate يثبت أن capacity هي السبب الأكبر.
 
 التالي:
 
 ```text
-Phase 27.121 — Synonyms Local Reference Layer Build, gitignored, no training
+Phase 27.122 — Synonyms Reference Query and Eval Gate, no training
 ```
 
 ---

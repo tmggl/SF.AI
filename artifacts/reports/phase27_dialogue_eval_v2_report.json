@@ -249,7 +249,7 @@
       "generator": "template",
       "dispatch": "module:chat",
       "detected_dialect": "msa",
-      "response_preview": "وصلنا إلى Phase 27.120: ثبتنا بوابة بناء reference layer محلي لـ SinaLab Synonyms. المسموح لاحقًا records محلية gitignored فقط، والمرفوع counts/schema بلا raw terms وبلا corpus أو "
+      "response_preview": "وصلنا إلى Phase 27.121: بُنِيت reference records محلية لـ SinaLab Synonyms داخل مسار gitignored. المرفوع فقط counts/hashes بلا raw terms وبلا corpus أو tokenizer أو تدريب. التالي P"
     },
     {
       "scenario_id": "clarification_repair_flow",

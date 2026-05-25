@@ -205,7 +205,7 @@ def test_system_status_reports_phase22_component() -> None:
     r = client.get("/system/status")
     assert r.status_code == 200
     body = r.json()
-    assert "Phase 27.120" in body["current_phase"]
+    assert "Phase 27.121" in body["current_phase"]
     assert any(
         c["name"] == "phase22_readiness" and c["status"] == "active"
         for c in body["components"]

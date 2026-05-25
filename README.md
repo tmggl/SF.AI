@@ -28,9 +28,9 @@
 المسار الحالي الرسمي:
 
 ```text
-Phase 27.120 — Synonyms Local Reference Layer Build Gate
+Phase 27.121 — Synonyms Local Reference Layer Build
 SF-native Objective/Curriculum/Decoding Acceleration Track
-PHASE27_120_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GATE_DECISION
+PHASE27_121_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_DECISION
 ```
 
 القرار الحالي:
@@ -68,7 +68,9 @@ PHASE27_120_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GATE_DECISION
 - Phase 27.120 ثبتت بوابة build محلية: يسمح فقط ببناء reference records
   محليًا داخل مسار gitignored في المرحلة التالية، مع استمرار منع raw terms
   في git ومنع corpus/tokenizer/training/runtime.
-- التالي: `Phase 27.121 — Synonyms Local Reference Layer Build, gitignored`.
+- Phase 27.121 بنت reference records محلية gitignored:
+  `1093` records و`685` eval candidates. المرفوع فقط counts/hashes بلا raw terms.
+- التالي: `Phase 27.122 — Synonyms Reference Query and Eval Gate`.
 - عند نجاح بوابة أي حجم لاحقًا، ينتقل الوكيل تلقائيًا للحجم التالي حتى
   `SF-1B+` دون انتظار موافقة جديدة.
 

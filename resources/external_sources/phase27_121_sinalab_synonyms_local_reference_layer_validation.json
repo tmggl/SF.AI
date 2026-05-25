@@ -1,0 +1,20 @@
+{
+  "phase": "Phase 27.121",
+  "validation_id": "PHASE27_121_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_VALIDATION",
+  "checks": {
+    "reference_count_matches_gate": true,
+    "eval_count_matches_gate": true,
+    "local_files_gitignored": true,
+    "raw_terms_not_committed": true,
+    "manifest_contains_no_terms": true,
+    "no_corpus_write": true,
+    "no_tokenizer_write": true,
+    "no_training": true,
+    "no_runtime_lookup": true
+  },
+  "passed": true,
+  "raw_terms_published": false,
+  "reference_records_committed": false,
+  "training_allowed": false,
+  "runtime_release_allowed": false
+}

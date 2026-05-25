@@ -50,7 +50,7 @@
 - السيادة تبقى على corpus/tokenizer/behavior/runtime/alignment/evaluation
   وسلوك الحوار الفصيح والسعودي.
 - قبل أي تدريب جديد يجب وجود root-cause/decision gate حديث يسمح به صراحة.
-  القرار الحالي هو `PHASE27_120_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GATE_DECISION`:
+  القرار الحالي هو `PHASE27_121_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_DECISION`:
   المسار أُعيد تثبيته عند Phase 27.79، ومرّت بوابات Phase 27.80، ثم اكتمل
   تدريب Phase 27.81. Phase 27.105 أثبت أن الواجهة تستدعي المولد الحقيقي
   في raw lab، لكنه شخّص فشل social subfamilies وtopic variants؛ التالي
@@ -70,6 +70,7 @@
   Phase 27.118 صمم reference extraction كطبقة مرجعية فقط دون raw terms في git.
   Phase 27.119 نفذ dry-run counts فقط دون raw terms أو corpus/tokenizer/training.
   Phase 27.120 ثبت بوابة build محلية: records مسموحة لاحقًا داخل gitignored فقط.
+  Phase 27.121 بنى records محلية gitignored؛ المرفوع counts/hashes فقط بلا raw terms.
 - لا runtime release بدون `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - لا تعتمد loss/perplexity/micro-probe وحدها؛ النجاح يعني held-out dialogue
   quality, runtime usability, clean-stop, semantic correctness, family
@@ -82,13 +83,13 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 27.120 موثقة تاريخيًا، لكن الحالة العملية
+- المراحل من Phase 0 حتى Phase 27.121 موثقة تاريخيًا، لكن الحالة العملية
   الحالية هي:
-  `Phase 27.120 — Synonyms Local Reference Layer Build Gate`
+  `Phase 27.121 — Synonyms Local Reference Layer Build`
   ضمن `SF-native Objective/Curriculum/Decoding Acceleration Track`.
   التقرير الملزم: `docs/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md`.
   القرار التنفيذي:
-  `PHASE27_120_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GATE_DECISION`.
+  `PHASE27_121_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_DECISION`.
   Phase 27.104 تبقى الدليل السابق: تدريب محدود نجح topic-wise وفشل
   all-family، وليست إذن runtime.
   تاريخيًا أضيفت دفعة `sf-ai-balanced-family-pack-v1`: `2500` سجل gold
@@ -158,7 +159,8 @@
 - Phase 27.119 حسم dry-run counts: `1093` reference candidates بعد الفلاتر
   و`685` eval candidates، بلا raw terms ولا corpus/tokenizer/training.
 - Phase 27.120 حسم build gate: المسموح في التالي records محلية gitignored فقط.
-- أول خطوة تالية: Phase 27.121 — Synonyms Local Reference Layer Build, gitignored, no training.
+- Phase 27.121 بنى `1093` records محلية و`685` eval candidates داخل gitignored.
+- أول خطوة تالية: Phase 27.122 — Synonyms Reference Query and Eval Gate, no training.
   لا تبدأ training ولا SF-50M ولا tokenizer retrain قبل هذه البوابة.
 - تفويض التكبير التلقائي معتمد، لكن مفعوله يبدأ فقط عندما تنجح gates؛
   حاليًا `SF-50M` ما زال محجوبًا لأن capacity وزنها `1%`.

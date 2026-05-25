@@ -1,0 +1,33 @@
+{
+  "phase": "Phase 27.121",
+  "source_id": "sinalab_synonyms",
+  "build_scope": "local_reference_records_gitignored_terms_not_committed",
+  "reference_record_count": 1093,
+  "eval_candidate_record_count": 685,
+  "quality_band_counts": {
+    "high": 685,
+    "medium": 408,
+    "low": 0
+  },
+  "local_files": {
+    "reference_records": {
+      "relative_path": "resources/external_sources/reference_layers/sinalab_synonyms/reference_records.jsonl",
+      "sha256": "637d59c65d288f45ff1b0416c4b1f4020148875f0bb1f2da6091f9b6eb05acc9",
+      "line_count": 1093,
+      "gitignored": true
+    },
+    "eval_candidates": {
+      "relative_path": "resources/external_sources/reference_layers/sinalab_synonyms/eval_candidates.jsonl",
+      "sha256": "87205020b314bb279846e796224ac7f0faa05d5d66f7668105422f39f9d0677d",
+      "line_count": 685,
+      "gitignored": true
+    }
+  },
+  "local_terms_files_gitignored": true,
+  "raw_terms_committed": false,
+  "committed_manifest_contains_terms": false,
+  "dialogue_corpus_written": false,
+  "tokenizer_vocab_written": false,
+  "training_started": false,
+  "runtime_lookup_enabled": false
+}

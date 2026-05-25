@@ -1,0 +1,87 @@
+{
+  "phase": "Phase 27.121",
+  "status": "PHASE27_121_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILT_GITIGNORED_NO_TRAINING",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "dictionary_track": "Saudi Seed v1",
+  "manifest": {
+    "phase": "Phase 27.121",
+    "source_id": "sinalab_synonyms",
+    "build_scope": "local_reference_records_gitignored_terms_not_committed",
+    "reference_record_count": 1093,
+    "eval_candidate_record_count": 685,
+    "quality_band_counts": {
+      "high": 685,
+      "medium": 408,
+      "low": 0
+    },
+    "local_files": {
+      "reference_records": {
+        "relative_path": "resources/external_sources/reference_layers/sinalab_synonyms/reference_records.jsonl",
+        "sha256": "637d59c65d288f45ff1b0416c4b1f4020148875f0bb1f2da6091f9b6eb05acc9",
+        "line_count": 1093,
+        "gitignored": true
+      },
+      "eval_candidates": {
+        "relative_path": "resources/external_sources/reference_layers/sinalab_synonyms/eval_candidates.jsonl",
+        "sha256": "87205020b314bb279846e796224ac7f0faa05d5d66f7668105422f39f9d0677d",
+        "line_count": 685,
+        "gitignored": true
+      }
+    },
+    "local_terms_files_gitignored": true,
+    "raw_terms_committed": false,
+    "committed_manifest_contains_terms": false,
+    "dialogue_corpus_written": false,
+    "tokenizer_vocab_written": false,
+    "training_started": false,
+    "runtime_lookup_enabled": false
+  },
+  "validation": {
+    "phase": "Phase 27.121",
+    "validation_id": "PHASE27_121_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_VALIDATION",
+    "checks": {
+      "reference_count_matches_gate": true,
+      "eval_count_matches_gate": true,
+      "local_files_gitignored": true,
+      "raw_terms_not_committed": true,
+      "manifest_contains_no_terms": true,
+      "no_corpus_write": true,
+      "no_tokenizer_write": true,
+      "no_training": true,
+      "no_runtime_lookup": true
+    },
+    "passed": true,
+    "raw_terms_published": false,
+    "reference_records_committed": false,
+    "training_allowed": false,
+    "runtime_release_allowed": false
+  },
+  "decision": {
+    "decision_id": "PHASE27_121_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_DECISION",
+    "engineering_decision": "ALLOW_PHASE27_122_SYNONYMS_REFERENCE_QUERY_AND_EVAL_GATE_NO_TRAINING",
+    "local_reference_layer_build_passed": true,
+    "local_reference_records_exist": true,
+    "raw_terms_commit_allowed": false,
+    "external_training_text_import_allowed": false,
+    "external_tokenizer_vocab_import_allowed": false,
+    "dialogue_corpus_allowed": false,
+    "tokenizer_vocab_allowed": false,
+    "new_training_allowed": false,
+    "runtime_release_allowed": false,
+    "sf50m_transition_allowed": false,
+    "next_phase": "Phase 27.122 — Synonyms Reference Query and Eval Gate, no training"
+  },
+  "training_started": false,
+  "runtime_changed": false,
+  "external_entries_imported": false,
+  "reference_records_written_locally": true,
+  "reference_records_committed": false,
+  "corpus_changed": false,
+  "tokenizer_changed": false,
+  "raw_terms_published": false
+}

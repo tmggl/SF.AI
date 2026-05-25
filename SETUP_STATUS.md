@@ -10,11 +10,11 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.120 / 30**
-- **المرحلة الحالية:** **Phase 27.120 — Synonyms Local Reference Layer Build Gate** (`PHASE27_120_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_GATE_DECISION`; بوابة build فقط؛ لا records فعلية ولا تدريب)
+- **الرحلة الحالية:** **Phase 27.121 / 30**
+- **المرحلة الحالية:** **Phase 27.121 — Synonyms Local Reference Layer Build** (`PHASE27_121_SINALAB_SYNONYMS_LOCAL_REFERENCE_LAYER_BUILD_DECISION`; records محلية gitignored؛ لا تدريب)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
 - **ملف القيادة الواحد:** `docs/SF_AI_MASTER_GUIDE.md` هو نقطة الدخول الأولى لأي Agent أو مهندس؛ بقية الملفات مراجع تفصيلية.
-- **المرحلة التالية المقترحة:** Phase 27.121 — Synonyms Local Reference Layer Build, gitignored, no training.
+- **المرحلة التالية المقترحة:** Phase 27.122 — Synonyms Reference Query and Eval Gate, no training.
 - **استراتيجية العمل الملزمة:** SF-native Objective/Curriculum/Decoding Acceleration Track؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب، و`NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS` قبل أي runtime.
 - **تصحيح السيادة:** لا يوجد Open-Weight Lane؛ Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي = أدوات هندسية فقط داخل SF-native.
@@ -25,6 +25,7 @@
 - **نتيجة Phase 13:** smoke training نجح: `loss 5.6638 → 4.7539`, checkpoint محلي في `artifacts/checkpoints/smoke_lm/sf-10m-step20`, وتقرير في `docs/PHASE13_SMOKE_TRAINING_REPORT.md`.
 - **نتيجة Phase 27.119:** dry-run counts لـ SinaLab Synonyms اكتملت: `3010` صفًا، `1093` مرشحًا مرجعيًا بعد الفلاتر، `685` مرشح eval؛ لا raw terms ولا corpus ولا tokenizer ولا training.
 - **نتيجة Phase 27.120:** build gate اكتملت؛ records مسموحة لاحقًا محليًا فقط داخل `resources/external_sources/reference_layers/sinalab_synonyms/` المحمي بـ `.gitignore`؛ المرفوع counts/schema/reports فقط.
+- **نتيجة Phase 27.121:** بُنيت records محلية gitignored: `1093` reference records و`685` eval candidates؛ المرفوع counts/hashes فقط بلا raw terms.
 - **نتيجة Phase 14:** SF-10M v0.1 محدود نجح: `33/80` خطوة بسبب صغر corpus، eval loss `4.0777`, perplexity `59.01`, وتقرير في `docs/PHASE14_SF10M_V0_1_REPORT.md`.
 - **نتيجة Phase 15:** أضيف `NativeGenerator` + `GenerationPolicy` + metadata في API/UI، لكن هذا adapter فقط؛ `SF-10M v0.1` خام وغير جاهز كحوار مقنع.
 - **نتيجة Phase 16:** `make eval-phase16` نجح: `15/15`; التقرير يثبت أن النموذج خام ومكرر، والمختبر المحلي يبقى مفتوحًا للقياس.
@@ -531,4 +532,4 @@ make server-start
 
 ## بروتوكول الانتقال
 
-التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، ومع نجاح بوابة التكبير انتقل تلقائيًا للحجم التالي حتى `SF-1B+`. ارفع الناجح فقط، افحص الحساسية، ووثّق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. بعد Phase 27.120 لا يوجد runtime release ولا SF-50M ولا tokenizer retrain؛ التالي Phase 27.121 بناء reference layer محلي gitignored بلا تدريب.
+التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، ومع نجاح بوابة التكبير انتقل تلقائيًا للحجم التالي حتى `SF-1B+`. ارفع الناجح فقط، افحص الحساسية، ووثّق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. بعد Phase 27.121 لا يوجد runtime release ولا SF-50M ولا tokenizer retrain؛ التالي Phase 27.122 بوابة query/eval بلا تدريب.
