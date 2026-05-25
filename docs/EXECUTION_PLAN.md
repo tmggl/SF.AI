@@ -4577,7 +4577,7 @@ Final Response
 
 ---
 
-## الحالة العملية الحالية — Phase 27.115
+## الحالة العملية الحالية — Phase 27.116
 
 المسار الحاكم هو:
 
@@ -4588,7 +4588,7 @@ SF-native Objective/Curriculum/Decoding Acceleration Track
 آخر قرار:
 
 ```text
-PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_DECISION
+PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_DECISION
 ```
 
 الخلاصة:
@@ -4628,14 +4628,16 @@ PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_DECISION
   - `Arabic Ontology` محجوب؛ لا artifact مباشر، فقط request/API-token path.
   - `SinaLab Synonyms` مرصود كـ GitHub artifact candidate، لكن import محجوب
     حتى quarantine checksum + schema dry-run.
-- لا تدريب جديد قبل Phase 27.116 quarantine/schema dry-run ولا قبل بوابات
+- Phase 27.116 نفذ quarantine checksum وschema dry-run لـ `SinaLab Synonyms`:
+  artifact محلي git-ignored، checksum مسجل، schema مرصود، ولا raw rows محفوظة.
+- لا تدريب جديد قبل Phase 27.117 sample quality/dedupe review ولا قبل بوابات
   corpus/license اللاحقة.
 - لا SF-50M قبل gate يثبت أن capacity هي السبب الأكبر.
 
 التالي:
 
 ```text
-Phase 27.116 — Synonyms Artifact Quarantine Checksum and Schema Dry-Run, no import/training
+Phase 27.117 — Synonyms Sample Quality and Dedupe Review, no training
 ```
 
 ---

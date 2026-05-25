@@ -61,13 +61,12 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate",
+        current_phase="Phase 27.116 — Synonyms Quarantine Schema Dry-Run",
         current_phase_status=(
-            "phase27_115_artifact_gate_ready_no_import"
+            "phase27_116_synonyms_quarantine_schema_ready_no_import"
         ),
         next_phase=(
-            "Phase 27.116 — Synonyms Artifact Quarantine Checksum and Schema Dry-Run, "
-            "no import/training"
+            "Phase 27.117 — Synonyms Sample Quality and Dedupe Review, no training"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -702,6 +701,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_115_arabic_ontology_synonyms_artifact_gate",
                 status="artifact_gate_ready_no_import",
                 phase="Phase 27.115",
+            ),
+            ComponentStatus(
+                name="phase27_116_sinalab_synonyms_quarantine_schema",
+                status="synonyms_quarantine_schema_ready_no_import",
+                phase="Phase 27.116",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

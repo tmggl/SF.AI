@@ -2152,7 +2152,46 @@ ALLOW_PHASE27_116_SYNONYMS_ARTIFACT_QUARANTINE_SCHEMA_DRY_RUN_NO_IMPORT
 - `artifacts/reports/PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_DECISION.json`
 - [PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_REPORT.md](./PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_REPORT.md)
 
-**التالي:** Phase 27.116 — Synonyms Artifact Quarantine Checksum and Schema Dry-Run, no import/training.
+**التالي كان:** Phase 27.116 — Synonyms Artifact Quarantine Checksum and Schema Dry-Run, no import/training.
+
+---
+
+## Phase 27.116 — Synonyms Artifact Quarantine Checksum and Schema Dry-Run
+
+**الحالة:** ✅ synonyms_quarantine_schema_ready_no_import
+
+**القاموس/المسار اللغوي:** Saudi Seed v1، العربية الفصحى + السعودية فقط.
+
+**القرار الرسمي:**
+
+```text
+PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_DECISION
+ALLOW_PHASE27_117_SYNONYMS_SAMPLE_QUALITY_AND_DEDUPE_REVIEW_NO_TRAINING
+```
+
+**النتيجة:**
+
+- نُزّل artifact `Synonyms Dataset.xlsx` في quarantine محلي git-ignored.
+- sha256: `a8622546d057f60d2cee0db3b8fdc79cf30303db6ae83001be1634215bb00035`.
+- schema dry-run فقط:
+  - sheet: `Sheet1`
+  - dimension: `A1:I4511`
+  - estimated rows: `4511`
+  - estimated columns: `9`
+- لم تُحفظ raw rows في التقارير.
+- لم يُكتب أي شيء إلى `data/corpus`.
+- لا tokenizer vocab/merges، لا training، لا runtime release، لا SF-50M.
+
+**الملفات:**
+
+- `resources/external_sources/phase27_116_sinalab_synonyms_quarantine_manifest.json`
+- `resources/external_sources/phase27_116_sinalab_synonyms_schema_dry_run.json`
+- `resources/external_sources/phase27_116_sinalab_synonyms_attribution.json`
+- `artifacts/reports/phase27_116_sinalab_synonyms_quarantine_schema_report.json`
+- `artifacts/reports/PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_DECISION.json`
+- [PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_REPORT.md](./PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_REPORT.md)
+
+**التالي:** Phase 27.117 — Synonyms Sample Quality and Dedupe Review, no training.
 
 ---
 

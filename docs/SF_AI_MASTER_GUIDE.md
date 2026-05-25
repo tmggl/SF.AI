@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.115
-الاسم: Arabic Ontology/Synonyms Artifact Gate
+المرحلة الحالية: Phase 27.116
+الاسم: Synonyms Quarantine Schema Dry-Run
 المسار الملزم: SF-native Objective/Curriculum/Decoding Acceleration Track
-القرار الرسمي: PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_DECISION
+القرار الرسمي: PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -121,6 +121,8 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - Phase 27.115 حسم artifact gate: Arabic Ontology محجوب لأنه request-only
   بلا artifact مباشر، وSinaLab Synonyms مرصود كـ artifact candidate لكن import
   محجوب حتى quarantine checksum + schema dry-run.
+- Phase 27.116 نزّل SinaLab Synonyms في quarantine محلي git-ignored، سجّل
+  checksum، وفحص schema فقط دون raw rows/corpus/tokenizer/training.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
@@ -147,7 +149,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   `docs/PHASE27_114_ARABIC_ONTOLOGY_SYNONYMS_SOURCE_CARDS_REPORT.md`.
 - تقرير artifact gate الحالي:
   `docs/PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_REPORT.md`.
-- التالي: `Phase 27.116 — Synonyms Artifact Quarantine Checksum and Schema Dry-Run, no import/training`.
+- تقرير quarantine/schema الحالي:
+  `docs/PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_REPORT.md`.
+- التالي: `Phase 27.117 — Synonyms Sample Quality and Dedupe Review, no training`.
 
 الدليل السابق الذي سبب هذا re-anchor:
 
@@ -419,14 +423,14 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.116 — Synonyms Artifact Quarantine Checksum and Schema Dry-Run, no import/training
+Phase 27.117 — Synonyms Sample Quality and Dedupe Review, no training
 ```
 
 مطلوب منها:
 
-- تنزيل artifact المرصود لـ SinaLab Synonyms في quarantine فقط.
-- تسجيل checksum وmetadata/schema بدون نسخ raw rows إلى `data/corpus`.
-- تثبيت attribution/license file قبل أي use لاحق.
+- فحص عينة محدودة من artifact داخل quarantine فقط لتقييم الجودة.
+- dedupe ضد Saudi Seed v1 والموارد السيادية.
+- تقرير جودة يحدد هل يُسمح بتحويل reference metadata لاحقًا.
 - لا training ولا tokenizer vocab ولا runtime release.
 - Qabas وArabic WordNet 4.0 يبقيان خارج candidates الفعلية.
 - ممنوع training/SF-50M/tokenizer retrain/runtime release قبل هذه البوابة.

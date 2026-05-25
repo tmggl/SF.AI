@@ -1,0 +1,20 @@
+{
+  "phase": "Phase 27.116",
+  "source_id": "sinalab_synonyms",
+  "title": "Synonyms Dataset",
+  "authors": [
+    "Sana Ghanem",
+    "Mustafa Jarrar",
+    "Radi Jarrar",
+    "Ibrahim Bounhas"
+  ],
+  "citation": "A Benchmark and Scoring Algorithm for Enriching Arabic Synonyms, Global WordNet Conference 2023",
+  "repository_url": "https://github.com/SinaLab/Synonyms",
+  "artifact_url": "https://raw.githubusercontent.com/SinaLab/Synonyms/main/Synonyms%20Dataset.xlsx",
+  "license": "CC-BY-4.0",
+  "artifact_sha256": "a8622546d057f60d2cee0db3b8fdc79cf30303db6ae83001be1634215bb00035",
+  "sf_ai_usage_now": "quarantine checksum and schema dry-run only",
+  "training_allowed": false,
+  "tokenizer_vocab_allowed": false,
+  "dialogue_corpus_allowed": false
+}

@@ -28,9 +28,9 @@
 المسار الحالي الرسمي:
 
 ```text
-Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate
+Phase 27.116 — Synonyms Quarantine Schema Dry-Run
 SF-native Objective/Curriculum/Decoding Acceleration Track
-PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_DECISION
+PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_DECISION
 ```
 
 القرار الحالي:
@@ -58,7 +58,9 @@ PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_DECISION
 - Phase 27.113–27.114 فتحت source-card path لـ Arabic Ontology وSinaLab Synonyms بلا import.
 - Phase 27.115 حسمت artifact gate: Arabic Ontology محجوب، وSinaLab Synonyms مرصود
   لكن import محجوب حتى quarantine checksum + schema dry-run.
-- التالي: `Phase 27.116 — Synonyms Artifact Quarantine Checksum and Schema Dry-Run`.
+- Phase 27.116 نزّلت Synonyms artifact في quarantine محلي git-ignored، وسجلت
+  checksum/schema دون raw rows أو corpus أو training.
+- التالي: `Phase 27.117 — Synonyms Sample Quality and Dedupe Review`.
 - عند نجاح بوابة أي حجم لاحقًا، ينتقل الوكيل تلقائيًا للحجم التالي حتى
   `SF-1B+` دون انتظار موافقة جديدة.
 

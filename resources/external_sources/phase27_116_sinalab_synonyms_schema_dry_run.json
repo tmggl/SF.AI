@@ -1,0 +1,29 @@
+{
+  "phase": "Phase 27.116",
+  "artifact": "Synonyms Dataset.xlsx",
+  "parser": "stdlib_zip_xml_metadata_only",
+  "sheets": [
+    {
+      "name": "Sheet1",
+      "sheet_id": "1",
+      "dimension_ref": "A1:I4511",
+      "estimated_rows": 4511,
+      "estimated_columns": 9,
+      "header_columns": [
+        "SynsetNo",
+        "RowID",
+        "",
+        "",
+        "L1",
+        "L2",
+        "L3",
+        "L4",
+        "Average"
+      ],
+      "raw_rows_exported": false
+    }
+  ],
+  "raw_row_values_saved": false,
+  "dialogue_corpus_written": false,
+  "tokenizer_vocab_written": false
+}

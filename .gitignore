@@ -84,6 +84,11 @@ resources/lexicons/imported/saudi_seed_v1/saudi_dialect_lexicon_full_seed_v1.csv
 resources/lexicons/imported/saudi_seed_v1/saudi_dialect_lexicon_full_seed_v1.json
 resources/lexicons/imported/saudi_seed_v1/saudi_dialect_lexicon_full_seed_v1.jsonl
 
+# External-source quarantine may temporarily hold licensed artifacts for
+# checksum/schema inspection. Commit manifests/reports only, never raw payloads.
+resources/external_sources/quarantine/**/raw/*
+!resources/external_sources/quarantine/**/raw/.gitkeep
+
 # --- Notebooks ---
 .ipynb_checkpoints/
 

@@ -1,0 +1,13 @@
+{
+  "decision_id": "PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_DECISION",
+  "engineering_decision": "ALLOW_PHASE27_117_SYNONYMS_SAMPLE_QUALITY_AND_DEDUPE_REVIEW_NO_TRAINING",
+  "quarantine_checksum_recorded": true,
+  "schema_dry_run_passed": true,
+  "raw_entry_import_allowed": false,
+  "external_training_text_import_allowed": false,
+  "external_tokenizer_vocab_import_allowed": false,
+  "new_training_allowed": false,
+  "runtime_release_allowed": false,
+  "sf50m_transition_allowed": false,
+  "next_phase": "Phase 27.117 — Synonyms Sample Quality and Dedupe Review, no training"
+}

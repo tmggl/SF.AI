@@ -542,6 +542,9 @@ phase27-arabic-ontology-synonyms-source-cards:
 phase27-arabic-ontology-synonyms-artifact-gate:
 	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_115_arabic_ontology_synonyms_artifact_gate.py $(ARGS)
 
+phase27-sinalab-synonyms-quarantine-schema:
+	ENABLE_SAUDI_SEED_V1_LEXICON=true $(PY) scripts/phase27_116_sinalab_synonyms_quarantine_schema_dry_run.py $(ARGS)
+
 prepare-dialogue-batch:
 	$(PY) scripts/prepare_dialogue_batch.py $(ARGS)
 

@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.115: Arabic Ontology محجوب لأنه request-only بلا "
-    "artifact مباشر، وSinaLab Synonyms مرصود لكن import ما زال محجوبًا. "
-    "التالي Phase 27.116: quarantine checksum وschema dry-run فقط، بلا تدريب.",
+    "وصلنا إلى Phase 27.116: نزلنا SinaLab Synonyms في quarantine محلي، "
+    "حسبنا checksum، وفحصنا schema فقط. لا import ولا تدريب. التالي "
+    "Phase 27.117: sample quality وdedupe review بلا تدريب.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

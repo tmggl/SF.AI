@@ -103,7 +103,7 @@
         "expected_status": "active",
         "expected_generator": "template",
         "expected_requires_safety": false,
-        "required_response_terms": ["Phase 27.115", "Arabic Ontology", "Phase 27.116"],
+        "required_response_terms": ["Phase 27.116", "SinaLab Synonyms", "Phase 27.117"],
         "forbidden_response_terms": ["نفتح الواجهة الآن", "نبدأ SF-50M كامل الآن"]
       }
     ]

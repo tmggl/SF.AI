@@ -50,7 +50,7 @@
 - السيادة تبقى على corpus/tokenizer/behavior/runtime/alignment/evaluation
   وسلوك الحوار الفصيح والسعودي.
 - قبل أي تدريب جديد يجب وجود root-cause/decision gate حديث يسمح به صراحة.
-  القرار الحالي هو `PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_DECISION`:
+  القرار الحالي هو `PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_DECISION`:
   المسار أُعيد تثبيته عند Phase 27.79، ومرّت بوابات Phase 27.80، ثم اكتمل
   تدريب Phase 27.81. Phase 27.105 أثبت أن الواجهة تستدعي المولد الحقيقي
   في raw lab، لكنه شخّص فشل social subfamilies وtopic variants؛ التالي
@@ -64,6 +64,8 @@
   Phase 27.114 أنشأ source cards وlicense matrix، بلا import.
   Phase 27.115 حسم artifact gate: Arabic Ontology محجوب لأنه request-only،
   وSinaLab Synonyms مرصود لكن import محجوب حتى quarantine checksum/schema dry-run.
+  Phase 27.116 نزّل SinaLab Synonyms في quarantine محلي git-ignored وسجل
+  checksum/schema فقط دون import أو تدريب.
 - لا runtime release بدون `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - لا تعتمد loss/perplexity/micro-probe وحدها؛ النجاح يعني held-out dialogue
   quality, runtime usability, clean-stop, semantic correctness, family
@@ -76,13 +78,13 @@
 
 **الحالة الراهنة باختصار:**
 
-- المراحل من Phase 0 حتى Phase 27.115 موثقة تاريخيًا، لكن الحالة العملية
+- المراحل من Phase 0 حتى Phase 27.116 موثقة تاريخيًا، لكن الحالة العملية
   الحالية هي:
-  `Phase 27.115 — Arabic Ontology/Synonyms Artifact Gate`
+  `Phase 27.116 — Synonyms Quarantine Schema Dry-Run`
   ضمن `SF-native Objective/Curriculum/Decoding Acceleration Track`.
   التقرير الملزم: `docs/PHASE27_OBJECTIVE_CURRICULUM_DECODING_PLAN.md`.
   القرار التنفيذي:
-  `PHASE27_115_ARABIC_ONTOLOGY_SYNONYMS_ARTIFACT_GATE_DECISION`.
+  `PHASE27_116_SINALAB_SYNONYMS_QUARANTINE_SCHEMA_DECISION`.
   Phase 27.104 تبقى الدليل السابق: تدريب محدود نجح topic-wise وفشل
   all-family، وليست إذن runtime.
   تاريخيًا أضيفت دفعة `sf-ai-balanced-family-pack-v1`: `2500` سجل gold
@@ -143,7 +145,9 @@
   Phase 27.114 أنشأ source cards وlicense matrix للمرشحين، ولا يوجد import.
   Phase 27.115 حسم artifact gate وfield mapping: Arabic Ontology محجوب،
   وSinaLab Synonyms مسموح فقط لـ quarantine checksum/schema dry-run.
-- أول خطوة تالية: Phase 27.116 — Synonyms Artifact Quarantine Checksum and Schema Dry-Run, no import/training.
+- Phase 27.116 حسم quarantine checksum وschema dry-run؛ لا raw rows محفوظة
+  ولا data/corpus ولا tokenizer ولا training.
+- أول خطوة تالية: Phase 27.117 — Synonyms Sample Quality and Dedupe Review, no training.
   لا تبدأ training ولا SF-50M ولا tokenizer retrain قبل هذه البوابة.
 - تفويض التكبير التلقائي معتمد، لكن مفعوله يبدأ فقط عندما تنجح gates؛
   حاليًا `SF-50M` ما زال محجوبًا لأن capacity وزنها `1%`.
