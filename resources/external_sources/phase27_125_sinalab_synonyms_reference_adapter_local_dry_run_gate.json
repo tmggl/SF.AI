@@ -1,0 +1,30 @@
+{
+  "phase": "Phase 27.125",
+  "gate_id": "PHASE27_125_SINALAB_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_GATE",
+  "source_id": "sinalab_synonyms",
+  "gate_passed": true,
+  "preconditions": {
+    "phase27_124_allows_local_dry_run": true,
+    "phase27_124_gate_passed": true,
+    "manifest_counts_match_adapter_metrics": true,
+    "adapter_index_has_expected_unique_keys": true,
+    "all_eval_queries_hit": true,
+    "redaction_applied_to_all_queries": true,
+    "no_term_leaks": true,
+    "hash_contract_passed": true,
+    "raw_terms_not_published": true,
+    "query_rows_not_published": true,
+    "runtime_and_chat_still_disabled": true,
+    "no_corpus_tokenizer_training": true
+  },
+  "reference_runtime_policy_design_allowed_next": true,
+  "runtime_lookup_activation_allowed": false,
+  "chat_integration_allowed": false,
+  "raw_terms_commit_allowed": false,
+  "query_rows_commit_allowed": false,
+  "dialogue_corpus_allowed": false,
+  "tokenizer_vocab_allowed": false,
+  "training_allowed": false,
+  "runtime_release_allowed": false,
+  "sf50m_transition_allowed": false
+}

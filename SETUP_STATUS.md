@@ -10,11 +10,11 @@
 
 - **اسم المشروع:** SF.AI
 - **الموقع:** `/Users/sami/workSF/SF.AI/`
-- **الرحلة الحالية:** **Phase 27.124 / 30**
-- **المرحلة الحالية:** **Phase 27.124 — Synonyms Reference Adapter Skeleton** (`PHASE27_124_SINALAB_SYNONYMS_REFERENCE_ADAPTER_SKELETON_DECISION`; skeleton code فقط؛ لا runtime ولا تدريب)
+- **الرحلة الحالية:** **Phase 27.125 / 30**
+- **المرحلة الحالية:** **Phase 27.125 — Synonyms Reference Adapter Local Dry-Run** (`PHASE27_125_SINALAB_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_DECISION`; dry-run counts-only؛ لا runtime ولا تدريب)
 - **الهدف العام:** الوصول إلى نموذج لغوي سيادي مولّد، يبدأ من الصفر، ثم يربط توليده بالشات خلف router/safety/composer.
 - **ملف القيادة الواحد:** `docs/SF_AI_MASTER_GUIDE.md` هو نقطة الدخول الأولى لأي Agent أو مهندس؛ بقية الملفات مراجع تفصيلية.
-- **المرحلة التالية المقترحة:** Phase 27.125 — Synonyms Reference Adapter Local Dry-Run, no runtime.
+- **المرحلة التالية المقترحة:** Phase 27.126 — Synonyms Reference Runtime Policy Design, no activation.
 - **استراتيجية العمل الملزمة:** SF-native Objective/Curriculum/Decoding Acceleration Track؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب، و`NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS` قبل أي runtime.
 - **تصحيح السيادة:** لا يوجد Open-Weight Lane؛ Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي = أدوات هندسية فقط داخل SF-native.
@@ -29,6 +29,7 @@
 - **نتيجة Phase 27.122:** query/eval محلي في الذاكرة: lookup `685/685`, duplicate keys `0`, quality match `685/685`; لا runtime activation ولا تدريب.
 - **نتيجة Phase 27.123:** صُمم `SinaLabSynonymsReferenceAdapter` كعقد فقط: default `max_results=5`, cap `10`, redaction policy تمنع raw terms/query rows/log terms؛ لا runtime ولا chat integration ولا corpus/tokenizer/training.
 - **نتيجة Phase 27.124:** أُضيف skeleton adapter في `sf_ai/reference_layers/` واختُبر بسجلات synthetic فقط: lookup/redaction/hash/quality threshold pass؛ لا runtime ولا chat integration ولا raw source records ولا corpus/tokenizer/training.
+- **نتيجة Phase 27.125:** dry-run محلي على reference layer gitignored: lookup `685/685`, redaction `685/685`, term leak `0`, hash length `[64]`; المرفوع counts/hashes فقط بلا raw terms أو query rows.
 - **نتيجة Phase 14:** SF-10M v0.1 محدود نجح: `33/80` خطوة بسبب صغر corpus، eval loss `4.0777`, perplexity `59.01`, وتقرير في `docs/PHASE14_SF10M_V0_1_REPORT.md`.
 - **نتيجة Phase 15:** أضيف `NativeGenerator` + `GenerationPolicy` + metadata في API/UI، لكن هذا adapter فقط؛ `SF-10M v0.1` خام وغير جاهز كحوار مقنع.
 - **نتيجة Phase 16:** `make eval-phase16` نجح: `15/15`; التقرير يثبت أن النموذج خام ومكرر، والمختبر المحلي يبقى مفتوحًا للقياس.
@@ -374,7 +375,7 @@ make server-start
 
 آخر تحقق حي بعد restart:
 - السيرفر يعمل داخل `screen` detached باسم `sfai8123` على `127.0.0.1:8123`.
-- الكود الحالي يعرض `Phase 27.124` في `/system/status` و`/health`; runtime المولّد العام لا يزال محجوبًا حتى تمر بوابات objective/curriculum/decoding.
+- الكود الحالي يعرض `Phase 27.125` في `/system/status` و`/health`; runtime المولّد العام لا يزال محجوبًا حتى تمر بوابات objective/curriculum/decoding.
 - `GET /system/phase26-readiness` يرجع `can_start_sf50m_training=false`.
 - `GET /system/corpus-audit` يعرض `READY_FOR_PHASE_12_TOKENIZER_TRAINING` بعدد 30/30
 - `make server-status` read-only ولا يوقف السيرفر.
@@ -535,4 +536,4 @@ make server-start
 
 ## بروتوكول الانتقال
 
-التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، ومع نجاح بوابة التكبير انتقل تلقائيًا للحجم التالي حتى `SF-1B+`. ارفع الناجح فقط، افحص الحساسية، ووثّق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. بعد Phase 27.124 لا يوجد runtime release ولا SF-50M ولا tokenizer retrain؛ التالي Phase 27.125 local dry-run بلا runtime.
+التفويض الحالي من سامي: استمر في المراحل المسجلة دون انتظار موافقة جديدة، ومع نجاح بوابة التكبير انتقل تلقائيًا للحجم التالي حتى `SF-1B+`. ارفع الناجح فقط، افحص الحساسية، ووثّق كل خطوة. لا تبدأ أي مصدر خارجي/زحف/اعتماد pretrained مهما كان التفويض عامًا. بعد Phase 27.125 لا يوجد runtime release ولا SF-50M ولا tokenizer retrain؛ التالي Phase 27.126 runtime policy design بلا activation.

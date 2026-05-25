@@ -79,10 +79,10 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 ## 3. الحالة الحالية المختصرة
 
 ```text
-المرحلة الحالية: Phase 27.124
-الاسم: Synonyms Reference Adapter Skeleton
+المرحلة الحالية: Phase 27.125
+الاسم: Synonyms Reference Adapter Local Dry-Run
 المسار الملزم: SF-native Objective/Curriculum/Decoding Acceleration Track
-القرار الرسمي: PHASE27_124_SINALAB_SYNONYMS_REFERENCE_ADAPTER_SKELETON_DECISION
+القرار الرسمي: PHASE27_125_SINALAB_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_DECISION
 المسار اللغوي: msa + saudi فقط
 القاموس: Saudi Seed v1
 السيرفر المحلي: http://127.0.0.1:8123/ui/chat
@@ -145,6 +145,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
 - Phase 27.124 كتب skeleton code للـ adapter واختبره بسجلات synthetic فقط:
   lookup/redaction/hash/quality-threshold contract مرّت، ولا raw source records
   ولا runtime/chat/corpus/tokenizer/training.
+- Phase 27.125 شغل adapter محليًا على reference layer gitignored: exact lookup
+  `685/685`, redaction `685/685`, term leak `0`, hash lengths `64`. المرفوع
+  counts/hashes فقط، ولا runtime/chat/corpus/tokenizer/training.
 - لا tokenizer جديد الآن.
 - لا runtime release الآن.
 - لا انتقال إلى `SF-50M` الآن.
@@ -189,7 +192,9 @@ SF.AI مشروع لبناء نموذج لغوي سيادي مولد لسامي،
   `docs/PHASE27_123_SINALAB_SYNONYMS_REFERENCE_ADAPTER_DESIGN_REPORT.md`.
 - تقرير adapter skeleton الحالي:
   `docs/PHASE27_124_SINALAB_SYNONYMS_REFERENCE_ADAPTER_SKELETON_REPORT.md`.
-- التالي: `Phase 27.125 — Synonyms Reference Adapter Local Dry-Run, no runtime`.
+- تقرير local dry-run الحالي:
+  `docs/PHASE27_125_SINALAB_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_REPORT.md`.
+- التالي: `Phase 27.126 — Synonyms Reference Runtime Policy Design, no activation`.
 
 الدليل السابق الذي سبب هذا re-anchor:
 
@@ -461,13 +466,14 @@ SF-10M
 المرحلة التالية الرسمية:
 
 ```text
-Phase 27.125 — Synonyms Reference Adapter Local Dry-Run, no runtime
+Phase 27.126 — Synonyms Reference Runtime Policy Design, no activation
 ```
 
 مطلوب منها:
 
-- تشغيل adapter على reference layer المحلي gitignored كتجربة dry-run counts-only.
-- عدم نشر raw terms أو query rows.
+- تصميم سياسة تفعيل مستقبلية: متى يُسمح للـ adapter بالعمل في runtime،
+  وما شروط redaction، وما الذي يبقى محجوبًا.
+- لا تفعيل runtime فعلي في هذه المرحلة.
 - عدم ربط adapter بالواجهة أو ChatModule.
 - لا corpus/tokenizer/training/runtime release.
 - لا corpus ولا tokenizer vocab ولا training ولا runtime release.

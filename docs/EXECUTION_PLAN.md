@@ -4577,7 +4577,7 @@ Final Response
 
 ---
 
-## الحالة العملية الحالية — Phase 27.124
+## الحالة العملية الحالية — Phase 27.125
 
 المسار الحاكم هو:
 
@@ -4588,7 +4588,7 @@ SF-native Objective/Curriculum/Decoding Acceleration Track
 آخر قرار:
 
 ```text
-PHASE27_124_SINALAB_SYNONYMS_REFERENCE_ADAPTER_SKELETON_DECISION
+PHASE27_125_SINALAB_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_DECISION
 ```
 
 الخلاصة:
@@ -4650,13 +4650,16 @@ PHASE27_124_SINALAB_SYNONYMS_REFERENCE_ADAPTER_SKELETON_DECISION
 - Phase 27.124 كتب skeleton adapter مستقلًا في `sf_ai/reference_layers/`
   واختبر lookup/redaction/hash/quality threshold بسجلات synthetic فقط. لا runtime
   ولا ChatModule ولا raw source records ولا corpus/tokenizer/training.
-- لا تدريب جديد قبل Phase 27.125 local dry-run ولا قبل بوابات corpus/license اللاحقة.
+- Phase 27.125 شغل adapter محليًا على reference layer gitignored كتجربة dry-run:
+  exact lookup `685/685`, redaction `1.0`, term leak `0`, hash lengths `[64]`.
+  لا raw terms ولا query rows في git، ولا runtime/chat/corpus/tokenizer/training.
+- لا تدريب جديد قبل Phase 27.126 runtime policy design ولا قبل بوابات corpus/license اللاحقة.
 - لا SF-50M قبل gate يثبت أن capacity هي السبب الأكبر.
 
 التالي:
 
 ```text
-Phase 27.125 — Synonyms Reference Adapter Local Dry-Run, no runtime
+Phase 27.126 — Synonyms Reference Runtime Policy Design, no activation
 ```
 
 ---

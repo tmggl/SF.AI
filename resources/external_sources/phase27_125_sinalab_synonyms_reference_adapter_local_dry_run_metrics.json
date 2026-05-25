@@ -1,0 +1,48 @@
+{
+  "phase": "Phase 27.125",
+  "scope": "local_reference_adapter_dry_run_counts_only",
+  "adapter_class": "SinaLabSynonymsReferenceAdapter",
+  "reference_record_count": 1093,
+  "eval_query_count": 685,
+  "adapter_record_count": 1093,
+  "adapter_index_key_count": 1093,
+  "reference_quality_band_counts": {
+    "high": 685,
+    "medium": 408,
+    "low": 0
+  },
+  "eval_quality_band_counts": {
+    "high": 685,
+    "medium": 0,
+    "low": 0
+  },
+  "exact_lookup_hits": 685,
+  "exact_lookup_rate": 1.0,
+  "missing_lookup_count": 0,
+  "quality_band_hits": {
+    "high": 685,
+    "medium": 0,
+    "low": 0
+  },
+  "missing_by_quality_band": {
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "redacted_lookup_count": 685,
+  "redaction_rate": 1.0,
+  "term_leak_count": 0,
+  "unique_result_hash_count": 685,
+  "observed_hash_lengths": [
+    64
+  ],
+  "local_reference_files_gitignored": true,
+  "raw_source_records_loaded_locally": true,
+  "raw_terms_published": false,
+  "query_rows_published": false,
+  "runtime_lookup_enabled": false,
+  "chat_integration_enabled": false,
+  "dialogue_corpus_written": false,
+  "tokenizer_vocab_written": false,
+  "training_started": false
+}

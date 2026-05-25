@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.124 / 30**
-- **المرحلة الحالية:** **Phase 27.124 — Synonyms Reference Adapter Skeleton**
-- **حالة المرحلة الحالية:** **كُتب skeleton adapter واختُبر بسجلات synthetic فقط؛ لا runtime ولا تدريب**
-- **المرحلة التالية المقترحة:** Phase 27.125 — Synonyms Reference Adapter Local Dry-Run, no runtime.
+- **الرحلة الحالية:** **Phase 27.125 / 30**
+- **المرحلة الحالية:** **Phase 27.125 — Synonyms Reference Adapter Local Dry-Run**
+- **حالة المرحلة الحالية:** **dry-run محلي على reference layer gitignored؛ lookup 685/685 وredaction 100% بلا runtime**
+- **المرحلة التالية المقترحة:** Phase 27.126 — Synonyms Reference Runtime Policy Design, no activation.
 - **التحول الاستراتيجي المعتمد:** **SF-native Objective/Curriculum/Decoding Acceleration Track** — تسريع هندسي فقط؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -180,6 +180,7 @@
 | Phase 27.122 | Synonyms Reference Query and Eval Gate | ✅ synonyms_reference_query_eval_gate_ready_no_runtime | ✅ |
 | Phase 27.123 | Synonyms Reference Adapter Design | ✅ synonyms_reference_adapter_design_ready_no_runtime | ✅ |
 | Phase 27.124 | Synonyms Reference Adapter Skeleton | ✅ synonyms_reference_adapter_skeleton_ready_no_runtime | ✅ |
+| Phase 27.125 | Synonyms Reference Adapter Local Dry-Run | ✅ synonyms_reference_adapter_local_dry_run_ready_no_runtime | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -2531,7 +2532,50 @@ ALLOW_PHASE27_125_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_NO_RUNTIME
 - `artifacts/reports/PHASE27_124_SINALAB_SYNONYMS_REFERENCE_ADAPTER_SKELETON_DECISION.json`
 - [PHASE27_124_SINALAB_SYNONYMS_REFERENCE_ADAPTER_SKELETON_REPORT.md](./PHASE27_124_SINALAB_SYNONYMS_REFERENCE_ADAPTER_SKELETON_REPORT.md)
 
-**التالي:** Phase 27.125 — Synonyms Reference Adapter Local Dry-Run, no runtime.
+**التالي كان:** Phase 27.125 — Synonyms Reference Adapter Local Dry-Run, no runtime.
+
+---
+
+## Phase 27.125 — Synonyms Reference Adapter Local Dry-Run
+
+**الحالة:** ✅ synonyms_reference_adapter_local_dry_run_ready_no_runtime
+
+**القاموس/المسار اللغوي:** Saudi Seed v1، العربية الفصحى + السعودية فقط.
+
+**القرار الرسمي:**
+
+```text
+PHASE27_125_SINALAB_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_DECISION
+ALLOW_PHASE27_126_SYNONYMS_REFERENCE_RUNTIME_POLICY_DESIGN_NO_ACTIVATION
+```
+
+**النتيجة:**
+
+- شُغل `SinaLabSynonymsReferenceAdapter` محليًا على reference layer gitignored.
+- المرفوع counts/hashes فقط، دون raw terms أو query rows.
+- metrics:
+  - reference records: `1093`
+  - eval queries: `685`
+  - adapter index keys: `1093`
+  - exact lookup hits: `685`
+  - exact lookup rate: `1.0`
+  - redacted lookups: `685`
+  - redaction rate: `1.0`
+  - term leak count: `0`
+  - observed hash lengths: `[64]`
+- محجوب الآن: runtime lookup activation، chat module integration،
+  raw terms/query rows، data/corpus writes، tokenizer vocab/merges، training،
+  وSF-50M transition.
+
+**الملفات:**
+
+- `resources/external_sources/phase27_125_sinalab_synonyms_reference_adapter_local_dry_run_metrics.json`
+- `resources/external_sources/phase27_125_sinalab_synonyms_reference_adapter_local_dry_run_gate.json`
+- `artifacts/reports/phase27_125_sinalab_synonyms_reference_adapter_local_dry_run_report.json`
+- `artifacts/reports/PHASE27_125_SINALAB_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_DECISION.json`
+- [PHASE27_125_SINALAB_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_REPORT.md](./PHASE27_125_SINALAB_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_REPORT.md)
+
+**التالي:** Phase 27.126 — Synonyms Reference Runtime Policy Design, no activation.
 
 ---
 

@@ -61,12 +61,12 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
     return SystemStatusResponse(
         project=settings.project_name,
         env=settings.env,
-        current_phase="Phase 27.124 — Synonyms Reference Adapter Skeleton",
+        current_phase="Phase 27.125 — Synonyms Reference Adapter Local Dry-Run",
         current_phase_status=(
-            "phase27_124_synonyms_reference_adapter_skeleton_ready_no_runtime"
+            "phase27_125_synonyms_reference_adapter_local_dry_run_ready_no_runtime"
         ),
         next_phase=(
-            "Phase 27.125 — Synonyms Reference Adapter Local Dry-Run, no runtime"
+            "Phase 27.126 — Synonyms Reference Runtime Policy Design, no activation"
         ),
         sovereign=True,
         uses_external_llm=False,
@@ -746,6 +746,11 @@ def system_status(settings: SettingsDep) -> SystemStatusResponse:
                 name="phase27_124_sinalab_synonyms_reference_adapter_skeleton",
                 status="synonyms_reference_adapter_skeleton_ready_no_runtime",
                 phase="Phase 27.124",
+            ),
+            ComponentStatus(
+                name="phase27_125_sinalab_synonyms_reference_adapter_local_dry_run",
+                status="synonyms_reference_adapter_local_dry_run_ready_no_runtime",
+                phase="Phase 27.125",
             ),
             ComponentStatus(name="coding_module", status="skeleton_only", phase="Phase 10"),
             ComponentStatus(name="data_module", status="skeleton_only", phase="Phase 10"),

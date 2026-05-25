@@ -23,7 +23,7 @@ def test_health_ok() -> None:
     body = r.json()
     assert body["status"] == "ok"
     assert body["project"] == "SF.AI"
-    assert body["phase"] == "Phase 27.124"
+    assert body["phase"] == "Phase 27.125"
 
 
 def test_system_status_sovereign_flags() -> None:
@@ -31,11 +31,11 @@ def test_system_status_sovereign_flags() -> None:
     assert r.status_code == 200
     body = r.json()
     assert body["project"] == "SF.AI"
-    assert body["current_phase"].startswith("Phase 27.124")
+    assert body["current_phase"].startswith("Phase 27.125")
     assert body["current_phase_status"] == (
-        "phase27_124_synonyms_reference_adapter_skeleton_ready_no_runtime"
+        "phase27_125_synonyms_reference_adapter_local_dry_run_ready_no_runtime"
     )
-    assert "Phase 27.125" in body["next_phase"]
+    assert "Phase 27.126" in body["next_phase"]
     assert body["sovereign"] is True
     assert body["uses_external_llm"] is False
     assert body["uses_pretrained_weights"] is False
@@ -212,6 +212,11 @@ def test_system_status_sovereign_flags() -> None:
     assert any(
         c["name"] == "phase27_124_sinalab_synonyms_reference_adapter_skeleton"
         and c["status"] == "synonyms_reference_adapter_skeleton_ready_no_runtime"
+        for c in body["components"]
+    )
+    assert any(
+        c["name"] == "phase27_125_sinalab_synonyms_reference_adapter_local_dry_run"
+        and c["status"] == "synonyms_reference_adapter_local_dry_run_ready_no_runtime"
         for c in body["components"]
     )
     assert any(

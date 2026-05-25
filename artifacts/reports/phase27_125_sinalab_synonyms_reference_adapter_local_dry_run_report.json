@@ -1,0 +1,116 @@
+{
+  "phase": "Phase 27.125",
+  "status": "PHASE27_125_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_READY_NO_RUNTIME",
+  "strategy": "Sovereign Practical Acceleration Strategy v2",
+  "sovereignty_mode": "SF-native only",
+  "language_track": [
+    "msa",
+    "saudi"
+  ],
+  "dictionary_track": "Saudi Seed v1",
+  "metrics": {
+    "phase": "Phase 27.125",
+    "scope": "local_reference_adapter_dry_run_counts_only",
+    "adapter_class": "SinaLabSynonymsReferenceAdapter",
+    "reference_record_count": 1093,
+    "eval_query_count": 685,
+    "adapter_record_count": 1093,
+    "adapter_index_key_count": 1093,
+    "reference_quality_band_counts": {
+      "high": 685,
+      "medium": 408,
+      "low": 0
+    },
+    "eval_quality_band_counts": {
+      "high": 685,
+      "medium": 0,
+      "low": 0
+    },
+    "exact_lookup_hits": 685,
+    "exact_lookup_rate": 1.0,
+    "missing_lookup_count": 0,
+    "quality_band_hits": {
+      "high": 685,
+      "medium": 0,
+      "low": 0
+    },
+    "missing_by_quality_band": {
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "redacted_lookup_count": 685,
+    "redaction_rate": 1.0,
+    "term_leak_count": 0,
+    "unique_result_hash_count": 685,
+    "observed_hash_lengths": [
+      64
+    ],
+    "local_reference_files_gitignored": true,
+    "raw_source_records_loaded_locally": true,
+    "raw_terms_published": false,
+    "query_rows_published": false,
+    "runtime_lookup_enabled": false,
+    "chat_integration_enabled": false,
+    "dialogue_corpus_written": false,
+    "tokenizer_vocab_written": false,
+    "training_started": false
+  },
+  "gate": {
+    "phase": "Phase 27.125",
+    "gate_id": "PHASE27_125_SINALAB_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_GATE",
+    "source_id": "sinalab_synonyms",
+    "gate_passed": true,
+    "preconditions": {
+      "phase27_124_allows_local_dry_run": true,
+      "phase27_124_gate_passed": true,
+      "manifest_counts_match_adapter_metrics": true,
+      "adapter_index_has_expected_unique_keys": true,
+      "all_eval_queries_hit": true,
+      "redaction_applied_to_all_queries": true,
+      "no_term_leaks": true,
+      "hash_contract_passed": true,
+      "raw_terms_not_published": true,
+      "query_rows_not_published": true,
+      "runtime_and_chat_still_disabled": true,
+      "no_corpus_tokenizer_training": true
+    },
+    "reference_runtime_policy_design_allowed_next": true,
+    "runtime_lookup_activation_allowed": false,
+    "chat_integration_allowed": false,
+    "raw_terms_commit_allowed": false,
+    "query_rows_commit_allowed": false,
+    "dialogue_corpus_allowed": false,
+    "tokenizer_vocab_allowed": false,
+    "training_allowed": false,
+    "runtime_release_allowed": false,
+    "sf50m_transition_allowed": false
+  },
+  "decision": {
+    "decision_id": "PHASE27_125_SINALAB_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_DECISION",
+    "engineering_decision": "ALLOW_PHASE27_126_SYNONYMS_REFERENCE_RUNTIME_POLICY_DESIGN_NO_ACTIVATION",
+    "local_dry_run_passed": true,
+    "reference_runtime_policy_design_allowed_next": true,
+    "runtime_lookup_activation_allowed": false,
+    "chat_integration_allowed": false,
+    "raw_terms_commit_allowed": false,
+    "query_rows_commit_allowed": false,
+    "dialogue_corpus_allowed": false,
+    "tokenizer_vocab_allowed": false,
+    "new_training_allowed": false,
+    "runtime_release_allowed": false,
+    "sf50m_transition_allowed": false,
+    "next_phase": "Phase 27.126 — Synonyms Reference Runtime Policy Design, no activation"
+  },
+  "adapter_code_changed": false,
+  "runtime_changed": false,
+  "runtime_lookup_enabled": false,
+  "chat_integration_enabled": false,
+  "raw_source_records_loaded_locally": true,
+  "query_rows_committed": false,
+  "reference_records_committed": false,
+  "corpus_changed": false,
+  "tokenizer_changed": false,
+  "training_started": false,
+  "raw_terms_published": false
+}
