@@ -31,7 +31,7 @@ app = FastAPI(
     version="0.1.0",
     description=(
         "SF.AI — Sovereign AI platform. Phase 9 chat UI mounted at /ui/chat. "
-        "Phase 27.123 completed SinaLab Synonyms reference adapter design "
+        "Phase 27.124 completed SinaLab Synonyms reference adapter skeleton "
         "with raw terms, runtime activation, and training still blocked; "
         "SF-10M Phase 27.81 is visible in lab mode, but official runtime "
         "remains blocked. "
@@ -49,7 +49,7 @@ app.include_router(ui.router)
 def root() -> dict[str, str]:
     return {
         "project": "SF.AI",
-        "phase": "Phase 27.123 — Synonyms Reference Adapter Design",
+        "phase": "Phase 27.124 — Synonyms Reference Adapter Skeleton",
         "ui": "/ui/chat",
         "docs": "/docs",
     }

@@ -28,9 +28,9 @@
 المسار الحالي الرسمي:
 
 ```text
-Phase 27.123 — Synonyms Reference Adapter Design
+Phase 27.124 — Synonyms Reference Adapter Skeleton
 SF-native Objective/Curriculum/Decoding Acceleration Track
-PHASE27_123_SINALAB_SYNONYMS_REFERENCE_ADAPTER_DESIGN_DECISION
+PHASE27_124_SINALAB_SYNONYMS_REFERENCE_ADAPTER_SKELETON_DECISION
 ```
 
 القرار الحالي:
@@ -76,7 +76,10 @@ PHASE27_123_SINALAB_SYNONYMS_REFERENCE_ADAPTER_DESIGN_DECISION
   `SinaLabSynonymsReferenceAdapter`، default `max_results=5`، cap `10`،
   وredaction policy تمنع raw terms/query rows/log terms. لا runtime activation،
   لا chat integration، لا corpus، لا tokenizer، لا training.
-- التالي: `Phase 27.124 — Synonyms Reference Adapter Skeleton, no runtime`.
+- Phase 27.124 كتبت skeleton للـ adapter واختبرته بسجلات synthetic فقط:
+  lookup/redaction/hash/quality-threshold contract مرّت، مع استمرار منع runtime،
+  ChatModule integration، raw terms، corpus، tokenizer، training، وSF-50M.
+- التالي: `Phase 27.125 — Synonyms Reference Adapter Local Dry-Run, no runtime`.
 - عند نجاح بوابة أي حجم لاحقًا، ينتقل الوكيل تلقائيًا للحجم التالي حتى
   `SF-1B+` دون انتظار موافقة جديدة.
 
@@ -153,8 +156,8 @@ PHASE27_123_SINALAB_SYNONYMS_REFERENCE_ADAPTER_DESIGN_DECISION
 
 ## الهدف الحالي
 
-- **الرحلة الحالية:** Phase 27.123 / 30 — Synonyms Reference Adapter Design.
-- **الأولوية الحالية:** Phase 27.124 يبني skeleton adapter فقط، بلا runtime ولا ChatModule ولا corpus/tokenizer/training.
+- **الرحلة الحالية:** Phase 27.124 / 30 — Synonyms Reference Adapter Skeleton.
+- **الأولوية الحالية:** Phase 27.125 يشغّل dry-run محليًا على reference layer gitignored بتقارير counts-only، بلا runtime ولا ChatModule ولا corpus/tokenizer/training.
 - **الشات الحالي:** `/chat/message` والواجهة يعملان كمختبر محلي؛ لا يجوز إخفاء ضعف المولد بقوالب، ولا يوجد runtime release رسمي.
 - **البيانات الحالية:** corpus موثق `9125` سجلًا يمر `corpus-audit`: `4535` فصحى + `4590` سعودي، `gold=4013`, `silver=5112`.
 - **التدريب:** آخر تدريب حواري مهم هو Phase 27.104/27.81 تاريخيًا، لكن المسار الحالي متوقف عند reference/diagnostic gates. لا تدريب جديد، لا tokenizer retrain، لا SF-50M حتى تسمح البوابات.

@@ -1,0 +1,28 @@
+{
+  "phase": "Phase 27.124",
+  "gate_id": "PHASE27_124_SINALAB_SYNONYMS_REFERENCE_ADAPTER_SKELETON_GATE",
+  "source_id": "sinalab_synonyms",
+  "gate_passed": true,
+  "preconditions": {
+    "phase27_123_allows_adapter_skeleton": true,
+    "spec_names_expected_adapter": true,
+    "policy_bounds_preserved": true,
+    "synthetic_lookup_contract_passed": true,
+    "quality_threshold_contract_passed": true,
+    "redaction_contract_passed": true,
+    "hash_contract_passed": true,
+    "runtime_and_chat_still_disabled": true,
+    "no_source_records_loaded": true,
+    "no_corpus_tokenizer_training": true
+  },
+  "local_reference_dry_run_allowed_next": true,
+  "runtime_lookup_activation_allowed": false,
+  "chat_integration_allowed": false,
+  "raw_terms_commit_allowed": false,
+  "query_rows_commit_allowed": false,
+  "dialogue_corpus_allowed": false,
+  "tokenizer_vocab_allowed": false,
+  "training_allowed": false,
+  "runtime_release_allowed": false,
+  "sf50m_transition_allowed": false
+}

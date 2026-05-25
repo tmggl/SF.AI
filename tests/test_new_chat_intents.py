@@ -165,9 +165,9 @@ def test_phase_guidance_prompts_are_current_generator_lab_guidance() -> None:
     assert "قوالب" in dialogue.response
     assert "بصراحة" in dialogue.response
     assert next_step.intent == "chat.next_step"
-    assert "Phase 27.123" in next_step.response
-    assert "adapter" in next_step.response
     assert "Phase 27.124" in next_step.response
+    assert "skeleton" in next_step.response
+    assert "Phase 27.125" in next_step.response
     assert diff.intent == "chat.training_activation_difference"
     assert "التدريب" in diff.response
     assert "التفعيل" in diff.response

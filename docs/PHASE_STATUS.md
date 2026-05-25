@@ -7,10 +7,10 @@
 ## الحالة العامة
 
 - **اسم المشروع:** SF.AI
-- **الرحلة الحالية:** **Phase 27.123 / 30**
-- **المرحلة الحالية:** **Phase 27.123 — Synonyms Reference Adapter Design**
-- **حالة المرحلة الحالية:** **صُمم عقد adapter مرجعي بلا runtime؛ يمنع raw terms/query rows/corpus/tokenizer/training**
-- **المرحلة التالية المقترحة:** Phase 27.124 — Synonyms Reference Adapter Skeleton, no runtime.
+- **الرحلة الحالية:** **Phase 27.124 / 30**
+- **المرحلة الحالية:** **Phase 27.124 — Synonyms Reference Adapter Skeleton**
+- **حالة المرحلة الحالية:** **كُتب skeleton adapter واختُبر بسجلات synthetic فقط؛ لا runtime ولا تدريب**
+- **المرحلة التالية المقترحة:** Phase 27.125 — Synonyms Reference Adapter Local Dry-Run, no runtime.
 - **التحول الاستراتيجي المعتمد:** **SF-native Objective/Curriculum/Decoding Acceleration Track** — تسريع هندسي فقط؛ `ENGINEERING_ROOT_CAUSE_GATE` قبل أي تدريب؛ `NO_RUNTIME_RELEASE_WITHOUT_HELDOUT_SUCCESS`.
 - **تصحيح إلزامي:** لا يوجد Open-Weight Lane. أي Qwen/open-weight/pretrained
   runtime ملغى وغير معتمد. التسريع السيادي يعني أدوات هندسية وتشخيصية فقط
@@ -179,6 +179,7 @@
 | Phase 27.121 | Synonyms Local Reference Layer Build | ✅ synonyms_local_reference_layer_built_gitignored_no_training | ✅ |
 | Phase 27.122 | Synonyms Reference Query and Eval Gate | ✅ synonyms_reference_query_eval_gate_ready_no_runtime | ✅ |
 | Phase 27.123 | Synonyms Reference Adapter Design | ✅ synonyms_reference_adapter_design_ready_no_runtime | ✅ |
+| Phase 27.124 | Synonyms Reference Adapter Skeleton | ✅ synonyms_reference_adapter_skeleton_ready_no_runtime | ✅ |
 | Phase 28 | SF-120M v0.1 Candidate | مخططة | ✅ |
 | Phase 29 | Runtime Hybrid Assistant v1 | مخططة | ✅ |
 | Phase 30 | Continuous Improvement Loop | مخططة | ✅ |
@@ -2487,7 +2488,50 @@ ALLOW_PHASE27_124_SYNONYMS_REFERENCE_ADAPTER_SKELETON_NO_RUNTIME
 - `artifacts/reports/PHASE27_123_SINALAB_SYNONYMS_REFERENCE_ADAPTER_DESIGN_DECISION.json`
 - [PHASE27_123_SINALAB_SYNONYMS_REFERENCE_ADAPTER_DESIGN_REPORT.md](./PHASE27_123_SINALAB_SYNONYMS_REFERENCE_ADAPTER_DESIGN_REPORT.md)
 
-**التالي:** Phase 27.124 — Synonyms Reference Adapter Skeleton, no runtime.
+**التالي كان:** Phase 27.124 — Synonyms Reference Adapter Skeleton, no runtime.
+
+---
+
+## Phase 27.124 — Synonyms Reference Adapter Skeleton
+
+**الحالة:** ✅ synonyms_reference_adapter_skeleton_ready_no_runtime
+
+**القاموس/المسار اللغوي:** Saudi Seed v1، العربية الفصحى + السعودية فقط.
+
+**القرار الرسمي:**
+
+```text
+PHASE27_124_SINALAB_SYNONYMS_REFERENCE_ADAPTER_SKELETON_DECISION
+ALLOW_PHASE27_125_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_NO_RUNTIME
+```
+
+**النتيجة:**
+
+- أُضيف skeleton adapter في `sf_ai/reference_layers/sinalab_synonyms.py`.
+- أُضيفت dataclasses: `SynonymReferenceRecord`, `SynonymLookupResult`.
+- الاختبار تم بسجلات synthetic فقط، لا source terms.
+- contract checks مرّت:
+  - synthetic records: `2`
+  - index keys: `5`
+  - max results default/cap: `5/10`
+  - normalized lookup: pass
+  - quality threshold: pass
+  - redaction when terms requested: pass
+  - hash lengths: `64`
+- محجوب الآن: runtime lookup activation، chat module integration،
+  raw terms/query rows، data/corpus writes، tokenizer vocab/merges، training،
+  وSF-50M transition.
+
+**الملفات:**
+
+- `sf_ai/reference_layers/sinalab_synonyms.py`
+- `resources/external_sources/phase27_124_sinalab_synonyms_reference_adapter_skeleton_metrics.json`
+- `resources/external_sources/phase27_124_sinalab_synonyms_reference_adapter_skeleton_gate.json`
+- `artifacts/reports/phase27_124_sinalab_synonyms_reference_adapter_skeleton_report.json`
+- `artifacts/reports/PHASE27_124_SINALAB_SYNONYMS_REFERENCE_ADAPTER_SKELETON_DECISION.json`
+- [PHASE27_124_SINALAB_SYNONYMS_REFERENCE_ADAPTER_SKELETON_REPORT.md](./PHASE27_124_SINALAB_SYNONYMS_REFERENCE_ADAPTER_SKELETON_REPORT.md)
+
+**التالي:** Phase 27.125 — Synonyms Reference Adapter Local Dry-Run, no runtime.
 
 ---
 

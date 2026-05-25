@@ -83,9 +83,9 @@ DIALOGUE_TEST = (
 )
 
 NEXT_STEP = (
-    "وصلنا إلى Phase 27.123: صممنا عقد adapter للـ synonyms reference layer "
-    "بلا runtime activation وبلا raw terms أو corpus أو tokenizer أو تدريب. "
-    "التالي Phase 27.124: skeleton للـ adapter بلا ربط بالواجهة.",
+    "وصلنا إلى Phase 27.124: كتبنا skeleton للـ synonyms reference adapter "
+    "واختبرناه بسجلات synthetic فقط. لا runtime ولا ChatModule ولا corpus أو tokenizer "
+    "أو تدريب. التالي Phase 27.125: dry-run محلي بلا واجهة.",
 )
 
 TRAINING_ACTIVATION_DIFFERENCE = (

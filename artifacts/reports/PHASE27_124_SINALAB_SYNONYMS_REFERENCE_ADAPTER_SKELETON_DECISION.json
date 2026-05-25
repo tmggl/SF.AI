@@ -1,0 +1,16 @@
+{
+  "decision_id": "PHASE27_124_SINALAB_SYNONYMS_REFERENCE_ADAPTER_SKELETON_DECISION",
+  "engineering_decision": "ALLOW_PHASE27_125_SYNONYMS_REFERENCE_ADAPTER_LOCAL_DRY_RUN_NO_RUNTIME",
+  "adapter_skeleton_passed": true,
+  "local_reference_dry_run_allowed_next": true,
+  "runtime_lookup_activation_allowed": false,
+  "chat_integration_allowed": false,
+  "raw_terms_commit_allowed": false,
+  "query_rows_commit_allowed": false,
+  "dialogue_corpus_allowed": false,
+  "tokenizer_vocab_allowed": false,
+  "new_training_allowed": false,
+  "runtime_release_allowed": false,
+  "sf50m_transition_allowed": false,
+  "next_phase": "Phase 27.125 — Synonyms Reference Adapter Local Dry-Run, no runtime"
+}
